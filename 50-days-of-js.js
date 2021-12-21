@@ -47,3 +47,37 @@ function reverseGivenInteger(num) {
 
 let num1 = reverseGivenInteger(num)
 console.log(num1)
+
+
+//  #4. Write a function which can convert the time input given in 12 hours format to 24 hours format
+// The check for 'AM' and 'PM' can be verified using endsWith String method
+// An extra 0 would be needed if the hours have single digit
+// convertTo24HrsFormat("12:10AM") returns "00:10"
+// convertTo24HrsFormat("5:00AM") returns "05:00"
+// convertTo24HrsFormat("12:33PM") returns "12:33"
+// convertTo24HrsFormat("01:59PM") returns "13:59"
+// convertTo24HrsFormat("11:8PM") returns "23:08"
+// convertTo24HrsFormat("10:02PM") returns "22:02"
+
+const time = '10:02PM';
+
+function convertTo24HrsFormat(input) {
+    const date = new Date('August 19, 1975 00:00');
+    const time = input.split(':');
+
+    if (input.endsWith('PM') && time[0] != 12)
+    time[0] = parseInt(time[0]) + 12;
+    else if (input.endsWith('AM') && time[0] == 12)
+    time[0] = 0;
+
+    date.setHours(parseInt(time[0]));
+    date.setMinutes(parseInt(time[1]));
+
+    const newDate = `${date.getHours()}:${date.getMinutes()}`;
+
+    return date.toTimeString().substring(0, 5)
+}
+
+console.log(`Converted time: ${convertTo24HrsFormat(time)}`)
+
+
