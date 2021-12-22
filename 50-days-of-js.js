@@ -99,3 +99,21 @@ function getTheGapX(str) {
 }
 
 console.log(`Gap between the X's: ${getTheGapX(str)}`)
+
+
+// #6. Write a function to truncate a string to a certain number of words
+// Truncate a string to a certain number of words
+// truncateWithWordLimit("JavaScript is simple", 3) returns "JavaScript is simple"
+// truncateWithWordLimit("Codedamn is the best place to learn to code", 5) returns "Codedamn is the best place"
+
+const str = 'Codedamn is the best place to learn to code';
+const wordLimit = 5
+
+function truncateWithWordLimit(str, wordLimit) {
+    const countOfWordsInString = str.split(' ');
+    const truncatedArrayOfWords = countOfWordsInString.slice(0, wordLimit).join(' ');
+
+    return truncatedArrayOfWords
+}
+
+console.log(truncateWithWordLimit(str, wordLimit))
