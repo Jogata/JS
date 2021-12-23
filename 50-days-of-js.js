@@ -203,3 +203,13 @@ let result = removeArrayElement(filterField)
 console.log(result);
 
 
+// #11. Return the N-th value of the Fibonacci sequence
+// function fibonacci(n) returns the N-th value of the Fibonacci sequence
+
+function fibonacci(n) {
+    return n < 1 ? 0
+         : n <= 2 ? 1
+         : fibonacci(n - 1) + fibonacci(n - 2)
+ }
+ 
+ console.log(`fibonacci value at position 5: ${fibonacci(5)}`)
