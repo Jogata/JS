@@ -177,3 +177,29 @@ var size = Object.keys(obj).length;
 }
 
 console.log(`is empty object: ${isEmpty(obj)}`)
+
+
+// #10. Write a function to remove array element based on object property?
+// removeArrayElement("money") returns the array without the money object
+// removeArrayElement("id") returns the array without the id object
+// removeArrayElement("cStatus") returns the array without the cStatus object
+
+const array = [
+    { field: "id", operator: "eq" },
+    { field: "cStatus", operator: "eq" },
+    { field: "money", operator: "eq" },
+];
+
+const filterField = "id"
+
+function removeArrayElement(filterField) {
+    const filtered = array.filter((x) => {
+        return x.field !== filterField
+    })
+    return filtered
+}
+
+let result = removeArrayElement(filterField)
+console.log(result);
+
+
