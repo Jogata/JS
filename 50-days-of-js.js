@@ -253,3 +253,29 @@ const spaceAge = (seconds) => {
 }
 
 console.log(spaceAge(436575687));
+
+
+// #15.Determine if a sentence is a pangram
+// A pangram (Greek: παν γράμμα, pan gramma, "every letter") is a sentence using every letter of the alphabet at least once.
+// The best known English pangram is: "The quick brown fox jumps over the lazy dog."
+// The alphabet used consists of ASCII letters a to z, inclusive, and is case insensitive. Input will not contain non-ASCII symbols.
+
+const isPangram = (input) => {
+
+    const numberOfLettersInAlphabet = 26;
+
+    const arr = input.toLowerCase().split(' ');
+    const str = arr.join('');
+    const uniqueLetters = new Set(str);
+
+    uniqueLetters.forEach((char) => {
+        if (char.charCodeAt(0) < 97 || char.charCodeAt(0) > 122) {
+            uniqueLetters.delete(char);
+        }
+      });
+
+    const isTrue = uniqueLetters.size === numberOfLettersInAlphabet;
+    return isTrue
+}
+
+console.log(isPangram('The quick brown fox jumps over the lazy dog.'));
