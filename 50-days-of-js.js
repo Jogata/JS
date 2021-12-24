@@ -279,3 +279,51 @@ const isPangram = (input) => {
 }
 
 console.log(isPangram('The quick brown fox jumps over the lazy dog.'));
+
+
+// #16. Ask the Bob
+// Bob is a lackadaisical teenager. In conversation, his responses are very limited.
+// Bob answers 'Sure.' if you ask him a question, such as "How are you?".
+// He answers 'Whoa, chill out!' if you YELL AT HIM (in all capitals).
+// He answers 'Calm down, I know what I'm doing!' if you yell a question at him.
+// He says 'Fine. Be that way!' if you address him without actually saying anything.
+// He answers 'Whatever.' to anything else.
+// Bob's conversational partner is a purist when it comes to written communication and always follows normal rules regarding sentence punctuation in English.
+
+const answers = {
+    onQuestion: 'Sure.',
+    whenYellAtHim: 'Whoa, chill out!',
+    whenYellQuestionAtHim: 'Calm down, I know what I\'m doing!',
+    onSilence: 'Fine. Be that way!',
+    anythingElse: 'Whatever.'
+}
+
+function hey(message) {
+	let answer = answers.anythingElse;
+    const question = /^[A-Z][a-z ,\-0-9]+\?/g;
+    const yelling = /^[A-Z][A-Z .,\-0-9]+\!$/g;
+    const yellingQuestion = /^[A-Z][A-Z ,\-0-9]+\?$/g;
+    const silence = /^$/g;
+
+    if (message.match(question)){
+        answer = answers.onQuestion;
+    }
+    if (message.match(yelling)){
+        answer = answers.whenYellAtHim;
+    }
+    if (message.match(yellingQuestion)){
+        answer = answers.whenYellQuestionAtHim;
+    }
+    if (message.match(silence)){
+        answer = answers.onSilence;
+    }
+
+	return answer
+}
+
+// console.log();
+// hey("How are you?") // => 'Sure.'
+// hey("YELL AT HIM") // => 'Whoa, chill out!'
+// hey("YELL QUESTION AT HIM?") // => 'Calm down, I know what I\'m doing!'
+// hey("") // 'Fine. Be that way!'
+// hey('fbhsdhfvaa') // 'Whatever.'
