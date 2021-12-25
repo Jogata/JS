@@ -384,3 +384,10 @@ const colorCode = (color) => {
 }
 
 console.log(colorCode('blue')) //6
+
+
+// #20. Add two numbers
+const addTwoNumbers = (a, b) => {
+	return a+b
+}
+console.log(1,2) //3
