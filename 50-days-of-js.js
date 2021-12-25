@@ -327,3 +327,26 @@ function hey(message) {
 // hey("YELL QUESTION AT HIM?") // => 'Calm down, I know what I\'m doing!'
 // hey("") // 'Fine. Be that way!'
 // hey('fbhsdhfvaa') // 'Whatever.'
+
+
+// #17. Longest Consecutive Sequence
+// Given an array of elements, find a subsequence in the array such that all the elements in the sequence are consecutive irrespective of their order.
+// longestConsecutiveSequence([100,4,200,1,3,2]) returns 4
+// longestConsecutiveSequence([0,3,7,2,5,8,4,6,0,1]) returns 9
+
+const longestConsecutiveSequence = (nums) => {
+    const set = new Set(nums);
+    let longestStreak = 1;
+    let max = 0;
+    set.forEach(x => {
+      if (!set.has(x - 1)) {
+        let num = x;
+        while(set.has(++num)) { ++longestStreak; }
+        max = Math.max(max, longestStreak);
+        longestStreak = 1;      
+      }
+    });
+    return max;
+  };
+
+  console.log(longestConsecutiveSequence([100,4,200,1,3,2])); //4
