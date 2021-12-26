@@ -391,3 +391,18 @@ const addTwoNumbers = (a, b) => {
 	return a+b
 }
 console.log(1,2) //3
+
+
+// #21. Union of Two Arrays
+// Write the code for the function which returns the the union of the two given arrays
+// unionOfArrays(['a','b','c'],['a',1,2,'d']) should return ['a','b','c',1,2,'d']
+// unionOfArrays(['array','object'],['value','object','key']) should return ['array','object', 'value', 'key']
+// unionOfArrays([1, 2, 34, 45, 3], [3, 24, 21]) == [1,2,34,45,3,24,21]) should return [1,2,34,45,3,24,21]
+
+const unionOfArrays = (arr1, arr2) => {
+    const mySet1 = new Set([ ...arr1, ...arr2])
+    
+      return Array.from(mySet1);
+    };
+    
+    console.log(`The union is ${unionOfArrays([1, 2, 34, 45, 3], [3, 24, 21])}`);
