@@ -404,5 +404,24 @@ const unionOfArrays = (arr1, arr2) => {
     
       return Array.from(mySet1);
     };
-    
-    console.log(`The union is ${unionOfArrays([1, 2, 34, 45, 3], [3, 24, 21])}`);
+
+console.log(`The union is ${unionOfArrays([1, 2, 34, 45, 3], [3, 24, 21])}`);
+
+
+// #22. Unique In Order
+// Implement the function unique_in_order which takes as argument a sequence and returns a list of items without any elements with the same value next to each other and preserving the original order of elements.
+// The argument can contain a string or an array
+// uniqueInOrder('AAAABBBCCDAABBB') should return ['A', 'B', 'C', 'D', 'A', 'B']
+// uniqueInOrder('ABBCcAD') should return ['A', 'B', 'C', 'c', 'A', 'D']
+// uniqueInOrder([1,2,2,3,3]) should return [1,2,3]
+
+let uniqueInOrder = (iterable) => {
+    let newiterable = [...iterable];
+    let result = newiterable.filter((el, index, arr) => {
+       return el!==arr[index-1]
+    })
+
+    return result
+};
+
+console.log(uniqueInOrder([1,2,2,3,3])); // => [1,2,3]
