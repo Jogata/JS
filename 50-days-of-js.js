@@ -464,3 +464,24 @@ function findEvenIndex(arr) {
 }
 
 console.log(findEvenIndex([20,10,30,10,10,15,35])); // => 3
+
+
+// #24. Write Number in Expanded Form
+// You will be given a number and you will need to return it as a string in Expanded Form.
+// expandedForm(12); // Should return '10+2'
+// expandedForm(42); // Should return '40+2
+// expandedForm(734) should return '700+30+4'
+
+function expandedForm(num) {
+    const numAsString = num.toString();
+    let expandedNum = '';
+    let counter = numAsString.length;
+    for (let i = 0; i < numAsString.length; i++){
+        const arr = new Array(counter-1);
+        expandedNum += numAsString[i] + arr.fill(0).join('')+"+";
+        counter--;
+    }
+    return expandedNum.slice(0, expandedNum.length-1);
+}
+  
+console.log(expandedForm(742))
