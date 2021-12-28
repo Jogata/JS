@@ -574,3 +574,35 @@ function getCount(str) {
 }
 
 console.log(getCount("abracadabra"));
+
+
+// #28. WeIrD StRiNg CaSe
+// Write a function toWeirdCase that accepts a string, and returns the same string with all even indexed characters in each word upper cased, and all odd indexed characters in each word lower cased. The indexing just explained is zero based, so the zero-ith index is even, therefore that character should be upper cased and you need to start over for each word.
+// The passed in string will only consist of alphabetical characters and spaces(' '). Spaces will only be present if there are multiple words. Words will be separated by a single space(' ').
+// toWeirdCase('This') returns 'ThIs'
+// toWeirdCase('This is a test') returns 'ThIs iS A TeSt'
+// toWeirdCase('A test case') returns 'A TeSt cAsE'
+
+function toWeirdCaseForEachWord(string) {
+    // convert all letters to upper case
+    let inputToUpperCase = string.toUpperCase();
+    // convert input to array of word
+    const resultAsArray = inputToUpperCase.split(' ');
+    // convert each word to array of letters
+    for (let currWord = 0; currWord < resultAsArray.length; currWord++){
+        const wordAsArray = [...resultAsArray[currWord]];
+        // convert all odd letters in array to lower case
+        for (let oddIndex = 1; oddIndex < wordAsArray.length; oddIndex+=2){
+            wordAsArray[oddIndex] = wordAsArray[oddIndex].toLowerCase();
+        }
+        resultAsArray[currWord] = wordAsArray.join('');
+    }
+
+    const result = resultAsArray.join(' ');
+
+    return result
+}
+
+let input = 'This';
+  
+console.log(`The weird case of ${input} is ${toWeirdCaseForEachWord(input)}`);
