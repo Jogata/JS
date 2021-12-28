@@ -548,6 +548,29 @@ function findOdd(arr) {
     }
 
     return result;
-  }
+}
+
+console.log(findOdd([20,1,-1,2,-2,3,3,5,5,1,2,4,20,4,-1,-2,5]))
+
+
+// #27. Vowel Count
+// Return the number (count) of vowels in the given string.
+// We will consider a, e, i, o, u as vowels
+// The input can consit of Lower case and upper case letters so make sure to count both of them.
+// getCount("abracadabra") should return 5
+// getCount("THe Strings are SOO COOL") should return 8
+
+function getCount(str) {
+    let vowelsCount = 0;
+    const arrVowels = ['a','e','i','o','u'];
+    
+    for (let i = 0; i< str.length; i++){
+        if(arrVowels.includes(str[i].toLowerCase())){
+            vowelsCount++;
+        }
+    }
   
-  console.log(findOdd([20,1,-1,2,-2,3,3,5,5,1,2,4,20,4,-1,-2,5]))
+    return vowelsCount;
+}
+
+console.log(getCount("abracadabra"));
