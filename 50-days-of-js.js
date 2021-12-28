@@ -606,3 +606,27 @@ function toWeirdCaseForEachWord(string) {
 let input = 'This';
   
 console.log(`The weird case of ${input} is ${toWeirdCaseForEachWord(input)}`);
+
+
+// #29.Mumbling
+// Each char becomes n*chars where n is the index + 1, and the first char is capitalized divided by - instead of space.
+// Only alphabets are passed as arguments for the accum(s) funciton
+// Example: accum("ZpglnRxqenU") should return "Z-Pp-Ggg-Llll-Nnnnn-Rrrrrr-Xxxxxxx-Qqqqqqqq-Eeeeeeeee-Nnnnnnnnnn-Uuuuuuuuuuu"
+
+// accum("ZpglnRxqenU") returns "Z-Pp-Ggg-Llll-Nnnnn-Rrrrrr-Xxxxxxx-Qqqqqqqq-Eeeeeeeee-Nnnnnnnnnn-Uuuuuuuuuuu"
+// accum("NyffsGeyylB") returns "N-Yy-Fff-Ffff-Sssss-Gggggg-Eeeeeee-Yyyyyyyy-Yyyyyyyyy-Llllllllll-Bbbbbbbbbbb"
+// accum("MjtkuBovqrU") returns "M-Jj-Ttt-Kkkk-Uuuuu-Bbbbbb-Ooooooo-Vvvvvvvv-Qqqqqqqqq-Rrrrrrrrrr-Uuuuuuuuuuu"
+
+function accum(s) {
+    const inputAsArrayOfLetters = s.toLowerCase().split('');
+
+    const result = inputAsArrayOfLetters.map((letter, index, array) => {
+        const arr = new Array(index+1).fill(letter);
+        arr[0] = letter.toUpperCase();
+        return arr.join('')
+    })
+
+    return result.join('-')
+}
+
+console.log(accum('ZpglnRxqenU'));
