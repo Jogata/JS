@@ -664,3 +664,22 @@ function wave(str) {
 }
 
 console.log(wave(" gap "));
+
+
+// #31. Write a Program to Find the Factorial of a Number
+// The factorial of a number is the product of all the numbers from 1 to that number.
+// For example, factorial of 5 is equal to 1 * 2 * 3 * 4 * 5 = 120.
+// The factorial of a positive number n is given by:
+// factorial of n (n!) = 1 * 2 * 3 * 4.....n
+// The factorial of negative numbers do not exist and the factorial of 0 is 1.
+
+function factorial(n) {
+    let result = 1;
+    for (let i = 2; i <= n; i++){
+    result *= i;
+    }
+    return result
+}
+
+let n = 4;
+console.log("The factorial of " + n + " is " + factorial(n));
