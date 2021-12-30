@@ -720,3 +720,28 @@ function set(arrOfNum) {
 const arrOfNum = [1, 2, 2, 4, 5, 6, 6];
 
 console.log("result is + " + set(arrOfNum));
+
+
+// #34. Write a program to find the most frequent item of an array
+// mostFreq([1, 2, 2, 4, 5, 6, 6]) returns 2 2
+// mostFreq([3, 'a', 'a', 'a', 2, 3, 'a', 3, 'a', 2, 4, 9, 3]) returns a 5
+
+function mostFreq(arr) {
+    const countOccurrences = arr => arr.reduce((prev, curr) => (prev[curr] = ++prev[curr] || 1, prev), {});
+    const occurences = countOccurrences(arr);
+    let mostFreqNumber = [null, 0];
+
+    for (let key in occurences) {
+        if (occurences[key] > mostFreqNumber[1]){
+            mostFreqNumber[1] = occurences[key];
+            mostFreqNumber[0] = key;
+        }
+      }
+      const result = mostFreqNumber.join(' ')
+
+      return result
+}
+
+const arr = [3, 'a', 'a', 'a', 2, 3, 'a', 3, 'a', 2, 4, 9, 3];
+
+console.log(mostFreq(arr));
