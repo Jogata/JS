@@ -745,3 +745,42 @@ function mostFreq(arr) {
 const arr = [3, 'a', 'a', 'a', 2, 3, 'a', 3, 'a', 2, 4, 9, 3];
 
 console.log(mostFreq(arr));
+
+
+// #35. Write a JavaScript function to get nth largest element from an unsorted array.
+// nthlargest([ 43, 56, 23, 89, 88, 90, 99, 652], 4) returns 89
+// nthlargest([ 10, 100, 1000, 10000], 2) returns 1000
+
+function nthlargest(arr, highest) {
+	let arrWithNthLargestElement = [0, arr[0]];
+
+    for (let i = 1; i < arr.length; i++){
+        if (arr[i] > arrWithNthLargestElement[arrWithNthLargestElement.length-1]){
+            arrWithNthLargestElement.push(arr[i]);
+            if (arrWithNthLargestElement.length > highest){
+                arrWithNthLargestElement.shift();
+            }
+        }
+        if (arr[i] < arrWithNthLargestElement[arrWithNthLargestElement.length-1]){
+            let index = arrWithNthLargestElement.length-1;
+            while (index >= 0){
+                // console.log(arr[i], arrWithNthLargestElement[index])
+                if (arr[i] > arrWithNthLargestElement[index]){
+                    arrWithNthLargestElement.splice(index+1, 0, arr[i])
+                    if (arrWithNthLargestElement.length>highest){
+                        arrWithNthLargestElement.shift();
+                    }
+                    break;
+                }
+                index--;
+            }
+        }
+
+    }
+	return arrWithNthLargestElement[highest-arr.length]
+}
+
+const arr = [43, 56, 23, 89, 88, 90, 99, 652];
+const highest = 4;
+
+console.log(nthlargest(arr, highest)); // 89
