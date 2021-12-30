@@ -701,3 +701,22 @@ const a = 2154
 const b = 458
 
 console.log("The GCD of " + a + " ", b + " is " + gcd(a, b));
+
+
+// #33. Write a program to print unique values from an array
+// set([1, 2, 2, 4, 5, 6, 6]) returns [1, 2, 4, 5, 6]
+// set([1, 1, 1, 1, 1]) returns [1]
+
+function set(arrOfNum) {
+	function onlyUnique(value, index, self) {
+        return self.indexOf(value) === index;
+      }
+
+    const arrOfUniqueValues = arrOfNum.filter(onlyUnique);
+
+    return arrOfUniqueValues
+}
+
+const arrOfNum = [1, 2, 2, 4, 5, 6, 6];
+
+console.log("result is + " + set(arrOfNum));
