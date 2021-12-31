@@ -784,3 +784,21 @@ const arr = [43, 56, 23, 89, 88, 90, 99, 652];
 const highest = 4;
 
 console.log(nthlargest(arr, highest)); // 89
+
+// ============================= v.2 ================================
+
+function nthlargest(arr, highest) {
+    let n = null;
+
+    for (let i = 0; i < highest; i++){
+        n = Math.max(...arr);
+        const index = arr.indexOf(n);
+        arr[index] = null;
+    }
+    return n
+}
+
+const arr = [43, 56, 23, 89, 88, 90, 99, 652];
+const highest = 4;
+
+console.log(nthlargest(arr, highest)); // 89
