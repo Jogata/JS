@@ -802,3 +802,29 @@ const arr = [43, 56, 23, 89, 88, 90, 99, 652];
 const highest = 4;
 
 console.log(nthlargest(arr, highest)); // 89
+
+
+// #36. Rna Transcription
+// Given a DNA strand, return its RNA complement (per RNA transcription).
+// Both DNA and RNA strands are a sequence of nucleotides.
+// The four nucleotides found in DNA are adenine (A), cytosine (C), guanine (G) and thymine (T).
+// The four nucleotides found in RNA are adenine (A), cytosine (C), guanine (G) and uracil (U).
+// Given a DNA strand, its transcribed RNA strand is formed by replacing each nucleotide with its complement:
+// G -> C // C -> G // T -> A // A -> U
+// transcription('GCT') should return 'CGA'
+// transcription('GATC') should return 'CUAG'
+
+const transcription = (dna) => {
+    const nucleotidesDNA = ['G', 'C', 'T', 'A'];
+    const nucleotidesRNA = ['C', 'G', 'A', 'U'];
+	let rna = '';
+
+    for (let nucleotide of dna){
+        let index = nucleotidesDNA.indexOf(nucleotide);
+        rna = rna + nucleotidesRNA.at(index);
+    }
+
+	return rna
+}
+
+console.log(transcription('GATC'));
