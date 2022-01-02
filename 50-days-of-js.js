@@ -1114,3 +1114,41 @@ function sumTwoSmallestNumbers(numbers) {
 
 sumTwoSmallestNumbers([5, 8, 12, 19, 22]);
 
+
+// #43. Highest Scoring Word
+// Given a string of words, you need to find the highest scoring word.
+// Each letter of a word scores points according to its position in the alphabet: a = 1, b = 2, c = 3 etc.
+// You need to return the highest scoring word as a string.
+// If two words score the same, return the word that appears earliest in the original string.
+// All letters will be lowercase and all inputs will be valid.
+// high('man i need a taxi up to ubud') should return 'taxi'
+// high('what time are we climbing up the volcano') should return 'volcano'
+
+// climbing = 3+12+9+13+2+9+14+7 = 69
+// volcano = 22+15+12+3+1+14+15 = 82
+
+function high(x) {
+    const alphabet = [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" ];
+    const words = x.split(' ');
+    let biggestScoreFromLettersInOneWord = 0;
+    let highestScoringWord = '';
+
+    for (const word of words){
+
+        let currentSum = 0;
+
+        for (const letter of word){
+            let positionInAlphabet = alphabet.indexOf(letter) + 1;
+            currentSum += positionInAlphabet;
+        }
+
+        if (currentSum > biggestScoreFromLettersInOneWord){
+            biggestScoreFromLettersInOneWord = currentSum;
+            highestScoringWord = word;
+        }
+    }
+
+    return highestScoringWord
+}
+
+console.log(high('man i need a taxi up to ubud'));
