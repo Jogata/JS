@@ -1152,3 +1152,32 @@ function high(x) {
 }
 
 console.log(high('man i need a taxi up to ubud'));
+
+
+// #44. Count the divisors of a number
+// Count the number of divisors of a positive integer n.
+// 4 --> 3 (1, 2, 4)
+// 5 --> 2 (1, 5)
+// 12 --> 6 (1, 2, 3, 4, 6, 12)
+// 30 --> 8 (1, 2, 3, 5, 6, 10, 15, 30)
+// getDivisorsCnt(10) should return 4
+// getDivisorsCnt(11) should return 2
+// getDivisorsCnt(54) should return 8
+
+function getDivisorsCnt(num) {
+    let curNumber = num;
+    let counterDivisors = 0;
+
+    while (curNumber > 0){
+        if (num % curNumber === 0){
+            counterDivisors++;
+        }
+        curNumber--;
+    }
+
+    return counterDivisors
+}
+
+console.log(getDivisorsCnt(10)); // 4
+console.log(getDivisorsCnt(11)); // 2
+console.log(getDivisorsCnt(54)); // 8
