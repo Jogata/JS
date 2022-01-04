@@ -1280,3 +1280,101 @@ console.log(isIsogram('aba'));
 console.log(isIsogram('moOse'));
 console.log(isIsogram('isogram'));
 console.log(isIsogram(''));
+
+// #48. Human readable duration format
+// Your task is to write a function which formats a duration, given as a number of seconds, in a human-friendly way.
+// The function must accept a non-negative integer. If it is zero, it just returns "now". Otherwise, the duration is expressed as a combination of years, days, hours, minutes and seconds.
+// For the purpose of this challenge, a year is 365 days and a day is 24 hours.
+// Note that spaces are important.
+// The resulting expression is made of components like 4 seconds, 1 year, etc. In general, a positive integer and one of the valid units of time, separated by a space. The unit of time is used in plural if the integer is greater than 1.
+// The components are separated by a comma and a space (", "). Except the last component, which is separated by " and ", just like it would be written in English.
+// A more significant units of time will occur before than a least significant one. Therefore, 1 second and 1 year is not correct, but 1 year and 1 second is.
+// Different components have different unit of times. So there is not repeated units like in 5 seconds and 1 second.
+// A component will not appear at all if its value happens to be zero. Hence, 1 minute and 0 seconds is not valid, but it should be just 1 minute.
+// A unit of time must be used "as much as possible". It means that the function should not return 61 seconds, but 1 minute and 1 second instead. Formally, the duration specified by of a component must not be greater than any valid more significant unit of time.
+// formatDuration(1) should return "1 second"
+// formatDuration(62) should return "1 minute and 2 seconds"
+// formatDuration(3662) should return "1 hour, 1 minute and 2 seconds"
+
+function formatDuration(seconds) {
+    // Set a Start Date
+    const date = new Date('January 1, 1980 00:00:00');
+    // Calculate a New Date, adding Seconds to Start Date
+    date.setSeconds(seconds);
+    // Calculate how many years, months, days, hours, minutes and seconds are passed
+    const newYear = date.getFullYear();
+    const startYear = 1980;
+    const newMonth = date.getMonth();
+    const startMonth = 0;
+    const newDay = date.getDate();
+    const startDay = 1;
+    const newHours = date.getHours();
+    const startHours = 0;
+    const newMinutes = date.getMinutes();
+    const startMinutes = 0;
+    const newSeconds = date.getSeconds();
+    const startSeconds = 0;
+    const passedYears = newYear - startYear;
+    const passedMonths = newMonth - startMonth;
+    const passedDays = newDay - startDay;
+    const passedHours = newHours - startHours;
+    const passedMinutes = newMinutes - startMinutes;
+    const passedSeconds = newSeconds - startSeconds;
+
+    // Create an array with the calculated time intervals
+    const dateAsArray = [
+        passedYears,
+        passedMonths,
+        passedDays,
+        passedHours,
+        passedMinutes,
+        passedSeconds,
+    ];
+    // Create an array with descriptions for the time intervals
+    const a = [
+        ['year', 'years'],
+        ['month', 'months'],
+        ['day', 'days'],
+        ['hour', 'hours'],
+        ['minute', 'minutes'],
+        ['second', 'seconds'],
+    ];
+    // Create an empty array to store the temporary strings
+    const resultAsArray = [];
+    // Concatenate the calculated time intervals with the proper description / for 1 => 1 hour, for 2 => 2 hours etc
+    for (let index = 0; index <= 5; index++){
+        let numberValue = dateAsArray[index];
+        let description = '';
+        // Remove time intervals with value of 0
+        if (dateAsArray[index] !== 0){
+            if (dateAsArray[index] === 1){
+                description = a[index][0];
+            } else {
+                description = a[index][1];
+            }
+            // IMPORTANT: The time intervals must be stored from seconds to years => [seconds, minutes, etc ...]
+            let str = `${numberValue} ${description}`;
+            resultAsArray.unshift(str);
+        }
+    }
+    // Create an empty string to build the final result
+    let resultAsString = '';
+    // Concatenate the temporary strings from the array to a final string
+    for (let i = 0; i < resultAsArray.length; i++){
+        if (i === 0) {
+            resultAsString = resultAsArray[i];
+        }
+        if (i === 1) {
+            resultAsString = resultAsArray[i].concat(' and ', resultAsString);
+        }
+        if (i > 1) {
+            resultAsString = resultAsArray[i].concat(', ', resultAsString);
+        }
+    }
+
+    return resultAsString
+}
+
+console.log(formatDuration(1)); // "1 second"
+console.log(formatDuration(62)); // "1 minute and 2 seconds"
+console.log(formatDuration(3662)); // "1 hour, 1 minute and 2 seconds"
