@@ -1378,3 +1378,35 @@ function formatDuration(seconds) {
 console.log(formatDuration(1)); // "1 second"
 console.log(formatDuration(62)); // "1 minute and 2 seconds"
 console.log(formatDuration(3662)); // "1 hour, 1 minute and 2 seconds"
+
+
+// #49. Is this a triangle?
+// Implement a function that accepts 3 integer values a, b, c. The function should return true if a triangle can be built with the sides of given length and false in any other case.
+// (In this case, all triangles must have surface greater than 0 to be accepted).
+// Hint You can check whether the sum of the two sides of a triangle is greater than the third side in all possible combinations.
+// isTriangle(1,2,2) should return true
+// isTriangle(7,2,2) should return false
+// isTriangle(7,14,16) should return true
+
+function isTriangle(a, b, c) {
+    let isTriagleBoolean = true;
+
+    for (let currentIndex = 0; currentIndex < arguments.length; currentIndex++){
+        let sum = 0;
+        for (let i = 0; i < arguments.length; i++){
+            if (i !== currentIndex){
+                sum += arguments[i];
+            }
+        }
+
+        if(arguments[currentIndex] > sum){
+            isTriagleBoolean = false;
+        }
+    }
+
+    return isTriagleBoolean
+}
+
+console.log(isTriangle(1,2,2)); // true
+console.log(isTriangle(7,2,2)); //false
+console.log(isTriangle(7,14,16)); // true
