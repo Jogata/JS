@@ -1253,3 +1253,30 @@ console.log(findNeedle(['hay', 'junk', 'hay', 'hay', 'moreJunk', 'needle', 'rand
 console.log(findNeedle(['3', '123124234', undefined, 'needle', 'world', 'hay', 2, '3', true, false])); // 3
 console.log(findNeedle(['283497238987234', 'a dog', 'a cat', 'some random junk', 'a piece of hay', 'needle', 'something somebody lost a while ago'])); // 5
 console.log(findNeedle([1,2,3,4,5,6,7,8,8,7,5,4,3,4,5,6,67,5,5,3,3,4,2,34,234,23,4,234,324,324,'needle',1,2,3,4,5,5,6,5,4,32,3,45,54])); // 30
+
+
+// #47. Isograms
+// An isogram is a word that has no repeating letters, consecutive or non-consecutive. Implement a function that determines whether a string that contains only letters is an isogram. Assume the empty string is an isogram. Ignore letter case.
+// "Dermatoglyphics" --> true
+// "aba" --> false
+// "moOse" --> false (ignore letter case)
+// isIsogram("isogram") should return true
+// isIsogram("") should return true
+
+function isIsogram(str) {
+    let isIsogramBoolean = false;
+    const strLowerCase = str.toLowerCase();
+    const uniqueLetters = new Set(strLowerCase);
+    
+    if (uniqueLetters.size === strLowerCase.length){
+        isIsogramBoolean = true;
+    }
+
+    return uniqueLetters
+}
+
+console.log(isIsogram('Dermatoglyphics'));
+console.log(isIsogram('aba'));
+console.log(isIsogram('moOse'));
+console.log(isIsogram('isogram'));
+console.log(isIsogram(''));
