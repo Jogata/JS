@@ -1,4 +1,26 @@
+function calcTimeInterval() {
+    let today = new Date();
+    let inputDate = new Date(document.getElementById('date').value);
 
+    let endYear = today.getFullYear();
+    let endMonth = today.getMonth();
+    let years = endYear - inputDate.getFullYear();
+    let months = endMonth - inputDate.getMonth();
+    let days = today.getDate() - inputDate.getDate();
+
+    if (months < 0)
+    {
+        years--;
+        months += 12;
+    }
+    if (days < 0)
+    {
+        months--;
+        days += new Date(endYear, endMonth, 0).getDate();
+    }
+    
+    return [years, months, days];
+}
 
 /* ==============   HTML   ============== 
     <section class="calculator">
