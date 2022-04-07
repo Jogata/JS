@@ -19,14 +19,16 @@ function calcTimeInterval() {
     let months = endMonth - inputDate.getMonth();
     let days = today.getDate() - inputDate.getDate();
 
-    if (months < 0)
-    {
+    if (months < 0){
         years--;
         months += 12;
     }
-    if (days < 0)
-    {
+    if (days < 0){
         months--;
+        if (months < 0){
+            years--;
+            months += 12;
+        }
         days += new Date(endYear, endMonth, 0).getDate();
     }
     
