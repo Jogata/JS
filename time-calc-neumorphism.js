@@ -36,6 +36,10 @@ function calcTimeInterval() {
 }
 
 /* ==============   HTML   ============== 
+<head>
+    <link rel="stylesheet" href="./time-calc-neumorphism.js" />
+</head>
+
     <section class="calculator">
         <div class="inputs">
             <label style="display: none;" for="date">Date</label>
