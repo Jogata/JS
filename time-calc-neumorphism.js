@@ -1,3 +1,14 @@
+const years = document.getElementById('years');
+const months = document.getElementById('months');
+const days = document.getElementById('days');
+
+function displayTime() {
+    const time = calcTimeInterval();
+    years.textContent = time[0];
+    months.textContent = time[1];
+    days.textContent = time[2];
+}
+
 function calcTimeInterval() {
     let today = new Date();
     let inputDate = new Date(document.getElementById('date').value);
@@ -25,8 +36,9 @@ function calcTimeInterval() {
 /* ==============   HTML   ============== 
     <section class="calculator">
         <div class="inputs">
+            <label style="display: none;" for="date">Date</label>
             <input type="date" name="date" id="date">
-            <button onclick="calcTimeInterval()">Calculate</button>
+            <button type="button" onclick="displayTime()">Calculate</button>
         </div>
         <div class="outputs">
             <div>
@@ -45,6 +57,12 @@ function calcTimeInterval() {
     </section>
 */
 /* ==============   CSS   ============== 
+        *, ::before, ::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             height: 100vh;
             display: flex;
@@ -110,5 +128,12 @@ function calcTimeInterval() {
             inset 4px 4px 8px rgb(189, 200, 213),
             inset -2px -2px 8px rgb(255, 255, 255);
             border-radius: 10px;
+        }
+        .outputs span {
+            font-size: 30px;
+        }
+        .outputs p {
+            color: #707070;
+            text-transform: capitalize;
         }
 */
