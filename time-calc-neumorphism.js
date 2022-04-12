@@ -93,8 +93,8 @@ function calcTimeInterval() {
             4px 4px 8px rgb(189, 200, 213),
             -4px -4px 8px rgb(255, 255, 255);
         }
-        .inputs input,
-        .inputs button {
+        .inputs input {
+            width: 60%;
             height: 40px;
             color: #080808;
             padding: 0 20px;
@@ -102,18 +102,33 @@ function calcTimeInterval() {
             border: none;
             border-radius: 10px;
             background-color: inherit;
-        }
-        .inputs input,
-        .inputs button:active {
             box-shadow: 
             inset 4px 4px 8px rgb(189, 200, 213),
             inset -4px -4px 8px rgb(255, 255, 255);
         }
-        .inputs input {
-            width: 60%;
-        }
         .inputs button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
+            height: 40px;
+            padding: 0 20px;
+            outline: none;
+            border: none;
+            border-radius: 10px;
+            box-shadow:
+              -8px -4px 8px 0px var(--light-shadow-color),
+              inset 8px 4px 20px 0px var(--light-shadow-color),
+              8px 4px 8px 0px var(--dark-shadow-color),
+              inset -8px -4px 20px 0 var(--dark-shadow-color);
+            transition: all 300ms ease-in-out;
+        }
+        .inputs button:active {
+            box-shadow:
+              8px 4px 8px 0px var(--light-shadow-color),
+              inset -8px -4px 20px 0px var(--light-shadow-color),
+              -8px -4px 8px 0px var(--dark-shadow-color),
+              inset 8px 4px 20px 0 var(--dark-shadow-color);
         }
 
         .outputs {
