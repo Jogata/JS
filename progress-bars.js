@@ -7,10 +7,8 @@ const maxValues = [65, 40, 89];
 
 let drawProgressBar1 = setInterval(() => {
     value[0]++;
-    console.log(value);
     if (value[0] <= maxValues[0]) {
         barValue[0].textContent = value[0];
-        console.log(barValue);
         bars[0].style.background = `conic-gradient(rgb(0, 188, 212) ${value[0] * 3.6}deg, transparent 0deg), rgba(0, 188, 212, 0.1)`;
     } else {
         clearInterval(drawProgressBar);
@@ -18,24 +16,20 @@ let drawProgressBar1 = setInterval(() => {
 });
 let drawProgressBar2 = setInterval(() => {
     value[1]++;
-    console.log(value);
     if (value[1] <= maxValues[1]) {
         barValue[1].textContent = value[1];
-        console.log(barValue);
         bars[1].style.background = `conic-gradient(rgb(255, 0, 0) ${value[1] * 3.6}deg, transparent 0deg), rgba(255, 0, 0, 0.1)`;
     } else {
-        clearInterval(drawProgressBara);
+        clearInterval(drawProgressBar2);
     }
 });
 let drawProgressBar3 = setInterval(() => {
     value[2]++;
-    console.log(value);
     if (value[2] <= maxValues[2]) {
         barValue[2].textContent = value[2];
-        console.log(barValue);
         bars[2].style.background = `conic-gradient(rgb(0, 255, 0) ${value[2] * 3.6}deg, transparent 0deg), rgba(0, 255, 0, 0.1)`;
     } else {
-        clearInterval(drawProgressBara);
+        clearInterval(drawProgressBar3);
     }
 });
 
@@ -132,5 +126,101 @@ let drawProgressBar3 = setInterval(() => {
 .green span {
     color: rgb(0, 255, 0);
     font-weight: bold;
+}
+*/
+
+
+/* ----------------------------------------------  Circular Progress Bar v.2  ---------------------------------------------- */
+/* ==============   HTML   ============== 
+<head>
+    <link rel="stylesheet" href="./progress-bar.js" />
+    // https://www.youtube.com/watch?v=DMPvOWXu7-s
+</head>
+
+    <section class="container flex">
+        <div class="progressbar center flex">
+            <div class="half-circle-left"></div>
+            <div class="half-circle-right"></div>
+            <div class="half-circle-top"></div>
+            <div class="progressbar-circle flex">100%</div>
+        </div>
+    </section>
+
+*/
+
+/* ==============   CSS   ============== 
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    background-color: #000;
+}
+.flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.progressbar {
+    width: 20rem;
+    height: 20rem;
+    background-color: rgb(30, 0, 0);
+    border-radius: 50%;
+    position: fixed;
+    overflow: hidden;
+}
+
+.progressbar-circle {
+    width: 19rem;
+    height: 19rem;
+    font-size: 4rem;
+    color: #b60000;
+    background-color: #000;
+    border-radius: 50%;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.half-circle-left, 
+.half-circle-right, 
+.half-circle-top {
+    position: absolute;
+    top: 0; left: 0;
+    width: 50%;
+    height: 100%;
+    transform-origin: right center;
+}
+
+.half-circle-left {
+    background-color: #b60000;
+}
+.half-circle-right {
+    background-color: #b60000;
+}
+.half-circle-top {
+    background-color: rgb(30, 0, 0);
+}
+
+.progressbar:hover .half-circle-left {
+    transform: rotate(180deg);
+    transition: transform 1s linear;
+}
+.progressbar:hover .half-circle-right {
+    transform: rotate(360deg);
+    transition: transform 2s linear;
+}
+.progressbar:hover .half-circle-top {
+    opacity: 0;
+    transition: opacity 0s 1s;
 }
 */
