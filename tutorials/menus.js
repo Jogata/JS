@@ -1,9 +1,11 @@
-const links = document.querySelectorAll('.nav-li');
+// floating indicator
+
+// const links = document.querySelectorAll('.nav-li');
 const indicator = document.querySelector('.indicator');
 
-links.forEach(link => {
-    link.addEventListener('click', toggleActiveLink);
-});
+// links.forEach(link => {
+//     link.addEventListener('click', toggleActiveLink);
+// });
 
 function toggleActiveLink() {
     const activeLink = document.querySelector('.active');
@@ -173,7 +175,27 @@ function toggleActiveLink() {
 */
 
 
+// radial menu with floating indicator
+const radialMenu = document.querySelector('.radial-menu');
+const toggleBtn = document.querySelector('.toggle');
 
+toggleBtn.addEventListener('click', () => {
+    toggleBtn.classList.toggle('active');
+    radialMenu.classList.toggle('active');
+})
+
+const links = document.querySelectorAll('li');
+
+links.forEach(link => {
+    link.addEventListener('click', activeLink);
+})
+
+function activeLink() {
+    links.forEach(link => {
+        link.classList.remove('active');
+        this.classList.add('active');
+    })
+}
 
 /* ==============   HTML   ============== 
 
@@ -196,4 +218,7 @@ function toggleActiveLink() {
     align-items: center;
     justify-content: center;
 }
-    */
+#bg2 {
+    background: #222327;
+}
+*/
