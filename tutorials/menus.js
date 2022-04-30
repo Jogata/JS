@@ -186,20 +186,34 @@ toggleBtn.addEventListener('click', () => {
 })
 
 const radialLinks = document.querySelectorAll('li');
+let currentPosition = 0;
 
 radialLinks.forEach(link => {
-    link.addEventListener('click', activeLink);
+    link.addEventListener('click', setActiveLink);
 })
 
-function activeLink() {
+function setActiveLink() {
     const activeLink = document.querySelector('li.active');
-    let currentIndex = activeLink.dataset.index;
-    let currentPosition = currentIndex * 360 / radialLinks.length;
     activeLink.classList.remove('active');
-    this.classList.add('active');
-    let newIndex = this.dataset.index;
+    const newActiveLink = this;
+    newActiveLink.classList.add('active');
+    rotateIndicator(activeLink, newActiveLink);
+}
+
+function rotateIndicator(oldActiveLink, newActiveLink) {
+    let currentIndex = oldActiveLink.dataset.index;
+    let newIndex = newActiveLink.dataset.index;
     let rotationAngle = (newIndex - currentIndex) * 360 / radialLinks.length;
+
+    if (rotationAngle > 180) {
+        rotationAngle = rotationAngle - 360;
+    }
+    if (rotationAngle < -180) {
+        rotationAngle = rotationAngle + 360;
+    }
+
     let newPosition = currentPosition + rotationAngle;
+    currentPosition = newPosition;
     radialIndicator.style = `transform: translateX(-103px) rotate(${newPosition}deg);`;
 }
 
@@ -211,42 +225,42 @@ function activeLink() {
             </div>
             
             <li style="--i:0"  data-index="0" class="active">
-                <a href="#bg2">0
+                <a href="#bg2">
                     <i class="fa fa-home" aria-hidden="true"></i>
                 </a>
             </li>
             <li style="--i:1"  data-index="1">
-                <a href="#bg2">1
+                <a href="#bg2">
                     <i class="fa fa-female" aria-hidden="true"></i>
                 </a>
             </li>
             <li style="--i:2" data-index="2">
-                <a href="#bg2">2
+                <a href="#bg2">
                     <i class="fa fa-comment-o" aria-hidden="true"></i>
                 </a>
             </li>
             <li style="--i:3"  data-index="3">
-                <a href="#bg2">3
+                <a href="#bg2">
                     <i class="fa fa-camera-retro" aria-hidden="true"></i>
                 </a>
             </li>
             <li style="--i:4" data-index="4">
-                <a href="#bg2">4
-                    <i class="fa fa-camera-retro" aria-hidden="true"></i>
+                <a href="#bg2">
+                    <i class="fa fa-globe" aria-hidden="true"></i>
                 </a>
             </li>
             <li style="--i:5"  data-index="5">
-                <a href="#bg2">5
+                <a href="#bg2">
                     <i class="fa fa-envelope-open-o" aria-hidden="true"></i>
                 </a>
             </li>
             <li style="--i:6"  data-index="6">
-                <a href="#bg2">6
+                <a href="#bg2">
                     <i class="fa fa-gamepad" aria-hidden="true"></i>
                 </a>
             </li>
             <li style="--i:7"  data-index="7">
-                <a href="#bg2">7
+                <a href="#bg2">
                     <i class="fa fa-cogs" aria-hidden="true"></i>
                 </a>
             </li>
@@ -348,7 +362,7 @@ function activeLink() {
 .radial-indicator::before {
     content: '';
     position: absolute;
-    top: -27.5px;
+    top: -28.5px;
     left: 72px;
     width: 55px;
     height: 55px;
@@ -360,8 +374,8 @@ function activeLink() {
 }
 
 .radial-menu.active .radial-indicator::before {
-    top: -27.5px;
-    left: -27.5px;
+    top: -28.5px;
+    left: -28.5px;
     background: #29fd53;
     box-shadow: 0px 0px 0px 6px #222327;
     opacity: 1;
