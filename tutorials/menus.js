@@ -179,6 +179,9 @@ function toggleActiveLink() {
 const radialMenu = document.querySelector('.radial-menu');
 const toggleBtn = document.querySelector('.toggle');
 const radiaiIndicator = document.querySelector('.radial-indicator');
+let currentPosition = document.querySelector('li.active').dataset.i;
+console.log(currentPosition);
+
 
 toggleBtn.addEventListener('click', () => {
     toggleBtn.classList.toggle('active');
@@ -195,8 +198,9 @@ function activeLink() {
     radialLinks.forEach(link => {
         link.classList.remove('active');
         this.classList.add('active');
-        radiaiIndicator.style = `transform: translateX(-103px) rotate(calc(45deg * ${this.dataset.i}));`;
     })
+    let newPosition = this.dataset.i;
+    radiaiIndicator.style = `transform: translateX(-103px) rotate(calc(45deg * ${this.dataset.i}));`;
 }
 
 /* ==============   HTML   ============== 
