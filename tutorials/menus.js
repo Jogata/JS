@@ -178,10 +178,7 @@ function toggleActiveLink() {
 // Radial Menu with Floating Indicator
 const radialMenu = document.querySelector('.radial-menu');
 const toggleBtn = document.querySelector('.toggle');
-const radiaiIndicator = document.querySelector('.radial-indicator');
-let currentPosition = document.querySelector('li.active').dataset.i;
-console.log(currentPosition);
-
+const radialIndicator = document.querySelector('.radial-indicator');
 
 toggleBtn.addEventListener('click', () => {
     toggleBtn.classList.toggle('active');
@@ -195,12 +192,15 @@ radialLinks.forEach(link => {
 })
 
 function activeLink() {
-    radialLinks.forEach(link => {
-        link.classList.remove('active');
-        this.classList.add('active');
-    })
-    let newPosition = this.dataset.i;
-    radiaiIndicator.style = `transform: translateX(-103px) rotate(calc(45deg * ${this.dataset.i}));`;
+    const activeLink = document.querySelector('li.active');
+    let currentIndex = activeLink.dataset.index;
+    let currentPosition = currentIndex * 360 / radialLinks.length;
+    activeLink.classList.remove('active');
+    this.classList.add('active');
+    let newIndex = this.dataset.index;
+    let rotationAngle = (newIndex - currentIndex) * 360 / radialLinks.length;
+    let newPosition = currentPosition + rotationAngle;
+    radialIndicator.style = `transform: translateX(-103px) rotate(${newPosition}deg);`;
 }
 
 /* ==============   HTML   ============== 
@@ -210,43 +210,43 @@ function activeLink() {
                 <i class="fa fa-plus" aria-hidden="true"></i>
             </div>
             
-            <li style="--i:0"  data-i="0" class="active">
-                <a href="#bg2">
+            <li style="--i:0"  data-index="0" class="active">
+                <a href="#bg2">0
                     <i class="fa fa-home" aria-hidden="true"></i>
                 </a>
             </li>
-            <li style="--i:1"  data-i="1">
-                <a href="#bg2">
+            <li style="--i:1"  data-index="1">
+                <a href="#bg2">1
                     <i class="fa fa-female" aria-hidden="true"></i>
                 </a>
             </li>
-            <li style="--i:2" data-i="2">
-                <a href="#bg2">
+            <li style="--i:2" data-index="2">
+                <a href="#bg2">2
                     <i class="fa fa-comment-o" aria-hidden="true"></i>
                 </a>
             </li>
-            <li style="--i:3"  data-i="3">
-                <a href="#bg2">
+            <li style="--i:3"  data-index="3">
+                <a href="#bg2">3
                     <i class="fa fa-camera-retro" aria-hidden="true"></i>
                 </a>
             </li>
-            <li style="--i:4" data-i="4">
-                <a href="#bg2">
+            <li style="--i:4" data-index="4">
+                <a href="#bg2">4
                     <i class="fa fa-camera-retro" aria-hidden="true"></i>
                 </a>
             </li>
-            <li style="--i:5"  data-i="5">
-                <a href="#bg2">
+            <li style="--i:5"  data-index="5">
+                <a href="#bg2">5
                     <i class="fa fa-envelope-open-o" aria-hidden="true"></i>
                 </a>
             </li>
-            <li style="--i:6"  data-i="6">
-                <a href="#bg2">
+            <li style="--i:6"  data-index="6">
+                <a href="#bg2">6
                     <i class="fa fa-gamepad" aria-hidden="true"></i>
                 </a>
             </li>
-            <li style="--i:7"  data-i="7">
-                <a href="#bg2">
+            <li style="--i:7"  data-index="7">
+                <a href="#bg2">7
                     <i class="fa fa-cogs" aria-hidden="true"></i>
                 </a>
             </li>
