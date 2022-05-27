@@ -7,17 +7,24 @@ tiltContainer.addEventListener("mousemove", e => {
     tiltElement.style.transform = `rotateX(${yAxis}deg) rotateY(${xAxis}deg)`;
 })
 
-/* ==============   HTML   ============== 
-<head>
-    <link rel="stylesheet" href="./time-calc-neumorphism.js" />
-</head>
+// Reset Element Position When The Mouse Leave
+tiltContainer.addEventListener("mouseleave", () => {
+    tiltElement.style.transform = `rotateX(0deg) rotateY(0deg)`;
+    tiltElement.style.transition = "all 1s ease";
+})
+// Remove Transition Effect Applied When The Mouse Leave
+tiltContainer.addEventListener("mouseenter", () => {
+    tiltElement.style.transition = "none";
+})
 
+/* ==============   HTML   ============== 
     <div class="tilt-container">
         <div class="tilt">
             <h1>title</h1>
         </div>
     </div>
 */
+
 /* ==============   CSS   ============== 
 *, ::before, ::after {
     margin: 0;
@@ -39,7 +46,6 @@ body {
     justify-content: center;
     width: 350px;
     height: 450px;
-    margin: 100px auto;
     perspective: 1000px;
 }
 .tilt {
