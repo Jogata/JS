@@ -10,11 +10,6 @@ tiltContainer.addEventListener("mousemove", e => {
 // Reset Element Position When The Mouse Leave
 tiltContainer.addEventListener("mouseleave", () => {
     tiltElement.style.transform = `rotateX(0deg) rotateY(0deg)`;
-    tiltElement.style.transition = "all 1s ease";
-})
-// Remove Transition Effect Applied When The Mouse Leave
-tiltContainer.addEventListener("mouseenter", () => {
-    tiltElement.style.transition = "none";
 })
 
 /* ==============   HTML   ============== 
@@ -48,6 +43,7 @@ body {
     height: 450px;
     perspective: 1000px;
 }
+
 .tilt {
     width: 280px;
     height: 350px;
@@ -57,9 +53,20 @@ body {
     border-radius: 20px;
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.5);
     transform-style: preserve-3d;
+    transition: all 1s ease;
 }
+.tilt-container:hover .tilt {
+    transition: none;
+}
+
 .tilt h1 {
     font-size: 3rem;
     text-transform: capitalize;
+    transform-style: preserve-3d;
+    text-shadow: -4px 3px 2px rgba(0, 0, 0, 0.4);
+    transition: all 0.5s ease;
+}
+.tilt-container:hover .tilt h1 {
+    transform: translateZ(1em);
 }
 */
