@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>setInterval function in JS</title>
+  </head>
+  <body>
+    <h1 style="text-align: center;">setInterval() - JavaScript</h1>
+    <hr>
+    <p id="timer" style="font-size: 3rem;">0 sec</p>
+    <button id="start">Start Timer</button>
+    <button id="pause">Pause Timer</button>
+
+    <script>
+      const timer = document.getElementById('timer');
+      const startButton = document.getElementById('start');
+      const pauseButton = document.getElementById('pause');
+
+      let count = 0;
+      let intervalID;
+
+      startButton.addEventListener('click', function () {
+        intervalID = setInterval(function () {
+          count += 1;
+          timer.textContent = `${count} sec`;
+        }, 1000)
+      })
+      
+      pauseButton.addEventListener('click', function () {
+        clearInterval(intervalID);
+      })
+    </script>
+  </body>
+</html>
