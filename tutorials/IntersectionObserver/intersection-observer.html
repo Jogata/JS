@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Intersection Observer</title>
+    <style>
+      body {
+        min-height: 100vh;
+        background-color: #378805;
+      }
+      h1 {
+        text-align: center;
+      }
+      section {
+        max-width: 600px;
+        margin: 5em auto;
+        padding: 1em 2em;
+        border-radius: 2em;
+        box-shadow: 3px 3px 9px rgba(0, 0, 0, 0.4);
+      }
+      .one {
+        height: 300px;
+        overflow-y: scroll;
+      }
+      .invert-color {
+        color: antiquewhite;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Intersection Observer</h1>
+    <section class="one">
+      <h2>Section 1</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur a suscipit, quo architecto odit qui, ipsam totam repellendus labore, sapiente aut ad possimus adipisci sed sint. Odit ipsum quam, dignissimos, nisi fugit soluta in architecto repudiandae ducimus velit quos consequatur.</p>
+      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui libero magni unde, saepe esse eos porro autem consequatur similique praesentium voluptatibus sequi incidunt eligendi, quia repudiandae quibusdam eveniet aut neque ullam ratione ipsum, molestias totam. Fugiat impedit sit excepturi natus saepe? Autem, veritatis! Ab perferendis aliquam voluptate numquam, tempore nulla minima enim laboriosam odio neque asperiores necessitatibus exercitationem illo odit explicabo tempora. Dolore, voluptate ipsa tempore voluptatum a exercitationem dolorem.</p>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi, accusamus provident. Maiores reiciendis harum voluptas! Tempora adipisci, vero exercitationem ab repellat veritatis iste enim ipsum? Ratione itaque vero nemo sint? Esse autem facere nam repellat quisquam recusandae eveniet repellendus ex atque. Eaque magni similique explicabo cumque, minima esse cum accusantium.</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, nemo velit veritatis similique nisi architecto culpa obcaecati tempora dolores, aperiam ratione repellat iure, earum consequatur. Libero culpa voluptates temporibus fuga mollitia voluptatem ut ea magni veniam tempora autem, quod amet alias? Numquam, soluta incidunt assumenda vel ab alias nihil eos architecto consequatur, facere consectetur quo quod. Rem laudantium iste omnis.</p>
+    </section>
+    <section class="two">
+      <h2>Section 2</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur a suscipit, quo architecto odit qui, ipsam totam repellendus labore, sapiente aut ad possimus adipisci sed sint. Odit ipsum quam, dignissimos, nisi fugit soluta in architecto repudiandae ducimus velit quos consequatur.</p>
+      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui libero magni unde, saepe esse eos porro autem consequatur similique praesentium voluptatibus sequi incidunt eligendi, quia repudiandae quibusdam eveniet aut neque ullam ratione ipsum, molestias totam. Fugiat impedit sit excepturi natus saepe? Autem, veritatis! Ab perferendis aliquam voluptate numquam, tempore nulla minima enim laboriosam odio neque asperiores necessitatibus exercitationem illo odit explicabo tempora. Dolore, voluptate ipsa tempore voluptatum a exercitationem dolorem.</p>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi, accusamus provident. Maiores reiciendis harum voluptas! Tempora adipisci, vero exercitationem ab repellat veritatis iste enim ipsum? Ratione itaque vero nemo sint? Esse autem facere nam repellat quisquam recusandae eveniet repellendus ex atque. Eaque magni similique explicabo cumque, minima esse cum accusantium.</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, nemo velit veritatis similique nisi architecto culpa obcaecati tempora dolores, aperiam ratione repellat iure, earum consequatur. Libero culpa voluptates temporibus fuga mollitia voluptatem ut ea magni veniam tempora autem, quod amet alias? Numquam, soluta incidunt assumenda vel ab alias nihil eos architecto consequatur, facere consectetur quo quod. Rem laudantium iste omnis.</p>
+    </section>
+    <section class="three">
+      <h2>Section 3</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur a suscipit, quo architecto odit qui, ipsam totam repellendus labore, sapiente aut ad possimus adipisci sed sint. Odit ipsum quam, dignissimos, nisi fugit soluta in architecto repudiandae ducimus velit quos consequatur.</p>
+      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Qui libero magni unde, saepe esse eos porro autem consequatur similique praesentium voluptatibus sequi incidunt eligendi, quia repudiandae quibusdam eveniet aut neque ullam ratione ipsum, molestias totam. Fugiat impedit sit excepturi natus saepe? Autem, veritatis! Ab perferendis aliquam voluptate numquam, tempore nulla minima enim laboriosam odio neque asperiores necessitatibus exercitationem illo odit explicabo tempora. Dolore, voluptate ipsa tempore voluptatum a exercitationem dolorem.</p>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Excepturi, accusamus provident. Maiores reiciendis harum voluptas! Tempora adipisci, vero exercitationem ab repellat veritatis iste enim ipsum? Ratione itaque vero nemo sint? Esse autem facere nam repellat quisquam recusandae eveniet repellendus ex atque. Eaque magni similique explicabo cumque, minima esse cum accusantium.</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, nemo velit veritatis similique nisi architecto culpa obcaecati tempora dolores, aperiam ratione repellat iure, earum consequatur. Libero culpa voluptates temporibus fuga mollitia voluptatem ut ea magni veniam tempora autem, quod amet alias? Numquam, soluta incidunt assumenda vel ab alias nihil eos architecto consequatur, facere consectetur quo quod. Rem laudantium iste omnis.</p>
+    </section>
+
+    <script>
+      const sections = document.querySelectorAll("section");
+
+      // Observe the ROOT Element
+      const options = {
+        root: null,             // default: null (the viewport)
+        threshold: 0,           // default: 0, from 0 to 1
+        rootMargin: "-150px",   // default: 0
+      }
+
+      const observer = new IntersectionObserver(invertColor, options);
+
+      sections.forEach(section => {
+        observer.observe(section);
+      })
+
+      function invertColor(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            console.log(entry.target);
+            entry.target.classList.add("invert-color");
+            observer.unobserve(entry.target);
+            // observer.disconnect();
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
