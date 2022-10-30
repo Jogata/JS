@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Intersection Observer - Fade In images</title>
+    <style>
+      body {
+        color: antiquewhite;
+        background-color: #222;
+        overflow-x: hidden;
+      }
+      section {
+        max-width: 900px;
+        min-height: 100vh;
+        margin-inline: auto;
+        display: grid;
+        text-align: center;
+        text-transform: capitalize;
+      }
+      h1 {
+        margin: auto;
+        font-size: 100px;
+        font-weight: bold;
+      }
+      h2 {
+        margin: auto;
+        font-size: 50px;
+        color: transparent;
+        white-space: nowrap;
+        -webkit-text-stroke: 1px whitesmoke;
+      }
+      dfn {
+        margin-left: 10px;
+        white-space: nowrap;
+        -webkit-text-stroke: 1px tomato;
+      }
+      section > :first-child:is(img, div) {
+        grid-column: 1 / 2;
+        grid-row: 1/ 2;
+      }
+      section > :last-child:is(img, div) {
+        grid-column: 2 / 3;
+        grid-row: 1/ 2;
+      }
+      img {
+        max-width: 400px;
+        margin: auto;
+        border-radius: 1em;
+        filter: drop-shadow(1px 1px 3px rgba(255, 255, 255, 0.4));
+        transform: translate(0);
+        transition: transform 2s, opacity 8s;
+      }
+      p {
+        max-width: 400px;
+        margin: auto;
+        padding: 1em;
+        border-radius: 1em;
+        box-shadow: 3px 3px 3px #000,
+        -1px -1px 3px rgba(255, 255, 255, 0.2);
+      }
+      .observer-container {
+        align-self: center;
+        width: 100%;
+        height: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: translate(0);
+        transition: transform 2s, opacity 8s;
+      }
+      .right {
+        transform: translate(70%);
+        opacity: 0;
+      }
+      .left {
+        transform: translate(-70%);
+        opacity: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <h1>landing page</h1>
+      <h2>fade in images with <dfn>intersection observer</dfn></h2>
+    </section>
+    <section>
+      <img class="left" src="https://unsplash.it/900" alt="Random picture">
+      <div class="observer-container right">
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veniam enim provident aut facere velit doloribus nisi quia! Quod minima debitis dolores perferendis possimus ab quas libero quis eveniet temporibus assumenda saepe quos pariatur hic ex, earum laboriosam laborum rem sapiente vero officiis obcaecati. Quidem, doloremque! Excepturi dolor officia quibusdam distinctio.</p>
+      </div>
+    </section>
+    <section>
+      <div class="observer-container left">
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veniam enim provident aut facere velit doloribus nisi quia! Quod minima debitis dolores perferendis possimus ab quas libero quis eveniet temporibus assumenda saepe quos pariatur hic ex, earum laboriosam laborum rem sapiente vero officiis obcaecati. Quidem, doloremque! Excepturi dolor officia quibusdam distinctio.</p>
+    </div>
+      <img class="right" src="https://unsplash.it/890" alt="Random picture">
+    </section>
+    <section>
+      <img class="left" src="https://unsplash.it/880" alt="Random picture">
+      <div class="observer-container right">
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Veniam enim provident aut facere velit doloribus nisi quia! Quod minima debitis dolores perferendis possimus ab quas libero quis eveniet temporibus assumenda saepe quos pariatur hic ex, earum laboriosam laborum rem sapiente vero officiis obcaecati. Quidem, doloremque! Excepturi dolor officia quibusdam distinctio.</p>
+      </div>
+    </section>
+
+    <script>
+    </script>
+  </body>
+  <script>
+    const elements = document.querySelectorAll(".left, .right");
+
+    const options = {
+      root: null,
+      threshold: 0,
+      rootMargin: "0px",
+    }
+
+    const imageObserver = new IntersectionObserver(fadeIn, options);
+
+    elements.forEach(element => {
+      imageObserver.observe(element);
+    })
+
+    function fadeIn(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove("left", "right");
+          console.log(entry.target);
+        }
+      })
+    }
+  </script>
+</html>
