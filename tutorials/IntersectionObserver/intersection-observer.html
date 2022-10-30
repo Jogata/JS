@@ -26,6 +26,15 @@
       .invert-color {
         color: antiquewhite;
       }
+
+      p {
+        padding: 1em;
+        border-radius: 1em;
+        transition: background-color 1s;
+      }
+      .dark-bg {
+        background-color: rgba(0, 0, 0, 0.4);
+      }
     </style>
   </head>
   <body>
@@ -75,6 +84,32 @@
             entry.target.classList.add("invert-color");
             observer.unobserve(entry.target);
             // observer.disconnect();
+          }
+        });
+      }
+
+      // Observe Any Element
+      const section = document.querySelector(".one");
+      const p = document.querySelectorAll(".one p");
+
+      const sectionOneOptions = {
+        root: section,
+        threshold: 0.5,
+        rootMargin: "0px",
+      }
+
+      const observerSectionOne = new IntersectionObserver(invertBg, sectionOneOptions);
+      p.forEach(p => {
+        observerSectionOne.observe(p);
+      })
+
+      function invertBg(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            console.log(entry.target);
+            entry.target.classList.add("dark-bg");
+            observerSectionOne.unobserve(entry.target);
+            // observerSectionOne.disconnect();
           }
         });
       }
