@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AJAX | XMLHttpRequest</title>
+    <style>
+      button {
+        padding: 5px 10px;
+        border-radius: 5px;
+      }
+      fieldset {
+        margin: 2rem auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="text-align: center;">AJAX | XMLHttpRequest</h1>
+    <fieldset>
+      <legend>Get all users from JSON file</legend>
+      <button>Send Request</button>
+    </fieldset>
+
+    <script>
+      // ================= Get data from JSON =================
+      const getAllUsers = new XMLHttpRequest();
+
+      getAllUsers.onload = function () {
+        if (this.status === 200) {
+          try {
+console.log(this.responseText);
+            const responseAsObject = JSON.parse(this.responseText);
+          } catch (error) {
+            console.warn('Did not parse the data!');
+          }
+        } else {
+          console.warn('Did not receive the data!');
+        }
+      };
+
+      getAllUsers.open('get', 'users.json');
+      getAllUsers.send();
+    </script>
+  </body>
+</html>
