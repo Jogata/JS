@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <style>
+      h1 {
+        text-align: center;
+      }
+      h1 span {
+        display: inline-block;
+        margin-right: 10px;
+        padding-right: 20px;
+        border-right: 2px solid;
+      }
       button {
         padding: 5px 10px;
         border-radius: 5px;
@@ -15,31 +24,69 @@
     </style>
   </head>
   <body>
-    <h1 style="text-align: center;">AJAX | XMLHttpRequest</h1>
+    <h1><span>AJAX</span> XMLHttpRequest</h1>
+    <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
-      <legend>Get all users from JSON file</legend>
-      <button>Send Request</button>
+      <legend>Get all users from local JSON file</legend>
+      <button id="local">Send Request</button>
     </fieldset>
 
     <script>
-      // ================= Get data from JSON =================
-      const getAllUsers = new XMLHttpRequest();
+      const btnLocalJSON = document.querySelector("#local");
+      btnLocalJSON.addEventListener("click", getAllUsersFromLocalFile);
 
-      getAllUsers.onload = function () {
-        if (this.status === 200) {
-          try {
-console.log(this.responseText);
-            const responseAsObject = JSON.parse(this.responseText);
-          } catch (error) {
-            console.warn('Did not parse the data!');
+      function getAllUsersFromLocalFile() {
+        const users = new XMLHttpRequest();
+
+        users.onload = function () {
+          if (this.status === 200) {
+            try {
+              const responseAsObject = JSON.parse(this.responseText);
+            } catch (error) {
+              console.warn('Did not parse the data!');
+            }
+          } else {
+            console.warn('Did not receive the data!');
           }
-        } else {
-          console.warn('Did not receive the data!');
-        }
-      };
+        };
+  
+        users.open('get', 'users.js', true);    // the last argument means Async/Sync request
+        users.send();
+      }
+    </script>
 
-      getAllUsers.open('get', 'users.json');
-      getAllUsers.send();
+    <!-- ================= Get data from GitHub API ================= -->
+    <fieldset>
+      <legend>Get users from GitHub API</legend>
+      <button id="github">Send Request</button>
+      <span id="userGithub"></span>
+    </fieldset>
+
+    <script>
+      const btnGithub = document.querySelector("#github");
+      btnGithub.addEventListener("click", getUsersFromGithub);
+
+      function getUsersFromGithub() {
+        const users = new XMLHttpRequest();
+
+        users.onload = function () {
+          if (this.status === 200) {
+            try {
+              const usersAsArray = JSON.parse(this.responseText);
+              const display = document.querySelector("#userGithub");
+              const randomIndex = Math.floor(Math.random() * 30);
+              display.textContent = usersAsArray[randomIndex].login;
+            } catch (error) {
+              console.warn('Did not parse the data!');
+            }
+          } else {
+            console.warn('Did not receive the data!');
+          }
+        };
+  
+        users.open('get', 'https://api.github.com/users', true);    // the last argument means Async/Sync request
+        users.send();
+      }
     </script>
   </body>
 </html>
