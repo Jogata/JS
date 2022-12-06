@@ -23,6 +23,32 @@
 }());
 
 
+// To Create something like Module
+// Use APP.add3() and APP.multiplyBy3() in the console of the brouser
+const APP = (function module() {
+    const a = 3;
+    const result = document.querySelector("#result");
+
+    const print = function (number) {
+        console.log(number);
+        result.textContent = number;
+    };
+
+    const add3 = function (b) {
+        print(a + b);
+    };
+
+    const multiplyBy3 = function (b) {
+        print(a * b);
+    }
+
+    return {
+        add3,
+        multiplyBy3,
+    };
+}());
+
+
 /* ===============  HTML  =============== 
     <h2>Closure Example</h2>
     <button id="btn1">Click!</button>
