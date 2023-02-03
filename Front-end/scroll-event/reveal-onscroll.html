@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reveal Elements on Scroll</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Herr+Von+Muellerhoff&family=Kaushan+Script&family=Playfair+Display&display=swap');
+/* 
+font-family: 'Kaushan Script', cursive;
+*/
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        
+        }
+
+        img {
+            width: 100%;
+        }
+
+        body {
+            color: hsl(0, 0%, 10%);
+            background-color: hsl(0, 0%, 100%);
+        }
+
+        .container {
+            position: relative;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        #main-title {
+            padding: 1em;
+            font-size: min(14vw, 8rem);
+            font-family: 'Kaushan Script', cursive;
+            text-transform: capitalize;
+            text-align: center;
+        }
+
+        article {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .img-box {
+            position: relative;
+            aspect-ratio: 1;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+            transition: all 0.6s ease;
+            overflow: hidden;
+        }
+        .img-box.clipped-right {
+            grid-column: 2 / 3;
+        }
+
+        .img-box img {
+            height: 100%;
+            object-fit: cover;
+        }
+        .img-box .mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+            mix-blend-mode: screen;
+        }
+
+        .content-box {
+            max-width: 50rem;
+            margin: auto;
+            padding: 5%;
+            text-align: center;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+            transition: all 0.6s ease;
+        }
+        .img-box.clipped-right + .content-box {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+        }
+
+        .title {
+            margin-bottom: 0.25em;
+            font-size: min(13vw, 5rem);
+            font-family: 'Kaushan Script', cursive;
+            text-transform: uppercase;
+        }
+
+        /* v.1 */
+        .hidden .content-box.clipped, 
+        .hidden .img-box.clipped {
+            clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
+        }
+        /* v.2 */
+        .hidden .img-box.clipped-right {
+            clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
+        }
+        /* v.3.1 */
+        .hidden .content-box.scaled, 
+        .hidden .img-box.scaled {
+            transform: scale(0);
+        }
+        /* v.3.2 */
+        .scaled-x {
+            transform-origin: left;
+        }
+
+        @media screen and (max-width: 50rem) {
+            article {
+                display: block;
+                margin-bottom: 10%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="container">
+        <h1 id="main-title">scroll down to reveal</h1>
+        <article class="hidden">
+            <div class="img-box clipped">
+                <img src="../assets/img/headphones/324064873_1192683554696328_4848221003213450933_n-copy.jpg" alt="">
+                <img src="../assets/img/headphones/mask-copy.png" alt="" class="mask">
+            </div>
+            <div class="content-box clipped">
+                <h1 class="title">title v.1</h1>
+                <p class="text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis vero quidem, aspernatur atque in aut asperiores possimus dolorem fugiat aperiam voluptates repudiandae, quaerat quasi quia vel eaque perferendis iusto nulla.</p>
+            </div>
+        </article>
+        <article class="hidden">
+            <div class="img-box clipped-right">
+                <img src="../assets/img/headphones/324164179_827407771655703_9026419471420137624_n-copy.jpg" alt="">
+                <img src="../assets/img/headphones/mask-copy.png" alt="" class="mask">
+            </div>
+            <div class="content-box clipped">
+                <h1 class="title">title v.2</h1>
+                <p class="text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis vero quidem, aspernatur atque in aut asperiores possimus dolorem fugiat aperiam voluptates repudiandae, quaerat quasi quia vel eaque perferendis iusto nulla.</p>
+            </div>
+        </article>
+        <article class="hidden">
+            <div class="img-box scaled">
+                <img src="../assets/img/headphones/324217899_201872359040954_8690786021021935279_n-copy.jpg" alt="">
+                <img src="../assets/img/headphones/mask-copy.png" alt="" class="mask">
+            </div>
+            <div class="content-box scaled">
+                <h1 class="title">title v.3.1</h1>
+                <p class="text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis vero quidem, aspernatur atque in aut asperiores possimus dolorem fugiat aperiam voluptates repudiandae, quaerat quasi quia vel eaque perferendis iusto nulla.</p>
+            </div>
+        </article>
+        <article class="hidden">
+            <div class="img-box scaled scaled-x">
+                <img src="../assets/img/headphones/324556480_699225431719202_1342017043134176827_n-copy.jpg" alt="">
+                <img src="../assets/img/headphones/mask-copy.png" alt="" class="mask">
+            </div>
+            <div class="content-box scaled scaled-x">
+                <h1 class="title">title v.3.2</h1>
+                <p class="text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis vero quidem, aspernatur atque in aut asperiores possimus dolorem fugiat aperiam voluptates repudiandae, quaerat quasi quia vel eaque perferendis iusto nulla.</p>
+            </div>
+        </article>
+    </section>
+
+    <script>
+        const elements = document.querySelectorAll("article");
+        
+        function revealOnScroll() {
+            elements.forEach(element => {
+                const isElementInViewport = element.getBoundingClientRect().top < window.innerHeight/2;
+                if (isElementInViewport) {
+                    element.classList.remove("hidden");
+                }
+            })
+        }
+        
+        window.addEventListener("scroll", revealOnScroll);
+    </script>
+</body>
+</html>
