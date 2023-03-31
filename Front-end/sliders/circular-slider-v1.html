@@ -9,7 +9,6 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap');
         @import url('https://fonts.googleapis.com/css?family=Molle:400i|Open+Sans+Condensed:300,700');
-
 /* 
 font-family: 'Dancing Script', cursive;
 font-family: 'Molle', cursive;
@@ -198,6 +197,7 @@ font-family: 'Molle', cursive;
         
         .slidebar-dots {
             position: relative;
+            padding: 0.6rem;
             text-align: center;
             pointer-events: none;
             z-index: 2;
@@ -323,7 +323,127 @@ font-family: 'Molle', cursive;
 </head>
 
 <body>
+    <section class="page-wrapper">
+        <div class="slider">
+            <ul class="slider-list">
+                <li class="slider-list-item active">
+                    <span class="back-element">
+                        <img src="./img/circular-slider-v1/back_apple_002.png" alt="">
+                    </span>
+                    <span class="main-element">
+                        <img src="./img/circular-slider-v1/bottle_apple_002.png" alt="">
+                    </span>
+                    <span class="front-element">
+                        <img src="./img/circular-slider-v1/front_apple_002.png" alt="">
+                    </span>
+                    <span class="title-element">
+                        <span class="title">apple</span>
+                    </span>
+                    <span class="info-element">
+                        <span class="content">
+                            <span class="headline">apple</span>
+                            <span class="excerpt">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque optio eligendi totam quae voluptatum, a incidunt aliquam reprehenderit dignissimos ullam.</span>
+                            <span class="link">
+                                <a href="#apple" id="apple">read more</a>
+                            </span>
+                        </span>
+                    </span>
+                </li>
+                <li class="slider-list-item">
+                    <span class="back-element">
+                        <img src="./img/circular-slider-v1/back_grapes_001.png" alt="">
+                    </span>
+                    <span class="main-element">
+                        <img src="./img/circular-slider-v1/bottle_grapes_001.png" alt="">
+                    </span>
+                    <span class="front-element">
+                        <img src="./img/circular-slider-v1/front_grapes_001.png" alt="">
+                    </span>
+                    <span class="title-element">
+                        <span class="title">grapes</span>
+                    </span>
+                    <span class="info-element">
+                        <span class="content">
+                            <span class="headline">grapes</span>
+                            <span class="excerpt">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique debitis rerum quis nisi neque voluptatem fuga nobis consequatur quia amet.</span>
+                            <span class="link">
+                                <a href="#grapes" id="grapes">read more</a>
+                            </span>
+                        </span>
+                    </span>
+                </li>
+                <li class="slider-list-item">
+                    <span class="back-element">
+                        <img src="./img/circular-slider-v1/back_strawberry_003.png" alt="">
+                    </span>
+                    <span class="main-element">
+                        <img src="./img/circular-slider-v1/bottle_strawberry_003.png" alt="">
+                    </span>
+                    <span class="front-element">
+                        <img src="./img/circular-slider-v1/front_strawberry_003.png" alt="">
+                    </span>
+                    <span class="title-element">
+                        <span class="title">strawberry</span>
+                    </span>
+                    <span class="info-element">
+                        <span class="content">
+                            <span class="headline">strawberry</span>
+                            <span class="excerpt">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Natus enim repudiandae iusto explicabo illum soluta unde, atque vitae error consectetur.</span>
+                            <span class="link">
+                                <a href="#strawberry" id="strawberry">read more</a>
+                            </span>
+                        </span>
+                    </span>
+                </li>
+            </ul>
+            <div class="slidebar-dots">
+                <button class="dot">01</button>
+                <button class="dot">02</button>
+                <button class="dot">03</button>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-arrow slider-arrow-prev">&#139;</button>
+                <button class="slider-arrow slider-arrow-next">&#155;</button>
+            </div>
+        </div>
+    </section>
 
+    <script>
+        const slides = document.querySelectorAll(".slider-list-item");
+        const slidebarDotsNav = document.querySelector(".slidebar-dots");
+        let index = 0;
+
+        const nextButton = document.querySelector(".slider-arrow-next");
+        const prevButton = document.querySelector(".slider-arrow-prev");
+
+        nextButton.addEventListener("click", () => {
+            slides[index].classList.remove("active");
+            slides[index].style.animation = "hide-to-left 1.4s ease both";
+            index++;
+            index = index % slides.length;
+            slides[index].classList.add("active");
+            slides[index].style.animation = "show-from-right 1.4s ease both";
+        })
+        prevButton.addEventListener("click", () => {
+            slides[index].classList.remove("active");
+            slides[index].style.animation = "hide-to-right 1.4s ease both";
+            index--;
+            index = index + slides.length;
+            index = index % slides.length;
+            slides[index].classList.add("active");
+            slides[index].style.animation = "show-from-left 1.4s ease both";
+        })
+
+        slidebarDotsNav.addEventListener("click", (e) => {
+            const dots = Array.from(slidebarDotsNav.children);
+            index = dots.indexOf(e.target);
+            const currentActiveSlide = document.querySelector(".slider-list-item.active");
+            currentActiveSlide.classList.remove("active");
+            currentActiveSlide.style.animation = "hide-to-left 1.4s ease both";
+            slides[index].classList.add("active");
+            slides[index].style.animation = "show-from-right 1.4s ease both";
+        })
+    </script>
 </body>
 
 </html>
