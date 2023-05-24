@@ -4,13 +4,125 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .cont {
+        width: 100%;
+        min-height: 100vh;
+        padding: 10px;
+        color: #fff;
+        font-family: Georgia;
+        background-image: 
+          linear-gradient(135deg, #4203a9, #90bafc);
+      }
+
+      .calc {
+        width: 100%;
+        max-width: 600px;
+        margin-top: 10%;
+        margin-left: 10%;
+      }
+
+      h2 {
+        font-size: 60px;
+        color: transparent;
+        -webkit-text-stroke: 2px #fff;
+      }
+      h2 span {
+        display: block;
+        color: darkturquoise;
+        -webkit-text-stroke: 0px #fff;
+      }
+
+      .inputbox {
+        margin: 40px 0;
+        padding: 35px;
+        display: flex;
+        align-items: center;
+        border-radius: 10px;
+        background-color: 
+          rgba(255, 255, 255, 0.3);
+      }
+      input {
+        flex: 1;
+        position: relative;
+        margin-right: 20px;
+        padding: 14px 20px;
+        font-size: 18px;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+      }
+      input::-webkit-calendar-picker-indicator {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: auto;
+        height: auto;
+        position: absolute;
+        background-position: calc(100% - 10px);
+        background-size: 30px;
+        cursor: pointer;
+      }
+
+      button {
+        padding: 12px 30px;
+        color: #333;
+        font-size: 22px;
+        font-weight: 500;
+        font-family: inherit;
+        text-transform: capitalize;
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        background-color: lavender;
+        cursor: pointer;
+      }
+      button:active {
+        transform: scale(0.98);
+        box-shadow: 
+          inset 1px 1px 2px #000, 
+          inset -1px -1px 2px #fff;
+      }
+
+      #result {
+        font-size: 20px;
+      }
+      #result span {
+        color: greenyellow;
+        font-size: 30px;
+        font-weight: bold;
+      }
+    </style>
   </head>
   <body>
     <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
-    <!-- javascript -->
-    <script>
+
+    <div class="cont">
+      <div class="calc">
+        <h2>JavaScript <span>Age Calculator</span></h2>
+        <div class="inputbox">
+          <input type="date" name="" id="date">
+          <button>Calc age</button>
+        </div>
+        <p id="result"></p>
+      </div>
+    </div>
+
+    <script src="./in-fetch-api.js"></script>
+    <script src="js.js">
       // Create Query String as String
       const queryStringSample = 'name=Dom&age=36&occupation=Software+Developer';
+      // Create URLSearchParams Object from String
+      const uspFromString = new URLSearchParams(queryStringSample);
+      console.log(uspFromString);
+
 
       // Create Query String as Object
       const queryStringSampleAsObject = {
@@ -19,23 +131,25 @@
         occupation: 'Software Developer',
       };
 
-      // Create URLSearchParams Object
-      const usp = new URLSearchParams(queryStringSampleAsObject);
+      // Create URLSearchParams Object from Object
+      const uspFromObject = new URLSearchParams(queryStringSampleAsObject);
 
       // Get Param from URLSearchParams
-      const name = usp.get('name');
+      const name = uspFromObject.get('name');
       console.log(`Value of 'name': ${name}`);
 
       // Change Param in URLSearchParams
-      usp.set('name', 'New Name');
+      uspFromObject.set('name', 'New Name');
       // Set New Param in URLSearchParams
-      usp.set('programming language', 'JavaScript');
+      uspFromObject.set('programming language', 'JavaScript');
 
-      for (const [key, value] of usp) {
+      for (const [key, value] of uspFromObject) {
         console.log(`${key} => ${value}`);
       }
 
-      console.log(usp.toString());
+      // Convert URLSearchParams Object to Query String
+      console.log(uspFromString.toString());
+      console.log(uspFromObject.toString());
     </script>
   </body>
 </html>
