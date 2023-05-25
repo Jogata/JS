@@ -115,6 +115,91 @@
       </div>
     </div>
 
+    <script>
+      const userInput = document.getElementById("date");
+      userInput.max = new Date().toISOString().split("T")[0];
+      const btn = document.querySelector("button");
+      const result = document.getElementById("result");
+
+      btn.addEventListener("click", calcAge);
+
+      function calcAge() {
+        let birthday = new Date(userInput.value);
+
+        let d1 = birthday.getDate();
+        let m1 = birthday.getMonth() + 1;
+        let y1 = birthday.getFullYear();
+
+        let today = new Date();
+
+        let d2 = today.getDate();
+        let m2 = today.getMonth() + 1;
+        let y2 = today.getFullYear();
+
+        let d3;
+        let m3;
+        let y3 = y2 - y1;
+
+        if (m2 >= m1) {
+          m3 = m2 - m1;
+        } else {
+          y3--;
+          m3 = 12 + m2 - m1;
+        }
+
+        if (d2 >= d1) {
+          d3 = d2 - d1;
+        } else {
+          m3--;
+          d3 = getDaysInMonth(y1, m1) + d2 - d1;
+        }
+
+        if (m3 < 0) {
+          m3 = 11;
+          y3--;
+        }
+
+        const pokazateli = [
+          {
+            value: y3, 
+            desc: "year",
+          }, 
+          {
+            value: m3,
+            desc: "month",
+          }, 
+          {
+            value: d3, 
+            desc: "day",
+          }];
+
+        const pokazateliAsObjects = [];
+
+        pokazateli.forEach(pokazatel => {
+          if (pokazatel.value === 1) {
+            pokazateliAsObjects.push(pokazatel);
+          } else if (pokazatel.value > 1) {
+            pokazatel.desc += "s";
+            pokazateliAsObjects.push(pokazatel);
+          }
+        })
+
+        if (pokazateliAsObjects.length === 0) {
+          result.textContent = "You are born today";
+        } else if (pokazateliAsObjects.length === 1) {
+          result.innerHTML = `You are <span>${pokazateliAsObjects[0].value}</span> ${pokazateliAsObjects[0].desc} old`;
+        } else if (pokazateliAsObjects.length === 2) {
+          result.innerHTML = `You are <span>${pokazateliAsObjects[0].value}</span> ${pokazateliAsObjects[0].desc} and <span>${pokazateliAsObjects[1].value}</span> ${pokazateliAsObjects[1].desc} old`;
+        } else {
+          result.innerHTML = `You are <span>${y3}</span> ${pokazateliAsObjects[0].desc}, <span>${m3}</span> ${pokazateliAsObjects[1].desc} and <span>${d3}</span> ${pokazateliAsObjects[2].desc} old`;
+        }
+      }
+
+      function getDaysInMonth(year, month) {
+        return new Date(year, month, 0).getDate();
+      }
+    </script>
+
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
       // Create Query String as String
