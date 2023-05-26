@@ -188,6 +188,78 @@
       </header>
     </div>
 
+    <div class="page">
+      <h1>Singletons in JavaScript</h1>
+      <ul class="summary"></ul>
+    </div>
+
+    <script>
+      class Settings {
+        constructor() {
+          if (Settings.instance instanceof Settings) {
+            return Settings.instance;
+          }
+          this.settingObject = {
+            background: "#ff0000",
+            version: Math.floor(Math.random() * 4000),
+          };
+
+          Object.freeze(this.settingObject);
+          Object.freeze(this);
+          Settings.instance = this;
+        }
+
+        get(key) {
+          return this.settingObject[key];
+        }
+      }
+
+      const s1 = new Settings();
+      const s2 = new Settings();
+
+      console.log(s1.get("background"));
+      console.log(s1.get("version"));
+      console.log(s2.get("background"));
+      console.log(s2.get("version"));
+      console.log(s1 === s2);
+    </script>
+
+    <script>
+      const obj = {
+        name: "Jogata",
+        age: 44,
+      }
+
+      Object.seal(obj);
+
+      console.log(obj);
+
+      obj.age++;
+      obj.job = "Dev";
+      delete obj.name;
+
+      console.log(obj);
+    </script>
+
+    <div class="box1"></div>
+
+    <script>
+      const box = document.querySelector(".box");
+      
+      try {
+        changeBG(box, "red");
+      } catch (err) {
+        console.log("error catched. app should keep running");
+      }
+
+
+      function changeBG(el, color) {
+        el.style.backgroundColor = color;
+      }
+
+      console.log("bg changed");
+    </script>
+
     <h1 style="text-align: center;">setInterval() - JavaScript</h1>
     <hr>
     <p id="timer" style="font-size: 3rem;">0 sec</p>
@@ -212,6 +284,44 @@
       pauseButton.addEventListener('click', function () {
         clearInterval(intervalID);
       })
+    </script>
+
+    <script>
+        function numberEndingIn7(input) {
+    let actorName = input[0];
+    let initilPoints = Number(input[1]);
+    let oCount = Number(input[2]);
+    let totalPoints = 0;
+
+    for (let i = 0; i <= oCount+3; i+=2) {
+      // i = 0,2,4,6
+      console.log(i);
+      let oName = input[i+3];
+      console.log(oName);
+      let oPoints = Number(input[i+4]);
+      console.log(oPoints);
+      let nameLength = oName.length;
+
+      // console.log(oName);
+      // console.log(oPoints);
+
+      totalPoints += ((nameLength*oPoints)/2);
+
+      if (totalPoints+initilPoints > 1250.5) {
+        let obshto = totalPoints+initilPoints;
+        console.log(`Congratulations, ${actorName} got a nominee for leading role with ${obshto.toFixed(1)}!`);
+        break;
+      }
+    }
+
+    if ((totalPoints+initilPoints) <= 1250.5) {
+      let missingPoints = 1250.5-(totalPoints+initilPoints);
+      console.log(`Sorry, ${actorName} you need ${missingPoints.toFixed(1)} more!`);
+    }
+  }
+
+  // numberEndingIn7(["Zahari Baharov", "205", "4" , "Johnny Depp", "45", "Will Smith", "29", "Jet Lee", "10", "Matthew Mcconaughey", "39"]);
+  numberEndingIn7(["actor", "200", "0"]);
     </script>
   </body>
 </html>
