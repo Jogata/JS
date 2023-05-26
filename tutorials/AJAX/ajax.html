@@ -90,83 +90,6 @@
     </script>
 
     <script>
-        // 03. Logistics
-
-  // До 3 тона – микробус (200 лева на тон)
-  // От 4 до 11 тона – камион (175 лева на тон)
-  // 12 и повече тона – влак (120 лева на тон)
-
-  function calcTransportCosts(arr) {
-      const cargos = Number(arr[0]);
-
-      let bus = 0;
-      let truck = 0;
-      let train = 0;
-      let totalCargo = 0;
-
-      for (let i = 1; i <= cargos; i++) {
-          const cargo = Number(arr[i]);
-
-          if (cargo <= 3) {
-              bus += cargo;
-          } else if (cargo <= 11) {
-              truck += cargo;
-          } else if (cargo > 11) {
-              train += cargo;
-          }
-      }
-
-      totalCargo = bus + truck + train;
-      const totalCargoCost = bus * 200 + truck * 175 + train * 120;
-      const averageCargoCost = totalCargoCost / totalCargo;
-      const busP = bus / totalCargo * 100;
-      const truckP = truck / totalCargo * 100;
-      const trainP = train / totalCargo * 100;
-
-      console.log(averageCargoCost.toFixed(2));
-      console.log(`${busP.toFixed(2)}%`);
-      console.log(`${truckP.toFixed(2)}%`);
-      console.log(`${trainP.toFixed(2)}%`);
-  }
-
-  // calcTransportCosts(["4", "1", "5", "16", "3"]);
-  // calcTransportCosts(["5", "2", "10", "20", "1", "7"]);
-
-  // 06. Bills
-
-  function calcMonthBills(arr) {
-    const months = Number(arr[0]);
-
-    let electricity = 0;
-    const water = 20;
-    const internet = 15;
-    let others = 0;
-
-    let electricityTotal = 0;
-    let othersTotal = 0;
-
-    for (let i = 1; i < arr.length; i++) {
-      electricity = Number(arr[i]);
-      electricityTotal += electricity;
-      
-      others = (electricity + water + internet) * 1.2;
-      othersTotal += others;
-    }
-
-    const waterTotal = water * months;
-    const internetTotal = internet * months;
-    const average = (electricityTotal + waterTotal + internetTotal + othersTotal) / months;
-
-    console.log(`Electricity: ${electricityTotal.toFixed(2)} lv`);
-    console.log(`Water: ${waterTotal.toFixed(2)} lv`);
-    console.log(`Internet: ${internetTotal.toFixed(2)} lv`);
-    console.log(`Other: ${othersTotal.toFixed(2)} lv`);
-    console.log(`Average: ${average.toFixed(2)} lv`);
-  }
-
-  // calcMonthBills(["5", "68.63", "89.25", "132.53", "93.53", "63.22"]);
-  // calcMonthBills(["8", "123.54", "231.54", "140.23", "100", "122.4", "430", "178.52", "64.2"]);
-
   // 07. Football League
 
   function calcFens(arr) {
@@ -178,29 +101,24 @@
     let v = 0;
     let g = 0;
 
-    for (let i = 0; i <arr.length; i++) {
-      const sector = arr[i];
-      
-      switch (sector) {
-        case "A":
-          a++;
-          break;
-        case "B":
-          b++;
-          break;
-        case "V":
-          v++;
-          break;
-        case "G":
-          g++;
-          break;
-      }
+    const sectors = {
+      "A": 0,
+      "B": 0,
+      "V": 0,
+      "G": 0,
     }
 
-    const aP = a / fens * 100;
-    const bP = b / fens * 100;
-    const vP = v / fens * 100;
-    const gP = g / fens * 100;
+    for (let i = 2; i < arr.length; i++) {
+      const sector = arr[i];
+
+      sectors[sector]++;
+
+    }
+
+    const aP = sectors.A / fens * 100;
+    const bP = sectors.B / fens * 100;
+    const vP = sectors.V / fens * 100;
+    const gP = sectors.G / fens * 100;
     const fensP = fens / stad * 100;
 
     console.log(`${aP.toFixed(2)}%`);
@@ -214,7 +132,88 @@
   // calcFens(["93", "16", "A", "V", "G", "G", "B", "B", "G", "B", "A", "B", "B", "B", "A", "B", "B", "A"]);
   // calcFens(["1000", "12", "A", "A", "V", "V", "A", "G", "A", "A", "V", "G", "V", "A"]);
 
-  // console.log("204");
+  // 08. Equal Pairs
+
+  function comparePairs2(arr) {
+    const pairs = Number(arr[0]);
+
+    let score = Number(arr[1]) + Number(arr[2]);
+    let prev = score;
+    let diff = 0;
+
+    for (let i = 3; i < arr.length; i+=2) {
+      const first = Number(arr[i]);
+      const second = Number(arr[i+1]);
+
+      score = first + second;
+
+      if (score !== prev) {
+        const currDiff = Math.abs(score - prev);
+        diff = Math.max(diff, currDiff);
+        prev = score;
+      }
+    }
+
+    if (diff === 0) {
+      console.log(`Yes, value=${score}`);
+    } else {
+      console.log(`No, maxdiff=${diff}`);
+    }
+  }
+
+  function comparePairs(arr) {
+    const pairs = Number(arr[0]);
+
+    const scores = [];
+    let areEqual = true;
+
+    for (let i = 1; i < arr.length; i+=2) {
+      const first = Number(arr[i]);
+      const second = Number(arr[i+1]);
+
+      const score = first + second;
+      scores.push(score);
+    }
+
+    prev = scores[0];
+
+    for (let i = 1; i < scores.length; i++) {
+      if (scores[i-1] !== scores[i]) {
+        areEqual = false;
+        break;
+      }
+    }
+
+    if (areEqual) {
+      console.log(`Yes, value=${scores[0]}`);
+    } else {
+      let biggest = 0;
+      for (let i = 1; i < scores.length; i++) {
+        let diff = Math.abs(scores[i] - scores[i-1]);
+        if (biggest < diff) {
+          biggest = diff;
+        }
+      }
+      console.log(`No, maxdiff=${biggest}`);
+    }
+  }
+
+  // comparePairs(["3", "1", "2", "0", "3", "4", "-1"]);
+  // comparePairs(["2", "1", "2", "2", "2"]);
+  // comparePairs(["4", "1", "1", "3", "1", "2", "2", "0", "0"]);
+  // comparePairs(["1", "5", "5"]);
+  // comparePairs(["2", "-1", "0", "0", "-1"]);
+  // comparePairs(["2", "-1", "2", "0", "-1"]);
+
+      // console.log("90>221");
+      console.log(Notification.permission);
+
+      if (Notification.permission === "granted") {
+        console.log("we have permission!");
+      } else if (Notification.permission !== "denied") {
+        Notification.requestPermission()
+        .then(permission => console.log(permission));
+      } 
     </script>
   </body>
 </html>
