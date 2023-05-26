@@ -11,194 +11,191 @@
         box-sizing: border-box;
       }
 
-      .cont {
-        width: 100%;
+      :root {
+        --primary-color: #f6f7fb;
+        --white-color: #fff;
+        --black-color: #18191a;
+        --red-color: #e74c3c;
+        --drop-shadow: drop-shadow(1px 1px 1px #000);
+      }
+
+      body {
         min-height: 100vh;
-        padding: 10px;
-        color: #fff;
-        font-family: Georgia;
-        background-image: 
-          linear-gradient(135deg, #4203a9, #90bafc);
-      }
-
-      .calc {
-        width: 100%;
-        max-width: 600px;
-        margin-top: 10%;
-        margin-left: 10%;
-      }
-
-      h2 {
-        font-size: 60px;
-        color: transparent;
-        -webkit-text-stroke: 2px #fff;
-      }
-      h2 span {
-        display: block;
-        color: darkturquoise;
-        -webkit-text-stroke: 0px #fff;
-      }
-
-      .inputbox {
-        margin: 40px 0;
-        padding: 35px;
         display: flex;
         align-items: center;
-        border-radius: 10px;
-        background-color: 
-          rgba(255, 255, 255, 0.3);
-      }
-      input {
-        flex: 1;
-        position: relative;
-        margin-right: 20px;
-        padding: 14px 20px;
-        font-size: 18px;
-        border: none;
-        outline: none;
-        border-radius: 5px;
-      }
-      input::-webkit-calendar-picker-indicator {
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        width: auto;
-        height: auto;
-        position: absolute;
-        background-position: calc(100% - 10px);
-        background-size: 30px;
-        cursor: pointer;
+        justify-content: center;
+        font-family: Georgia, serif;
+        background-color: var(--white-color);
       }
 
-      button {
-        padding: 12px 30px;
-        color: #333;
-        font-size: 22px;
-        font-weight: 500;
+      body.dark {
+        --white-color: #18191a;
+        --black-color: #fff;
+        --drop-shadow: drop-shadow(-1px -1px 1px #fff);
+      }
+      body.dark .clock {
+        filter: drop-shadow(-1px -3px 2px #fff6);
+      }
+      body.dark .modes button {
+        filter: drop-shadow(-1px -1px 1px #fff6);
+        text-shadow: -1px -1px 1px #fff4;
+      }
+
+      .clock {
+        position: relative;
+        width: 400px;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background-color: var(--white-color);
+        filter: drop-shadow(1px 3px 2px #0006);
+        /* box-shadow: 
+          0px 15px 25px rgba(0, 0, 0, 0.1), 
+          0px 25px 45px rgba(0, 0, 0, 0.1); */
+      }
+
+      label {
+        position: absolute;
+        inset: 20px;
+        text-align: center;
+        transform: rotate(calc(var(--i) * (360deg / 12)));
+      }
+      label span {
+        display: inline-block;
+        font-size: 30px;
+        font-weight: 600;
+        color: var(--black-color);
+        color: var(--white-color);
+        transform: rotate(calc(var(--i) * (-360deg / 12)));
+        filter: var(--drop-shadow);
+      }
+
+      .indicator {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        display: flex;
+        justify-content: center;
+        filter: var(--drop-shadow);
+      }
+      .indicator::before {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        border: 4px solid var(--red-color);
+        background-color: var(--black-color);
+        background-color: var(--white-color);
+        box-shadow: 1px 1px 1px #000, 
+              inset 1px 1px 1px #000;
+        z-index: 4;
+      }
+
+      .hand {
+        position: absolute;
+        bottom: 0;
+        border-radius: 25px;
+        background-color: var(--black-color);
+        background-color: var(--white-color);
+        transform-origin: bottom;
+      }
+      .hour {
+        width: 6px;
+        height: 100px;
+        z-index: 3;
+      }
+      .min {
+        width: 4px;
+        height: 120px;
+        z-index: 2;
+      }
+      .sec {
+        width: 2px;
+        height: 130px;
+        background-color: var(--red-color);
+        z-index: 1;
+      }
+
+      .modes {
+        margin-top: 3rem;
+        text-align: center;
+      }
+      .modes button {
+        display: inline-block;
+        padding: 10px 20px;
+        color: var(--white-color);
+        font-size: 20px;
         font-family: inherit;
         text-transform: capitalize;
-        outline: none;
-        border: none;
-        border-radius: 5px;
-        background-color: lavender;
+        border-radius: 2em;
+        border: 2px solid var(--white-color);
+        background-color: var(--black-color);
+        background-color: transparent;
+        filter: drop-shadow(1px 1px 1px #000b);
+        text-shadow: 1px 1px 1px #0008;
+        /* box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1); */
         cursor: pointer;
-      }
-      button:active {
-        transform: scale(0.98);
-        box-shadow: 
-          inset 1px 1px 2px #000, 
-          inset -1px -1px 2px #fff;
-      }
-
-      #result {
-        font-size: 20px;
-      }
-      #result span {
-        color: greenyellow;
-        font-size: 30px;
-        font-weight: bold;
       }
     </style>
   </head>
   <body>
-    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+    <div class="container">
+      <div class="clock">
+        <label style="--i:1"><span>1</span></label>
+        <label style="--i:2"><span>2</span></label>
+        <label style="--i:3"><span>3</span></label>
+        <label style="--i:4"><span>4</span></label>
+        <label style="--i:5"><span>5</span></label>
+        <label style="--i:6"><span>6</span></label>
+        <label style="--i:7"><span>7</span></label>
+        <label style="--i:8"><span>8</span></label>
+        <label style="--i:9"><span>9</span></label>
+        <label style="--i:10"><span>10</span></label>
+        <label style="--i:11"><span>11</span></label>
+        <label style="--i:12"><span>12</span></label>
 
-    <div class="cont">
-      <div class="calc">
-        <h2>JavaScript <span>Age Calculator</span></h2>
-        <div class="inputbox">
-          <input type="date" name="" id="date">
-          <button>Calc age</button>
+        <div class="indicator">
+          <span class="hand hour"></span>
+          <span class="hand min"></span>
+          <span class="hand sec"></span>
         </div>
-        <p id="result"></p>
       </div>
+
+      <div class="modes">
+        <button>dark mode</button>
+      </div>
+
+      <script>
+        const hourHand = document.querySelector(".hour");
+        const minHand = document.querySelector(".min");
+        const secHand = document.querySelector(".sec");
+        const switchBtn = document.querySelector("button");
+
+        setInterval(updateTime, 1000);
+
+        function updateTime() {
+          const date = new Date();
+
+          const secToDeg = (date.getSeconds() / 60) * 360;
+          secHand.style.transform = `rotate(${secToDeg}deg)`;
+
+          const minToDeg = (date.getMinutes() / 60) * 360;
+          minHand.style.transform = `rotate(${minToDeg}deg)`;
+          
+          const hourToDeg = (date.getHours() / 12) * 360;
+          hourHand.style.transform = `rotate(${hourToDeg}deg)`;
+        }
+
+        switchBtn.addEventListener("click", () => {
+          document.body.classList.toggle("dark");
+        })
+      </script>
     </div>
 
-    <script>
-      const userInput = document.getElementById("date");
-      userInput.max = new Date().toISOString().split("T")[0];
-      const btn = document.querySelector("button");
-      const result = document.getElementById("result");
-
-      btn.addEventListener("click", calcAge);
-
-      function calcAge() {
-        let birthday = new Date(userInput.value);
-
-        let d1 = birthday.getDate();
-        let m1 = birthday.getMonth() + 1;
-        let y1 = birthday.getFullYear();
-
-        let today = new Date();
-
-        let d2 = today.getDate();
-        let m2 = today.getMonth() + 1;
-        let y2 = today.getFullYear();
-
-        let d3;
-        let m3;
-        let y3 = y2 - y1;
-
-        if (m2 >= m1) {
-          m3 = m2 - m1;
-        } else {
-          y3--;
-          m3 = 12 + m2 - m1;
-        }
-
-        if (d2 >= d1) {
-          d3 = d2 - d1;
-        } else {
-          m3--;
-          d3 = getDaysInMonth(y1, m1) + d2 - d1;
-        }
-
-        if (m3 < 0) {
-          m3 = 11;
-          y3--;
-        }
-
-        const pokazateli = [
-          {
-            value: y3, 
-            desc: "year",
-          }, 
-          {
-            value: m3,
-            desc: "month",
-          }, 
-          {
-            value: d3, 
-            desc: "day",
-          }];
-
-        const pokazateliAsObjects = [];
-
-        pokazateli.forEach(pokazatel => {
-          if (pokazatel.value === 1) {
-            pokazateliAsObjects.push(pokazatel);
-          } else if (pokazatel.value > 1) {
-            pokazatel.desc += "s";
-            pokazateliAsObjects.push(pokazatel);
-          }
-        })
-
-        if (pokazateliAsObjects.length === 0) {
-          result.textContent = "You are born today";
-        } else if (pokazateliAsObjects.length === 1) {
-          result.innerHTML = `You are <span>${pokazateliAsObjects[0].value}</span> ${pokazateliAsObjects[0].desc} old`;
-        } else if (pokazateliAsObjects.length === 2) {
-          result.innerHTML = `You are <span>${pokazateliAsObjects[0].value}</span> ${pokazateliAsObjects[0].desc} and <span>${pokazateliAsObjects[1].value}</span> ${pokazateliAsObjects[1].desc} old`;
-        } else {
-          result.innerHTML = `You are <span>${y3}</span> ${pokazateliAsObjects[0].desc}, <span>${m3}</span> ${pokazateliAsObjects[1].desc} and <span>${d3}</span> ${pokazateliAsObjects[2].desc} old`;
-        }
-      }
-
-      function getDaysInMonth(year, month) {
-        return new Date(year, month, 0).getDate();
-      }
-    </script>
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
