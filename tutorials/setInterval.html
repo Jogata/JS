@@ -11,253 +11,223 @@
         box-sizing: border-box;
       }
 
-      ul {
-        list-style: none;
-      }
-
-      a {
-        text-transform: capitalize;
-        text-decoration: none;
-      }
-
-      .page {
-        width: 100%;
-        min-height: 100vh;
+      body {
         font-family: Georgia, serif;
-        background-color: blueviolet;
+        background-color: #001e4d;
       }
 
-      .container {
+      .app {
         width: 90%;
-        max-width: 1260px;
-        margin: 0 auto;
+        max-width: 600px;
+        min-height: 100vh;
+        margin: 100px auto 0;
+        padding: 30px;
+        border-radius: 10px;
+        background-color: #FFF;
       }
 
-      header {
-        width: 100%;
-        height: 100vh;
-        overflow: hidden;
-        font-family: 'Franklin Gothic Medium', sans-serif;
+      h1 {
+        padding-bottom: 30px;
+        color: #001e4d;
+        font-size: 50px;
+        font-weight: 600;
+        text-transform: capitalize;
+        border-bottom: 1px solid #333;
       }
 
-      nav {
-        width: 100%;
-        padding-top: 60px;
+      .quiz {
+        padding: 20px 0;
       }
 
-      .nav-container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      .logo h3 {
-        color: #fff;
-        font-size: 24px;
-        font-weight: 500;
-      }
-
-      ul {
-        display: flex;
-        gap: 70px;
-      }
-      ul li a {
-        color: #fff;
-        font-size: 14px;
-        transition: 0.4s ease;
-      }
-      ul li a:hover {
-        color: #f22987;
+      #question {
+        color: #001e4d;
+        font-size: 25px;
+        font-weight: 600;
       }
 
       .btn {
-        display: inline-block;
-        padding: 25px 60px;
-        color: #fff;
-        font-size: 18px;
-        font-weight: 500;
-        border-radius: 32px;
-        transition: all 0.4s ease;
-      }
-      .btn:hover {
-        color: #f22987;
-        background-color: #fff;
-      }
-
-      .main-container {
-        display: grid;
-        grid-template-columns: 40% 60%;
-        align-items: center;
-      }
-
-      img {
-        display: block;
         width: 100%;
-      }
-
-      h6 {
-        margin-bottom: 16px;
-        color: #f2c94c;
-        font-size: 14px;
-        font-weight: 600;
-      }
-      h1 {
-        margin-bottom: 26px;
-        color: #fff;
-        font-size: 72px;
-        font-weight: 600;
-        line-height: 80px;
-        letter-spacing: 4px;
-        text-transform: capitalize;
-      }
-
-      p {
-        margin-bottom: 30px;
-        color: #fff;
-        font-size: 14px;
-        line-height: 24px;
-      }
-
-      .action {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-      }
-
-      .btn-primay {
-        background-color: #f22987;
-      }
-
-      .main {
-        position: relative;
-      }
-
-      .bottom-text {
-        position: absolute;
-        color: #fff;
-        font-size: 24px;
+        margin: 10px 0;
+        padding: 10px;
+        color: #222;
         font-weight: 500;
-        bottom: 4rem;
-        left: 40%;
+        text-align: left;
+        border: 1px solid #222;
+        border-radius: 4px;
+        background-color: #FFF;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+      .btn:hover:not([disabled]) {
+        color: #FFF;
+        background-color: #222;
+      }
+      .btn:disabled {
+        cursor: not-allowed;
       }
 
-      .box1 {
-        width: 150px;
-        height: 150px;
-        background: blue;
+      #next {
+        display: block;
+        margin: 20px auto 0;
+        padding: 10px 40px;
+        color: #FFF;
+        font-size: 22px;
+        font-family: inherit;
+        font-weight: 500;
+        text-transform: capitalize;
+        border-radius: 4px;
+        border: 1px solid #001e4d;
+        background-color: #001e4d;
+        cursor: pointer;
+        display: none;
+      }
+
+      .correct {
+        background-color: #9aeabc;
+      }
+      .incorrect {
+        background-color: #ff9393;
       }
     </style>
+
   </head>
   <body>
-    <div class="page">
-      <header>
-        <nav>
-          <div class="container nav-container">
-            <a href="#logo" class="logo"><h3>liggen</h3></a>
-            <ul>
-              <li><a href="#">features</a></li>
-              <li><a href="#">saving</a></li>
-              <li><a href="#">payments</a></li>
-              <li><a href="#">product</a></li>
-              <li><a href="#">about</a></li>
-            </ul>
-            <a href="#" class="btn">get app now</a>
-          </div>
-        </nav>
-        <div class="main">
-          <div class="container main-container">
-            <div class="left">
-              <h6>Switch to the newest and modern digital wallet</h6>
-              <h1>easy and fast <br> payment <br> with liggen</h1>
-              <p>With integration and well-build digital wallet, control your own cards <br>
-                and list all your payments to pay. Set your own code key to makes all <br>
-                payments done with only one approve action.</p>
-              <div class="action">
-                <a href="#" class="btn btn-primay">open account</a>
-                <a href="#" class="btn">download app</a>
-              </div>
-            </div>
-            <div class="right">
-              <img src="../../New folder/right.png" alt="">
-            </div>
-          </div>
-          <div class="bottom-text">
-            Trusted by 230,394 users
-          </div>
+    <div class="app">
+      <h1>simple quiz</h1>
+      <div class="quiz">
+        <h2 id="question">Question?</h2>
+        <div id="answers">
+          <button class="btn">Answer 1</button>
+          <button class="btn">Answer 2</button>
+          <button class="btn">Answer 3</button>
+          <button class="btn">Answer 4</button>
         </div>
-      </header>
-    </div>
-
-    <div class="page">
-      <h1>Singletons in JavaScript</h1>
-      <ul class="summary"></ul>
+        <button id="next">next</button>
+      </div>
     </div>
 
     <script>
-      class Settings {
-        constructor() {
-          if (Settings.instance instanceof Settings) {
-            return Settings.instance;
+      const questions = [
+        {
+          question: "Which is the largest animal in the world?", 
+          answers: [
+            { text: "Shark", correct: false}, 
+            { text: "Blue whale", correct: true}, 
+            { text: "Elephant", correct: false}, 
+            { text: "Giraffe", correct: false}, 
+          ]
+        }, 
+        {
+          question: "Which is the smallest country in the world?", 
+          answers: [
+            { text: "Vatican city", correct: true}, 
+            { text: "Bhutan", correct: false}, 
+            { text: "Nepal", correct: false}, 
+            { text: "Shri Lanka", correct: false}, 
+          ]
+        }, 
+        {
+          question: "Which is the largest desert in the world?", 
+          answers: [
+            { text: "Kalahari", correct: false}, 
+            { text: "Gobi", correct: false}, 
+            { text: "Sahara", correct: false}, 
+            { text: "Antarctica", correct: true},
+          ]
+        }, 
+        {
+          question: "Which is the smallest continent in the world?", 
+          answers: [
+            { text: "Asia", correct: false}, 
+            { text: "Australia", correct: true}, 
+            { text: "Arctic", correct: false}, 
+            { text: "Africa", correct: false}, 
+          ]
+        }, 
+      ]
+
+      const question = document.getElementById("question");
+      const answers = document.getElementById("answers");
+      const nextButton = document.getElementById("next");
+
+      let index = 0;
+      let score = 0;
+
+      startQuiz();
+
+      nextButton.addEventListener("click", () => {
+        if (index < questions.length) {
+          handleNextButton();
+        } else {
+          startQuiz();
+        }
+      })
+
+      function startQuiz() {
+        index = 0;
+        score = 0;
+        nextButton.innerHTML = "next";
+        showQuestion();
+      }
+
+      function showQuestion() {
+        resetQuestion();
+        let currentQuestion = questions[index];
+        let questionNo = index + 1;
+        question.innerHTML = questionNo + ". " + currentQuestion.question;
+
+        currentQuestion.answers.forEach(answer => {
+          const button = document.createElement("button");
+          button.innerHTML = answer.text;
+          button.classList.add("btn");
+          if (answer.correct) {
+            button.dataset.correct = answer.correct;
           }
-          this.settingObject = {
-            background: "#ff0000",
-            version: Math.floor(Math.random() * 4000),
-          };
+          button.addEventListener("click", selectAnswer);
+          answers.appendChild(button);
+        })
+      }
 
-          Object.freeze(this.settingObject);
-          Object.freeze(this);
-          Settings.instance = this;
+      function resetQuestion() {
+        nextButton.style.display = "none";
+        answers.innerHTML = "";
+      }
+
+      function selectAnswer(e) {
+        const selectedBtn = e.target;
+        const isCorrect = selectedBtn.dataset.correct === "true";
+
+        if (isCorrect) {
+          selectedBtn.classList.add("correct");
+          score++;
+        } else {
+          selectedBtn.classList.add("incorrect");
         }
 
-        get(key) {
-          return this.settingObject[key];
+        Array.from(answers.children).forEach(button => {
+          if (button.dataset.correct === "true") {
+            button.classList.add("correct");
+          }
+          button.disabled = true;
+        })
+        nextButton.style.display = "block";
+      }
+
+      function handleNextButton() {
+        index++;
+        if (index < questions.length) {
+          showQuestion();
+        } else {
+          showScore();
         }
       }
 
-      const s1 = new Settings();
-      const s2 = new Settings();
-
-      console.log(s1.get("background"));
-      console.log(s1.get("version"));
-      console.log(s2.get("background"));
-      console.log(s2.get("version"));
-      console.log(s1 === s2);
-    </script>
-
-    <script>
-      const obj = {
-        name: "Jogata",
-        age: 44,
+      function showScore() {
+        resetQuestion();
+        question.innerHTML = `You scored ${score} out of ${questions.length}!`;
+        nextButton.innerHTML = "play again";
+        nextButton.style.display = "block";
       }
-
-      Object.seal(obj);
-
-      console.log(obj);
-
-      obj.age++;
-      obj.job = "Dev";
-      delete obj.name;
-
-      console.log(obj);
-    </script>
-
-    <div class="box1"></div>
-
-    <script>
-      const box = document.querySelector(".box");
-      
-      try {
-        changeBG(box, "red");
-      } catch (err) {
-        console.log("error catched. app should keep running");
-      }
-
-
-      function changeBG(el, color) {
-        el.style.backgroundColor = color;
-      }
-
-      console.log("bg changed");
     </script>
 
     <h1 style="text-align: center;">setInterval() - JavaScript</h1>
@@ -284,44 +254,6 @@
       pauseButton.addEventListener('click', function () {
         clearInterval(intervalID);
       })
-    </script>
-
-    <script>
-        function numberEndingIn7(input) {
-    let actorName = input[0];
-    let initilPoints = Number(input[1]);
-    let oCount = Number(input[2]);
-    let totalPoints = 0;
-
-    for (let i = 0; i <= oCount+3; i+=2) {
-      // i = 0,2,4,6
-      console.log(i);
-      let oName = input[i+3];
-      console.log(oName);
-      let oPoints = Number(input[i+4]);
-      console.log(oPoints);
-      let nameLength = oName.length;
-
-      // console.log(oName);
-      // console.log(oPoints);
-
-      totalPoints += ((nameLength*oPoints)/2);
-
-      if (totalPoints+initilPoints > 1250.5) {
-        let obshto = totalPoints+initilPoints;
-        console.log(`Congratulations, ${actorName} got a nominee for leading role with ${obshto.toFixed(1)}!`);
-        break;
-      }
-    }
-
-    if ((totalPoints+initilPoints) <= 1250.5) {
-      let missingPoints = 1250.5-(totalPoints+initilPoints);
-      console.log(`Sorry, ${actorName} you need ${missingPoints.toFixed(1)} more!`);
-    }
-  }
-
-  // numberEndingIn7(["Zahari Baharov", "205", "4" , "Johnny Depp", "45", "Will Smith", "29", "Jet Lee", "10", "Matthew Mcconaughey", "39"]);
-  numberEndingIn7(["actor", "200", "0"]);
     </script>
   </body>
 </html>
