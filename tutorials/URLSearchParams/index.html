@@ -4,197 +4,205 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      :root {
-        --primary-color: #f6f7fb;
-        --white-color: #fff;
-        --black-color: #18191a;
-        --red-color: #e74c3c;
-        --drop-shadow: drop-shadow(1px 1px 1px #000);
-      }
-
       body {
         min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
         font-family: Georgia, serif;
-        background-color: var(--white-color);
+        background-color: #F2F2F2;
       }
 
-      body.dark {
-        --white-color: #18191a;
-        --black-color: #fff;
-        --drop-shadow: drop-shadow(-1px -1px 1px #fff);
-      }
-      body.dark .clock {
-        filter: drop-shadow(-1px -3px 2px #fff6);
-      }
-      body.dark .modes button {
-        filter: drop-shadow(-1px -1px 1px #fff6);
-        text-shadow: -1px -1px 1px #fff4;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
 
-      .clock {
-        position: relative;
-        width: 400px;
-        height: 400px;
+      .content {
         display: flex;
         align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        background-color: var(--white-color);
-        filter: drop-shadow(1px 3px 2px #0006);
-        /* box-shadow: 
-          0px 15px 25px rgba(0, 0, 0, 0.1), 
-          0px 25px 45px rgba(0, 0, 0, 0.1); */
+        column-gap: 1rem;
       }
 
-      label {
-        position: absolute;
-        inset: 20px;
-        text-align: center;
-        transform: rotate(calc(var(--i) * (360deg / 12)));
+      .card {
+        position: relative;
+        width: 280px;
+        margin: 20px 0;
+        border-radius: 20px;
+        background-color: #FFF;
       }
-      label span {
-        display: inline-block;
-        font-size: 30px;
-        font-weight: 600;
-        color: var(--black-color);
-        color: var(--white-color);
-        transform: rotate(calc(var(--i) * (-360deg / 12)));
-        filter: var(--drop-shadow);
-      }
-
-      .indicator {
-        position: absolute;
-        width: 10px;
-        height: 10px;
-        display: flex;
-        justify-content: center;
-        filter: var(--drop-shadow);
-      }
-      .indicator::before {
+      .card::before {
         position: absolute;
         content: "";
         width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        border: 4px solid var(--red-color);
-        background-color: var(--black-color);
-        background-color: var(--white-color);
-        box-shadow: 1px 1px 1px #000, 
-              inset 1px 1px 1px #000;
-        z-index: 4;
+        height: 40%;
+        border-radius: 20px 20px 0 0;
+        background-color: #7D2AE8;
       }
 
-      .hand {
-        position: absolute;
-        bottom: 0;
-        border-radius: 25px;
-        background-color: var(--black-color);
-        background-color: var(--white-color);
-        transform-origin: bottom;
-      }
-      .hour {
-        width: 6px;
-        height: 100px;
-        z-index: 3;
-      }
-      .min {
-        width: 4px;
-        height: 120px;
+      .card-content {
+        position: relative;
+        padding: 30px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
         z-index: 2;
       }
-      .sec {
-        width: 2px;
-        height: 130px;
-        background-color: var(--red-color);
-        z-index: 1;
+
+      .image {
+        width: 140px;
+        height: 140px;
+        padding: 3px;
+        border-radius: 50%;
+        background-color: #7D2AE8;
+      }
+      .image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border: 3px solid #FFF;
+        border-radius: 50%;
       }
 
-      .modes {
-        margin-top: 3rem;
-        text-align: center;
+      .media-icons {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
       }
-      .modes button {
-        display: inline-block;
-        padding: 10px 20px;
-        color: var(--white-color);
-        font-size: 20px;
-        font-family: inherit;
-        text-transform: capitalize;
-        border-radius: 2em;
-        border: 2px solid var(--white-color);
-        background-color: var(--black-color);
-        background-color: transparent;
-        filter: drop-shadow(1px 1px 1px #000b);
-        text-shadow: 1px 1px 1px #0008;
-        /* box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1); */
+
+      .media-icons i {
+        margin-top: 10px;
+        color: #FFF;
+        transition: all 0.4s ease;
+        opacity: 0.6;
         cursor: pointer;
+      }
+      .media-icons i:hover {
+        opacity: 1;
+      }
+
+      .info {
+        margin-top: 10px;
+        color: #333;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+      }
+      .info span {
+        text-transform: capitalize;
+      }
+
+      .name {
+        font-size: 20px;
+        font-weight: 600;
+      }
+      .prof {
+        font-size: 15px;
+        font-weight: 500;
+      }
+
+      .rating {
+        display: flex;
+        align-items: center;
+        margin-top: 18px;
+      }
+
+      .rating i {
+        margin: 0 2px;
+        color: #7D2AE8;
+        font-size: 18px;
+      }
+
+      .buttons {
+        width: 100%;
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-around;
+      }
+      .buttons button {
+        padding: 8px 22px;
+        color: #FFF;
+        font-size: 14px;
+        text-transform: capitalize;
+        outline: none;
+        border: none;
+        border-radius: 20px;
+        background-color: #7D2AE8;
+        transition: all 0.4s ease;
+        cursor: pointer;
+      }
+      .buttons button:hover {
+        background-color: #6616d0;
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <div class="clock">
-        <label style="--i:1"><span>1</span></label>
-        <label style="--i:2"><span>2</span></label>
-        <label style="--i:3"><span>3</span></label>
-        <label style="--i:4"><span>4</span></label>
-        <label style="--i:5"><span>5</span></label>
-        <label style="--i:6"><span>6</span></label>
-        <label style="--i:7"><span>7</span></label>
-        <label style="--i:8"><span>8</span></label>
-        <label style="--i:9"><span>9</span></label>
-        <label style="--i:10"><span>10</span></label>
-        <label style="--i:11"><span>11</span></label>
-        <label style="--i:12"><span>12</span></label>
-
-        <div class="indicator">
-          <span class="hand hour"></span>
-          <span class="hand min"></span>
-          <span class="hand sec"></span>
+    <section>
+      <div class="container">
+        <div class="content">
+          <div class="card">
+            <div class="card-content">
+              <div class="image">
+                <img src="../../../CSS/assets/img/profile-copy.jpg" alt="">
+              </div>
+              <div class="media-icons">
+                <i class="fa fa-facebook"></i>
+                <i class="fa fa-twitter"></i>
+                <i class="fa fa-github"></i>
+              </div>
+              <div class="info">
+                <span class="name">vbdhd fdkbvfkdl</span>
+                <span class="prof">jvnfdklsvbfl</span>
+              </div>
+              <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+              </div>
+              <div class="buttons">
+                <button class="about">about me</button>
+                <button class="hire">hire me</button>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-content">
+              <div class="image">
+                <img src="../../../CSS/assets/img/profile-copy.jpg" alt="">
+              </div>
+              <div class="media-icons">
+                <i class="fa fa-facebook"></i>
+                <i class="fa fa-twitter"></i>
+                <i class="fa fa-github"></i>
+              </div>
+              <div class="info">
+                <span class="name">vbdhd fdkbvfkdl</span>
+                <span class="prof">jvnfdklsvbfl</span>
+              </div>
+              <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+              </div>
+              <div class="buttons">
+                <button class="about">about me</button>
+                <button class="hire">hire me</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div class="modes">
-        <button>dark mode</button>
-      </div>
-
-      <script>
-        const hourHand = document.querySelector(".hour");
-        const minHand = document.querySelector(".min");
-        const secHand = document.querySelector(".sec");
-        const switchBtn = document.querySelector("button");
-
-        setInterval(updateTime, 1000);
-
-        function updateTime() {
-          const date = new Date();
-
-          const secToDeg = (date.getSeconds() / 60) * 360;
-          secHand.style.transform = `rotate(${secToDeg}deg)`;
-
-          const minToDeg = (date.getMinutes() / 60) * 360;
-          minHand.style.transform = `rotate(${minToDeg}deg)`;
-          
-          const hourToDeg = (date.getHours() / 12) * 360;
-          hourHand.style.transform = `rotate(${hourToDeg}deg)`;
-        }
-
-        switchBtn.addEventListener("click", () => {
-          document.body.classList.toggle("dark");
-        })
-      </script>
-    </div>
-
+    </section>
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
     <script src="./in-fetch-api.js"></script>
