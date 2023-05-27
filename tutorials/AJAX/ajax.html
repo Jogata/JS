@@ -88,132 +88,134 @@
         users.send();
       }
     </script>
-
-    <script>
-  // 07. Football League
-
-  function calcFens(arr) {
-    const stad = Number(arr[0]);
-    const fens = Number(arr[1]);
     
-    let a = 0;
-    let b = 0;
-    let v = 0;
-    let g = 0;
+    <script>
+      // 09. Clock
 
-    const sectors = {
-      "A": 0,
-      "B": 0,
-      "V": 0,
-      "G": 0,
-    }
+      function clock() {
+        
+        for (let i = 0; i < 24; i++) {
+          
+          for (let j = 0; j < 60; j++) {
+            
+            console.log(`${i} : ${j}`);
 
-    for (let i = 2; i < arr.length; i++) {
-      const sector = arr[i];
-
-      sectors[sector]++;
-
-    }
-
-    const aP = sectors.A / fens * 100;
-    const bP = sectors.B / fens * 100;
-    const vP = sectors.V / fens * 100;
-    const gP = sectors.G / fens * 100;
-    const fensP = fens / stad * 100;
-
-    console.log(`${aP.toFixed(2)}%`);
-    console.log(`${bP.toFixed(2)}%`);
-    console.log(`${vP.toFixed(2)}%`);
-    console.log(`${gP.toFixed(2)}%`);
-    console.log(`${fensP.toFixed(2)}%`);
-  }
-
-  // calcFens(["76", "10", "A", "V", "V", "V", "G", "B", "A", "V", "B", "B"]);
-  // calcFens(["93", "16", "A", "V", "G", "G", "B", "B", "G", "B", "A", "B", "B", "B", "A", "B", "B", "A"]);
-  // calcFens(["1000", "12", "A", "A", "V", "V", "A", "G", "A", "A", "V", "G", "V", "A"]);
-
-  // 08. Equal Pairs
-
-  function comparePairs2(arr) {
-    const pairs = Number(arr[0]);
-
-    let score = Number(arr[1]) + Number(arr[2]);
-    let prev = score;
-    let diff = 0;
-
-    for (let i = 3; i < arr.length; i+=2) {
-      const first = Number(arr[i]);
-      const second = Number(arr[i+1]);
-
-      score = first + second;
-
-      if (score !== prev) {
-        const currDiff = Math.abs(score - prev);
-        diff = Math.max(diff, currDiff);
-        prev = score;
-      }
-    }
-
-    if (diff === 0) {
-      console.log(`Yes, value=${score}`);
-    } else {
-      console.log(`No, maxdiff=${diff}`);
-    }
-  }
-
-  function comparePairs(arr) {
-    const pairs = Number(arr[0]);
-
-    const scores = [];
-    let areEqual = true;
-
-    for (let i = 1; i < arr.length; i+=2) {
-      const first = Number(arr[i]);
-      const second = Number(arr[i+1]);
-
-      const score = first + second;
-      scores.push(score);
-    }
-
-    prev = scores[0];
-
-    for (let i = 1; i < scores.length; i++) {
-      if (scores[i-1] !== scores[i]) {
-        areEqual = false;
-        break;
-      }
-    }
-
-    if (areEqual) {
-      console.log(`Yes, value=${scores[0]}`);
-    } else {
-      let biggest = 0;
-      for (let i = 1; i < scores.length; i++) {
-        let diff = Math.abs(scores[i] - scores[i-1]);
-        if (biggest < diff) {
-          biggest = diff;
+          }
         }
       }
-      console.log(`No, maxdiff=${biggest}`);
-    }
-  }
 
-  // comparePairs(["3", "1", "2", "0", "3", "4", "-1"]);
-  // comparePairs(["2", "1", "2", "2", "2"]);
-  // comparePairs(["4", "1", "1", "3", "1", "2", "2", "0", "0"]);
-  // comparePairs(["1", "5", "5"]);
-  // comparePairs(["2", "-1", "0", "0", "-1"]);
-  // comparePairs(["2", "-1", "2", "0", "-1"]);
+      // clock();
 
-      // console.log("90>221");
-      console.log(Notification.permission);
+      // 10. Clock - part 2
+
+      function clock2() {
+        
+        for (let i = 0; i < 24; i++) {
+          
+          for (let j = 0; j < 60; j++) {
+
+            for (let s = 0; s < 60; s++) {
+              
+              console.log(`${i} : ${j} : ${s}`);
+
+            }
+            
+          }
+        }
+      }
+
+      // clock2();
+
+      // 11. Odd / Even Position
+
+      function magic(arr) {
+        const n = Number(arr[0]);
+
+        let oddSum = null;
+        let evenSum = null;
+        let minOdd = null;
+        let maxOdd = null;
+        let minEven = null;
+        let maxEven = null;
+
+        for (let i = 1; i < arr.length; i++) {
+          const num = Number(arr[i]);
+
+          if (num % 2 === 0) {
+            if (evenSum !== null) {
+              evenSum += num;
+            } else {
+              evenSum = num;
+            }
+
+            if (minEven !== null) {
+              if (minEven > num) {
+                minEven = num;
+              }
+            } else {
+              minEven = num;
+            }
+
+            if (maxEven !== null) {
+              if (maxEven < num) {
+                maxEven = num;
+              }
+            } else {
+              maxEven = num;
+            }
+          } else {
+            if (oddSum !== null) {
+              oddSum += num;
+            } else {
+              oddSum = num;
+            }
+
+            if (minOdd !== null) {
+              if (minOdd > num) {
+                minOdd = num;
+              }
+            } else {
+              minOdd = num;
+            }
+
+            if (maxOdd !== null) {
+              if (maxOdd < num) {
+                maxOdd = num;
+              }
+            } else {
+              maxOdd = num;
+            }
+          }
+        }
+
+        console.log(`OddSum=${oddSum?.toFixed(2) || "No"}`);
+        console.log(`OddMin=${minOdd?.toFixed(2) || "No"}`);
+        console.log(`OddMax=${maxOdd?.toFixed(2) || "No"}`);
+        console.log(`EvenSum=${evenSum?.toFixed(2) || "No"}`);
+        console.log(`EvenMin=${minEven?.toFixed(2) || "No"}`);
+        console.log(`EvenMax=${maxEven?.toFixed(2) || "No"}`);
+      }
+
+      // magic(["6", "2", "3", "5", "4", "2", "1"]);
+      // magic(["2", "1.5", "-2.5"]);
+      // magic(["1", "1"]);
+      magic(["0"]);
+      // magic(["5", "3", "-2", "8", "11", "3"]);
+      // magic(["4", "1.5", "1.75", "1.5", "1.75"]);
+      // magic(["1", "-5"]);
+      // magic(["3","-1", "-2", "-3"]);
+
+      // console.log("90>220>220");
+
+      function showNotification() {
+        const notification = new Notification("New message!", {
+          body: "Hey, how are you?"
+        });
+      }
 
       if (Notification.permission === "granted") {
-        console.log("we have permission!");
-      } else if (Notification.permission !== "denied") {
-        Notification.requestPermission()
-        .then(permission => console.log(permission));
-      } 
+        showNotification();
+      }
     </script>
   </body>
 </html>
