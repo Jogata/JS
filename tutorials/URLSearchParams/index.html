@@ -6,203 +6,186 @@
     <title>URLSearchParams in JS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-      body {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: Georgia, serif;
-        background-color: #F2F2F2;
-      }
-
-      * {
+      *, 
+      *::before, 
+      *:after {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
 
-      .content {
-        display: flex;
-        align-items: center;
-        column-gap: 1rem;
-      }
-
-      .card {
-        position: relative;
-        width: 280px;
-        margin: 20px 0;
-        border-radius: 20px;
-        background-color: #FFF;
-      }
-      .card::before {
-        position: absolute;
-        content: "";
+      body {
         width: 100%;
-        height: 40%;
-        border-radius: 20px 20px 0 0;
-        background-color: #7D2AE8;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        font-family: Georgia, Times, serif;
       }
 
-      .card-content {
-        position: relative;
-        padding: 30px;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        z-index: 2;
-      }
-
-      .image {
-        width: 140px;
-        height: 140px;
-        padding: 3px;
-        border-radius: 50%;
-        background-color: #7D2AE8;
-      }
-      .image img {
+      .converter {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border: 3px solid #FFF;
-        border-radius: 50%;
-      }
-
-      .media-icons {
-        position: absolute;
-        top: 10px;
-        right: 20px;
+        max-width: 350px;
+        padding: 35px;
         display: flex;
         align-items: center;
-        flex-direction: column;
+        justify-content: space-between;
+        border-radius: 16px;
+        background-color: #4a98f7;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
       }
 
-      .media-icons i {
-        margin-top: 10px;
-        color: #FFF;
-        transition: all 0.4s ease;
-        opacity: 0.6;
-        cursor: pointer;
-      }
-      .media-icons i:hover {
-        opacity: 1;
-      }
-
-      .info {
-        margin-top: 10px;
-        color: #333;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-      }
-      .info span {
+      h6 {
+        margin-bottom: 2px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 400;
         text-transform: capitalize;
       }
 
-      .name {
+      input {
+        max-width: 100px;
+        height: 50px;
+        color: #737373;
         font-size: 20px;
-        font-weight: 600;
+        text-align: center;
+        outline: none;
+        border: none;
+        border-radius: 8px;
       }
-      .prof {
-        font-size: 15px;
-        font-weight: 500;
+      input::-webkit-inner-spin-button, 
+      input::-webkit-outer-spin-button {
+        display: none;
       }
 
-      .rating {
+      .fa-exchange {
+        margin-top: 20px;
+        color: #fff;
+        font-size: 25px;
+        cursor: pointer;
+      }
+
+      /* ============================== */
+      section {
+        width: 100%;
+        min-height: 100vh;
         display: flex;
         align-items: center;
-        margin-top: 18px;
+        justify-content: center;
+        background-color: yellowgreen;
       }
 
-      .rating i {
-        margin: 0 2px;
-        color: #7D2AE8;
-        font-size: 18px;
-      }
-
-      .buttons {
-        width: 100%;
-        margin-top: 20px;
-        display: flex;
-        justify-content: space-around;
-      }
-      .buttons button {
-        padding: 8px 22px;
-        color: #FFF;
-        font-size: 14px;
+      button {
+        position: relative;
+        display: inline-block;
+        margin: auto;
+        padding: 1em 3em;
+        color: #fff;
+        font-size: 2rem;
+        font-weight: 600;
+        font-family: Georgia;
+        letter-spacing: 1px;
         text-transform: capitalize;
         outline: none;
         border: none;
-        border-radius: 20px;
-        background-color: #7D2AE8;
-        transition: all 0.4s ease;
+        background-color: transparent;
+        isolation: isolate;
         cursor: pointer;
       }
-      .buttons button:hover {
-        background-color: #6616d0;
+      button::before {
+        position: absolute;
+        top: -5%;
+        left: -1%;
+        content: "";
+        width: 50%;
+        height: 100%;
+        background-color: #ff0303;
+        transform: skew(30deg);
+        transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: -1;
+      }
+      button::after {
+        position: absolute;
+        top: 5%;
+        right: -1%;
+        content: "";
+        width: 50%;
+        height: 100%;
+        background-color: #2e3840;
+        transform: skew(30deg);
+        transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: -1;
+      }
+      button:hover::before, 
+      button:hover::after {
+        top: 0;
+        transform: skew(0deg);
+      }
+      button:hover::after {
+        right: 0;
+      }
+      button:hover::before {
+        left: 0;
       }
     </style>
   </head>
   <body>
     <section>
-      <div class="container">
-        <div class="content">
-          <div class="card">
-            <div class="card-content">
-              <div class="image">
-                <img src="../../../CSS/assets/img/profile-copy.jpg" alt="">
-              </div>
-              <div class="media-icons">
-                <i class="fa fa-facebook"></i>
-                <i class="fa fa-twitter"></i>
-                <i class="fa fa-github"></i>
-              </div>
-              <div class="info">
-                <span class="name">vbdhd fdkbvfkdl</span>
-                <span class="prof">jvnfdklsvbfl</span>
-              </div>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-              </div>
-              <div class="buttons">
-                <button class="about">about me</button>
-                <button class="hire">hire me</button>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-content">
-              <div class="image">
-                <img src="../../../CSS/assets/img/profile-copy.jpg" alt="">
-              </div>
-              <div class="media-icons">
-                <i class="fa fa-facebook"></i>
-                <i class="fa fa-twitter"></i>
-                <i class="fa fa-github"></i>
-              </div>
-              <div class="info">
-                <span class="name">vbdhd fdkbvfkdl</span>
-                <span class="prof">jvnfdklsvbfl</span>
-              </div>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-              </div>
-              <div class="buttons">
-                <button class="about">about me</button>
-                <button class="hire">hire me</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <button>submit</button>
     </section>
+    <div class="converter">
+      <div class="input-box">
+        <h6>celsius <span>*C</span></h6>
+        <input type="number" id="celsius" autofocus>
+      </div>
+      <i class="fa fa-exchange" aria-hidden="true"></i>
+      <div class="input-box">
+        <h6>fahrenheit <span>*F</span></h6>
+        <input type="number" id="fahrenheit">
+      </div>
+    </div>
+
+    <script>
+      const celsius = document.querySelector("#celsius");
+      const fahrenheit = document.querySelector("#fahrenheit");
+
+      window.addEventListener("load", () => {
+        celsius.value = "";
+        fahrenheit.value = "";
+      });
+
+      celsius.addEventListener("input", () => {
+        const celDegree = celsius.value;
+        fahrenheit.value = ((celDegree * 9) / 5 + 32).toFixed(2);
+
+        if (!celDegree) {
+          fahrenheit.value = "";
+        }
+      })
+
+      fahrenheit.addEventListener("input", () => {
+        const fahDegree = fahrenheit.value;
+        celsius.value = ((fahDegree - 32) * 5 / 9).toFixed(2);
+
+        if (!fahDegree) {
+          celsius.value = "";
+        }
+      })
+
+      const exchangeBtn = document.querySelector(".fa-exchange");
+
+      exchangeBtn.addEventListener("click", () => {
+        const inputBoxes = document.querySelectorAll(".input-box");
+        const leftInputBoxChildren = inputBoxes[0].querySelectorAll(".input-box > *");
+        const rightInputBoxChildren = inputBoxes[1].querySelectorAll(".input-box > *");
+
+        // console.log(celInputBoxChildren);
+        // console.log(fahInputBoxChildren);
+
+        inputBoxes[0].replaceChildren(...rightInputBoxChildren);
+        inputBoxes[1].replaceChildren(...leftInputBoxChildren);
+      })
+    </script>
+
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
     <script src="./in-fetch-api.js"></script>
