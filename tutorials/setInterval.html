@@ -6,320 +6,270 @@
     <title>setInterval function in JS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-      :root {
-        --bg-orange: hsl(25, 97%, 53%);
-        --bg-white-alpha-4: hsla(0, 0%, 100%, 0.04);
-        --bg-dark-blue: hsl(213, 19%, 18%);
-        --bg-rich-black-fogra-29: hsla(215, 27%, 12%, 1);
-        --bg-very-dark-blue: hsl(216, 12%, 8%);
-
-        --text-white: hsl(0, 0%, 100%);
-        --text-light-gray: hsl(217, 12%, 63%);
-        --text-medium-gray: hsl(216, 12%, 54%);
-        --text-orange: hsl(25, 97%, 53%);
-        
-        --gradient-1: radial-gradient(circle at top, hsla(0, 0%, 100%, 0.05) 0%, transparent 80%);
-
-        --fontFamily-overpass: 'Overpass', sans-serif;
-        --fontFamily-overpass: Georgia;
-        
-        --fontSize-title: 2.4rem;
-        --fontSize-body: 1.4rem;
-        
-        --radius-pill: 100px;
-        --radius-circle: 50%;
-        
-        --transition-1: 100ms ease;
-      }
-
-      *, *::after, *::before {
+      * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
 
-      li {
-        list-style: none;
-      }
-
-      a, 
-      img, 
-      span, 
-      button {
-        display: block;
-      }
-
       img {
-        height: auto;
-      }
-
-      button {
-        font-family: inherit;
-        outline: none;
-        border: none;
-        background-color: transparent;
-        cursor: pointer;
-      }
-
-      html {
-        font-size: 10px;
-        scroll-behavior: smooth;
+        width: 100%;
       }
 
       body {
         min-height: 100vh;
-        padding: 24px;
-        color: var(--text-light-gray);
-        font-size: var(--fontSize-body);
-        font-family: var(--fontFamily-overpass);
-        line-height: 1.6;
-        background-color: var(--bg-very-dark-blue);
+        display: flex;
+        /* align-items: center; */
+        /* justify-content: center; */
+        flex-direction: column;
+        font-family: Georgia, initial, serif;
+        background-color: #222;
       }
 
-      .page {
+      .container {
+        position: relative;
+        width: 600px;
+        height: 600px;
+        margin: auto;
+        border: 2px solid #fff;
+        border-radius: 50%;
+      }
+
+      /* .icons */
+      .icon {
+        position: relative;
+        left: -50%;
         width: 100%;
-        min-height: 100vh;
-        display: grid;
-        place-content: center;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* cursor: pointer; */
+        z-index: 2;
       }
 
-      .rated-state {
+      .icon-img-box {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        border: 1px solid #fff;
+        border-radius: 50%;
+        transform: rotate(calc(360deg/8 * var(--i)));
+        transform-origin: 340px;
+        box-shadow: 0 0 0 4px #222, 0 0 0 6px #fff;
+        transition: all 0.5s;
+        cursor: pointer;
+        overflow: hidden;
+        /* z-index: 100; */
+      }
+      .icon-img-box.active {
+        box-shadow: 0 0 0 6px #222, 0 0 0 10px #ff1d50;
+      }
+      .icon-img-box img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        object-fit: cover;
+        transform: rotate(calc(-360deg/8 * var(--i)));
+        filter: grayscale(1);
+        transition: all 0.5s;
+      }
+      .icon-img-box.active img {
+        filter: grayscale(0);
+      }
+
+      .content {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* overflow: hidden; */
+      }
+      .content::before {
+        position: absolute;
+        inset: 60px;
+        content: "";
+        border: 4px solid transparent;
+        border-left: 4px solid #2196f3;
+        border-right: 4px solid #fff;
+        border-radius: 50%;
+        animation: rotate-v1 5s linear infinite;
+        pointer-events: none;
+        z-index: 1;
+      }
+      .content::after {
+        position: absolute;
+        inset: 120px;
+        content: "";
+        border: 4px solid transparent;
+        border-left: 4px solid #ff1d50;
+        border-right: 4px solid #fff;
+        border-radius: 50%;
+        /* animation: rotate-v2 5s linear infinite; */
+        animation: rotate-v1 5s linear infinite reverse;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      @keyframes rotate-v1 {
+        0% {
+          rotate: 0deg;
+        }
+        100% {
+          rotate: 360deg;
+        }
+      }
+      /* @keyframes rotate-v2 {
+        0% {
+          rotate: 0deg;
+        }
+        100% {
+          rotate: -360deg;
+        }
+      } */
+
+      .content-box {
         display: none;
+        position: absolute;
+        transform: scale(0);
+        transition: all 0.5s;
+        opacity: 0;
+      }
+      .content-box.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: scale(1);
+        transition-delay: 0.5s;
+        opacity: 1;
+        z-index: 3;
       }
 
       .card {
-        max-width: 410px;
-        margin-inline: auto;
-        padding: 24px;
-        border-radius: 15px;
-        background-color: var(--bg-rich-black-fogra-29);
-        background-image: var(--gradient-1);
-      }
-
-      .card-icon {
-        width: 40px;
-        height: 40px;
-        display: grid;
-        place-items: center;
-        border-radius: var(--radius-circle);
-        background-color: var(--bg-dark-blue);
-      }
-      .card-icon i {
-        font-size: 20px;
-        color: var(--bg-orange);
-      }
-
-      .card-title {
-        margin-block: 20px 15px;
-        color: var(--text-white);
-        font-size: var(--fontSize-title);
-        line-height: 1;
-      }
-
-      .wrapper {
-        margin-block: 25px 20px;
+        position: relative;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
+        flex-direction: column;
+        row-gap: 15px;
       }
 
-      .icon-btn {
-        width: 40px;
-        height: 40px;
-        color: var(--text-medium-gray);
-        line-height: 42px;
-        border-radius: var(--radius-circle);
-        background-color: var(--bg-dark-blue);
-        transition: var(--transition-1);
-      }
-      .icon-btn:focus-visible, 
-      .icon-btn:hover {
-        color: var(--text-white);
-        background-color: var(--text-medium-gray);
-      }
-      .icon-btn.selected {
-        color: var(--text-white);
-        background-color: var(--bg-orange);
-      }
-
-      .submit-btn {
-        width: 100%;
-        height: 45px;
-        color: var(--text-white);
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        border-radius: var(--radius-pill);
-        background-color: var(--bg-orange);
-        transition: var(--transition-1);
-      }
-      .submit-btn:focus-visible, 
-      .submit-btn:hover {
-        color: var(--bg-orange);
-        background-color: var(--text-white);
-      }
-
-      .rated .rating-state {
-        display: none;
-      }
-      .rated {
-        padding-block: 30px 25px;
-      }
-
-      .rated .rated-state {
-        display: block;
-        text-align: center;
-      }
-
-      .card-img {
+      .img-box {
+        position: relative;
         width: 150px;
-        margin-inline: auto;
-        margin-block-end: 25px;
-        border: 1px solid #fff;
+        height: 150px;
+        border-radius: 50%;
+        overflow: hidden;
+      }
+      .img-box img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        object-fit: cover;
       }
 
-      .card-subtitle {
-        max-width: max-content;
-        margin-inline: auto;
-        padding: 10px 16px 8px;
-        color: var(--text-orange);
-        line-height: 1;
-        border-radius: var(--radius-pill);
-        background-color: var(--bg-white-alpha-4);
+      .text-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
       }
 
-      .card-subtitle span {
-        display: inline;
+      h2 {
+        position: relative;
+        color: #fff;
+        font-size: 1.25rem;
+        text-align: center;
+        text-transform: uppercase;
+      }
+      h3 {
+        color: #fff;
+        font-size: 0.6rem;
+        text-align: center;
+        text-transform: uppercase;
       }
 
-      .rated .card-title {
-        margin-block: 25px 15px;
+      .sci {
+        list-style: none;
+        position: relative;
+        margin-top: 10px;
+        display: flex;
+        gap: 7px;
+      }
+      .sci a {
+        text-decoration: none;
+        position: relative;
+        width: 30px;
+        height: 30px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background-color: #444;
+        transition: all 0.5s;
+      }
+      .sci a:hover {
+        background-color: #2196f3;
       }
 
-      @media screen and (min-width: 768px) {
-        :root {
-          --fontSize-title: 2.8rem;
-          --FontSize-body: 1.5rem;
-        }
-        .card {
-          padding: 30px;
-          border-radius: 30px;
-        }
-        .card-icon, 
-        .icon-btn {
-          width: 50px;
-          height: 50px;
-        }
-        .card-icon img {
-          width: max-content;
-        }
-        .icon-btn {
-          line-height: 54px;
-        }.rated {
-          padding: 40px 35px 35px;
-        }
-        .card-img {
-          width: max-content;
-        }
-        .rated .card-title {
-          margin-block: 20px 30px;
-        }
+      body {
+        height: 110vh;
       }
     </style>
   </head>
   <body>
-    <section class="page">
-      <div class="card" data-card>
-        <div class="rating-state">
-          <div class="card-icon">
-            <i class="fa fa-star"></i>
-          </div>
-          <h3 class="card-title">How did we do?</h3>
-
-          <p class="card-text">
-            Please let us know how we did with your support request. All feedback is appreciated to help us improve our offering!
-          </p>
-
-          <div class="wrapper">
-            <button class="icon-btn" aria-label="rate 1 star" data-rating-btn>1</button>
-            <button class="icon-btn" aria-label="rate 2 star" data-rating-btn>2</button>
-            <button class="icon-btn" aria-label="rate 3 star" data-rating-btn>3</button>
-            <button class="icon-btn" aria-label="rate 4 star" data-rating-btn>4</button>
-            <button class="icon-btn" aria-label="rate 5 star" data-rating-btn>5</button>
-          </div>
-
-          <button class="submit-btn" data-submit-btn>submit</button>
+    <div class="container">
+      <div class="icon">
+        <div class="icon-img-box active" style="--i:1;">
+          <img src="../../CSS/assets/img/profile-copy.jpg" alt="Person">
         </div>
-        <div class="rated-state">
-
-          <img src="" alt="card image" width="162" height="108" class="card-img">
-
-          <p class="card-subtitle">
-            You selected <span data-rated-value>5</span> out of 5
-          </p>
-
-          <h3 class="card-title">Thank you!</h3>
-
-          <p class="card-text">
-            We appreciate you taking the time to give a rating. If you ever need more support, don't hesitate to get in touch!
-          </p>
-
+        <div class="icon-img-box" style="--i:2;">
+          <img src="../../CSS/assets/img/profile-copy.jpg" alt="Person">
+        </div>
+        <div class="icon-img-box" style="--i:3;">
+          <img src="../../CSS/assets/img/profile-copy.jpg" alt="Person">
+        </div>
+        <div class="icon-img-box" style="--i:4;">
+          <img src="../../CSS/assets/img/profile-copy.jpg" alt="Person">
+        </div>
+        <div class="icon-img-box" style="--i:5;">
+          <img src="../../CSS/assets/img/profile-copy.jpg" alt="Person">
+        </div>
+        <div class="icon-img-box" style="--i:6;">
+          <img src="../../CSS/assets/img/profile-copy.jpg" alt="Person">
+        </div>
+        <div class="icon-img-box" style="--i:7;">
+          <img src="../../CSS/assets/img/profile-copy.jpg" alt="Person">
+        </div>
+        <div class="icon-img-box" style="--i:8;">
+          <img src="../../Front-end/Full-Projects/Travel/travel-v1/img/testimonial/pic-6.png" alt="Person">
         </div>
       </div>
-    </section>
+
+    </div>
 
     <script>
-      "use strict"
+      const imgBoxes = document.querySelectorAll(".icon-img-box");
+      const contentBoxes = document.querySelectorAll(".content-box");
 
-      const card = document.querySelector("[data-card]");
-      const submitBtn = document.querySelector("[data-submit-btn]");
-      const ratingBtns = document.querySelectorAll("[data-rating-btn]");
-      const ratedValue = document.querySelector("[data-rated-value]");
-
-      let lastRatedValue = NaN;
-
-      for (let i = 0; i < ratingBtns.length; i++) {
-        ratingBtns[i].addEventListener("click", function () {
-          if (lastRatedValue) {
-            ratingBtns[lastRatedValue - 1].classList.remove("selected");
+      for (let i = 0; i < imgBoxes.length; i++) {
+        imgBoxes[i].addEventListener("mouseover", function() {
+          for (let i = 0; i < contentBoxes.length; i++) {
+            contentBoxes[i].className = "content-box";
           }
+          contentBoxes[i].className = "content-box active";
 
-          lastRatedValue = Number(this.textContent);
-          this.classList.add("selected");
+          for (let i = 0; i < imgBoxes.length; i++) {
+            imgBoxes[i].className = "icon-img-box";
+          }
+          this.className = "icon-img-box active";
         })
       }
-
-      submitBtn.addEventListener("click", function () {
-        if (lastRatedValue) {
-          card.classList.add("rated");
-        }
-        ratedValue.textContent = lastRatedValue;
-      })
     </script>
 
-    <!-- <h1 style="text-align: center;">setInterval() - JavaScript</h1> -->
-    <hr>
-    <p id="timer" style="font-size: 3rem;">0 sec</p>
-    <button id="start">Start Timer</button>
-    <button id="pause">Pause Timer</button>
-
-    <script src="js.js">
-      const timer = document.getElementById('timer');
-      const startButton = document.getElementById('start');
-      const pauseButton = document.getElementById('pause');
-
-      let count = 0;
-      let intervalID;
-
-      startButton.addEventListener('click', function () {
-        intervalID = setInterval(function () {
-          count += 1;
-          timer.textContent = `${count} sec`;
-        }, 1000)
-      })
-      
-      pauseButton.addEventListener('click', function () {
-        clearInterval(intervalID);
-      })
-    </script>
   </body>
 </html>
