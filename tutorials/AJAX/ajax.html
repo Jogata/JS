@@ -90,136 +90,151 @@
     </script>
 
     <script>
-      // 11. Odd / Even Position
+      // 01. Read Text
 
-      function magic(arr) {
-        const n = Number(arr[0]);
+      function printWords(arr) {
+        let word = "";
+        let index = 0;
 
-        let oddSum = 0;
-        let evenSum = 0;
-        let minOdd = null;
-        let maxOdd = null;
-        let minEven = null;
-        let maxEven = null;
+        while (word !== "Stop") {
+          word = arr[index];
 
-        for (let i = 1; i < arr.length; i++) {
-          const num = Number(arr[i]);
-
-          if (i % 2 == 0) {
-            if (evenSum !== null) {
-              evenSum += num
-            } else {
-              evenSum = num;
-            }
-
-            if (minEven !== null) {
-              if (minEven > num) {
-                minEven = num;
-              }
-            } else {
-              minEven = num;
-            }
-
-            if (maxEven !== null) {
-              if (maxEven < num) {
-                maxEven = num;
-              }
-            } else {
-              maxEven = num;
-            }
-          } else {
-            if (oddSum !== null) {
-              oddSum += num;
-            } else {
-              oddSum = num;
-            }
-
-            if (minOdd !== null) {
-              if (minOdd > num) {
-                minOdd = num;
-              }
-            } else {
-              minOdd = num;
-            }
-
-            if (maxOdd !== null) {
-              if (maxOdd < num) {
-                maxOdd = num;
-              }
-            } else {
-              maxOdd = num;
-            }
+          if (word === "Stop") {
+            break;
           }
+
+          console.log(word);
+          index++;
         }
-
-        // console.log(`OddSum=${oddSum?.toFixed(2) || "No"}`);
-        // console.log(`OddMin=${minOdd?.toFixed(2) || "No"}`);
-        // console.log(`OddMax=${maxOdd?.toFixed(2) || "No"}`);
-        // console.log(`EvenSum=${evenSum?.toFixed(2) || "No"}`);
-        // console.log(`EvenMin=${minEven?.toFixed(2) || "No"}`);
-        // console.log(`EvenMax=${maxEven?.toFixed(2) || "No"}`);
-
-        if (minOdd === null) {
-          minOdd = "No";
-        } else {
-          minOdd = minOdd.toFixed(2);
-        }
-
-        if (maxOdd === null) {
-          maxOdd = "No";
-        } else {
-          maxOdd = maxOdd.toFixed(2);
-        }
-
-        if (minEven === null) {
-          minEven = "No";
-        } else {
-          minEven = minEven.toFixed(2);
-        }
-
-        if (maxEven === null) {
-          maxEven = "No";
-        } else {
-          maxEven = maxEven.toFixed(2);
-        }
-
-        console.log(`OddSum=${oddSum.toFixed(2)},`);
-        console.log(`OddMin=${minOdd},`);
-        console.log(`OddMax=${maxOdd},`);
-        console.log(`EvenSum=${evenSum.toFixed(2)},`);
-        console.log(`EvenMin=${minEven},`);
-        console.log(`EvenMax=${maxEven}`);
       }
 
-      // magic(["6", "2", "3", "5", "4", "2", "1"]);
-      // magic(["2", "1.5", "-2.5"]);
-      // magic(["1", "1"]);
-      // magic(["0"]);
-      // magic(["5", "3", "-2", "8", "11", "-3"]);
-      // magic(["4", "1.5", "1.75", "1.5", "1.75"]);
-      // magic(["1", "-5"]);
-      // magic(["3","-1", "-2", "-3"]);
+      // printWords(["Nakov", "SoftUni", "Sofia", "Bulgaria", "SomeText", "Stop", "AfterStop", "Europe", "HelloWorld"]);
+      // printWords(["Sofia", "Berlin", "Moscow", "Athens", "Madrid", "London", "Paris", "Stop", "AfterStop"]);
 
-      // console.log("90 / 221>225");
-    </script>
+      // 02. Password
 
-    <ul id="one">
-      <li>100</li>
-      <li>101</li>
-    </ul>
-    <ul id="two">
-      <li>200</li>
-      <li>201</li>
-    </ul>
+      function login(arr) {
+        const user = arr[0];
+        const pass = arr[1];
+        let opit = "";
+        let index = 2;
 
-    <script>
-      const one = document.querySelector("#one");
-      const two = document.querySelector("#two");
-      const oneChildren = one.querySelectorAll("li");
-      const twoChildren = two.querySelectorAll("li");
+        while (index < arr.length) {
+          opit = arr[index];
 
-      one.replaceChildren(...twoChildren);
-      two.replaceChildren(...oneChildren);
+          if (opit === pass) {
+            console.log(`Welcome ${user}!`);
+          }
+
+          index++;
+        }
+      }
+
+      // login(["Nakov", "1234", "Pass", "1324", "1234"]);
+      // login(["Gosho", "secret", "secret"]);
+
+      // 03. Sum Numbers
+
+      function sumNumbers(arr) {
+        const end = Number(arr[0]);
+        let num = 0;
+        let sum = 0;
+        let index = 0;
+
+        // console.log(sum);
+        // console.log(end);
+
+        while (sum < end) {
+          index++;
+
+          if (index === arr.length) {
+            break;
+          }
+
+          console.log(sum, end);
+
+          num = Number(arr[index]);
+          sum += num;
+        }
+
+        console.log(sum);
+      }
+
+      // sumNumbers(["100", "10", "20", "30", "40"]);
+      // sumNumbers(["20", "1", "2", "3", "4", "5", "6"]);
+
+      // 04. Sequence 2k+1
+
+      function createSequence(arr) {
+        const end = Number(arr[0]);
+        let current = 1;
+
+        while (current <= end) {
+          console.log(current);
+          current = current * 2 + 1;
+        }
+      }
+
+      // createSequence(["3"]);
+      // console.log("*************************");
+      // createSequence(["8"]);
+      // console.log("*************************");
+      // createSequence(["17"]);
+      // console.log("*************************");
+      // createSequence(["31"]);
+
+      // 05. Account Balance
+
+      function menageAccountBalance(vnoski) {
+        let total = 0;
+        let index = 0;
+        let vnoska = vnoski[index];
+
+        while (vnoska !== "NoMoreMoney") {
+          vnoska = Number(vnoska);
+          
+          if (vnoska < 0) {
+            console.log("Invalid operation!");
+            break;
+          }
+          
+          console.log(`Increase: ${vnoska.toFixed(2)}`);
+          total += vnoska;
+          index++;
+          vnoska = vnoski[index];
+        }
+
+        console.log(`Total: ${total.toFixed(2)}`);
+      }
+
+      // menageAccountBalance(["5.51", "69.42", "100", "NoMoreMoney"]);
+      // menageAccountBalance(["120", "45.55", "-150"]);
+
+      // 06. Max Number
+
+      function findMaxNumber(arr) {
+        let input = arr[0];
+        let max = input;
+        let index = 0;
+
+        while (input !== "Stop") {
+          input = Number(input);
+
+          if (max < input) {
+            max = input;
+          }
+
+          index++;
+          input = arr[index];
+        }
+
+        console.log(max);
+      }
+
+      // findMaxNumber(["999", "Stop"]);
+      // findMaxNumber(["45", "-20", "7", "99", "Stop"]);
+      // findMaxNumber(["-10", "20", "-30", "Stop"]);
+      // findMaxNumber(["100", "99", "80", "70", "Stop"]);
     </script>
   </body>
 </html>
