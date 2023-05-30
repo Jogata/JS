@@ -90,151 +90,157 @@
     </script>
 
     <script>
-      // 01. Read Text
+      // 07. Min Number
 
-      function printWords(arr) {
-        let word = "";
-        let index = 0;
-
-        while (word !== "Stop") {
-          word = arr[index];
-
-          if (word === "Stop") {
-            break;
-          }
-
-          console.log(word);
-          index++;
-        }
-      }
-
-      // printWords(["Nakov", "SoftUni", "Sofia", "Bulgaria", "SomeText", "Stop", "AfterStop", "Europe", "HelloWorld"]);
-      // printWords(["Sofia", "Berlin", "Moscow", "Athens", "Madrid", "London", "Paris", "Stop", "AfterStop"]);
-
-      // 02. Password
-
-      function login(arr) {
-        const user = arr[0];
-        const pass = arr[1];
-        let opit = "";
-        let index = 2;
-
-        while (index < arr.length) {
-          opit = arr[index];
-
-          if (opit === pass) {
-            console.log(`Welcome ${user}!`);
-          }
-
-          index++;
-        }
-      }
-
-      // login(["Nakov", "1234", "Pass", "1324", "1234"]);
-      // login(["Gosho", "secret", "secret"]);
-
-      // 03. Sum Numbers
-
-      function sumNumbers(arr) {
-        const end = Number(arr[0]);
-        let num = 0;
-        let sum = 0;
-        let index = 0;
-
-        // console.log(sum);
-        // console.log(end);
-
-        while (sum < end) {
-          index++;
-
-          if (index === arr.length) {
-            break;
-          }
-
-          console.log(sum, end);
-
-          num = Number(arr[index]);
-          sum += num;
-        }
-
-        console.log(sum);
-      }
-
-      // sumNumbers(["100", "10", "20", "30", "40"]);
-      // sumNumbers(["20", "1", "2", "3", "4", "5", "6"]);
-
-      // 04. Sequence 2k+1
-
-      function createSequence(arr) {
-        const end = Number(arr[0]);
-        let current = 1;
-
-        while (current <= end) {
-          console.log(current);
-          current = current * 2 + 1;
-        }
-      }
-
-      // createSequence(["3"]);
-      // console.log("*************************");
-      // createSequence(["8"]);
-      // console.log("*************************");
-      // createSequence(["17"]);
-      // console.log("*************************");
-      // createSequence(["31"]);
-
-      // 05. Account Balance
-
-      function menageAccountBalance(vnoski) {
-        let total = 0;
-        let index = 0;
-        let vnoska = vnoski[index];
-
-        while (vnoska !== "NoMoreMoney") {
-          vnoska = Number(vnoska);
-          
-          if (vnoska < 0) {
-            console.log("Invalid operation!");
-            break;
-          }
-          
-          console.log(`Increase: ${vnoska.toFixed(2)}`);
-          total += vnoska;
-          index++;
-          vnoska = vnoski[index];
-        }
-
-        console.log(`Total: ${total.toFixed(2)}`);
-      }
-
-      // menageAccountBalance(["5.51", "69.42", "100", "NoMoreMoney"]);
-      // menageAccountBalance(["120", "45.55", "-150"]);
-
-      // 06. Max Number
-
-      function findMaxNumber(arr) {
+      function findMinNumber(arr) {
         let input = arr[0];
-        let max = input;
+        let min = input;
         let index = 0;
 
         while (input !== "Stop") {
           input = Number(input);
 
-          if (max < input) {
-            max = input;
+          if (min > input) {
+            min = input;
           }
 
           index++;
           input = arr[index];
         }
 
-        console.log(max);
+        console.log(min);
       }
 
-      // findMaxNumber(["999", "Stop"]);
-      // findMaxNumber(["45", "-20", "7", "99", "Stop"]);
-      // findMaxNumber(["-10", "20", "-30", "Stop"]);
-      // findMaxNumber(["100", "99", "80", "70", "Stop"]);
+      // findMinNumber(["100", "99", "80", "70", "Stop"]);
+      // findMinNumber(["-10", "20", "-30", "Stop"]);
+      // findMinNumber(["45", "-20", "7", "99", "Stop"]);
+      // findMinNumber(["999", "Stop"]);
+      // findMinNumber(["-1", "-2", "Stop"]);
+
+      // 08. Graduation
+
+      function calcGrade(grades) {
+        const student = grades[0];
+        let total = 0;
+        let index = 0;
+
+        // console.log(grades.length);
+
+        while (index < grades.length - 1) {
+          index++;
+          let current = Number(grades[index]);
+
+          if (current < 4) {
+            console.log(`${student} has been excluded at ${index} grade`);
+            total = -1;
+            break;
+          }
+
+          total += current;
+          // console.log(total);
+        }
+
+        if (total > 0) {
+          let average = total / (grades.length - 1);
+          console.log(`${student} graduated. Average grade: ${average.toFixed(2)}`);
+        }
+      }
+
+      // calcGrade(["Gosho", "5", "5.5", "6", "5.43", "5.5", "6", "5.55", "5", "6", "6", "5.43", "5"]);
+      // calcGrade(["Mimi", "5", "6", "5", "6", "5", "6", "6", "2", "3"]);
+
+      // 02. Exam Preparation
+
+      function examPreparation(arr) {
+        const maxBad = Number(arr[0]);
+        let taskName = null;
+        let index = 1;
+        let bads = 0;
+        let total = 0;
+        let tasks = 0;
+        let last = null;
+
+        while (taskName !== "Enough") {
+          last = arr[index];
+          index++;
+          const grade = Number(arr[index]);
+          tasks++;
+
+          if (grade <= 4) {
+            bads++;
+
+            if (bads === maxBad) {
+              console.log(`You need a break, ${maxBad} poor grades.`);
+              break;
+            }
+          }
+
+          total += grade;
+
+          index++;
+          taskName = arr[index];
+        }
+
+        if (bads < maxBad) {
+          console.log(`Average score: ${(total / tasks).toFixed(2)}`);
+          console.log(`Number of problems: ${tasks}`);
+          console.log(`Last problem: ${last}`);
+        }
+      }
+
+      // examPreparation(["3", "Money", "6", "Story", "4", "Spring Time", "5", "Bus", "6", "Enough"]);
+      // examPreparation(["2", "Income", "3", "Game Info", "6", "Best Player", "4"]);
+
+      // 03. Vacation
+
+      function calcVacation(arr) {
+        const vacation = Number(arr[0]);
+        let money = Number(arr[1]);
+        let index = 2;
+        let days = 0;
+        let cdays = 0;
+
+        while (money >= 0) {
+          const action = arr[index];
+          index++;
+          days++;
+          const sum = Number(arr[index]);
+
+          if (action === "spend") {
+            money -= sum;
+            cdays++;
+
+            if (money < 0) {
+              money = 0;
+            }
+
+            if (cdays == 5) {
+              console.log("You can't save the money.");
+              console.log(`${days}`);
+              break;
+            }
+          } else if (action === "save") {
+            money += sum;
+            cdays = 0;
+
+            if (money >= vacation) {
+              console.log(`You saved the money for ${days} days.`);
+              break;
+            }
+          }
+
+          index++;
+          
+          // if (index > 20) {
+          //   console.log(index);
+          //   break;
+          // }
+        }
+      }
+
+      // calcVacation(["2000", "1000", "spend", "1200", "save", "2000"]);
+      // calcVacation(["110", "60", "spend", "10", "spend", "10", "spend", "10", "spend", "10", "spend", "10"]);
+      calcVacation(["250", "150", "spend", "50", "spend", "50", "save", "100", "save", "100"]);
     </script>
   </body>
 </html>
