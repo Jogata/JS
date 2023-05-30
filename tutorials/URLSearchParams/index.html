@@ -26,6 +26,18 @@
         background-color: #fff;
         transition: 0.5s;
       }
+      .banner::before {
+        position: absolute;
+        left: 30%;
+        top: 10%;
+        content: "";
+        width: 150px;
+        height: 150px;
+        background-color: red;
+        background-size: cover;
+        animation: animate1 10s linear infinite;
+        animation-delay: 5s;
+      }
 
       header {
         position: absolute;
@@ -86,9 +98,20 @@
         transition: 0.5s;
       }
       .content h2 span {
+        display: inline-block;
+        width: 0;
         color: #e91e63;
         text-transform: capitalize;
+        animation: width3 10s linear infinite;
+        overflow: hidden;
       }
+      @keyframes width3 {
+    20%, 40% {
+        width: 100%;
+        text-shadow: 2px 2px 1px rgba(45, 52, 54, 0.8),
+                -2px -2px 1px rgba(255, 255, 255, 0.6);
+    }
+}
       .content p {
         margin: 10px 0 20px;
         color: #666;
@@ -139,6 +162,82 @@
       .sci li a:hover {
         color: #2196f3;
       }
+
+      .dayNight {
+        position: absolute;
+        left: 50%;
+        bottom: 25px;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 60px;
+        background-color: #f0f0f0;
+        border-radius: 50%;
+        color: #666;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: 0.5s;
+        font-size: 2rem;
+      }
+
+      .banner.night .fa-moon-o, 
+      .banner .fa-sun-o {
+        display: none;
+      }
+      .banner.night .fa-sun-o {
+        display: block;
+      }
+
+      .banner.night {
+        background-color: #333;
+      }
+      .banner.night .dayNight {
+        color: #fff;
+        background-color: #444;
+      }
+      .banner.night .logo, 
+      .banner.night .content p, 
+      .banner.night .content button.chat, 
+      .banner.night header ul li a, 
+      .banner.night .sci li a, 
+      .banner.night .content h3, 
+      .banner.night .content h2 {
+        color: #fff;
+      }
+      .banner.night .sci li a:hover {
+        color: #2196f3;
+      }
+
+      .colors {
+        position: absolute;
+        right: 0;
+        max-width: 800px;
+        animation: animate1 8s ease-in-out infinite;
+      }
+      @keyframes animate1 {
+        0%, 100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(50px);
+        }
+      }
+      .person {
+        position: absolute;
+        right: 100px;
+        bottom: 0;
+        max-height: 85vh;
+        animation: animate2 8s ease-in-out infinite;
+      }
+      @keyframes animate2 {
+        0%, 100% {
+          transform: translateX(0px);
+        }
+        50% {
+          transform: translateX(-50px);
+        }
+      }
     </style>
   </head>
   <body>
@@ -163,10 +262,13 @@
           <i class="fa fa-comments-o"></i>
           let's chat</button>
         </div>
+        <img src="../../../CSS/assets/img/paint-mask.png" alt="" class="colors">
+        <img src="../../../CSS/assets/img/00ivet/120372783_340812587254299_774244032306180550_n.jpg" alt="" class="person">
         <ul class="sci">
           <li><a href="#">
             <i class="fa fa-facebook" aria-hidden="true"></i>
           </a></li>
+          <!-- child node -->
           <li><a href="#">
             <i class="fa fa-twitter" aria-hidden="true"></i>
           </a></li>
@@ -182,6 +284,15 @@
           <i class="fa fa-sun-o" aria-hidden="true"></i>
         </div>
     </section>
+
+    <script>
+      const banner = document.querySelector(".banner");
+      const dayNight = document.querySelector(".dayNight");
+
+      dayNight.onclick = function() {
+        banner.classList.toggle("night");
+      }
+    </script>
     
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
@@ -220,6 +331,23 @@
       // Convert URLSearchParams Object to Query String
       console.log(uspFromString.toString());
       console.log(uspFromObject.toString());
+    </script>
+
+    <script>
+      const sci = document.querySelector(".sci");
+      const sciChildNodes = sci.childNodes;
+
+      console.log(sciChildNodes);
+
+      for (const node of sciChildNodes) {
+        console.log(node);
+      }
+
+      console.log("========================================");
+
+      for (let i = 0; i < sciChildNodes.length; i++) {
+        console.log(sciChildNodes[i]);
+      }
     </script>
   </body>
 </html>
