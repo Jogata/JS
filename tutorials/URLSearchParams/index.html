@@ -6,294 +6,230 @@
     <title>URLSearchParams in JS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-      * {
+      :root {
+        --black: #444;
+        --green: #16a085;
+        --light-color: #777;
+        --border: 0.2rem solid var(--green);
+        --box-shadow: 0.5rem 0.5rem 0 rgba(22, 160, 133, 0.2);
+        --text-shadow: 0.4rem 0.4rem 0 rgba(0, 0, 0, 0.2);
+      }
+
+      *, 
+      *::after, 
+      *::before {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      img {
+        width: 100%;
+      }
+
+      * {
+        transition: all 0.2s ease-out;
       }
 
       body {
         font-family: Georgia, serif;
       }
 
-      .banner {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        min-height: 100vh;
-        padding: 100px;
-        background-color: #fff;
-        transition: 0.5s;
+      section {
+        padding: 2rem 9%;
       }
-      .banner::before {
-        position: absolute;
-        left: 30%;
-        top: 10%;
-        content: "";
-        width: 150px;
-        height: 150px;
-        background-color: red;
-        background-size: cover;
-        animation: animate1 10s linear infinite;
-        animation-delay: 5s;
+
+      section:nth-child(even) {
+        background-color: #f5f5f5;
+      }
+
+      .heading {
+        padding-bottom: 2rem;
+        color: var(--black);
+        font-size: 5rem;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 0.4rem;
+        text-shadow: var(--text-shadow);
+      }
+      .heading span {
+        color: var(--green);
+        text-transform: uppercase;
+      }
+
+      .btn {
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.5rem;
+        padding-left: 1rem;
+        color: var(--green);
+        font-size: 1.7rem;
+        text-transform: capitalize;
+        border: var(--border);
+        border-radius: 0.5rem;
+        box-shadow: var(--box-shadow);
+        transition: all 0.5s ease-out;
+        cursor: pointer;
+      }
+      .btn:hover {
+        color: #fff;
+        background-color: var(--green);
+      }
+      .btn i {
+        margin-left: 0.5rem;
+        padding: 0.7rem 1rem;
+        color: #fff;
+        border-radius: 0.5rem;
+        background-color: var(--green);
+      }
+      .btn:hover i {
+        margin-left: 1rem;
+        color: var(--green);
+        background-color: #fff;
+      }
+
+      html {
+        font-size: 62.5%;
+        overflow-x: hidden;
+        scroll-padding-top: 7rem;
+        scroll-behavior: smooth;
       }
 
       header {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding: 20px 100px;
+        position: fixed;
+        inset: 0 0 auto 0;
+        padding: 2rem 9%;
         display: flex;
         align-items: center;
         justify-content: space-between;
+        text-transform: capitalize;
+        background-color: #fff;
+        box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+        z-index: 1000;
       }
 
       .logo {
-        color: #333;
-        font-size: 2rem;
-        font-weight: 700;
-        text-decoration: none;
-        transition: 0.5s;
+        color: var(--black);
+        font-size: 2.5rem;
       }
-      .logo span {
-        color: #2196f3;
-        text-transform: capitalize;
+      .logo i {
+        color: var(--green);
       }
 
-      header ul {
-        display: flex;
-        gap: 40px;
+      .navbar a {
+        margin-left: 2rem;
+        color: var(--light-color);
+        font-size: 1.7rem;
       }
-      header ul li {
-        list-style: none;
-      }
-      header ul li a {
-        color: #333;
-        font-size: 1.2rem;
-        font-weight: 500;
-        text-transform: capitalize;
-        text-decoration: none;
-        transition: 0.5s;
+      .navbar a:hover {
+        color: var(--green);
       }
 
-      .content {
-        position: relative;
-        max-width: 700px;
-        z-index: 10;
-      }
-
-      .content h3 {
-        color: #333;
-        font-size: 2rem;
-        font-weight: 200;
-        text-transform: capitalize;
-        transition: 0.5s;
-      }
-      .content h2 {
-        color: #333;
-        font-size: 5.5rem;
-        font-weight: 700;
-        transition: 0.5s;
-      }
-      .content h2 span {
-        display: inline-block;
-        width: 0;
-        color: #e91e63;
-        text-transform: capitalize;
-        animation: width3 10s linear infinite;
-        overflow: hidden;
-      }
-      @keyframes width3 {
-    20%, 40% {
-        width: 100%;
-        text-shadow: 2px 2px 1px rgba(45, 52, 54, 0.8),
-                -2px -2px 1px rgba(255, 255, 255, 0.6);
-    }
-}
-      .content p {
-        margin: 10px 0 20px;
-        color: #666;
-        font-size: 1.2rem;
-        transition: 0.5s;
-      }
-      .content button {
-        position: relative;
-        margin-right: 20px;
-        padding: 15px 35px;
-        color: #fff;
-        font-size: 1.25rem;
-        font-weight: 600;
-        font-family: inherit;
-        letter-spacing: 0.05em;
-        text-transform: capitalize;
-        outline: none;
-        border: none;
-        border-radius: 4px;
-        background-color: #2196f3;
-        transition: 0.5s;
-        cursor: pointer;
-      }
-      .content button.chat {
-        color: #333;
-        background-color: transparent;
-      }
-      .fa-comments-o {
-        position: relative;
-        color: #e91e63;
-        font-size: 1.5rem;
-      }
-
-      .sci {
-        position: absolute;
-        bottom: 30px;
-        display: flex;
-        align-items: center;
-        column-gap: 20px;
-        list-style: none;
-      }
-      .sci li a {
-        color: #333;
-        font-size: 1.75rem;
-        text-decoration: none;
-        transition: 0.5s;
-      }
-      .sci li a:hover {
-        color: #2196f3;
-      }
-
-      .dayNight {
-        position: absolute;
-        left: 50%;
-        bottom: 25px;
-        transform: translateX(-50%);
-        width: 60px;
-        height: 60px;
-        background-color: #f0f0f0;
-        border-radius: 50%;
-        color: #666;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: 0.5s;
-        font-size: 2rem;
-      }
-
-      .banner.night .fa-moon-o, 
-      .banner .fa-sun-o {
+      #menu-btn {
         display: none;
-      }
-      .banner.night .fa-sun-o {
-        display: block;
-      }
-
-      .banner.night {
-        background-color: #333;
-      }
-      .banner.night .dayNight {
-        color: #fff;
-        background-color: #444;
-      }
-      .banner.night .logo, 
-      .banner.night .content p, 
-      .banner.night .content button.chat, 
-      .banner.night header ul li a, 
-      .banner.night .sci li a, 
-      .banner.night .content h3, 
-      .banner.night .content h2 {
-        color: #fff;
-      }
-      .banner.night .sci li a:hover {
-        color: #2196f3;
+        padding: 1rem 1.5rem;
+        color: var(--green);
+        font-size: 2.5rem;
+        border-radius: 0.5rem;
+        background-color: #eee;
+        cursor: pointer;
       }
 
-      .colors {
-        position: absolute;
-        right: 0;
-        max-width: 800px;
-        animation: animate1 8s ease-in-out infinite;
+      .home {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        padding-top: 10rem;
       }
-      @keyframes animate1 {
-        0%, 100% {
-          transform: translateY(0px);
-        }
-        50% {
-          transform: translateY(50px);
-        }
+      .home .image {
+        flex: 1 1 45rem;
       }
-      .person {
-        position: absolute;
-        right: 100px;
-        bottom: 0;
-        max-height: 85vh;
-        animation: animate2 8s ease-in-out infinite;
+
+      .home .content {
+        flex: 1 1 45rem;
       }
-      @keyframes animate2 {
-        0%, 100% {
-          transform: translateX(0px);
-        }
-        50% {
-          transform: translateX(-50px);
-        }
+      .home .content h3 {
+        color: var(--black);
+        font-size: 4.5rem;
+        text-transform: capitalize;
+        line-height: 1.8;
+        text-shadow: var(--text-shadow);
       }
+      .home .content p {
+        padding: 1rem 0;
+        color: var(--light-color);
+        font-size: 1.7rem;
+        line-height: 1.8;
+      }
+
+
     </style>
   </head>
   <body>
-    <section class="banner">
-      <header>
-        <a href="#logo" class="logo">
-          <span>my</span>Portfolio
-        </a>
-        <ul>
-          <li><a href="#h">home</a></li>
-          <li><a href="#a">about</a></li>
-          <li><a href="#w">work</a></li>
-          <li><a href="#c">contact</a></li>
-        </ul>
-      </header>
+    <header class="header">
+
+      <a href="#home" class="logo">
+        <i class="fa fa-heartbeat"></i>
+        medcare.
+      </a>
+
+      <nav class="navbar">
+        <a href="#home">home</a>
+        <a href="#services">services</a>
+        <a href="#about">about</a>
+        <a href="#doctors">doctors</a>
+        <a href="#book">book</a>
+        <a href="#review">review</a>
+        <a href="#blogs">blogs</a>
+      </nav>
+
+      <i class="fa fa-bars" id="menu-btn"></i>
+
+    </header>
+
+    <section id="home" class="home">
+
+      <div class="image">
+        <img src="../../../CSS/assets/img/00ivet/210603643_1010676219690043_7853467171473160756_n.jpg" alt="">
+      </div>
+
       <div class="content">
-        <h3>hey_</h3>
-        <h2>I am <span id="text">john</span></h2>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quasi ipsam repellendus qui dolorem voluptas ab dolor enim eum vel suscipit.</p>
-        <button>hire me</button>
-        <button class="chat">
-          <i class="fa fa-comments-o"></i>
-          let's chat</button>
-        </div>
-        <img src="../../../CSS/assets/img/paint-mask.png" alt="" class="colors">
-        <img src="../../../CSS/assets/img/00ivet/120372783_340812587254299_774244032306180550_n.jpg" alt="" class="person">
-        <ul class="sci">
-          <li><a href="#">
-            <i class="fa fa-facebook" aria-hidden="true"></i>
-          </a></li>
-          <!-- child node -->
-          <li><a href="#">
-            <i class="fa fa-twitter" aria-hidden="true"></i>
-          </a></li>
-          <li><a href="#">
-            <i class="fa fa-instagram" aria-hidden="true"></i>
-          </a></li>
-          <li><a href="#">
-            <i class="fa fa-linkedin" aria-hidden="true"></i>
-          </a></li>
-        </ul>
-        <div class="dayNight">
-          <i class="fa fa-moon-o" aria-hidden="true"></i>
-          <i class="fa fa-sun-o" aria-hidden="true"></i>
-        </div>
+        <h3>stay safe, stay healthy</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet esse earum repellat ratione animi tempore nesciunt, est eos perferendis optio.</p>
+        <a href="#" class="btn">
+          contact us
+          <i class="fa fa-chevron-right"></i>
+        </a>
+      </div>
+
     </section>
 
-    <script>
-      const banner = document.querySelector(".banner");
-      const dayNight = document.querySelector(".dayNight");
 
-      dayNight.onclick = function() {
-        banner.classList.toggle("night");
-      }
+
+
+
+    <script>
+      const menu = document.querySelector("#menu-btn");
+      const navbar = document.querySelector(".navbar");
+
+      menu.addEventListener("click", () => {
+        menu.classList.toggle("fa-bars");
+        menu.classList.toggle("fa-times");
+        navbar.classList.toggle("active");
+      })
+
+      window.addEventListener("scroll", () => {
+        menu.classList.replace("fa-times", "fa-bars");
+        navbar.classList.remove("active");
+      })
     </script>
-    
+
+
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
     <script src="./in-fetch-api.js"></script>
@@ -331,23 +267,6 @@
       // Convert URLSearchParams Object to Query String
       console.log(uspFromString.toString());
       console.log(uspFromObject.toString());
-    </script>
-
-    <script>
-      const sci = document.querySelector(".sci");
-      const sciChildNodes = sci.childNodes;
-
-      console.log(sciChildNodes);
-
-      for (const node of sciChildNodes) {
-        console.log(node);
-      }
-
-      console.log("========================================");
-
-      for (let i = 0; i < sciChildNodes.length; i++) {
-        console.log(sciChildNodes[i]);
-      }
     </script>
   </body>
 </html>
