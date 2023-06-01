@@ -90,160 +90,169 @@
     </script>
 
     <script>
-      // 01. Old Books
+      // 07. Moving
 
-      function findBook(books) {
-        const book = books[0];
-        let index = 0;
-        let isFound = false;
-
-        while (index < books.length) {
-          index++;
-          const input = books[index];
-
-          if (input === "No More Books") {
-            break;
-          } else if (input === book) {
-            isFound = true;
-            console.log(`You checked ${index-1} books and found it.`);
-            break;
-          }
-        }
-
-        if (!isFound) {
-          console.log("The book you search is not here!");
-          console.log(`You checked ${index - 1} books.`);
-        }
-      }
-
-      // findBook(["Troy", "Stronger", "Life Style", "Troy"]);
-      // findBook(["The Spot", "Hunger Games", "Harry Potter", "Torronto", "Spotify", "No More Books"]);
-      // findBook(["Bourne", "True Story", "Forever", "More Space", "The Girl", "Spaceship", "Strongest", "Profit", "Tripple", "Stella", "The Matrix", "Bourne"]);
-
-      // 04. Walking
-
-      function calcSteps(arr) {
-        const goal = 10000;
-        let index = 0;
-        let input = Number(arr[index]);
-        let total = 0;
-
-        while (input !== "Going home") {
-          input = arr[index];
-
-          if (input !== "Going home") {
-            total += Number(input);
-
-            if (total >= goal) {
-              break;
-            }
-          } else {
-            total += Number(arr[index+1]);
-          }
-
-          index++;
-        }
-
-        if (total >= goal) {
-          const diff = total - goal;
-          console.log("Goal reached! Good job!");
-          console.log(`${diff} steps over the goal!`);
-        } else {
-          const diff = goal - total;
-          console.log(`${diff} more steps to reach goal.`);
-        }
-      }
-
-      // calcSteps(["1000", "1500", "2000", "6500"]);
-      // calcSteps(["1500", "3000", "250", "1548", "2000", "Going home", "2000"]);
-      // calcSteps(["1500", "300", "2500", "3000", "Going home", "200"]);
-      // calcSteps(["125", "250", "4000", "30", "2678", "4682"]);
-
-      // 05. Coins
-
-      function calcChange(input) {
-        let change = (Number(input[0]) * 100).toFixed(2);
-        let index = 0;
-        const coins = [2, 1, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01];
-
-        let n = 0;
-
-        while (change > 0) {
-          const coin = coins[index]*100;
-
-          
-          if (change >= coin) {
-            // console.log(coin);
-            change -= coin;
-            // console.log(change);
-            n++;
-
-            if (change === 0) {
-              break;
-            }
-          } else {
-            index++;
-          }
-        }
-
-        console.log(n);
-      }
-
-      // calcChange(["1.23"]);
-      // calcChange(["2"]);
-      // calcChange(["0.56"]);
-      // calcChange(["2.73"]);
-
-      // 06. Cake
-
-      function calcCake(arr) {
+      function calcFreeSpace(arr) {
         const w = Number(arr[0]);
         const l = Number(arr[1]);
-        let area = w * l;
-        let index = 2;
+        const h = Number(arr[2]);
+        let space = w * l * h;
+        let index = 3;
 
-        while (area > 0) {
-          const input = arr[index];
+        let input = arr[index];
+        index++;
 
-          if (input !== "STOP") {
-            area -= Number(input);
+        while (input !== "Done") {
+          space -= Number(input);
 
-            if (area <= 0) {
-              console.log(`No more cake left! You need ${area * (-1)} pieces more.`);
-              break;
-            }
-          } else {
-            console.log(`${area} pieces are left.`);
+          if (space <= 0) {
             break;
           }
 
+          input = arr[index];
           index++;
+        }
 
-          if (index > arr.length) {
+        if (input === "Done") {
+          console.log(`${space} Cubic meters left.`);
+        } else {
+          console.log(`No more free space! You need ${space * (-1)} Cubic meters more.`);
+        }
+      }
+
+      // calcFreeSpace(["10", "10", "2", "20", "20", "20", "20", "122"]);
+      // calcFreeSpace(["10", "1", "2", "4",  "6", "Done"]);
+
+      // 01. Dishwasher
+
+      function calcWahing(arr) {
+        const preparatML = Number(arr[0]) * 750;
+        let index = 1;
+        let totalPreparat = 0;
+        let dishes = 0;
+        let pots = 0;
+
+        let broiSadove = arr[index];
+        index++;
+
+        while (broiSadove !== "End") {
+          broiSadove = Number(broiSadove);
+          
+          if ((index-1) % 3 !== 0) {
+            totalPreparat += broiSadove * 5;
+            dishes += broiSadove;
+          } else {
+            totalPreparat += broiSadove * 15;
+            pots += broiSadove;
+          }
+
+          if (totalPreparat > preparatML) {
             break;
           }
+
+          broiSadove = arr[index];
+          index++;
+        }
+
+        if (totalPreparat <= preparatML) {
+          const ostanalo = preparatML - totalPreparat;
+          console.log("Detergent was enough!");
+          console.log(`${dishes} dishes and ${pots} pots were washed.`);
+          console.log(`Leftover detergent ${ostanalo} ml.`);
+        } else {
+          const nedostig = totalPreparat - preparatML;
+          console.log(`Not enough detergent, ${nedostig} ml. more necessary!`);
         }
       }
 
-      // calcCake(["10", "2", "2", "4", "6", "STOP"]);
-      // calcCake(["10", "10", "20", "20", "20", "20", "21"]);
+      // calcWahing(["2", "53", "65", "55", "End"]);
+      // calcWahing(["1", "10", "15", "10", "12", "13", "30"]);
+      // calcWahing(["1", "10", "15", "10p", "12", "13", "5p", "5", "7", "5p", "3"]);
 
-      function restOperator(a, ...nums) {
-        console.log(a);
-        console.log(nums);
+      // 02. Report System
 
-        let total = 0;
+      function menageReportSystem(arr) {
+        const target = Number(arr[0]);
+        let cards = 0;
+        let sumCards = 0;
+        let cashes = 0;
+        let sumCashes = 0;
+        let index = 1;
 
-        for (const n of nums) {
-          total += n;
+        let input = arr[index];
+        index++;
+
+        while (input !== "End") {
+          input = Number(input);
+
+          if ((index-1) % 2 !== 0) {
+
+            if (input <= 100) {
+              cashes++;
+              sumCashes += input;
+              console.log(`Product sold!`);
+            } else {
+              console.log(`Error in transaction!`);
+            }
+
+          } else {
+
+            if (input >= 10) {
+              cards++;
+              sumCards += input;
+              console.log(`Product sold!`);
+            } else {
+              console.log(`Error in transaction!`);
+            }
+
+          }
+
+          if (sumCards + sumCashes >= target) {
+            break;
+          }
+
+          input = arr[index];
+          index++;
         }
 
-        return total;
+        if (sumCards + sumCashes >= target) {
+          console.log(`Average CS: ${(sumCashes / cashes).toFixed(2)}`);
+          console.log(`Average CC: ${(sumCards / cards).toFixed(2)}`);
+        } else {
+          console.log(`Failed to collect required money for charity.`);
+        }
       }
 
-      const result = restOperator(5, 10, 20);
-      console.log(result);
+      // menageReportSystem(["500", "120", "8", "63", "256", "78", "317"]);
+      // menageReportSystem(["600", "86", "150", "98", "227", "End"]);
 
+      const str = "jogata";
+      const strobj = new String("jogata");
+
+      console.log(typeof str);
+      console.log(typeof strobj);
+
+      const strobjprim = strobj.valueOf();
+
+      console.log(strobjprim);
+      console.log(typeof strobjprim);
+
+      class Product {
+        constructor (name, cost) {
+          this.name = name;
+          this.cost = cost;
+        }
+
+        valueOf() {
+          return this.cost;
+        }
+      }
+
+      const p1 = new Product("Samsung", 850);
+      const p2 = new Product("Nokia", 790);
+      const total2 = p1 + p2;
+
+      console.log(total2);
     </script>
   </body>
 </html>
