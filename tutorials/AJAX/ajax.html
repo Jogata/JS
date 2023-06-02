@@ -21,9 +21,113 @@
       fieldset {
         margin: 2rem auto;
       }
+
+      body {
+        margin: 15px;
+        font-family: Georgia, serif;
+      }
+
+      .palette {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+      }
+
+      .palette-color {
+        position: relative;
+        height: 150px;
+      }
+
+      .palette-desc {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 10px;
+        color: #fff;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        outline: none;
+        border: 1px solid #ddd;
+        border-top: none;
+      }
     </style>
   </head>
   <body>
+    <div class="palette">
+      <!-- <div class="palette-item">
+        <div class="palette-color">
+          <div class="palette-desc">primary</div>
+        </div>
+        <input type="text" value="#009578">
+      </div> -->
+    </div>
+
+    <script>
+      function createElementWithClass(tag, classes) {
+        const newEl = document.createElement(tag);
+        newEl.setAttribute("class", classes);
+        return newEl;
+      }
+
+      function createPelette(color, desc) {
+        const item = createElementWithClass("div", "palette-item");
+        const colorel = createElementWithClass("div", "palette-color");
+        const descel = createElementWithClass("div", "palette-desc");
+        const input = createElementWithClass("div", "palette-input");
+
+        colorel.style.backgroundColor = color;
+        input.value = color;
+        descel.textContent = desc;
+
+        item.appendChild(colorel);
+        item.appendChild(input);
+        colorel.appendChild(descel);
+
+        input.onfocus = () => input.select();
+
+        return item;
+      }
+
+      const colors = [
+        {
+          desc: "Primary",
+          color: "#009578",
+        },
+        {
+          desc: "Primary Light",
+          color: "#6dcdb1",
+        },
+        {
+          desc: "Secondary",
+          color: "#252c6a",
+        },
+        {
+          desc: "Secondary Light",
+          color: "#7f89df",
+        },
+        {
+          desc: "Tertiary",
+          color: "#ff6d10",
+        },
+        {
+          desc: "Tertiary Light",
+          color: "#ffddc7",
+        },
+      ]
+
+      const parent = document.querySelector(".palette");
+
+      colors.forEach(color => {
+        const newel = createPelette(color.color, color.desc);
+        parent.appendChild(newel);
+      })
+    </script>
+
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
@@ -89,170 +193,58 @@
       }
     </script>
 
+    
+
     <script>
-      // 07. Moving
+      // 03. Stream Of Letters
 
-      function calcFreeSpace(arr) {
-        const w = Number(arr[0]);
-        const l = Number(arr[1]);
-        const h = Number(arr[2]);
-        let space = w * l * h;
-        let index = 3;
-
-        let input = arr[index];
+      function findHiddenText(letters) {
+        let word = "";
+        let phrase = "";
+        let matches = 0;
+        let index = 0;
+        let letter = letters[index];
         index++;
 
-        while (input !== "Done") {
-          space -= Number(input);
+        let secretWord = ["c", "o", "n"];
 
-          if (space <= 0) {
-            break;
-          }
+        while (letter !== "End") {
 
-          input = arr[index];
-          index++;
-        }
-
-        if (input === "Done") {
-          console.log(`${space} Cubic meters left.`);
-        } else {
-          console.log(`No more free space! You need ${space * (-1)} Cubic meters more.`);
-        }
-      }
-
-      // calcFreeSpace(["10", "10", "2", "20", "20", "20", "20", "122"]);
-      // calcFreeSpace(["10", "1", "2", "4",  "6", "Done"]);
-
-      // 01. Dishwasher
-
-      function calcWahing(arr) {
-        const preparatML = Number(arr[0]) * 750;
-        let index = 1;
-        let totalPreparat = 0;
-        let dishes = 0;
-        let pots = 0;
-
-        let broiSadove = arr[index];
-        index++;
-
-        while (broiSadove !== "End") {
-          broiSadove = Number(broiSadove);
+          const unicode = letter.charCodeAt();
           
-          if ((index-1) % 3 !== 0) {
-            totalPreparat += broiSadove * 5;
-            dishes += broiSadove;
-          } else {
-            totalPreparat += broiSadove * 15;
-            pots += broiSadove;
-          }
+          if (unicode >= 65 && unicode <= 90 || unicode >= 97 && unicode <= 122 ) {
 
-          if (totalPreparat > preparatML) {
-            break;
-          }
-
-          broiSadove = arr[index];
-          index++;
-        }
-
-        if (totalPreparat <= preparatML) {
-          const ostanalo = preparatML - totalPreparat;
-          console.log("Detergent was enough!");
-          console.log(`${dishes} dishes and ${pots} pots were washed.`);
-          console.log(`Leftover detergent ${ostanalo} ml.`);
-        } else {
-          const nedostig = totalPreparat - preparatML;
-          console.log(`Not enough detergent, ${nedostig} ml. more necessary!`);
-        }
-      }
-
-      // calcWahing(["2", "53", "65", "55", "End"]);
-      // calcWahing(["1", "10", "15", "10", "12", "13", "30"]);
-      // calcWahing(["1", "10", "15", "10p", "12", "13", "5p", "5", "7", "5p", "3"]);
-
-      // 02. Report System
-
-      function menageReportSystem(arr) {
-        const target = Number(arr[0]);
-        let cards = 0;
-        let sumCards = 0;
-        let cashes = 0;
-        let sumCashes = 0;
-        let index = 1;
-
-        let input = arr[index];
-        index++;
-
-        while (input !== "End") {
-          input = Number(input);
-
-          if ((index-1) % 2 !== 0) {
-
-            if (input <= 100) {
-              cashes++;
-              sumCashes += input;
-              console.log(`Product sold!`);
+            if (secretWord.includes(letter)) {
+              matches++;
+              const position = secretWord.indexOf(letter);
+              secretWord[position] = null;
             } else {
-              console.log(`Error in transaction!`);
+              word += letter;
             }
 
-          } else {
-
-            if (input >= 10) {
-              cards++;
-              sumCards += input;
-              console.log(`Product sold!`);
-            } else {
-              console.log(`Error in transaction!`);
+            if (matches === 3) {
+              secretWord = ["c", "o", "n"];
+              matches = 0;
+              phrase += word + " ";
+              word = "";
             }
-
           }
 
-          if (sumCards + sumCashes >= target) {
+          letter = letters[index];
+          index++;
+
+          if (index > 100) {
+            console.log("infinity");
             break;
           }
-
-          input = arr[index];
-          index++;
         }
 
-        if (sumCards + sumCashes >= target) {
-          console.log(`Average CS: ${(sumCashes / cashes).toFixed(2)}`);
-          console.log(`Average CC: ${(sumCards / cards).toFixed(2)}`);
-        } else {
-          console.log(`Failed to collect required money for charity.`);
-        }
+        console.log(phrase.trimEnd());
       }
 
-      // menageReportSystem(["500", "120", "8", "63", "256", "78", "317"]);
-      // menageReportSystem(["600", "86", "150", "98", "227", "End"]);
-
-      const str = "jogata";
-      const strobj = new String("jogata");
-
-      console.log(typeof str);
-      console.log(typeof strobj);
-
-      const strobjprim = strobj.valueOf();
-
-      console.log(strobjprim);
-      console.log(typeof strobjprim);
-
-      class Product {
-        constructor (name, cost) {
-          this.name = name;
-          this.cost = cost;
-        }
-
-        valueOf() {
-          return this.cost;
-        }
-      }
-
-      const p1 = new Product("Samsung", 850);
-      const p2 = new Product("Nokia", 790);
-      const total2 = p1 + p2;
-
-      console.log(total2);
+      // findHiddenText(["H", "n", "e", "l", "l", "o", "o", "c", "t", "c", "h", "o", "e", "r", "e", "n", "e", "End"]);
+      // findHiddenText(["o", "S", "%", "o", "l", "^", "v", "e", "c", "n", "&", "m", "e", "c", "o", "n", "End"]);
+      // findHiddenText(["%", "!", "c", "^", "B", "`", "o", "%", "o", "o", "M", ")", "{", "n", "\\", "A", "D", "End"]);
     </script>
   </body>
 </html>
