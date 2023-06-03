@@ -21,113 +21,9 @@
       fieldset {
         margin: 2rem auto;
       }
-
-      body {
-        margin: 15px;
-        font-family: Georgia, serif;
-      }
-
-      .palette {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 15px;
-      }
-
-      .palette-color {
-        position: relative;
-        height: 150px;
-      }
-
-      .palette-desc {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: 10px;
-        color: #fff;
-        background-color: rgba(0, 0, 0, 0.4);
-      }
-
-      input {
-        width: 100%;
-        padding: 10px;
-        outline: none;
-        border: 1px solid #ddd;
-        border-top: none;
-      }
     </style>
   </head>
   <body>
-    <div class="palette">
-      <!-- <div class="palette-item">
-        <div class="palette-color">
-          <div class="palette-desc">primary</div>
-        </div>
-        <input type="text" value="#009578">
-      </div> -->
-    </div>
-
-    <script>
-      function createElementWithClass(tag, classes) {
-        const newEl = document.createElement(tag);
-        newEl.setAttribute("class", classes);
-        return newEl;
-      }
-
-      function createPelette(color, desc) {
-        const item = createElementWithClass("div", "palette-item");
-        const colorel = createElementWithClass("div", "palette-color");
-        const descel = createElementWithClass("div", "palette-desc");
-        const input = createElementWithClass("div", "palette-input");
-
-        colorel.style.backgroundColor = color;
-        input.value = color;
-        descel.textContent = desc;
-
-        item.appendChild(colorel);
-        item.appendChild(input);
-        colorel.appendChild(descel);
-
-        input.onfocus = () => input.select();
-
-        return item;
-      }
-
-      const colors = [
-        {
-          desc: "Primary",
-          color: "#009578",
-        },
-        {
-          desc: "Primary Light",
-          color: "#6dcdb1",
-        },
-        {
-          desc: "Secondary",
-          color: "#252c6a",
-        },
-        {
-          desc: "Secondary Light",
-          color: "#7f89df",
-        },
-        {
-          desc: "Tertiary",
-          color: "#ff6d10",
-        },
-        {
-          desc: "Tertiary Light",
-          color: "#ffddc7",
-        },
-      ]
-
-      const parent = document.querySelector(".palette");
-
-      colors.forEach(color => {
-        const newel = createPelette(color.color, color.desc);
-        parent.appendChild(newel);
-      })
-    </script>
-
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
@@ -193,58 +89,162 @@
       }
     </script>
 
-    
+    <h1>mutation observer</h1>
+
+    <ul class="oldClassName">
+      <li>list item 1.1</li>
+      <li>
+        list item 1.2
+        <ul>
+          <li>list item 2.1</li>
+          <li>list item 2.2</li>
+        </ul>
+      </li>
+      <li>list item 1.3</li>
+    </ul>
+    <script>
+      const list = document.querySelector("ul");
+
+      // Making a new MutationObserver object
+
+      const observer = new MutationObserver(mutations => {
+        console.log(mutations);
+        mutations.forEach(record => {
+          console.log(record);
+
+          if (record.type === "attributes") {
+            const name = record.attributeName;
+            const oldValue = record.oldValue;
+            const newValue = record.target.getAttribute(name);
+            console.log("=======================");
+            console.log(name);
+            console.log(oldValue);
+            console.log(newValue);
+            console.log("=======================");
+          } else if (record.type === "childList") {
+            const removed = record.removedNodes.length;
+            const addded = record.addedNodes.length;
+            // const newValue = record.target.getAttribute(name);
+            console.log("=======================");
+            console.log(`Removed ${removed}`);
+            console.log(`Added ${addded}`);
+            // console.log(newValue);
+            console.log("=======================");
+          } else if (record.type === "characterData") {
+            const oldValue = record.oldValue;
+            const newValue = record.target.nodeValue;
+            // const newValue = record.target.getAttribute(name);
+            console.log("=======================");
+            console.log(`Before: ${oldValue}`);
+            console.log(`After: ${newValue}`);
+            // console.log(newValue);
+            console.log("=======================");
+          }
+
+          if (record.addedNodes.length > 0 && record.addedNodes[0].nodeType === Node.TEXT_NODE) {
+            console.log(`From <${record.removedNodes[0].nodeValue}> 
+            to <${record.addedNodes[0].nodeValue}>.`);
+          }
+
+        })
+      });
+
+      // Tell it what to observe
+
+      // Attributes
+      // observer.observe(list, {
+      //   attributes: true,
+      //   attributeFilter: ["class"],
+      //   attributeOldValue: true,
+      // })
+
+      // setTimeout(() => {
+      //   list.setAttribute("id", "listIDadded");
+      //   list.setAttribute("class", "newClassName");
+      // }, 1000);
+
+      // Child nodes
+      // observer.observe(list, {
+      //   childList: true,
+      // })
+
+      // setTimeout(() => {
+      //   list.removeChild(list.firstElementChild);
+
+      //   const li = document.createElement("li");
+      //   li.textContent = "new list item 1.1.2";
+      //   list.appendChild(li);
+      // }, 1000);
+
+      // Text
+      // observer.observe(list.firstElementChild, {
+      //   childList: true,
+      // })
+
+      // setTimeout(() => {
+      //   list.firstElementChild.textContent = "new list item 1.1.2";
+      // }, 1000);
+
+      // Text
+      observer.observe(list.firstElementChild.firstChild, {
+        characterData: true,
+        characterDataOldValue: true,
+      })
+
+      setTimeout(() => {
+        list.firstElementChild.firstChild.textContent = "new list item 1.1.2";
+      }, 1000);
+
+    </script>
 
     <script>
-      // 03. Stream Of Letters
+      // 05. Average Number
 
-      function findHiddenText(letters) {
-        let word = "";
-        let phrase = "";
-        let matches = 0;
-        let index = 0;
-        let letter = letters[index];
-        index++;
+      function calcAverageNumber(numbers) {
+        let index = 1;
+        let sum = 0;
+        let average = 0;
+        
+        while (index < numbers.length) {
+          const number = Number(numbers[index]);
 
-        let secretWord = ["c", "o", "n"];
+          sum += number;
 
-        while (letter !== "End") {
-
-          const unicode = letter.charCodeAt();
-          
-          if (unicode >= 65 && unicode <= 90 || unicode >= 97 && unicode <= 122 ) {
-
-            if (secretWord.includes(letter)) {
-              matches++;
-              const position = secretWord.indexOf(letter);
-              secretWord[position] = null;
-            } else {
-              word += letter;
-            }
-
-            if (matches === 3) {
-              secretWord = ["c", "o", "n"];
-              matches = 0;
-              phrase += word + " ";
-              word = "";
-            }
-          }
-
-          letter = letters[index];
           index++;
-
-          if (index > 100) {
-            console.log("infinity");
-            break;
-          }
         }
 
-        console.log(phrase.trimEnd());
+        average = sum / (numbers.length - 1);
+
+        console.log(average.toFixed(2));
       }
 
-      // findHiddenText(["H", "n", "e", "l", "l", "o", "o", "c", "t", "c", "h", "o", "e", "r", "e", "n", "e", "End"]);
-      // findHiddenText(["o", "S", "%", "o", "l", "^", "v", "e", "c", "n", "&", "m", "e", "c", "o", "n", "End"]);
-      // findHiddenText(["%", "!", "c", "^", "B", "`", "o", "%", "o", "o", "M", ")", "{", "n", "\\", "A", "D", "End"]);
+      // calcAverageNumber(["4", "3", "2", "4", "2"]);
+      // calcAverageNumber(["2", "6", "4"]);
+      // calcAverageNumber(["3", "82", "43", "22"]);
+      // calcAverageNumber(["4", "95", "23", "76", "23"]);
+
+      function calcAverageNumber2(numbers) {
+        let index = Number(numbers[0]);
+        let sum = 0;
+        let average = 0;
+        
+        while (index > 0) {
+          const number = Number(numbers[index]);
+
+          sum += number;
+
+          index--;
+        }
+
+        average = sum / (numbers.length - 1);
+
+        console.log(average.toFixed(2));
+      }
+
+      // calcAverageNumber2(["4", "3", "2", "4", "2"]);
+      // calcAverageNumber2(["2", "6", "4"]);
+      // calcAverageNumber2(["3", "82", "43", "22"]);
+      // calcAverageNumber2(["4", "95", "23", "76", "23"]);
     </script>
   </body>
 </html>
