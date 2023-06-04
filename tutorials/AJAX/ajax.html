@@ -89,162 +89,154 @@
       }
     </script>
 
-    <h1>mutation observer</h1>
-
-    <ul class="oldClassName">
-      <li>list item 1.1</li>
-      <li>
-        list item 1.2
-        <ul>
-          <li>list item 2.1</li>
-          <li>list item 2.2</li>
-        </ul>
-      </li>
-      <li>list item 1.3</li>
-    </ul>
     <script>
-      const list = document.querySelector("ul");
+      // 04. Numbers Divided by 3 Without Reminder
 
-      // Making a new MutationObserver object
-
-      const observer = new MutationObserver(mutations => {
-        console.log(mutations);
-        mutations.forEach(record => {
-          console.log(record);
-
-          if (record.type === "attributes") {
-            const name = record.attributeName;
-            const oldValue = record.oldValue;
-            const newValue = record.target.getAttribute(name);
-            console.log("=======================");
-            console.log(name);
-            console.log(oldValue);
-            console.log(newValue);
-            console.log("=======================");
-          } else if (record.type === "childList") {
-            const removed = record.removedNodes.length;
-            const addded = record.addedNodes.length;
-            // const newValue = record.target.getAttribute(name);
-            console.log("=======================");
-            console.log(`Removed ${removed}`);
-            console.log(`Added ${addded}`);
-            // console.log(newValue);
-            console.log("=======================");
-          } else if (record.type === "characterData") {
-            const oldValue = record.oldValue;
-            const newValue = record.target.nodeValue;
-            // const newValue = record.target.getAttribute(name);
-            console.log("=======================");
-            console.log(`Before: ${oldValue}`);
-            console.log(`After: ${newValue}`);
-            // console.log(newValue);
-            console.log("=======================");
-          }
-
-          if (record.addedNodes.length > 0 && record.addedNodes[0].nodeType === Node.TEXT_NODE) {
-            console.log(`From <${record.removedNodes[0].nodeValue}> 
-            to <${record.addedNodes[0].nodeValue}>.`);
-          }
-
-        })
-      });
-
-      // Tell it what to observe
-
-      // Attributes
-      // observer.observe(list, {
-      //   attributes: true,
-      //   attributeFilter: ["class"],
-      //   attributeOldValue: true,
-      // })
-
-      // setTimeout(() => {
-      //   list.setAttribute("id", "listIDadded");
-      //   list.setAttribute("class", "newClassName");
-      // }, 1000);
-
-      // Child nodes
-      // observer.observe(list, {
-      //   childList: true,
-      // })
-
-      // setTimeout(() => {
-      //   list.removeChild(list.firstElementChild);
-
-      //   const li = document.createElement("li");
-      //   li.textContent = "new list item 1.1.2";
-      //   list.appendChild(li);
-      // }, 1000);
-
-      // Text
-      // observer.observe(list.firstElementChild, {
-      //   childList: true,
-      // })
-
-      // setTimeout(() => {
-      //   list.firstElementChild.textContent = "new list item 1.1.2";
-      // }, 1000);
-
-      // Text
-      observer.observe(list.firstElementChild.firstChild, {
-        characterData: true,
-        characterDataOldValue: true,
-      })
-
-      setTimeout(() => {
-        list.firstElementChild.firstChild.textContent = "new list item 1.1.2";
-      }, 1000);
-
-    </script>
-
-    <script>
-      // 05. Average Number
-
-      function calcAverageNumber(numbers) {
-        let index = 1;
-        let sum = 0;
-        let average = 0;
+      function printNumbersDividedby3() {
+        let index = 3;
         
-        while (index < numbers.length) {
-          const number = Number(numbers[index]);
-
-          sum += number;
+        while (index < 100) {
+          
+          if (index % 3 === 0) {
+            console.log(index);
+          }
 
           index++;
         }
-
-        average = sum / (numbers.length - 1);
-
-        console.log(average.toFixed(2));
       }
 
-      // calcAverageNumber(["4", "3", "2", "4", "2"]);
-      // calcAverageNumber(["2", "6", "4"]);
-      // calcAverageNumber(["3", "82", "43", "22"]);
-      // calcAverageNumber(["4", "95", "23", "76", "23"]);
+      // printNumbersDividedby3();
 
-      function calcAverageNumber2(numbers) {
-        let index = Number(numbers[0]);
-        let sum = 0;
-        let average = 0;
+      // 01. Clock
+
+      function displayHours() {
         
-        while (index > 0) {
-          const number = Number(numbers[index]);
+        for (let hours = 0; hours < 24; hours++) {
+          
+          for (let minutes = 0; minutes < 60; minutes++) {
+            
+            console.log(`${hours}:${minutes}`);
 
-          sum += number;
+          }
 
-          index--;
         }
 
-        average = sum / (numbers.length - 1);
-
-        console.log(average.toFixed(2));
       }
 
-      // calcAverageNumber2(["4", "3", "2", "4", "2"]);
-      // calcAverageNumber2(["2", "6", "4"]);
-      // calcAverageNumber2(["3", "82", "43", "22"]);
-      // calcAverageNumber2(["4", "95", "23", "76", "23"]);
+      // displayHours();
+
+      // 02. Multiplication Table
+
+      function printMultiplicationTable() {
+        
+        for (let i = 1; i <= 10; i++) {
+          
+          for (let k = 1; k <= 10; k++) {
+            
+            console.log(`${i} * ${k} = ${i * k}`);
+
+          }
+
+        }
+
+      }
+
+      // printMultiplicationTable();
+
+      // 03. Combinations
+
+      function getCombinations(input) {
+        const sum = Number(input[0]);
+        let combinations = 0;
+
+        for (let i = 0; i <= sum; i++) {
+          
+          for (let j = 0; j <= sum; j++) {
+            
+            for (let k = 0; k <= sum; k++) {
+
+              const result = i + j + k;
+              
+              if (result === sum) {
+                combinations++;
+              }
+
+            }
+
+          }
+
+        }
+
+        console.log(combinations);
+
+      }
+
+      // getCombinations(["25"]);
+      // getCombinations(["20"]);
+      // getCombinations(["5"]);
+
+      // 04. Sum of Two Numbers
+
+      function findFirstCombination(numbers) {
+        const start = Number(numbers[0]);
+        const end = Number(numbers[1]);
+        const magicN = Number(numbers[2]);
+        let combinations = 0;
+        let isFound = false;
+
+        for (let i = start; i <= end; i++) {
+          
+          for (let j = start; j <= end; j++) {
+            
+            const sum = i + j;
+            combinations++;
+
+            if (sum === magicN) {
+              console.log(`Combination N:${combinations} (${i} + ${j} = ${sum})`);
+              isFound = true;
+              i = end;
+              break;
+            }
+
+          }
+
+        }
+
+        if (!isFound) {
+          console.log(`${combinations} combinations - neither equals ${magicN}`);
+        }
+
+      }
+
+      // findFirstCombination(["1", "10" , "5"]);
+      // findFirstCombination(["88", "888" , "1000"]);
+      // findFirstCombination(["23", "24" , "20"]);
+      // findFirstCombination(["88", "888" , "2000"]);
+
+      function calcTraveling(input) {
+        let index = 0;
+        let destination = input[index];
+
+        while (destination !== "End") {
+          index++;
+          let price = Number(input[index]);
+          let savings = 0;
+
+          while (savings < price) {
+            index++;
+            savings += Number(input[index]);
+          }
+
+          console.log(`Going to ${destination}!`);
+
+          index++;
+          destination = input[index];
+        }
+      }
+
+      // calcTraveling(["BG", "1000", "1200", "End"]);
+      // calcTraveling(["Greece", "1000", "200", "200", "300", "100", "150", "240", "Spain", "1200", "300", "500", "193", "423", "End"]);
+      // calcTraveling(["France", "2000", "300", "300", "200", "400", "190", "258", "360", "Portugal", "1450", "400", "400", "200", "300", "300", "Egypt", "1900", "1000", "280", "300", "500", "End"]);
     </script>
   </body>
 </html>
