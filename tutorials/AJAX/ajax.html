@@ -90,153 +90,153 @@
     </script>
 
     <script>
-      // 04. Numbers Divided by 3 Without Reminder
+      // 05. Traveling
 
-      function printNumbersDividedby3() {
-        let index = 3;
-        
-        while (index < 100) {
-          
-          if (index % 3 === 0) {
-            console.log(index);
-          }
-
-          index++;
-        }
-      }
-
-      // printNumbersDividedby3();
-
-      // 01. Clock
-
-      function displayHours() {
-        
-        for (let hours = 0; hours < 24; hours++) {
-          
-          for (let minutes = 0; minutes < 60; minutes++) {
-            
-            console.log(`${hours}:${minutes}`);
-
-          }
-
-        }
-
-      }
-
-      // displayHours();
-
-      // 02. Multiplication Table
-
-      function printMultiplicationTable() {
-        
-        for (let i = 1; i <= 10; i++) {
-          
-          for (let k = 1; k <= 10; k++) {
-            
-            console.log(`${i} * ${k} = ${i * k}`);
-
-          }
-
-        }
-
-      }
-
-      // printMultiplicationTable();
-
-      // 03. Combinations
-
-      function getCombinations(input) {
-        const sum = Number(input[0]);
-        let combinations = 0;
-
-        for (let i = 0; i <= sum; i++) {
-          
-          for (let j = 0; j <= sum; j++) {
-            
-            for (let k = 0; k <= sum; k++) {
-
-              const result = i + j + k;
-              
-              if (result === sum) {
-                combinations++;
-              }
-
-            }
-
-          }
-
-        }
-
-        console.log(combinations);
-
-      }
-
-      // getCombinations(["25"]);
-      // getCombinations(["20"]);
-      // getCombinations(["5"]);
-
-      // 04. Sum of Two Numbers
-
-      function findFirstCombination(numbers) {
-        const start = Number(numbers[0]);
-        const end = Number(numbers[1]);
-        const magicN = Number(numbers[2]);
-        let combinations = 0;
-        let isFound = false;
-
-        for (let i = start; i <= end; i++) {
-          
-          for (let j = start; j <= end; j++) {
-            
-            const sum = i + j;
-            combinations++;
-
-            if (sum === magicN) {
-              console.log(`Combination N:${combinations} (${i} + ${j} = ${sum})`);
-              isFound = true;
-              i = end;
-              break;
-            }
-
-          }
-
-        }
-
-        if (!isFound) {
-          console.log(`${combinations} combinations - neither equals ${magicN}`);
-        }
-
-      }
-
-      // findFirstCombination(["1", "10" , "5"]);
-      // findFirstCombination(["88", "888" , "1000"]);
-      // findFirstCombination(["23", "24" , "20"]);
-      // findFirstCombination(["88", "888" , "2000"]);
-
-      function calcTraveling(input) {
-        let index = 0;
-        let destination = input[index];
+      function calcTraveling2(input) {
+        let destination = input[0];
+        let price = Number(input[1]);
+        let spestqvaniq = 0;
+        let index = 2;
 
         while (destination !== "End") {
+          let current = Number(input[index]);
+          spestqvaniq += current;
           index++;
-          let price = Number(input[index]);
-          let savings = 0;
-
-          while (savings < price) {
+          
+          while (spestqvaniq < price) {
+            current = Number(input[index]);
+            spestqvaniq += current;
             index++;
-            savings += Number(input[index]);
+            
           }
 
           console.log(`Going to ${destination}!`);
 
-          index++;
           destination = input[index];
+
+          if (destination === undefined) {
+            break;
+          }
+          
+          index++;
+          price = Number(input[index]);
+          index++;
+          current = Number(input[index]);
+          spestqvaniq = current;
+          // index += 3;
+          index++;
+
         }
       }
 
       // calcTraveling(["BG", "1000", "1200", "End"]);
       // calcTraveling(["Greece", "1000", "200", "200", "300", "100", "150", "240", "Spain", "1200", "300", "500", "193", "423", "End"]);
       // calcTraveling(["France", "2000", "300", "300", "200", "400", "190", "258", "360", "Portugal", "1450", "400", "400", "200", "300", "300", "Egypt", "1900", "1000", "280", "300", "500", "End"]);
+
+      // 06. Building
+
+      function displayBuildingFloors(inputs) {
+        const floors = Number(inputs[0]);
+        const rooms = Number(inputs[1]);
+        let lastFloor = floors;
+        let current = "";
+
+        for (let room = 0; room < rooms; room++) {
+          current += `L${lastFloor}${room} `;
+        }
+
+        console.log(current);
+
+        for (let floor = floors-1; floor > 0; floor--) {
+          let desc = "";
+          current = "";
+
+          if (floor % 2 === 0) {
+            desc = "O";
+          } else {
+            desc = "A";
+          }
+          
+          for (let room = 0; room < rooms; room++) {
+            current += `${desc}${floor}${room} `;
+          }
+
+          console.log(current);
+        }
+      }
+
+      // displayBuildingFloors(["6", "4"]);
+      // displayBuildingFloors(["9", "5"]);
+      // displayBuildingFloors(["4", "4"]);
+      // displayBuildingFloors(["1", "4"]);
+
+      // 01. Number Pyramid
+
+      function buildNumberPyramid(input) {
+        const num = Number(input[0]);
+        let current = 1;
+        let rowLength = 1;
+        let row = "";
+
+        
+        while (current <= num) {
+          
+          for (let i = 0; i < rowLength; i++) {
+
+            if (current > num) {
+              break;
+            }
+
+            row += `${current} `;
+            current++;
+          }
+
+          console.log(row);
+
+          row = "";
+          rowLength++;
+        }
+      }
+
+      // buildNumberPyramid(["7"]);
+      // buildNumberPyramid(["12"]);
+      // buildNumberPyramid(["15"]);
+
+      // 02. Equal Sums Even Odd Position
+
+      function printEqualSumsEvenOddPosition(input) {
+        let start = Number(input[0]);
+        let end = Number(input[1]);
+        let sumEven = 0;
+        let sumOdd = 0;
+        let result = "";
+
+        for (let current = start; current <= end; current++) {
+          sumEven = 0;
+          sumOdd = 0;
+
+          const currentString = current.toString();
+
+          for (let index = 0; index < 6; index+=2) {
+            sumEven += Number(currentString[index]);
+          }
+
+          for (let index = 1; index < 6; index+=2) {
+            sumOdd += Number(currentString[index]);
+          }
+
+          if (sumEven === sumOdd) {
+            result += `${current} `;
+          }
+          
+        }
+
+        console.log(result);
+      }
+
+      // printEqualSumsEvenOddPosition(["100000", "100050"]);
+      // printEqualSumsEvenOddPosition(["123456", "124000"]);
+
     </script>
   </body>
 </html>
