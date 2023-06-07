@@ -413,7 +413,6 @@
 
       #portfolio img {
         width: 100%;
-        height: 100%;
         object-fit: cover;
         transition: all 0.3s ease;
         cursor: pointer;
@@ -456,10 +455,10 @@
 
       .modal {
         position: fixed;
-        top: 4em;
+        top: 0;
         left: 0;
         width: 100%;
-        height: calc(100% - 4em);
+        height: 100%;
         padding: 2em;
         display: none;
         align-items: flex-start;
@@ -561,6 +560,96 @@
           gap: 2em;
           height: 20em;
           overflow-y: scroll;
+        }
+        .active::before {
+          background-color: var(--accent);
+        }
+        /* JS class */
+        .menu-open {
+          top: 4.2em;
+        }
+        #about .container {
+          grid-template-columns: 1fr;
+        }
+        #about .container > div:nth-child(2) {
+          align-items: flex-start;
+        }
+        #about h1 {
+          margin-bottom: 1.5em;
+        }
+      }
+
+      @media screen and (max-width: 900px) {
+        #blog .posts {
+          grid-template-columns: 1fr;
+          grid-template-rows: repeat(4, 1fr);
+        }
+        .post4 {
+          grid-column: auto;
+          grid-row: auto;
+        }
+        .post4 .date {
+          right: 0.5em;
+          left: initial;
+        }
+      }
+
+      @media screen and (max-width: 800px) {
+        #services .items, 
+        #our-team .items, 
+        #pricing .items {
+          grid-template-columns: 1fr;
+        }
+        #portfolio, 
+        #contact .container {
+          display: block;
+        }
+        #portfolio h1 {
+          margin: 1em 0;
+        }
+        #contact h1 {
+          margin-bottom: 1.5em;
+        }
+        #contact img {
+          margin-top: 2em;
+        }
+      }
+
+      @media screen and (max-width: 600px) {
+        #services .container, 
+        #blog .container, 
+        #our-team .container, 
+        #pricing .container {
+          display: block;
+        }
+        #services h1, 
+        #blog h1, 
+        #our-team h1, 
+        #pricing h1 {
+          margin-bottom: 1.5em;
+        }
+      }
+
+      @media screen and (max-width: 500px) {
+        .post1, 
+        .post2, 
+        .post3 {
+          grid-template-columns: 1fr;
+        }
+        .blog-post-img {
+          height: 10em;
+        }
+      }
+
+      @media screen and (max-width: 400px) {
+        html {
+          font-size: 14px;
+        }
+      }
+
+      @media screen and (max-height: 400px) and (max-width: 1000px) {
+        .navbar .menu ul {
+          height: 70vh;
         }
       }
     </style>
@@ -904,6 +993,55 @@
         <i class="fa fa-copyright" aria-hidden="true"></i>
         Copyright. Company Name</p>
     </footer>
+
+    <script>
+      const navbar = document.querySelector(".navbar");
+      const menu = document.querySelector(".menu");
+      const menuBtn = document.querySelector(".menu-btn");
+      const checkpoints = document.querySelectorAll(".scroll-checkpoint");
+      const links =document.querySelectorAll(".menu ul a");
+
+      menuBtn.addEventListener("click", () => {
+        menu.classList.toggle("menu-open");
+      })
+
+      window.addEventListener("scroll", () => {
+        if (pageYOffset > 50) {
+          navbar.classList.add("navbar-active");
+        } else {
+          navbar.classList.remove("navbar-active");
+        }
+
+        checkpoints.forEach((checkpoint, index) => {
+          if (pageYOffset > (checkpoint.offsetTop - 50)) {
+            links.forEach(link => link.classList.remove("active"));
+            links[index].classList.add("active");
+          }
+        })
+      })
+
+      // Modal
+      const modal = document.querySelector(".modal");
+      const images = document.querySelectorAll("#portfolio > img");
+      const modalImg = document.querySelector(".modal img");
+
+      images.forEach(image => {
+        image.addEventListener("click", (e) => {
+          modalImg.src = e.target.src;
+          modal.style.display = "flex";
+          setTimeout(() => {
+            modal.style.opacity = "1";
+          }, 10);
+        })
+      })
+
+      modal.addEventListener("click", () => {
+        modal.style. opacity = "0";
+        setTimeout(() => {
+          modal.style.display = "none";
+        }, 500);
+      })
+    </script>
 
     <!-- <h1 style="text-align: center;">setInterval() - JavaScript</h1>
     <hr>
