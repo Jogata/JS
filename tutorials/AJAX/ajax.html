@@ -90,150 +90,159 @@
     </script>
 
     <script>
-      // 03. Sum Prime Non Prime
+      // 05. Special Numbers
 
-      function sumPrimeNonPrime(numbers) {
-        let index = 0;
-        let input = numbers[index];
-        let sumPrime = 0;
-        let sumNonPrime = 0;
+      function findSpecialNumbers(data) {
+        const n = Number(data[0]);
+        let result = "";
 
-        while (input !== "stop") {
-          let number = Number(input);
+        for (let number = 1111; number < 9999; number++) {
+          let current = number.toString();
 
-          if (number < 0) {
-            console.log("Number is negative.");
-            index++;
-            input = numbers[index];
-            continue;
-          }
+          for (let letter = 0; letter < current.length; letter++) {
+            let symbol = Number(current[letter]);
 
-          if (number === 2) {
-            sumPrime += 2;
-          }
-
-          for (let i = 2; i < number; i++) {
-            
-            if (number % i === 0) {
-              sumNonPrime += number;
-              break;
-            } else if (i === (number - 1)) {
-              sumPrime += number;
-            }
-            
-          }
-          
-          index++;
-          input = numbers[index];
-        }
-
-        console.log(`Sum of all prime numbers is: ${sumPrime}`);
-        console.log(`Sum of all non prime numbers is: ${sumNonPrime}`);
-      }
-
-      // sumPrimeNonPrime(["3", "9", "0", "7", "19", "4", "stop"]);
-      // sumPrimeNonPrime(["30", "83", "33", "-1", "20", "2", "stop"]);
-      // sumPrimeNonPrime(["0", "-9", "0", "stop"]);
-      // sumPrimeNonPrime(["2", "stop"]);
-
-      // 04. Train The Trainers
-
-      function trainTheTrainers(data) {
-        const judges = Number(data[0]);
-        let presentation = data[1];
-        let index = 1;
-        let input = 0;
-
-        let totalMark = 0;
-        let presentations = 0;
-                
-        while (input !== "Finish") {
-          let presentationMark = 0;
-          
-          for (let i = 0; i < judges; i++) {
-            index++;
-            input = Number(data[index]);
-            presentationMark += input;
-          }
-
-          presentationMark = presentationMark / judges;
-          console.log(`${presentation} - ${presentationMark.toFixed(2)}.`);
-
-          totalMark += presentationMark;
-          presentations++;
-
-          index++;
-          input = data[index];
-          presentation = input;
-        }
-
-        console.log(`Student's final assessment is ${(totalMark / presentations).toFixed(2)}.`);
-      }
-
-      // trainTheTrainers(["2", "While-Loop", "6.00", "5.50", "For-Loop", "5.84", "5.66", "Finish"]);
-      // trainTheTrainers(["3", "Arrays", "4.53", "5.23", "5.00", "Lists", "5.83", "6.00", "5.42", "Finish"]);
-      // trainTheTrainers(["2", "Objects and Classes", "5.77", "4.23", "Dictionaries", "4.62", "5.02", "RegEx", "2.88", "3.42", "Finish"]);
-
-      // 06. Cinema Tickets
-
-      function calcTicketTypes(data) {
-        let movie = data[0];
-        let stud = 0;
-        let stan = 0;
-        let kids = 0;
-        let tickets = 0;
-        let index = 0;
-                
-        while (movie !== "Finish") {
-          index++;
-          let seats = Number(data[index]);
-          let totalTicketsForCurrentMovie = 0;
-          
-          for (let seat = 0; seat < seats; seat++) {
-            index++;
-            let input = data[index];
-
-            if (input === "End") {
+            if (n % symbol !== 0) {
+              current = false;
               break;
             }
-
-            tickets++;
-            totalTicketsForCurrentMovie++;
-            
-            switch (input) {
-              case "student":
-                stud++;
-                break;
-              case "standard":
-                stan++;
-                break;
-              case "kid":
-                kids++;
-                break;
-            }
           }
 
-          const totalTicketsForCurrentMovieP = totalTicketsForCurrentMovie / seats * 100;
-          console.log(`${movie} - ${totalTicketsForCurrentMovieP.toFixed(2)}% full.`);
-
-          index++;
-          movie = data[index];
+          if (current) {
+            result = result + `${current} `
+          }
 
         }
 
-        const totalTicketsForStudP = stud / tickets * 100;
-        const totalTicketsForStanP = stan / tickets * 100;
-        const totalTicketsForKidsP = kids / tickets * 100;
-
-        console.log(`Total tickets: ${tickets}`);
-        console.log(`${totalTicketsForStudP.toFixed(2)}% student tickets.`);
-        console.log(`${totalTicketsForStanP.toFixed(2)}% standard tickets.`);
-        console.log(`${totalTicketsForKidsP.toFixed(2)}% kids tickets.`);
-
+        console.log(result);
       }
 
-      // calcTicketTypes(["Taxi", "10", "standard", "kid", "student", "student", "standard", "standard", "End", "Scary Movie", "6", "student", "student", "student", "student", "student", "student", "Finish"]);
-      calcTicketTypes(["The Matrix", "20", "student", "standard", "kid", "kid", "student", "student", "standard", "student", "End", "The Green Mile", "17", "student", "standard", "standard", "student", "standard", "student", "End", "Amadeus", "3", "standard", "standard", "standard", "Finish"]);
+      // findSpecialNumbers(["3"]);
+      // findSpecialNumbers(["11"]);
+
+      // 01. Birthday Party
+
+      function calcBirthdayParty(data) {
+        const rent = Number(data[0]);
+        let cake = rent * 0.2;
+        let drinks = cake * 0.55;
+        let anime = rent / 3;
+
+        let sum = rent + cake + drinks + anime;
+
+        console.log(sum);
+      }
+
+      // calcBirthdayParty(["2250"]);
+      // calcBirthdayParty(["3720"]);
+
+      // 02. Cat Walking
+
+      function calcCatWalking(data) {
+        const minutes = Number(data[0]);
+        const hikes = Number(data[1]);
+        const calories = Number(data[2]);
+
+        const burnedcal = hikes * minutes * 5;
+
+        if (burnedcal >= (calories / 2)) {
+          console.log(`Yes, the walk for your cat is enough. Burned calories per day: ${burnedcal}.`);
+        } else {
+          console.log(`No, the walk for your cat is not enough. Burned calories per day: ${burnedcal}.`);
+        }
+      }
+
+      // calcCatWalking(["30", '3', "600"]);
+      // calcCatWalking(["15", '2', "500"]);
+      // calcCatWalking(["40", '2', "200"]);
+
+      // 03. Energy Booster
+
+      function calcEnergyBoosterPrice(data) {
+        const flavor = data[0];
+        let razfasofka = data[1];
+        const q = Number(data[2]);
+        let price = 0;
+
+        if (razfasofka === "small") {
+          razfasofka = 2;
+          switch (flavor) {
+            case "Watermelon":
+              price = 56;
+              break;
+            case "Mango":
+              price = 36.66;
+              break;
+            case "Pineapple":
+              price = 42.10;
+              break;
+            case "Raspberry":
+              price = 20;
+              break;
+          }
+        } else {
+          razfasofka = 5;
+          switch (flavor) {
+            case "Watermelon":
+              price = 28.7;
+              break;
+            case "Mango":
+              price = 19.60;
+              break;
+            case "Pineapple":
+              price = 24.80;
+              break;
+            case "Raspberry":
+              price = 15.20;
+              break;
+          }
+        }
+
+        let sum = q * price * razfasofka;
+
+        if (sum >= 400 && sum <= 1000) {
+          sum = sum * 0.85;
+        } else if (sum > 1000) {
+          sum /= 2;
+        }
+
+        console.log(`${sum.toFixed(2)} lv.`);
+      }
+
+      // calcEnergyBoosterPrice(["Watermelon", "big", "4"]);
+      // calcEnergyBoosterPrice(["Pineapple", "small", "1"]);
+      // calcEnergyBoosterPrice(["Raspberry", "small", "50"]);
+      // calcEnergyBoosterPrice(["Mango", "big", "8"]);
+
+      // 04. Food for Pets
+
+      function calcPetsFood(data) {
+        const days = Number(data[0]);
+        const food = Number(data[1]);
+
+        let dog = 0;
+        let cat = 0;
+        let bisc = 0;
+        let currentDay = 0;
+
+        for (let index = 2; index < data.length; index+=2) {
+          dog = dog + Number(data[index]);
+          cat = cat + Number(data[index+1]);
+          currentDay++;
+
+          if (currentDay % 3 === 0) {
+            bisc += (Number(data[index]) + Number(data[index+1])) * 0.1;
+          }
+        }
+
+        console.log(`Total eaten biscuits: ${Math.round(bisc)}gr.`);
+        console.log(`${((cat + dog) / food * 100).toFixed(2)}% of the food has been eaten.`);
+        console.log(`${(dog / (cat + dog) * 100).toFixed(2)}% eaten from the dog.`);
+        console.log(`${(cat / (cat + dog) * 100).toFixed(2)}% eaten from the cat.`);
+      }
+
+      calcPetsFood(["3", "1000", "300", "20", "100", "30", "110", "40"]);
+      calcPetsFood(["3", "500", "100", "30", "110", "25", "120", "35"]);
     </script>
   </body>
 </html>
