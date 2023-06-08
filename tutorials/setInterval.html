@@ -4,1046 +4,108 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>setInterval function in JS</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-      *, 
-      *::after, 
-      *::before {
+      * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
 
-      :root {
-        --accent: #f05b33;
-        --primary: #fff;
-        --secondary: #f6f2f1;
-        --text: #333;
-      }
-
-      html {
-        scroll-behavior: smooth;
+      img {
+        width: 100%;
+        max-width: max-content;
+        margin: auto;
       }
 
       body {
         font-family: Georgia, serif;
-      }
-
-      h1, 
-      h2, 
-      h3 {
-        text-transform: uppercase;
-      }
-
-      h1 {
-        font-size: 2.5rem;
-        line-height: 55px;
-      }
-      h1 span {
-        color: var(--accent);
-      }
-
-      #pricing h3, 
-      #contact h3, 
-      #our-team h3 {
-        color: var(--accent);
-      }
-
-      p {
-        max-width: 400px;
-        margin: 1em 0;
-        line-height: 25px;
-      }
-
-      a {
-        text-decoration: none;
-        transition: all 0.3s;
+        background-color: #000;
       }
 
       section {
-        padding: 4em 2em;
+        padding: 0 3% 3%;
+        /* display: flex; */
+        /* align-items: center; */
+        /* justify-content: center; */
+        /* flex-direction: column; */
+        text-align: center;
       }
-      section:nth-child(odd) {
-        background-color: var(--secondary);
-      }
-      section:nth-child(even) {
-        background-color: var(--primary);
+      
+      p {
+        max-width: 100rem;
+        margin: 1.2rem auto auto;
+        color: #fff;
       }
 
-      .container {
-        max-width: 1150px;
-        margin: 0 auto;
-      }
-
-      /* Header section */
-      header {
+      #parallax {
         position: relative;
-        min-height: 100vh;
-        padding: 6em 2em 2em 2em;
-        display: flex;
-        align-items: center;
-        color: var(--primary);
-        background-image: url("./agency/img/banner.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
+        width: 100%;
+        height: 100vh;
+        background-color: #000;
+        overflow: hidden;
       }
 
-      header a {
-        color: var(--primary);
-        font-weight: 400;
-        text-transform: uppercase;
-      }
-
-      header a:not(.brand, .btn):hover {
-        color: var(--accent);
-      }
-
-      header::before {
+      .layer {
         position: absolute;
         top: 0;
         left: 0;
-        content: "";
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-        z-index: 0;
+        overflow: hidden;
       }
 
-      .navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding: 1em 2em;
-        z-index: 9;
+      .bg {
+        background-image: url("./AC/images/bg.jpg");
+        background-repeat: no-repeat;
+        background-position: bottom;
+        background-size: cover;
       }
-
-      .navbar .container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+      .overlay {
+        background-image: url("./AC/images/overlay.png");
+        background-repeat: no-repeat;
+        background-position: bottom;
+        background-size: cover;
       }
-
-      .menu ul {
-        list-style: none;
-        display: flex;
-        align-items: center;
-        justify-content: right;
-        gap: 1.5em;
-      }
-
-      .brand {
-        text-transform: capitalize;
-      }
-
-      .brand span {
-        display: block;
-        font-size: 1.7em;
-        margin-bottom: -0.3em;
-      }
-      .brand small {
-        padding-left: 0.2em;
-      }
-      .brand-mobile {
-        font-size: 1.5em;
-      }
-
-      .menu-btn {
-        border: 1px solid transparent;
-        background-color: transparent;
-        cursor: pointer;
-      }
-      .menu-btn i {
-        font-size: 2.2em;
-      }
-
-      .brand-mobile, 
-      .menu-btn {
-        display: none;
-      }
-
-      .active {
-        position: relative;
-      }
-      .active::before {
-        position: absolute;
-        bottom: -0.5em;
-        left: 50%;
-        transform: translateX(-50%);
-        content: "";
-        width: 100%;
-        height: 4px;
-        background-color: #fff;
-      }
-
       .hero {
-        position: relative;
-        width: 90vw;
-      }
-      .hero p {
-        margin: 2em 0 2.8em 0;
-      }
-
-      .btn {
-        margin-right: 1.5em;
-        padding: 0.5em 1.5em;
-        font-size: 0.9em;
-        color: var(--primary);
-        border: 3px solid var(--accent);
-        background-color: var(--accent);
-      }
-      .secondary {
-        border: 3px solid var(--primary);
-        background-color: transparent;
-      }
-
-      .btn:hover {
-        background-color: #d5512d;
-      }
-      .secondary:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-      }
-
-      .navbar.active {
-        background-color: var(--primary);
-        box-shadow: 0.5em 0 2em rgba(0, 0, 0, 0.1);
-      }
-      .navbar.active a {
-        color: var(--text);
-      }
-      .navbar.active .brand span {
-        margin: 0;
-        font-size: 1.5em;
-      }
-      .navbar.active .brand small {
-        display: none;
-      }
-      .navbar.active .active::before {
-        background-color: var(--accent);
-      }
-
-      /* About section */
-      #about .container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2em;
-      }
-
-      #about .container > div:nth-child(2) {
-        position: relative;
-        padding: 2em;
-        background-image: url("./agency/img/background.jpg");
+        background-image: url("./AC/images/assassins.png");
         background-repeat: no-repeat;
-        background-position: center;
+        background-position: bottom;
         background-size: cover;
       }
-      #about .container > div:nth-child(2)::before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-color: rgba(240, 91, 51, 0.8);
-        z-index: 0;
-      }
-
-      #about .container > div:nth-child(2) div {
-        position: relative;
-        padding: 2em 0;
-        color: var(--primary);
-        text-align: right;
-        border-bottom: 1px solid var(--primary);
-      }
-
-      /* Services section */
-      #services .container, 
-      #blog .container, 
-      #our-team .container, 
-      #pricing .container {
-        display: flex;
-        justify-content: space-between;
-        gap: 2em;
-      }
-
-      #services .items {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1em;
-        text-align: center;
-      }
-
-      #services .title h1, 
-      #blog .title h1, 
-      #our-team .title h1, 
-      #pricing .title h1 {
-        position: sticky;
-        top: 10px;
-      }
-
-      #services .items div {
-        padding: 1.5em;
-        background-color: var(--primary);
-      }
-
-      #services .items span {
-        margin-bottom: 0.2em;
-        font-size: 3em;
-      }
-
-      #services .items > div i {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-      }
-
-      /* Blog section */
-      #blog .posts {
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        grid-template-rows: repeat(3, 1fr);
-        gap: 1em;
-      }
-
-      .post1, 
-      .post2, 
-      .post3 {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1em;
-      }
-
-      .post4 {
-        grid-column: 2 / 3;
-        grid-row: 1 / 4;
-      }
-
-      .post1 .blog-post-img {
-        background-image: url("./agency/img/blog1.jpg");
-      }
-      .post2 .blog-post-img {
-        background-image: url("./agency/img/blog2.jpg");
-      }
-      .post3 .blog-post-img {
-        background-image: url("./agency/img/blog3.jpg");
-      }
-      .post4 .blog-post-img {
-        height: 100%;
-        background-image: url("./agency/img/blog4.jpg");
-        display: flex;
-        align-items: flex-end;
-        padding: 1.5em;
-        color: var(--primary);
-      }
-
-      .posts .blog-post-img, 
-      .post4 {
-        position: relative;
+      .bottom {
+        background-image: url("./AC/images/bottom.png");
         background-repeat: no-repeat;
-        background-position: center;
+        background-position: bottom;
         background-size: cover;
       }
 
-      .posts .date {
-        display: inline-block;
-        position: absolute;
-        top: 0.5em;
-        left: 0.5em;
-        padding: 0.2em 0.5em 0.5em 0.5em;
-        color: var(--primary);
-        background-color: var(--accent);
-        text-align: center;
-      }
-
-      .posts .date h1 {
-        font-size: 2.5em;
-      }
-
-      /* Our Team & Pricing sections */
-      #our-team .team, 
-      #pricing .tables {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1em;
-      }
-
-      .team img {
-        width: 100%;
-        margin-bottom: 1em;
-      }
-
-      .team p {
-        margin-bottom: 0;
-      }
-
-      .tables {
-        text-align: center;
-      }
-
-      .tables > div {
-        padding: 1.5em;
-        background-color: var(--primary);
-      }
-
-      .tables h2 {
-        margin: 1rem 0;
-      }
-
-      .tables .btn {
-        display: block;
-        margin: 1em;
-        font-family: inherit;
-        text-transform: capitalize;
-      }
-
-      .tables i {
-        font-size: 4em;
-      }
-
-      .price {
-        margin-bottom: 0.5em;
-      }
-
-      /* Portfolio section */
-      #portfolio {
-        display: grid;
-        grid-template-columns: 1fr 2fr 2fr 1fr;
-        grid-template-rows: 15em 15em 15em;
-      }
-
-      #portfolio img {
-        width: 100%;
-        object-fit: cover;
-        transition: all 0.3s ease;
-        cursor: pointer;
-      }
-      #portfolio > img:hover {
-        opacity: 0.7;
-      }
-
-      .img1 {
-        grid-column: 1 / 3;
-        grid-row: 1 / 2;
-      }
-      .img2 {
-        grid-column: 3 / 5;
-        grid-row: 1 / 2;
-      }
-      .img3 {
-        grid-column: 1 / 2;
-        grid-row: 2 / 4;
-      }
-      .img4 {
-        grid-column: 3 / 4;
-        grid-row: 2 / 3;
-      }
-      .img5 {
-        grid-column: 3 / 4;
-        grid-row: 3 / 4;
-      }
-      .img6 {
-        grid-column: 4 / 5;
-        grid-row: 2 / 4;
-      }
-      #portfolio .title {
-        grid-column: 2 / 3;
-        grid-row: 2 / 4;
-        padding: 0 2em;
-        display: flex;
-        align-items: flex-end;
-      }
-
-      .modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        padding: 2em;
-        display: none;
-        align-items: flex-start;
-        justify-content: center;
-        background-color: rgba(0, 0, 0, 0.8);
-        overflow-y: scroll;
-        transition: all 0.5s;
-        opacity: 0;
-      }
-      .modal img {
-        width: 100%;
-        max-width: 700px;
-      }
-
-      /* Contact section */
-      #contact .container {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        gap: 2em;
-      }
-
-      #contact img {
-        justify-self: right;
-        align-self: center;
-        width: 100%;
-      }
-
-      .contact-method {
-        display: flex;
-        align-items: center;
-        gap: 1em;
-        margin: 1.5em 0;
-      }
-
-      #contact p {
-        margin: 0.5em 0;
-      }
-
-      .contact-method i {
-        font-size: 3em;
-      }
-
-      /* Foother */
-      footer {
-        padding: 1.5em;
-        color: #a7a7a7;
-        background-color: var(--secondary);
-      }
-
-      footer p {
-        margin: 0 auto;
-        text-align: center;
-      }
-
-      /* Responsive */
-      @media screen and (min-width: 1200px) {
-        .hero {
-          width: 1150px;
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #fff;
         }
-      }
-
-      @media screen and (min-width: 1000px) {
-        h1 {
-          font-size: 3em;
+        p {
+          color: #000;
+          font-size: 2rem;
         }
-        #about {
-          padding: 0 2em;
-        }
-        #about .container > div {
-          padding: 4em 0;
-        }
-      }
-
-      @media screen and (max-width: 1000px) {
-        .brand-mobile, 
-        .menu-btn {
-          display: block;
-        }
-        .brand {
-          display: none;
-        }
-        .navbar {
-          background-color: var(--primary);
-        }
-        .navbar a {
-          color: var(--text);
-        }
-        .menu {
-          position: absolute;
-          top: -20em;
-          left: 0;
-          width: 100%;
-          background-color: var(--secondary);
-          transition: all 0.5s ease-in-out;
-        }
-        .menu ul {
-          padding: 2em;
-          flex-direction: column;
-          gap: 2em;
-          height: 20em;
-          overflow-y: scroll;
-        }
-        .active::before {
-          background-color: var(--accent);
-        }
-        /* JS class */
-        .menu-open {
-          top: 4.2em;
-        }
-        #about .container {
-          grid-template-columns: 1fr;
-        }
-        #about .container > div:nth-child(2) {
-          align-items: flex-start;
-        }
-        #about h1 {
-          margin-bottom: 1.5em;
-        }
-      }
-
-      @media screen and (max-width: 900px) {
-        #blog .posts {
-          grid-template-columns: 1fr;
-          grid-template-rows: repeat(4, 1fr);
-        }
-        .post4 {
-          grid-column: auto;
-          grid-row: auto;
-        }
-        .post4 .date {
-          right: 0.5em;
-          left: initial;
-        }
-      }
-
-      @media screen and (max-width: 800px) {
-        #services .items, 
-        #our-team .items, 
-        #pricing .items {
-          grid-template-columns: 1fr;
-        }
-        #portfolio, 
-        #contact .container {
-          display: block;
-        }
-        #portfolio h1 {
-          margin: 1em 0;
-        }
-        #contact h1 {
-          margin-bottom: 1.5em;
-        }
-        #contact img {
-          margin-top: 2em;
-        }
-      }
-
-      @media screen and (max-width: 600px) {
-        #services .container, 
-        #blog .container, 
-        #our-team .container, 
-        #pricing .container {
-          display: block;
-        }
-        #services h1, 
-        #blog h1, 
-        #our-team h1, 
-        #pricing h1 {
-          margin-bottom: 1.5em;
-        }
-      }
-
-      @media screen and (max-width: 500px) {
-        .post1, 
-        .post2, 
-        .post3 {
-          grid-template-columns: 1fr;
-        }
-        .blog-post-img {
-          height: 10em;
-        }
-      }
-
-      @media screen and (max-width: 400px) {
-        html {
-          font-size: 14px;
-        }
-      }
-
-      @media screen and (max-height: 400px) and (max-width: 1000px) {
-        .navbar .menu ul {
-          height: 70vh;
+        img {
+          filter: invert(1);
         }
       }
     </style>
   </head>
   <body>
-    <header id="header" class="scroll-checkpoint">
-      <nav class="navbar">
-        <div class="container">
-          <a href="#header" class="brand">
-            <span>creative agency</span>
-            <small>Creative tagline here</small>
-          </a>
-          <a href="#header" class="brand-mobile">
-            ca
-          </a>
-          <div class="menu">
-            <ul>
-              <li>
-                <a href="#header" class="active">home</a>
-              </li>
-              <li>
-                <a href="#about">about us</a>
-              </li>
-              <li>
-                <a href="#services">services</a>
-              </li>
-              <li>
-                <a href="#blog">blog</a>
-              </li>
-              <li>
-                <a href="#our-team">our team</a>
-              </li>
-              <li>
-                <a href="#portfolio">portfolio</a>
-              </li>
-              <li>
-                <a href="#pricing">pricing</a>
-              </li>
-              <li>
-                <a href="#contact">contact</a>
-              </li>
-            </ul>
-          </div>
-          <button class="menu-btn">
-            <i class="fa fa-bars"></i>
-          </button>
-        </div>
-      </nav>
-      <div class="container">
-        <div class="hero">
-          <h1>welcome to the 
-            <span>award <br> winning</span>
-            agency
-          </h1>
-          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur nam molestias aliquam at maxime quisquam ad expedita iusto voluptate rerum.</p>
-          <div class="buttons">
-            <a href="#" class="btn">get started</a>
-            <a href="#" class="btn secondary">learn more</a>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <section id="about" class="scroll-checkpoint">
-      <div class="container">
-        <div>
-          <h1>
-            about <br>
-            <span>creative</span><br>
-            agency <br>
-          </h1>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ratione, repellat ea! Maxime, ullam aspernatur! Dignissimos et nisi eos blanditiis reiciendis architecto nobis.</p>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quisquam maxime iste voluptate expedita id consectetur aliquam explicabo. Porro, repudiandae doloremque voluptatibus eveniet nostrum deleniti animi eaque quaerat fugiat dicta commodi, veritatis beatae.</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam.</p>
-        </div>
-        <div>
-          <div>
-            <h2>Mon-Fri (08-16h)</h2>
-            <h3>john smith</h3>
-          </div>
-          <div>
-            <h2>Mon-Thu (07-17h)</h2>
-            <h3>jane doe</h3>
-          </div>
-          <div>
-            <h2>Wed-Sat (15-22h)</h2>
-            <h3>mike johnson</h3>
-          </div>
-          <div>
-            <h2>Mon-fri (15-21h)</h2>
-            <h3>dave anderson</h3>
-          </div>
-        </div>
-        <div>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae sint eveniet hic suscipit iure. Consectetur nulla reiciendis amet! Molestias aspernatur voluptas perferendis unde.</p>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odit delectus dolore voluptas unde tempora, porro hic cupiditate ratione.</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores architecto harum inventore deserunt officia accusantium in. Sapiente tenetur quis nesciunt? Magnam reiciendis accusantium laboriosam architecto eveniet libero culpa itaque.</p>
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel deserunt ut recusandae quibusdam nulla veritatis nostrum eligendi assumenda, quo aspernatur inventore omnis vitae adipisci quod.</p>
-        </div>
-      </div>
+    <div id="parallax">
+      <div class="layer bg" data-speed="0"></div>
+      <div class="layer overlay" data-speed="0"></div>
+      <div class="layer hero" data-speed="0"></div>
+      <div class="layer bottom" data-speed="0"></div>
+    </div>
+    <section>
+      <img src="./AC/images/logo-text.png" alt="AC">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id expedita, vero qui libero ratione sequi voluptatem obcaecati. Adipisci beatae consectetur accusamus quas asperiores, voluptatum fugiat a quae mollitia magni vel, numquam omnis ratione. Ab iusto nostrum aliquam mollitia eaque? Nobis, consequatur quos maxime esse assumenda pariatur officia quae est. Omnis voluptates cupiditate corporis rem porro fuga iusto inventore hic animi illo! Unde, temporibus accusantium debitis nulla iure labore corporis incidunt consequatur eligendi natus ipsa animi consectetur facere hic exercitationem possimus. Beatae mollitia cumque quis, laudantium voluptate nemo ex repellat quas dolorem eos nam fugiat unde fugit exercitationem excepturi accusantium quos facilis repudiandae. Vitae consequuntur, molestiae blanditiis quaerat veniam totam similique tempore reiciendis temporibus cum officia quisquam, delectus dolorum minus atque, eos porro soluta natus eum ex dolore! Optio quis quod, provident in quidem corporis ullam tempora accusamus, recusandae possimus, praesentium repellat ipsa dolores? Repellendus blanditiis quae laboriosam veniam ducimus laudantium possimus officia quibusdam. Ratione tempore temporibus saepe similique dicta recusandae accusamus commodi distinctio enim voluptatibus. Laboriosam facilis alias quod? Nobis a nulla aperiam tempore corrupti voluptatum enim illum reprehenderit optio repellendus, asperiores aliquam rem provident eveniet sapiente culpa nesciunt nihil quae impedit sed quam. Sit, voluptatibus quia? Delectus sit quos porro, excepturi accusantium rerum sequi quae, perspiciatis recusandae ipsam molestiae atque iste expedita, nihil quasi? Est, nihil eligendi! Doloribus quisquam rem nesciunt architecto ad, quis iste excepturi. Velit deleniti nostrum molestiae? Perferendis nulla, ratione architecto laboriosam nihil perspiciatis similique quaerat quia repellat pariatur officia tenetur corporis, aperiam aliquam, porro deserunt.</p>
     </section>
 
-    <section id="services" class="scroll-checkpoint">
-      <div class="container">
-        <div class="title">
-          <h1>
-            our <br>
-            <span>special</span><br>
-            services <br>
-          </h1>
-        </div>
-        <div class="items">
-          <div>
-            <i class="fa fa-globe"></i>
-            <h3>web design</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi quod atque corporis.</p>
-          </div>
-          <div>
-            <i class="fa fa-archive"></i>
-            <h3>package design</h3>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa, ullam et.</p>
-          </div>
-          <div>
-            <i class="fa fa-pencil"></i>
-            <h3>wireframing</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-          </div>
-          <div>
-            <i class="fa fa-th-large" aria-hidden="true"></i>
-            <h3>layout</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, numquam. Totam.</p>
-          </div>
-          <div>
-            <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-            <h3>product design</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat exercitationem quis amet dolore.</p>
-          </div>
-          <div>
-            <i class="fa fa-code" aria-hidden="true"></i>
-            <h3>app design</h3>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="blog" class="scroll-checkpoint">
-      <div class="container">
-        <div class="title">
-          <h1>
-            latest <br>
-            <span>design</span> <br>
-            blog <br>
-          </h1>
-        </div>
-        <div class="posts">
-          <div class="post1">
-            <div class="blog-post-img">
-              <div class="date">
-                <h1>24</h1>
-                <small>dec, 23</small>
-              </div>
-            </div>
-            <div>
-              <h2>new things comming</h2>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, iusto. Reiciendis laborum quisquam voluptas deserunt natus, necessitatibus atque corrupti nisi asperiores quo.</p>
-            </div>
-          </div>
-          <div class="post2">
-            <div class="blog-post-img">
-              <div class="date">
-                <h1>03</h1>
-                <small>nov, 23</small>
-              </div>
-            </div>
-            <div>
-              <h2>the workspace</h2>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, iusto. Reiciendis laborum quisquam voluptas deserunt natus, necessitatibus atque corrupti nisi asperiores quo.</p>
-            </div>
-          </div>
-          <div class="post3">
-            <div class="blog-post-img">
-              <div class="date">
-                <h1>14</h1>
-                <small>nov, 23</small>
-              </div>
-            </div>
-            <div>
-              <h2>new design 2023</h2>
-              <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, iusto. Reiciendis laborum quisquam voluptas deserunt natus, necessitatibus atque corrupti nisi asperiores quo.</p>
-            </div>
-          </div>
-          <div class="post4">
-            <div class="blog-post-img">
-              <div class="date">
-                <h1>15</h1>
-                <small>dec, 23</small>
-              </div>
-              <div>
-                <h2>creative agency</h2>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus, iusto. Reiciendis laborum quisquam voluptas deserunt natus, necessitatibus atque corrupti nisi asperiores quo.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="our-team" class="scroll-checkpoint">
-      <div class="container">
-        <div class="title">
-          <h1>
-            creative <br>
-            <span>team</span> <br>
-            members <br>
-          </h1>
-        </div>
-        <div class="team">
-          <div>
-            <img src="./agency/img/person1.jpg" alt="">
-            <h2>julia sanchez</h2>
-            <h3>graphic designer</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui quos, veritatis odio sapiente optio sequi et aliquid quae ipsa voluptatem esse laborum.</p>
-          </div>
-          <div>
-            <img src="./agency/img/person2.jpg" alt="">
-            <h2>jane doe</h2>
-            <h3>graphic designer</h3>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde fugiat repudiandae architecto aliquid odit eum, voluptatem est autem illum pariatur illo quos? In, quaerat modi.</p>
-          </div>
-          <div>
-            <img src="./agency/img/person3.jpg" alt="">
-            <h2>morgan smith</h2>
-            <h3>graphic designer</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam eius rem sapiente cupiditate minus, sequi libero excepturi exercitationem nesciunt.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="portfolio" class="scroll-checkpoint">
-      <img src="./agency/img/product1.jpg" alt="product" class="img1">
-      <img src="./agency/img/product2.jpg" alt="product" class="img2">
-      <img src="./agency/img/product3.jpg" alt="product" class="img3">
-      <div class="title">
-        <h1>
-          our <br>
-          <span>portfolio</span> <br>
-          gallery <br>
-        </h1>
-      </div>
-      <img src="./agency/img/product4.jpg" alt="product" class="img4">
-      <img src="./agency/img/product5.jpg" alt="product" class="img5">
-      <img src="./agency/img/product6.jpg" alt="product" class="img6">
-      <div class="modal">
-        <img src="./agency/img/product3.jpg" alt="product-modal">
-      </div>
-    </section>
-
-    <section id="pricing" class="scroll-checkpoint">
-      <div class="container">
-        <div class="title">
-          <h1>
-            our <br>
-            <span>pricing</span> <br>
-            plans <br>
-          </h1>
-        </div>
-        <div class="tables">
-          <div>
-            <i class="fa fa-bicycle"></i>
-            <h2>basic</h2>
-            <h3>pricing plan</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus ducimus odio esse, error unde expedita a, porro perferendis nulla impedit soluta repellat iste dolores dignissimos accusantium.</p>
-            <h1 class="price">50$</h1>
-            <a href="#" class="btn">purchase</a>
-          </div>
-          <div>
-            <i class="fa fa-plane"></i>
-            <h2>pro</h2>
-            <h3>pricing plan</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus ducimus odio esse, error unde expedita a, porro perferendis nulla impedit soluta repellat iste dolores dignissimos accusantium.</p>
-            <h1 class="price">100$</h1>
-            <a href="#" class="btn">purchase</a>
-          </div>
-          <div>
-            <i class="fa fa-rocket"></i>
-            <h2>enterprise</h2>
-            <h3>pricing plan</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus ducimus odio esse, error unde expedita a, porro perferendis nulla impedit soluta repellat iste dolores dignissimos accusantium.</p>
-            <h1 class="price">1000$</h1>
-            <a href="#" class="btn">purchase</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="scroll-checkpoint">
-      <div class="container">
-        <div>
-          <h1>
-            how to <br>
-            <span>find us</span> <br>
-          </h1>
-          <div class="contact-method">
-            <i class="fa fa-map-marker" aria-hidden="true"></i>
-            <div>
-              <h3>address</h3>
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta, laudantium.</p>
-            </div>
-          </div>
-          <div class="contact-method">
-            <i class="fa fa-phone" aria-hidden="true"></i>
-            <div>
-              <h3>call us</h3>
-              <p>+123 456 7891</p>
-              <p>+123 654 1987</p>
-            </div>
-          </div>
-          <div class="contact-method">
-            <i class="fa fa-envelope" aria-hidden="true"></i>
-            <div>
-              <h3>email</h3>
-              <p>email@gmail.com</p>
-            </div>
-          </div>
-          <div class="contact-method">
-            <i class="fa fa-television" aria-hidden="true"></i>
-            <div>
-              <h3>website</h3>
-              <p>www.website.com</p>
-            </div>
-          </div>
-        </div>
-        <img src="./agency/img/contact.jpg" alt="Office">
-      </div>
-    </section>
-
-    <footer>
-      <p>
-        <i class="fa fa-copyright" aria-hidden="true"></i>
-        Copyright. Company Name</p>
-    </footer>
-
-    <script>
-      const navbar = document.querySelector(".navbar");
-      const menu = document.querySelector(".menu");
-      const menuBtn = document.querySelector(".menu-btn");
-      const checkpoints = document.querySelectorAll(".scroll-checkpoint");
-      const links =document.querySelectorAll(".menu ul a");
-
-      menuBtn.addEventListener("click", () => {
-        menu.classList.toggle("menu-open");
-      })
-
-      window.addEventListener("scroll", () => {
-        if (pageYOffset > 50) {
-          navbar.classList.add("navbar-active");
-        } else {
-          navbar.classList.remove("navbar-active");
-        }
-
-        checkpoints.forEach((checkpoint, index) => {
-          if (pageYOffset > (checkpoint.offsetTop - 50)) {
-            links.forEach(link => link.classList.remove("active"));
-            links[index].classList.add("active");
-          }
-        })
-      })
-
-      // Modal
-      const modal = document.querySelector(".modal");
-      const images = document.querySelectorAll("#portfolio > img");
-      const modalImg = document.querySelector(".modal img");
-
-      images.forEach(image => {
-        image.addEventListener("click", (e) => {
-          modalImg.src = e.target.src;
-          modal.style.display = "flex";
-          setTimeout(() => {
-            modal.style.opacity = "1";
-          }, 10);
-        })
-      })
-
-      modal.addEventListener("click", () => {
-        modal.style. opacity = "0";
-        setTimeout(() => {
-          modal.style.display = "none";
-        }, 500);
-      })
-    </script>
-
-    <!-- <h1 style="text-align: center;">setInterval() - JavaScript</h1>
+    <h1 style="text-align: center;">setInterval() - JavaScript</h1>
     <hr>
     <p id="timer" style="font-size: 3rem;">0 sec</p>
     <button id="start">Start Timer</button>
@@ -1067,6 +129,6 @@
       pauseButton.addEventListener('click', function () {
         clearInterval(intervalID);
       })
-    </script> -->
+    </script>
   </body>
 </html>
