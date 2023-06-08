@@ -90,129 +90,122 @@
     </script>
 
     <script>
-      // 05. Special Numbers
+      // 05. Care of Puppy
 
-      function findSpecialNumbers(data) {
-        const n = Number(data[0]);
-        let result = "";
+      function calcFoodForPuppy(params) {
+        const food = Number(params[0]) * 1000;
+        let eaten = 0;
+        let index = 1;
+        let input = params[index];
 
-        for (let number = 1111; number < 9999; number++) {
-          let current = number.toString();
+        while (input !== "Adopted") {
+          input = Number(input);
+          eaten += input;
 
-          for (let letter = 0; letter < current.length; letter++) {
-            let symbol = Number(current[letter]);
+          index++;
+          input = params[index];
+        }
 
-            if (n % symbol !== 0) {
-              current = false;
-              break;
+        if (food >= eaten) {
+          console.log(`Food is enough! Leftovers: ${food - eaten} grams.`);
+        } else {
+          console.log(`Food is not enough. You need ${eaten - food} grams more.`);
+        }
+      }
+
+
+      // calcFoodForPuppy(4, 130, 345, 400, 180, 230, 120, "Adopted");
+      // calcFoodForPuppy(3, 1000, 1000, 1000, "Adopted");
+      // calcFoodForPuppy(2, 999, 456, 999, 999, 123, 456, "Adopted");
+
+      // 06. Tournament of Christmas
+
+      const params1 = "2 volleyball win football lose basketball win Finish golf win tennis win badminton win Finish".split(" ");
+      const params2 = "3 darts lose handball lose judo win Finish snooker lose swimming lose squash lose tabletennis win Finish volleyball win basketball win Finish".split(" ");
+
+      function calcDonation(params) {
+        const days = Number(params[0]);
+        // let wins = 0;
+        // let lose = 0;
+        let donationTotal = 0;
+        let winsVSloses = 0;
+        let index = 1;
+        
+        for (let day = 1; day <= days; day++) {
+          // index++;
+          let wins = 0;
+          let lose = 0;
+          let donationDay = 0;
+          let input = params[index];
+
+          // console.log(index, input);
+          
+          while (input !== "Finish") {
+            index++;
+            input = params[index];
+            // console.log(index, input);
+
+            if (input === "win") {
+              wins++;
+              winsVSloses++;
+              donationDay += 20;
+              donationTotal += 20;
+            } else {
+              lose++;
+              winsVSloses--;
             }
+
+            index++;
+            input = params[index];
+
+            // if (index > 100) {
+            //   console.log("inf");
+            //   break;
+            // }
           }
 
-          if (current) {
-            result = result + `${current} `
+          if (wins > lose) {
+            donationTotal = donationTotal + donationDay * 0.1;
           }
 
+          // console.log(day, index);
+          index++;
         }
 
-        console.log(result);
-      }
-
-      // findSpecialNumbers(["3"]);
-      // findSpecialNumbers(["11"]);
-
-      // 01. Birthday Party
-
-      function calcBirthdayParty(data) {
-        const rent = Number(data[0]);
-        let cake = rent * 0.2;
-        let drinks = cake * 0.55;
-        let anime = rent / 3;
-
-        let sum = rent + cake + drinks + anime;
-
-        console.log(sum);
-      }
-
-      // calcBirthdayParty(["2250"]);
-      // calcBirthdayParty(["3720"]);
-
-      // 02. Cat Walking
-
-      function calcCatWalking(data) {
-        const minutes = Number(data[0]);
-        const hikes = Number(data[1]);
-        const calories = Number(data[2]);
-
-        const burnedcal = hikes * minutes * 5;
-
-        if (burnedcal >= (calories / 2)) {
-          console.log(`Yes, the walk for your cat is enough. Burned calories per day: ${burnedcal}.`);
+        // console.log(winsVSloses);
+        if (winsVSloses > 0) {
+          donationTotal = donationTotal * 1.2;
+          console.log(`You won the tournament! Total raised money: ${donationTotal.toFixed(2)}`);
         } else {
-          console.log(`No, the walk for your cat is not enough. Burned calories per day: ${burnedcal}.`);
+          console.log(`You lost the tournament! Total raised money: ${donationTotal.toFixed(2)}`);
         }
       }
 
-      // calcCatWalking(["30", '3', "600"]);
-      // calcCatWalking(["15", '2', "500"]);
-      // calcCatWalking(["40", '2', "200"]);
+      // calcDonation(params1);
+      // calcDonation(params2);
 
-      // 03. Energy Booster
+      // 01. Change Bureau
 
-      function calcEnergyBoosterPrice(data) {
-        const flavor = data[0];
-        let razfasofka = data[1];
-        const q = Number(data[2]);
-        let price = 0;
+      function ChangeBureau(params) {
+        const bit = Number(params[0]);
+        const yeni = Number(params[1]);
+        const com = Number(params[2]);
 
-        if (razfasofka === "small") {
-          razfasofka = 2;
-          switch (flavor) {
-            case "Watermelon":
-              price = 56;
-              break;
-            case "Mango":
-              price = 36.66;
-              break;
-            case "Pineapple":
-              price = 42.10;
-              break;
-            case "Raspberry":
-              price = 20;
-              break;
-          }
-        } else {
-          razfasofka = 5;
-          switch (flavor) {
-            case "Watermelon":
-              price = 28.7;
-              break;
-            case "Mango":
-              price = 19.60;
-              break;
-            case "Pineapple":
-              price = 24.80;
-              break;
-            case "Raspberry":
-              price = 15.20;
-              break;
-          }
-        }
+        let leva = bit * 1168;
+        let us = yeni * 0.15;
+        leva = leva + us * 1.76;
 
-        let sum = q * price * razfasofka;
+        let euro = leva / 1.95;
+        euro = euro - euro * com/100;
 
-        if (sum >= 400 && sum <= 1000) {
-          sum = sum * 0.85;
-        } else if (sum > 1000) {
-          sum /= 2;
-        }
-
-        console.log(`${sum.toFixed(2)} lv.`);
+        console.log(euro.toFixed(2));
       }
 
-      // calcEnergyBoosterPrice(["Watermelon", "big", "4"]);
-      // calcEnergyBoosterPrice(["Pineapple", "small", "1"]);
-      // calcEnergyBoosterPrice(["Raspberry", "small", "50"]);
-      // calcEnergyBoosterPrice(["Mango", "big", "8"]);
+      ChangeBureau(["1", "5", "5"]);
+      ChangeBureau(["20", "5678", "2.4"]);
+      ChangeBureau(["7", "50200.12", "3"]);
+
+      // 02. Mountain Run
 
       // 04. Food for Pets
 
@@ -241,8 +234,8 @@
         console.log(`${(cat / (cat + dog) * 100).toFixed(2)}% eaten from the cat.`);
       }
 
-      calcPetsFood(["3", "1000", "300", "20", "100", "30", "110", "40"]);
-      calcPetsFood(["3", "500", "100", "30", "110", "25", "120", "35"]);
+      // calcPetsFood(["3", "1000", "300", "20", "100", "30", "110", "40"]);
+      // calcPetsFood(["3", "500", "100", "30", "110", "25", "120", "35"]);
     </script>
   </body>
 </html>
