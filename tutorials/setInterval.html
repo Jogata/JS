@@ -5,111 +5,138 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>setInterval function in JS</title>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      img {
-        width: 100%;
-        max-width: max-content;
-        margin: auto;
-      }
-
       body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         font-family: Georgia, serif;
         background-color: #000;
+        background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.1), rgba(22, 22, 22, 1));
       }
 
-      section {
-        padding: 0 3% 3%;
-        /* display: flex; */
-        /* align-items: center; */
-        /* justify-content: center; */
-        /* flex-direction: column; */
-        text-align: center;
-      }
-      
-      p {
-        max-width: 100rem;
-        margin: 1.2rem auto auto;
-        color: #fff;
-      }
-
-      #parallax {
+      .container {
         position: relative;
-        width: 100%;
-        height: 100vh;
-        background-color: #000;
-        overflow: hidden;
       }
 
-      .layer {
+      .text {
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
+        /* top: 12em; */
+        top: 60%;
+        /* left: -9em; */
+        left: -30%;
+        padding: 1em;
+        width: 15.1em;
+        height: 15.1em;
+        color: #fff;
+        font-weight: 300;
+        text-align: center;
+        border-radius: 50%;
+        background-color: #151515;
+        animation: float 4.4s ease-in-out infinite;
+      }
+
+      p {
+        margin-top: 1em;
+        margin-bottom: 2em;
+        font-size: 0.9em;
+        line-height: 25px;
+      }
+
+      a {
+        text-decoration: none;
+        padding: 0.4em 1em;
+        color: #ff511d;
+        text-transform: capitalize;
+        border: 2px solid #ff511d;
+        border-radius: 8px;
+      }
+
+      span::before, 
+      span::after {
+        content: "";
+        width: 50%;
         height: 100%;
-        overflow: hidden;
+      }
+      span::before {
+        float: left;
+        shape-outside: radial-gradient(
+          farthest-side at 100%, 
+          transparent 100%, 
+          #fff);
+      }
+      span::after {
+        float: right;
+        shape-outside: radial-gradient(
+          farthest-side at 0%, 
+          transparent 100%, 
+          #fff);
       }
 
-      .bg {
-        background-image: url("./AC/images/bg.jpg");
+      .img {
+        width: 25em;
+        height: 25em;
+        border-radius: 50%;
+        background-image: url("../../CSS/assets/img/00ivet/72614063_433236090677267_2807365040358828412_n.jpg");
         background-repeat: no-repeat;
         background-position: bottom;
         background-size: cover;
-      }
-      .overlay {
-        background-image: url("./AC/images/overlay.png");
-        background-repeat: no-repeat;
-        background-position: bottom;
-        background-size: cover;
-      }
-      .hero {
-        background-image: url("./AC/images/assassins.png");
-        background-repeat: no-repeat;
-        background-position: bottom;
-        background-size: cover;
-      }
-      .bottom {
-        background-image: url("./AC/images/bottom.png");
-        background-repeat: no-repeat;
-        background-position: bottom;
-        background-size: cover;
+        animation: float 5.5s ease-in-out infinite;
       }
 
-      @media (prefers-color-scheme: dark) {
-        body {
-          background-color: #fff;
-        }
-        p {
-          color: #000;
-          font-size: 2rem;
-        }
-        img {
-          filter: invert(1);
+      .circle {
+        position: absolute;
+        /* top: 5em; */
+        top: 10%;
+        /* right: -6em; */
+        right: -30%;
+        width: 60%;
+        height: 60%;
+        border-radius: 50%;
+        background-image: linear-gradient(45deg, #fbb138, #ff511d);
+        animation: float 5s ease-in-out infinite;
+        z-index: -1;
+      }
+
+      .ring {
+        position: absolute;
+        /* top: -3em; */
+        top: -14%;
+        /* left: -6em; */
+        left: -25%;
+        width: 80%;
+        height: 80%;
+        border: 5px solid #ff511d;
+        border-radius: 50%;
+        animation: float 6s ease-in-out infinite;
+        z-index: -1;
+      }
+
+      @keyframes float {
+        50% {
+          transform: translateY(-1em);
         }
       }
     </style>
   </head>
   <body>
-    <div id="parallax">
-      <div class="layer bg" data-speed="0"></div>
-      <div class="layer overlay" data-speed="0"></div>
-      <div class="layer hero" data-speed="0"></div>
-      <div class="layer bottom" data-speed="0"></div>
-    </div>
-    <section>
-      <img src="./AC/images/logo-text.png" alt="AC">
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id expedita, vero qui libero ratione sequi voluptatem obcaecati. Adipisci beatae consectetur accusamus quas asperiores, voluptatum fugiat a quae mollitia magni vel, numquam omnis ratione. Ab iusto nostrum aliquam mollitia eaque? Nobis, consequatur quos maxime esse assumenda pariatur officia quae est. Omnis voluptates cupiditate corporis rem porro fuga iusto inventore hic animi illo! Unde, temporibus accusantium debitis nulla iure labore corporis incidunt consequatur eligendi natus ipsa animi consectetur facere hic exercitationem possimus. Beatae mollitia cumque quis, laudantium voluptate nemo ex repellat quas dolorem eos nam fugiat unde fugit exercitationem excepturi accusantium quos facilis repudiandae. Vitae consequuntur, molestiae blanditiis quaerat veniam totam similique tempore reiciendis temporibus cum officia quisquam, delectus dolorum minus atque, eos porro soluta natus eum ex dolore! Optio quis quod, provident in quidem corporis ullam tempora accusamus, recusandae possimus, praesentium repellat ipsa dolores? Repellendus blanditiis quae laboriosam veniam ducimus laudantium possimus officia quibusdam. Ratione tempore temporibus saepe similique dicta recusandae accusamus commodi distinctio enim voluptatibus. Laboriosam facilis alias quod? Nobis a nulla aperiam tempore corrupti voluptatum enim illum reprehenderit optio repellendus, asperiores aliquam rem provident eveniet sapiente culpa nesciunt nihil quae impedit sed quam. Sit, voluptatibus quia? Delectus sit quos porro, excepturi accusantium rerum sequi quae, perspiciatis recusandae ipsam molestiae atque iste expedita, nihil quasi? Est, nihil eligendi! Doloribus quisquam rem nesciunt architecto ad, quis iste excepturi. Velit deleniti nostrum molestiae? Perferendis nulla, ratione architecto laboriosam nihil perspiciatis similique quaerat quia repellat pariatur officia tenetur corporis, aperiam aliquam, porro deserunt.</p>
-    </section>
+    <div class="container">
+      <div class="circle"></div>
+      <div class="ring"></div>
+      <div class="img"></div>
 
-    <h1 style="text-align: center;">setInterval() - JavaScript</h1>
-    <hr>
-    <p id="timer" style="font-size: 3rem;">0 sec</p>
-    <button id="start">Start Timer</button>
-    <button id="pause">Pause Timer</button>
+      <div class="text">
+        <span></span>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Numquam sequi dolore odio? Asperiores ex placeat nam possimus tempora alias dolores.</p>
+        <a href="#">learn more</a>
+      </div>
+    </div>
+
+    <!-- <h1 style="text-align: center;">setInterval() - JavaScript</h1> -->
+    <!-- <hr> -->
+    <!-- <p id="timer" style="font-size: 3rem;">0 sec</p> -->
+    <!-- <button id="start">Start Timer</button> -->
+    <!-- <button id="pause">Pause Timer</button> -->
 
     <script src="js.js">
       const timer = document.getElementById('timer');
