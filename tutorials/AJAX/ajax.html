@@ -89,154 +89,158 @@
       }
     </script>
 
-    <script></script>
-
     <script>
-      const params1 = ``.split("\n");
-      const params2 = ``.split("\n");
-      const params3 = ``.split("\n");
+      // let params1 = ``.split("\n");
+      // let params2 = ``.split("\n");
+      // let params3 = ``.split("\n");
 
-      // 04. Trekking Mania
+      // 05. Suitcases Load
 
-      function calcClimbers(params) {
-        const groups = Number(params[0]);
-        let climbers = 0;
-        let mu = 0;
-        let mo = 0;
-        let ki = 0;
-        let k2 = 0;
-        let ev = 0;
+      function loadSuitcases(params) {
+        const bagajnik = Number(params[0]);
+        let freeSpace = bagajnik;
+        let cargo = 0;
 
-        for (let group = 1; group <= groups; group++) {
-          let current = Number(params[group]);
-          climbers += current;
+        let index = 1;
+        let current = params[index];
 
-          if (current <= 5) {
-            mu += current;
-          } else if (current <= 12) {
-            mo += current;
-          } else if (current <= 25) {
-            ki += current;
-          } else if (current <= 40) {
-            k2 += current;
-          } else if (current > 40) {
-            ev += current;
+        while (current !== "End") {
+          current = Number(current);
+          cargo++;
+
+          if (cargo % 3 === 0 && cargo > 0) {
+            current = current * 1.1;
           }
+
+          // console.log(current);
+          // console.log(freeSpace);
+          
+          if (current > freeSpace) {
+            freeSpace = false;
+            cargo--;
+            break;
+          }
+          
+          freeSpace -= current;
+
+          if (freeSpace === 0) {
+            break;
+          }
+
+          index++;
+          current = params[index];
+
+          // if (index > 100) {
+          //   console.log("inf");
+          //   break;
+          // }
+
         }
 
-          let muP = mu / climbers * 100;
-          let moP = mo / climbers * 100;
-          let kiP = ki / climbers * 100;
-          let k2P = k2 / climbers * 100;
-          let evP = ev / climbers * 100;
-
-          console.log(`${muP.toFixed(2)}%`);
-          console.log(`${moP.toFixed(2)}%`);
-          console.log(`${kiP.toFixed(2)}%`);
-          console.log(`${k2P.toFixed(2)}%`);
-          console.log(`${evP.toFixed(2)}%`);
-      }
-
-      // calcClimbers(params1);
-      // calcClimbers(params2);
-
-      // 03. Fitness Card
-
-      function calcMembershipPrice(params) {
-        const money = Number(params[0]);
-        const gendre = params[1];
-        const age = Number(params[2]);
-        const sport = params[3];
-        let price = 0;
-
-        if (gendre === "m") {
-          switch (sport) {
-            case "Gym":
-              price += 42;
-              break;
-            case "Boxing":
-              price += 41;
-              break;
-            case "Yoga":
-              price += 45;
-              break;
-            case "Zumba":
-              price += 34;
-              break;
-            case "Dances":
-              price += 51;
-              break;
-            case "Pilates":
-              price += 39;
-              break;
-          }
-        } else if (gendre === "f") {
-          switch (sport) {
-            case "Gym":
-              price += 35;
-              break;
-            case "Boxing":
-              price += 37;
-              break;
-            case "Yoga":
-              price += 42;
-              break;
-            case "Zumba":
-              price += 31;
-              break;
-            case "Dances":
-              price += 53;
-              break;
-            case "Pilates":
-              price += 37;
-              break;
-          }
-        }
-
-        if (age <= 19) {
-          price = price * 0.8;
-        }
-
-        if (price <= money) {
-          console.log(`You purchased a 1 month pass for ${sport}.`);
+        if (freeSpace) {
+          console.log(`Congratulations! All suitcases are loaded!`);
         } else {
-          const diff = price - money;
-          console.log(`You don't have enough money! You need $${diff.toFixed(2)} more.`);
+          console.log(`No more space!`);
         }
+
+        console.log(`Statistic: ${cargo} suitcases loaded.`);
       }
 
-      // calcMembershipPrice(["50", "m", "23", "Gym"]);
-      // calcMembershipPrice(["20", "f", "15", "Yoga"]);
-      // calcMembershipPrice(["10", "m", "50", "Pilates"]);
+      // loadSuitcases(["550", "100", "252", "72", "End"]);
+      // loadSuitcases(["700.5", "180", "340.6", "126", "220"]);
+      // loadSuitcases(["1200.2", "260", "380.5", "125.6", "305", "End"]);
+      // loadSuitcases(["150", "50", "50", "50"]);
 
-      // 02. Mountain Run
+      // 04. Food for Pets
 
-      function climbing(params) {
-        const record = Number(params[0]);
-        const distance = Number(params[1]);
-        const timePerMeter = Number(params[2]);
+      function calcPetsFood(data) {
+        const days = Number(data[0]);
+        const food = Number(data[1]);
 
-        let totalTime = distance * timePerMeter;
-        let zabavqniq = Math.floor(distance / 50) * 30;
-        totalTime += zabavqniq;
+        let dog = 0;
+        let cat = 0;
+        let bisc = 0;
+        let currentDay = 0;
 
-        if (totalTime < record) {
-          console.log(`Yes! The new record is ${(totalTime).toFixed(2)} seconds.`);
+        for (let index = 2; index < data.length; index+=2) {
+          dog = dog + Number(data[index]);
+          cat = cat + Number(data[index+1]);
+          currentDay++;
+
+          if (currentDay % 3 === 0) {
+            bisc += (Number(data[index]) + Number(data[index+1])) * 0.1;
+          }
+        }
+
+        let dogP = (dog / (cat + dog) * 100);
+        let catP = (cat / (cat + dog) * 100);
+        let total = (cat + dog) / food * 100;
+        
+        if (food === 0) {
+          total = 0;
+          bisc = 0;
+        }
+
+        if (cat + dog === 0 || food === 0) {
+          dogP = 0;
+          catP = 0;
+        }
+
+        console.log(`Total eaten biscuits: ${Math.round(bisc)}gr.`);
+        console.log(`${total.toFixed(2)}% of the food has been eaten.`);
+        console.log(`${dogP.toFixed(2)}% eaten from the dog.`);
+        console.log(`${catP.toFixed(2)}% eaten from the cat.`);
+      }
+
+      // calcPetsFood(["3", "60", "10", "10", "10", "10", "10", "10"]);
+      // calcPetsFood(["3", "0", "30", "0", "30", "0", "30", "0"]);
+
+      // 05. Best Player
+
+      function findBestPlayer(data) {
+        let player = data[0];
+        let index = 0;
+        let mvp = "";
+        let max = 0;
+        
+        while (player !== "END") {
+          index++;
+          let goals = Number(data[index]);
+
+          // console.log(player);
+          // console.log(goals);
+
+          if (goals > max) {
+            mvp = player;
+            max = goals;
+          }
+
+          if (goals >= 10) {
+            break;
+          }
+
+          index++;
+          player = data[index];
+
+          // if (index>10) {
+          //   console.log("inf");
+          //   break;
+          // }
+        }
+
+        console.log(`${mvp} is the best player!`);
+
+        if (max >= 3) {
+          console.log(`He has scored ${max} goals and made a hat-trick !!!`);
         } else {
-          const diff = totalTime - record;
-          console.log(`No! He was ${diff.toFixed(2)} seconds slower.`);
+          console.log(`He has scored ${max} goals.`);
         }
       }
 
-      // climbing(["10164", "1400", "25"]);
-      // climbing(["5554.36", "1340", "3.23"]);
-      // climbing(["1377", "389", "3"]);
-
-      const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      console.log(isDarkMode);
+      // findBestPlayer(["Neymar", "2", "Ronaldo", "1", "Messi", "3", "END"]);
+      // findBestPlayer(["Silva", "5", "Harry Kane", "10"]);
+      // findBestPlayer(["Petrov", "2", "Drogba", "11"]);
 
     </script>
-
-
   </body>
 </html>
