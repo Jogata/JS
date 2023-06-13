@@ -90,161 +90,156 @@
     </script>
 
     <script>
-      // 03. Aluminum Joinery
-
-      function printFinalPrice(params) {
-        const broi = Number(params[0]);
-        const type = params[1];
-        const delivery = params[2];
-
-        let total = 0;
-
-        if (broi < 10) {
-          console.log("Invalid order");
-          return;
-        } else if (type === "90X130") {
-          if (broi > 60) {
-            total = (broi * 110) * 0.92;
-          } else if (broi > 30) {
-            total = (broi * 110) * 0.95;
-          } else {
-            total = broi * 110;
-          }
-        } else if (type === "100X150") {
-          if (broi > 80) {
-            total = (broi * 140) * 0.90;
-          } else if (broi > 40) {
-            total = (broi * 140) * 0.94;
-          } else {
-            total = broi * 140;
-          }
-        } else if (type === "130X180") {
-          if (broi > 50) {
-            total = (broi * 190) * 0.88;
-          } else if (broi > 20) {
-            total = (broi * 190) * 0.93;
-          } else {
-            total = broi * 190;
-          }
-        } else if (type === "200X300") {
-          if (broi > 50) {
-            total = (broi * 250) * 0.86;
-          } else if (broi > 25) {
-            total = (broi * 250) * 0.91;
-          } else {
-            total = broi * 250;
-          }
+      function onTimee(input) {
+    let examHour = Number(input[0]);
+    let examMinute = Number(input[1]);
+    let arrivalHour = Number(input[2]);
+    let arraivalMinute = Number(input[3]);
+ 
+ 
+    let totalExamminutes = (examHour*60) + examMinute ;
+    let totalArrivalMinutes = (arrivalHour * 60) + arraivalMinute ;
+ 
+    if (totalArrivalMinutes > totalExamminutes) {
+      console.log('Late' );
+    }    
+    if (totalExamminutes >= totalArrivalMinutes && (totalExamminutes-totalArrivalMinutes) <= 30) {
+      console.log('On time');
+    }
+    if (totalExamminutes > totalArrivalMinutes && (totalExamminutes-totalArrivalMinutes) > 30){
+      console.log('Early');
+    }
+    
+    if(totalExamminutes > totalArrivalMinutes && (totalExamminutes - totalArrivalMinutes) <= 59) {
+      console.log(`${(totalExamminutes - totalArrivalMinutes)} minutes before the start`);
+    }
+   
+    if (totalExamminutes < totalArrivalMinutes && (totalArrivalMinutes - totalExamminutes <= 59  )) {
+      console.log(`${totalArrivalMinutes-totalExamminutes} minutes after the start`);
+    }
+    
+    if (totalExamminutes > totalArrivalMinutes && (totalExamminutes - totalArrivalMinutes >= 60)) {
+        totalTime=totalExamminutes -totalArrivalMinutes
+        let hour= 0;
+        let minutes = 0;
+        
+        while(totalTime >= 60) {
+            if(totalTime >= 60) {
+                totalTime -= 60;
+                hour++;
+            }
+        }
+        
+        if (totalTime <= 59) {
+          minutes += totalTime;
         }
 
-        if (delivery === "With delivery") {
-          total += 60;
-        }
-
-        if (broi > 99) {
-          total = total * 0.96;
-        }
-
-        console.log(`${total.toFixed(2)} BGN`);
-      }
-
-      // printFinalPrice(["40", "90X130", "Without delivery"]);
-      // printFinalPrice(["105", "100X150", "With delivery"]);
-      // printFinalPrice(["2", "130X180", "With delivery"]);
-
-      // 04. Balls
-
-      function lotary(params) {
-        const balls = Number(params[0]);
-        let index = 1;
-        let current = params[index];
-
-        let points = 0;
-        let red = 0;
-        let orange = 0;
-        let yellow = 0;
-        let white = 0;
-        let black = 0;
-        let others = 0;
-
-        while (index <= balls) {
-          switch (current) {
-            case "red":
-              red++;
-              points += 5;
-              break;
-            case "orange":
-              orange++;
-              points += 10;
-              break;
-            case "yellow":
-              yellow++;
-              points += 15;
-              break;
-              case "white":
-              white++;
-              points += 20;
-              break;
-            case "black":
-              black++;
-              points = Math.floor(points / 2);
-              break;
-            default:
-              others++;
-              break;
-          }
-
-          index++;
-          current = params[index];
-        }
-
-        console.log(`Total points: ${points}`);
-        console.log(`Red balls: ${red}`);
-        console.log(`Orange balls: ${orange}`);
-        console.log(`Yellow balls: ${yellow}`);
-        console.log(`White balls: ${white}`);
-        console.log(`Other colors picked: ${others}`);
-        console.log(`Divides from black balls: ${black}`);
-      }
-
-      // lotary(["3", "white", "black", "pink"]);
-      // lotary(["5", "red", "red", "ddd", "ddd", "ddd"]);
-
-      // 02. Add Bags
-
-      function calcBagsPrice(params) {
-        const priceover20 = Number(params[0]);
-        const kg = Number(params[1]);
-        const days = Number(params[2]);
-        const bags = Number(params[3]);
-
-        let total = 0;
-
-        if (kg < 10) {
-          total = priceover20 * 0.2;
-        } else if (kg <= 20) {
-          total = priceover20 * 0.5;
+        if (minutes>=10){
+          console.log( `${hour}:${minutes} hours before the start`);
         } else {
-          total = priceover20;
+          console.log( `${hour}:0${minutes} hours before the start`);
+        }
+ 
+    }
+
+    if (totalArrivalMinutes > totalExamminutes && (totalArrivalMinutes - totalExamminutes) >= 60) { 
+        totalTime= totalArrivalMinutes - totalExamminutes;
+        let hour= 0;
+        let minutes = 0;
+        
+        while(totalTime >= 60) {
+            if(totalTime >= 60) {
+                totalTime -= 60;
+                hour++;
+            }
+        }
+        
+        if (totalTime <= 59) {
+          minutes += totalTime;
         }
 
-        if (days < 7) {
-          total *= 1.4;
-        } else if (days <= 30) {
-          total = total * 1.15;
+        if (minutes >= 10) {
+          console.log( `${hour}:${minutes} hours after the start`);
         } else {
-          total *= 1.1;
+          console.log( `${hour}:0${minutes} hours after the start`);
         }
-
-        total = total * bags;
-
-        console.log(` The total price of bags is: ${total.toFixed(2)} lv.`);
       }
+    }
+      
+    // onTimee(["16", "00", "15", "00"]);
 
-      // calcBagsPrice(["30", "18", "15", "2"]);
-      // calcBagsPrice(["25.50", "5", "36", "6"]);
-      // calcBagsPrice(["63.80", "23", "3", "1"]);
+    function travelAgency(input){
+let destination = input[0];
+let packageType = input[1];
+let statusVIP = input[2];
+let daysNum = Number(input[3]);
+let price = 0;
+let dayPrice = 100;
+ 
+if (daysNum < 1) {
+  console.log(`Days must be positive number!`);
+  return;
+}
+
+if (packageType !== "withBreakfast" && packageType !== "noBreakfast" && packageType !== "withEquipment" && packageType !== "noEquipment") {
+  console.log(`Invalid input!`);
+  return;
+}
+
+   if (destination === "Bansko" || destination === "Borovets") {
+        if (packageType === "withEquipment") {
+            if (statusVIP === "no") {
+              price = daysNum * 100;
+              dayPrice = price / daysNum;
+            } else {
+              price = daysNum * 100 * 0.90;
+              dayPrice = price / daysNum;
+            }
+          } else if (packageType === "noEquipment") {
+            if (statusVIP === "no") {
+              price = daysNum * 80;
+              dayPrice = price / daysNum;
+            } else {
+              price = daysNum * 80 * 0.95;
+              dayPrice = price / daysNum;
+            }
+        }
+   } else if (destination === "Varna" || destination === "Burgas") {
+        if (packageType === "withBreakfast") {
+            if (statusVIP === "no") {
+              price = daysNum * 130;
+              dayPrice = price / daysNum;
+            } else {
+              price = daysNum * 130 * 0.88;
+              dayPrice = price / daysNum;
+            }
+          } else if (packageType === "noBreakfast") {
+            dayPrice = 100;
+            if (statusVIP === "no") {
+              price = daysNum * 100;
+              dayPrice = price / daysNum;
+            } else {
+              price = daysNum * 100 * 0.93;
+              dayPrice = price / daysNum;
+            }
+        }    
+    } else {
+        console.log(`Invalid input!`);
+        return; 
+    }
+
+    if (daysNum >= 7) {
+      // daysNum = daysNum - 1;
+      price = price - dayPrice;
+    }
+
+    console.log(`The price is ${price.toFixed(2)}lv! Have a nice time!`);
+}
+
+// travelAgency(["Borovets", "noEquipments", "yes", "6"]);
+// travelAgency(["Varna", "withBreakfast", "no", "0"]);
+// travelAgency(["Bansko", "withEquipment", "no", "2"]);
 
     </script>
-
   </body>
 </html>
