@@ -34,7 +34,7 @@
       }
 
       .wrapper {
-        width: 2160px;
+        /* width: 2160px; */
         display: flex;
         align-items: center;
         flex-wrap: wrap;
@@ -42,10 +42,10 @@
 
       .slide {
         width: 360px;
+        padding: 1.2rem;
       }
       .slide img {
         width: 100%;
-        padding: 1.2rem;
       }
 
       .slider-wrapper {
@@ -90,6 +90,12 @@
       .left.disabled {
         pointer-events: none;
         opacity: 0;
+      }
+
+      @media screen and (max-width: 768px) {
+        .slide {
+          width: 49vw;
+        }
       }
 
       @media screen and (min-width: 768px) {
@@ -138,13 +144,140 @@
     </div>
 
     <script>
-      const sliders = document.querySelectorAll(".slider");
+      const sliders = document.querySelectorAll(".slider-wrapper");
+      let wrapper = sliders[0].querySelector(".wrapper");
+      let slider = sliders[0].querySelector(".slider");
 
-      for (let i = 0; i < sliders.length; i++) {
+      window.addEventListener("resize", () => {
+        setWidth();
+      })
+
+      for (let i = 0; i <= sliders.length; i++) {
+        setWidth();
+      }
+
+      const btnNext = sliders[0].querySelector(".right");
+      const btnPrev = sliders[0].querySelector(".left");
+
+      btnPrev.addEventListener("click", () => {
+        btnNext.classList.remove("disabled");
+        slider.scrollLeft -= slider.clientWidth;
+        let inc = 0;
+        let interval = setInterval(() => {
+          slider.scrollLeft -= 20;;
+          inc += 20;
+          if (inc >= slider.clientWidth) {
+            clearInterval(interval);
+            if (slider.scrollLeft === 0) {
+              btnPrev.classList.add("disabled");
+            }
+          }
+        }, 10);
+      });
+
+      btnNext.addEventListener("click", () => {
+        btnPrev.classList.remove("disabled");
+        slider.scrollLeft += slider.clientWidth;
+        let inc = 0;
+        let interval = setInterval(() => {
+          slider.scrollLeft += 20;;
+          inc += 20;
+          if (inc >= slider.clientWidth) {
+            clearInterval(interval);
+            if (slider.scrollLeft >= wrapper.clientWidth - slider.clientWidth) {
+              btnNext.classList.add("disabled");
+            }
+          }
+        }, 10);
+      });
+
+      function transition(el, from, to, cb) {
+        let inc = from;
+        let interval = setInterval(() => {
+          slider.scrollLeft += 20;;
+          inc += 20;
+          if (inc >= to) {
+            clearInterval(interval);
+            cb();
+          }
+        }, 10);
+      }
+
+      function setWidth() {
         const slides = sliders[0].querySelectorAll(".slide");
-        let wrapper = sliders[0].querySelector(".wrapper");
         wrapper.style.width = slides.length * slides[0].clientWidth + "px";
       }
+    </script>
+
+    <script>
+      document.addEventListener("visibilitychange", () => {
+        document.title = document.visibilityState;
+        console.log(document.visibilityState);
+        console.log(document.hidden);
+      })
+    </script>
+
+    <script>
+      const arr = [1, 2, 3, 11];
+
+      const sorted = arr.sort();
+
+      console.log(sorted);
+
+      const sorted2 = arr.sort((a, b) => {
+        return a < b;
+      });
+
+      console.log(sorted2);
+    </script>
+
+    <script>
+      document.addEventListener("dblclick", () => {
+        toggleFullScreen();
+      });
+
+      document.addEventListener("fullscreenchange", () => {
+        console.log("changed");
+      });
+
+      const h3 = document.querySelector("h3");
+
+      h3.style.backgroundColor = "blue";
+
+      function getFullScreenElement() {
+        return document.fullscreenElement 
+            || document.webkitFullscreenElement 
+            || document.mozFullscreenElement 
+            || document.msFullscreenElement;
+      };
+
+      function toggleFullScreen() {
+        if (getFullScreenElement()) {
+          document.exitFullscreen();
+          console.log("exit");
+        } else {
+            h3.requestFullscreen()
+              .catch((e) => console.log(e));
+
+            setTimeout(() => {
+              console.log(getFullScreenElement());
+            }, 1000);
+        }
+      }
+    </script>
+
+    <input type="text" name="" id="test">
+
+    <script>
+      const test = document.getElementById("test");
+
+      test.toggleAttribute("disabled");
+
+      setTimeout(() => {
+        test.toggleAttribute("disabled");
+      }, 2000);
+
+      test.style.margin = "10vh auto";
     </script>
 
     <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
