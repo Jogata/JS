@@ -90,159 +90,154 @@
     </script>
 
     <script>
-            // 03. Easter Trip
+      // 06. Barcode Generator
 
-            function solveEasterTrip(params) {
-        let dest = params[0];
-        let date = params[1];
-        let days = Number(params[2]);
+      function generateBarcode(params) {
+        const min = params[0];
+        const max = params[1];
 
-        let price = 0;
+        let barcodes = "";
 
-        switch (dest) {
-          case "France":
-            switch (date) {
-              case "21-23":
-                price = 30;
-                break;
-              case "24-27":
-                price = 35;
-                break;
-              case "28-31":
-                price = 40;
-                break;
+        for (let index = Number(min[0]); index <= Number(max[0]); index++) {
+                    
+          if (index % 2 === 0) {
+            continue;
+          }
+          
+          let num1 = index;
+
+          for (let index = Number(min[1]); index <= Number(max[1]); index++) {
+
+            if (index % 2 === 0) {
+              continue;
             }
-            break;
-          case "Italy":
-            switch (date) {
-              case "21-23":
-                price = 28;
-                break;
-              case "24-27":
-                price = 32;
-                break;
-              case "28-31":
-                price = 39;
-                break;
+
+            let num2 = index;
+
+            for (let index = Number(min[2]); index <= Number(max[2]); index++) {
+
+              if (index % 2 === 0) {
+                continue;
+              }
+
+              let num3 = index;
+
+              for (let index = Number(min[3]); index <= Number(max[3]); index++) {
+                let barcode = "";
+
+                if (index % 2 === 0) {
+                  continue;
+                }
+
+                let num4 = index;
+                barcode += `${num1}${num2}${num3}${num4}`;
+                barcodes += `${barcode} `;
+
+              }
             }
-            break;
-          case "Germany":
-            switch (date) {
-              case "21-23":
-                price = 32;
-                break;
-              case "24-27":
-                price = 37;
-                break;
-              case "28-31":
-                price = 43;
-                break;
-            }
-            break;
+          }
         }
 
-        let total = price * days;
-        console.log(`Easter trip to ${dest} : ${total.toFixed(2)} leva.`);
+        console.log(barcodes);
       }
 
-      // solveEasterTrip(["Germany", "24-27", "5"]);
-      // solveEasterTrip(["Italy", "21-23", "7"]);
-      // solveEasterTrip(["France", "28-31", "8"]);
+      // generateBarcode(["2345", "6789"]);
+      // generateBarcode(["3256", "6579"]);
+      // generateBarcode(["1365", "5877"]);
 
-      // 03. Painting Eggs
+      // 05. Suitcases Load
 
-      function solvePaintingEggs(params) {
-        let size = params[0];
-        let color = params[1];
-        let partidi = Number(params[2]);
+      function loadSuitcases(params) {
+        const bagajnik = Number(params[0]);
+        let freeSpace = bagajnik;
+        let cargo = 0;
 
-        let price = 0;
+        let index = 1;
+        let current = params[index];
 
-        switch (size) {
-          case "Large":
-            switch (color) {
-              case "Red":
-                price = 16;
-                break;
-              case "Green":
-                price = 12;
-                break;
-              case "Yellow":
-                price = 9;
-                break;
-            }
+        while (current !== "End") {
+          current = Number(current);
+          cargo++;
+
+          if (cargo % 3 === 0 && cargo > 0) {
+            current = current * 1.1;
+          }
+          
+          if (current > freeSpace) {
+            freeSpace = false;
+            cargo--;
             break;
-          case "Medium":
-            switch (color) {
-              case "Red":
-                price = 13;
-                break;
-              case "Green":
-                price = 9;
-                break;
-              case "Yellow":
-                price = 7;
-                break;
-            }
+          }
+          
+          freeSpace -= current;
+
+          if (freeSpace === 0) {
             break;
-          case "Small":
-            switch (color) {
-              case "Red":
-                price = 9;
-                break;
-              case "Green":
-                price = 8;
-                break;
-              case "Yellow":
-                price = 5;
-                break;
-            }
-            break;
+          }
+
+          index++;
+          current = params[index];
+
         }
 
-        let total = (price * partidi) * 0.65;
-        console.log(`${total.toFixed(2)} leva.`);
-      }
-
-      // solvePaintingEggs(["Large", "Red", "7"]);
-      // solvePaintingEggs(["Medium", "Green", "5"]);
-      // solvePaintingEggs(["Small", "Yellow", "3"]);
-
-            // 02. Easter Party
-
-            function calcEasterParty(params) {
-        let gosti = Number(params[0]);
-        let kuvert = Number(params[1]);
-        let budjet = Number(params[2]);
-
-        let cake = budjet * 0.1;
-        let total = gosti * kuvert;
-
-        if (gosti < 10 ) {
-          total = total
-        } else if (gosti <= 15) {
-          total = total * 0.85;
-        } else if (gosti <= 20) {
-          total = total * 0.80;
-        } else if (gosti > 20) {
-          total = total * 0.75;
-        }
-
-        total += cake;
-
-        if (budjet >= total) {
-          let diff = budjet - total;
-          console.log(`It is party time! ${diff.toFixed(2)} leva left.`);
+        if (freeSpace) {
+          console.log(`Congratulations! All suitcases are loaded!`);
         } else {
-          let diff = total - budjet;
-          console.log(`No party! ${diff.toFixed(2)} leva needed.`);
+          console.log(`No more space!`);
         }
+
+        console.log(`Statistic: ${cargo} suitcases loaded.`);
       }
 
-      // calcEasterParty(["18", "30", "450"]);
-      // calcEasterParty(["8", "25", "340"]);
-      // calcEasterParty(["24", "35", "550"]);
-      
+      // loadSuitcases(["550", "100", "252", "72", "End"]);
+      // loadSuitcases(["700.5", "180", "340.6", "126", "220"]);
+      // loadSuitcases(["1200.2", "260", "380.5", "125.6", "305", "End"]);
+      // loadSuitcases(["150", "50", "50", "50"]);
+
+      // 04. Food for Pets
+
+      function calcPetsFood(data) {
+        const days = Number(data[0]);
+        const food = Number(data[1]);
+
+        let dog = 0;
+        let cat = 0;
+        let bisc = 0;
+        let currentDay = 0;
+
+        for (let index = 2; index < data.length; index+=2) {
+          dog = dog + Number(data[index]);
+          cat = cat + Number(data[index+1]);
+          currentDay++;
+
+          if (currentDay % 3 === 0) {
+            bisc += (Number(data[index]) + Number(data[index+1])) * 0.1;
+          }
+        }
+
+        let dogP = (dog / (cat + dog) * 100);
+        let catP = (cat / (cat + dog) * 100);
+        let total = (cat + dog) / food * 100;
+        
+        if (food === 0) {
+          total = 0;
+          bisc = 0;
+        }
+
+        if (cat + dog === 0 || food === 0) {
+          dogP = 0;
+          catP = 0;
+        }
+
+        console.log(`Total eaten biscuits: ${Math.round(bisc)}gr.`);
+        console.log(`${total.toFixed(2)}% of the food has been eaten.`);
+        console.log(`${dogP.toFixed(2)}% eaten from the dog.`);
+        console.log(`${catP.toFixed(2)}% eaten from the cat.`);
+      }
+
+      // calcPetsFood(["3", "60", "10", "10", "10", "10", "10", "10"]);
+      // calcPetsFood(["3", "0", "30", "0", "30", "0", "30", "0"]);
+
     </script>
   </body>
 </html>
