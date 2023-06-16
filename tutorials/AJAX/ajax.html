@@ -90,153 +90,155 @@
     </script>
 
     <script>
-      // 06. Barcode Generator
+      // 05. Best Player
 
-      function generateBarcode(params) {
-        const min = params[0];
-        const max = params[1];
+      function findBestPlayer(data) {
+        let player = data[0];
+        let index = 0;
+        let mvp = "";
+        let max = 0;
+        
+        while (player !== "END") {
+          index++;
+          let goals = Number(data[index]);
 
-        let barcodes = "";
-
-        for (let index = Number(min[0]); index <= Number(max[0]); index++) {
-                    
-          if (index % 2 === 0) {
-            continue;
+          if (goals > max) {
+            mvp = player;
+            max = goals;
           }
-          
-          let num1 = index;
 
-          for (let index = Number(min[1]); index <= Number(max[1]); index++) {
-
-            if (index % 2 === 0) {
-              continue;
-            }
-
-            let num2 = index;
-
-            for (let index = Number(min[2]); index <= Number(max[2]); index++) {
-
-              if (index % 2 === 0) {
-                continue;
-              }
-
-              let num3 = index;
-
-              for (let index = Number(min[3]); index <= Number(max[3]); index++) {
-                let barcode = "";
-
-                if (index % 2 === 0) {
-                  continue;
-                }
-
-                let num4 = index;
-                barcode += `${num1}${num2}${num3}${num4}`;
-                barcodes += `${barcode} `;
-
-              }
-            }
-          }
-        }
-
-        console.log(barcodes);
-      }
-
-      // generateBarcode(["2345", "6789"]);
-      // generateBarcode(["3256", "6579"]);
-      // generateBarcode(["1365", "5877"]);
-
-      // 05. Suitcases Load
-
-      function loadSuitcases(params) {
-        const bagajnik = Number(params[0]);
-        let freeSpace = bagajnik;
-        let cargo = 0;
-
-        let index = 1;
-        let current = params[index];
-
-        while (current !== "End") {
-          current = Number(current);
-          cargo++;
-
-          if (cargo % 3 === 0 && cargo > 0) {
-            current = current * 1.1;
-          }
-          
-          if (current > freeSpace) {
-            freeSpace = false;
-            cargo--;
-            break;
-          }
-          
-          freeSpace -= current;
-
-          if (freeSpace === 0) {
+          if (goals >= 10) {
             break;
           }
 
           index++;
-          current = params[index];
+          player = data[index];
 
         }
 
-        if (freeSpace) {
-          console.log(`Congratulations! All suitcases are loaded!`);
+        console.log(`${mvp} is the best player!`);
+
+        if (max >= 3) {
+          console.log(`He has scored ${max} goals and made a hat-trick !!!`);
         } else {
-          console.log(`No more space!`);
+          console.log(`He has scored ${max} goals.`);
         }
-
-        console.log(`Statistic: ${cargo} suitcases loaded.`);
       }
 
-      // loadSuitcases(["550", "100", "252", "72", "End"]);
-      // loadSuitcases(["700.5", "180", "340.6", "126", "220"]);
-      // loadSuitcases(["1200.2", "260", "380.5", "125.6", "305", "End"]);
-      // loadSuitcases(["150", "50", "50", "50"]);
+      // findBestPlayer(["Neymar", "2", "Ronaldo", "1", "Messi", "3", "END"]);
+      // findBestPlayer(["Silva", "5", "Harry Kane", "10"]);
+      // findBestPlayer(["Petrov", "2", "Drogba", "11"]);
 
-      // 04. Food for Pets
+      // 04. Easter Eggs Battle
 
-      function calcPetsFood(data) {
-        const days = Number(data[0]);
-        const food = Number(data[1]);
+      function solveEasterEggsBattle(params) {
+        let eggs1 = Number(params[0]);
+        let eggs2 = Number(params[1]);
+        let index = 2;
+        let input = params[index];
+        let winner = "";
 
-        let dog = 0;
-        let cat = 0;
-        let bisc = 0;
-        let currentDay = 0;
-
-        for (let index = 2; index < data.length; index+=2) {
-          dog = dog + Number(data[index]);
-          cat = cat + Number(data[index+1]);
-          currentDay++;
-
-          if (currentDay % 3 === 0) {
-            bisc += (Number(data[index]) + Number(data[index+1])) * 0.1;
+        while (input !== "End") {
+          
+          if (input === "one") {
+            eggs2--;
+            if (eggs2 === 0) {
+              winner = "one";
+              break;
+            }
+          } else {
+            eggs1--;
+            if (eggs1 === 0) {
+              winner = "two";
+              break;
+            }
           }
+
+          index++;
+          input = params[index];
         }
 
-        let dogP = (dog / (cat + dog) * 100);
-        let catP = (cat / (cat + dog) * 100);
-        let total = (cat + dog) / food * 100;
-        
-        if (food === 0) {
-          total = 0;
-          bisc = 0;
+        if (winner) {
+          if (winner === "one") {
+            console.log(`Player two is out of eggs. Player one has ${eggs1} eggs left.`);
+          } else {
+            console.log(`Player one is out of eggs. Player two has ${eggs2} eggs left.`);
+          }
+        } else {
+          console.log(`Player one has ${eggs1} eggs left.`);
+          console.log(`Player two has ${eggs2} eggs left.`);
         }
-
-        if (cat + dog === 0 || food === 0) {
-          dogP = 0;
-          catP = 0;
-        }
-
-        console.log(`Total eaten biscuits: ${Math.round(bisc)}gr.`);
-        console.log(`${total.toFixed(2)}% of the food has been eaten.`);
-        console.log(`${dogP.toFixed(2)}% eaten from the dog.`);
-        console.log(`${catP.toFixed(2)}% eaten from the cat.`);
       }
 
-      // calcPetsFood(["3", "60", "10", "10", "10", "10", "10", "10"]);
-      // calcPetsFood(["3", "0", "30", "0", "30", "0", "30", "0"]);
+      // solveEasterEggsBattle(params1);
+      // solveEasterEggsBattle(params2);
+      // solveEasterEggsBattle(params3);
+
+      // 04. Easter Shop
+
+      function solveEasterShop(params) {
+        let eggs = Number(params[0]);
+        let sales = 0;
+        let index = 1;
+        let operation = params[index];
+        
+        while (operation !== "Close") {
+          index++;
+          let q = Number(params[index]);
+          
+          if (operation === "Buy") {
+            if (q > eggs) {
+              operation = "Over";
+              break;
+            }
+            eggs -= q;
+            sales += q;
+          } else if (operation === "Fill") {
+            eggs += q;
+          }
+
+          index++;
+          operation = params[index];
+
+        }
+
+        if (operation === "Over") {
+          console.log("Not enough eggs in store!");
+          console.log(`You can buy only ${eggs}.`);
+        } else {
+          console.log("Store is closed!");
+          console.log(`${sales} eggs sold.`);
+        }
+      }
+
+      // solveEasterShop(["13", "Buy", "8", "Fill", "3", "Buy", "10"]);
+      // solveEasterShop(["20", "Fill", "30", "Buy", "15", "Buy", "20", "Close"]);
+      // solveEasterShop(["1", "Buy", "1", "Buy", "1", "Close"]);
+
+      // 02. Easter Guests
+
+      function solveEasterGuests(params) {
+        let gosti = Number(params[0]);
+        let budjet = Number(params[1]);
+
+        let koz = Math.ceil(gosti / 3) * 4;
+        let egg = gosti * 2 * 0.45;
+
+        let total = koz + egg;
+
+        if (budjet >= total) {
+          let diff = budjet - total;
+          console.log(`Lyubo bought ${koz/4} Easter bread and ${gosti*2} eggs.`);
+          console.log(`He has ${diff.toFixed(2)} lv. left.`);
+        } else {
+          let diff = total - budjet;
+          console.log(`Lyubo doesn't have enough money.`);
+          console.log(`He needs ${diff.toFixed(2)} lv. more.`);
+        }
+      }
+
+      // solveEasterGuests(["10", "35"]);
+      // solveEasterGuests(["9", "12"]);
 
     </script>
   </body>
