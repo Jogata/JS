@@ -243,7 +243,7 @@
         font-size: 14px;
       }
 
-      .shop-page {
+      .shop-section {
         position: relative;
         width: 100%;
         min-height: 100vh;
@@ -252,6 +252,7 @@
       }
 
       .offer-boxes {
+        padding-bottom: 10%;
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
@@ -271,39 +272,38 @@
       }
       .offer-details h2 {
         color: #262626;
-        font-size: 18px;
+        font-size: 1.1rem;
         text-transform: capitalize;
       }
       .offer-details p {
         padding-top: 5px;
         color: #262626;
-        font-size: 16px;
+        font-size: 1rem;
       }
 
-      .products-part {
-        position: relative;
-        margin-top: 180px;
+      .products-section {
         display: flex;
+        align-items: center;
         justify-content: center;
+        flex-wrap: wrap;
+        column-gap: 2rem;
       }
 
       .product-title {
-        position: relative;
-        top:26vh;
+        padding-bottom: 5%;
       }
       .product-title h3 {
-        font-size:2.8rem;
-        font-weight:500;
-        color:#262626;
+        color: #262626;
+        font-size: 2.8rem;
+        font-weight: 500;
         text-transform: capitalize;
       }
       .product-title a {
-        font-size: 1.1rem;
-        color: #4f4f4f;
         position: relative;
-        top: 20px;
-        cursor: pointer;
+        color: #4f4f4f;
+        font-size: 1.1rem;
         transition: all 0.5s;
+        cursor: pointer;
       }
       .product-title a:hover {
         background: linear-gradient(90deg, #22e6aa, #06abed);
@@ -316,100 +316,99 @@
       }
 
       .product-boxes {
-        position: relative;
-        margin-left: 50px;
+        padding-top: 5%;
         display: flex;
+        flex-wrap: wrap;
+        column-gap: 2rem;
+        row-gap: 3rem;
       }
       
       .product-box {
-        position: relative;
-        width: 250px;
-        /* height: 380px; */
-        margin: 0 8px;
+        flex: 1 1 250px;
         border-radius: 12px;
         background-color: #c1d0e4;
+        filter: drop-shadow(2px 2px 4px #000);
         cursor: pointer;
       }
+      .product-box:nth-child(1) {
+        z-index: 3;
+      }
+      .product-box:nth-child(2) {
+        z-index: 2;
+      }
+      .product-box:nth-child(3) {
+        z-index: 1;
+      }
+
       .product-box img {
-        position: relative;
-        left: 20px;
-        top: -12vh;
+        display: block;
+        margin: -10% auto auto;
         width: 90%;
         transition: 0.8s;
       }
+      .main-img {
+        aspect-ratio: 1;
+      }
 
       .product-box:hover .main-img {
-    transform: rotate(35deg) translateY(-85px);
-}
-.product-box .shodow {
-    position: absolute;
-    top: 20.5vh;
-    left: 60px;
-    width: 50%;
-    opacity: 0.5;
-}
-.product-box:hover .shodow {
-    opacity: 0;
-}
+        transform: rotate(35deg) translateY(-85px);
+      }
+      .product-box .shadow {
+        width: 50%;
+        position: relative;
+        z-index: -1;
+      }
+      .product-box:hover .shadow {
+        opacity: 0;
+      }
+      
+      .product-details {
+        padding: 1.2em 1.4em;
+        border-radius: inherit;
+        background-color: #fff;
+        transition: 0.5s;
+      }
+      .product-box:hover .product-details {
+        transform: translateY(-25px);
+      }
+      
+      .product-details .product-name {
+        color: #262626;
+        font-size: 20px;
+        font-weight: 500;
+        text-transform: capitalize;
+      }
+      
+      .product-details .rating i {
+        padding-top: 5px;
+        font-size: 0.8rem;
+        color: #f2c94c;
+      }
 
-.product-details {
-    width: 250px;
-    min-height: 220px;
-    margin-top: -45px;
-    padding: 20px 25px;
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
-    background-color: #fff;
-    transition: 0.5s;
-}
-.product-box2 .product-details {
-    position: relative;
-    top: -15px;
-}
-.product-box:hover .product-details {
-    transform: translateY(-25px);
-}
-
-.product-details .product-name {
-  color: #262626;
-  font-size: 20px;
-  font-weight: 500;
-  text-transform: capitalize;
-}
-
-.product-details .rating i {
-    padding-top: 5px;
-    font-size: 12px;
-    color: #f2c94c;
-}
-
-.tag {
-    display: flex;
-    padding-top: 12vh;
-    font-weight: 500;
-    align-items: center;
-}
-.tag h4 {
-  color: #262626;
-  font-size: 18px;
-  font-weight: 500;
-}
-.tag .btn {
-    position: absolute;
-    right: 25px;
-    width: 33px;
-    height: 33px;
-    color: #fff;
-    text-align: center;
-    line-height: 35px;
-    border-radius: 50%;
-    background: linear-gradient(90deg, #22e6aa, #064bed);
-    transition: all 0.5s ease;
-    cursor: pointer;
-}
-.tag .btn:hover {
-    background: linear-gradient(90deg, #c522e6, #ed4b06);
-}
+      .tag {
+        display: flex;
+        padding: 1em 0;
+        font-weight: 500;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .tag h4 {
+        color: #262626;
+        font-size: 18px;
+        font-weight: 500;
+      }
+      .tag .btn {
+        padding: 0.6em 0.8em;
+        color: #fff;
+        text-align: center;
+        border-radius: 50%;
+        background: linear-gradient(90deg, #22e6aa, #064bed);
+        transition: all 0.5s ease;
+        cursor: pointer;
+      }
+      .tag .btn:hover {
+        background: linear-gradient(90deg, #c522e6, #ed4b06);
+      }
 
 .gallary-page {
     position: relative;
@@ -664,7 +663,7 @@
         </header>
       </div>
 
-      <div class="shop-page">
+      <div class="shop-section">
         <div class="offer-boxes">
           <div class="offer-box">
             <img src="./images/akar-icons_shipping-box-02.png" alt="">
@@ -688,9 +687,9 @@
             </div>
           </div>
         </div>
-        <div class="products-part">
+        <div class="products-section">
           <div class="product-title">
-            <h3>best seller <br> product</h3>
+            <h3>best seller product</h3>
             <a href="#">Sell all collection
               <i class="fa fa-arrow-right" aria-hidden="true"></i>
             </a>
