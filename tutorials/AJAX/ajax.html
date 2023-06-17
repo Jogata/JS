@@ -90,155 +90,152 @@
     </script>
 
     <script>
-      // 05. Best Player
+      // 05. Everest
 
-      function findBestPlayer(data) {
-        let player = data[0];
-        let index = 0;
-        let mvp = "";
-        let max = 0;
+      // 5364 > 8848
+
+      function solveEverest(params) {
+        const start = 5364;
+        const top = 8848;
+        let rest = params[0];
         
-        while (player !== "END") {
-          index++;
-          let goals = Number(data[index]);
-
-          if (goals > max) {
-            mvp = player;
-            max = goals;
+        let index = 0;
+        let days = 1;
+        let metri = start;
+        let isFailed = false;
+        
+        while (rest !== "END") {
+          
+          if (rest === "Yes") {
+            days++;
+            
+            if (days > 5) {
+              isFailed = true;
+              break;
+            }
           }
+          
+          index++;
+          let current = Number(params[index]);
+          metri = metri + current;
 
-          if (goals >= 10) {
+          if (metri >= top) {
             break;
           }
 
           index++;
-          player = data[index];
-
+          rest = params[index];
         }
 
-        console.log(`${mvp} is the best player!`);
+        if (metri < top) {
+          isFailed = true;
+        }
 
-        if (max >= 3) {
-          console.log(`He has scored ${max} goals and made a hat-trick !!!`);
+        if (isFailed === false) {
+          console.log(`Goal reached for ${days} days!`);
         } else {
-          console.log(`He has scored ${max} goals.`);
+          console.log("Failed!");
+          console.log(`${metri}`);
         }
       }
 
-      // findBestPlayer(["Neymar", "2", "Ronaldo", "1", "Messi", "3", "END"]);
-      // findBestPlayer(["Silva", "5", "Harry Kane", "10"]);
-      // findBestPlayer(["Petrov", "2", "Drogba", "11"]);
+      // solveEverest(["Yes", "1254", "Yes", "1402", "No", "250", "Yes", "635"]);
+      // solveEverest(["Yes", "1000", "Yes", "945", "No", "1200", "END"]);
+      // solveEverest(["Yes", "535", "Yes", "849", "Yes", "499", "Yes", "400", "Yes", "500"]);
+      // solveEverest(["Yes", "700", "END"]);
 
-      // 04. Easter Eggs Battle
+      // 06. Sum And Product
 
-      function solveEasterEggsBattle(params) {
-        let eggs1 = Number(params[0]);
-        let eggs2 = Number(params[1]);
-        let index = 2;
-        let input = params[index];
-        let winner = "";
+      function solveSumAndProduct(params) {
+        let n = params[0];
+        let result = "";
+        let isFound = false;
 
-        while (input !== "End") {
+        for (let a = 1; a <= 9; a++) {
+
+          for (let b = 9; b >= a; b--) {
+            
+            for (let c = 0; c <= 9; c++) {
+              
+              for (let d = 9; d >= c; d--) {
+                
+                result = a.toString() + b.toString() + c.toString() + d.toString();
+
+                let sum = Number(result[0]) + Number(result[1]) + Number(result[2]) + Number(result[3]);
+                let pro = Number(result[0]) * Number(result[1]) * Number(result[2]) * Number(result[3]);
+
+                if (sum === pro && n[2] === "5") {
+                  isFound = true;
+                  console.log(result);
+                  a = 10;
+                  b = 0;
+                  c = 10;
+                  break;
+                  console.log("after");
+                }
+
+                let r = Math.floor(pro / sum);
+                
+                if (r === 3 && Number(n) % 3 === 0) {
+                  isFound = true;
+                  let reversed = `${result[3]}${result[2]}${result[1]}${result[0]}`;
+                  console.log(reversed);
+                  a = 10;
+                  b = 0;
+                  c = 10;
+                  break;
+                }
+              }
+            }
+          }
+        }
+
+        if (isFound === false) {
+          console.log(`Nothing found`);
+        }
+
+      }
+
+      // solveSumAndProduct(["123"]);
+      // solveSumAndProduct(["145"]);
+      // solveSumAndProduct(["214"]);
+
+      // 05. Easter Bake
+
+      function solveEasterBake(params) {
+        let cakes = Number(params[0]);
+        let sugar = 0;
+        let flour = 0;
+        let maxS = 0;
+        let maxF = 0;
+
+        for (let index = 1; index <= cakes*2; index++) {
+          let current = Number(params[index]);
+
+          sugar += current;
+          if (current > maxS) {
+            maxS = current;
+          }
+
+          index++;
           
-          if (input === "one") {
-            eggs2--;
-            if (eggs2 === 0) {
-              winner = "one";
-              break;
-            }
-          } else {
-            eggs1--;
-            if (eggs1 === 0) {
-              winner = "two";
-              break;
-            }
+          current = Number(params[index]);
+          flour += current;
+          if (current > maxF) {
+            maxF = current;
           }
-
-          index++;
-          input = params[index];
         }
 
-        if (winner) {
-          if (winner === "one") {
-            console.log(`Player two is out of eggs. Player one has ${eggs1} eggs left.`);
-          } else {
-            console.log(`Player one is out of eggs. Player two has ${eggs2} eggs left.`);
-          }
-        } else {
-          console.log(`Player one has ${eggs1} eggs left.`);
-          console.log(`Player two has ${eggs2} eggs left.`);
-        }
+        let paketS = Math.ceil(sugar / 950);
+        let paketF = Math.ceil(flour / 750);
+
+        console.log(`Sugar: ${paketS}`);
+        console.log(`Flour: ${paketF}`);
+        console.log(`Max used flour is ${maxF} grams, max used sugar is ${maxS} grams.`);
       }
 
-      // solveEasterEggsBattle(params1);
-      // solveEasterEggsBattle(params2);
-      // solveEasterEggsBattle(params3);
-
-      // 04. Easter Shop
-
-      function solveEasterShop(params) {
-        let eggs = Number(params[0]);
-        let sales = 0;
-        let index = 1;
-        let operation = params[index];
-        
-        while (operation !== "Close") {
-          index++;
-          let q = Number(params[index]);
-          
-          if (operation === "Buy") {
-            if (q > eggs) {
-              operation = "Over";
-              break;
-            }
-            eggs -= q;
-            sales += q;
-          } else if (operation === "Fill") {
-            eggs += q;
-          }
-
-          index++;
-          operation = params[index];
-
-        }
-
-        if (operation === "Over") {
-          console.log("Not enough eggs in store!");
-          console.log(`You can buy only ${eggs}.`);
-        } else {
-          console.log("Store is closed!");
-          console.log(`${sales} eggs sold.`);
-        }
-      }
-
-      // solveEasterShop(["13", "Buy", "8", "Fill", "3", "Buy", "10"]);
-      // solveEasterShop(["20", "Fill", "30", "Buy", "15", "Buy", "20", "Close"]);
-      // solveEasterShop(["1", "Buy", "1", "Buy", "1", "Close"]);
-
-      // 02. Easter Guests
-
-      function solveEasterGuests(params) {
-        let gosti = Number(params[0]);
-        let budjet = Number(params[1]);
-
-        let koz = Math.ceil(gosti / 3) * 4;
-        let egg = gosti * 2 * 0.45;
-
-        let total = koz + egg;
-
-        if (budjet >= total) {
-          let diff = budjet - total;
-          console.log(`Lyubo bought ${koz/4} Easter bread and ${gosti*2} eggs.`);
-          console.log(`He has ${diff.toFixed(2)} lv. left.`);
-        } else {
-          let diff = total - budjet;
-          console.log(`Lyubo doesn't have enough money.`);
-          console.log(`He needs ${diff.toFixed(2)} lv. more.`);
-        }
-      }
-
-      // solveEasterGuests(["10", "35"]);
-      // solveEasterGuests(["9", "12"]);
+      // solveEasterBake(["3", "400", "350", "250", "300", "450", "380"]);
+      // solveEasterBake(["4", "500", "350", "560", "430", "600", "345", "578", "543"]);
 
     </script>
   </body>
