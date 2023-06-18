@@ -90,170 +90,156 @@
     </script>
 
     <script>
-      function unicePinCodes (input){
+      function barcodeGenerator(input) {
+    let firstNum = input[0];
+    let secondNum = input[1];
+    let barcodes = '';
  
- let firstNumEnd = Number(input[0]);
- let secondNumEnd = Number(input[1]);
- let thirdNumEnd = Number(input[2]);
-
-
-
-    for(let a = 1; a <= firstNumEnd; a++){
-
-      for(let b = 1; b <= secondNumEnd; b++) {
-
-        for( let m = 2; m < 7; m++ ) {
-
-          for(let c = 1; c <= thirdNumEnd; c++) {
-
-             if( a % 2 === 0 && c % 2 === 0 ) {
-                 console.log(a.toString() + " " + b.toString() + " " + c.toString()) 
-              }
+    for (let a = firstNum.charAt(0); a <= secondNum.charAt(0); a++) {
+        for (let b = firstNum.charAt(1); b <= secondNum.charAt(1); b++) {
+            for (let c = firstNum.charAt(2); c <= secondNum.charAt(2); c++) {
+                for (let d = firstNum.charAt(3); d <= secondNum.charAt(3); d++) {
+                    if (a % 2 !== 0 && b % 2 !== 0 && c % 2 !== 0 && d % 2 !== 0) {
+                        if (barcodes !== '') {
+                            barcodes += ' ';
+                        }
+                        barcodes += a.toString() + b + c + d;
+                    }
+                }
             }
-          }
-        }
-      }
-    }
-
-    function fund(input) {
-    index = 0
-    let expectedDonation = Number(input[index])
-    index++
- 
-    let priceSubjects = input[index];
-    index++
- 
-    let transactionDeclined = false;
-    let payByCard = 0;
-    let payCash = 0;
- 
-    let numTransaction = 0;
- 
-    let fundCollected = 0;
-    let sumOfCards = 0;
-    let sumOfCash = 0;
-
-    while(priceSubjects !== "End") {
-let priceSubjectss = Number(priceSubjects)
-numTransaction++
-
-        if(numTransaction % 2 === 0 && priceSubjectss < 10) {
-            transactionDeclined = true;
-            console.log("Error in transaction!");
-         } else if (numTransaction % 2 === 0 && priceSubjectss > 10) {
-            payByCard++
-            fundCollected += priceSubjectss
-            sumOfCards +=priceSubjectss
- 
-            console.log("Product sold!");
-            }
-
-            if(numTransaction % 2 !== 0 && priceSubjectss > 100) {
-                transactionDeclined = true;
-                console.log("Error in transaction!");
-            } else if(numTransaction % 2 !== 0 && priceSubjectss < 100) {
-                payCash++
-                fundCollected += priceSubjectss
-                sumOfCash += priceSubjectss
-                console.log("Product sold!");
-            }
- 
-            if(fundCollected > expectedDonation) {
-                break;
-            }
-
-            priceSubjects = input[index];
-            index++
- 
-            }
- 
-if(fundCollected < expectedDonation) {
-    console.log("Failed to collect required money for charity.");
-} else {
-    console.log(`Average CS: ${(sumOfCash / payCash).toFixed(2)}`);
-    console.log(`Average CC: ${(sumOfCards / payByCard).toFixed(2)}` );
-}
-}
-// fund(['600', '86', '150', '98', '227', 'End']);
-
-function  multiplyTable(input){
-let n = input[0];
-let result = "";
- 
-for (let i = 1; i <= n.charAt(2); i++){
-   
-    for(let y = 1; y <= n.charAt(1); y++){
-        
-        for(let k = 1; k <= n.charAt(0); k++){
-            result = i * y * k;
-            console.log(`${i} * ${y} * ${k} = ${result};`)
         }
     }
-}
+    console.log(barcodes);
 }
 
-function findValidCombination(input) {
-  const n = parseInt(input);
-  for (let a = 1; a <= 9; a++) {
-    for (let b = a; b <= 9; b++) {
-      for (let c = 0; c <= 9; c++) {
-        for (let d = 9; d >= c; d--) {
-          const sum = a + b + c + d;
-          const product = a * b * c * d;
+function demo(input) {
+    let start = Number(input[0]);
+    let end = Number(input[1]);
+    let sum = 0;
+    let output = '';
  
-          if (sum === product && n % 10 === 5) {
-            const abcd = a * 1000 + b * 100 + c * 10 + d;
-            console.log(abcd.toString());
-            return;
-          }
- 
-          if (product % sum === 0 && n % 3 === 0) {
-            const dcba = d * 1000 + c * 100 + b * 10 + a;
-            console.log(dcba.toString());
-            return;
-          }
+    for (let a = start; a <= end; a++) {
+        if (a <= 0) {
+            continue;
+        } else if (a % 9 === 0) {
+            sum = sum + a;
+            output = output + `${a}\n`;
         }
-      }
     }
-  }
- 
-  console.log("Nothing found");
+    console.log(`The sum: ${sum}`);
+    console.log(output);
 }
- 
-findValidCombination([123,]);
 
-function substitute(input) {
+function numberPyramid(input) {
  
- let k = Number(input[0]);
- let l = Number(input[1]);
- let m = Number(input[2]);
- let n = Number(input[3]);
- let subCounter = 0;
+ let num = Number(input[0]);
+ let currNum = 1;
+ let output = '';
 
- for (let i = k; i <= 8; i++) {
-     for (let y = 9; y >= l; y--) {
-         for (let x = m; x <= 8; x++) {
-             for (let z = 9; z >= n; z--) {
-                 if (i % 2 === 0 && x % 2 === 0) {
-                     if (y % 2 !== 0 && z % 2 !== 0) {
-                         if (i === x && y === z) {
-                             console.log("Cannot change the same player.");
-                         } else {
-                             console.log(`${i}${y} - ${x}${z}`);
-                             subCounter++;
-                             if (subCounter === 6) {
-                                 return;
-                             }
-                         }
-                     }
-                 }
-             }
+ for (let row = 1; row <= num; row++) {
+     for (let column = 1; column <= row; column++) {
+         if (currNum > num) {
+             console.log(output);
+             return;
          }
+         output += currNum + ' ';
+         currNum++;
      }
+     console.log(output);
+     output = '';
  }
 }
 
-// substitute(["6", "7", "5", "6"])
+function boatTrip(input){
+    let buget = Number(input[0]);
+    let season = input[1];
+    let fishermanCount = Number(input[2]);
+    
+    let discountPerPerson = 0;
+    let additionalDiscount = 0;
+    let boatPrice = 0 ;
+ 
+    if (fishermanCount % 2 ===0 && season !== "Autumn") {
+         additionalDiscount = 0.05
+    }
+
+    if (fishermanCount <=6){
+         discountPerPerson = 0.1
+    }else if(fishermanCount <=11){ 
+         discountPerPerson = 0.15
+    }else if(fishermanCount>=12){
+         discountPerPerson = 0.25
+    }
+
+if(season === "Spring") {
+   boatPrice = 3000;
+  } else if(season === "Winter") { 
+    boatPrice = 2600
+  } else if (season ==="Autumn") {
+      boatPrice = 4200
+    }else if(season ==="Summer"){
+       boatPrice = 4200
+      }
+    
+ 
+    let totalPrice=(boatPrice -(boatPrice * discountPerPerson) )   ;
+    let finalsum = totalPrice -(totalPrice *additionalDiscount);
+ 
+if(finalsum<buget){ 
+    console.log(`Yes! You have ${(buget - finalsum).toFixed(2)} leva left.`);
+}else{
+  console.log(`Not enough money! You need ${(finalsum -buget).toFixed(2)} leva.`)
+ }
+ 
+}
+ 
+// boatTrip(["2000", "Winter", "12"]);
+
+function vacation(input) {
+    let index = 0;
+ 
+    let moneyNeeded = Number(input[index]);
+    index++;
+ 
+    let budget = Number(input[index]);
+    index++
+ 
+    let daysCount = 0;
+    let daysSpendCount = 0
+ 
+    while (budget < moneyNeeded) {
+ 
+        let action = input[index];
+        index++;
+        let sum = Number(input[index]);
+        index++;
+ 
+        if (action === "save") {
+            budget += sum;
+            daysSpendCount = 0;
+        } else if (action === "spend") {
+            if (sum > budget) {
+                budget = 0;
+            } else {
+                budget -= sum;
+            }
+            
+            daysSpendCount++
+        }
+
+        daysCount++
+ 
+        if (daysSpendCount === 5) {
+            console.log("You can't save the money.");
+            console.log(`${daysSpendCount}`);
+            break;
+        }
+    }
+
+    if (budget >= moneyNeeded) {
+        console.log(`You saved the money for ${daysCount} days.`);
+    }
+}
     </script>
   </body>
 </html>
