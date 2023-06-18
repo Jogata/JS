@@ -90,153 +90,149 @@
     </script>
 
     <script>
-      // 05. Everest
+      const animal = "Tiger";
 
-      // 5364 > 8848
+// switch ("Monkey")
+switch (animal) {
+  case "Tiger": {
+    console.log("You are a tiger!");
+    // break;
+  }
 
-      function solveEverest(params) {
-        const start = 5364;
-        const top = 8848;
-        let rest = params[0];
-        
-        let index = 0;
-        let days = 1;
-        let metri = start;
-        let isFailed = false;
-        
-        while (rest !== "END") {
-          
-          if (rest === "Yes") {
-            days++;
-            
-            if (days > 5) {
-              isFailed = true;
-              break;
-            }
-          }
-          
-          index++;
-          let current = Number(params[index]);
-          metri = metri + current;
+  case "Koala":
+  case "Monkey": {
+    console.log("The best animal!");
+    // break;
+  }
 
-          if (metri >= top) {
-            break;
-          }
+  default: {
+    console.log("Must be something else!");
+    break;
+  }
+}
 
-          index++;
-          rest = params[index];
-        }
+console.log("All done!");
 
-        if (metri < top) {
-          isFailed = true;
-        }
+const activities = ["Swimming", "Hiking", "Rock Climbing", "Biking", "Running"];
 
-        if (isFailed === false) {
-          console.log(`Goal reached for ${days} days!`);
-        } else {
-          console.log("Failed!");
-          console.log(`${metri}`);
-        }
-      }
+for (const activity of activities) {
+  switch (activity) {
+    case "Swimming": {
+      console.log("Like a fish!");
+      break;
+    }
+    case "Rock Climbing": {
+      console.log("Like a mountain goat!");
+      break;
+    }
+    case "Running": {
+      console.log("Like a cheetah!");
+      break;
+    }
+    default: {
+      console.log("I'm sure some animal does that...");
+      break;
+    }
+  }
+}
 
-      // solveEverest(["Yes", "1254", "Yes", "1402", "No", "250", "Yes", "635"]);
-      // solveEverest(["Yes", "1000", "Yes", "945", "No", "1200", "END"]);
-      // solveEverest(["Yes", "535", "Yes", "849", "Yes", "499", "Yes", "400", "Yes", "500"]);
-      // solveEverest(["Yes", "700", "END"]);
+const enemies = {
+  rat: { atk: 3, def: 2, hp: 20, class: 1 },
+  goblin: { atk: 10, def: 6, hp: 50, class: 1 },
+  troll: { atk: 30, def: 20, hp: 200, class: 2 },
+  giant: { atk: 50, def: 40, hp: 500, class: 2 },
+  iceGiant: { atk: 50, def: 40, hp: 500, class: 3 },
+};
 
-      // 06. Sum And Product
+for (const enemy of Object.values(enemies)) {
+  switch (enemy.class) {
+    case 1: {
+      console.log("This is an easy fight");
+      break;
+    }
+    case 2: {
+      console.log("This will require some training");
+      break;
+    }
+    default: {
+      console.log("Not implemented yet...");
+      break;
+    }
+  }
+}
 
-      function solveSumAndProduct(params) {
-        let n = params[0];
-        let result = "";
-        let isFound = false;
+const points = [3, 4, 1, 0, 1, 5, 6];
 
-        for (let a = 1; a <= 9; a++) {
+for (const point of points) {
+  switch (point) {
+    case 0:
+    case 1:
+    case 2: {
+      console.log("Good try!");
+      break;
+    }
 
-          for (let b = 9; b >= a; b--) {
-            
-            for (let c = 0; c <= 9; c++) {
-              
-              for (let d = 9; d >= c; d--) {
-                
-                result = a.toString() + b.toString() + c.toString() + d.toString();
+    case 3:
+    case 4:
+    case 5: {
+      console.log("Very well done!");
+      break;
+    }
 
-                let sum = Number(result[0]) + Number(result[1]) + Number(result[2]) + Number(result[3]);
-                let pro = Number(result[0]) * Number(result[1]) * Number(result[2]) * Number(result[3]);
+    default: {
+      console.log("Wow, shooting for the moon!");
+      break;
+    }
+  }
+}
 
-                if (sum === pro && n[2] === "5") {
-                  isFound = true;
-                  console.log(result);
-                  a = 10;
-                  b = 0;
-                  c = 10;
-                  break;
-                  console.log("after");
-                }
+    function reportSystem(input) {
+ 
+ let targetSum = Number(input[0]);
+ let index = 1;
+ let [cash, card, cashCounter, cardCounter] = [0, 0, 0, 0];
 
-                let r = Math.floor(pro / sum);
-                
-                if (r === 3 && Number(n) % 3 === 0) {
-                  isFound = true;
-                  let reversed = `${result[3]}${result[2]}${result[1]}${result[0]}`;
-                  console.log(reversed);
-                  a = 10;
-                  b = 0;
-                  c = 10;
-                  break;
-                }
-              }
-            }
-          }
-        }
 
-        if (isFound === false) {
-          console.log(`Nothing found`);
-        }
 
-      }
+ while (input[index] !== 'End') {
 
-      // solveSumAndProduct(["123"]);
-      // solveSumAndProduct(["145"]);
-      // solveSumAndProduct(["214"]);
+     let transaction = Number(input[index]);
 
-      // 05. Easter Bake
+     if (index % 2 !== 0) {
 
-      function solveEasterBake(params) {
-        let cakes = Number(params[0]);
-        let sugar = 0;
-        let flour = 0;
-        let maxS = 0;
-        let maxF = 0;
+         if (transaction > 100) {
+             console.log(`Error in transaction!`);
+         } else {
+             console.log(`Product sold!`);
+             cash += transaction;
+             cashCounter++;
+         }
 
-        for (let index = 1; index <= cakes*2; index++) {
-          let current = Number(params[index]);
+     } else {
 
-          sugar += current;
-          if (current > maxS) {
-            maxS = current;
-          }
+         if (transaction < 10) {
+             console.log(`Error in transaction!`);
+         } else {
+             console.log(`Product sold!`);
+             card += transaction;
+             cardCounter++;
+         }
 
-          index++;
-          
-          current = Number(params[index]);
-          flour += current;
-          if (current > maxF) {
-            maxF = current;
-          }
-        }
+     }
 
-        let paketS = Math.ceil(sugar / 950);
-        let paketF = Math.ceil(flour / 750);
+     if ((card + cash) >= targetSum) {
+         console.log(`Average CS: ${(cash / cashCounter).toFixed(2)}`);
+         console.log(`Average CC: ${(card / cardCounter).toFixed(2)}`);
+         return;
+     }
 
-        console.log(`Sugar: ${paketS}`);
-        console.log(`Flour: ${paketF}`);
-        console.log(`Max used flour is ${maxF} grams, max used sugar is ${maxS} grams.`);
-      }
+     index++;
+ }
 
-      // solveEasterBake(["3", "400", "350", "250", "300", "450", "380"]);
-      // solveEasterBake(["4", "500", "350", "560", "430", "600", "345", "578", "543"]);
+ console.log(`Failed to collect required money for charity.`);
+}
 
+reportSystem([500, 120, 8, 63, 256, 78, 317]);
     </script>
   </body>
 </html>
