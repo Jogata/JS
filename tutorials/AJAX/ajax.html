@@ -6,8 +6,21 @@
     <title>AJAX | XMLHttpRequest</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Georgia, serif;
+        background-image: url("../../../CSS/assets/img/games-the-elder-scrolls-v-skyrim-50003-copy.jpg");
+      }
+
       h1 {
+        color: #000;
         text-align: center;
+        filter: drop-shadow(1px 1px 1px #fff);
       }
       h1 span {
         display: inline-block;
@@ -23,160 +36,145 @@
         margin: 2rem auto;
       }
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: Georgia, serif;
-        background-image: url("../../../CSS/assets/img/alley-copy.jpg");
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-      }
-
-      h1:not(.logo) {
-        margin-top: 15vh;
-        color: #fff;
-      }
-
-      fieldset {
-        width: 80%;
-        margin: 2rem auto;
-        color: #fff;
-        padding: 1rem;
-        border-radius: 1rem;
-      }
-
-      nav {
+      .container {
         width: 100%;
-        height: 70px;
+        height: 100vh;
         display: flex;
         align-items: center;
         align-content: center;
-        flex-direction: row;
-        flex-wrap: wrap;
-        background-color: #000;
-      }
-
-      .logo {
-        position: absolute;
-        margin-left: 15%;
-        padding: 10px;
-        color: #fff;
-        font-size: 2rem;
-        font-weight: 500;
-        font-style: italic;
-        text-transform: capitalize;
-        letter-spacing: 5px;
-        transition: all 1.4s ease-in-out;
-        cursor: pointer;
-      }
-      .logo:hover {
-        transform: scale(1.1) rotateY(360deg);
-        opacity: 0.8;
-      }
-
-      .nav-links {
-        width: 100%;
-        display: flex;
-        align-content: center;
         justify-content: center;
-        flex-direction: row;
-        flex-wrap: wrap;
-        color: #fff;
+        flex-direction: column;
+      }
+
+      .content {
+        width: 350px;
+        height: 400px;
+        text-align: center;
+        border-radius: 25px;
+        background-color: #000;
+        box-shadow: 0 0 10px 1px #000;
+      }
+
+      .head {
+        margin-top: 20px;
+        color: #000;
+        font-size: 3rem;
+        font-weight: 600;
+        text-align: center;
+        text-transform: capitalize;
+        filter: drop-shadow(-1px -1px 1px #aaa);
+      }
+
+      .text-box {
+        width: 100%;
+        margin-top: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
         text-align: center;
       }
 
-      ul {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        margin-left: 25%;
+      input {
+        width: 80%;
+        height: 50px;
+        margin-top: 20px;
+        padding-top: 10px;
+        color: #fff;
+        font-size: 16px;
+        text-align: center;
+        outline: none;
+        border-color: transparent;
+        border-bottom: 2px solid #fff;
+        background-color: transparent;
       }
 
-      li {
-        position: relative;
-        list-style: none;
-        margin-left: 10px;
-        padding: 25px;
-        transition: all 0.4s ease-in-out;
+      .btn {
+        width: 100%;
+        margin-top: 20px;
+      }
+
+      button {
+        width: 80%;
+        height: 50px;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        font-family: inherit;
+        text-transform: capitalize;
+        border-radius: 50px;
+        border: 2px solid #fff;
+        background-color: #000;
+        transition: all 0.4s ease-out;
         cursor: pointer;
       }
-      li:hover {
+      button:hover {
+        font-size: 17px;
         transform: scale(1.1);
       }
-      li::before {
-        position: absolute;
-        bottom: 25%;
-        left: 50%;
-        transform: translateX(-50%);
-        content: "";
-        width: 0%;
-        height: 2px;
-        background-color: #fff;
-        transform-origin: left;
-        transition: all 0.4s ease-in-out;
-      }
-      li:hover::before {
-        width: 80%;
+
+      .sign-in {
+        width: 100%;
+        margin-top: 20px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        text-align: center;
       }
 
-      i.fa {
-        color: #fff;
-        font-size: 18px;
+      p {
+        font-size: 16px;
+      }
+      p::first-letter {
+        text-transform: uppercase;
       }
 
       a {
         margin-left: 5px;
-        color: #fff;
-        font-size: 18px;
+        padding: 5px;
+        color: lightcoral;
+        font-size: 16px;
         text-transform: capitalize;
         text-decoration: none;
+        border: 2px solid transparent;
+        border-radius: 50px;
+        transition: all 0.4s ease-in-out;
+      }
+      a:hover {
+        font-size: 17px;
+        text-decoration: underline;
+        border: 2px solid lightcoral;
+        transform: scale(1.1);
       }
     </style>
   </head>
   <body>
-    <header>
+    <div class="container">
 
-      <nav>
+      <div class="content">
 
-        <h1 class="logo">logo</h1>
+        <h1 class="head">login</h1>
 
-        <div class="nav-links">
-
-          <ul>
-
-            <li>
-              <i class="fa fa-home"></i>
-              <a href="#">home</a>
-            </li>
-
-            <li>
-              <i class="fa fa-briefcase"></i>
-              <a href="#">my projects</a>
-            </li>
-
-            <li>
-              <i class="fa fa-user"></i>
-              <a href="#">about me</a>
-            </li>
-
-            <li>
-              <i class="fa fa-phone"></i>
-              <a href="#">contacts</a>
-            </li>
-
-          </ul>
-
+        <div class="text-box">
+          <input type="text" name="user" id="user" placeholder="Username">
+          <input type="password" name="password" id="password" placeholder="Password">
         </div>
 
-      </nav>
+        <div class="btn">
+          <button type="submit">login</button>
+        </div>
 
-    </header>
+        <div class="sign-in">
+          <p>new here?</p>
+          <a href="#">create new account</a>
+        </div>
+
+      </div>
+
+    </div>
+
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
