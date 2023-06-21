@@ -6,21 +6,8 @@
     <title>AJAX | XMLHttpRequest</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: Georgia, serif;
-        background-image: url("../../../CSS/assets/img/games-the-elder-scrolls-v-skyrim-50003-copy.jpg");
-      }
-
       h1 {
-        color: #000;
         text-align: center;
-        filter: drop-shadow(1px 1px 1px #fff);
       }
       h1 span {
         display: inline-block;
@@ -36,144 +23,102 @@
         margin: 2rem auto;
       }
 
-      .container {
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Georgia, Times, serif;
+      }
+
+      .main-container {
         width: 100%;
         height: 100vh;
         display: flex;
         align-items: center;
-        align-content: center;
         justify-content: center;
-        flex-direction: column;
+        background-color: #121212;
+        transition: all 0.4s ease-in;
       }
 
-      .content {
-        width: 350px;
-        height: 400px;
-        text-align: center;
-        border-radius: 25px;
-        background-color: #000;
-        box-shadow: 0 0 10px 1px #000;
+      .body-light {
+        background-color: #f7f7f7;
       }
 
-      .head {
-        margin-top: 20px;
-        color: #000;
-        font-size: 3rem;
-        font-weight: 600;
-        text-align: center;
-        text-transform: capitalize;
-        filter: drop-shadow(-1px -1px 1px #aaa);
-      }
-
-      .text-box {
-        width: 100%;
-        margin-top: 25px;
+      .toggle {
+        position: relative;
+        width: 270px;
+        height: 100px;
         display: flex;
         align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        text-align: center;
-      }
-
-      input {
-        width: 80%;
-        height: 50px;
-        margin-top: 20px;
-        padding-top: 10px;
-        color: #fff;
-        font-size: 16px;
-        text-align: center;
-        outline: none;
-        border-color: transparent;
-        border-bottom: 2px solid #fff;
-        background-color: transparent;
-      }
-
-      .btn {
-        width: 100%;
-        margin-top: 20px;
-      }
-
-      button {
-        width: 80%;
-        height: 50px;
-        color: #fff;
-        font-size: 16px;
-        font-weight: bold;
-        font-family: inherit;
-        text-transform: capitalize;
+        border: 2px solid #121212;
         border-radius: 50px;
-        border: 2px solid #fff;
-        background-color: #000;
-        transition: all 0.4s ease-out;
+        background-color: #f7f7f7;
         cursor: pointer;
       }
-      button:hover {
-        font-size: 17px;
-        transform: scale(1.1);
-      }
 
-      .sign-in {
-        width: 100%;
-        margin-top: 20px;
-        color: #fff;
+      .darkmode {
+        position: absolute;
+        left: 5px;
+        width: 90px;
+        height: 90px;
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-direction: row;
-        text-align: center;
+        color: #f7f7f7;
+        font-size: 40px;
+        border-radius: 50%;
+        background-color: #121212;
+        transition: all 0.4s ease-in;
+        cursor: pointer;
       }
 
-      p {
-        font-size: 16px;
-      }
-      p::first-letter {
-        text-transform: uppercase;
+      .hide-darkmode-icon {
+        display: none;
       }
 
-      a {
-        margin-left: 5px;
-        padding: 5px;
-        color: lightcoral;
-        font-size: 16px;
-        text-transform: capitalize;
-        text-decoration: none;
-        border: 2px solid transparent;
-        border-radius: 50px;
-        transition: all 0.4s ease-in-out;
+      .lightmode-icon {
+        display: none;
       }
-      a:hover {
-        font-size: 17px;
-        text-decoration: underline;
-        border: 2px solid lightcoral;
-        transform: scale(1.1);
+      .show-lightmode-icon {
+        display: flex;
+      }
+
+      .toggle-darkmode {
+        left: 172px;
       }
     </style>
   </head>
   <body>
-    <div class="container">
 
-      <div class="content">
-
-        <h1 class="head">login</h1>
-
-        <div class="text-box">
-          <input type="text" name="user" id="user" placeholder="Username">
-          <input type="password" name="password" id="password" placeholder="Password">
+    <div class="main-container" id="dark-light">
+      <div class="toggle">
+        <div class="darkmode" id="light">
+          <i class="fa fa-moon-o darkmode-icon" id="toggle-dark"></i>
+          <i class="fa fa-sun-o lightmode-icon" id="toggle-light"></i>
         </div>
-
-        <div class="btn">
-          <button type="submit">login</button>
-        </div>
-
-        <div class="sign-in">
-          <p>new here?</p>
-          <a href="#">create new account</a>
-        </div>
-
       </div>
-
     </div>
+
+    <script>
+      let lightMode = document.getElementById("light");
+      let lightIcon = document.getElementById("toggle-dark");
+      let darkIcon = document.getElementById("toggle-light");
+      let body = document.getElementById("dark-light");
+
+      let toggle = document.querySelector(".toggle");
+
+      toggle.addEventListener("click", toggleLight);
+
+      function toggleLight() {
+        lightMode.classList.toggle("toggle-darkmode");
+        lightIcon.classList.toggle("hide-darkmode-icon");
+        darkIcon.classList.toggle("show-lightmode-icon");
+        body.classList.toggle("body-light");
+      }
+    </script>
 
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
     <!-- ================= Get data from local JSON file ================= -->
@@ -238,6 +183,65 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
+    </script>
+
+    <script>
+        const apiKey = generateKey();
+const locationID = '0194fdc2-fa2f-4cc0-81d3-ff12045b73c8';
+
+      async function updateLocationById(id, locationObj) {
+  const path = `https://api.boot.dev/v1/courses_rest_api/learn-http/locations/${id}`;
+  const response = await fetch(path, {
+    method: 'PUT',
+    mode: 'cors',
+    headers: getHeaders(),
+    body: JSON.stringify(locationObj)
+  })
+  return response.json();
+}
+
+async function start() {
+const location = await getLocationById(locationID);
+console.log(`Location '${location.name}' fetched. Data: ${JSON.stringify(location)}`);
+
+location.discovered = true;
+await updateLocationById(locationID, location);
+console.log(`Location '${location.name}' was discovered!`);
+
+const updatedLocation = await getLocationById(locationID);
+console.log(`Location '${updatedLocation.name}' fetched. Data: ${JSON.stringify(updatedLocation)}`);
+}
+
+start();
+
+function generateKey() {
+  const characters = 'ABCDEF0123456789';
+  let result = '';
+  for (let i = 0; i < 16; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return result;
+}
+
+async function getLocationById(id) {
+  const path = `https://api.boot.dev/v1/courses_rest_api/learn-http/locations/${id}`;
+  const response = await fetch(path, {
+    method: 'GET',
+    mode: 'cors',
+    headers: {
+      'X-API-Key': apiKey,
+      'Content-Type': 'application/json'
+    }
+  })
+  return response.json();
+}
+
+function getHeaders() {
+  return {
+    'X-API-Key': apiKey,
+    'Content-Type': 'application/json'
+  }
+}
     </script>
 
   </body>
