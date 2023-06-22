@@ -22,103 +22,9 @@
       fieldset {
         margin: 2rem auto;
       }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: Georgia, Times, serif;
-      }
-
-      .main-container {
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #121212;
-        transition: all 0.4s ease-in;
-      }
-
-      .body-light {
-        background-color: #f7f7f7;
-      }
-
-      .toggle {
-        position: relative;
-        width: 270px;
-        height: 100px;
-        display: flex;
-        align-items: center;
-        border: 2px solid #121212;
-        border-radius: 50px;
-        background-color: #f7f7f7;
-        cursor: pointer;
-      }
-
-      .darkmode {
-        position: absolute;
-        left: 5px;
-        width: 90px;
-        height: 90px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #f7f7f7;
-        font-size: 40px;
-        border-radius: 50%;
-        background-color: #121212;
-        transition: all 0.4s ease-in;
-        cursor: pointer;
-      }
-
-      .hide-darkmode-icon {
-        display: none;
-      }
-
-      .lightmode-icon {
-        display: none;
-      }
-      .show-lightmode-icon {
-        display: flex;
-      }
-
-      .toggle-darkmode {
-        left: 172px;
-      }
     </style>
   </head>
   <body>
-
-    <div class="main-container" id="dark-light">
-      <div class="toggle">
-        <div class="darkmode" id="light">
-          <i class="fa fa-moon-o darkmode-icon" id="toggle-dark"></i>
-          <i class="fa fa-sun-o lightmode-icon" id="toggle-light"></i>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      let lightMode = document.getElementById("light");
-      let lightIcon = document.getElementById("toggle-dark");
-      let darkIcon = document.getElementById("toggle-light");
-      let body = document.getElementById("dark-light");
-
-      let toggle = document.querySelector(".toggle");
-
-      toggle.addEventListener("click", toggleLight);
-
-      function toggleLight() {
-        lightMode.classList.toggle("toggle-darkmode");
-        lightIcon.classList.toggle("hide-darkmode-icon");
-        darkIcon.classList.toggle("show-lightmode-icon");
-        body.classList.toggle("body-light");
-      }
-    </script>
 
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
     <!-- ================= Get data from local JSON file ================= -->
@@ -186,63 +92,151 @@
     </script>
 
     <script>
-        const apiKey = generateKey();
-const locationID = '0194fdc2-fa2f-4cc0-81d3-ff12045b73c8';
+      // 01. Unique PIN Codes
 
-      async function updateLocationById(id, locationObj) {
-  const path = `https://api.boot.dev/v1/courses_rest_api/learn-http/locations/${id}`;
-  const response = await fetch(path, {
-    method: 'PUT',
-    mode: 'cors',
-    headers: getHeaders(),
-    body: JSON.stringify(locationObj)
-  })
-  return response.json();
-}
+      function generateUniquePINCodes(params) {
+        let maxNum1 = Number(params[0]);
+        let maxNum2 = Number(params[1]);
+        let maxNum3 = Number(params[2]);
 
-async function start() {
-const location = await getLocationById(locationID);
-console.log(`Location '${location.name}' fetched. Data: ${JSON.stringify(location)}`);
+        if (maxNum1 % 2 !== 0) {
+          maxNum1--;
+        }
 
-location.discovered = true;
-await updateLocationById(locationID, location);
-console.log(`Location '${location.name}' was discovered!`);
+        if (maxNum3 % 2 !== 0) {
+          maxNum3--;
+        }
 
-const updatedLocation = await getLocationById(locationID);
-console.log(`Location '${updatedLocation.name}' fetched. Data: ${JSON.stringify(updatedLocation)}`);
-}
+        maxNum2 = Math.min(maxNum2, 7);  // 2, 3, 5, 7
 
-start();
+        // console.log(maxNum1, maxNum2, maxNum3);
 
-function generateKey() {
-  const characters = 'ABCDEF0123456789';
-  let result = '';
-  for (let i = 0; i < 16; i++) {
-    result += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return result;
-}
+        for (let one = 2; one <= maxNum1; one+=2) {
 
-async function getLocationById(id) {
-  const path = `https://api.boot.dev/v1/courses_rest_api/learn-http/locations/${id}`;
-  const response = await fetch(path, {
-    method: 'GET',
-    mode: 'cors',
-    headers: {
-      'X-API-Key': apiKey,
-      'Content-Type': 'application/json'
-    }
-  })
-  return response.json();
-}
+          for (let two = 2; two <= maxNum2; two++) {
 
-function getHeaders() {
-  return {
-    'X-API-Key': apiKey,
-    'Content-Type': 'application/json'
-  }
-}
+            if (two === 4 || two === 6) {
+              continue;
+            }
+
+            for (let tri = 2; tri <= maxNum3; tri+=2) {
+
+              const pin = `${one.toString()} ${two} ${tri}`;
+              console.log(pin);
+              
+            }
+          }
+        }
+      }
+
+      // generateUniquePINCodes(["3", "5", "5"]);
+      // generateUniquePINCodes(["8", "2", "8"]);
+
+      // 02. Letters Combinations
+
+      function generateLettersCombinations(params) {
+        const start = params[0].charCodeAt(0);
+        const end = params[1].charCodeAt(0);
+        const skip = params[2].charCodeAt(0);
+        let count = 0;
+        let lettersCombinations = "";
+
+        // console.log(start, end, skip);
+        // console.log(String.fromCharCode(start));
+
+        for (let letter1 = start; letter1 <= end; letter1++) {
+
+          if (letter1 === skip) {
+            continue;
+          }
+          
+          for (let letter2 = start; letter2 <= end; letter2++) {
+
+            if (letter2 === skip) {
+              continue;
+            }
+            
+            for (let letter3 = start; letter3 <= end; letter3++) {
+
+              if (letter3 === skip) {
+                continue;
+              }
+
+              let result = String.fromCharCode(letter1) + String.fromCharCode(letter2) + String.fromCharCode(letter3);
+              lettersCombinations += `${result} `;
+              count++;
+              
+            }
+          }
+        }
+
+        console.log(lettersCombinations + count);
+      }
+
+      // generateLettersCombinations(["a", "c", "b"]);
+      // generateLettersCombinations(["a", "c", "z"]);
+      // generateLettersCombinations(["f", "k", "h"]);
+
+      // 03. Lucky Numbers
+
+      function generateLuckyNumbers(params) {
+        const n = Number(params[0]);
+        let luckyNumbers = "";
+
+        const end = Math.min(n, 10);
+
+        for (let first = 1; first < end; first++) {
+          
+          for (let second = 1; second < end; second++) {
+            
+            for (let treti = 1; treti < end; treti++) {
+              
+              for (let forth = 1; forth < end; forth++) {
+                
+                if (first + second === treti + forth) {
+                  
+                  if (n % (first + second) === 0) {
+                    const luckyNumber = "" + first + second + treti + forth;
+                    luckyNumbers += `${luckyNumber} `;
+                  }
+
+                }
+              }
+            }
+          }
+        }
+
+        console.log(luckyNumbers);
+
+      }
+
+      // generateLuckyNumbers(["3"]);
+      // generateLuckyNumbers(["7"]);
+      // generateLuckyNumbers(["24"]);
+
+      // 01. Easter Bakery
+
+      function calcEasterBakery(params) {
+        let flourP = Number(params[0]);
+        let flour = Number(params[1]);
+        let sugar = Number(params[2]);
+        let eggs = Number(params[3]);
+        let maq = Number(params[4]);
+
+        flour = flour * flourP;
+        let sugarP = flourP * 0.75;
+        sugar = sugar * sugarP;
+        eggs = eggs * (flourP * 1.1);
+        maq = maq * (sugarP * 0.2);
+
+        let total = flour + sugar + eggs + maq;
+
+        console.log(total.toFixed(2));
+      }
+
+      // calcEasterBakery(["50", "10", "3.5", "6", "1"]);
+      // calcEasterBakery(["63.44", "3.57", "6.35", "8", "2"]);
+
     </script>
-
   </body>
 </html>
