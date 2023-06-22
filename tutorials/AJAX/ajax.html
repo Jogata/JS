@@ -33,7 +33,7 @@
         font-family: Georgia, serif;
       }
 
-      h1 {
+      h1, h3 {
         text-transform: capitalize;
       }
 
@@ -61,6 +61,10 @@
         padding: 5px 0;
         color: #003041cb;
         font-size: 13px;
+        text-align: left;
+      }
+      .log-header h1 {
+        text-align: left;
       }
 
       .sign-guest {
@@ -130,6 +134,88 @@
         height: 1px;
         background-color: #003041;
       }
+
+      .log-option {
+        width: 100%;
+        height: auto;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        column-gap: 60px;
+      }
+      .log-option i {
+        width: 40px;
+        height: 40px;
+        margin: 0 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 25px;
+        border-radius: 50%;
+        transition: all 0.4s ease-in;
+        cursor: pointer;
+      }
+      .log-option i:hover {
+        color: #f7f7f7;
+        background-color: #003041;
+      }
+
+      .err-alert {
+        width: 100%;
+        margin-top: -15px;
+        color: orangered;
+        font-size: 15px;
+        text-align: left;
+        transition: all 0.4s ease-in-out;
+        visibility: hidden;
+        opacity: 0;
+      }
+      .show-err {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .dashboard {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #003041;
+      }
+      .dashboard span {
+        color: #fff;
+        font-size: 30px;
+        text-align: center;
+      }
+
+      .logout {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        transition: all 0.4s ease-in-out;
+        cursor: pointer;
+      }
+      .logout:hover {
+        color: #003041;
+        background-color: #fff;
+      }
+
+      #user {
+        font-weight: 500;
+      }
+
+
+      .hidden {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -146,7 +232,11 @@
 
           <label for="">Sign as a Guest</label>
 
-          <input type="text" name="" id="" placeholder="Hi, what is your name">
+          <input type="text" name="" id="username" placeholder="Hi, what is your name">
+
+          <div class="err-alert">
+            <small>You must enter your name</small>
+          </div>
 
           <div class="action-btn">
             <button type="button">Sign in Guest</button>
@@ -167,7 +257,56 @@
 
       </div>
 
+      <div class="dashboard hidden">
+
+        <span class="logout">
+          <i class="fa fa-sign-out"></i>
+        </span>
+
+        <span>
+          <h1 id="day">greeting</h1>
+          <h3 id="user">username</h3>
+        </span>
+      </div>
+
     </div>
+
+    <script>
+      const btnSignIn = document.querySelector(".action-btn button");
+
+      btnSignIn.addEventListener("click", signIn);
+
+      function signIn() {
+        let username = document.getElementById("username");
+
+        if (!username.value) {
+          let err = document.querySelector(".err-alert");
+          err.classList.add("show-err");
+          setTimeout(() => {
+            err.classList.remove("show-err");
+          }, 3000);
+        } else {
+          const user = document.getElementById("user");
+          user.textContent = username.value;
+          username.value = "";
+          const form = document.querySelector(".login-form");
+          form.classList.add("hidden");
+          const dashboard = document.querySelector(".dashboard");
+          dashboard.classList.remove("hidden");
+        }
+      }
+
+      const btnSignOut = document.querySelector(".logout");
+
+      btnSignOut.addEventListener("click", signOut);
+
+      function signOut() {
+        const form = document.querySelector(".login-form");
+        form.classList.remove("hidden");
+        const dashboard = document.querySelector(".dashboard");
+        dashboard.classList.add("hidden");
+      }
+    </script>
 
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
     <!-- ================= Get data from local JSON file ================= -->
