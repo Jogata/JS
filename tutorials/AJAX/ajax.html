@@ -22,9 +22,152 @@
       fieldset {
         margin: 2rem auto;
       }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Georgia, serif;
+      }
+
+      h1 {
+        text-transform: capitalize;
+      }
+
+      .container {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #00304121;
+      }
+
+      .login-form {
+        width: 600px;
+        height: 400px;
+        padding: 20px 30px;
+        border-radius: 10px;
+        border: 1px solid #00304121;
+        background-color: #fff;
+        box-shadow: 0 0 10px 2px #00304121;
+      }
+
+      .log-header {
+        width: 100%;
+        padding: 5px 0;
+        color: #003041cb;
+        font-size: 13px;
+      }
+
+      .sign-guest {
+        width: 450px;
+        height: auto;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+      }
+
+      label {
+        padding: 15px 0;
+        color: #003041;
+        font-size: 18px;
+        font-weight: 500;
+        text-align: center;
+      }
+
+      input {
+        width: 100%;
+        height: 50px;
+        margin: auto;
+        margin-bottom: 20px;
+        padding: 0 15px;
+        font-size: 15px;
+        border: 1px solid #003041cb;
+        border-radius: 5px;outline-color: #003041;
+      }
+
+      .action-btn {
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: right;
+      }
+      .action-btn button {
+        width: 120px;
+        height: 50px;
+        margin: 8px 0;
+        color: #fff;
+        border: 1px solid transparent;
+        border-radius: 5px;
+        background-color: #003041;
+        cursor: pointer;
+      }
+      .action-btn button:hover {
+        background-color: #003041cb;
+      }
+
+      .label {
+        width: 100%;
+        margin-top: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+      }
+      .label small {
+        width: 100%;
+        margin: 0 10px;
+        text-align: center;
+      }
+
+      .br {
+        width: 100%;
+        height: 1px;
+        background-color: #003041;
+      }
     </style>
   </head>
   <body>
+
+    <div class="container">
+
+      <div class="login-form">
+
+        <div class="log-header">
+          <h1>taskido</h1>
+        </div>
+
+        <div class="sign-guest">
+
+          <label for="">Sign as a Guest</label>
+
+          <input type="text" name="" id="" placeholder="Hi, what is your name">
+
+          <div class="action-btn">
+            <button type="button">Sign in Guest</button>
+          </div>
+
+          <span class="label">
+            <div class="br"></div>
+            <small>Continue with</small>
+            <div class="br"></div>
+          </span>
+
+          <div class="log-option">
+            <i class="fa fa-google"></i>
+            <i class="fa fa-facebook"></i>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
 
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
     <!-- ================= Get data from local JSON file ================= -->
@@ -91,152 +234,5 @@
       }
     </script>
 
-    <script>
-      // 01. Unique PIN Codes
-
-      function generateUniquePINCodes(params) {
-        let maxNum1 = Number(params[0]);
-        let maxNum2 = Number(params[1]);
-        let maxNum3 = Number(params[2]);
-
-        if (maxNum1 % 2 !== 0) {
-          maxNum1--;
-        }
-
-        if (maxNum3 % 2 !== 0) {
-          maxNum3--;
-        }
-
-        maxNum2 = Math.min(maxNum2, 7);  // 2, 3, 5, 7
-
-        // console.log(maxNum1, maxNum2, maxNum3);
-
-        for (let one = 2; one <= maxNum1; one+=2) {
-
-          for (let two = 2; two <= maxNum2; two++) {
-
-            if (two === 4 || two === 6) {
-              continue;
-            }
-
-            for (let tri = 2; tri <= maxNum3; tri+=2) {
-
-              const pin = `${one.toString()} ${two} ${tri}`;
-              console.log(pin);
-              
-            }
-          }
-        }
-      }
-
-      // generateUniquePINCodes(["3", "5", "5"]);
-      // generateUniquePINCodes(["8", "2", "8"]);
-
-      // 02. Letters Combinations
-
-      function generateLettersCombinations(params) {
-        const start = params[0].charCodeAt(0);
-        const end = params[1].charCodeAt(0);
-        const skip = params[2].charCodeAt(0);
-        let count = 0;
-        let lettersCombinations = "";
-
-        // console.log(start, end, skip);
-        // console.log(String.fromCharCode(start));
-
-        for (let letter1 = start; letter1 <= end; letter1++) {
-
-          if (letter1 === skip) {
-            continue;
-          }
-          
-          for (let letter2 = start; letter2 <= end; letter2++) {
-
-            if (letter2 === skip) {
-              continue;
-            }
-            
-            for (let letter3 = start; letter3 <= end; letter3++) {
-
-              if (letter3 === skip) {
-                continue;
-              }
-
-              let result = String.fromCharCode(letter1) + String.fromCharCode(letter2) + String.fromCharCode(letter3);
-              lettersCombinations += `${result} `;
-              count++;
-              
-            }
-          }
-        }
-
-        console.log(lettersCombinations + count);
-      }
-
-      // generateLettersCombinations(["a", "c", "b"]);
-      // generateLettersCombinations(["a", "c", "z"]);
-      // generateLettersCombinations(["f", "k", "h"]);
-
-      // 03. Lucky Numbers
-
-      function generateLuckyNumbers(params) {
-        const n = Number(params[0]);
-        let luckyNumbers = "";
-
-        const end = Math.min(n, 10);
-
-        for (let first = 1; first < end; first++) {
-          
-          for (let second = 1; second < end; second++) {
-            
-            for (let treti = 1; treti < end; treti++) {
-              
-              for (let forth = 1; forth < end; forth++) {
-                
-                if (first + second === treti + forth) {
-                  
-                  if (n % (first + second) === 0) {
-                    const luckyNumber = "" + first + second + treti + forth;
-                    luckyNumbers += `${luckyNumber} `;
-                  }
-
-                }
-              }
-            }
-          }
-        }
-
-        console.log(luckyNumbers);
-
-      }
-
-      // generateLuckyNumbers(["3"]);
-      // generateLuckyNumbers(["7"]);
-      // generateLuckyNumbers(["24"]);
-
-      // 01. Easter Bakery
-
-      function calcEasterBakery(params) {
-        let flourP = Number(params[0]);
-        let flour = Number(params[1]);
-        let sugar = Number(params[2]);
-        let eggs = Number(params[3]);
-        let maq = Number(params[4]);
-
-        flour = flour * flourP;
-        let sugarP = flourP * 0.75;
-        sugar = sugar * sugarP;
-        eggs = eggs * (flourP * 1.1);
-        maq = maq * (sugarP * 0.2);
-
-        let total = flour + sugar + eggs + maq;
-
-        console.log(total.toFixed(2));
-      }
-
-      // calcEasterBakery(["50", "10", "3.5", "6", "1"]);
-      // calcEasterBakery(["63.44", "3.57", "6.35", "8", "2"]);
-
-    </script>
   </body>
 </html>
