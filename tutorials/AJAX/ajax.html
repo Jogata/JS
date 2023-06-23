@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
       h1 {
         text-align: center;
@@ -22,291 +21,9 @@
       fieldset {
         margin: 2rem auto;
       }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: Georgia, serif;
-      }
-
-      h1, h3 {
-        text-transform: capitalize;
-      }
-
-      .container {
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #00304121;
-      }
-
-      .login-form {
-        width: 600px;
-        height: 400px;
-        padding: 20px 30px;
-        border-radius: 10px;
-        border: 1px solid #00304121;
-        background-color: #fff;
-        box-shadow: 0 0 10px 2px #00304121;
-      }
-
-      .log-header {
-        width: 100%;
-        padding: 5px 0;
-        color: #003041cb;
-        font-size: 13px;
-        text-align: left;
-      }
-      .log-header h1 {
-        text-align: left;
-      }
-
-      .sign-guest {
-        width: 450px;
-        height: auto;
-        margin: auto;
-        display: flex;
-        flex-direction: column;
-      }
-
-      label {
-        padding: 15px 0;
-        color: #003041;
-        font-size: 18px;
-        font-weight: 500;
-        text-align: center;
-      }
-
-      input {
-        width: 100%;
-        height: 50px;
-        margin: auto;
-        margin-bottom: 20px;
-        padding: 0 15px;
-        font-size: 15px;
-        border: 1px solid #003041cb;
-        border-radius: 5px;outline-color: #003041;
-      }
-
-      .action-btn {
-        width: 100%;
-        height: auto;
-        display: flex;
-        align-items: center;
-        justify-content: right;
-      }
-      .action-btn button {
-        width: 120px;
-        height: 50px;
-        margin: 8px 0;
-        color: #fff;
-        border: 1px solid transparent;
-        border-radius: 5px;
-        background-color: #003041;
-        cursor: pointer;
-      }
-      .action-btn button:hover {
-        background-color: #003041cb;
-      }
-
-      .label {
-        width: 100%;
-        margin-top: 15px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 14px;
-      }
-      .label small {
-        width: 100%;
-        margin: 0 10px;
-        text-align: center;
-      }
-
-      .br {
-        width: 100%;
-        height: 1px;
-        background-color: #003041;
-      }
-
-      .log-option {
-        width: 100%;
-        height: auto;
-        margin-top: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        column-gap: 60px;
-      }
-      .log-option i {
-        width: 40px;
-        height: 40px;
-        margin: 0 5px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 25px;
-        border-radius: 50%;
-        transition: all 0.4s ease-in;
-        cursor: pointer;
-      }
-      .log-option i:hover {
-        color: #f7f7f7;
-        background-color: #003041;
-      }
-
-      .err-alert {
-        width: 100%;
-        margin-top: -15px;
-        color: orangered;
-        font-size: 15px;
-        text-align: left;
-        transition: all 0.4s ease-in-out;
-        visibility: hidden;
-        opacity: 0;
-      }
-      .show-err {
-        visibility: visible;
-        opacity: 1;
-      }
-
-      .dashboard {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #003041;
-      }
-      .dashboard span {
-        color: #fff;
-        font-size: 30px;
-        text-align: center;
-      }
-
-      .logout {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        width: 50px;
-        height: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 5px;
-        transition: all 0.4s ease-in-out;
-        cursor: pointer;
-      }
-      .logout:hover {
-        color: #003041;
-        background-color: #fff;
-      }
-
-      #user {
-        font-weight: 500;
-      }
-
-
-      .hidden {
-        display: none;
-      }
     </style>
   </head>
   <body>
-
-    <div class="container">
-
-      <div class="login-form">
-
-        <div class="log-header">
-          <h1>taskido</h1>
-        </div>
-
-        <div class="sign-guest">
-
-          <label for="">Sign as a Guest</label>
-
-          <input type="text" name="" id="username" placeholder="Hi, what is your name">
-
-          <div class="err-alert">
-            <small>You must enter your name</small>
-          </div>
-
-          <div class="action-btn">
-            <button type="button">Sign in Guest</button>
-          </div>
-
-          <span class="label">
-            <div class="br"></div>
-            <small>Continue with</small>
-            <div class="br"></div>
-          </span>
-
-          <div class="log-option">
-            <i class="fa fa-google"></i>
-            <i class="fa fa-facebook"></i>
-          </div>
-
-        </div>
-
-      </div>
-
-      <div class="dashboard hidden">
-
-        <span class="logout">
-          <i class="fa fa-sign-out"></i>
-        </span>
-
-        <span>
-          <h1 id="day">greeting</h1>
-          <h3 id="user">username</h3>
-        </span>
-      </div>
-
-    </div>
-
-    <script>
-      const btnSignIn = document.querySelector(".action-btn button");
-
-      btnSignIn.addEventListener("click", signIn);
-
-      function signIn() {
-        let username = document.getElementById("username");
-
-        if (!username.value) {
-          let err = document.querySelector(".err-alert");
-          err.classList.add("show-err");
-          setTimeout(() => {
-            err.classList.remove("show-err");
-          }, 3000);
-        } else {
-          const user = document.getElementById("user");
-          user.textContent = username.value;
-          username.value = "";
-          const form = document.querySelector(".login-form");
-          form.classList.add("hidden");
-          const dashboard = document.querySelector(".dashboard");
-          dashboard.classList.remove("hidden");
-        }
-      }
-
-      const btnSignOut = document.querySelector(".logout");
-
-      btnSignOut.addEventListener("click", signOut);
-
-      function signOut() {
-        const form = document.querySelector(".login-form");
-        form.classList.remove("hidden");
-        const dashboard = document.querySelector(".dashboard");
-        dashboard.classList.add("hidden");
-      }
-    </script>
 
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
     <!-- ================= Get data from local JSON file ================= -->
@@ -371,6 +88,160 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
+    </script>
+
+    <script>
+      // 05. Challenge the Wedding
+
+      function makeCouples(params) {
+        const mens = Number(params[0]);
+        const womens = Number(params[1]);
+        const tables = Number(params[2]);
+        let combinations = "";
+
+        let couples = 0;
+
+        for (let man = 1; man <= mens; man++) {
+
+          for (let woman = 1; woman <= womens; woman++) {
+
+            couples++;
+            
+            if (couples > tables) {
+              man = mens + 1;
+              break;
+            }
+
+            let combination = `(${man} <-> ${woman}) `;
+            combinations += combination;
+
+          }
+
+        }
+
+        console.log(combinations);
+
+      }
+
+      // makeCouples(["2", "2", "6"]);
+      // makeCouples(["2", "2", "3"]);
+      // makeCouples(["5", "8", "40"]);
+
+      // 06. Wedding Seats
+
+      function calcWeddingSeats(params) {
+        const lastSector = params[0];
+        let rows = Number(params[1]);
+        let seats = Number(params[2]);
+        let totalSeats = 0;
+
+        const start = "A".charCodeAt(0);
+        const end = lastSector.charCodeAt(0);
+
+        // console.log(start, end);
+        // console.log("a".charCodeAt(0));
+
+        for (let sector = start; sector <= end; sector++) {
+          const currentSector = String.fromCharCode(sector);
+          
+          for (let row = 1; row <= rows; row++) {
+            let seatsCurrentRow = seats + 97;
+
+            if (row % 2 === 0) {
+              seatsCurrentRow += 2;
+            }
+
+            for (let seat = 97; seat < seatsCurrentRow; seat++) {
+              const currentSeatLetter = String.fromCharCode(seat);
+              const currentSeat = `${currentSector}${row}${currentSeatLetter}`;
+              totalSeats++;
+              console.log(currentSeat);
+            }
+
+          }
+
+          rows++;
+
+        }
+
+        console.log(totalSeats);
+
+      }
+
+      // calcWeddingSeats(["B", "3", "2"]);
+      // calcWeddingSeats(["C", "4", "2"]);
+
+      // 07. Safe Passwords Generator
+
+      function createSafePasswords(params) {
+        const limitA = Number(params[0]);
+        const limitB = Number(params[1]);
+        const maxPasswords = Number(params[2]);
+        let currentPassword = 0;
+        let passwords = "";
+        let symbolA = 35;
+        let symbolB = 64;
+
+        // for (let passwords = 1; passwords <= maxPasswords; passwords++) {
+          
+          for (let a = 1; a <= limitA; a++) {
+            
+            for (let b = 1; b <= limitB; b++) {
+              
+              const aa = String.fromCharCode(symbolA);
+              const bb = String.fromCharCode(symbolB);
+              let password = `${aa}${bb}${a}${b}${bb}${aa}`;
+
+              currentPassword++;
+              // console.log(currentPassword);
+
+              if (currentPassword === maxPasswords) {
+                a = limitA + 1;
+                b = limitB + 1;
+              }
+
+              symbolA++;
+              if (symbolA > 55) {
+                symbolA = 35;
+              }
+
+              symbolB++;
+              if (symbolB > 96) {
+                symbolB = 64;
+              }
+
+              // console.log(password);
+              passwords += `${password}|`;
+
+            }
+            
+          }
+
+          console.log(passwords);
+
+        }
+      // }
+
+      // createSafePasswords(["20", "50", "10"]);
+      // createSafePasswords(["2", "3", "10"]);
+
+      // 01. Excursion
+
+      function solveExcursion(params) {
+        let people = Number(params[0]);
+        let nosht = Number(params[1]);
+        let tran = Number(params[2]);
+        let musei = Number(params[3]);
+
+        let forP = nosht * 20 + tran * 1.6 + musei * 6;
+        let total = people * forP * 1.25;
+
+        console.log(total.toFixed(2));
+      }
+
+      // solveExcursion(["20", "14", "30", "6"]);
+      // solveExcursion(["131","9", "33", "46"]);
+
     </script>
 
   </body>
