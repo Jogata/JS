@@ -21,9 +21,150 @@
       fieldset {
         margin: 2rem auto;
       }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Georgia, serif;
+      }
+
+      .container {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #3a4452;
+      }
+
+      .calculator {
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #3a4452;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2), 
+            -8px -8px 15px rgba(255, 255, 255, 0.1);
+      }
+
+      form input {
+        border: 0;
+        outline: 0;
+        width: 60px;
+        height: 60px;
+        margin: 10px;
+        color: #fff;
+        font-size: 20px;
+        font-family: inherit;
+        border-radius: 10px;
+        background-color: transparent;
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2), 
+            -8px -8px 15px rgba(255, 255, 255, 0.1);
+        transition: all 0.6s ease-in-out;
+        cursor: pointer;
+      }
+
+      .display {
+        width: 100%;
+        margin: 20px 0;
+        display: flex;
+        justify-content: flex-end;
+        pointer-events: none;
+        cursor: auto;
+      }
+      .display input {
+        flex: 1;
+        height: 80px;
+        padding: 0 15px;
+        font-size: 45px;
+        text-align: right;
+        box-shadow: inset 5px 5px 15px rgba(0, 0, 0, 0.2), 
+            inset -8px -8px 15px rgba(255, 255, 255, 0.1);
+      }
+
+      .equal {
+        width: 145px;
+      }
+
+      .calculator div:nth-child(2) input:first-child,
+      .calculator div:nth-child(2) input:nth-child(2),
+      .calculator div input:last-child {
+        color: #33ffd8;
+      }
+
+      input:active {
+        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2), 
+            -8px -8px 15px rgba(255, 255, 255, 0.1);
+      }
     </style>
   </head>
   <body>
+    
+    <div class="container">
+
+      <div class="calculator">
+        <form>
+          <div class="display">
+            <input type="text" name="display" id="display">
+          </div>
+          <div>
+            <input type="button" value="AC" id="ac">
+            <input type="button" value="DE" id="del">
+            <input type="button" value=".">
+            <input type="button" value="/">
+          </div>
+          <div>
+            <input type="button" value="7">
+            <input type="button" value="8">
+            <input type="button" value="9">
+            <input type="button" value="*">
+          </div>
+          <div>
+            <input type="button" value="4">
+            <input type="button" value="5">
+            <input type="button" value="6">
+            <input type="button" value="-">
+          </div>
+          <div>
+            <input type="button" value="1">
+            <input type="button" value="2">
+            <input type="button" value="3">
+            <input type="button" value="+">
+          </div>
+          <div>
+            <input type="button" value="00">
+            <input type="button" value="0">
+            <input type="button" value="=" class="equal">
+          </div>
+        </form>
+      </div>
+
+      <script>
+        display.value = "";
+
+        const buttons = document.querySelectorAll(".calculator input");
+        
+        buttons.forEach(button => {
+          button.addEventListener("click", () => {
+            display.value += button.value;
+          })
+        })
+        
+        const equalButton = document.querySelector(".equal");
+        equalButton.addEventListener("click", () => {
+          deleteButton.click();
+          display.value = eval(display.value);
+        })
+
+        const deleteButton = document.querySelector("#del");
+        deleteButton.addEventListener("click", () => {
+          display.value = display.value.toString().slice(0, -3);
+        })
+      </script>
+
+    </div>
 
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
     <!-- ================= Get data from local JSON file ================= -->
@@ -88,160 +229,6 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
-    </script>
-
-    <script>
-      // 05. Challenge the Wedding
-
-      function makeCouples(params) {
-        const mens = Number(params[0]);
-        const womens = Number(params[1]);
-        const tables = Number(params[2]);
-        let combinations = "";
-
-        let couples = 0;
-
-        for (let man = 1; man <= mens; man++) {
-
-          for (let woman = 1; woman <= womens; woman++) {
-
-            couples++;
-            
-            if (couples > tables) {
-              man = mens + 1;
-              break;
-            }
-
-            let combination = `(${man} <-> ${woman}) `;
-            combinations += combination;
-
-          }
-
-        }
-
-        console.log(combinations);
-
-      }
-
-      // makeCouples(["2", "2", "6"]);
-      // makeCouples(["2", "2", "3"]);
-      // makeCouples(["5", "8", "40"]);
-
-      // 06. Wedding Seats
-
-      function calcWeddingSeats(params) {
-        const lastSector = params[0];
-        let rows = Number(params[1]);
-        let seats = Number(params[2]);
-        let totalSeats = 0;
-
-        const start = "A".charCodeAt(0);
-        const end = lastSector.charCodeAt(0);
-
-        // console.log(start, end);
-        // console.log("a".charCodeAt(0));
-
-        for (let sector = start; sector <= end; sector++) {
-          const currentSector = String.fromCharCode(sector);
-          
-          for (let row = 1; row <= rows; row++) {
-            let seatsCurrentRow = seats + 97;
-
-            if (row % 2 === 0) {
-              seatsCurrentRow += 2;
-            }
-
-            for (let seat = 97; seat < seatsCurrentRow; seat++) {
-              const currentSeatLetter = String.fromCharCode(seat);
-              const currentSeat = `${currentSector}${row}${currentSeatLetter}`;
-              totalSeats++;
-              console.log(currentSeat);
-            }
-
-          }
-
-          rows++;
-
-        }
-
-        console.log(totalSeats);
-
-      }
-
-      // calcWeddingSeats(["B", "3", "2"]);
-      // calcWeddingSeats(["C", "4", "2"]);
-
-      // 07. Safe Passwords Generator
-
-      function createSafePasswords(params) {
-        const limitA = Number(params[0]);
-        const limitB = Number(params[1]);
-        const maxPasswords = Number(params[2]);
-        let currentPassword = 0;
-        let passwords = "";
-        let symbolA = 35;
-        let symbolB = 64;
-
-        // for (let passwords = 1; passwords <= maxPasswords; passwords++) {
-          
-          for (let a = 1; a <= limitA; a++) {
-            
-            for (let b = 1; b <= limitB; b++) {
-              
-              const aa = String.fromCharCode(symbolA);
-              const bb = String.fromCharCode(symbolB);
-              let password = `${aa}${bb}${a}${b}${bb}${aa}`;
-
-              currentPassword++;
-              // console.log(currentPassword);
-
-              if (currentPassword === maxPasswords) {
-                a = limitA + 1;
-                b = limitB + 1;
-              }
-
-              symbolA++;
-              if (symbolA > 55) {
-                symbolA = 35;
-              }
-
-              symbolB++;
-              if (symbolB > 96) {
-                symbolB = 64;
-              }
-
-              // console.log(password);
-              passwords += `${password}|`;
-
-            }
-            
-          }
-
-          console.log(passwords);
-
-        }
-      // }
-
-      // createSafePasswords(["20", "50", "10"]);
-      // createSafePasswords(["2", "3", "10"]);
-
-      // 01. Excursion
-
-      function solveExcursion(params) {
-        let people = Number(params[0]);
-        let nosht = Number(params[1]);
-        let tran = Number(params[2]);
-        let musei = Number(params[3]);
-
-        let forP = nosht * 20 + tran * 1.6 + musei * 6;
-        let total = people * forP * 1.25;
-
-        console.log(total.toFixed(2));
-      }
-
-      // solveExcursion(["20", "14", "30", "6"]);
-      // solveExcursion(["131","9", "33", "46"]);
-
     </script>
 
   </body>
