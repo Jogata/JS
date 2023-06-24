@@ -4,11 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
       h1 {
         text-align: center;
-        display: none;
       }
       h1 span {
         display: inline-block;
@@ -22,155 +20,10 @@
       }
       fieldset {
         margin: 2rem auto;
-        display: none;
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: Georgia, serif;
-      }
-
-      section {
-        width: 100%;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        background-color: cornflowerblue;
-      }
-
-      .card {
-        position: relative;
-        width: 550px;
-        height: 350px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 30px;
-        background-color: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(25px);
-        box-shadow: 0 25px 45px rgba(0, 0, 0, 0.25);
-      }
-
-      .top {
-        padding: 12px 15px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        /* flex-direction: row; */
-        border-bottom: 1px solid #d5cccc24;
-      }
-      .top span {
-        margin-left: 20px;
-        font-size: 20px;
-      }
-      .top i {
-        padding: 10px;
-        font-size: 30px;
-        border-radius: 30%;
-        cursor: pointer;
-      }
-      .top i:hover {
-        background-color: rgba(0, 0, 0, 0.1);
-      }
-      .top p {
-        position: absolute;
-        top: 50px;
-        left: 15px;
-        padding: 10px 20px;
-        text-transform: capitalize;
-        border-radius: 10px;
-        background-color: rgba(0, 0, 0, 0.15);
-        transition: all 0.5s ease-in-out;
-        opacity: 0;
-      }
-      .top i:hover ~ p {
-        opacity: 1;
-      }
-
-      .middle {
-        padding: 20px 30px 0px 30px;
-        display: flex;
-        /* flex-direction: row; */
-      }
-
-      .middle img {
-        width: 170px;
-        border: 5px solid transparent;
-        border-radius: 50%;
-        outline: 3px solid rgba(255, 255, 255, 0.25);
-      }
-
-      .right {
-        margin: 20px 0px 10px 50px;
-      }
-
-      ul li {
-        list-style-type: circle;
-      }
-
-      .social-icons {
-        display: flex;
-        /* flex-direction: row; */
-      }
-
-      .social-icons span {
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid #fff;
-        border-radius: 50%;
       }
     </style>
   </head>
   <body>
-    <section>
-      <div class="card">
-        <div class="top">
-          <span>ivet valcheva</span>
-          <i class="fa fa-ellipsis-v"></i>
-          <p>my portfolio</p>
-        </div>
-        <div class="middle">
-          <div class="left">
-            <img src="../../../CSS/assets/img/profile-copy.jpg" alt="">
-          </div>
-          <div class="right">
-            <label for="skills">skills:</label>
-            <div>
-              <ul>
-                <li>web designer</li>
-                <li>programmer</li>
-                <li>graphic designer</li>
-              </ul>
-            </div>
-            <div class="social-icons">
-              <span>
-                <i class="fa fa-facebook"></i>
-              </span>
-              <span>
-                <i class="fa fa-linkedin"></i>
-              </span>
-              <span>
-                <i class="fa fa-instagram"></i>
-              </span>
-              <span>
-                <i class="fa fa-github"></i>
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="bottom">
-          <input type="submit" value="Hire" class="btn">
-        </div>
-      </div>
-    </section>
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
@@ -234,6 +87,160 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
+    </script>
+
+    <script>
+      // 09. Sum of Two Numbers
+
+      function findMagicNumber(params) {
+        const first = Number(params[0]);
+        const second = Number(params[1]);
+        const magic = Number(params[2]);
+        let isF = true;
+        let combinations = 0;
+
+        // console.log(first, second, magic);
+
+        for (let i = first; i <= second; i++) {
+          
+          for (let j = first; j <= second; j++) {
+            
+            const sum = i + j;
+            combinations++;
+
+            // console.log(i, j);
+
+            if (sum === magic) {
+              console.log(`Combination N:${combinations} (${i} + ${j} = ${sum})`);
+              isF = false;
+              i = second + 1;
+              break;
+            }
+
+          }
+        }
+
+        if (isF) {
+          console.log(`${combinations} combinations - neither equals ${magic}`);
+        }
+      }
+
+      // findMagicNumber(["1", "10", "5"]);
+      // findMagicNumber(["23", "24", "20"]);
+
+      // 11. HappyCat Parking
+
+      function calcParking(params) {
+        const days = Number(params[0]);
+        const hours = Number(params[1]);
+        let total = 0;
+        let currentDay = 0;
+
+        // For Odd Days
+        for (let oddDay = 1; oddDay <= days; oddDay+=2) {
+          currentDay = oddDay;
+          let todayCost = 0;
+          
+          for (let oddHour = 1; oddHour <= hours; oddHour+=2) {
+            total++;
+            todayCost++;
+          }
+
+          for (let evenHour = 2; evenHour <= hours; evenHour+=2) {
+            total += 1.25;
+            todayCost += 1.25;
+          }
+
+          console.log(`Day: ${currentDay} - ${todayCost.toFixed(2)} leva`);
+        }
+
+        // For Even Days
+        for (let evenDay = 2; evenDay <= days; evenDay+=2) {
+          currentDay = evenDay;
+          let todayCost = 0;
+          
+          for (let oddHour = 1; oddHour <= hours; oddHour+=2) {
+            total += 2.5;
+            todayCost += 2.5;
+          }
+
+          for (let evenHour = 2; evenHour <= hours; evenHour+=2) {
+            total++;
+            todayCost++;
+          }
+
+          console.log(`Day: ${currentDay} - ${todayCost.toFixed(2)} leva`);
+        }
+
+        console.log(`Total: ${total.toFixed(2)} leva`);
+      }
+
+      // calcParking(["2", "5"]);
+      // calcParking(["5", "2"]);
+
+      function calcParking2(params) {
+        const days = Number(params[0]);
+        const hours = Number(params[1]);
+        let total = 0;
+        let currentDay = 0;
+
+        // For Odd Days
+        for (let day = 1; day <= days; day++) {
+          let todayCost = 0;
+
+          if (day % 2 === 0) {
+          
+          for (let oddHour = 1; oddHour <= hours; oddHour+=2) {
+            total += 2.5;
+            todayCost += 2.5;
+          }
+
+          for (let evenHour = 2; evenHour <= hours; evenHour+=2) {
+            total++;
+            todayCost++;
+          }
+
+          console.log(`Day: ${day} - ${todayCost.toFixed(2)} leva`);
+          } else {
+          
+          for (let oddHour = 1; oddHour <= hours; oddHour+=2) {
+            total++;
+            todayCost++;
+          }
+
+          for (let evenHour = 2; evenHour <= hours; evenHour+=2) {
+            total += 1.25;
+            todayCost += 1.25;
+          }
+
+          console.log(`Day: ${day} - ${todayCost.toFixed(2)} leva`);
+        }
+      }
+
+        console.log(`Total: ${total.toFixed(2)} leva`);
+      }
+
+      // calcParking2(["2", "5"]);
+      // calcParking2(["5", "2"]);
+
+      const collection = new Map();
+
+      collection.set("name", "Jogata");
+      collection.set("age", 43);
+
+      const jogata = Object.fromEntries(collection);
+
+      console.log(jogata);
+
+      const params = [
+        ["search", "dogs"], 
+        ["page", "2"], 
+        "test"   // throws an error
+      ]
+
+      const searchParams = Object.fromEntries(params);
+
+      console.log(searchParams);
     </script>
   </body>
 </html>
