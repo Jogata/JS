@@ -4,191 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <style>
-      h1 {
-        text-align: center;
-      }
-      h1 span {
-        display: inline-block;
-        margin-right: 10px;
-        padding-right: 20px;
-        border-right: 2px solid;
-      }
-      button {
-        padding: 5px 10px;
-        border-radius: 5px;
-      }
-      fieldset {
-        margin: 2rem auto;
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      a {
-        text-decoration: none;
-      }
-
-      body {
-        font-family: Georgia, serif;
-      }
-
-      .bg {
-        width: 100%;
-        height: 100vh;
-        background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.45)), 
-        url("https://images.pexels.com/photos/2079246/pexels-photo-2079246.jpeg");
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-      }
-
-      .navbar {
-        width: 85%;
-        margin: auto;
-        padding: 35px 0;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      .navbar .logo {
-        width: 70px;
-        mix-blend-mode: lighten;
-        filter: invert(1);
-        cursor: pointer;
-      }
-      .logo-cont {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .logo-cont::after {
-        position: absolute;
-        top: calc(-15% - 1px);
-        left: calc(-15% - 1px);
-        content: "";
-        width: 130%;
-        height: 130%;
-        border-radius: 50%;
-        border: 2px solid #fff;
-      }
-
-      .navbar ul {
-        list-style: none;
-      }
-      .navbar ul li {
-        position: relative;
-        display: inline-block;
-        margin: 0 20px;
-      }
-      .navbar ul li a {
-        color: lightgrey;
-        font-size: 14px;
-        font-weight: bold;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-      }
-      .navbar ul li::after {
-        position: absolute;
-        left: 0;
-        bottom: -10px;
-        content: "";
-        width: 0;
-        height: 3px;
-        border-radius: 10px;
-        background-color: #fff;
-        transition: all 0.6s;
-      }
-      .navbar ul li:hover::after {
-        width: 100%;
-      }
-
-      .content {
-        margin-top: 10%;
-        color: #fff;
-        text-align: center;
-      }
-      .content h1 {
-        font-size: 55px;
-        text-transform: uppercase;
-      }
-      .content p {
-        margin: 20px;
-        font-size: 24px;
-      }
-
-      button {
-        position: fixed;
-        width: 250px;
-        height: 70px;
-        margin: 20px -150px;
-        padding: 15px 0;
-        color: #fff;
-        font-size: 24px;
-        font-weight: bold;
-        font-family: inherit;
-        text-align: center;
-        text-transform: capitalize;
-        border: 2px solid #fff;
-        border-radius: 50px;
-        background-color: transparent;
-        cursor: pointer;
-        overflow: hidden;
-      }
-      button span {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: inherit;
-        transition: all 0.6s;
-        z-index: -1;
-      }
-      button:hover span {
-        background: grey;
-        opacity: 0.5;
-      }
-    </style>
   </head>
   <body>
-    <div class="bg">
-
-      <div class="navbar">
-
-        <div class="logo-cont">
-          <img src="https://cdn.imgbin.com/23/3/7/linear-detailed-travel-elements-icon-chair-icon-armchair-icon-D08TURQC.jpg" alt="" class="logo">
-        </div>
-
-        <ul>
-          <li><a href="#">home</a></li>
-          <li><a href="#">dining</a></li>
-          <li><a href="#">kitchen</a></li>
-          <li><a href="#">bedroom</a></li>
-          <li><a href="#">backyard</a></li>
-        </ul>
-
-      </div>
-
-      <div class="content">
-        <h1>create youe dream with us</h1>
-        <p>Be faithful to your own taste, because nothing you really like is never out of style.</p>
-        <div>
-          <button type="button">
-            <span></span>
-            subscribe now</button>
-        </div>
-      </div>
-
-    </div>
-
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
       <legend>Get all users from local JSON file</legend>
@@ -251,6 +70,179 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
+    </script>
+
+    <script>
+      // 12. The song of the wheels
+
+      function findPassword(params) {
+        const controlN = Number(params[0]);
+        let passwords = "";
+        let count = 0;
+        let result = "";
+
+        for (let f = 1; f <= 9; f++) {
+
+          for (let s = 1; s <= 9; s++) {
+
+            for (let t = 1; t <= 9; t++) {
+
+              for (let fo = 1; fo <= 9; fo++) {
+                let current = f * s + t * fo;
+                let password = `${f}${s}${t}${fo}`;
+
+                if (current === controlN) {
+                  if (f < s) {
+                    if (t > fo) {
+                      // console.log(password);
+                      passwords += `${password} `;
+                      count++;
+
+                      if (count === 4) {
+                        result = password;
+                      }
+                    }
+                  }
+                }
+                
+              }
+            }
+          }
+        }
+
+        if (count > 0) {
+          console.log(passwords);
+        }
+
+        if (count > 3) {
+          // console.log(`Password: ${passwords[15]}${passwords[16]}${passwords[17]}${passwords[18]}`);
+          console.log(`Password: ${result}`);
+        } else {
+          console.log("No!");
+        }
+
+      }
+
+      // findPassword(["11"]);
+      // findPassword(["139"]);
+      // findPassword(["1"]);
+
+      // 13. Prime Pairs
+
+      function createPrimePairs(params) {
+        const firstStart = Number(params[0]);
+        const secondStart = Number(params[1]);
+        const diff1 = Number(params[2]);
+        const diff2 = Number(params[3]);
+
+        const firstEnd = firstStart + diff1;
+        const secondEnd = secondStart + diff2;
+
+        for (let i1 = firstStart; i1 <= firstEnd; i1++) {
+
+          let isSimple = true;
+          
+          for (let index = 2; index < i1; index++) {
+            if (i1 % index === 0) {
+              isSimple = false;
+              break;
+            }
+          }
+
+          if (isSimple) {
+            for (let i2 = secondStart; i2 <= secondEnd; i2++) {
+              isSimple = true;
+              
+              for (let index = 2; index < i2; index++) {
+
+                if (i2 % index === 0) {
+                  isSimple = false;
+                  break;
+                }
+              }
+
+              if (isSimple) {
+                console.log(`${i1}${i2}`);
+              }
+
+            }
+          }
+
+        }
+      }
+
+      // createPrimePairs(["10", "20", "5", "5"]);
+      // createPrimePairs(["10", "30", "9", "6"]);
+
+      // 14. Password Generator
+
+      function generatePassword(params) {
+        const input1 = Number(params[0]);
+        const input2 = Number(params[1]);
+
+        let passwords = "";
+
+        for (let n1 = 1; n1 < input1; n1++) {
+
+          for (let n2 = 1; n2 < input1; n2++) {
+            
+            for (let n3 = 97; n3 < 97+input2; n3++) {
+              
+              for (let n4 = 97; n4 < 97+input2; n4++) {
+                
+                const max = Math.max(n1, n2) + 1;
+
+                for (let n5 = max; n5 <= input1; n5++) {
+                  
+                  let password = `${n1}${n2}${String.fromCharCode(n3)}${String.fromCharCode(n4)}${n5} `;
+                  passwords += password;
+                  
+                }
+                
+              }
+            }
+          }
+        }
+
+        console.log(passwords);
+
+      }
+
+      // generatePassword(["2", "4"]);
+      // generatePassword(["3", "1"]);
+      // generatePassword(["3", "2"]);
+      // generatePassword(["4", "2"]);
+
+      // 08. Secret Door's Lock
+
+      function generateLocksCombinations(params) {
+        const max100 = Number(params[0]);
+        let max10 = Number(params[1]);
+        const max1 = Number(params[2]);
+
+        max10 = Math.min(max10, 7);
+
+        for (let stotici = 2; stotici <= max100; stotici+=2) {
+
+          for (let desetici = 2; desetici <= max10; desetici++) {
+
+            if (desetici === 4 || desetici === 6) {
+              continue;
+            }
+
+            for (let edenici = 2; edenici <= max1; edenici+=2) {
+
+              let combination = `${stotici} ${desetici} ${edenici}`;
+              console.log(combination);
+              
+            }
+          }
+        }
+      }
+
+      // generateLocksCombinations(["3", "5", "5"]);
+      // generateLocksCombinations(["8", "2", "8"]);
+
     </script>
   </body>
 </html>
