@@ -4,1169 +4,132 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      a {
-        text-decoration: none;
-      }
-
-      body {
-        font-family: Georgia, serif;
-      }
-
-      .section-container {
-        padding-top: 2rem;
-      }
-
-      .section-title {
-        margin-bottom: 1.2rem;
-        color: #171717;
-        font-size: 2rem;
-        text-align: center;
-        text-transform: capitalize;
-        text-shadow: 1px 1px 1px rgb(0, 0, 0), 
-        -1px -1px 1px rgba(255, 255, 255, 0.4);
-      }
-      
-      /* .section-title {
-        color: transparent;
-        background: linear-gradient(90deg, #000, #fff, #000);
-        background-position-x: -500%;
-        background-repeat: no-repeat;
-        background-size: 80%;
-        background-clip: text;
-        -webkit-background-clip: text;
-        animation: shine 5s linear infinite;
-      }
-      @keyframes shine {
-        100% {
-          background-position-x: 500%;
-        }
-      } */
-
-      .fa-play {
-        padding: 0.34em 0.34em 0.34em 0.56em;
-        color: #ffe100;
-        border: 2px solid #ffe100;
-        border-radius: 50%;
-        background-color: transparent;
-        transition: all 0.4s ease-in-out;
-        cursor: pointer;
-      }
-      .fa-play:hover {
-        background-color: rgba(255, 225, 0, 0.2);
-      }
-
-      header {
-        width: 100%;
+      .product-slider {
+        padding: 2em;
         min-height: 100vh;
-        padding-top: 20px;
-        background-color: #171717;
-      }
-
-      header nav {
-        width: 100%;
-        margin-bottom: 20px;
-        padding: 10px 5% 8px 5%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: #171717;
-      }
-
-      .logo {
-        font-size: 1.6rem;
-        text-transform: capitalize;
-      }
-      .logo a {
-        color: #faebd7;
-      }
-      .logo span {
-        display: inline-block;
-        margin-left: 8px;
-        color: #ffe100;
-        text-transform: capitalize;
-        text-decoration: underline;
-      }
-
-      .menu-links ul {
-        list-style: none;
-      }
-      .menu-links ul li {
-        display: inline-block;
-        margin: 0 5px;
-      }
-      .menu-links ul li a {
-        color: #fff;
-        text-transform: capitalize;
-        transition: all 0.4s;
-      }
-
-      .menu-links ul li a:hover {
-        color: #ffe100;
-      }
-
-      .swiper {
-        position: relative;
-        width: 95%;
-        margin: auto;
-        border-radius: 20px;
-        overflow: hidden;
-      }
-      .swiper::selection {
-        user-select: none;
-      }
-
-      .swiper-slide {
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        min-height: 100vh;
-        aspect-ratio: 16 / 9;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.2rem;
-        text-align: center;
-        background-color: #fff;
-        opacity: 0;
+        background: linear-gradient(-45deg, #44202c, #0a1821);
       }
-      .swiper-slide.visible {
+
+      .logo {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        width: 40%;
+        height: 90%;
+        object-fit: cover;
+      }
+
+      .card {
         position: relative;
-        opacity: 1;
+        width: 90vw;
+        max-width: 1050px;
+        height: 80vh;
+        min-height: 38em;
+        padding: 2em;
+      }
+
+      .panel-1,      
+      .panel-2 {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        border-radius: 2em;
+        box-shadow: 0 0 4em 1em rgba(0, 0, 0, 0.4);
+      }      
+
+      .panel-1 {
+        width: 80%;
+        height: 90%;
+        right: 0;
+        background-image: url("./images/background1.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        overflow: hidden;
         z-index: 1;
       }
-
-      .swiper-navigation {
-        position: absolute;
-        top: 47%;
-        width: 100%;
-        padding: 0 2%;
-        z-index: 3;
-      }
-      .swiper-navigation button {
-        border: 1px solid #fff;
-        border-radius: 50%;
-        outline: 1px solid transparent;
-        background-color: transparent;
-        transition: all 0.2s;
-        opacity: 0.4;
-        cursor: pointer;
-      }
-      .swiper-navigation button:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-        opacity: 1;
-      }
-      .swiper-navigation button span {
-        display: inline-block;
-        padding: 0.3em 0.266em 0.5em 0.2em;
-        color: #fff;
-        font-size: 3rem;
-        font-family: initial;
-        line-height: 0;
-      }
-      .swiper-navigation button#next {
-        float: right;
-      }
-      .swiper-navigation button#next span {
-        padding: 0.3em 0.2em 0.5em 0.266em;
-      }
-
-      .slide-content {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-      }
-      .slide-content::before {
+      .panel-1::before {
         position: absolute;
         top: 0;
         left: 0;
         content: "";
         width: 100%;
         height: 100%;
-        background-image: 
-          linear-gradient(to bottom, 
-            rgba(0, 0, 0, 0), 
-            rgba(0, 0, 0, 0.9));
-        pointer-events: none;
-        z-index: 1;
-      }
-
-      .slide-info {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        margin-top: auto;
-        padding: 0 3% 4%;
-        z-index: 2;
-      }
-      .slide-info h1 {
-        color: #fff;
-        font-size: 2rem;
-        text-align: left;
-      }
-
-      .swiper-slide img {
-        position: relative;
-        top: 0;
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .rating {
-        margin: 10px 0;
-        color: #fff;
-        font-size: 1rem;
-        text-align: left;
-      }
-      .rating i {
-        color: #ffe100;
-      }
-
-      .slide-info p {
-        width: 100%;
-        max-width: 35rem;
-        margin: 10px 0;
-        color: #ccc;
-        font-size: 1rem;
-        text-align: justify;
-        line-height: 23px;
-      }
-
-      .genre {
-        margin: 13px 0;
-        font-size: 1rem;
-        text-align: left;
-      }
-
-      .category {
-        padding: 2px 7px;
-        color: #ccc;
-        background-color: #282931;
-      }
-      .category span {
-        color: #ffe100;
-        font-family: initial;
-      }
-
-      .trailer {
-        margin: 10px 0;
-        display: flex;
-        align-items: center;
-        text-align: left;
-      }
-      .trailer .fa-play {
-        font-size: 2.2rem;
-      }
-      .trailer p {
-        width: fit-content;
-        margin-left: 15px;
-        font-size: 1.4rem;
-        text-align: center;
-        text-transform: capitalize;
-      }
-
-      .popular {
-        width: 100%;
-        height: auto;
-        margin: 0 auto;
-        padding-bottom: 25px;
-        background-color: #171717;
-      }
-
-      .latest {
-        width: 95%;
-        margin: 0 auto;
-      }
-
-      .cards {
-        display: flex;
-        align-items: center;
-        overflow-x: auto;
-      }
-
-      .card {
-        position: relative;
-        width: 250px;
-        min-width: 250px;
-        height: 370px;
-        margin: 10px;
-        border-radius: 8px;
-        overflow: hidden;
-        cursor: pointer;
-      }
-
-      .card .details {
-        position: absolute;
-        width: 250px;
-        height: 370px;
-        transition: 0.3s;
-        opacity: 0;
-        overflow: hidden;
-      }
-      .card:hover .details {
-        opacity: 1;
-        background-image: linear-gradient(
-          to bottom, 
-          rgba(0, 0, 0, 0), 
-          rgba(0, 0, 0, 0.7)
+        background: linear-gradient(45deg, 
+          #29191e 0%, #0c1c29 40%, 
+          rgba(12, 31, 45, 0.9) 100%
         );
       }
 
-      .details .general-info {
-        position: absolute;
-        bottom: 0;
-        color: #fff;
-        transform: translateX(-100px);
-        transition: 0.4s;
-        opacity: 0;
-      }
-      .card:hover .details .general-info {
-        transform: translateX(0);
-        opacity: 1;
-      }
-
-      .name {
-        width: 100%;
-        padding: 0 10px;
-        margin-bottom: 10px;
-        font-size: 20px;
-        font-weight: bold;
-        text-transform: capitalize;
-      }
-
-      .date-quality {
-        display: flex;
-        align-items: center;
-      }
-      .quality {
-        width: 30px;
-        margin-left: 10px;
-        margin-bottom: 8px;
-        color: #282931;
-        font-size: 13px;
-        font-weight: bold;
-        text-align: center;
-        background-color: #ffe100;
-      }
-      .date {
-        margin-left: 10px;
-        margin-bottom: 8px;
-        color: #fff;
-        font-size: 15px;
-        font-weight: bold;
-        text-align: left;
-      }
-
-      .category {
-        display: inline-block;
-        margin-left: 10px;
-        margin-bottom: 8px;
-        font-size: 13px;
-      }
-
-      .info {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-      }
-
-      .rate {
-        display: flex;
-        align-items: center;
-        margin-left: 10px;
-        margin-right: 10px;
-      }
-      .rate i {
-        margin-right: 5px;
-        color: #ffd500;
-        font-size: 12px;
-      }
-      .rate p {
-        font-size: 18px;
-      }
-      
-      .duration {
-        display: flex;
-        align-items: center;
-      }
-      .duration i {
-        margin-left: 5px;
-        color: #ffd500;
-        font-size: 12px;
-      }
-      .duration p {
-        margin-left: 5px;
-        font-size: 12px;
-      }
-      .duration p span {
-        font-size: 18px;
-      }
-
-      .play-button {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        color: #fff;
-        transform: translateX(100px);
-        transition: 0.4s;
-        opacity: 0;
-      }
-      .card:hover .details .play-button {
-        transform: translateX(0);
-        opacity: 1;
-      }
-      .play-button i {
-        margin: 0 10px 8px 0;
-        font-size: 1.2rem;
-      }
-
-      .card img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-      }
-
-      .upcoming {
-        width: 100%;
-        height: auto;
-        margin: 0 auto;
-        padding-bottom: 25px;
-        background-color: #171717;
-      }
-
-      .movies-box {
-        width: 95%;
-        margin: 0 auto;
-      }
-
-      .movies-box h1 {
-        margin-bottom: 20px;
-        color: #fff;
-        font-size: 20px;
-      }
-
-      .show {
-        width: 100%;
-        height: auto;
-        margin: 0 auto;
-        padding-bottom: 25px;
-        background-color: #171717;
-      }
-
-      .show .tv-show {
-        width: 95%;
-        margin: 0 auto;
-      }
-
-      .tv-show h1 {
-        margin-bottom: 20px;
-        color: #fff;
-        font-size: 20px;
-        text-transform: capitalize;
-      }
-
-      .newsletter {
-        width: 100%;
-        height: auto;
-        padding-bottom: 3rem;
-        background-color: #171717;
-      }
-
-      .newsletter .news-card {
-        position: relative;
-        width: 100%;
-        max-width: 550px;
-        margin: 0 auto;
-        padding-right: 0.2em;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 3px solid #171717;
-        border-radius: 2em;
-        outline: 1px solid transparent;
-        box-shadow: 1px 1px 1px #000, 
-        inset 1px 1px 1px #000,
-        -1px -1px 1px rgba(255, 255, 255, 0.4), 
-        inset -1px -1px 1px rgba(255, 255, 255, 0.4);
-      }
-      .news-card input {
-        width: 100%;
-        max-width: 550px;
-        padding: 1em 10px 1em 1.4em;
-        color: #ccc;
-        border: 1px solid transparent;
-        outline: 1px solid transparent;
-        background-color: transparent;
-      }
-      .news-card button {
-        padding: 0.6em 3em;
-        color: #ffe100;
-        font-size: 1rem;
-        font-weight: bold;
-        text-transform: capitalize;
-        outline: 1px solid transparent;
-        border: 1px solid transparent;
-        border-radius: 2em;
-        background-color: transparent;
-        box-shadow: 1px 1px 1px #000, 
-        -1px -1px 1px rgba(255, 255, 255, 0.4);
-        cursor: pointer;
-      }
-
-      @media screen and (max-width: 44rem) {
-        .slide-info {
-          position: relative;
-        }
-        .swiper-slide img {
-          position: absolute;
-        }
-        .swiper-slide {
-          aspect-ratio: 1;
-        }
-        .newsletter .news-card {
-          flex-direction: column;
-          row-gap: 1em;
-          box-shadow: unset;
-        }
-        .news-card input {
-          border-radius: 2em;
-          box-shadow: 1px 1px 1px #000, 
-          inset 1px 1px 1px #000, 
-          -1px -1px 1px rgba(255, 255, 255, 0.4), 
-          inset -1px -1px 1px rgba(255, 255, 255, 0.4);
-        }
-      }
-
-      @media screen and (max-width: 44rem) {
-        .swiper-slide {
-          aspect-ratio: 9 / 16;
-        }
-      }
     </style>
   </head>
   <body>
-    <header>
-      <nav>
-        <div class="logo">
-          <a href="#logo">movies<span>hub</span></a>
-        </div>
-        <div class="menu-links">
-          <ul>
-            <li><a href="#">home</a></li>
-            <li><a href="#">about</a></li>
-            <li><a href="#"><span class="upper">tv</span> show</a></li>
-            <li><a href="#">newsletters</a></li>
-            <li><a href="#">blog</a></li>
-            <li><a href="#">contact</a></li>
-          </ul>
-        </div>
-      </nav>
-
-      <div class="swiper">
-        <div class="swiper-slide visible">
-          <div class="slide-content">
-            <div class="slide-info">
-              <h1>Death on the Nile</h1>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half"></i>
-                <i class="fa fa-star-o"></i>
+    <section class="product-slider">
+      <img src="./images/logo1.svg" alt="Logo" class="logo">
+      <div class="card">
+        <div class="panel-1"></div>
+        <div class="panel-2"></div>
+        <div class="product">
+          <div class="product-image">
+            <img src="./images/product1.png" alt="Stormtrooper Helmet">
+          </div>
+          <div class="product-details">
+            <div>
+              <h1 class="product-name">
+                stormtrooper helmet
+              </h1>
+              <h2 class="price">
+                $<span class="product-price">1.299</span>,<sup>99</sup>
+              </h2>
+              <div class="details">
+                <div class="options">
+                  <b class="product-option-title">
+                    helmet size
+                  </b>
+                  <ul class="options-list">
+                    <li class="option active">s</li>
+                    <li class="option">m</li>
+                    <li class="option">l</li>
+                    <li class="option">xl</li>
+                  </ul>
+                </div>
+                <div class="specs">
+                  <div class="progress-bar">
+                    <div class="progress-circle">
+                      <div class="progress-content">
+                        <h3 class="prog-text">80</h3>
+                      </div>
+                      <div class="progress"></div>
+                    </div>
+                  </div>
+                  <small><b>durability</b></small>
+                </div>
               </div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas nesciunt laudantium commodi natus minima
-                rem, accusamus velit! Quam consequatur, optio dolore temporibus accusamus aperiam eos similique expedita porro
-                eaque quidem.</p>
-              <div class="genre">
-                <a href="#cat" class="category">Action</a>
-                <a href="#cat" class="category">Drama</a>
-                <a href="#cat" class="category"><span>4K</span></a>
-              </div>
-              <div class="trailer">
-                <i class="fa fa-play"></i>
-                <p>watch the trailer</p>
+              <div class="buttons">
+                <button type="button" class="btn-primary">
+                  <b>add to cart</b>
+                </button>
+                <button type="button" class="btn-secondary">
+                  <i class="fa fa-heart"></i>
+                  add to wishlist
+                </button>
               </div>
             </div>
-            <img src="./images/background.jpg" alt="">
           </div>
         </div>
-        <div class="swiper-slide">
-          <div class="slide-content">
-            <div class="slide-info">
-              <h1>The Maze Runner</h1>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half"></i>
-                <i class="fa fa-star-o"></i>
-              </div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas nesciunt laudantium commodi natus minima
-                rem, accusamus velit! Quam consequatur, optio dolore temporibus accusamus aperiam eos similique expedita porro
-                eaque quidem.</p>
-              <div class="genre">
-                <a href="#cat" class="category">Action</a>
-                <a href="#cat" class="category">Drama</a>
-                <a href="#cat" class="category"><span>4K</span></a>
-              </div>
-              <div class="trailer">
-                <i class="fa fa-play"></i>
-                <p>watch the trailer</p>
-              </div>
-            </div>
-            <img src="./images/background_1.jpg" alt="">
-          </div>
+        <div class="left-arrow">
+          <i class="fa fa-arrow-left"></i>
         </div>
-        <div class="swiper-slide">
-          <div class="slide-content">
-            <div class="slide-info">
-              <h1>The Avengers</h1>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half"></i>
-                <i class="fa fa-star-o"></i>
-              </div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas nesciunt laudantium commodi natus minima
-                rem, accusamus velit! Quam consequatur, optio dolore temporibus accusamus aperiam eos similique expedita porro
-                eaque quidem.</p>
-              <div class="genre">
-                <a href="#cat" class="category">Action</a>
-                <a href="#cat" class="category">Drama</a>
-                <a href="#cat" class="category"><span>4K</span></a>
-              </div>
-              <div class="trailer">
-                <i class="fa fa-play"></i>
-                <p>watch the trailer</p>
-              </div>
-            </div>
-            <img src="./images/background_2.jpg" alt="">
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="slide-content">
-            <div class="slide-info">
-              <h1>Fullmetal Alchemist: Final Transmutation</h1>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half"></i>
-                <i class="fa fa-star-o"></i>
-              </div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas nesciunt laudantium commodi natus minima
-                rem, accusamus velit! Quam consequatur, optio dolore temporibus accusamus aperiam eos similique expedita porro
-                eaque quidem.</p>
-              <div class="genre">
-                <a href="#cat" class="category">Action</a>
-                <a href="#cat" class="category">Drama</a>
-                <a href="#cat" class="category"><span>4K</span></a>
-              </div>
-              <div class="trailer">
-                <i class="fa fa-play"></i>
-                <p>watch the trailer</p>
-              </div>
-            </div>
-            <img src="./images/background_4.jpg" alt="">
-          </div>
-        </div>
-        <div class="swiper-slide">
-          <div class="slide-content">
-            <div class="slide-info">
-              <h1>Apocalypto</h1>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-half"></i>
-                <i class="fa fa-star-o"></i>
-              </div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas nesciunt laudantium commodi natus minima
-                rem, accusamus velit! Quam consequatur, optio dolore temporibus accusamus aperiam eos similique expedita porro
-                eaque quidem.</p>
-              <div class="genre">
-                <a href="#cat" class="category">Action</a>
-                <a href="#cat" class="category">Drama</a>
-                <a href="#cat" class="category"><span>4K</span></a>
-              </div>
-              <div class="trailer">
-                <i class="fa fa-play"></i>
-                <p>watch the trailer</p>
-              </div>
-            </div>
-            <img src="./images/background_5.jpg" alt="">
-          </div>
-        </div>
-        <div class="swiper-navigation">
-          <button id="prev">
-            <span>&#139;</span>
-          </button>
-          <button id="next">
-            <span>&#155;</span>
-          </button>
+        <div class="right-arrow">
+          <i class="fa fa-arrow-right"></i>
         </div>
       </div>
-    </header>
-
-    <div class="popular section-container">
-      <div class="latest">
-        <h2 class="section-title">popular movies</h2>
-        <div class="cards">
-          <div class="card">
-            <div class="details">
-              <div class="general-info">
-                <p class="name">black panter: wakanda forever</p>
-                <div class="date-quality">
-                  <p class="quality">HD</p>
-                  <p class="date">2022</p>
-                </div>
-                <p class="category">Action/Adventure</p>
-                <div class="info">
-                  <div class="rate">
-                    <i class="fa fa-star"></i>
-                    <p>7.1</p>
-                  </div>
-                  <div class="duration">
-                    <i class="fa fa-clock-o"></i>
-                    <p><span>120</span>min</p>
-                  </div>
-                </div>
-              </div>
-              <div class="play-button">
-                <i class="fa fa-play"></i>
-              </div>
-            </div>
-            <img src="./images/Black_Panther.webp" alt="">
-          </div>
-          <div class="card">
-            <div class="details">
-              <div class="general-info">
-                <p class="name">gajeman</p>
-                <div class="date-quality">
-                  <p class="quality">HD</p>
-                  <p class="date">2023</p>
-                </div>
-                <p class="category">Animation/Comedy</p>
-                <div class="info">
-                  <div class="rate">
-                    <i class="fa fa-star"></i>
-                    <p>9.2</p>
-                  </div>
-                  <div class="duration">
-                    <i class="fa fa-clock-o"></i>
-                    <p><span>120</span>min</p>
-                  </div>
-                </div>
-              </div>
-              <div class="play-button">
-                <i class="fa fa-play"></i>
-              </div>
-            </div>
-            <img src="./images/gajaman.jpg" alt="">
-          </div>
-          <div class="card">
-            <div class="details">
-              <div class="general-info">
-                <p class="name">interceptor</p>
-                <div class="date-quality">
-                  <p class="quality">HD</p>
-                  <p class="date">2022</p>
-                </div>
-                <p class="category">Action/Adventure</p>
-                <div class="info">
-                  <div class="rate">
-                    <i class="fa fa-star"></i>
-                    <p>4.6</p>
-                  </div>
-                  <div class="duration">
-                    <i class="fa fa-clock-o"></i>
-                    <p><span>120</span>min</p>
-                  </div>
-                </div>
-              </div>
-              <div class="play-button">
-                <i class="fa fa-play"></i>
-              </div>
-            </div>
-            <img src="./images/Interceptor.jpg" alt="">
-          </div>
-          <div class="card">
-            <div class="details">
-              <div class="general-info">
-                <p class="name">thor: love and thunder</p>
-                <div class="date-quality">
-                  <p class="quality">HD</p>
-                  <p class="date">2022</p>
-                </div>
-                <p class="category">Action/Adventure</p>
-                <div class="info">
-                  <div class="rate">
-                    <i class="fa fa-star"></i>
-                    <p>6.3</p>
-                  </div>
-                  <div class="duration">
-                    <i class="fa fa-clock-o"></i>
-                    <p><span>120</span>min</p>
-                  </div>
-                </div>
-              </div>
-              <div class="play-button">
-                <i class="fa fa-play"></i>
-              </div>
-            </div>
-            <img src="./images/Thor.jpg" alt="">
-          </div>
-          <div class="card">
-            <div class="details">
-              <div class="general-info">
-                <p class="name">black adam</p>
-                <div class="date-quality">
-                  <p class="quality">HD</p>
-                  <p class="date">2022</p>
-                </div>
-                <p class="category">Action/Adventure</p>
-                <div class="info">
-                  <div class="rate">
-                    <i class="fa fa-star"></i>
-                    <p>6.4</p>
-                  </div>
-                  <div class="duration">
-                    <i class="fa fa-clock-o"></i>
-                    <p><span>120</span>min</p>
-                  </div>
-                </div>
-              </div>
-              <div class="play-button">
-                <i class="fa fa-play"></i>
-              </div>
-            </div>
-            <img src="./images/Black_Adam.jpg" alt="">
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="upcoming section-container">
-      <div class="movies-box">
-        <h2 class="section-title">upcoming movies</h2>
-        <div class="cards">
-          <div class="card">
-            <div class="details">
-              <div class="general-info">
-                <p class="name">plane</p>
-                <div class="date-quality">
-                  <p class="quality">HD</p>
-                  <p class="date">2023</p>
-                </div>
-                <p class="category">Action/Thriller</p>
-                <div class="info">
-                  <div class="rate">
-                    <i class="fa fa-star"></i>
-                    <p>7.2</p>
-                  </div>
-                  <div class="duration">
-                    <i class="fa fa-clock-o"></i>
-                    <p><span>120</span>min</p>
-                  </div>
-                </div>
-              </div>
-              <div class="play-button">
-                <i class="fa fa-play"></i>
-              </div>
-            </div>
-            <img src="./images/plane.jpg" alt="">
-          </div>
-          <div class="card">
-            <div class="details">
-              <div class="general-info">
-                <p class="name">john wick: chapter 4</p>
-                <div class="date-quality">
-                  <p class="quality">HD</p>
-                  <p class="date">2023</p>
-                </div>
-                <p class="category">Action/Neo-noar</p>
-                <div class="info">
-                  <div class="rate">
-                    <i class="fa fa-star"></i>
-                    <p>8.5</p>
-                  </div>
-                  <div class="duration">
-                    <i class="fa fa-clock-o"></i>
-                    <p><span>120</span>min</p>
-                  </div>
-                </div>
-              </div>
-              <div class="play-button">
-                <i class="fa fa-play"></i>
-              </div>
-            </div>
-            <img src="./images/john_wick.jfif" alt="">
-          </div>
-          <div class="card">
-            <div class="details">
-              <div class="general-info">
-                <p class="name">meg 2: the trench</p>
-                <div class="date-quality">
-                  <p class="quality">HD</p>
-                  <p class="date">2023</p>
-                </div>
-                <p class="category">Adventure</p>
-                <div class="info">
-                  <div class="rate">
-                    <i class="fa fa-star"></i>
-                    <p>6.7</p>
-                  </div>
-                  <div class="duration">
-                    <i class="fa fa-clock-o"></i>
-                    <p><span>120</span>min</p>
-                  </div>
-                </div>
-              </div>
-              <div class="play-button">
-                <i class="fa fa-play"></i>
-              </div>
-            </div>
-            <img src="./images/meg.jpg" alt="">
-          </div>
-          <div class="card">
-            <div class="details">
-              <div class="general-info">
-                <p class="name">aquaman and the lost kingdom</p>
-                <div class="date-quality">
-                  <p class="quality">HD</p>
-                  <p class="date">2023</p>
-                </div>
-                <p class="category">Action/Fantasy</p>
-                <div class="info">
-                  <div class="rate">
-                    <i class="fa fa-star"></i>
-                    <p>8.6</p>
-                  </div>
-                  <div class="duration">
-                    <i class="fa fa-clock-o"></i>
-                    <p><span>120</span>min</p>
-                  </div>
-                </div>
-              </div>
-              <div class="play-button">
-                <i class="fa fa-play"></i>
-              </div>
-            </div>
-            <img src="./images/aquaman.jpg" alt="">
-          </div>
-          <div class="card">
-            <div class="details">
-              <div class="general-info">
-                <p class="name">ant-man and the wasp: quantumania</p>
-                <div class="date-quality">
-                  <p class="quality">HD</p>
-                  <p class="date">2023</p>
-                </div>
-                <p class="category">Action/Adventure</p>
-                <div class="info">
-                  <div class="rate">
-                    <i class="fa fa-star"></i>
-                    <p>6.9</p>
-                  </div>
-                  <div class="duration">
-                    <i class="fa fa-clock-o"></i>
-                    <p><span>120</span>min</p>
-                  </div>
-                </div>
-              </div>
-              <div class="play-button">
-                <i class="fa fa-play"></i>
-              </div>
-            </div>
-            <img src="./images/ant_man.jpg" alt="">
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="show section-container">
-      <div class="tv-show">
-        <h2 class="section-title">world best tv show</h2>
-        <div class="cards">
-          <div class="card">
-            <div class="details">
-              <div class="general-info">
-                <p class="name">money heist</p>
-                <div class="date-quality">
-                  <p class="quality">HD</p>
-                  <p class="date">2017</p>
-                </div>
-                <p class="category">Thriller</p>
-                <div class="info">
-                  <div class="rate">
-                    <i class="fa fa-star"></i>
-                    <p>8.2</p>
-                  </div>
-                  <div class="duration">
-                    <i class="fa fa-clock-o"></i>
-                    <p><span>120</span>min</p>
-                  </div>
-                </div>
-              </div>
-              <div class="play-button">
-                <i class="fa fa-play"></i>
-              </div>
-            </div>
-            <img src="./images/money_heist.jpg" alt="">
-          </div>
-          <div class="card">
-            <div class="details">
-              <div class="general-info">
-                <p class="name">wednesday</p>
-                <div class="date-quality">
-                  <p class="quality">HD</p>
-                  <p class="date">2022</p>
-                </div>
-                <p class="category">Comedy</p>
-                <div class="info">
-                  <div class="rate">
-                    <i class="fa fa-star"></i>
-                    <p>7.2</p>
-                  </div>
-                  <div class="duration">
-                    <i class="fa fa-clock-o"></i>
-                    <p><span>120</span>min</p>
-                  </div>
-                </div>
-              </div>
-              <div class="play-button">
-                <i class="fa fa-play"></i>
-              </div>
-            </div>
-            <img src="./images/wednesday.jpg" alt="">
-          </div>
-          <div class="card">
-            <div class="details">
-              <div class="general-info">
-                <p class="name">1899</p>
-                <div class="date-quality">
-                  <p class="quality">HD</p>
-                  <p class="date">2022</p>
-                </div>
-                <p class="category">Mystery</p>
-                <div class="info">
-                  <div class="rate">
-                    <i class="fa fa-star"></i>
-                    <p>7.4</p>
-                  </div>
-                  <div class="duration">
-                    <i class="fa fa-clock-o"></i>
-                    <p><span>120</span>min</p>
-                  </div>
-                </div>
-              </div>
-              <div class="play-button">
-                <i class="fa fa-play"></i>
-              </div>
-            </div>
-            <img src="./images/1899.jpg" alt="">
-          </div>
-          <div class="card">
-            <div class="details">
-              <div class="general-info">
-                <p class="name">game of thrones</p>
-                <div class="date-quality">
-                  <p class="quality">HD</p>
-                  <p class="date">2011</p>
-                </div>
-                <p class="category">Fantasy/Drama</p>
-                <div class="info">
-                  <div class="rate">
-                    <i class="fa fa-star"></i>
-                    <p>9.2</p>
-                  </div>
-                  <div class="duration">
-                    <i class="fa fa-clock-o"></i>
-                    <p><span>120</span>min</p>
-                  </div>
-                </div>
-              </div>
-              <div class="play-button">
-                <i class="fa fa-play"></i>
-              </div>
-            </div>
-            <img src="./images/game_of_thrones.jpg" alt="">
-          </div>
-          <div class="card">
-            <div class="details">
-              <div class="general-info">
-                <p class="name">arrow</p>
-                <div class="date-quality">
-                  <p class="quality">HD</p>
-                  <p class="date">2012</p>
-                </div>
-                <p class="category">Drama/Action</p>
-                <div class="info">
-                  <div class="rate">
-                    <i class="fa fa-star"></i>
-                    <p>7.5</p>
-                  </div>
-                  <div class="duration">
-                    <i class="fa fa-clock-o"></i>
-                    <p><span>120</span>min</p>
-                  </div>
-                </div>
-              </div>
-              <div class="play-button">
-                <i class="fa fa-play"></i>
-              </div>
-            </div>
-            <img src="./images/arrow.jpg" alt="">
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="newsletter section-container">
-      <h2 class="section-title">newsletter</h2>
-      <div class="news-card">
-        <input type="email" name="" id="" placeholder="Enter your email">
-        <button type="submit">subscribe</button>
-      </div>
-    </div>
-
-    <script>
-      const slides = document.querySelectorAll(".swiper-slide");
-      const btnPrev = document.querySelector("#prev");
-      const btnNext = document.querySelector("#next");
-      let slideIndex = 0;
-
-      btnNext.addEventListener("click", () => {
-        const visibleSlide = document.querySelector(".swiper-slide.visible");
-        visibleSlide.classList.remove("visible");
-        slideIndex++;
-        slideIndex = slideIndex % slides.length;
-        slides[slideIndex].classList.add("visible");
-      })
-
-      btnPrev.addEventListener("click", () => {
-        const visibleSlide = document.querySelector(".swiper-slide.visible");
-        visibleSlide.classList.remove("visible");
-        slideIndex--;
-        slideIndex = slideIndex + slides.length;
-        slideIndex = slideIndex % slides.length;
-        slides[slideIndex].classList.add("visible");
-      })
-    </script>
+    </section>
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
