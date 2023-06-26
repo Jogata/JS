@@ -4,917 +4,154 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>setInterval function in JS</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet"> 
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      ul {
-        list-style: none;
-      }
-      a {
-        text-decoration: none;
-      }
-
-      img {
+      .header {
         width: 100%;
+        height: 40px;
+        background-color: #3ba3e6;
       }
 
-      body {
-        width: fit-content;
-        font-family: Georgia, serif;
-      }
-
-      .flex-container {
-        display: flex;
-        flex-wrap: wrap;
-        column-gap: 2rem;
-        row-gap: 3rem;
-      }
-
-      .hero-page {
-        position: relative;
-        width: 100%;
-        min-height: 100vh;
-        margin-bottom: 5rem;
-        background-color: #fff;
-      }
-      header {
-        aspect-ratio: 1728 / 1189;
-      }
-      .hero-page::before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-image: 
-          linear-gradient(
-            rgba(85, 83, 83, 0.054) 80%, 
-            rgb(255, 255, 255));
-        z-index: 1;
-      }
-
-      .hero-img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: 0;
-      }
-
-      .nav {
-        position: relative;
-        width: 100%;
-        padding: 2% 4%;
+      .contact {
+        width: 90%;
+        margin: 0 auto;
+        padding-top: 5px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        z-index: 1;
-      }
-
-      .logo a {
-        color: #fff;
-        font-size: 1.2rem;
-        font-weight: 600;
-        text-transform: capitalize;
-        transition: all 0.5s ease;
-      }
-
-      .menu ul {
-        position: relative;
-        display: flex;
-        flex-wrap: wrap;
-        row-gap: 1rem;
-      }
-      .menu a {
-        margin: 0 1.5rem;
-        color: #fff;
-        font-size: 1rem;
-        font-weight: 500;
-        text-transform: capitalize;
-        transition: all 0.5s ease;
-      }
-
-      .fa-shopping-cart {
-        color: #fff;
-        font-size: 1rem;
-        transition: all 0.5s ease;
-        cursor: pointer;
-      }
-
-      .fa-shopping-cart:hover, 
-      header a.active, 
-      header a:hover {
-        color: transparent;
-        background-image: linear-gradient(90deg, #22e6aa, #06abed);
-        background-clip: text;
-        -webkit-background-clip: text;
-      }
-
-      .hero-content {
-        position: relative;
-        margin: max(10vh, 5rem) 1rem;
         text-align: center;
-        z-index: 1;
       }
 
-      .title {
-        max-width: 55rem;
-        margin: auto;
-        color: #fff;
-        font-size: min(8vw, 3rem);
-        font-weight: 700;
-        line-height: 1.3;
-        text-transform: capitalize;
-      }
-
-      .subtitle {
-        padding-top: 0.6em;
-        color: rgba(255, 255, 255, 0.834);
-        font-size: 1rem;
-        line-height: 1.5;
-      }
-
-      .hero-content form {
-        position: relative;
-        width: 100%;
-        max-width: 18rem;
-        margin: 0 auto;
-        padding-top: 1rem;
-      }
-      .search-bar {
-        position: relative;
-        width: 100%;
-        /* padding: 0.7rem 3rem 0.7rem 1rem; */
-        padding: 0.7em 3em 0.7em 1em;
-        color: #fff;
-        outline: none;
-        border: 1px solid rgba(255, 255, 255, 0.179);
-        border-radius: 2em;
-        /* background-color: #5f6979; */
-        background-color: rgba(95, 105, 121, 0.8);
-        box-shadow: inset 1px 1px 1px #000, inset -1px -1px 1px #fff;
-      }
-      .search-bar::placeholder {
-        color: #fff;
-        font-size: 0.8rem;
-        font-family: Georgia, serif;
-      }
-      .fa-search {
-        position: absolute;
-        right: 0.2rem;
-        bottom: 0.2rem;
-        /* padding: 0.56rem; */
-        padding: 0.45rem;
-        color: #fff;
-        font-size: 1rem;
-        text-align: center;
-        border-radius: 50%;
-        /* border: 2px solid #5f6979; */
-        background-color: #5f6979;
-        filter: drop-shadow(1px 1px 1px #000) drop-shadow(-1px -1px 1px #fff);
-        transition: all 0.5s ease;
-        cursor: pointer;
-      }
-      .fa-search:hover {
-        background-color: #06abed;
-      }
-      .fa-search:active {
-        filter: drop-shadow(1px 1px 1px transparent);
-      }
-
-      .price-tag {
-        position: absolute;
-        top: 40%;
-        left: 8%;
+      .normal {
         display: flex;
+        align-items: center;
+        text-align: justify;
       }
-      .price-tag .circle {
-        position: relative;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background-color: #fff;
-      }
-      .price-tag .circle::before, 
-      .price-tag .circle::after {
-        position: absolute;
-        top: -3px;
-        left: -3px;
-        content: "";
-        width: 14px;
-        height: 14px;
-        border: 1px solid #fff;
-        border-radius: 50%;
-        animation: circle 1.8s linear infinite;
-        opacity: 0;
-      }
-
-      .price-tag .circle-2 {
-        top: 14vh;
-        left: 35px;
-      }
-      .price-tag .circle-3 {
-        top: 15vh;
-        right: -168vh;
-      }
-
-      @keyframes circle {
-        0% {
-          transform: scale(0.5);
-        }
-        50% {
-          opacity: 1;
-        }
-        100% {
-          transform: scale(1.5);
-        }
-      }
-
-      .short-note {
-        position: absolute;
-        top: 40%;
-        right: 3%;
-        width: 160px;
-        height: 80px;
-        padding: 18px 20px;
-        border: 1px solid rgba(255, 255, 255, 0.179);
-        border-radius: 8px;
-        background-color: #515a66;
-      }
-      .short-note h2 {
+      .normal span {
+        padding-left: 12px;
         color: #fff;
         font-size: 18px;
       }
-      .short-note p {
-        padding-top: 6px;
+      .normal span i {
+        padding-right: 5px;
+      }
+
+      .social-contact {
+        display: flex;
+        align-items: right;
+        text-align: center;
+      }
+      .social-contact a i {
+        margin: 0 5px;
+        padding: 6px 8px;
+        color: #f38609;
+        border: 1px solid #fff;
+        border-radius: 50px;
+        background-color: #fff;
+        transition: all 0.4s ease-in-out;
+      }
+      .social-contact a i:hover {
         color: #fff;
-        font-size: 14px;
+        background-color: #f38609;
       }
 
-      .shop-section {
-        position: relative;
+      #navbar {
         width: 100%;
-        padding: min(5rem, 10%) 5% 10%;
+        height: 60px;
         background-color: #fff;
+        box-shadow: 0 0 8px #ccc;
+        overflow: hidden;
+        z-index: 1000;
       }
 
-      .offer-boxes {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        column-gap: 2rem;
-        row-gap: 3rem;
-      }
-      .offer-box {
-        display: flex;
-        align-items: center;
-      }
-      .offer-box img {
-        flex: 1 1 3rem;
-        max-width: 5rem;
-      }
-      .offer-details {
-        margin-left: 18px;
-      }
-      .offer-details h2 {
-        color: #262626;
-        font-size: 1.1rem;
-        text-transform: capitalize;
-      }
-      .offer-details p {
-        padding-top: 5px;
-        color: #262626;
-        font-size: 1rem;
-      }
-
-      .products-section {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-        column-gap: 2rem;
-      }
-
-      .product-title {
-        padding-top: 10%;
-        padding-bottom: 5%;
-      }
-      .product-title h3 {
-        color: #262626;
-        font-size: 2.8rem;
-        font-weight: 500;
-        text-transform: capitalize;
-      }
-      .product-title a {
-        position: relative;
-        color: #4f4f4f;
-        font-size: 1.1rem;
-        transition: all 0.5s;
-        cursor: pointer;
-      }
-      .product-title a:hover {
-        background: linear-gradient(90deg, #22e6aa, #06abed);
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      .product-title a i {
-        font-size: 14px;
-      }
-
-      .product-boxes {
-        padding-top: 5%;
-        display: flex;
-        flex-wrap: wrap;
-        column-gap: 2rem;
-        row-gap: 3rem;
-      }
-      
-      .product-box {
-        flex: 1 1 16rem;
-        border-radius: 0.6rem;
-        background-color: #c1d0e4;
-        filter: drop-shadow(2px 2px 4px #000);
-        cursor: pointer;
-      }
-      .product-box:nth-child(1) {
-        z-index: 3;
-      }
-      .product-box:nth-child(2) {
-        z-index: 2;
-      }
-      .product-box:nth-child(3) {
-        z-index: 1;
-      }
-      .product-box:hover {
-        z-index: 4;
-      }
-
-      .product-box img {
-        display: block;
-        margin: -10% auto auto;
+      .top-nav {
         width: 90%;
-        transition: 0.8s;
-      }
-      .main-img {
-        aspect-ratio: 1;
-      }
-
-      .product-box:hover .main-img {
-        transform: rotate(35deg) translateY(-85px);
-      }
-      .product-box .shadow {
-        width: 50%;
-        position: relative;
-        z-index: -1;
-      }
-      .product-box:hover .shadow {
-        opacity: 0;
-      }
-      
-      .product-details {
-        padding: 1.2em 1.4em;
-        border-radius: inherit;
-        background-color: #fff;
-        transition: 0.5s;
-      }
-      .product-box:hover .product-details {
-        transform: translateY(-25px);
-      }
-      
-      .product-details .product-name {
-        color: #262626;
-        font-size: 1.3rem;
-        font-weight: 500;
-        text-transform: capitalize;
-      }
-      
-      .product-details .rating i {
-        padding-top: 5px;
-        font-size: 0.8rem;
-        color: #f2c94c;
-      }
-
-      .tag {
+        margin: 0 auto;
+        padding-top: 22px;
         display: flex;
-        padding: 1em 0;
-        font-weight: 500;
         align-items: center;
         justify-content: space-between;
-      }
-      .tag h4 {
-        color: #262626;
-        font-size: 1.1rem;
-        font-weight: 500;
-      }
-      .tag .btn {
-        padding: 0.6em 0.8em;
-        color: #fff;
         text-align: center;
-        border-radius: 50%;
-        background: linear-gradient(90deg, #22e6aa, #064bed);
-        transition: all 0.5s ease;
-        cursor: pointer;
-      }
-      .tag .btn:hover {
-        background: linear-gradient(90deg, #c522e6, #ed4b06);
-      }
-
-      
-      .gallary-section {
-        position: relative;
-        width: 100%;
-        max-width: 140rem;
-        margin: auto;
-        padding: 0 5%;
         background-color: #fff;
-      }
-      
-      .img-head {
-        text-align: center;
-      }
-      .img-head h2 {
-        color: #262626;
-        font-size: 2.5rem;
-        font-weight: 600;
-        text-transform: capitalize;
-      }
-      .img-head p {
-        padding-top: 0.5rem;
-        color: #4f4f4f;
-        font-size: 1rem;
-      }
-      
-      .boxes {
-        padding: 3.4rem 0;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1.4rem;
-      }
-      
-      .box-img {
-        position: relative;
-        border-radius: 12%;
-        transition: 0.5s;
         overflow: hidden;
-        cursor: pointer;
+        z-index: 1000;
       }
-      .portrait {
-        grid-column: 2 / 3;
-        grid-row: 1 / 3;
-        border-radius: 8%;
-      }
-      .box-img-1 {
-        grid-column: 1 / 2;
-        grid-row: 1 / 2;
-      }
-      .box-img-3 {
-        grid-column: 1 / 2;
-        grid-row: 2 / 3;
-      } 
-      .box-img img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      .box-img::before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        border-radius: 12px;
-        background-color:rgba(0,0,0,0.287);
-      }
-      
-      .box-img .box-info {
-        position: absolute;
-        top: 45%;
-        left: 30%;
-        transform: translate(-50%, -50%);
-        transform: scale(0);
-        transition: 0.5s;
-        cursor: pointer;
-      }
-      .box-img.box-active .box-info {
-        transform: scale(1);
-      }
-      .box-img:hover .box-info {
-        transform: scale(1);
-      }
-      .box-img .box-info h1 {
-        color: #fff;
-        text-transform: capitalize;
-      }
-      
-      .plants-section {
-        position: relative;
-        width: 100%;
-        max-width: 140rem;
-        margin: auto;
-        padding: 10% 5%;
+
+      .nav-menu {
         display: flex;
         align-items: center;
-        background-color: #fff;
-      }
-      
-      .plant-information {
-        margin: auto;
+        justify-content: space-between;
         text-align: center;
       }
-      
-      .plant-head {
-        margin-bottom: 3rem;
-      }
-      
-      .plant-head h2 {
-        color: #262626;
-        font-size: 2.5rem;
-        font-weight: 500;
-        text-transform: capitalize;
-      }
-      .plant-head .subhead {
-        padding-top: 8px;
-        color: #818181;
-        font-size: 16px;
-      }
-      
-      .plant-details, 
-      .plant-img {
-        flex: 1 1 34rem;
-      }
-      
-      .plant-box {
-        margin: 0.8rem 0;
+      .nav-menu ul {
         display: flex;
         align-items: center;
-        justify-content: center;
-      }
-      .plant-box img {
-        max-width: 4rem;
-      }
-      .plant-box-info {
-        margin-left: 1rem;
-      }
-      .plant-box-info h3 {
-        padding: 0.5rem 0;
-        color: #262626;
-        font-size: 1.1rem;
-        font-weight: 500;
-        text-transform: capitalize;
-      }
-      .plant-box-info p {
-        color: #818181;
-        font-size: 1rem;
-        line-height: 1.5;
-        text-align: left;
+        justify-content: space-around;
+        text-align: center;
       }
 
-      
-      .footer-page {
-        position: relative;
-        width: 100%;
-        padding: max(3rem, 6%) max(1rem, 5%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-        column-gap: 3rem;
-        row-gap: 4rem;
-        background-image: linear-gradient(90deg, #505c6b, #2e3a4a);
-      }
-      
-      .newsletter {
-        color: #fff;
-        font-size: 25px;
+      .top-header a, 
+      .top-header a span {
+        font-size: 29px;
         font-weight: 600;
-        text-transform: capitalize;
+        font-family: 'Dancing Script', cursive;
+        text-transform: uppercase;
       }
-      
-      .newsletter form {
-        position: relative;
-        width: 100%;
-        max-width: 18rem;
-        margin: 0 auto;
-        padding-top: 1rem;
-      }
-      .newsletter .fa-search {
-        font-size: 1rem;
-      }
-      
-      .footer-menu {
-        display: flex;
-        flex-wrap: wrap;
-        column-gap: 2rem;
-        row-gap: 3rem;
-      }
-      
-      .footer-nav h3 {
-        color: #fff;
-        font-size: 1.3rem;
-        font-weight: 500;
-        text-transform: capitalize;
-      }
-      .footer-nav ul {
-        padding-top: 0.8rem;
-      }
-      .footer-nav ul li a {
-        color: #fff;
-        font-size: 1rem;
-        line-height: 1.8;
-        text-transform: capitalize;
-        transition: all 0.5s;
-      }
-      .footer-nav ul li a:hover {
-        color: #22e6aa;
-      }
-      
-      @media screen and (max-width: 1000px) {
-        .boxes {
-          grid-template-columns: 1fr;
-        }
-        .portrait {
-          grid-column: 1 / 2;
-          grid-row: auto;
-        }
-      }
-
-      @media screen and (max-width: 40rem) {
-        .menu {
-          display: none;
-        }
+      .top-header a span {
+        color: #3ba3e6;
       }
     </style>
   </head>
   <body>
-    <div class="page-container">
 
-      <div class="hero-page">
-        <header>
-          <div class="nav">
-            <div class="logo">
-              <a href="#home">logo</a>
-            </div>
-            <div class="menu">
-              <ul>
-                <li><a class="active" href="#">home</a></li>
-                <li><a href="#">shop</a></li>
-                <li><a href="#">about us</a></li>
-                <li><a href="#">contact</a></li>
-              </ul>
-            </div>
-            <div class="shopping-cart">
-              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-            </div>
-          </div>
-          <div class="hero-content">
-            <h1 class="title">bring serenity to your place with interior plants</h1>
-            <p class="subtitle">Find your dream plant for your home decoration with <br> us, and we will make it happen.</p>
-            <form action="">
-              <input type="text" class="search-bar" name="" id="" placeholder="Search plant">
-              <i class="fa fa-search" aria-hidden="true"></i>
-            </form>
-          </div>
-          <!-- <div class="price-tag">
-            <div class="circle"></div>
-            <div class="circle circle-2"></div>
-            <div class="circle circle-3"></div>
-          </div>
-          <div class="short-note">
-            <h2>$65.00</h2>
-            <p>dracena fragnas</p>
-          </div> -->
-          <img src="./images/bg.png" alt="Decorated Room" class="hero-img">
-        </header>
-      </div>
-
-      <div class="shop-section">
-        <div class="offer-boxes">
-          <div class="offer-box">
-            <img src="./images/akar-icons_shipping-box-02.png" alt="">
-            <div class="offer-details">
-              <h2>free shopping</h2>
-              <p>No charge for each delivery</p>
-            </div>
-          </div>
-          <div class="offer-box">
-            <img src="./images/fluent_wallet-credit-card-16-regular.png" alt="">
-            <div class="offer-details">
-              <h2>quick payment</h2>
-              <p>No charge for each delivery</p>
-            </div>
-          </div>
-          <div class="offer-box">
-            <img src="./images/akar-icons_shipping-box-01.png" alt="">
-            <div class="offer-details">
-              <h2>24/7 support</h2>
-              <p>No charge for each delivery</p>
-            </div>
-          </div>
+    <div class="header">
+      <div class="contact">
+        <div class="normal">
+          <span><i class="fa fa-location-arrow"></i>sri lanka</span>
+          <span><i class="fa fa-envelope"></i>info@gmail.com</span>
+          <span><i class="fa fa-phone"></i>+94 77 123 4567</span>
         </div>
-        <div class="products-section">
-          <div class="product-title">
-            <h3>best seller product</h3>
-            <a href="#">Sell all collection
-              <i class="fa fa-arrow-right" aria-hidden="true"></i>
-            </a>
-          </div>
-          <div class="product-boxes">
-            <div class="product-box">
-              <img src="./images/camille-plant-terracotta-pot-home-decor-object.png" alt="" class="main-img">
-              <img src="./images/Ellipse.png" class="shadow">
-              <div class="product-details">
-                <h2 class="product-name">cammila</h2>
-                <div class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="tag">
-                  <h4>$65.00</h4>
-                  <div class="btn">
-                    <i class="fa fa-plus"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="product-box">
-              <img src="./images/image.png" alt="" class="main-img">
-              <img src="./images/Ellipse.png" class="shadow">
-              <div class="product-details">
-                <h2 class="product-name">cammila</h2>
-                <div class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="tag">
-                  <h4>$65.00</h4>
-                  <div class="btn">
-                    <i class="fa fa-plus"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="product-box">
-              <img src="./images/peace-lily-plant-terracotta-pot-home-decor-object.png" alt="" class="main-img">
-              <img src="./images/Ellipse.png" class="shadow">
-              <div class="product-details">
-                <h2 class="product-name">cammila</h2>
-                <div class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                </div>
-                <div class="tag">
-                  <h4>$65.00</h4>
-                  <div class="btn">
-                    <i class="fa fa-plus"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="social-contact">
+          <a href="#f"><i class="fa fa-facebook"></i></a>
+          <a href="#t"><i class="fa fa-twitter"></i></a>
+          <a href="#i"><i class="fa fa-instagram"></i></a>
+          <a href="#y"><i class="fa fa-youtube"></i></a>
+          <a href="#l"><i class="fa fa-linkedin"></i></a>
         </div>
       </div>
-
-      <div class="gallary-section">
-        <div class="img-head">
-          <h2>interior plant reference</h2>
-          <p>Make your home so comfortable with refreshing plants</p>
-        </div>
-        <div class="boxes">
-          <div class="box-img box-img-1">
-            <img src="./images/sofa.png" alt="">
-            <div class="box-info">
-              <h1>living room</h1>
-            </div>
-          </div>
-          <div class="box-img portrait">
-            <img src="./images/unsplash_MBsReSZ2WNM.png" alt="">
-            <div class="box-info">
-              <h1>dinner room</h1>
-            </div>
-          </div>
-          <div class="box-img box-img-3">
-            <img src="./images/high-angle-desk-arrangement-with-plants.png" alt="">
-            <div class="box-info">
-              <h1>studies room</h1>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="plants-section">
-        <div class="plant-information">
-          <div class="plant-head">
-            <h2>how to take care for a plant</h2>
-            <p class="subhead">Take care of plants with all your heart</p>
-          </div>
-          <div class="flex-container">
-            <div class="plant-details">
-              <div class="plant-box">
-                <img src="./images/icon-park-outline_sun.png" alt="">
-                <div class="plant-box-info">
-                  <h3>adjust lighting</h3>
-                  <p>When caring for indoor plants, make sure the room temperture is neither too cold or not too hot.</p>
-                </div>
-              </div>
-              <div class="plant-box">
-                <img src="./images/charm_plant-pot.png" alt="">
-                <div class="plant-box-info">
-                  <h3>adjust lighting</h3>
-                  <p>When caring for indoor plants, make sure the room temperture is neither too cold or not too hot.</p>
-                </div>
-              </div>
-              <div class="plant-box">
-                <img src="./images/akar-icons_water.png" alt="">
-                <div class="plant-box-info">
-                  <h3>adjust lighting</h3>
-                  <p>When caring for indoor plants, make sure the room temperture is neither too cold or not too hot.</p>
-                </div>
-              </div>
-              <div class="plant-box">
-                <img src="./images/tabler_temperature.png" alt="">
-                <div class="plant-box-info">
-                  <h3>adjust lighting</h3>
-                  <p>When caring for indoor plants, make sure the room temperture is neither too cold or not too hot.</p>
-                </div>
-              </div>
-            </div>
-            <div class="plant-img">
-              <img src="./images/unsplash_sEApBUS4fIk.png" alt="">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-page">
-        <div class="newsletter">
-          <h2>newsletter</h2>
-          <form action="">
-            <input type="text" class="search-bar" name="" id="" placeholder="Search plant">
-            <i class="fa fa-search"></i>
-          </form>
-        </div>
-        <div class="footer-menu">
-          <div class="footer-nav">
-            <h3>support</h3>
-            <ul>
-              <li><a href="#">about us</a></li>
-              <li><a href="#">careers</a></li>
-              <li><a href="#">blog</a></li>
-            </ul>
-          </div>
-          <div class="footer-nav">
-            <h3>support</h3>
-            <ul>
-              <li><a href="#">about us</a></li>
-              <li><a href="#">careers</a></li>
-              <li><a href="#">blog</a></li>
-            </ul>
-          </div>
-          <div class="footer-nav">
-            <h3>support</h3>
-            <ul>
-              <li><a href="#">about us</a></li>
-              <li><a href="#">careers</a></li>
-              <li><a href="#">blog</a></li>
-            </ul>
-          </div>
-          <div class="footer-nav">
-            <h3>support</h3>
-            <ul>
-              <li><a href="#">about us</a></li>
-              <li><a href="#">careers</a></li>
-              <li><a href="#">blog</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
     </div>
 
-    <!-- <h1 style="text-align: center;">setInterval() - JavaScript</h1>
+    <div id="navbar">
+      <div class="top-nav">
+        <div class="top-header">
+          <a href="#">time <span>zone</span></a>
+        </div>
+        <div class="nav-menu">
+          <div class="top-navbar">
+            <ul>
+              <li><a href="#h"></a>home</li>
+              <li><a href="#s"></a>shop</li>
+              <li><a href="#c"></a>cart</li>
+              <li><a href="#l"></a>login</li>
+              <li><a href="#c"></a>contact</li>
+            </ul>
+          </div>
+          <div class="top-icons">
+            <i class="fa fa-search"></i>
+            <i class="fa fa-user"></i>
+            <i class="fa fa-cart"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h1 style="text-align: center;">setInterval() - JavaScript</h1>
     <hr>
     <p id="timer" style="font-size: 3rem;">0 sec</p>
     <button id="start">Start Timer</button>
-    <button id="pause">Pause Timer</button> -->
+    <button id="pause">Pause Timer</button>
 
     <script src="js.js">
       const timer = document.getElementById('timer');
