@@ -6,139 +6,6 @@
     <title>AJAX | XMLHttpRequest</title>
   </head>
   <body>
-    <script>
-      // 06. Easter Decoration
-
-      function avverageCost(params) {
-        const clients = Number(params[0]);
-        
-        const basket = 1.50;
-        const wreath = 3.80;
-        const bunny = 7;
-
-        let total = 0;
-        let index = 0;
-
-        for (let client = 0; client < clients; client++) {
-          index++;
-          let input = params[index];
-          let pokupki = 0;
-          let current = 0;
-          
-          while (input !== "Finish") {
-
-            switch (input) {
-              case "basket":
-                pokupki++;
-                current += basket;
-                break;
-              case "wreath":
-                pokupki++;
-                current += wreath;
-                break;
-              case "chocolate bunny":
-                pokupki++;
-                current += bunny;
-                break;
-            }
-
-            index++;
-            input = params[index];
-
-        }
-
-        if (pokupki % 2 === 0) {
-          current = current * 0.8;
-        }
-
-        total += current;
-        console.log(`You purchased ${pokupki} items for ${current.toFixed(2)} leva.`);
-          
-        }
-
-        const average = total / clients;
-
-        console.log(`Average bill per client is: ${average.toFixed(2)} leva.`);
-
-      }
-
-      // avverageCost(["2", "basket", "wreath", "chocolate bunny", "Finish", "wreath", "chocolate bunny", "Finish"]);
-      // avverageCost(["1", "basket", "wreath", "chocolate bunny", "wreath", "basket", "chocolate bunny", "Finish"]);
-
-      // 01. Tennis Equipment
-
-      function calcTennisEquipmentCost(params) {
-        const raketa = Number(params[0]);
-        const raketi = Number(params[1]);
-        const maratonki = Number(params[2]);
-
-        const maratonka = raketa / 6;
-
-        let total = raketi * raketa + maratonki * maratonka;
-
-        const others = total * 0.2;
-
-        total += others;
-
-        console.log(`Price to be paid by Djokovic ${Math.floor(total / 8)}`);
-        console.log(`Price to be paid by sponsors ${Math.ceil(total * 7 / 8)}`);
-
-      }
-
-      // calcTennisEquipmentCost(["850", "4", "2"]);
-      // calcTennisEquipmentCost(["386", "7", "4"]);
-
-      // 01. Basketball Equipment
-
-      function calcBasketballEquipmentCost(params) {
-        const taksa = Number(params[0]);
-
-        const kecove = taksa * 0.6;
-
-        const ekip = kecove * 0.8;
-
-        const ball = ekip * 0.25;
-
-        const acsessories = ball * 0.2;
-
-        const total = taksa + kecove + ekip + ball + acsessories;
-
-        console.log(total.toFixed(2));
-      }
-
-      // calcBasketballEquipmentCost(["320"]);
-      // calcBasketballEquipmentCost(["550"]);
-
-      // 02. Football Results
-
-      function printsFootballResults(params) {
-        let wins = 0;
-        let lost = 0;
-        let draw = 0;
-        
-        for (let index = 0; index < params.length; index++) {
-          
-          const current = params[index];
-
-          if (current[0] > current[2]) {
-            wins++;
-          } else if (current[0] < current[2]) {
-            lost++;
-          } else {
-            draw++;
-          }
-        }
-
-        console.log(`Team won ${wins} games.`);
-        console.log(`Team lost ${lost} games.`);
-        console.log(`Drawn games: ${draw}`);
-      }
-
-      printsFootballResults(["3:1", "0:2", "0:0"]);
-      printsFootballResults(["4:2", "0:3", "1:0"]);
-      printsFootballResults(["0:2", "0:1", "3:3"]);
-
-    </script>
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
@@ -203,6 +70,136 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
+    </script>
+
+    <script>
+      // 02. Skeleton
+
+      function calcTime(params) {
+        const controlM = Number(params[0]);
+        const controlS = Number(params[1]);
+        const distance = Number(params[2]);
+        const speedMS = Number(params[3]);
+
+        const control = controlM * 60 + controlS;
+
+        // console.log(control);
+
+        let time = distance / 100 * speedMS;
+        let zabavqne = (distance / 120) * 2.5;
+        // console.log(zabavqne);
+        time -= zabavqne;
+
+        if (time > control) {
+          const diff = time - control;
+          console.log(`No, Marin failed! He was ${diff.toFixed(3)} second slower.`);
+        } else {
+          console.log("Marin Bangiev won an Olympic quota!");
+          console.log(`His time is ${time.toFixed(3)}.`);
+        }
+
+      }
+
+      // calcTime(["1", "20", "1546", "12"]);
+      // calcTime(["2", "12", "1200", "10"]);
+
+      // 03. Gymnastics
+
+      function printGymnasticsResults(params) {
+        const country = params[0];
+        const ured = params[1];
+
+        let score = 0;
+
+        switch (country) {
+          case "Russia":
+            switch (ured) {
+              case "ribbon":
+                score = 9.1 + 9.4;
+                break;
+              case "hoop":
+                score = 9.3 + 9.8;
+                break;
+              case "rope":
+                score = 9.6 + 9;
+                break;
+            }
+            break;
+          case "Bulgaria":
+            switch (ured) {
+              case "ribbon":
+                score = 9.6 + 9.4;
+                break;
+              case "hoop":
+                score = 9.55 + 9.75;
+                break;
+              case "rope":
+                score = 9.5 + 9.4;
+                break;
+            }
+            break;
+          case "Italy":
+            switch (ured) {
+              case "ribbon":
+                score = 9.2 + 9.5;
+                break;
+              case "hoop":
+                score = 9.45 + 9.35;
+                break;
+              case "rope":
+                score = 9.7 + 9.15;
+                break;
+            }
+            break;
+        }
+
+        const p = score / 20 * 100;
+
+        console.log(`The team of ${country} get ${score.toFixed(3)} on ${ured}.`);
+        console.log(`${(100 - p).toFixed(2)}%`);
+      }
+
+      // printGymnasticsResults(["Bulgaria", "ribbon"]);
+      // printGymnasticsResults(["Russia", "rope"]);
+
+      // 05. Easter Eggs
+
+      function solveEasterEggs(params) {
+        let eggs = Number(params[0]);
+
+        let eggsO = {
+          "red": 0,
+          "orange": 0,
+          "blue": 0,
+          "green": 0,
+        }
+
+        for (let index = 1; index <= eggs; index++) {
+
+          let current = params[index];
+
+          eggsO[current]++;
+        }
+
+        let colors = ["red", "orange", "blue", "green"];
+        let eggsMax = [eggsO.red, eggsO.orange, eggsO.blue, eggsO.green];
+
+        let max = Math.max(eggsO.red, eggsO.orange, eggsO.blue, eggsO.green);
+
+        let indexMax = eggsMax.findIndex(x => x === max);
+
+        let colorMax = colors[indexMax];
+
+        console.log(`Red eggs: ${eggsO.red}`);
+        console.log(`Orange eggs: ${eggsO.orange}`);
+        console.log(`Blue eggs: ${eggsO.blue}`);
+        console.log(`Green eggs: ${eggsO.green}`);
+        console.log(`Max eggs: ${max} -> ${colorMax}`);
+      }
+
+      // solveEasterEggs(["7", "orange", "blue", "green", "green", "blue", "red", "green"]);
+      // solveEasterEggs(["4", "blue", "red", "blue", "orange"]);
+
     </script>
   </body>
 </html>
