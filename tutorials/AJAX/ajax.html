@@ -6,6 +6,139 @@
     <title>AJAX | XMLHttpRequest</title>
   </head>
   <body>
+    <script>
+      // 04. Game Number Wars
+
+      function playNumberWarsGame(params) {
+        const p1 = params[0];
+        const p2 = params[1];
+
+        let p1Score = 0;
+        let p2Score = 0;
+
+        let hasEnded = false;
+
+        let index = 2;
+        let input = params[index];
+
+        while (input !== "End of game") {
+          let p1Card = Number(input);
+          index++;
+          let p2Card = Number(params[index]);
+
+          if (p1Card > p2Card) {
+            p1Score += p1Card - p2Card;
+          } else if (p2Card > p1Card) {
+            p2Score += p2Card - p1Card;
+          } else if (p1Card === p2Card) {
+            console.log("Number wars!");
+            index++;
+            p1Card = Number(params[index]);
+            index++;
+            p2Card = Number(params[index]);
+
+            if (p1Card > p2Card) {
+              console.log(`${p1} is winner with ${p1Score} points`);
+            } else {
+              console.log(`${p2} is winner with ${p2Score} points`);
+            }
+
+            hasEnded = true;
+            break;
+          }
+
+          index++;
+          input = params[index];
+        }
+
+        if (!hasEnded) {
+          console.log(`${p1} has ${p1Score} points`);
+          console.log(`${p2} has ${p2Score} points`);
+        }
+
+      }
+
+      // playNumberWarsGame(["Desi", "Niki", "7", "5", "3", "4", "3", "3", "5", "3"]);
+      // playNumberWarsGame(["Elena", "Simeon", "6", "3", "2", "5", "8", "9", "End of game"]);
+      // playNumberWarsGame(["Aleks", "Georgi", "4", "5", "3", "2", "4", "3", "4", "4", "5", "2"]);
+
+      // 04. Darts
+
+      function playDarts(params) {
+        const player = params[0];
+
+        let start = 301;
+
+        let suc = 0;
+        let unsuc = 0;
+
+        let index = 1;
+        let input = params[index];
+        
+        while (input !== "Retire") {
+          input = params[index];
+          index++;
+          let points = params[index];
+
+          switch (input) {
+            case "Double":
+              points = points * 2;
+              break;
+            case "Triple":
+              points = points * 3;
+              break;
+          }
+
+          if (points <= start) {
+            start -= points;
+            suc++;
+          } else {
+            unsuc++;
+          }
+
+          if (start === 0) {
+            break;
+          }
+
+          index++;
+          input = params[index];
+          
+        }
+
+        if (start === 0) {
+          console.log(`${player} won the leg with ${suc} shots.`);
+        } else {
+          console.log(`${player} retired after ${unsuc} unsuccessful shots.`);
+        }
+
+      }
+
+      // playDarts(["Michael van Gerwen", "Triple", "20", "Triple", "19", "Double", "10", "Single", "3", "Single", "1", "Triple", "20", "Triple", "20", "Double", "20"]);
+      // playDarts(["Stephen Bunting", "Triple", "20", "Triple", "20", "Triple", "20", "Triple", "20", "Triple", "20", "Triple", "20", "Double", "7", "Single", "12", "Double", "1", "Single", "1"]);
+      // playDarts(["Rob Cross", "Triple", "20", "Triple", "20", "Triple", "20", "Triple", "20", "Double", "20", "Triple", "20", "Double", "5", "Triple", "10", "Double", "6", "Retire"]);
+
+      // 01. Easter Lunch
+
+      function calcEasterLunch(params) {
+        let koz = Number(params[0]);
+        let eggs = Number(params[1]);
+        let cook = Number(params[2]);
+
+        koz = koz * 3.2;
+        let totaleggs = eggs * 4.35;
+        cook = cook * 5.4;
+        let paint = eggs * 12 * 0.15;
+
+        let total = koz + totaleggs + cook + paint;
+
+        console.log(total.toFixed(2));
+      }
+
+      // calcEasterLunch(["3", "2", "3"]);
+      // calcEasterLunch(["4", "4", "3"]);
+
+    </script>
+
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
@@ -70,136 +203,6 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
-    </script>
-
-    <script>
-      // 02. Skeleton
-
-      function calcTime(params) {
-        const controlM = Number(params[0]);
-        const controlS = Number(params[1]);
-        const distance = Number(params[2]);
-        const speedMS = Number(params[3]);
-
-        const control = controlM * 60 + controlS;
-
-        // console.log(control);
-
-        let time = distance / 100 * speedMS;
-        let zabavqne = (distance / 120) * 2.5;
-        // console.log(zabavqne);
-        time -= zabavqne;
-
-        if (time > control) {
-          const diff = time - control;
-          console.log(`No, Marin failed! He was ${diff.toFixed(3)} second slower.`);
-        } else {
-          console.log("Marin Bangiev won an Olympic quota!");
-          console.log(`His time is ${time.toFixed(3)}.`);
-        }
-
-      }
-
-      // calcTime(["1", "20", "1546", "12"]);
-      // calcTime(["2", "12", "1200", "10"]);
-
-      // 03. Gymnastics
-
-      function printGymnasticsResults(params) {
-        const country = params[0];
-        const ured = params[1];
-
-        let score = 0;
-
-        switch (country) {
-          case "Russia":
-            switch (ured) {
-              case "ribbon":
-                score = 9.1 + 9.4;
-                break;
-              case "hoop":
-                score = 9.3 + 9.8;
-                break;
-              case "rope":
-                score = 9.6 + 9;
-                break;
-            }
-            break;
-          case "Bulgaria":
-            switch (ured) {
-              case "ribbon":
-                score = 9.6 + 9.4;
-                break;
-              case "hoop":
-                score = 9.55 + 9.75;
-                break;
-              case "rope":
-                score = 9.5 + 9.4;
-                break;
-            }
-            break;
-          case "Italy":
-            switch (ured) {
-              case "ribbon":
-                score = 9.2 + 9.5;
-                break;
-              case "hoop":
-                score = 9.45 + 9.35;
-                break;
-              case "rope":
-                score = 9.7 + 9.15;
-                break;
-            }
-            break;
-        }
-
-        const p = score / 20 * 100;
-
-        console.log(`The team of ${country} get ${score.toFixed(3)} on ${ured}.`);
-        console.log(`${(100 - p).toFixed(2)}%`);
-      }
-
-      // printGymnasticsResults(["Bulgaria", "ribbon"]);
-      // printGymnasticsResults(["Russia", "rope"]);
-
-      // 05. Easter Eggs
-
-      function solveEasterEggs(params) {
-        let eggs = Number(params[0]);
-
-        let eggsO = {
-          "red": 0,
-          "orange": 0,
-          "blue": 0,
-          "green": 0,
-        }
-
-        for (let index = 1; index <= eggs; index++) {
-
-          let current = params[index];
-
-          eggsO[current]++;
-        }
-
-        let colors = ["red", "orange", "blue", "green"];
-        let eggsMax = [eggsO.red, eggsO.orange, eggsO.blue, eggsO.green];
-
-        let max = Math.max(eggsO.red, eggsO.orange, eggsO.blue, eggsO.green);
-
-        let indexMax = eggsMax.findIndex(x => x === max);
-
-        let colorMax = colors[indexMax];
-
-        console.log(`Red eggs: ${eggsO.red}`);
-        console.log(`Orange eggs: ${eggsO.orange}`);
-        console.log(`Blue eggs: ${eggsO.blue}`);
-        console.log(`Green eggs: ${eggsO.green}`);
-        console.log(`Max eggs: ${max} -> ${colorMax}`);
-      }
-
-      // solveEasterEggs(["7", "orange", "blue", "green", "green", "blue", "red", "green"]);
-      // solveEasterEggs(["4", "blue", "red", "blue", "orange"]);
-
     </script>
   </body>
 </html>
