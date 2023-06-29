@@ -6,139 +6,6 @@
     <title>AJAX | XMLHttpRequest</title>
   </head>
   <body>
-    <script>
-      // 04. Game Number Wars
-
-      function playNumberWarsGame(params) {
-        const p1 = params[0];
-        const p2 = params[1];
-
-        let p1Score = 0;
-        let p2Score = 0;
-
-        let hasEnded = false;
-
-        let index = 2;
-        let input = params[index];
-
-        while (input !== "End of game") {
-          let p1Card = Number(input);
-          index++;
-          let p2Card = Number(params[index]);
-
-          if (p1Card > p2Card) {
-            p1Score += p1Card - p2Card;
-          } else if (p2Card > p1Card) {
-            p2Score += p2Card - p1Card;
-          } else if (p1Card === p2Card) {
-            console.log("Number wars!");
-            index++;
-            p1Card = Number(params[index]);
-            index++;
-            p2Card = Number(params[index]);
-
-            if (p1Card > p2Card) {
-              console.log(`${p1} is winner with ${p1Score} points`);
-            } else {
-              console.log(`${p2} is winner with ${p2Score} points`);
-            }
-
-            hasEnded = true;
-            break;
-          }
-
-          index++;
-          input = params[index];
-        }
-
-        if (!hasEnded) {
-          console.log(`${p1} has ${p1Score} points`);
-          console.log(`${p2} has ${p2Score} points`);
-        }
-
-      }
-
-      // playNumberWarsGame(["Desi", "Niki", "7", "5", "3", "4", "3", "3", "5", "3"]);
-      // playNumberWarsGame(["Elena", "Simeon", "6", "3", "2", "5", "8", "9", "End of game"]);
-      // playNumberWarsGame(["Aleks", "Georgi", "4", "5", "3", "2", "4", "3", "4", "4", "5", "2"]);
-
-      // 04. Darts
-
-      function playDarts(params) {
-        const player = params[0];
-
-        let start = 301;
-
-        let suc = 0;
-        let unsuc = 0;
-
-        let index = 1;
-        let input = params[index];
-        
-        while (input !== "Retire") {
-          input = params[index];
-          index++;
-          let points = params[index];
-
-          switch (input) {
-            case "Double":
-              points = points * 2;
-              break;
-            case "Triple":
-              points = points * 3;
-              break;
-          }
-
-          if (points <= start) {
-            start -= points;
-            suc++;
-          } else {
-            unsuc++;
-          }
-
-          if (start === 0) {
-            break;
-          }
-
-          index++;
-          input = params[index];
-          
-        }
-
-        if (start === 0) {
-          console.log(`${player} won the leg with ${suc} shots.`);
-        } else {
-          console.log(`${player} retired after ${unsuc} unsuccessful shots.`);
-        }
-
-      }
-
-      // playDarts(["Michael van Gerwen", "Triple", "20", "Triple", "19", "Double", "10", "Single", "3", "Single", "1", "Triple", "20", "Triple", "20", "Double", "20"]);
-      // playDarts(["Stephen Bunting", "Triple", "20", "Triple", "20", "Triple", "20", "Triple", "20", "Triple", "20", "Triple", "20", "Double", "7", "Single", "12", "Double", "1", "Single", "1"]);
-      // playDarts(["Rob Cross", "Triple", "20", "Triple", "20", "Triple", "20", "Triple", "20", "Double", "20", "Triple", "20", "Double", "5", "Triple", "10", "Double", "6", "Retire"]);
-
-      // 01. Easter Lunch
-
-      function calcEasterLunch(params) {
-        let koz = Number(params[0]);
-        let eggs = Number(params[1]);
-        let cook = Number(params[2]);
-
-        koz = koz * 3.2;
-        let totaleggs = eggs * 4.35;
-        cook = cook * 5.4;
-        let paint = eggs * 12 * 0.15;
-
-        let total = koz + totaleggs + cook + paint;
-
-        console.log(total.toFixed(2));
-      }
-
-      // calcEasterLunch(["3", "2", "3"]);
-      // calcEasterLunch(["4", "4", "3"]);
-
-    </script>
-
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
@@ -203,6 +70,141 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
+    </script>
+
+    <script>
+      // 05. Tennis Ranklist
+
+      function calcPoints(params) {
+        const turniri = Number(params[0]);
+        let start = Number(params[1]);
+        let points = start;
+        let result = "";
+        let wins = 0;
+
+        for (let index = 2; index < params.length; index++) {
+          result = params[index];
+          
+          switch (result) {
+            case "W":
+              points += 2000;
+              wins++;
+              break;
+            case "F":
+              points += 1200;
+              break;
+            case "SF":
+              points += 720;
+              break;
+          }
+
+        }
+
+        const average = Math.floor((points - start) / turniri);
+        const winP = wins / turniri * 100;
+
+        console.log(`Final points: ${points}`);
+        console.log(`Average points: ${average}`);
+        console.log(`${winP.toFixed(2)}%`);
+
+      }
+
+      // calcPoints(["5", "1400", "F", "SF", "W", "W","SF"]);
+      // calcPoints(["4", "750", "SF", "W", "SF", "W"]);
+
+      // 05. Fitness Center
+
+      function calcVisitors(params) {
+        const visitors = Number(params[0]);
+        let back = 0;
+        let chest = 0;
+        let legs = 0;
+        let abs = 0;
+        let proteinShake = 0;
+        let proteinBar = 0;
+        let buyers = 0
+
+        for (let visitor = 1; visitor < params.length; visitor++) {
+          let input = params[visitor];
+
+          switch (input) {
+            case "Back":
+              back++;
+              break;
+            case "Chest":
+              chest++;
+              break;
+            case "Legs":
+              legs++;
+              break;
+            case "Abs":
+              abs++;
+              break;
+            case "Protein shake":
+              proteinShake++;
+              buyers++;
+              break;
+            case "Protein bar":
+              proteinBar++;
+              buyers++;
+              break;
+          }
+        }
+
+        const buyersP = buyers / visitors * 100;
+        const trainP = 100 - buyersP;
+
+        console.log(`${back} - back`);
+        console.log(`${chest} - chest`);
+        console.log(`${legs} - legs`);
+        console.log(`${abs} - abs`);
+        console.log(`${proteinShake} - protein shake`);
+        console.log(`${proteinBar} - protein bar`);
+        console.log(`${trainP.toFixed(2)}% - work out`);
+        console.log(`${buyersP.toFixed(2)}% - protein`);
+      }
+
+      // calcVisitors(["10", "Back", "Chest", "Legs", "Abs", "Protein shake", "Protein bar", "Protein shake", "Protein bar", "Legs", "Abs"]);
+      // calcVisitors(["7", "Chest", "Back", "Legs", "Legs", "Abs", "Protein shake", "Protein bar"]);
+
+      // 06. High Jump
+
+      function traningHighJump(params) {
+        const target = Number(params[0]);
+        let start = target - 30;
+        let isFailed = true;
+
+        for (let jump = 1; jump < params.length; jump++) {
+          isFailed = true;
+          
+          for (let current = jump; current < jump + 3; current++) {
+            let input = params[current];
+            // console.log(input);
+            // console.log(current);
+            
+            if (input > start) {
+              start += 5;
+              jump = current;
+              isFailed = false;
+              break;
+            }
+
+          }
+
+          if (isFailed) {
+            console.log(`Tihomir failed at ${start}cm after ${jump + 2} jumps.`);
+            break;
+          }
+        }
+
+        if (!isFailed) {
+          console.log(`Tihomir succeeded, he jumped over ${target}cm after ${params.length - 1} jumps.`);
+        }
+
+      }
+
+      // traningHighJump(["250", "225", "224", "225", "228", "231", "235", "234", "235"]);
+      // traningHighJump(["231", "205", "212", "213", "228", "229", "230", "235"]);
     </script>
   </body>
 </html>
