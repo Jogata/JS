@@ -385,6 +385,141 @@
       </div>
     </section>
 
+    <script>
+      const data = [
+        [
+          "product1",
+          "product2",
+          "product3"
+        ],
+        [
+          "Stormtrooper Helmet", 
+          "Imperial Tie Fighter", 
+          "The Death Star"
+        ],
+        [
+          "1.299",
+          "9.999", 
+          "99.999"
+        ], 
+        [
+          "Helmet Size", 
+          "Engine Unit",
+          "Armament"
+        ], 
+        [
+          ["S", "M", "L", "XL"], 
+          ["P-S4 Twin", "P-W401"], 
+          ["Superlaser", "Turbolaser"]
+        ], 
+        [80, 25, 100], 
+        [
+          "background1", 
+          "background2", 
+          "background3", 
+        ]
+      ]
+
+      const progText = document.querySelector(".prog-text");
+      const progress = document.querySelector(".progress");
+
+      function progressBar(percentage) {
+        progText.innerText = 0;
+        let count = 0;
+        progress.style.transition = 50 * data[5][percentage] + "ms";
+        progress.style.bottom = data[5][percentage] - 110 + "%";
+
+        function updateCount() {
+          const target = data[5][percentage];
+  
+          if (count < target) {
+            count++;
+            progText.innerText = count + "%";
+            setTimeout(updateCount, 30);
+          } else {
+            progText.innerText = target + "%";
+          }
+        }
+
+        updateCount();
+      }
+
+      progressBar(0);
+
+      const optionsList = document.querySelector(".options-list");
+      const options = document.querySelectorAll(".options-list > li");
+
+      optionsList.addEventListener("click", function(e) {
+        if (e.target && e.target.classList.contains("option")) {
+          for (let i = 0; i < optionsList.children.length; i++) {
+            optionsList.children[i].classList.remove("active");
+          }
+          e.target.classList.add("active");
+        }
+      })
+
+      const leftArrow = document.querySelector(".left-arrow");
+      const rightArrow = document.querySelector(".right-arrow");
+      const img = document.querySelector(".product-image img");
+      const productName = document.querySelector(".product-name");
+      const price = document.querySelector(".product-price");
+      const optionTitle = document.querySelector(".product-option-title");
+
+      let id = 0;
+      let li;
+
+      function slider(id) {
+        img.src = "./images/" + data[0][id] + ".png";
+
+        img.classList.add("fade-in");
+        setTimeout(() => {
+          img.classList.remove("fade-in");
+        }, 850);
+
+        name.innerText = data[1][id];
+
+        price.innerText = data[2][id];
+
+        optionTitle.innerText = data[3][id];
+
+        for (let i = 0; i < data[4][id].length; i++) {
+          li = document.createElement("li");
+          li.innerHTML = data[4][id][i];
+          li.classList.add("option");
+
+          if (i === 0) {
+            optionsList.innerHTML = "";
+            li.classList.add("active");
+          }
+
+          optionsList.appendChild(li);
+
+          let bg = document.querySelector(".panel-1");
+          bg.style.backgroundImage = "url(./images/" + data[6][id] + ".jpg)";
+
+          progressBar(id);
+        }
+
+        leftArrow.addEventListener("click", () => {
+          id--;
+          if (id < 0) {
+            id = data[0].length - 1;
+          }
+          slider(id);
+        })
+
+        rightArrow.addEventListener("click", () => {
+          id++;
+          if (id > data[0].length - 1) {
+            id = 0;
+          }
+          slider(id);
+        })
+      }
+
+      slider(id);
+    </script>
+
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
     <script src="./in-fetch-api.js"></script>
