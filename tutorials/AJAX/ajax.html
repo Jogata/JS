@@ -6,6 +6,138 @@
     <title>AJAX | XMLHttpRequest</title>
   </head>
   <body>
+    <script>
+      // 05. Fitness Center
+
+      function manageGym(params) {
+        const clients = Number(params[0]);
+        
+        const options = {
+          back: 0,
+          chest: 0,
+          legs: 0,
+          abs: 0,
+          "protein shake": 0,
+          "protein bar": 0,
+          buyers: 0,
+        }
+
+        for (let current = 1; current < params.length; current++) {
+          let input = params[current].toLowerCase();
+
+          options[input]++;
+
+          if (input === "protein shake" || input === "protein bar") {
+            options.buyers++;
+          }
+
+        }
+
+        const clientssP = options.buyers / clients * 100;
+        const trainingP = 100 - clientssP;
+
+        console.log(`${options.back} - back`);
+        console.log(`${options.chest} - chest`);
+        console.log(`${options.legs} - legs`);
+        console.log(`${options.abs} - abs`);
+        console.log(`${options["protein shake"]} - protein shake`);
+        console.log(`${options["protein bar"]} - protein bar`);
+        console.log(`${trainingP.toFixed(2)}% - work out`);
+        console.log(`${clientssP.toFixed(2)}% - protein`);
+      }
+
+      // manageGym(["10", "Back", "Chest", "Legs", "Abs", "Protein shake", "Protein bar", "Protein shake", "Protein bar", "Legs", "Abs"]);
+      // manageGym(["7", "Chest", "Back", "Legs", "Legs", "Abs", "Protein shake", "Protein bar"]);
+
+      // 05. Tennis Ranklist
+
+      function calcPoints(data) {
+        const turniri = Number(data[0]);
+        let startingPoints = Number(data[1]);
+        let points = startingPoints;
+        let etap = "";
+        let uspehi = 0;
+
+        const results = {
+          W: 2000,
+          F: 1200,
+          SF: 720,
+        }
+
+        for (let index = 2; index < data.length; index++) {
+          etap = data[index];
+
+          points += results[result];
+
+          if (etap === "W") {
+            uspehi++
+          }
+          
+        }
+
+        const average = Math.floor((points - startingPoints) / turniri);
+        const uspehP = uspehi / turniri * 100;
+
+        console.log(`Final points: ${points}`);
+        console.log(`Average points: ${average}`);
+        console.log(`${uspehP.toFixed(2)}%`);
+
+      }
+
+      calcPoints(["5", "1400", "F", "SF", "W", "W","SF"]);
+      calcPoints(["4", "750", "SF", "W", "SF", "W"]);
+
+      // 06. High Jump
+
+      function calcHighJump(data) {
+        let end = Number(data[0]);
+        let currentTarget = end - 30;
+        let isSucessuful = true;
+        let broiPosledNeuspOpiti = 0;
+        let jumps = 1;
+
+        while (currentTarget <= end) {
+          console.log(currentTarget);
+          let height = Number(data[jumps]);
+          broiPosledNeuspOpiti = 0;
+          
+          while (height <= currentTarget) {
+
+            console.log("inf");
+
+            if (broiPosledNeuspOpiti === 3) {
+              isSucessuful = false;
+              end = 0;
+              break;
+            } else {
+              broiPosledNeuspOpiti++;
+            jumps++;
+            height = Number(data[jumps]);
+
+            }
+
+          }
+
+          if (height > currentTarget) {
+            currentTarget += 5;
+            jumps++;
+          }
+          
+        }
+
+        if (isSucessuful) {
+          console.log("end");
+        } else {
+          console.log(`Tihomir failed at ${currentTarget}cm after ${jumps} jumps.`);
+        }
+
+      }
+
+      // calcHighJump(["250", "225", "224", "225", "228", "231", "235", "234", "235", "250", "255", "235"]);
+      // calcHighJump(["231", "205", "212", "213", "228", "229", "230", "235"]);
+
+    </script>
+
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
@@ -70,141 +202,6 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
-    </script>
-
-    <script>
-      // 05. Tennis Ranklist
-
-      function calcPoints(params) {
-        const turniri = Number(params[0]);
-        let start = Number(params[1]);
-        let points = start;
-        let result = "";
-        let wins = 0;
-
-        for (let index = 2; index < params.length; index++) {
-          result = params[index];
-          
-          switch (result) {
-            case "W":
-              points += 2000;
-              wins++;
-              break;
-            case "F":
-              points += 1200;
-              break;
-            case "SF":
-              points += 720;
-              break;
-          }
-
-        }
-
-        const average = Math.floor((points - start) / turniri);
-        const winP = wins / turniri * 100;
-
-        console.log(`Final points: ${points}`);
-        console.log(`Average points: ${average}`);
-        console.log(`${winP.toFixed(2)}%`);
-
-      }
-
-      // calcPoints(["5", "1400", "F", "SF", "W", "W","SF"]);
-      // calcPoints(["4", "750", "SF", "W", "SF", "W"]);
-
-      // 05. Fitness Center
-
-      function calcVisitors(params) {
-        const visitors = Number(params[0]);
-        let back = 0;
-        let chest = 0;
-        let legs = 0;
-        let abs = 0;
-        let proteinShake = 0;
-        let proteinBar = 0;
-        let buyers = 0
-
-        for (let visitor = 1; visitor < params.length; visitor++) {
-          let input = params[visitor];
-
-          switch (input) {
-            case "Back":
-              back++;
-              break;
-            case "Chest":
-              chest++;
-              break;
-            case "Legs":
-              legs++;
-              break;
-            case "Abs":
-              abs++;
-              break;
-            case "Protein shake":
-              proteinShake++;
-              buyers++;
-              break;
-            case "Protein bar":
-              proteinBar++;
-              buyers++;
-              break;
-          }
-        }
-
-        const buyersP = buyers / visitors * 100;
-        const trainP = 100 - buyersP;
-
-        console.log(`${back} - back`);
-        console.log(`${chest} - chest`);
-        console.log(`${legs} - legs`);
-        console.log(`${abs} - abs`);
-        console.log(`${proteinShake} - protein shake`);
-        console.log(`${proteinBar} - protein bar`);
-        console.log(`${trainP.toFixed(2)}% - work out`);
-        console.log(`${buyersP.toFixed(2)}% - protein`);
-      }
-
-      // calcVisitors(["10", "Back", "Chest", "Legs", "Abs", "Protein shake", "Protein bar", "Protein shake", "Protein bar", "Legs", "Abs"]);
-      // calcVisitors(["7", "Chest", "Back", "Legs", "Legs", "Abs", "Protein shake", "Protein bar"]);
-
-      // 06. High Jump
-
-      function traningHighJump(params) {
-        const target = Number(params[0]);
-        let start = target - 30;
-        let isFailed = true;
-
-        for (let jump = 1; jump < params.length; jump++) {
-          isFailed = true;
-          
-          for (let current = jump; current < jump + 3; current++) {
-            let input = params[current];
-            // console.log(input);
-            // console.log(current);
-            
-            if (input > start) {
-              start += 5;
-              jump = current;
-              isFailed = false;
-              break;
-            }
-
-          }
-
-          if (isFailed) {
-            console.log(`Tihomir failed at ${start}cm after ${jump + 2} jumps.`);
-            break;
-          }
-        }
-
-        if (!isFailed) {
-          console.log(`Tihomir succeeded, he jumped over ${target}cm after ${params.length - 1} jumps.`);
-        }
-
-      }
-
-      // traningHighJump(["250", "225", "224", "225", "228", "231", "235", "234", "235"]);
-      // traningHighJump(["231", "205", "212", "213", "228", "229", "230", "235"]);
     </script>
   </body>
 </html>
