@@ -11,8 +11,8 @@
       }
 
       body {
-        min-width: fit-content;
         margin: 0;
+        min-width: fit-content;
         font-family: Georgia, serif;
       }
 
@@ -21,27 +21,23 @@
         min-height: 100vh;
         display: flex;
         align-items: center;
-        /* justify-content: center; */
         background: linear-gradient(-45deg, #44202c, #0a1821);
       }
 
       .logo {
         position: absolute;
-        top: 50%;
+        top: 5%;
         right: 0;
-        transform: translateY(-50%);
         width: 40%;
         height: 90%;
         object-fit: cover;
       }
 
-      .card {
+      .product-card {
         position: relative;
-        /* width: 90vw; */
-        max-width: 1050px;
-        /* min-height: 38em; */
+        max-width: 66rem;
         margin: auto;
-        padding: 4em 2em;
+        padding: 4rem 2rem;
       }
 
       .panel-1,      
@@ -51,6 +47,7 @@
         transform: translateY(-50%);
         border-radius: 2em;
         box-shadow: 0 0 4em 1em rgba(0, 0, 0, 0.4);
+        overflow: hidden;
       }      
 
       .panel-1 {
@@ -61,7 +58,6 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
-        overflow: hidden;
         z-index: 1;
       }
       .panel-1::before {
@@ -82,7 +78,6 @@
         width: 50%;
         height: 110%;
         background-color: #cc2c42;
-        overflow: hidden;
         z-index: 0;
       }
       .panel-2::before {
@@ -120,7 +115,7 @@
         filter: drop-shadow(0 0 1em rgba(0, 0, 0, 0.7));
       }
 
-      .product-details {
+      .product-info {
         display: flex;
         align-items: center;
         justify-content: flex-start;
@@ -128,13 +123,13 @@
 
       .product-name {
         margin: 0;
-        font-size: 2.8em;
+        font-size: 2.8rem;
       }
 
       .price {
         margin: 0.2em 0;
         color: #eee;
-        font-size: 2.8em;
+        font-size: 2.8rem;
         font-weight: 300;
       }
 
@@ -146,7 +141,6 @@
       }
 
       .options {
-        justify-self: flex-start;
         margin: 1em 0;
         padding: 1em 1.5em 1em 0;
         border-right: 1px solid #eee;
@@ -161,7 +155,9 @@
         display: inline-block;
         margin-right: 0.5em;
         padding: 0.5em;
+        border: 1px solid transparent;
         border-radius: 3em;
+        transition: all 0.4s ease-in-out;
         cursor: pointer;
       }
       .option.active {
@@ -179,8 +175,8 @@
 
       .progress-circle {
         position: relative;
-        width: 7em;
-        height: 7em;
+        width: 7rem;
+        height: 7rem;
         border: 8px solid #0a1821;
         border-radius: 50%;
         /* background-color: transparent; */
@@ -189,23 +185,23 @@
       .progress {
         position: absolute;
         left: 50%;
-        bottom: -100%;
+        top: 100%;
+        /* bottom: -100%; */
         transform: translateX(-50%);
-        width: 7em;
-        height: 7em;
+        width: 100%;
+        height: 100%;
         background: linear-gradient(0deg, 
           rgba(202, 31, 64, 0), #ca1f40
         );
-        transition: bottom 4.5s;
+        transition: top 4.5s ease-in-out;
       }
 
       .progress-content {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 5.5em;
-        height: 5.5em;
+        top: 5%;
+        left: 5%;
+        width: 90%;
+        height: 90%;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -221,7 +217,7 @@
 
       .buttons button {
         padding: 1em 2em;
-        font-size: 0.9em;
+        font-size: 0.9rem;
         text-transform: uppercase;
         border: 3px solid #0c1c29;
         border-radius: 3em;
@@ -238,7 +234,6 @@
         color: #fff;
         font-weight: bold;
         background-color: #ca1f40;
-        /* box-shadow: 0 1em 2em #ca1f40; */
       }
       .btn-primary:hover {
         color: #ca1f40;
@@ -265,11 +260,7 @@
       .arrow {
         position: absolute;
         top: 50%;
-        /* width: 4em; */
-        /* height: 4em; */
         color: #0a1821;
-        /* text-align: center; */
-        /* line-height: 4.2em; */
         border: 2px solid #fff;
         border-radius: 50%;
         background-color: #fff8;
@@ -319,13 +310,12 @@
         }
       }
 
-      @media screen and (max-width: 880px) {
+      @media screen and (max-width: 55rem) {
         .panel-1, 
         .panel-2 {
           display: none;
         }
-        .card {
-          /* height: initial; */
+        .product-card {
           padding: 3em 2em 1em 2em;
           text-align: center;
           border-radius: 2em;
@@ -336,7 +326,7 @@
         .product-name {
           margin-top: 1em;
         }
-        .product-details {
+        .product-info {
           justify-content: center;
         }
         .details {
@@ -360,7 +350,7 @@
         }
       }
 
-      @media screen and (max-width: 700px) {
+      @media screen and (max-width: 44rem) {
         .product-slider {
           font-size: 13px;
         }
@@ -370,14 +360,14 @@
   <body>
     <section class="product-slider">
       <img src="./images/logo1.svg" alt="Logo" class="logo">
-      <div class="card">
+      <div class="product-card">
         <div class="panel-1"></div>
         <div class="panel-2"></div>
         <div class="product">
           <div class="product-image">
             <img src="./images/product1.png" alt="Stormtrooper Helmet">
           </div>
-          <div class="product-details">
+          <div class="product-info">
             <div>
               <h1 class="product-name">
                 stormtrooper helmet
@@ -401,7 +391,7 @@
                   <div class="progress-bar">
                     <div class="progress-circle">
                       <div class="progress-content">
-                        <h3 class="prog-text">80</h3>
+                        <h3 class="durability-value">80%</h3>
                       </div>
                       <div class="progress"></div>
                     </div>
@@ -465,24 +455,61 @@
         ]
       ]
 
-      const progText = document.querySelector(".prog-text");
+      const products = [
+        {
+          image: "./images/product1.png",
+          name: "Stormtrooper Helmet",
+          price: "1.299",
+          option: "Helmet Size",
+          options: ["S", "M", "L", "XL"],
+          durability: 80,
+          background: "./images/background1.jpg"
+        }, 
+        {
+          image: "./images/product2.png",
+          name: "Imperial Tie Fighter",
+          price: "9.999",
+          option: "Engine Unit",
+          options: ["P-S4 Twin", "P-W401"],
+          durability: 25,
+          background: "./images/background2.jpg"
+
+        }, 
+        {
+          image: "./images/product3.png",
+          name: "The Death Star",
+          price: "99.999",
+          option: "Armament",
+          options: ["Superlaser", "Turbolaser"],
+          durability: 100,
+          background: "./images/background3.jpg"
+
+        }
+      ]
+
+      const progValue = document.querySelector(".durability-value");
       const progress = document.querySelector(".progress");
 
+      let id = 0;
+
       function progressBar(percentage) {
-        progText.innerText = 0;
+        progValue.innerText = 0;
         let count = 0;
-        progress.style.transition = 50 * data[5][percentage] + "ms";
-        progress.style.bottom = data[5][percentage] - 110 + "%";
+        // progress.style.transition = 50 * data[5][percentage] + "ms";
+        // progress.style.bottom = data[5][percentage] - 100 + "%";
+        progress.style.top = 100 - products[id].durability + "%";
+        console.log(id);
 
         function updateCount() {
-          const target = data[5][percentage];
+          // const target = data[5][percentage];
+          const durability = products[id].durability;
   
-          if (count < target) {
+          if (count > durability) {
             count++;
-            progText.innerText = count + "%";
-            setTimeout(updateCount, 30);
+            progValue.innerText = count + "%";
+            // setTimeout(updateCount, 30);
           } else {
-            progText.innerText = target + "%";
+            progValue.innerText = durability + "%";
           }
         }
 
@@ -492,7 +519,7 @@
       progressBar(0);
 
       const optionsList = document.querySelector(".options-list");
-      const options = document.querySelectorAll(".options-list > li");
+      const options = document.querySelectorAll(".option");
 
       optionsList.addEventListener("click", function(e) {
         if (e.target && e.target.classList.contains("option")) {
@@ -504,58 +531,58 @@
 
       const leftArrow = document.querySelector(".left-arrow");
       const rightArrow = document.querySelector(".right-arrow");
-      const img = document.querySelector(".product-image img");
-      const productName = document.querySelector(".product-name");
-      const price = document.querySelector(".product-price");
-      const optionTitle = document.querySelector(".product-option-title");
-
-      let id = 0;
-
+      
       function slider(id) {
-        img.src = "./images/" + data[0][id] + ".png";
+        const img = document.querySelector(".product-image img");
+        const productName = document.querySelector(".product-name");
+        const price = document.querySelector(".product-price");
+        const optionTitle = document.querySelector(".product-option-title");
+        const bg = document.querySelector(".panel-1");
+
+        img.src = products[id].image;
 
         img.classList.add("fade-in");
         setTimeout(() => {
           img.classList.remove("fade-in");
         }, 850);
 
-        name.innerText = data[1][id];
+        productName.innerText = products[id].name;
 
-        price.innerText = data[2][id];
+        price.innerText = products[id].price;
 
-        optionTitle.innerText = data[3][id];
-
+        optionTitle.innerText = products[id].option;
+        
+        optionsList.innerHTML = "";
+        
         for (let i = 0; i < data[4][id].length; i++) {
           const li = document.createElement("li");
-          li.innerHTML = data[4][id][i];
+          li.innerHTML = products[id].options[i];
           li.classList.add("option");
-
-          if (i === 0) {
-            optionsList.innerHTML = "";
-            li.classList.add("active");
-          }
-
           optionsList.appendChild(li);
-
-          let bg = document.querySelector(".panel-1");
-          bg.style.backgroundImage = "url(./images/" + data[6][id] + ".jpg)";
-
-          progressBar(id);
         }
 
-        rightArrow.addEventListener("click", () => {
-          id++;
-          id = id % (data[0].length);
-          slider(id);
-        })
+        const firstOption = document.querySelector(".option");
+        firstOption.classList.add("active");
 
-        leftArrow.addEventListener("click", () => {
-          id--;
-          id = id + data[0].length;
-          id = id % (data[0].length);
-          slider(id);
-        })
+        bg.style.backgroundImage = `url(${products[id].background})`;
+
+        progressBar(id);
+
       }
+
+      rightArrow.addEventListener("click", () => {
+        id++;
+        console.log(id);
+        id = id % (data[0].length);
+        slider(id);
+      })
+
+      leftArrow.addEventListener("click", () => {
+        id--;
+        id = id + data[0].length;
+        id = id % (data[0].length);
+        slider(id);
+      })
 
       slider(id);
     </script>
