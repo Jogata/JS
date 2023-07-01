@@ -4,139 +4,180 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        font-family: Georgia, serif;
+        background-color: #eee;
+        overflow-x: hidden;
+      }
+
+      .auto-carousel {
+        position: relative;
+        width: 100vw;
+        height: 20em;
+        margin: 2em 0;
+      }
+
+      .carousel-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        align-items: center;
+        background-color: #fff;
+      }
+
+      .slide {
+        height: 100%;
+        padding: 1em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+
+      .slide img {
+        width: 100%;
+        height: 16em;
+        object-fit: cover;
+      }
+
+      @media screen and (max-width: 1100px) {
+        .carousel-container {
+          width: 266.5%;
+        }
+      }
+
+      @media screen and (max-width: 900px) {
+        .carousel-container {
+          width: 400%;
+        }
+      }
+
+      @media screen and (max-width: 600px) {
+        .carousel-container {
+          width: 800%;
+        }
+      }
+
+      h2 {
+        position: absolute;
+        color: #fff;
+        text-transform: capitalize;
+      }
+
+      .buttons {
+        position: absolute;
+        top: 47%;
+        left: 1%;
+        width: 96%;
+        z-index: 2;
+      }
+      button {
+        border: 1px solid #fff;
+        border-radius: 50%;
+        background-color: transparent;
+        transition: opacity 0.4s;
+        opacity: 0.4;
+        cursor: pointer;
+      }
+      button:hover {
+        opacity: 1;
+      }
+      #prev {
+        transform: rotate(-135deg);
+      }
+      #next {
+        float: right;
+        transform: rotate(45deg);
+      }
+      button i {
+        padding: 1em 1.08em;
+        color: #fff;
+        font-size: 1.4rem;
+      }
+    </style>
   </head>
   <body>
-    <script>
-      // 05. Fitness Center
+    <div class="auto-carousel">
+      <div class="buttons">
+        <button id="prev"><i class="fa fa-location-arrow"></i></button>
+        <button id="next"><i class="fa fa-location-arrow"></i></button>
+      </div>
+      <div class="carousel-container">
+        <div class="slide">
+          <h2>slide 1</h2>
+          <img src="https://picsum.photos/id/723/500/400">
+        </div>
+        <div class="slide">
+          <h2>slide 2</h2>
+          <img src="https://picsum.photos/id/73/500/400">
+        </div>
+        <div class="slide">
+          <h2>slide 3</h2>
+          <img src="https://picsum.photos/id/472/500/400">
+        </div>
+        <div class="slide">
+          <h2>slide 4</h2>
+          <img src="https://picsum.photos/id/83/500/400">
+        </div>
+        <div class="slide">
+          <h2>slide 5</h2>
+          <img src="https://picsum.photos/id/7/500/400">
+        </div>
+        <div class="slide">
+          <h2>slide 6</h2>
+          <img src="https://picsum.photos/id/832/500/400">
+        </div>
+        <div class="slide">
+          <h2>slide 7</h2>
+          <img src="https://picsum.photos/id/1032/500/400">
+        </div>
+        <div class="slide">
+          <h2>slide 8</h2>
+          <img src="https://picsum.photos/id/853/500/400">
+        </div>
+      </div>
 
-      function manageGym(params) {
-        const clients = Number(params[0]);
-        
-        const options = {
-          back: 0,
-          chest: 0,
-          legs: 0,
-          abs: 0,
-          "protein shake": 0,
-          "protein bar": 0,
-          buyers: 0,
-        }
+      <script>
+        const container = document.querySelector(".carousel-container");
+        const slides = document.querySelectorAll(".slide");
 
-        for (let current = 1; current < params.length; current++) {
-          let input = params[current].toLowerCase();
+        let offset = 0;
+        let slideID = 0;
 
-          options[input]++;
+        setInterval(() => {
+          offset = slides[0].offsetWidth;
+          container.style.transition = "left 0.5s ease-in-out";
+          container.style.left = -offset + "px";
 
-          if (input === "protein shake" || input === "protein bar") {
-            options.buyers++;
-          }
+          setTimeout(() => {
+            container.style.transition = "none";
+            slides[slideID].style.order = slides.length - 1;
+            container.style.left = 0;
+            slideID++;
 
-        }
-
-        const clientssP = options.buyers / clients * 100;
-        const trainingP = 100 - clientssP;
-
-        console.log(`${options.back} - back`);
-        console.log(`${options.chest} - chest`);
-        console.log(`${options.legs} - legs`);
-        console.log(`${options.abs} - abs`);
-        console.log(`${options["protein shake"]} - protein shake`);
-        console.log(`${options["protein bar"]} - protein bar`);
-        console.log(`${trainingP.toFixed(2)}% - work out`);
-        console.log(`${clientssP.toFixed(2)}% - protein`);
-      }
-
-      // manageGym(["10", "Back", "Chest", "Legs", "Abs", "Protein shake", "Protein bar", "Protein shake", "Protein bar", "Legs", "Abs"]);
-      // manageGym(["7", "Chest", "Back", "Legs", "Legs", "Abs", "Protein shake", "Protein bar"]);
-
-      // 05. Tennis Ranklist
-
-      function calcPoints(data) {
-        const turniri = Number(data[0]);
-        let startingPoints = Number(data[1]);
-        let points = startingPoints;
-        let etap = "";
-        let uspehi = 0;
-
-        const results = {
-          W: 2000,
-          F: 1200,
-          SF: 720,
-        }
-
-        for (let index = 2; index < data.length; index++) {
-          etap = data[index];
-
-          points += results[result];
-
-          if (etap === "W") {
-            uspehi++
-          }
-          
-        }
-
-        const average = Math.floor((points - startingPoints) / turniri);
-        const uspehP = uspehi / turniri * 100;
-
-        console.log(`Final points: ${points}`);
-        console.log(`Average points: ${average}`);
-        console.log(`${uspehP.toFixed(2)}%`);
-
-      }
-
-      calcPoints(["5", "1400", "F", "SF", "W", "W","SF"]);
-      calcPoints(["4", "750", "SF", "W", "SF", "W"]);
-
-      // 06. High Jump
-
-      function calcHighJump(data) {
-        let end = Number(data[0]);
-        let currentTarget = end - 30;
-        let isSucessuful = true;
-        let broiPosledNeuspOpiti = 0;
-        let jumps = 1;
-
-        while (currentTarget <= end) {
-          console.log(currentTarget);
-          let height = Number(data[jumps]);
-          broiPosledNeuspOpiti = 0;
-          
-          while (height <= currentTarget) {
-
-            console.log("inf");
-
-            if (broiPosledNeuspOpiti === 3) {
-              isSucessuful = false;
-              end = 0;
-              break;
-            } else {
-              broiPosledNeuspOpiti++;
-            jumps++;
-            height = Number(data[jumps]);
-
+            if (slideID === slides.length) {
+              slideID = 0;
+              slides.forEach(slide => {
+                slide.style.order = "initial";
+              })
             }
-
-          }
-
-          if (height > currentTarget) {
-            currentTarget += 5;
-            jumps++;
-          }
-          
-        }
-
-        if (isSucessuful) {
-          console.log("end");
-        } else {
-          console.log(`Tihomir failed at ${currentTarget}cm after ${jumps} jumps.`);
-        }
-
-      }
-
-      // calcHighJump(["250", "225", "224", "225", "228", "231", "235", "234", "235", "250", "255", "235"]);
-      // calcHighJump(["231", "205", "212", "213", "228", "229", "230", "235"]);
-
-    </script>
+          }, 500);
+        }, 3000);
+      </script>
+    </div>
 
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
