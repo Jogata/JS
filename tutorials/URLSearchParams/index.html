@@ -4,590 +4,151 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-      * {
-        box-sizing: border-box;
+      :root {
+        --clr-primary: hsl(215, 99%, 66%);
+        --clr-secondary: hsl(259, 69%, 65%);
+        --clr-neutral-100: hsl(0, 0%, 100%);
+        --clr-neutral-900: hsl(230, 32%, 15%);
+        --gradient: linear-gradient(90deg, var(--clr-primary), var(--clr-secondary));
       }
 
       body {
-        margin: 0;
-        min-width: fit-content;
+        min-height: 100vh;
+        display: grid;
+        place-content: center;
         font-family: Georgia, serif;
       }
 
-      .product-slider {
-        padding: 2em;
+      main {
         min-height: 100vh;
-        display: flex;
-        align-items: center;
-        background: linear-gradient(-45deg, #44202c, #0a1821);
-      }
-
-      .logo {
-        position: absolute;
-        top: 5%;
-        right: 0;
-        width: 40%;
-        height: 90%;
-        object-fit: cover;
-      }
-
-      .product-card {
-        position: relative;
-        max-width: 66rem;
-        margin: auto;
-        padding: 4rem 2rem;
-      }
-
-      .panel-1,      
-      .panel-2 {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        border-radius: 2em;
-        box-shadow: 0 0 4em 1em rgba(0, 0, 0, 0.4);
-        overflow: hidden;
-      }      
-
-      .panel-1 {
-        width: 80%;
-        height: 100%;
-        right: 0;
-        background-image: url("./images/background1.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        z-index: 1;
-      }
-      .panel-1::before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(45deg, 
-          #29191e 0%, #0c1c29 40%, 
-          rgba(12, 31, 45, 0.9) 100%
-        );
-      }
-
-      .panel-2 {
-        left: 0;
-        width: 50%;
-        height: 110%;
-        background-color: #cc2c42;
-        z-index: 0;
-      }
-      .panel-2::before {
-        position: absolute;
-        top: 50%;
-        left: -5em;
-        transform: translateY(-50%) rotate(-90deg);
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-image: url("./images/star-wars1.svg");
-        background-position: center;
-        background-size: cover;
-        z-index: 2;
-      }
-
-      .product {
-        position: relative;
-        height: 100%;
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        color: #fff;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        z-index: 3;
+        place-content: center;
       }
 
-      .product-image {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      .card {
+        display: grid;
+        grid-template-columns: 2rem 20rem 2rem;
+        grid-template-rows: repeat(3, auto);
+        place-content: center;
+        text-align: center;
       }
-      .product-image img {
-        width: 70%;
-        filter: drop-shadow(0 0 1em rgba(0, 0, 0, 0.7));
+      
+      .welcome {
+        grid-column: 1 / -1;
+        grid-row: 1 / 3;
+        display: grid;
+        grid-template-columns: subgrid;
+        grid-template-rows: subgrid;
+        padding-top: 1rem;
+        color: var(--clr-neutral-100);
+        background-image: var(--gradient);
+        border-radius: 1rem;
       }
 
-      .product-info {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
+      .welcome div {
+        grid-column: 2 / 3;
       }
 
-      .product-name {
+      .start-chatting {
+        grid-column: 2 / 3;
+        grid-row: 2 / 4;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        padding-bottom: 2.6rem;
+        border-radius: 0.4rem;
+        background-color: var(--clr-neutral-100);
+        box-shadow: 0 0 1rem var(--clr-neutral-900);
+      }
+
+      .rep-info > * {
         margin: 0;
-        font-size: 2.8rem;
       }
 
-      .price {
-        margin: 0.2em 0;
-        color: #eee;
-        font-size: 2.8rem;
+      h1 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        text-transform: capitalize;
+      }
+
+      h2 {
+        margin-bottom: 2rem;
+        font-size: 1.25rem;
         font-weight: 300;
       }
 
-      .details {
-        margin: 2em 0;
+      .name {
+        font-size: 1rem;
+        text-transform: capitalize;
+      }
+
+      .status {
         display: flex;
         align-items: center;
-        justify-content: flex-start;
-      }
-
-      .options {
-        margin: 1em 0;
-        padding: 1em 1.5em 1em 0;
-        border-right: 1px solid #eee;
-      }
-      .options-list {
-        list-style: none;
-        margin: 0.5em 0;
-        padding: 0;
-      }
-
-      .option {
-        display: inline-block;
-        margin-right: 0.5em;
-        padding: 0.5em;
-        border: 1px solid transparent;
-        border-radius: 3em;
-        transition: all 0.4s ease-in-out;
-        cursor: pointer;
-      }
-      .option.active {
-        border: 1px solid #ca1f40;
-      }
-
-      .specs {
-        padding-left: 2em;
-        text-align: center;
-      }
-
-      .progress-bar {
-        margin-bottom: 0.5em;
-      }
-
-      .progress-circle {
-        position: relative;
-        width: 7rem;
-        height: 7rem;
-        border: 8px solid #0a1821;
-        border-radius: 50%;
-        /* background-color: transparent; */
-        overflow: hidden;
-      }
-      .progress {
-        position: absolute;
-        left: 50%;
-        top: 100%;
-        /* bottom: -100%; */
-        transform: translateX(-50%);
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(0deg, 
-          rgba(202, 31, 64, 0), #ca1f40
-        );
-        transition: top 4.5s ease-in-out;
-      }
-
-      .progress-content {
-        position: absolute;
-        top: 5%;
-        left: 5%;
-        width: 90%;
-        height: 90%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        border-radius: 50%;
-        background-color: #44202c;
-        z-index: 1;
-      }
-
-      #durability {
-        font-weight: bold;
-      }
-
-      .buttons button {
-        padding: 1em 2em;
+        width: min-content;
+        margin: 0.6rem auto 2rem;
+        padding: 0.2em 1em 0.3em;
         font-size: 0.9rem;
-        text-transform: uppercase;
-        border: 3px solid #0c1c29;
-        border-radius: 3em;
-        box-shadow: 
-        1px 1px 1px #000, 
-        -1px -1px 1px #fff8, 
-        inset 1px 1px 1px #000, 
-        inset -1px -1px 1px #fff8;
-        transition: all 0.3s;
-        cursor: pointer;
+        text-transform: capitalize;
+        border: 1px solid #000;
+        border-radius: 2em;
+        opacity: 0.7;
       }
-      .btn-primary {
-        margin-right: 1em;
-        color: #fff;
-        font-weight: bold;
-        background-color: #ca1f40;
-      }
-      .btn-primary:hover {
-        color: #ca1f40;
-        background-color: #fff;
-      }
-      .btn-secondary {
-        color: #ccc;
-        background-color: transparent;
-      }
-      .btn-secondary i {
-        margin-right: 0.5em;
-        color: #ca1f40;
-      }
-      .btn-secondary:hover {
-        color: #0a1821;
-        background-color: #fff;
-      }
-      .buttons button:active {
-        box-shadow: -1px -1px 1px transparent, 
-        inset 1px 1px 1px transparent, 
-        inset -1px -1px 1px transparent;
-      }
-
-      .arrow {
-        position: absolute;
-        top: 50%;
-        color: #0a1821;
-        border: 2px solid #fff;
+      .status::before {
+        content: "";
+        width: 0.44rem;
+        height: 0.44rem;
+        margin-right: 0.3rem;
         border-radius: 50%;
-        background-color: #fff8;
-        box-shadow: 
-        inset 1px 1px 1px #000, 
-        inset -1px -1px 1px #fff;
-        transition: all 0.5s ease;
+        background-color: #f00;
+      }
+      .status[data-status="active"]::before {
+        background-color: #0f0;
+      }
+
+      img {
+        width: 60%;
+        max-width: 6rem;
+        aspect-ratio: 1;
+        object-fit: cover;
+        margin: auto;
+        border-radius: 50%;
+      }
+
+      button {
+        padding: 1em 2em;
+        color: var(--clr-neutral-100);
+        font-size: 0.8rem;
+        font-family: inherit;
+        border: 1px solid transparent;
+        border-radius: 0.24rem;
+        background-image: var(--gradient);
         cursor: pointer;
-        z-index: 4;
-      }
-      .arrow i {
-        padding: 0.8em 0.84em;
-        font-size: 1.5rem;
-      }
-      .left-arrow {
-        left: 0;
-        transform: translate(-50%, -50%);
-      }
-      .right-arrow {
-        right: 0;
-        transform: translate(50%, -50%);
-      }
-      .arrow:hover {
-        color: #fff;
-        background-color: #0a1821;
-        border: 2px solid #0a1821;
-        box-shadow: -1px -1px 1px #fff8, 
-        inset 1px 1px 1px #000, 
-        inset -1px -1px 1px #fff8;
-      }
-      .arrow:active {
-        box-shadow: -1px -1px 1px transparent, 
-        inset 1px 1px 1px transparent, 
-        inset -1px -1px 1px transparent;
-      }
-
-      .fade-in {
-        animation: fade-in 0.8s ease-in-out;
-      }
-
-      @keyframes fade-in {
-        0% {
-          opacity: 0;
-        }
-        100% {
-          opacity: 1;
-        }
-      }
-
-      @media screen and (max-width: 55rem) {
-        .panel-1, 
-        .panel-2 {
-          display: none;
-        }
-        .product-card {
-          padding: 3em 2em 1em 2em;
-          text-align: center;
-          border-radius: 2em;
-          background: linear-gradient(45deg, 
-          #29191e 0%, #0c1c29 40%, 
-          rgba(12, 31, 45, 0.9) 100%);
-        }
-        .product-name {
-          margin-top: 1em;
-        }
-        .product-info {
-          justify-content: center;
-        }
-        .details {
-          flex-direction: column;
-        }
-        .product {
-          grid-template-columns: 1fr;
-        }
-        .product-image img {
-          width: 50%;
-        }
-        .options {
-          padding-right: 0;
-          border-right: none;
-        }
-        .specs {
-          padding-left: 0;
-        }
-        .buttons button {
-          margin: 2.5em;
-        }
-      }
-
-      @media screen and (max-width: 44rem) {
-        .product-slider {
-          font-size: 13px;
-        }
       }
     </style>
   </head>
   <body>
-    <section class="product-slider">
-      <img src="./images/logo1.svg" alt="Logo" class="logo">
-      <div class="product-card">
-        <div class="panel-1"></div>
-        <div class="panel-2"></div>
-        <div class="product">
-          <div class="product-image">
-            <img src="./images/product1.png" alt="Stormtrooper Helmet">
-          </div>
-          <div class="product-info">
-            <div>
-              <h1 class="product-name">
-                stormtrooper helmet
-              </h1>
-              <h2 class="price">
-                $<span class="product-price">1.299</span>,<sup>99</sup>
-              </h2>
-              <div class="details">
-                <div class="options">
-                  <b class="product-option-title">
-                    helmet size
-                  </b>
-                  <ul class="options-list">
-                    <li class="option active">s</li>
-                    <li class="option">m</li>
-                    <li class="option">l</li>
-                    <li class="option">xl</li>
-                  </ul>
-                </div>
-                <div class="specs">
-                  <div class="progress-bar">
-                    <div class="progress-circle">
-                      <div class="progress-content">
-                        <h3 class="durability-value">80%</h3>
-                      </div>
-                      <div class="progress"></div>
-                    </div>
-                  </div>
-                  <span id="durability">durability</span>
-                </div>
-              </div>
-              <div class="buttons">
-                <button type="button" class="btn-primary">
-                  add to cart
-                </button>
-                <button type="button" class="btn-secondary">
-                  <i class="fa fa-heart"></i>
-                  add to wishlist
-                </button>
-              </div>
-            </div>
+    <main>
+      <div class="card">
+        <div class="welcome">
+          <div>
+            <h1>hi george</h1>
+            <p>You can contact us whenever you need help or just curious about something.</p>
           </div>
         </div>
-        <div class="arrow left-arrow" id="prev">
-          <i class="fa fa-arrow-left"></i>
-        </div>
-        <div class="arrow right-arrow" id="next">
-          <i class="fa fa-arrow-right"></i>
+        <div class="start-chatting">
+          <h2>Start chatting</h2>
+          <div class="rep-info">
+            <img src="../../../CSS/assets/img/profile-copy.jpg" alt="person">
+            <p class="name">essie walton</p>
+            <div class="status" data-status="active">active</div>
+          </div>
+          <button class="button">Send a message</button>
         </div>
       </div>
-    </section>
+    </main>
 
-    <script>
-      const data = [
-        [
-          "product1",
-          "product2",
-          "product3"
-        ],
-        [
-          "Stormtrooper Helmet", 
-          "Imperial Tie Fighter", 
-          "The Death Star"
-        ],
-        [
-          "1.299",
-          "9.999", 
-          "99.999"
-        ], 
-        [
-          "Helmet Size", 
-          "Engine Unit",
-          "Armament"
-        ], 
-        [
-          ["S", "M", "L", "XL"], 
-          ["P-S4 Twin", "P-W401"], 
-          ["Superlaser", "Turbolaser"]
-        ], 
-        [80, 25, 100], 
-        [
-          "background1", 
-          "background2", 
-          "background3", 
-        ]
-      ]
-
-      const products = [
-        {
-          image: "./images/product1.png",
-          name: "Stormtrooper Helmet",
-          price: "1.299",
-          option: "Helmet Size",
-          options: ["S", "M", "L", "XL"],
-          durability: 80,
-          background: "./images/background1.jpg"
-        }, 
-        {
-          image: "./images/product2.png",
-          name: "Imperial Tie Fighter",
-          price: "9.999",
-          option: "Engine Unit",
-          options: ["P-S4 Twin", "P-W401"],
-          durability: 25,
-          background: "./images/background2.jpg"
-
-        }, 
-        {
-          image: "./images/product3.png",
-          name: "The Death Star",
-          price: "99.999",
-          option: "Armament",
-          options: ["Superlaser", "Turbolaser"],
-          durability: 100,
-          background: "./images/background3.jpg"
-
-        }
-      ]
-
-      const progValue = document.querySelector(".durability-value");
-      const progress = document.querySelector(".progress");
-
-      let id = 0;
-
-      function progressBar(percentage) {
-        progValue.innerText = 0;
-        let count = 0;
-        // progress.style.transition = 50 * data[5][percentage] + "ms";
-        // progress.style.bottom = data[5][percentage] - 100 + "%";
-        progress.style.top = 100 - products[id].durability + "%";
-        console.log(id);
-
-        function updateCount() {
-          // const target = data[5][percentage];
-          const durability = products[id].durability;
-  
-          if (count > durability) {
-            count++;
-            progValue.innerText = count + "%";
-            // setTimeout(updateCount, 30);
-          } else {
-            progValue.innerText = durability + "%";
-          }
-        }
-
-        updateCount();
-      }
-
-      progressBar(0);
-
-      const optionsList = document.querySelector(".options-list");
-      const options = document.querySelectorAll(".option");
-
-      optionsList.addEventListener("click", function(e) {
-        if (e.target && e.target.classList.contains("option")) {
-          const activeOption = optionsList.querySelector(".active");
-          activeOption.classList.remove("active");
-          e.target.classList.add("active");
-        }
-      })
-
-      const leftArrow = document.querySelector(".left-arrow");
-      const rightArrow = document.querySelector(".right-arrow");
-      
-      function slider(id) {
-        const img = document.querySelector(".product-image img");
-        const productName = document.querySelector(".product-name");
-        const price = document.querySelector(".product-price");
-        const optionTitle = document.querySelector(".product-option-title");
-        const bg = document.querySelector(".panel-1");
-
-        img.src = products[id].image;
-
-        img.classList.add("fade-in");
-        setTimeout(() => {
-          img.classList.remove("fade-in");
-        }, 850);
-
-        productName.innerText = products[id].name;
-
-        price.innerText = products[id].price;
-
-        optionTitle.innerText = products[id].option;
-        
-        optionsList.innerHTML = "";
-        
-        for (let i = 0; i < data[4][id].length; i++) {
-          const li = document.createElement("li");
-          li.innerHTML = products[id].options[i];
-          li.classList.add("option");
-          optionsList.appendChild(li);
-        }
-
-        const firstOption = document.querySelector(".option");
-        firstOption.classList.add("active");
-
-        bg.style.backgroundImage = `url(${products[id].background})`;
-
-        progressBar(id);
-
-      }
-
-      rightArrow.addEventListener("click", () => {
-        id++;
-        console.log(id);
-        id = id % (data[0].length);
-        slider(id);
-      })
-
-      leftArrow.addEventListener("click", () => {
-        id--;
-        id = id + data[0].length;
-        id = id % (data[0].length);
-        slider(id);
-      })
-
-      slider(id);
-    </script>
-
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
