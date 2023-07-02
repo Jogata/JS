@@ -4,180 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        min-height: 100vh;
-        font-family: Georgia, serif;
-        background-color: #eee;
-        overflow-x: hidden;
-      }
-
-      .auto-carousel {
-        position: relative;
-        width: 100vw;
-        height: 20em;
-        margin: 2em 0;
-      }
-
-      .carousel-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 200%;
-        height: 100%;
-        display: grid;
-        grid-template-columns: repeat(8, 1fr);
-        align-items: center;
-        background-color: #fff;
-      }
-
-      .slide {
-        height: 100%;
-        padding: 1em;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-      }
-
-      .slide img {
-        width: 100%;
-        height: 16em;
-        object-fit: cover;
-      }
-
-      @media screen and (max-width: 1100px) {
-        .carousel-container {
-          width: 266.5%;
-        }
-      }
-
-      @media screen and (max-width: 900px) {
-        .carousel-container {
-          width: 400%;
-        }
-      }
-
-      @media screen and (max-width: 600px) {
-        .carousel-container {
-          width: 800%;
-        }
-      }
-
-      h2 {
-        position: absolute;
-        color: #fff;
-        text-transform: capitalize;
-      }
-
-      .buttons {
-        position: absolute;
-        top: 47%;
-        left: 1%;
-        width: 96%;
-        z-index: 2;
-      }
-      button {
-        border: 1px solid #fff;
-        border-radius: 50%;
-        background-color: transparent;
-        transition: opacity 0.4s;
-        opacity: 0.4;
-        cursor: pointer;
-      }
-      button:hover {
-        opacity: 1;
-      }
-      #prev {
-        transform: rotate(-135deg);
-      }
-      #next {
-        float: right;
-        transform: rotate(45deg);
-      }
-      button i {
-        padding: 1em 1.08em;
-        color: #fff;
-        font-size: 1.4rem;
-      }
-    </style>
   </head>
   <body>
-    <div class="auto-carousel">
-      <div class="buttons">
-        <button id="prev"><i class="fa fa-location-arrow"></i></button>
-        <button id="next"><i class="fa fa-location-arrow"></i></button>
-      </div>
-      <div class="carousel-container">
-        <div class="slide">
-          <h2>slide 1</h2>
-          <img src="https://picsum.photos/id/723/500/400">
-        </div>
-        <div class="slide">
-          <h2>slide 2</h2>
-          <img src="https://picsum.photos/id/73/500/400">
-        </div>
-        <div class="slide">
-          <h2>slide 3</h2>
-          <img src="https://picsum.photos/id/472/500/400">
-        </div>
-        <div class="slide">
-          <h2>slide 4</h2>
-          <img src="https://picsum.photos/id/83/500/400">
-        </div>
-        <div class="slide">
-          <h2>slide 5</h2>
-          <img src="https://picsum.photos/id/7/500/400">
-        </div>
-        <div class="slide">
-          <h2>slide 6</h2>
-          <img src="https://picsum.photos/id/832/500/400">
-        </div>
-        <div class="slide">
-          <h2>slide 7</h2>
-          <img src="https://picsum.photos/id/1032/500/400">
-        </div>
-        <div class="slide">
-          <h2>slide 8</h2>
-          <img src="https://picsum.photos/id/853/500/400">
-        </div>
-      </div>
-
-      <script>
-        const container = document.querySelector(".carousel-container");
-        const slides = document.querySelectorAll(".slide");
-
-        let offset = 0;
-        let slideID = 0;
-
-        setInterval(() => {
-          offset = slides[0].offsetWidth;
-          container.style.transition = "left 0.5s ease-in-out";
-          container.style.left = -offset + "px";
-
-          setTimeout(() => {
-            container.style.transition = "none";
-            slides[slideID].style.order = slides.length - 1;
-            container.style.left = 0;
-            slideID++;
-
-            if (slideID === slides.length) {
-              slideID = 0;
-              slides.forEach(slide => {
-                slide.style.order = "initial";
-              })
-            }
-          }, 500);
-        }, 3000);
-      </script>
-    </div>
 
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
@@ -243,6 +71,154 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
+    </script>
+
+    <script>
+      // 06. The Most Powerful Word
+
+      function findTheMostPowerfulWord2(params) {
+        let index = 0;
+        let word = params[index];
+        let biggest = 0;
+        let theMost = "";
+
+        while (word !== "End of words") {
+          let sum = 0;
+
+          for (let letter = 0; letter < word.length; letter++) {
+            sum = sum + word.charCodeAt(letter);
+          }
+
+          if (word[0] == "a") {
+            sum *= word.length;
+          } else if (word[0] == "e") {
+            sum *= word.length;
+          } else if (word[0] == "i") {
+            sum *= word.length;
+          } else if (word[0] == "o") {
+            sum *= word.length;
+          } else if (word[0] == "u") {
+            sum *= word.length;
+          } else if (word[0] == "y") {
+            sum *= word.length;
+          } else if (word[0] == "A") {
+            sum *= word.length;
+          } else if (word[0] == "E") {
+            sum *= word.length;
+          } else if (word[0] == "I") {
+            sum *= word.length;
+          } else if (word[0] == "O") {
+            sum *= word.length;
+          } else if (word[0] == "U") {
+            sum *= word.length;
+          } else if (word[0] == "Y") {
+            sum *= word.length;
+          } else {
+            sum = Math.floor(sum / word.length);
+          }
+
+          // console.log(sum);
+
+          if (sum > biggest) {
+            biggest = sum;
+            theMost = word;
+          }
+
+          // console.log("=================");
+
+          index++;
+          word = params[index];
+
+          // if (index > 20) {
+          //   console.log("inf");
+          //   break;
+          // }
+        }
+
+        console.log(`The most powerful word is ${theMost} - ${biggest}`);
+
+      }
+
+      function findTheMostPowerfulWord(params) {
+        let index = 0;
+        let word = params[index];
+        let biggest = 0;
+        let theMost = "";
+
+        const letters = {
+          a: true,
+          e: true,
+          i: true,
+          o: true,
+          u: true,
+          y: true,
+          A: true,
+          E: true,
+          I: true,
+          O: true,
+          U: true,
+          Y: true,
+        }
+
+        while (word !== "End of words") {
+          let sum = 0;
+
+          for (let letter = 0; letter < word.length; letter++) {
+            sum = sum + word.charCodeAt(letter);
+          }
+
+          if (letters[word[0]] == true) {
+            sum *= word.length;
+          } else {
+            sum = Math.floor(sum / word.length);
+          }
+
+          // console.log(sum);
+
+          if (sum > biggest) {
+            biggest = sum;
+            theMost = word;
+          }
+
+          // console.log("=================");
+
+          index++;
+          word = params[index];
+
+          // if (index > 20) {
+          //   console.log("inf");
+          //   break;
+          // }
+        }
+
+        console.log(`The most powerful word is ${theMost} - ${biggest}`);
+
+      }
+
+      // findTheMostPowerfulWord(["The", "Most", "Powerful", "Word", "Is", "Experience", "End of words"]);
+      // findTheMostPowerfulWord(["But", "Some", "People", "Say", "It's", "LOVE", "End of words"]);
+
+      // 01. Pool Day
+
+      function calcPoolDay(params) {
+        const people = Number(params[0]);
+        const taksa = Number(params[1]);
+        const shezlong = Number(params[2]);
+        const umbrella = Number(params[3]);
+
+        let total = 0;
+
+        total = total + people * taksa;
+        const umbrellas = Math.ceil(people / 2);
+        total = total + umbrellas * umbrella;
+        const shezlongs = Math.ceil(people * 0.75);
+        total = total + shezlongs * shezlong;
+
+        console.log(`${total.toFixed(2)} lv.`);
+      }
+
+      // calcPoolDay(["21","5.50", "4.40", "6.20"]);
+      // calcPoolDay(["50", "6", "8", "4"]);
     </script>
   </body>
 </html>
