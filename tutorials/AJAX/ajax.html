@@ -4,10 +4,168 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
+    <style>
+      * {
+        margin: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        padding: 1.5em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Georgia, serif;
+      }
+
+      .testimonials {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        justify-items: center;
+        border-radius: 10px;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      .profile-img {
+        width: 100%;
+        height: 100%;
+        min-height: 18em;
+        background-image: url("../../../CSS/assets/img/profile-copy.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        transition: all 0.4s;
+      }
+
+      .container {
+        width: 100%;
+        overflow: hidden;
+      }
+
+      .testimonial {
+        width: 100%;
+        height: 100%;
+        padding: 2.5em 2.5em 1.5em 2.5em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.4s;
+      }
+
+      .name {
+        margin: 0.5em 0;
+        font-size: 2rem;
+        text-transform: capitalize;
+      }
+
+      .title {
+        text-transform: capitalize;
+      }
+      .title span {
+        text-transform: lowercase;
+      }
+
+      .quote {
+        max-width: 400px;
+        margin: 1em 0;
+        font-size: 1.5em;
+        font-weight: 600;
+        line-height: 1.5em;
+      }
+
+      @media screen and (max-width: 700px) {
+        .quote {
+          font-size: 1.2em;
+        }
+      }
+
+      @media screen and (max-width: 580px) {
+        .testimonials {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      fieldset {
+        display: none;
+      }
+    </style>
   </head>
   <body>
+    <div class="testimonials">
+      <div class="profile-img"></div>
+      <div class="container">
+        <div class="testimonial">
+          <div>
+            <h3 class="name">tanya singer</h3>
+            <p class="title">
+              director <span>of</span> digital marketing
+            </p>
+            <p class="quote">
+              &quot; <span>Your product has helped us to learn more about our customers.</span> &quot;
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+    <script>
+      const testimonial = document.querySelector(".testimonial");
+      const image = document.querySelector(".profile-img");
+      const name = document.querySelector(".name");
+      const title = document.querySelector(".title");
+      const quote = document.querySelector(".quote");
+
+      let id = 0;
+
+      const testimonials = [
+        [
+          "../../../CSS/assets/img/profile-copy.jpg", 
+          "../../../CSS/assets/img/profile-copy.jpg", 
+          "../../../CSS/assets/img/profile-copy.jpg"
+        ], 
+        [
+          "tanya singer", 
+          "john doe", 
+          "mike smith"
+        ], 
+        [
+          "director <span>of</span> digital marketing", 
+          "lead front end developer", 
+          "author, online influencer"
+        ], 
+        [
+          "Your product has helped us to learn more about our customers.", 
+          "Truly a unique and effective way of solving my problems. Wonderfull!", 
+          "Been using it for the past month, a gamechanger for sure."
+        ]
+      ]
+
+      setInterval(() => {
+        setTimeout(() => {
+          testimonial.style.transform = "translateX(-100%)";
+        }, 2000);
+        setTimeout(() => {
+          testimonial.style.transform = "none";
+          testimonial.style.transform = "translateX(100%)";
+          id++;
+          if (id > testimonials[0].length - 1) {
+            id = 0;
+          }
+          image.style.backgroundImage = "url(" + testimonials[0][id] + ")";
+          name.innerHTML = testimonials[1][id];
+          title.innerHTML = testimonials[2][id];
+          quote.innerHTML = testimonials[3][id];
+        }, 2400);
+        setTimeout(() => {
+          testimonial.style.transition = "all 0.4s";
+          testimonial.style.transform = "translateX(0)";
+        }, 3000);
+      }, 6000);
+    </script>
+
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
@@ -71,154 +229,6 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
-    </script>
-
-    <script>
-      // 06. The Most Powerful Word
-
-      function findTheMostPowerfulWord2(params) {
-        let index = 0;
-        let word = params[index];
-        let biggest = 0;
-        let theMost = "";
-
-        while (word !== "End of words") {
-          let sum = 0;
-
-          for (let letter = 0; letter < word.length; letter++) {
-            sum = sum + word.charCodeAt(letter);
-          }
-
-          if (word[0] == "a") {
-            sum *= word.length;
-          } else if (word[0] == "e") {
-            sum *= word.length;
-          } else if (word[0] == "i") {
-            sum *= word.length;
-          } else if (word[0] == "o") {
-            sum *= word.length;
-          } else if (word[0] == "u") {
-            sum *= word.length;
-          } else if (word[0] == "y") {
-            sum *= word.length;
-          } else if (word[0] == "A") {
-            sum *= word.length;
-          } else if (word[0] == "E") {
-            sum *= word.length;
-          } else if (word[0] == "I") {
-            sum *= word.length;
-          } else if (word[0] == "O") {
-            sum *= word.length;
-          } else if (word[0] == "U") {
-            sum *= word.length;
-          } else if (word[0] == "Y") {
-            sum *= word.length;
-          } else {
-            sum = Math.floor(sum / word.length);
-          }
-
-          // console.log(sum);
-
-          if (sum > biggest) {
-            biggest = sum;
-            theMost = word;
-          }
-
-          // console.log("=================");
-
-          index++;
-          word = params[index];
-
-          // if (index > 20) {
-          //   console.log("inf");
-          //   break;
-          // }
-        }
-
-        console.log(`The most powerful word is ${theMost} - ${biggest}`);
-
-      }
-
-      function findTheMostPowerfulWord(params) {
-        let index = 0;
-        let word = params[index];
-        let biggest = 0;
-        let theMost = "";
-
-        const letters = {
-          a: true,
-          e: true,
-          i: true,
-          o: true,
-          u: true,
-          y: true,
-          A: true,
-          E: true,
-          I: true,
-          O: true,
-          U: true,
-          Y: true,
-        }
-
-        while (word !== "End of words") {
-          let sum = 0;
-
-          for (let letter = 0; letter < word.length; letter++) {
-            sum = sum + word.charCodeAt(letter);
-          }
-
-          if (letters[word[0]] == true) {
-            sum *= word.length;
-          } else {
-            sum = Math.floor(sum / word.length);
-          }
-
-          // console.log(sum);
-
-          if (sum > biggest) {
-            biggest = sum;
-            theMost = word;
-          }
-
-          // console.log("=================");
-
-          index++;
-          word = params[index];
-
-          // if (index > 20) {
-          //   console.log("inf");
-          //   break;
-          // }
-        }
-
-        console.log(`The most powerful word is ${theMost} - ${biggest}`);
-
-      }
-
-      // findTheMostPowerfulWord(["The", "Most", "Powerful", "Word", "Is", "Experience", "End of words"]);
-      // findTheMostPowerfulWord(["But", "Some", "People", "Say", "It's", "LOVE", "End of words"]);
-
-      // 01. Pool Day
-
-      function calcPoolDay(params) {
-        const people = Number(params[0]);
-        const taksa = Number(params[1]);
-        const shezlong = Number(params[2]);
-        const umbrella = Number(params[3]);
-
-        let total = 0;
-
-        total = total + people * taksa;
-        const umbrellas = Math.ceil(people / 2);
-        total = total + umbrellas * umbrella;
-        const shezlongs = Math.ceil(people * 0.75);
-        total = total + shezlongs * shezlong;
-
-        console.log(`${total.toFixed(2)} lv.`);
-      }
-
-      // calcPoolDay(["21","5.50", "4.40", "6.20"]);
-      // calcPoolDay(["50", "6", "8", "4"]);
     </script>
   </body>
 </html>
