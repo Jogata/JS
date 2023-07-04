@@ -4,168 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <style>
-      * {
-        margin: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        min-height: 100vh;
-        padding: 1.5em;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: Georgia, serif;
-      }
-
-      .testimonials {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        justify-items: center;
-        border-radius: 10px;
-        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-      }
-
-      .profile-img {
-        width: 100%;
-        height: 100%;
-        min-height: 18em;
-        background-image: url("../../../CSS/assets/img/profile-copy.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        transition: all 0.4s;
-      }
-
-      .container {
-        width: 100%;
-        overflow: hidden;
-      }
-
-      .testimonial {
-        width: 100%;
-        height: 100%;
-        padding: 2.5em 2.5em 1.5em 2.5em;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.4s;
-      }
-
-      .name {
-        margin: 0.5em 0;
-        font-size: 2rem;
-        text-transform: capitalize;
-      }
-
-      .title {
-        text-transform: capitalize;
-      }
-      .title span {
-        text-transform: lowercase;
-      }
-
-      .quote {
-        max-width: 400px;
-        margin: 1em 0;
-        font-size: 1.5em;
-        font-weight: 600;
-        line-height: 1.5em;
-      }
-
-      @media screen and (max-width: 700px) {
-        .quote {
-          font-size: 1.2em;
-        }
-      }
-
-      @media screen and (max-width: 580px) {
-        .testimonials {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      fieldset {
-        display: none;
-      }
-    </style>
   </head>
   <body>
-    <div class="testimonials">
-      <div class="profile-img"></div>
-      <div class="container">
-        <div class="testimonial">
-          <div>
-            <h3 class="name">tanya singer</h3>
-            <p class="title">
-              director <span>of</span> digital marketing
-            </p>
-            <p class="quote">
-              &quot; <span>Your product has helped us to learn more about our customers.</span> &quot;
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <script>
-      const testimonial = document.querySelector(".testimonial");
-      const image = document.querySelector(".profile-img");
-      const name = document.querySelector(".name");
-      const title = document.querySelector(".title");
-      const quote = document.querySelector(".quote");
-
-      let id = 0;
-
-      const testimonials = [
-        [
-          "../../../CSS/assets/img/profile-copy.jpg", 
-          "../../../CSS/assets/img/profile-copy.jpg", 
-          "../../../CSS/assets/img/profile-copy.jpg"
-        ], 
-        [
-          "tanya singer", 
-          "john doe", 
-          "mike smith"
-        ], 
-        [
-          "director <span>of</span> digital marketing", 
-          "lead front end developer", 
-          "author, online influencer"
-        ], 
-        [
-          "Your product has helped us to learn more about our customers.", 
-          "Truly a unique and effective way of solving my problems. Wonderfull!", 
-          "Been using it for the past month, a gamechanger for sure."
-        ]
-      ]
-
-      setInterval(() => {
-        setTimeout(() => {
-          testimonial.style.transform = "translateX(-100%)";
-        }, 2000);
-        setTimeout(() => {
-          testimonial.style.transform = "none";
-          testimonial.style.transform = "translateX(100%)";
-          id++;
-          if (id > testimonials[0].length - 1) {
-            id = 0;
-          }
-          image.style.backgroundImage = "url(" + testimonials[0][id] + ")";
-          name.innerHTML = testimonials[1][id];
-          title.innerHTML = testimonials[2][id];
-          quote.innerHTML = testimonials[3][id];
-        }, 2400);
-        setTimeout(() => {
-          testimonial.style.transition = "all 0.4s";
-          testimonial.style.transform = "translateX(0)";
-        }, 3000);
-      }, 6000);
-    </script>
-
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
@@ -230,5 +71,132 @@
         users.send();
       }
     </script>
+
+<script>
+  // 06. Name Game
+
+  function playNameGame(params) {
+    let index = 0;
+    let input = params[index];
+    let max = 0;
+    let winner = "";
+
+    while (input !== "Stop") {
+      let name = input;
+      let sum = 0;
+
+      for (let i = 0; i < name.length; i++) {
+        let letter = name[i];
+        index++;
+        input = Number(params[index]);
+
+        // console.log(input);
+        
+        if (input === letter.charCodeAt(0)) {
+          sum += 10;
+        } else {
+          sum += 2;
+        }
+      }
+
+      if (sum >= max) {
+        max = sum;
+        winner = name;
+      }
+
+      index++;
+      input = params[index];
+
+      // if (index > 20) {
+      //   console.log("inf");
+      //   break;
+      // }
+    }
+
+    console.log(`The winner is ${winner} with ${max} points!`);
+
+  }
+
+  // playNameGame(["Ivan", "73", "20", "98", "110", "Ivo", "80", "65", "87", "Stop"]);
+  // playNameGame(["Pesho", "124", "34", "111", "97", "99", "Gosho", "98", "124", "88", "76", "18", "Stop"]);
+
+  // 05. Football Tournament
+
+  function menageFootballTeamStatistics(params) {
+    const team = params[0];
+    const sreshti = Number(params[1]);
+    let points = 0;
+    let wins = 0;
+    let ravni = 0;
+    let loses = 0;
+
+    if (sreshti === 0) {
+      console.log(`${team} hasn't played any games during this season.`);
+      return;
+    }
+
+    for (let sreshta = 1; sreshta <= sreshti; sreshta++) {
+      let result = params[sreshta+1];
+
+      // console.log(result);
+
+      if (result == "W") {
+        wins++;
+        points += 3;
+      } else if (result == "D") {
+        ravni++;
+        points += 1;
+      } else if (result == "L") {
+        loses++;
+      }
+
+    }
+
+    const winRate = wins / sreshti * 100;
+
+    console.log(`${team} has won ${points} points during this season.`);
+    console.log("Total stats:");
+    console.log(`## W: ${wins}`);
+    console.log(`## D: ${ravni}`);
+    console.log(`## L: ${loses}`);
+    console.log(`Win rate: ${winRate.toFixed(2)}%`);
+
+  }
+
+  // menageFootballTeamStatistics(["Liverpool", "10", "W", "D", "D", "W", "L", "W", "D", "D", "W", "W"]);
+  // menageFootballTeamStatistics(["Barcelona", "7", "W", "D", "L", "L", "W", "W", "D"]);
+  // menageFootballTeamStatistics(["Chelsea", "0"]);
+
+  // 02. Family Trip
+
+  // Бюджетът, с който разполагат – реално число в интервала [1.00 … 10000.00]
+  // Брой нощувки – цяло число в интервала [0 … 1000]
+  // Цена за нощувка – реално число в интервала [1.00 … 500.00]
+  // Процент за допълнителни разходи – цяло число в интервала [0 … 100]
+
+  function calcFamilyTrip(params) {
+    const budget = Number(params[0]);
+    const noshti = Number(params[1]);
+    let price = Number(params[2]);
+    const percentAE = Number(params[3]);
+
+    if (noshti > 7) {
+      price = price * 0.95;
+    }
+
+    let total = noshti * price + budget * (percentAE / 100);
+
+    if (budget >= total) {
+      const diff = budget - total;
+      console.log(`Ivanovi will be left with ${diff.toFixed(2)} leva after vacation.`);
+    } else {
+      const diff = total - budget;
+      console.log(`${diff.toFixed(2)} leva needed.`);
+    }
+  }
+
+  // calcFamilyTrip(["800.50", "8", "100", "2"]);
+  // calcFamilyTrip(["500", "7", "66", "15"]);
+</script>
   </body>
 </html>
