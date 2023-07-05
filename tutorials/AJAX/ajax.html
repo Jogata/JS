@@ -4,8 +4,157 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
+    <nav class="navbar">
+      <a href="#" class="brand">logo</a>
+      <div class="menu-container">
+        <ul class="mega-menu">
+          <li class="dropdown">
+            <div>
+              <span>new releases</span>
+              <i class="fa fa-chevron-down"></i>
+            </div>
+            <ul class="menu">
+              <li class="link">
+                <a href="#">features</a>
+              </li>
+              <li class="link">
+                <a href="#">calendar</a>
+              </li>
+              <li class="link">
+                <a href="#">bestsellers</a>
+              </li>
+            </ul>
+          </li>
+          <li class="link">
+            <a href="#">shoes</a>
+          </li>
+          <li class="dropdown">
+            <div>
+              <span>women</span>
+              <i class="fa fa-chevron-down"></i>
+            </div>
+            <ul class="menu">
+              <li class="link">
+                <a href="#">all shoes</a>
+              </li>
+              <li class="link">
+                <a href="#">lifestyle</a>
+              </li>
+              <li class="sub-dropdown">
+                <div>
+                  <span>clothing</span>
+                  <i class="fa fa-chevron-down"></i>
+                </div>
+                <ul class="sub-menu">
+                  <li>
+                    <a href="#">tops and t-shirts</a>
+                  </li>
+                  <li>
+                    <a href="#">hoodies and sweatshirts</a>
+                  </li>
+                  <li>
+                    <a href="#">leggings</a>
+                  </li>
+                  <li>
+                    <a href="#">matching sets</a>
+                  </li>
+                  <li>
+                    <a href="#">jackets</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="sub-dropdown">
+                <div>
+                  <span>accessories</span>
+                  <i class="fa fa-chevron-down"></i>
+                </div>
+                <ul class="sub-menu">
+                  <li>
+                    <a href="#">all accessories</a>
+                  </li>
+                  <li>
+                    <a href="#">bags and backpacks</a>
+                  </li>
+                  <li>
+                    <a href="#">socks</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="link">
+            <a href="#">blog</a>
+          </li>
+          <li class="dropdown">
+            <div>
+              <span>men</span>
+              <i class="fa fa-chevron-down"></i>
+            </div>
+            <ul class="menu">
+              <li class="link">
+                <a href="#">accessories</a>
+              </li>
+              <li class="link">
+                <a href="#">all clothing</a>
+              </li>
+              <li class="sub-dropdown">
+                <div>
+                  <span>shoes</span>
+                  <i class="fa fa-chevron-down"></i>
+                </div>
+                <ul class="sub-menu">
+                  <li>
+                    <a href="#">running</a>
+                  </li>
+                  <li>
+                    <a href="#">jordan</a>
+                  </li>
+                  <li>
+                    <a href="#">football</a>
+                  </li>
+                  <li>
+                    <a href="#">basketball</a>
+                  </li>
+                  <li>
+                    <a href="#">tennis</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="sub-dropdown">
+                <div>
+                  <span>accessories</span>
+                  <i class="fa fa-chevron-down"></i>
+                </div>
+                <ul class="sub-menu">
+                  <li>
+                    <a href="#">all accessories</a>
+                  </li>
+                  <li>
+                    <a href="#">bags and backpacks</a>
+                  </li>
+                  <li>
+                    <a href="#">socks</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="link">
+            <a href="#">sale</a>
+          </li>
+        </ul>
+      </div>
+      <div class="buttons">
+        <button class="btn">contact</button>
+        <button class="menu-btn">
+          <i class="fa fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
@@ -71,132 +220,5 @@
         users.send();
       }
     </script>
-
-<script>
-  // 06. Name Game
-
-  function playNameGame(params) {
-    let index = 0;
-    let input = params[index];
-    let max = 0;
-    let winner = "";
-
-    while (input !== "Stop") {
-      let name = input;
-      let sum = 0;
-
-      for (let i = 0; i < name.length; i++) {
-        let letter = name[i];
-        index++;
-        input = Number(params[index]);
-
-        // console.log(input);
-        
-        if (input === letter.charCodeAt(0)) {
-          sum += 10;
-        } else {
-          sum += 2;
-        }
-      }
-
-      if (sum >= max) {
-        max = sum;
-        winner = name;
-      }
-
-      index++;
-      input = params[index];
-
-      // if (index > 20) {
-      //   console.log("inf");
-      //   break;
-      // }
-    }
-
-    console.log(`The winner is ${winner} with ${max} points!`);
-
-  }
-
-  // playNameGame(["Ivan", "73", "20", "98", "110", "Ivo", "80", "65", "87", "Stop"]);
-  // playNameGame(["Pesho", "124", "34", "111", "97", "99", "Gosho", "98", "124", "88", "76", "18", "Stop"]);
-
-  // 05. Football Tournament
-
-  function menageFootballTeamStatistics(params) {
-    const team = params[0];
-    const sreshti = Number(params[1]);
-    let points = 0;
-    let wins = 0;
-    let ravni = 0;
-    let loses = 0;
-
-    if (sreshti === 0) {
-      console.log(`${team} hasn't played any games during this season.`);
-      return;
-    }
-
-    for (let sreshta = 1; sreshta <= sreshti; sreshta++) {
-      let result = params[sreshta+1];
-
-      // console.log(result);
-
-      if (result == "W") {
-        wins++;
-        points += 3;
-      } else if (result == "D") {
-        ravni++;
-        points += 1;
-      } else if (result == "L") {
-        loses++;
-      }
-
-    }
-
-    const winRate = wins / sreshti * 100;
-
-    console.log(`${team} has won ${points} points during this season.`);
-    console.log("Total stats:");
-    console.log(`## W: ${wins}`);
-    console.log(`## D: ${ravni}`);
-    console.log(`## L: ${loses}`);
-    console.log(`Win rate: ${winRate.toFixed(2)}%`);
-
-  }
-
-  // menageFootballTeamStatistics(["Liverpool", "10", "W", "D", "D", "W", "L", "W", "D", "D", "W", "W"]);
-  // menageFootballTeamStatistics(["Barcelona", "7", "W", "D", "L", "L", "W", "W", "D"]);
-  // menageFootballTeamStatistics(["Chelsea", "0"]);
-
-  // 02. Family Trip
-
-  // Бюджетът, с който разполагат – реално число в интервала [1.00 … 10000.00]
-  // Брой нощувки – цяло число в интервала [0 … 1000]
-  // Цена за нощувка – реално число в интервала [1.00 … 500.00]
-  // Процент за допълнителни разходи – цяло число в интервала [0 … 100]
-
-  function calcFamilyTrip(params) {
-    const budget = Number(params[0]);
-    const noshti = Number(params[1]);
-    let price = Number(params[2]);
-    const percentAE = Number(params[3]);
-
-    if (noshti > 7) {
-      price = price * 0.95;
-    }
-
-    let total = noshti * price + budget * (percentAE / 100);
-
-    if (budget >= total) {
-      const diff = budget - total;
-      console.log(`Ivanovi will be left with ${diff.toFixed(2)} leva after vacation.`);
-    } else {
-      const diff = total - budget;
-      console.log(`${diff.toFixed(2)} leva needed.`);
-    }
-  }
-
-  // calcFamilyTrip(["800.50", "8", "100", "2"]);
-  // calcFamilyTrip(["500", "7", "66", "15"]);
-</script>
   </body>
 </html>
