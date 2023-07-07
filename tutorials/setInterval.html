@@ -4,1220 +4,133 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>setInterval function in JS</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet"> 
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      ul {
-        list-style: none;
-      }
-
       a {
+        color: #555;
+        text-transform: capitalize;
         text-decoration: none;
       }
 
-      button {
-        font-family: inherit;
-        cursor: pointer;
+      .container {
+        max-width: 1300px;
+        margin: auto;
+        padding-left: 25px;
+        padding-right: 25px;
       }
 
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        font-family: Georgia, serif;
-      }
-
-      .header {
-        background-color: #3ba3e6;
-      }
-
-      .contact {
-        width: 90%;
-        max-width: 100rem;
-        margin: 0 auto;
-        padding-top: 0.4rem;
-        padding-bottom: 0.4rem;
+      .navbar {
+        padding: 20px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        row-gap: 1rem;
-        text-align: center;
       }
 
-      .normal {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        row-gap: 0.4rem;
-        text-align: justify;
-      }
-      .normal span {
-        padding-right: 2rem;
-        color: #fff;
-        font-size: 1.2rem;
-      }
-      .normal span i {
-        padding-right: 0.4rem;
+      .logo img {
+        width: 125px;
       }
 
-      .social-contact {
-        display: flex;
-        align-items: center;
-        column-gap: 0.8rem;
-        text-align: center;
-      }
-      .social-contact a i {
-        padding: 0.4em 0.5em;
-        color: #f38609;
-        border: 1px solid #fff;
-        border-radius: 50px;
-        background-color: #fff;
-        transition: all 0.4s ease-in-out;
-      }
-      .social-contact a i:hover {
-        color: #fff;
-        background-color: #f38609;
+      nav {
+        flex: 1;
+        text-align: right;
       }
 
-      #navbar {
-        background-color: #fff;
-        box-shadow: 0 0 8px #ccc;
-        overflow: hidden;
-        z-index: 1000;
-      }
-      .sticky {
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 100%;
-      }
-      .sticky + section {
-        padding-top: 4rem;
-      }
-
-      .top-nav {
-        width: 90%;
-        max-width: 100rem;
-        margin: 0 auto;
-        padding: 0.8em 0 0.6em;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        text-align: center;
-        background-color: #fff;
-        overflow: hidden;
-        z-index: 1000;
-      }
-      .top-header a, 
-      .top-header a span {
-        font-size: 1.8rem;
-        font-weight: 600;
-        font-family: 'Dancing Script', cursive;
-        text-transform: capitalize;
-      }
-      .top-header a {
-        padding: 0.2em 0.6em;
-        white-space: nowrap;
-      }
-      .top-header a span {
-        color: #3ba3e6;
-      }
-
-      .nav-menu {
-        display: flex;
-        align-items: center;
-        text-align: center;
-      }
-      .nav-menu ul {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        text-align: center;
-      }
-      .nav-menu ul li a {
+      nav ul {
+        list-style: none;
         display: inline-block;
-        margin: 0 1rem;
-        padding: 0.2em 0.6em;
-        color: #000;
-        font-size: 1.1rem;
-        text-transform: capitalize;
-        transition: all 0.4s;
-      }
-      .nav-menu ul li a:hover {
-        color: #3ba3e6;
       }
 
-      .nav-menu .top-icons {
-        display: flex;
-        align-items: center;
-        text-align: center;
-        gap: 1rem;
-      }
-      .nav-menu .top-icons i {
-        padding: 5px;
-        font-size: 1.1rem;
-        transition: all 0.4s;
-        cursor: pointer;
-      }
-      .nav-menu .top-icons i:hover {
-        color: #3ba3e6;
-        transform: scale(1.1);
-      }
-
-      #menuBar {
-        display: none;
-        border: none;
-        background-color: transparent;
-        cursor: pointer;
-      }
-      #menuBar i {
-        padding: 0.2em 0.272em;
-        font-size: 2rem;
-        transition: all 0.4s;
-      }
-      #menuBar:hover i {
-        color: #3ba3e6;
-      }
-
-      .main-menu {
-        width: 100%;
-        height: auto;
-        background-color: #f2f2f2;
-      }
-
-      .menu-row {
-        width: 90%;
-        max-width: 80rem;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(6, 1fr);
-        column-gap: 3rem;
-      }
-      .menu-col {
-        grid-row: 2 / -1;
-        max-width: 40rem;
-        margin: 0 auto;
-      }
-
-      .menu-col h2 {
-        color: #00a9;
-        font-size: 4.2rem;
-        text-transform: capitalize;
-      }
-      .menu-col p {
-        padding: 30px 0;
-        font-size: 1rem;
-      }
-
-      .menu-row img {
-        grid-row: 1 / -1;
-        width: 16rem;
-        margin: auto;
-      }
-      .buy-btn {
-        margin: 1.2rem 0;
-        padding: 1em 2em;
-        color: #fff;
-        font-size: 1.1rem;
-        outline: none;
-        text-transform: capitalize;
-        background-color: #000;
-        transition: all 0.4s;
-        cursor: pointer;
-      }
-      .buy-btn:hover {
-        border: 1px solid #3ba3e6;
-        background-color: #3ba3e6;
-      }
-
-      section {
-        padding: 2rem;
-        text-align: center;
-      }
-
-      #shop h2 {
-        padding-top: 3rem;
-        font-size: 2rem;
-        text-transform: capitalize;
-      }
-      #shop p {
-        max-width: 65rem;
-        margin: auto;
-        padding: 2rem;
-        text-align: center;
-      }
-
-      .items-row {
-        max-width: 100rem;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        column-gap: 1.2rem;
-        row-gap: 2rem;
-      }
-
-      .items-col {
-        border: 1px solid #ccc;
-        box-shadow: 0 0 8px #ccc;
-      }
-
-      .items-img img {
-        width: 100%;
-        object-fit: contain;
-      }
-
-      .card {
-        padding: 0.6em 0;
-        color: #fff;
-        font-size: 1.1rem;
-        text-transform: capitalize;
-        background-color: red;
-        transform: translateY(100%);
-        transition: all 0.4s ease-in-out;
-        cursor: pointer;
-      }
-      .items-col:hover .items-img .card {
-        transform: translateY(0);
-      }
-
-      .content {
-        position: relative;
-        padding: 10px 0;
-        text-align: center;
-        border-top: 4px solid red;
-        background-color: #fff;
-      }
-      .content h4 {
-        color: #000;
-        font-size: 1.5rem;
-        text-transform: capitalize;
-      }
-      .content span {
-        color: #000;
-        font-size: 1.1rem;
-        font-weight: 500;
-      }
-
-      #shop .shop-btn {
-        margin-top: 4rem;
-        padding: 0.4em 1.2em;
-        color: #fff;
-        font-size: 1.4rem;
-        font-weight: 500;
-        text-transform: capitalize;
-        border: none;
-        outline: none;
-        background-color: red;
-        transition: all 0.4s ease-in-out;
-        cursor: pointer;
-      }
-      #shop .shop-btn:hover {
-        background-color: #3ba3e6;
-      }
-
-      #cart {
-        max-width: 100rem;
-        margin: auto;
-      }
-
-      #cart h2 {
-        margin: 3rem 0 2rem;
-        color: #000;
-        font-size: 2rem;
-        text-align: center;
-        text-transform: capitalize;
-      }
-
-      .cart-row {
-        margin: 0 auto;
-      }
-      .cart-col {
-        padding-top: 30px;
-        text-align: left;
-      }
-
-      table {
-        margin: auto;
-      }
-      #cart table thead th, 
-      #cart table tr td {
-        padding: 0.5em 0.8em;
-        color: #000;
-        font-size: 1.1rem;
-        text-transform: capitalize;
-      }
-
-      .cart-img {
-        display: flex;
-        align-items: center;
-      }
-      .cart-img img {
-        width: 12rem;
-        padding-right: 1.4rem;
-      }
-
-      table input {
-        width: calc(6ch + 5px);
-        padding-left: 5px;
-        font-size: 1rem;
-      }
-
-      #cart th, #cart td {
-        border-bottom: 1px solid black;
-        border-collapse: collapse;
-      }
-
-      .buttons {
-        margin-top: 3rem;
-        text-align: center;
-      }
-      .buttons button {
+      nav ul li {
         display: inline-block;
-        margin: 1rem;
-        padding: 0.5em 0.9em;
-        color: #fff;
-        font-size: 1.1rem;
-        text-transform: capitalize;
-        border: 1px solid red;
-        background-color: red;
-        transition: all 0.4s ease-in-out;
-        cursor: pointer;
-      }
-      .buttons button:hover {
-        border: 1px solid #3ba3e6;
-        background-color: #3ba3e6;
+        margin-right: 20px;
       }
 
-      #login {
-        max-width: 100rem;
-        margin: auto;
+      .shopping-cart {
+        width: 30px;
+        height: 30px;
       }
 
-      .login-row {
-        margin: 0 auto;
-        padding: 2.5rem 0;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-      }
+      .menu-icon {}
 
-      .login-1 {
+      .row {
         display: flex;
-        background-image: 
-          linear-gradient(
-            to right, 
-            rgba(0, 0, 0, 0.5), 
-            rgba(23, 131, 220, 0.5)
-          );
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
       }
 
-      .login-content {
-        margin: auto;
-        padding: 2rem;
-        text-align: center;
-      }
-      .login-content h3 {
-        padding-bottom: 10px;
-        color: #fff;
-        font-size: 1.5rem;
-      }
-      .login-content h3 span {
-        text-transform: capitalize;
-      }
-      .login-content p {
-        padding-bottom: 35px;
-        color: #fff;
+      .col-2 {
+        flex-basis: 50%;
+        min-width: 300px;
       }
 
-      .register-btn {
-        padding: 12px 30px;
-        color: #fff;
-        font-size: 1rem;
-        font-family: inherit;
-        text-transform: uppercase;
-        border: 1px solid #fff;
-        background-color: transparent;
-        transition: all 0.4s ease-in-out;
-        cursor: pointer;
-      }
-      .register-btn:hover {
-        background-color: #3ba3e6;
-      }
-
-      .login-2 {
-        padding: 2.5rem 1.3rem;
-        text-align: left;
-      }
-      .login-header {
-        padding: 20px 0;
-        color: #000;
-        font-size: 1.2rem;
-        text-transform: capitalize;
-      }
-      .login-header span {
-        text-transform: initial;
-      }
-
-      .login-details > input, 
-      .login-details button {
-        width: 100%;
-        margin-top: 20px;
-        padding: 14px;
-        color: #000;
-        font-size: 1.1rem;
-      }
-      .login-details > input {
-        outline: none;
-        border: none;
-        border-bottom: 1px solid #000;
-      }
-      input#password {
-        margin-bottom: 16px;
-      }
-      input::placeholder {
-        text-transform: capitalize;
-      }
-      .login-details button {
-        margin-bottom: 10px;
-        color: #3ba3e6;
-        font-family: inherit;
-        text-transform: capitalize;
-        border: 1px solid #3ba3e6;
-        background-color: transparent;
-        transition: all 0.4s ease-in-out;
-        cursor: pointer;
-      }
-      .login-details button:hover {
-        color: #fff;
-        background-color: #3ba3e6;
-      }
-
-      .login-2 div {
-        margin-top: 10px;
-        margin-bottom: 10px;
-      }
-      .login-2 div span {
-        margin-left: 5px;
+      .col-2 h1 {
+        margin: 25px 0;
+        font-size: 50px;
+        line-height: 60px;
         text-transform: capitalize;
       }
 
-      #choice {
-        max-width: 100rem;
-        margin: auto;
-      }
-
-      #choice h1 {
-        padding-bottom: 4.5rem;
-        font-size: 2.4rem;
-        text-align: center;
-        text-transform: capitalize;
-      }
-
-      .choice-row {
-        margin: 0 auto;
-        padding: 20px 0;
-      }
-
-      .choice-col {
-        margin-bottom: 40px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-      }
-
-      .choice-content {
-        padding: 0 10px;
-        text-align: justify;
-      }
-      .choice-content h1 {
-        color: #000;
-        font-size: 2.4rem;
-      }
-      .choice-content p {
-        color: #000;
-        font-size: 1rem;
-        text-indent: 2rem;
-      }
-
-      .choice-btn {
-        margin-top: 2rem;
-        padding: 0.6em 1em;
-        color: #fff;
-        font-size: 1rem;
-        font-weight: 600;
-        font-family: inherit;
-        text-transform: uppercase;
-        border: 1px solid #f38609;
-        background-color: #f38609;
-        transition: all 0.4s ease-in-out;
-        cursor: pointer;
-      }
-      .choice-btn:hover {
-        border: 1px solid #3ba3e6;
-        background-color: #3ba3e6;
-      }
-
-      .choice-col img {
-        width: 100%;
-      }
-
-      #contact {
-        max-width: 100rem;
-        margin: auto;
-      }
-
-      #contact h1 {
-        padding-bottom: 2.5rem;
-        color: #000;
-        font-size: 2.4rem;
-        text-transform: capitalize;
-      }
-
-      .contact-row {
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: auto auto;
-        gap: 2.5rem;
-        text-align: justify;
-      }
-
-      .contact-col table {
-        width: 34rem;
-      }
-
-      .contact-col textarea, 
-      .contact-col input {
-        width: 100%;
-        margin-bottom: 10px;
-        padding: 0.6em;
-        font-size: 1rem;
-        outline: none;
-      }
-
-      .send-btn {
-        margin-top: 2rem;
-        padding: 0.6em 1.2em;
-        color: #fff;
-        font-size: 1rem;
-        text-transform: capitalize;
-        border: 1px solid #f38609;
-        background-color: #f38609;
-        transition: all 0.4s ease-in-out;
-        cursor: pointer;
-      }
-      .send-btn:hover {
-        border: 1px solid #3ba3e6;
-        background-color: #3ba3e6;
-      }
-
-      .contact-details {
-        margin-bottom: 2rem;
-        display: flex;
-      }
-      .contact-details i {
-        font-size: 2rem;
-        margin-right: 1rem;
-      }
-
-      .contact-col h4 {
-        color: #000;
-        font-size: 1.2rem;
-        text-transform: capitalize;
-      }
-      .contact-col span {
-        text-transform: capitalize;
-      }
-      .contact-col span .uppercase {
-        text-transform: uppercase;
-      }
-
-      .footer {
-        width: 100%;
-        padding: 60px 0;
-        color: #000;
-        font-size: 1rem;
-        text-align: center;
-        text-transform: capitalize;
-        background-color: #ccc;
-      }
-      .footer .lowercase {
-        text-transform: lowercase;
-      }
-
-      @media screen and (max-width: 1080px) {
-        .items-row {
-          width: 95%;
-          grid-template-columns: 1fr 1fr 1fr;
-        }
-        #shop p {
-          padding: 2rem;
-        }
-      }
-
-      @media screen and (max-width: 990px) {
-        .menu-col {
-          top: 10%;
-        }
-        .menu-col h2 {
-          font-size: 3.4rem;
-        }
-        .menu-col p {
-          padding: 20px 0;
-          font-size: 1rem;
-        }
-        .menu-row img {
-          left: 35%;
-          width: 200px;
-        }
-        .shop-btn {
-          padding: 10px 40px;
-        }
-        .items-row {
-          width: 75%;
-          grid-template-columns: 1fr 1fr;
-        }
-        .cart-img {
-          display: block;
-        }
-        .cart-img img {
-          display: block;
-        }
-        table input {
-          width: 30px;
-          height: 30px;
-          font-size: 18px;
-          text-indent: 10px;
-        }
-        table button {
-          padding: 6px 20px;
-        }
-        .login-2 {
-          padding: 10px 20px;
-        }
-        .login-2 .login-header {
-          padding: 10px 0;
-          font-size: 16px;
-        }
-        .login-details > input, 
-        .login-details button {
-          font-size: 1rem;
-        }
-        .login-row {
-          width: 80%;
-          grid-template-columns: 1fr;
-        }
-        .login-col {
-          height: auto;
-        }
-        .cart-col img {
-          width: 22rem;
-          /* height: 600px; */
-          padding-top: 9rem;
-        }
-        .contact-col table {
-          width: 24rem;
-        }
-      }
-
-      @media screen and (max-width: 780px) {
-        .menu-row img {
-          left: 35%;
-          width: 170px;
-        }
-        .menu-col h2 {
-          font-size: 38px;
-        }
-        .buy-btn {
-          /* padding: 10px 40px; */
-          font-size: 1rem;
-        }
-        .nav-menu {
-          position: fixed;
-          top: 16.5%;
-          right: 100%;
-          display: block;
-          min-width: 14rem;
-          height: calc(100vh - 16.5%);
-          padding-bottom: 2rem;
-          border: 1px solid #fff;
-          background-color: #fff;
-          overflow: auto;
-          z-index: 1000;
-        }
-        .nav-menu.open {
-          right: 0;
-        }
-        .nav-menu ul {
-          display: block;
-          margin: 30px 0;
-        }
-        .nav-menu ul li {
-          margin-top: 30px;
-        }
-        .nav-menu .top-icons i {
-          position: relative;
-          left: 32%;
-        }
-        #menuBar {
-          display: block;
-        }
-        .normal {
-          display: none;
-        }
-        #navbar {
-          height: 100px;
-          background-color: #fff;
-        }
-        .items-row {
-          width: 65%;
-          grid-template-columns: 1fr;
-        }
-        #shop p {
-          padding: 30px 50px;
-        }
-        .cart-row table tr td {
-          font-size: 14px;
-        }
-        .cart-row table tr td .cart-img {
-          width: 100px;
-        }
-        .buttons button {
-          padding: 6px 20px;
-          font-size: 14px;
-        }
-        .cart-row {
-          width: 80%;
-          margin: 0 auto;
-        }
-        .shop-btn {
-          position: absolute;
-          left: 18%;
-        }
-        .login-row {
-          width: 80%;
-          display: grid;
-          grid-template-columns: 1fr;
-        }
-        .choice-col {
-          grid-template-columns: 1fr;
-        }
-        .choice-col img {
-          width: 100%;
-        }
-        .contact-row {
-          grid-template-columns: 1fr;
-        }
-        .contact-col table {
-          width: 100%;
-        }
-      }
-
-      @media screen and (max-width: 540px) {
-        .main-menu {
-          width: 100%;
-          height: 60vh;
-          background-color: #f2f2f2;
-        }
-        .main-menu .menu-row img {
-          display: none;
-        }
-        .main-menu .menu-row .menu-col {
-          font-size: 20px;
-          width: 250px;
-        }
-        .menu-col p {
-          width: 250px;
-          text-align: justify;
-        }
-        .buy-btn {
-          position: relative;
-          left: 0;
-          padding: 8px 30px;
-          font-size: 14px;
-          width: 200px;
-        }
-        .menu-row {
-          width: 95%;
-          margin: 0 auto;
-        }
-        .items-row {
-          width: 75%;
-          grid-template-columns: 1fr;
-        }
-        #shop p {
-          padding: 30px 50px;
-        }
-        .items-col {
-          width: 220px;
-        }
-        .content h4 {
-          font-size: 20px;
-        }
-        .login-content {
-          top: 20%;
-          padding: 25px;
-        }
-        .login-content h3 {
-          font-size: 18px;
-        }
-        .register-btn {
-          padding: 12px 30px; 
-          font-size: 14px;
-        }
-        .login-col {
-          height: 40vh;
-        }
-        .choice-content h1 {
-          color: #000;
-          font-size: 28px;
-        }
-        #contact h1 {
-          padding-bottom: 20px;
-          font-size: 28px;
-        }
-        .footer {
-          font-size: 14px;
-        }
+      .col-2 img {
+        max-width: 100%;
+        padding: 50px 0;
       }
     </style>
   </head>
   <body>
-
     <div class="header">
-      <div class="contact">
-        <div class="normal">
-          <span><i class="fa fa-location-arrow"></i>sri lanka</span>
-          <span><i class="fa fa-envelope"></i>info@gmail.com</span>
-          <span><i class="fa fa-phone"></i>+94 77 123 4567</span>
-        </div>
-        <div class="social-contact">
-          <a href="#f"><i class="fa fa-facebook"></i></a>
-          <a href="#t"><i class="fa fa-twitter"></i></a>
-          <a href="#i"><i class="fa fa-instagram"></i></a>
-          <a href="#y"><i class="fa fa-youtube"></i></a>
-          <a href="#l"><i class="fa fa-linkedin"></i></a>
-        </div>
-      </div>
-    </div>
 
-    <div id="navbar">
-      <nav class="top-nav">
-        <div class="top-header">
-          <a href="#">time <span>zone</span></a>
-        </div>
-        <div class="nav-menu">
-          <div class="top-navbar">
-            <ul>
-              <li><a href="#home">home</a></li>
-              <li><a href="#shop">shop</a></li>
-              <li><a href="#cart">cart</a></li>
-              <li><a href="#login">login</a></li>
-              <li><a href="#contact">contact</a></li>
+      <div class="container">
+
+        <div class="navbar">
+
+          <div class="logo">
+            <a href="#logo">home
+              <img src="./images/logo.png" alt="Home page">
+            </a>
+          </div>
+
+          <nav>
+            <ul id="MenuItems">      <!-- TODO: change ID -->
+              <li><a href="#h">home</a></li>
+              <li><a href="#p">products</a></li>
+              <li><a href="#ab">about</a></li>
+              <li><a href="#c">contact</a></li>
+              <li><a href="#ac">account</a></li>
             </ul>
-          </div>
-          <div class="top-icons">
-            <i class="fa fa-search"></i>
-            <i class="fa fa-user"></i>
-            <i class="fa fa-shopping-cart"></i>
-          </div>
+          </nav>
+
+          <a href="#cart" class="shopping-cart">cart
+            <img src="./images/cart.png">
+          </a>
+
+          <!-- <button>menu -->
+            <img src="./images/menu.png" class="menu-icon">
+          <!-- </button> -->
+
         </div>
-        <button id="menuBar">
-          <i class="fa fa-bars"></i>
-        </button>
-      </nav>
+
+        <div class="row">
+
+          <div class="col-2">
+            <h1>give your workout <br> a new style!</h1>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero aliquam repudiandae voluptatem debitis praesentium <br> consequuntur quod sit neque, omnis obcaecati mollitia a temporibus esse suscipit nam unde, iure quibusdam ipsa.</p>
+            <a href="#" class="btn">explore now &#8594;</a>
+          </div>
+
+          <div class="col-2">
+            <img src="./images/image1.png" alt="">
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
 
-    <div class="main-menu">
-      <div class="menu-row">
-        <div class="menu-col">
-          <h2>select your new perfect style</h2>
-          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus quos animi possimus. Minus explicabo, autem vitae facilis quibusdam recusandae libero.</p>
-          <button class="buy-btn">shop now</button>
-        </div>
-        <img src="./images/watch.png" alt="A watch">
-      </div>
-    </div>
-
-    <section id="shop">
-      <h2>popular items</h2>
-      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facere impedit neque dignissimos, beatae obcaecati eveniet et accusamus laboriosam nostrum voluptatem.</p>
-      <div class="items-row">
-        <div class="items-col">
-          <div class="items-img">
-            <img src="./images/popular1.png" alt="">
-            <div class="card">
-              <span>add to cart</span>
-            </div>
-          </div>
-          <div class="content">
-            <h4>thermo ball etip gloves</h4>
-            <span>$45,743</span>
-          </div>
-        </div>
-        <div class="items-col">
-          <div class="items-img">
-            <img src="./images/popular2.png" alt="">
-            <div class="card">
-              <span>add to cart</span>
-            </div>
-          </div>
-          <div class="content">
-            <h4>thermo ball etip gloves</h4>
-            <span>$45,743</span>
-          </div>
-        </div>
-        <div class="items-col">
-          <div class="items-img">
-            <img src="./images/popular3.png" alt="">
-            <div class="card">
-              <span>add to cart</span>
-            </div>
-          </div>
-          <div class="content">
-            <h4>thermo ball etip gloves</h4>
-            <span>$45,743</span>
-          </div>
-        </div>
-        <div class="items-col">
-          <div class="items-img">
-            <img src="./images/popular4.png" alt="">
-            <div class="card">
-              <span>add to cart</span>
-            </div>
-          </div>
-          <div class="content">
-            <h4>thermo ball etip gloves</h4>
-            <span>$45,743</span>
-          </div>
-        </div>
-        <div class="items-col">
-          <div class="items-img">
-            <img src="./images/popular5.png" alt="">
-            <div class="card">
-              <span>add to cart</span>
-            </div>
-          </div>
-          <div class="content">
-            <h4>thermo ball etip gloves</h4>
-            <span>$45,743</span>
-          </div>
-        </div>
-        <div class="items-col">
-          <div class="items-img">
-            <img src="./images/popular6.png" alt="">
-            <div class="card">
-              <span>add to cart</span>
-            </div>
-          </div>
-          <div class="content">
-            <h4>thermo ball etip gloves</h4>
-            <span>$45,743</span>
-          </div>
-        </div>
-      </div>
-      <button class="shop-btn">read more</button>
-    </section>
-
-    <section id="cart">
-      <h2>cart list</h2>
-      <div class="cart-row">
-        <div class="cart-col">
-          <table>
-            <thead>
-              <th>product</th>
-              <th>price</th>
-              <th>quantity</th>
-              <th>total</th>
-            </thead>
-            <tr>
-              <td>
-                <div class="cart-img">
-                  <img src="./images/card1.png" width="100" alt="">
-                  <span>Lorem ipsum dolor sit amet.</span>
-                </div>
-              </td>
-              <td>$360.00</td>
-              <td><input type="number" value="1"></td>
-              <td>$720.00</td>
-            </tr>
-            <tr>
-              <td>
-                <div class="cart-img">
-                  <img src="./images/card2.png" width="100" alt="">
-                  <span>Lorem ipsum dolor sit amet.</span>
-                </div>
-              </td>
-              <td>$360.00</td>
-              <td><input type="number" value="1"></td>
-              <td>$720.00</td>
-            </tr>
-          </table>
-          <div class="buttons">
-            <button>update cart</button>
-            <button>close coupon</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="login">
-      <div class="login-row">
-        <div class="login-col login-1">
-          <div class="login-content">
-            <h3><span>new</span> to our <span>shop?</span></h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis nostrum voluptas eligendi minima iure sint consectetur reprehenderit provident.</p>
-            <button class="register-btn">create an account</button>
-          </div>
-        </div>
-        <div class="login-col login-2">
-          <div class="login-header">
-            <h2>welcome back!</h2>
-            <h2>please sign <span>in now</span></h2>
-          </div>
-          <div class="login-details">
-            <input type="text" name="username" id="username" placeholder="username">
-            <br>
-            <input type="password" name="password" id="password" placeholder="password">
-            <br>
-            <!-- <tr> -->
-              <!-- <td> -->
-                <div>
-                  <input type="checkbox" name="remember" id="remember">
-                  <td><span>remember me</span></td>
-                </div>
-              <!-- </td> -->
-            <!-- </tr> -->
-            <!-- <br> -->
-            <button type="button" class="login-btn">log in</button>
-            <span class="forgot">forgot password?</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="choice">
-      <div class="choice-row">
-        <div class="choice-col">
-          <div class="choice-content">
-            <h1>watch of choice</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet repellat accusantium fugiat deleniti impedit consectetur optio in porro ratione quibusdam atque nulla vero obcaecati delectus facilis eius, repudiandae ex.</p>
-            <button class="choice-btn">show watches</button>
-          </div>
-          <img src="./images/choce_watch1.png" alt="">
-        </div>
-        <div class="choice-col">
-          <div class="choice-content">
-            <h1>watch of choice</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet repellat accusantium fugiat deleniti impedit consectetur optio in porro ratione quibusdam atque nulla vero obcaecati delectus facilis eius, repudiandae ex.</p>
-            <button class="choice-btn">show watches</button>
-          </div>
-          <img src="./images/choce_watch2.png" alt="">
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <h1>our contact</h1>
-      <div class="contact-row">
-        <div class="contact-col">
-          <table>
-            <tr>
-              <td colspan="2">
-                <textarea name="message" id="message" cols="30" placeholder="Enter message"></textarea>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <input type="text" name="name" id="name" placeholder="Enter your name">
-              </td>
-              <td>
-                <input type="email" name="email" id="email" placeholder="Enter your email">
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <input type="text" name="subject" id="subject" placeholder="Enter subject">
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <button class="send-btn">send</button>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div class="contact-col">
-          <div class="contact-details">
-            <i class="fa fa-home"></i>
-            <div class="contact-address">
-              <h4>buttonwood, california</h4>
-              <span>rosemead, <span class="uppercase">ca</span> 91770</span>
-            </div>
-          </div>
-          <div class="contact-details">
-            <i class="fa fa-phone"></i>
-            <div class="contact-address">
-              <h4>buttonwood, california</h4>
-              <span>rosemead, <span class="uppercase">ca</span> 91770</span>
-            </div>
-          </div>
-          <div class="contact-details">
-            <i class="fa fa-envelope"></i>
-            <div class="contact-address">
-              <h4>buttonwood, california</h4>
-              <span>rosemead, <span class="uppercase">ca</span> 91770</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="footer">
-      <span>copyright @2023 all <span class="lowercase">right reserved</span></span>
-    </section>
-
-    <script>
-      window.onscroll = function () {
-        setupStickyNavigation();
-      }
-
-      document.addEventListener("DOMContentLoaded", setupStickyNavigation);
-
-      const navbar = document.getElementById("navbar");
-      const sticky = navbar.offsetTop;
-
-      function setupStickyNavigation() {
-        if (window.pageYOffset >= sticky) {
-          navbar.classList.add("sticky");
-        } else {
-          navbar.classList.remove("sticky");
-        }
-      }
-
-      const menu = document.querySelector("#menuBar");
-      const navMenu = document.querySelector(".nav-menu");
-
-      menu.onclick = () => {
-        navMenu.classList.toggle("open");
-      }
-    </script>
-
-    <!-- <h1 style="text-align: center;">setInterval() - JavaScript</h1> -->
-    <!-- <hr> -->
-    <!-- <p id="timer" style="font-size: 3rem;">0 sec</p> -->
-    <!-- <button id="start">Start Timer</button> -->
-    <!-- <button id="pause">Pause Timer</button> -->
+    <h1 style="text-align: center;">setInterval() - JavaScript</h1>
+    <hr>
+    <p id="timer" style="font-size: 3rem;">0 sec</p>
+    <button id="start">Start Timer</button>
+    <button id="pause">Pause Timer</button>
 
     <script src="js.js">
       const timer = document.getElementById('timer');
