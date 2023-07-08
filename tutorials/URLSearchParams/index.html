@@ -17,7 +17,13 @@
         text-transform: capitalize;
       }
 
+      button {
+        background-color: transparent;
+        cursor: pointer;
+      }
+
       body {
+        min-width: fit-content;
         min-height: 100vh;
         font-family: Georgia, serif;
         background-image: url("./yoga-images/back1.png");
@@ -28,8 +34,8 @@
       
       .container {
         width: 100%;
-        padding: min(2%, 2rem) min(3%, 3rem);
-        overflow: hidden;
+        min-width: fit-content;
+        /* padding: min(2%, 2rem) min(3%, 3rem); */
       }
 
       .nav {
@@ -38,11 +44,12 @@
         width: 100%;
         max-width: 69rem;
         margin: auto;
+        padding: min(2%, 2rem) min(3%, 3rem);
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 1rem;
-        z-index: 2;
+        z-index: 3;
       }
 
       .logo {
@@ -60,10 +67,13 @@
         cursor: pointer;
       }
       .logo a {
+        display: flex;
+        justify-content: center;
         color: #fff;
         font-size: 2.2rem;
         font-weight: bold;
         text-transform: capitalize;
+        filter: drop-shadow(1px 1px 1px #000);
       }
       .logo a img {
         flex-shrink: 0;
@@ -73,11 +83,6 @@
         transform: scale(1.1);
       }
 
-      .nav-links {
-        /* display: flex;
-        align-items: center;
-        justify-content: center; */
-      }
       .nav-links ul {
         list-style: none;
         display: flex;
@@ -113,14 +118,29 @@
         background-color: #fc2a51;
       }
       .nav-links a.active::after {
-        width: 0;
+        display: none;
       }
       .nav-links a.active:hover {
         transform: scale(1.1);
       }
 
+      .menu {
+        display: none;
+        padding: 0 0.262em 0.1em;
+        color: #fff;
+        font-size: 2.4rem;
+        border: 1px solid currentColor;
+        border-radius: 0.6rem;
+        transition: all 0.4s;
+      }
+      .menu:hover {
+        background-color: #fc2a51;
+        transform: scale(1.1);
+      }
+
       .content {
         margin-top: 3rem;
+        overflow: hidden;
       }
 
       .content-details {
@@ -128,20 +148,23 @@
         width: 100%;
         max-width: 63rem;
         margin: auto;
+        padding: 0 min(3%, 3rem) min(5%, 3rem) min(3%, 3rem);
         display: flex;
         align-items: center;
         justify-content: space-between;
         flex-wrap: wrap;
-        border: 1px solid red;
+        /* border: 1px solid red; */
       }
 
-      .yoga {
+      .main-info {
         flex: 1 1 22rem;
         max-width: 25rem;
         margin: 3rem auto;
         color: #fff;
         animation: fade-right 2s ease-in-out backwards;
+        z-index: 2;
       }
+      
       @keyframes fade-right {
         0% {
           transform: translateX(-50%);
@@ -153,8 +176,8 @@
         }
       }
 
-      .yoga h1 {
-        font-size: 8rem;
+      .main-info h1 {
+        font-size: min(5rem + 5vw, 8rem);
         letter-spacing: 5px;
         text-transform: capitalize;
       }
@@ -182,16 +205,17 @@
         transform: scale(1.1);
       }
 
-      .hero-img {
+      .hero-images {
         position: relative;
         flex: 1 1 22rem;
         aspect-ratio: 1;
         max-width: 25rem;
         margin: auto;
         animation: fade-left 2s ease-in backwards;
-        animation-delay: 1s;
+        /* animation-delay: 1s; */
+        z-index: 1;
       }
-      .hero-img.flex {
+      .hero-images.flex {
         display: flex;
         justify-content: center;
       }
@@ -207,7 +231,7 @@
         }
       }
 
-      .hero-img::before {
+      .hero-images::before {
         position: absolute;
         top: 5%;
         left: 5%;
@@ -216,37 +240,42 @@
         aspect-ratio: 1;
         border-radius: 50%;
         background-color: #d08860;
+        transition: opacity 2s;
+        opacity: 1;
         z-index: -1;
       }
-      .hero-img.flex::before {
+      .hero-images.circle::before {
         opacity: 0;
       }
 
-      /* .circle {
+      .hero-images img {
+        position: absolute;
         width: 100%;
-        aspect-ratio: 1;
-        border-radius: 50%;
-        background-color: #d08860;
-      } */
-
-      .hero-img img {
-        width: 100%;
+        /* max-width: 94vw; */
         height: 100%;
         object-fit: contain;
+        transition: opacity 1s;
+        opacity: 0;
       }
-      .hero-img.flex img {
+      .intro {
+        position: relative;
+      }
+      .hero-images img.visible {
+        transition: opacity 2s;
+        opacity: 1;
+      }
+      .hero-images.flex .wider {
         width: 150%;
-        /* height: 150%; */
         flex-shrink: 0;
       }
 
       .dots {
         position: absolute;
-        right: 0;
+        right: min(3%, 3rem);
         z-index: 2;
-        border: 1px solid lightskyblue;
+        /* border: 1px solid lightskyblue; */
       }
-      .dots li {
+      .dot {
         list-style: none;
         width: 1.2rem;
         height: 1.2rem;
@@ -255,18 +284,21 @@
         border: 2px solid #d08860;
         border-radius: 50%;
         background-color: transparent;
+        transition: all 0.4s;
       }
-      .dots .active {
+      .dot.active {
         background-color: #fc2a51;
       }
-      .dots li a {
+      .dot a {
         display: block;
         width: 100%;
         height: 100%;
+        cursor: pointer;
       }
 
       .sci-container {
         width: 100%;
+        min-width: fit-content;
         display: flex;
         align-items: center;
         background-color: #000;
@@ -275,6 +307,7 @@
       .sci-links {
         list-style: none;
         margin: auto;
+        padding: 0 1.2rem;
         display: flex;
       }
 
@@ -299,34 +332,51 @@
         background-color: #fc2a51;
         opacity: 1;
       }
+
+      @media screen and (max-width: 38rem) {
+        .nav-links {
+          display: none;
+        }
+        .menu {
+          display: inline-block;
+        }
+        .hero-images.flex .wider {
+          width: 100%;
+        }
+      }
+
+      /* .container {
+        overflow: hidden;
+      } */
     </style>
   </head>
   <body>
-    <div class="container" id="first">
+    <div class="container">
 
       <nav class="nav">
         <div class="logo">
-          <!-- <a href="#home">yoga</a> -->
-          <a href="#home" style="display: flex; justify-content: center;">
-            <img src="./yoga-images/logo-1.png" alt="" style="width: 140%;">
-            <!-- <img src="./yoga-images/logo-2.png" alt="" style="width: 120%;"> -->
+          <!-- <a href="#home">yoga -->
+          <a href="index.html">
+            <!-- <img src="./yoga-images/logo-1.png" alt="" style="width: 140%;"> -->
+            <img src="./yoga-images/logo-2.png" alt="" style="width: 120%;">
           </a>
         </div>
         <div class="nav-links">
           <ul>
-            <li><a href="#">home</a></li>
-            <li><a href="#">market</a></li>
-            <li><a href="#">course</a></li>
-            <li><a href="#" class="active">enroll now</a></li>
+            <li><a href="#" class="nav-link">home</a></li>
+            <li><a href="#" class="nav-link">market</a></li>
+            <li><a href="#" class="nav-link">course</a></li>
+            <li><a href="#" class="nav-link active">enroll now</a></li>
           </ul>
         </div>
+        <button class="menu">&#9776;</button>
       </nav>
     
       <main class="content">
 
         <div class="content-details">
 
-          <div class="yoga">
+          <div class="main-info">
 
             <h1>yoga</h1>
 
@@ -339,23 +389,18 @@
 
           </div>
     
-          <div class="hero-img flex">
-          <!-- <div class="hero-img"> -->
-            <!-- <div class="circle"> -->
-              <img src="./yoga-images/yoga-1.png">
-              <!-- <img src="./yoga-images/yoga-2.png"> -->
-              <!-- <img src="./yoga-images/yoga-3-couples.png"> -->
-              <!-- <img src="./yoga-images/yoga-4-children.png"> -->
-            <!-- </div> -->
+          <div class="hero-images flex circle">
+            <img class="intro wider visible" src="./yoga-images/yoga-1.png">
+            <img class="hero-image" src="./yoga-images/yoga-2.png">
+            <img class="hero-image" src="./yoga-images/yoga-3-couples.png">
+            <img class="hero-image wider" src="./yoga-images/yoga-4-children.png">
           </div>
     
           <div class="dots">
             <ul>
-              <li class="active">
-                <a href="#"></a>
-              </li>
-              <li><a href="#"></a></li>
-              <li><a href="#"></a></li>
+              <li class="dot active"><a></a></li>
+              <li class="dot"><a></a></li>
+              <li class="dot"><a></a></li>
             </ul>
           </div>
 
@@ -389,6 +434,51 @@
           </li>
         </ul>
     </div>
+
+    <script>
+      const data = [
+        {
+          src: "./yoga-images/yoga-2.png",
+          classes: "",
+          parent: "hero-images flex"
+        },
+        {
+          src: "./yoga-images/yoga-3-couples.png",
+          classes: "", 
+          parent: "hero-images flex"
+        },
+        {
+          src: "./yoga-images/yoga-4-children.png",
+          classes: "", 
+          parent: "hero-images flex"
+        }
+      ]
+
+      const dots = document.querySelectorAll(".dot");
+      const images = document.querySelectorAll(".hero-image");
+
+      dots.forEach((button, index) => {
+        button.addEventListener("click", () => {
+          const activeButton = document.querySelector(".dot.active");
+          activeButton.classList.remove("active");
+          button.classList.add("active");
+          const activeImage = document.querySelector(".hero-images .visible");
+          activeImage.classList.remove("visible");
+          images[index].classList.add("visible");
+          activeImage.parentElement.className = data[index].parent;
+        })
+      })
+
+      const navLinks = document.querySelectorAll(".nav-link");
+
+      navLinks.forEach(link => {
+        link.addEventListener("click", () => {
+          const activeLink = document.querySelector(".nav-link.active");
+          activeLink.classList.remove("active");
+          link.classList.add("active");
+        })
+      })
+    </script>
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
