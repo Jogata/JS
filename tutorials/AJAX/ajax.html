@@ -100,6 +100,15 @@
         cursor: pointer;
       }
 
+      .fa-chevron-down, 
+      .fa-chevron-up {
+        font-size: 12px;
+        transition: transform 0.4s;
+      }
+      .fa-chevron-down.rotate {
+        transform: rotate(180deg);
+      }
+
       .dropdown .menu a:hover {
         color: #9b9b9b;
       }
@@ -421,6 +430,126 @@
         </button>
       </div>
     </nav>
+
+    <script>
+      const menuBtn = document.querySelector(".menu-btn");
+      const menu = document.querySelector(".menu-container");
+      const dropdowns = document.querySelectorAll(".dropdown > div");
+      const subDropdowns = document.querySelectorAll(".sub-dropdown > div");
+
+      let menuOpen = false;
+
+      menuBtn.addEventListener("click", () => {
+        menu.classList.toggle("mega-menu-show");
+        if (!menuOpen) {
+          const menuIcon = menuBtn.querySelector(".fa");
+          menuIcon.classList.toggle("fa-bars");
+          menuIcon.classList.toggle("fa-times");
+          menuOpen = true;
+        } else {
+          const menuIcon = menuBtn.querySelector(".fa");
+          menuIcon.classList.toggle("fa-bars");
+          menuIcon.classList.toggle("fa-times");
+          menuOpen = false;
+        }
+      })
+
+      dropdowns.forEach(dropdown => {
+        dropdown.addEventListener("click", (e) => {
+          const menuIcon = dropdown.querySelector(".fa");
+          menuIcon.classList.toggle("rotate");
+          // menuIcon.classList.toggle("fa-chevron-down");
+          // menuIcon.classList.toggle("fa-chevron-up");
+          dropdown.nextElementSibling.classList.toggle("menu-show");
+        })
+      })
+
+      subDropdowns.forEach(subDropdown => {
+        subDropdown.addEventListener("click", (e) => {
+          const menuIcon = subDropdown.querySelector(".fa");
+          menuIcon.classList.toggle("rotate");
+          // menuIcon.classList.toggle("fa-chevron-down");
+          // menuIcon.classList.toggle("fa-chevron-up");
+          subDropdown.nextElementSibling.classList.toggle("sub-menu-show");
+        })
+      })
+    </script>
+
+    <script>
+      function f2() {
+        const a = "f2";
+        
+        function f1() {
+          console.log(a);
+        }
+
+        function f3() {
+          const a = "f3";
+          f1();
+        }
+
+        f3();
+      }
+
+      f2();
+    </script>
+
+<script>
+  // 06. Basketball Tournament
+
+  function calcBasketballResults(params) {
+    let index = 0;
+    let input = params[index];
+    let wins = 0;
+    let lost = 0;
+    let totalSreshti = 0;
+    
+    while (input !== "End of tournaments") {
+      const turnir = input;
+      index++;
+      const sreshti = Number(params[index]);
+      totalSreshti += sreshti;
+
+      for (let sreshta = 1; sreshta <= sreshti; sreshta++) {
+        index++;
+        const team1 = Number(params[index]);
+        index++;
+        const team2 = Number(params[index]);
+        
+        if (team1 > team2) {
+          wins++;
+          const diff = team1 - team2;
+          console.log(`Game ${sreshta} of tournament ${turnir}: win with ${diff} points.`);
+        } else {
+          lost++;
+          const diff = team2 - team1;
+          console.log(`Game ${sreshta} of tournament ${turnir}: lost with ${diff} points.`);
+        }
+      }
+
+      index++;
+      input = params[index];
+
+      // if (index > 30) {
+      //   console.log("inf");
+      //   break;
+      // }
+    }
+
+    const winsP = wins / totalSreshti * 100;
+    const lostP = lost / totalSreshti * 100;
+
+    console.log(`${winsP.toFixed(2)}% matches win`);
+    console.log(`${lostP.toFixed(2)}% matches lost`);
+
+  }
+
+  calcBasketballResults([
+    "Dunkers", "2", "75", "65", "56", "73", 
+    "Fire Girls", "3", "67", "34", "83", "98", "66", "45", 
+    "End of tournaments"
+  ]);
+</script>
 
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
