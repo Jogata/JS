@@ -4,483 +4,141 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+      header {
+        padding: 30px 100px;
       }
-
-      a {
+      ul li {
+        margin-left: 20px;
+      }
+      ul li a {
+        padding: 6px 15px;
+        font-size: 20px;
         text-decoration: none;
-        text-transform: capitalize;
+        border-radius: 20px;
       }
-
-      button {
-        background-color: transparent;
-        cursor: pointer;
+      ul li a:hover, 
+      ul li a.active {
+        color: #2b1055;
+        background-color: #fff
       }
-
-      body {
-        min-width: fit-content;
-        min-height: 100vh;
-        font-family: Georgia, serif;
-        background-image: url("./yoga-images/back1.png");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-      }
-      
       .container {
-        width: 100%;
-        min-width: fit-content;
-        /* padding: min(2%, 2rem) min(3%, 3rem); */
+        width: 1200px;
+        margin-top: 80px;
+        transform-style: preserve-3d;
       }
-
-      .nav {
-        position: sticky;
+      .box {
+        width: 300px;
+        height: 400px;
+        margin: 40px auto;
+        border-radius: 20px;
+        background-color: #232323;
+        transform-style: preserve-3d;
+      }
+      .box::after {
+        right: 20px;
+        bottom: 20px;
+        content: "LIGHT";
+        font-size: 5.9em;
+        font-weight: 900;
+        font-style: italic;
+        transition: all 0.8s;
+      }
+      .box::before {
+        top: 20px;
+        left: 5px;
+        content: "MOON";
+        font-size: 5.4em;
+        font-weight: 700;
+        font-style: italic;
+        transition: all 0.8s;
+      }
+      .name {
         top: 0;
-        width: 100%;
-        max-width: 69rem;
-        margin: auto;
-        padding: min(2%, 2rem) min(3%, 3rem);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        z-index: 3;
-      }
-
-      .logo {
-        position: relative;
-        width: 4.4rem;
-        height: 4.4rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
+        right: 0;
+        /* justify-content: center; */
         text-align: center;
-        border-radius: 50%;
-        background-color: #fc2a51;
-        transition: all 0.4s;
-        cursor: pointer;
+        transform-style: preserve-3d;
+        transform: translate3d(0, 0, 75px);
+        transition: all 0.8s;
       }
-      .logo a {
-        display: flex;
-        justify-content: center;
-        color: #fff;
-        font-size: 2.2rem;
-        font-weight: bold;
-        text-transform: capitalize;
-        filter: drop-shadow(1px 1px 1px #000);
-      }
-      .logo a img {
-        flex-shrink: 0;
-        filter: invert(1);
-      }
-      .logo:hover {
-        transform: scale(1.1);
-      }
-
-      .nav-links ul {
-        list-style: none;
-        display: flex;
-        justify-content: flex-end;
-        flex-wrap: wrap;
-        gap: 0.6rem;
-      }
-      /* .nav-links li {} */
-      .nav-links a {
-        position: relative;
-        display: inline-block;
-        margin: 0.4rem;
-        padding: 0.6em 1.2em;
-        color: #fff;
-        transition: all 0.4s;
-      }
-      .nav-links a::after {
-        position: absolute;
-        left: 0;
+      .box:first-child .explore {
         bottom: 0;
-        content: "";
-        width: 0;
-        height: 3px;
-        background-color: transparent;
-        transition: all 0.4s;
+        left: 50%;
+        padding: 10px 25px;
+        border-radius: 30px;
+        background-color: #b92525;
+        transform-style: preserve-3d;
+        transform: translate3d(-50%, 0, 75px);
+        transition: all 0.8s;
       }
-      .nav-links a:hover::after {
-        width: 100%;
-        background-color: #fc2a51;
+      .box:hover .explore {
+        /* transform: translate3d(-50%, 0, 0); */
+        bottom: 30px;
       }
-      .nav-links a.active {
-        border-radius: 0.6rem;
-        background-color: #fc2a51;
+      .container:nth-child(2) .explore {
+        left: 50%;
+        padding: 10px 25px;
+        border-radius: 30px;
+        background-color: #b9b2b2;
+        transform-style: preserve-3d;
+        transform: translate3d(-50%, 0, 75px);
+        transition: all 0.8s;
       }
-      .nav-links a.active::after {
-        display: none;
+      .container:hover .explore {
+        /* transform: translate3d(-50%, 0, 0); */
+        bottom: 30px;
       }
-      .nav-links a.active:hover {
-        transform: scale(1.1);
+      .container:nth-child(3) .explore {
+        bottom: 0;
+        left: 50%;
+        padding: 10px 25px;
+        border-radius: 30px;
+        background-color: #ccc933;
+        transform-style: preserve-3d;
+        transform: translate3d(-50%, 0, 75px);
+        transition: all 0.8s;
       }
-
-      .menu {
-        display: none;
-        padding: 0 0.262em 0.1em;
-        color: #fff;
-        font-size: 2.4rem;
-        border: 1px solid currentColor;
-        border-radius: 0.6rem;
-        transition: all 0.4s;
+      .container:hover .explore {
+        /* transform: translate3d(-50%, 0, 0); */
+        bottom: 30px;
       }
-      .menu:hover {
-        background-color: #fc2a51;
-        transform: scale(1.1);
-      }
-
-      .content {
-        margin-top: 3rem;
-        overflow: hidden;
-      }
-
-      .content-details {
-        position: relative;
-        width: 100%;
-        max-width: 63rem;
-        margin: auto;
-        padding: 0 min(3%, 3rem) min(5%, 3rem) min(3%, 3rem);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        /* border: 1px solid red; */
-      }
-
-      .main-info {
-        flex: 1 1 22rem;
-        max-width: 25rem;
-        margin: 3rem auto;
-        color: #fff;
-        animation: fade-right 2s ease-in-out backwards;
-        z-index: 2;
-      }
-      
-      @keyframes fade-right {
-        0% {
-          transform: translateX(-50%);
-          opacity: 0;
-        }
-        100% {
-          transform: translateX(0);
-          opacity: 1;
-        }
-      }
-
-      .main-info h1 {
-        font-size: min(5rem + 5vw, 8rem);
-        letter-spacing: 5px;
-        text-transform: capitalize;
-      }
-
-      p {
-        width: 100%;
-        margin-top: 1rem;
-        font-size: 1rem;
-      }
-
-      .learn button {
-        margin-top: 1rem;
-        padding: 0.4em 1em;
-        color: #fff;
-        font-size: 1rem;
-        font-family: inherit;
-        text-transform: capitalize;
-        border: 1px solid #fc2a51;
-        border-radius: 10px;
-        background-color: #fc2a51;
-        transition: all 0.4s;
-        cursor: pointer;
-      }
-      .learn button:hover {
-        transform: scale(1.1);
-      }
-
-      .hero-images {
-        position: relative;
-        flex: 1 1 22rem;
-        aspect-ratio: 1;
-        max-width: 25rem;
-        margin: auto;
-        animation: fade-left 2s ease-in backwards;
-        /* animation-delay: 1s; */
-        z-index: 1;
-      }
-      .hero-images.flex {
-        display: flex;
-        justify-content: center;
-      }
-
-      @keyframes fade-left {
-        0% {
-          transform: translateX(50%);
-          opacity: 0;
-        }
-        100% {
-          transform: translateX(0);
-          opacity: 1;
-        }
-      }
-
-      .hero-images::before {
-        position: absolute;
-        top: 5%;
-        left: 5%;
-        content: "";
-        width: 90%;
-        aspect-ratio: 1;
-        border-radius: 50%;
-        background-color: #d08860;
-        transition: opacity 2s;
-        opacity: 1;
-        z-index: -1;
-      }
-      .hero-images.circle::before {
-        opacity: 0;
-      }
-
-      .hero-images img {
-        position: absolute;
-        width: 100%;
-        /* max-width: 94vw; */
-        height: 100%;
-        object-fit: contain;
-        transition: opacity 1s;
-        opacity: 0;
-      }
-      .intro {
-        position: relative;
-      }
-      .hero-images img.visible {
-        transition: opacity 2s;
-        opacity: 1;
-      }
-      .hero-images.flex .wider {
-        width: 150%;
-        flex-shrink: 0;
-      }
-
-      .dots {
-        position: absolute;
-        right: min(3%, 3rem);
-        z-index: 2;
-        /* border: 1px solid lightskyblue; */
-      }
-      .dot {
-        list-style: none;
-        width: 1.2rem;
-        height: 1.2rem;
-        /* margin: 0.6rem 1rem; */
-        margin: 0.6rem 0 0.6rem 1rem;
-        border: 2px solid #d08860;
-        border-radius: 50%;
-        background-color: transparent;
-        transition: all 0.4s;
-      }
-      .dot.active {
-        background-color: #fc2a51;
-      }
-      .dot a {
-        display: block;
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
-      }
-
-      .sci-container {
-        width: 100%;
-        min-width: fit-content;
-        display: flex;
-        align-items: center;
-        background-color: #000;
-      }
-
-      .sci-links {
-        list-style: none;
-        margin: auto;
-        padding: 0 1.2rem;
-        display: flex;
-      }
-
-      .sci-links a {
-        display: inline-block;
-        margin: 10px;
-        border: 2px solid #fff;
-        border-radius: 50%;
-        text-decoration: none;
-        transition: all 0.6s;
-        opacity: 0.5;
-      }
-      .sci-links i {
-        width: 2.2rem;
-        height: 2.2rem;
-        padding: 0.4em;
-        color: #fff;
-        font-size: 1.2rem;
-        text-align: center;
-      }
-      .sci-links a:hover {
-        background-color: #fc2a51;
-        opacity: 1;
-      }
-
-      @media screen and (max-width: 38rem) {
-        .nav-links {
-          display: none;
-        }
-        .menu {
-          display: inline-block;
-        }
-        .hero-images.flex .wider {
-          width: 100%;
-        }
-      }
-
-      /* .container {
-        overflow: hidden;
-      } */
     </style>
   </head>
   <body>
-    <div class="container">
-
-      <nav class="nav">
-        <div class="logo">
-          <!-- <a href="#home">yoga -->
-          <a href="index.html">
-            <!-- <img src="./yoga-images/logo-1.png" alt="" style="width: 140%;"> -->
-            <img src="./yoga-images/logo-2.png" alt="" style="width: 120%;">
-          </a>
+    <header>
+      <a href="#" class="logo2">tilt3d</a>
+      <ul>
+        <li class="active"><a href="#">home</a></li>
+        <li><a href="#">learn more</a></li>
+        <li><a href="#">about</a></li>
+        <li><a href="#">contact</a></li>
+      </ul>
+    </header>
+    <section>
+      <div class="container">
+        <div class="box">
+          <h2 class="name">red moon</h2>
+          <a href="#" class="explore">explore</a>
+          <img src="./tilt3D/redmoon.png" alt="Moon" class="type">
         </div>
-        <div class="nav-links">
-          <ul>
-            <li><a href="#" class="nav-link">home</a></li>
-            <li><a href="#" class="nav-link">market</a></li>
-            <li><a href="#" class="nav-link">course</a></li>
-            <li><a href="#" class="nav-link active">enroll now</a></li>
-          </ul>
+      </div>
+      <div class="container">
+        <div class="box">
+          <h2 class="name">crecent moon</h2>
+          <a href="#" class="explore">explore</a>
+          <img src="./tilt3D/cre.png" alt="Moon" class="type">
         </div>
-        <button class="menu">&#9776;</button>
-      </nav>
-    
-      <main class="content">
-
-        <div class="content-details">
-
-          <div class="main-info">
-
-            <h1>yoga</h1>
-
-            <p>Yoga improves strength, balance and flexibility. Slow movements and deep breathing increase blood flow and
-              warm up muscles, while holding a pose can build strength.</p>
-    
-            <div class="learn">
-              <button>learn more</button>
-            </div>
-
-          </div>
-    
-          <div class="hero-images flex circle">
-            <img class="intro wider visible" src="./yoga-images/yoga-1.png">
-            <img class="hero-image" src="./yoga-images/yoga-2.png">
-            <img class="hero-image" src="./yoga-images/yoga-3-couples.png">
-            <img class="hero-image wider" src="./yoga-images/yoga-4-children.png">
-          </div>
-    
-          <div class="dots">
-            <ul>
-              <li class="dot active"><a></a></li>
-              <li class="dot"><a></a></li>
-              <li class="dot"><a></a></li>
-            </ul>
-          </div>
-
+      </div>
+      <div class="container">
+        <div class="box">
+          <h2 class="name">yellow moon</h2>
+          <a href="#" class="explore">explore</a>
+          <img src="./tilt3D/yellowmoon.png" alt="Moon" class="type">
         </div>
-
-      </main>
-
-    </div>
-    
-    <div class="sci-container">
-      <ul class="sci-links">
-          <li>
-            <a href="#i">
-              <i class="fa fa-instagram"></i>
-            </a>
-          </li>
-          <li>
-            <a href="#t">
-              <i class="fa fa-twitter"></i>
-            </a>
-          </li>
-          <li>
-            <a href="#y">
-              <i class="fa fa-youtube-play"></i>
-            </a>
-          </li>
-          <li>
-            <a href="#l">
-              <i class="fa fa-linkedin"></i>
-            </a>
-          </li>
-        </ul>
-    </div>
-
-    <script>
-      const data = [
-        {
-          src: "./yoga-images/yoga-2.png",
-          classes: "",
-          parent: "hero-images flex"
-        },
-        {
-          src: "./yoga-images/yoga-3-couples.png",
-          classes: "", 
-          parent: "hero-images flex"
-        },
-        {
-          src: "./yoga-images/yoga-4-children.png",
-          classes: "", 
-          parent: "hero-images flex"
-        }
-      ]
-
-      const dots = document.querySelectorAll(".dot");
-      const images = document.querySelectorAll(".hero-image");
-
-      dots.forEach((button, index) => {
-        button.addEventListener("click", () => {
-          const activeButton = document.querySelector(".dot.active");
-          activeButton.classList.remove("active");
-          button.classList.add("active");
-          const activeImage = document.querySelector(".hero-images .visible");
-          activeImage.classList.remove("visible");
-          images[index].classList.add("visible");
-          activeImage.parentElement.className = data[index].parent;
-        })
-      })
-
-      const navLinks = document.querySelectorAll(".nav-link");
-
-      navLinks.forEach(link => {
-        link.addEventListener("click", () => {
-          const activeLink = document.querySelector(".nav-link.active");
-          activeLink.classList.remove("active");
-          link.classList.add("active");
-        })
-      })
-    </script>
-
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+      </div>
+    </section>
+    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
