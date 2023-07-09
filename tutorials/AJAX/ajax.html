@@ -4,554 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      fieldset {
-        display: none;
-      }
-
-      body {
-        min-height: 100vh;
-        font-family: Georgia, serif;
-        background-image: url("../../../CSS/assets/img/river-bank-copy.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-      }
-
-      ul {
-        list-style: none;
-      }
-      ul span {
-        text-transform: capitalize;
-      }
-
-      a {
-        color: #fff;
-        text-transform: capitalize;
-        text-decoration: none;
-      }
-
-      button {
-        font-family: inherit;
-        text-transform: capitalize;
-        border: none;
-        transition: all 0.4s;
-        cursor: pointer;
-      }
-
-      .navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        color: #fff;
-        background-color: #212225;
-        z-index: 2;
-      }
-
-      .navbar, 
-      .buttons {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-      }
-
-      .brand {
-        font-size: 1.3rem;
-        font-weight: bold;
-        text-transform: capitalize;
-      }
-
-      .btn {
-        padding: 0.5em 1.3em;
-        color: #fff;
-        font-size: 1.1rem;
-        border-radius: 8px;
-        background-color: #428aff;
-      }
-      .btn:hover {
-        background-color: #3877db;
-      }
-
-      .menu-btn {
-        display: inline-block;
-        margin-left: 1em;
-        color: #fff;
-        background-color: transparent;
-      }
-      .menu-btn span {
-        font-size: 2.3rem;
-      }
-
-      .dropdown > div, 
-      .sub-dropdown > div {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.5em;
-        cursor: pointer;
-      }
-
-      .fa-chevron-down, 
-      .fa-chevron-up {
-        font-size: 12px;
-        transition: transform 0.4s;
-      }
-      .fa-chevron-down.rotate {
-        transform: rotate(180deg);
-      }
-
-      .dropdown .menu a:hover {
-        color: #9b9b9b;
-      }
-
-      @media screen and (min-width: 900px) {
-        .navbar {
-          padding: 0 1.5em;
-        }
-        .dropdown > div, 
-        .mega-menu > .link {
-          padding: 1.5em 1em;
-        }
-        .mega-menu {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .menu-btn {
-          display: none;
-        }
-        .menu {
-          position: absolute;
-          top: 4.3em;
-          left: 0;
-          padding: 0;
-          display: flex;
-          align-items: stretch;
-          justify-content: center;
-          flex-direction: column;
-          background-color: #2d3033;
-          transition: all 0.4s;
-          overflow-y: hidden;
-        }
-        .sub-menu {
-          position: absolute;
-          top: 0;
-          left: 100%;
-          height: 0;
-          background-color: #212225;
-          transition: all 0.4s;
-          opacity: 0;
-          overflow-y: hidden;
-        }
-        .menu > li:last-child a {
-          padding-bottom: 1rem;
-        }
-        .sub-menu li:first-child {
-          padding-top: 1rem;
-        }
-        .sub-menu li:last-child {
-          padding-bottom: 0.5rem;
-        }
-        .menu li a, 
-        .menu .sub-dropdown > div {
-          padding: 0.5em 2em;
-        }
-        .dropdown, 
-        .sub-dropdown {
-          position: relative;
-        }
-        .dropdown > div, 
-        .mega-menu > .link {
-          transition: all 0.4s;
-        }
-        .dropdown a {
-          display: block;
-        }
-        .menu {
-          height: 0;
-        }
-        .sub-dropdown, 
-        .menu > .link {
-          padding: 0.5em 0;
-        }
-        .dropdown:hover, 
-        .link:hover {
-          background-color: #2d3033;
-        }
-        .dropdown:hover .menu {
-          height: auto;
-          padding: 0.5em 0 0 0;
-          overflow-y: visible;
-        }
-        .sub-dropdown:hover {
-          background-color: #212225;
-        }
-        .sub-dropdown:hover .sub-menu {
-          height: auto;
-          opacity: 1;
-        }
-      }
-
-      @media screen and (max-width: 900px) {
-        .navbar {
-          padding: 1em 1.5em;
-        }
-        .menu-container {
-          position: absolute;
-          top: 4.4rem;
-          left: 0;
-          width: 100%;
-          background-color: #212225;
-          transition: all 0.4s;
-          overflow-y: hidden;
-        }
-        .mega-menu::-webkit-scrollbar {
-          width: 8px;
-        }
-        .mega-menu::-webkit-scrollbar-track {
-          background-color: #f1f1f1;
-        }
-        .mega-menu::-webkit-scrollbar-thumb {
-          background-color: #888;
-        }
-        .mega-menu::-webkit-scrollbar-thumb:hover {
-          background-color: #555;
-        }
-        .mega-menu {
-          height: 100%;
-          padding: 0 1em 1em 1em;
-          overflow-y: scroll;
-        }
-        .mega-menu li {
-          font-size: 1.1rem;
-          font-weight: bold;
-        }
-        .mega-menu li > div {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 0.5em;
-        }
-        .menu li {
-          padding: 0 1em;
-          font-size: 1em;
-          font-weight: 400;
-        }
-        .menu a {
-          display: block;
-          margin: 0.8em 0;
-        }
-        .menu {
-          display: none;
-        }
-        .menu-show {
-          display: block;
-        }
-        .dropdown > div, 
-        .sub-dropdown > div, 
-        .mega-menu > .link {
-          padding: 0.5em;
-          cursor: pointer;
-        }
-        .sub-menu {
-          display: none;
-          font-size: 0.9em;
-        }
-        .sub-menu-show {
-          display: block;
-        }
-        .dropdown:hover > div, 
-        .sub-dropdown:hover > div {
-          background-color: #2d3033;
-        }
-        .menu-container {
-          height: 0;
-        }
-        .mega-menu-show {
-          height: 50vh;
-        }
-      }
-    </style>
   </head>
   <body>
-    <nav class="navbar">
-      <a href="#" class="brand">logo</a>
-      <div class="menu-container">
-        <ul class="mega-menu">
-          <li class="dropdown">
-            <div>
-              <span>new releases</span>
-              <i class="fa fa-chevron-down"></i>
-            </div>
-            <ul class="menu">
-              <li class="link">
-                <a href="#">features</a>
-              </li>
-              <li class="link">
-                <a href="#">calendar</a>
-              </li>
-              <li class="link">
-                <a href="#">bestsellers</a>
-              </li>
-            </ul>
-          </li>
-          <li class="link">
-            <a href="#">shoes</a>
-          </li>
-          <li class="dropdown">
-            <div>
-              <span>women</span>
-              <i class="fa fa-chevron-down"></i>
-            </div>
-            <ul class="menu">
-              <li class="link">
-                <a href="#">all shoes</a>
-              </li>
-              <li class="link">
-                <a href="#">lifestyle</a>
-              </li>
-              <li class="sub-dropdown">
-                <div>
-                  <span>clothing</span>
-                  <i class="fa fa-chevron-down"></i>
-                </div>
-                <ul class="sub-menu">
-                  <li>
-                    <a href="#">tops and t-shirts</a>
-                  </li>
-                  <li>
-                    <a href="#">hoodies and sweatshirts</a>
-                  </li>
-                  <li>
-                    <a href="#">leggings</a>
-                  </li>
-                  <li>
-                    <a href="#">matching sets</a>
-                  </li>
-                  <li>
-                    <a href="#">jackets</a>
-                  </li>
-                </ul>
-              </li>
-              <li class="sub-dropdown">
-                <div>
-                  <span>accessories</span>
-                  <i class="fa fa-chevron-down"></i>
-                </div>
-                <ul class="sub-menu">
-                  <li>
-                    <a href="#">all accessories</a>
-                  </li>
-                  <li>
-                    <a href="#">bags and backpacks</a>
-                  </li>
-                  <li>
-                    <a href="#">socks</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li class="link">
-            <a href="#">blog</a>
-          </li>
-          <li class="dropdown">
-            <div>
-              <span>men</span>
-              <i class="fa fa-chevron-down"></i>
-            </div>
-            <ul class="menu">
-              <li class="link">
-                <a href="#">accessories</a>
-              </li>
-              <li class="link">
-                <a href="#">all clothing</a>
-              </li>
-              <li class="sub-dropdown">
-                <div>
-                  <span>shoes</span>
-                  <i class="fa fa-chevron-down"></i>
-                </div>
-                <ul class="sub-menu">
-                  <li>
-                    <a href="#">running</a>
-                  </li>
-                  <li>
-                    <a href="#">jordan</a>
-                  </li>
-                  <li>
-                    <a href="#">football</a>
-                  </li>
-                  <li>
-                    <a href="#">basketball</a>
-                  </li>
-                  <li>
-                    <a href="#">tennis</a>
-                  </li>
-                </ul>
-              </li>
-              <li class="sub-dropdown">
-                <div>
-                  <span>accessories</span>
-                  <i class="fa fa-chevron-down"></i>
-                </div>
-                <ul class="sub-menu">
-                  <li>
-                    <a href="#">all accessories</a>
-                  </li>
-                  <li>
-                    <a href="#">bags and backpacks</a>
-                  </li>
-                  <li>
-                    <a href="#">socks</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li class="link">
-            <a href="#">sale</a>
-          </li>
-        </ul>
-      </div>
-      <div class="buttons">
-        <button class="btn">contact</button>
-        <button class="menu-btn">
-          <i class="fa fa-bars"></i>
-        </button>
-      </div>
-    </nav>
-
-    <script>
-      const menuBtn = document.querySelector(".menu-btn");
-      const menu = document.querySelector(".menu-container");
-      const dropdowns = document.querySelectorAll(".dropdown > div");
-      const subDropdowns = document.querySelectorAll(".sub-dropdown > div");
-
-      let menuOpen = false;
-
-      menuBtn.addEventListener("click", () => {
-        menu.classList.toggle("mega-menu-show");
-        if (!menuOpen) {
-          const menuIcon = menuBtn.querySelector(".fa");
-          menuIcon.classList.toggle("fa-bars");
-          menuIcon.classList.toggle("fa-times");
-          menuOpen = true;
-        } else {
-          const menuIcon = menuBtn.querySelector(".fa");
-          menuIcon.classList.toggle("fa-bars");
-          menuIcon.classList.toggle("fa-times");
-          menuOpen = false;
-        }
-      })
-
-      dropdowns.forEach(dropdown => {
-        dropdown.addEventListener("click", (e) => {
-          const menuIcon = dropdown.querySelector(".fa");
-          menuIcon.classList.toggle("rotate");
-          // menuIcon.classList.toggle("fa-chevron-down");
-          // menuIcon.classList.toggle("fa-chevron-up");
-          dropdown.nextElementSibling.classList.toggle("menu-show");
-        })
-      })
-
-      subDropdowns.forEach(subDropdown => {
-        subDropdown.addEventListener("click", (e) => {
-          const menuIcon = subDropdown.querySelector(".fa");
-          menuIcon.classList.toggle("rotate");
-          // menuIcon.classList.toggle("fa-chevron-down");
-          // menuIcon.classList.toggle("fa-chevron-up");
-          subDropdown.nextElementSibling.classList.toggle("sub-menu-show");
-        })
-      })
-    </script>
-
-    <script>
-      function f2() {
-        const a = "f2";
-        
-        function f1() {
-          console.log(a);
-        }
-
-        function f3() {
-          const a = "f3";
-          f1();
-        }
-
-        f3();
-      }
-
-      f2();
-    </script>
-
-<script>
-  // 06. Basketball Tournament
-
-  function calcBasketballResults(params) {
-    let index = 0;
-    let input = params[index];
-    let wins = 0;
-    let lost = 0;
-    let totalSreshti = 0;
-    
-    while (input !== "End of tournaments") {
-      const turnir = input;
-      index++;
-      const sreshti = Number(params[index]);
-      totalSreshti += sreshti;
-
-      for (let sreshta = 1; sreshta <= sreshti; sreshta++) {
-        index++;
-        const team1 = Number(params[index]);
-        index++;
-        const team2 = Number(params[index]);
-        
-        if (team1 > team2) {
-          wins++;
-          const diff = team1 - team2;
-          console.log(`Game ${sreshta} of tournament ${turnir}: win with ${diff} points.`);
-        } else {
-          lost++;
-          const diff = team2 - team1;
-          console.log(`Game ${sreshta} of tournament ${turnir}: lost with ${diff} points.`);
-        }
-      }
-
-      index++;
-      input = params[index];
-
-      // if (index > 30) {
-      //   console.log("inf");
-      //   break;
-      // }
-    }
-
-    const winsP = wins / totalSreshti * 100;
-    const lostP = lost / totalSreshti * 100;
-
-    console.log(`${winsP.toFixed(2)}% matches win`);
-    console.log(`${lostP.toFixed(2)}% matches lost`);
-
-  }
-
-  calcBasketballResults([
-    "Dunkers", "2", "75", "65", "56", "73", 
-    "Fire Girls", "3", "67", "34", "83", "98", "66", "45", 
-    "End of tournaments"
-  ]);
-</script>
-
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
@@ -615,6 +70,139 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
+    </script>
+
+    <script>
+      // 04. Club
+
+      function calcProfit(params) {
+        const target = Number(params[0]);
+        let total = 0;
+        // let eNaPechalba = false;
+        let index = 1;
+        let input = params[index];
+
+        while (input !== "Party!") {
+          
+          // if (target === 0) {
+            // break;
+          // }
+
+          const name = input;
+          const price = name.length;
+
+          index++;
+          input = Number(params[index]);
+          const broi = input;
+          let current = broi * price;
+
+          if (current % 2 === 1) {
+            current = current * 0.75;
+          }
+
+          total += current;
+
+          if (total >= target) {
+            // eNaPechalba = true;
+            break;
+          }
+
+          index++;
+          input = params[index];
+
+          if (index > 20) {
+            console.log("inf");
+            break;
+          }
+        }
+
+        if (total >= target) {
+          console.log("Target acquired.");
+          console.log(`Club income - ${total.toFixed(2)} leva.`);
+        } else {
+          const diff = target - total;
+          console.log(`We need ${diff.toFixed(2)} leva more.`);
+          console.log(`Club income - ${total.toFixed(2)} leva.`);
+        }
+
+      }
+
+      // calcProfit(["500", "Bellini", "6", "Bamboo", "7", "Party!"]);
+      // calcProfit(["0"]);
+      // calcProfit(["100", "Sidecar", "7", "Mojito", "5", "White Russian", "10"]);
+
+      // 03. Coffee Machine
+
+      function calcCoffeePrice(params) {
+        const drink = params[0];
+        const sugar = params[1];
+        const broi = Number(params[2]);
+
+        let price = 0;
+
+        switch (drink) {
+          case "Espresso":
+            switch (sugar) {
+              case "Without":
+                price = 0.9;
+                break;
+                case "Normal":
+                price = 1;
+                break;
+                case "Extra":
+                price = 1.2;
+                break;
+            }
+            break;
+          case "Cappuccino":
+            switch (sugar) {
+              case "Without":
+                price = 1;
+                break;
+                case "Normal":
+                price = 1.2;
+                break;
+                case "Extra":
+                price = 1.6;
+                break;
+            }
+            break;
+          case "Tea":
+            switch (sugar) {
+              case "Without":
+                price = 0.5;
+                break;
+                case "Normal":
+                price = 0.6;
+                break;
+                case "Extra":
+                price = 0.7;
+                break;
+            }
+            break;
+        }
+
+        let total = broi * price;
+
+        if (sugar === "Without") {
+          total = total * 0.65;
+        }
+
+        if (drink === "Espresso" && broi >= 5) {
+          total = total * 0.75;
+        }
+
+        if (total > 15) {
+          total = total * 0.8;
+        }
+
+        console.log(`You bought ${broi} cups of ${drink} for ${total.toFixed(2)} lv.`);
+
+      }
+
+      // calcCoffeePrice(["Espresso", "Without", "10"]);
+      // calcCoffeePrice(["Cappuccino", "Normal", "13"]);
+      // calcCoffeePrice(["Tea", "Extra", "3"]);
     </script>
   </body>
 </html>
