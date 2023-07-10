@@ -5,29 +5,90 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
     <style>
-      header {
-        padding: 30px 100px;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        min-height: 100vh;
+        font-family: Georgia, serif;
+        background: linear-gradient(#2b1055, #7597de);
+        overflow-x: hidden;
+      }
+
+      header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 30px 100px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 2;
+      }
+
+      .logo {
+        color: #fff;
+        font-size: 2rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-decoration: none;
+        letter-spacing: 2px;
+      }
+
+      ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
       ul li {
         margin-left: 20px;
       }
+
       ul li a {
         padding: 6px 15px;
+        color: #fff;
         font-size: 20px;
+        text-transform: capitalize;
         text-decoration: none;
         border-radius: 20px;
+        transition: all 0.4s;
       }
+
       ul li a:hover, 
       ul li a.active {
         color: #2b1055;
         background-color: #fff
       }
+
+      section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
       .container {
+        position: relative;
         width: 1200px;
         margin-top: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
         transform-style: preserve-3d;
       }
+
       .box {
+        position: relative;
         width: 300px;
         height: 400px;
         margin: 40px auto;
@@ -36,78 +97,137 @@
         transform-style: preserve-3d;
       }
       .box::after {
+        position: absolute;
         right: 20px;
         bottom: 20px;
         content: "LIGHT";
+        color: #fff;
         font-size: 5.9em;
         font-weight: 900;
         font-style: italic;
         transition: all 0.8s;
+        opacity: 0;
+      }
+      .box:hover::after {
+        opacity: 0.1;
       }
       .box::before {
+        position: absolute;
         top: 20px;
         left: 5px;
         content: "MOON";
+        color: #fff;
         font-size: 5.4em;
         font-weight: 700;
         font-style: italic;
         transition: all 0.8s;
+        opacity: 0;
       }
+      .box:hover::before {
+        opacity: 0.1;
+      }
+
       .name {
+        position: absolute;
         top: 0;
+        left: 0;
         right: 0;
-        /* justify-content: center; */
         text-align: center;
+        color: #fff;
+        text-transform: capitalize;
         transform-style: preserve-3d;
         transform: translate3d(0, 0, 75px);
         transition: all 0.8s;
+        opacity: 0;
+        z-index: 1;
       }
+
+      .box:hover .name {
+        top: 40px;
+        opacity: 1;
+      }
+
       .box:first-child .explore {
+        position: absolute;
         bottom: 0;
         left: 50%;
         padding: 10px 25px;
+        color: #fff;
+        text-transform: capitalize;
+        text-decoration: none;
         border-radius: 30px;
         background-color: #b92525;
         transform-style: preserve-3d;
         transform: translate3d(-50%, 0, 75px);
         transition: all 0.8s;
+        opacity: 0;
+        z-index: 1;
       }
       .box:hover .explore {
-        /* transform: translate3d(-50%, 0, 0); */
         bottom: 30px;
+        opacity: 1;
       }
+
       .container:nth-child(2) .explore {
+        position: absolute;
+        bottom: 0;
         left: 50%;
         padding: 10px 25px;
+        color: #fff;
+        text-transform: capitalize;
+        text-decoration: none;
         border-radius: 30px;
         background-color: #b9b2b2;
         transform-style: preserve-3d;
         transform: translate3d(-50%, 0, 75px);
         transition: all 0.8s;
+        opacity: 0;
+        z-index: 1;
       }
       .container:hover .explore {
-        /* transform: translate3d(-50%, 0, 0); */
         bottom: 30px;
+        opacity: 1;
       }
+
       .container:nth-child(3) .explore {
+        position: absolute;
         bottom: 0;
         left: 50%;
         padding: 10px 25px;
+        color: #fff;
+        text-transform: capitalize;
+        text-decoration: none;
         border-radius: 30px;
         background-color: #ccc933;
         transform-style: preserve-3d;
         transform: translate3d(-50%, 0, 75px);
         transition: all 0.8s;
+        opacity: 0;
+        z-index: 1;
       }
       .container:hover .explore {
-        /* transform: translate3d(-50%, 0, 0); */
         bottom: 30px;
+        opacity: 1;
+      }
+
+      .box:hover .type {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        max-width: 200px;
+        transform-style: preserve-3d;
+        transform: translate3d(-50%, -50%, 0);
+        transition: all 0.8s;
+        z-index: 2;
+      }
+      .box:hover .type {
+        transform: translate3d(-50%, -50%, 100px);
       }
     </style>
   </head>
   <body>
     <header>
-      <a href="#" class="logo2">tilt3d</a>
+      <a href="#" class="logo">tilt3d</a>
       <ul>
         <li class="active"><a href="#">home</a></li>
         <li><a href="#">learn more</a></li>
@@ -115,6 +235,7 @@
         <li><a href="#">contact</a></li>
       </ul>
     </header>
+
     <section>
       <div class="container">
         <div class="box">
@@ -138,6 +259,7 @@
         </div>
       </div>
     </section>
+
     <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
     <script src="./in-fetch-api.js"></script>
