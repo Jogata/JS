@@ -4,8 +4,136 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 100%;
+        min-height: 100vh;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        background-color: #333;
+        overflow-x: hidden;
+      }
+
+      header, 
+      section {
+        width: 100%;
+        padding: 2em;
+        color: #fff;
+      }
+
+      header {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        background-image: url("https://picsum.photos/id/122/1600/900");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+
+      section {
+        background-color: #222;
+      }
+
+      section p {
+        margin: 1em 0;
+        font-size: 1.1em;
+        line-height: 30px;
+      }
+
+      header h1 {
+        font-size: 3em;
+        text-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
+      }
+
+      .mouse-tracker {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: translate(-50%, -50%);
+        width: 1.5em;
+        height: 1.5em;
+        border: 1px solid #fff;
+        border-radius: 50%;
+        pointer-events: none;
+      }
+
+      .menu {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        padding-bottom: 5em;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        background-color: #111;
+        transition: all 1s ease-in-out;
+      }
+
+      .menu ul {
+        list-style: none;
+        /* padding: 0; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 1em;
+      }
+    </style>
   </head>
   <body>
+    <div class="menu">
+      <ul>
+        <li><a href="#">
+          <span class="text">home</span>
+        </a></li>
+        <li><a href="#">
+          <span class="text">about</span>
+        </a></li>
+        <li><a href="#">
+          <span class="text">blog</span>
+        </a></li>
+        <li><a href="#">
+          <span class="text">contact</span>
+        </a></li>
+        <li><a href="#">
+          <span class="text">login</span>
+        </a></li>
+      </ul>
+      <div class="nav-btn">
+        <input type="checkbox" name="" id="" class="btn">
+        <div class="lines">
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
+      </div>
+    </div>
+
+    <header>
+      <h1>full screen menu</h1>
+    </header>
+
+    <section>
+      <h2>Lorem ipsum dolor sit amet</h2>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque dolorum hic nisi non, amet quaerat voluptatibus ea excepturi voluptatem mollitia accusamus itaque repudiandae id esse sit tempore nihil numquam odit fuga suscipit obcaecati error rem. Deserunt, illo eius ipsum quod aspernatur consequuntur cumque. Rem, inventore.</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestiae ea fugiat suscipit rerum eaque veniam voluptatem nam, iste sunt repellat aspernatur soluta praesentium quisquam vitae officiis repudiandae. Facilis ex dolorum fugit aut laborum officiis.</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae molestiae distinctio quisquam corrupti, provident voluptas rem facilis aliquam excepturi cupiditate voluptate maiores quo nobis cumque ea tempore doloribus quia placeat blanditiis odio magnam officiis porro. Corporis quis pariatur eligendi similique hic nesciunt mollitia possimus iusto, iure accusantium. Sed, nam deleniti officia repellat commodi nesciunt dicta at.</p>
+    </section>
+
+    <div class="mouse-tracker"></div>
+
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
@@ -70,139 +198,6 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
-    </script>
-
-    <script>
-      // 04. Club
-
-      function calcProfit(params) {
-        const target = Number(params[0]);
-        let total = 0;
-        // let eNaPechalba = false;
-        let index = 1;
-        let input = params[index];
-
-        while (input !== "Party!") {
-          
-          // if (target === 0) {
-            // break;
-          // }
-
-          const name = input;
-          const price = name.length;
-
-          index++;
-          input = Number(params[index]);
-          const broi = input;
-          let current = broi * price;
-
-          if (current % 2 === 1) {
-            current = current * 0.75;
-          }
-
-          total += current;
-
-          if (total >= target) {
-            // eNaPechalba = true;
-            break;
-          }
-
-          index++;
-          input = params[index];
-
-          if (index > 20) {
-            console.log("inf");
-            break;
-          }
-        }
-
-        if (total >= target) {
-          console.log("Target acquired.");
-          console.log(`Club income - ${total.toFixed(2)} leva.`);
-        } else {
-          const diff = target - total;
-          console.log(`We need ${diff.toFixed(2)} leva more.`);
-          console.log(`Club income - ${total.toFixed(2)} leva.`);
-        }
-
-      }
-
-      // calcProfit(["500", "Bellini", "6", "Bamboo", "7", "Party!"]);
-      // calcProfit(["0"]);
-      // calcProfit(["100", "Sidecar", "7", "Mojito", "5", "White Russian", "10"]);
-
-      // 03. Coffee Machine
-
-      function calcCoffeePrice(params) {
-        const drink = params[0];
-        const sugar = params[1];
-        const broi = Number(params[2]);
-
-        let price = 0;
-
-        switch (drink) {
-          case "Espresso":
-            switch (sugar) {
-              case "Without":
-                price = 0.9;
-                break;
-                case "Normal":
-                price = 1;
-                break;
-                case "Extra":
-                price = 1.2;
-                break;
-            }
-            break;
-          case "Cappuccino":
-            switch (sugar) {
-              case "Without":
-                price = 1;
-                break;
-                case "Normal":
-                price = 1.2;
-                break;
-                case "Extra":
-                price = 1.6;
-                break;
-            }
-            break;
-          case "Tea":
-            switch (sugar) {
-              case "Without":
-                price = 0.5;
-                break;
-                case "Normal":
-                price = 0.6;
-                break;
-                case "Extra":
-                price = 0.7;
-                break;
-            }
-            break;
-        }
-
-        let total = broi * price;
-
-        if (sugar === "Without") {
-          total = total * 0.65;
-        }
-
-        if (drink === "Espresso" && broi >= 5) {
-          total = total * 0.75;
-        }
-
-        if (total > 15) {
-          total = total * 0.8;
-        }
-
-        console.log(`You bought ${broi} cups of ${drink} for ${total.toFixed(2)} lv.`);
-
-      }
-
-      // calcCoffeePrice(["Espresso", "Without", "10"]);
-      // calcCoffeePrice(["Cappuccino", "Normal", "13"]);
-      // calcCoffeePrice(["Tea", "Extra", "3"]);
     </script>
   </body>
 </html>
