@@ -33,7 +33,7 @@
 
       header {
         width: 100%;
-        max-width: 115rem;
+        max-width: 144rem;
         margin: auto;
         padding: 2em;
         display: flex;
@@ -76,7 +76,7 @@
       }
 
       section {
-        max-width: 100rem;
+        max-width: 140rem;
         margin: auto;
         display: flex;
         align-items: center;
@@ -87,22 +87,28 @@
       .container {
         position: relative;
         margin: 6rem;
-        display: flex;
+        /* display: flex;
         align-items: center;
         justify-content: center;
-        flex-wrap: wrap;
+        flex-wrap: wrap; */
         transform-style: preserve-3d;
+        perspective: 3000px;
       }
 
       .box {
         position: relative;
         /* width: 300px; */
+        width: 34rem;
         /* height: 400px; */
-        margin: 40px auto;
+        height: 34rem;
+        margin: 1rem;
+        display: grid;
         text-align: center;
         border-radius: 20px;
-        background-color: #232323;
+        /* background-color: #232323; */
         transform-style: preserve-3d;
+        transform: rotateX(0deg) rotateY(0deg);
+        transition: transform 0.4s;
       }
       .box::before, 
       .box::after {
@@ -111,7 +117,7 @@
         color: #fff;
         font-style: italic;
         transition: all 0.8s;
-        opacity: 0.1;
+        opacity: 0;
       }
       .box::after {
         right: 20px;
@@ -127,41 +133,45 @@
         font-size: 4.8rem;
         font-weight: 700;
       }
-      .box:hover::before, 
-      .box:hover::after {
+      .container:hover .box::before {
+        transform: translateY(40%);
         opacity: 0.1;
       }
+      .container:hover .box::after {
+        transform: translateY(-40%);
+        opacity: 0.1;
+      }
+
       .name {
         font-size: 4rem;
         color: #fff;
         text-transform: capitalize;
         transform-style: preserve-3d;
-        transform: translate3d(0, 0, 75px);
+        transform: translate3d(0, 0, 25px);
         transition: all 0.8s;
-        /* opacity: 0; */
+        opacity: 0;
         z-index: 1;
       }
-
-      .box:hover .name {
-        /* top: 40px; */
-        transform: translate3d(0, 40px, 75px);
+      .container:hover .name {
+        transform: translate3d(0, 30%, 25px);
         opacity: 1;
       }
 
       .explore {
+        margin: auto auto 0;
         padding: 0.5em 1.2em;
         color: #fff;
         font-size: 1.2rem;
         text-transform: capitalize;
         border-radius: 2em;
         transform-style: preserve-3d;
-        transform: translate3d(0, 0, 75px);
+        transform: translate3d(0, 0, 25px);
         transition: all 0.8s;
-        /* opacity: 0; */
+        opacity: 0;
         z-index: 1;
       }
-      .box:hover .explore {
-        transform: translate3d(0, -30px, 75px);
+      .container:hover .explore {
+        transform: translate3d(0, -240%, 25px);
         opacity: 1;
       }
 
@@ -177,67 +187,87 @@
         background-color: #ccc933;
       }
 
-      .box:hover .red {
-        /* position: absolute;
-        top: 50%;
-        left: 50%; */
-        max-width: 200px;
-        transform-style: preserve-3d;
-        transform: translate3d(-50%, -50%, 0);
-        z-index: 2;
+      .box img {
+        width: 100%;
+        pointer-events: none;
       }
+
       .box .red {
-        /* position: absolute;
+        position: absolute;
         top: 50%;
-        left: 50%; */
-        max-width: 500px;
+        left: 50%;
+        /* max-width: 500px; */
+        max-width: 32rem;
         transform: translate3d(-29%, -40%, 0);
         transition: all 0.8s;
       }
-
-      .box:hover .crescent {
-        /* position: absolute;
-        top: 50%;
-        left: 50%; */
-        max-width: 200px;
+      .container:hover .red {
+        /* max-width: 300px; */
+        max-width: 19rem;
         transform-style: preserve-3d;
-        transform: translate3d(-50%, -50%, 0);
+        transform: translate3d(-50%, -50%, 60px);
         z-index: 2;
       }
+
       .box .crescent {
-        /* position: absolute;
+        position: absolute;
         top: 50%;
-        left: 50%; */
-        max-width: 300px;
-        transform: translate3d(-11%, -30%, 0);
+        left: 50%;
+        /* max-width: 300px; */
+        max-width: 19rem;
+        transform: translate3d(-11%, -34%, 0);
         transition: all 0.8s;
       }
-
-      img {
-        pointer-events: none;
-      }
-      
-      .box:hover .yellow {
-        /* position: absolute;
-        top: 50%;
-        left: 50%; */
-        max-width: 200px;
+      .container:hover .crescent {
+        /* max-width: 200px; */
+        max-width: 13rem;
         transform-style: preserve-3d;
-        transform: translate3d(-50%, -50%, 0);
+        transform: translate3d(-50%, -50%, 60px);
         z-index: 2;
       }
+      
       .box .yellow {
-        /* position: absolute;
+        position: absolute;
         top: 50%;
-        left: 50%; */
-        max-width: 350px;
-        transform: translate3d(-25%, -38%, 0);
+        left: 50%;
+        /* max-width: 350px; */
+        max-width: 22rem;
+        transform: translate3d(-25%, -32%, 0);
         transition: all 0.8s, max-width 0.7s;
       }
-      /* .box:hover .type3 { */
-        /* transform: translate3d(-50%, -50%, 100px); */
-      /* } */
+      .container:hover .yellow {
+        /* max-width: 200px; */
+        max-width: 13rem;
+        transform-style: preserve-3d;
+        transform: translate3d(-50%, -50%, 60px);
+        z-index: 2;
+      }
 
+      /* .container {
+        position: relative;
+        border: 5px solid white;
+      }
+      .box {
+        border: 5px solid red;
+      } */
+      /* .container::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 50%;
+        height: 100%;
+        background-color: red;
+      }
+      .container::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 50%;
+        background-color: red;
+      } */
     </style>
   </head>
   <body>
@@ -259,11 +289,11 @@
           <a href="#" class="explore">explore</a>
         </div>
       </div>
-      <!-- <div class="container crescent">
+      <div class="container crescent">
         <div class="box">
           <h2 class="name">crescent moon</h2>
           <a href="#" class="explore">explore</a>
-          <img src="./tilt3D/cre.png" alt="Moon" class="crescent">
+          <img src="./tilt3D/crescent.png" alt="Moon" class="crescent">
         </div>
       </div>
       <div class="container yellow">
@@ -272,8 +302,56 @@
           <a href="#" class="explore">explore</a>
           <img src="./tilt3D/yellowmoon.png" alt="Moon" class="yellow">
         </div>
-      </div> -->
+      </div>
     </section>
+
+    <script>
+      const cards = document.querySelectorAll(".container");
+
+      // window.addEventListener("mousemove", (e) => {
+      //   const x = e.clientX;
+      //   const y = e.clientY;
+      //   console.log(x, y);
+      // })
+
+      cards.forEach(card => {
+        const box = card.children[0];
+        card.addEventListener("mousemove", (e) => {
+          const mouseXPosition = e.clientX;
+          const mouseYPosition = e.clientY;
+          // console.log(mouseXPosition, mouseYPosition);
+          const boxProp = box.getBoundingClientRect();
+          // console.log(boxProp);
+          const leftOffset = mouseXPosition - boxProp.x;
+          const topOffset = mouseYPosition - boxProp.top;
+          // console.log(leftOffset, topOffset);
+          const middleX = boxProp.width / 2;
+          const middleY = boxProp.height / 2;
+          // if (leftOffset - middleX > 0) {
+          //   console.log("right");
+          // } else {
+          //   console.log("left");
+          // }
+          // console.log(leftOffset - middleX);
+          // const y = middleX - leftOffset;
+          const y = leftOffset - middleX;
+          // if (topOffset - middleY > 0) {
+          //   console.log("bottom");
+          // } else {
+          //   console.log(("top"));
+          // }
+          // console.log(topOffset - middleY);
+          const x = middleY - topOffset;
+          // const x = topOffset - middleY;
+          box.style.transform = `rotateX(${x/20}deg) rotateY(${y/20}deg)`;
+          // console.log(box);
+        })
+        card.addEventListener("mouseleave", () => {
+          box.style.transform = "rotateX(0deg) rotateY(0deg)";
+        })
+        // console.log(box);
+      })
+    </script>
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
