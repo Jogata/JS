@@ -4,370 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        min-height: 100vh;
-        font-family: Georgia, 'Times New Roman', Times, serif;
-        background-color: #333;
-        overflow-x: hidden;
-      }
-
-      header, 
-      section {
-        padding: 2em;
-        color: #fff;
-      }
-
-      header {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-image: url("https://picsum.photos/id/122/1600/900");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-      }
-
-      section {
-        background-color: #222;
-      }
-
-      section p {
-        margin: 1em 0;
-        font-size: 1.1em;
-        line-height: 30px;
-      }
-
-      header h1 {
-        font-size: 3em;
-        text-transform: capitalize;
-        text-shadow: 0 0 1em rgba(0, 0, 0, 0.5);
-      }
-
-      .mouse-tracker {
-        position: absolute;
-        top: 0;
-        left: 0;
-        transform: translate(-50%, -50%);
-        width: 1.5em;
-        height: 1.5em;
-        border: 1px solid #fff;
-        border-radius: 50%;
-        pointer-events: none;
-      }
-
-      .menu {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        min-height: 100vh;
-        padding-bottom: 5em;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #111;
-        transform: translateY(-100%);
-        transition: all 1s ease-in-out;
-      }
-      .menu-open {
-        /* top: 0; */
-        transform: translateY(0);
-      }
-
-      .menu ul {
-        list-style: none;
-        /* padding: 0; */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        gap: 1em;
-      }
-      
-      .menu li {
-        margin: 0 1em;
-        padding: 1.5em;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .menu a {
-        position: relative;
-        color: #fff;
-        font-size: 1.1em;
-        text-transform: capitalize;
-        text-decoration: none;
-        transition: all 0.4s;
-      }
-
-      .menu a:hover {
-        color: #0f2027;
-      }
-
-      .circle {
-        position: absolute;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background-color: #fff;
-        transform: translate(-50%, -50%);
-        transform: width 0.4s, height 0.4s;
-        pointer-events: none;
-        z-index: 0;
-      }
-
-      .circle-active {
-        width: 6em;
-        height: 6em;
-      }
-
-      .text {
-        position: absolute;
-        position: relative;
-        /* top: 50%; */
-        /* left: 50%; */
-        display: inline-block;
-        padding: 1em;
-        /* transform: translate(-50%, -50%); */
-        transition: 0.3s;
-        z-index: 1;
-      }
-
-      .nav-btn {
-        position: absolute;
-        bottom: -4rem;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 4rem;
-        height: 4rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: bottom 0.2s;
-        transition-delay: 1s;
-      }
-      
-      .nav-btn .btn {
-        width: 100%;
-        height: 100%;
-        font-size: 0px;
-        /* appearance: none; */
-        outline: none;
-        transition: 0.6s;
-        cursor: pointer;
-        z-index: 2;
-      }
-
-      .nav-btn .btn:checked ~ .lines .line:nth-child(1) {
-        opacity: 0;
-      }
-      .nav-btn.menu-btn-open .lines .line:nth-child(1) {
-        opacity: 0;
-      }
-      /* .nav-btn .btn:checked ~ .lines .line:nth-child(2) {
-        transform: rotate(-45deg) translate(-1.8em, -0.6em);
-      }
-      .nav-btn .btn:checked ~ .lines .line:nth-child(3) {
-        transform: rotate(45deg) translate(-2em, 0.4em);
-      } */
-      .nav-btn.menu-btn-open .lines .line:nth-child(2) {
-        transform: rotate(-45deg) translate(-1.8em, -0.6em);
-      }
-      .nav-btn.menu-btn-open .lines .line:nth-child(3) {
-        transform: rotate(45deg) translate(-2em, 0.4em);
-      }
-
-      .nav-btn .lines {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        height: 100%;
-      }
-
-      .nav-btn .line {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 90%;
-        height: 0.3em;
-        background-color: #fff;
-        transition: 0.4s;
-        pointer-events: none;
-      }
-
-      .nav-btn .line:nth-child(2) {
-        top: 25%;
-      }
-      .nav-btn .line:nth-child(3) {
-        top: 75%;
-      }
-
-      /* .menu { */
-        /* top: -100vh; */
-      /* } */
-
-      .menu-btn-open {
-        bottom: 2em;
-      }
-
-      .tracker-menu {
-        width: 7em;
-        padding: 0.5em;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #000;
-        border-radius: 1em;
-        background-color: #fff;
-        transform: translate(4em, -50%);
-        transition: all 0.4s;
-      }
-
-      /* @media screen and (max-height: 400px) {
-        .menu {
-          height: 30em;
-          top: -30em;
-        }
-      }
- */
-      @media screen and (max-width: 500px) {
-        .mouse-tracker, 
-        .tracker-menu {
-          display: none;
-        }
-      }
-    </style>
   </head>
   <body>
-    <div class="menu">
-      <ul>
-        <li><a href="#">
-          <span class="text">home</span>
-        </a></li>
-        <li><a href="#">
-          <span class="text">about</span>
-        </a></li>
-        <li><a href="#">
-          <span class="text">blog</span>
-        </a></li>
-        <li><a href="#">
-          <span class="text">contact</span>
-        </a></li>
-        <li><a href="#">
-          <span class="text">login</span>
-        </a></li>
-      </ul>
-      <div class="nav-btn">
-        <btn id="menu-btn" class="btn">menu</btn>
-        <div class="lines">
-          <div class="line"></div>
-          <div class="line"></div>
-          <div class="line"></div>
-        </div>
-      </div>
-    </div>
-
-    <header>
-      <h1>full screen menu</h1>
-    </header>
-
-    <section>
-      <h2>Lorem ipsum dolor sit amet</h2>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque dolorum hic nisi non, amet quaerat voluptatibus ea excepturi voluptatem mollitia accusamus itaque repudiandae id esse sit tempore nihil numquam odit fuga suscipit obcaecati error rem. Deserunt, illo eius ipsum quod aspernatur consequuntur cumque. Rem, inventore.</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa molestiae ea fugiat suscipit rerum eaque veniam voluptatem nam, iste sunt repellat aspernatur soluta praesentium quisquam vitae officiis repudiandae. Facilis ex dolorum fugit aut laborum officiis.</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae molestiae distinctio quisquam corrupti, provident voluptas rem facilis aliquam excepturi cupiditate voluptate maiores quo nobis cumque ea tempore doloribus quia placeat blanditiis odio magnam officiis porro. Corporis quis pariatur eligendi similique hic nesciunt mollitia possimus iusto, iure accusantium. Sed, nam deleniti officia repellat commodi nesciunt dicta at.</p>
-    </section>
-
-    <div class="mouse-tracker"></div>
-
-    <script>
-      const tracker = document.querySelector(".mouse-tracker");
-      
-      let scrollY = 0;
-      let y = 0;
-
-      window.addEventListener("mousemove", mouseTracker);
-
-      function mouseTracker(e) {
-        const x = e.clientX;
-        y = e.clientY;
-        tracker.style.left = `${x}px`;
-        tracker.style.top = `${y + scrollY}px`;
-      }
-
-      window.addEventListener("scroll", () => {
-        scrollY = document.documentElement.scrollTop;
-        tracker.style.top = `${y + scrollY}px`;
-      })
-
-      const menuBtn = document.querySelector(".btn");
-      const menu = document.querySelector(".menu");
-
-      let menuOpen = false;
-
-      menuBtn.addEventListener("click", () => {
-        menu.classList.toggle("menu-open");
-        menuBtn.parentElement.classList.toggle("menu-btn-open");
-        menuOpen = !menuOpen;
-      })
-
-      menuBtn.addEventListener("mouseenter", () => {
-        tracker.classList.add("tracker-menu");
-        if (!menuOpen) {
-          tracker.innerHTML = "Open Menu";
-        } else {
-          tracker.innerHTML = "Close Menu";
-        }
-      })
-
-      menuBtn.addEventListener("mouseleave", () => {
-        tracker.classList.remove("tracker-menu");
-        tracker.innerHTML = "";
-      })
-
-      const links = document.querySelectorAll(".menu li");
-      const text = document.querySelectorAll(".text");
-
-      const circle = document.createElement("span");
-      circle.setAttribute("class", "circle");
-
-      for (let i = 0; i < links.length; i++) {
-        links[i].appendChild(circle);
-        links[i].addEventListener("mouseenter", () => {
-          window.removeEventListener("mousemove", mouseTracker);
-          tracker.style.display = "none";
-        })
-        links[i].addEventListener("mousemove", (e) => {
-          circle.style.left = `${e.clientX}px`;
-          circle.style.top = `${scrollY + e.clientY}px`;
-          circle.classList.add("circle-active");
-          const innerX = e.clientX - links[i].offsetLeft;
-          const innerY = e.clientY - links[i].offsetTop;
-          console.log(innerX, innerY);
-          text[i].style.transform = `translate(${innerX * -1}%, ${(innerY + scrollY) * -1}%)`;
-        })
-        links[i].addEventListener("mouseleave", () => {
-          circle.classList.remove("circle-active");
-          // text[i].style.transform = `translate(-50%, -50%)`;
-          text[i].style.transform = `translate(0%, 0%)`;
-          window.addEventListener("mousemove", mouseTracker);
-          tracker.style.display = "flex";
-        })
-      }
-    </script>
-
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
@@ -432,6 +70,136 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
+    </script>
+
+    <script>
+      // 06. Vet Parking
+
+      function calcVetParking(params) {
+        const days = Number(params[0]);
+        const hours = Number(params[1]);
+
+        let price = 0;
+        let total = 0;
+
+        for (let day = 1; day <= days; day++) {
+          let totalForCurrentDay = 0;
+          
+          if (day % 2 !== 0) {
+            for (let hour = 1; hour <= hours; hour+=2) {
+              totalForCurrentDay += 1;
+              // console.log(totalForCurrentDay);
+            }
+            for (let hour = 2; hour <= hours; hour+=2) {
+              totalForCurrentDay += 1.25;
+              // console.log(totalForCurrentDay);
+            }
+            console.log(`Day: ${day} - ${totalForCurrentDay.toFixed(2)} leva`);
+          } else {
+            for (let hour = 1; hour <= hours; hour+=2) {
+              totalForCurrentDay += 2.5;
+              // console.log(totalForCurrentDay);
+            }
+            for (let hour = 2; hour <= hours; hour+=2) {
+              totalForCurrentDay += 1;
+              // console.log(totalForCurrentDay);
+            }
+            console.log(`Day: ${day} - ${totalForCurrentDay.toFixed(2)} leva`);
+          }
+
+          total += totalForCurrentDay;
+
+        }
+
+        console.log(`Total: ${total.toFixed(2)} leva`);
+
+      }
+
+      // calcVetParking(["2", "5"]);
+      // calcVetParking(["5", "2"]);
+
+      // 05. Division Without Remainder
+
+      function magic(params) {
+        const n = Number(params[0]);
+
+        let by2 = 0;
+        let by3 = 0;
+        let by4 = 0;
+
+        for (let index = 1; index <= n; index++) {
+          const number = Number(params[index]);
+
+          if (number % 2 === 0) {
+            by2++;
+          }
+
+          if (number % 3 === 0) {
+            by3++;
+          }
+
+          if (number % 4 === 0) {
+            by4++;
+          }
+
+        }
+
+        const b2P = by2 / n * 100;
+        const b3P = by3 / n * 100;
+        const b4P = by4 / n * 100;
+
+        console.log(`${b2P.toFixed(2)}%`);
+        console.log(`${b3P.toFixed(2)}%`);
+        console.log(`${b4P.toFixed(2)}%`);
+
+      }
+
+      // magic(["10", "680", "2", "600", "200", "800", "799", "199", "46", "128", "65"]);
+      // magic(["3", "3", "6", "9"]);
+
+      // 04. Tourist Shop
+
+      function calcTouristEquipmentPrice(params) {
+        const budget = Number(params[0]);
+
+        let total = 0;
+        let products = 0;
+
+        let index = 1;
+        let input = params[index];
+
+        while (input !== "Stop") {
+          index++;
+          let price = Number(params[index]);
+          
+          if ((products) % 3 === 0) {
+            price = price / 2;
+          }
+
+          total += price;
+
+          if (total > budget) {
+            break;
+          }
+
+          products++;
+
+          index++;
+          input = params[index];
+        }
+
+        if (total < budget) {
+          console.log(`You bought ${products} products for ${total.toFixed(2)} leva.`);
+        } else {
+          const diff = total - budget;
+          console.log("You don't have enough money!");
+          console.log(`You need ${diff.toFixed(2)} leva!`);
+        }
+
+      }
+
+      // calcTouristEquipmentPrice(["153.20", "Backpack", "25.20", "Shoes", "54", "Sunglasses", "30", "Stop"]);
+      // calcTouristEquipmentPrice(["54", "Thermal underwear", "24", "Sunscreen", "45"]);
     </script>
   </body>
 </html>
