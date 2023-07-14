@@ -4,9 +4,118 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f2f2f2;
+      }
+
+      .img-slider {
+        width: 1000px;
+        height: 500px;
+        display: flex;
+        border-radius: 5px;
+        background-color: #222;
+        overflow: hidden;
+      }
+
+      .content {
+        flex-basis: 50%;
+        position: relative;
+        padding: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        font-family: Georgia, serif;
+        background-color: #fff;
+      }
+      .content h1 {
+        color: #333;
+        font-size: 54px;
+        letter-spacing: 2px;
+        text-transform: capitalize;
+      }
+      .content p {
+        margin: 15px 0px 30px;
+        color: #777;
+        text-transform: capitalize;
+      }
+      .content p.align {
+        text-align: center;
+      }
+      .content button {
+        padding: 15px 40px;
+        color: #fff;
+        font-size: 14px;
+        text-transform: capitalize;
+        font-family: Georgia, serif;
+        border: none;
+        outline: none;
+        border-radius: 25px;
+        background-color: #333;
+        box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+      }
+
+      ul {
+        position: absolute;
+        bottom: 30px;
+      }
+      ul li {
+        list-style: none;
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #bfbfbf;
+        cursor: pointer;
+      }
+      li.active {
+        background-color: #333;
+      }
+
+      .imgs {
+        flex-basis: 50%;
+        background-color: #333;
+      }
+      .imgs img {
+        width: 100%;
+        object-fit: cover;
+      }
+    </style>
   </head>
   <body>
-    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+    <div class="container">
+      <div class="img-slider">
+        <div class="content">
+          <h1>explore <br> designer furnitures</h1>
+          <p>discover designer furnitures near you or in a location you desire.</p>
+          <p class="align">
+            <button>explore now</button>
+          </p>
+          <ul>
+            <li class="btn active"></li>
+            <li class="btn"></li>
+            <li class="btn"></li>
+          </ul>
+        </div>
+        <div class="imgs">
+          <img src="../../../CSS/assets/img/alley-copy.jpg" alt="" class="banner">
+        </div>
+      </div>
+    </div>
+    
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
@@ -70,136 +179,6 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
-    </script>
-
-    <script>
-      // 06. Vet Parking
-
-      function calcVetParking(params) {
-        const days = Number(params[0]);
-        const hours = Number(params[1]);
-
-        let price = 0;
-        let total = 0;
-
-        for (let day = 1; day <= days; day++) {
-          let totalForCurrentDay = 0;
-          
-          if (day % 2 !== 0) {
-            for (let hour = 1; hour <= hours; hour+=2) {
-              totalForCurrentDay += 1;
-              // console.log(totalForCurrentDay);
-            }
-            for (let hour = 2; hour <= hours; hour+=2) {
-              totalForCurrentDay += 1.25;
-              // console.log(totalForCurrentDay);
-            }
-            console.log(`Day: ${day} - ${totalForCurrentDay.toFixed(2)} leva`);
-          } else {
-            for (let hour = 1; hour <= hours; hour+=2) {
-              totalForCurrentDay += 2.5;
-              // console.log(totalForCurrentDay);
-            }
-            for (let hour = 2; hour <= hours; hour+=2) {
-              totalForCurrentDay += 1;
-              // console.log(totalForCurrentDay);
-            }
-            console.log(`Day: ${day} - ${totalForCurrentDay.toFixed(2)} leva`);
-          }
-
-          total += totalForCurrentDay;
-
-        }
-
-        console.log(`Total: ${total.toFixed(2)} leva`);
-
-      }
-
-      // calcVetParking(["2", "5"]);
-      // calcVetParking(["5", "2"]);
-
-      // 05. Division Without Remainder
-
-      function magic(params) {
-        const n = Number(params[0]);
-
-        let by2 = 0;
-        let by3 = 0;
-        let by4 = 0;
-
-        for (let index = 1; index <= n; index++) {
-          const number = Number(params[index]);
-
-          if (number % 2 === 0) {
-            by2++;
-          }
-
-          if (number % 3 === 0) {
-            by3++;
-          }
-
-          if (number % 4 === 0) {
-            by4++;
-          }
-
-        }
-
-        const b2P = by2 / n * 100;
-        const b3P = by3 / n * 100;
-        const b4P = by4 / n * 100;
-
-        console.log(`${b2P.toFixed(2)}%`);
-        console.log(`${b3P.toFixed(2)}%`);
-        console.log(`${b4P.toFixed(2)}%`);
-
-      }
-
-      // magic(["10", "680", "2", "600", "200", "800", "799", "199", "46", "128", "65"]);
-      // magic(["3", "3", "6", "9"]);
-
-      // 04. Tourist Shop
-
-      function calcTouristEquipmentPrice(params) {
-        const budget = Number(params[0]);
-
-        let total = 0;
-        let products = 0;
-
-        let index = 1;
-        let input = params[index];
-
-        while (input !== "Stop") {
-          index++;
-          let price = Number(params[index]);
-          
-          if ((products) % 3 === 0) {
-            price = price / 2;
-          }
-
-          total += price;
-
-          if (total > budget) {
-            break;
-          }
-
-          products++;
-
-          index++;
-          input = params[index];
-        }
-
-        if (total < budget) {
-          console.log(`You bought ${products} products for ${total.toFixed(2)} leva.`);
-        } else {
-          const diff = total - budget;
-          console.log("You don't have enough money!");
-          console.log(`You need ${diff.toFixed(2)} leva!`);
-        }
-
-      }
-
-      // calcTouristEquipmentPrice(["153.20", "Backpack", "25.20", "Shoes", "54", "Sunglasses", "30", "Stop"]);
-      // calcTouristEquipmentPrice(["54", "Thermal underwear", "24", "Sunscreen", "45"]);
     </script>
   </body>
 </html>
