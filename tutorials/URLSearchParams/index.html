@@ -4,356 +4,125 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      a {
-        text-decoration: none;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        min-height: 100vh;
-        font-family: Georgia, serif;
-        background: linear-gradient(#2b1055, #7597de);
-        background-image: url("../../../CSS/assets/img/games-the-elder-scrolls-v-skyrim-50003-copy.jpg");
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-        background-position: top;
-        background-size: cover;
-        overflow-x: hidden;
-      }
-
-      header {
-        width: 100%;
-        max-width: 144rem;
-        margin: auto;
-        padding: 2em;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      .logo {
-        color: #fff;
-        font-size: 2rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-      }
-
-      ul {
-        list-style: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      ul li {
-        margin-left: 20px;
-      }
-
-      ul li a {
-        padding: 0.4em 1em;
-        color: #fff;
-        font-size: 1.2em;
-        text-transform: capitalize;
-        border-radius: 2em;
-        transition: all 0.4s;
-      }
-
-      ul li a:hover, 
-      ul li a.active {
-        color: #2b1055;
-        background-color: #fff
-      }
-
-      section {
-        max-width: 140rem;
-        margin: auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
-
-      .container {
-        position: relative;
-        margin: 6rem;
-        /* display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-wrap: wrap; */
-        transform-style: preserve-3d;
-        perspective: 3000px;
-      }
-
-      .box {
-        position: relative;
-        /* width: 300px; */
-        width: 34rem;
-        /* height: 400px; */
-        height: 34rem;
-        margin: 1rem;
-        display: grid;
-        text-align: center;
-        border-radius: 20px;
-        /* background-color: #232323; */
-        transform-style: preserve-3d;
-        transform: rotateX(0deg) rotateY(0deg);
-        transition: transform 0.4s;
-      }
-      .box::before, 
-      .box::after {
-        position: absolute;
-        width: 100%;
-        color: #fff;
-        font-style: italic;
-        transition: all 0.8s;
-        opacity: 0;
-      }
-      .box::after {
-        right: 20px;
-        bottom: -20px;
-        content: "LIGHT";
-        font-size: 5rem;
-        font-weight: 900;
-      }
-      .box::before {
-        top: -20px;
-        left: 5px;
-        content: "MOON";
-        font-size: 4.8rem;
-        font-weight: 700;
-      }
-      .container:hover .box::before {
-        transform: translateY(40%);
-        opacity: 0.1;
-      }
-      .container:hover .box::after {
-        transform: translateY(-40%);
-        opacity: 0.1;
-      }
-
-      .name {
-        font-size: 4rem;
-        color: #fff;
-        text-transform: capitalize;
-        transform-style: preserve-3d;
-        transform: translate3d(0, 0, 25px);
-        transition: all 0.8s;
-        opacity: 0;
-        z-index: 1;
-      }
-      .container:hover .name {
-        transform: translate3d(0, 30%, 25px);
-        opacity: 1;
-      }
-
-      .explore {
-        margin: auto auto 0;
-        padding: 0.5em 1.2em;
-        color: #fff;
-        font-size: 1.2rem;
-        text-transform: capitalize;
-        border-radius: 2em;
-        transform-style: preserve-3d;
-        transform: translate3d(0, 0, 25px);
-        transition: all 0.8s;
-        opacity: 0;
-        z-index: 1;
-      }
-      .container:hover .explore {
-        transform: translate3d(0, -240%, 25px);
-        opacity: 1;
-      }
-
-      .red .explore {
-        background-color: #b92525;
-      }
-
-      .crescent .explore {
-        background-color: #b9b2b2;
-      }
-
-      .yellow .explore {
-        background-color: #ccc933;
-      }
-
-      .box img {
-        width: 100%;
-        pointer-events: none;
-      }
-
-      .box .red {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        /* max-width: 500px; */
-        max-width: 32rem;
-        transform: translate3d(-29%, -40%, 0);
-        transition: all 0.8s;
-      }
-      .container:hover .red {
-        /* max-width: 300px; */
-        max-width: 19rem;
-        transform-style: preserve-3d;
-        transform: translate3d(-50%, -50%, 60px);
-        z-index: 2;
-      }
-
-      .box .crescent {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        /* max-width: 300px; */
-        max-width: 19rem;
-        transform: translate3d(-11%, -34%, 0);
-        transition: all 0.8s;
-      }
-      .container:hover .crescent {
-        /* max-width: 200px; */
-        max-width: 13rem;
-        transform-style: preserve-3d;
-        transform: translate3d(-50%, -50%, 60px);
-        z-index: 2;
-      }
-      
-      .box .yellow {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        /* max-width: 350px; */
-        max-width: 22rem;
-        transform: translate3d(-25%, -32%, 0);
-        transition: all 0.8s, max-width 0.7s;
-      }
-      .container:hover .yellow {
-        /* max-width: 200px; */
-        max-width: 13rem;
-        transform-style: preserve-3d;
-        transform: translate3d(-50%, -50%, 60px);
-        z-index: 2;
-      }
-
-      /* .container {
-        position: relative;
-        border: 5px solid white;
-      }
-      .box {
-        border: 5px solid red;
-      } */
-      /* .container::before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 50%;
-        height: 100%;
-        background-color: red;
-      }
-      .container::after {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 50%;
-        background-color: red;
-      } */
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Babylonica&family=Dancing+Script&family=Fraunces:opsz@9..144&family=Herr+Von+Muellerhoff&family=Kaushan+Script&family=Permanent+Marker&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <header>
-      <a href="#" class="logo">tilt3d</a>
-      <ul>
-        <li class="active"><a href="#">home</a></li>
-        <li><a href="#">learn more</a></li>
-        <li><a href="#">about</a></li>
-        <li><a href="#">contact</a></li>
-      </ul>
-    </header>
+    <section class="section-1">
 
-    <section>
-      <div class="container red">
-        <div class="box">
-          <h2 class="name">red moon</h2>
-          <img src="./tilt3D/redmoon.png" alt="Moon" class="red">
-          <a href="#" class="explore">explore</a>
+      <div class="section-1-container">
+
+        <div class="nav-container">
+
+          <nav>
+
+            <div class="logo-container">
+              <a href="">
+                <img src="./images/icons/LOGO.svg" alt="">
+                <span>wine</span>
+              </a>
+            </div>
+
+            <ul class="menu">
+              <li class="menu-item">
+                <a href="">about us</a>
+              </li>
+              <li class="menu-item">
+                <a href="">our awards</a>
+              </li>
+              <li class="menu-item">
+                <a href="">our team</a>
+              </li>
+              <li class="menu-item">
+                <a href="">gallery</a>
+              </li>
+              <li class="menu-item">
+                <a href="">info</a>
+              </li>
+            </ul>
+            <div class="bars-container">
+              <div class="bars">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+              </div>
+            </div>
+
+          </nav>
+
         </div>
-      </div>
-      <div class="container crescent">
-        <div class="box">
-          <h2 class="name">crescent moon</h2>
-          <a href="#" class="explore">explore</a>
-          <img src="./tilt3D/crescent.png" alt="Moon" class="crescent">
+
+        <div class="section-1-content-container">
+
+          <div class="home-container">
+
+            <div class="home">
+
+              <div class="home-title">
+
+                <div class="image">
+
+                  <div class="line"></div>
+
+                  <img src="./images/icons/grapes-80x70.svg" alt="">
+
+                  <div class="line"></div>
+
+                </div>
+
+                <span class="title-description">
+                  discover grapes
+                </span>
+
+              </div>
+
+              <div class="home-text">
+
+                <h1>
+                  <span>my wine</span>
+                  <span>original</span>
+                </h1>
+
+              </div>
+
+              <div class="home-buttons">
+
+                <h3>explore now</h3>
+
+                <div class="arrow-container">
+
+                  <div class="arrow">
+                    <i class="fa fa-arrow-right"></i>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+          
         </div>
+
       </div>
-      <div class="container yellow">
-        <div class="box">
-          <h2 class="name">yellow moon</h2>
-          <a href="#" class="explore">explore</a>
-          <img src="./tilt3D/yellowmoon.png" alt="Moon" class="yellow">
-        </div>
-      </div>
+
     </section>
 
     <script>
-      const cards = document.querySelectorAll(".container");
+      const mobileNav = document.querySelector(".bars");
+      const mobileNavContainer = document.querySelector(".bars-container");
+      const menu = document.querySelector(".menu");
 
-      // window.addEventListener("mousemove", (e) => {
-      //   const x = e.clientX;
-      //   const y = e.clientY;
-      //   console.log(x, y);
-      // })
-
-      cards.forEach(card => {
-        const box = card.children[0];
-        card.addEventListener("mousemove", (e) => {
-          const mouseXPosition = e.clientX;
-          const mouseYPosition = e.clientY;
-          // console.log(mouseXPosition, mouseYPosition);
-          const boxProp = box.getBoundingClientRect();
-          // console.log(boxProp);
-          const leftOffset = mouseXPosition - boxProp.x;
-          const topOffset = mouseYPosition - boxProp.top;
-          // console.log(leftOffset, topOffset);
-          const middleX = boxProp.width / 2;
-          const middleY = boxProp.height / 2;
-          // if (leftOffset - middleX > 0) {
-          //   console.log("right");
-          // } else {
-          //   console.log("left");
-          // }
-          // console.log(leftOffset - middleX);
-          // const y = middleX - leftOffset;
-          const y = leftOffset - middleX;
-          // if (topOffset - middleY > 0) {
-          //   console.log("bottom");
-          // } else {
-          //   console.log(("top"));
-          // }
-          // console.log(topOffset - middleY);
-          const x = middleY - topOffset;
-          // const x = topOffset - middleY;
-          box.style.transform = `rotateX(${x/20}deg) rotateY(${y/20}deg)`;
-          // console.log(box);
-        })
-        card.addEventListener("mouseleave", () => {
-          box.style.transform = "rotateX(0deg) rotateY(0deg)";
-        })
-        // console.log(box);
+      mobileNavContainer.addEventListener("click", () => {
+        mobileNav.classList.toggle("bars-active");
+        menu.classList.toggle("menu-active");
       })
     </script>
 
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
