@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <style>
+      fieldset {
+        display: none;
+      }
+
       * {
         margin: 0;
         padding: 0;
@@ -87,10 +91,33 @@
       .imgs {
         flex-basis: 50%;
         background-color: #333;
+        overflow: hidden;
       }
       .imgs img {
         width: 100%;
+        height: 100%;
         object-fit: cover;
+      }
+
+      .zoom {
+        animation: zoom-out 0.5s linear;
+      }
+
+      @keyframes zoom-out {
+        0% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        .img-slider {
+          height: 700px;
+          margin: 0 15px;
+          flex-direction: column;
+        }
       }
     </style>
   </head>
@@ -110,10 +137,108 @@
           </ul>
         </div>
         <div class="imgs">
-          <img src="../../../CSS/assets/img/alley-copy.jpg" alt="" class="banner">
+          <img src="../../../CSS/assets/img/alley-copy.jpg" alt="" id="banner">
         </div>
       </div>
     </div>
+
+    <script>
+      const btn = document.getElementsByClassName("btn");
+      const banner = document.getElementById("banner");
+
+      btn[0].addEventListener("click", function() {
+        banner.src = "../../../CSS/assets/img/alley-copy.jpg";
+        animation();
+        this.classList.add("active");
+      })
+
+      btn[1].addEventListener("click", function() {
+        banner.src = "../../../CSS/assets/img/road-copy.jpg";
+        animation();
+        this.classList.add("active");
+      })
+
+      btn[2].addEventListener("click", function() {
+        banner.src = "../../../CSS/assets/img/river-bank-copy.jpg";
+        animation();
+        this.classList.add("active");
+        // console.log(this);
+      })
+
+      function animation() {
+        banner.classList.add("zoom");
+
+        setTimeout(() => {
+          banner.classList.remove("zoom");
+        }, 500);
+
+        for (const b of btn) {
+          b.classList.remove("active");
+        }
+      }
+
+      class Settings {
+        constructor() {
+          if (Settings.instance instanceof Settings) {
+            return Settings.instance;
+          }
+
+          this.settingsObject = {
+            background: "red",
+            version: Math.floor(Math.random() * 4000),
+          }
+
+          Object.freeze(this.settingsObject);
+          Object.freeze(this);
+          Settings.instance = this;
+        }
+
+        get(key) {
+          return this.settingsObject[key];
+        }
+
+      }
+
+      const s = new Settings();
+      const a = new Settings();
+
+      console.log(s.get("background"));
+      console.log(s.get("version"));
+      console.log(a.get("version"));
+      console.log(Settings.instance);
+      console.log(Settings.prototype);
+
+      const testSeal = {
+        name: "Jogata",
+        age: 43,
+      }
+
+      console.log(`Is the object sealed: ${Object.isSealed(testSeal)}`);
+
+      testSeal.job = "developer";
+      console.log(testSeal);
+
+
+      Object.seal(testSeal);
+      console.log(`Is the object sealed: ${Object.isSealed(testSeal)}`);
+
+      testSeal.address = "Sofia";
+      console.warn("Address won't be added, because the object is sealed.");
+
+      delete testSeal.job;
+      console.warn("Job won't be deleted, because the object is sealed but it can be changed");
+      testSeal.job = "fired";
+
+      console.log(testSeal);
+
+      function test() {
+        console.log(arguments);
+        const testArrayFrom = Array.from(arguments);
+        console.log(testArrayFrom);
+      }
+
+      test(1, 2, 3, 4, 5);
+    </script>
     
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
