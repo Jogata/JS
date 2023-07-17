@@ -4,9 +4,165 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      fieldset {
+        display: none;
+      }
+
+      body {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        background-color: #f1f1f1;
+      }
+
+      .services {
+        width: 80%;
+        min-height: 100vh;
+        margin: 0 auto;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      .services h1 {
+        font-size: 48px;
+        margin: 30px;
+        text-align: center;
+        text-transform: capitalize;
+      }
+      .services p {
+        margin-bottom: 50px;
+        font-size: 16px;
+        text-align: center;
+      }
+
+      .container {
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        text-align: center;
+      }
+
+      .box {
+        width: 500px;
+        height: 150px;
+        margin-right: 20px;
+        margin-bottom: 10px;
+        padding: 10px 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        background-color: #fff;
+        box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .icon {
+        width: 150px;
+        height: 110px;
+      }
+      .icon i {
+        color: red;
+        font-size: 60px;
+      }
+
+      .details {
+        height: 110px;
+      }
+      .details h3 {
+        margin-bottom: 10px;
+        font-size: 25px;
+        text-align: left;
+      }
+      .details p {
+        text-align: left;
+      }
+
+      @media screen and (max-width: 768px) {
+        .container {
+          width: 98%;
+          margin: 0 auto;
+        }
+        .box {
+          height: 180px;
+          margin-bottom: 20px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+    <div class="services">
+      <h1>services</h1>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum fugiat ratione est reprehenderit nemo id quibusdam nisi magnam dolor maxime corporis nesciunt non at incidunt eum ut soluta, unde sint voluptatem quisquam facilis explicabo autem in. Libero delectus eligendi, facilis molestias tempora aperiam nisi dignissimos.</p>
+
+      <div class="container">
+        <div class="box">
+          <div class="icon">
+            <i class="fa fa-building-o"></i>
+          </div>
+          <div class="details">
+            <h3>Lorem, ipsum</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, in asperiores. Quam, consequuntur hic.</p>
+          </div>
+        </div>
+        <div class="box">
+          <div class="icon">
+            <i class="fa fa-whatsapp"></i>
+          </div>
+          <div class="details">
+            <h3>Lorem, ipsum</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, in asperiores. Quam, consequuntur hic.</p>
+          </div>
+        </div>
+        <div class="box">
+          <div class="icon">
+            <i class="fa fa-sitemap"></i>
+          </div>
+          <div class="details">
+            <h3>Lorem, ipsum</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, in asperiores. Quam, consequuntur hic.</p>
+          </div>
+        </div>
+        <div class="box">
+          <div class="icon">
+            <i class="fa fa-shield"></i>
+          </div>
+          <div class="details">
+            <h3>Lorem, ipsum</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, in asperiores. Quam, consequuntur hic.</p>
+          </div>
+        </div>
+        <div class="box">
+          <div class="icon">
+            <i class="fa fa-truck"></i>
+          </div>
+          <div class="details">
+            <h3>Lorem, ipsum</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, in asperiores. Quam, consequuntur hic.</p>
+          </div>
+        </div>
+        <div class="box">
+          <div class="icon">
+            <i class="fa fa-bar-chart"></i>
+          </div>
+          <div class="details">
+            <h3>Lorem, ipsum</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, in asperiores. Quam, consequuntur hic.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
@@ -70,139 +226,6 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
-    </script>
-
-    <script>
-      // 03. Mobile operator
-
-      function solve2(params) {
-        const years = params[0];
-        const type = params[1];
-        const internet = params[2];
-        const months = Number(params[3]);
-
-        let pricePerMonth = 0;
-
-        if (years == "one") {
-          switch (type) {
-            case "Small":
-              pricePerMonth = 9.98;
-              break;
-            case "Middle":
-              pricePerMonth = 18.99;
-              break;
-            case "Large":
-              pricePerMonth = 25.98;
-              break;
-            case "ExtraLarge":
-              pricePerMonth = 35.99;
-              break;
-          }
-        } else if (years == "two") {
-          switch (type) {
-            case "Small":
-              pricePerMonth = 8.58;
-              break;
-            case "Middle":
-              pricePerMonth = 17.09;
-              break;
-            case "Large":
-              pricePerMonth = 23.59;
-              break;
-            case "ExtraLarge":
-              pricePerMonth = 31.79;
-              break;
-        }
-      }
-
-      if (internet == "yes") {
-        if (pricePerMonth <= 10) {
-          pricePerMonth += 5.5;
-        } else if (pricePerMonth <= 30) {
-          pricePerMonth += 4.35;
-        } else if (pricePerMonth > 30) {
-          pricePerMonth += 3.85;
-        }
-      }
-
-      let total = pricePerMonth * months;
-
-      if (years == "two") {
-        total = total * 0.9625;
-      }
-
-      console.log(`${total.toFixed(2)} lv.`);
-
-    }
-
-    function solve(params) {
-      const years = params[0];
-      const type = params[1];
-      const internet = params[2];
-      const months = Number(params[3]);
-
-      let pricePerMonth = 0;
-
-      const plans = {
-        one: {
-          small: 9.98,
-          middle: 18.99,
-          large: 25.98,
-          extralarge: 35.99,
-        },
-        two: {
-          small: 8.58,
-          middle: 17.09,
-          large: 23.59,
-          extralarge: 31.79,
-        },
-      }
-
-      const plan = plans[years];
-      pricePerMonth = plan[type.toLowerCase()];
-      // console.log(plans[years][type.toLowerCase()]);
-
-      if (internet == "yes") {
-        if (pricePerMonth <= 10) {
-          pricePerMonth += 5.5;
-        } else if (pricePerMonth <= 30) {
-          pricePerMonth += 4.35;
-        } else if (pricePerMonth > 30) {
-          pricePerMonth += 3.85;
-        }
-      }
-
-      let total = pricePerMonth * months;
-
-      if (years == "two") {
-        total = total * 0.9625;
-      }
-
-      console.log(`${total.toFixed(2)} lv.`);
-
-    }
-
-    // solve(["one", "Small", "yes", "10"]);
-    // solve(["two", "Large", "no", "10"]);
-    // solve(["two", "ExtraLarge", "yes", "20"]);
-    // solve(["two", "Small", "yes", "20"]);
-
-    document.addEventListener("visibilitychange", () => {
-      document.title = document.visibilityState;
-      console.log(document.visibilityState);
-      console.log(document.hidden);
-    })
-
-    const fieldset = document.querySelector("fieldset");
-
-    // fieldset.toggleAttribute("hidden");
-
-    const strong = document.createElement("strong");
-    strong.textContent = "new STRONG element";
-    const em = document.createElement("em");
-    em.textContent = "new EM element";
-
-    fieldset.prepend(strong, em);
     </script>
   </body>
 </html>
