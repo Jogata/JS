@@ -4,165 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      fieldset {
-        display: none;
-      }
-
-      body {
-        font-family: Georgia, 'Times New Roman', Times, serif;
-        background-color: #f1f1f1;
-      }
-
-      .services {
-        width: 80%;
-        min-height: 100vh;
-        margin: 0 auto;
-        display: flex;
-        align-content: center;
-        justify-content: center;
-        flex-direction: column;
-      }
-
-      .services h1 {
-        font-size: 48px;
-        margin: 30px;
-        text-align: center;
-        text-transform: capitalize;
-      }
-      .services p {
-        margin-bottom: 50px;
-        font-size: 16px;
-        text-align: center;
-      }
-
-      .container {
-        margin: 0 auto;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        text-align: center;
-      }
-
-      .box {
-        width: 500px;
-        height: 150px;
-        margin-right: 20px;
-        margin-bottom: 10px;
-        padding: 10px 15px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-top: 1px solid rgba(0, 0, 0, 0.2);
-        border-radius: 20px;
-        background-color: #fff;
-        box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.2);
-      }
-
-      .icon {
-        width: 150px;
-        height: 110px;
-      }
-      .icon i {
-        color: red;
-        font-size: 60px;
-      }
-
-      .details {
-        height: 110px;
-      }
-      .details h3 {
-        margin-bottom: 10px;
-        font-size: 25px;
-        text-align: left;
-      }
-      .details p {
-        text-align: left;
-      }
-
-      @media screen and (max-width: 768px) {
-        .container {
-          width: 98%;
-          margin: 0 auto;
-        }
-        .box {
-          height: 180px;
-          margin-bottom: 20px;
-        }
-      }
-    </style>
   </head>
   <body>
-    <div class="services">
-      <h1>services</h1>
-      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum fugiat ratione est reprehenderit nemo id quibusdam nisi magnam dolor maxime corporis nesciunt non at incidunt eum ut soluta, unde sint voluptatem quisquam facilis explicabo autem in. Libero delectus eligendi, facilis molestias tempora aperiam nisi dignissimos.</p>
-
-      <div class="container">
-        <div class="box">
-          <div class="icon">
-            <i class="fa fa-building-o"></i>
-          </div>
-          <div class="details">
-            <h3>Lorem, ipsum</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, in asperiores. Quam, consequuntur hic.</p>
-          </div>
-        </div>
-        <div class="box">
-          <div class="icon">
-            <i class="fa fa-whatsapp"></i>
-          </div>
-          <div class="details">
-            <h3>Lorem, ipsum</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, in asperiores. Quam, consequuntur hic.</p>
-          </div>
-        </div>
-        <div class="box">
-          <div class="icon">
-            <i class="fa fa-sitemap"></i>
-          </div>
-          <div class="details">
-            <h3>Lorem, ipsum</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, in asperiores. Quam, consequuntur hic.</p>
-          </div>
-        </div>
-        <div class="box">
-          <div class="icon">
-            <i class="fa fa-shield"></i>
-          </div>
-          <div class="details">
-            <h3>Lorem, ipsum</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, in asperiores. Quam, consequuntur hic.</p>
-          </div>
-        </div>
-        <div class="box">
-          <div class="icon">
-            <i class="fa fa-truck"></i>
-          </div>
-          <div class="details">
-            <h3>Lorem, ipsum</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, in asperiores. Quam, consequuntur hic.</p>
-          </div>
-        </div>
-        <div class="box">
-          <div class="icon">
-            <i class="fa fa-bar-chart"></i>
-          </div>
-          <div class="details">
-            <h3>Lorem, ipsum</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, in asperiores. Quam, consequuntur hic.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
@@ -226,6 +70,94 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
+    </script>
+
+    <script>
+      // Цената на един литър гориво е 2.10 лв.
+      // Цената за екскурзовод е 100лв.
+      // В зависимост от деня има отстъпки от общата цена - за събота 10%, а за неделя 20%
+
+      function safari(params) {
+        const budget = Number(params[0]);
+        const fuelL = Number(params[1]);
+        const weekDay = params[2];
+
+        const guide = 100;
+        const priceFuel = 2.1;
+
+        let total = fuelL * priceFuel + guide;
+
+        if (weekDay == "Saturday") {
+          total = total * 0.9;
+        } else if (weekDay == "Sunday") {
+          total = total * 0.8;
+        }
+
+        if (budget >= total) {
+          const diff = budget - total;
+          console.log(`Safari time! Money left: ${diff.toFixed(2)} lv.`);
+        } else {
+          const diff = total - budget;
+          console.log(`Not enough money! Money needed: ${diff.toFixed(2)} lv.`);
+        }
+
+      } 
+
+      // safari(["1000", "10", "Sunday"]);
+      // safari(["120", "30", "Saturday"]);
+
+      // 06. Movie Tickets
+
+      function generateMovieTicketsSN(params) {
+        const n1 = Number(params[0]);
+        const n2 = Number(params[1]);
+        const n3 = Number(params[2]);
+
+        let sn = "";
+
+        for (let s1i = n1; s1i < n2; s1i++) {
+
+          const s1ASCII = String.fromCharCode(s1i);
+          const s4 = s1ASCII.charCodeAt(s1ASCII);
+          let s2 = 1;
+          let s3 = 1;
+
+          if (s4 % 2 === 0) {
+            continue;
+          } 
+          // else {
+          //   console.log(s1ASCII);
+          // }
+
+          for (s2 = 1; s2 < n3; s2++) {
+
+            // console.log(s2);
+
+            for (s3 = 1; s3 <= n3/2 - 1; s3++) {
+
+              // console.log(s3);
+              
+              let sum = s2 + s3 + s4;
+    
+              // console.log(sum);
+    
+              if (sum % 2 !== 0) {
+                sn = `${s1ASCII}-${s2}${s3}${s4}`;
+                console.log(sn);
+              }
+
+            }
+
+          }
+
+        }
+
+      }
+
+      // generateMovieTicketsSN(["86", "88", "4"]);
+      // generateMovieTicketsSN(["71", "74", "6"]);
+      // generateMovieTicketsSN(["69", "72", "4"]);
+      // generateMovieTicketsSN(["73", "91", "7"]);
     </script>
   </body>
 </html>
