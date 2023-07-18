@@ -46,22 +46,26 @@
         width: 3rem;
       }
 
-      .section-1 {
-        width: 100%;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
+      .purple {
+        color: purple;
+      }
+
+      .section {
+        /* width: 100%; */
+        /* min-height: 100vh; */
+        /* display: flex; */
+        /* flex-direction: column; */
         background-image: url("./images/background/background.png");
         background-repeat: no-repeat;
         background-size: cover;
-        overflow: hidden;
+        /* overflow: hidden; */
       }
 
-      .section-1-container {
+      .section-container {
         padding: 2rem 2rem 0 2rem;
-        display: flex;
-        flex-grow: 1;
-        flex-direction: column;
+        /* display: flex; */
+        /* flex-grow: 1; */
+        /* flex-direction: column; */
       }
 
       .nav-container {
@@ -72,6 +76,8 @@
 
       nav {
         width: 100%;
+        max-width: 120rem;
+        margin: auto;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -95,10 +101,10 @@
       }
 
       .menu {
-        width: 100%;
+        /* width: 100%; */
         display: flex;
         justify-content: center;
-        gap: 5%;
+        gap: 1rem;
         transition: all 0.4s ease-in-out;
       }
       .menu.menu-active {
@@ -106,24 +112,29 @@
         opacity: 1;
         z-index: 2;
       }
-      .menu a {
+
+      .menu-item {
+        white-space: nowrap;
+      }
+      .menu-item a {
+        padding: 0.4em 0.8em;
         color: #000;
         font-size: 1.3rem;
         font-weight: 800;
       }
-      .menu a:hover {
+      .menu-item a:hover {
         color: purple;
       }
 
       .bars-container {
+        display: none;
         position: relative;
         z-index: 2;
-        border: 1px solid red;
       }
 
       .bars {
         padding: 0.5rem 0.3rem;
-        display: none;
+        display: flex;
         align-items: center;
         flex-direction: column;
         cursor: pointer;
@@ -155,14 +166,9 @@
       }
 
       @media screen and (max-width: 860px) {
-        .bars {
-          display: flex;
+        .bars-container {
+          display: block;
         }
-        /* .bars-container {
-          display: flex;
-          width: 100%;
-          justify-content: flex-end;
-        } */
         .menu {
           /* display: none; */
           position: fixed;
@@ -181,37 +187,45 @@
         }
       }
 
-      .section-1-content-container {
-        flex: 1;
+      .section-content-container {
+        /* flex: 1; */
         position: relative;
-        display: flex;
-        flex-direction: column;
+        /* display: flex; */
+        /* flex-direction: column; */
         z-index: 1;
       }
 
       .home-container {
-        flex: 1;
+        /* flex: 1; */
+        max-width: 120rem;
         min-height: 500px;
+        margin: auto;
         display: flex;
         align-items: center;
         justify-content: space-evenly;
         gap: 2rem;
       }
 
-      .home {
+      .home-text {
         max-width: 100%;
       }
 
-      .home-title {
+      .home-text .section-subtitle {
+        display: block;
+        padding: 0;
+      }
+
+      .page-title {
         margin-bottom: 2rem;
       }
 
-      .image {
+      .subtitle-decoration {
+        margin: auto;
         display: flex;
         align-items: center;
         gap: 0.5rem;
       }
-      .image img {
+      .subtitle-decoration img {
         width: 3rem;
       }
 
@@ -221,21 +235,25 @@
         background-color: #000;
       }
 
-      .title-description {
+      .subtitle-text {
         display: block;
         margin-bottom: 0.5rem;
         text-transform: uppercase;
       }
 
-      .home-text {
+      .main-title {
         display: block;
+        margin: 1rem 0 2rem;
       }
 
-      .home-text h1 {
-        max-width: 600px;
-        margin-bottom: 2rem;
+      .main-title h1 {
+        /* max-width: 600px; */
+        /* margin-bottom: 2rem; */
         font-size: calc(max(2rem, 5vw));
         text-transform: capitalize;
+      }
+      .main-title h1 span {
+        display: block;
       }
 
       .home-buttons {
@@ -268,14 +286,37 @@
         color: purple;
         transform: translateX(5px);
       }
+
+      .home-image img {
+        width: calc((max(8vw, 5rem)));
+      }
+
+      .home-image {
+        position: relative;
+      }
+      .circle {
+        position: absolute;
+        top: 5%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(max(12vw, 6rem));
+        height: calc(max(12vw, 6rem));
+        border-radius: 50%;
+        background-image: radial-gradient(circle, rgba(241, 43, 43, 1) 0%, rgba(255, 236, 236, 1) 100%);
+        z-index: -1;
+      }
+
       @media screen and (max-width: 420px) {
-        .image {
+        .home .section-subtitle {
+          display: flex;
+        }
+        /* .subtitle-decoration {
           justify-content: center;
-        }
-        .title-description {
+        } */
+        /* .subtitle-text {
           text-align: center;
-        }
-        .home-text {
+        } */
+        .main-title {
           text-align: center;
         }
         .home-buttons {
@@ -298,9 +339,9 @@
     </style>
   </head>
   <body>
-    <section class="section-1">
+    <section class="section">
 
-      <div class="section-1-container">
+      <div class="section-container">
 
         <div class="nav-container">
 
@@ -315,7 +356,7 @@
 
             <ul class="menu">
               <li class="menu-item">
-                <a href="">about us</a>
+                <a href="#about">about us</a>
               </li>
               <li class="menu-item">
                 <a href="">our awards</a>
@@ -342,15 +383,15 @@
 
         </div>
 
-        <div class="section-1-content-container">
+        <div class="section-content-container">
 
           <div class="home-container">
 
-            <div class="home">
+            <div class="home-text">
 
-              <div class="home-title">
+              <div class="section-subtitle">
 
-                <div class="image">
+                <div class="subtitle-decoration">
 
                   <div class="line"></div>
 
@@ -360,13 +401,13 @@
 
                 </div>
 
-                <span class="title-description">
+                <span class="subtitle-text">
                   discover grapes
                 </span>
 
               </div>
 
-              <div class="home-text">
+              <div class="main-title">
 
                 <h1>
                   <span>my wine</span>
@@ -418,45 +459,45 @@
       })
     </script>
 
-    <section class="section-1 about">
-      <div class="section-1-container">
-        <div class="section-1-content-container">
+    <section class="section" id="about">
+      <div class="section-container">
+        <div class="section-content-container">
 
-          <div class="home-title">
-            <div class="image">
+          <div class="section-subtitle">
+            <div class="subtitle-decoration">
               <div class="line"></div>
               <img src="./images/icons/grapes-80x70.svg" alt="">
               <div class="line"></div>
             </div>
-            <span class="title-description">
+            <span class="subtitle-text">
               original recipe
             </span>
           </div>
 
-          <div class="home-text">
+          <div class="section-title">
             <h2>more than <span class="purple">wine</span></h2>
             <p>In 1862 James Malcolm - the visionary father of My Wine winemaking - established the winery that started it all.</p>
           </div>
 
-          <div class="sec">
+          <div class="subsection">
             <h3 class="purple">harvesting</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum tenetur perferendis maxime ad distinctio expedita officia ab suscipit autem laboriosam voluptates praesentium delectus voluptate amet reiciendis temporibus, voluptatum neque possimus eaque assumend.</p>
             <img src="./images/icons/Wine80x70.svg" alt="">
           </div>
 
-          <div class="sec">
+          <div class="subsection">
             <h3 class="purple">clarification</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim dolores vitae eveniet similique? Nobis ea magni maiores beatae saepe nostrum incidunt voluptatum aspernatur ullam adipisci, nihil asperiores alias et ex magnam, repudiandae praesentium est quibusdam eligendi. Molestiae nisi fugit repellendus aspernatur eaque error dignissimos ducimus, nihil nemo inventore ipsam quas soluta nostrum laborum.</p>
             <img src="./images/icons/Barel 80x70.svg" alt="">
           </div>
           
-          <div class="sec">
+          <div class="subsection">
             <h3 class="purple">fermentation</h3>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa iusto qui inventore repellat accusantium ex quibusdam commodi? Saepe officia unde dignissimos velit assumenda magnam ex eaque.</p>
             <img src="./images/icons/Barel2 80x70.svg" alt="">
           </div>
 
-          <div class="sec">
+          <div class="subsection">
             <h3 class="purple">aging</h3>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit iusto saepe itaque veritatis, hic voluptas ipsum ullam perspiciatis aliquam molestias doloremque, doloribus placeat similique soluta quam, optio sint ex incidunt dolorum.</p>
             <img src="./images/icons/WineBottle 80x70.svg" alt="">
@@ -486,13 +527,13 @@
     </section>
 
     <section class="team">
-      <div class="home-title">
-        <div class="image">
+      <div class="section-subtitle">
+        <div class="subtitle-decoration">
           <div class="line"></div>
           <img src="./images/icons/grapes-80x70.svg" alt="">
           <div class="line"></div>
         </div>
-        <span class="title-description">
+        <span class="subtitle-text">
           people behind creativeness
         </span>
       </div>
