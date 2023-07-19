@@ -4,9 +4,105 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
+    <style>
+      .wrapper {
+        position: relative;
+        /* min-width: 1200px; */
+        width: 100%;
+        max-width: 1400px;
+        /* max-height: 1200px; */
+        margin: 0 auto auto;
+        /* flex-grow: 1; */
+        /* overflow: hidden; */
+      }
+      
+      .grid-container {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+        /* grid-template-rows: repeat(4, 1fr); */
+        /* gap: 1rem; */
+        align-items: center;
+        justify-items: center;
+      }
+
+      .wrapper {
+        /* border: 1px solid red; */
+      }
+
+      img {
+        grid-column: span 2;
+        max-width: 100%;
+        width: 1920px;
+        /* height: 1080px; */
+        aspect-ratio: 1920 / 1080;
+        object-fit: cover;
+        margin-bottom: -26%;
+        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        grid-row: span 2;
+        transform: scale(1);
+        transition: all 0.25s;
+        cursor: pointer;
+        z-index: 1;
+      }
+      img:hover {
+        transform: scale(2);
+        transition: transform 0.3s;
+        z-index: 2;
+      }
+
+      img:nth-child(3n) {
+        /* border: 1px solid #fff; */
+      }
+      img:nth-child(4n + 1) {
+        /* 1, 5, 9 */
+        border: 1px solid #ff0;
+      }
+      img:nth-child(4n + 2) {
+        /* 2, 6, 10 */
+        border: 1px solid #fff;
+      }
+      img:nth-child(4n + 3) {
+        /* 3, 7 */
+        /* grid-column: 2 / span 2; */
+        /* grid-row: 2 / span 2; */
+        border: 1px solid #f0f;
+      }
+      img:nth-child(4n + 4) {
+        /* 4, 8 */
+        /* grid-column: 6 / span 2; */
+        /* grid-row: 2 / span 2; */
+        border: 1px solid #0ff;
+      }
+      img:nth-child(4n) {
+        /* grid-row: 2 / span 2; */
+        /* border: 1px solid red; */
+      }
+      /* img:nth-child(5n) {
+        grid-row: 4 / span 2;
+      } */
+
+    </style>
   </head>
   <body>
-    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+    <h1>GRID Honeycomb Gallery</h1>
+    <div class="wrapper">
+      <div class="grid-container">
+        <img src="../../../CSS/assets/img/alley-copy.jpg" alt="">
+        <img src="../../../CSS/assets/img/wp7360943-black-lady-wallpapers-copy.jpg" alt="">
+        <img src="../../../CSS/assets/img/winter-painting-copy.jpg" alt="">
+        <img src="../../../CSS/assets/img/foggy-lake-quang-nguyen-vinh-2166695-copy.jpg" alt="">
+        <img src="../../../CSS/assets/img/forest.jpg" alt="">
+        <img src="../../../CSS/assets/img/lake-17401.jpg" alt="">
+        <img src="../../../CSS/assets/img/miao-gengxin-gu435nBTLW4-unsplash.jpg" alt="">
+        <img src="../../../CSS/assets/img/rainforest-kunal-shinde--f0YLss50Bs-unsplash.jpg" alt="">
+        <img src="../../../CSS/assets/img/scenic-view-of-lake-against-sky-during-sunset-copy.jpg" alt="">
+        <img src="../../../CSS/assets/img/road-copy.jpg" alt="">
+      </div>
+    </div>
+
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
@@ -70,94 +166,6 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
-    </script>
-
-    <script>
-      // Цената на един литър гориво е 2.10 лв.
-      // Цената за екскурзовод е 100лв.
-      // В зависимост от деня има отстъпки от общата цена - за събота 10%, а за неделя 20%
-
-      function safari(params) {
-        const budget = Number(params[0]);
-        const fuelL = Number(params[1]);
-        const weekDay = params[2];
-
-        const guide = 100;
-        const priceFuel = 2.1;
-
-        let total = fuelL * priceFuel + guide;
-
-        if (weekDay == "Saturday") {
-          total = total * 0.9;
-        } else if (weekDay == "Sunday") {
-          total = total * 0.8;
-        }
-
-        if (budget >= total) {
-          const diff = budget - total;
-          console.log(`Safari time! Money left: ${diff.toFixed(2)} lv.`);
-        } else {
-          const diff = total - budget;
-          console.log(`Not enough money! Money needed: ${diff.toFixed(2)} lv.`);
-        }
-
-      } 
-
-      // safari(["1000", "10", "Sunday"]);
-      // safari(["120", "30", "Saturday"]);
-
-      // 06. Movie Tickets
-
-      function generateMovieTicketsSN(params) {
-        const n1 = Number(params[0]);
-        const n2 = Number(params[1]);
-        const n3 = Number(params[2]);
-
-        let sn = "";
-
-        for (let s1i = n1; s1i < n2; s1i++) {
-
-          const s1ASCII = String.fromCharCode(s1i);
-          const s4 = s1ASCII.charCodeAt(s1ASCII);
-          let s2 = 1;
-          let s3 = 1;
-
-          if (s4 % 2 === 0) {
-            continue;
-          } 
-          // else {
-          //   console.log(s1ASCII);
-          // }
-
-          for (s2 = 1; s2 < n3; s2++) {
-
-            // console.log(s2);
-
-            for (s3 = 1; s3 <= n3/2 - 1; s3++) {
-
-              // console.log(s3);
-              
-              let sum = s2 + s3 + s4;
-    
-              // console.log(sum);
-    
-              if (sum % 2 !== 0) {
-                sn = `${s1ASCII}-${s2}${s3}${s4}`;
-                console.log(sn);
-              }
-
-            }
-
-          }
-
-        }
-
-      }
-
-      // generateMovieTicketsSN(["86", "88", "4"]);
-      // generateMovieTicketsSN(["71", "74", "6"]);
-      // generateMovieTicketsSN(["69", "72", "4"]);
-      // generateMovieTicketsSN(["73", "91", "7"]);
     </script>
   </body>
 </html>
