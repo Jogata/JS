@@ -5,6 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      fieldset {
+        display: none;
+      }
+
+      html, 
+      body {
+        height: 100%;
+      }
+
+      body {
+        background-color: #222;
+        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.025) 10%, transparent 0), linear-gradient(#222, #000);
+        background-size: 0.75em 100%, 100% 100%;
+        background-attachment: fixed;
+        display: flex;
+        flex-direction: column;
+        font-family: Georgia, serif;
+        overflow-x: hidden;
+      }
+
       .wrapper {
         position: relative;
         /* min-width: 1200px; */
@@ -19,7 +45,7 @@
       .grid-container {
         width: 100%;
         display: grid;
-        grid-template-columns: repeat(8, 1fr);
+        /* grid-template-columns: repeat(8, 1fr); */
         grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
         /* grid-template-rows: repeat(4, 1fr); */
         /* gap: 1rem; */
@@ -52,37 +78,81 @@
         z-index: 2;
       }
 
-      img:nth-child(3n) {
-        /* border: 1px solid #fff; */
-      }
-      img:nth-child(4n + 1) {
-        /* 1, 5, 9 */
-        border: 1px solid #ff0;
-      }
-      img:nth-child(4n + 2) {
-        /* 2, 6, 10 */
-        border: 1px solid #fff;
-      }
-      img:nth-child(4n + 3) {
-        /* 3, 7 */
-        /* grid-column: 2 / span 2; */
-        /* grid-row: 2 / span 2; */
-        border: 1px solid #f0f;
-      }
-      img:nth-child(4n + 4) {
-        /* 4, 8 */
-        /* grid-column: 6 / span 2; */
-        /* grid-row: 2 / span 2; */
-        border: 1px solid #0ff;
-      }
-      img:nth-child(4n) {
-        /* grid-row: 2 / span 2; */
-        /* border: 1px solid red; */
-      }
-      /* img:nth-child(5n) {
-        grid-row: 4 / span 2;
+      /* @media screen and (min-width: 1000px) {
+        img:nth-child(4n + 1) {
+          grid-column: 2 / span 2;
+        }
       } */
+      @media screen and (max-width: 524px) {
+        /* img:nth-child(2n + 1) {
+          grid-column: 2 / span 2;
+        } */
+        .grid-container {
+          grid-template-columns: 1fr;
+        }
+        img:hover {
+          transform: scale(1.2);
+        }
+      }
+      @media screen and (min-width: 525px) {
+        img:nth-child(2n + 1) {
+          grid-column: 2 / span 2;
+        }
+      }
+      @media screen and (min-width: 750px) {
+        img:nth-child(2n + 1) {
+          grid-column: auto / span 2;
+        }
+        img:nth-child(3n + 1) {
+          grid-column: 2 / span 2;
+        }
+      }
+      @media screen and (min-width: 875px) {
+        img:nth-child(3n + 1) {
+          grid-column: auto / span 2;
+        }
+        img:nth-child(4n + 1) {
+          grid-column: 2 / span 2;
+        }
+      }
+      @media screen and (min-width: 1225px) {
+        img:nth-child(4n + 1) {
+          grid-column: auto / span 2;
+        }
+        img:nth-child(6n + 1) {
+          grid-column: 2 / span 2;
+        }
+        img:nth-child(10) {
+          grid-column: 3 / span 2;
+        }
+      }
+      @media screen and (min-width: 1410px) {
+        /* img:nth-child(4n + 1) {
+          grid-column: auto / span 2;
+        } */
+        img:nth-child(6n + 1) {
+          grid-column: auto / span 2;
+        }
+        img:nth-child(7n + 1) {
+          grid-column: 2 / span 2;
+        }
+        img:nth-child(10) {
+          grid-column: auto / span 2;
+        }
+      }
+      /* img:nth-child(3n) { */
+        /* object-position: bottom; */
+        /* object-fit: contain; */
+      /* } */
+      /* img:nth-child(3n + 1) { */
+        /* object-position: top; */
+      /* } */
 
+      h1 {
+        color: #fff;
+        text-align: center;
+        margin: auto auto 3rem;
+      }
     </style>
   </head>
   <body>
