@@ -28,7 +28,7 @@
         display: flex;
         flex-direction: column;
         font-family: Georgia, serif;
-        overflow-x: hidden;
+        /* overflow-x: hidden; */
       }
 
       .wrapper {
@@ -153,6 +153,23 @@
         text-align: center;
         margin: auto auto 3rem;
       }
+
+      .test {
+        width: 2000px;
+        min-height: 100vh;
+        margin: 5px;
+        color: #fff;
+        text-align: center;
+        border: 1px solid #fff;
+        background-color: red;
+      }
+      .test:nth-of-type(3) {
+        padding-top: 200px;
+      }
+      .test span {
+        text-transform: capitalize;
+        border: 1px solid black;
+      }
     </style>
   </head>
   <body>
@@ -171,6 +188,115 @@
         <img src="../../../CSS/assets/img/road-copy.jpg" alt="">
       </div>
     </div>
+
+    <script>
+      const url = "https://api.github.com/users";
+
+      // function getData(url) {
+      //   return fetch(url)
+      //     .then(data => data.json());
+      // }
+
+      // getData(url)
+      //   .then(data => {
+      //     console.log(data);
+      //   })
+
+      // async function doSomething() {
+      //   const users = await getData(url);
+
+      //   console.log(users);
+
+      //   users.forEach(user => {
+      //     console.log(user.login);
+      //   })
+      // }
+
+      // doSomething();
+    </script>
+
+    <div class="test" id="first"></div>
+    <div class="test">
+      <span>test #2</span>
+    </div>
+    <div class="test">
+      <span>test #2</span>
+    </div>
+
+    <script>
+      const div1 = document.querySelectorAll(".test")[0];
+      const div2 = document.querySelectorAll(".test")[1];
+      const div3 = document.querySelectorAll(".test")[2];
+
+      let isEqual = div1.isEqualNode(div2);
+      console.log(isEqual);
+
+      isEqual = div2.isEqualNode(div3);
+      console.log(isEqual);
+
+      setTimeout(() => {
+        console.log("settimeout#1");
+        window.scrollTo(0, 200);
+      }, 1000);
+
+      setTimeout(() => {
+        console.log("settimeout#2");
+        window.scrollTo(200, 1000);
+      }, 2000);
+
+      setTimeout(() => {
+        console.log("settimeout#3");
+        window.scrollTo({
+          top: 1500,
+          left: 400,
+          behavior: "smooth",
+        });
+      }, 3000);
+
+      function findClosestElementFromPoint(x, y) {
+        const elem = document.elementFromPoint(x, y);
+        console.log(elem);
+      }
+
+      findClosestElementFromPoint(500, 600);
+      </script>
+
+      <input type="text" value="sample.txt">
+
+<script>
+  const input = document.querySelector("input");
+
+  input.addEventListener("focus", () => {
+    const dotPosition = input.value.indexOf("x");
+    console.log(dotPosition);
+    input.setSelectionRange(4, dotPosition);
+  })
+
+  const str = "Hello, i'm 25 and she's 31!";
+
+  console.log(str.replace("and", "&"));
+
+  console.log(str.replace(/\d+/, "22"));
+  console.log(str.replace(/\d+/g, "22"));
+  console.log(str.replace(/(\d+)([^\d]+)(\d+)/g, "$3$2$1"));
+  
+  console.log(str.replace(/(\d+)([^\d]+)(\d+)/g, function () {
+    return "jogata";
+  }));
+
+  const count = (num) => {
+    console.log(num);
+    const updatedNum = num - 1;
+
+    if (updatedNum >= 0) {
+      count(updatedNum);
+    }
+  }
+
+  count(7);
+
+  console.log(304);
+</script>
 
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
@@ -236,138 +362,6 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
-    </script>
-
-    <script>
-      // Nullish operator
-
-      let game;
-      const game2 = null;
-      const game3 = "Sonic";
-
-      console.log(
-        game2 ?? game3
-      );
-
-      let user;
-
-      console.log(
-        user ?? "Guest"
-      );
-
-      let score = 0;
-
-      console.log(
-        score || "No score"
-      );
-
-      console.log(
-        score ?? "No score"
-      );
-
-      // For ...in loop
-
-      const character = {
-        name: "Sonic",
-        color: "Blue",
-        speed: 1000,
-      }
-
-      character.name = "Knuckles";
-      delete character.speed;
-      character.alignment = "Good";
-
-      Object.defineProperty(character, "name", {
-        value: "Tails",
-        enumerable: false,
-        configurable: false,
-        writable: false,
-      })
-
-      console.log(character);
-
-      for (const x in character) {
-        console.log(`${x}: ${character[x]}`);
-      }
-
-      // Sets
-
-      const fruits = new Set();
-
-      fruits.add("apple");
-      fruits.add("banana");
-      fruits.add("orange");
-      fruits.add("plums").add("apricot");
-
-      console.log(fruits);
-
-      fruits.add("apple");
-      fruits.delete("orange");
-      const isFruitExist = fruits.has("grape");
-
-      console.log(fruits);
-      console.log(fruits.size);
-      console.log(isFruitExist);
-
-      fruits.clear();
-      console.log(fruits);
-
-      let numbers = [1, 2, 3, 4, 5];
-
-      const weakSet = new WeakSet();
-
-      weakSet.add(numbers);
-
-      console.log(weakSet);
-
-      try {
-        numbers = null;
-        weakSet.add(numbers);
-      } catch (error) {
-        console.log(weakSet);
-        console.log("Cannot add primitive values to WaekSet");
-      }
-
-      // Maps
-
-      const newGame = {
-        name: "Sonic",
-        platform: "SEGA",
-        year: 1991,
-      }
-
-      const gameMap = new Map();
-
-      gameMap.set("Name", "Sonic the Hedgehog");
-      gameMap.set(3, "Three");
-      gameMap.set(true, "boolean");
-
-      const getInfo = gameMap.get(3);
-
-      const hasInfo = gameMap.has("Name")
-
-      console.log(newGame);
-      console.log(gameMap);
-      console.log(getInfo);
-      console.log(hasInfo);
-
-      const deleteInfo = gameMap.delete(true);
-
-      console.log(deleteInfo);
-      console.log(gameMap);
-      console.log(gameMap.size);
-
-      for (const key of gameMap.keys()) {
-        console.log(key);
-      }
-
-      for (const value of gameMap.values()) {
-        console.log(value);
-      }
-
-      gameMap.clear();
-
-      console.log(gameMap);
     </script>
   </body>
 </html>
