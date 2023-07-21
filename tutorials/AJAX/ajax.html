@@ -237,5 +237,137 @@
         users.send();
       }
     </script>
+
+    <script>
+      // Nullish operator
+
+      let game;
+      const game2 = null;
+      const game3 = "Sonic";
+
+      console.log(
+        game2 ?? game3
+      );
+
+      let user;
+
+      console.log(
+        user ?? "Guest"
+      );
+
+      let score = 0;
+
+      console.log(
+        score || "No score"
+      );
+
+      console.log(
+        score ?? "No score"
+      );
+
+      // For ...in loop
+
+      const character = {
+        name: "Sonic",
+        color: "Blue",
+        speed: 1000,
+      }
+
+      character.name = "Knuckles";
+      delete character.speed;
+      character.alignment = "Good";
+
+      Object.defineProperty(character, "name", {
+        value: "Tails",
+        enumerable: false,
+        configurable: false,
+        writable: false,
+      })
+
+      console.log(character);
+
+      for (const x in character) {
+        console.log(`${x}: ${character[x]}`);
+      }
+
+      // Sets
+
+      const fruits = new Set();
+
+      fruits.add("apple");
+      fruits.add("banana");
+      fruits.add("orange");
+      fruits.add("plums").add("apricot");
+
+      console.log(fruits);
+
+      fruits.add("apple");
+      fruits.delete("orange");
+      const isFruitExist = fruits.has("grape");
+
+      console.log(fruits);
+      console.log(fruits.size);
+      console.log(isFruitExist);
+
+      fruits.clear();
+      console.log(fruits);
+
+      let numbers = [1, 2, 3, 4, 5];
+
+      const weakSet = new WeakSet();
+
+      weakSet.add(numbers);
+
+      console.log(weakSet);
+
+      try {
+        numbers = null;
+        weakSet.add(numbers);
+      } catch (error) {
+        console.log(weakSet);
+        console.log("Cannot add primitive values to WaekSet");
+      }
+
+      // Maps
+
+      const newGame = {
+        name: "Sonic",
+        platform: "SEGA",
+        year: 1991,
+      }
+
+      const gameMap = new Map();
+
+      gameMap.set("Name", "Sonic the Hedgehog");
+      gameMap.set(3, "Three");
+      gameMap.set(true, "boolean");
+
+      const getInfo = gameMap.get(3);
+
+      const hasInfo = gameMap.has("Name")
+
+      console.log(newGame);
+      console.log(gameMap);
+      console.log(getInfo);
+      console.log(hasInfo);
+
+      const deleteInfo = gameMap.delete(true);
+
+      console.log(deleteInfo);
+      console.log(gameMap);
+      console.log(gameMap.size);
+
+      for (const key of gameMap.keys()) {
+        console.log(key);
+      }
+
+      for (const value of gameMap.values()) {
+        console.log(value);
+      }
+
+      gameMap.clear();
+
+      console.log(gameMap);
+    </script>
   </body>
 </html>
