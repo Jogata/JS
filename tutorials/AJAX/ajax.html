@@ -172,6 +172,150 @@
       </div>
     </div>
 
+    <script>
+      const fibonacciPosN = (pos) => {
+        if (pos <= 1) {
+          return pos;
+        }
+
+        const seq = [0, 1];
+
+        for (let i = 2; i <= pos; i++) {
+          const [nextToLast, last] = seq.slice(-2);
+          seq.push(nextToLast + last);
+        }
+
+        return seq[pos];
+
+      }
+
+      console.log(fibonacciPosN(8));
+
+      const fibonacciPosR = (pos) => {
+
+        if (pos < 2) {
+          return pos;
+        }
+
+        return fibonacciPosR(pos - 1) + fibonacciPosR(pos - 2);
+
+      }
+
+      console.log(fibonacciPosR(8));
+
+      const artists = {
+        jazz: ["MD", "JC"],
+        rock: {
+          classic: ["BS", "The Eagles"], 
+          hair: ["Def Lepard", "Whitesnake", "Poison"], 
+          alt: {
+            classic: ["Pearl Jam", "The Killers"], 
+            current: ["Joywave", "Sir Sly"],
+          }
+        }, 
+        unclassified: {
+          new: ["Caamp", "NY"], 
+          classic: ["Seal", "Morcheeba", "CS"],
+        }
+      }
+
+      const getArtist = (dataObj, arr = []) => {
+
+
+        Object.keys(dataObj).forEach(key => {
+
+          if (Array.isArray(dataObj[key])) {
+            return dataObj[key].forEach(artist => {
+              arr.push(artist);
+            })
+          }
+
+          getArtist(dataObj[key], arr);
+
+        })
+
+        return arr;
+
+      }
+
+      console.log(getArtist(artists));
+    </script>
+
+    <script>
+      let x = 1;
+      
+      const parent = () => {
+        let inside = 2;
+        console.log(x);
+        console.log(inside);
+        
+        const child = () => {
+          console.log(x += 5);
+          console.log(inside += 1);
+        }
+        
+        child();
+      }
+
+      parent();
+
+      // CLOSURE
+      const parentClosure = () => {
+        let inside = 2;
+        console.log(x);
+        console.log(inside);
+
+        const child = () => {
+          console.log(x += 5);
+          console.log(inside += 1);
+        }
+
+        return child;
+
+      }
+
+      const result = parentClosure();
+      console.log(result);
+      console.log(result());
+      console.log(result());
+
+      const counter = (() => {
+        let count = 0;
+        console.log(`initial value: ${count}`);
+        return () => {
+          count++;
+          console.log(count);
+        }
+      })()
+
+      counter();
+      counter();
+      counter();
+      counter();
+      counter();
+
+      const credits = ((num) => {
+        let credits = num;
+        console.log(`Initial credits: ${credits}`);
+
+        return () => {
+          credits--;
+
+          if (credits >= 0) {
+            console.log(`Start new game, credits left: ${credits}`);
+          } else {
+            console.log(`No credits left`);
+          }
+
+        }
+      })(3);
+
+      credits();
+      credits();
+      credits();
+      credits();
+    </script>
+    
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <!-- ================= Get data from local JSON file ================= -->
@@ -236,135 +380,6 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
-    </script>
-
-    <script>
-      function calcTotal(n) {
-        let total = 0;
-
-        for (let i = 0; i <= n; i++) {
-          total += i;
-        }
-
-        return total;
-
-      }
-
-      // console.log(calcTotal(3));
-
-      function calcTotalR(n, total = 0) {
-
-        if (n === 0) {
-          console.log(total);
-          return total;
-        }
-
-        total += n;
-
-        return calcTotalR(n - 1, total);
-
-      }
-
-      console.log(calcTotalR(3));
-
-    </script>
-
-    <script>
-      const team = {
-        name: "Jogata", 
-        teams: [
-          {
-            name: "one", 
-            teams: [
-              {
-                name: "one-one", 
-                teams: [],
-              }
-            ],
-          },
-          {
-            name: "two", 
-            teams: [],
-          }
-        ]
-      }
-
-      function getTeams(obj) {
-
-        if (obj.teams.length === 0) {
-          return;
-        }
-
-        obj.teams.forEach(team => {
-          console.log(team.name);
-
-          getTeams(team);
-
-        })
-
-      }
-
-      getTeams(team);
-
-    </script>
-
-    <script>
-      const countToTen = (num = 1) => {
-
-        while (num <= 10) {
-          console.log(num);
-          num++;
-        }
-
-      }
-
-      countToTen();
-
-      const countTo100R = (n = 100) => {
-
-        if (n > 110) {
-          return;
-        }
-
-        console.log(n);
-        n++;
-
-        countTo100R(n);
-
-      }
-
-      countTo100R();
-
-      // Fibonnaci
-
-      const fibonnaciN = (num, array = [0, 1]) => {
-
-        while (num > 2) {
-          
-          const [nextToLast, last] = array.slice(-2);
-          array.push(nextToLast + last);
-          num -= 1;
-        }
-
-        return array;
-
-      }
-
-      console.log(fibonnaciN(12));
-
-      const fibonnaciR = (num, array = [0, 1]) => {
-
-        if (num <= 2) {
-          return array;
-        }
-
-        const [nextToLast, last] = array.slice(-2);
-
-        return fibonnaciR(num - 1, [...array, nextToLast + last]);
-
-      }
-
-      console.log(fibonnaciR(12));
     </script>
   </body>
 </html>
