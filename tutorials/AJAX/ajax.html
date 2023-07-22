@@ -153,6 +153,32 @@
         text-align: center;
         margin: auto auto 3rem;
       }
+
+      .test {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+      }
+
+      button {
+        padding: 0.4em 1em;
+        color: cadetblue;
+        font-size: 1.2rem;
+        font-family: inherit;
+        border: 1px solid currentColor;
+        border-radius: 0.6em;
+        background-color: #fff;
+        text-transform: capitalize;
+        transition: all 0.4s;
+        cursor: pointer;
+      }
+      button:hover {
+        color: #fff;
+        background-color: cadetblue;
+      }
     </style>
   </head>
   <body>
@@ -172,150 +198,6 @@
       </div>
     </div>
 
-    <script>
-      const fibonacciPosN = (pos) => {
-        if (pos <= 1) {
-          return pos;
-        }
-
-        const seq = [0, 1];
-
-        for (let i = 2; i <= pos; i++) {
-          const [nextToLast, last] = seq.slice(-2);
-          seq.push(nextToLast + last);
-        }
-
-        return seq[pos];
-
-      }
-
-      console.log(fibonacciPosN(8));
-
-      const fibonacciPosR = (pos) => {
-
-        if (pos < 2) {
-          return pos;
-        }
-
-        return fibonacciPosR(pos - 1) + fibonacciPosR(pos - 2);
-
-      }
-
-      console.log(fibonacciPosR(8));
-
-      const artists = {
-        jazz: ["MD", "JC"],
-        rock: {
-          classic: ["BS", "The Eagles"], 
-          hair: ["Def Lepard", "Whitesnake", "Poison"], 
-          alt: {
-            classic: ["Pearl Jam", "The Killers"], 
-            current: ["Joywave", "Sir Sly"],
-          }
-        }, 
-        unclassified: {
-          new: ["Caamp", "NY"], 
-          classic: ["Seal", "Morcheeba", "CS"],
-        }
-      }
-
-      const getArtist = (dataObj, arr = []) => {
-
-
-        Object.keys(dataObj).forEach(key => {
-
-          if (Array.isArray(dataObj[key])) {
-            return dataObj[key].forEach(artist => {
-              arr.push(artist);
-            })
-          }
-
-          getArtist(dataObj[key], arr);
-
-        })
-
-        return arr;
-
-      }
-
-      console.log(getArtist(artists));
-    </script>
-
-    <script>
-      let x = 1;
-      
-      const parent = () => {
-        let inside = 2;
-        console.log(x);
-        console.log(inside);
-        
-        const child = () => {
-          console.log(x += 5);
-          console.log(inside += 1);
-        }
-        
-        child();
-      }
-
-      parent();
-
-      // CLOSURE
-      const parentClosure = () => {
-        let inside = 2;
-        console.log(x);
-        console.log(inside);
-
-        const child = () => {
-          console.log(x += 5);
-          console.log(inside += 1);
-        }
-
-        return child;
-
-      }
-
-      const result = parentClosure();
-      console.log(result);
-      console.log(result());
-      console.log(result());
-
-      const counter = (() => {
-        let count = 0;
-        console.log(`initial value: ${count}`);
-        return () => {
-          count++;
-          console.log(count);
-        }
-      })()
-
-      counter();
-      counter();
-      counter();
-      counter();
-      counter();
-
-      const credits = ((num) => {
-        let credits = num;
-        console.log(`Initial credits: ${credits}`);
-
-        return () => {
-          credits--;
-
-          if (credits >= 0) {
-            console.log(`Start new game, credits left: ${credits}`);
-          } else {
-            console.log(`No credits left`);
-          }
-
-        }
-      })(3);
-
-      credits();
-      credits();
-      credits();
-      credits();
-    </script>
-    
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <!-- ================= Get data from local JSON file ================= -->
@@ -380,6 +262,111 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
+    </script>
+
+<div class="test">
+  <button id="throttle">throttle</button>
+  <button id="debounce">debounce</button>
+</div>
+
+    <script>
+      const initApp = () => {
+        const btn = document.querySelector("#throttle");
+        btn.addEventListener("click", throttle(logClick, 2000));
+        window.addEventListener("scroll", throttle(logScroll, 200));
+
+        const btn2 = document.querySelector("#debounce");
+        btn2.addEventListener("click", debounce(logClick, 2000));
+      }
+
+      const logClick = () => {
+        console.log("clicked");
+      }
+
+      const logScroll = () => {
+        console.log("scrolled");
+      }
+
+      document.addEventListener("DOMContentLoaded", initApp);
+
+      const throttle = (fn, delay) => {
+        let lastTime = 0;
+        console.log(`throttle was called`);
+        let id = 0;
+
+        return (...args) => {
+          const now = new Date().getTime();
+          id++;
+
+          if (now - lastTime < delay) {
+            console.log("not yet");
+            return;
+          }
+
+          lastTime = now;
+          console.log(`event id: ${id}`);
+
+          fn(...args);
+        }
+      }
+
+        const debounce = (fn, delay) => {
+          let id;
+          console.log(`id at load: ${id}`);
+
+          return (...args) => {
+            console.log(`previous id: ${id}`);
+
+            if (id) {
+              clearTimeout(id);
+            }
+            
+            id = setTimeout(() => {
+              fn(...args);
+            }, delay);
+          }
+        }
+    </script>
+    <script>
+      let sum = (...args) => {
+        return args.reduce((acc, num) => {
+          return acc + num;
+        })
+      }
+
+      const callCounter = (fn) => {
+        let count = 0;
+
+        return (...args) => {
+          console.log(`sum has been called ${count += 1} times`);
+          return fn(...args);
+        }
+      }
+
+      sum = callCounter(sum);
+
+      console.log(sum(1, 2, 3));
+      console.log(sum(1, 2, 3, 4, 5));
+      console.log(sum(1, 5));
+    </script>
+    <script>
+      let rectangleArea = (width, length) => {
+        return width * length;
+      }
+
+      const countParams = (fn) => {
+        return (...params) => {
+          if (params.length !== fn.length) {
+            throw new Error(`Incorrect number of parameters for ${fn.name}`);
+          }
+          return fn(...params);
+        }
+      }
+
+      rectangleArea = countParams(rectangleArea);
+
+      console.log(rectangleArea(5, 6));
+      rectangleArea(5);
     </script>
   </body>
 </html>
