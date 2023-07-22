@@ -153,23 +153,6 @@
         text-align: center;
         margin: auto auto 3rem;
       }
-
-      .test {
-        width: 2000px;
-        min-height: 100vh;
-        margin: 5px;
-        color: #fff;
-        text-align: center;
-        border: 1px solid #fff;
-        background-color: red;
-      }
-      .test:nth-of-type(3) {
-        padding-top: 200px;
-      }
-      .test span {
-        text-transform: capitalize;
-        border: 1px solid black;
-      }
     </style>
   </head>
   <body>
@@ -188,115 +171,6 @@
         <img src="../../../CSS/assets/img/road-copy.jpg" alt="">
       </div>
     </div>
-
-    <script>
-      const url = "https://api.github.com/users";
-
-      // function getData(url) {
-      //   return fetch(url)
-      //     .then(data => data.json());
-      // }
-
-      // getData(url)
-      //   .then(data => {
-      //     console.log(data);
-      //   })
-
-      // async function doSomething() {
-      //   const users = await getData(url);
-
-      //   console.log(users);
-
-      //   users.forEach(user => {
-      //     console.log(user.login);
-      //   })
-      // }
-
-      // doSomething();
-    </script>
-
-    <div class="test" id="first"></div>
-    <div class="test">
-      <span>test #2</span>
-    </div>
-    <div class="test">
-      <span>test #2</span>
-    </div>
-
-    <script>
-      const div1 = document.querySelectorAll(".test")[0];
-      const div2 = document.querySelectorAll(".test")[1];
-      const div3 = document.querySelectorAll(".test")[2];
-
-      let isEqual = div1.isEqualNode(div2);
-      console.log(isEqual);
-
-      isEqual = div2.isEqualNode(div3);
-      console.log(isEqual);
-
-      setTimeout(() => {
-        console.log("settimeout#1");
-        window.scrollTo(0, 200);
-      }, 1000);
-
-      setTimeout(() => {
-        console.log("settimeout#2");
-        window.scrollTo(200, 1000);
-      }, 2000);
-
-      setTimeout(() => {
-        console.log("settimeout#3");
-        window.scrollTo({
-          top: 1500,
-          left: 400,
-          behavior: "smooth",
-        });
-      }, 3000);
-
-      function findClosestElementFromPoint(x, y) {
-        const elem = document.elementFromPoint(x, y);
-        console.log(elem);
-      }
-
-      findClosestElementFromPoint(500, 600);
-      </script>
-
-      <input type="text" value="sample.txt">
-
-<script>
-  const input = document.querySelector("input");
-
-  input.addEventListener("focus", () => {
-    const dotPosition = input.value.indexOf("x");
-    console.log(dotPosition);
-    input.setSelectionRange(4, dotPosition);
-  })
-
-  const str = "Hello, i'm 25 and she's 31!";
-
-  console.log(str.replace("and", "&"));
-
-  console.log(str.replace(/\d+/, "22"));
-  console.log(str.replace(/\d+/g, "22"));
-  console.log(str.replace(/(\d+)([^\d]+)(\d+)/g, "$3$2$1"));
-  
-  console.log(str.replace(/(\d+)([^\d]+)(\d+)/g, function () {
-    return "jogata";
-  }));
-
-  const count = (num) => {
-    console.log(num);
-    const updatedNum = num - 1;
-
-    if (updatedNum >= 0) {
-      count(updatedNum);
-    }
-  }
-
-  count(7);
-
-  console.log(304);
-</script>
 
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
@@ -362,6 +236,135 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
+    </script>
+
+    <script>
+      function calcTotal(n) {
+        let total = 0;
+
+        for (let i = 0; i <= n; i++) {
+          total += i;
+        }
+
+        return total;
+
+      }
+
+      // console.log(calcTotal(3));
+
+      function calcTotalR(n, total = 0) {
+
+        if (n === 0) {
+          console.log(total);
+          return total;
+        }
+
+        total += n;
+
+        return calcTotalR(n - 1, total);
+
+      }
+
+      console.log(calcTotalR(3));
+
+    </script>
+
+    <script>
+      const team = {
+        name: "Jogata", 
+        teams: [
+          {
+            name: "one", 
+            teams: [
+              {
+                name: "one-one", 
+                teams: [],
+              }
+            ],
+          },
+          {
+            name: "two", 
+            teams: [],
+          }
+        ]
+      }
+
+      function getTeams(obj) {
+
+        if (obj.teams.length === 0) {
+          return;
+        }
+
+        obj.teams.forEach(team => {
+          console.log(team.name);
+
+          getTeams(team);
+
+        })
+
+      }
+
+      getTeams(team);
+
+    </script>
+
+    <script>
+      const countToTen = (num = 1) => {
+
+        while (num <= 10) {
+          console.log(num);
+          num++;
+        }
+
+      }
+
+      countToTen();
+
+      const countTo100R = (n = 100) => {
+
+        if (n > 110) {
+          return;
+        }
+
+        console.log(n);
+        n++;
+
+        countTo100R(n);
+
+      }
+
+      countTo100R();
+
+      // Fibonnaci
+
+      const fibonnaciN = (num, array = [0, 1]) => {
+
+        while (num > 2) {
+          
+          const [nextToLast, last] = array.slice(-2);
+          array.push(nextToLast + last);
+          num -= 1;
+        }
+
+        return array;
+
+      }
+
+      console.log(fibonnaciN(12));
+
+      const fibonnaciR = (num, array = [0, 1]) => {
+
+        if (num <= 2) {
+          return array;
+        }
+
+        const [nextToLast, last] = array.slice(-2);
+
+        return fibonnaciR(num - 1, [...array, nextToLast + last]);
+
+      }
+
+      console.log(fibonnaciR(12));
     </script>
   </body>
 </html>
