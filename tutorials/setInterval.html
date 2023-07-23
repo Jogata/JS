@@ -550,9 +550,132 @@
         max-width: 400px;
         border-top: 3px solid #ff533b;
       }
+
+      /* digital clock */
+      h2 {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        color: #fff;
+        font-size: 14px;
+        letter-spacing: 4px;
+        text-align: center;
+        text-transform: capitalize;
+      }
+
+      .container {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      body {
+        background-image: url("https://images.unsplash.com/photo-1511884642898-4c92249e20b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGFuZHNjYXBlfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60");
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+
+      .clock {
+        /* min-height: 100vh; */
+        display: flex;
+        /* align-items: center; */
+        justify-content: center;
+      }
+
+      .clock div {
+        position: relative;
+        margin: 5px;
+      }
+
+      .clock span {
+        width: 100px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 50px;
+        background-color: slateblue;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        opacity: 0.8;
+      }
+      .clock span.text {
+        height: 30px;
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        background-color: darkblue;
+        opacity: 0.8;
+      }
+
+      #ampm {
+        position: absolute;
+        bottom: 0;
+        width: 60px;
+        height: 30px;
+        font-size: 20px;
+        background-color: green;
+        text-transform: uppercase;
+      }
     </style>
   </head>
   <body>
+    <!-- digital clock -->
+
+    <div class="container">
+    <h2>digital clock</h2>
+    <div class="clock">
+      <div>
+        <span id="hour">00</span>
+        <span class="text">hours</span>
+      </div>
+      <div>
+        <span id="minutes">00</span>
+        <span class="text">minutes</span>
+      </div>
+      <div>
+        <span id="seconds">00</span>
+        <span class="text">seconds</span>
+      </div>
+      <div>
+        <span id="ampm">am</span>
+      </div>
+      </div>
+    </div>
+
+    <script>
+      const hourEl = document.getElementById("hour");
+      const minuteEl = document.getElementById("minutes");
+      const secondEl = document.getElementById("seconds");
+      const ampmEl = document.getElementById("ampm");
+
+      function updateClock() {
+        let h = new Date().getHours();
+        let m = new Date().getMinutes();
+        let s = new Date().getSeconds();
+        let ampm = "am";
+
+        if (h > 12) {
+          h = h - 12;
+          ampm = "pm";
+        }
+
+        hourEl.innerText = h;
+        minuteEl.innerText = m;
+        secondEl.innerText = s;
+        ampmEl.innerText = ampm;
+
+        setTimeout(() => {
+          updateClock();
+        }, 1000);
+      }
+
+      updateClock();
+    </script>
+
     <!-- PRODUCTS PAGE -->
 
       <div class="container">
