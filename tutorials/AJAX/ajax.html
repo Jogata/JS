@@ -252,8 +252,6 @@
       }
 
       test();
-
-      console.log(300);
     </script>
     <script>
       const IDs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -261,7 +259,7 @@
       const initApp = async () => {
         // useForEach(IDs);
         // getPostsSerialized(IDs);
-        getPostsConc(IDs);
+        // getPostsConc(IDs);
       }
 
       document.addEventListener("DOMContentLoaded", initApp);
@@ -283,10 +281,15 @@
         //   const data = await getPost(ids[id]);
         //   console.log(data);
         // }
-        for (const id of IDs) {
-          const data = await getPost(id);
-          console.log(data);          
-        }
+        // for (const id of IDs) {
+        //   const data = await getPost(id);
+        //   console.log(data);          
+        // }
+        await ids.reduce(async (acc, id) => {
+          await acc;
+          const post = await getPost(id);
+          console.log(post);
+        }, Promise.resolve());
       }
 
       const getPostsConc = async (ids) => {
@@ -295,6 +298,117 @@
         }))
         console.log(posts);
       }
+    </script>
+    <script>
+      const x = "global";
+
+      function f1() {
+        const x = "f1";
+
+        function f2() {
+          console.log(x);
+        }
+
+        function f3() {
+          const x = "f3";
+          f2();
+        }
+
+        f3();
+      }
+
+      f1();
+
+      const letters = ["a", "b", "c"];
+      const newArr = [...numbers, ...letters, 5, 6, 7];
+
+      console.log(newArr);
+
+      const characters = [
+        {
+          id: 1,
+          name: "Sonic",
+        },
+        {
+          id: 2,
+          name: "Mario",
+        },
+        {
+          id: 3,
+          name: "Link",
+        },
+      ]
+
+      const secondArray = characters;
+      
+      const newCharacter = {
+        id: 4,
+        name: "Donkey Kong",
+      }
+      
+      // characters.push(newCharacter);
+      
+      const updatedCharacters = [...characters, newCharacter];
+
+      secondArray.pop();
+
+      console.log(characters);
+      console.log(updatedCharacters);
+      console.log(secondArray);
+
+      console.log("======================================");
+
+      const book = {
+        title: "The Lion",
+        release: "16/10/1950",
+        author: "C.S.Lewis",
+        relatedBooks: {
+          title1: "The Magicians Nephew",
+          title2: "Prince Caspian",
+          title3: "The Silver Chair",
+        }
+      }
+
+      const newBook = {
+        ...book, 
+        pages: 328,
+        relatedBooks: {
+          ...book.relatedBooks,
+          title4: "The Horse and his Boy",
+        }
+      }
+
+      console.log(book);
+      console.log(newBook);
+
+      console.log("======================================");
+
+      function sum(a, b, c) {
+        return a + b + c;
+      }
+
+      console.log(sum(1, 2, 3));
+      console.log(sum(...numbers));
+
+      console.log("======================================");
+
+      function restOperator(x, y, ...rest) {
+        console.log(`x is ${x}`);
+        console.log(`y is ${y}`);
+        console.log(rest);
+        console.log(arguments);
+
+        const sum = rest.reduce((acc, number) => {
+          return acc + number;
+        }, 0)
+
+        return sum;
+      }
+
+      console.log(restOperator(1, 2, 3, 4, 5, 6));
+    </script>
+    <script>
+      console.log(425);
     </script>
 
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
