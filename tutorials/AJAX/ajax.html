@@ -28,7 +28,7 @@
         display: flex;
         flex-direction: column;
         font-family: Georgia, serif;
-        /* overflow-x: hidden; */
+        overflow-x: hidden;
       }
 
       .wrapper {
@@ -153,32 +153,6 @@
         text-align: center;
         margin: auto auto 3rem;
       }
-
-      .test {
-        width: 100%;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #fff;
-      }
-
-      button {
-        padding: 0.4em 1em;
-        color: cadetblue;
-        font-size: 1.2rem;
-        font-family: inherit;
-        border: 1px solid currentColor;
-        border-radius: 0.6em;
-        background-color: #fff;
-        text-transform: capitalize;
-        transition: all 0.4s;
-        cursor: pointer;
-      }
-      button:hover {
-        color: #fff;
-        background-color: cadetblue;
-      }
     </style>
   </head>
   <body>
@@ -197,6 +171,131 @@
         <img src="../../../CSS/assets/img/road-copy.jpg" alt="">
       </div>
     </div>
+
+    <script>
+      function power(num, exponent) {
+
+        if (exponent === 1) {
+          return num;
+        }
+
+        return num * power(num, exponent - 1);
+
+      }
+
+      console.log(power(2, 5));
+
+      function printNumbers(index, arr) {
+        
+        if (index === arr.length) {
+          return;
+        }
+
+        console.log(arr[index]);
+
+        printNumbers(++index, arr);
+
+      }
+
+      const numbers = [1, 2, 3, 4];
+
+      printNumbers(0, numbers);
+
+      let rectangleArea = (w, l) => {
+        return w * l;
+      }
+
+      const isInteger = (fn) => {
+        return (...prams) => {
+          prams.forEach(param => {
+            if (!Number.isInteger(param)) {
+              throw new Error(`${param} is not an integer`);
+            }
+          })
+          return fn(...prams);
+        }
+      }
+
+      rectangleArea = isInteger(rectangleArea);
+
+      console.log(rectangleArea(5, 6));
+      // rectangleArea(5, 6.4);
+
+      // const url = 'https://api.github.com/users';
+      const url = 'https://jsonplaceholder.typicode.com/posts';
+
+      let getData = async (url) => {
+
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+          return data;
+        } catch (error) {
+          console.error(error);
+        }
+
+      }
+
+      const dataResponseTime = (fn) => {
+        return async (url) => {
+          console.time("fn");
+          const data = await fn(url);
+          console.timeEnd("fn");
+          return data;
+        }
+      }
+
+      const test = async () => {
+        getData = dataResponseTime(getData);
+        const users = await getData(url);
+        console.log(users);
+      }
+
+      test();
+
+      console.log(300);
+    </script>
+    <script>
+      const IDs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+      const initApp = async () => {
+        // useForEach(IDs);
+        // getPostsSerialized(IDs);
+        getPostsConc(IDs);
+      }
+
+      document.addEventListener("DOMContentLoaded", initApp);
+
+      const getPost = async (id) => {
+        return await (await fetch(url + "/" + id)).json();
+      }
+
+      const useForEach = (ids) => {
+        ids.forEach(async (id) => {
+          console.log(id);
+          const data = await getPost(id);
+          console.log(data);
+        })
+      }
+
+      const getPostsSerialized = async (ids) => {
+        // for (let id = 0; id < ids.length; id++) {
+        //   const data = await getPost(ids[id]);
+        //   console.log(data);
+        // }
+        for (const id of IDs) {
+          const data = await getPost(id);
+          console.log(data);          
+        }
+      }
+
+      const getPostsConc = async (ids) => {
+        const posts = await Promise.all(IDs.map(async (id) => {
+          return getPost(id);
+        }))
+        console.log(posts);
+      }
+    </script>
 
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
@@ -262,111 +361,6 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
-    </script>
-
-<div class="test">
-  <button id="throttle">throttle</button>
-  <button id="debounce">debounce</button>
-</div>
-
-    <script>
-      const initApp = () => {
-        const btn = document.querySelector("#throttle");
-        btn.addEventListener("click", throttle(logClick, 2000));
-        window.addEventListener("scroll", throttle(logScroll, 200));
-
-        const btn2 = document.querySelector("#debounce");
-        btn2.addEventListener("click", debounce(logClick, 2000));
-      }
-
-      const logClick = () => {
-        console.log("clicked");
-      }
-
-      const logScroll = () => {
-        console.log("scrolled");
-      }
-
-      document.addEventListener("DOMContentLoaded", initApp);
-
-      const throttle = (fn, delay) => {
-        let lastTime = 0;
-        console.log(`throttle was called`);
-        let id = 0;
-
-        return (...args) => {
-          const now = new Date().getTime();
-          id++;
-
-          if (now - lastTime < delay) {
-            console.log("not yet");
-            return;
-          }
-
-          lastTime = now;
-          console.log(`event id: ${id}`);
-
-          fn(...args);
-        }
-      }
-
-        const debounce = (fn, delay) => {
-          let id;
-          console.log(`id at load: ${id}`);
-
-          return (...args) => {
-            console.log(`previous id: ${id}`);
-
-            if (id) {
-              clearTimeout(id);
-            }
-            
-            id = setTimeout(() => {
-              fn(...args);
-            }, delay);
-          }
-        }
-    </script>
-    <script>
-      let sum = (...args) => {
-        return args.reduce((acc, num) => {
-          return acc + num;
-        })
-      }
-
-      const callCounter = (fn) => {
-        let count = 0;
-
-        return (...args) => {
-          console.log(`sum has been called ${count += 1} times`);
-          return fn(...args);
-        }
-      }
-
-      sum = callCounter(sum);
-
-      console.log(sum(1, 2, 3));
-      console.log(sum(1, 2, 3, 4, 5));
-      console.log(sum(1, 5));
-    </script>
-    <script>
-      let rectangleArea = (width, length) => {
-        return width * length;
-      }
-
-      const countParams = (fn) => {
-        return (...params) => {
-          if (params.length !== fn.length) {
-            throw new Error(`Incorrect number of parameters for ${fn.name}`);
-          }
-          return fn(...params);
-        }
-      }
-
-      rectangleArea = countParams(rectangleArea);
-
-      console.log(rectangleArea(5, 6));
-      rectangleArea(5);
     </script>
   </body>
 </html>
