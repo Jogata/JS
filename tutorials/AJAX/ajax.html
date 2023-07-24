@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
       * {
         margin: 0;
@@ -153,9 +154,95 @@
         text-align: center;
         margin: auto auto 3rem;
       }
+
+      .page {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        color: #d2a3ae;
+        font-family: Georgia, serif;
+        /* background-color: #fff; */
+        background-color: #411f2c;
+      }
+
+      .container {
+        margin: auto;
+      }
+
+      .social-icon {
+        width: 300px;
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 0;
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      .social-icon i {
+        position: relative;
+        font-size: 3rem;
+        transition: opacity 0.2s ease-in-out;
+        opacity: 0.5;
+      }
+      .social-icon:hover i {
+        opacity: 1;
+      }
+
+      .social-icon p {
+        position: relative;
+        top: -10px;
+        right: 220px;
+        display: inline;
+        margin-left: 8px;
+        opacity: 0;
+      }
+      .social-icon:hover p {
+        animation: slideleft 0.5s ease-in-out forwards, 
+                    fadein 0.5s ease-in-out 0.2s forwards;
+      }
+
+      @keyframes slideleft {
+        from {
+          right: 220px;
+        }
+        to {
+          right: 0px;
+        }
+      }
+
+      @keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
     </style>
   </head>
   <body>
+
+    <div class="page">
+      <div class="container">
+        <div class="social-icon">
+          <i class="fa fa-facebook-square"></i>
+          <p>Like us on Facebook</p>
+        </div>
+        <div class="social-icon">
+          <i class="fa fa-twitter-square"></i>
+          <p>Follow us on Twitter</p>
+        </div>
+        <div class="social-icon">
+          <i class="fa fa-whatsapp"></i>
+          <p>Chat with us on WhatsApp</p>
+        </div>
+        <div class="social-icon">
+          <i class="fa fa-linkedin"></i>
+          <p>Connect with us on Linkedin</p>
+        </div>
+      </div>
+    </div>
+
     <h1>GRID Honeycomb Gallery</h1>
     <div class="wrapper">
       <div class="grid-container">
@@ -171,245 +258,6 @@
         <img src="../../../CSS/assets/img/road-copy.jpg" alt="">
       </div>
     </div>
-
-    <script>
-      function power(num, exponent) {
-
-        if (exponent === 1) {
-          return num;
-        }
-
-        return num * power(num, exponent - 1);
-
-      }
-
-      console.log(power(2, 5));
-
-      function printNumbers(index, arr) {
-        
-        if (index === arr.length) {
-          return;
-        }
-
-        console.log(arr[index]);
-
-        printNumbers(++index, arr);
-
-      }
-
-      const numbers = [1, 2, 3, 4];
-
-      printNumbers(0, numbers);
-
-      let rectangleArea = (w, l) => {
-        return w * l;
-      }
-
-      const isInteger = (fn) => {
-        return (...prams) => {
-          prams.forEach(param => {
-            if (!Number.isInteger(param)) {
-              throw new Error(`${param} is not an integer`);
-            }
-          })
-          return fn(...prams);
-        }
-      }
-
-      rectangleArea = isInteger(rectangleArea);
-
-      console.log(rectangleArea(5, 6));
-      // rectangleArea(5, 6.4);
-
-      // const url = 'https://api.github.com/users';
-      const url = 'https://jsonplaceholder.typicode.com/posts';
-
-      let getData = async (url) => {
-
-        try {
-          const response = await fetch(url);
-          const data = await response.json();
-          return data;
-        } catch (error) {
-          console.error(error);
-        }
-
-      }
-
-      const dataResponseTime = (fn) => {
-        return async (url) => {
-          console.time("fn");
-          const data = await fn(url);
-          console.timeEnd("fn");
-          return data;
-        }
-      }
-
-      const test = async () => {
-        getData = dataResponseTime(getData);
-        const users = await getData(url);
-        console.log(users);
-      }
-
-      test();
-    </script>
-    <script>
-      const IDs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-      const initApp = async () => {
-        // useForEach(IDs);
-        // getPostsSerialized(IDs);
-        // getPostsConc(IDs);
-      }
-
-      document.addEventListener("DOMContentLoaded", initApp);
-
-      const getPost = async (id) => {
-        return await (await fetch(url + "/" + id)).json();
-      }
-
-      const useForEach = (ids) => {
-        ids.forEach(async (id) => {
-          console.log(id);
-          const data = await getPost(id);
-          console.log(data);
-        })
-      }
-
-      const getPostsSerialized = async (ids) => {
-        // for (let id = 0; id < ids.length; id++) {
-        //   const data = await getPost(ids[id]);
-        //   console.log(data);
-        // }
-        // for (const id of IDs) {
-        //   const data = await getPost(id);
-        //   console.log(data);          
-        // }
-        await ids.reduce(async (acc, id) => {
-          await acc;
-          const post = await getPost(id);
-          console.log(post);
-        }, Promise.resolve());
-      }
-
-      const getPostsConc = async (ids) => {
-        const posts = await Promise.all(IDs.map(async (id) => {
-          return getPost(id);
-        }))
-        console.log(posts);
-      }
-    </script>
-    <script>
-      const x = "global";
-
-      function f1() {
-        const x = "f1";
-
-        function f2() {
-          console.log(x);
-        }
-
-        function f3() {
-          const x = "f3";
-          f2();
-        }
-
-        f3();
-      }
-
-      f1();
-
-      const letters = ["a", "b", "c"];
-      const newArr = [...numbers, ...letters, 5, 6, 7];
-
-      console.log(newArr);
-
-      const characters = [
-        {
-          id: 1,
-          name: "Sonic",
-        },
-        {
-          id: 2,
-          name: "Mario",
-        },
-        {
-          id: 3,
-          name: "Link",
-        },
-      ]
-
-      const secondArray = characters;
-      
-      const newCharacter = {
-        id: 4,
-        name: "Donkey Kong",
-      }
-      
-      // characters.push(newCharacter);
-      
-      const updatedCharacters = [...characters, newCharacter];
-
-      secondArray.pop();
-
-      console.log(characters);
-      console.log(updatedCharacters);
-      console.log(secondArray);
-
-      console.log("======================================");
-
-      const book = {
-        title: "The Lion",
-        release: "16/10/1950",
-        author: "C.S.Lewis",
-        relatedBooks: {
-          title1: "The Magicians Nephew",
-          title2: "Prince Caspian",
-          title3: "The Silver Chair",
-        }
-      }
-
-      const newBook = {
-        ...book, 
-        pages: 328,
-        relatedBooks: {
-          ...book.relatedBooks,
-          title4: "The Horse and his Boy",
-        }
-      }
-
-      console.log(book);
-      console.log(newBook);
-
-      console.log("======================================");
-
-      function sum(a, b, c) {
-        return a + b + c;
-      }
-
-      console.log(sum(1, 2, 3));
-      console.log(sum(...numbers));
-
-      console.log("======================================");
-
-      function restOperator(x, y, ...rest) {
-        console.log(`x is ${x}`);
-        console.log(`y is ${y}`);
-        console.log(rest);
-        console.log(arguments);
-
-        const sum = rest.reduce((acc, number) => {
-          return acc + number;
-        }, 0)
-
-        return sum;
-      }
-
-      console.log(restOperator(1, 2, 3, 4, 5, 6));
-    </script>
-    <script>
-      console.log(425);
-    </script>
 
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
