@@ -663,6 +663,91 @@
     </style>
   </head>
   <body>
+
+    <div id="search" class="instant-search loading">
+
+      <div class="input-container">
+        <input type="text" class="search-bar" spellcheck="false" placeholder="Search Users...">
+        <i class="fa fa-search"></i>
+      </div>
+
+      <div class="results visible">
+
+        <a href="#" class="result">
+          <div class="title">first name & last name</div>
+          <p class="para">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore facere debitis tempora laborum! Ea voluptatum doloribus dolore eum quas fugiat dicta et suscipit?</p>
+        </a>
+
+        <a href="#" class="result">
+          <div class="title">first name & last name</div>
+          <p class="para">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore facere debitis tempora laborum! Ea voluptatum doloribus dolore eum quas fugiat dicta et suscipit?</p>
+        </a>
+
+      </div>
+
+    </div>
+
+    <script>
+      const searchUsers = document.querySelector("#search");
+      const instantSearchUsers = new InstantSearch(searchUsers, {
+        searchUrl: new URL("https"), 
+        queryParam: "q", 
+        resultParser: () => {}, 
+        templateFunction: () => {}, 
+      });
+
+      /**
+       * @typedef {Object}
+       * @property {URL}
+       * @property {string}
+       * @property {Function} Takes the response from the instant search and returns an array of users
+       * @property {Funcion} Takes an instant search result and process the HTML for it
+       */
+
+      class InstantSearch {
+        /**
+         * @param {HTMLElement} instantSearch
+         * @param {InstantSearchOptions} options
+         */
+        constructor(instantSearch, options) {
+          this.options - options, 
+          this.elements = {
+            main: instantSearch, 
+            input: instantSearch.querySelector(".search-bar"), 
+            resultContainer: document.createElement("div"),
+          }
+
+          this.elements.resultContainer.classList.add("results");
+          this.elements.main.appendChild(this.elements.resultContainer);
+
+          this.addListeners();
+        }
+
+        addListeners() {
+          let delay;
+
+          this.elements.input.addEventListener("input", () => {
+            clearTimeout(delay);
+
+            const query = this.elements.input.value;
+
+            delay = setTimeout(() => {
+              if (query.length < 3) {
+                this.populateResults([]);
+              }
+              console.log(query);
+            }, 500);
+          })
+
+        }
+
+        populateResults(results) {
+          console.log("results are displayed");
+          console.log(results);
+        }
+      }
+    </script>
+
     <!-- PRODUCTS PAGE -->
 
       <div class="container">
