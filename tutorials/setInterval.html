@@ -551,190 +551,118 @@
         border-top: 3px solid #ff533b;
       }
 
-      :root {
-        --primary-color: #fd562a;
-        --secondary-color: rgba(255, 255, 255, 0.4);
-      }
-
-      .test {
-        min-height: 100vh;
-      }
-
-      #service-section {
-        width: 100%;
-        min-height: 100vh;
-        padding: 2rem 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        background-color: #20223a;
-      }
-
-      #service-section h2 {
+      .instant-search {
         position: relative;
-        margin-bottom: 20px;
-        color: #fff;
-        font-size: 2rem;
-        text-align: center;
-        text-transform: capitalize;
+        max-width: 250px;
       }
-      #service-section h2::after {
-        position: absolute;
-        top: 30%;
-        left: -30px;
-        content: "";
-        width: 0;
-        height: 0;
-        border-top: 20px solid transparent;
-        border-left: 20px solid var(--primary-color);
-      }
-      #service-section h2::before {
-        position: absolute;
-        top: 30%;
-        right: -30px;
-        content: "";
-        width: 0;
-        height: 0;
-        border-top: 20px solid transparent;
-        border-right: 20px solid var(--primary-color);
+      .instant-search:focus-within {
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
       }
 
-      #para {
-        width: 45%;
-        margin-bottom: 40px;
-        color: rgba(255, 255, 255, 0.7);
-        font-size: 1rem;
-        text-align: center;
-        line-height: 1.5rem;
-        white-space: 1px;
-        text-transform: uppercase;
-      }
-
-      .cards {
-        margin-top: 20px;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 25px;
-        z-index: 9;
-      }
-
-      .card {
-        position: relative;
-        width: 450px;
-        height: 350px;
-        margin: 0 10px;
-        padding: 0 8%;
-        display: flex;
-        justify-content: flex-start;
-        flex-direction: column;
-        background-color: rgba(65, 62, 105);
-      }
-      .card::before {
+      .instant-search.loading::after {
         position: absolute;
         top: 0;
         left: 0;
         content: "";
+        width: 0;
+        height: 2px;
+        border-radius: 5px;
+        background: #009578;
+        animation: indicator 0.5s ease-in-out infinite;
+      }
+
+      @keyframes indicator {
+        0% {
+          width: 15%;
+        }
+        50% {
+          width: 100%;
+        }
+        100% {
+          width: 15%;
+        }
+      }
+
+      .instant-search, 
+      .instant-search * {
+        transition: background 0.15s, box-shadow 0.15s;
+      }
+
+      .instant-search input {
+        font-family: Georgia, serif;
+      }
+
+      .instant-search, 
+      .input-container {
+        border-radius: 5px;
+      }
+
+      .input-container {
+        display: inline-flex;
         width: 100%;
-        height: 100%;
-        border-radius: 10px;
-        background-color: #fd562a;
-        transform: rotate(0deg);
-        transition: all 0.4s;
-        z-index: -1;
+        padding: 6px;
+        background: #eee;
       }
-      .card:hover::before {
-        transform: rotate(10deg);
+      .input-container:focus-within {
+        background: #fff;
       }
 
-      .card i {
-        margin-top: 40px;
+      .search-bar {
+        flex-grow: 1;
+        width: 100%;
+        padding: 0 6px;
+        border: none;
+        outline: none;
+        background: transparent;
+      }
+
+      .results {
+        max-height: 250px;
+        overflow-y: auto;
+        transition: 
+        visibility 0.1s, 
+        opacity 0.1s;
+        visibility: hidden;
+        opacity: 0;
+      }
+      .results.visible {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .result {
+        display: block;
+        padding: 10px;
+        color: #333;
+        font-size: 0.8em;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .result:hover {
+        background: #eee;
+      }
+      .result:not(:last-of-type) {
+        border-bottom: 1px solid #eee;
+      }
+
+      .title {
         margin-bottom: 10px;
-        color: var(--primary-color);
-        font-size: 1.5rem;
+        font-size: 1.1rem;
+        font-weight: bold;
+        text-align: initial;
+        line-height: 1.5;
+      }
+      .title::after {
+        display: none;
       }
 
-      .card h3 {
-        margin-bottom: 10px;
-        color: #fff;
-        font-size: 1.8rem;
-        text-transform: capitalize;
-      }
-
-      .content p {
-        margin-bottom: 20px;
-        color: rgba(255, 255, 255, 0.5);
-        font-size: 1.05rem;
-        font-weight: 500;
-        border-radius: 10px;
-      }
-
-      @media screen and (max-width: 1100px) {
-        #service-section h2 {
-          margin-top: 30px;
-        }
-        .cards {
-          grid-template-columns: 1fr;
-        }
-        #paragraph {
-          width: 80%;
-        }
-      }
-
-      @media screen and (max-width: 900px) {
-        .card {
-          width: 400%;
-          height: 300px;
-        }
+      .para {
+        margin: 8px 0;
+        line-height: 1.5;
       }
     </style>
   </head>
   <body>
-
-    <div class="test">
-      <div id="service-section">
-        <h2>services</h2>
-        <p id="para">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates cumque cupiditate, itaque perspiciatis ducimus officiis iure repellat quasi quae quisquam expedita temporibus! Explicabo, nihil?
-        </p>
-        <div class="cards">
-          <div class="card">
-            <i class="fa fa-home"></i>
-            <div class="content">
-              <h3>web development</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et omnis iste totam excepturi doloribus amet possimus nihil facilis odio voluptas ullam cumque porro adipisci quia ipsa quam, deleniti distinctio? Odio maiores deserunt voluptates deleniti.</p>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam distinctio voluptatibus dolores enim autem qui deserunt, maxime harum.</p>
-            </div>
-          </div>
-          <div class="card">
-            <i class="fa fa-pencil"></i>
-            <div class="content">
-              <h3>web design</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et omnis iste totam excepturi doloribus amet possimus nihil facilis odio voluptas ullam cumque porro adipisci quia ipsa quam, deleniti distinctio? Odio maiores deserunt voluptates deleniti.</p>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam distinctio voluptatibus dolores enim autem qui deserunt, maxime harum.</p>
-            </div>
-          </div>
-          <div class="card">
-            <i class="fa fa-diamond"></i>
-            <div class="content">
-              <h3>app development</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et omnis iste totam excepturi doloribus amet possimus nihil facilis odio voluptas ullam cumque porro adipisci quia ipsa quam, deleniti distinctio? Odio maiores deserunt voluptates deleniti.</p>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam distinctio voluptatibus dolores enim autem qui deserunt, maxime harum.</p>
-            </div>
-          </div>
-          <div class="card">
-            <i class="fa fa-home"></i>
-            <div class="content">
-              <h3>web development</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et omnis iste totam excepturi doloribus amet possimus nihil facilis odio voluptas ullam cumque porro adipisci quia ipsa quam, deleniti distinctio? Odio maiores deserunt voluptates deleniti.</p>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam distinctio voluptatibus dolores enim autem qui deserunt, maxime harum.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <h1>795</h1>
     <!-- PRODUCTS PAGE -->
 
       <div class="container">
