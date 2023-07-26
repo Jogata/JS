@@ -689,12 +689,6 @@
 
     <script>
       const searchUsers = document.querySelector("#search");
-      const instantSearchUsers = new InstantSearch(searchUsers, {
-        searchUrl: new URL("https"), 
-        queryParam: "q", 
-        resultParser: () => {}, 
-        templateFunction: () => {}, 
-      });
 
       /**
        * @typedef {Object}
@@ -710,7 +704,7 @@
          * @param {InstantSearchOptions} options
          */
         constructor(instantSearch, options) {
-          this.options - options, 
+          this.options = options, 
           this.elements = {
             main: instantSearch, 
             input: instantSearch.querySelector(".search-bar"), 
@@ -734,18 +728,115 @@
             delay = setTimeout(() => {
               if (query.length < 3) {
                 this.populateResults([]);
+                return;
               }
+
               console.log(query);
+              this.performSearch(query)
+                .then(results => {
+                  this.populateResults(results);
+                });
             }, 500);
+          })
+
+          this.elements.input.addEventListener("focus", () => {
+            this.elements.resultContainer.classList.add("visible");
+          })
+
+          this.elements.input.addEventListener("blur", () => {
+            this.elements.resultContainer.classList.remove("visible");
           })
 
         }
 
+        /**
+         * @param {Object[]} results
+         */
         populateResults(results) {
-          console.log("results are displayed");
-          console.log(results);
+          // console.log("results are displayed");
+          // console.log(results);
+          while (this.elements.resultContainer.firstChild) {
+            this.elements.resultContainer.removeChild(this.elements.resultContainer.firstChild);
+          }
+
+          // create new list
+          for (const result of results) {
+            this.elements.resultContainer.appendChild(this.createResultElement(result));
+          }
+        }
+
+        /**
+         * @param {Object} result
+         * @returns {HTMLAnchorElement}
+         */
+        createResultElement(result) {
+          const aEl = document.createElement("a");
+          aEl.classList.add("result");
+          aEl.insertAdjacentHTML("afterbegin", this.options.templateFunction(result));
+
+          if ("href" in result) {
+            aEl.setAttribute("href", result.href);
+          }
+
+          return aEl;
+        }
+
+        /**
+         * @param {string} query
+         * @returns {Promise<Object[]>}
+         */
+        performSearch(query) {
+          const url = new URL(this.options.searchUrl.toString());
+          url.searchParams.set(this.options.queryParam, query);
+          console.log(url.toString());
+
+          this.setLoading(true);
+
+          return fetch(url, {
+            method: "get", 
+            credentials: "same-origin", 
+          }).then(response => {
+            if (response.status !== 200) {
+              throw new Error("Something went wrong");
+            }
+
+            return response.json();
+          }).then(data => {
+            console.log(data);
+
+            return this.options.resultParser(data);
+          }).catch(error => {
+            console.error(error);
+
+            return [];
+          }).finally(results => {
+            this.setLoading(false);
+
+            return results;
+          })
+        }
+
+        /**
+         * @param {boolean} b
+         */
+        setLoading(b) {
+          this.elements.main.classList.toggle("loading", b);
         }
       }
+
+      const instantSearchUsers = new InstantSearch(searchUsers, {
+        searchUrl: new URL("https://api.github.com/users"), 
+        queryParam: "q", 
+        resultParser: (data) => {
+          return data.results;
+        }, 
+        templateFunction: (result) => {
+          return `
+            <div class="title">${result.firstName} ${result.lastName}</div>
+            <p class="para">${result.occupation}</p>
+          `;
+        }, 
+      });
     </script>
 
     <!-- PRODUCTS PAGE -->
