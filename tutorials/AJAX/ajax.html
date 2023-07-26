@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
       * {
         margin: 0;
@@ -154,91 +155,107 @@
         margin: auto auto 3rem;
       }
 
-      .test {
-        min-height: 110vh;
-        display: grid;
-        place-content: center;
-        background-color: #411f2a;
+      .text-align {
+        text-align: center;
       }
 
-      .wrapper {
-        width: 310px;
-        height: 310px;
-        /* background-color: whitesmoke; */
-        animation: animate1 1s linear infinite;
-        animation: animate2 6s linear infinite;
+      body {
+        background-color: #c7ecee;
       }
 
-      @keyframes animate1 {
-        from {
-          box-shadow: inset 0 5px 10px 5px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 0 #411f2a,
-                      inset 0 5px 10px 5px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 20px #411f2a,
-                      inset 0 5px 10px 25px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 40px #411f2a,
-                      inset 0 5px 10px 45px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 60px #411f2a,
-                      inset 0 5px 10px 65px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 80px #411f2a,
-                      inset 0 5px 10px 85px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 100px #411f2a,
-                      inset 0 5px 10px 105px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 120px #411f2a,
-                      inset 0 5px 10px 125px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 140px #411f2a,
-                      inset 0 5px 10px 145px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 160px #411f2a;
-        }
-        to {
-          box-shadow: inset 0 5px 10px 5px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 0 #411f2a,
-                      inset 0 5px 10px 25px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 40px #411f2a,
-                      inset 0 5px 10px 45px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 60px #411f2a,
-                      inset 0 5px 10px 65px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 80px #411f2a,
-                      inset 0 5px 10px 85px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 100px #411f2a,
-                      inset 0 5px 10px 105px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 120px #411f2a,
-                      inset 0 5px 10px 125px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 140px #411f2a,
-                      inset 0 5px 10px 145px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 160px #411f2a, 
-                      inset 0 5px 10px 165px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 180px #411f2a;
-        }
+      h1 {
+        width: 1200px;
+        margin: 10px auto;
+        color: #777;
+        font-size: 1.5rem;
+        text-align: center;
+        text-transform: capitalize;
       }
-      @keyframes animate2 {
-        from {
-          box-shadow: inset 0 5px 10px 5px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 0 #411f2a,
-                      inset 0 5px 10px 5px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 20px #411f2a,
-                      inset 0 5px 10px 25px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 40px #411f2a,
-                      inset 0 5px 10px 45px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 60px #411f2a,
-                      inset 0 5px 10px 65px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 80px #411f2a,
-                      inset 0 5px 10px 85px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 100px #411f2a,
-                      inset 0 5px 10px 105px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 120px #411f2a,
-                      inset 0 5px 10px 125px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 140px #411f2a,
-                      inset 0 5px 10px 145px rgba(0, 0, 0, 0.3), 
-                      inset 0 0 0 160px #411f2a;
-        }
+
+      .services {
+        min-height: 600px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .card {
+        position: relative;
+        width: 300px;
+        height: 380px;
+        margin: 10px;
+        padding: 20px 35px;
+        background-color: #dff9fb;
+        transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+        overflow: hidden;
+      }
+
+      .icon {
+        display: block;
+        margin-top: 18px;
+        color: #7ed6df;
+        font-size: 64px;
+        text-align: center;
+      }
+
+      .card h1 {
+        color: #22a6b3;
+        font-size: 22px;
+        text-align: center;
+      }
+
+      .button {
+        display: inline-block;
+        width: 120px;
+        margin-top: 25px;
+        padding: 15px;
+        color: #c7ecee;
+        font-size: 16px;
+        text-align: center;
+        text-transform: capitalize;
+        border: none;
+        border-radius: 5px;
+        background-color: #22a6b3;
       }
     </style>
   </head>
   <body>
 
-    <div class="test">
-      <div class="wrapper"></div>
+    <div class="title">
+      <h1>our services</h1>
+    </div>
+
+    <div class="services">
+      <div class="card">
+        <i class="fa fa-globe"></i>
+        <h1>web development</h1>
+        <div class="content">
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio dolores laboriosam, animi nihil modi qui sapiente iste culpa, repellendus perferendis neque aliquid possimus ducimus voluptatibus ab. Rerum nostrum laudantium a hic ullam quos.</p>
+          <p class="text-align">
+            <a href="#" class="button">read more</a>
+          </p>
+        </div>
+      </div>
+      <div class="card">
+        <i class="fa fa-edit"></i>
+        <h1>graphic design</h1>
+        <div class="content">
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio dolores laboriosam, animi nihil modi qui sapiente iste culpa, repellendus perferendis neque aliquid possimus ducimus voluptatibus ab. Rerum nostrum laudantium a hic ullam quos.</p>
+          <p class="text-align">
+            <a href="#" class="button">read more</a>
+          </p>
+        </div>
+      </div>
+      <div class="card">
+        <i class="fa fa-briefcase"></i>
+        <h1>digital branding</h1>
+        <div class="content">
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio dolores laboriosam, animi nihil modi qui sapiente iste culpa, repellendus perferendis neque aliquid possimus ducimus voluptatibus ab. Rerum nostrum laudantium a hic ullam quos.</p>
+          <p class="text-align">
+            <a href="#" class="button">read more</a>
+          </p>
+        </div>
+      </div>
     </div>
 
     <h1>GRID Honeycomb Gallery</h1>
