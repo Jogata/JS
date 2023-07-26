@@ -551,999 +551,134 @@
         border-top: 3px solid #ff533b;
       }
 
-      .instant-search {
+      .account-page {
+        padding: 50px 0;
+        background: radial-gradient(#fff, #87ceeb);
+      }
+
+      .form-container {
         position: relative;
-        max-width: 250px;
-      }
-      .instant-search:focus-within {
-        box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
-      }
-
-      .instant-search.loading::after {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 0;
-        height: 2px;
-        border-radius: 5px;
-        background: #009578;
-        animation: indicator 0.5s ease-in-out infinite;
+        width: 300px;
+        height: 400px;
+        margin: auto;
+        padding: 20px 0;
+        text-align: center;
+        background-color: #fff;
+        box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
       }
 
-      @keyframes indicator {
-        0% {
-          width: 15%;
-        }
-        50% {
-          width: 100%;
-        }
-        100% {
-          width: 15%;
-        }
+      .form-btn {
+        display: inline-block;
       }
 
-      .instant-search, 
-      .instant-search * {
-        transition: background 0.15s, box-shadow 0.15s;
-      }
-
-      .instant-search input {
-        font-family: Georgia, serif;
-      }
-
-      .instant-search, 
-      .input-container {
-        border-radius: 5px;
-      }
-
-      .input-container {
-        display: inline-flex;
-        width: 100%;
-        padding: 6px;
-        background: #eee;
-      }
-      .input-container:focus-within {
-        background: #fff;
-      }
-
-      .search-bar {
-        flex-grow: 1;
-        width: 100%;
-        padding: 0 6px;
-        border: none;
-        outline: none;
-        background: transparent;
-      }
-
-      .results {
-        max-height: 250px;
-        overflow-y: auto;
-        transition: 
-        visibility 0.1s, 
-        opacity 0.1s;
-        visibility: hidden;
-        opacity: 0;
-      }
-      .results.visible {
-        visibility: visible;
-        opacity: 1;
-      }
-
-      .result {
-        display: block;
-        padding: 10px;
-        color: #333;
-        font-size: 0.8em;
-        text-decoration: none;
+      .form-btn span {
+        display: inline-block;
+        width: 100px;
+        padding: 0 10px;
+        color: #555;
+        font-weight: bold;
+        text-transform: capitalize;
         cursor: pointer;
       }
-      .result:hover {
-        background: #eee;
-      }
-      .result:not(:last-of-type) {
-        border-bottom: 1px solid #eee;
+
+      .form-container form {
+        position: absolute;
+        top: 130px;
+        max-width: 300px;
+        padding: 0 20px;
+        transition: transform 1s;
       }
 
-      .title {
-        margin-bottom: 10px;
-        font-size: 1.1rem;
-        font-weight: bold;
-        text-align: initial;
-        line-height: 1.5;
-      }
-      .title::after {
-        display: none;
+      form input {
+        width: 100%;
+        height: 30px;
+        margin: 10px 0;
+        padding: 0 10px;
       }
 
-      .para {
-        margin: 8px 0;
-        line-height: 1.5;
+      form .btn {
+        width: 100%;
+        margin: 10px 0;
+        border: none;
+        cursor: pointer;
+      }
+      form .btn:focus {
+        outline: none;
+      }
+
+      #login-form {
+        left: -330px;
+      }
+
+      #register-form {
+        left: 0;
       }
     </style>
   </head>
   <body>
+    <!-- ACCOUNT PAGE -->
 
-    <div id="search" class="instant-search loading">
+    <div class="account-page">
 
-      <div class="input-container">
-        <input type="text" class="search-bar" spellcheck="false" placeholder="Search Users...">
-        <i class="fa fa-search"></i>
-      </div>
+      <div class="container">
 
-      <div class="results visible">
+        <div class="row">
 
-        <a href="#" class="result">
-          <div class="title">first name & last name</div>
-          <p class="para">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore facere debitis tempora laborum! Ea voluptatum doloribus dolore eum quas fugiat dicta et suscipit?</p>
-        </a>
+          <div class="col-2">
+            <img src="./images/image1.png" alt="">
+          </div>
 
-        <a href="#" class="result">
-          <div class="title">first name & last name</div>
-          <p class="para">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore facere debitis tempora laborum! Ea voluptatum doloribus dolore eum quas fugiat dicta et suscipit?</p>
-        </a>
+          <div class="col-2">
+
+            <div class="form-container">
+
+              <div class="form-btn">
+                <span id="login">login</span>
+                <span id="register">register</span>
+                <hr id="indicator">
+              </div>
+
+              <form action="" id="login-form">
+                <input type="text" name="" id="username" placeholder="Username">
+                <input type="password" name="" id="password" placeholder="Password">
+                <button type="submit" class="btn">login</button>
+                <a href="#FP">forgot password?</a>
+              </form>
+
+              <form action="" id="register-form">
+                <input type="text" name="" id="username" placeholder="Username">
+                <input type="email" name="" id="email" placeholder="Email">
+                <input type="password" name="" id="password" placeholder="Password">
+                <button type="submit" class="btn">register</button>
+              </form>
+
+            </div>
+          </div>
+
+        </div>
 
       </div>
 
     </div>
 
     <script>
-      const searchUsers = document.querySelector("#search");
+      const loginBtn = document.querySelector("#login");
 
-      /**
-       * @typedef {Object}
-       * @property {URL}
-       * @property {string}
-       * @property {Function} Takes the response from the instant search and returns an array of users
-       * @property {Funcion} Takes an instant search result and process the HTML for it
-       */
+      loginBtn.addEventListener("click", login);
 
-      class InstantSearch {
-        /**
-         * @param {HTMLElement} instantSearch
-         * @param {InstantSearchOptions} options
-         */
-        constructor(instantSearch, options) {
-          this.options = options, 
-          this.elements = {
-            main: instantSearch, 
-            input: instantSearch.querySelector(".search-bar"), 
-            resultContainer: document.createElement("div"),
-          }
-
-          this.elements.resultContainer.classList.add("results");
-          this.elements.main.appendChild(this.elements.resultContainer);
-
-          this.addListeners();
-        }
-
-        addListeners() {
-          let delay;
-
-          this.elements.input.addEventListener("input", () => {
-            clearTimeout(delay);
-
-            const query = this.elements.input.value;
-
-            delay = setTimeout(() => {
-              if (query.length < 3) {
-                this.populateResults([]);
-                return;
-              }
-
-              console.log(query);
-              this.performSearch(query)
-                .then(results => {
-                  this.populateResults(results);
-                });
-            }, 500);
-          })
-
-          this.elements.input.addEventListener("focus", () => {
-            this.elements.resultContainer.classList.add("visible");
-          })
-
-          this.elements.input.addEventListener("blur", () => {
-            this.elements.resultContainer.classList.remove("visible");
-          })
-
-        }
-
-        /**
-         * @param {Object[]} results
-         */
-        populateResults(results) {
-          // console.log("results are displayed");
-          // console.log(results);
-          while (this.elements.resultContainer.firstChild) {
-            this.elements.resultContainer.removeChild(this.elements.resultContainer.firstChild);
-          }
-
-          // create new list
-          for (const result of results) {
-            this.elements.resultContainer.appendChild(this.createResultElement(result));
-          }
-        }
-
-        /**
-         * @param {Object} result
-         * @returns {HTMLAnchorElement}
-         */
-        createResultElement(result) {
-          const aEl = document.createElement("a");
-          aEl.classList.add("result");
-          aEl.insertAdjacentHTML("afterbegin", this.options.templateFunction(result));
-
-          if ("href" in result) {
-            aEl.setAttribute("href", result.href);
-          }
-
-          return aEl;
-        }
-
-        /**
-         * @param {string} query
-         * @returns {Promise<Object[]>}
-         */
-        performSearch(query) {
-          const url = new URL(this.options.searchUrl.toString());
-          url.searchParams.set(this.options.queryParam, query);
-          console.log(url.toString());
-
-          this.setLoading(true);
-
-          return fetch(url, {
-            method: "get", 
-            credentials: "same-origin", 
-          }).then(response => {
-            if (response.status !== 200) {
-              throw new Error("Something went wrong");
-            }
-
-            return response.json();
-          }).then(data => {
-            console.log(data);
-
-            return this.options.resultParser(data);
-          }).catch(error => {
-            console.error(error);
-
-            return [];
-          }).finally(results => {
-            this.setLoading(false);
-
-            return results;
-          })
-        }
-
-        /**
-         * @param {boolean} b
-         */
-        setLoading(b) {
-          this.elements.main.classList.toggle("loading", b);
-        }
+      function login() {
+        console.log("login");
       }
 
-      const instantSearchUsers = new InstantSearch(searchUsers, {
-        searchUrl: new URL("https://api.github.com/users"), 
-        queryParam: "q", 
-        resultParser: (data) => {
-          return data.results;
-        }, 
-        templateFunction: (result) => {
-          return `
-            <div class="title">${result.firstName} ${result.lastName}</div>
-            <p class="para">${result.occupation}</p>
-          `;
-        }, 
-      });
-    </script>
+      const registerBtn = document.querySelector("#register");
 
-    <!-- PRODUCTS PAGE -->
+      registerBtn.addEventListener("click", register);
 
-      <div class="container">
-
-        <div class="navbar">
-
-          <div class="logo">
-            <a href="#logo">home
-              <img src="./images/logo.png" alt="Home page">
-            </a>
-          </div>
-
-          <nav>
-            <ul id="menu-items">
-              <li><a href="#h">home</a></li>
-              <li><a href="#p">products</a></li>
-              <li><a href="#ab">about</a></li>
-              <li><a href="#c">contact</a></li>
-              <li><a href="#ac">account</a></li>
-            </ul>
-          </nav>
-
-          <a href="#cart" class="shopping-cart">cart
-            <img src="./images/cart.png">
-          </a>
-          
-          <button id="menu-btn">menu
-            <img src="./images/menu.png" class="menu-icon">
-          </button>
-
-        </div>
-
-      </div>
-
-    <div class="small-container">
-
-      <div class="row row-2">
-        <h2>all products</h2>
-        <select id="">
-          <option value="">default shopping</option>
-          <option value="">sort by price</option>
-          <option value="">sort by popularity</option>
-          <option value="">sort by rating</option>
-          <option value="">sort by sale</option>
-        </select>
-      </div>
-
-      <div class="row">
-
-        <div class="col-4">
-          <a href="#">
-            <img src="./images/product-1.jpg" alt="">
-          </a>
-          <a href="#">
-            <h4>red printed t-shirt</h4>
-          </a>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-          </div>
-          <p>$50.00</p>
-        </div>
-
-        <div class="col-4">
-          <a href="#">
-            <img src="./images/product-2.jpg" alt="">
-          </a>
-          <a href="#">
-            <h4>red printed t-shirt</h4>
-          </a>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-          </div>
-          <p>$50.00</p>
-        </div>
-
-        <div class="col-4">
-          <a href="#">
-            <img src="./images/product-3.jpg" alt="">
-          </a>
-          <a href="#">
-            <h4>red printed t-shirt</h4>
-          </a>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-          </div>
-          <p>$50.00</p>
-        </div>
-
-        <div class="col-4">
-          <a href="#">
-            <img src="./images/product-4.jpg" alt="">
-          </a>
-          <a href="#">
-            <h4>red printed t-shirt</h4>
-          </a>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-          </div>
-          <p>$50.00</p>
-        </div>
-
-        <div class="col-4">
-          <a href="#">
-            <img src="./images/product-5.jpg" alt="">
-          </a>
-          <a href="#">
-            <h4>red printed t-shirt</h4>
-          </a>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-          </div>
-          <p>$50.00</p>
-        </div>
-
-        <div class="col-4">
-          <a href="#">
-            <img src="./images/product-6.jpg" alt="">
-          </a>
-          <a href="#">
-            <h4>red printed t-shirt</h4>
-          </a>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-          </div>
-          <p>$50.00</p>
-        </div>
-
-        <div class="col-4">
-          <a href="#">
-            <img src="./images/product-7.jpg" alt="">
-          </a>
-          <a href="#">
-            <h4>red printed t-shirt</h4>
-          </a>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-          </div>
-          <p>$50.00</p>
-        </div>
-
-        <div class="col-4">
-          <a href="#">
-            <img src="./images/product-8.jpg" alt="">
-          </a>
-          <a href="#">
-            <h4>red printed t-shirt</h4>
-          </a>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-          </div>
-          <p>$50.00</p>
-        </div>
-
-        <div class="col-4">
-          <a href="#">
-            <img src="./images/product-9.jpg" alt="">
-          </a>
-          <a href="#">
-            <h4>red printed t-shirt</h4>
-          </a>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-          </div>
-          <p>$50.00</p>
-        </div>
-
-        <div class="col-4">
-          <a href="#">
-            <img src="./images/product-10.jpg" alt="">
-          </a>
-          <a href="#">
-            <h4>red printed t-shirt</h4>
-          </a>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-          </div>
-          <p>$50.00</p>
-        </div>
-
-        <div class="col-4">
-          <a href="#">
-            <img src="./images/product-11.jpg" alt="">
-          </a>
-          <a href="#">
-            <h4>red printed t-shirt</h4>
-          </a>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-          </div>
-          <p>$50.00</p>
-        </div>
-
-        <div class="col-4">
-          <a href="#">
-            <img src="./images/product-12.jpg" alt="">
-          </a>
-          <a href="#">
-            <h4>red printed t-shirt</h4>
-          </a>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-          </div>
-          <p>$50.00</p>
-        </div>
-
-      </div>
-
-      <div class="page-btn">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-        <span>4</span>
-        <button>&#155;<span>next page</span></button>
-      </div>
-
-    </div>
-
-    <div class="footer">
-
-      <div class="container">
-
-        <div class="row">
-
-          <div class="footer-col-1">
-
-            <h3>download our app</h3>
-
-            <p>Download App for Android and iOS mobile phones.</p>
-
-            <div class="app-logo">
-              <img src="./images/play-store.png" alt="">
-              <img src="./images/app-store.png" alt="">
-            </div>
-
-          </div>
-
-          <div class="footer-col-2">
-
-            <img src="./images/logo-white.png" alt="">
-
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ducimus, voluptate expedita ipsum vero qui corporis.</p>
-
-          </div>
-
-          <div class="footer-col-3">
-
-            <h3>useful links</h3>
-
-            <ul>
-              <li><a href="#">coupons</a></li>
-              <li><a href="#">blog post</a></li>
-              <li><a href="#">return policy</a></li>
-              <li><a href="#">join affiliate</a></li>
-            </ul>
-
-          </div>
-
-          <div class="footer-col-4">
-
-            <h3>follow us</h3>
-
-            <ul>
-              <li><a href="#f">facebook</a></li>
-              <li><a href="#t">twitter</a></li>
-              <li><a href="#i">instagramm</a></li>
-              <li><a href="#y">YouTube</a></li>
-            </ul>
-
-          </div>
-
-        </div>
-
-        <hr>
-
-        <p class="copyrights">copyrights <span>&copy;</span> 2023</p>
-
-      </div>
-    </div>
-
-    <script>
-      const menuItems = document.getElementById("menu-items");
-      menuItems.style.maxHeight = "0px";
-
-      function menuToggle() {
-        if (menuItems.style.maxHeight == "0px") {
-          menuItems.style.maxHeight = "200px";
-        } else {
-          menuItems.style.maxHeight = "0px";
-        }
+      function register() {
+        console.log("register");
       }
-
-      const menuButton = document.getElementById("menu-btn");
-      menuButton.addEventListener("click", menuToggle);
     </script>
-
-    <!-- PRODUCT DETAILS PAGE -->
-    <div class="container">
-
-      <div class="navbar">
-
-        <div class="logo">
-          <a href="#logo">home
-            <img src="./images/logo.png" alt="Home page">
-          </a>
-        </div>
-
-        <nav>
-          <ul id="menu-items">
-            <li><a href="#h">home</a></li>
-            <li><a href="#p">products</a></li>
-            <li><a href="#ab">about</a></li>
-            <li><a href="#c">contact</a></li>
-            <li><a href="#ac">account</a></li>
-          </ul>
-        </nav>
-
-        <a href="#cart" class="shopping-cart">cart
-          <img src="./images/cart.png">
-        </a>
-        
-        <button id="menu-btn">menu
-          <img src="./images/menu.png" class="menu-icon">
-        </button>
-
-      </div>
-
-    </div>
-
-    <div class="small-container single-product">
-
-      <div class="row">
-
-        <div class="col-2">
-
-          <img src="./images/gallery-1.jpg" alt="" id="ProductImg">
-
-          <div class="small-img-row">
-
-            <div class="small-img-col">
-              <img src="./images/gallery-1.jpg" alt="" class="small-img">
-            </div>
-            <div class="small-img-col">
-              <img src="./images/gallery-2.jpg" alt="" class="small-img">
-            </div>
-            <div class="small-img-col">
-              <img src="./images/gallery-3.jpg" alt="" class="small-img">
-            </div>
-            <div class="small-img-col">
-              <img src="./images/gallery-4.jpg" alt="" class="small-img">
-            </div>
-
-          </div>
-          
-        </div>
-
-        <div class="col-2">
-
-          <p>Home / T-Shirt</p>
-
-          <h1>red printed <span>T-Shirt by HRX</span></h1>
-
-          <h4>$50.00</h4>
-
-          <select name="" id="">
-            <option value="Select Size">Select Size</option>
-            <option value="XXL">XXL</option>
-            <option value="XL">XL</option>
-            <option value="Large">Large</option>
-            <option value="Medium">Medium</option>
-            <option value="Small">Small</option>
-          </select>
-
-          <input type="number" name="" id="" value="1">
-
-          <a href="#cart" class="btn">add to cart</a>
-
-          <h3>product details <i class="fa fa-indent"></i></h3>
-
-          <p>Give your summer wardrobe a style upgrade with the HRX men's active T-shirt.</p>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="small-container">
-      <div class="row row-2">
-        <h2>related products</h2>
-        <p>view more</p>
-      </div>
-    </div>
-
-    <div class="small-container">
-
-      <div class="row">
-
-        <div class="col-4">
-          <a href="#">
-            <img src="./images/product-1.jpg" alt="">
-          </a>
-          <a href="#">
-            <h4>red printed t-shirt</h4>
-          </a>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-          </div>
-          <p>$50.00</p>
-        </div>
-
-        <div class="col-4">
-          <a href="#">
-            <img src="./images/product-2.jpg" alt="">
-          </a>
-          <a href="#">
-            <h4>red printed t-shirt</h4>
-          </a>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-          </div>
-          <p>$50.00</p>
-        </div>
-
-        <div class="col-4">
-          <a href="#">
-            <img src="./images/product-3.jpg" alt="">
-          </a>
-          <a href="#">
-            <h4>red printed t-shirt</h4>
-          </a>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-          </div>
-          <p>$50.00</p>
-        </div>
-
-      </div>
-
-      <div class="page-btn">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-        <span>4</span>
-        <span>&#155;</span>
-      </div>
-
-    </div>
-
-    <!-- CART -->
-
-    <div class="container">
-
-      <div class="navbar">
-
-        <div class="logo">
-          <a href="#logo">home
-            <img src="./images/logo.png" alt="Home page">
-          </a>
-        </div>
-
-        <nav>
-          <ul id="menu-items">
-            <li><a href="#h">home</a></li>
-            <li><a href="#p">products</a></li>
-            <li><a href="#ab">about</a></li>
-            <li><a href="#c">contact</a></li>
-            <li><a href="#ac">account</a></li>
-          </ul>
-        </nav>
-
-        <a href="#cart" class="shopping-cart">cart
-          <img src="./images/cart.png">
-        </a>
-        
-        <button id="menu-btn">menu
-          <img src="./images/menu.png" class="menu-icon">
-        </button>
-
-      </div>
-
-    </div>
-
-    <div class="small-container cart-page">
-
-      <table>
-
-        <tr>
-          <th>product</th>
-          <th>quantity</th>
-          <th>subtotal</th>
-        </tr>
-
-        <tr>
-
-          <td>
-            <div class="cart-info">
-              <img src="./images/buy-1.jpg" alt="">
-              <div>
-                <p>red printed <span class="unset">T-sirt</span></p>
-                <small>price: $50.00</small>
-                <br>
-                <a href="#d">remove</a>
-              </div>
-            </div>
-          </td>
-
-          <td>
-            <input type="number" name="" id="" value="1">
-            <td>$50.00</td>
-          </td>
-          
-        </tr>
-
-        <tr>
-
-          <td>
-            <div class="cart-info">
-              <img src="./images/buy-2.jpg" alt="">
-              <div>
-                <p>red printed <span class="unset">T-sirt</span></p>
-                <small>price: $75.00</small>
-                <br>
-                <a href="#d">remove</a>
-              </div>
-            </div>
-          </td>
-
-          <td>
-            <input type="number" name="" id="" value="1">
-            <td>$50.00</td>
-          </td>
-
-        </tr>
-
-        <tr>
-
-          <td>
-            <div class="cart-info">
-              <img src="./images/buy-3.jpg" alt="">
-              <div>
-                <p>red printed <span class="unset">T-sirt</span></p>
-                <small>price: $95.00</small>
-                <br>
-                <a href="#d">remove</a>
-              </div>
-            </div>
-          </td>
-
-          <td>
-            <input type="number" name="" id="" value="1">
-            <td>$50.00</td>
-          </td>
-
-        </tr>
-
-      </table>
-
-      <div class="total-price">
-
-        <table>
-
-          <tr>
-            <td>subtotal</td>
-            <td>$220.00</td>
-          </tr>
-
-          <tr>
-            <td>tax</td>
-            <td>$44.00</td>
-          </tr>
-
-          <tr>
-            <td>total</td>
-            <td>$264.00</td>
-          </tr>
-
-        </table>
-
-      </div>
-
-    </div>
-
-    <div class="footer">
-
-      <div class="container">
-
-        <div class="row">
-
-          <div class="footer-col-1">
-
-            <h3>download our app</h3>
-
-            <p>Download App for Android and iOS mobile phones.</p>
-
-            <div class="app-logo">
-              <img src="./images/play-store.png" alt="">
-              <img src="./images/app-store.png" alt="">
-            </div>
-
-          </div>
-
-          <div class="footer-col-2">
-
-            <img src="./images/logo-white.png" alt="">
-
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ducimus, voluptate expedita ipsum vero qui corporis.</p>
-
-          </div>
-
-          <div class="footer-col-3">
-
-            <h3>useful links</h3>
-
-            <ul>
-              <li><a href="#">coupons</a></li>
-              <li><a href="#">blog post</a></li>
-              <li><a href="#">return policy</a></li>
-              <li><a href="#">join affiliate</a></li>
-            </ul>
-
-          </div>
-
-          <div class="footer-col-4">
-
-            <h3>follow us</h3>
-
-            <ul>
-              <li><a href="#f">facebook</a></li>
-              <li><a href="#t">twitter</a></li>
-              <li><a href="#i">instagramm</a></li>
-              <li><a href="#y">YouTube</a></li>
-            </ul>
-
-          </div>
-
-        </div>
-
-        <hr>
-
-        <p class="copyrights">copyrights <span>&copy;</span> 2023</p>
-
-      </div>
-    </div>
-
-
 
     <!-- <h1 style="text-align: center;">setInterval() - JavaScript</h1>
     <hr>
