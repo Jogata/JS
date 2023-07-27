@@ -600,6 +600,8 @@
       form .btn {
         width: 100%;
         margin: 10px 0;
+        font-family: inherit;
+        text-transform: capitalize;
         border: none;
         cursor: pointer;
       }
@@ -608,15 +610,107 @@
       }
 
       #login-form {
-        left: -330px;
+        left: -300px;
       }
 
       #register-form {
         left: 0;
       }
+
+      form a {
+        font-size: 12px;
+      }
+
+      #indicator {
+        width: 100px;
+        height: 3px;
+        margin-top: 8px;
+        border: none;
+        background-color: #ff533b;
+        transform: translateX(100px);
+        transition: transform 1s;
+      }
+
+      @media screen and (max-width: 600px) {
+        .row {
+          text-align: center;
+        }
+        .col-2 {
+          flex-basis: 100%;
+        }
+        .col-3 {
+          flex-basis: 100%;
+        }
+        .col-4 {
+          flex-basis: 100%;
+        }
+        .single-product .row {
+          text-align: left;
+        }
+        .single-product .col-2 {
+          padding: 20px 0;
+        }
+        .single-product h1 {
+          font-size: 26px;
+          line-height: 32px;
+        }
+        .cart-info p {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
+    <div class="header">
+
+      <div class="container">
+
+        <div class="navbar">
+
+          <div class="logo">
+            <a href="#logo">home
+              <img src="./images/logo.png" alt="Home page">
+            </a>
+          </div>
+
+          <nav>
+            <ul id="menu-items">
+              <li><a href="#h">home</a></li>
+              <li><a href="#p">products</a></li>
+              <li><a href="#ab">about</a></li>
+              <li><a href="#c">contact</a></li>
+              <li><a href="#ac">account</a></li>
+            </ul>
+          </nav>
+
+          <a href="#cart" class="shopping-cart">cart
+            <img src="./images/cart.png">
+          </a>
+
+          <button id="menu-btn">menu
+            <img src="./images/menu.png" class="menu-icon">
+          </button>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-2">
+            <h1>give your workout <br> a new style!</h1>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero aliquam repudiandae voluptatem debitis praesentium <br> consequuntur quod sit neque, omnis obcaecati mollitia a temporibus esse suscipit nam unde, iure quibusdam ipsa.</p>
+            <a href="#" class="btn">explore now &#8594;</a>
+          </div>
+
+          <div class="col-2">
+            <img src="./images/image1.png" alt="">
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
     <!-- ACCOUNT PAGE -->
 
     <div class="account-page">
@@ -663,12 +757,19 @@
     </div>
 
     <script>
+      const loginForm = document.getElementById("login-form");
+      const registerForm = document.getElementById("register-form");
+      const indicator = document.getElementById("indicator");
+
       const loginBtn = document.querySelector("#login");
 
       loginBtn.addEventListener("click", login);
 
       function login() {
         console.log("login");
+        registerForm.style.transform = "translateX(300px)";
+        loginForm.style.transform = "translateX(300px)";
+        indicator.style.transform = "translateX(0px)";
       }
 
       const registerBtn = document.querySelector("#register");
@@ -677,8 +778,54 @@
 
       function register() {
         console.log("register");
+        registerForm.style.transform = "translateX(0px)";
+        loginForm.style.transform = "translateX(0px)";
+        indicator.style.transform = "translateX(100px)";
       }
     </script>
+
+<div class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="footer-col-1">
+        <h3>download our app</h3>
+        <p>Download App for Android and iOS mobile phones.</p>
+        <div class="app-logo">
+          <img src="./images/play-store.png" alt="">
+          <img src="./images/app-store.png" alt="">
+        </div>
+      </div>
+
+      <div class="footer-col-2">
+        <img src="./images/logo-white.png" alt="">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ducimus, voluptate expedita ipsum vero qui corporis.</p>
+      </div>
+
+      <div class="footer-col-3">
+        <h3>useful links</h3>
+        <ul>
+          <li><a href="#">coupons</a></li>
+          <li><a href="#">blog post</a></li>
+          <li><a href="#">return policy</a></li>
+          <li><a href="#">join affiliate</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col-4">
+        <h3>follow us</h3>
+        <ul>
+          <li><a href="#f">facebook</a></li>
+          <li><a href="#t">twitter</a></li>
+          <li><a href="#i">instagramm</a></li>
+          <li><a href="#y">YouTube</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr>
+    <p class="copyrights">copyrights <span>&copy;</span> 2023</p>
+  </div>
+</div>
+
 
     <!-- <h1 style="text-align: center;">setInterval() - JavaScript</h1>
     <hr>
