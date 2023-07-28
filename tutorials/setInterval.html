@@ -3,835 +3,106 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>setInterval function in JS</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: Georgia, serif;
-      }
-
-      a {
-        color: #555;
-        text-transform: capitalize;
-        text-decoration: none;
-      }
-
-      .header {
-        background: radial-gradient(#fff, #87ceeb);
-      }
-
-      .container {
-        max-width: 81.25rem;
-        margin: auto;
-        padding-left: 1.5em;
-        padding-right: 1.5em;
-      }
-
-      .navbar {
-        padding: 1.2em;
-        display: flex;
-        align-items: center;
-      }
-
-      .logo a {
-        font-size: 0px;
-      }
-      .logo img {
-        width: 7.8rem;
-      }
-
-      nav {
-        flex: 1;
-        text-align: right;
-      }
-
-      nav ul {
-        list-style: none;
-        display: inline-block;
-      }
-
-      nav ul li {
-        display: inline-block;
-        margin-right: 1.2rem;
-      }
-
-      .shopping-cart {
-        width: 2rem;
-        height: 2rem;
-        font-size: 0px;
-      }
-      .shopping-cart img {
-        width: 100%;
-      }
-
-      #menu-btn {
-        font-size: 0px;
-        margin-left: 1.2rem;
-        border: 1px solid transparent;
-        background-color: transparent;
-        cursor: pointer;
-      }
-      .menu-icon {
-        display: none;
-        width: 1.8rem;
-      }
-
-      .row {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        flex-wrap: wrap;
-      }
-
-      .header .row {
-        margin-top: 4.4rem;
-      }
-
-      .col-2 {
-        flex-basis: 50%;
-        min-width: 19rem;
-      }
-
-      .col-2 h1 {
-        margin: 1.6rem 0;
-        font-size: 3.125rem;
-        line-height: 3.75rem;
-        text-transform: capitalize;
-      }
-
-      .btn {
-        display: inline-block;
-        margin: 2rem 0;
-        padding: 0.5em 1.6em;
-        color: #fff;
-        border-radius: 2em;
-        background-color: #ff533b;
-        transition: all 0.5s;
-      }
-
-      .col-2 img {
-        max-width: 100%;
-        padding: 3em 0;
-      }
-
-      .categories {
-        margin: 4.2rem 0;
-      }
-
-      .small-container {
-        max-width: 86rem;
-        margin: auto;
-        padding-left: 1.5em;
-        padding-right: 1.5em;
-      }
-
-      .col-3 {
-        flex-basis: 100%;
-        min-width: 15.6rem;
-        max-width: 21.9rem;
-        margin-bottom: 2rem;
-      }
-      
-      .col-3 img {
-        width: 100%;
-      }
-
-      .title {
-        position: relative;
-        margin: 0 auto 80px;
-        color: #555;
-        line-height: 50px;
-        text-align: center;
-        text-transform: capitalize;
-      }
-      .title::after {
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translate(-50%);
-        content: "";
-        width: 5rem;
-        height: 0.4rem;
-        border-radius: 0.4rem;
-        background-color: #87ceeb;
-      }
-
-      .col-4 {
-        flex-basis: 25%;
-        min-height: 12.5rem;
-        margin-bottom: 50px;
-        padding: 0.5em;
-        transition: transform 0.5s;
-        cursor: pointer;
-      }
-      .col-4:hover {
-        transform: translateY(-5px);
-      }
-      .col-4 img {
-        width: 100%;
-      }
-      .col-4 h4 {
-        color: #555;
-        font-weight: normal;
-      }
-      .col-4 p {
-        font-size: 14px;
-      }
-      .col-4 i {
-        font-size: 16px;
-        color: #ff533b;
-      }
-
-      .offer {
-        margin-top: 5rem;
-        padding: 2em 0;
-        background: radial-gradient(#fff, #87ceeb);
-      }
-
-      .offer-img {
-        padding: 3em;
-      }
-
-      .offer .col-2 p:first-child {
-        text-transform: capitalize;
-      }
-
-      .initial {
-        text-transform: initial;
-      }
-
-      .description {
-        color: #555;
-      }
-
-      .testimonial {
-        padding-top: 100px;
-      }
-
-      .testimonial .col-3 {
-        margin: 0 2rem 2rem;
-        padding: 2.5em 1.2em;
-        text-align: center;
-        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
-        transition: transform 0.5s;
-        cursor: pointer;
-      }
-
-      .testimonial .col-3 img {
-        width: 40%;
-        min-width: 80px;
-        max-width: 120px;
-        margin-top: 20px;
-        border-radius: 50%;
-      }
-
-      .testimonial .col-3:hover {
-        transform: translateY(-10px);
-      }
-
-      .fa-quote-left {
-        color: #ff533b;
-        font-size: 34px;
-      }
-
-      .testimonial .col-3 p {
-        margin: 12px 0;
-        color: #777;
-        font-size: 16px;
-      }
-
-      .testimonial .col-3 h3 {
-        margin: 12px 0;
-        color: #555;
-        font-size: 24px;
-        font-weight: 600;
-        text-transform: capitalize;
-      }
-
-      .brands {
-        margin: 100px auto;
-      }
-
-      .col-5 {
-        width: 10rem;
-      }
-
-      .col-5 img {
-        width: 100%;
-        filter: grayscale(100%);
-        cursor: pointer;
-      }
-      .col-5 img:hover {
-        filter: grayscale(0);
-      }
-
-      .footer {
-        padding: 60px 0 20px;
-        color: #8a8a8a;
-        font-size: 14px;
-        background-color: #000;
-      }
-      .footer p {
-        color: #8a8a8a;
-      }
-      .footer h3 {
-        margin-bottom: 20px;
-        color: #fff;
-        text-transform: capitalize;
-      }
-      
-      .footer-col-1, 
-      .footer-col-2, 
-      .footer-col-3, 
-      .footer-col-4 {
-        min-width: 250px;
-        margin-bottom: 20px;
-      }
-      .footer-col-1 {
-        flex-basis: 30%;
-      }
-      .footer-col-2 {
-        flex: 1;
-        text-align: center;
-      }
-      .footer-col-2 img {
-        width: 11rem;
-        margin-bottom: 1.2rem;
-      }
-
-      .footer-col-3, 
-      .footer-col-4 {
-        flex-basis: 12px;
-        margin: 0 2rem;
-        text-align: center;
-      }
-
-      .footer ul {
-        list-style: none;
-      }
-
-      .app-logo {
-        margin-top: 1.2rem;
-      }
-      .app-logo img {
-        width: 8.8rem;
-      }
-
-      hr {
-        height: 1px;
-        margin: 20px 0;
-        border: none;
-        background-color: #b5b5b5;
-      }
-
-      .copyrights {
-        flex: 1;
-        text-align: center;
-        text-transform: capitalize;
-      }
-      .copyrights span {
-        font-size: 0.8em;
-        vertical-align: super;
-      }
-
-      @media screen and (max-width: 800px) {
-        nav ul {
-          position: absolute;
-          top: 70px;
-          left: 0;
-          width: 100%;
-          background-color: #333;
-          transition: all 0.4s;
-          overflow: hidden;
-        }
-        nav ul li {
-          display: block;
-          margin-top: 0.5rem;
-          margin-right: 3rem;
-          margin-bottom: 0.5rem;
-        }
-        nav ul li a {
-          color: #fff;
-        }
-        .menu-icon {
-          display: block;
-          cursor: pointer;
-        }
-      }
-
-      /* PRODUCTS PAGE */
-      .row-2 {
-        margin: 6rem auto 3rem;
-        justify-content: space-between;
-      }
-
-      .row-2 h2 {
-        text-transform: capitalize;
-      }
-
-      select {
-        padding: 0.4em;
-        text-transform: capitalize;
-        border: 1px solid #ff533b;
-        background-color: transparent;
-      }
-      select:focus {
-        outline: none;
-      }
-
-      .page-btn {
-        margin: 0 auto 80px;
-      }
-      .page-btn span {
-        display: inline-block;
-        width: 40px;
-        height: 40px;
-        margin-left: 10px;
-        line-height: 40px;
-        text-align: center;
-        border: 1px solid #ff533b;
-        transition: all 0.4s;
-        cursor: pointer;
-      }
-      .page-btn span:hover {
-        color: #fff;
-        background-color: #ff533b;
-      }
-
-      .page-btn button {
-        display: inline-block;
-        margin-left: 10px;
-        padding: 16px 12.75px 11px;
-        font-size: 30px;
-        font-family: inherit;
-        line-height: 0;
-        text-align: center;
-        border: 1px solid #ff533b;
-        background-color: transparent;
-        transition: all 0.4s;
-        cursor: pointer;
-      }
-      .page-btn button:hover {
-        color: #fff;
-        background-color: #ff533b;
-      }
-      .page-btn button span {
-        font-size: 0px;
-        width: 0;
-        height: 0;
-        margin: 0;
-        line-height: 0;
-        border: 0px;
-      }
-
-      .single-product {
-        margin-top: 80px;
-      }
-
-      .single-product .row-2 {
-        padding: 20px;
-      }
-
-      .single-product .row-2 img {
-        padding: 0;
-      }
-
-      .single-product h4 {
-        margin: 20px 0;
-        font-size: 22px;
-        font-weight: bold;
-      }
-
-      .single-product select {
-        display: block;
-        margin-top: 20px;
-        padding: 10px;
-      }
-
-      .single-product input {
-        width: 50px;
-        height: 40px;
-        margin-right: 10px;
-        padding-left: 10px;
-        font-size: 20px;
-        border: 1px solid #ff533b;
-      }
-
-      input:focus {
-        outline: none;
-      }
-
-      .single-product h3 {
-        margin-bottom: 10px;
-        text-transform: capitalize;
-      }
-
-      .single-product i {
-        margin-left: 20px;
-        color: #ff533b;
-      }
-
-      .small-img-row {
-        display: flex;
-        justify-content: space-between;
-      }
-
-      .small-img-col {
-        flex-basis: 24%;
-        cursor: pointer;
-      }
-
-      .cart-page {
-        margin: 80px auto;
-      }
-
-      table {
-        width: 100%;
-        border-collapse: collapse;
-      }
-
-      .cart-info {
-        display: flex;
-        flex-wrap: wrap;
-      }
-
-      th {
-        padding: 5px;
-        color: #fff;
-        font-weight: normal;
-        text-align: center;
-        text-transform: capitalize;
-        background-color: #ff533b;
-      }
-      th:last-child {
-        text-align: right;
-      }
-
-      td {
-        padding: 10px 5px;
-        text-transform: capitalize;
-      }
-      td:last-child {
-        text-align: right;
-      }
-
-      td input {
-        display: block;
-        width: 40px;
-        height: 38px;
-        margin: auto;
-        padding: 5px;
-      }
-
-      td a {
-        color: #ff533b;
-        font-size: 12px;
-      }
-
-      td img {
-        width: 80px;
-        height: 80px;
-        margin-right: 10px;
-      }
-
-      .total-price {
-        display: flex;
-        justify-content: flex-end;
-      }
-
-      .total-price table {
-        width: 100%;
-        max-width: 400px;
-        border-top: 3px solid #ff533b;
-      }
-
-      .account-page {
-        padding: 50px 0;
-        background: radial-gradient(#fff, #87ceeb);
-      }
-
-      .form-container {
-        position: relative;
-        width: 300px;
-        height: 400px;
-        margin: auto;
-        padding: 20px 0;
-        text-align: center;
-        background-color: #fff;
-        box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-      }
-
-      .form-btn {
-        display: inline-block;
-      }
-
-      .form-btn span {
-        display: inline-block;
-        width: 100px;
-        padding: 0 10px;
-        color: #555;
-        font-weight: bold;
-        text-transform: capitalize;
-        cursor: pointer;
-      }
-
-      .form-container form {
-        position: absolute;
-        top: 130px;
-        max-width: 300px;
-        padding: 0 20px;
-        transition: transform 1s;
-      }
-
-      form input {
-        width: 100%;
-        height: 30px;
-        margin: 10px 0;
-        padding: 0 10px;
-      }
-
-      form .btn {
-        width: 100%;
-        margin: 10px 0;
-        font-family: inherit;
-        text-transform: capitalize;
-        border: none;
-        cursor: pointer;
-      }
-      form .btn:focus {
-        outline: none;
-      }
-
-      #login-form {
-        left: -300px;
-      }
-
-      #register-form {
-        left: 0;
-      }
-
-      form a {
-        font-size: 12px;
-      }
-
-      #indicator {
-        width: 100px;
-        height: 3px;
-        margin-top: 8px;
-        border: none;
-        background-color: #ff533b;
-        transform: translateX(100px);
-        transition: transform 1s;
-      }
-
-      @media screen and (max-width: 600px) {
-        .row {
-          text-align: center;
-        }
-        .col-2 {
-          flex-basis: 100%;
-        }
-        .col-3 {
-          flex-basis: 100%;
-        }
-        .col-4 {
-          flex-basis: 100%;
-        }
-        .single-product .row {
-          text-align: left;
-        }
-        .single-product .col-2 {
-          padding: 20px 0;
-        }
-        .single-product h1 {
-          font-size: 26px;
-          line-height: 32px;
-        }
-        .cart-info p {
-          display: none;
-        }
-      }
-    </style>
+    <!-- <title>setInterval function in JS</title> -->
+    <title>Travelia - Explore the world</title>
+    <meta name="title" content="Travelia - Explore the world">
+    <meta name="description" content="This is a travel html template">
+    <link rel="shortcut icon" href="" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div class="header">
-
+    <!-- PRELOADER -->
+    <div class="preloader" data-preloader>
+      <div class="preloader-inner">
+        <img src="./images/preloader.svg" alt="" class="img">
+      </div>
+    </div>
+    <!-- HEADER -->
+    <header class="header" data-header>
       <div class="container">
-
-        <div class="navbar">
-
-          <div class="logo">
-            <a href="#logo">home
-              <img src="./images/logo.png" alt="Home page">
+        <a href="#" class="logo">
+          <img src="./images/logo.svg" alt="logo">
+        </a>
+        <nav class="navbar">
+          <div class="navbar-top">
+            <a href="#" class="logo">
+              <img src="./images/logo.svg" alt="logo">
             </a>
+            <button class="nav-toggle-btn">
+              <i class="fa fa-bars"></i>
+            </button>
           </div>
-
-          <nav>
-            <ul id="menu-items">
-              <li><a href="#h">home</a></li>
-              <li><a href="#p">products</a></li>
-              <li><a href="#ab">about</a></li>
-              <li><a href="#c">contact</a></li>
-              <li><a href="#ac">account</a></li>
-            </ul>
-          </nav>
-
-          <a href="#cart" class="shopping-cart">cart
-            <img src="./images/cart.png">
-          </a>
-
-          <button id="menu-btn">menu
-            <img src="./images/menu.png" class="menu-icon">
-          </button>
-
-        </div>
-
-        <div class="row">
-
-          <div class="col-2">
-            <h1>give your workout <br> a new style!</h1>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero aliquam repudiandae voluptatem debitis praesentium <br> consequuntur quod sit neque, omnis obcaecati mollitia a temporibus esse suscipit nam unde, iure quibusdam ipsa.</p>
-            <a href="#" class="btn">explore now &#8594;</a>
+          <ul class="navbar-list">
+            <li class="navbar-item">
+              <a href="#" class="navbar-link">home</a>
+            </li>
+            <li class="navbar-item">
+              <a href="#" class="navbar-link">about</a>
+            </li>
+            <li class="navbar-item">
+              <a href="#" class="navbar-link">services</a>
+            </li>
+            <li class="navbar-item">
+              <a href="#" class="navbar-link">pricing</a>
+            </li>
+            <li class="navbar-item">
+              <a href="#" class="navbar-link">contact</a>
+            </li>
+          </ul>
+          <div class="header-action">
+            <a href="#" class="login-btn">login</a>
+            <a href="#" class="btn btn-primary">sign up</a>
           </div>
-
-          <div class="col-2">
-            <img src="./images/image1.png" alt="">
-          </div>
-
-        </div>
-
+        </nav>
+        <button class="nav-toggle-btn">
+          <i class="fa fa-time"></i>
+        </button>
+        <div class="overlay"></div>
       </div>
-
-    </div>
-
-    <!-- ACCOUNT PAGE -->
-
-    <div class="account-page">
-
-      <div class="container">
-
-        <div class="row">
-
-          <div class="col-2">
-            <img src="./images/image1.png" alt="">
-          </div>
-
-          <div class="col-2">
-
-            <div class="form-container">
-
-              <div class="form-btn">
-                <span id="login">login</span>
-                <span id="register">register</span>
-                <hr id="indicator">
+    </header>
+    <main>
+      <article>
+        <!-- HERO -->
+        <section class="section hero has-bg-image">
+          <div class="container">
+            <div class="hero-content">
+              <p class="hero-subtitle">
+                Explore the World
+                <img src="./images/title-icon.svg" alt="" class="img">
+              </p>
+              <h1 class="h1 title hero-title">
+                It's a Big World Out There, Go Explore
+              </h1>
+              <p class="hero-text">We always make our customer happy by providing as many choices as possible</p>
+              <div class="wrapper">
+                <a href="#" class="btn btn-secondary">
+                  <span class="span">Plan a Trip</span>
+                  <i class="fa fa-arrow-left"></i>
+                </a>
+                <button class="hero-btn">
+                  <div class="btn-img">
+                    <img src="./images/hero-button-img.jpg" alt="" class="img-cover">
+                    <i class="fa fa-play"></i>
+                  </div>
+                  <p class="text">Watch our Story</p>
+                </button>
               </div>
-
-              <form action="" id="login-form">
-                <input type="text" name="" id="username" placeholder="Username">
-                <input type="password" name="" id="password" placeholder="Password">
-                <button type="submit" class="btn">login</button>
-                <a href="#FP">forgot password?</a>
-              </form>
-
-              <form action="" id="register-form">
-                <input type="text" name="" id="username" placeholder="Username">
-                <input type="email" name="" id="email" placeholder="Email">
-                <input type="password" name="" id="password" placeholder="Password">
-                <button type="submit" class="btn">register</button>
-              </form>
-
             </div>
+            <figure class="hero-banner">
+              <img src="./images/hero-banner.png" alt="" class="w-100">
+            </figure>
           </div>
+        </section>
+      </article>
+    </main>
 
-        </div>
-
-      </div>
-
-    </div>
-
-    <script>
-      const loginForm = document.getElementById("login-form");
-      const registerForm = document.getElementById("register-form");
-      const indicator = document.getElementById("indicator");
-
-      const loginBtn = document.querySelector("#login");
-
-      loginBtn.addEventListener("click", login);
-
-      function login() {
-        console.log("login");
-        registerForm.style.transform = "translateX(300px)";
-        loginForm.style.transform = "translateX(300px)";
-        indicator.style.transform = "translateX(0px)";
-      }
-
-      const registerBtn = document.querySelector("#register");
-
-      registerBtn.addEventListener("click", register);
-
-      function register() {
-        console.log("register");
-        registerForm.style.transform = "translateX(0px)";
-        loginForm.style.transform = "translateX(0px)";
-        indicator.style.transform = "translateX(100px)";
-      }
-    </script>
-
-<div class="footer">
-  <div class="container">
-    <div class="row">
-      <div class="footer-col-1">
-        <h3>download our app</h3>
-        <p>Download App for Android and iOS mobile phones.</p>
-        <div class="app-logo">
-          <img src="./images/play-store.png" alt="">
-          <img src="./images/app-store.png" alt="">
-        </div>
-      </div>
-
-      <div class="footer-col-2">
-        <img src="./images/logo-white.png" alt="">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ducimus, voluptate expedita ipsum vero qui corporis.</p>
-      </div>
-
-      <div class="footer-col-3">
-        <h3>useful links</h3>
-        <ul>
-          <li><a href="#">coupons</a></li>
-          <li><a href="#">blog post</a></li>
-          <li><a href="#">return policy</a></li>
-          <li><a href="#">join affiliate</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col-4">
-        <h3>follow us</h3>
-        <ul>
-          <li><a href="#f">facebook</a></li>
-          <li><a href="#t">twitter</a></li>
-          <li><a href="#i">instagramm</a></li>
-          <li><a href="#y">YouTube</a></li>
-        </ul>
-      </div>
-    </div>
-    <hr>
-    <p class="copyrights">copyrights <span>&copy;</span> 2023</p>
-  </div>
-</div>
-
-
-    <!-- <h1 style="text-align: center;">setInterval() - JavaScript</h1>
+    <h1 style="text-align: center;">setInterval() - JavaScript</h1>
     <hr>
     <p id="timer" style="font-size: 3rem;">0 sec</p>
     <button id="start">Start Timer</button>
-    <button id="pause">Pause Timer</button> -->
+    <button id="pause">Pause Timer</button>
 
     <script src="js.js">
       const timer = document.getElementById('timer');
