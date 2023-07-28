@@ -4,349 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      fieldset {
-        display: none;
-      }
-
-      html, 
-      body {
-        height: 100%;
-      }
-
-      body {
-        background-color: #222;
-        background-image: linear-gradient(to right, rgba(255, 255, 255, 0.025) 10%, transparent 0), linear-gradient(#222, #000);
-        background-size: 0.75em 100%, 100% 100%;
-        background-attachment: fixed;
-        display: flex;
-        flex-direction: column;
-        font-family: Georgia, serif;
-        overflow-x: hidden;
-      }
-
-      .wrapper {
-        position: relative;
-        /* min-width: 1200px; */
-        width: 100%;
-        max-width: 1400px;
-        /* max-height: 1200px; */
-        margin: 0 auto auto;
-        /* flex-grow: 1; */
-        /* overflow: hidden; */
-      }
-      
-      .grid-container {
-        width: 100%;
-        display: grid;
-        /* grid-template-columns: repeat(8, 1fr); */
-        grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
-        /* grid-template-rows: repeat(4, 1fr); */
-        /* gap: 1rem; */
-        align-items: center;
-        justify-items: center;
-      }
-
-      .wrapper {
-        /* border: 1px solid red; */
-      }
-
-      img {
-        grid-column: span 2;
-        max-width: 100%;
-        width: 1920px;
-        /* height: 1080px; */
-        aspect-ratio: 1920 / 1080;
-        object-fit: cover;
-        margin-bottom: -26%;
-        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-        grid-row: span 2;
-        transform: scale(1);
-        transition: all 0.25s;
-        cursor: pointer;
-        z-index: 1;
-      }
-      img:hover {
-        transform: scale(2);
-        transition: transform 0.3s;
-        z-index: 2;
-      }
-
-      /* @media screen and (min-width: 1000px) {
-        img:nth-child(4n + 1) {
-          grid-column: 2 / span 2;
-        }
-      } */
-      @media screen and (max-width: 524px) {
-        /* img:nth-child(2n + 1) {
-          grid-column: 2 / span 2;
-        } */
-        .grid-container {
-          grid-template-columns: 1fr;
-        }
-        img:hover {
-          transform: scale(1.2);
-        }
-      }
-      @media screen and (min-width: 525px) {
-        img:nth-child(2n + 1) {
-          grid-column: 2 / span 2;
-        }
-      }
-      @media screen and (min-width: 750px) {
-        img:nth-child(2n + 1) {
-          grid-column: auto / span 2;
-        }
-        img:nth-child(3n + 1) {
-          grid-column: 2 / span 2;
-        }
-      }
-      @media screen and (min-width: 875px) {
-        img:nth-child(3n + 1) {
-          grid-column: auto / span 2;
-        }
-        img:nth-child(4n + 1) {
-          grid-column: 2 / span 2;
-        }
-      }
-      @media screen and (min-width: 1225px) {
-        img:nth-child(4n + 1) {
-          grid-column: auto / span 2;
-        }
-        img:nth-child(6n + 1) {
-          grid-column: 2 / span 2;
-        }
-        img:nth-child(10) {
-          grid-column: 3 / span 2;
-        }
-      }
-      @media screen and (min-width: 1410px) {
-        /* img:nth-child(4n + 1) {
-          grid-column: auto / span 2;
-        } */
-        img:nth-child(6n + 1) {
-          grid-column: auto / span 2;
-        }
-        img:nth-child(7n + 1) {
-          grid-column: 2 / span 2;
-        }
-        img:nth-child(10) {
-          grid-column: auto / span 2;
-        }
-      }
-      /* img:nth-child(3n) { */
-        /* object-position: bottom; */
-        /* object-fit: contain; */
-      /* } */
-      /* img:nth-child(3n + 1) { */
-        /* object-position: top; */
-      /* } */
-
-      h1 {
-        color: #fff;
-        text-align: center;
-        margin: auto auto 3rem;
-      }
-
-      .text-align {
-        text-align: center;
-      }
-
-      body {
-        background-color: #c7ecee;
-      }
-
-      h1 {
-        width: 1200px;
-        margin: 10px auto;
-        color: #777;
-        font-size: 1.5rem;
-        text-align: center;
-        text-transform: capitalize;
-      }
-
-      .services {
-        min-height: 600px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .card {
-        position: relative;
-        width: 300px;
-        height: 380px;
-        margin: 10px;
-        padding: 20px 35px;
-        background-color: #dff9fb;
-        transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
-        overflow: hidden;
-      }
-      .card::before, 
-      .card::after {
-        position: absolute;
-        right: 0;
-        bottom: -80px;
-        content: "";
-        width: 180px;
-        height: 180px;
-        border-radius: 50%;
-        background-color: #22a6b3;
-        transform: translate(100%, -25%) translate3d(0, 0, 0);
-        transition: all 0.15s cubic-bezier(0.02, 0.01, 0.47, 1);
-        opacity: 0;
-        z-index: -1;
-      }
-      .card:hover::before, 
-      .card:hover::after {
-        opacity: 0.1;
-      }
-      .card:hover::before {
-        transform: translate3d(50%, 0, 0) scale(0.9);
-      }
-      .card:hover::after {
-        transform: translate(50%, 0) scale(1.1);
-      }
-
-      @keyframes rotate {
-        0% {
-          transform: rotate(0deg);
-        }
-        25% {
-          transform: rotate(3deg);
-        }
-        50% {
-          transform: rotate(-3deg);
-        }
-        75% {
-          transform: rotate(1deg);
-        }
-        100% {
-          transform: rotate(0deg);
-        }
-      }
-
-      .icon {
-        display: block;
-        margin-top: 18px;
-        color: #7ed6df;
-        font-size: 64px;
-        text-align: center;
-      }
-
-      .card h1 {
-        color: #22a6b3;
-        font-size: 22px;
-        text-align: center;
-        text-transform: capitalize;
-      }
-
-      .button {
-        display: inline-block;
-        width: 120px;
-        margin-top: 25px;
-        padding: 15px;
-        color: #c7ecee;
-        font-size: 16px;
-        text-align: center;
-        text-transform: capitalize;
-        border: none;
-        border-radius: 5px;
-        background-color: #22a6b3;
-      }
-
-      .card a {
-        text-decoration: none;
-      }
-
-      .card:hover {
-        color: #fff;
-        background-color: transparent;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-        animation: rotate 0.7s ease-in-out both;
-      }
-
-      .content p {
-        color: #535c68;
-        font-size: 12px;
-        line-height: 18px;
-      }
-
-      @media screen and (max-width: 900px) {
-        .title {
-          width: 100%;
-        }
-        .title h1 {
-          font-size: 20px;
-        }.services {
-          flex-direction: column;
-        }
-      }
-    </style>
   </head>
   <body>
-
-    <div class="title">
-      <h1>our services</h1>
-    </div>
-
-    <div class="services">
-      <div class="card">
-        <i class="fa fa-globe"></i>
-        <h1>web development</h1>
-        <div class="content">
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio dolores laboriosam, animi nihil modi qui sapiente iste culpa, repellendus perferendis neque aliquid possimus ducimus voluptatibus ab. Rerum nostrum laudantium a hic ullam quos.</p>
-          <p class="text-align">
-            <a href="#" class="button">read more</a>
-          </p>
-        </div>
-      </div>
-      <div class="card">
-        <i class="fa fa-edit"></i>
-        <h1>graphic design</h1>
-        <div class="content">
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio dolores laboriosam, animi nihil modi qui sapiente iste culpa, repellendus perferendis neque aliquid possimus ducimus voluptatibus ab. Rerum nostrum laudantium a hic ullam quos.</p>
-          <p class="text-align">
-            <a href="#" class="button">read more</a>
-          </p>
-        </div>
-      </div>
-      <div class="card">
-        <i class="fa fa-briefcase"></i>
-        <h1>digital branding</h1>
-        <div class="content">
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio dolores laboriosam, animi nihil modi qui sapiente iste culpa, repellendus perferendis neque aliquid possimus ducimus voluptatibus ab. Rerum nostrum laudantium a hic ullam quos.</p>
-          <p class="text-align">
-            <a href="#" class="button">read more</a>
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <h1>GRID Honeycomb Gallery</h1>
-    <div class="wrapper">
-      <div class="grid-container">
-        <img src="../../../CSS/assets/img/alley-copy.jpg" alt="">
-        <img src="../../../CSS/assets/img/wp7360943-black-lady-wallpapers-copy.jpg" alt="">
-        <img src="../../../CSS/assets/img/winter-painting-copy.jpg" alt="">
-        <img src="../../../CSS/assets/img/foggy-lake-quang-nguyen-vinh-2166695-copy.jpg" alt="">
-        <img src="../../../CSS/assets/img/forest.jpg" alt="">
-        <img src="../../../CSS/assets/img/lake-17401.jpg" alt="">
-        <img src="../../../CSS/assets/img/miao-gengxin-gu435nBTLW4-unsplash.jpg" alt="">
-        <img src="../../../CSS/assets/img/rainforest-kunal-shinde--f0YLss50Bs-unsplash.jpg" alt="">
-        <img src="../../../CSS/assets/img/scenic-view-of-lake-against-sky-during-sunset-copy.jpg" alt="">
-        <img src="../../../CSS/assets/img/road-copy.jpg" alt="">
-      </div>
-    </div>
-
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
@@ -410,6 +70,140 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
+    </script>
+
+    <script>
+      // 06. Favorite Movie
+
+      function pickMovie(params) {
+        let index = 0;
+        let movie = params[index];
+        let max = 0;
+        let choice = "";
+        
+        while (movie !== "STOP") {
+          // console.log(movie);
+          let total = 0;
+          
+          for (let i = 0; i < movie.length; i++) {
+            let letter = movie[i];
+            let ascii = letter.charCodeAt(0);
+            // console.log(ascii);
+            total += ascii;
+            
+            if (ascii > 64 && ascii < 91) {
+              total -= movie.length;
+            } else if (ascii > 96 && ascii < 123) {
+              total -= (movie.length * 2);
+            }
+            
+          }
+
+          // console.log(total);
+
+          if (total > max) {
+            max = total;
+            choice = movie;
+          }
+
+          index++;
+
+          if (index > 6) {
+            console.log("The limit is reached.");
+            break;
+          }
+
+          movie = params[index];
+        }
+
+        console.log(`The best movie for you is ${choice} with ${max} ASCII sum.`);
+
+      }
+
+      // pickMovie(["azAZ", "STOP"]);
+      // pickMovie(["Matrix", "Breaking bad", "Legend", "STOP"]);
+      // pickMovie(["Wrong turn", "The maze", "Area 51", "Night Club", "Ice age", "Harry Potter", "Wizards"]);
+
+      // 05. Oscars
+
+      function calcPoints(params) {
+        const actor = params[0];
+        let points = Number(params[1]);
+        const judges = Number(params[2]);
+
+        for (let i = 3; i < params.length; i++) {
+          const judge = params[i];
+          i++;
+          const judgePoints = Number(params[i]);
+          points += (judge.length * judgePoints) / 2;
+
+          if (points >= 1250.5) {
+            i = params.length;
+          }
+
+        }
+
+        if (points >= 1250.5) {
+          console.log(`Congratulations, ${actor} got a nominee for leading role with ${points.toFixed(1)}!`);
+        } else {
+          const diff = 1250.5 - points;
+          console.log(`Sorry, ${actor} you need ${diff.toFixed(1)} more!`);
+        }
+
+      }
+
+      // calcPoints(["Zahari Baharov", "205", "4", "Johnny Depp", "45", "Will Smith", "29", "Jet Lee", "10", "Matthew Mcconaughey", "39"]);
+      // calcPoints(["Sandra Bullock", "340", "5", "Robert De Niro", "50", "Julia Roberts", "40.5", "Daniel Day-Lewis", "39.4", "Nicolas Cage", "29.9", "Stoyanka Mutafova", "33"]);
+
+      // 05. Series
+
+      function calcTotalPrice(params) {
+        const budjet = Number(params[0]);
+        const series = Number(params[1]);
+
+        let total = 0;
+
+        for (let i = 2; i < params.length; i++) {
+          const title = params[i];
+          i++;
+          const seriesPrice = Number(params[i]);
+          let discount = 0;
+
+          switch (title) {
+            case "Thrones":
+              discount = 0.5;
+              break;
+            case "Lucifer":
+              discount = 0.4;
+              break;
+            case "Protector":
+              discount = 0.3;
+              break;
+            case "TotalDrama":
+              discount = 0.2;
+              break;
+            case "Area":
+              discount = 0.1;
+              break;
+          }
+
+          total += (seriesPrice * (1 - discount));
+          // console.log(total);
+        }
+
+        if (budjet >= total) {
+          const diff = budjet - total;
+          console.log(`You bought all the series and left with ${diff.toFixed(2)} lv.`);
+        } else {
+          const diff = total - budjet;
+          console.log(`You need ${diff.toFixed(2)} lv. more to buy the series!`);
+        }
+
+      }
+
+      // calcTotalPrice(["10", "3", "Thrones", "5", "Riverdale", "5", "Gotham", "2"]);
+      // calcTotalPrice(["25", "6", "Teen Wolf", "8", "Protector", "5", "TotalDrama", "5", "Area", "4", "Thrones", "5", "Lucifer", "9"]);
+
     </script>
   </body>
 </html>
