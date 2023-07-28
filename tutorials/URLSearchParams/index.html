@@ -540,6 +540,117 @@
       #awards * {
         border: 1px solid blue;
       }
+
+      .square {
+        position: relative;
+        width: 400px;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .square span {
+        position: absolute;
+        inset: 0;
+        border: 2px solid #333;
+        opacity: 0.5;
+      }
+      .square span:nth-child(1) {
+        border-radius: 46% 54% 70% 30% / 40% 40% 60% 60%;
+        animation: rotate 6s linear infinite;
+      }
+      .square span:nth-child(2) {
+        border-radius: 68% 32% 61% 39% / 49% 52% 48% 51%;
+        animation: rotate 4s linear infinite;
+      }
+      .square span:nth-child(3) {
+        border-radius: 56% 44% 36% 64% / 51% 68% 32% 49%;
+        animation: rotate-reverse 4s linear infinite;
+      }
+
+      @keyframes rotate {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes rotate-reverse {
+        0% {
+          transform: rotate(360deg);
+        }
+        100% {
+          transform: rotate(0deg);
+        }
+      }
+
+      .bottom {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        margin-top: 100px;
+        padding: 40px 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #66a3ff;
+      }
+
+      .wave {
+        position: absolute;
+        top: -100px;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background-image: url(./images/background/background.png);
+        background-size: 1000px 100px;
+      }
+
+      #wave-1 {
+        bottom: 0;
+        animation: wave 4s linear infinite;
+        opacity: 1;
+        z-index: 3;
+      }
+      #wave-2 {
+        bottom: 10px;
+        animation: wave-2 4s linear infinite;
+        opacity: 0.5;
+        z-index: 2;
+      }
+      #wave-3 {
+        bottom: 15px;
+        animation: wave 3s linear infinite;
+        opacity: 0.2;
+        z-index: 1;
+      }
+      #wave-4 {
+        bottom: 20px;
+        animation: wave-2 3s linear infinite;
+        opacity: 0.7;
+        z-index: 2;
+      }
+
+      @keyframes wave {
+        0% {
+          background-position-x: 1000px;
+        }
+        100% {
+          background-position: 0px;
+        }
+      }
+
+      @keyframes wave-2 {
+        0% {
+          background-position-x: 0px;
+        }
+        100% {
+          background-position: 1000px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -763,6 +874,20 @@
       </div>
       </div>
     </section>
+
+    <div class="square">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="bottom">
+      <div class="waves">
+        <div class="wave" id="wave-1"></div>
+        <div class="wave" id="wave-2"></div>
+        <div class="wave" id="wave-3"></div>
+        <div class="wave" id="wave-4"></div>
+      </div>
+    </div>
 
     <section class="team">
 
