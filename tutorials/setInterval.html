@@ -6,11 +6,117 @@
     <!-- <title>setInterval function in JS</title> -->
     <title>Travelia - Explore the world</title>
     <meta name="title" content="Travelia - Explore the world">
-    <meta name="description" content="This is a travel html template">
-    <link rel="shortcut icon" href="" type="image/svg+xml">
+    <meta name="description" content="This is a travel HTML template">
+    <link rel="shortcut icon" href="./images/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        /* COLORS */
+
+        /* background colors */
+        --bg-white: hsl(0, 0%, 100%);
+        --bg-black-alpha-20: hsla(0, 0%, 0%, 0.2);
+        --bg-lavender-blush: hsl(0, 100%, 98%);
+        --bg-majorelle-blue: hsl(249, 95%, 63%);
+        --bg-ocean-blue: hsl(249, 63%, 54%);
+        --bg-majorelle-blue-alpha-5: hsla(249, 95%, 63%, 0.05);
+        --bg-misty-rose: hsl(0, 100%, 95%);
+        --bg-red-salsa: hsl(357, 94%, 63%);
+        --bg-red-salsa-alpha-5: hsla(357, 94%, 63%, 0.05);
+        --bg-english-vermillion: hsl(357, 64%, 53%);
+        --bg-chrome-yellow-alpha-5: hsla(40, 100%, 50%, 0.05);
+        --bg-sunglow-alpha-10: hsla(48, 100%, 50%, 0.1);
+        --bg-gainsboro: hsl(0, 0%, 85%);
+        /* text colors */
+        --text-white: hsl(0, 0%, 100%);
+        --text-gunmetal: hsl(209, 40%, 14%);
+        --text-light-coral: hsl(357, 96%, 73%);
+        --text-granite-gray: hsl(210, 4%, 38%);
+        --text-majorelle-blue: hsl(249, 95%, 63%);
+        --text-sunglow: hsl(48, 100%, 50%);
+        /* border colors */
+        --border-gainsboro: hsl(0, 1%, 85%);
+        
+        /* TYPOGRAPHY */
+        
+        /* font family */
+        --ff-poppins: 'Poppins', sans-serif;
+        /* font size */
+        --fontSize-1: 4.2rem;
+        --fontSize-2: 3.6rem;
+        --fontSize-3: 2.5rem;
+        --fontSize-4: 2.4rem;
+        --fontSize-5: 2rem;
+        --fontSize-6: 1.6rem;
+        --fontSize-7: 1.5rem;
+        /* font weight */
+        --weight-bold: 700;
+        --weight-semiBold: 600;
+        --weight-medium: 500;
+        
+        /* SPACING */
+        --section-spacing: 80px;
+        
+        /* BOX SHADOW */
+        --shadow-1: 0 2px 10px hsla(209, 40%, 14%, 10%);
+        --shadow-2: 0 5px 10px hsla(249, 95%, 63%, 25%);
+        --shadow-3: 0 5px 10px hsla(357, 64%, 53%, 25%);
+        --shadow-4: 0 30px 50px hsla(357, 64%, 53%, 30%);
+        
+        /* RADIUS */
+        --radius-pill: 200px;
+        --radius-circle: 50%;
+        --radius-30: 30px;
+        --radius-20: 20px;
+        
+        /* TRANSITION */
+        --transition-1: 250ms ease;
+        --transition-2: 500ms ease;
+        --cubic-out: cubic-bezier(0.05, 0.83, 0.52, 0.97);
+      }
+
+      *, 
+      *::before, 
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      li {
+        list-style: none;
+      }
+
+      a, 
+      img, 
+      span, 
+      input, 
+      button, 
+      i.fa {
+        display: block;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button, 
+      input {
+        font: inherit;
+        border: none;
+        background-color: transparent;
+      }
+
+      input {
+        width: 100%;
+        outline: none;
+      }
+
+    </style>
   </head>
   <body>
     <!-- PRELOADER -->
@@ -19,19 +125,28 @@
         <img src="./images/preloader.svg" alt="" class="img">
       </div>
     </div>
+
+    <script>
+      const preloader = document.querySelector("[data-preloader]");
+
+      window.addEventListener("load", () => {
+        preloader.classList.add("remove");
+      })
+    </script>
+
     <!-- HEADER -->
     <header class="header" data-header>
       <div class="container">
         <a href="#" class="logo">
           <img src="./images/logo.svg" alt="logo">
         </a>
-        <nav class="navbar">
+        <nav class="navbar" data-navbar>
           <div class="navbar-top">
             <a href="#" class="logo">
               <img src="./images/logo.svg" alt="logo">
             </a>
-            <button class="nav-toggle-btn">
-              <i class="fa fa-bars"></i>
+            <button class="nav-toggle-btn" aria-label="close menu">
+              <i class="fa fa-times"></i>
             </button>
           </div>
           <ul class="navbar-list">
@@ -57,11 +172,12 @@
           </div>
         </nav>
         <button class="nav-toggle-btn">
-          <i class="fa fa-time"></i>
+          <i class="fa fa-bars"></i>
         </button>
         <div class="overlay"></div>
       </div>
     </header>
+
     <main>
       <article>
         <!-- HERO -->
@@ -98,11 +214,11 @@
       </article>
     </main>
 
-    <h1 style="text-align: center;">setInterval() - JavaScript</h1>
-    <hr>
-    <p id="timer" style="font-size: 3rem;">0 sec</p>
-    <button id="start">Start Timer</button>
-    <button id="pause">Pause Timer</button>
+    <!-- <h1 style="text-align: center;">setInterval() - JavaScript</h1> -->
+    <!-- <hr> -->
+    <!-- <p id="timer" style="font-size: 3rem;">0 sec</p> -->
+    <!-- <button id="start">Start Timer</button> -->
+    <!-- <button id="pause">Pause Timer</button> -->
 
     <script src="js.js">
       const timer = document.getElementById('timer');
