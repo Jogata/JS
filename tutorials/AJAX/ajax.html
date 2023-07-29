@@ -4,9 +4,127 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      fieldset {
+        display: none;
+      }
+
+      a {
+        text-decoration: none;
+        transition: all 300ms;
+      }
+
+      body {
+        font-family: Georgia, serif;
+      }
+
+      section {
+        min-height: 100vh;
+        padding: 4em 2em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      section:nth-child(even) {
+        background-color: #fff;
+      }
+      section:nth-child(odd) {
+        background-color: #f6f2f1;
+      }
+
+      .container {
+        max-width: 1150px;
+        margin: 0 auto;
+      }
+    </style>
   </head>
   <body>
-    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+    <header id="header" class="scroll-checkpoint">
+      <nav class="navbar">
+        <div class="container">
+          <a href="ajax.html" class="brand">brand name</a>
+          <div class="menu">
+            <ul>
+              <li><a href="#header" class="active">home</a></li>
+              <li><a href="#about">about us</a></li>
+              <li><a href="#portfolio">portfolio</a></li>
+              <li><a href="#pricing">pricing</a></li>
+              <li><a href="#contact">contact</a></li>
+            </ul>
+          </div>
+          <button class="menu-btn">
+            <i class="fa fa-bars"></i>
+          </button>
+        </div>
+      </nav>
+      <div class="container">
+        <div class="hero">
+          <h1>welcome to our website</h1>
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, recusandae consectetur ullam beatae dignissimos eum! Adipisci, ipsa nobis natus minus beatae unde.</p>
+          <div class="buttons">
+            <a href="#" class="btn">get started</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="about" class="scroll-checkpoint">
+      <h1>about us</h1>
+    </section>
+
+    <section id="portfolio" class="scroll-checkpoint">
+      <h1>portfolio</h1>
+    </section>
+
+    <section id="pricing" class="scroll-checkpoint">
+      <h1>pricing plans</h1>
+    </section>
+
+    <section id="contact" class="scroll-checkpoint">
+      <h1>contact us</h1>
+    </section>
+
+    <footer>
+      <p>&copy; Copyright. Brand Name</p>
+    </footer>
+
+    <script>
+      const navbar = document.querySelector(".navbar");
+      const menu = document.querySelector(".menu");
+      const menuBtn = document.querySelector(".menu-btn");
+      const checkpoints = document.querySelectorAll(".scroll-checkpoint");
+      const links = document.querySelectorAll(".menu ul a");
+
+      menuBtn.addEventListener("click", () => {
+        menu.classList.toggle("menu-open");
+      })
+
+      window.addEventListener("scroll", () => {
+        if (scrollY > 50) {
+          navbar.classList.add("navbar-active");
+        } else {
+          navbar.classList.remove("navbar-active");
+        }
+
+        for (let i = 0; i < checkpoints.length; i++) {
+          if (scrollY > checkpoints[i].offsetTop - 50) {
+            links.forEach(link => {
+              link.classList.remove("active");
+            })
+            links[i].classList.add("active");
+          }
+        }
+      })
+    </script>
+
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
@@ -70,140 +188,6 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
-    </script>
-
-    <script>
-      // 06. Favorite Movie
-
-      function pickMovie(params) {
-        let index = 0;
-        let movie = params[index];
-        let max = 0;
-        let choice = "";
-        
-        while (movie !== "STOP") {
-          // console.log(movie);
-          let total = 0;
-          
-          for (let i = 0; i < movie.length; i++) {
-            let letter = movie[i];
-            let ascii = letter.charCodeAt(0);
-            // console.log(ascii);
-            total += ascii;
-            
-            if (ascii > 64 && ascii < 91) {
-              total -= movie.length;
-            } else if (ascii > 96 && ascii < 123) {
-              total -= (movie.length * 2);
-            }
-            
-          }
-
-          // console.log(total);
-
-          if (total > max) {
-            max = total;
-            choice = movie;
-          }
-
-          index++;
-
-          if (index > 6) {
-            console.log("The limit is reached.");
-            break;
-          }
-
-          movie = params[index];
-        }
-
-        console.log(`The best movie for you is ${choice} with ${max} ASCII sum.`);
-
-      }
-
-      // pickMovie(["azAZ", "STOP"]);
-      // pickMovie(["Matrix", "Breaking bad", "Legend", "STOP"]);
-      // pickMovie(["Wrong turn", "The maze", "Area 51", "Night Club", "Ice age", "Harry Potter", "Wizards"]);
-
-      // 05. Oscars
-
-      function calcPoints(params) {
-        const actor = params[0];
-        let points = Number(params[1]);
-        const judges = Number(params[2]);
-
-        for (let i = 3; i < params.length; i++) {
-          const judge = params[i];
-          i++;
-          const judgePoints = Number(params[i]);
-          points += (judge.length * judgePoints) / 2;
-
-          if (points >= 1250.5) {
-            i = params.length;
-          }
-
-        }
-
-        if (points >= 1250.5) {
-          console.log(`Congratulations, ${actor} got a nominee for leading role with ${points.toFixed(1)}!`);
-        } else {
-          const diff = 1250.5 - points;
-          console.log(`Sorry, ${actor} you need ${diff.toFixed(1)} more!`);
-        }
-
-      }
-
-      // calcPoints(["Zahari Baharov", "205", "4", "Johnny Depp", "45", "Will Smith", "29", "Jet Lee", "10", "Matthew Mcconaughey", "39"]);
-      // calcPoints(["Sandra Bullock", "340", "5", "Robert De Niro", "50", "Julia Roberts", "40.5", "Daniel Day-Lewis", "39.4", "Nicolas Cage", "29.9", "Stoyanka Mutafova", "33"]);
-
-      // 05. Series
-
-      function calcTotalPrice(params) {
-        const budjet = Number(params[0]);
-        const series = Number(params[1]);
-
-        let total = 0;
-
-        for (let i = 2; i < params.length; i++) {
-          const title = params[i];
-          i++;
-          const seriesPrice = Number(params[i]);
-          let discount = 0;
-
-          switch (title) {
-            case "Thrones":
-              discount = 0.5;
-              break;
-            case "Lucifer":
-              discount = 0.4;
-              break;
-            case "Protector":
-              discount = 0.3;
-              break;
-            case "TotalDrama":
-              discount = 0.2;
-              break;
-            case "Area":
-              discount = 0.1;
-              break;
-          }
-
-          total += (seriesPrice * (1 - discount));
-          // console.log(total);
-        }
-
-        if (budjet >= total) {
-          const diff = budjet - total;
-          console.log(`You bought all the series and left with ${diff.toFixed(2)} lv.`);
-        } else {
-          const diff = total - budjet;
-          console.log(`You need ${diff.toFixed(2)} lv. more to buy the series!`);
-        }
-
-      }
-
-      // calcTotalPrice(["10", "3", "Thrones", "5", "Riverdale", "5", "Gotham", "2"]);
-      // calcTotalPrice(["25", "6", "Teen Wolf", "8", "Protector", "5", "TotalDrama", "5", "Area", "4", "Thrones", "5", "Lucifer", "9"]);
-
     </script>
   </body>
 </html>
