@@ -540,6 +540,9 @@
       #awards * {
         border: 1px solid blue;
       }
+      #team * {
+        border: 1px solid blue;
+      }
 
       .square {
         position: relative;
@@ -590,14 +593,14 @@
 
       .bottom {
         /* position: absolute; */
-        bottom: 0;
+        /* bottom: 0; */
         width: 100%;
-        margin-top: 100px;
-        padding: 40px 50px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #66a3ff;
+        margin-top: 6rem;
+        padding: 2.5rem 3rem;
+        /* display: flex; */
+        /* align-items: center; */
+        /* justify-content: center; */
+        /* background-color: #66a3ff; */
       }
 
       .wave {
@@ -651,15 +654,6 @@
         100% {
           background-position: 1000px;
         }
-      }
-
-      .icon {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 40px;
-        cursor: pointer;
       }
     </style>
   </head>
@@ -916,7 +910,7 @@
         <div class="content-box" id="content-2">
           <div class="card">
             <div class="img-box">
-              <img src="../../../CSS/assets/img/profile-copy.jpg" alt="">
+              <img src="./images/pics/people1_1920.jpg" alt="">
             </div>
             <div class="text-box">
               <h2>person's name 2<br> 
@@ -942,7 +936,7 @@
         <div class="content-box" id="content-3">
           <div class="card">
             <div class="img-box">
-              <img src="../../../CSS/assets/img/profile-copy.jpg" alt="">
+              <img src="./images/pics/people2_1920.jpg" alt="">
             </div>
             <div class="text-box">
               <h2>person's name 3<br> 
@@ -968,7 +962,7 @@
         <div class="content-box" id="content-4">
           <div class="card">
             <div class="img-box">
-              <img src="../../../CSS/assets/img/profile-copy.jpg" alt="">
+              <img src="./images/pics/people3_1920.jpg" alt="">
             </div>
             <div class="text-box">
               <h2>person's name 4<br> 
@@ -1003,23 +997,41 @@
         <div class="wave" id="wave-3"></div>
         <div class="wave" id="wave-4"></div>
       </div>
-      <div class="icon">
-        <div class="img-box active">
+      <div class="icons">
+        <div class="img-box active" data-id="content-1">
           <img src="../../../CSS/assets/img/profile-copy.jpg" alt="">
         </div>
-        <div class="img-box">
+        <div class="img-box" data-id="content-2">
           <img src="./images/pics/people1_1920.jpg" alt="">
         </div>
-        <div class="img-box">
-          <img src="../../../CSS/assets/img/profile-copy.jpg" alt="">
+        <div class="img-box" data-id="content-3">
+          <img src="./images/pics/people2_1920.jpg" alt="">
         </div>
-        <div class="img-box">
-          <img src="../../../CSS/assets/img/profile-copy.jpg" alt="">
+        <div class="img-box" data-id="content-4">
+          <img src="./images/pics/people3_1920.jpg" alt="">
         </div>
       </div>
     </div>
 
-    <section class="team">
+    <script>
+      const imageBoxes = document.querySelectorAll(".img-box");
+      const contentBoxes = document.querySelectorAll(".content-box");
+
+      for (let i = 0; i < imageBoxes.length; i++) {
+        imageBoxes[i].addEventListener("mouseover", () => {
+          for (let i = 0; i < contentBoxes.length; i++) {
+            contentBoxes[i].className = "content-box";
+          }
+          document.getElementById(imageBoxes[i].dataset.id).className = "content-box active";
+          for (let j = 0; j < imageBoxes.length; j++) {
+            imageBoxes[j].className = "img-box";
+          }
+          imageBoxes[i].className = "img-box active";
+        })
+      }
+    </script>
+
+    <section id="team">
 
       <div class="section-subtitle">
 
@@ -1033,62 +1045,71 @@
         <span class="subtitle-text">
           people behind creativeness
         </span>
-
-        <div class="sec">
-
-          <div class="person">
-            <img src="./images/pics/people1_1920.jpg" alt="">
-            <span class="name">name</span>
-            <span class="profession">profession</span>
-            <ul class="sci">
-              <li><a href="#f">
-                <i class="fa fa-facebook"></i>
-              </a></li>
-              <li><a href="#t">
-                <i class="fa fa-twitter"></i>
-              </a></li>
-              <li><a href="#i">
-                <i class="fa fa-instagram"></i>
-              </a></li>
-            </ul>
-          </div>
-
-          <div class="person">
-            <img src="./images/pics/people2_1920.jpg" alt="">
-            <span class="name">name</span>
-            <span class="profession">profession</span>
-            <ul class="sci">
-              <li><a href="#f">
-                <i class="fa fa-facebook"></i>
-              </a></li>
-              <li><a href="#t">
-                <i class="fa fa-twitter"></i>
-              </a></li>
-              <li><a href="#i">
-                <i class="fa fa-instagram"></i>
-              </a></li>
-            </ul>
-          </div>
-
-          <div class="person">
-            <img src="./images/pics/people3_1920.jpg" alt="">
-            <span class="name">name</span>
-            <span class="profession">profession</span>
-            <ul class="sci">
-              <li><a href="#f">
-                <i class="fa fa-facebook"></i>
-              </a></li>
-              <li><a href="#t">
-                <i class="fa fa-twitter"></i>
-              </a></li>
-              <li><a href="#i">
-                <i class="fa fa-instagram"></i>
-              </a></li>
-            </ul>
-          </div>
-
-        </div>
         
+      </div>
+
+      <div class="sec">
+
+        <div class="person">
+          <div class="image-box">
+
+            <img src="./images/pics/people1_1920.jpg" alt="">
+          </div>
+          <span class="name">name</span>
+          <span class="profession">profession</span>
+          <ul class="sci">
+            <li><a href="#f">
+              <i class="fa fa-facebook"></i>
+            </a></li>
+            <li><a href="#t">
+              <i class="fa fa-twitter"></i>
+            </a></li>
+            <li><a href="#i">
+              <i class="fa fa-instagram"></i>
+            </a></li>
+          </ul>
+        </div>
+
+        <div class="person">
+          <div class="image-box">
+
+            <img src="./images/pics/people2_1920.jpg" alt="">
+          </div>
+          <span class="name">name</span>
+          <span class="profession">profession</span>
+          <ul class="sci">
+            <li><a href="#f">
+              <i class="fa fa-facebook"></i>
+            </a></li>
+            <li><a href="#t">
+              <i class="fa fa-twitter"></i>
+            </a></li>
+            <li><a href="#i">
+              <i class="fa fa-instagram"></i>
+            </a></li>
+          </ul>
+        </div>
+
+        <div class="person">
+          <div class="image-box">
+
+            <img src="./images/pics/people3_1920.jpg" alt="">
+          </div>
+          <span class="name">name</span>
+          <span class="profession">profession</span>
+          <ul class="sci">
+            <li><a href="#f">
+              <i class="fa fa-facebook"></i>
+            </a></li>
+            <li><a href="#t">
+              <i class="fa fa-twitter"></i>
+            </a></li>
+            <li><a href="#i">
+              <i class="fa fa-instagram"></i>
+            </a></li>
+          </ul>
+        </div>
+
       </div>
 
     </section>
