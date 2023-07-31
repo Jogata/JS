@@ -83,7 +83,7 @@
         justify-content: space-between;
       }
       
-      .brand {
+      .logo {
         font-size: 1.5rem;
         text-transform: capitalize;
       }
@@ -145,7 +145,7 @@
       }
 
       p {
-        max-width: 400px;
+        max-width: 36rem;
         margin: 1rem 0;
         line-height: 25px;
       }
@@ -157,13 +157,96 @@
       .hero p {
         margin: 2em auto 2.8em auto;
       }
+
+      .btn {
+        margin-right: 1.5em;
+        padding: 0.5em 1.5em;
+        color: #fff;
+        font-size: 1.2rem;
+        text-transform: capitalize;
+        border: 3px solid #3391f0;
+        border-radius: 0.5em;
+        background-color: #3391f0;
+      }
+      .btn:hover {
+        /* color: #3391f0; */
+        border-color: #fff;
+        background-color: transparent;
+      }
+
+      footer {
+        padding: 1.5em;
+        color: #a7a7a7;
+        background-color: #fff;
+      }
+      footer p {
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      @media screen and (min-width: 1200px) {
+        .hero {
+          width: 1150px;
+        }
+      }
+
+      @media screen and (min-width: 1000px) {
+        h1 {
+          font-size: 3rem;
+        }
+      }
+
+      @media screen and (max-width: 1000px) {
+        .menu-btn {
+          display: block;
+        }
+        .navbar {
+          background-color: #fff;
+        }
+        .navbar a {
+          color: #333;
+        }
+        .menu {
+          position: absolute;
+          top: -20em;
+          left: 0;
+          width: 100%;
+          background-color: #f6f2f1;
+          transition: all 0.5s ease-in-out;
+        }
+        .menu ul {
+          padding: 2em;
+          flex-direction: column;
+          gap: 2em;
+          height: 15em;
+          overflow-y: auto;
+        }
+        .active::before {
+          background-color: #3391f0;
+        }
+        .menu-open {
+          top: 4.2em;
+        }
+      }
+
+      @media screen and (max-width: 400px) {
+        html {
+          font-size: 14px;
+        }
+      }
+
+      @media screen and (max-height: 400px) and (max-width: 1000px) {
+        .navbar .menu ul {
+          height: 70vh;
+        }
+      }
     </style>
   </head>
   <body>
     <header id="header" class="scroll-checkpoint">
       <nav class="navbar">
         <div class="container">
-          <a href="ajax.html" class="brand">brand name</a>
+          <a href="ajax.html" class="logo">logo</a>
           <div class="menu">
             <ul>
               <li><a href="#header" class="active">home</a></li>
@@ -206,7 +289,7 @@
     </section>
 
     <footer>
-      <p>&copy; Copyright. Brand Name</p>
+      <p>&copy; Copyright. Company Name</p>
     </footer>
 
     <script>
@@ -220,12 +303,57 @@
         menu.classList.toggle("menu-open");
       })
 
-      window.addEventListener("scroll", () => {
+      // function addClass(element, className) {
+      //   return () => {
+      //     if (scrollY > 50) {
+      //       element.classList.add(className);
+      //       console.log("class added");
+      //       window.removeEventListener("scroll", addClass);
+      //       window.addEventListener("scroll", removeClass(navbar, "navbar-active"));
+      //     }
+      //   }
+      // }
+
+      // function removeClass(element, className) {
+      //   return () => {
+      //     if (scrollY < 50) {
+      //       element.classList.remove(className);
+      //       console.log("class removed");
+      //       window.removeEventListener("scroll", removeClass);
+      //       window.addEventListener("scroll", addClass(navbar, "navbar-active"));
+      //     }
+      //   }
+      // }
+      
+      // window.addEventListener("scroll", addClass(navbar, "navbar-active"));
+
+      function setNavbar() {
         if (scrollY > 50) {
           navbar.classList.add("navbar-active");
-        } else {
-          navbar.classList.remove("navbar-active");
+          console.log("class added");
+          window.removeEventListener("scroll", setNavbar);
+          window.addEventListener("scroll", unsetNavbar);
         }
+      }
+
+      function unsetNavbar() {
+        if (scrollY < 50) {
+          navbar.classList.remove("navbar-active");
+          console.log("class removed");
+          window.removeEventListener("scroll", unsetNavbar);
+          window.addEventListener("scroll", setNavbar);
+        }
+      }
+
+      window.addEventListener("scroll", setNavbar);
+
+      window.addEventListener("scroll", () => {
+        // if (scrollY > 50) {
+        //   navbar.classList.add("navbar-active");
+        //   console.log("class added");
+        // } else {
+        //   navbar.classList.remove("navbar-active");
+        // }
 
         checkpoints.forEach((checkpoint, index) => {          
           if (scrollY > checkpoint.offsetTop - 50) {
