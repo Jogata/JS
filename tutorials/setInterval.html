@@ -145,6 +145,36 @@
         padding-inline: 16px;
       }
 
+      .btn {
+        max-width: max-content;
+        height: 50px;
+        padding-inline: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        color: var(--text-white);
+        text-transform: capitalize;
+        border-radius: var(--radius-pill);
+        transition: var(--transition-1);
+      }
+
+      .btn-primary {
+        background-color: var(--bg-majorelle-blue);
+      }
+      .btn-primary:is(:hover, :focus-visible) {
+        background-color: var(--bg-ocean-blue);
+        box-shadow: var(--shadow-2);
+      }
+
+      .btn-secondary {
+        background-color: var(--bg-red-salsa);
+      }
+      .btn-secondary:is(:hover, :focus-visible) {
+        background-color: var(--bg-english-vermillion);
+        box-shadow: var(--shadow-3);
+      }
+
       .preloader {
         position: fixed;
         top: 0;
@@ -234,13 +264,103 @@
       }
 
       /* .navbar,  */
-      .overlay {
+      /* .overlay {
         display: none;
-      }
+      } */
 
       .logo img {
         width: 160px;
         height: 38px;
+      }
+
+      /* =================================== */
+      .nav-toggle-btn {
+        font-size: 3.2rem;
+      }
+
+      .navbar {
+        position: fixed;
+        top: 0;
+        right: -350px;
+        width: 100%;
+        max-width: 350px;
+        height: 100vh;
+        padding: 30px 16px;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--bg-white);
+        transition: 400ms var(--cubic-out);
+        visibility: hidden;
+        z-index: 1;
+      }
+
+      .navbar.active {
+        transform: translate(-350px);
+        transition-duration: 500ms;
+        visibility: visible;
+      }
+
+      .navbar-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .navbar-list {
+        margin-block-start: 50px;
+      }
+
+      .navbar-link {
+        position: relative;
+        padding-block: 8px;
+        color: var(--text-gunmetal);
+        font-size: var(--fontSize-7);
+        font-weight: var(--weight-medium);
+        text-transform: capitalize;
+        transition: var(--transition-1);
+      }
+      .navbar-link:is(:hover, :focus-visible, .active) {
+        transform: translateX(10px);
+      }
+      .navbar-link::before {
+        position: absolute;
+        top: 50%;
+        left: -10px;
+        transform: translateY(-50%);
+        content: "";
+        width: 3px;
+        height: 10px;
+        border-radius: 5px;
+        background-color: var(--bg-majorelle-blue);
+        transition: var(--transition-1);
+        opacity: 0;
+      }
+      .navbar-link:is(:hover, :focus-visible, .active)::before {
+        opacity: 1;
+      }
+
+      .header-action {
+        margin-block-start: auto;
+        padding-block-start: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        border-block-start: 1px solid var(--border-gainsboro);
+      }
+
+      .login-btn {
+        color: var(--text-gunmetal);
+        font-size: var(--fontSize-7);
+        font-weight: var(--weight-medium);
+        text-transform: capitalize;
+        transition: var(--transition-1);
+      }
+      .login-btn:is(:hover, :focus-visible) {
+        opacity: 0.8;
+      }
+
+      .overlay {
+        position: fixed;
       }
     </style>
   </head>
@@ -266,7 +386,7 @@
         <a href="#" class="logo">
           <img src="./images/logo.svg" alt="logo">
         </a>
-        <nav class="navbar active" data-navbar>
+        <nav class="navbar" data-navbar>
           <div class="navbar-top">
             <a href="#" class="logo">
               <img src="./images/logo.svg" alt="logo">
@@ -277,7 +397,7 @@
           </div>
           <ul class="navbar-list">
             <li class="navbar-item">
-              <a href="#" class="navbar-link">home</a>
+              <a href="#" class="navbar-link active">home</a>
             </li>
             <li class="navbar-item">
               <a href="#" class="navbar-link">about</a>
@@ -297,10 +417,10 @@
             <a href="#" class="btn btn-primary">sign up</a>
           </div>
         </nav>
-        <button class="nav-toggle-btn" aria-label="open menu">
+        <button class="nav-toggle-btn" aria-label="open menu" data-nav-toggler>
           <i class="fa fa-bars"></i>
         </button>
-        <div class="overlay" data-overlay></div>
+        <div class="overlay" data-overlay data-nav-toggler></div>
       </div>
     </header>
 
