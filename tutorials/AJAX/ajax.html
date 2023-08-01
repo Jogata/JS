@@ -4,373 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      fieldset {
-        display: none;
-      }
-
-      a {
-        text-decoration: none;
-        transition: all 300ms;
-      }
-
-      body {
-        font-family: Georgia, serif;
-      }
-
-      section {
-        min-height: 100vh;
-        padding: 4em 2em;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      section:nth-child(even) {
-        background-color: #fff;
-      }
-      section:nth-child(odd) {
-        background-color: #f6f2f1;
-      }
-
-      .container {
-        max-width: 1150px;
-        margin: 0 auto;
-      }
-
-      header {
-        position: relative;
-        min-height: 100vh;
-        padding: 6em 2em 2em 2em;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        background-image: url("../../../CSS/assets/img/foggy-lake-quang-nguyen-vinh-2166695-copy.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-      }
-      header::before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.7);
-        z-index: 0;
-      }
-
-      .navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding: 1em 1em;
-        z-index: 1;
-      }
-
-      .navbar .container {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      
-      .logo {
-        font-size: 1.5rem;
-        text-transform: capitalize;
-      }
-
-      .menu ul {
-        list-style: none;
-        display: flex;
-        align-items: center;
-        justify-content: right;
-        gap: 1.5em;
-      }
-
-      nav a {
-        color: #fff;
-        font-weight: 400;
-        text-transform: uppercase;
-      }
-      nav a:hover {
-        color: #3391f0;
-      }
-
-      .menu-btn {
-        display: none;
-        border: none;
-        background-color: transparent;
-        cursor: pointer;
-      }
-      .menu-btn i {
-        font-size: 2.2rem;
-      }
-      .active {
-        position: relative;
-      }
-      .active::before {
-        position: absolute;
-        bottom: -6px;
-        left: 50%;
-        transform: translateX(-50%);
-        content: "";
-        width: 100%;
-        height: 3px;
-        background-color: #fff;
-      }
-
-      .navbar-active {
-        background-color: #fff;
-        box-shadow: 0.5em 0 2em rgba(0, 0, 0, 0.1);
-      }
-      .navbar-active a {
-        color: #333;
-      }
-      .navbar-active .active::before {
-        background-color: #3391f0;
-      }
-
-      h1 {
-        font-size: 2.5rem;
-        text-transform: uppercase;
-      }
-
-      p {
-        max-width: 36rem;
-        margin: 1rem 0;
-        line-height: 25px;
-      }
-
-      .hero {
-        position: relative;
-        text-align: center;
-      }
-      .hero p {
-        margin: 2em auto 2.8em auto;
-      }
-
-      .btn {
-        margin-right: 1.5em;
-        padding: 0.5em 1.5em;
-        color: #fff;
-        font-size: 1.2rem;
-        text-transform: capitalize;
-        border: 3px solid #3391f0;
-        border-radius: 0.5em;
-        background-color: #3391f0;
-      }
-      .btn:hover {
-        /* color: #3391f0; */
-        border-color: #fff;
-        background-color: transparent;
-      }
-
-      footer {
-        padding: 1.5em;
-        color: #a7a7a7;
-        background-color: #fff;
-      }
-      footer p {
-        margin: 0 auto;
-        text-align: center;
-      }
-
-      @media screen and (min-width: 1200px) {
-        .hero {
-          width: 1150px;
-        }
-      }
-
-      @media screen and (min-width: 1000px) {
-        h1 {
-          font-size: 3rem;
-        }
-      }
-
-      @media screen and (max-width: 1000px) {
-        .menu-btn {
-          display: block;
-        }
-        .navbar {
-          background-color: #fff;
-        }
-        .navbar a {
-          color: #333;
-        }
-        .menu {
-          position: absolute;
-          top: -20em;
-          left: 0;
-          width: 100%;
-          background-color: #f6f2f1;
-          transition: all 0.5s ease-in-out;
-        }
-        .menu ul {
-          padding: 2em;
-          flex-direction: column;
-          gap: 2em;
-          height: 15em;
-          overflow-y: auto;
-        }
-        .active::before {
-          background-color: #3391f0;
-        }
-        .menu-open {
-          top: 4.2em;
-        }
-      }
-
-      @media screen and (max-width: 400px) {
-        html {
-          font-size: 14px;
-        }
-      }
-
-      @media screen and (max-height: 400px) and (max-width: 1000px) {
-        .navbar .menu ul {
-          height: 70vh;
-        }
-      }
-    </style>
   </head>
   <body>
-    <header id="header" class="scroll-checkpoint">
-      <nav class="navbar">
-        <div class="container">
-          <a href="ajax.html" class="logo">logo</a>
-          <div class="menu">
-            <ul>
-              <li><a href="#header" class="active">home</a></li>
-              <li><a href="#about">about us</a></li>
-              <li><a href="#portfolio">portfolio</a></li>
-              <li><a href="#pricing">pricing</a></li>
-              <li><a href="#contact">contact</a></li>
-            </ul>
-          </div>
-          <button class="menu-btn">
-            <i class="fa fa-bars"></i>
-          </button>
-        </div>
-      </nav>
-      <div class="container">
-        <div class="hero">
-          <h1>welcome to our website</h1>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, recusandae consectetur ullam beatae dignissimos eum! Adipisci, ipsa nobis natus minus beatae unde.</p>
-          <div class="buttons">
-            <a href="#" class="btn">get started</a>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <section id="about" class="scroll-checkpoint">
-      <h1>about us</h1>
-    </section>
-
-    <section id="portfolio" class="scroll-checkpoint">
-      <h1>portfolio</h1>
-    </section>
-
-    <section id="pricing" class="scroll-checkpoint">
-      <h1>pricing plans</h1>
-    </section>
-
-    <section id="contact" class="scroll-checkpoint">
-      <h1>contact us</h1>
-    </section>
-
-    <footer>
-      <p>&copy; Copyright. Company Name</p>
-    </footer>
-
-    <script>
-      const navbar = document.querySelector(".navbar");
-      const menu = document.querySelector(".menu");
-      const menuBtn = document.querySelector(".menu-btn");
-      const checkpoints = document.querySelectorAll(".scroll-checkpoint");
-      const links = document.querySelectorAll(".menu ul a");
-
-      menuBtn.addEventListener("click", () => {
-        menu.classList.toggle("menu-open");
-      })
-
-      // function addClass(element, className) {
-      //   return () => {
-      //     if (scrollY > 50) {
-      //       element.classList.add(className);
-      //       console.log("class added");
-      //       window.removeEventListener("scroll", addClass);
-      //       window.addEventListener("scroll", removeClass(navbar, "navbar-active"));
-      //     }
-      //   }
-      // }
-
-      // function removeClass(element, className) {
-      //   return () => {
-      //     if (scrollY < 50) {
-      //       element.classList.remove(className);
-      //       console.log("class removed");
-      //       window.removeEventListener("scroll", removeClass);
-      //       window.addEventListener("scroll", addClass(navbar, "navbar-active"));
-      //     }
-      //   }
-      // }
-      
-      // window.addEventListener("scroll", addClass(navbar, "navbar-active"));
-
-      function setNavbar() {
-        if (scrollY > 50) {
-          navbar.classList.add("navbar-active");
-          console.log("class added");
-          window.removeEventListener("scroll", setNavbar);
-          window.addEventListener("scroll", unsetNavbar);
-        }
-      }
-
-      function unsetNavbar() {
-        if (scrollY < 50) {
-          navbar.classList.remove("navbar-active");
-          console.log("class removed");
-          window.removeEventListener("scroll", unsetNavbar);
-          window.addEventListener("scroll", setNavbar);
-        }
-      }
-
-      window.addEventListener("scroll", setNavbar);
-
-      window.addEventListener("scroll", () => {
-        // if (scrollY > 50) {
-        //   navbar.classList.add("navbar-active");
-        //   console.log("class added");
-        // } else {
-        //   navbar.classList.remove("navbar-active");
-        // }
-
-        checkpoints.forEach((checkpoint, index) => {          
-          if (scrollY > checkpoint.offsetTop - 50) {
-            // links.forEach(link => {
-            //   link.classList.remove("active");
-            // })
-            const activeLink = document.querySelector("a.active");
-            activeLink.classList.remove("active");
-            links[index].classList.add("active");
-          }
-        })
-        // for (let i = 0; i < checkpoints.length; i++) {
-        // }
-      })
-    </script>
-
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
@@ -434,6 +70,135 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
+    </script>
+
+    <script>
+      // 04. Movie Stars
+
+      function calcSalary(params) {
+        const budjet = Number(params[0]);
+        let index = 1;
+        let input = params[index];
+        let total = 0;
+
+        while (input !== "ACTION") {
+          const actor = input;
+
+          if (actor.length <= 15) {
+            index++;
+            const salary = Number(params[index]);
+            total += salary;
+          } else {
+            const salary = (budjet - total) * 0.2;
+            total += salary;
+          }
+
+          // if (total > budjet) {
+          //   break;
+          // }
+
+          // index++;
+          // input = params[index];
+
+          if (total > budjet) {
+            input = "ACTION";
+          } else {
+            index++;
+            input = params[index];
+          }
+
+        }
+
+        if (budjet >= total) {
+          const diff = budjet - total;
+          console.log(`We are left with ${diff.toFixed(2)} leva.`);
+        } else {
+          const diff = total - budjet;
+          console.log(`We need ${diff.toFixed(2)} leva for our actors.`);
+        }
+
+      }
+
+      // calcSalary(["90000", "Christian Bale", "70000.50", "Leonard DiCaprio", "Kevin Spacey", "24000.99"]);
+      // calcSalary(["170000", "Ben Affleck", "40000.50", "Zahari Baharov", "80000", "Tom Hanks", "2000.99", "ACTION"]);
+
+      // 04. Cinema
+
+      function calcCinemaSeats(params) {
+        const seats = Number(params[0]);
+        
+        const ticketPrice = 5;
+        let total = 0;
+        let remainingSeats = seats;
+
+        let index = 1;
+        let input = params[index];
+
+        while (input !== "Movie time!") {
+          const clients = Number(input);
+          
+          remainingSeats-= clients;
+
+          if (remainingSeats < 0) {
+            break;
+          }
+
+          let current = clients * ticketPrice;
+
+          if (clients % 3 === 0) {
+            current -= 5;
+          }
+
+          total += current;
+
+          index++;
+          input = params[index];
+        }
+
+        if (remainingSeats < 0) {
+          console.log("The cinema is full.");
+          console.log(`Cinema income - ${total} lv.`);
+        } else {
+          console.log(`There are ${remainingSeats} seats left in the cinema.`);
+          console.log(`Cinema income - ${total} lv.`);
+        }
+
+      }
+
+      // calcCinemaSeats(["60", "10", "6", "3", "20", "15", "Movie time!"]);
+      // calcCinemaSeats(["50", "15", "10", "10", "15", "5"]);
+      // calcCinemaSeats(["100", "10", "10", "10", "10", "10", "10", "10", "10", "10", "10", "Movie time!"]);
+
+    // 01. Fruit Market
+
+    function market(a, b, c, d, e) {
+      // const priceS = Number(params[0]);
+      // const qB = Number(params[1]);
+      // const qO = Number(params[2]);
+      // const qR = Number(params[3]);
+      // const qS = Number(params[4]);
+
+      const priceS = a;
+      const qB = b;
+      const qO = c;
+      const qR = d;
+      const qS = e;
+
+
+      const priceR = priceS / 2;
+      const priceO = priceR * 0.6;
+      const priceB = priceR * 0.2;
+
+      const total = priceS * qS + priceB * qB + priceO * qO + priceR * qR;
+
+      console.log(total.toFixed(2));
+
+    }
+
+    // market(["48", "10", "3.3", "6.5", "1.7"]);
+    // market(["63.5", "3.57", "6.35", "8.15", "2.5"]);
+    // market(48, 10, 3.3, 6.5, 1.7);
+    // market(63.5, 3.57, 6.35, 8.15, 2.5);
     </script>
   </body>
 </html>
