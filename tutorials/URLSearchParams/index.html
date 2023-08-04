@@ -422,15 +422,16 @@
       }
       .subsections::after {
         position: absolute;
-        top: 0;
+        top: 15%;
         left: 0;
         content: "";
         width: 100%;
         height: 100%;
+        max-height: 70%;
         background-image: url("./images/pics/WINE2.png");
         background-repeat: no-repeat;
         background-position: center;
-        background-size: auto 70%;
+        background-size: contain;
         opacity: 0.2;
       }
 
@@ -440,7 +441,15 @@
 
         display: flex;
         justify-content: center;
+        flex-wrap: wrap-reverse;
       }
+
+      /* @media screen and (min-width: 450px) {
+        .subsection {
+          flex-direction: column-reverse;
+          flex-wrap: wrap;
+        }
+      } */
 
       .subsection-content-container {
         max-width: 30rem;
@@ -521,34 +530,7 @@
         object-fit: contain;
       }
 
-      /*
-      .bars-container {
-        border: 1px solid red;
-      }
-      .menu-item a {
-        border: 1px solid red;
-      }
-      nav ul {
-        border: 1px solid;
-      }
-      .home-container {
-        border: 1px solid green;
-      }
-      nav {
-        border:  1px solid salmon;
-      } 
-      #awards .subsection {
-        border: 1px solid red;
-      }
-      */
-      #awards * {
-        /* border: 1px solid blue; */
-      }
-      #team * {
-        /* border: 1px solid blue; */
-      }
-
-      .square {
+      .testimonial {
         position: relative;
         /* width: 400px; */
         /* width: 40vw; */
@@ -567,26 +549,26 @@
         z-index: 2;
       }
 
-      /* .square .fancy-circle {
+      /* .testimonial .fancy-circle {
         width: 100%;
         height: 100%;
         border: 2px solid #333;
         opacity: 0.5;
       }
-      .square .fancy-circle {
+      .testimonial .fancy-circle {
         border-radius: 46% 54% 70% 30% / 40% 40% 60% 60%;
         animation: rotate 6s linear infinite;
       }
-      .square .fancy-circle .fancy-circle {
+      .testimonial .fancy-circle .fancy-circle {
         border-radius: 68% 32% 61% 39% / 49% 52% 48% 51%;
         animation: rotate 4s linear infinite;
       }
-      .square .fancy-circle .fancy-circle .fancy-circle {
+      .testimonial .fancy-circle .fancy-circle .fancy-circle {
         border-radius: 56% 44% 36% 64% / 51% 68% 32% 49%;
         animation: rotate-reverse 4s linear infinite;
       } */
 
-      .square span {
+      .testimonial span {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -598,15 +580,15 @@
         opacity: 0.5;
       }
 
-       .square span:nth-of-type(1) {
+       .testimonial span:nth-of-type(1) {
         border-radius: 46% 54% 70% 30% / 40% 40% 60% 60%;
         animation: rotate 6s linear infinite;
       }
-      .square span:nth-of-type(2) {
+      .testimonial span:nth-of-type(2) {
         border-radius: 68% 32% 61% 39% / 49% 52% 48% 51%;
         animation: rotate 4s linear infinite;
       }
-      .square span:nth-of-type(3) {
+      .testimonial span:nth-of-type(3) {
         border-radius: 56% 44% 36% 64% / 51% 68% 32% 49%;
         animation: rotate-reverse 4s linear infinite;
       }
@@ -629,7 +611,7 @@
         }
       }
 
-      .bottom {
+      .testimonial-nav {
         /* position: absolute; */
         /* bottom: 0; */
         width: 100%;
@@ -848,7 +830,7 @@
         max-width: 30rem;
       }
 
-      .sec {
+      .team-section {
         max-width: 70rem;
         margin: auto;
         display: flex;
@@ -880,6 +862,7 @@
         text-transform: capitalize;
       }
       .name {
+        color: #eb2e4e;
         font-size: 3rem;
       }
       .profession {
@@ -887,7 +870,7 @@
       }
       .person .sci {
         justify-content: center;
-        flex-wrap: wrap;
+        /* flex-wrap: wrap; */
         margin: 2rem;
       }
 
@@ -909,13 +892,67 @@
         3px 3px 6px #0006, 
         -3px -3px 3px #fff, 
         inset 6px 6px 3px #0006, 
-        inset -6px -6px 3px #fff8;
+        inset -6px -6px 16px #fff8;
         z-index: 2;
+      }
+
+      .person .sci li a:hover {
+        background-color: #eb2e4e;
       }
 
       /* #team {
         background-color: #ddd;
       } */
+
+      #gallery {
+        max-width: 80rem;
+        margin: auto;
+        padding: 0.5rem;
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+        grid-auto-flow: dense;
+        /* ============================ */
+        /* columns: 3 18rem; */
+      }
+      #gallery img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* margin: 0.5rem; */
+      }
+      #gallery img.portrait {
+        grid-row: span 2;
+      }
+
+
+      .bars-container {
+        /* border: 1px solid red; */
+      }
+      .menu-item a {
+        /* border: 1px solid red; */
+      }
+      nav ul {
+        /* border: 1px solid; */
+      }
+      .home-container {
+        /* border: 1px solid green; */
+      }
+      nav {
+        /* border:  1px solid salmon; */
+      } 
+      #awards .subsection {
+        /* border: 1px solid red; */
+      }
+      #awards * {
+        /* border: 1px solid blue; */
+      }
+      #team * {
+        /* border: 1px solid blue; */
+      }
+      #gallery {
+        border: 1px solid red;
+      }
     </style>
   </head>
   <body>
@@ -1140,8 +1177,10 @@
       </div>
     </section>
 
-    <div class="square">
+    <div class="testimonial">
+
       <div class="content">
+
         <div class="content-box active" id="content-1">
           <div class="card">
             <div class="img-box">
@@ -1168,6 +1207,7 @@
             </div>
           </div>
         </div>
+
         <div class="content-box" id="content-2">
           <div class="card">
             <div class="img-box">
@@ -1194,6 +1234,7 @@
             </div>
           </div>
         </div>
+
         <div class="content-box" id="content-3">
           <div class="card">
             <div class="img-box">
@@ -1220,6 +1261,7 @@
             </div>
           </div>
         </div>
+
         <div class="content-box" id="content-4">
           <div class="card">
             <div class="img-box">
@@ -1246,12 +1288,15 @@
             </div>
           </div>
         </div>
+
       </div>
+
       <span></span>
       <span></span>
       <span></span>
+
     </div>
-    <div class="bottom">
+    <div class="testimonial-nav">
       <!-- <div class="waves"> -->
         <!-- <div class="wave" id="wave-1"></div> -->
         <!-- <div class="wave" id="wave-2"></div> -->
@@ -1273,22 +1318,33 @@
         </div>
       </div>
     </div>
+
     <script>
       const imageBoxes = document.querySelectorAll(".icon-img-box");
       const contentBoxes = document.querySelectorAll(".content-box");
 
-      for (let i = 0; i < imageBoxes.length; i++) {
-        imageBoxes[i].addEventListener("mouseover", () => {
-          for (let i = 0; i < contentBoxes.length; i++) {
-            contentBoxes[i].className = "content-box";
-          }
-          document.getElementById(imageBoxes[i].dataset.id).className = "content-box active";
-          for (let j = 0; j < imageBoxes.length; j++) {
-            imageBoxes[j].className = "icon-img-box";
-          }
-          imageBoxes[i].className = "icon-img-box active";
+      imageBoxes.forEach((icon, index) => {
+        icon.addEventListener("mouseover", () => {
+          const activeIcon = document.querySelector(".icon-img-box.active");
+          activeIcon.classList.remove("active");
+          icon.classList.add("active");
+          const activeBox = document.querySelector(".content-box.active");
+          activeBox.classList.remove("active");
+          contentBoxes[index].classList.add("active");
         })
-      }
+      })
+      // for (let i = 0; i < imageBoxes.length; i++) {
+      //   imageBoxes[i].addEventListener("mouseover", () => {
+      //     for (let i = 0; i < contentBoxes.length; i++) {
+      //       contentBoxes[i].className = "content-box";
+      //     }
+      //     document.getElementById(imageBoxes[i].dataset.id).className = "content-box active";
+      //     for (let j = 0; j < imageBoxes.length; j++) {
+      //       imageBoxes[j].className = "icon-img-box";
+      //     }
+      //     imageBoxes[i].className = "icon-img-box active";
+      //   })
+      // }
     </script>
 
     <section id="team">
@@ -1308,7 +1364,7 @@
         
       </div>
 
-      <div class="sec">
+      <div class="team-section">
 
         <div class="person">
           <div class="image-box">
@@ -1376,6 +1432,31 @@
       </div>
 
     </section>
+
+    <section id="gallery">
+      <img src="./images/gallery/gallery1_1920x1080.jpg" alt="">
+      <img class="portrait" src="./images/gallery/gallery2_1920x2300.jpg" alt="">
+      <img src="./images/gallery/gallery3_1920x1080.jpg" alt="">
+      <img class="portrait" src="./images/gallery/gallery6_1920x2300.jpg" alt="">
+      <img src="./images/gallery/gallery4_1920x1080.jpg" alt="">
+      <img src="./images/gallery/gallery5_1920x1080.jpg" alt="">
+    </section>
+
+    <footer>
+      <address>
+        <span>location x 32</span>
+        <span>(123) 456 789</span>
+      </address>
+      <ul>
+        <li><a href="#">our history</a></li>
+        <li><a href="#about">about us</a></li>
+        <li><a href="#">our blogs</a></li>
+        <li><a href="#gallery">our gallery</a></li>
+        <li><a href="#team">about team</a></li>
+        <li><a href="#">faq</a></li>
+      </ul>
+      <p>Since 2023 &#174; All Right Reserved</p>
+    </footer>
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
