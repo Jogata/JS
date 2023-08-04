@@ -19,8 +19,8 @@
       
       [aria-selected="true"] {
         /* text-decoration-thickness: 0.25em; */
-        /* text-underline-offset: 0.5em; */
-        color: orangered;
+        text-underline-offset: 0.5em;
+        color: greenyellow;
       }
       
       .tabs-container {
@@ -33,7 +33,7 @@
         /* either --dark-mode or --no-dark-mode */
         --color-scheme: var(--dark-mode);
         
-        --font-family: system-ui;
+        --font-family: Georgia, serif;
         
         --fs-300: clamp(0.94rem, calc(0.92rem + 0.08vw), 0.98rem);
         --fs-400: clamp(1.13rem, calc(1.06rem + 0.33vw), 1.31rem);
@@ -69,6 +69,7 @@
       
       body {
         margin: 0;
+        padding: 1rem 2rem;
         font-size: var(--fs-400);
         font-family: var(--font-family);
         line-height: 1.6;
@@ -216,16 +217,68 @@
         switchTab(tab);
       })
 
+      tabsContainer.addEventListener("keydown", (e) => {
+        console.log(e);
+        switch (e.key) {
+          case "ArrowLeft":
+            moveLeft();
+            break;
+          case "Home":
+            e.preventDefault();
+            switchTab(tabButtons[0]);
+            break;
+          case "ArrowRight":
+            moveRight();
+            break;
+          case "End":
+            e.preventDefault();
+            switchTab(tabButtons[tabButtons.length - 1]);
+            break;
+        }
+      })
+
+      function moveLeft() {
+        console.log("left");
+        const currentTab = document.activeElement;
+        let previousTab = currentTab.parentElement.previousElementSibling;
+        if (!previousTab) {
+          previousTab = tabButtons[tabButtons.length - 1];
+        } else {
+          previousTab = previousTab.querySelector("a");
+        }
+        switchTab(previousTab);
+      }
+
+      function moveRight() {
+        console.log("right");
+        const currentTab = document.activeElement;
+        let nextTab = currentTab.parentElement.nextElementSibling;
+        if (!nextTab) {
+          nextTab = tabButtons[0];
+        } else {
+          nextTab = nextTab.querySelector("a");
+        }
+        switchTab(nextTab);
+      }
+
       function switchTab(tab) {
         const activePanelID = tab.getAttribute("href");
         const activePanel = tabsContainer.querySelector(activePanelID);
+
+        tabButtons.forEach(button => {
+          button.setAttribute("aria-selected", "false");
+          button.setAttribute("tabindex", "-1");
+        })
 
         tabPanels.forEach(panel => {
           panel.setAttribute("hidden", "true");
         })
         
         activePanel.removeAttribute("hidden");
+
         tab.setAttribute("aria-selected", "true");
+        tab.setAttribute("tabindex", "0");
+        tab.focus();
       }
 
       tabButtons.forEach((tab, index) => {
