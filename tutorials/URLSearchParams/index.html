@@ -34,9 +34,9 @@
         list-style: none;
       }
 
-      /* html {
-        overflow-x: hidden;
-      } */
+      html {
+        scroll-behavior: smooth;
+      }
 
       body {
         font-family: 'Dancing Script', cursive;
@@ -55,28 +55,18 @@
       }
 
       .section {
-        /* width: 100%; */
-        /* min-height: 100vh; */
-        /* display: flex; */
-        /* flex-direction: column; */
         padding: 2em 0;
         background-image: url("./images/background/background.png");
         background-repeat: no-repeat;
         background-size: cover;
-        /* overflow: hidden; */
       }
 
       .section-container {
         padding: 2rem 2rem 0 2rem;
-        /* display: flex; */
-        /* flex-grow: 1; */
-        /* flex-direction: column; */
       }
 
       .nav-container {
         margin-bottom: 2rem;
-        /* display: flex; */
-        /* align-items: center; */
       }
 
       nav {
@@ -106,7 +96,6 @@
       }
 
       .menu {
-        /* width: 100%; */
         display: flex;
         justify-content: center;
         gap: 1rem;
@@ -114,7 +103,6 @@
       }
       .menu.menu-active {
         order: 1;
-        /* height: 60%; */
         margin: 3rem;
         visibility: visible;
         opacity: 1;
@@ -173,6 +161,12 @@
         transform: rotate(45deg) translate(-4px, -4px);
       }
 
+      @media screen and (min-width: 54rem) {
+        body.fixed-nav {
+          overflow: unset;
+        }
+      }
+
       @media screen and (max-width: 54rem) {
         .fixed-nav nav {
           position: fixed;
@@ -182,8 +176,6 @@
           max-width: 100%;
           height: 100vh;
           padding: 1em;
-          /* display: flex; */
-          /* justify-content: space-between; */
           align-items: start;
           flex-wrap: wrap;
           background-color: #f5f5db;
@@ -192,19 +184,6 @@
         }
         .menu {
           display: none;
-          /* position: fixed;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 100%;
-          height: 100vh;
-          display: flex;
-          align-items: center;
-          flex-direction: column;
-          background-color: #f5f5db;
-          visibility: hidden;
-          opacity: 0;
-          z-index: -1; */
           width: 100%;
         }
         .fixed-nav .menu {
@@ -224,10 +203,7 @@
       }
 
       .section-content-container {
-        /* flex: 1; */
         position: relative;
-        /* display: flex; */
-        /* flex-direction: column; */
         z-index: 1;
       }
 
@@ -236,7 +212,6 @@
       }
 
       .home-container {
-        /* flex: 1; */
         max-width: 120rem;
         min-height: 500px;
         margin: auto;
@@ -287,15 +262,9 @@
       }
 
       .main-title h1 {
-        /* max-width: 600px; */
-        /* margin-bottom: 2rem; */
-        /* font-size: calc(max(2rem, 5vw)); */
         font-size: calc(2rem + 3vw);
         text-transform: capitalize;
       }
-      /* .main-title h1 span {
-        display: block;
-      } */
 
       .home-buttons {
         display: flex;
@@ -315,14 +284,6 @@
         cursor: pointer;
       }
 
-      /* .arrow {
-        padding: 0.3rem 0.5rem;
-        border: 2px solid purple;
-        border-radius: 50%;
-      }
-      .arrow:hover {
-        border-color: #000;
-      } */
       .arrow i {
         padding: 0.6rem 0.672rem;
         border-radius: 50%;
@@ -351,26 +312,16 @@
         width: calc(max(12vw, 6rem));
         height: calc(max(12vw, 6rem));
         border-radius: 50%;
-        /* opacity: 0; */
         z-index: -1;
       }
       .red {
         background-image: radial-gradient(circle, rgba(241, 43, 43, 1) 0%, rgba(255, 236, 236, 1) 100%);
-        /* transition: all 300ms ease-in;
-        transition-delay: 600ms;
-        opacity: 1; */
       }
       .olive {
         background-image: radial-gradient(circle, rgba(132, 126, 17, 1) 0%, rgba(255, 236, 236, 1) 100%);
-        /* transition: all 300ms ease-in;
-        transition-delay: 600ms;
-        opacity: 1; */
       }
       .black {
         background-image: radial-gradient(circle, rgba(12, 11, 11, 1) 0%, rgba(255, 236, 236, 1) 100%);
-        /* transition: all 300ms ease-in;
-        transition-delay: 600ms;
-        opacity: 1; */
       }
 
       .home-image {
@@ -379,7 +330,6 @@
         left: 0;
         width: calc((max(8vw, 5rem)));
         transform: translateX(30%);
-        /* height: 100%; */
         visibility: hidden;
         opacity: 0;
       }
@@ -418,12 +368,15 @@
         .home .section-subtitle {
           display: flex;
         }
-        /* .subtitle-decoration {
-          justify-content: center;
-        } */
-        /* .subtitle-text {
+        .subtitle-decoration .line:first-child {
+          margin-left: auto;
+        }
+        .subtitle-decoration .line:last-child {
+          margin-right: auto;
+        }
+        .subtitle-text {
           text-align: center;
-        } */
+        }
         .main-title {
           text-align: center;
         }
@@ -516,13 +469,6 @@
         flex-wrap: wrap-reverse;
       }
 
-      /* @media screen and (min-width: 450px) {
-        .subsection {
-          flex-direction: column-reverse;
-          flex-wrap: wrap;
-        }
-      } */
-
       .subsection-content-container {
         max-width: 30rem;
       }
@@ -547,9 +493,6 @@
 
       #awards .section-title {
         padding: 1em 0 0;
-      }
-      #awards h2 {
-        /* padding: 1em 0 0; */
       }
 
       #awards h3 {
@@ -592,10 +535,6 @@
         text-transform: lowercase;
       }
 
-      #awards .subsection {
-        /* border: 1px solid red; */
-      }
-
       #awards img {
         flex: 1 1 24rem;
         width: 100%;
@@ -604,15 +543,8 @@
 
       .testimonial {
         position: relative;
-        /* width: 400px; */
-        /* width: 40vw; */
-        /* height: 400px; */
-        /* height: 40vw; */
-        /* margin: auto; */
         margin: 3rem 0;
         display: flex;
-        /* align-items: center; */
-        /* justify-content: center; */
       }
 
       .content {
@@ -621,31 +553,10 @@
         z-index: 2;
       }
 
-      /* .testimonial .fancy-circle {
-        width: 100%;
-        height: 100%;
-        border: 2px solid #333;
-        opacity: 0.5;
-      }
-      .testimonial .fancy-circle {
-        border-radius: 46% 54% 70% 30% / 40% 40% 60% 60%;
-        animation: rotate 6s linear infinite;
-      }
-      .testimonial .fancy-circle .fancy-circle {
-        border-radius: 68% 32% 61% 39% / 49% 52% 48% 51%;
-        animation: rotate 4s linear infinite;
-      }
-      .testimonial .fancy-circle .fancy-circle .fancy-circle {
-        border-radius: 56% 44% 36% 64% / 51% 68% 32% 49%;
-        animation: rotate-reverse 4s linear infinite;
-      } */
-
       .testimonial span {
         position: absolute;
         top: 50%;
         left: 50%;
-        /* transform: translate(-50%, -50%); */
-        /* inset: 0; */
         height: 120%;
         aspect-ratio: 1;
         border: 2px solid #333;
@@ -662,7 +573,6 @@
       }
       .testimonial span:nth-of-type(3) {
         border-radius: 56% 44% 36% 64% / 51% 68% 32% 49%;
-        /* animation: rotate-reverse 4s linear infinite; */
         animation: rotate 4s linear infinite reverse;
       }
 
@@ -675,79 +585,10 @@
         }
       }
 
-      /* @keyframes rotate-reverse { */
-        /* 0% { */
-          /* transform: translate(-50%, -50%) rotate(360deg); */
-        /* } */
-        /* 100% { */
-          /* transform: translate(-50%, -50%) rotate(0deg); */
-        /* } */
-      /* } */
-
       .testimonial-nav {
-        /* position: absolute; */
-        /* bottom: 0; */
         width: 100%;
         margin-top: 6rem;
-        /* padding: 2.5rem 3rem; */
-        /* display: flex; */
-        /* align-items: center; */
-        /* justify-content: center; */
-        /* background-color: #66a3ff; */
       }
-
-      /* .wave { */
-        /* position: absolute; */
-        /* top: -100px; */
-        /* left: 0; */
-        /* width: 100%; */
-        /* height: 100px; */
-        /* background-image: url(./images/background/background.png); */
-        /* background-size: 1000px 100px; */
-      /* } */
-
-      /* #wave-1 { */
-        /* bottom: 0; */
-        /* animation: wave 4s linear infinite; */
-        /* opacity: 1; */
-        /* z-index: 3; */
-      /* } */
-      /* #wave-2 { */
-        /* bottom: 10px; */
-        /* animation: wave-2 4s linear infinite; */
-        /* opacity: 0.5; */
-        /* z-index: 2; */
-      /* } */
-      /* #wave-3 { */
-        /* bottom: 15px; */
-        /* animation: wave 3s linear infinite; */
-        /* opacity: 0.2; */
-        /* z-index: 1; */
-      /* } */
-      /* #wave-4 { */
-        /* bottom: 20px; */
-        /* animation: wave-2 3s linear infinite; */
-        /* opacity: 0.7; */
-        /* z-index: 2; */
-      /* } */
-
-      /* @keyframes wave { */
-        /* 0% { */
-          /* background-position-x: 1000px; */
-        /* } */
-        /* 100% { */
-          /* background-position: 0px; */
-        /* } */
-      /* } */
-
-      /* @keyframes wave-2 { */
-        /* 0% { */
-          /* background-position-x: 0px; */
-        /* } */
-        /* 100% { */
-          /* background-position: 1000px; */
-        /* } */
-      /* } */
 
       .content-box {
         position: absolute;
@@ -780,21 +621,14 @@
 
       .card .img-box {
         position: relative;
-        /* width: 150px; */
         width: min(20rem, 80vw);
-        /* height: 150px; */
         height: min(20rem, 80vw);
-        /* outline: 10px solid wheat; */
-        /* outline-offset: 35px; */
         border-radius: 53% 47% 29% 71% / 32% 47% 53% 68%;
         filter: drop-shadow(10px 10px 10px #000);
         border-radius: 56% 44% 36% 64% / 51% 68% 32% 49%;
         overflow: hidden;
       }
       .card .img-box img {
-        /* position: absolute; */
-        /* top: 0; */
-        /* left: 0; */
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -860,7 +694,6 @@
         justify-content: center;
         flex-wrap: wrap;
         gap: 40px;
-        /* cursor: pointer; */
       }
 
       .icons .icon-img-box {
@@ -886,9 +719,6 @@
         opacity: 1;
       }
       .icons .icon-img-box img {
-        /* position: absolute; */
-        /* top: 0; */
-        /* left: 0; */
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -916,10 +746,6 @@
         position: relative;
         width: 100%;
         height: 100%;
-        /* display: block; */
-        /* margin: auto; */
-        /* width: 20rem; */
-        /* height: 20rem; */
         object-fit: cover;
         border-radius: 50%;
         z-index: 1;
@@ -943,17 +769,15 @@
       }
       .person .sci {
         justify-content: center;
-        /* flex-wrap: wrap; */
         margin: 2rem;
       }
 
       .image-box {
         position: relative;
-        width: 20rem;
-        height: 20rem;
+        width: min(90vw, 20rem);
+        height: min(90vw, 20rem);
         margin: auto;
         border-radius: 50%;
-        /* overflow: hidden; */
       }
       .image-box::after {
         position: absolute;
@@ -973,27 +797,22 @@
         background-color: #eb2e4e;
       }
 
-      /* #team {
-        background-color: #ddd;
-      } */
-
       #gallery {
         max-width: 80rem;
         margin: auto;
-        /* padding: 0.5rem; */
-        /* display: grid; */
-        /* gap: 0.5rem; */
-        /* grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); */
-        /* grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); */
-        /* grid-auto-flow: dense; */
+        padding: 0.5rem;
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+        grid-auto-flow: dense;
         /* ============================ */
-        columns: 3 18rem;
+        /* columns: 3 18rem; */
       }
       #gallery img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        /* margin: 0.5rem; */
+        cursor: pointer;
       }
       #gallery img.portrait {
         grid-row: span 2;
@@ -1031,70 +850,79 @@
         text-align: center;
       }
 
+      .wrapper {
+    max-width: 75rem;
+    padding: 2rem;
+    margin: 0 auto;
+    font-family: Georgia, serif;
+}
 
-      .bars-container {
-        /* border: 1px solid red; */
-      }
-      .menu-item a {
-        /* border: 1px solid red; */
-      }
-      nav ul {
-        /* border: 1px solid; */
-      }
-      .home-container {
-        /* border: 1px solid green; */
-      }
-      nav {
-        /* border:  1px solid salmon; */
-      } 
-      #awards .subsection {
-        /* border: 1px solid red; */
-      }
-      #awards * {
-        /* border: 1px solid blue; */
-      }
-      #team * {
-        /* border: 1px solid blue; */
-      }
-      #gallery {
-        /* border: 1px solid red; */
-      }
-      footer > * {
-        /* border: 1px solid red; */
-      }
+/* Gallery */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 12.5rem);
+    gap: .5rem;
+}
+
+/* Gallery Layout */
+.gallery__item--1 {
+    grid-column: 1 / span 1;
+    grid-row: 1 / span 1;
+}
+
+.gallery__item--2 {
+    grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+}
+
+.gallery__item--3 {
+    grid-column: 2 / span 1;
+    grid-row: 1 / span 2;
+}
+
+.gallery__item--4 {
+    grid-column: 3 / span 1;
+    grid-row: 1 / span 3;
+}
+
+.gallery__item--5 {
+    grid-column: 1 / span 2;
+    grid-row: 3 / span 2;
+}
+
+.gallery__item--6 {
+    grid-column: 3 / span 1;
+    grid-row: 4 / span 1;
+}
     </style>
   </head>
   <body>
     <section class="section home-section">
-
       <div class="section-container">
-
         <div class="nav-container">
-
           <nav>
-
             <div class="logo-container">
               <a href="">
                 <img src="./images/icons/LOGO.svg" alt="">
                 <span>wine</span>
               </a>
             </div>
-
             <ul class="menu">
               <li class="menu-item">
                 <a href="#about">about us</a>
               </li>
               <li class="menu-item">
-                <a href="">our awards</a>
+                <a href="#awards">our awards</a>
               </li>
               <li class="menu-item">
-                <a href="">our team</a>
+                <a href="#team">our team</a>
               </li>
               <li class="menu-item">
-                <a href="">gallery</a>
+                <a href="#gallery">gallery</a>
               </li>
               <li class="menu-item">
-                <a href="">info</a>
+                <a href="#info">info</a>
               </li>
             </ul>
             <div class="bars-container">
@@ -1104,82 +932,48 @@
                 <div class="bar"></div>
               </div>
             </div>
-
           </nav>
-
         </div>
-
         <div class="section-content-container">
-
           <div class="home-container">
-
             <div class="home-text">
-
               <div class="section-subtitle">
-
                 <div class="subtitle-decoration">
-
                   <div class="line"></div>
-
                   <img src="./images/icons/grapes-80x70.svg" alt="">
-
                   <div class="line"></div>
-
                 </div>
-
                 <span class="subtitle-text">
                   discover grapes
                 </span>
-
               </div>
-
               <div class="main-title">
-
                 <h1>
                   my wine original
-                  <!-- <span>my wine</span>
-                  <span>original</span> -->
                 </h1>
-
               </div>
-
               <div class="home-buttons">
-
                 <h3>explore now</h3>
-
                 <div class="arrow-container">
-
                   <div class="arrow">
                     <i class="fa fa-arrow-right"></i>
                   </div>
-
                 </div>
-
               </div>
-
             </div>
-
             <div class="home-images">
-
               <img class="home-image visible" src="./images/pics/WINE1.png" alt="">
               <img class="home-image" src="./images/pics/WINE2.png" alt="">
               <img class="home-image" src="./images/pics/WINE3.png" alt="">
-
               <div class="slider-btns">
                 <i class="fa fa-arrow-left" id="prev"></i>
                 <i class="fa fa-arrow-right" id="next"></i>
               </div>
-
               <div class="circle red"></div>
-
             </div>
-
           </div>
-          
         </div>
-
       </div>
-
     </section>
 
     <script>
@@ -1205,34 +999,18 @@
       let index = 0;
 
       prevButton.addEventListener("click", () => {
-        // const visibleImage = document.querySelector(".home-image.visible");
-        // visibleImage.classList.remove("visible");
         heroImages[index].classList.remove("visible");
-        // circle.classList.remove(colors[index]);
         index--;
         index = heroImages.length + index;
         index = index % heroImages.length;
-        // setTimeout(() => {
-        //   circle.classList.add(colors[index]);
-        // }, 50);
-        // if (index < 0) {
-        //   index = heroImages.length - 1;
-        // }
         heroImages[index].classList.add("visible");
         changeCircleColor();
       })
 
       nextButton.addEventListener("click", () => {
         heroImages[index].classList.remove("visible");
-        // circle.classList.remove(colors[index]);
         index++;
         index = index % heroImages.length;
-        // setTimeout(() => {
-        //   circle.classList.add(colors[index]);
-        // }, 50);
-        // if (index >= heroImages.length - 1) {
-        //   index = 0;
-        // }
         heroImages[index].classList.add("visible");
         changeCircleColor();
       })
@@ -1246,7 +1024,6 @@
     <section class="section" id="about">
       <div class="section-container">
         <div class="section-content-container">
-
           <div class="section-subtitle">
             <div class="subtitle-decoration">
               <div class="line"></div>
@@ -1257,14 +1034,11 @@
               original recipe
             </span>
           </div>
-
           <div class="section-title">
             <h2>more than <span class="purple">wine</span></h2>
             <p>In 1862 James Malcolm - the visionary father of My Wine winemaking - established the winery that started it all.</p>
           </div>
-
           <div class="subsections">
-
             <div class="subsection">
               <div class="subsection-content-container">
                 <h3 class="purple">harvesting</h3>
@@ -1272,7 +1046,6 @@
               </div>
               <img src="./images/icons/Wine80x70.svg" alt="">
             </div>
-            
             <div class="subsection">
               <div class="subsection-content-container">
                 <h3 class="purple">clarification</h3>
@@ -1280,7 +1053,6 @@
               </div>
               <img src="./images/icons/Barel 80x70.svg" alt="">
             </div>
-            
             <div class="subsection">
               <div class="subsection-content-container">
                 <h3 class="purple">fermentation</h3>
@@ -1288,7 +1060,6 @@
               </div>
               <img src="./images/icons/Barel2 80x70.svg" alt="">
             </div>
-  
             <div class="subsection">
               <div class="subsection-content-container">
                 <h3 class="purple">aging</h3>
@@ -1296,31 +1067,25 @@
               </div>
               <img src="./images/icons/WineBottle 80x70.svg" alt="">
             </div>
-
           </div>
-
         </div>
       </div>
     </section>
 
     <section id="awards">
-
       <div class="section-title">
         <h2>our <span class="purple">awards</span> & achievements</h2>
       </div>
-
       <h3 class="subtitle">
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla voluptas in minima cum obcaecati modi
       </h3>
-
       <div class="awards-container">
-      <!-- <img src="./images/pics/awards (1).png" alt=""> -->
-      <!-- <img src="./images/pics/awards (2).png" alt=""> -->
-      <!-- <img src="./images/pics/awards (3).png" alt=""> -->
-      <!-- <img src="./images/pics/awards (4).png" alt=""> -->
-      <img src="./images/pics/awards (5).png" alt="">
-      <!-- <img src="./images/pics/awards (6).png" alt=""> -->
-
+        <img src="./images/pics/awards-hero-img-1.png" alt="">
+        <!-- <img src="./images/pics/awards-hero-img-2.png" alt=""> -->
+        <!-- <img src="./images/pics/awards-hero-img-3.png" alt=""> -->
+        <!-- <img src="./images/pics/awards-hero-img-4.png" alt=""> -->
+        <!-- <img src="./images/pics/awards-hero-img-5.png" alt=""> -->
+        <!-- <img src="./images/pics/awards-hero-img-6.png" alt=""> -->
       <div class="subsections">
         <div class="subsection">
           <p><span class="purple">5</span> varietals</p>
@@ -1339,9 +1104,7 @@
     </section>
 
     <div class="testimonial">
-
       <div class="content">
-
         <div class="content-box active" id="content-1">
           <div class="card">
             <div class="img-box">
@@ -1368,7 +1131,6 @@
             </div>
           </div>
         </div>
-
         <div class="content-box" id="content-2">
           <div class="card">
             <div class="img-box">
@@ -1395,7 +1157,6 @@
             </div>
           </div>
         </div>
-
         <div class="content-box" id="content-3">
           <div class="card">
             <div class="img-box">
@@ -1422,7 +1183,6 @@
             </div>
           </div>
         </div>
-
         <div class="content-box" id="content-4">
           <div class="card">
             <div class="img-box">
@@ -1449,13 +1209,10 @@
             </div>
           </div>
         </div>
-
       </div>
-
       <span></span>
       <span></span>
       <span></span>
-
     </div>
     <div class="testimonial-nav">
       <!-- <div class="waves"> -->
@@ -1509,24 +1266,17 @@
     </script>
 
     <section id="team">
-
       <div class="section-subtitle">
-
         <div class="subtitle-decoration">
-
           <div class="line"></div>
           <img src="./images/icons/grapes-80x70.svg" alt="">
           <div class="line"></div>
         </div>
-
         <span class="subtitle-text">
           people behind creativeness
         </span>
-        
       </div>
-
       <div class="team-section">
-
         <div class="person">
           <div class="image-box">
             <img src="./images/pics/people1_1920.jpg" alt="">
@@ -1547,7 +1297,6 @@
             </a></li>
           </ul>
         </div>
-
         <div class="person">
           <div class="image-box">
             <img src="./images/pics/people2_1920.jpg" alt="">
@@ -1568,7 +1317,6 @@
             </a></li>
           </ul>
         </div>
-
         <div class="person">
           <div class="image-box">
             <img src="./images/pics/people3_1920.jpg" alt="">
@@ -1589,9 +1337,7 @@
             </a></li>
           </ul>
         </div>
-
       </div>
-
     </section>
 
     <section id="gallery">
@@ -1603,7 +1349,7 @@
       <img src="./images/gallery/gallery5_1920x1080.jpg" alt="">
     </section>
 
-    <footer>
+    <footer id="info">
       <div class="footer-container">
         <address>
           <span>location x 32</span>
@@ -1620,6 +1366,61 @@
       </div>
       <p>Since 2023 &#174; All Right Reserved</p>
     </footer>
+
+    <div class="wrapper">
+        
+      <div class="gallery">
+          <div class="gallery__item gallery__item--1">
+              <a href="#" class="gallery__link">
+                  <img src="https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80" class="gallery__image" />
+                  <div class="gallery__overlay">
+                      <span>Eating Panda</span>
+                  </div>
+              </a>
+          </div>
+          <div class="gallery__item gallery__item--2">
+              <a href="#" class="gallery__link">
+                  <img src="https://images.unsplash.com/reserve/wrev1ljvQ6KlfyljCQG0_lion.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80" class="gallery__image" />
+                  <div class="gallery__overlay">
+                      <span>Roaring Lion</span>
+                  </div>
+              </a>
+          </div>
+          <div class="gallery__item gallery__item--3">
+              <a href="#" class="gallery__link">
+                  <img src="https://images.unsplash.com/photo-1521651201144-634f700b36ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" class="gallery__image" />
+                  <div class="gallery__overlay">
+                      <span>Elephants in a field</span>
+                  </div>
+              </a>
+          </div>
+          <div class="gallery__item gallery__item--4">
+              <a href="#" class="gallery__link">
+                  <img src="https://images.unsplash.com/photo-1484406566174-9da000fda645?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2135&q=80" class="gallery__image" />
+                  <div class="gallery__overlay">
+                      <span>Buck in the wild</span>
+                  </div>
+              </a>
+          </div>
+          <div class="gallery__item gallery__item--5">
+              <a href="#" class="gallery__link">
+                  <img src="https://images.unsplash.com/photo-1500479694472-551d1fb6258d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" class="gallery__image" />
+                  <div class="gallery__overlay">
+                      <span>A little fox</span>
+                  </div>
+              </a>
+          </div>
+          <div class="gallery__item gallery__item--6">
+              <a href="#" class="gallery__link">
+                  <img src="https://images.unsplash.com/photo-1460999158988-6f0380f81f4d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" class="gallery__image" />
+                  <div class="gallery__overlay">
+                      <span>Group of horses</span>
+                  </div>
+              </a>
+          </div>
+      </div>
+
+  </div>
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
