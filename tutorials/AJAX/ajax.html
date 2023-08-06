@@ -5,12 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <style>
+      fieldset {
+        display: none;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
       body {
         min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
         background-color: #acbaca;
+        font-family: Georgia, serif;
       }
 
       .clock {
@@ -44,6 +55,17 @@
         inset 7px 7px 7px rgba(255, 255, 255, 0.55), 
         -9px -9px 15px rgba(255, 255, 255, 0.1);
       }
+      .numbers::before {
+        position: absolute;
+        content: "";
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background-color: #e91e63;
+        box-shadow: 0 0 0 3px #fff, 
+        0 0 0 1px hsl(340, 82%, 52%), 
+        0 0 5px 5px rgba(0, 0, 0, 0.15);
+      }
 
       .numbers span {
         position: absolute;
@@ -70,6 +92,20 @@
         border-radius: 50%;
         z-index: 10;
       }
+      .circle::before {
+        position: absolute;
+        top: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        content: "";
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: currentColor;
+        box-shadow: 
+        0 0 20px currentColor, 
+        0 0 60px currentColor;
+      }
 
       .circle i {
         position: absolute;
@@ -91,11 +127,71 @@
         height: 230px;
         color: #fee800;
       }
-      #mun i {
+      #min i {
         width: 4px;
       }
       #hrs {
+        width: 180px;
+        height: 180px;
         color: #ff2972;
+      }
+
+      #time {
+        position: absolute;
+        bottom: 35px;
+        display: flex;
+        padding: 10px 20px;
+        font-size: 2rem;
+        font-weight: 600;
+        border-radius: 40px;
+        background-color: #152b4a;
+        box-shadow: 7px 7px 22px #152b4a66, 
+        inset 7px 7px 7px rgba(255, 255, 255, 0.55), 
+        -9px -9px 15px rgba(255, 255, 255, 0.1);
+      }
+
+      #time div {
+        position: relative;
+        width: 60px;
+        text-align: center;
+        opacity: 0.75;
+        /* border: 1px solid; */
+      }
+      #time div:nth-child(1)::after, 
+      #time div:nth-child(2)::after {
+        position: absolute;
+        right: -5px;
+        content: ":";
+        animation: blink 1s steps(1) infinite;
+      }
+
+      @keyframes blink {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+      }
+
+      #seconds {
+        color: #04fc43;
+      }
+      #minutes {
+        color: #fee800;
+      }
+      #hour {
+        color: #ff2972;
+      }
+      #ampm {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 0.5em;
+        font-weight: 500;
+        text-transform: uppercase;
+        /* border: 1px solid; */
       }
     </style>
   </head>
@@ -103,9 +199,9 @@
 
     <div class="clock">
       <div class="numbers">
-        <div class="circle" id="sec"></div>
-        <div class="circle" id="min"></div>
-        <div class="circle" id="hrs"></div>
+        <div class="circle" id="sec"><i></i></div>
+        <div class="circle" id="min"><i></i></div>
+        <div class="circle" id="hrs"><i></i></div>
         <span style="--i:0"><b>12</b></span>
         <span style="--i:1"><b>1</b></span>
         <span style="--i:2"><b>2</b></span>
@@ -119,9 +215,67 @@
         <span style="--i:10"><b>10</b></span>
         <span style="--i:11"><b>11</b></span>
       </div>
+      <div id="time">
+        <div id="hour">00</div>
+        <div id="minutes">00</div>
+        <div id="seconds">00</div>
+        <div id="ampm">pm</div>
+      </div>
     </div>
 
-    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+    <script>
+      let hr = document.querySelector("#hrs");
+      let mn = document.querySelector("#min");
+      let sc = document.querySelector("#sec");
+
+      let hour = document.querySelector("#hour");
+      let minutes = document.querySelector("#minutes");
+      let seconds = document.querySelector("#seconds");
+      let ampm = document.querySelector("#ampm");
+      
+      setInterval(() => {
+        let day = new Date();
+        let hh = day.getHours() * 30;
+        let mm = day.getMinutes() * 6;
+        let ss = day.getSeconds() * 6;
+  
+        hr.style.transform = `rotateZ(${hh+(mm/12)}deg)`;
+        mn.style.transform = `rotateZ(${mm}deg)`;
+        sc.style.transform = `rotateZ(${ss}deg)`;
+
+        let h = new Date().getHours();
+        let m = new Date().getMinutes();
+        let s = new Date().getSeconds();
+
+        let am = "pm";
+
+        if (h >= 12) {
+          am = "am";
+        }
+
+        if (h > 12) {
+          h = h -12;
+        }
+
+        if (h < 10) {
+          h = `0${h}`;
+        }
+        if (m < 10) {
+          m = `0${m}`;
+        }
+        if (s < 10) {
+          s = `0${s}`;
+        }
+
+        hour.textContent = h;
+        minutes.textContent = m;
+        seconds.textContent = s;
+        ampm.textContent = am;
+      }, 1000);
+
+    </script>
+
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
