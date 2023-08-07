@@ -4,278 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <style>
-      fieldset {
-        display: none;
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #acbaca;
-        font-family: Georgia, serif;
-      }
-
-      .clock {
-        position: relative;
-        width: 450px;
-        height: 550px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50px;
-        border-top-left-radius: 250px;
-        border-top-right-radius: 250px;
-        background-color: #c9d5e0;
-        box-shadow: 45px 45px 45px -15px rgba(0, 0, 0, 0.15), 
-        inset 15px 15px 10px rgba(255, 255, 255, 0.75), 
-        -15px -15px 35px rgba(255, 255, 255, 0.75), 
-        inset -2px -2px 15px rgba(0, 0, 0, 0.2);
-      }
-
-      .numbers {
-        position: absolute;
-        top: 30px;
-        width: 390px;
-        height: 390px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        background-color: #152b4a;
-        box-shadow: 7px 7px 22px #152b4a66, 
-        inset 7px 7px 7px rgba(255, 255, 255, 0.55), 
-        -9px -9px 15px rgba(255, 255, 255, 0.1);
-      }
-      .numbers::before {
-        position: absolute;
-        content: "";
-        width: 4px;
-        height: 4px;
-        border-radius: 50%;
-        background-color: #e91e63;
-        box-shadow: 0 0 0 3px #fff, 
-        0 0 0 1px hsl(340, 82%, 52%), 
-        0 0 5px 5px rgba(0, 0, 0, 0.15);
-      }
-
-      .numbers span {
-        position: absolute;
-        inset: 15px;
-        color: #fff;
-        font-size: 1.25rem;
-        text-align: center;
-        transform: rotate(calc(30deg * var(--i)));
-      }
-      .numbers span b {
-        display: inline-block;
-        font-weight: 400;
-        transform: rotate(calc(-30deg * var(--i)));
-      }
-
-      .circle {
-        position: absolute;
-        width: 280px;
-        height: 280px;
-        display: flex;
-        align-items: flex-start;
-        justify-content: center;
-        border: 1px solid rgba(0, 0, 0, 0.75);
-        border-radius: 50%;
-        z-index: 10;
-      }
-      .circle::before {
-        position: absolute;
-        top: -6px;
-        left: 50%;
-        transform: translateX(-50%);
-        content: "";
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background-color: currentColor;
-        box-shadow: 
-        0 0 20px currentColor, 
-        0 0 60px currentColor;
-      }
-
-      .circle i {
-        position: absolute;
-        width: 6px;
-        height: 50%;
-        background-color: currentColor;
-        transform-origin: bottom;
-        transform: scaleY(0.5);
-        opacity: 0.75;
-      }
-      #sec {
-        color: #04fc43;
-      }
-      #sec i {
-        width: 2px;
-      }
-      #min {
-        width: 230px;
-        height: 230px;
-        color: #fee800;
-      }
-      #min i {
-        width: 4px;
-      }
-      #hrs {
-        width: 180px;
-        height: 180px;
-        color: #ff2972;
-      }
-
-      #time {
-        position: absolute;
-        bottom: 35px;
-        display: flex;
-        padding: 10px 20px;
-        font-size: 2rem;
-        font-weight: 600;
-        border-radius: 40px;
-        background-color: #152b4a;
-        box-shadow: 7px 7px 22px #152b4a66, 
-        inset 7px 7px 7px rgba(255, 255, 255, 0.55), 
-        -9px -9px 15px rgba(255, 255, 255, 0.1);
-      }
-
-      #time div {
-        position: relative;
-        width: 60px;
-        text-align: center;
-        opacity: 0.75;
-        /* border: 1px solid; */
-      }
-      #time div:nth-child(1)::after, 
-      #time div:nth-child(2)::after {
-        position: absolute;
-        right: -5px;
-        content: ":";
-        animation: blink 1s steps(1) infinite;
-      }
-
-      @keyframes blink {
-        0% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0;
-        }
-      }
-
-      #seconds {
-        color: #04fc43;
-      }
-      #minutes {
-        color: #fee800;
-      }
-      #hour {
-        color: #ff2972;
-      }
-      #ampm {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        font-size: 0.5em;
-        font-weight: 500;
-        text-transform: uppercase;
-        /* border: 1px solid; */
-      }
-    </style>
   </head>
   <body>
 
-    <div class="clock">
-      <div class="numbers">
-        <div class="circle" id="sec"><i></i></div>
-        <div class="circle" id="min"><i></i></div>
-        <div class="circle" id="hrs"><i></i></div>
-        <span style="--i:0"><b>12</b></span>
-        <span style="--i:1"><b>1</b></span>
-        <span style="--i:2"><b>2</b></span>
-        <span style="--i:3"><b>3</b></span>
-        <span style="--i:4"><b>4</b></span>
-        <span style="--i:5"><b>5</b></span>
-        <span style="--i:6"><b>6</b></span>
-        <span style="--i:7"><b>7</b></span>
-        <span style="--i:8"><b>8</b></span>
-        <span style="--i:9"><b>9</b></span>
-        <span style="--i:10"><b>10</b></span>
-        <span style="--i:11"><b>11</b></span>
-      </div>
-      <div id="time">
-        <div id="hour">00</div>
-        <div id="minutes">00</div>
-        <div id="seconds">00</div>
-        <div id="ampm">pm</div>
-      </div>
-    </div>
-
-    <script>
-      let hr = document.querySelector("#hrs");
-      let mn = document.querySelector("#min");
-      let sc = document.querySelector("#sec");
-
-      let hour = document.querySelector("#hour");
-      let minutes = document.querySelector("#minutes");
-      let seconds = document.querySelector("#seconds");
-      let ampm = document.querySelector("#ampm");
-      
-      setInterval(() => {
-        let day = new Date();
-        let hh = day.getHours() * 30;
-        let mm = day.getMinutes() * 6;
-        let ss = day.getSeconds() * 6;
-  
-        hr.style.transform = `rotateZ(${hh+(mm/12)}deg)`;
-        mn.style.transform = `rotateZ(${mm}deg)`;
-        sc.style.transform = `rotateZ(${ss}deg)`;
-
-        let h = new Date().getHours();
-        let m = new Date().getMinutes();
-        let s = new Date().getSeconds();
-
-        let am = "pm";
-
-        if (h >= 12) {
-          am = "am";
-        }
-
-        if (h > 12) {
-          h = h -12;
-        }
-
-        if (h < 10) {
-          h = `0${h}`;
-        }
-        if (m < 10) {
-          m = `0${m}`;
-        }
-        if (s < 10) {
-          s = `0${s}`;
-        }
-
-        hour.textContent = h;
-        minutes.textContent = m;
-        seconds.textContent = s;
-        ampm.textContent = am;
-      }, 1000);
-
-    </script>
-
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
@@ -339,6 +71,130 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
+    </script>
+
+    <script>
+      // 03. Movie Destination
+
+      // function calcExpenses(params) {
+      //   const budjet = Number(params[0]);
+      //   const dest = params[1];
+      //   const season = params[2];
+      //   const days = Number(params[3]);
+
+      //   let dayExpenses = 0;
+
+      //   switch (dest) {
+      //     case "Dubai":
+      //       if (season == "Summer") {
+      //         dayExpenses = 40000;
+      //       } else if (season == "Winter") {
+      //         dayExpenses = 45000;
+      //       }
+      //       dayExpenses = dayExpenses * 0.7;
+      //       break;
+      //     case "Sofia":
+      //       if (season == "Summer") {
+      //         dayExpenses = 12500;
+      //       } else if (season == "Winter") {
+      //         dayExpenses = 17000;
+      //       }
+      //       dayExpenses = dayExpenses * 1.25;
+      //       break;
+      //     case "London":
+      //       if (season == "Summer") {
+      //         dayExpenses = 20250;
+      //       } else if (season == "Winter") {
+      //         dayExpenses = 24000;
+      //       }
+      //       break;
+      //   }
+
+      //   const total = dayExpenses * days;
+
+      //   if (budjet > total) {
+      //     const diff = budjet - total;
+      //     console.log(`The budget for the movie is enough! We have ${diff.toFixed(2)} leva left!`);
+      //   } else {
+      //     const diff = total - budjet;
+      //     console.log(`The director needs ${diff.toFixed(2)} leva more!`);
+      //   }
+
+      // }
+
+      function calcExpenses(params) {
+        const budjet = Number(params[0]);
+        const dest = params[1];
+        const season = params[2];
+        const days = Number(params[3]);
+
+        let dayExpenses = 0;
+
+        const destinations = {
+          dubai: {
+            winter: 45000,
+            summer: 40000,
+          },
+          sofia: {
+            winter: 17000,
+            summer: 12500,
+          },
+          london: {
+            winter: 24000,
+            summer: 20250,
+          },
+        }
+
+        const oblekcheniq = {
+          dubai: 0.7,
+          sofia: 1.25,
+          london: 1,
+        }
+
+        dayExpenses = destinations[dest.toLowerCase()][season.toLowerCase()];
+
+        // console.log(dayExpenses);
+
+        dayExpenses = dayExpenses * oblekcheniq[dest.toLowerCase()];
+
+        // console.log(dayExpenses);
+
+        const total = dayExpenses * days;
+
+        if (budjet > total) {
+          const diff = budjet - total;
+          console.log(`The budget for the movie is enough! We have ${diff.toFixed(2)} leva left!`);
+        } else {
+          const diff = total - budjet;
+          console.log(`The director needs ${diff.toFixed(2)} leva more!`);
+        }
+
+      }
+
+      // calcExpenses(["400000", "Sofia", "Winter", "20"]);
+      // calcExpenses(["1000000", "Dubai", "Summer", "5"]);
+      // calcExpenses(["200000", "London", "Summer", "7"]);
+
+      // 01. Series Calculator
+
+      function calcWatchingTime(params) {
+        const title = params[0];
+        const seasons = Number(params[1]);
+        const episods = Number(params[2]);
+        let duration = Number(params[3]);
+
+        duration = duration * 1.2;
+
+        let total = episods * duration;
+        total = total + 10;
+        total = seasons * total;
+
+        console.log(`Total time needed to watch the ${title} series is ${total} minutes.`);
+      }
+
+      // calcWatchingTime(["Lucifer", "3", "18", "55"]);
+      // calcWatchingTime(["Game of Thrones", "7", "10", "50"]);
+      // calcWatchingTime(["Riverdale", "3", "21", "45"]);
     </script>
   </body>
 </html>
