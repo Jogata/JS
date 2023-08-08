@@ -4,10 +4,136 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
+    <style>
+      fieldset {
+        display: none;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Georgia, serif;
+        background-color: #03a9f4;
+        transition: all 1s;
+      }
+      .slide {
+        background-color: #f43648;
+      }
+
+      .container {
+        position: relative;
+        width: 800px;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(0, 0, 0, 0.125);
+      }
+
+      .box {
+        position: relative;
+        width: 50%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        z-index: 2;
+      }
+      .box h2 {
+        margin-bottom: 10px;
+        color: #fff;
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
+      .box button {
+        padding: 10px 20px;
+        color: #333;
+        font-size: 1rem;
+        font-weight: 500;
+        border: none;
+        outline: none;
+        text-transform: capitalize;
+        background-color: #fff;
+        cursor: pointer;
+      }
+      .box button:hover {
+        background-color: #03a9f4;
+      }
+
+      .form-box {
+        position: absolute;
+        left: 50px;
+        width: 350px;
+        height: 480px;
+        background-color: #fff;
+        box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.15);
+        transition: all 0.5s;
+        transition-delay: 0.5s;
+        z-index: 3;
+      }
+      .slide .form-box {
+        left: 400px;
+      }
+    </style>
   </head>
   <body>
 
-    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+    <div class="container">
+      <div class="box signin">
+        <h2>Already Have an Account ?</h2>
+        <button class="signin-btn">sign up</button>
+      </div>
+      <div class="box signup">
+        <h2></h2>
+        <button class="signup-btn">sign in</button>
+      </div>
+      <div class="form-box">
+        <div class="form signin-form">
+          <form>
+            <h3>sign in</h3>
+            <input type="text" name="user" id="user" placeholder="Username">
+            <input type="password" name="user" id="user" placeholder="Password">
+            <input type="submit" value="Login">
+            <a href="#" class="forgot">forgot password ?</a>
+          </form>
+        </div>
+        <div class="form signup-form">
+          <form>
+            <h3>sign up</h3>
+            <input type="text" name="user" id="user" placeholder="Username">
+            <input type="text" name="email" id="email" placeholder="Email">
+            <input type="password" name="password" id="password" placeholder="Password">
+            <input type="password" name="confirm" id="confirm" placeholder="Password">
+            <input type="submit" value="register">
+            <a href="#" class="forgot">forgot password ?</a>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const signinBtn = document.querySelector(".signin-btn");
+      const signupBtn = document.querySelector(".signup-btn");
+      
+      signupBtn.onclick = function() {
+        document.body.classList.add("slide");
+      }
+
+      signinBtn.onclick = function() {
+        document.body.classList.remove("slide");
+      }
+    </script>
+
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
@@ -71,130 +197,6 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
-    </script>
-
-    <script>
-      // 03. Movie Destination
-
-      // function calcExpenses(params) {
-      //   const budjet = Number(params[0]);
-      //   const dest = params[1];
-      //   const season = params[2];
-      //   const days = Number(params[3]);
-
-      //   let dayExpenses = 0;
-
-      //   switch (dest) {
-      //     case "Dubai":
-      //       if (season == "Summer") {
-      //         dayExpenses = 40000;
-      //       } else if (season == "Winter") {
-      //         dayExpenses = 45000;
-      //       }
-      //       dayExpenses = dayExpenses * 0.7;
-      //       break;
-      //     case "Sofia":
-      //       if (season == "Summer") {
-      //         dayExpenses = 12500;
-      //       } else if (season == "Winter") {
-      //         dayExpenses = 17000;
-      //       }
-      //       dayExpenses = dayExpenses * 1.25;
-      //       break;
-      //     case "London":
-      //       if (season == "Summer") {
-      //         dayExpenses = 20250;
-      //       } else if (season == "Winter") {
-      //         dayExpenses = 24000;
-      //       }
-      //       break;
-      //   }
-
-      //   const total = dayExpenses * days;
-
-      //   if (budjet > total) {
-      //     const diff = budjet - total;
-      //     console.log(`The budget for the movie is enough! We have ${diff.toFixed(2)} leva left!`);
-      //   } else {
-      //     const diff = total - budjet;
-      //     console.log(`The director needs ${diff.toFixed(2)} leva more!`);
-      //   }
-
-      // }
-
-      function calcExpenses(params) {
-        const budjet = Number(params[0]);
-        const dest = params[1];
-        const season = params[2];
-        const days = Number(params[3]);
-
-        let dayExpenses = 0;
-
-        const destinations = {
-          dubai: {
-            winter: 45000,
-            summer: 40000,
-          },
-          sofia: {
-            winter: 17000,
-            summer: 12500,
-          },
-          london: {
-            winter: 24000,
-            summer: 20250,
-          },
-        }
-
-        const oblekcheniq = {
-          dubai: 0.7,
-          sofia: 1.25,
-          london: 1,
-        }
-
-        dayExpenses = destinations[dest.toLowerCase()][season.toLowerCase()];
-
-        // console.log(dayExpenses);
-
-        dayExpenses = dayExpenses * oblekcheniq[dest.toLowerCase()];
-
-        // console.log(dayExpenses);
-
-        const total = dayExpenses * days;
-
-        if (budjet > total) {
-          const diff = budjet - total;
-          console.log(`The budget for the movie is enough! We have ${diff.toFixed(2)} leva left!`);
-        } else {
-          const diff = total - budjet;
-          console.log(`The director needs ${diff.toFixed(2)} leva more!`);
-        }
-
-      }
-
-      // calcExpenses(["400000", "Sofia", "Winter", "20"]);
-      // calcExpenses(["1000000", "Dubai", "Summer", "5"]);
-      // calcExpenses(["200000", "London", "Summer", "7"]);
-
-      // 01. Series Calculator
-
-      function calcWatchingTime(params) {
-        const title = params[0];
-        const seasons = Number(params[1]);
-        const episods = Number(params[2]);
-        let duration = Number(params[3]);
-
-        duration = duration * 1.2;
-
-        let total = episods * duration;
-        total = total + 10;
-        total = seasons * total;
-
-        console.log(`Total time needed to watch the ${title} series is ${total} minutes.`);
-      }
-
-      // calcWatchingTime(["Lucifer", "3", "18", "55"]);
-      // calcWatchingTime(["Game of Thrones", "7", "10", "50"]);
-      // calcWatchingTime(["Riverdale", "3", "21", "45"]);
     </script>
   </body>
 </html>
