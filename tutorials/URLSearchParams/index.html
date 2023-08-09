@@ -914,199 +914,105 @@
         text-align: center;
       }
 
-      .wrapper {
-    max-width: 75rem;
-    padding: 2rem;
-    margin: 0 auto;
-    font-family: Georgia, serif;
-}
+      .preview-box {
+        position: fixed;
+        top: 0;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        min-height: 100vh;
+        display: flex;
+        /* flex-direction: column; */
+        font-family: Georgia, serif;
+        background-color: rgba(0, 0, 0, 0.4);
+        transition: opacity 400ms ease-out;
+        visibility: hidden;
+        opacity: 0;
+        overflow: auto;
+        z-index: -1;
+        /* border: 1px solid red; */
+      }
+      .preview-box.visible {
+        visibility: visible;
+        opacity: 1;
+        z-index: 2;
+      }
 
-/* Gallery */
-/* .gallery { */
-    /* display: grid; */
-    /* grid-template-columns: repeat(3, 1fr); */
-    /* grid-template-rows: repeat(4, 12.5rem); */
-    /* gap: .5rem; */
-/* } */
+      .inner-container {
+        align-self: flex-start;
+        position: relative;
+        width: 96%;
+        /* height: 100%; */
+        max-width: 80rem;
+        margin: 0 auto;
+        padding: 2% 0;
+        display: flex;
+        flex-direction: column;
+      }
 
-/* Gallery Layout */
-.gallery__item--1 {
-    grid-column: 1 / span 1;
-    grid-row: 1 / span 1;
-}
+      #preview-box-image {
+        /* width: 96%; */
+        /* max-width: 80rem; */
+        width: 100%;
+        margin: auto auto 0;
+      }
 
-.gallery__item--2 {
-    grid-column: 1 / span 1;
-    grid-row: 2 / span 1;
-}
+      .preview-box-navigation {
+        position: absolute;
+        top: 45%;
+        left: 3%;
+        width: 94%;
+        /* max-width: 80rem; */
+        display: flex;
+        justify-content: space-between;
+      /* border: 1px solid red; */
+      }
+      .preview-box-navigation button span {
+        display: inline-block;
+        color: #fff;
+        font-size: 3rem;
+        font-family: initial;
+        transition: all 400ms ease-in-out;
+        opacity: 0.5;
+      }
+      .preview-box-navigation button:hover span {
+        transform: scale(1.2);
+        opacity: 1;
+      }
 
-.gallery__item--3 {
-    grid-column: 2 / span 1;
-    grid-row: 1 / span 2;
-}
+      .details {
+        width: 100%;
+        /* width: 96%; */
+        /* max-width: 80rem; */
+        margin: 0 auto auto;
+        padding: 1em;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #fff;
+      }
+      .details span {
+        padding: 0.1em;
+        font-size: 1.4em;
+      }
 
-.gallery__item--4 {
-    grid-column: 3 / span 1;
-    grid-row: 1 / span 3;
-}
+      .close {
+        font-size: 0px;
+      }
+      .close i {
+        font-size: 1.2rem;
+        padding: 0.4em;
+        transition: all 400ms ease-in-out;
+        /* border: 1px solid red; */
+      }
+      .close i:hover {
+        color: #eb2e4e;
+        transform: scale(1.1);
+      }
 
-.gallery__item--5 {
-    grid-column: 1 / span 2;
-    grid-row: 3 / span 2;
-}
-
-.gallery__item--6 {
-    grid-column: 3 / span 1;
-    grid-row: 4 / span 1;
-}
-
-/* Gallery Link */
-.gallery__link {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-/* Gallery Link Overlay */
-.gallery__overlay {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    background: rgba(0, 0, 0, 0.4);
-    font-size: 1.5rem;
-    color: #fff;
-    font-weight: 700;
-    text-transform: uppercase;
-
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .2s;
-}
-
-.gallery__link:hover .gallery__overlay {
-    opacity: 1;
-}
-
-/* Gallery Overlay Text */
-.gallery__overlay span {
-    position: relative;
-    line-height: 3rem;
-}
-
-.gallery__overlay span:before,
-.gallery__overlay span:after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    background: #fff;
-    transition: width .3s ease-out .2s;
-}
-
-.gallery__overlay span:before {
-    top: 0;
-    left: 0;
-}
-
-.gallery__overlay span:after {
-    bottom: 0;
-    right: 0;
-}
-
-.gallery__link:hover .gallery__overlay span:before,
-.gallery__link:hover .gallery__overlay span:after {
-    width: 100%;    
-}
-
-
-/* Gallery Image */
-.gallery__image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: scale(1.05);
-    transition: 
-        transform .5s,
-        filter .5s;
-}
-
-.gallery__link:hover .gallery__image {
-    transform: scale(1.2);
-    filter: blur(2px);
-}
-
-@media screen and (max-width: 60rem) {
-    .wrapper {
-        padding: 1rem;
-    }
-
-    .gallery {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    /* Gallery Layout */
-    .gallery__item--1 {
-        grid-column: 1 / span 1;
-        grid-row: 1 / span 1;
-    }
-
-    .gallery__item--2 {
-        grid-column: 1 / span 1;
-        grid-row: 2 / span 1;
-    }
-
-    .gallery__item--3 {
-        grid-column: 2 / span 1;
-        grid-row: 1 / span 2;
-    }
-
-    .gallery__item--4 {
-        grid-column: 1 / span 1;
-        grid-row: 3 / span 2;
-    }
-
-    .gallery__item--5 {
-        grid-column: 2 / span 1;
-        grid-row: 3 / span 1;
-    }
-
-    .gallery__item--6 {
-        grid-column: 2 / span 1;
-        grid-row: 4 / span 1;
-    }
-
-    .gallery__overlay {
-        font-size: 1.25rem;
-    }
-}
-
-@media screen and (max-width: 35rem) {
-    .gallery {
-        display: block;
-    }
-
-    .gallery__item {
-        margin: .5rem;
-    }
-
-    .gallery__link {
-        height: 80vw;
-    }
-
-    .gallery__overlay {
-        font-size: 1rem;
-    }
-}
+      body.preview-mode {
+        overflow: hidden;
+      }
     </style>
   </head>
   <body>
@@ -1577,7 +1483,73 @@
         <h2>view</h2>
         <img src="./images/gallery/gallery5_1920x1080.jpg" alt="">
       </div>
+      <div class="preview-box">
+        <div class="inner-container">
+          <img src="./images/gallery/gallery1_1920x1080.jpg" id="preview-box-image" alt="">
+          <div class="preview-box-navigation">
+            <button id="prev-image">
+              <span>&#139;</span>
+            </button>
+            <button id="next-image">
+              <span>&#155;</span>
+            </button>
+          </div>
+          <div class="details">
+            <p>Image <span class="current">1</span> of <span class="total">5</span></p>
+            <button class="close">
+              close preview
+              <i class="fa fa-times"></i>
+            </button>
+          </div>
+        </div>
+      </div>
     </section>
+
+    <script>
+      const images = document.querySelectorAll(".gallery-image h2");
+      const previewBox = document.querySelector(".preview-box");
+      const closePreviewButton = document.querySelector(".close");
+      const previewImage = document.querySelector("#preview-box-image");
+      
+      const current = document.querySelector(".current");
+
+      const totalImages = document.querySelector(".total");
+      totalImages.textContent = images.length;
+
+      images.forEach((image, index) => {
+        image.addEventListener("click", () => {
+          document.body.classList.add("preview-mode");
+          previewBox.classList.add("visible");
+          current.textContent = index + 1;
+          previewImage.src = image.nextElementSibling.src;
+        })
+      })
+      
+      closePreviewButton.addEventListener("click", () => {
+        document.body.classList.remove("preview-mode");
+        previewBox.classList.remove("visible");
+      })
+
+      const prevImageButton = document.querySelector("#prev-image");
+      const nextImageButton = document.querySelector("#next-image");
+
+      prevImageButton.addEventListener("click", () => {
+        let index = Number(current.textContent) - 1;
+        index--;
+        index = images.length + index;
+        index = index % images.length;
+        previewImage.src = images[index].nextElementSibling.src;
+        current.textContent = index + 1;
+      })
+
+      nextImageButton.addEventListener("click", () => {
+        let index = Number(current.textContent) - 1;
+        index++;
+        index = index % images.length;
+        previewImage.src = images[index].nextElementSibling.src;
+        current.textContent = index + 1;
+      })
+    </script>
 
     <footer id="info">
       <div class="footer-container">
@@ -1596,61 +1568,6 @@
       </div>
       <p>Since 2023 &#174; All Right Reserved</p>
     </footer>
-
-    <div class="wrapper">
-        
-      <div class="gallery">
-          <div class="gallery__item gallery__item--1">
-              <a href="#" class="gallery__link">
-                  <img src="https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80" class="gallery__image" />
-                  <div class="gallery__overlay">
-                      <span>Eating Panda</span>
-                  </div>
-              </a>
-          </div>
-          <div class="gallery__item gallery__item--2">
-              <a href="#" class="gallery__link">
-                  <img src="https://images.unsplash.com/reserve/wrev1ljvQ6KlfyljCQG0_lion.jpg?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80" class="gallery__image" />
-                  <div class="gallery__overlay">
-                      <span>Roaring Lion</span>
-                  </div>
-              </a>
-          </div>
-          <div class="gallery__item gallery__item--3">
-              <a href="#" class="gallery__link">
-                  <img src="https://images.unsplash.com/photo-1521651201144-634f700b36ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" class="gallery__image" />
-                  <div class="gallery__overlay">
-                      <span>Elephants in a field</span>
-                  </div>
-              </a>
-          </div>
-          <div class="gallery__item gallery__item--4">
-              <a href="#" class="gallery__link">
-                  <img src="https://images.unsplash.com/photo-1484406566174-9da000fda645?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2135&q=80" class="gallery__image" />
-                  <div class="gallery__overlay">
-                      <span>Buck in the wild</span>
-                  </div>
-              </a>
-          </div>
-          <div class="gallery__item gallery__item--5">
-              <a href="#" class="gallery__link">
-                  <img src="https://images.unsplash.com/photo-1500479694472-551d1fb6258d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" class="gallery__image" />
-                  <div class="gallery__overlay">
-                      <span>A little fox</span>
-                  </div>
-              </a>
-          </div>
-          <div class="gallery__item gallery__item--6">
-              <a href="#" class="gallery__link">
-                  <img src="https://images.unsplash.com/photo-1460999158988-6f0380f81f4d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" class="gallery__image" />
-                  <div class="gallery__overlay">
-                      <span>Group of horses</span>
-                  </div>
-              </a>
-          </div>
-      </div>
-
-  </div>
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
