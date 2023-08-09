@@ -18,8 +18,8 @@
       body {
         min-height: 100vh;
         display: flex;
-        align-items: center;
-        justify-content: center;
+        /* align-items: center; */
+        /* justify-content: center; */
         font-family: Georgia, serif;
         background-color: #03a9f4;
         transition: all 1s;
@@ -32,6 +32,7 @@
         position: relative;
         width: 800px;
         height: 400px;
+        margin: auto;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -78,10 +79,89 @@
         box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.15);
         transition: all 0.5s;
         transition-delay: 0.5s;
+        overflow: hidden;
         z-index: 3;
       }
       .slide .form-box {
         left: 400px;
+      }
+
+      .form {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #fff;
+        transition: all 500ms;
+      }
+
+      .signup-form {
+        top: 100%;
+        transition-delay: 0s;
+      }
+
+      .slide .form.signup-form {
+        top: 0;
+        transition-delay: 1s;
+      }
+
+      .signin-form {
+        top: 0;
+        transition-delay: 1s;
+      }
+      .slide .form.signin-form {
+        top: -100%;
+        transition-delay: 0;
+      }
+
+      .form form {
+        width: 100%;
+        padding: 0 50px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      form h3 {
+        margin-bottom: 20px;
+        color: #333;
+        font-size: 1.4rem;
+        font-weight: 600;
+        text-transform: capitalize;
+      }
+
+      form input {
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 10px;
+        font-size: 0.8em;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        outline: none;
+        border: 1px solid #333;
+      }
+
+      form input[type="submit"] {
+        max-width: 100px;
+        font-weight: 500;
+        color: #fff;
+        border: none;
+        background-color: #03a9f4;
+        cursor: pointer;
+      }
+
+      .signup-form form input[type="submit"] {
+        background-color: #f43648;
+      }
+
+      .forgot {
+        color: #333;
+        font-size: 0.8em;
+        letter-spacing: 0.05em;
+        text-transform: capitalize;
       }
     </style>
   </head>
@@ -89,11 +169,11 @@
 
     <div class="container">
       <div class="box signin">
-        <h2>Already Have an Account ?</h2>
+        <h2>Already have an Account ?</h2>
         <button class="signin-btn">sign up</button>
       </div>
       <div class="box signup">
-        <h2></h2>
+        <h2>Don't have an Account ?</h2>
         <button class="signup-btn">sign in</button>
       </div>
       <div class="form-box">
@@ -132,6 +212,58 @@
         document.body.classList.remove("slide");
       }
     </script>
+
+<script>
+  // 03. Coffee Machine
+
+  function calcCoffeePrice(params) {
+    const drink = params[0];
+    const sugar = params[1];
+    const broi = Number(params[2]);
+
+    const products = {
+      espresso: {
+        without: 0.9,
+        normal: 1,
+        extra: 1.2,
+      }, 
+      cappuccino: {
+        without: 1,
+        normal: 1.2,
+        extra: 1.6,
+      }, 
+      tea: {
+        without: 0.5,
+        normal: 0.6,
+        extra: 0.7,
+      }
+    }
+
+    let price = products[drink.toLowerCase()][sugar.toLowerCase()];
+
+    let total = broi * price;
+
+    if (sugar === "Without") {
+      total = total * 0.65;
+    }
+
+    if (drink === "Espresso" && broi >= 5) {
+      total = total * 0.75;
+    }
+
+    if (total > 15) {
+      total = total * 0.8;
+    }
+
+    console.log(`You bought ${broi} cups of ${drink} for ${total.toFixed(2)} lv.`);
+
+  }
+
+  // calcCoffeePrice(["Espresso", "Without", "10"]);
+  // calcCoffeePrice(["Cappuccino", "Normal", "13"]);
+  // calcCoffeePrice(["Tea", "Extra", "3"]);
+
+</script>
 
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
