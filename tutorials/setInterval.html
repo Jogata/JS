@@ -797,9 +797,141 @@
         height: 45px;
         display: grid;
         place-items: center;
+        color: var(--text-white);
         font-size: 2rem;
         border-radius: var(--radius-circle);
         background-color: var(--bg-majorelle-blue);
+        transition: var(--transition-1);
+      }
+      .input-btn:focus-visible, 
+      .input-btn:hover {
+        background-color: var(--bg-ocean-blue);
+      }
+      .input-btn i {
+        transform: translateX(-2px) rotate(45deg);
+      }
+
+      .footer-bottom {
+        padding-block: 30px;
+        border-block-start: 1px solid var(--border-gainsboro);
+      }
+
+      .copyright {
+        margin-block-end: 20px;
+      }
+
+      .copyright-link {
+        display: inline-block;
+        color: var(--text-majorelle-blue);
+        font-weight: var(--weight-medium);
+      }
+
+      .footer-bottom-link:focus-visible, 
+      .footer-bottom-link:hover {
+        text-decoration: underline;
+      }
+
+      @media screen and (min-width: 575px) {
+        .container {
+          width: 100%;
+          max-width: 540px;
+          margin-inline: auto;
+        }
+        .navbar {
+          padding-inline: 40px;
+          padding-block-start: 40px;
+        }
+        .hero-text {
+          max-width: 42ch;
+        }
+        .hero .wrapper {
+          display: flex;
+          align-items: center;
+          gap: 30px;
+        }
+        .hero .btn {
+          margin-block-end: 0;
+        }
+        .service .container {
+          grid-template-columns: 1fr 1fr;
+          align-items: flex-start;
+        }
+        .destination-list {
+          grid-template-columns: 1fr 1fr;
+        }
+        .footer-bottom-list {
+          display: flex;
+          gap: 30px;
+        }
+      }
+
+      @media screen and (min-width: 768px) {
+        :root {
+          --fontSize-1: 4.8rem;
+          --fontSize-2: 4rem;
+          --fontSize-3: 2.8rem;
+          --fontSize-4: 2.6rem;
+          --fontSize-5: 2.2rem;
+          --fontSize-6: 1.8rem;
+          --fontSize-7: 1.6rem;
+
+          --section-spacing: 120px;
+        }
+        .container {
+          max-width: 720px;
+        }
+        .btn {
+          height: 60px;
+          padding-inline: 40px;
+        }
+        .destination .section-subtitle, 
+        .destination .section-title, 
+        .gallery .section-subtitle,
+        .gallery .section-title {
+          text-align: center;
+        }
+        .preloader .img {
+          width: 80px;
+        }
+        .hero {
+          padding-block-start: 180px;
+        }
+        .hero-subtitle {
+          --fontSize-7: 1.8rem;
+          padding: 10px 30px;
+        }
+        .hero-btn {
+          gap: 32px;
+        }
+        .hero-btn .btn-img {
+          width: 80px;
+          height: 80px;
+        }
+        .hero-btn i {
+          padding: 12px;
+        }
+        .hero-banner {
+          max-width: 550px;
+          margin-inline: auto;
+        }
+        .service .container {
+          gap: 35px;
+        }
+        .service-card {
+          padding: 40px 30px;
+        }
+        .service-card .card-title {
+          margin-block: 20px 10px;
+        }
+        .destination .section-title {
+          margin-block-end: 65px;
+        }
+        .destination-list {
+          gap: 50px 35px;
+        }
+        .destination-card .card-title {
+          margin-block-start: 25px;
+        }
       }
     </style>
   </head>
@@ -1451,7 +1583,7 @@
 
       const navbar = document.querySelector("[data-navbar]");
       const navToglers = document.querySelectorAll("[data-nav-toggler]");
-      const overlay = document.querySelectorAll("[data-overlay]");
+      const overlay = document.querySelector("[data-overlay]");
 
       function toggleNav() {
         navbar.classList.toggle("active");
