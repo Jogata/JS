@@ -4,6 +4,60 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
+    <style>
+      h1 {
+        font-size: 5rem;
+        text-align: center;
+        text-transform: capitalize;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Georgia, serif;
+      }
+
+      .container {
+        min-height: 100vh;
+        padding: 2% 0;
+        text-align: center;
+        background-color: bisque;
+      }
+
+      .content p {
+        font-size: 3rem;
+        text-align: center;
+        text-transform: capitalize;
+      }
+      
+      .content {
+        padding-bottom: 2em;
+      }
+
+      .play {
+        display: block;
+        margin: auto;
+        padding: 0.4em 1em;
+        font-size: 2.4rem;
+        font-family: inherit;
+        text-transform: capitalize;
+        text-decoration: none;
+        box-shadow: 
+        4px 4px 4px #0005, 
+        -4px -4px 4px #fff5;
+        border: 1px solid transparent;
+        border-radius: 1em;
+        background-color: transparent;
+        cursor: pointer;
+      }
+
+      #footer-id {
+        text-align: center;
+        font-size: 2rem;
+        padding: 2em;
+        background-color: hsl(33, 100%, 84%);
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -72,9 +126,6 @@
     </div>
 
     <script>
-      const playBtn = document.querySelector(".play");
-      playBtn.addEventListener("click", init);
-
       const gifts = [
         "hoodie", 
         "moon-light", 
@@ -108,12 +159,12 @@
 
         childElement.innerText = "";
         childElement.innerText = child;
-        santaElement = "";
-        santaElement = santa;
+        santaElement.innerText = "";
+        santaElement.innerText = santa;
 
         giftElement.innerHTML = "";
         const img = document.createElement("img");
-        img.src = "";
+        img.src = "./img/logo1.png";
         img.alt = gift;
         img.width = 300;
         img.height = 300;
@@ -121,6 +172,9 @@
       }
 
       init();
+
+      const playBtn = document.querySelector(".play");
+      playBtn.addEventListener("click", init);
     </script>
 
     <script>
@@ -136,8 +190,82 @@
       orederPizza("veg", "Cheese Barbeque", function(message) {
         console.log(message);
       });
+
+      const addFooter = () => {
+        const footer = document.getElementById("footer-id");
+        footer.innerText = `CopyRights ${new Date().getFullYear()} Author Name`;
+      }
+
+      addFooter();
     </script>
-    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+
+    <script>
+      function incrArr(arr, n) {
+        const result = [];
+
+        for (const elem of arr) {
+          result.push(elem + n);
+        }
+
+        return result;
+      }
+
+      const numbers = [1, 2, 3, 4, 5];
+
+      console.log(incrArr(numbers, 1));
+
+      function incr(num, pad) {
+        return num + pad;
+      }
+
+      function dencr(num, pad) {
+        return num - pad;
+      }
+
+      function mult(num, pad) {
+        return num * pad;
+      }
+      function devide(num, pad) {
+        return num / pad;
+      }
+
+      function incrArrHighOrder(arr, n, operation) {
+        const result = [];
+
+        for (const elem of arr) {
+          result.push(operation(elem, n));
+        }
+
+        return result;
+      }
+
+      console.log(incrArrHighOrder(numbers, 2, incr));
+      console.log(incrArrHighOrder(numbers, 1, dencr));
+
+      const user = {
+        name: "jogata", 
+        age: 44, 
+        country: "BG", 
+        isMarried: false,
+      }
+
+      user.address = "123 Main Str.";
+      user.age = 45;
+      delete user.isMarried;
+      console.log(user);
+
+      console.log(Object.isExtensible(user));
+
+      Object.defineProperty(user, "isAdmin", {
+        value: false, 
+        writable: true, 
+        enumerable: true, 
+      })
+
+      console.log(user);
+    </script>
+
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
