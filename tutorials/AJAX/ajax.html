@@ -7,13 +7,108 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Poppins', sans-serif;
+      }
+
+      .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        margin: 40px 20px 0 20px;
+      }
+
+      .heading {
+        width: 50%;
+        padding-bottom: 50px;
+      }
+      .heading h3 {
+        padding-bottom: 10px;
+        font-size: 3rem;
+        font-weight: bold;
+        text-transform: capitalize;
+        border-bottom: 3px solid #222;
+      }
+      .heading span {
+        font-weight: 100;
+      }
+
+      .box {
+        display: flex;
+        /* align-items: center; */
+        justify-content: space-between;
+        flex-direction: row;
+      }
+
+      .dream {
+        width: 32.5%;
+        display: flex;
+        flex-direction: column;
+        /* border: 1px solid red; */
+      }
+      .dream img {
+        width: 100%;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        object-fit: cover;
+      }
+
+      .btn {
+        margin: 40px 0 70px 0;
+        padding: 15px 40px;
+        border-radius: 5px;
+        background-color: #222;
+      }
+      .btn a {
+        color: #fff;
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-transform: capitalize;
+        text-decoration: none;
+        letter-spacing: 3px;
+      }
+
+      @media screen and (max-width: 769px) {
+        .box {
+          flex-direction: column;
+        }
+        .dream {
+          width: 100%;
+        }
+      }
+
+      @media screen and (max-width: 750px) {
+        .heading {
+          width: 100%;
+        }
+      }
+      
+      @media screen and (max-width: 640px) {        
+        .heading h3 {
+          font-size: 2rem;
+        }
+      }
+    </style>
   </head>
   <body>
+
     <div class="container gallery">
+
       <div class="heading">
         <h3>photo <span>gallery</span></h3>
       </div>
+
       <div class="box">
+
         <div class="dream">
           <img src="../../../CSS/assets/img/alley-copy.jpg" alt="">
           <img src="../../../CSS/assets/img/branch-copy.jpg" alt="">
@@ -21,6 +116,7 @@
           <img src="../../../CSS/assets/img/foggy-lake-quang-nguyen-vinh-2166695-copy.jpg" alt="">
           <img src="../../../CSS/assets/img/forest.jpg" alt="">
         </div>
+
         <div class="dream">
           <img src="../../../CSS/assets/img/games-the-elder-scrolls-v-skyrim-50003-copy.jpg" alt="">
           <img src="../../../CSS/assets/img/girl-winter-copy.jpg" alt="">
@@ -28,6 +124,7 @@
           <img src="../../../CSS/assets/img/miao-gengxin-gu435nBTLW4-unsplash.jpg" alt="">
           <img src="../../../CSS/assets/img/pexels-alex-azabache-3879055.jpg" alt="">
         </div>
+
         <div class="dream">
           <img src="../../../CSS/assets/img/rainforest-kunal-shinde--f0YLss50Bs-unsplash.jpg" alt="">
           <img src="../../../CSS/assets/img/river-bank-copy.jpg" alt="">
@@ -35,10 +132,32 @@
           <img src="../../../CSS/assets/img/scenic-view-of-lake-against-sky-during-sunset-copy.jpg" alt="">
           <img src="../../../CSS/assets/img/stadium-bg.jpg" alt="">
         </div>
+
       </div>
+
       <div class="btn">
         <a href="#">more</a>
       </div>
+
+      <script>
+        function collectThings(x, ...params) {
+          console.log(x);
+          console.log(params);
+        }
+
+        collectThings(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+        const arr1 = [1, 2, 3];
+        const arr2 = [4, 5, 6, 7];
+        const merge1 = (x, y) => {
+          for (let i = 0; i < y.length; i++) {
+            x.push(y[i]);
+          }
+        };
+        merge1(arr1, arr2);
+        console.log(arr1);
+      </script>
+
     </div>
 
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
@@ -105,107 +224,6 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
-    </script>
-
-    <script>
-      async function updateUser(baseURL, id, data, apiKey) {
-  const fullURL = `${baseURL}/${id}`
-  await fetch(fullURL, {
-    method: 'PUT',
-    mode: 'cors',
-    headers: {
-      'X-API-Key': apiKey,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
-}
-
-async function getUserById(baseURL, id, apiKey) {
-  const fullURL = `${baseURL}/${id}`
-  const response = await fetch(fullURL, {
-    method: 'GET',
-    mode: 'cors',
-    headers: {
-      'X-API-Key': apiKey,
-      'Content-Type': 'application/json'
-    }
-  })
-  return response.json()
-}
-
-// don't touch below this line
-
-const userId = '2f8282cb-e2f9-496f-b144-c0aa4ced56db'
-const generatedKey = generateKey()
-const baseURL = 'https://api.boot.dev/v1/courses_rest_api/learn-http/users'
-
-function generateKey() {
-  const characters = 'ABCDEF0123456789'
-  let result = ''
-  for (let i = 0; i < 16; i++) {
-    result += characters.charAt(Math.floor(Math.random() * characters.length))
-  }
-  return result
-}
-
-function logUser(user) {
-  console.log(`User uuid: ${user.id}, Character Name: ${user.characterName}, Class: ${user.class}, Level: ${user.level}, PVP Status: ${user.pvpEnabled}, User name: ${user.user.name}`)
-}
-
-const start = async function () {
-  const userData = await getUserById(baseURL, userId, generatedKey)
-  logUser(userData);
-  console.log(`Updating user with id: ${userId}`)
-userData.characterName = 'Dellbiar'
-userData.level = 7
-userData.class = 'Warrior'
-userData.pvpEnabled = true
-userData.user.name = 'Allan'
-await updateUser(baseURL, userId, userData, generatedKey)
-
-const newUser = await getUserById(baseURL, userId, generatedKey)
-logUser(newUser) 
-}
-
-start();
-    </script>
-
-    <script>
-            // 10. Profit
-
-            function magic1(params) {
-        const b1 = Number(params[0]);
-        const b2 = Number(params[1]);
-        const b5 = Number(params[2]);
-        const sum = Number(params[3]);
-
-        for (let leva1 = 0; leva1 <= b1; leva1++) {
-          let sum1 = 0;
-          sum1+=leva1;
-
-          for (let leva2 = 0; leva2 <= b2; leva2++) {
-            let sum2 = 0;
-            sum2+=leva2*2;
-
-            for (let leva5 = 0; leva5 <= b5; leva5++) {
-              let sum5 = 0;
-              sum5+=leva5*5;
-
-              // console.log(sum1, sum2, sum5);
-
-              const currentSum = sum1 + sum2 + sum5;
-              if (currentSum === sum) {
-                console.log(`${leva1} * 1 lv. + ${leva2} * 2 lv. + ${leva5} * 5 lv. = ${sum} lv.`);
-              }
-
-            }
-          }
-        }
-      }
-
-      // magic1(["3", "2", "3", "10"]);
-      // magic1(["5", "3", "1", "7"]);
     </script>
   </body>
 </html>
