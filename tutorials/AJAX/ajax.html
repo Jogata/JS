@@ -4,163 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: 'Poppins', sans-serif;
-      }
-
-      .container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        text-align: center;
-        margin: 40px 20px 0 20px;
-      }
-
-      .heading {
-        width: 50%;
-        padding-bottom: 50px;
-      }
-      .heading h3 {
-        padding-bottom: 10px;
-        font-size: 3rem;
-        font-weight: bold;
-        text-transform: capitalize;
-        border-bottom: 3px solid #222;
-      }
-      .heading span {
-        font-weight: 100;
-      }
-
-      .box {
-        display: flex;
-        /* align-items: center; */
-        justify-content: space-between;
-        flex-direction: row;
-      }
-
-      .dream {
-        width: 32.5%;
-        display: flex;
-        flex-direction: column;
-        /* border: 1px solid red; */
-      }
-      .dream img {
-        width: 100%;
-        margin-bottom: 15px;
-        border-radius: 5px;
-        object-fit: cover;
-      }
-
-      .btn {
-        margin: 40px 0 70px 0;
-        padding: 15px 40px;
-        border-radius: 5px;
-        background-color: #222;
-      }
-      .btn a {
-        color: #fff;
-        font-size: 1.2rem;
-        font-weight: bold;
-        text-transform: capitalize;
-        text-decoration: none;
-        letter-spacing: 3px;
-      }
-
-      @media screen and (max-width: 769px) {
-        .box {
-          flex-direction: column;
-        }
-        .dream {
-          width: 100%;
-        }
-      }
-
-      @media screen and (max-width: 750px) {
-        .heading {
-          width: 100%;
-        }
-      }
-      
-      @media screen and (max-width: 640px) {        
-        .heading h3 {
-          font-size: 2rem;
-        }
-      }
-    </style>
   </head>
   <body>
-
-    <div class="container gallery">
-
-      <div class="heading">
-        <h3>photo <span>gallery</span></h3>
-      </div>
-
-      <div class="box">
-
-        <div class="dream">
-          <img src="../../../CSS/assets/img/alley-copy.jpg" alt="">
-          <img src="../../../CSS/assets/img/branch-copy.jpg" alt="">
-          <img src="../../../CSS/assets/img/clouds-bg-copy.jpg" alt="">
-          <img src="../../../CSS/assets/img/foggy-lake-quang-nguyen-vinh-2166695-copy.jpg" alt="">
-          <img src="../../../CSS/assets/img/forest.jpg" alt="">
-        </div>
-
-        <div class="dream">
-          <img src="../../../CSS/assets/img/games-the-elder-scrolls-v-skyrim-50003-copy.jpg" alt="">
-          <img src="../../../CSS/assets/img/girl-winter-copy.jpg" alt="">
-          <img src="../../../CSS/assets/img/lake-17401.jpg" alt="">
-          <img src="../../../CSS/assets/img/miao-gengxin-gu435nBTLW4-unsplash.jpg" alt="">
-          <img src="../../../CSS/assets/img/pexels-alex-azabache-3879055.jpg" alt="">
-        </div>
-
-        <div class="dream">
-          <img src="../../../CSS/assets/img/rainforest-kunal-shinde--f0YLss50Bs-unsplash.jpg" alt="">
-          <img src="../../../CSS/assets/img/river-bank-copy.jpg" alt="">
-          <img src="../../../CSS/assets/img/road-copy.jpg" alt="">
-          <img src="../../../CSS/assets/img/scenic-view-of-lake-against-sky-during-sunset-copy.jpg" alt="">
-          <img src="../../../CSS/assets/img/stadium-bg.jpg" alt="">
-        </div>
-
-      </div>
-
-      <div class="btn">
-        <a href="#">more</a>
-      </div>
-
-      <script>
-        function collectThings(x, ...params) {
-          console.log(x);
-          console.log(params);
-        }
-
-        collectThings(1, 2, 3, 4, 5, 6, 7, 8, 9);
-
-        const arr1 = [1, 2, 3];
-        const arr2 = [4, 5, 6, 7];
-        const merge1 = (x, y) => {
-          for (let i = 0; i < y.length; i++) {
-            x.push(y[i]);
-          }
-        };
-        merge1(arr1, arr2);
-        console.log(arr1);
-      </script>
-
-    </div>
-
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
@@ -224,6 +70,143 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
+    </script>
+
+    <script>
+      function getCapture(camera) {
+        camera();
+      }
+
+      getCapture(function() {
+        console.log("The camera is Canon");
+      })
+
+      function returnFN() {
+        return function() {
+          console.log("This is a Function, returned from HOF");
+        }
+      }
+
+      returnFN()();
+
+      function test() {
+        const x = 5;
+
+        const arrowF = () => {
+          console.log(this);
+        }
+
+        arrowF();
+      }
+
+      const testObj = {
+        logThis: test,
+      }
+
+      testObj.logThis();
+      test();
+    </script>
+
+    <script>
+      const user = {
+        name: "John", 
+        age: 25, 
+        country: "BG",
+        isMaried: false,
+      }
+
+      console.log(user);
+
+      user.address = "123 main Str.";
+      user.name = "John Doe";
+      delete user.isMaried;
+      console.log(user);
+
+      console.log(Object.isExtensible(user));
+
+      Object.defineProperty(user, "isAdmin", {
+        value: false,
+        writable: true,
+        enumerable: true,
+      })
+
+      console.log(user);
+
+      // Prevent Extensions
+      Object.preventExtensions(user);
+      console.log(Object.isExtensible(user));
+
+      user.age = 26;
+      user.wontBeAdded = true;
+      delete user.isAdmin;
+      console.log(user);
+
+      // Seal Object
+      Object.seal(user);
+      console.log(Object.isSealed(user));
+
+      user.name = "will be changed";
+      delete user.age;
+      user.email = "email@abv.bg";
+
+      console.log(user);
+
+      // Freeze Object
+      Object.freeze(user);
+      console.log(Object.isFrozen(user));
+
+      user.name = "wont be changed";
+      delete user.age;
+      user.email = "email@abv.bg";
+
+      const config = {
+        db: "MongoDB",
+        host: "host.com",
+        password: "fake",
+        port: 512,
+        admin: {
+          name: "jogata",
+          rights: ["create", "update", "delete"],
+        }
+      }
+
+      console.log("=====================");
+      // Object.freeze(config);
+      console.log(Object.isFrozen(config));
+
+      config.host = "wont be changed";
+      delete config.db;
+      config.admin.name = "hacker";
+
+      console.log(config);
+
+      function deepFreeze(obj) {
+        Object.keys(obj).forEach(key => {
+          if (typeof obj[key] === "object") {
+            deepFreeze(obj[key]);
+          }
+        })
+        Object.freeze(obj);
+      }
+
+      deepFreeze(config);
+
+      console.log(Object.isFrozen(config.admin.rights));
+
+      config.admin.name = "newHacker";
+
+      console.log(config.admin.name);
+
+      // Freezing Arrays
+      const numbers = [1, 2, 3, 4];
+
+      Object.freeze(numbers);
+
+      numbers.push(5);
+      numbers.pop();
+      numbers.length = 0;
+
+      console.log(numbers);
     </script>
   </body>
 </html>
