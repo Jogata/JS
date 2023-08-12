@@ -4,10 +4,127 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        /* min-height: 100vh; */
+        font-family: Georgia, serif;
+        background-image: url("./img/banner.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+
+      header {
+        position: relative;
+        width: 100%;
+        /* height: 100%; */
+        min-height: 100vh;
+        border: 1px solid red;
+      }
+
+      .top-header {
+        width: 100%;
+        padding: 8px 105px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #4a4a4a;
+      }
+
+      .left {
+        display: flex;
+      }
+      .left p {
+        padding-right: 15px;
+        color: #999;
+        font-size: 16px;
+        border-right: 1px solid #fff;
+        transition: color 400ms;
+        cursor: pointer;
+      }
+      .left p:last-child {
+        padding-left: 15px;
+        border-right: 0px solid transparent;
+      }
+      .left p:hover {
+        color: #fff;
+      }
+      .left p i {
+        padding-right: 10px;
+        font-size: 12px;
+        color: #fb5b21;
+      }
+
+      .right i {
+        padding-right: 15px;
+        color: #afafaf;
+        font-size: 14px;
+        border-right: 1px solid #fff;
+        cursor: pointer;
+      }
+      .right i:last-child {
+        padding-left: 15px;
+        padding-right: 0;
+        border-right: 0px solid transparent;
+      }
+
+      .header {
+        padding: 15px 105px 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo {
+        width: 150px;
+      }
+      .logo img {
+        width: 100%;
+      }
+
+      .menu ul {
+        display: flex;
+      }
+      .menu ul li {
+        list-style: none;
+        margin-right: 25px;
+      }
+      .menu ul li:last-child {
+        margin-right: 0;
+      }
+      .menu ul li a {
+        color: #fff;
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: color 400ms;
+      }
+      .menu ul li a:hover {
+        color: #fb5b21;
+      }
+
+      .banner-text {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 50%;
+        height: 70%;
+        /* margin: auto; */
+        padding-top: 121px;
+      }
       h1 {
         font-size: 5rem;
-        text-align: center;
+        /* text-align: center; */
         text-transform: capitalize;
       }
 
@@ -64,17 +181,17 @@
       <div class="top-header">
         <div class="left">
           <p>
-            <i class="fa fa-phone"></i>
+            <i class="fa fa-phone" aria-hidden="true"></i>
             + 123 456 78910
           </p>
           <p>
-            <i class="fa fa-envelope"></i>
+            <i class="fa fa-envelope-o" aria-hidden="true"></i>
           user1211@gmail.com
           </p>
         </div>
         <div class="right">
-          <i class="fa fa-search"></i>
-          <i class="fa fa-cart"></i>
+          <i class="fa fa-search" aria-hidden="true"></i>
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
         </div>
       </div>
       <div class="header">
@@ -96,174 +213,17 @@
       </div>
       <div class="banner-text">
         <h3>hi</h3>
-        <h1>i'm john smith</h1>
+        <h1>i'm <span>john smith</span></h1>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia maxime error ipsa assumenda exercitationem. Odio, ad impedit veritatis odit incidunt, aliquid id laudantium maiores tenetur quo, eligendi cumque.</p>
         <div class="sci">
-          <i class="fa fa-facebook"></i>
-          <i class="fa fa-twitter"></i>
-          <i class="fa fa-linkedin-in"></i>
-          <i class="fa fa-skype"></i>
+          <i class="fa fa-facebook" aria-hidden="true"></i>
+          <i class="fa fa-twitter" aria-hidden="true"></i>
+          <i class="fa fa-linkedin" aria-hidden="true"></i>
+          <i class="fa fa-skype" aria-hidden="true"></i>
         </div>
         <button>join us</button>
       </div>
     </header>
-
-    <div class="container">
-      <header>
-        <h1>secret santa game</h1>
-      </header>
-      <div class="content">
-        <p id="gift-id" class="gift"></p>
-        <p>
-          <strong>santa</strong>: <span id="santa-id"></span>
-        </p>
-        <p>
-          <strong>child</strong>: <span id="child-id"></span>
-        </p>
-        <button class="play">play</button>
-      </div>
-      <footer id="footer-id"></footer>
-    </div>
-
-    <script>
-      const gifts = [
-        "hoodie", 
-        "moon-light", 
-        "perfumes", 
-        "watch", 
-        "studio-light", 
-      ]
-
-      const participants = [
-        "Alex", 
-        "Bob", 
-        "Carl", 
-        "Dell", 
-        "Emle", 
-      ]
-
-      const getRandomElement = arr => {
-        return arr[Math.floor(Math.random()*arr.length)];
-      }
-
-      const init = () => {
-        const giftElement = document.getElementById("gift-id");
-        const childElement = document.getElementById("child-id");
-        const santaElement = document.getElementById("santa-id");
-
-        const child = getRandomElement(participants);
-        const santa = getRandomElement(participants.filter(elem => elem !== child));
-        const gift = getRandomElement(gifts);
-
-        console.log(`${santa} to give ${gift} to ${child}`);
-
-        childElement.innerText = "";
-        childElement.innerText = child;
-        santaElement.innerText = "";
-        santaElement.innerText = santa;
-
-        giftElement.innerHTML = "";
-        const img = document.createElement("img");
-        img.src = "./img/logo1.png";
-        img.alt = gift;
-        img.width = 300;
-        img.height = 300;
-        giftElement.appendChild(img);
-      }
-
-      init();
-
-      const playBtn = document.querySelector(".play");
-      playBtn.addEventListener("click", init);
-    </script>
-
-    <script>
-      function orederPizza(type, name, callback) {
-        console.log(`Pizza of ${type} ${name} is ordered`);
-        
-        setTimeout(() => {
-          const message = `Pizza of ${type} ${name} is ready`;
-          callback(message);
-        }, 3000);
-      }
-
-      orederPizza("veg", "Cheese Barbeque", function(message) {
-        console.log(message);
-      });
-
-      const addFooter = () => {
-        const footer = document.getElementById("footer-id");
-        footer.innerText = `CopyRights ${new Date().getFullYear()} Author Name`;
-      }
-
-      addFooter();
-    </script>
-
-    <script>
-      function incrArr(arr, n) {
-        const result = [];
-
-        for (const elem of arr) {
-          result.push(elem + n);
-        }
-
-        return result;
-      }
-
-      const numbers = [1, 2, 3, 4, 5];
-
-      console.log(incrArr(numbers, 1));
-
-      function incr(num, pad) {
-        return num + pad;
-      }
-
-      function dencr(num, pad) {
-        return num - pad;
-      }
-
-      function mult(num, pad) {
-        return num * pad;
-      }
-      function devide(num, pad) {
-        return num / pad;
-      }
-
-      function incrArrHighOrder(arr, n, operation) {
-        const result = [];
-
-        for (const elem of arr) {
-          result.push(operation(elem, n));
-        }
-
-        return result;
-      }
-
-      console.log(incrArrHighOrder(numbers, 2, incr));
-      console.log(incrArrHighOrder(numbers, 1, dencr));
-
-      const user = {
-        name: "jogata", 
-        age: 44, 
-        country: "BG", 
-        isMarried: false,
-      }
-
-      user.address = "123 Main Str.";
-      user.age = 45;
-      delete user.isMarried;
-      console.log(user);
-
-      console.log(Object.isExtensible(user));
-
-      Object.defineProperty(user, "isAdmin", {
-        value: false, 
-        writable: true, 
-        enumerable: true, 
-      })
-
-      console.log(user);
-    </script>
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
