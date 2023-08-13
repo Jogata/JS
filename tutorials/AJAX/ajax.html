@@ -4,9 +4,139 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
+    <style>
+      fieldset {
+        display: none;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #191919;
+      }
+
+      .gallery {
+        width: 900px;
+        display: flex;
+        margin: auto;
+        overflow: auto;
+      }
+
+      .gallery div {
+        width: 100%;
+        padding: 10px;
+        flex: none;
+        display: grid;
+        gap: 20px;
+        grid-template-columns: auto auto auto;
+      }
+
+      .gallery img {
+        width: 100%;
+      }
+
+      .gallery::-webkit-scrollbar {
+        display: none;
+      }
+
+      .gallery-wrapper {
+        margin: auto 10%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      button span {
+        color: whitesmoke;
+        display: block;
+        width: 70px;
+        height: 70px;
+        font-size: 50px;
+        cursor: pointer;
+      }
+
+      #prev {
+        padding-right: 5px;
+      }
+      #next {
+        padding-left: 5px;
+      }
+
+      .gallery-wrapper button {
+        width: 50px;
+        height: 50px;
+        background-color: transparent;
+        font-family: 'Times New Roman', Times, serif;
+        border: 1px solid transparent;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background-color: tomato;
+      }
+    </style>
   </head>
   <body>
-    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+
+    <div class="gallery-wrapper">
+
+      <button id="prev">
+        <span>&#139;</span>
+      </button>
+
+      <div class="gallery">
+  
+        <div>
+          <span>
+            <img src="./slides/361146473_995671938136092_4243291179085438720_n-copy.jpg" alt="">
+          </span>
+          <span>
+            <img src="./slides/362626204_1293072171336316_5256622931544661120_n-copy.jpg" alt="">
+          </span>
+          <span>
+            <img src="./slides/362664191_1324713848119224_2171936770770053129_n-copy.jpg" alt="">
+          </span>
+        </div>
+  
+        <div>
+          <span>
+            <img src="./slides/362860545_306516828402860_2842904757267180744_n-copy.jpg" alt="">
+          </span>
+          <span>
+            <img src="./slides/363884762_971180514130824_8969875958453403320_n-copy.jpg" alt="">
+          </span>
+          <span>
+            <img src="./slides/364342225_2020813254755899_8012892550414412459_n-copy.jpg" alt="">
+          </span>
+        </div>
+  
+        <div>
+          <span>
+            <img src="./slides/364346480_1958559877860560_3786840621881788296_n-copy.jpg" alt="">
+          </span>
+          <span>
+            <img src="./slides/365179140_207555025301834_1020397736021360341_n-copy.jpg" alt="">
+          </span>
+          <span>
+            <img src="./slides/365457363_904071257798378_5402481005423976957_n-copy.jpg" alt="">
+          </span>
+        </div>
+  
+      </div>
+
+      <button id="next">
+        <span>&#155;</span>
+      </button>
+
+    </div>
+    
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
@@ -70,143 +200,6 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
-    </script>
-
-    <script>
-      function getCapture(camera) {
-        camera();
-      }
-
-      getCapture(function() {
-        console.log("The camera is Canon");
-      })
-
-      function returnFN() {
-        return function() {
-          console.log("This is a Function, returned from HOF");
-        }
-      }
-
-      returnFN()();
-
-      function test() {
-        const x = 5;
-
-        const arrowF = () => {
-          console.log(this);
-        }
-
-        arrowF();
-      }
-
-      const testObj = {
-        logThis: test,
-      }
-
-      testObj.logThis();
-      test();
-    </script>
-
-    <script>
-      const user = {
-        name: "John", 
-        age: 25, 
-        country: "BG",
-        isMaried: false,
-      }
-
-      console.log(user);
-
-      user.address = "123 main Str.";
-      user.name = "John Doe";
-      delete user.isMaried;
-      console.log(user);
-
-      console.log(Object.isExtensible(user));
-
-      Object.defineProperty(user, "isAdmin", {
-        value: false,
-        writable: true,
-        enumerable: true,
-      })
-
-      console.log(user);
-
-      // Prevent Extensions
-      Object.preventExtensions(user);
-      console.log(Object.isExtensible(user));
-
-      user.age = 26;
-      user.wontBeAdded = true;
-      delete user.isAdmin;
-      console.log(user);
-
-      // Seal Object
-      Object.seal(user);
-      console.log(Object.isSealed(user));
-
-      user.name = "will be changed";
-      delete user.age;
-      user.email = "email@abv.bg";
-
-      console.log(user);
-
-      // Freeze Object
-      Object.freeze(user);
-      console.log(Object.isFrozen(user));
-
-      user.name = "wont be changed";
-      delete user.age;
-      user.email = "email@abv.bg";
-
-      const config = {
-        db: "MongoDB",
-        host: "host.com",
-        password: "fake",
-        port: 512,
-        admin: {
-          name: "jogata",
-          rights: ["create", "update", "delete"],
-        }
-      }
-
-      console.log("=====================");
-      // Object.freeze(config);
-      console.log(Object.isFrozen(config));
-
-      config.host = "wont be changed";
-      delete config.db;
-      config.admin.name = "hacker";
-
-      console.log(config);
-
-      function deepFreeze(obj) {
-        Object.keys(obj).forEach(key => {
-          if (typeof obj[key] === "object") {
-            deepFreeze(obj[key]);
-          }
-        })
-        Object.freeze(obj);
-      }
-
-      deepFreeze(config);
-
-      console.log(Object.isFrozen(config.admin.rights));
-
-      config.admin.name = "newHacker";
-
-      console.log(config.admin.name);
-
-      // Freezing Arrays
-      const numbers = [1, 2, 3, 4];
-
-      Object.freeze(numbers);
-
-      numbers.push(5);
-      numbers.pop();
-      numbers.length = 0;
-
-      console.log(numbers);
     </script>
   </body>
 </html>
