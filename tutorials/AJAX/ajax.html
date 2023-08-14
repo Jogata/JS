@@ -3,17 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AJAX | XMLHttpRequest</title>
+    <!-- <title>AJAX | XMLHttpRequest</title> -->
+    <title>Multiplication App</title>
     <style>
       fieldset {
         display: none;
       }
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+      /* * { */
+        /* margin: 0; */
+        /* padding: 0; */
+        /* box-sizing: border-box; */
+      /* } */
 
       body {
         background-color: #191919;
@@ -21,9 +22,11 @@
 
       .gallery {
         width: 900px;
+        min-width: 900px;
         display: flex;
         margin: auto;
-        overflow: auto;
+        scroll-behavior: smooth;
+        overflow: hidden;
       }
 
       .gallery div {
@@ -31,12 +34,26 @@
         padding: 10px;
         flex: none;
         display: grid;
-        gap: 20px;
+        gap: 1%;
         grid-template-columns: auto auto auto;
       }
 
+      .gallery span {
+        overflow: hidden;
+      }
+      /* .gallery span:hover {
+        z-index: 2;
+      } */
+
       .gallery img {
         width: 100%;
+        filter: grayscale(1);
+        transition: all 400ms;
+        cursor: pointer;
+      }
+      .gallery img:hover {
+        transform: scale(1.1);
+        filter: grayscale(0);
       }
 
       .gallery::-webkit-scrollbar {
@@ -47,29 +64,35 @@
         margin: auto 10%;
         display: flex;
         align-items: center;
-        justify-content: center;
+        /* justify-content: center; */
         min-height: 100vh;
       }
 
+      .gallery-wrapper button {
+        flex-shrink: 0;
+      }
       button span {
-        color: whitesmoke;
         display: block;
-        width: 70px;
-        height: 70px;
-        font-size: 50px;
+        color: whitesmoke;
+        /* width: min(2vw, 70px); */
+        /* height: min(2vw, 70px); */
+        font-size: max(1rem, 4vw);
+        line-height: 0;
         cursor: pointer;
       }
 
-      #prev {
-        padding-right: 5px;
+      #prev span {
+        padding: 0.47em 0.44em 0.66em 0.36em;
+        /* padding-right: 5px; */
       }
-      #next {
-        padding-left: 5px;
+      #next span {
+        padding: 0.47em 0.38em 0.66em 0.42em;
+        /* padding-left: 5px; */
       }
 
       .gallery-wrapper button {
-        width: 50px;
-        height: 50px;
+        /* width: 50px; */
+        /* height: 50px; */
         background-color: transparent;
         font-family: 'Times New Roman', Times, serif;
         border: 1px solid transparent;
@@ -79,6 +102,88 @@
         justify-content: center;
         border-radius: 50%;
         background-color: tomato;
+      }
+
+      /* <!-- Multiplication App --> */
+      * {
+        box-sizing: content-box;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      .container {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Georgia, serif;
+        text-align: center;
+        background-color: #f2f2f2;
+      }
+
+      form {
+        margin: 10px;
+        padding: 30px;
+        outline: 2px solid green;
+        outline-offset: -10px;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      .input {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        color: green;
+        font-size: 25px;
+        font-family: inherit;
+        text-align: center;
+        border: 4px solid green;
+        box-sizing: border-box;
+      }
+      .input::placeholder {
+        color: lightgray;
+        font-family: inherit;
+      }
+
+      .btn {
+        display: block;
+        width: 100%;
+        margin: 20px 0;
+        padding: 10px;
+        color: #fff;
+        font-size: 20px;
+        font-family: inherit;
+        text-transform: capitalize;
+        border: 1px solid transparent;
+        border-radius: 5px;
+        background-color: green;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        transition: all 400ms;
+        box-sizing: border-box;
+        cursor: pointer;
+      }
+      .btn:hover {
+        filter: brightness(0.9);
+      }
+
+      .score {
+        padding-right: 10px;
+        padding-bottom: 10px;
+        color: green;
+        font-size: 20px;
+        text-align: right;
+        border-bottom: 1px solid lightgray;
+      }
+
+      #question {
+        max-width: 600px;
+        font-size: 60px;
       }
     </style>
   </head>
@@ -134,7 +239,35 @@
         <span>&#155;</span>
       </button>
 
+      <script>
+        const container = document.querySelector(".gallery");
+        const prevBtn = document.querySelector("#prev");
+        const nextBtn = document.querySelector("#next");
+
+        container.addEventListener("wheel", (e) => {
+          e.preventDefault();
+          container.scrollLeft += e.deltaY;
+        })
+
+        prevBtn.addEventListener("click", () => {
+          container.scrollLeft -= 900;
+        })
+        nextBtn.addEventListener("click", () => {
+          container.scrollLeft += 900;
+        })
+      </script>
+
     </div>
+
+    <!-- Multiplication App -->
+    <div class="container">
+      <form action="" class="form" id="form">
+        <h4 class="score" id="score">score: 0</h4>
+        <h1 id="question">What is 1 multiply by 1?</h1>
+        <input type="text" name="answer" id="input" class="input" placeholder="Enter Your Answer" autofocus autocomplete="off">
+        <button type="submit" class="btn">submit</button>
+      </form>
+      </div>
     
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
