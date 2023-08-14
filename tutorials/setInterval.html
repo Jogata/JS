@@ -4,20 +4,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>setInterval function in JS</title>
-      <style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
       * {
-        margin: 0;padding: 0;box-sizing: border-box;
-      }ul {list-style: none;
-      }li {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      ul {
+        list-style: none;
+      }
+      
+      li {
         display: inline-block;
-      }a {text-decoration: none;
-      }body {
+      }
+      
+      a {
+        text-decoration: none;
+      }
+
+      button {
+        border: 1px solid transparent;
+        background-color: transparent;
+        cursor: pointer;
+      }
+      
+      body {
         font-family: Georgia, serif;
-      }:root {
+      }
+      
+      :root {
         --primary-color: rgb(253, 86, 42);
         --secondary-color: rgba(255, 255, 255, 0.4);
         --background-color: #222;
-      }main {
+      }
+      main {
         min-width: 100%;
         min-height: 780px;
         background-color: rgb(4, 52, 83);
@@ -26,57 +48,98 @@
         rgb(4, 52, 83) 0%, 
         rgb(3, 50, 81) 35%, 
         rgb(41, 17, 45) 100%);
-        /* overflow: hidden; */
-      }#header {
-        position: fixed;width: 100%;
+        overflow: hidden;
+      }
+      
+      #header {
+        position: fixed;
+        width: 100%;
         min-height: 100px;
         padding: 0 10%;
-        display: flex;align-items: center;justify-content: space-between;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         backdrop-filter: blur(6px);
         transition: all 600ms;
-        z-index: 2;
-      }#header a {
+        z-index: 3;
+      }
+
+      .menu a {
         padding: 0 10px;
         color: #fff;
-        font-weight: 600;text-transform: capitalize;
+        font-weight: 600;
+        text-transform: capitalize;
         transition: all 600ms;
-      }#header a:hover {
+      }
+      #header a:hover {
         color: var(--primary-color);
-      }.logo {
+      }
+      
+      .logo a {
         color: #fff;
         font-size: 1.7rem;
-        font-weight: 600;text-transform: capitalize;
-      }#header .fa-bars {
+        font-weight: 600;
+        text-transform: capitalize;
+      }
+
+      .menu-btn {
         display: none;
-        padding: 10px;color: #fff;
-        font-size: 1.2rem;
+        font-size: 0px;
+        /* font-weight: bold; */
+        border-radius: 0.2rem;
         background-color: var(--primary-color);
-      }@media (max-width: 768px) {
-        #header .fa-bars {
+        transition: all 400ms;
+      }
+      .menu-btn:hover {
+        background-color: #fff;
+      }
+      .fa-bars {
+        padding: 6px 8px;
+        color: #fff;
+        font-size: 1.2rem;
+        /* font-weight: 900; */
+        transition: all 400ms;
+      }
+      .menu-btn:hover .fa-bars {
+        color: var(--primary-color);
+      }
+      
+      @media (max-width: 768px) {
+        .menu-btn {
           display: block;
-        }ul {
-          display: none;
+        }
+        .menu {
+          display: block;
           position: absolute;
           top: 100%;
           left: 0;
           width: 100%;
           border-bottom: 2px solid var(--primary-color);
           background-color: #fff;
-        }ul li {
+        }
+        .menu li {
           display: block;
           margin: 10px 0;
           padding: 5px 0;
-        }#header a {
-          color: #000;
-        }.show {
-          display: block;
-        }}.hero {
-          width: 100%;min-height: 100%;
-          padding: 8%;
-          display: flex;align-items: center;
-          justify-content: space-evenly;
         }
-        </style>
+        .menu a {
+          color: #000;
+        }
+        .hidden {
+          display: none;
+        }
+      }
+      
+      .hero {
+        position: relative;
+        width: 100%;
+        min-height: 100%;
+        padding: 8%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -84,8 +147,8 @@
         <div id="header">
           <div class="logo">
             <a href="#header">logo</a>
-           </div>
-          <ul>
+          </div>
+          <ul class="menu hidden">
             <li><a href="#">home</a></li>
             <li><a href="#">about</a></li>
             <li><a href="#">portfolio</a></li>
@@ -93,13 +156,15 @@
             <li><a href="#">testimonial</a></li>
             <li><a href="#">blog</a></li>
             <li><a href="#">contact</a></li>
-           </ul>
-          <i class="fa fa-bars">menu</i>
+          </ul>
+          <button class="menu-btn">menu
+            <i class="fa fa-bars"></i>
+          </button>
         </div>
         <div class="hero">
           <div class="top-elements">
-            <img src="" alt="">
-            <img src="" alt="">
+            <img src="../../CSS/assets/img/golden-floral-decor-copy.png" alt="">
+            <img src="../../CSS/assets/img/golden-floral-decor-copy.png" alt="">
           </div>
           <div class="content">
             <h3>hello i'm</h3>
@@ -116,29 +181,32 @@
                 <i class="fa fa-instagram"></i>
               </div>
             </div>
-            <div class="image">
-              <img src="../../CSS/assets/img/profile-copy.jpg" alt="">
-             </div>
-            <div class="side-elements">
-              <img src="" alt="">
-              <img src="" alt="">
-            </div>
+          </div>
+          <div class="image">
+            <img src="../../CSS/assets/img/profile-copy.jpg" alt="">
+           </div>
+          <div class="side-elements">
+            <img src="" alt="">
+            <img src="" alt="">
           </div>
         </div>
       </main>
     </div>
-     <script>
-      const menu = document.querySelector("ul");
-      const bar = document.querySelector(".fa-bars");
-      bar.addEventListener("click", () => {
-        menu.classList.toggle("show");
-    })
-     </script>
-    <h1 style="text-align: center;">setInterval() - JavaScript</h1>
-    <hr>
-    <p id="timer" style="font-size: 3rem;">0 sec</p>
-    <button id="start">Start Timer</button>
-    <button id="pause">Pause Timer</button>
+
+    <script>
+      const menu = document.querySelector(".menu");
+      const menuBtn = document.querySelector(".menu-btn");
+
+      menuBtn.addEventListener("click", () => {
+        menu.classList.toggle("hidden");
+      })
+    </script>
+
+    <!-- <h1 style="text-align: center;">setInterval() - JavaScript</h1> -->
+    <!-- <hr> -->
+    <!-- <p id="timer" style="font-size: 3rem;">0 sec</p> -->
+    <!-- <button id="start">Start Timer</button> -->
+    <!-- <button id="pause">Pause Timer</button> -->
 
     <script src="js.js">
       const timer = document.getElementById('timer');
