@@ -10,112 +10,17 @@
         display: none;
       }
 
-      /* * { */
-        /* margin: 0; */
-        /* padding: 0; */
-        /* box-sizing: border-box; */
-      /* } */
-
-      body {
-        background-color: #191919;
-      }
-
-      .gallery {
-        width: 900px;
-        min-width: 900px;
-        display: flex;
-        margin: auto;
-        scroll-behavior: smooth;
-        overflow: hidden;
-      }
-
-      .gallery div {
-        width: 100%;
-        padding: 10px;
-        flex: none;
-        display: grid;
-        gap: 1%;
-        grid-template-columns: auto auto auto;
-      }
-
-      .gallery span {
-        overflow: hidden;
-      }
-      /* .gallery span:hover {
-        z-index: 2;
-      } */
-
-      .gallery img {
-        width: 100%;
-        filter: grayscale(1);
-        transition: all 400ms;
-        cursor: pointer;
-      }
-      .gallery img:hover {
-        transform: scale(1.1);
-        filter: grayscale(0);
-      }
-
-      .gallery::-webkit-scrollbar {
-        display: none;
-      }
-
-      .gallery-wrapper {
-        margin: auto 10%;
-        display: flex;
-        align-items: center;
-        /* justify-content: center; */
-        min-height: 100vh;
-      }
-
-      .gallery-wrapper button {
-        flex-shrink: 0;
-      }
-      button span {
-        display: block;
-        color: whitesmoke;
-        /* width: min(2vw, 70px); */
-        /* height: min(2vw, 70px); */
-        font-size: max(1rem, 4vw);
-        line-height: 0;
-        cursor: pointer;
-      }
-
-      #prev span {
-        padding: 0.47em 0.44em 0.66em 0.36em;
-        /* padding-right: 5px; */
-      }
-      #next span {
-        padding: 0.47em 0.38em 0.66em 0.42em;
-        /* padding-left: 5px; */
-      }
-
-      .gallery-wrapper button {
-        /* width: 50px; */
-        /* height: 50px; */
-        background-color: transparent;
-        font-family: 'Times New Roman', Times, serif;
-        border: 1px solid transparent;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        background-color: tomato;
-      }
-
-      /* <!-- Multiplication App --> */
       * {
-        box-sizing: content-box;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
 
       body {
-        margin: 0;
+        font-family: Georgia, serif;
       }
 
       .container {
-        margin: 0;
-        padding: 0;
         min-height: 100vh;
         display: flex;
         align-items: center;
@@ -144,7 +49,6 @@
         font-family: inherit;
         text-align: center;
         border: 4px solid green;
-        box-sizing: border-box;
       }
       .input::placeholder {
         color: lightgray;
@@ -165,7 +69,6 @@
         background-color: green;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         transition: all 400ms;
-        box-sizing: border-box;
         cursor: pointer;
       }
       .btn:hover {
@@ -183,91 +86,139 @@
 
       #question {
         max-width: 600px;
+        margin: 1rem;
         font-size: 60px;
       }
     </style>
   </head>
   <body>
 
-    <div class="gallery-wrapper">
-
-      <button id="prev">
-        <span>&#139;</span>
-      </button>
-
-      <div class="gallery">
-  
-        <div>
-          <span>
-            <img src="./slides/361146473_995671938136092_4243291179085438720_n-copy.jpg" alt="">
-          </span>
-          <span>
-            <img src="./slides/362626204_1293072171336316_5256622931544661120_n-copy.jpg" alt="">
-          </span>
-          <span>
-            <img src="./slides/362664191_1324713848119224_2171936770770053129_n-copy.jpg" alt="">
-          </span>
-        </div>
-  
-        <div>
-          <span>
-            <img src="./slides/362860545_306516828402860_2842904757267180744_n-copy.jpg" alt="">
-          </span>
-          <span>
-            <img src="./slides/363884762_971180514130824_8969875958453403320_n-copy.jpg" alt="">
-          </span>
-          <span>
-            <img src="./slides/364342225_2020813254755899_8012892550414412459_n-copy.jpg" alt="">
-          </span>
-        </div>
-  
-        <div>
-          <span>
-            <img src="./slides/364346480_1958559877860560_3786840621881788296_n-copy.jpg" alt="">
-          </span>
-          <span>
-            <img src="./slides/365179140_207555025301834_1020397736021360341_n-copy.jpg" alt="">
-          </span>
-          <span>
-            <img src="./slides/365457363_904071257798378_5402481005423976957_n-copy.jpg" alt="">
-          </span>
-        </div>
-  
-      </div>
-
-      <button id="next">
-        <span>&#155;</span>
-      </button>
-
-      <script>
-        const container = document.querySelector(".gallery");
-        const prevBtn = document.querySelector("#prev");
-        const nextBtn = document.querySelector("#next");
-
-        container.addEventListener("wheel", (e) => {
-          e.preventDefault();
-          container.scrollLeft += e.deltaY;
-        })
-
-        prevBtn.addEventListener("click", () => {
-          container.scrollLeft -= 900;
-        })
-        nextBtn.addEventListener("click", () => {
-          container.scrollLeft += 900;
-        })
-      </script>
-
-    </div>
-
-    <!-- Multiplication App -->
     <div class="container">
       <form action="" class="form" id="form">
-        <h4 class="score" id="score">score: 0</h4>
+        <h4 class="score" id="score">score: <span>0</span></h4>
         <h1 id="question">What is 1 multiply by 1?</h1>
         <input type="text" name="answer" id="input" class="input" placeholder="Enter Your Answer" autofocus autocomplete="off">
         <button type="submit" class="btn">submit</button>
       </form>
-      </div>
+
+      <script>
+        let num1 = Math.ceil(Math.random() * 10);
+        let num2 = Math.ceil(Math.random() * 10);
+
+        console.log(num1, num2);
+
+        let result = num1 * num2;
+
+        const questionElement = document.getElementById("question");
+        questionElement.innerText = `What is ${num1} multiply by ${num2}?`;
+ 
+        const formElement = document.getElementById("form");
+        const inputElement = document.getElementById("input");
+        const scoreElement = document.querySelector("#score span");
+ 
+        formElement.addEventListener("submit", (e) => {
+ 
+          e.preventDefault(); 
+
+          const userInput = Number(inputElement.value);
+ 
+          if (userInput === result) {
+            console.log(scoreElement.innerText);
+            scoreElement.innerText = Number(scoreElement.innerText) + 1;
+          } else {
+            scoreElement.innerText = Number(scoreElement.innerText) - 1;
+          }
+
+        num1 = Math.ceil(Math.random() * 10);
+        num2 = Math.ceil(Math.random() * 10);
+ 
+        console.log(num1, num2);
+ 
+        result = num1 * num2;
+ 
+        const questionElement = document.getElementById("question");
+        questionElement.innerText = `What is ${num1} multiply by ${num2}?`;
+ 
+        inputElement.value = "";
+ 
+        }) 
+      </script> 
+ 
+      <script>
+        const arr1 = [1, 2, 3];
+        let arr2 = [4, 5, 6];
+
+        const merge = (first, second) => {
+
+          for (let i = 0; i < second.length; i++) {
+            first.push(second[i]);
+          }
+
+          return first;
+
+        }
+
+        console.log(merge(arr1, arr2));
+ 
+        const mergedSpread = [...arr1, ...arr2];
+        console.log(mergedSpread);
+        
+        arr2 = "Jogata";
+        // const mergedConcat = [].concat(arr1, arr2);
+        const mergedConcat = arr1.concat(arr2);
+        console.log(mergedConcat);
+ 
+        arr2 = [4, 5, 6];
+        let mergesPush = arr1.push(...arr2);
+        console.log(arr1);
+ 
+        const mergedReduce = arr2.reduce((arr, item) => {
+          arr.push(item);
+          return arr;
+        }, arr1)
+        console.log(mergedReduce);
+      </script>
+      <script>
+        const agent = {
+          id: "007", 
+          name: "James", 
+          dept: {
+            id: "D001", 
+            name: "Spy", 
+            address: {
+              street: "30 Wellington Square", 
+              city: "Chelsea", 
+            }
+          }
+        }
+ 
+        const {id, name} = agent;
+        console.log(id);
+        console.log(name);
+
+        const {dept: {address}} = agent;
+        const {dept: {address: {street}}} = agent;
+        console.log(address);
+        console.log(street);
+
+        const {id: agentID} = agent;
+        console.log(agentID);
+
+        let key = "id";
+        console.log(agent[key]);
+
+        const id1 = getPropertyValue("id");
+        const name1 = getPropertyValue("name");
+ 
+        function getPropertyValue(key) {
+          const {[key]: returnValue} = agent;
+          return returnValue;
+        }
+ 
+        console.log(id1);
+        console.log(name1);
+      </script>
+    </div>
     
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
