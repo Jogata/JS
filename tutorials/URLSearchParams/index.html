@@ -6,107 +6,7 @@
     <title>URLSearchParams in JS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-
-      .top-header {
-        width: 100%;
-        max-width: 170rem;
-        margin: auto;
-        padding: 0.5rem 3rem;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        border-bottom: 1px solid #4a4a4a;
-      }
-
-      .left {
-        display: flex;
-        flex-wrap: wrap;
-      }
-      .left p {
-        padding: 0.5rem 1rem;
-        color: #999;
-        font-size: 1rem;
-        border-right: 1px solid #fff;
-        transition: color 400ms;
-        cursor: pointer;
-      }
-      .left p:last-child {
-        border-right: 0px solid transparent;
-      }
-      .left p:hover {
-        color: #fff;
-      }
-      .left p i {
-        padding-right: 0.6em;
-        font-size: 1rem;
-        color: #fb5b21;
-      }
-
-      .right {
-        padding: 0.5rem 1rem;
-      }
-      .right i {
-        padding: 0.5rem 1rem;
-        color: #afafaf;
-        font-size: 1rem;
-        border-right: 1px solid #fff;
-        cursor: pointer;
-      }
-      .right i:last-child {
-        padding-left: 1rem;
-        padding-right: 0;
-        border-right: 0px solid transparent;
-      }
-
-      .flex-container {
-        display: flex;
-      }
-
-      .banner-text {
-        width: min-content;
-        min-width: 50%;
-        margin-left: auto;
-        padding: max(20vh, 4rem) 0;
-      }
-      .banner-text h3 {
-        color: #fff;
-        font-size: 2.5rem;
-        font-weight: 400;
-        text-transform: capitalize;
-      }
-      .banner-text h1 {
-        color: #fff;
-        font-size: 3.4rem;
-        font-weight: 400;
-        text-transform: capitalize;
-      }
-      .banner-text h1 span {
-        font-weight: 600;
-      }
-      .banner-text p {
-        padding: 1em 0;
-        color: #fff;
-        max-width: 35rem;
-        line-height: 1.6;
-      }
-
-      .banner-text button {
-        padding: 0.4em 1.4em;
-        color: #fff;
-        font-size: 1rem;
-        font-family: inherit;
-        text-transform: capitalize;
-        border: 1px solid #fb5b21;
-        border-radius: 2em;
-        background-color: transparent;
-        transition: all 400ms;
-        cursor: pointer;
-      }
-      .banner-text button:hover {
-        background-color: #fb5b21;
-      }
-
+      /* old */
       * {
         margin: 0;
         padding: 0;
@@ -182,7 +82,8 @@
         min-height: 100vh;
       }
 
-      .slider {}
+      /* .slider {} */
+
       .slide {
         position: absolute;
         width: 100%;
@@ -214,9 +115,25 @@
         background-color: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(20px);
       }
+      /* .penetrate-blur {
+        mask: 
+        linear-gardient(#000 0 0), 
+        linear-gardient(#000 0 0);
+        -webkit-mask: 
+        linear-gardient(#000 0 0), 
+        linear-gardient(#000 0 0);
+        mask-clip: padding-box;
+        -webkit-mask-clip: text;
+        mask-composite: exclude;
+        -webkit-mask-composite: xor;
+      } */
       .penetrate-blur h1 {
         color: #fff;
         font-size: 250px;
+        color: transparent;
+        background-image: url("./images/china.jpg");
+        background-size: 150%;
+        background-clip: text;
       }
 
       .content {
@@ -242,11 +159,10 @@
         color: #444;
         font-size: 16px;
         font-weight: 600;
-        border: 1px solid #fff;
+        border: 2px solid #fff;
         border-radius: 6px;
         background-color: #fff;
         text-transform: capitalize;
-        /* text-decoration: none; */
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         transition: all 400ms;
       }
@@ -264,12 +180,23 @@
         height: 100%;
         display: flex;
         align-items: center;
-        /* flex-direction: column; */
-        /* justify-content: center; */
       }
       .right-info h1 {
         color: #fff;
         font-size: 250px;
+        text-shadow: 
+        0px 1px 0px #ccc, 
+        0px 2px 0px #c9c9c9, 
+        0px 3px 0px #bbb, 
+        0px 4px 0px #b9b9b9, 
+        0px 5px 0px #aaa, 
+        0px 6px 1px rgba(0, 0, 0, 0.1), 
+        0px 0px 5px rgba(0, 0, 0, 0.1), 
+        0px 1px 3px rgba(0, 0, 0, 0.3), 
+        0px 3px 5px rgba(0, 0, 0, 0.2), 
+        0px 5px 10px rgba(0, 0, 0, 0.25), 
+        0px 10px 10px rgba(0, 0, 0, 0.2), 
+        0px 20px 20px rgba(0, 0, 0, 0.15);
       }
       .right-info h3 {
         position: absolute;
@@ -279,6 +206,50 @@
         text-transform: capitalize;
         transform: translateY(150%);
         text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      }
+
+      .navigation {
+        position: absolute;
+        bottom: 8%;
+        right: 5%;
+        z-index: 3;
+      }
+      .navigation span {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        margin-left: 25px;
+        border: 2px solid #fff;
+        border-radius: 6px;
+        background-color: #fff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        transition: all 500ms;
+        cursor: pointer;
+      }
+      .navigation span:hover {
+        background-color: transparent;
+      }
+      .navigation span.prev-btn {
+        background-color: transparent;
+      }
+      .navigation span.prev-btn:hover {
+        background-color: #fff;
+      }
+      .navigation span i {
+        color: #444;
+        font-size: 35px;
+        transition: all 500ms;
+      }
+      .navigation span:hover i {
+        color: #fff;
+      }
+      .navigation span.prev-btn i {
+        color: #fff;
+      }
+      .navigation span.prev-btn:hover i {
+        color: #444;
       }
 
       /* ====================================================== delete ============================================== */
@@ -292,12 +263,42 @@
         /* min-height: unset; */
         /* background-color: seagreen; */
       /* } */
-      .sci a {
-        text-decoration: none;
+      /* .sci a { */
+        /* text-decoration: none; */
+      /* } */
+      /* .navbar a { */
+        /* text-decoration: none; */
+      /* } */
+      h1 {
+        border: 1px solid red;
       }
-      .navbar a {
-        text-decoration: none;
-      }
+
+h2 {
+    font-size: 16vw;
+    padding: 20px 40px;
+    border-radius: 50px;
+    text-transform: uppercase;
+}
+
+#v1 {
+    color: #000;
+    background: #fff;
+    background: rgba(255, 255, 255, 0.8);
+    mix-blend-mode: screen;
+}
+
+#v2 {
+    color: #fff;
+    background: rgba(0, 0, 0, 0.6);
+    mix-blend-mode: multiply;
+}
+#v3 {
+    color: transparent;
+    text-transform: capitalize;
+    font-family: 'Limelight', cursive;
+    -webkit-text-stroke-color: #fff;
+    -webkit-text-stroke-width: 1px;
+}
     </style>
   </head>
   <body>
@@ -348,7 +349,18 @@
           </div>
         </div>
       </div>
-    </section>
+      <div class="navigation">
+        <span class="prev-btn">
+          <i class="fa fa-chevron-left"></i>
+        </span>
+        <span class="next-btn">
+          <i class="fa fa-chevron-right"></i>
+        </span>
+      </div>
+      <!-- <h2 id="v1"> text I </h2> -->
+      <!-- <h2 id="v2"> text II </h2> -->
+      <!-- <h2 id="v3"> text III </h2> -->
+    </section>  
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
