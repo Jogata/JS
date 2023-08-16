@@ -3,224 +3,136 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>AJAX | XMLHttpRequest</title> -->
-    <title>Multiplication App</title>
-    <style>
-      fieldset {
-        display: none;
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: Georgia, serif;
-      }
-
-      .container {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: Georgia, serif;
-        text-align: center;
-        background-color: #f2f2f2;
-      }
-
-      form {
-        margin: 10px;
-        padding: 30px;
-        outline: 2px solid green;
-        outline-offset: -10px;
-        border-radius: 10px;
-        background-color: #fff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      }
-
-      .input {
-        display: block;
-        width: 100%;
-        padding: 10px;
-        color: green;
-        font-size: 25px;
-        font-family: inherit;
-        text-align: center;
-        border: 4px solid green;
-      }
-      .input::placeholder {
-        color: lightgray;
-        font-family: inherit;
-      }
-
-      .btn {
-        display: block;
-        width: 100%;
-        margin: 20px 0;
-        padding: 10px;
-        color: #fff;
-        font-size: 20px;
-        font-family: inherit;
-        text-transform: capitalize;
-        border: 1px solid transparent;
-        border-radius: 5px;
-        background-color: green;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        transition: all 400ms;
-        cursor: pointer;
-      }
-      .btn:hover {
-        filter: brightness(0.9);
-      }
-
-      .score {
-        padding-right: 10px;
-        padding-bottom: 10px;
-        color: green;
-        font-size: 20px;
-        text-align: right;
-        border-bottom: 1px solid lightgray;
-      }
-
-      #question {
-        max-width: 600px;
-        margin: 1rem;
-        font-size: 60px;
-      }
-    </style>
+    <title>AJAX | XMLHttpRequest</title>
   </head>
   <body>
-
-    <div class="container">
-      <form action="" class="form" id="form">
-        <h4 class="score" id="score">score: <span>0</span></h4>
-        <h1 id="question">What is 1 multiply by 1?</h1>
-        <input type="text" name="answer" id="input" class="input" placeholder="Enter Your Answer" autofocus autocomplete="off">
-        <button type="submit" class="btn">submit</button>
-      </form>
-
-      <script>
-        let num1 = Math.ceil(Math.random() * 10);
-        let num2 = Math.ceil(Math.random() * 10);
-
-        console.log(num1, num2);
-
-        let result = num1 * num2;
-
-        const questionElement = document.getElementById("question");
-        questionElement.innerText = `What is ${num1} multiply by ${num2}?`;
- 
-        const formElement = document.getElementById("form");
-        const inputElement = document.getElementById("input");
-        const scoreElement = document.querySelector("#score span");
- 
-        formElement.addEventListener("submit", (e) => {
- 
-          e.preventDefault(); 
-
-          const userInput = Number(inputElement.value);
- 
-          if (userInput === result) {
-            console.log(scoreElement.innerText);
-            scoreElement.innerText = Number(scoreElement.innerText) + 1;
-          } else {
-            scoreElement.innerText = Number(scoreElement.innerText) - 1;
-          }
-
-        num1 = Math.ceil(Math.random() * 10);
-        num2 = Math.ceil(Math.random() * 10);
- 
-        console.log(num1, num2);
- 
-        result = num1 * num2;
- 
-        const questionElement = document.getElementById("question");
-        questionElement.innerText = `What is ${num1} multiply by ${num2}?`;
- 
-        inputElement.value = "";
- 
-        }) 
-      </script> 
- 
-      <script>
-        const arr1 = [1, 2, 3];
-        let arr2 = [4, 5, 6];
-
-        const merge = (first, second) => {
-
-          for (let i = 0; i < second.length; i++) {
-            first.push(second[i]);
-          }
-
-          return first;
-
-        }
-
-        console.log(merge(arr1, arr2));
- 
-        const mergedSpread = [...arr1, ...arr2];
-        console.log(mergedSpread);
-        
-        arr2 = "Jogata";
-        // const mergedConcat = [].concat(arr1, arr2);
-        const mergedConcat = arr1.concat(arr2);
-        console.log(mergedConcat);
- 
-        arr2 = [4, 5, 6];
-        let mergesPush = arr1.push(...arr2);
-        console.log(arr1);
- 
-        const mergedReduce = arr2.reduce((arr, item) => {
-          arr.push(item);
-          return arr;
-        }, arr1)
-        console.log(mergedReduce);
-      </script>
-      <script>
-        const agent = {
-          id: "007", 
-          name: "James", 
-          dept: {
-            id: "D001", 
-            name: "Spy", 
-            address: {
-              street: "30 Wellington Square", 
-              city: "Chelsea", 
-            }
-          }
-        }
- 
-        const {id, name} = agent;
-        console.log(id);
-        console.log(name);
-
-        const {dept: {address}} = agent;
-        const {dept: {address: {street}}} = agent;
-        console.log(address);
-        console.log(street);
-
-        const {id: agentID} = agent;
-        console.log(agentID);
-
-        let key = "id";
-        console.log(agent[key]);
-
-        const id1 = getPropertyValue("id");
-        const name1 = getPropertyValue("name");
- 
-        function getPropertyValue(key) {
-          const {[key]: returnValue} = agent;
-          return returnValue;
-        }
- 
-        console.log(id1);
-        console.log(name1);
-      </script>
-    </div>
     
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <section class="gallery">
+ 
+      <div class="gallery-topic">
+        <h2>our gallery</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil, expedita dolorem? Consequatur facere quasi at rem, eos saepe. Eligendi, animi laboriosam rerum accusantium voluptatem, odio tempora eveniet velit soluta, placeat dolor dolorem sequi.</p>
+      </div>
+ 
+      <div class="gallery-image">
+ 
+        <div class="col-2">
+          <img src="./slides/361146473_995671938136092_4243291179085438720_n-copy.jpg" alt="">
+          <div class="search-btn">
+            <svg aria-hidden="true" class="pre-nav-design-icon" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none">
+              <path stroke="currentColor" stroke-width="1.5" d="M13.962 16.296a6.716 6.716 0 01-3.462.954 6.728 6.728 0 01-4.773-1.977A6.728 6.728 0 
+              013.75 10.5c0-1.864.755-3.551 1.977-4.773A6.728 6.728 0 0110.5 3.75c1.864 0 3.551.755 4.773 1.977A6.728 6.728 0 0117.25 10.5a6.726 6.726 
+              0 01-.921 3.407c-.517.882-.434 1.988.289 2.711l3.853 3.853"></path>
+            </svg>
+          </div>
+        </div>
+ 
+        <div class="col-2">
+          <img src="./slides/361146473_995671938136092_4243291179085438720_n-copy.jpg" alt="">
+          <div class="search-btn">
+            <svg aria-hidden="true" class="pre-nav-design-icon" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none">
+              <path stroke="currentColor" stroke-width="1.5" d="M13.962 16.296a6.716 6.716 0 01-3.462.954 6.728 6.728 0 01-4.773-1.977A6.728 6.728 0 
+              013.75 10.5c0-1.864.755-3.551 1.977-4.773A6.728 6.728 0 0110.5 3.75c1.864 0 3.551.755 4.773 1.977A6.728 6.728 0 0117.25 10.5a6.726 6.726 
+              0 01-.921 3.407c-.517.882-.434 1.988.289 2.711l3.853 3.853"></path>
+            </svg>
+          </div>
+        </div>
+
+        <div class="col-2">
+          <img src="./slides/361146473_995671938136092_4243291179085438720_n-copy.jpg" alt="">
+          <div class="search-btn">
+            <svg aria-hidden="true" class="pre-nav-design-icon" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none">
+              <path stroke="currentColor" stroke-width="1.5" d="M13.962 16.296a6.716 6.716 0 01-3.462.954 6.728 6.728 0 01-4.773-1.977A6.728 6.728 0 
+              013.75 10.5c0-1.864.755-3.551 1.977-4.773A6.728 6.728 0 0110.5 3.75c1.864 0 3.551.755 4.773 1.977A6.728 6.728 0 0117.25 10.5a6.726 6.726 
+              0 01-.921 3.407c-.517.882-.434 1.988.289 2.711l3.853 3.853"></path>
+            </svg>
+          </div>
+        </div>
+
+        <div class="col-2">
+          <img src="./slides/361146473_995671938136092_4243291179085438720_n-copy.jpg" alt="">
+          <div class="search-btn">
+            <svg aria-hidden="true" class="pre-nav-design-icon" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none">
+              <path stroke="currentColor" stroke-width="1.5" d="M13.962 16.296a6.716 6.716 0 01-3.462.954 6.728 6.728 0 01-4.773-1.977A6.728 6.728 0 
+              013.75 10.5c0-1.864.755-3.551 1.977-4.773A6.728 6.728 0 0110.5 3.75c1.864 0 3.551.755 4.773 1.977A6.728 6.728 0 0117.25 10.5a6.726 6.726 
+              0 01-.921 3.407c-.517.882-.434 1.988.289 2.711l3.853 3.853"></path>
+            </svg>
+          </div>
+        </div>
+
+        <div class="col-2">
+          <img src="./slides/361146473_995671938136092_4243291179085438720_n-copy.jpg" alt="">
+          <div class="search-btn">
+            <svg aria-hidden="true" class="pre-nav-design-icon" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none">
+              <path stroke="currentColor" stroke-width="1.5" d="M13.962 16.296a6.716 6.716 0 01-3.462.954 6.728 6.728 0 01-4.773-1.977A6.728 6.728 0 
+              013.75 10.5c0-1.864.755-3.551 1.977-4.773A6.728 6.728 0 0110.5 3.75c1.864 0 3.551.755 4.773 1.977A6.728 6.728 0 0117.25 10.5a6.726 6.726 
+              0 01-.921 3.407c-.517.882-.434 1.988.289 2.711l3.853 3.853"></path>
+            </svg>
+          </div>
+        </div>
+
+        <div class="col-2">
+          <img src="./slides/361146473_995671938136092_4243291179085438720_n-copy.jpg" alt="">
+          <div class="search-btn">
+            <svg aria-hidden="true" class="pre-nav-design-icon" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none">
+              <path stroke="currentColor" stroke-width="1.5" d="M13.962 16.296a6.716 6.716 0 01-3.462.954 6.728 6.728 0 01-4.773-1.977A6.728 6.728 0 
+              013.75 10.5c0-1.864.755-3.551 1.977-4.773A6.728 6.728 0 0110.5 3.75c1.864 0 3.551.755 4.773 1.977A6.728 6.728 0 0117.25 10.5a6.726 6.726 
+              0 01-.921 3.407c-.517.882-.434 1.988.289 2.711l3.853 3.853"></path>
+            </svg>
+          </div>
+        </div>
+
+        <div class="col-2">
+          <img src="./slides/361146473_995671938136092_4243291179085438720_n-copy.jpg" alt="">
+          <div class="search-btn">
+            <svg aria-hidden="true" class="pre-nav-design-icon" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none">
+              <path stroke="currentColor" stroke-width="1.5" d="M13.962 16.296a6.716 6.716 0 01-3.462.954 6.728 6.728 0 01-4.773-1.977A6.728 6.728 0 
+              013.75 10.5c0-1.864.755-3.551 1.977-4.773A6.728 6.728 0 0110.5 3.75c1.864 0 3.551.755 4.773 1.977A6.728 6.728 0 0117.25 10.5a6.726 6.726 
+              0 01-.921 3.407c-.517.882-.434 1.988.289 2.711l3.853 3.853"></path>
+            </svg>
+          </div>
+        </div>
+ 
+        <div class="col-2">
+          <img src="./slides/361146473_995671938136092_4243291179085438720_n-copy.jpg" alt="">
+          <div class="search-btn">
+            <svg aria-hidden="true" class="pre-nav-design-icon" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none">
+              <path stroke="currentColor" stroke-width="1.5" d="M13.962 16.296a6.716 6.716 0 01-3.462.954 6.728 6.728 0 01-4.773-1.977A6.728 6.728 0 
+              013.75 10.5c0-1.864.755-3.551 1.977-4.773A6.728 6.728 0 0110.5 3.75c1.864 0 3.551.755 4.773 1.977A6.728 6.728 0 0117.25 10.5a6.726 6.726 
+              0 01-.921 3.407c-.517.882-.434 1.988.289 2.711l3.853 3.853"></path>
+            </svg>
+          </div>
+        </div>
+ 
+        <div class="col-2">
+          <img src="./slides/361146473_995671938136092_4243291179085438720_n-copy.jpg" alt="">
+          <div class="search-btn">
+            <svg aria-hidden="true" class="pre-nav-design-icon" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none">
+              <path stroke="currentColor" stroke-width="1.5" d="M13.962 16.296a6.716 6.716 0 01-3.462.954 6.728 6.728 0 01-4.773-1.977A6.728 6.728 0 
+              013.75 10.5c0-1.864.755-3.551 1.977-4.773A6.728 6.728 0 0110.5 3.75c1.864 0 3.551.755 4.773 1.977A6.728 6.728 0 0117.25 10.5a6.726 6.726 
+              0 01-.921 3.407c-.517.882-.434 1.988.289 2.711l3.853 3.853"></path>
+            </svg>
+          </div>
+        </div>
+ 
+        <div class="col-2">
+          <img src="./slides/361146473_995671938136092_4243291179085438720_n-copy.jpg" alt="">
+          <div class="search-btn">
+            <svg aria-hidden="true" class="pre-nav-design-icon" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none">
+              <path stroke="currentColor" stroke-width="1.5" d="M13.962 16.296a6.716 6.716 0 01-3.462.954 6.728 6.728 0 01-4.773-1.977A6.728 6.728 0 
+              013.75 10.5c0-1.864.755-3.551 1.977-4.773A6.728 6.728 0 0110.5 3.75c1.864 0 3.551.755 4.773 1.977A6.728 6.728 0 0117.25 10.5a6.726 6.726 
+              0 01-.921 3.407c-.517.882-.434 1.988.289 2.711l3.853 3.853"></path>
+            </svg>
+          </div>
+        </div>
+ 
+      </div>
+
+      <button class="btn more">see more</button>
+
+    </section>
+
+    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
