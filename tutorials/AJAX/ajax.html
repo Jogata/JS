@@ -24,8 +24,10 @@
 
       section {
         width: 80%;
+        max-width: 1200px;
         margin: auto;
-        padding: 80px 60px;
+        padding: 5rem 4rem;
+        text-align: center;
       }
 
       .gallery-topic {
@@ -41,9 +43,9 @@
         filter: drop-shadow(-1px -1px 1px #fff);
       }
       .gallery-topic p {
-        margin: 30px 0;
+        margin: 2rem 0;
         color: gray;
-        font-size: 16px;
+        font-size: 1rem;
       }
 
       hr {
@@ -56,15 +58,20 @@
       }
 
       .gallery-images {
+        /* max-width: 1100px; */
+        margin: auto;
         display: grid;
         gap: 15px;
-        grid-template-columns: 1fr 1fr 1fr;
+        /* grid-template-columns: 1fr 1fr 1fr; */
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        /* justify-content: center; */
+        /* justify-items: center; */
         text-align: center;
       }
 
       .col-2 {
         position: relative;
-        width: 330px;
+        /* width: 330px; */
         height: 350px;
         box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
         cursor: pointer;
@@ -74,6 +81,7 @@
         height: 100%;
         object-fit: cover;
         object-position: top;
+        transition: all 500ms ease-in;
       }
 
       .search-btn {
@@ -93,20 +101,23 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 38px;
-        height: 38px;
+        width: 2.4rem;
+        height: 2.4rem;
       }
       .col-2:hover .search-btn {
         transform: scale(1);
       }
+      .col-2:hover img {
+        object-position: center;
+      }
 
       .btn {
-        margin-top: 40px;
-        margin-bottom: 30px;
-        padding: 12px 20px;
+        margin-top: 2.4rem;
+        margin-bottom: 2rem;
+        padding: 0.6em 1em;
         /* color: #000; */
         color: transparent;
-        font-size: 20px;
+        font-size: 1.2rem;
         font-weight: 600;
         font-family: inherit;
         text-transform: capitalize;
@@ -122,7 +133,71 @@
       }
       .btn:hover {
         color: #fff;
+        /* border: 1px solid #ff5601; */
+        /* background-color: #ff5601; */
         /* background-color: transparent; */
+      }
+
+      /* .more {
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+      } */
+
+      @media screen and (max-width: 1220px) {
+        .gallery-images {
+          /* grid-template-columns: 1fr 1fr; */
+          gap: 15px;
+        }
+        .col-2 {
+          width: 100%;
+          height: 350px;
+        }
+        .search-btn {
+          width: 100%;
+          height: 350px;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        .gallery-images {
+          /* grid-template-columns: 1fr; */
+        }
+        .gallery-topic h2 {
+          font-size: 32px;
+          text-align: left;
+        }
+        .gallery-topic p {
+          font-size: 14px;
+          text-align: left;
+        }
+        hr {
+          width: 100%;
+        }
+      }
+
+      @media screen and (max-width: 550px) {
+        section {
+          padding: 80px 30px;
+        }
+        .col-2 {
+          width: 100%;
+          height: 250px;
+        }
+        .search-btn {
+          width: 100%;
+          height: 250px;
+        }
+      }
+
+      @media screen and (max-width: 330px) {
+        section {
+          padding: 40px 0;
+        }
+        h2 {
+          font-size: 26px;
+          /* text-align: left; */
+        }
       }
     </style>
   </head>
@@ -252,9 +327,48 @@
 
       <button class="btn more">see more</button>
 
+<script>
+  function calcPCGameShopSales(params) {
+    const sales = Number(params[0]);
+
+    const games = {
+      hearthstone: "hearthstone",
+      fornite: "fornite",
+      overwatch: "overwatch",
+    }
+
+    const allGames = {
+      hearthstone: 0,
+      fornite: 0,
+      overwatch: 0,
+      undefined: 0,
+    }
+
+    for (let sale = 1; sale <= sales; sale++) {
+      const game = params[sale].toLowerCase();
+      const gameName = games[game];
+      allGames[gameName]++;
+    }
+
+    const fP = (allGames.fornite / sales) * 100;
+    const hP = (allGames.hearthstone / sales) * 100;
+    const oP = (allGames.overwatch / sales) * 100;
+    const rP = (allGames.undefined / sales) * 100;
+    
+    console.log(`Hearthstone - ${hP.toFixed(2)}%`);
+    console.log(`Fornite - ${fP.toFixed(2)}%`);
+    console.log(`Overwatch - ${oP.toFixed(2)}%`);
+    console.log(`Others - ${rP.toFixed(2)}%`);
+
+  }
+
+  // calcPCGameShopSales(["4", "Hearthstone", "Fornite", "Overwatch", "Counter-Strike"]);
+  // calcPCGameShopSales(["3", "Hearthstone", "Diablo 2", "Star Craft 2"]);
+</script>
+
     </section>
 
-    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
