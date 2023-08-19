@@ -16,6 +16,10 @@
         text-decoration: none;
       }
 
+      button {
+        cursor: pointer;
+      }
+
       body {
         font-family: Georgia, serif;
       }
@@ -77,9 +81,10 @@
       .banner {
         position: relative;
         width: 100%;
+        min-width: 1000px;
         height: 100%;
         min-height: 100vh;
-        overflow-x: hidden;
+        /* overflow-x: hidden; */
       }
 
       /* .slider {} */
@@ -104,18 +109,20 @@
         /* top: 0; */
         /* left: 0; */
         width: 50%;
+        height: 1000px;
+        min-height: 100vh;
         /* height: 100%; */
         transform: translateX(-100%);
         transition: 0s;
       }
 
       .penetrate-blur {
-        position: absolute;
-        width: 100%;
+        /* position: absolute; */
+        /* width: 100%; */
         height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
+        /* display: flex; */
+        /* align-items: center; */
+        /* justify-content: flex-end; */
         background-color: rgba(255, 255, 255, 0.1);
         backdrop-filter: blur(20px);
       }
@@ -132,11 +139,19 @@
         -webkit-mask-composite: xor;
       } */
       .penetrate-blur h1 {
-        color: #fff;
-        font-size: 250px;
+        width: 100%;
+        height: 100%;
+        min-height: 100vh;
+        /* color: #fff; */
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
         color: transparent;
+        font-size: 250px;
+        text-align: right;
         background-image: url("./images/china.jpg");
-        background-size: 150%;
+        background-position: left;
+        background-size: cover;
         background-clip: text;
         /* text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); */
         -webkit-text-stroke: 2px rgba(255, 255, 255, 0.6);
@@ -155,6 +170,7 @@
         text-transform: capitalize;
       }
       .content p {
+        max-width: 990px;
         font-size: 16px;
         margin: 10px 0 15px;
       }
@@ -192,30 +208,47 @@
       .right-info h1 {
         color: #fff;
         font-size: 250px;
-        text-shadow: 
-        0px 1px 0px #ccc, 
-        0px 2px 0px #c9c9c9, 
-        0px 3px 0px #bbb, 
-        0px 4px 0px #b9b9b9, 
-        0px 5px 0px #aaa, 
-        0px 6px 1px rgba(0, 0, 0, 0.1), 
-        0px 0px 5px rgba(0, 0, 0, 0.1), 
-        0px 1px 3px rgba(0, 0, 0, 0.3), 
-        0px 3px 5px rgba(0, 0, 0, 0.2), 
-        0px 5px 10px rgba(0, 0, 0, 0.25), 
-        0px 10px 10px rgba(0, 0, 0, 0.2), 
-        0px 20px 20px rgba(0, 0, 0, 0.15);
+        /* text-shadow:  */
+        /* 0px 1px 0px #ccc,  */
+        /* 0px 2px 0px #c9c9c9,  */
+        /* 0px 3px 0px #bbb,  */
+        /* 0px 4px 0px #b9b9b9,  */
+        /* 0px 5px 0px #aaa,  */
+        /* 0px 6px 1px rgba(0, 0, 0, 0.1),  */
+        /* 0px 0px 5px rgba(0, 0, 0, 0.1),  */
+        /* 0px 1px 3px rgba(0, 0, 0, 0.3),  */
+        /* 0px 3px 5px rgba(0, 0, 0, 0.2),  */
+        /* 0px 5px 10px rgba(0, 0, 0, 0.25),  */
+        /* 0px 10px 10px rgba(0, 0, 0, 0.2),  */
+        /* 0px 20px 20px rgba(0, 0, 0, 0.15); */
       }
-      .right-info h3 {
-        position: absolute;
-        margin-left: 13px;
-        color: #fff;
-        font-size: 80px;
-        text-transform: capitalize;
-        transform: translateY(150%);
-        text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      /* .right-info h3 { */
+        /* position: absolute; */
+        /* margin-left: 13px; */
+        /* color: #fff; */
+        /* font-size: 80px; */
+        /* text-transform: capitalize; */
+        /* transform: translateY(150%); */
+        /* text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); */
+      /* } */
+
+      .slide {
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      .slide img {
+        object-position: left;
       }
 
+      .slide.relative {
+        position: relative;
+      }
+
+      .slide.active {
+        z-index: 1;
+      }
       .slide.active img {
         opacity: 1;
       }
@@ -236,95 +269,110 @@
         right: 5%;
         z-index: 3;
       }
-      .slider-navigation span {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 50px;
-        height: 50px;
+      .slider-navigation button {
+        /* display: inline-block; */
+        /* align-items: center; */
+        /* justify-content: center; */
+        /* width: 50px; */
+        /* height: 50px; */
         margin-left: 25px;
+        padding: 0.3em 0.3em 0.569em 0.3em;
+        /* color: #444; */
+        font-size: 70px;
+        line-height: 0;
         border: 2px solid #fff;
         border-radius: 6px;
-        background-color: #fff;
+        /* background-color: #fff; */
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
         transition: all 500ms;
-        cursor: pointer;
+        /* cursor: pointer; */
       }
-      .slider-navigation span:hover {
-        background-color: transparent;
+      .slider-navigation span {
+        font-family: 'Times New Roman', serif;
+        line-height: 0;
       }
-      .slider-navigation span.prev-btn {
-        background-color: transparent;
-      }
-      .slider-navigation span.prev-btn:hover {
+      .slider-navigation button.next-btn {
+        color: #444;
         background-color: #fff;
       }
-      .slider-navigation span i {
-        color: #444;
-        font-size: 35px;
-        transition: all 500ms;
-      }
-      .slider-navigation span:hover i {
+      .slider-navigation button.next-btn:hover {
         color: #fff;
+        background-color: transparent;
       }
-      .slider-navigation span.prev-btn i {
+      .slider-navigation button.prev-btn {
         color: #fff;
+        background-color: transparent;
       }
-      .slider-navigation span.prev-btn:hover i {
+      .slider-navigation button.prev-btn:hover {
         color: #444;
+        background-color: #fff;
       }
+      /* .slider-navigation span i { */
+        /* color: #444; */
+        /* font-size: 35px; */
+        /* transition: all 500ms; */
+      /* } */
+      /* .slider-navigation span:hover i { */
+        /* color: #fff; */
+      /* } */
+      /* .slider-navigation span.prev-btn i { */
+        /* color: #fff; */
+      /* } */
+      /* .slider-navigation span.prev-btn:hover i { */
+        /* color: #444; */
+      /* } */
 
       /* v.2 */
-      .banner {
-        min-width: 1000px;
+      /* .banner { */
+        /* min-width: 1000px; */
         /* overflow-x: hidden; */
-      }
+      /* } */
 
-      .slide.relative {
+      /* .slide.relative {
         position: relative;
-      }
+      } */
 
-      .slide {
-        /* position: relative; */
+      /* .slide {
+        position: relative;
         top: 0;
         width: 100%;
         height: 100%;
-        /* min-width: 700px; */
+        min-width: 700px;
         overflow: hidden;
       }
       .slide img {
         object-position: left;
-      }
+      } */
 
-      .left-info {
-        /* position: absolute; */
-        /* top: 0; */
-        /* left: 0; */
+      /* .left-info {
+        position: absolute;
+        top: 0;
+        left: 0;
         height: 1000px;
         min-height: 100vh;
-      }
+      } */
 
-      .penetrate-blur {
-  /* position: absolute; */
-  /* width: 100%; */
-  height: 100%;
-  /* display: flex; */
-  /* align-items: center; */
-  /* justify-content: flex-end; */
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-}
-.penetrate-blur h1 {
-  min-height: 100vh;
-width: 100%;
-height: 100%;
-text-align: right;
-display: flex;
-align-items: center;
-justify-content: flex-end;
-background-size: cover;
-background-position: left;
-}
+      /* .penetrate-blur {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
+      } */
+      /* .penetrate-blur h1 {
+        min-height: 100vh;
+        width: 100%;
+        height: 100%;
+        text-align: right;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        background-size: cover;
+        background-position: left;
+      } */
 
 .right-info h1 {
   position: relative;
@@ -352,16 +400,16 @@ text-transform: capitalize;
       <a href="#" class="logo">tours.</a>
       <div class="sci">
         <a href="#">
-          <i class="fa fa-facebook"></i>
+          <i class="fa fa-facebook" aria-hidden="true"></i>
         </a>
         <a href="#">
-          <i class="fa fa-instagram"></i>
+          <i class="fa fa-instagram" aria-hidden="true"></i>
         </a>
         <a href="#">
-          <i class="fa fa-twitter"></i>
+          <i class="fa fa-twitter" aria-hidden="true"></i>
         </a>
         <a href="#">
-          <i class="fa fa-paper-plane"></i>
+          <i class="fa fa-paper-plane" aria-hidden="true"></i>
         </a>
       </div>
       <nav class="navbar">
@@ -390,7 +438,6 @@ text-transform: capitalize;
           </div>
           <div class="right-info">
             <h1>na <span>forest</span></h1>
-            <!-- <h3>forest</h3> -->
           </div>
         </div>
         <div class="slide">
@@ -400,7 +447,7 @@ text-transform: capitalize;
               <h1>Ser</h1>
             </div>
             <div class="content">
-              <h3>01. serbia forest tour</h3>
+              <h3>02. serbia forest tour</h3>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores accusantium ullam laudantium,
                 recusandae dolore officiis omnis aliquam earum consequuntur consectetur assumenda illo laborum placeat a
                 neque minima quos similique quam fugiat tenetur.</p>
@@ -408,29 +455,9 @@ text-transform: capitalize;
             </div>
           </div>
           <div class="right-info">
-            <h1>bia</h1>
-            <h3>forest</h3>
+            <h1>bia <span>forest</span></h1>
           </div>
         </div>
-        <!-- <div class="slide"> -->
-          <!-- <img src="./images/china.jpg" alt=""> -->
-          <!-- <div class="left-info"> -->
-            <!-- <div class="penetrate-blur"> -->
-              <!-- <h1>Chi</h1> -->
-            <!-- </div> -->
-            <!-- <div class="content"> -->
-              <!-- <h3>01. china forest tour</h3> -->
-              <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores accusantium ullam laudantium, -->
-                <!-- recusandae dolore officiis omnis aliquam earum consequuntur consectetur assumenda illo laborum placeat a -->
-                <!-- neque minima quos similique quam fugiat tenetur.</p> -->
-              <!-- <a href="#" class="btn">more details</a> -->
-            <!-- </div> -->
-          <!-- </div> -->
-          <!-- <div class="right-info"> -->
-            <!-- <h1>na</h1> -->
-            <!-- <h3>forest</h3> -->
-          <!-- </div> -->
-        <!-- </div> -->
         <div class="slide">
           <img src="./images/brazil.jpg" alt="">
           <div class="left-info">
@@ -438,7 +465,7 @@ text-transform: capitalize;
               <h1>Bra</h1>
             </div>
             <div class="content">
-              <h3>01. brazil forest tour</h3>
+              <h3>03. brazil forest tour</h3>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores accusantium ullam laudantium,
                 recusandae dolore officiis omnis aliquam earum consequuntur consectetur assumenda illo laborum placeat a
                 neque minima quos similique quam fugiat tenetur.</p>
@@ -446,8 +473,7 @@ text-transform: capitalize;
             </div>
           </div>
           <div class="right-info">
-            <h1>zil</h1>
-            <h3>forest</h3>
+            <h1>zil <span>forest</span></h1>
           </div>
         </div>
         <div class="slide">
@@ -457,7 +483,7 @@ text-transform: capitalize;
               <h1>Afr</h1>
             </div>
             <div class="content">
-              <h3>03. africa forest tour</h3>
+              <h3>04. africa forest tour</h3>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores accusantium ullam laudantium,
                 recusandae dolore officiis omnis aliquam earum consequuntur consectetur assumenda illo laborum placeat a
                 neque minima quos similique quam fugiat tenetur.</p>
@@ -465,8 +491,7 @@ text-transform: capitalize;
             </div>
           </div>
           <div class="right-info">
-            <h1>ica</h1>
-            <h3>forest</h3>
+            <h1>ica <span>forest</span></h1>
           </div>
         </div>
         <div class="slide">
@@ -476,7 +501,7 @@ text-transform: capitalize;
               <h1>Jap</h1>
             </div>
             <div class="content">
-              <h3>03. japan forest tour</h3>
+              <h3>05. japan forest tour</h3>
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores accusantium ullam laudantium,
                 recusandae dolore officiis omnis aliquam earum consequuntur consectetur assumenda illo laborum placeat a
                 neque minima quos similique quam fugiat tenetur.</p>
@@ -484,18 +509,17 @@ text-transform: capitalize;
             </div>
           </div>
           <div class="right-info">
-            <h1>an</h1>
-            <h3>forest</h3>
+            <h1>an <span>forest</span></h1>
           </div>
         </div>
       </div>
       <div class="slider-navigation">
-        <span class="prev-btn">
-          <i class="fa fa-chevron-left"></i>
-        </span>
-        <span class="next-btn">
-          <i class="fa fa-chevron-right"></i>
-        </span>
+        <button class="prev-btn">
+          <span>&#139;</span>
+        </button>
+        <button class="next-btn">
+          <span>&#155;</span>
+        </button>
       </div>
     </section>
 
