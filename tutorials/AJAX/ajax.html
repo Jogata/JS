@@ -4,371 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <style>
-      fieldset {
-        display: none;
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        width: 100%;
-        min-height: 100vh;
-        font-family: Georgia, serif;
-        background-color: #000;
-      }
-
-      section {
-        width: 80%;
-        max-width: 1200px;
-        margin: auto;
-        padding: 5rem 4rem;
-        text-align: center;
-      }
-
-      .gallery-topic {
-        text-align: center;
-      }
-      .gallery-topic h2 {
-        color: #ff5601;
-        color: transparent;
-        font-size: 52px;
-        text-transform: uppercase;
-        /* -webkit-text-stroke: 2px #ff5601; */
-        -webkit-text-stroke: 2px #000;
-        filter: drop-shadow(-1px -1px 1px #fff);
-      }
-      .gallery-topic p {
-        margin: 2rem 0;
-        color: gray;
-        font-size: 1rem;
-      }
-
-      hr {
-        color: lightgray;
-        width: 70%;
-        height: 4px;
-        margin: auto;
-        color: transparent;
-        border: 1px solid lightgray;
-      }
-
-      .gallery-images {
-        /* max-width: 1100px; */
-        margin: auto;
-        display: grid;
-        gap: 15px;
-        /* grid-template-columns: 1fr 1fr 1fr; */
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        /* justify-content: center; */
-        /* justify-items: center; */
-        text-align: center;
-      }
-
-      .col-2 {
-        position: relative;
-        /* width: 330px; */
-        height: 350px;
-        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
-        cursor: pointer;
-      }
-      .col-2 img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: top;
-        transition: all 500ms ease-in;
-      }
-
-      .search-btn {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: 
-          rgba(255, 255, 255, 0.5);
-        transform: scale(0);
-        transition: all 400ms;
-      }
-
-      .search-btn .pre-nav-design-icon {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 2.4rem;
-        height: 2.4rem;
-      }
-      .col-2:hover .search-btn {
-        transform: scale(1);
-      }
-      .col-2:hover img {
-        object-position: center;
-      }
-
-      .btn {
-        margin-top: 2.4rem;
-        margin-bottom: 2rem;
-        padding: 0.6em 1em;
-        /* color: #000; */
-        color: transparent;
-        font-size: 1.2rem;
-        font-weight: 600;
-        font-family: inherit;
-        text-transform: capitalize;
-        /* border: 1px solid #fff; */
-        border: 1px solid #000;
-        border-radius: 10px;
-        /* background-color: #fff; */
-        background-color: transparent;
-        -webkit-text-stroke: 1px #000;
-        filter: drop-shadow(-0.2px -0.2px 0.2px #fff);
-        transition: all 400ms;
-        cursor: pointer;
-      }
-      .btn:hover {
-        color: #fff;
-        /* border: 1px solid #ff5601; */
-        /* background-color: #ff5601; */
-        /* background-color: transparent; */
-      }
-
-      /* .more {
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
-      } */
-
-      @media screen and (max-width: 1220px) {
-        .gallery-images {
-          /* grid-template-columns: 1fr 1fr; */
-          gap: 15px;
-        }
-        .col-2 {
-          width: 100%;
-          height: 350px;
-        }
-        .search-btn {
-          width: 100%;
-          height: 350px;
-        }
-      }
-
-      @media screen and (max-width: 768px) {
-        .gallery-images {
-          /* grid-template-columns: 1fr; */
-        }
-        .gallery-topic h2 {
-          font-size: 32px;
-          text-align: left;
-        }
-        .gallery-topic p {
-          font-size: 14px;
-          text-align: left;
-        }
-        hr {
-          width: 100%;
-        }
-      }
-
-      @media screen and (max-width: 550px) {
-        section {
-          padding: 80px 30px;
-        }
-        .col-2 {
-          width: 100%;
-          height: 250px;
-        }
-        .search-btn {
-          width: 100%;
-          height: 250px;
-        }
-      }
-
-      @media screen and (max-width: 330px) {
-        section {
-          padding: 40px 0;
-        }
-        h2 {
-          font-size: 26px;
-          /* text-align: left; */
-        }
-      }
-    </style>
   </head>
-  <body>
-    
-    <section class="gallery">
- 
-      <div class="gallery-topic">
-        <h2>our gallery</h2>
-        <hr>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil, expedita dolorem? Consequatur facere quasi at rem, eos saepe. Eligendi, animi laboriosam rerum accusantium voluptatem, odio tempora eveniet velit soluta, placeat dolor dolorem sequi.</p>
-      </div>
- 
-      <div class="gallery-images">
- 
-        <div class="col-2">
-          <img src="./slides/361146473_995671938136092_4243291179085438720_n-copy.jpg" alt="">
-          <div class="search-btn">
-            <svg aria-hidden="true" class="pre-nav-design-icon" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none">
-              <path stroke="currentColor" stroke-width="1.5" d="M13.962 16.296a6.716 6.716 0 01-3.462.954 6.728 6.728 0 01-4.773-1.977A6.728 6.728 0 
-              013.75 10.5c0-1.864.755-3.551 1.977-4.773A6.728 6.728 0 0110.5 3.75c1.864 0 3.551.755 4.773 1.977A6.728 6.728 0 0117.25 10.5a6.726 6.726 
-              0 01-.921 3.407c-.517.882-.434 1.988.289 2.711l3.853 3.853"></path>
-            </svg>
-          </div>
-        </div>
- 
-        <div class="col-2">
-          <img src="./slides/362626204_1293072171336316_5256622931544661120_n-copy.jpg" alt="">
-          <div class="search-btn">
-            <svg aria-hidden="true" class="pre-nav-design-icon" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none">
-              <path stroke="currentColor" stroke-width="1.5" d="M13.962 16.296a6.716 6.716 0 01-3.462.954 6.728 6.728 0 01-4.773-1.977A6.728 6.728 0 
-              013.75 10.5c0-1.864.755-3.551 1.977-4.773A6.728 6.728 0 0110.5 3.75c1.864 0 3.551.755 4.773 1.977A6.728 6.728 0 0117.25 10.5a6.726 6.726 
-              0 01-.921 3.407c-.517.882-.434 1.988.289 2.711l3.853 3.853"></path>
-            </svg>
-          </div>
-        </div>
-
-        <div class="col-2">
-          <img src="./slides/362664191_1324713848119224_2171936770770053129_n-copy.jpg" alt="">
-          <div class="search-btn">
-            <svg aria-hidden="true" class="pre-nav-design-icon" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none">
-              <path stroke="currentColor" stroke-width="1.5" d="M13.962 16.296a6.716 6.716 0 01-3.462.954 6.728 6.728 0 01-4.773-1.977A6.728 6.728 0 
-              013.75 10.5c0-1.864.755-3.551 1.977-4.773A6.728 6.728 0 0110.5 3.75c1.864 0 3.551.755 4.773 1.977A6.728 6.728 0 0117.25 10.5a6.726 6.726 
-              0 01-.921 3.407c-.517.882-.434 1.988.289 2.711l3.853 3.853"></path>
-            </svg>
-          </div>
-        </div>
-
-        <div class="col-2">
-          <img src="./slides/362860545_306516828402860_2842904757267180744_n-copy.jpg" alt="">
-          <div class="search-btn">
-            <svg aria-hidden="true" class="pre-nav-design-icon" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none">
-              <path stroke="currentColor" stroke-width="1.5" d="M13.962 16.296a6.716 6.716 0 01-3.462.954 6.728 6.728 0 01-4.773-1.977A6.728 6.728 0 
-              013.75 10.5c0-1.864.755-3.551 1.977-4.773A6.728 6.728 0 0110.5 3.75c1.864 0 3.551.755 4.773 1.977A6.728 6.728 0 0117.25 10.5a6.726 6.726 
-              0 01-.921 3.407c-.517.882-.434 1.988.289 2.711l3.853 3.853"></path>
-            </svg>
-          </div>
-        </div>
-
-        <div class="col-2">
-          <img src="./slides/363884762_971180514130824_8969875958453403320_n-copy.jpg" alt="">
-          <div class="search-btn">
-            <svg aria-hidden="true" class="pre-nav-design-icon" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none">
-              <path stroke="currentColor" stroke-width="1.5" d="M13.962 16.296a6.716 6.716 0 01-3.462.954 6.728 6.728 0 01-4.773-1.977A6.728 6.728 0 
-              013.75 10.5c0-1.864.755-3.551 1.977-4.773A6.728 6.728 0 0110.5 3.75c1.864 0 3.551.755 4.773 1.977A6.728 6.728 0 0117.25 10.5a6.726 6.726 
-              0 01-.921 3.407c-.517.882-.434 1.988.289 2.711l3.853 3.853"></path>
-            </svg>
-          </div>
-        </div>
-
-        <div class="col-2">
-          <img src="./slides/364342225_2020813254755899_8012892550414412459_n-copy.jpg" alt="">
-          <div class="search-btn">
-            <svg aria-hidden="true" class="pre-nav-design-icon" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none">
-              <path stroke="currentColor" stroke-width="1.5" d="M13.962 16.296a6.716 6.716 0 01-3.462.954 6.728 6.728 0 01-4.773-1.977A6.728 6.728 0 
-              013.75 10.5c0-1.864.755-3.551 1.977-4.773A6.728 6.728 0 0110.5 3.75c1.864 0 3.551.755 4.773 1.977A6.728 6.728 0 0117.25 10.5a6.726 6.726 
-              0 01-.921 3.407c-.517.882-.434 1.988.289 2.711l3.853 3.853"></path>
-            </svg>
-          </div>
-        </div>
-
-        <div class="col-2">
-          <img src="./slides/364346480_1958559877860560_3786840621881788296_n-copy.jpg" alt="">
-          <div class="search-btn">
-            <svg aria-hidden="true" class="pre-nav-design-icon" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none">
-              <path stroke="currentColor" stroke-width="1.5" d="M13.962 16.296a6.716 6.716 0 01-3.462.954 6.728 6.728 0 01-4.773-1.977A6.728 6.728 0 
-              013.75 10.5c0-1.864.755-3.551 1.977-4.773A6.728 6.728 0 0110.5 3.75c1.864 0 3.551.755 4.773 1.977A6.728 6.728 0 0117.25 10.5a6.726 6.726 
-              0 01-.921 3.407c-.517.882-.434 1.988.289 2.711l3.853 3.853"></path>
-            </svg>
-          </div>
-        </div>
- 
-        <div class="col-2">
-          <img src="./slides/365179140_207555025301834_1020397736021360341_n-copy.jpg" alt="">
-          <div class="search-btn">
-            <svg aria-hidden="true" class="pre-nav-design-icon" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none">
-              <path stroke="currentColor" stroke-width="1.5" d="M13.962 16.296a6.716 6.716 0 01-3.462.954 6.728 6.728 0 01-4.773-1.977A6.728 6.728 0 
-              013.75 10.5c0-1.864.755-3.551 1.977-4.773A6.728 6.728 0 0110.5 3.75c1.864 0 3.551.755 4.773 1.977A6.728 6.728 0 0117.25 10.5a6.726 6.726 
-              0 01-.921 3.407c-.517.882-.434 1.988.289 2.711l3.853 3.853"></path>
-            </svg>
-          </div>
-        </div>
- 
-        <div class="col-2">
-          <img src="./slides/365457363_904071257798378_5402481005423976957_n-copy.jpg" alt="">
-          <div class="search-btn">
-            <svg aria-hidden="true" class="pre-nav-design-icon" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none">
-              <path stroke="currentColor" stroke-width="1.5" d="M13.962 16.296a6.716 6.716 0 01-3.462.954 6.728 6.728 0 01-4.773-1.977A6.728 6.728 0 
-              013.75 10.5c0-1.864.755-3.551 1.977-4.773A6.728 6.728 0 0110.5 3.75c1.864 0 3.551.755 4.773 1.977A6.728 6.728 0 0117.25 10.5a6.726 6.726 
-              0 01-.921 3.407c-.517.882-.434 1.988.289 2.711l3.853 3.853"></path>
-            </svg>
-          </div>
-        </div>
- 
-        <div class="col-2">
-          <img src="./slides/366115790_951911676112661_5703025846685068235_n-copy.jpg" alt="">
-          <div class="search-btn">
-            <svg aria-hidden="true" class="pre-nav-design-icon" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none">
-              <path stroke="currentColor" stroke-width="1.5" d="M13.962 16.296a6.716 6.716 0 01-3.462.954 6.728 6.728 0 01-4.773-1.977A6.728 6.728 0 
-              013.75 10.5c0-1.864.755-3.551 1.977-4.773A6.728 6.728 0 0110.5 3.75c1.864 0 3.551.755 4.773 1.977A6.728 6.728 0 0117.25 10.5a6.726 6.726 
-              0 01-.921 3.407c-.517.882-.434 1.988.289 2.711l3.853 3.853"></path>
-            </svg>
-          </div>
-        </div>
- 
-      </div>
-
-      <button class="btn more">see more</button>
-
-<script>
-  function calcPCGameShopSales(params) {
-    const sales = Number(params[0]);
-
-    const games = {
-      hearthstone: "hearthstone",
-      fornite: "fornite",
-      overwatch: "overwatch",
-    }
-
-    const allGames = {
-      hearthstone: 0,
-      fornite: 0,
-      overwatch: 0,
-      undefined: 0,
-    }
-
-    for (let sale = 1; sale <= sales; sale++) {
-      const game = params[sale].toLowerCase();
-      const gameName = games[game];
-      allGames[gameName]++;
-    }
-
-    const fP = (allGames.fornite / sales) * 100;
-    const hP = (allGames.hearthstone / sales) * 100;
-    const oP = (allGames.overwatch / sales) * 100;
-    const rP = (allGames.undefined / sales) * 100;
-    
-    console.log(`Hearthstone - ${hP.toFixed(2)}%`);
-    console.log(`Fornite - ${fP.toFixed(2)}%`);
-    console.log(`Overwatch - ${oP.toFixed(2)}%`);
-    console.log(`Others - ${rP.toFixed(2)}%`);
-
-  }
-
-  // calcPCGameShopSales(["4", "Hearthstone", "Fornite", "Overwatch", "Counter-Strike"]);
-  // calcPCGameShopSales(["3", "Hearthstone", "Diablo 2", "Star Craft 2"]);
-</script>
-
-    </section>
-
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+  <body style="font-family: Georgia">
+    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
@@ -431,6 +69,130 @@
   
         users.open('get', 'https://api.github.com/users', true);
         users.send();
+      }
+    </script>
+
+    <div id="output">
+      <!-- results goes here -->
+    </div>
+
+    <script>
+      const root = "https://jsonplaceholder.typicode.com/";
+      let uri = root + "posts/?userId=1";
+
+      console.log(uri);
+
+      let options = {
+        method: "GET", 
+        mode: 'no-cors'
+      }
+
+      let formdata = new FormData();
+
+      formdata.append("userid", 3);
+      formdata.append("title", "Some Title");
+      formdata.append("body", "Some Text");
+
+      let options2 = {
+        method: "POST", 
+        mode: "no-cors", 
+        body: formdata
+      }
+
+      let req = new Request(uri, options);
+      let req2 = new Request(uri, options2);
+
+      fetch(uri)
+        .then(response => {
+          console.log(response);
+          if (response.ok) {
+            // console.log(response);
+            return response.json();
+          } else {
+            throw new Error("Bad HTTP");
+          }
+        })
+        .then(data => {
+          console.log(data);
+        })
+        .catch(err => {
+          console.log("ERROR: ", err.message);
+        })
+    </script>
+
+    <p>
+      <button id="btn">button</button>
+    </p>
+    <p>
+      <a href="https://www.google.com" id="lnk">google</a>
+    </p>
+    <p>
+      <input type="text" name="" id="txt">
+    </p>
+    <script>
+      const btn = document.getElementById("btn");
+      const lnk = document.getElementById("lnk");
+      const txt = document.getElementById("txt");
+
+      btn.addEventListener("click", buttonClicked);
+
+      function buttonClicked(e) {
+        console.log(e.type);
+        console.log(e.target);
+        console.log(e.currentTarget);
+      }
+
+      lnk.addEventListener("click", linkClicked);
+
+      function linkClicked(e) {
+        e.preventDefault();
+        console.log(e.type);
+        console.log(e.target);
+        console.log(e.currentTarget);
+      }
+
+      txt.addEventListener("click", inputClicked);
+
+      txt.addEventListener("input", (e) => {
+        console.log(e.type);
+        console.log(e.target.value);
+      });
+
+      txt.addEventListener("change", (e) => {
+        console.log(e.type);
+      });
+
+      txt.addEventListener("blur", (e) => {
+        console.log(e.type);
+      });
+
+      function inputClicked(e) {
+        console.log(e.type);
+        console.log(e.target);
+        console.log(e.currentTarget);
+      }
+
+      txt.addEventListener("keydown", keyDown);
+
+      function keyDown(e) {
+        let target = e.currentTarget;
+        let tag = target.tagName;
+        let key = e.char || e.charCode || e.which;
+        let key2 = e.key;
+        console.log(key, String.fromCharCode(key));
+        console.log(key2);
+        if (key === 37) {
+          console.log("LEFT");
+        }
+      }
+
+      document.body.addEventListener("keydown", keyDown);
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", init);
+      function init() {
+        if (navigator.geolocation) {
+        } else {}
       }
     </script>
   </body>
