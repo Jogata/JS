@@ -125,6 +125,9 @@
         .main .hero .content h2 span {
           font-size: 5rem;
         }
+        #portfolio .cards {
+          grid-template-columns: 1fr 1fr;
+        }
       }
 
       @media (max-width: 940px) {
@@ -202,6 +205,9 @@
         .social .sci i {
           font-size: 1.2rem;
         }
+        #portfolio .cards {
+          grid-template-columns: 1fr;
+        }
       }
 
       @media (max-width: 500px) {
@@ -228,7 +234,7 @@
         justify-content: space-evenly;
       }
 
-      .content {
+      .hero .content {
         position: relative;
         flex: 50%;
         display: flex;
@@ -236,14 +242,14 @@
         z-index: 2;
       }
 
-      .content h3 {
+      .hero .content h3 {
         margin-bottom: 20px;
         color: #fff;
         font-size: 1.5rem;
         font-weight: 600;
         text-transform: capitalize;
       }
-      .content h2 {
+      .hero .content h2 {
         margin-bottom: 20px;
         color: #fff;
         font-size: 5.7rem;
@@ -251,14 +257,14 @@
         line-height: 1;
         text-transform: capitalize;
       }
-      .content h2 span {
+      .hero .content h2 span {
         color: var(--primary-color);
       }
       .content p {
         color: #ffffffe6;
         font-size: 1.2rem;
       }
-      .content p span {
+      .hero .content p span {
         margin-bottom: 10px;
         font-weight: 800;
         text-transform: capitalize;
@@ -395,7 +401,7 @@
         width: 100%;
       }
       .top-elements img {
-        width: 100px;
+        /* width: 100px; */
       }
       .hero {
         flex-wrap: wrap;
@@ -472,6 +478,67 @@
         background-color: var(--background-color);
       }
 
+      .triangle {
+        position: relative;
+        margin-bottom: 20px;
+        color: #fff;
+        font-size: 2rem;
+        text-transform: uppercase;
+      }
+      .triangle::after {
+        position: absolute;
+        top: 14px;
+        right: -28px;
+        content: "";
+        width: 0;
+        height: 0;
+        border-top: 20px solid transparent;
+        border-right: 20px solid var(--primary-color);
+      }
+      .triangle::before {
+        position: absolute;
+        top: 14px;
+        left: -28px;
+        content: "";
+        width: 0;
+        height: 0;
+        border-top: 20px solid transparent;
+        border-left: 20px solid var(--primary-color);
+      }
+
+      .para {
+        width: 40%;
+        margin-bottom: 40px;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 16px;
+        text-align: center;
+        line-height: 24px;
+        /* white-space: 1px; */
+      }
+
+      .radio-btns {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .radio-btns label {
+        margin: 8px 0;
+        padding: 8px 12px;
+        color: #fff;
+        font-size: 16px;
+        text-transform: capitalize;
+        border: 1px solid #fff;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      .radio-btns label:hover {
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+      }
+      .radio-btns input {
+        display: none;
+      }
+
       .cards {
         margin-top: 50px;
         display: grid;
@@ -491,7 +558,7 @@
         left: 0;
         content: "";
         width: 100%;
-        height: 50%;
+        height: 0;
         border-top-left-radius: 12px;
         border-top-right-radius: 12px;
         background-color: rgba(247, 71, 22, 0.8);
@@ -500,19 +567,71 @@
       }
       .card::before {
         position: absolute;
+        bottom: 0;
         left: 0;
         content: "";
         width: 100%;
-        height: 50%;
+        height: 0;
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
         background-color: rgba(247, 71, 22, 0.8);
         transition: all 600ms;
         z-index: 2;
       }
+      .card:hover::before, 
+      .card:hover::after {
+        height: 50%;
+      }
+
       .card img {
         width: 360px;
         height: 340px;
         border-radius: 12px;
         background-color: red;
+      }
+
+      .element {
+        position: absolute;
+        top: 45%;
+        left: 45%;
+        padding: 15px;
+        text-align: center;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.8);
+        transform: translateX(-5px);
+        transition: all 600ms;
+        opacity: 0;
+        z-index: 5;
+      }
+
+      .card:hover .element {
+        transform: translateX(0);
+        opacity: 1;
+      }
+
+      .card .content {
+        position: absolute;
+        top: 72%;
+        left: 9%;
+        color: #fff;
+        text-align: center;
+        transform: translateY(30px);
+        transition: all 600ms;
+        opacity: 0;
+        z-index: 6;
+      }
+      .card:hover .content {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .card .content h2 {
+        width: 100%;
+        font-size: 1.2rem;
+      }
+
+      .card .content {
+        border: 1px solid blue;
       }
     </style>
   </head>
@@ -615,7 +734,7 @@
         </div>
       </main>
       <div id="portfolio">
-        <h2 class="tringle">portfolio</h2>
+        <h2 class="triangle">portfolio</h2>
         <p class="para">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis, recusandae! Aperiam neque, repellendus quidem aspernatur culpa impedit aliquam dicta, delectus quas, molestias iste.</p>
         <div class="radio-btns">
           <label for="all" id="label1">all</label>
