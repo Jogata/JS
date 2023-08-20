@@ -32,6 +32,9 @@
         padding: 30px 5%;
         display: flex;
         align-items: center;
+        border-bottom: 2px solid #fff;
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(20px);
         z-index: 2;
       }
       
@@ -51,7 +54,8 @@
         justify-content: center;
         width: 40px;
         height: 40px;
-        margin-right: 10px;
+        /* margin-right: 15px; */
+        margin: 6px;
         border: 2px solid #fff;
         border-radius: 6px;
         background-color: transparent;
@@ -70,12 +74,34 @@
       }
 
       .navbar a {
-        margin-left: 30px;
+        display: inline-block;
+        /* margin-left: 30px; */
+        margin: 8px 16px;
         color: #fff;
         font-size: 18px;
         font-weight: 500;
         text-transform: capitalize;
         text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .menu-btn {
+        display: none;
+        border: 2px solid #fff;
+        border-radius: 6px;
+        background-color: transparent;
+        transition: all 500ms;
+      }
+      .menu-btn:hover {
+        background-color: #fff;
+      }
+      .menu-btn i {
+        padding: 10px 11px;
+        color: #fff;
+        font-size: 20px;
+        transition: color 500ms;
+      }
+      .menu-btn:hover i {
+        color: #444;
       }
 
       .banner {
@@ -149,12 +175,36 @@
         color: transparent;
         font-size: 250px;
         text-align: right;
-        background-image: url("./images/china.jpg");
         background-position: left;
         background-size: cover;
         background-clip: text;
         /* text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); */
-        -webkit-text-stroke: 2px rgba(255, 255, 255, 0.6);
+        /* -webkit-text-stroke: 2px rgba(255, 255, 255, 0.6); */
+        -webkit-text-stroke: 3px #fff;
+      }
+      .slide:nth-child(1) .penetrate-blur h1 {
+        background-image: url("./images/china.jpg");
+      }
+      .slide:nth-child(2) .penetrate-blur h1 {
+        background-image: url("./images/serbia.jpg");
+      }
+      .slide:nth-child(3) .penetrate-blur h1 {
+        background-image: url("./images/brazil-new.jpg");
+      }
+      .slide:nth-child(4) .penetrate-blur h1 {
+        background-image: url("./images/africa-new.jpg");
+      }
+      .slide:nth-child(5) .penetrate-blur h1 {
+        background-image: url("./images/japan.jpg");
+      }
+      .penetrate-blur h1 span {
+        display: none;
+      }
+
+      @media screen and (min-width: 1920px) {
+        .penetrate-blur h1 {
+          background-size: 100vw;
+        }
       }
 
       .content {
@@ -177,7 +227,8 @@
 
       .btn {
         display: inline-block;
-        padding: 13px 28px;
+        /* padding: 13px 28px; */
+        padding: 0.8em 1.74em;
         color: #444;
         font-size: 16px;
         font-weight: 600;
@@ -206,8 +257,27 @@
         transition: 0s;
       }
       .right-info h1 {
-        color: #fff;
+        position: relative;
+        /* color: #fff; */
+        color: transparent;
         font-size: 250px;
+        -webkit-text-stroke: 3px #fff;
+        filter: drop-shadow(3px 3px 3px #000);
+        /* font-weight: bold; */
+      }
+      .right-info h1 span {
+        position: absolute;
+        left: 0;
+        top: 100%;
+        font-size: 80px;
+        line-height: 0;
+        text-transform: capitalize;
+        -webkit-text-stroke: 2px #fff;
+      }
+
+      /* .right-info h1 { */
+        /* color: #fff; */
+        /* font-size: 250px; */
         /* text-shadow:  */
         /* 0px 1px 0px #ccc,  */
         /* 0px 2px 0px #c9c9c9,  */
@@ -221,7 +291,7 @@
         /* 0px 5px 10px rgba(0, 0, 0, 0.25),  */
         /* 0px 10px 10px rgba(0, 0, 0, 0.2),  */
         /* 0px 20px 20px rgba(0, 0, 0, 0.15); */
-      }
+      /* } */
       /* .right-info h3 { */
         /* position: absolute; */
         /* margin-left: 13px; */
@@ -374,20 +444,95 @@
         background-position: left;
       } */
 
-.right-info h1 {
-  position: relative;
-  color: #fff;
-  font-size: 250px;
-  /* font-weight: bold; */
-}
-.right-info h1 span {
-  font-size: 80px;
-position: absolute;
-left: 0;
-top: 100%;
-line-height: 0;
-text-transform: capitalize;
-}
+      @media screen and (max-width: 1000px) {
+        header {
+          padding: 3%;
+        }
+        .logo {
+          font-size: 25px;
+        }
+        .navbar {
+          display: none;
+        }
+        .menu-btn {
+          display: inline-block;
+          margin-left: auto;
+        }
+        .menu-btn i {
+          padding: 6px 8px;
+        }
+        /* .sci {
+          margin: 0 0 0 auto;
+        } */
+        .banner {
+          min-width: 100%;
+        }
+        .slide {
+          overflow: auto;
+        }
+        .slide img {
+          object-position: center;
+        }
+        .left-info {
+          width: 100%;
+          height: auto;
+        }
+        .penetrate-blur {
+          display: flex;
+          min-height: 100vh;
+          background-color: transparent;
+          backdrop-filter: blur(0px);
+        }
+        .penetrate-blur h1 {
+          display: block;
+          min-height: auto;
+          margin: auto;
+          font-size: 100px;
+          text-align: center;
+          -webkit-text-stroke: 2px #fff;
+          background-image: none !important;
+          filter: drop-shadow(1px 1px 1px #000);
+        }
+        .penetrate-blur h1 span {
+          display: inline;
+        }
+        .content {
+          position: static;
+          padding-bottom: 4%;
+        }
+        .btn {
+          font-size: 13px;
+        }
+        .right-info {
+          display: none;
+        }
+        .slider-navigation {
+          position: fixed;
+          top: 42vh;
+          right: auto;
+          bottom: auto;
+          width: 90%;
+          margin: 0 5%;
+          padding: 4% 0;
+          display: flex;
+          justify-content: space-between;
+        }
+        .slider-navigation button {
+          margin: 0;
+          font-size: 40px;
+          opacity: 0.4;
+        }
+        .slider-navigation button:hover {
+          opacity: 1;
+        }
+      }
+
+      @media screen and (max-width: 850px) {
+        .sci {
+          display: none;
+        }
+      }
+
       /* ====================================================== delete ============================================== */
       /* h1 { */
         /* border: 1px solid red; */
@@ -418,6 +563,9 @@ text-transform: capitalize;
         <a href="#">services</a>
         <a href="#">contact</a>
       </nav>
+      <button class="menu-btn">
+        <i class="fa fa-bars"></i>
+      </button>
     </header>
 
     <section class="banner">
@@ -426,7 +574,7 @@ text-transform: capitalize;
           <img src="./images/china.jpg" alt="">
           <div class="left-info">
             <div class="penetrate-blur">
-              <h1>Chi</h1>
+              <h1>Chi<span>na</span></h1>
             </div>
             <div class="content">
               <h3>01. china forest tour</h3>
@@ -444,7 +592,7 @@ text-transform: capitalize;
           <img src="./images/serbia.jpg" alt="">
           <div class="left-info">
             <div class="penetrate-blur">
-              <h1>Ser</h1>
+              <h1>Ser<span>bia</span></h1>
             </div>
             <div class="content">
               <h3>02. serbia forest tour</h3>
@@ -459,10 +607,10 @@ text-transform: capitalize;
           </div>
         </div>
         <div class="slide">
-          <img src="./images/brazil.jpg" alt="">
+          <img src="./images/brazil-new.jpg" alt="">
           <div class="left-info">
             <div class="penetrate-blur">
-              <h1>Bra</h1>
+              <h1>Bra<span>zil</span></h1>
             </div>
             <div class="content">
               <h3>03. brazil forest tour</h3>
@@ -477,10 +625,10 @@ text-transform: capitalize;
           </div>
         </div>
         <div class="slide">
-          <img src="./images/africa.jpg" alt="">
+          <img src="./images/africa-new.jpg" alt="">
           <div class="left-info">
             <div class="penetrate-blur">
-              <h1>Afr</h1>
+              <h1>Afr<span>ica</span></h1>
             </div>
             <div class="content">
               <h3>04. africa forest tour</h3>
@@ -498,7 +646,7 @@ text-transform: capitalize;
           <img src="./images/japan.jpg" alt="">
           <div class="left-info">
             <div class="penetrate-blur">
-              <h1>Jap</h1>
+              <h1>Jap<span>an</span></h1>
             </div>
             <div class="content">
               <h3>05. japan forest tour</h3>
