@@ -12,13 +12,59 @@
       .geo {
         flex: 1;
         padding-left: 3rem;
+        min-height: 100vh;
       }
 
-      p {
+      #error {
+        color: tomato;
+      }
+
+      .geo p {
         color: wheat;
         font-size: 3rem;
         font-weight: bold;
         text-transform: uppercase;
+      }
+
+      #output {
+        min-height: 70vh;
+        margin: 10% auto;
+      }
+
+      #users {
+        max-width: 40rem;
+        padding: 10% 1rem;
+      }
+
+      #users li {
+        list-style: none;
+        margin: 1rem;
+        border: 1px solid #bbb;
+        border-top-right-radius: 20px;
+        background-color: #fff;
+      }
+
+      #users p {
+        padding: 0.5rem 2rem;
+      }
+
+      #users .name {
+        color: #000;
+        font-size: 2rem;
+      }
+
+      #users .info {
+        color: #000;
+        font-size: 1.4rem;
+        background-color: #666;
+      }
+
+      .ad {
+        min-width: 400px;
+        color: #666;
+        margin: 1rem;
+        padding: 1rem 2rem;
+        border: 1px solid #999;
       }
 
       :root {
@@ -37,6 +83,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-direction: column;
         background-color: #151b3c;
       }
 
@@ -260,7 +307,8 @@
     </div>
 
     <script>
-      document.addEventListener("DOMContentLoaded", init);
+      // document.addEventListener("DOMContentLoaded", init);
+
       function init() {
         if (navigator.geolocation) {
           let giveUp = 30 * 1000;
@@ -281,17 +329,91 @@
         const spans = document.querySelectorAll("p span");
         spans[0].textContent = position.coords.latitude;
         spans[1].textContent = position.coords.longitude;
-        spans[6].textContent = position.timeStamp;
+        spans[2].textContent = position.coords.accuracy;
+        spans[6].textContent = position.timestamp;
       }
 
       function fail(err) {
-        // console.log(fail);
+        console.log("fial");
         const errors = {
           1: "No permission",
           2: "Unable to determine",
           3: "Took too long",
         }
+        document.querySelector("#error").textContent = errors[err];
       }
     </script>
+
+    <div id="output">
+      <ul id="users">
+        <li>
+          <p class="name"></p>
+          <p class="info"></p>
+        </li>
+        <li>
+          <p class="name"></p>
+          <p class="info"></p>
+        </li>
+        <li>
+          <p class="name"></p>
+          <p class="info"></p>
+        </li>
+        <li>
+          <p class="name"></p>
+          <p class="info"></p>
+        </li>
+        <li>
+          <p class="name"></p>
+          <p class="info"></p>
+        </li>
+      </ul>
+
+      <script>
+        const url = 'https://jsonplaceholder.typicode.com/users';
+
+        let req = new Request(url, {
+          method: "GET", 
+          mode: "cors"
+        })
+
+        fetch(req)
+          .then(response => {
+            if (response.ok) {
+              return response.json();
+            } else {
+              throw new Error("BAD HTTP!");
+            }
+          }).then(data => {
+            // console.log(data);
+            const ul = document.getElementById("users");
+            ul.innerHTML = "";
+            const df = new DocumentFragment();
+            data.forEach(user => {
+              console.log(user);
+              const li = document.createElement("li");
+              const pn = document.createElement("p");
+              const pue = document.createElement("p");
+              pn.textContent = user.name;
+              pue.textContent = `${user.username} - ${user.email}`;
+              pn.classList.add("name");
+              pue.classList.add("info");
+              li.appendChild(pn);
+              li.appendChild(pue);
+              df.appendChild(li);
+            })
+            ul.appendChild(df);
+          }).catch(err => {
+            console.log("ERROR: ", err.message);
+          })
+      </script>
+    </div>
+
+    <div class="ad">
+      <h2>advertisment</h2>
+      <p>Please send us money</p>
+      <p>We promise to be thankful.</p>
+    </div>
+    <section id="target1"></section>
+    <section id="target2"></section>
   </body>
 </html>
