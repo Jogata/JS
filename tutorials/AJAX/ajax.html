@@ -9,6 +9,18 @@
         display: none;
       }
 
+      .geo {
+        flex: 1;
+        padding-left: 3rem;
+      }
+
+      p {
+        color: wheat;
+        font-size: 3rem;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
       :root {
         --body-bg: #025253;
         --spinner-bg: #19e4ff;
@@ -54,11 +66,11 @@
         text-indent: -9999em;
         border-radius: 50%;
         transform: translateZ(0);
-        animation: spin 1.7s infinite ease, round 1.7s infinite ease;
+        animation: trace 1.7s infinite ease, rotate 1.7s infinite ease;
         overflow: hidden;
       }
 
-      @keyframes spin {
+      @keyframes trace {
         0% {
           box-shadow: 
           0 -0.83em 0 -0.4em, 
@@ -75,10 +87,59 @@
           0 -0.83em 0 -0.46em, 
           0 -0.83em 0 -0.477em;
         }
+        10% {
+          box-shadow: 0 -0.83em 0 -0.4em, 
+          -0.087em -0.825em 0 -0.42em, 
+          -0.173em -0.812em 0 -0.44em, 
+          -0.256em -0.789em 0 -0.46em, 
+          -0.297em -0.775em 0 -0.477em;
+        }
+        20% {
+          box-shadow: 0 -0.83em 0 -0.4em, 
+          -0.338em -0.758em 0 -0.42em, 
+          -0.555em -0.617em 0 -0.44em, 
+          -0.671em -0.488em 0 -0.46em, 
+          -0.749em -0.34em 0 -0.477em;
+        }
+        38% {
+          box-shadow: 0 -0.83em 0 -0.4em, 
+          -0.377em -0.74em 0 -0.42em, 
+          -0.645em -0.522em 0 -0.44em, 
+          -0.775em -0.297em 0 -0.46em, 
+          -0.82em -0.09em 0 -0.477em;
+        }
+        59% {
+          box-shadow: 0 -0.83em 0 -0.4em, 
+          -0.087em -0.825em 0 -0.42em, 
+          -0.173em -0.812em 0 -0.44em, 
+          -0.256em -0.789em 0 -0.46em, 
+          -0.297em -0.775em 0 -0.477em;
+        }
+        95% {
+          box-shadow: 
+          0 -0.83em 0 -0.4em, 
+          0 -0.83em 0 -0.42em, 
+          0 -0.83em 0 -0.44em, 
+          0 -0.83em 0 -0.46em, 
+          0 -0.83em 0 -0.477em;
+        }
+        100% {
+          box-shadow: 
+          0 -0.83em 0 -0.4em, 
+          0 -0.83em 0 -0.42em, 
+          0 -0.83em 0 -0.44em, 
+          0 -0.83em 0 -0.46em, 
+          0 -0.83em 0 -0.477em;
+        }
       }
 
-      @keyframes round {
-        0% {}
+      @keyframes rotate {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
       }
     </style>
   </head>
@@ -117,9 +178,9 @@
     </div>
 
     <span class="spinner"></span>
-    <span class="spinner"></span>
-    <span class="spinner"></span>
-    <span class="spinner"></span>
+    <!-- <span class="spinner"></span> -->
+    <!-- <span class="spinner"></span> -->
+    <!-- <span class="spinner"></span> -->
 
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
@@ -186,11 +247,50 @@
         users.send();
       }
     </script>
+
+    <div class="geo">
+      <h1 id="error"></h1>
+      <p>lat:<span></span></p>
+      <p>lng:<span></span></p>
+      <p>accuracy:<span></span></p>
+      <p>heading:<span></span></p>
+      <p>speed:<span></span></p>
+      <p>altitude:<span></span></p>
+      <p>time:<span></span></p>
+    </div>
+
     <script>
       document.addEventListener("DOMContentLoaded", init);
       function init() {
         if (navigator.geolocation) {
-        } else {}
+          let giveUp = 30 * 1000;
+          let tooOld = 60 * 60 * 1000; // 1 hour
+          const options = {
+            enableHighAccuracy: true, 
+            timeout: giveUp, 
+            maximumAge: tooOld
+          }
+          navigator.geolocation.getCurrentPosition(gotPosition, fail, options);
+        } else {
+          console.log("Your browser is too old!");
+        }
+      }
+
+      function gotPosition(position) {
+        // console.log(position);
+        const spans = document.querySelectorAll("p span");
+        spans[0].textContent = position.coords.latitude;
+        spans[1].textContent = position.coords.longitude;
+        spans[6].textContent = position.timeStamp;
+      }
+
+      function fail(err) {
+        // console.log(fail);
+        const errors = {
+          1: "No permission",
+          2: "Unable to determine",
+          3: "Took too long",
+        }
       }
     </script>
   </body>
