@@ -4,315 +4,139 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <style>
-      fieldset {
-        display: none;
-      }
-
-      .geo {
-        flex: 1;
-        padding-left: 3rem;
-        min-height: 100vh;
-      }
-
-      #error {
-        color: tomato;
-      }
-
-      .geo p {
-        color: wheat;
-        font-size: 3rem;
-        font-weight: bold;
-        text-transform: uppercase;
-      }
-
-      #output {
-        min-height: 70vh;
-        margin: 10% auto;
-      }
-
-      #users {
-        max-width: 40rem;
-        padding: 10% 1rem;
-      }
-
-      #users li {
-        list-style: none;
-        margin: 1rem;
-        border: 1px solid #bbb;
-        border-top-right-radius: 20px;
-        background-color: #fff;
-      }
-
-      #users p {
-        padding: 0.5rem 2rem;
-      }
-
-      #users .name {
-        color: #000;
-        font-size: 2rem;
-      }
-
-      #users .info {
-        color: #000;
-        font-size: 1.4rem;
-        background-color: #666;
-      }
-
-      .ad {
-        min-width: 400px;
-        color: #666;
-        margin: 1rem;
-        padding: 1rem 2rem;
-        border: 1px solid #999;
-        background-color: #fff;
-      }
-      .ad h2 {
-        font-size: 2rem;
-        text-transform: capitalize;
-      }
-
-            /* =============================== */
-            #test3 {
-        background-color: #363f48;
-      }
-
-      .calculator {
-        position: absolute;
-        width: 370px;
-        padding: 1rem;
-        color: #fff;
-        border-radius: 10px;
-        background-color: #363f48;
-        box-shadow: 
-        3px 3px 3px #17181c, 
-        -3px -3px 3px #676e7e;
-        overflow: hidden;
-      }
-
-      .output {
-        display: block;
-        width: 100%;
-        margin-bottom: 1.5rem;
-        padding-top: 1.5rem;
-        padding-right: 1rem;
-        padding-bottom: 1rem;
-        color: #fff;
-        font-size: 3.4rem;
-        text-align: right;
-        outline: none;
-        border: 1px solid transparent;
-        background-color: transparent;
-        box-shadow: 
-        inset 3px 3px 3px #17181c, 
-        inset -3px -3px 3px #676e7e;
-      }
-      .output::placeholder {
-        color: #fff;
-      }
-
-      .keys {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 3px;
-      }
-
-      .key {
-        width: 70px;
-        height: 70px;
-        margin: 0.3rem;
-        color: #fff;
-        font-size: 1.5rem;
-        border: none;
-        border-radius: 30px;
-        background-color: #363f48;
-        box-shadow: 
-        3px 3px 3px #17181c, 
-        -3px -3px 3px #676e7e;
-        cursor: pointer;
-      }
-      .key:active, 
-      .key:focus {
-        background-color: #363f48;
-        box-shadow: 
-        inset 3px 3px 3px #17181c, 
-        inset -3px -3px 3px #676e7e;
-      }
-
-      .key-op {
-        color: cyan;
-      }
-
-      #equal {
-        grid-column: 4 / 5;
-        grid-row: 2 / span 4;
-        height: auto;
-        color: cyan;
-      }
-
-      :root {
-        --body-bg: #025253;
-        --spinner-bg: #19e4ff;
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        background-color: #151b3c;
-      }
-
-      .tilt {
-        transform: perspective(500px) scale(1) rotateX(0deg) rotateY(0deg);
-        transition: all 0.1s ease;
-        cursor: pointer;
-      }
-
-      .content {
-        width: 300px;
-      }
-      .content img {
-        width: 100%;
-      }
-
-      body {
-        background-color: var(--body-bg);
-      }
-
-      .spinner {
-        position: relative;
-        width: 1em;
-        height: 1em;
-        color: var(--spinner-bg);
-        font-size: 6rem;
-        text-indent: -9999em;
-        border-radius: 50%;
-        transform: translateZ(0);
-        animation: trace 1.7s infinite ease, rotate 1.7s infinite ease;
-        overflow: hidden;
-      }
-
-      @keyframes trace {
-        0% {
-          box-shadow: 
-          0 -0.83em 0 -0.4em, 
-          0 -0.83em 0 -0.42em, 
-          0 -0.83em 0 -0.44em, 
-          0 -0.83em 0 -0.46em, 
-          0 -0.83em 0 -0.477em;
-        }
-        5% {
-          box-shadow: 
-          0 -0.83em 0 -0.4em, 
-          0 -0.83em 0 -0.42em, 
-          0 -0.83em 0 -0.44em, 
-          0 -0.83em 0 -0.46em, 
-          0 -0.83em 0 -0.477em;
-        }
-        10% {
-          box-shadow: 0 -0.83em 0 -0.4em, 
-          -0.087em -0.825em 0 -0.42em, 
-          -0.173em -0.812em 0 -0.44em, 
-          -0.256em -0.789em 0 -0.46em, 
-          -0.297em -0.775em 0 -0.477em;
-        }
-        20% {
-          box-shadow: 0 -0.83em 0 -0.4em, 
-          -0.338em -0.758em 0 -0.42em, 
-          -0.555em -0.617em 0 -0.44em, 
-          -0.671em -0.488em 0 -0.46em, 
-          -0.749em -0.34em 0 -0.477em;
-        }
-        38% {
-          box-shadow: 0 -0.83em 0 -0.4em, 
-          -0.377em -0.74em 0 -0.42em, 
-          -0.645em -0.522em 0 -0.44em, 
-          -0.775em -0.297em 0 -0.46em, 
-          -0.82em -0.09em 0 -0.477em;
-        }
-        59% {
-          box-shadow: 0 -0.83em 0 -0.4em, 
-          -0.087em -0.825em 0 -0.42em, 
-          -0.173em -0.812em 0 -0.44em, 
-          -0.256em -0.789em 0 -0.46em, 
-          -0.297em -0.775em 0 -0.477em;
-        }
-        95% {
-          box-shadow: 
-          0 -0.83em 0 -0.4em, 
-          0 -0.83em 0 -0.42em, 
-          0 -0.83em 0 -0.44em, 
-          0 -0.83em 0 -0.46em, 
-          0 -0.83em 0 -0.477em;
-        }
-        100% {
-          box-shadow: 
-          0 -0.83em 0 -0.4em, 
-          0 -0.83em 0 -0.42em, 
-          0 -0.83em 0 -0.44em, 
-          0 -0.83em 0 -0.46em, 
-          0 -0.83em 0 -0.477em;
-        }
-      }
-
-      @keyframes rotate {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-    </style>
   </head>
   <body>
-
-    <div class="tilt">
-      <div class="content">
-        <img src="./slides/361146473_995671938136092_4243291179085438720_n-copy.jpg" alt="">
-      </div>
-
-      <script>
-        const tiltEl = document.querySelector(".tilt");
-
-        const width = tiltEl.clientWidth;
-        const height = tiltEl.clientHeight;
-
-        tiltEl.addEventListener("mousemove", (e) => {
-          const x = e.layerX;
-          const y = e.layerY;
-          const multiplier = 15;
-
-          const xRotate = ((x-width/2)/width) * multiplier;
-          const yRotate = ((y-height/2)/height) * multiplier * (-1);
-
-          tiltEl.style.transform = moveTilt(xRotate, yRotate);
-        })
-
-        tiltEl.addEventListener("mouseleave", () => {
-          tiltEl.style.transform = moveTilt(0, 0);
-        })
-
-        function moveTilt(x, y) {
-          return `perspective(500px) scale(1.1) rotateX(${x}deg) rotateY(${y}deg)`;
+    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+    <h1>Forecast for the Next 24 Hours</h1>
+ 
+    <main id="container"></main>
+ 
+    <script>
+      let jogata = {
+        changeColors: function(e) {
+          console.log(this);
+          const target = e.currentTarget;
+          target.style.color = "#333";
+          target.style.backgroundColor = "olive";
+        }, 
+        init: function() {
+          let h1 = document.querySelector("h1");
+          h1.addEventListener("click", this.changeColors);
         }
-      </script>
-    </div>
+       }
+ 
+      jogata.init();
+    </script>
+    <script>
+      const container = document.getElementById("container");
+      let df = new DocumentFragment();
 
-    <span class="spinner"></span>
-    <!-- <span class="spinner"></span> -->
-    <!-- <span class="spinner"></span> -->
-    <!-- <span class="spinner"></span> -->
+      const darksky = 'https://api.darksky.net/forecast/';
+      const key = "bc7587vgghcfgxkjldgh656vxgkv7b6a"
+      const lat = 45.3483;
+      const lng = -75.7584;
+ 
+      let uri = darksky + key + "/" + lat + "," + lng;
+      uri = uri.concat("?units=ca&exclude=minutely");
+      console.log(uri);
+ 
+      const options = {
+        method: "GET", 
+        mode: "cors"
+      } 
+ 
+      const req = new Request(uri, options);
+ 
+      fetch(req)
+        .then(response => {
+          if (response.ok) {
+            console.log(response);
+            return response.json();
+          } else {
+            throw new Error("Bad HTTP!");
+          }
+        })
+        .then((data)=>{console.log(data)}, res => {
+          const response = {
+            currently: {
+              temperature: 0, 
+              summary: "sum"
+            }, 
+            daily: {
+              data: [{
+                time: "1499918409",
+              }], 
+            }, 
+            hourly: {
+              data: [
+                {
+                  time: "1499918409", 
+                  temperature: 15.94, 
+                  summary: "Clear", 
+                  precipProbability: 0.15, 
+                }, 
+                {
+                  time: "1599918409",
+                  temperature: 14.95, 
+                  summary: "Sunny", 
+                  precipProbability: 0.65, 
+                }
+              ]
+            }
+          }
+  
+          console.log("response provided");
+          
+          response.hourly.data.forEach(hour => {
+            let div = document.createElement("div");
+            div.classList.add("hour");
+            let timestamp = hour.time;
+            div.id = "ts" + timestamp;
+            let temp = parseInt(hour.temperature);
+            div.textContent = temp.toString().concat("\u00B0");
+            div.title = hour.summary;
+            div.style.margin = "50px";
+            let span = document.createElement("span");
+            span.style.display = "block";
+            let timmy = new Date(timestamp * 1000);
+            // span.textContent = "0:00";
+            span.textContent = timmy.getHours() + ":00";
+            div.appendChild(span);
+            df.appendChild(div);
+          });
 
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+          container.appendChild(df);
+ 
+          response.hourly.data.filter(hour => {
+            if (hour.precipProbability > 0.5) {
+              return true;
+            } else {
+              return false;
+            }
+          }).map(hour => {
+            return hour.time;
+          }).forEach(timestamp => {
+            let id = "ts" + timestamp;
+            document.getElementById(id).classList.add("precip");
+          })
+
+          const highObj = response.hourly.data.reduce((acc, hour) => {
+            if (hour.temperature > acc.temp) {
+              return {
+                temp: hour.temperature,
+                time: hour.time,
+              };
+            } else {
+              return acc;
+            }
+          }, {temp: -100, time: 1000});
+          let id = "ts" + highObj.time;
+          document.getElementById(id).classList.add("high");
+        }) 
+        .catch(err => {
+          console.log("ERROR: ", err.message);
+        }) 
+    </script>
 
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
@@ -377,207 +201,5 @@
         users.send();
       }
     </script>
-
-    <div class="geo">
-      <h1 id="error"></h1>
-      <p>lat:<span></span></p>
-      <p>lng:<span></span></p>
-      <p>accuracy:<span></span></p>
-      <p>heading:<span></span></p>
-      <p>speed:<span></span></p>
-      <p>altitude:<span></span></p>
-      <p>time:<span></span></p>
-    </div>
-
-    <script>
-      // document.addEventListener("DOMContentLoaded", init);
-
-      function init() {
-        if (navigator.geolocation) {
-          let giveUp = 30 * 1000;
-          let tooOld = 60 * 60 * 1000; // 1 hour
-          const options = {
-            enableHighAccuracy: true, 
-            timeout: giveUp, 
-            maximumAge: tooOld
-          }
-          navigator.geolocation.getCurrentPosition(gotPosition, fail, options);
-        } else {
-          console.log("Your browser is too old!");
-        }
-      }
-
-      function gotPosition(position) {
-        // console.log(position);
-        const spans = document.querySelectorAll("p span");
-        spans[0].textContent = position.coords.latitude;
-        spans[1].textContent = position.coords.longitude;
-        spans[2].textContent = position.coords.accuracy;
-        spans[6].textContent = position.timestamp;
-      }
-
-      function fail(err) {
-        console.log("fial");
-        const errors = {
-          1: "No permission",
-          2: "Unable to determine",
-          3: "Took too long",
-        }
-        document.querySelector("#error").textContent = errors[err];
-      }
-    </script>
-
-    <div id="output">
-      <ul id="users">
-        <li>
-          <p class="name"></p>
-          <p class="info"></p>
-        </li>
-        <li>
-          <p class="name"></p>
-          <p class="info"></p>
-        </li>
-        <li>
-          <p class="name"></p>
-          <p class="info"></p>
-        </li>
-        <li>
-          <p class="name"></p>
-          <p class="info"></p>
-        </li>
-        <li>
-          <p class="name"></p>
-          <p class="info"></p>
-        </li>
-      </ul>
-
-      <script>
-        const url = 'https://jsonplaceholder.typicode.com/users';
-
-        let req = new Request(url, {
-          method: "GET", 
-          mode: "cors"
-        })
-
-        fetch(req)
-          .then(response => {
-            if (response.ok) {
-              return response.json();
-            } else {
-              throw new Error("BAD HTTP!");
-            }
-          }).then(data => {
-            // console.log(data);
-            const ul = document.getElementById("users");
-            ul.innerHTML = "";
-            const df = new DocumentFragment();
-            data.forEach(user => {
-              console.log(user);
-              const li = document.createElement("li");
-              const pn = document.createElement("p");
-              const pue = document.createElement("p");
-              pn.textContent = user.name;
-              pue.textContent = `${user.username} - ${user.email}`;
-              pn.classList.add("name");
-              pue.classList.add("info");
-              li.appendChild(pn);
-              li.appendChild(pue);
-              df.appendChild(li);
-            })
-            ul.appendChild(df);
-          }).catch(err => {
-            console.log("ERROR: ", err.message);
-          })
-      </script>
-    </div>
-
-    <div class="ad">
-      <h2>advertisment</h2>
-      <p>Please send us money</p>
-      <p>We promise to be thankful.</p>
-    </div>
-    <section id="target1"></section>
-    <section id="target2"></section>
-    <section id="target3"></section>
-    <script type="text/html">
-      <div class="ad">
-        <h2>From inside the template</h2>
-        <p>Copied with cloneNode.</p>
-        <p>Deep clone of the node.</p>
-        <p>By default, script content is NOT shown on the page.</p>
-      </div>
-    </script>
-    <script>
-      const start = function() {
-        const t1 = document.getElementById("target1");
-        const t2 = document.getElementById("target2");
-        const t3 = document.getElementById("target3");
-
-        const div1 = document.querySelector(".ad");
-        // t1.appendChild(div1);
-        const temp1 = div1.cloneNode(false);
-        t1.appendChild(temp1);
-        const temp2 = div1.cloneNode(true);
-        t2.appendChild(temp2);
-
-        const temp3 = document.querySelector('[type="text/html"]');
-        const clone = temp3.cloneNode(true);
-        const div3 = clone.textContent;
-        t3.innerHTML = div3;
-      }
-
-      start();
-    </script>
-
-<section id="test3">
-  <div class="calculator">
-    <input type="text" name="result" id="result" class="output" placeholder="0">
-    <div class="keys">
-      <input type="button" value="+" class="key key-op">
-      <input type="button" value="-" class="key key-op">
-      <input type="button" value="*" class="key key-op">
-      <input type="button" value="/" class="key key-op">
-      <input type="button" value="7" class="key">
-      <input type="button" value="8" class="key">
-      <input type="button" value="9" class="key">
-      <input type="button" value="4" class="key">
-      <input type="button" value="5" class="key">
-      <input type="button" value="6" class="key">
-      <input type="button" value="1" class="key">
-      <input type="button" value="2" class="key">
-      <input type="button" value="3" class="key">
-      <input type="button" value="0" class="key">
-      <input type="button" value="." class="key">
-      <input type="button" value="c" class="key" id="clear">
-      <input type="button" value="=" class="key" id="equal">
-    </div>
-  </div>
-  <script>
-    const buttons = document.querySelectorAll(".key:not([id])");
-    
-    function display(value) {
-      result.value += value;
-    }
-
-    buttons.forEach(button => {
-      button.addEventListener("click", () => {
-        display(button.value);
-      })
-    })
-
-    function clearDisplay() {
-      result.value = "";
-    }
-
-    clear.addEventListener("click", clearDisplay);
-
-    function calcResult() {
-      result.value = eval(result.value);
-    }
-
-    equal.addEventListener("click", calcResult);
-  </script>
-</section>
-
   </body>
 </html>
