@@ -4,139 +4,137 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      fieldset {
+        display: none;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #000;
+        font-family: Georgia, serif;
+      }
+
+      .login-box {
+        position: relative;
+        width: 400px;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+        background-color: red;
+      }
+
+      h2 {
+        color: #fff;
+        font-size: 2rem;
+        text-align: center;
+        text-transform: capitalize;
+      }
+
+      .input-box {
+        position: relative;
+        width: 310px;
+        margin: 30px 0;
+        border-bottom: 2px solid #fff;
+      }
+
+      .input-box label {
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        transform: translateY(-50%);
+        color: #fff;
+        font-size: 1rem;
+        text-transform: capitalize;
+        transition: all 0.5s;
+        pointer-events: none;
+      }
+      .input-box input:focus ~ label, 
+      .input-box input:valid ~ label {
+        top: -5px;
+      }
+
+      .input-box input {
+        width: 100%;
+        height: 50px;
+        padding: 0 35px 0 5px;
+        color: #fff;
+        font-size: 1rem;
+        border: none;
+        outline: none;
+        background-color: transparent;
+      }
+      
+      .icon {
+        position: absolute;
+        right: 8px;
+        color: #fff;
+        font-size: 1.2rem;
+        line-height: 57px;
+      }
+
+      .remember {
+        margin: -15px 0 15px;
+        color: #fff;
+        font-size: 0.9rem;
+        display: flex;
+        justify-content: space-between;
+      }
+      .remember label {
+        text-transform: capitalize;
+      }
+      .remember input {
+        margin-right: 3px;
+      }
+    </style>
   </head>
   <body>
-    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
-    <h1>Forecast for the Next 24 Hours</h1>
- 
-    <main id="container"></main>
- 
-    <script>
-      let jogata = {
-        changeColors: function(e) {
-          console.log(this);
-          const target = e.currentTarget;
-          target.style.color = "#333";
-          target.style.backgroundColor = "olive";
-        }, 
-        init: function() {
-          let h1 = document.querySelector("h1");
-          h1.addEventListener("click", this.changeColors);
-        }
-       }
- 
-      jogata.init();
-    </script>
-    <script>
-      const container = document.getElementById("container");
-      let df = new DocumentFragment();
 
-      const darksky = 'https://api.darksky.net/forecast/';
-      const key = "bc7587vgghcfgxkjldgh656vxgkv7b6a"
-      const lat = 45.3483;
-      const lng = -75.7584;
- 
-      let uri = darksky + key + "/" + lat + "," + lng;
-      uri = uri.concat("?units=ca&exclude=minutely");
-      console.log(uri);
- 
-      const options = {
-        method: "GET", 
-        mode: "cors"
-      } 
- 
-      const req = new Request(uri, options);
- 
-      fetch(req)
-        .then(response => {
-          if (response.ok) {
-            console.log(response);
-            return response.json();
-          } else {
-            throw new Error("Bad HTTP!");
-          }
-        })
-        .then((data)=>{console.log(data)}, res => {
-          const response = {
-            currently: {
-              temperature: 0, 
-              summary: "sum"
-            }, 
-            daily: {
-              data: [{
-                time: "1499918409",
-              }], 
-            }, 
-            hourly: {
-              data: [
-                {
-                  time: "1499918409", 
-                  temperature: 15.94, 
-                  summary: "Clear", 
-                  precipProbability: 0.15, 
-                }, 
-                {
-                  time: "1599918409",
-                  temperature: 14.95, 
-                  summary: "Sunny", 
-                  precipProbability: 0.65, 
-                }
-              ]
-            }
-          }
-  
-          console.log("response provided");
-          
-          response.hourly.data.forEach(hour => {
-            let div = document.createElement("div");
-            div.classList.add("hour");
-            let timestamp = hour.time;
-            div.id = "ts" + timestamp;
-            let temp = parseInt(hour.temperature);
-            div.textContent = temp.toString().concat("\u00B0");
-            div.title = hour.summary;
-            div.style.margin = "50px";
-            let span = document.createElement("span");
-            span.style.display = "block";
-            let timmy = new Date(timestamp * 1000);
-            // span.textContent = "0:00";
-            span.textContent = timmy.getHours() + ":00";
-            div.appendChild(span);
-            df.appendChild(div);
-          });
-
-          container.appendChild(df);
- 
-          response.hourly.data.filter(hour => {
-            if (hour.precipProbability > 0.5) {
-              return true;
-            } else {
-              return false;
-            }
-          }).map(hour => {
-            return hour.time;
-          }).forEach(timestamp => {
-            let id = "ts" + timestamp;
-            document.getElementById(id).classList.add("precip");
-          })
-
-          const highObj = response.hourly.data.reduce((acc, hour) => {
-            if (hour.temperature > acc.temp) {
-              return {
-                temp: hour.temperature,
-                time: hour.time,
-              };
-            } else {
-              return acc;
-            }
-          }, {temp: -100, time: 1000});
-          let id = "ts" + highObj.time;
-          document.getElementById(id).classList.add("high");
-        }) 
-        .catch(err => {
-          console.log("ERROR: ", err.message);
-        }) 
-    </script>
+    <div class="login-box">
+      <form action="">
+        <h2>login</h2>
+        <div class="input-box">
+          <span class="icon">
+            <i class="fa fa-envelope-o"></i>
+          </span>
+          <input type="email" name="email" id="email" required>
+          <label for="email">email</label>
+        </div>
+        <div class="input-box">
+          <span class="icon">
+            <i class="fa fa-key"></i>
+          </span>
+          <input type="password" name="password" id="password" required>
+          <label for="password">password</label>
+        </div>
+        <div class="remember">
+          <label>
+            <input type="checkbox" name="" id="">
+            remember me
+          </label>
+          <a href="#">forgot password?</a>
+        </div>
+        <button type="submit">login</button>
+        <div class="register">
+          <p>don't have an account</p>
+          <a href="#">register</a>
+        </div>
+      </form>
+    </div>
+    
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
