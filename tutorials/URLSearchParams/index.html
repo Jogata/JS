@@ -4,715 +4,153 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      a {
-        text-decoration: none;
-      }
-
-      button {
-        cursor: pointer;
-      }
-
-      body {
-        font-family: Georgia, serif;
-      }
-
-      header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding: 30px 5%;
-        display: flex;
-        align-items: center;
-        border-bottom: 2px solid #fff;
-        background-color: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(20px);
-        z-index: 2;
-      }
-      
-      .logo {
-        color: #fff;
-        font-size: 30px;
-        font-weight: 700;
-        text-transform: capitalize;
-      }
-
-      .sci {
-        margin: 0 auto 0 50px;
-      }
-      .sci a {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        /* margin-right: 15px; */
-        margin: 6px;
-        border: 2px solid #fff;
-        border-radius: 6px;
-        background-color: transparent;
-        transition: all 500ms;
-      }
-      .sci a:hover {
-        background-color: #fff;
-      }
-      .sci i {
-        color: #fff;
-        font-size: 20px;
-        transition: color 500ms;
-      }
-      .sci a:hover i {
-        color: #444;
-      }
-
-      .navbar a {
-        display: inline-block;
-        /* margin-left: 30px; */
-        margin: 8px 16px;
-        color: #fff;
-        font-size: 18px;
-        font-weight: 500;
-        text-transform: capitalize;
-        text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-      }
-
-      .menu-btn {
-        display: none;
-        border: 2px solid #fff;
-        border-radius: 6px;
-        background-color: transparent;
-        transition: all 500ms;
-      }
-      .menu-btn:hover {
-        background-color: #fff;
-      }
-      .menu-btn i {
-        padding: 10px 11px;
-        color: #fff;
-        font-size: 20px;
-        transition: color 500ms;
-      }
-      .menu-btn:hover i {
-        color: #444;
-      }
-
+    <style> 
+      * { 
+        margin: 0; 
+        padding: 0; 
+        box-sizing: border-box; 
+      } 
+ 
+      a { 
+        text-decoration: none; 
+      } 
+ 
       .banner {
+        width: 100%; 
+        min-height: 100vh; 
+        background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+         url("../../../../EmeraldLakeYukon.jpg");
+         background-repeat: no-repeat;
+         background-position: center;
+         background-size: cover;
+      } 
+ 
+      .navbar {
+        width: 86%;
+        margin: auto;
+        padding: 35px 0;
+        display: flex; 
+        align-items: center; 
+        justify-content: space-between;
+      } 
+
+      .logo { 
+        color: #fff; 
+        font-size: 2rem;
+        font-weight: bold;
+        text-transform: capitalize; 
+        /* text-decoration: none; */
+      } 
+ 
+      .navbar li {
+        list-style: none;
         position: relative;
-        width: 100%;
-        min-width: 1000px;
-        height: 100%;
-        min-height: 100vh;
-        /* overflow-x: hidden; */
-      }
-
-      /* .slider {} */
-
-      .slide {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-      }
-      .slide img {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        pointer-events: none;
-        transition: opacity 300ms;
-        opacity: 0;
-      }
-
-      .left-info {
-        /* position: absolute; */
-        /* top: 0; */
-        /* left: 0; */
-        width: 50%;
-        height: 1000px;
-        min-height: 100vh;
-        /* height: 100%; */
-        transform: translateX(-100%);
-        transition: 0s;
-      }
-
-      .penetrate-blur {
-        /* position: absolute; */
-        /* width: 100%; */
-        height: 100%;
-        /* display: flex; */
-        /* align-items: center; */
-        /* justify-content: flex-end; */
-        background-color: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(20px);
-      }
-      /* .penetrate-blur {
-        mask: 
-        linear-gardient(#000 0 0), 
-        linear-gardient(#000 0 0);
-        -webkit-mask: 
-        linear-gardient(#000 0 0), 
-        linear-gardient(#000 0 0);
-        mask-clip: padding-box;
-        -webkit-mask-clip: text;
-        mask-composite: exclude;
-        -webkit-mask-composite: xor;
-      } */
-      .penetrate-blur h1 {
-        width: 100%;
-        height: 100%;
-        min-height: 100vh;
-        /* color: #fff; */
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        color: transparent;
-        font-size: 250px;
-        text-align: right;
-        background-position: left;
-        background-size: cover;
-        background-clip: text;
-        /* text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); */
-        /* -webkit-text-stroke: 2px rgba(255, 255, 255, 0.6); */
-        -webkit-text-stroke: 3px #fff;
-      }
-      .slide:nth-child(1) .penetrate-blur h1 {
-        background-image: url("./images/china.jpg");
-      }
-      .slide:nth-child(2) .penetrate-blur h1 {
-        background-image: url("./images/serbia.jpg");
-      }
-      .slide:nth-child(3) .penetrate-blur h1 {
-        background-image: url("./images/brazil-new.jpg");
-      }
-      .slide:nth-child(4) .penetrate-blur h1 {
-        background-image: url("./images/africa-new.jpg");
-      }
-      .slide:nth-child(5) .penetrate-blur h1 {
-        background-image: url("./images/japan.jpg");
-      }
-      .penetrate-blur h1 span {
-        display: none;
-      }
-
-      @media screen and (min-width: 1920px) {
-        .penetrate-blur h1 {
-          background-size: 100vw;
-        }
-      }
-
-      .content {
-        position: absolute;
-        /* right: 10%; */
-        bottom: 8%;
-        /* left: 10%; */
-        margin: 0 10%;
-        color: #fff;
-      }
-      .content h3 {
-        font-size: 20px;
-        text-transform: capitalize;
-      }
-      .content p {
-        max-width: 990px;
-        font-size: 16px;
-        margin: 10px 0 15px;
-      }
-
-      .btn {
-        display: inline-block;
-        /* padding: 13px 28px; */
-        padding: 0.8em 1.74em;
-        color: #444;
-        font-size: 16px;
-        font-weight: 600;
-        border: 2px solid #fff;
-        border-radius: 6px;
-        background-color: #fff;
-        text-transform: capitalize;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        transition: all 400ms;
-      }
-      .btn:hover {
-        color: #fff;
-        background-color: transparent;
-        filter: drop-shadow(1px 1px 1px #000);
-      }
-
-      .right-info {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 50%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        transform: translateX(100%);
-        transition: 0s;
-      }
-      .right-info h1 {
-        position: relative;
-        /* color: #fff; */
-        color: transparent;
-        font-size: 250px;
-        -webkit-text-stroke: 3px #fff;
-        filter: drop-shadow(3px 3px 3px #000);
-        /* font-weight: bold; */
-      }
-      .right-info h1 span {
-        position: absolute;
+        display: inline-block; 
+        margin: 0 20px;
+      } 
+ 
+      .navbar li a {
+        color: #fff; 
+        text-transform: uppercase;
+        /* text-decoration: none; */
+      } 
+      .navbar li::after {
+        position: absolute; 
+        bottom: -10px;
         left: 0;
-        top: 100%;
-        font-size: 80px;
-        line-height: 0;
-        text-transform: capitalize;
-        -webkit-text-stroke: 2px #fff;
-      }
-
-      /* .right-info h1 { */
-        /* color: #fff; */
-        /* font-size: 250px; */
-        /* text-shadow:  */
-        /* 0px 1px 0px #ccc,  */
-        /* 0px 2px 0px #c9c9c9,  */
-        /* 0px 3px 0px #bbb,  */
-        /* 0px 4px 0px #b9b9b9,  */
-        /* 0px 5px 0px #aaa,  */
-        /* 0px 6px 1px rgba(0, 0, 0, 0.1),  */
-        /* 0px 0px 5px rgba(0, 0, 0, 0.1),  */
-        /* 0px 1px 3px rgba(0, 0, 0, 0.3),  */
-        /* 0px 3px 5px rgba(0, 0, 0, 0.2),  */
-        /* 0px 5px 10px rgba(0, 0, 0, 0.25),  */
-        /* 0px 10px 10px rgba(0, 0, 0, 0.2),  */
-        /* 0px 20px 20px rgba(0, 0, 0, 0.15); */
-      /* } */
-      /* .right-info h3 { */
-        /* position: absolute; */
-        /* margin-left: 13px; */
-        /* color: #fff; */
-        /* font-size: 80px; */
-        /* text-transform: capitalize; */
-        /* transform: translateY(150%); */
-        /* text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); */
-      /* } */
-
-      .slide {
-        top: 0;
+        content: "";
+        width: 100%; 
+        height: 3px;
+        background-color: #009688;
+        transform: scale(0);
+        transition: all 0.5s;
+      } 
+      .navbar li:hover::after {
+        transform: scale(1);
+      } 
+ 
+      .content { 
+        position: absolute; 
+        top: 50%;
+        transform: translateY(-50%);
         width: 100%;
-        height: 100%;
-        overflow: hidden;
-      }
-      .slide img {
-        object-position: left;
-      }
-
-      .slide.relative {
-        position: relative;
-      }
-
-      .slide.active {
-        z-index: 1;
-      }
-      .slide.active img {
-        opacity: 1;
-      }
-      .slide.active .left-info {
-        transform: translateX(0);
-        transition: transform 500ms;
-        z-index: 1;
-      }
-      .slide.active .right-info {
-        transform: translateX(0);
-        transition: transform 500ms;
-        z-index: 1;
-      }
-
-      .slider-navigation {
-        position: absolute;
-        bottom: 8%;
-        right: 5%;
-        z-index: 3;
-      }
-      .slider-navigation button {
-        /* display: inline-block; */
-        /* align-items: center; */
-        /* justify-content: center; */
-        /* width: 50px; */
-        /* height: 50px; */
-        margin-left: 25px;
-        padding: 0.3em 0.3em 0.569em 0.3em;
-        /* color: #444; */
+        color: #fff; 
+        text-align: center;
+      } 
+ 
+      .content h1 {
+        margin-top: 40px;
         font-size: 70px;
-        line-height: 0;
-        border: 2px solid #fff;
-        border-radius: 6px;
-        /* background-color: #fff; */
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-        transition: all 500ms;
-        /* cursor: pointer; */
+        text-transform: uppercase;
+      } 
+ 
+      .content p {
+        max-width: 700px;
+        margin: auto;
+        line-height: 20px;
+        font-weight: 100;
+      } 
+ 
+      .content button {
+        position: relative; 
+        width: 200px;
+        margin: 20px 10px;
+        padding: 15px 0;
+        color: #fff; 
+        font-size: 18px;
+        font-weight: bold;
+        font-family: inherit;
+        text-align: center;
+        text-transform: uppercase;
+        border: 2px solid #009688;
+        border-radius: 25px;
+        background-color: transparent; 
+        overflow: hidden; 
+        cursor: pointer;
+      } 
+      .content button::after {
+        position: absolute; 
+        top: 0; 
+        left: -2%;
+        content: "";
+        width: 104%;
+        height: 100%; 
+        border-radius: inherit;
+        background-color: #009688;
+        transform: translateX(-100%);
+        transition: all 0.5s;
+        z-index: -1;
       }
-      .slider-navigation span {
-        font-family: 'Times New Roman', serif;
-        line-height: 0;
-      }
-      .slider-navigation button.next-btn {
-        color: #444;
-        background-color: #fff;
-      }
-      .slider-navigation button.next-btn:hover {
-        color: #fff;
-        background-color: transparent;
-      }
-      .slider-navigation button.prev-btn {
-        color: #fff;
-        background-color: transparent;
-      }
-      .slider-navigation button.prev-btn:hover {
-        color: #444;
-        background-color: #fff;
-      }
-      /* .slider-navigation span i { */
-        /* color: #444; */
-        /* font-size: 35px; */
-        /* transition: all 500ms; */
-      /* } */
-      /* .slider-navigation span:hover i { */
-        /* color: #fff; */
-      /* } */
-      /* .slider-navigation span.prev-btn i { */
-        /* color: #fff; */
-      /* } */
-      /* .slider-navigation span.prev-btn:hover i { */
-        /* color: #444; */
-      /* } */
-
-      /* v.2 */
-      /* .banner { */
-        /* min-width: 1000px; */
-        /* overflow-x: hidden; */
-      /* } */
-
-      /* .slide.relative {
-        position: relative;
-      } */
-
-      /* .slide {
-        position: relative;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        min-width: 700px;
-        overflow: hidden;
-      }
-      .slide img {
-        object-position: left;
-      } */
-
-      /* .left-info {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 1000px;
-        min-height: 100vh;
-      } */
-
-      /* .penetrate-blur {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        background-color: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(20px);
-      } */
-      /* .penetrate-blur h1 {
-        min-height: 100vh;
-        width: 100%;
-        height: 100%;
-        text-align: right;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        background-size: cover;
-        background-position: left;
-      } */
-
-      @media screen and (max-width: 1000px) {
-        header {
-          padding: 3%;
-        }
-        .logo {
-          font-size: 25px;
-        }
-        .navbar {
-          display: none;
-        }
-        .menu-btn {
-          display: inline-block;
-          margin-left: auto;
-        }
-        .menu-btn i {
-          padding: 6px 8px;
-        }
-        /* .sci {
-          margin: 0 0 0 auto;
-        } */
-        .banner {
-          min-width: 100%;
-        }
-        .slide {
-          overflow: auto;
-        }
-        .slide img {
-          object-position: center;
-        }
-        .left-info {
-          width: 100%;
-          height: auto;
-        }
-        .penetrate-blur {
-          display: flex;
-          min-height: 100vh;
-          background-color: transparent;
-          backdrop-filter: blur(0px);
-        }
-        .penetrate-blur h1 {
-          display: block;
-          min-height: auto;
-          margin: auto;
-          font-size: 100px;
-          text-align: center;
-          -webkit-text-stroke: 2px #fff;
-          background-image: none !important;
-          filter: drop-shadow(1px 1px 1px #000);
-        }
-        .penetrate-blur h1 span {
-          display: inline;
-        }
-        .content {
-          position: static;
-          padding-bottom: 4%;
-        }
-        .btn {
-          font-size: 13px;
-        }
-        .right-info {
-          display: none;
-        }
-        .slider-navigation {
-          position: fixed;
-          top: 42vh;
-          right: auto;
-          bottom: auto;
-          width: 90%;
-          margin: 0 5%;
-          padding: 4% 0;
-          display: flex;
-          justify-content: space-between;
-        }
-        .slider-navigation button {
-          margin: 0;
-          font-size: 40px;
-          opacity: 0.4;
-        }
-        .slider-navigation button:hover {
-          opacity: 1;
-        }
-      }
-
-      @media screen and (max-width: 850px) {
-        .sci {
-          display: none;
-        }
-      }
-
-      /* ====================================================== delete ============================================== */
-      /* h1 { */
-        /* border: 1px solid red; */
-      /* } */
-    </style>
+      .content button:hover::after {
+        transform: translateX(0);
+      } 
+    </style> 
   </head>
   <body>
-
-    <header>
-      <a href="#" class="logo">tours.</a>
-      <div class="sci">
-        <a href="#">
-          <i class="fa fa-facebook" aria-hidden="true"></i>
-        </a>
-        <a href="#">
-          <i class="fa fa-instagram" aria-hidden="true"></i>
-        </a>
-        <a href="#">
-          <i class="fa fa-twitter" aria-hidden="true"></i>
-        </a>
-        <a href="#">
-          <i class="fa fa-paper-plane" aria-hidden="true"></i>
-        </a>
+ 
+    <div class="banner">
+      <div class="navbar">
+        <a href="#" class="logo">logo</a>
+        <ul>
+          <li><a href="#">home</a></li>
+          <li><a href="#">bedrooms</a></li>
+          <li><a href="#">dining</a></li>
+          <li><a href="#">kitchen</a></li>
+          <li><a href="#">backyard</a></li>
+        </ul>
       </div>
-      <nav class="navbar">
-        <a href="#">destinations</a>
-        <a href="#">booking</a>
-        <a href="#">services</a>
-        <a href="#">contact</a>
-      </nav>
-      <button class="menu-btn">
-        <i class="fa fa-bars"></i>
-      </button>
-    </header>
-
-    <section class="banner">
-      <div class="slider">
-        <div class="slide active relative">
-          <img src="./images/china.jpg" alt="">
-          <div class="left-info">
-            <div class="penetrate-blur">
-              <h1>Chi<span>na</span></h1>
-            </div>
-            <div class="content">
-              <h3>01. china forest tour</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores accusantium ullam laudantium,
-                recusandae dolore officiis omnis aliquam earum consequuntur consectetur assumenda illo laborum placeat a
-                neque minima quos similique quam fugiat tenetur.</p>
-              <a href="#" class="btn">more details</a>
-            </div>
-          </div>
-          <div class="right-info">
-            <h1>na <span>forest</span></h1>
-          </div>
-        </div>
-        <div class="slide">
-          <img src="./images/serbia.jpg" alt="">
-          <div class="left-info">
-            <div class="penetrate-blur">
-              <h1>Ser<span>bia</span></h1>
-            </div>
-            <div class="content">
-              <h3>02. serbia forest tour</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores accusantium ullam laudantium,
-                recusandae dolore officiis omnis aliquam earum consequuntur consectetur assumenda illo laborum placeat a
-                neque minima quos similique quam fugiat tenetur.</p>
-              <a href="#" class="btn">more details</a>
-            </div>
-          </div>
-          <div class="right-info">
-            <h1>bia <span>forest</span></h1>
-          </div>
-        </div>
-        <div class="slide">
-          <img src="./images/brazil-new.jpg" alt="">
-          <div class="left-info">
-            <div class="penetrate-blur">
-              <h1>Bra<span>zil</span></h1>
-            </div>
-            <div class="content">
-              <h3>03. brazil forest tour</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores accusantium ullam laudantium,
-                recusandae dolore officiis omnis aliquam earum consequuntur consectetur assumenda illo laborum placeat a
-                neque minima quos similique quam fugiat tenetur.</p>
-              <a href="#" class="btn">more details</a>
-            </div>
-          </div>
-          <div class="right-info">
-            <h1>zil <span>forest</span></h1>
-          </div>
-        </div>
-        <div class="slide">
-          <img src="./images/africa-new.jpg" alt="">
-          <div class="left-info">
-            <div class="penetrate-blur">
-              <h1>Afr<span>ica</span></h1>
-            </div>
-            <div class="content">
-              <h3>04. africa forest tour</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores accusantium ullam laudantium,
-                recusandae dolore officiis omnis aliquam earum consequuntur consectetur assumenda illo laborum placeat a
-                neque minima quos similique quam fugiat tenetur.</p>
-              <a href="#" class="btn">more details</a>
-            </div>
-          </div>
-          <div class="right-info">
-            <h1>ica <span>forest</span></h1>
-          </div>
-        </div>
-        <div class="slide">
-          <img src="./images/japan.jpg" alt="">
-          <div class="left-info">
-            <div class="penetrate-blur">
-              <h1>Jap<span>an</span></h1>
-            </div>
-            <div class="content">
-              <h3>05. japan forest tour</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores accusantium ullam laudantium,
-                recusandae dolore officiis omnis aliquam earum consequuntur consectetur assumenda illo laborum placeat a
-                neque minima quos similique quam fugiat tenetur.</p>
-              <a href="#" class="btn">more details</a>
-            </div>
-          </div>
-          <div class="right-info">
-            <h1>an <span>forest</span></h1>
-          </div>
+      <div class="content">
+        <h1>design your house</h1>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fuga corrupti, labore, earum saepe facere reprehenderit eveniet molestiae qui error quas nihil aliquam itaque eaque.</p>
+        <div>
+          <button type="button">watch more</button>
+          <button type="button">subscribe</button>
         </div>
       </div>
-      <div class="slider-navigation">
-        <button class="prev-btn">
-          <span>&#139;</span>
-        </button>
-        <button class="next-btn">
-          <span>&#155;</span>
-        </button>
-      </div>
-    </section>
-
-    <script>
-      const prevBtn = document.querySelector(".prev-btn");
-      const nextBtn = document.querySelector(".next-btn");
-      const slides = document.querySelectorAll(".slide");
-      const numberOfSlides = slides.length;
-      let slideIndex = 0;
-
-      prevBtn.addEventListener("click", () => {
-        // slides.forEach(slide => {
-        //   slide.classList.remove("active");
-        // })
-        slides[slideIndex].classList.remove("active");
-
-        slideIndex--;
-
-        // if (slideIndex < 0) {
-        //   slideIndex = numberOfSlides - 1;
-        // }
-        slideIndex = slideIndex + numberOfSlides;
-        slideIndex = slideIndex % numberOfSlides;
-
-        slides[slideIndex].classList.add("active");
-      })
-
-      nextBtn.addEventListener("click", () => {
-        // slides.forEach(slide => {
-        //   slide.classList.remove("active");
-        // })
-        slides[slideIndex].classList.remove("active");
-
-        slideIndex++;
-
-        // if (slideIndex >= numberOfSlides) {
-        //   slideIndex = 0;
-        // }
-        slideIndex = slideIndex % numberOfSlides;
-
-        slides[slideIndex].classList.add("active");
-      })
-    </script>
-
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+    </div>
+ 
+    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
