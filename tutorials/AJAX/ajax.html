@@ -145,7 +145,12 @@
         outline: none;
         border-radius: 40px;
         background-color: #fff;
+        transition: all 500ms;
         cursor: pointer;
+      }
+      button:hover {
+        color: #fff;
+        background-color: rgba(255, 255, 255, 0.5);
       }
 
       .register {
@@ -201,13 +206,23 @@
         /* background-color: red; */
       }
 
-      .border-one {
+      .border {
         position: absolute;
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        filter: drop-shadow(0 0 20px #0496ff);
+        animation: rotate 6s linear infinite;
         overflow: hidden;
+      }
+      
+      .border-one {
+        /* position: absolute; */
+        /* width: 100%; */
+        /* height: 100%; */
+        /* border-radius: 50%; */
+        filter: drop-shadow(0 0 20px #0496ff);
+        /* animation: rotate 6s linear infinite; */
+        /* overflow: hidden; */
       }
       .border-one::before {
         position: absolute;
@@ -218,9 +233,125 @@
         height: 100%;
         background: linear-gradient(0deg, #0496ff, #0496ff);
       }
+      .border-one::after {
+        position: absolute;
+        bottom: -50%;
+        left: -50%;
+        content: "";
+        width: 470px;
+        height: 100%;
+        background: linear-gradient(0deg, transparent, transparent, #0496ff);
+      }
+
+      .border-two {
+        /* position: absolute; */
+        /* width: 100%; */
+        /* height: 100%; */
+        /* border-radius: 50%; */
+        filter: drop-shadow(0 0 20px #ff0a54);
+        /* animation: rotate 6s linear infinite; */
+        animation-delay: -6s;
+        /* overflow: hidden; */
+      }
+      .border-two::before {
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        content: "";
+        width: 470px;
+        height: 100%;
+        background: linear-gradient(0deg, #ff0a54, transparent, transparent);
+      }
+      .border-two::after {
+        position: absolute;
+        bottom: -50%;
+        right: -50%;
+        content: "";
+        width: 470px;
+        height: 100%;
+        background: linear-gradient(0deg, #ff0a54, #ff0a54);
+      }
+
+      @keyframes rotate {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .content {
+        position: absolute;
+        padding: 10px;
+        inset: 5px;
+        border-radius: 50%;
+        background-color: #0c0a3e;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+      }
+      .content img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+        border-radius: inherit;
+      }
+
+      /* ================================ */
+      #js1 {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: aliceblue;
+        background-image: none;
+      }
+
+      .btn {
+        position: relative;
+        padding: 20px 40px;
+        color: #000;
+        font-size: 1rem;
+        text-transform: capitalize;
+        text-decoration: none;
+        border-radius: 5px;
+        background-color: pink;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+      }
+      .btn::before {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        content: "";
+        width: 0px;
+        height: 0px;
+        border-radius: 50%;
+        background-color: red;
+        transition: all 500ms;
+      }
+      .btn:hover::before {
+        width: 200%;
+        height: 200%;
+      }
+
+      .btn span {
+        position: relative;
+        z-index: 1;
+      }
     </style>
   </head>
   <body>
+
+    <section id="js1">
+      <a href="#" class="btn">
+        <span>button</span>
+      </a>
+    </section>
 
     <section>
       <div class="login-box">
@@ -258,9 +389,11 @@
 
     <section id="test">
       <div class="circle">
-        <div class="border-one"></div>
-        <div class="border-two"></div>
-        <img src="" alt="">
+        <div class="border border-one"></div>
+        <div class="border border-two"></div>
+        <div class="content">
+          <img src="../../../../367364636_295684053110451_4078138612283317246_n.jpg" alt="">
+        </div>
       </div>
     </section>
 
