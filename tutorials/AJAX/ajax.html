@@ -4,530 +4,136 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      fieldset {
-        display: none;
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        height: 100%;
-        min-height: 100vh;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        background-color: #000;
-        font-family: Georgia, serif;
-      }
-
-      section {
-        width: 100%;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        /* background-image: url("../../../../EmeraldLakeYukon.jpg"); */
-        background-image: url("../../../CSS/assets/img/hue-bg-01.jpg");
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        animation: hue 12s linear infinite;
-      }
-
-      @keyframes hue {
-        0% {
-          filter: hue-rotate(0deg) invert(1);
-        }
-        100% {
-          filter: hue-rotate(360deg) invert(1);
-        }
-      }
-
-      /* @keyframes animate { */
-        /* 100% { */
-          /* filter: hue-rotate(360deg); */
-        /* } */
-      /* } */
-
-      .login-box {
-        position: relative;
-        width: 400px;
-        height: 400px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 2px solid rgba(255, 255, 255, 0.5);
-        border-radius: 20px;
-        /* background-color: red; */
-        background-color: transparent;
-        backdrop-filter: blur(15px);
-      }
-
-      h2 {
-        color: #fff;
-        font-size: 2rem;
-        text-align: center;
-        text-transform: capitalize;
-      }
-
-      .input-box {
-        position: relative;
-        width: 310px;
-        margin: 30px 0;
-        border-bottom: 2px solid #fff;
-      }
-
-      .input-box label {
-        position: absolute;
-        top: 50%;
-        left: 5px;
-        transform: translateY(-50%);
-        color: #fff;
-        font-size: 1rem;
-        text-transform: capitalize;
-        transition: all 0.5s;
-        pointer-events: none;
-      }
-      .input-box input:focus ~ label, 
-      .input-box input:valid ~ label {
-        top: -5px;
-      }
-
-      .input-box input {
-        width: 100%;
-        height: 50px;
-        padding: 0 35px 0 5px;
-        color: #fff;
-        font-size: 1rem;
-        border: none;
-        outline: none;
-        background-color: transparent;
-      }
-      
-      .icon {
-        position: absolute;
-        right: 8px;
-        color: #fff;
-        font-size: 1.2rem;
-        line-height: 57px;
-      }
-
-      .remember {
-        margin: -15px 0 15px;
-        color: #fff;
-        font-size: 0.9rem;
-        display: flex;
-        justify-content: space-between;
-      }
-      .remember label {
-        text-transform: capitalize;
-      }
-      .remember input {
-        margin-right: 3px;
-      }
-      .remember a {
-        color: #fff;
-        text-transform: capitalize;
-        text-decoration: none;
-      }
-      .remember a:hover {
-        text-decoration: underline;
-      }
-
-      button {
-        width: 100%;
-        height: 40px;
-        color: #000;
-        font-size: 1rem;
-        font-weight: 500;
-        font-family: inherit;
-        text-transform: capitalize;
-        border: none;
-        outline: none;
-        border-radius: 40px;
-        background-color: #fff;
-        transition: all 500ms;
-        cursor: pointer;
-      }
-      button:hover {
-        color: #fff;
-        background-color: rgba(255, 255, 255, 0.5);
-      }
-
-      .register {
-        margin: 25px 0 10px;
-        color: #fff;
-        font-size: 0.9rem;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-      }
-      .register p {
-        margin-right: 5px;
-        text-transform: capitalize;
-      }
-      .register a {
-        color: #fff;
-        font-weight: 600;
-        text-decoration: none;
-        text-transform: capitalize;
-      }
-      .register a:hover {
-        text-decoration: underline;
-      }
-
-      @media screen and (max-width: 360px) {
-        .login-box {
-          width: 100%;
-          min-height: 100vh;
-          border: none;
-          border-radius: 0px;
-        }
-        .input-box {
-          width: 290px;
-        }
-      }
-
-      /* ================================== */
-      #test {
-        width: 100%;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #0a0934;
-        background-image: none;
-        animation: none;
-      }
-
-      .circle {
-        position: relative;
-        width: 500px;
-        height: 500px;
-        margin: 10% auto;
-        /* background-color: red; */
-      }
-
-      .border {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        animation: rotate 6s linear infinite;
-        overflow: hidden;
-      }
-      
-      .border-one {
-        /* position: absolute; */
-        /* width: 100%; */
-        /* height: 100%; */
-        /* border-radius: 50%; */
-        filter: drop-shadow(0 0 20px #0496ff);
-        /* animation: rotate 6s linear infinite; */
-        /* overflow: hidden; */
-      }
-      .border-one::before {
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        content: "";
-        width: 94%;
-        height: 100%;
-        background: linear-gradient(0deg, #0496ff, #0496ff);
-      }
-      .border-one::after {
-        position: absolute;
-        bottom: -50%;
-        left: -50%;
-        content: "";
-        width: 94%;
-        height: 100%;
-        background: linear-gradient(0deg, transparent, transparent, #0496ff);
-      }
-
-      .border-two {
-        /* position: absolute; */
-        /* width: 100%; */
-        /* height: 100%; */
-        /* border-radius: 50%; */
-        filter: drop-shadow(0 0 20px #ff0a54);
-        /* animation: rotate 6s linear infinite; */
-        animation-delay: -6s;
-        /* overflow: hidden; */
-      }
-      .border-two::before {
-        position: absolute;
-        top: -50%;
-        right: -50%;
-        content: "";
-        width: 94%;
-        height: 100%;
-        background: linear-gradient(0deg, #ff0a54, transparent, transparent);
-      }
-      .border-two::after {
-        position: absolute;
-        bottom: -50%;
-        right: -50%;
-        content: "";
-        width: 94%;
-        height: 100%;
-        background: linear-gradient(0deg, #ff0a54, #ff0a54);
-      }
-
-      @keyframes rotate {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-
-      .content {
-        position: absolute;
-        padding: 10px;
-        inset: 5px;
-        border-radius: 50%;
-        background-color: #0c0a3e;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 10;
-      }
-      .content img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: top;
-        border-radius: inherit;
-      }
-
-      /* ================================ */
-      #js1 {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: aliceblue;
-        background-image: none;
-      }
-
-      .btn {
-        position: relative;
-        padding: 20px 40px;
-        color: #000;
-        font-size: 1rem;
-        text-transform: capitalize;
-        text-decoration: none;
-        border-radius: 5px;
-        background-color: pink;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        overflow: hidden;
-      }
-      .btn::before {
-        position: absolute;
-        top: var(--yPos);
-        left: var(--xPos);
-        transform: translate(-50%, -50%);
-        content: "";
-        width: 0px;
-        height: 0px;
-        border-radius: 50%;
-        background-color: palevioletred;
-        transition: all 500ms;
-      }
-      .btn:hover::before {
-        width: 300%;
-        height: 300%;
-      }
-
-      .btn span {
-        position: relative;
-        z-index: 1;
-      }
-
-            /* .penetrate-blur {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        background-color: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(20px);
-      } */
-      /* .penetrate-blur h1 {
-        min-height: 100vh;
-        width: 100%;
-        height: 100%;
-        text-align: right;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        background-size: cover;
-        background-position: left;
-      } */
-
-            /* .slide {
-        position: relative;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        min-width: 700px;
-        overflow: hidden;
-      }
-      .slide img {
-        object-position: left;
-      } */
-
-      /* .left-info {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 1000px;
-        min-height: 100vh;
-      } */
-
-            /* .slider-navigation span i { */
-        /* color: #444; */
-        /* font-size: 35px; */
-        /* transition: all 500ms; */
-      /* } */
-      /* .slider-navigation span:hover i { */
-        /* color: #fff; */
-      /* } */
-      /* .slider-navigation span.prev-btn i { */
-        /* color: #fff; */
-      /* } */
-      /* .slider-navigation span.prev-btn:hover i { */
-        /* color: #444; */
-      /* } */
-
-      /* v.2 */
-      /* .banner { */
-        /* min-width: 1000px; */
-        /* overflow-x: hidden; */
-      /* } */
-
-      /* .slide.relative {
-        position: relative;
-      } */
-
-      .right-info h1 {
-        color: #fff;
-        font-size: 250px;
-        /* text-shadow:  */
-        /* 0px 1px 0px #ccc,  */
-        /* 0px 2px 0px #c9c9c9,  */
-        /* 0px 3px 0px #bbb,  */
-        /* 0px 4px 0px #b9b9b9,  */
-        /* 0px 5px 0px #aaa,  */
-        /* 0px 6px 1px rgba(0, 0, 0, 0.1),  */
-        /* 0px 0px 5px rgba(0, 0, 0, 0.1),  */
-        /* 0px 1px 3px rgba(0, 0, 0, 0.3),  */
-        /* 0px 3px 5px rgba(0, 0, 0, 0.2),  */
-        /* 0px 5px 10px rgba(0, 0, 0, 0.25),  */
-        /* 0px 10px 10px rgba(0, 0, 0, 0.2),  */
-        /* 0px 20px 20px rgba(0, 0, 0, 0.15); */
-      }
-      /* .right-info h3 { */
-        /* position: absolute; */
-        /* margin-left: 13px; */
-        /* color: #fff; */
-        /* font-size: 80px; */
-        /* text-transform: capitalize; */
-        /* transform: translateY(150%); */
-        /* text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); */
-      /* } */
-
-            /* .penetrate-blur {
-        mask: 
-        linear-gardient(#000 0 0), 
-        linear-gardient(#000 0 0);
-        -webkit-mask: 
-        linear-gardient(#000 0 0), 
-        linear-gardient(#000 0 0);
-        mask-clip: padding-box;
-        -webkit-mask-clip: text;
-        mask-composite: exclude;
-        -webkit-mask-composite: xor;
-      } */
-    </style>
   </head>
   <body>
-
-    <section id="js1">
-      <a href="#" class="btn">
-        <span>button</span>
-      </a>
-      <script>
-        const button = document.querySelector(".btn");
-
-        button.addEventListener("mouseover", (e) => {
-          const x = e.pageX - button.offsetLeft;
-          const y = e.pageY - button.offsetTop;
-
-          console.log(x, y);
-
-          button.style.setProperty("--xPos", x + "px");
-          button.style.setProperty("--yPos", y + "px");
-        })
-      </script>
-    </section>
-
-    <section>
-      <div class="login-box">
-        <form action="">
-          <h2>login</h2>
-          <div class="input-box">
-            <span class="icon">
-              <i class="fa fa-envelope-o"></i>
-            </span>
-            <input type="email" name="email" id="email" required>
-            <label for="email">email</label>
-          </div>
-          <div class="input-box">
-            <span class="icon">
-              <i class="fa fa-key"></i>
-            </span>
-            <input type="password" name="password" id="password" required>
-            <label for="password">password</label>
-          </div>
-          <div class="remember">
-            <label>
-              <input type="checkbox" name="" id="" checked>
-              remember me
-            </label>
-            <a href="#">forgot password?</a>
-          </div>
-          <button type="submit">login</button>
-          <div class="register">
-            <p>don't have an account?</p>
-            <a href="#">register</a>
-          </div>
-        </form>
+    <header>
+      <a href="#" class="logo">tours.</a>
+      <div class="sci">
+        <a href="#">
+          <i class="fa fa-facebook" aria-hidden="true"></i>
+        </a>
+        <a href="#">
+          <i class="fa fa-instagram" aria-hidden="true"></i>
+        </a>
+        <a href="#">
+          <i class="fa fa-twitter" aria-hidden="true"></i>
+        </a>
+        <a href="#">
+          <i class="fa fa-paper-plane" aria-hidden="true"></i>
+        </a>
       </div>
-    </section>
+      <nav class="navbar">
+        <a href="#">destinations</a>
+        <a href="#">booking</a>
+        <a href="#">services</a>
+        <a href="#">contact</a>
+      </nav>
+    </header>
 
-    <section id="test">
-      <div class="circle">
-        <div class="border border-one"></div>
-        <div class="border border-two"></div>
-        <div class="content">
-          <img src="../../../../367364636_295684053110451_4078138612283317246_n.jpg" alt="">
+    <section class="banner">
+      <div class="slider">
+        <div class="slide active relative">
+          <img src="./images/china.jpg" alt="">
+          <div class="left-info">
+            <div class="penetrate-blur">
+              <h1>Chi</h1>
+            </div>
+            <div class="content">
+              <h3>01. china forest tour</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores accusantium ullam laudantium,
+                recusandae dolore officiis omnis aliquam earum consequuntur consectetur assumenda illo laborum placeat a
+                neque minima quos similique quam fugiat tenetur.</p>
+              <a href="#" class="btn">more details</a>
+            </div>
+          </div>
+          <div class="right-info">
+            <h1>na <span>forest</span></h1>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="./images/serbia.jpg" alt="">
+          <div class="left-info">
+            <div class="penetrate-blur">
+              <h1>Ser</h1>
+            </div>
+            <div class="content">
+              <h3>02. serbia forest tour</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores accusantium ullam laudantium,
+                recusandae dolore officiis omnis aliquam earum consequuntur consectetur assumenda illo laborum placeat a
+                neque minima quos similique quam fugiat tenetur.</p>
+              <a href="#" class="btn">more details</a>
+            </div>
+          </div>
+          <div class="right-info">
+            <h1>bia <span>forest</span></h1>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="./images/brazil.jpg" alt="">
+          <div class="left-info">
+            <div class="penetrate-blur">
+              <h1>Bra</h1>
+            </div>
+            <div class="content">
+              <h3>03. brazil forest tour</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores accusantium ullam laudantium,
+                recusandae dolore officiis omnis aliquam earum consequuntur consectetur assumenda illo laborum placeat a
+                neque minima quos similique quam fugiat tenetur.</p>
+              <a href="#" class="btn">more details</a>
+            </div>
+          </div>
+          <div class="right-info">
+            <h1>zil <span>forest</span></h1>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="./images/africa.jpg" alt="">
+          <div class="left-info">
+            <div class="penetrate-blur">
+              <h1>Afr</h1>
+            </div>
+            <div class="content">
+              <h3>04. africa forest tour</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores accusantium ullam laudantium,
+                recusandae dolore officiis omnis aliquam earum consequuntur consectetur assumenda illo laborum placeat a
+                neque minima quos similique quam fugiat tenetur.</p>
+              <a href="#" class="btn">more details</a>
+            </div>
+          </div>
+          <div class="right-info">
+            <h1>ica <span>forest</span></h1>
+          </div>
+        </div>
+        <div class="slide">
+          <img src="./images/japan.jpg" alt="">
+          <div class="left-info">
+            <div class="penetrate-blur">
+              <h1>Jap</h1>
+            </div>
+            <div class="content">
+              <h3>05. japan forest tour</h3>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores accusantium ullam laudantium,
+                recusandae dolore officiis omnis aliquam earum consequuntur consectetur assumenda illo laborum placeat a
+                neque minima quos similique quam fugiat tenetur.</p>
+              <a href="#" class="btn">more details</a>
+            </div>
+          </div>
+          <div class="right-info">
+            <h1>an <span>forest</span></h1>
+          </div>
         </div>
       </div>
+      <div class="slider-navigation">
+        <button class="prev-btn">
+          <span>&#139;</span>
+        </button>
+        <button class="next-btn">
+          <span>&#155;</span>
+        </button>
+      </div>
     </section>
 
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
