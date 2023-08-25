@@ -197,6 +197,38 @@
         color: #fff;
         font-size: 250px;
       }
+
+      .slide {
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      .slide img {
+        object-position: left;
+      }
+
+      .slide.relative {
+        position: relative;
+      }
+
+      .slide.active {
+        z-index: 1;
+      }
+      .slide.active img {
+        opacity: 1;
+      }
+      .slide.active .left-info {
+        transform: translateX(0);
+        transition: transform 500ms;
+        z-index: 1;
+      }
+      .slide.active .right-info {
+        transform: translateX(0);
+        transition: transform 500ms;
+        z-index: 1;
+      }
+
       .slider-navigation {
         position: absolute;
         bottom: 8%;
@@ -242,20 +274,20 @@
         background-color: #fff;
       }
 
-.right-info h1 {
-  position: relative;
-  color: #fff;
-  font-size: 250px;
-  /* font-weight: bold; */
-}
-.right-info h1 span {
-  font-size: 80px;
-position: absolute;
-left: 0;
-top: 100%;
-line-height: 0;
-text-transform: capitalize;
-}
+      .right-info h1 {
+        position: relative;
+        color: #fff;
+        font-size: 250px;
+        /* font-weight: bold; */
+      }
+      .right-info h1 span {
+        font-size: 80px;
+        position: absolute;
+        left: 0;
+        top: 100%;
+        line-height: 0;
+        text-transform: capitalize;
+      }
       /* ====================================================== delete ============================================== */
       /* h1 { */
         /* border: 1px solid red; */
@@ -267,132 +299,94 @@ text-transform: capitalize;
     </style>
   </head>
   <body>
-    <header>
-      <a href="#" class="logo">tours.</a>
-      <div class="sci">
-        <a href="#">
-          <i class="fa fa-facebook" aria-hidden="true"></i>
-        </a>
-        <a href="#">
-          <i class="fa fa-instagram" aria-hidden="true"></i>
-        </a>
-        <a href="#">
-          <i class="fa fa-twitter" aria-hidden="true"></i>
-        </a>
-        <a href="#">
-          <i class="fa fa-paper-plane" aria-hidden="true"></i>
-        </a>
-      </div>
-      <nav class="navbar">
-        <a href="#">destinations</a>
-        <a href="#">booking</a>
-        <a href="#">services</a>
-        <a href="#">contact</a>
-      </nav>
-    </header>
+    <script>
+      const prevBtn = document.querySelector(".prev-btn");
+      const nextBtn = document.querySelector(".next-btn");
+      const slides = document.querySelectorAll(".slide");
+      const numberOfSlides = slides.length;
+      let slideIndex = 0;
 
-    <section class="banner">
-      <div class="slider">
-        <div class="slide active relative">
-          <img src="./images/china.jpg" alt="">
-          <div class="left-info">
-            <div class="penetrate-blur">
-              <h1>Chi</h1>
-            </div>
-            <div class="content">
-              <h3>01. china forest tour</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores accusantium ullam laudantium,
-                recusandae dolore officiis omnis aliquam earum consequuntur consectetur assumenda illo laborum placeat a
-                neque minima quos similique quam fugiat tenetur.</p>
-              <a href="#" class="btn">more details</a>
-            </div>
-          </div>
-          <div class="right-info">
-            <h1>na <span>forest</span></h1>
-          </div>
-        </div>
-        <div class="slide">
-          <img src="./images/serbia.jpg" alt="">
-          <div class="left-info">
-            <div class="penetrate-blur">
-              <h1>Ser</h1>
-            </div>
-            <div class="content">
-              <h3>02. serbia forest tour</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores accusantium ullam laudantium,
-                recusandae dolore officiis omnis aliquam earum consequuntur consectetur assumenda illo laborum placeat a
-                neque minima quos similique quam fugiat tenetur.</p>
-              <a href="#" class="btn">more details</a>
-            </div>
-          </div>
-          <div class="right-info">
-            <h1>bia <span>forest</span></h1>
-          </div>
-        </div>
-        <div class="slide">
-          <img src="./images/brazil.jpg" alt="">
-          <div class="left-info">
-            <div class="penetrate-blur">
-              <h1>Bra</h1>
-            </div>
-            <div class="content">
-              <h3>03. brazil forest tour</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores accusantium ullam laudantium,
-                recusandae dolore officiis omnis aliquam earum consequuntur consectetur assumenda illo laborum placeat a
-                neque minima quos similique quam fugiat tenetur.</p>
-              <a href="#" class="btn">more details</a>
-            </div>
-          </div>
-          <div class="right-info">
-            <h1>zil <span>forest</span></h1>
-          </div>
-        </div>
-        <div class="slide">
-          <img src="./images/africa.jpg" alt="">
-          <div class="left-info">
-            <div class="penetrate-blur">
-              <h1>Afr</h1>
-            </div>
-            <div class="content">
-              <h3>04. africa forest tour</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores accusantium ullam laudantium,
-                recusandae dolore officiis omnis aliquam earum consequuntur consectetur assumenda illo laborum placeat a
-                neque minima quos similique quam fugiat tenetur.</p>
-              <a href="#" class="btn">more details</a>
-            </div>
-          </div>
-          <div class="right-info">
-            <h1>ica <span>forest</span></h1>
-          </div>
-        </div>
-        <div class="slide">
-          <img src="./images/japan.jpg" alt="">
-          <div class="left-info">
-            <div class="penetrate-blur">
-              <h1>Jap</h1>
-            </div>
-            <div class="content">
-              <h3>05. japan forest tour</h3>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis dolores accusantium ullam laudantium,
-                recusandae dolore officiis omnis aliquam earum consequuntur consectetur assumenda illo laborum placeat a
-                neque minima quos similique quam fugiat tenetur.</p>
-              <a href="#" class="btn">more details</a>
-            </div>
-          </div>
-          <div class="right-info">
-            <h1>an <span>forest</span></h1>
-          </div>
-        </div>
-      </div>
-      <div class="slider-navigation">
-        <button class="prev-btn">
-          <span>&#139;</span>
-        </button>
-        <button class="next-btn">
-          <span>&#155;</span>
-        </button>
-      </div>
-    </section>
+      prevBtn.addEventListener("click", () => {
+        // slides.forEach(slide => {
+        //   slide.classList.remove("active");
+        // })
+        slides[slideIndex].classList.remove("active");
+
+        slideIndex--;
+
+        // if (slideIndex < 0) {
+        //   slideIndex = numberOfSlides - 1;
+        // }
+        slideIndex = slideIndex + numberOfSlides;
+        slideIndex = slideIndex % numberOfSlides;
+
+        slides[slideIndex].classList.add("active");
+      })
+
+      nextBtn.addEventListener("click", () => {
+        // slides.forEach(slide => {
+        //   slide.classList.remove("active");
+        // })
+        slides[slideIndex].classList.remove("active");
+
+        slideIndex++;
+
+        // if (slideIndex >= numberOfSlides) {
+        //   slideIndex = 0;
+        // }
+        slideIndex = slideIndex % numberOfSlides;
+
+        slides[slideIndex].classList.add("active");
+      })
+    </script>
+    <script>
+            function calcTotalPrice(params) {
+        const budjet = Number(params[0]);
+        const series = Number(params[1]);
+
+        let total = 0;
+
+        const titles = {
+          thrones: "thrones",
+          lucifer: "lucifer",
+          protector: "protector",
+          totaldrama: "totaldrama",
+          area: "area",
+        }
+
+        const discounts = {
+          thrones: 0.5,
+          lucifer: 0.4,
+          protector: 0.3,
+          totaldrama: 0.2,
+          area: 0.1,
+          undefined: 0,
+        }
+
+        for (let i = 2; i < params.length; i++) {
+          let title = params[i];
+          i++;
+          const seriesPrice = Number(params[i]);
+          let discount = 0;
+
+          title = titles[title.toLowerCase()];
+          discount = discounts[title];
+          // console.log(discount);
+
+          total += (seriesPrice * (1 - discount));
+          // console.log(total);
+        }
+
+        if (budjet >= total) {
+          const diff = budjet - total;
+          console.log(`You bought all the series and left with ${diff.toFixed(2)} lv.`);
+        } else {
+          const diff = total - budjet;
+          console.log(`You need ${diff.toFixed(2)} lv. more to buy the series!`);
+        }
+
+      }
+    </script>
 
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
