@@ -119,14 +119,22 @@
 
       .slide {
         position: absolute;
+        top: 0;
         width: 100%;
         height: 100%;
+        overflow: hidden;
+      }
+      .slide.relative {
+        position: relative;
       }
       .slide img {
         position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: left;
         pointer-events: none;
         transition: opacity 300ms;
         opacity: 0;
@@ -177,6 +185,7 @@
         color: transparent;
         font-size: 250px;
         text-align: right;
+        word-break: break-all;
         background-position: left;
         background-size: cover;
         background-clip: text;
@@ -191,10 +200,10 @@
         background-image: url("./images/serbia.jpg");
       }
       .slide:nth-child(3) .penetrate-blur h1 {
-        background-image: url("./images/brazil-new.jpg");
+        background-image: url("./images/brazil.jpg");
       }
       .slide:nth-child(4) .penetrate-blur h1 {
-        background-image: url("./images/africa-new.jpg");
+        background-image: url("./images/africa.jpg");
       }
       .slide:nth-child(5) .penetrate-blur h1 {
         background-image: url("./images/japan.jpg");
@@ -304,21 +313,22 @@
         /* text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); */
       /* } */
 
-      .slide {
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-      }
-      .slide img {
-        object-position: left;
-      }
+      /* .slide { */
+        /* top: 0; */
+        /* width: 100%; */
+        /* height: 100%; */
+        /* overflow: hidden; */
+      /* } */
+      /* .slide img { */
+        /* object-position: left; */
+      /* } */
 
-      .slide.relative {
-        position: relative;
-      }
+      /* .slide.relative { */
+        /* position: relative; */
+      /* } */
 
       .slide.active {
+        min-width: fit-content;
         z-index: 1;
       }
       .slide.active img {
@@ -336,6 +346,7 @@
       }
 
       .slider-navigation {
+        pointer-events: none;
         position: absolute;
         bottom: 8%;
         right: 5%;
@@ -357,6 +368,7 @@
         /* background-color: #fff; */
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
         transition: all 500ms;
+        pointer-events: all;
         /* cursor: pointer; */
       }
       .slider-navigation span {
@@ -395,6 +407,27 @@
       /* } */
 
       /* v.2 */
+      /* .banner { */
+        /* min-width: 1000px; */
+        /* overflow-x: hidden; */
+      /* } */
+
+      /* .slide.relative {
+        position: relative;
+      } */
+
+      /* .slide {
+        position: relative;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        min-width: 700px;
+        overflow: hidden;
+      }
+      .slide img {
+        object-position: left;
+      } */
+
       /* .left-info {
         position: absolute;
         top: 0;
@@ -521,23 +554,89 @@
       fieldset {
         display: none;
       }
+
+      .navbar a {
+        position: relative;
+      }
+      .navbar a::after {
+        position: absolute;
+        left: 0;
+        bottom: -3px;
+        content: "";
+        width: 100%;
+        height: 2px;
+        background-color: #fff;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: all 500ms ease-out;
+      }
+      .navbar a:hover::after {
+        transform: scaleX(1);
+      }
+
+      header {
+        /* min-height: 100vh; */
+        /* z-index: 4; */
+      }
+      .mobile {
+        overflow: hidden;
+      }
+      .mobile header {
+        height: 100vh;
+        /* min-height: 100vh; */
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        row-gap: 20px;
+        overflow: auto;
+        z-index: 4;
+      }
+      .mobile .logo {
+        order: 1;
+      }
+      .mobile .sci {
+        order: 4;
+        /* position: absolute; */
+        display: block;
+        margin: auto;
+        text-align: center;
+      }
+      .mobile .navbar {
+        order: 3;
+        /* position: absolute; */
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
+      .mobile .menu-btn {
+        order: 2;
+      }
+      .mobile .navbar a {
+        display: block;
+        margin: 16px;
+      }
     </style>
   </head>
   <body>
     <header>
+      <!-- <div class="active"> -->
       <a href="#" class="logo">tours.</a>
       <div class="sci">
         <a href="#">
-          <i class="fa fa-facebook" aria-hidden="true"></i>
+          <!-- <i class="fa fa-facebook" aria-hidden="true"></i> -->
+          <i class="fa fa-facebook" aria-hidden="true" title="Facebook"></i>
         </a>
         <a href="#">
-          <i class="fa fa-instagram" aria-hidden="true"></i>
+          <!-- <i class="fa fa-instagram" aria-hidden="true"></i> -->
+          <i class="fa fa-instagram" aria-hidden="true" title="Instagram"></i>
         </a>
         <a href="#">
-          <i class="fa fa-twitter" aria-hidden="true"></i>
+          <!-- <i class="fa fa-twitter" aria-hidden="true"></i> -->
+          <i class="fa fa-twitter" aria-hidden="true" title="Twitter"></i>
         </a>
         <a href="#">
-          <i class="fa fa-paper-plane" aria-hidden="true"></i>
+          <!-- <i class="fa fa-paper-plane" aria-hidden="true"></i> -->
+          <i class="fa fa-paper-plane" aria-hidden="true" title="Telegram"></i>
         </a>
       </div>
       <nav class="navbar">
@@ -549,6 +648,7 @@
       <button class="menu-btn">
         <i class="fa fa-bars"></i>
       </button>
+      <!-- </div> -->
     </header>
 
     <section class="banner">
@@ -590,7 +690,7 @@
           </div>
         </div>
         <div class="slide">
-          <img src="./images/brazil-new.jpg" alt="">
+          <img src="./images/brazil.jpg" alt="">
           <div class="left-info">
             <div class="penetrate-blur">
               <h1>Bra<span>zil</span></h1>
@@ -608,7 +708,7 @@
           </div>
         </div>
         <div class="slide">
-          <img src="./images/africa-new.jpg" alt="">
+          <img src="./images/africa.jpg" alt="">
           <div class="left-info">
             <div class="penetrate-blur">
               <h1>Afr<span>ica</span></h1>
@@ -645,10 +745,10 @@
         </div>
       </div>
       <div class="slider-navigation">
-        <button class="prev-btn">
+        <button class="prev-btn" title="Previous slide">
           <span>&#139;</span>
         </button>
-        <button class="next-btn">
+        <button class="next-btn" title="Next slide">
           <span>&#155;</span>
         </button>
       </div>
@@ -692,6 +792,12 @@
         slideIndex = slideIndex % numberOfSlides;
 
         slides[slideIndex].classList.add("active");
+      })
+
+      const menuBtn = document.querySelector(".menu-btn");
+
+      menuBtn.addEventListener("click", () => {
+        document.body.classList.toggle("mobile");
       })
     </script>
 
