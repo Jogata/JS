@@ -4,175 +4,152 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <style>
-      fieldset {
-        display: none;
-      }
-
-      header {
-        font-size: 24px;
-        text-align: center;
-        text-transform: capitalize;
-      }
-
-      p {
-        font-size: 20px;
-      }
-
-      .box {
-        display: block;
-        float: left;
-        width: 20%;
-        height: 300px;
-        padding: 10px;
-        padding-left: 12px;
-        overflow: hidden;
-      }
-
-      .box img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 5px;
-        transition: all 0.5s;
-      }
-      .box:hover img {
-        transform: scale(1.2);
-      }
-
-      main {
-        display: none;
-        margin-left: 120px;
-      }
-
-      /* h2 {
-        text-transform: capitalize;
-      }
-      h2 span {
-        text-transform: uppercase;
-      } */
-    </style>
   </head>
   <body>
+    <section class="section home-section">
+      <div class="section-container">
+        <div class="nav-container">
+          <nav>
+            <div class="logo-container">
+              <a href="">
+                <img src="./images/icons/LOGO.svg" alt="">
+                <span>wine</span>
+              </a>
+            </div>
+            <ul class="menu">
+              <li class="menu-item">
+                <a href="#about">about us</a>
+              </li>
+              <li class="menu-item">
+                <a href="#awards">our awards</a>
+              </li>
+              <li class="menu-item">
+                <a href="#team">our team</a>
+              </li>
+              <li class="menu-item">
+                <a href="#gallery">gallery</a>
+              </li>
+              <li class="menu-item">
+                <a href="#info">info</a>
+              </li>
+            </ul>
+            <div class="bars-container">
+              <div class="bars">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+              </div>
+            </div>
+          </nav>
+        </div>
+        <div class="section-content-container">
+          <div class="home-container">
+            <div class="home-text">
+              <div class="section-subtitle">
+                <div class="subtitle-decoration">
+                  <div class="line"></div>
+                  <img src="./images/icons/grapes-80x70.svg" alt="">
+                  <div class="line"></div>
+                </div>
+                <span class="subtitle-text">
+                  discover grapes
+                </span>
+              </div>
+              <div class="main-title">
+                <h1>
+                  my wine original
+                </h1>
+              </div>
+              <div class="home-buttons">
+                <h3>explore now</h3>
+                <div class="arrow-container">
+                  <div class="arrow">
+                    <i class="fa fa-arrow-right"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="home-images">
+              <img class="home-image visible" src="./images/pics/WINE1.png" alt="">
+              <img class="home-image" src="./images/pics/WINE2.png" alt="">
+              <img class="home-image" src="./images/pics/WINE3.png" alt="">
+              <div class="slider-btns">
+                <i class="fa fa-arrow-left" id="prev"></i>
+                <i class="fa fa-arrow-right" id="next"></i>
+              </div>
+              <div class="circle red"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <header>
-      <h1>photo gallery</h1>
-    </header>
+    <script>
+      const mobileNav = document.querySelector(".bars");
+      const mobileNavContainer = document.querySelector(".bars-container");
+      const menu = document.querySelector(".menu");
 
-    <hr>
+      mobileNavContainer.addEventListener("click", () => {
+        document.body.classList.toggle("fixed-nav");
+        mobileNav.classList.toggle("bars-active");
+        menu.classList.toggle("menu-active");
+      })
+    </script>
+
+    <script>
+      const heroImages = document.querySelectorAll(".home-image");
+      const prevButton = document.querySelector("#prev");
+      const nextButton = document.querySelector("#next");
+      const circle = document.querySelector(".circle");
+
+      const colors = ["red", "olive", "black"];
+
+      let index = 0;
+
+      prevButton.addEventListener("click", () => {
+        heroImages[index].classList.remove("visible");
+        index--;
+        index = heroImages.length + index;
+        index = index % heroImages.length;
+        heroImages[index].classList.add("visible");
+        changeCircleColor();
+      })
+
+      nextButton.addEventListener("click", () => {
+        heroImages[index].classList.remove("visible");
+        index++;
+        index = index % heroImages.length;
+        heroImages[index].classList.add("visible");
+        changeCircleColor();
+      })
+
+      function changeCircleColor() {
+        const circle = document.querySelector(".circle");
+        circle.className = "circle " + colors[index];
+      }
+    </script>
+
+    <script>
+      // 01. Oscars ceremony
  
-    <main>
-      <div class="box">
-        <img src="./slides/348752785_505207435051669_8291971845639749599_n.jpg" alt="">
-      </div>
-      <div class="box">
-        <img src="./slides/356798994_967012961190529_4412407967034851009_n.jpg" alt="">
-      </div>
-      <div class="box">
-        <img src="./slides/356940129_1021872482095940_7163622879331713946_n.jpg" alt="">
-      </div>
-      <div class="box">
-        <img src="./slides/358794262_2029410497404504_8220717208730657446_n.jpg" alt="">
-      </div>
-      <div class="box">
-        <img src="./slides/361293658_1300947700520880_5496842987114781813_n.jpg" alt="">
-      </div>
-      <div class="box">
-        <img src="./slides/363501547_634324178451363_8761577603587065923_n.jpg" alt="">
-      </div>
-      <div class="box">
-        <img src="./slides/366450015_726469829245996_6761655007762136773_n.jpg" alt="">
-      </div> 
-      <div class="box">
-        <img src="./slides/369600102_688341202630518_728054106325483819_n.jpg" alt="">
-      </div>
-
-      <script>
-        function calc(params) {
-          const time = Number(params[0]);
-          const scenes = Number(params[1]);
-          const duration = Number(params[2]);
-
-          let total = scenes * duration + time * 0.15;
-
-          // console.log(total);
-
-          if (total > time) {
-            const diff = total - time;
-            console.log(`Time is up! To complete the movie you need ${diff.toFixed()} minutes.`);
-          } else {
-            const diff = time - total;
-            console.log(`You managed to finish the movie on time! You have ${diff.toFixed()} minutes left!`);
-          }
-        }
-
-        calc(["120", "10", "11"]);
-        calc(["60", "15", "3"]);
-
-        // 01. Movie Profit
-
-        function calcProfit(params) {
-          const movie = params[0];
-          const days = Number(params[1]);
-          const tickets = Number(params[2]);
-          const price = Number(params[3]);
-          const percent = Number(params[4]);
-
-          let total = days * tickets * price;
-          let profit = total * (100 - percent) / 100;
-
-          console.log(`The profit from the movie ${movie} is ${profit.toFixed(2)} lv.`);
-
-        }
-
-        calcProfit(["The Programmer", "20", "500", "7.50", "7"]);
-        calcProfit(["Python Basics", "40", "34785", "10.45", "14"]);
-        calcProfit(["The Jungle", "22", "20500", "9.37", "30"]);
-      </script>
-    </main>
-
-    <font align="center" size="5">
-      <!-- <h2>photo gallery - <span>html</span> only</h2> -->
-      <h1>photo</h1>
-    </font>
-
-    <table align="center">
-      <tr>
-        <td>
-          <img src="./slides/348752785_505207435051669_8291971845639749599_n.jpg" alt="" width="250" height="350">
-        </td>
-        <td>
-          <img src="./slides/356798994_967012961190529_4412407967034851009_n.jpg" alt="" width="250" height="350">
-        </td>
-        <td>
-          <img src="./slides/356940129_1021872482095940_7163622879331713946_n.jpg" alt="" width="250" height="350">
-        </td> 
-      </tr>
-      <tr>
-        <td>
-          <img src="./slides/358794262_2029410497404504_8220717208730657446_n.jpg" alt="" width="250" height="350">
-        </td>
-        <td>
-          <img src="./slides/361293658_1300947700520880_5496842987114781813_n.jpg" alt="" width="250" height="350">
-        </td>
-        <td>
-          <img src="./slides/363501547_634324178451363_8761577603587065923_n.jpg" alt="" width="250" height="350">
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <img src="./slides/366450015_726469829245996_6761655007762136773_n.jpg" alt="" width="250" height="350">
-        </td>
-        <td>
-          <img src="./slides/369600102_688341202630518_728054106325483819_n.jpg" alt="" width="250" height="350">
-        </td>
-        <td>
-          <img src="./slides/369813609_1028538561470536_1690811916422768795_n.jpg" alt="" width="250" height="350">
-        </td>
-      </tr>
-    </table>
+      function calcOscars(params) {
+        const rent = Number(params[0]);
  
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+        const statues = rent * 0.70;
+        const food = statues * 0.85;
+        const sound = food * 0.5;
+ 
+        const total = statues + food + sound + rent;
+ 
+        console.log(total.toFixed(2));
+        
+      }
+ 
+      calcOscars([3500]);
+      calcOscars([5555]);
+    </script>
+ 
+    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
     <fieldset>
