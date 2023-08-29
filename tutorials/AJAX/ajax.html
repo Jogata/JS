@@ -4,6 +4,138 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Babylonica&family=Dancing+Script&family=Fraunces:opsz@9..144&family=Herr+Von+Muellerhoff&family=Kaushan+Script&family=Permanent+Marker&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: 'Dancing Script', cursive;
+        overflow-x: hidden;
+      }
+      body.fixed-nav {
+        overflow: hidden;
+      }
+
+      img {
+        width: 3rem;
+      }
+
+      .purple {
+        color: purple;
+      }
+
+      .section {
+        padding: 2em 0;
+        background-image: url("./images/background/background.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      .section-container {
+        padding: 2rem 2rem 0 2rem;
+      }
+
+      .nav-container {
+        margin-bottom: 2rem;
+      }
+
+      nav {
+        width: 100%;
+        max-width: 120rem;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        text-transform: capitalize;
+      }
+
+      .logo-container a {
+        display: flex;
+        gap: 5px;
+      }
+      .logo-container img {
+        width: 2.2rem;
+      }
+      .logo-container span {
+        color: #000;
+        font-size: 2rem;
+        transition: all 0.4s ease-in-out;
+      }
+      .logo-container:hover span {
+        color: purple;
+      }
+
+      .menu {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        transition: all 0.4s ease-in-out;
+      }
+      .menu.menu-active {
+        order: 1;
+        margin: 3rem;
+        visibility: visible;
+        opacity: 1;
+        z-index: 2;
+      }
+
+      .menu-item {
+        white-space: nowrap;
+      }
+      .menu-item a {
+        padding: 0.4em 0.8em;
+        color: #000;
+        font-size: 1.3rem;
+        font-weight: 800;
+      }
+      .menu-item a:hover {
+        color: purple;
+      }
+
+      .bars-container {
+        display: none;
+        position: relative;
+        z-index: 2;
+      }
+
+      .bars {
+        padding: 0.5rem 0.3rem;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        cursor: pointer;
+      }
+      .bar {
+        position: relative;
+        width: 20px;
+        height: 3px;
+        background-color: #000;
+        transition: all 0.4s ease-in-out;
+      }
+
+      .bar:first-child {
+        transform: translateY(10px);
+      }
+      .bars-active .bar:first-child {
+        transform: rotate(-45deg) translateY(0);
+      }
+
+      .bars-active .bar:nth-child(2) {
+        opacity: 0;
+      }
+
+      .bar:last-child {
+        transform: translateY(-10px);
+      }
+      .bars-active .bar:last-child {
+        transform: rotate(45deg) translate(-4px, -4px);
+      }
+    </style>
   </head>
   <body>
     <section class="section home-section">
