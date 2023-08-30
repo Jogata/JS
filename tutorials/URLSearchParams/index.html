@@ -4,153 +4,150 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
-    <style> 
-      * { 
-        margin: 0; 
-        padding: 0; 
-        box-sizing: border-box; 
-      } 
- 
-      a { 
-        text-decoration: none; 
-      } 
- 
-      .banner {
-        width: 100%; 
-        min-height: 100vh; 
-        background-image: 
-        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-         url("../../../../EmeraldLakeYukon.jpg");
-         background-repeat: no-repeat;
-         background-position: center;
-         background-size: cover;
-      } 
- 
-      .navbar {
-        width: 86%;
-        margin: auto;
-        padding: 35px 0;
-        display: flex; 
-        align-items: center; 
-        justify-content: space-between;
-      } 
-
-      .logo { 
-        color: #fff; 
-        font-size: 2rem;
-        font-weight: bold;
-        text-transform: capitalize; 
-        /* text-decoration: none; */
-      } 
- 
-      .navbar li {
-        list-style: none;
-        position: relative;
-        display: inline-block; 
-        margin: 0 20px;
-      } 
- 
-      .navbar li a {
-        color: #fff; 
-        text-transform: uppercase;
-        /* text-decoration: none; */
-      } 
-      .navbar li::after {
-        position: absolute; 
-        bottom: -10px;
-        left: 0;
-        content: "";
-        width: 100%; 
-        height: 3px;
-        background-color: #009688;
-        transform: scale(0);
-        transition: all 0.5s;
-      } 
-      .navbar li:hover::after {
-        transform: scale(1);
-      } 
- 
-      .content { 
-        position: absolute; 
-        top: 50%;
-        transform: translateY(-50%);
-        width: 100%;
-        color: #fff; 
-        text-align: center;
-      } 
- 
-      .content h1 {
-        margin-top: 40px;
-        font-size: 70px;
-        text-transform: uppercase;
-      } 
- 
-      .content p {
-        max-width: 700px;
-        margin: auto;
-        line-height: 20px;
-        font-weight: 100;
-      } 
- 
-      .content button {
-        position: relative; 
-        width: 200px;
-        margin: 20px 10px;
-        padding: 15px 0;
-        color: #fff; 
-        font-size: 18px;
-        font-weight: bold;
-        font-family: inherit;
-        text-align: center;
-        text-transform: uppercase;
-        border: 2px solid #009688;
-        border-radius: 25px;
-        background-color: transparent; 
-        overflow: hidden; 
-        cursor: pointer;
-      } 
-      .content button::after {
-        position: absolute; 
-        top: 0; 
-        left: -2%;
-        content: "";
-        width: 104%;
-        height: 100%; 
-        border-radius: inherit;
-        background-color: #009688;
-        transform: translateX(-100%);
-        transition: all 0.5s;
-        z-index: -1;
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
-      .content button:hover::after {
-        transform: translateX(0);
-      } 
-    </style> 
+
+      body {
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        background-color: #fff;
+      }
+
+      .main {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        background-image: linear-gradient(
+          rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+          url("../AJAX/images/pics/people1_1920.jpg");
+        background-position: center;
+        background-size: cover;
+      }
+
+      .bars {
+        position: relative;
+        width: 30px;
+        height: 30px;
+        top: 5%;
+        left: 5%;
+        padding: 5px 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        border: 1px solid #fff;
+        border-radius: 5px;
+        background-color: transparent;
+        cursor: pointer;
+      }
+
+      .bar {
+        position: relative;
+        width: 100%;
+        height: 2px;
+        margin: 2px 0;
+        background-color: #fff;
+      }
+
+      .main nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 250px;
+        height: 100%;
+        margin-left: -100%;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        transition: all 0.3s linear;
+      }
+
+      .main ul {
+        position: relative;
+        width: 100%;
+        margin: auto;
+        /* height: 100%; */
+      }
+
+      .main li {
+        list-style-type: none;
+        display: block;
+      }
+
+      .main a {
+        position: relative;
+        display: block;
+        text-decoration: none;
+        padding: 10px 0;
+        color: #222;
+        font-size: 1.5rem;
+        font-weight: 750;
+        text-align: center;
+        text-transform: capitalize;
+        transition: all 0.2s linear;
+      }
+      .main a:hover {
+        color: #fff;
+        background-color: #000;
+      }
+
+      .main nav > a {
+        position: relative;
+        /* top: -30%; */
+        display: block;
+        width: 100%;
+        padding: 10px 0;
+        color: #222;
+        font-size: 2.2rem;
+        font-weight: 800;
+        text-align: center;
+        text-transform: capitalize;
+        text-decoration: none;
+        background-color: #fff;
+        transition: all 0.2s linear;
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
- 
-    <div class="banner">
-      <div class="navbar">
-        <a href="#" class="logo">logo</a>
+    <div class="main">
+      <div class="bars">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
+      <nav>
+        <a href="#" id="close">close</a>
         <ul>
           <li><a href="#">home</a></li>
-          <li><a href="#">bedrooms</a></li>
-          <li><a href="#">dining</a></li>
-          <li><a href="#">kitchen</a></li>
-          <li><a href="#">backyard</a></li>
+          <li><a href="#">about</a></li>
+          <li><a href="#">blig</a></li>
+          <li><a href="#">portfolio</a></li>
+          <li><a href="#">contact</a></li>
         </ul>
-      </div>
-      <div class="content">
-        <h1>design your house</h1>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fuga corrupti, labore, earum saepe facere reprehenderit eveniet molestiae qui error quas nihil aliquam itaque eaque.</p>
-        <div>
-          <button type="button">watch more</button>
-          <button type="button">subscribe</button>
-        </div>
-      </div>
+      </nav>
+
+      <script>
+        const closeBtn = document.getElementById("close");
+        const navogation = document.querySelector("nav");
+        const bars = document.querySelector(".bars");
+
+        closeBtn.addEventListener("click", function() {
+          navogation.style.marginLeft = "-100%";
+        })
+
+        bars.addEventListener("click", function() {
+          navogation.style.marginLeft = "0%";
+        })
+      </script>
     </div>
  
-    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
