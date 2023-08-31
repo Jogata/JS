@@ -617,7 +617,7 @@
         transition-delay: 0.5s;
         opacity: 1;
       }
-
+      
       .card {
         position: relative;
         display: flex;
@@ -742,6 +742,143 @@
         max-width: 30rem;
       }
 
+      .team-section {
+        max-width: 70rem;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 3rem;
+      }
+
+      .person img {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        z-index: 1;
+      }
+
+      .info {
+        margin: 2rem auto;
+      }
+
+      .info span {
+        display: block;
+        text-align: center;
+        text-transform: capitalize;
+      }
+      .name {
+        color: #eb2e4e;
+        font-size: 3rem;
+      }
+      .profession {
+        font-size: 2rem;
+      }
+      .person .sci {
+        justify-content: center;
+        margin: 2rem;
+      }
+
+      .image-box {
+        position: relative;
+        width: min(90vw, 20rem);
+        height: min(90vw, 20rem);
+        margin: auto;
+        border-radius: 50%;
+      }
+      .image-box::after {
+        position: absolute;
+        inset: 0;
+        content: "";
+        border-radius: 50%;
+        border: 6px solid #ddd;
+        box-shadow: 
+        3px 3px 6px #0006, 
+        -3px -3px 3px #fff, 
+        inset 6px 6px 3px #0006, 
+        inset -6px -6px 16px #fff8;
+        z-index: 2;
+      }
+
+      .person .sci li a:hover {
+        background-color: #eb2e4e;
+      }
+
+      #gallery {
+        max-width: 80rem;
+        margin: auto;
+        padding: 0.5rem;
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+        grid-auto-flow: dense;
+        /* ============================ */
+        /* columns: 3 18rem; */
+      }
+
+      .gallery-image {
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+      }
+      .gallery-image::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 1;
+      }
+      .portrait {
+        grid-row: span 2;
+      }
+
+      .gallery-image h2 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 2.4rem;
+        color: #fff;
+        font-family: Georgia, serif;
+        text-transform: capitalize;
+        transition: opacity 200ms ease-out;
+        opacity: 0;
+        z-index: 2;
+      }
+      .gallery-image h2::before, 
+      .gallery-image h2::after {
+        position: absolute;
+        left: -10%;
+        content: "";
+        width: 120%;
+        height: 2px;
+        background-color: #fff;
+        transform: scaleX(0);
+        transition: all 300ms ease-out 200ms;
+      }
+      .gallery-image h2::before {
+        top: 0;
+        transform-origin: left;
+      }
+      .gallery-image h2::after {
+        bottom: 0;
+        transform-origin: right;
+      }
+
+      .gallery-image:hover h2 {
+        opacity: 1;
+      }
+      .gallery-image:hover h2::before, 
+      .gallery-image:hover h2::after {
+        transform: scaleX(1);
+      }
     </style>
   </head>
   <body>
