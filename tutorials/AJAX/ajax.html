@@ -913,6 +913,16 @@
         font-size: 1.4rem;
       }
 
+      footer ul {
+        margin: auto;
+        columns: 3 10rem;
+      }
+
+      footer p {
+        padding-top: 2rem;
+        text-align: center;
+      }
+
       .preview-box {
         position: fixed;
         top: 0;
@@ -1007,6 +1017,10 @@
       .close i:hover {
         color: #eb2e4e;
         transform: scale(1.1);
+      }
+
+      body.preview-mode {
+        overflow: hidden;
       }
     </style>
   </head>
@@ -1376,6 +1390,127 @@
       //     imageBoxes[i].className = "icon-img-box active";
       //   })
       // }
+    </script>
+
+    <section id="team">
+      <div class="section-subtitle">
+        <div class="subtitle-decoration">
+          <div class="line"></div>
+          <img src="./images/icons/grapes-80x70.svg" alt="">
+          <div class="line"></div>
+        </div>
+        <span class="subtitle-text">
+          people behind creativeness
+        </span>
+      </div>
+      <div class="team-section">
+        <div class="person">
+          <div class="image-box">
+            <img src="./images/pics/people1_1920.jpg" alt="">
+          </div>
+          <div class="info">
+            <span class="name">name</span>
+            <span class="profession">profession</span>
+          </div>
+          <ul class="sci">
+            <li><a href="#f">
+                <i class="fa fa-facebook"></i>
+              </a></li>
+            <li><a href="#t">
+                <i class="fa fa-twitter"></i>
+              </a></li>
+            <li><a href="#i">
+                <i class="fa fa-instagram"></i>
+              </a></li>
+          </ul>
+        </div>
+        <div class="person">
+          <div class="image-box">
+            <img src="./images/pics/people2_1920.jpg" alt="">
+          </div>
+          <div class="info">
+            <span class="name">name</span>
+            <span class="profession">profession</span>
+          </div>
+          <ul class="sci">
+            <li><a href="#f">
+                <i class="fa fa-facebook"></i>
+              </a></li>
+            <li><a href="#t">
+                <i class="fa fa-twitter"></i>
+              </a></li>
+            <li><a href="#i">
+                <i class="fa fa-instagram"></i>
+              </a></li>
+          </ul>
+        </div>
+        <div class="person">
+          <div class="image-box">
+            <img src="./images/pics/people3_1920.jpg" alt="">
+          </div>
+          <div class="info">
+            <span class="name">name</span>
+            <span class="profession">profession</span>
+          </div>
+          <ul class="sci">
+            <li><a href="#f">
+                <i class="fa fa-facebook"></i>
+              </a></li>
+            <li><a href="#t">
+                <i class="fa fa-twitter"></i>
+              </a></li>
+            <li><a href="#i">
+                <i class="fa fa-instagram"></i>
+              </a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const images = document.querySelectorAll(".gallery-image h2");
+      const previewBox = document.querySelector(".preview-box");
+      const closePreviewButton = document.querySelector(".close");
+      const previewImage = document.querySelector("#preview-box-image");
+      
+      const current = document.querySelector(".current");
+
+      const totalImages = document.querySelector(".total");
+      totalImages.textContent = images.length;
+
+      images.forEach((image, index) => {
+        image.addEventListener("click", () => {
+          document.body.classList.add("preview-mode");
+          previewBox.classList.add("visible");
+          current.textContent = index + 1;
+          previewImage.src = image.nextElementSibling.src;
+        })
+      })
+      
+      closePreviewButton.addEventListener("click", () => {
+        document.body.classList.remove("preview-mode");
+        previewBox.classList.remove("visible");
+      })
+
+      const prevImageButton = document.querySelector("#prev-image");
+      const nextImageButton = document.querySelector("#next-image");
+
+      prevImageButton.addEventListener("click", () => {
+        let index = Number(current.textContent) - 1;
+        index--;
+        index = images.length + index;
+        index = index % images.length;
+        previewImage.src = images[index].nextElementSibling.src;
+        current.textContent = index + 1;
+      })
+
+      nextImageButton.addEventListener("click", () => {
+        let index = Number(current.textContent) - 1;
+        index++;
+        index = index % images.length;
+        previewImage.src = images[index].nextElementSibling.src;
+        current.textContent = index + 1;
+      })
     </script>
 
     <section id="gallery">
