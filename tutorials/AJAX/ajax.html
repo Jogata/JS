@@ -69,7 +69,8 @@
         margin-bottom: 2rem;
       }
 
-      nav {
+      section nav {
+      /* nav { */
         width: 100%;
         max-width: 120rem;
         margin: auto;
@@ -1022,9 +1023,110 @@
       body.preview-mode {
         overflow: hidden;
       }
+
+      body {
+        background-color: #ff8c00;
+      }
+      body > nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 80px;
+        height: 100%;
+        padding: 10px;
+        font-family: Georgia, Times, serif;
+        text-align: center;
+        line-height: 50px;
+        background-color: rgba(0, 0, 0, 0.6);
+        box-shadow: 0 0 3px 2px #fff;
+        transition: width 0.5s ease-out;
+        overflow: scroll;
+        z-index: 99;
+      }
+
+      ol li {
+        padding: 5px;
+        list-style: none;
+        border-radius: 50px;
+      }
+      ol li a {
+        padding-left: 15px;
+        text-decoration: none;
+        color: #fff;
+        text-transform: capitalize;
+        display: none;
+      }
+      ol li i {
+        color: #fff;
+        font-size: 20px;
+      }
+      #first {
+        margin-bottom: 70px;
+        display: block;
+        font-size: 25px;
+      }
+      #last {
+        margin-top: 100px;
+      }
+      ol li:hover {
+        background-color: #fff;
+        cursor: pointer;
+      }
+      ol li:hover a {
+        color: #000;
+      }
+      ol li:hover i {
+        color: #000;
+      }
+      body > nav:hover {
+        width: 210px;
+        text-align: left;
+      }
+      body > nav:hover ol li a {
+        display: inline;
+      }
     </style>
   </head>
   <body>
+    <nav>
+      <ol>
+        <li id="first">
+          <i class="fa fa-user-circle-o"></i>
+          <a href="#">sign in</a>
+        </li>
+        <li>
+          <i class="fa fa-search"></i>
+          <a href="#">search</a>
+        </li>
+        <li>
+          <i class="fa fa-home"></i>
+          <a href="#">home</a>
+        </li>
+        <li>
+          <i class="fa fa-music"></i>
+          <a href="#">music</a>
+        </li>
+        <li>
+          <i class="fa fa-gamepad"></i>
+          <a href="#">gaming</a>
+        </li>
+        <li>
+          <i class="fa fa-envelope-o"></i>
+          <a href="#">subscription</a>
+        </li>
+        <li>
+          <i class="fa fa-university"></i>
+          <a href="#">library</a></li>
+        <li>
+          <i class="fa fa-bars"></i>
+          <a href="#">more</a></li>
+        <li id="last">
+          <i class="fa fa-cogs"></i>
+          <a href="#">settings</a>
+        </li>
+      </ol>
+    </nav>
+
     <section class="section home-section">
       <div class="section-container">
         <div class="nav-container">
@@ -1467,52 +1569,6 @@
       </div>
     </section>
 
-    <script>
-      const images = document.querySelectorAll(".gallery-image h2");
-      const previewBox = document.querySelector(".preview-box");
-      const closePreviewButton = document.querySelector(".close");
-      const previewImage = document.querySelector("#preview-box-image");
-      
-      const current = document.querySelector(".current");
-
-      const totalImages = document.querySelector(".total");
-      totalImages.textContent = images.length;
-
-      images.forEach((image, index) => {
-        image.addEventListener("click", () => {
-          document.body.classList.add("preview-mode");
-          previewBox.classList.add("visible");
-          current.textContent = index + 1;
-          previewImage.src = image.nextElementSibling.src;
-        })
-      })
-      
-      closePreviewButton.addEventListener("click", () => {
-        document.body.classList.remove("preview-mode");
-        previewBox.classList.remove("visible");
-      })
-
-      const prevImageButton = document.querySelector("#prev-image");
-      const nextImageButton = document.querySelector("#next-image");
-
-      prevImageButton.addEventListener("click", () => {
-        let index = Number(current.textContent) - 1;
-        index--;
-        index = images.length + index;
-        index = index % images.length;
-        previewImage.src = images[index].nextElementSibling.src;
-        current.textContent = index + 1;
-      })
-
-      nextImageButton.addEventListener("click", () => {
-        let index = Number(current.textContent) - 1;
-        index++;
-        index = index % images.length;
-        previewImage.src = images[index].nextElementSibling.src;
-        current.textContent = index + 1;
-      })
-    </script>
-
     <section id="gallery">
       <div class="gallery-image">
         <h2>view</h2>
@@ -1559,6 +1615,91 @@
         </div>
       </div>
     </section>
+
+    <script>
+      const images = document.querySelectorAll(".gallery-image h2");
+      const previewBox = document.querySelector(".preview-box");
+      const closePreviewButton = document.querySelector(".close");
+      const previewImage = document.querySelector("#preview-box-image");
+      
+      const current = document.querySelector(".current");
+
+      const totalImages = document.querySelector(".total");
+      totalImages.textContent = images.length;
+
+      images.forEach((image, index) => {
+        image.addEventListener("click", () => {
+          document.body.classList.add("preview-mode");
+          previewBox.classList.add("visible");
+          current.textContent = index + 1;
+          previewImage.src = image.nextElementSibling.src;
+        })
+      })
+      
+      closePreviewButton.addEventListener("click", () => {
+        document.body.classList.remove("preview-mode");
+        previewBox.classList.remove("visible");
+      })
+
+      const prevImageButton = document.querySelector("#prev-image");
+      const nextImageButton = document.querySelector("#next-image");
+
+      prevImageButton.addEventListener("click", () => {
+        let index = Number(current.textContent) - 1;
+        index--;
+        index = images.length + index;
+        index = index % images.length;
+        previewImage.src = images[index].nextElementSibling.src;
+        current.textContent = index + 1;
+      })
+
+      nextImageButton.addEventListener("click", () => {
+        let index = Number(current.textContent) - 1;
+        index++;
+        index = index % images.length;
+        previewImage.src = images[index].nextElementSibling.src;
+        current.textContent = index + 1;
+      })
+    </script>
+
+    <footer id="info">
+      <div class="footer-container">
+        <address>
+          <span>location x 32</span>
+          <span>(123) 456 789</span>
+        </address>
+        <ul>
+          <li class="menu-item"><a href="#">our history</a></li>
+          <li class="menu-item"><a href="#about">about us</a></li>
+          <li class="menu-item"><a href="#">our blogs</a></li>
+          <li class="menu-item"><a href="#gallery">our gallery</a></li>
+          <li class="menu-item"><a href="#team">about team</a></li>
+          <li class="menu-item"><a href="#">faq</a></li>
+        </ul>
+      </div>
+      <p>Since 2023 &#174; All Right Reserved</p>
+    </footer>
+
+    <script>
+      function log() {
+        "use strict"
+        console.log(this);
+      }
+
+      class Person {
+        constructor(name) {
+          this.name = name;
+        }
+        logThis() {
+          console.log(this);
+          log();
+        }
+      }
+
+      let person1 = new Person("sasho");
+
+      person1.logThis();
+    </script>
  
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
