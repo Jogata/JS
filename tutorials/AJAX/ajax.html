@@ -4,263 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        font-family: Georgia, serif;
-        background-color: #222;
-      }
-
-      .gallery {
-        position: relative;
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        gap: 20px;
-        width: 800px;
-        height: 500px;
-        margin: 100px auto;
-        /* background-color: #fff; */
-        transition: all 250ms;
-      }
-
-      .box {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-      }
-      .box:nth-child(1) {
-        background-image: url("./images/cris-pratt.jpg");
-      }
-      .box:nth-child(2) {
-        background-image: url("./images/spider-man.jpg");
-      }
-      .box:nth-child(3) {
-        background-image: url("./images/iron-man.jpg");
-      }
-      .box:nth-child(4) {
-        background-image: url("./images/scarlett-johansson.jpg");
-      }
-      .box:nth-child(5) {
-        background-image: url("./images/cris-evans.jpg");
-      }
-      .box:nth-child(even) {
-        transform: translateY(15px);
-      }
-      .box:nth-child(odd) {
-        transform: translateY(-15px);
-      }
-      .gallery:hover .box {
-        filter: grayscale(1);
-      }
-      .gallery .box:hover {
-        filter: grayscale(0) brightness(1.25);
-      }
-      .gallery:has(.box:nth-child(1):hover) {
-        grid-template-columns: 2fr repeat(4, 0.5fr);
-      }
-      .gallery:has(.box:nth-child(2):hover) {
-        grid-template-columns: 0.5fr 2fr 0.5fr 0.5fr 0.5fr;
-      }
-      .gallery:has(.box:nth-child(3):hover) {
-        grid-template-columns: 0.5fr 0.5fr 2fr 0.5fr 0.5fr;
-      }
-      .gallery:has(.box:nth-child(4):hover) {
-        grid-template-columns: 0.5fr 0.5fr 0.5fr 2fr 0.5fr;
-      }
-      .gallery:has(.box:nth-child(5):hover) {
-        grid-template-columns: repeat(4, 0.5fr) 2fr;
-      }
-      .box::before {
-        position: absolute;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-image: 
-          linear-gradient(#222, 
-          transparent, transparent, 
-          transparent, #222);
-      }
-
-      .box h2 {
-        position: absolute;
-        bottom: 0;
-        margin-top: auto;
-        padding: 20px 10px;
-        /* margin-bottom: 20px; */
-        color: #fff;
-        text-align: center;
-        text-transform: capitalize;
-        transform: translateY(220%);
-        transition: all 500ms;
-        opacity: 0;
-        z-index: 2;
-        color: #222;
-        /* -webkit-text-stroke: 3px #222; */
-        background-color: #fff;
-        /* width: 100%; */
-        white-space: nowrap;
-        letter-spacing: 1px;
-      }
-      .box:hover h2 {
-        transform: translateY(120%);
-        opacity: 1;
-      }
-      .box {
-        overflow: visible;
-      }
-    </style>
   </head>
   <body>
-
-    <div class="gallery">
-      <div class="box">
-        <h2>star lord</h2>
-      </div>
-      <div class="box">
-        <h2>spider-man</h2>
-      </div>
-      <div class="box">
-        <h2>iron man</h2>
-      </div>
-      <div class="box">
-        <h2>black widow</h2>
-      </div>
-      <div class="box">
-        <h2>captain america</h2>
-      </div>
-    </div>
-
-    <nav id="desktop-nav">
-      <div class="logo">John Doe</div>
-      <div>
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-    </nav>
-
-    <nav id="hamburger-nav">
-      <div class="logo">John Doe</div>
-      <div class="hamburger-menu">
-        <div class="hamburger-icon" onclick="toggleMenu()">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div class="menu-links">
-          <li><a href="#about" onclick="toggleMenu()">About</a></li>
-          <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
-          <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
-          <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
-        </div> 
-      </div> 
-    </nav>
-
-    <section id="profile">
-      <div class="section__pic-container">
-        <img src="./assets/profile-pic.png" alt="John Doe profile picture" />
-      </div>
-      <div class="section__text">
-        <p class="section__text__p1">Hello, I'm</p>
-        <h1 class="title">John Doe</h1>
-        <p class="section__text__p2">Frontend Developer</p>
-        <div class="btn-container">
-          <button
-            class="btn btn-color-2"
-            onclick="window.open('./assets/resume-example.pdf')"
-          >
-            Download CV
-          </button>
-          <button class="btn btn-color-1" onclick="location.href='./#contact'">
-            Contact Info
-          </button>
-        </div>
-        <div id="socials-container">
-          <img
-            src="./assets/linkedin.png"
-            alt="My LinkedIn profile"
-            class="icon"
-            onclick="location.href='https://linkedin.com/'"
-          />
-          <img
-            src="./assets/github.png"
-            alt="My Github profile"
-            class="icon"
-            onclick="location.href='https://github.com/'"
-          />
-        </div> 
-      </div> 
-    </section> 
-
-    <section id="about">
-      <p class="section__text__p1">Get To Know More</p>
-      <h1 class="title">About Me</h1>
-      <div class="section-container">
-        <div class="section__pic-container">
-          <img
-            src="./assets/about-pic.png"
-            alt="Profile picture"
-            class="about-pic"
-          />
-        </div>
-        <div class="about-details-container">
-          <div class="about-containers">
-            <div class="details-container">
-              <img
-                src="./assets/experience.png"
-                alt="Experience icon"
-                class="icon"
-              />
-              <h3>Experience</h3>
-              <p>2+ years <br />Frontend Development</p>
-            </div>
-            <div class="details-container">
-              <img
-                src="./assets/education.png"
-                alt="Education icon"
-                class="icon"
-              />
-              <h3>Education</h3>
-              <p>B.Sc. Bachelors Degree<br />M.Sc. Masters Degree</p>
-            </div>
-          </div>
-          <div class="text-container">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quis
-              reprehenderit et laborum, rem, dolore eum quod voluptate
-              exercitationem nobis, nihil esse debitis maxime facere minus sint
-              delectus velit in eos quo officiis explicabo deleniti dignissimos.
-              Eligendi illum libero dolorum cum laboriosam corrupti quidem,
-              reiciendis ea magnam? Nulla, impedit fuga!
-            </p>
-          </div>
-        </div>
-      </div> 
-      <img
-        src="./assets/arrow.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#experience'"
-      />
-    </section>
-
     <section id="experience">
       <p class="section__text__p1">Explore My</p>
       <h1 class="title">Experience</h1>
@@ -395,138 +140,138 @@
         onclick="location.href='./#projects'"
       />
     </section>
-
-    <section id="projects">
-      <p class="section__text__p1">Browse My Recent</p>
-      <h1 class="title">Projects</h1>
-      <div class="experience-details-container">
-        <div class="about-containers">
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img
-                src="./assets/project-1.png"
-                alt="Project 1"
-                class="project-img"
-              />
-            </div>
-            <h2 class="experience-sub-title project-title">Project One</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/'"
-              >
-                Github
-              </button>
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/'"
-              >
-                Live Demo
-              </button>
-            </div>
-          </div>
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img
-                src="./assets/project-2.png"
-                alt="Project 2"
-                class="project-img"
-              />
-            </div>
-            <h2 class="experience-sub-title project-title">Project Two</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/'"
-              >
-                Github
-              </button>
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/'"
-              >
-                Live Demo
-              </button>
-            </div>
-          </div>
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img
-                src="./assets/project-3.png"
-                alt="Project 3"
-                class="project-img"
-              />
-            </div>
-            <h2 class="experience-sub-title project-title">Project Three</h2>
-            <div class="btn-container">
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/'"
-              >
-                Github
-              </button>
-              <button
-                class="btn btn-color-2 project-btn"
-                onclick="location.href='https://github.com/'"
-              >
-                Live Demo
-              </button>
-            </div>
-          </div>
+    
+<section id="projects">
+  <p class="section__text__p1">Browse My Recent</p>
+  <h1 class="title">Projects</h1>
+  <div class="experience-details-container">
+    <div class="about-containers">
+      <div class="details-container color-container">
+        <div class="article-container">
+          <img
+            src="./assets/project-1.png"
+            alt="Project 1"
+            class="project-img"
+          />
+        </div>
+        <h2 class="experience-sub-title project-title">Project One</h2>
+        <div class="btn-container">
+          <button
+            class="btn btn-color-2 project-btn"
+            onclick="location.href='https://github.com/'"
+          >
+            Github
+          </button>
+          <button
+            class="btn btn-color-2 project-btn"
+            onclick="location.href='https://github.com/'"
+          >
+            Live Demo
+          </button>
         </div>
       </div>
+      <div class="details-container color-container">
+        <div class="article-container">
+          <img
+            src="./assets/project-2.png"
+            alt="Project 2"
+            class="project-img"
+          />
+        </div>
+        <h2 class="experience-sub-title project-title">Project Two</h2>
+        <div class="btn-container">
+          <button
+            class="btn btn-color-2 project-btn"
+            onclick="location.href='https://github.com/'"
+          >
+            Github
+          </button>
+          <button
+            class="btn btn-color-2 project-btn"
+            onclick="location.href='https://github.com/'"
+          >
+            Live Demo
+          </button>
+        </div>
+      </div>
+      <div class="details-container color-container">
+        <div class="article-container">
+          <img
+            src="./assets/project-3.png"
+            alt="Project 3"
+            class="project-img"
+          />
+        </div>
+        <h2 class="experience-sub-title project-title">Project Three</h2>
+        <div class="btn-container">
+          <button
+            class="btn btn-color-2 project-btn"
+            onclick="location.href='https://github.com/'"
+          >
+            Github
+          </button>
+          <button
+            class="btn btn-color-2 project-btn"
+            onclick="location.href='https://github.com/'"
+          >
+            Live Demo
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <img
+    src="./assets/arrow.png"
+    alt="Arrow icon"
+    class="icon arrow"
+    onclick="location.href='./#contact'"
+  />
+</section>
+
+<section id="contact">
+  <p class="section__text__p1">Get in Touch</p>
+  <h1 class="title">Contact Me</h1>
+  <div class="contact-info-upper-container">
+    <div class="contact-info-container">
       <img
-        src="./assets/arrow.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#contact'"
+        src="./assets/email.png"
+        alt="Email icon"
+        class="icon contact-icon email-icon"
       />
-    </section>
+      <p><a href="mailto:examplemail@gmail.com">Example@gmail.com</a></p>
+    </div>
+    <div class="contact-info-container">
+      <img
+        src="./assets/linkedin.png"
+        alt="LinkedIn icon"
+        class="icon contact-icon"
+      />
+      <p><a href="https://www.linkedin.com">LinkedIn</a></p>
+    </div>
+  </div>
+</section>
 
-    <section id="contact">
-      <p class="section__text__p1">Get in Touch</p>
-      <h1 class="title">Contact Me</h1>
-      <div class="contact-info-upper-container">
-        <div class="contact-info-container">
-          <img
-            src="./assets/email.png"
-            alt="Email icon"
-            class="icon contact-icon email-icon"
-          />
-          <p><a href="mailto:examplemail@gmail.com">Example@gmail.com</a></p>
-        </div>
-        <div class="contact-info-container">
-          <img
-            src="./assets/linkedin.png"
-            alt="LinkedIn icon"
-            class="icon contact-icon"
-          />
-          <p><a href="https://www.linkedin.com">LinkedIn</a></p>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <nav>
-        <div class="nav-links-container">
-          <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-      </nav>
-      <p>Copyright &#169; 2023 John Doe. All Rights Reserved.</p>
-    </footer>
-
-    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+<footer>
+  <nav>
+    <div class="nav-links-container">
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+  <p>Copyright &#169; 2023 John Doe. All Rights Reserved.</p>
+</footer>
+    
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <!-- ================= Get data from local JSON file ================= -->
-    <fieldset>
-      <legend>Get all users from local JSON file</legend>
-      <button id="local">Send Request</button>
-    </fieldset>
+    <!-- <fieldset> -->
+      <!-- <legend>Get all users from local JSON file</legend> -->
+      <!-- <button id="local">Send Request</button> -->
+    <!-- </fieldset> -->
 
     <script>
       const btnLocalJSON = document.querySelector("#local");
@@ -553,11 +298,11 @@
     </script>
 
     <!-- ================= Get data from GitHub API ================= -->
-    <fieldset>
-      <legend>Get users from GitHub API</legend>
-      <button id="github">Send Request</button>
-      <span id="userGithub"></span>
-    </fieldset>
+    <!-- <fieldset> -->
+      <!-- <legend>Get users from GitHub API</legend> -->
+      <!-- <button id="github">Send Request</button> -->
+      <!-- <span id="userGithub"></span> -->
+    <!-- </fieldset> -->
 
     <script>
       const btnGithub = document.querySelector("#github");
