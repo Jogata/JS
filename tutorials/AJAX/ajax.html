@@ -60,7 +60,13 @@
       }
       
       p {
-        color: rgb(85, 85, 85);
+        color: var(--secondary-color-2);
+      }
+
+      button {
+        border: 1px solid transparent;
+        background-color: transparent;
+        cursor: pointer;
       }
       
       /* TRANSITION */
@@ -75,12 +81,19 @@
       nav,
       .nav-links {
         display: flex;
+        align-items: center;
       }
       
       nav {
         height: 17vh;
-        align-items: center;
+        /* align-items: center; */
         justify-content: space-around;
+      }
+      nav li:last-child {
+        width: max-content;
+        margin: auto;
+        padding: 10px;
+        display: flex;
       }
       
       .nav-links {
@@ -90,24 +103,36 @@
       }
       
       a {
-        color: black;
+        color: var(--secondary-color);
         text-decoration: none;
-        text-decoration-color: white;
+        text-decoration-color: var(--primary-color);
       }
       
       a:hover {
-        color: grey;
+        /* color: grey; */
         text-decoration: underline;
         text-underline-offset: 1rem;
-        text-decoration-color: rgb(181, 181, 181);
+        text-decoration-color: var(--secondary-color);
+      }
+      nav a:hover {
+        color: var(--secondary-color);
+        text-decoration-color: var(--secondary-color);
       }
       
       .logo {
+        color: var(--secondary-color);
         font-size: 2rem;
       }
       
       .logo:hover {
         cursor: default;
+      }
+
+      .theme-toggle {
+        font-size: 0;
+      }
+      .theme-toggle i {
+        font-size: 20px;
       }
       
       /* HAMBURGER MENU */
@@ -133,7 +158,7 @@
       .hamburger-icon span {
         width: 100%;
         height: 2px;
-        background-color: black;
+        background-color: var(--secondary-color);
         transition: all 0.3 ease-in-out;
       }
       
@@ -141,7 +166,7 @@
         position: absolute;
         top: 100%;
         right: 0;
-        background-color: white;
+        background-color: var(--primary-color);
         width: fit-content;
         max-height: 0;
         overflow: hidden;
@@ -153,7 +178,7 @@
         padding: 10px;
         text-align: center;
         font-size: 1.5rem;
-        color: black;
+        color: var(--secondary-color);
         text-decoration: none;
         transition: all 0.3 ease-in-out;
       }
@@ -202,6 +227,7 @@
       
       .section-container {
         display: flex;
+        justify-content: center;
       }
       
       /* PROFILE SECTION */
@@ -239,6 +265,7 @@
       }
       
       .title {
+        color: var(--secondary-color);
         font-size: 3rem;
         text-align: center;
       }
@@ -253,8 +280,8 @@
       /* ICONS */
       
       .icon {
-        cursor: pointer;
         height: 2rem;
+        cursor: pointer;
       }
       
       /* BUTTONS */
@@ -266,39 +293,42 @@
       }
       
       .btn {
-        font-weight: 600;
-        transition: all 300ms ease;
-        padding: 1rem;
         width: 8rem;
+        padding: 1rem;
+        font-weight: 600;
+        font-family: inherit;
         border-radius: 2rem;
+        transition: all 300ms ease;
       }
       
       .btn-color-1,
       .btn-color-2 {
-        border: rgb(53, 53, 53) 0.1rem solid;
+        color: var(--secondary-color-2);
+        border: var(--button-border);
       }
       
-      .btn-color-1:hover,
-      .btn-color-2:hover {
-        cursor: pointer;
-      }
+      /* .btn-color-1:hover, */
+      /* .btn-color-2:hover { */
+        /* cursor: pointer; */
+      /* } */
       
       .btn-color-1,
       .btn-color-2:hover {
-        background: rgb(53, 53, 53);
-        color: white;
+        color: var(--primary-color);
+        background: var(--button-background);
       }
       
       .btn-color-1:hover {
-        background: rgb(0, 0, 0);
+        background: var(--secondary-color);
       }
 
       .btn-color-2 {
-        background: none;
+        background: transparent;
       }
       
       .btn-color-2:hover {
-        border: rgb(255, 255, 255) 0.1rem solid;
+        border: var(--button-border);
+        background: var(--secondary-color);
       }
       
       .btn-container {
@@ -318,6 +348,7 @@
       }
       
       .about-details-container {
+        max-width: 50rem;
         justify-content: center;
         flex-direction: column;
       }
@@ -338,13 +369,13 @@
       }
       
       .details-container {
-        padding: 1.5rem;
         flex: 1;
-        background: white;
-        border-radius: 2rem;
-        border: rgb(53, 53, 53) 0.1rem solid;
-        border-color: rgb(163, 163, 163);
+        padding: 1.5rem;
         text-align: center;
+        border-radius: 2rem;
+        border: var(--button-border);
+        border-color: var(--container-border);
+        background: var(--primary-color-2);
       }
       
       .section-container {
@@ -353,8 +384,9 @@
       }
       
       .section__pic-container {
-        height: 400px;
+        flex-shrink: 0;
         width: 400px;
+        height: 400px;
         margin: auto 0;
         border-radius: 50%;
         overflow: hidden;
@@ -373,10 +405,10 @@
       }
       
       .experience-sub-title {
-        color: rgb(85, 85, 85);
-        font-weight: 600;
-        font-size: 1.75rem;
         margin-bottom: 2rem;
+        color: var(--secondary-color);
+        font-size: 1.75rem;
+        font-weight: 600;
       }
       
       .experience-details-container {
@@ -412,8 +444,8 @@
       }
       
       .color-container {
-        border-color: rgb(163, 163, 163);
-        background: rgb(250, 250, 250);
+        border-color: var(--container-border);
+        background: var(--primary-color-2);
       }
       
       .project-img {
@@ -424,12 +456,12 @@
       
       .project-title {
         margin: 1rem;
-        color: black;
+        color: var(--secondary-color);
       }
       
       .project-btn {
-        color: black;
-        border-color: rgb(163, 163, 163);
+        color: var(--secondary-color);
+        border-color: var(--container-border);
       }
 
       /* CONTACT */
@@ -445,9 +477,9 @@
         display: flex;
         justify-content: center;
         border-radius: 2rem;
-        border: rgb(53, 53, 53) 0.1rem solid;
-        border-color: rgb(163, 163, 163);
-        background: (250, 250, 250);
+        border: var(--button-border);
+        border-color: var(--container-border);
+        background: var(--background-color);
         margin: 2rem auto;
         padding: 0.5rem;
       }
@@ -502,16 +534,17 @@
             <a href="#contact">Contact</a>
           </li>
           <li>
-            <button class="theme-toggle">l
-              <!-- <i class="fa fa-moon-o"></i> -->
-              <img 
-                id="modeToggle" 
-                class="icon color-icon" 
-                src="./assets/theme_light.png"
-                src-light="./assets/theme_light.png"
-                src-dark="./assets/theme_dark.png"
-                alt=""
-              >
+            <button class="theme-toggle">
+              dark mode
+              <i class="fa fa-moon-o"></i>
+              <!-- <img  -->
+                <!-- id="modeToggle"  -->
+                <!-- class="icon color-icon"  -->
+                <!-- src="./assets/theme_light.png" -->
+                <!-- src-light="./assets/theme_light.png" -->
+                <!-- src-dark="./assets/theme_dark.png" -->
+                <!-- alt="" -->
+              <!-- > -->
             </button>
           </li>
         </ul>
@@ -540,16 +573,17 @@
             <a href="#contact" onclick="toggleMenu()">Contact</a>
           </li>
           <li>
-            <button class="theme-toggle">l
-              <!-- <i class="fa fa-moon-o"></i> -->
-              <img 
-                id="modeToggle2" 
-                class="icon color-icon" 
-                src="./assets/theme_light.png"
-                src-light="./assets/theme_light.png"
-                src-dark="./assets/theme_dark.png"
-                alt=""
-              >
+            <button class="theme-toggle">
+              light mode
+              <i class="fa fa-moon-o"></i>
+              <!-- <img -->
+                <!-- id="modeToggle2"  -->
+                <!-- class="icon color-icon"  -->
+                <!-- src="./assets/theme_light.png" -->
+                <!-- src-light="./assets/theme_light.png" -->
+                <!-- src-dark="./assets/theme_dark.png" -->
+                <!-- alt="" -->
+              <!-- > -->
             </button>
           </li>
         </div> 
@@ -664,9 +698,9 @@
             <div class="article-container">
               <article>
                 <img
-                  src="./assets/checkmark-light.png"
-                  src-light="./assets/checkmark-light.png"
-                  src-dark="./assets/checkmark-dark.png"
+                  src="./assets/checkmark_light.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
                   alt="Experience icon"
                   class="icon"
                 />
@@ -677,9 +711,9 @@
               </article>
               <article>
                 <img
-                  src="./assets/checkmark-light.png"
-                  src-light="./assets/checkmark-light.png"
-                  src-dark="./assets/checkmark-dark.png"
+                  src="./assets/checkmark_light.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
                   alt="Experience icon"
                   class="icon"
                 />
@@ -690,9 +724,9 @@
               </article>
               <article>
                 <img
-                  src="./assets/checkmark-light.png"
-                  src-light="./assets/checkmark-light.png"
-                  src-dark="./assets/checkmark-dark.png"
+                  src="./assets/checkmark_light.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
                   alt="Experience icon"
                   class="icon"
                 />
@@ -703,9 +737,9 @@
               </article>
               <article>
                 <img
-                  src="./assets/checkmark-light.png"
-                  src-light="./assets/checkmark-light.png"
-                  src-dark="./assets/checkmark-dark.png"
+                  src="./assets/checkmark_light.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
                   alt="Experience icon"
                   class="icon"
                 />
@@ -716,9 +750,9 @@
               </article>
               <article>
                 <img
-                  src="./assets/checkmark-light.png"
-                  src-light="./assets/checkmark-light.png"
-                  src-dark="./assets/checkmark-dark.png"
+                  src="./assets/checkmark_light.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
                   alt="Experience icon"
                   class="icon"
                 />
@@ -729,9 +763,9 @@
               </article>
               <article>
                 <img
-                  src="./assets/checkmark-light.png"
-                  src-light="./assets/checkmark-light.png"
-                  src-dark="./assets/checkmark-dark.png"
+                  src="./assets/checkmark_light.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
                   alt="Experience icon"
                   class="icon"
                 />
@@ -747,9 +781,9 @@
             <div class="article-container">
               <article>
                 <img
-                  src="./assets/checkmark-light.png"
-                  src-light="./assets/checkmark-light.png"
-                  src-dark="./assets/checkmark-dark.png"
+                  src="./assets/checkmark_light.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
                   alt="Experience icon"
                   class="icon"
                 />
@@ -760,9 +794,9 @@
               </article>
               <article>
                 <img
-                  src="./assets/checkmark-light.png"
-                  src-light="./assets/checkmark-light.png"
-                  src-dark="./assets/checkmark-dark.png"
+                  src="./assets/checkmark_light.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
                   alt="Experience icon"
                   class="icon"
                 />
@@ -773,9 +807,9 @@
               </article>
               <article>
                 <img
-                  src="./assets/checkmark-light.png"
-                  src-light="./assets/checkmark-light.png"
-                  src-dark="./assets/checkmark-dark.png"
+                  src="./assets/checkmark_light.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
                   alt="Experience icon"
                   class="icon"
                 />
@@ -786,9 +820,9 @@
               </article>
               <article>
                 <img
-                  src="./assets/checkmark-light.png"
-                  src-light="./assets/checkmark-light.png"
-                  src-dark="./assets/checkmark-dark.png"
+                  src="./assets/checkmark_light.png"
+                  src-light="./assets/checkmark_light.png"
+                  src-dark="./assets/checkmark_dark.png"
                   alt="Experience icon"
                   class="icon"
                 />
@@ -900,33 +934,34 @@
       />
     </section>
 
-<section id="contact">
-  <p class="section__text__p1">Get in Touch</p>
-  <h1 class="title">Contact Me</h1>
-  <div class="contact-info-upper-container">
-    <div class="contact-info-container">
-      <img
-        src="./assets/email_light.png"
-        src-light="./assets/email_light.png"
-        src-dark="./assets/email_dark.png"
-        alt="Email icon"
-        class="icon contact-icon email-icon"
-      />
-      <p><a href="mailto:examplemail@gmail.com">Example@gmail.com</a></p>
-    </div>
-    <div class="contact-info-container">
-      <img
-        src="./assets/linkedin_light.png"
-        src-light="./assets/linkedin_light.png"
-        src-dark="./assets/linkedin_dark.png"
-        alt="My LinkedIn profile"
-        class="icon linkedin-icon"
-        onclick="location.href='https://linkedin.com/'"
-      />
-      <p><a href="https://www.linkedin.com">LinkedIn</a></p>
-    </div>
-  </div>
-</section>
+    
+    <section id="contact">
+      <p class="section__text__p1">Get in Touch</p>
+      <h1 class="title">Contact Me</h1>
+      <div class="contact-info-upper-container">
+        <div class="contact-info-container">
+          <img
+            src="./assets/email_light.png"
+            src-light="./assets/email_light.png"
+            src-dark="./assets/email_dark.png"
+            alt="Email icon"
+            class="icon contact-icon email-icon"
+          />
+          <p><a href="mailto:examplemail@gmail.com">Example@gmail.com</a></p>
+        </div>
+        <div class="contact-info-container">
+          <img
+            src="./assets/linkedin_light.png"
+            src-light="./assets/linkedin_light.png"
+            src-dark="./assets/linkedin_dark.png"
+            alt="My LinkedIn profile"
+            class="icon linkedin-icon"
+            onclick="location.href='https://linkedin.com/'"
+          />
+          <p><a href="https://www.linkedin.com">LinkedIn</a></p>
+        </div>
+      </div>
+    </section>
 
     <footer>
       <nav>
