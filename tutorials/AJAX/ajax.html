@@ -44,6 +44,10 @@
         width: 30px;
         height: 30px;
       }
+
+      ul {
+        list-style: none;
+      }
       
       html {
         scroll-behavior: smooth;
@@ -87,7 +91,8 @@
       
       /* DESKTOP NAV */
       
-      nav,
+      nav, 
+      .nav, 
       .nav-links {
         display: flex;
         align-items: center;
@@ -106,9 +111,10 @@
         /* display: flex; */
       /* } */
       
+      .nav, 
       .nav-links {
         gap: 2rem;
-        list-style: none;
+        /* list-style: none; */
         font-size: 1.5rem;
       }
       
@@ -151,6 +157,10 @@
       .theme-toggle:hover i {
         background-color: var(--secondary-color);
       }
+      #mobile-mode-toggle {
+        display: block;
+        margin: auto;
+      }
       
       /* HAMBURGER MENU */
       
@@ -176,18 +186,19 @@
         width: 100%;
         height: 2px;
         background-color: var(--secondary-color);
-        transition: all 0.3 ease-in-out;
+        transition: all 0.3s ease-in-out;
       }
       
-      .menu-links {
+      .menu {
+      /* .menu-links { */
         position: absolute;
         top: 100%;
         right: 0;
-        background-color: var(--primary-color);
         width: fit-content;
         max-height: 0;
+        background-color: var(--primary-color);
+        /* transition: all 0.3s ease-in-out; */
         overflow: hidden;
-        transition: all 0.3 ease-in-out;
       }
       
       .menu-links a {
@@ -200,12 +211,13 @@
         transition: all 0.3 ease-in-out;
       }
       
-      .menu-links li {
-        list-style: none;
-      }
+      /* .menu-links li { */
+        /* list-style: none; */
+      /* } */
 
-      .menu-links.open {
-        max-height: 300px;
+      .menu.open {
+        max-height: unset;
+        padding: 2rem 1rem;
       }
       
       .hamburger-icon.open span:first-child {
@@ -235,11 +247,13 @@
       /* SECTIONS */
       
       section {
+        max-width: 100rem;
+        min-height: fit-content;
+        margin: auto;
         padding-top: 4vh;
         /* height: 96vh; */
-        margin: 0 10rem;
+        margin: 3rem 10rem;
         box-sizing: border-box;
-        min-height: fit-content;
       }
       
       .section-container {
@@ -381,8 +395,10 @@
       
       .arrow {
         position: absolute;
-        right: -5rem;
+        right: 0;
         bottom: 2.5rem;
+        font-size: 3rem;
+        transform: translateX(200%);
       }
       
       .details-container {
@@ -529,6 +545,7 @@
       }
       
       footer p {
+        padding: 0 min(2rem, 2%) min(2rem, 2%);
         text-align: center;
       }
 
@@ -644,15 +661,15 @@
         }
       }
 
-      section {
-        border: 1px solid red;
-      }
+      /* section { */
+        /* border: 1px solid red; */
+      /* } */
     </style>
   </head>
   <body>
     <nav id="desktop-nav">
       <div class="logo">John Doe</div>
-      <div>
+      <div class="nav">
         <ul class="nav-links">
           <li>
             <a href="#about">About</a>
@@ -666,21 +683,21 @@
           <li>
             <a href="#contact">Contact</a>
           </li>
-          <li>
-            <button class="theme-toggle" id="modeToggle">
-              dark mode
-              <i class="fa fa-moon-o"></i>
-              <!-- <img  -->
-                <!-- id="modeToggle"  -->
-                <!-- class="icon color-icon"  -->
-                <!-- src="./assets/theme_light.png" -->
-                <!-- src-light="./assets/theme_light.png" -->
-                <!-- src-dark="./assets/theme_dark.png" -->
-                <!-- alt="" -->
-              <!-- > -->
-            </button>
-          </li>
+          <!-- <li> -->
+          <!-- </li> -->
         </ul>
+        <button class="theme-toggle" id="desktop-mode-toggle">
+          dark mode
+          <i class="fa fa-moon-o"></i>
+          <!-- <img  -->
+            <!-- id="modeToggle"  -->
+            <!-- class="icon color-icon"  -->
+            <!-- src="./assets/theme_light.png" -->
+            <!-- src-light="./assets/theme_light.png" -->
+            <!-- src-dark="./assets/theme_dark.png" -->
+            <!-- alt="" -->
+          <!-- > -->
+        </button>
       </div>
     </nav>
 
@@ -692,34 +709,36 @@
           <span></span>
           <span></span>
         </div>
-        <div class="menu-links">
-          <li>
-            <a href="#about" onclick="toggleMenu()">About</a>
-          </li>
-          <li>
-            <a href="#experience" onclick="toggleMenu()">Experience</a>
-          </li>
-          <li>
-            <a href="#projects" onclick="toggleMenu()">Projects</a>
-          </li>
-          <li>
-            <a href="#contact" onclick="toggleMenu()">Contact</a>
-          </li>
-          <li>
-            <button class="theme-toggle">
-              light mode
-              <i class="fa fa-moon-o"></i>
-              <!-- <img -->
-                <!-- id="modeToggle2"  -->
-                <!-- class="icon color-icon"  -->
-                <!-- src="./assets/theme_light.png" -->
-                <!-- src-light="./assets/theme_light.png" -->
-                <!-- src-dark="./assets/theme_dark.png" -->
-                <!-- alt="" -->
-              <!-- > -->
-            </button>
-          </li>
-        </div> 
+        <div class="menu">
+          <ul class="menu-links">
+            <li>
+              <a href="#about" onclick="toggleMenu()">About</a>
+            </li>
+            <li>
+              <a href="#experience" onclick="toggleMenu()">Experience</a>
+            </li>
+            <li>
+              <a href="#projects" onclick="toggleMenu()">Projects</a>
+            </li>
+            <li>
+              <a href="#contact" onclick="toggleMenu()">Contact</a>
+            </li>
+            <!-- <li> -->
+            <!-- </li> -->
+          </ul>
+          <button class="theme-toggle" id="mobile-mode-toggle">
+            light mode
+            <i class="fa fa-moon-o"></i>
+            <!-- <img -->
+              <!-- id="modeToggle2"  -->
+              <!-- class="icon color-icon"  -->
+              <!-- src="./assets/theme_light.png" -->
+              <!-- src-light="./assets/theme_light.png" -->
+              <!-- src-dark="./assets/theme_dark.png" -->
+              <!-- alt="" -->
+            <!-- > -->
+          </button>
+        </div>
       </div> 
     </nav>
 
@@ -816,15 +835,18 @@
             </p>
           </div>
         </div>
-      </div> 
-      <img
-        src="./assets/arrow_light.png"
-        src-light="./assets/arrow_light.png"
-        src-dark="./assets/arrow_dark.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#experience'"
-      />
+      </div>
+      <a href="#experience">
+        <i class="fa fa-angle-double-down arrow" aria-hidden="true"></i>
+      </a>
+      <!-- <img -->
+        <!-- src="./assets/arrow_light.png" -->
+        <!-- src-light="./assets/arrow_light.png" -->
+        <!-- src-dark="./assets/arrow_dark.png" -->
+        <!-- alt="Arrow icon" -->
+        <!-- class="icon arrow" -->
+        <!-- onclick="location.href='./#experience'" -->
+      <!-- /> -->
     </section>
 
     <section id="experience">
@@ -984,14 +1006,17 @@
           </div>
         </div>
       </div>
-      <img
-        src="./assets/arrow_light.png"
-        src-light="./assets/arrow_light.png"
-        src-dark="./assets/arrow_dark.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#projects'"
-      />
+      <a href="#projects">
+        <i class="fa fa-angle-double-down arrow" aria-hidden="true"></i>
+      </a>
+      <!-- <img -->
+        <!-- src="./assets/arrow_light.png" -->
+        <!-- src-light="./assets/arrow_light.png" -->
+        <!-- src-dark="./assets/arrow_dark.png" -->
+        <!-- alt="Arrow icon" -->
+        <!-- class="icon arrow" -->
+        <!-- onclick="location.href='./#projects'" -->
+      <!-- /> -->
     </section>
     
     <section id="projects">
@@ -1073,14 +1098,17 @@
           </div>
         </div>
       </div>
-      <img
-        src="./assets/arrow_light.png"
-        src-light="./assets/arrow_light.png"
-        src-dark="./assets/arrow_dark.png"
-        alt="Arrow icon"
-        class="icon arrow"
-        onclick="location.href='./#contact'"
-      />
+      <a href="#contact">
+        <i class="fa fa-angle-double-down arrow" aria-hidden="true"></i>
+      </a>
+      <!-- <img -->
+        <!-- src="./assets/arrow_light.png" -->
+        <!-- src-light="./assets/arrow_light.png" -->
+        <!-- src-dark="./assets/arrow_dark.png" -->
+        <!-- alt="Arrow icon" -->
+        <!-- class="icon arrow" -->
+        <!-- onclick="location.href='./#contact'" -->
+      <!-- /> -->
     </section>
 
     
@@ -1134,14 +1162,14 @@
       }
 
       function toggleMenu() {
-        const menu = document.querySelector(".menu-links");
+        const menu = document.querySelector(".menu");
         const icon = document.querySelector(".hamburger-icon");
         menu.classList.toggle("open");
         icon.classList.toggle("open");
       }
 
-      const btn = document.getElementById("modeToggle");
-      const btn2 = document.getElementById("modeToggle2");
+      const desktopModeToggleBtn = document.getElementById("desktop-mode-toggle");
+      const mobileModeToggleBtn = document.getElementById("mobile-mode-toggle");
       const themeIcons = document.querySelectorAll(".icon");
       let currentTheme = myLocalStorage.theme;
 
@@ -1149,11 +1177,11 @@
         setDarkMode();
       }
 
-      btn.addEventListener("click", () => {
+      desktopModeToggleBtn.addEventListener("click", () => {
         setTheme();
       });
 
-      btn2.addEventListener("click", () => {
+      mobileModeToggleBtn.addEventListener("click", () => {
         setTheme();
       });
 
