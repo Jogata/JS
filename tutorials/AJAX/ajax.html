@@ -17,6 +17,7 @@
       }
       
       body {
+      width: 100%;
         /* min-height: 100vh; */
         font-family: Georgia, serif;
         background-image: url("./images/banner.jpg");
@@ -36,7 +37,7 @@
         width: 100%;
         max-width: 170rem;
         margin: auto;
-        padding: 0.5rem 3rem;
+        padding: 0.5rem min(2%, 3rem);
         display: flex;
         flex-wrap: wrap;
         align-items: center;
@@ -49,6 +50,7 @@
         flex-wrap: wrap;
       }
       .left p {
+        margin: auto;
         padding: 0.5rem 1rem;
         color: #999;
         font-size: 1rem;
@@ -77,6 +79,7 @@
         color: #afafaf;
         font-size: 1rem;
         border-right: 1px solid #fff;
+        transition: color 400ms;
         cursor: pointer;
       }
       .right i:last-child {
@@ -84,8 +87,12 @@
         padding-right: 0;
         border-right: 0px solid transparent;
       }
+      .right i:hover {
+        color: #fb5b21;
+      }
       
       .header {
+      width: 100%;
         max-width: 170rem;
         margin: auto;
         padding: 1rem;
@@ -128,6 +135,117 @@
       }
       .menu ul li a:hover {
         color: #fb5b21;
+      }
+
+      .banner-text {
+        /* position: absolute; */
+        /* top: 0; */
+        /* right: 0; */
+        /* bottom: 0; */
+        width: fit-content;
+        min-width: 50%;
+        /* height: 70%; */
+        margin-left: auto;
+        padding: 4rem;
+        padding: max(20vh, 4rem) 0;
+      }
+      .banner-text h3 {
+      width: 100%;
+        color: #fff;
+        font-size: 2.5rem;
+        font-weight: 400;
+        /* text-transform: capitalize; */
+        text-transform: capitalize;
+      }
+      .banner-text h1 {
+      width: 100%;
+        color: #fff;
+        font-size: 3.4rem;
+        font-weight: 400;
+        /* text-transform: capitalize; */
+        text-transform: capitalize;
+      }
+      .banner-text h1 span {
+        font-weight: 600;
+      }
+      .banner-text p {
+        padding: 1em 0;
+        color: #fff;
+        /* width: 60%; */
+        max-width: 35rem;
+        line-height: 1.6;
+      }
+      
+      .sci {
+        display: flex;
+        padding: 1rem 0;
+      }
+      .sci a {
+        margin-right: 1rem;
+        text-decoration: none;
+      }
+      .sci i {
+        width: 2.5rem;
+        height: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fb5b21;
+        font-size: 1rem;
+        border: 1px solid #fff2;
+        border-radius: 50%;
+        transition: all 400ms;
+        cursor: pointer;
+      }
+      .sci i:hover {
+        color: #fff;
+        background-color: #fb5b21;
+      }
+      
+      .banner-text button {
+        padding: 0.4em 1em;
+        color: #fff;
+        font-size: 1rem;
+        font-family: inherit;
+        text-transform: uppercase;
+        border: 1px solid #fb5b21;
+        border-radius: 2em;
+        /* background-color: transparent; */
+        background-color: transparent;
+        transition: all 400ms;
+        cursor: pointer;
+      }
+      .banner-text button:hover {
+        background-color: #fb5b21;
+      }
+      
+      /* .banner-text, 
+      header {
+        border: 1px solid red;
+      } */
+      
+      .flex-container {
+      width: 100%;
+        display: flex;
+      }
+      
+      .banner-text {
+        width: min-content;
+        margin-left: auto;
+      }
+      
+      @media screen and (max-width: 1100px) {
+        .banner-text {
+          width: auto;
+          margin: auto;
+          text-align: center;
+        }
+        .sci {
+          display: block;
+        }
+        .sci a {
+          display: inline-block;
+        }
       }
     </style>
   </head>
@@ -193,10 +311,10 @@
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <!-- ================= Get data from local JSON file ================= -->
-    <fieldset>
-      <legend>Get all users from local JSON file</legend>
-      <button id="local">Send Request</button>
-    </fieldset>
+    <!-- <fieldset> -->
+      <!-- <legend>Get all users from local JSON file</legend> -->
+      <!-- <button id="local">Send Request</button> -->
+    <!-- </fieldset> -->
 
     <script>
       const btnLocalJSON = document.querySelector("#local");
@@ -223,11 +341,11 @@
     </script>
 
     <!-- ================= Get data from GitHub API ================= -->
-    <fieldset>
-      <legend>Get users from GitHub API</legend>
-      <button id="github">Send Request</button>
-      <span id="userGithub"></span>
-    </fieldset>
+    <!-- <fieldset> -->
+      <!-- <legend>Get users from GitHub API</legend> -->
+      <!-- <button id="github">Send Request</button> -->
+      <!-- <span id="userGithub"></span> -->
+    <!-- </fieldset> -->
 
     <script>
       const btnGithub = document.querySelector("#github");
