@@ -4,1060 +4,74 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-      }
-
-      /* LIGHT MODE */
-      :root {
-        --primary-color: rgb(255, 255, 255);
-        --primary-color-2: rgb(250, 250, 250);
-        --primary-color-3: rgb(181, 181, 181);
-        --background-color: rgb(255, 255, 255);
-        --secondary-color: rgb(0, 0, 0);
-        --secondary-color-2: rgb(85, 85, 85);
-        --button-border: 0.1rem solid rgb(53, 53, 53);
-        --button-border-2: 0.1rem solid rgb(255, 255, 255);
-        --button-background: rgb(53, 53, 53);
-        --button-text-hover: rgb(128, 128, 128);
-        --container-border: rgb(163, 163, 163);
-      }
-      /* DARK MODE */
-      [theme="dark"] {
-        --primary-color: #000;
-        --primary-color-2: rgb(39, 39, 39);
-        --primary-color-3: rgb(74, 74, 74);
-        --background-color: rgb(33, 33, 33);
-        --secondary-color: rgb(255, 255, 255);
-        --secondary-color-2: rgb(170, 170, 170);
-        --button-border: 0.1rem solid rgb(202, 202, 202);
-        --button-border-2: 0.1rem solid rgb(0, 0, 0);
-        --button-background: rgb(202, 202, 202);
-        --button-text-hover: rgb(211, 211, 211);
-        --container-border: rgb(92, 92, 92);
-      }
-
-      button img {
-        width: 30px;
-        height: 30px;
-      }
-
-      ul {
-        list-style: none;
-      }
-      
-      html {
-        scroll-behavior: smooth;
-      }
-      
-      body {
-        font-family: "Poppins", sans-serif;
-        font-family: Georgia, serif;
-        background-color: var(--background-color);
-      }
-
-      h3 {
-        color: var(--secondary-color);
-      }
-      
-      p {
-        color: var(--secondary-color-2);
-      }
-
-      button {
-        border: 1px solid transparent;
-        background-color: transparent;
-        cursor: pointer;
-      }
-
-      .link-icon {
-        color: var(--button-background);
-        font-size: 2rem;
-      }
-      .link-icon:hover {
-        color: var(--secondary-color);
-      }
-
-      /* TRANSITION */
-      
-      a, 
-      i, 
-      button {
-        transition: all 300ms ease;
-      }
-      
-      /* DESKTOP NAV */
-      
-      nav, 
-      .nav, 
-      .nav-links {
-        display: flex;
-        align-items: center;
-      }
-      
-      nav {
-        max-width: 100rem;
-        margin: auto;
-        padding: min(2rem, 2%);
-        justify-content: space-between;
-      }
-      
-      .nav, 
-      .nav-links {
-        gap: 2rem;
-        font-size: 1.5rem;
-      }
-      
-      a {
-        color: var(--secondary-color);
-        text-decoration: none;
-        text-decoration-color: var(--primary-color);
-      }
-      
-      a:hover {
-        text-decoration: underline;
-        text-underline-offset: 1rem;
-        text-decoration-color: var(--secondary-color);
-      }
-      nav a:hover {
-        color: var(--secondary-color);
-        text-decoration-color: var(--secondary-color);
-      }
-      
-      .logo {
-        color: var(--secondary-color);
-        font-size: 2rem;
-      }
-      
-      .logo:hover {
-        cursor: default;
-      }
-
-      .theme-toggle {
-        font-size: 0;
-      }
-      .theme-toggle i {
-        padding: 8px 9px;
-        color: var(--primary-color);
-        font-size: 20px;
-        border-radius: 50%;
-        background-color: var(--button-background);
-      }
-      .theme-toggle:hover i {
-        background-color: var(--secondary-color);
-      }
-      #mobile-mode-toggle {
-        display: block;
-        margin: auto;
-      }
-      
-      /* HAMBURGER MENU */
-      
-      #hamburger-nav {
-        display: none;
-      }
-      
-      .hamburger-menu {
-        position: relative;
-        display: inline-block;
-      }
-      
-      .hamburger-icon {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        height: 24px;
-        width: 30px;
-        cursor: pointer;
-      }
-      
-      .hamburger-icon span {
-        width: 100%;
-        height: 2px;
-        background-color: var(--secondary-color);
-        transition: all 0.3s ease-in-out;
-      }
-      
-      .menu {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        width: fit-content;
-        max-height: 0;
-        background-color: var(--background-color);
-        overflow: hidden;
-      }
-      
-      .menu-links a {
-        display: block;
-        padding: 10px;
-        text-align: center;
-        font-size: 1.5rem;
-        color: var(--secondary-color);
-        text-decoration: none;
-        transition: all 0.3 ease-in-out;
-      }
-      
-      .menu.open {
-        max-height: unset;
-        padding: 2rem 1rem;
-      }
-      
-      .hamburger-icon.open span:first-child {
-        transform: rotate(45deg) translate(10px, 5px);
-      }
-      
-      .hamburger-icon.open span:nth-child(2) {
-        opacity: 0;
-      }
-      
-      .hamburger-icon.open span:last-child {
-        transform: rotate(-45deg) translate(10px, -5px);
-      }
-      
-      .hamburger-icon span:first-child {
-        transform: none;
-      }
-      
-      .hamburger-icon span:first-child {
-        opacity: 1;
-      }
-      
-      .hamburger-icon span:first-child {
-        transform: none;
-      }
-      
-      /* SECTIONS */
-      
-      section {
-        max-width: 100rem;
-        min-height: fit-content;
-        margin: auto;
-        padding-top: 4vh;
-        /* margin: 3rem 10rem; */
-        box-sizing: border-box;
-      }
-      
-      .section-container {
-        display: flex;
-        justify-content: center;
-      }
-      
-      /* PROFILE SECTION */
-      
-      #profile {
-        display: flex;
-        justify-content: center;
-        gap: 5rem;
-      }
-      
-      .section__pic-container {
-        display: flex;
-        height: 400px;
-        width: 400px;
-        margin: auto 0;
-      }
-      
-      .section__text {
-        align-self: center;
-        text-align: center;
-      }
-      
-      .section__text p {
-        font-weight: 600;
-      }
-      
-      .section__text__p1 {
-        text-align: center;
-      }
-      
-      .section__text__p2 {
-        font-size: 1.75rem;
-        margin-bottom: 1rem;
-      }
-      
-      .title {
-        color: var(--secondary-color);
-        font-size: 3rem;
-        text-align: center;
-      }
-      
-      #socials-container {
-        display: flex;
-        justify-content: center;
-        margin-top: 1rem;
-        gap: 1rem;
-      }
-      
-      /* ICONS */
-      
-      .icon {
-        /* height: 2rem; */
-        /* cursor: pointer; */
-        color: var(--button-background);
-      }
-      
-      /* BUTTONS */
-      
-      .btn-container {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-      }
-      
-      .btn {
-        width: 8rem;
-        padding: 1rem;
-        font-weight: 600;
-        font-family: inherit;
-        border-radius: 2rem;
-      }
-      
-      .btn-color-1,
-      .btn-color-2 {
-        color: var(--secondary-color-2);
-        border: var(--button-border);
-      }
-      
-      .btn-color-1,
-      .btn-color-2:hover {
-        color: var(--primary-color);
-        background: var(--button-background);
-      }
-      
-      .btn-color-1:hover {
-        background: var(--secondary-color);
-      }
-
-      .btn-color-2 {
-        background: transparent;
-      }
-      
-      .btn-color-2:hover {
-        border: var(--button-border);
-        background: var(--secondary-color);
-      }
-      
-      .btn-container {
-        gap: 1rem;
-      }
-      
-      /* ABOUT SECTION */
-      
-      #about {
-        position: relative;
-      }
-      
-      .about-containers {
-        gap: 2rem;
-        margin-bottom: 2rem;
-        margin-top: 2rem;
-      }
-      
-      .about-details-container {
-        max-width: 50rem;
-        justify-content: center;
-        flex-direction: column;
-      }
-      
-      .about-containers,
-      .about-details-container {
-        display: flex;
-      }
-      
-      .about-pic {
-        border-radius: 2rem;
-      }
-      
-      .arrow {
-        position: absolute;
-        right: 0;
-        bottom: 2.5rem;
-        font-size: 3rem;
-        transform: translateX(200%);
-      }
-      
-      .details-container {
-        flex: 1;
-        padding: 1.5rem;
-        text-align: center;
-        border-radius: 2rem;
-        border: var(--button-border);
-        border-color: var(--container-border);
-        background: var(--primary-color-2);
-      }
-      
-      .section-container {
-        gap: 4rem;
-        height: 80%;
-      }
-      
-      .section__pic-container {
-        flex-shrink: 0;
-        width: 400px;
-        height: 400px;
-        margin: auto 0;
-        border-radius: 50%;
-        overflow: hidden;
-      }
-      .section__pic-container img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: top;
-      }
-      
-      /* EXPERIENCE SECTION */
-      
-      #experience {
-        position: relative;
-      }
-      
-      .experience-sub-title {
-        margin-bottom: 2rem;
-        color: var(--secondary-color);
-        font-size: 1.75rem;
-        font-weight: 600;
-      }
-      
-      .experience-details-container {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-      }
-      
-      .article-container {
-        display: flex;
-        text-align: initial;
-        flex-wrap: wrap;
-        flex-direction: row;
-        gap: 2.5rem;
-        justify-content: space-around;
-      }
-      
-      article {
-        display: flex;
-        width: 10rem;
-        justify-content: space-around;
-        gap: 0.5rem;
-      }
-      
-      article .icon {
-        cursor: default;
-      }
-      
-      /* PROJECTS SECTION */
-      
-      #projects {
-        position: relative;
-      }
-      
-      .color-container {
-        border-color: var(--container-border);
-        background: var(--primary-color-2);
-      }
-      
-      .project-img {
-        width: 90%;
-        height: 90%;
-        border-radius: 2rem;
-      }
-      
-      .project-title {
-        margin: 1rem;
-        color: var(--secondary-color);
-      }
-      
-      .project-btn {
-        color: var(--secondary-color);
-        border-color: var(--container-border);
-      }
-
-      /* CONTACT */
-      
-      #contact {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-      }
-      
-      .contact-info-upper-container {
-        margin: 2rem auto;
-        padding: 0.5rem;
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-        border-radius: 2rem;
-        border: var(--button-border);
-        border-color: var(--container-border);
-        background: var(--background-color);
-      }
-      
-      .contact-info-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        margin: 1rem;
-      }
-      
-      .contact-info-container p {
-        font-size: larger;
-      }
-      
-      .contact-icon {
-        cursor: default;
-      }
-      
-      .email-icon {
-        height: 2.5rem;
-      }
-      
-      /* FOOTER SECTION */
-      
-      footer {
-        margin: 0 1rem;
-      }
-      
-      footer p {
-        padding: 0 min(2rem, 2%) min(2rem, 2%);
-        text-align: center;
-      }
-
-      .nav-links-container {
-        margin: auto;
-      }
-      
-      @media screen and (max-width: 87.5rem) {
-        #profile {
-          margin-top: 3rem;
-          margin-bottom: 6rem;
-        }
-        .about-containers {
-          flex-wrap: wrap;
-        }
-        #contact,
-        #projects {
-          height: fit-content;
-        }
-      }
-      
-      @media screen and (max-width: 75rem) {
-        #desktop-nav {
-          display: none;
-        }
-        #hamburger-nav {
-          display: flex;
-        }
-        #experience,
-        .experience-details-container {
-          margin-top: 2rem;
-        }
-        #profile,
-        .section-container {
-          display: block;
-        }
-        .about-details-container {
-          margin: auto;
-        }
-        .arrow {
-          display: none;
-        }
-        section,
-        .section-container {
-          height: fit-content;
-        }
-        section {
-          margin: 0 5%;
-        }
-        .section__pic-container {
-          width: 275px;
-          height: 275px;
-          margin: 0 auto 2rem;
-        }
-        .about-containers {
-          margin-top: 0;
-        }
-      }
-      
-      @media screen and (max-width: 37.5rem) {
-        /* #contact, */
-        /* footer { */
-          /* height: 40vh; */
-        /* } */
-        #profile {
-          /* height: 83vh; */
-          margin-bottom: 0;
-        }
-        article {
-          font-size: 1rem;
-        }
-        footer nav {
-          height: fit-content;
-          margin-bottom: 2rem;
-        }
-        .about-containers,
-        .contact-info-upper-container,
-        .btn-container {
-          flex-wrap: wrap;
-        }
-        .contact-info-container {
-          margin: 0;
-        }
-        .contact-info-container p,
-        .nav-links li a {
-          font-size: 1rem;
-        }
-        .experience-sub-title {
-          font-size: 1.25rem;
-        }
-        .logo {
-          font-size: 1.5rem;
-        }
-        .nav-links {
-          flex-direction: column;
-          gap: 0.5rem;
-          text-align: center;
-        }
-        .section__pic-container {
-          width: auto;
-          /* height: 46vw; */
-          justify-content: center;
-        }
-        .section__text__p2 {
-          font-size: 1.25rem;
-        }
-        .title {
-          font-size: 2rem;
-        }
-        .text-container {
-          text-align: justify;
-        }
-      }
-    </style>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   </head>
   <body>
-    <nav id="desktop-nav">
-      <div class="logo">John Doe</div>
-      <div class="nav">
-        <ul class="nav-links">
-          <li>
-            <a href="#about">About</a>
-          </li>
-          <li>
-            <a href="#experience">Experience</a>
-          </li>
-          <li>
-            <a href="#projects">Projects</a>
-          </li>
-          <li>
-            <a href="#contact">Contact</a>
-          </li>
+    <header>
+      <div class="top-header">
+        <div class="left">
+          <p>
+            <i class="fa fa-phone" aria-hidden="true"></i>
+            + 123 456 78910
+          </p>
+          <p>
+            <i class="fa fa-envelope-o" aria-hidden="true"></i>
+          user1211@gmail.com
+          </p>
+        </div>
+        <div class="right">
+          <i class="fa fa-search" aria-hidden="true"></i>
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+        </div>
+    </div>
+      <div class="header">
+        <div class="logo">
+          <img src="./img/logo.png" alt="">
+      </div>
+      <div class="menu">
+          <ul>
+            <li><a href="#">home</a></li>
+            <li><a href="#">about</a></li>
+            <li><a href="#">classes</a></li>
+            <li><a href="#">shedule</a></li>
+            <li><a href="#">trainers</a></li>
+            <li><a href="#">news</a></li>
+            <li><a href="#">pages</a></li>
+            <li><a href="#">contact</a></li>
         </ul>
-        <button class="theme-toggle" id="desktop-mode-toggle">
-          dark mode
-          <i class="fa fa-moon-o"></i>
-        </button>
-      </div>
-    </nav>
-
-    <nav id="hamburger-nav">
-      <div class="logo">John Doe</div>
-      <div class="hamburger-menu">
-        <div class="hamburger-icon" onclick="toggleMenu()">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div class="menu">
-          <ul class="menu-links">
-            <li>
-              <a href="#about">About</a>
-            </li>
-            <li>
-              <a href="#experience">Experience</a>
-            </li>
-            <li>
-              <a href="#projects">Projects</a>
-            </li>
-            <li>
-              <a href="#contact">Contact</a>
-            </li>
-          </ul>
-          <button class="theme-toggle" id="mobile-mode-toggle">
-            light mode
-            <i class="fa fa-moon-o"></i>
-          </button>
-        </div>
-      </div> 
-    </nav>
-
-    <section id="profile">
-      <div class="section__pic-container">
-        <img src="./slides/profile-renet-del.jpg" alt="John Doe profile picture" />
-      </div>
-      <div class="section__text">
-        <p class="section__text__p1">Hello, I'm</p>
-        <h1 class="title">John Doe</h1>
-        <p class="section__text__p2">Frontend Developer</p>
-        <div class="btn-container">
-          <button
-            class="btn btn-color-2"
-            onclick="window.open('./assets/resume-example.pdf')"
-          >
-            Download CV
-          </button>
-          <button class="btn btn-color-1" onclick="location.href='./#contact'">
-            Contact Info
-          </button>
-        </div>
-        <div id="socials-container">
-          <a href="#linkedin">
-            <i class="fa fa-linkedin link-icon"></i>
-          </a>
-          <a href="#github">
-            <i class="fa fa-github link-icon"></i>
-          </a>
-        </div> 
-      </div> 
-    </section> 
-
-    <section id="about">
-      <p class="section__text__p1">Get To Know More</p>
-      <h1 class="title">About Me</h1>
-      <div class="section-container">
-        <div class="section__pic-container">
-          <img
-            src="./assets/about-pic.png"
-            alt="Profile picture"
-            class="about-pic"
-          />
-        </div>
-        <div class="about-details-container">
-          <div class="about-containers">
-            <div class="details-container">
-              <i class="fa fa-certificate icon" aria-hidden="true"></i>
-              <!-- <img -->
-                <!-- src="./assets/experience_light.png" -->
-                <!-- src-light="./assets/experience_light.png" -->
-                <!-- src-dark="./assets/experience_dark.png" -->
-                <!-- alt="Experience icon" -->
-                <!-- class="icon" -->
-              <!-- /> -->
-              <h3>Experience</h3>
-              <p>2+ years <br/> Frontend Development</p>
-            </div>
-            <div class="details-container">
-              <i class="fa fa-university icon" aria-hidden="true"></i>
-              <!-- <img -->
-                <!-- src="./assets/education_light.png" -->
-                <!-- src-light="./assets/education_light.png" -->
-                <!-- src-dark="./assets/education_dark.png" -->
-                <!-- alt="Education icon" -->
-                <!-- class="icon" -->
-              <!-- /> -->
-              <h3>Education</h3>
-              <p>B.Sc. Bachelors Degree <br/> M.Sc. Masters Degree</p>
-            </div>
-          </div>
-          <div class="text-container">
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quis
-              reprehenderit et laborum, rem, dolore eum quod voluptate
-              exercitationem nobis, nihil esse debitis maxime facere minus sint
-              delectus velit in eos quo officiis explicabo deleniti dignissimos.
-              Eligendi illum libero dolorum cum laboriosam corrupti quidem,
-              reiciendis ea magnam? Nulla, impedit fuga!
-            </p>
-          </div>
         </div>
       </div>
-      <a href="#experience">
-        <i class="fa fa-angle-double-down arrow" aria-hidden="true"></i>
-      </a>
-    </section>
-
-    <section id="experience">
-      <p class="section__text__p1">Explore My</p>
-      <h1 class="title">Experience</h1>
-      <div class="experience-details-container">
-        <div class="about-containers">
-          <div class="details-container">
-            <h2 class="experience-sub-title">Frontend Development</h2>
-            <div class="article-container">
-              <article>
-                <i class="fa fa-check-square-o icon" aria-hidden="true"></i>
-                <div>
-                  <h3>HTML</h3>
-                  <p>Experienced</p>
-                </div>
-              </article>
-              <article>
-                <i class="fa fa-check-square-o icon" aria-hidden="true"></i>
-                <div>
-                  <h3>CSS</h3>
-                  <p>Experienced</p>
-                </div>
-              </article>
-              <article>
-                <i class="fa fa-check-square-o icon" aria-hidden="true"></i>
-                <div>
-                  <h3>SASS</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <i class="fa fa-check-square-o icon" aria-hidden="true"></i>
-                <div>
-                  <h3>JavaScript</h3>
-                  <p>Basic</p>
-                </div>
-              </article>
-              <article>
-                <i class="fa fa-check-square-o icon" aria-hidden="true"></i>
-                <div>
-                  <h3>TypeScript</h3>
-                  <p>Basic</p>
-                </div>
-              </article>
-              <article>
-                <i class="fa fa-check-square-o icon" aria-hidden="true"></i>
-                <div>
-                  <h3>Material UI</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-            </div>
+      <div class="flex-container">
+        <div class="banner-text">
+          <h3>hi</h3>
+          <h1>i'm <span>john smith</span></h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia maxime error ipsa assumenda exercitationem. Odio, ad impedit veritatis odit incidunt, aliquid id laudantium maiores tenetur quo, eligendi cumque.</p>
+          <div class="sci">
+            <a href="#f">
+              <i class="fa fa-facebook" aria-hidden="true"></i>
+            </a>
+            <a href="#t">
+              <i class="fa fa-twitter" aria-hidden="true"></i>
+            </a>
+            <a href="#l">
+              <i class="fa fa-linkedin" aria-hidden="true"></i>
+            </a>
+            <a href="#s">
+              <i class="fa fa-skype" aria-hidden="true"></i>
+            </a>
           </div>
-          <div class="details-container">
-            <h2 class="experience-sub-title">Frontend Development</h2>
-            <div class="article-container">
-              <article>
-                <i class="fa fa-check-square-o icon" aria-hidden="true"></i>
-                <div>
-                  <h3>PostgreSQL</h3>
-                  <p>Basic</p>
-                </div>
-              </article>
-              <article>
-                <i class="fa fa-check-square-o icon" aria-hidden="true"></i>
-                <div>
-                  <h3>Node JS</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <i class="fa fa-check-square-o icon" aria-hidden="true"></i>
-                <div>
-                  <h3>Express JS</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-              <article>
-                <i class="fa fa-check-square-o icon" aria-hidden="true"></i>
-                <div>
-                  <h3>Git</h3>
-                  <p>Intermediate</p>
-                </div>
-              </article>
-            </div>
-          </div>
-        </div>
+          <button>join us</button>
       </div>
-      <a href="#projects">
-        <i class="fa fa-angle-double-down arrow" aria-hidden="true"></i>
-      </a>
-    </section>
-    
-    <section id="projects">
-      <p class="section__text__p1">Browse My Recent</p>
-      <h1 class="title">Projects</h1>
-      <div class="experience-details-container">
-        <div class="about-containers">
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img
-              src="./assets/project-1.png"
-              alt="Project 1"
-              class="project-img"
-              />
-              <h2 class="experience-sub-title project-title">Project One</h2>
-              <div class="btn-container">
-                <button
-                  class="btn btn-color-2 project-btn"
-                  onclick="location.href='https://github.com/'"
-                >
-                Github
-                </button>
-                <button
-                  class="btn btn-color-2 project-btn"
-                  onclick="location.href='https://github.com/'"
-                >
-                Live Demo
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img
-                src="./assets/project-2.png"
-                alt="Project 2"
-                class="project-img"
-              />
-              <h2 class="experience-sub-title project-title">Project Two</h2>
-              <div class="btn-container">
-                <button
-                  class="btn btn-color-2 project-btn"
-                  onclick="location.href='https://github.com/'"
-                >
-                Github
-                </button>
-                <button
-                  class="btn btn-color-2 project-btn"
-                  onclick="location.href='https://github.com/'"
-                >
-                Live Demo
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="details-container color-container">
-            <div class="article-container">
-              <img
-                src="./assets/project-3.png"
-                alt="Project 3"
-                class="project-img"
-              />
-              <h2 class="experience-sub-title project-title">Project Three</h2>
-              <div class="btn-container">
-                <button
-                  class="btn btn-color-2 project-btn"
-                  onclick="location.href='https://github.com/'"
-                >
-                Github
-                </button>
-                <button
-                  class="btn btn-color-2 project-btn"
-                  onclick="location.href='https://github.com/'"
-                >
-                Live Demo
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
-      <a href="#contact">
-        <i class="fa fa-angle-double-down arrow" aria-hidden="true"></i>
-      </a>
-    </section>
+    </header>
 
-    
-    <section id="contact">
-      <p class="section__text__p1">Get in Touch</p>
-      <h1 class="title">Contact Me</h1>
-      <div class="contact-info-upper-container">
-        <div class="contact-info-container">
-          <i class="fa fa-envelope link-icon"></i>
-          <p><a href="mailto:examplemail@gmail.com">Example@gmail.com</a></p>
-        </div>
-        <div class="contact-info-container">
-          <i class="fa fa-linkedin link-icon"></i>
-          <p><a href="https://www.linkedin.com">LinkedIn</a></p>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <nav>
-        <div class="nav-links-container">
-          <ul class="nav-links">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div>
-      </nav>
-      <p>Copyright &#169; 2023 John Doe. All Rights Reserved.</p>
-    </footer>
-
-    <script>
-      const myLocalStorage = {
-        theme: "light",
-      }
-
-      const menuLinks = document.querySelectorAll(".menu-links a");
-
-      menuLinks.forEach(link => {
-        link.addEventListener("click", toggleMenu);
-      })
-
-      function toggleMenu() {
-        const menu = document.querySelector(".menu");
-        const icon = document.querySelector(".hamburger-icon");
-        menu.classList.toggle("open");
-        icon.classList.toggle("open");
-      }
-
-      const desktopModeToggleBtn = document.getElementById("desktop-mode-toggle");
-      const mobileModeToggleBtn = document.getElementById("mobile-mode-toggle");
-      const themeIcons = document.querySelectorAll(".theme-toggle i");
-      let currentTheme = myLocalStorage.theme;
-
-      if (currentTheme === "dark") {
-        setDarkMode();
-      }
-
-      desktopModeToggleBtn.addEventListener("click", () => {
-        setTheme();
-      });
-
-      mobileModeToggleBtn.addEventListener("click", () => {
-        setTheme();
-      });
-
-      function setTheme() {
-        let currentTheme = document.body.getAttribute("theme");
-
-        if (currentTheme === "dark") {
-          setLightMode();
-        } else {
-          setDarkMode();
-        }
-
-      }
-
-      function setDarkMode() {
-        document.body.setAttribute("theme", "dark");
-        myLocalStorage.theme = "dark";
-        themeIcons.forEach(icon => {
-          // icon.src = icon.getAttribute("src-dark");
-          icon.classList.replace("fa-moon-o", "fa-sun-o");
-        })
-      }
-      
-      function setLightMode() {
-        document.body.removeAttribute("theme");
-        myLocalStorage.theme = "light";
-        themeIcons.forEach(icon => {
-          // icon.src = icon.getAttribute("src-light");
-          icon.classList.replace("fa-sun-o", "fa-moon-o");
-        })
-      }
-    </script>
-    
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
-    <!-- <fieldset> -->
-      <!-- <legend>Get all users from local JSON file</legend> -->
-      <!-- <button id="local">Send Request</button> -->
-    <!-- </fieldset> -->
+    <fieldset>
+      <legend>Get all users from local JSON file</legend>
+      <button id="local">Send Request</button>
+    </fieldset>
 
     <script>
       const btnLocalJSON = document.querySelector("#local");
@@ -1084,11 +98,11 @@
     </script>
 
     <!-- ================= Get data from GitHub API ================= -->
-    <!-- <fieldset> -->
-      <!-- <legend>Get users from GitHub API</legend> -->
-      <!-- <button id="github">Send Request</button> -->
-      <!-- <span id="userGithub"></span> -->
-    <!-- </fieldset> -->
+    <fieldset>
+      <legend>Get users from GitHub API</legend>
+      <button id="github">Send Request</button>
+      <span id="userGithub"></span>
+    </fieldset>
 
     <script>
       const btnGithub = document.querySelector("#github");
@@ -1115,6 +129,64 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
+    </script>
+
+    <script>
+        // 04. Renovation
+
+  function calcPainting(params) {
+    const h = Number(params[0]);
+    const w = Number(params[1]);
+    const p = Number(params[2]);
+
+    let area = w * h;
+    area = area * 4;
+    area = area * 100 - area * p;
+
+    // console.log(area);
+
+    let painted = 0;
+    let days= 3;
+    let input = params[days];
+
+    while (input !== "Tired!") {
+      input = Number(input) * 100;
+
+      painted += input;
+      // console.log(input, days);
+
+      if (painted >= area) {
+        area = area / 100;
+        painted = painted / 100;
+        const diff = painted - area;
+
+        if (diff === 0) {
+          console.log(`All walls are painted! Great job, Pesho!`);
+        } else {
+          console.log(`All walls are painted and you have ${painted - area} l paint left!`);
+        }
+        break;
+      }
+
+      days++;
+      input = params[days];
+
+      // if (days > 20) {
+      //   console.log("inf");
+      //   break;
+      // }
+    }
+
+    if (input === "Tired!") {
+      area = area / 100;
+      painted = painted / 100;
+      console.log(`${area - painted} quadratic m left.`);
+    }
+  }
+
+  // calcPainting(["3", "5", "10", "2", "3", "4", "Tired!"]);
+  // calcPainting(["3", "5", "10", "Tired!"]);
+  // calcPainting(["2", "3", "25", "6", "7", "5"]);
     </script>
   </body>
 </html>
