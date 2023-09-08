@@ -11,35 +11,42 @@
     padding: 0;
     box-sizing: border-box;
   }
+
   :root {
     --white: #fff;
     --black: #2e2e2e
   }
+
   a {
     text-decoration: none;
   }
+
   ul {
     list-style: none;
   }
+
   .dark {
     --white: #2e2e2e;
     --black: #fff;
   }
+
   body {
     min-height: 100vh;
     /* display: flex; */
     /* align-items: center; */
     /* justify-content: center; */
   }
+
   header {
-    position: absolute;
+    /* position: absolute; */
     width: 100%;
     padding: 40px 100px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    z-index: 4;
+    /* z-index: 4; */
   }
+
   .logo {
     position: relative;
     display: inline-block;
@@ -50,9 +57,11 @@
     text-transform: uppercase;
     /* text-decoration: none; */
   }
+
   .right {
     display: flex;
   }
+
   .btns {
     position: relative;
     width: 40px;
@@ -79,23 +88,133 @@
   .btns.active i:nth-child(2) {
     display: block;
   }
+
+  nav {
+    position: relative;
+  }
+
   .navigation {
     position: absolute;
     top: 0;
-    left: -100%;
-    /* left: 0; */
+    /* left: -100%; */
+    left: 0;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     background-color: var(--white);
-    transition: 0.5s;
+    transform: translateX(-100%);
+    transition: transform 0.5s ease-in;
     z-index: 3;
   }
   .navigation.active {
-    left: 0;
+    transform: translateX(0);
+  }
+
+  /* .navigation li {
+    list-style: none;
+  } */
+
+  .navigation a {
+    display: inline-block;
+    margin: 5px 0;
+    padding: 10px 20px 8px;
+    color: var(--black);
+    font-size: 1.35rem;
+    text-transform: uppercase;
+    /* text-decoration: none; */
+    border-radius: 40px;
+    transition: all 0.5s ease-in-out;
+    transition-delay: 0.5s;
+    opacity: 0;
+  }
+  .navigation a:hover {
+    color: var(--white);
+    background-color: var(--black);
+  }
+  .navigation.active a {
+    opacity: 1;
+  }
+
+  main {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  video, 
+  img {
+    width: 100%;
+  }
+
+  .video, 
+  video {
+    position: absolute;
+    top: 0;left: 0;
+    /* width: 100%; */
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s ease-in-out;
+  }
+
+  .mask {
+    position: absolute;
+    top: 0;left: 0;
+    /* width: 100%; */
+    height: 100%;
+    mix-blend-mode: screen;
+    /* pointer-events: none; */
+    /* user-select: none; */
+    z-index: 2;
+  }
+  .dark .mask {
+    filter: invert(1);
+    mix-blend-mode: multiply;
+  }
+
+  main h2 {
+    position: relative;
+    color: var(--white);
+    font-size: 16vw;
+    text-transform: uppercase;
+    text-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+  }
+
+  /* main h2,  */
+  main p {
+    position: absolute;
+    bottom: 40px;
+    left: 100px;
+    color: var(--black);
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    z-index: 3;
+  }
+
+  .sci {
+    position: absolute;
+    right: 100px;
+    bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    z-index: 3;
+  }
+  /* .sci li {
+    list-style: none;
+  } */
+  .sci a {
+    /* text-decoration: none; */
+    color: var(--black);
+    font-size: 1.75rem;
+    transition: 0.5s;
   }
 </style>
   </head>
@@ -136,7 +255,6 @@
         <li><a href="#"><i class="fa fa-instagram"></i></a></li>
       </ul>
     </main>
-
     <h1 style="display: none;">URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
     <script src="./in-fetch-api.js"></script>
