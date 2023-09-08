@@ -4,150 +4,140 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: Georgia, 'Times New Roman', Times, serif;
-        background-color: #fff;
-      }
-
-      .main {
-        position: relative;
-        width: 100%;
-        height: 100vh;
-        background-image: linear-gradient(
-          rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-          url("../AJAX/images/pics/people1_1920.jpg");
-        background-position: center;
-        background-size: cover;
-      }
-
-      .bars {
-        position: relative;
-        width: 30px;
-        height: 30px;
-        top: 5%;
-        left: 5%;
-        padding: 5px 2px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        border: 1px solid #fff;
-        border-radius: 5px;
-        background-color: transparent;
-        cursor: pointer;
-      }
-
-      .bar {
-        position: relative;
-        width: 100%;
-        height: 2px;
-        margin: 2px 0;
-        background-color: #fff;
-      }
-
-      .main nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 250px;
-        height: 100%;
-        margin-left: -100%;
-        background-color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        transition: all 0.3s linear;
-      }
-
-      .main ul {
-        position: relative;
-        width: 100%;
-        margin: auto;
-        /* height: 100%; */
-      }
-
-      .main li {
-        list-style-type: none;
-        display: block;
-      }
-
-      .main a {
-        position: relative;
-        display: block;
-        text-decoration: none;
-        padding: 10px 0;
-        color: #222;
-        font-size: 1.5rem;
-        font-weight: 750;
-        text-align: center;
-        text-transform: capitalize;
-        transition: all 0.2s linear;
-      }
-      .main a:hover {
-        color: #fff;
-        background-color: #000;
-      }
-
-      .main nav > a {
-        position: relative;
-        /* top: -30%; */
-        display: block;
-        width: 100%;
-        padding: 10px 0;
-        color: #222;
-        font-size: 2.2rem;
-        font-weight: 800;
-        text-align: center;
-        text-transform: capitalize;
-        text-decoration: none;
-        background-color: #fff;
-        transition: all 0.2s linear;
-        cursor: pointer;
-      }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  :root {
+    --white: #fff;
+    --black: #2e2e2e
+  }
+  a {
+    text-decoration: none;
+  }
+  ul {
+    list-style: none;
+  }
+  .dark {
+    --white: #2e2e2e;
+    --black: #fff;
+  }
+  body {
+    min-height: 100vh;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+  }
+  header {
+    position: absolute;
+    width: 100%;
+    padding: 40px 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 4;
+  }
+  .logo {
+    position: relative;
+    display: inline-block;
+    color: var(--black);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    /* text-decoration: none; */
+  }
+  .right {
+    display: flex;
+  }
+  .btns {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .btns i {
+    color: var(--black);
+    font-size: 1.5rem;
+  }
+  .btns.menu-toggle i {
+    font-size: 3rem;
+  }
+  .btns i:nth-child(2) {
+    display: none;
+  }
+  .btns.active i:nth-child(1) {
+    display: none;
+  }
+  .btns.active i:nth-child(2) {
+    display: block;
+  }
+  .navigation {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    /* left: 0; */
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--white);
+    transition: 0.5s;
+    z-index: 3;
+  }
+  .navigation.active {
+    left: 0;
+  }
+</style>
   </head>
   <body>
-    <div class="main">
-      <div class="bars">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
+
+    <!-- <h1>hello</h1> -->
+
+    <header>
+      <a href="#" class="logo">journey</a>
+      <div class="right">
+        <div class="btns">
+          <i class="fa fa-moon-o"></i>
+          <i class="fa fa-sun-o"></i>
+        </div>
+        <div class="btns">
+          <i class="fa fa-bars"></i>
+          <i class="fa fa-close"></i>
+        </div>
       </div>
-      <nav>
-        <a href="#" id="close">close</a>
-        <ul>
-          <li><a href="#">home</a></li>
-          <li><a href="#">about</a></li>
-          <li><a href="#">blig</a></li>
-          <li><a href="#">portfolio</a></li>
-          <li><a href="#">contact</a></li>
-        </ul>
-      </nav>
+    </header>
+    <nav>
+      <ul class="navigation">
+        <li><a href="#">home</a></li>
+        <li><a href="#">about</a></li>
+        <li><a href="#">features</a></li>
+        <li><a href="#">contact</a></li>
+      </ul>
+    </nav>
+    <main>
+      <!-- <video src="./images/forest.mp4" autoplay muted loop></video> -->
+      <img src="../../../CSS/assets/img/rainforest-kunal-shinde--f0YLss50Bs-unsplash.jpg" alt="" class="video">
+      <img class="mask" src="./images/tree.jpg">
+      <h2>forest</h2>
+      <p>watch, like & subscribe</p>
+      <ul class="sci">
+        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+        <li><a href="#"><i class="fa fa-youtube-play"></i></a></li>
+        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+      </ul>
+    </main>
 
-      <script>
-        const closeBtn = document.getElementById("close");
-        const navogation = document.querySelector("nav");
-        const bars = document.querySelector(".bars");
-
-        closeBtn.addEventListener("click", function() {
-          navogation.style.marginLeft = "-100%";
-        })
-
-        bars.addEventListener("click", function() {
-          navogation.style.marginLeft = "0%";
-        })
-      </script>
-    </div>
- 
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+    <h1 style="display: none;">URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
