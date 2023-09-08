@@ -20,18 +20,28 @@
   a {
     text-decoration: none;
   }
+  a:focus-visible {
+    outline: 1px solid currentColor;
+  }
+
 
   ul {
     list-style: none;
   }
 
+  button {
+    background-color: transparent;
+    cursor: pointer;
+  }
+
   .dark {
-    --white: #2e2e2e;
+    --white: #000;
     --black: #fff;
   }
 
   body {
     min-height: 100vh;
+    background-color: var(--white);
     /* display: flex; */
     /* align-items: center; */
     /* justify-content: center; */
@@ -40,10 +50,14 @@
   header {
     /* position: absolute; */
     width: 100%;
-    padding: 40px 100px;
+    /* padding: 40px 100px; */
+    padding: 3% 5%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    /* background-color: var(--white); */
     /* z-index: 4; */
   }
 
@@ -64,28 +78,44 @@
 
   .btns {
     position: relative;
-    width: 40px;
-    height: 40px;
+    /* width: 40px; */
+    /* height: 40px; */
     margin-left: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* cursor: pointer; */
+  }
+  .btns button {
+    font-size: 0;
+    border-width: 0px;
+    outline: none;
+  }
+  .btns button:focus-visible i {
+    outline: 1px solid currentColor;
   }
   .btns i {
+    /* padding: 10px 12px; */
+    padding: 0.4em 0.48em;
     color: var(--black);
     font-size: 1.5rem;
+    /* border: 1px solid currentColor; */
+    border-radius: 0.4em;
+    box-shadow: 1px 1px 2px #000, -1px -1px 2px #fff;
+  }
+  .btns i:active {
+    box-shadow: inset 1px 1px 1px #0005, inset -1px -1px 1px #fff;
   }
   .btns.menu-toggle i {
     font-size: 3rem;
   }
-  .btns i:nth-child(2) {
+  .btns button:nth-child(2) {
     display: none;
   }
-  .btns.active i:nth-child(1) {
+  .btns.active button:nth-child(1) {
     display: none;
   }
-  .btns.active i:nth-child(2) {
+  .btns.active button:nth-child(2) {
     display: block;
   }
 
@@ -100,17 +130,23 @@
     left: 0;
     width: 100%;
     min-height: 100vh;
+    padding-bottom: 5%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     background-color: var(--white);
     transform: translateX(-100%);
-    transition: transform 0.5s ease-in;
+    transition: opacity 1s ease-in, transform 0s;
+    transition-delay: 0s, 1s;
+    opacity: 0;
     z-index: 3;
+    /* border: 1px solid red; */
   }
   .navigation.active {
     transform: translateX(0);
+    transition: all 0s;
+    opacity: 1;
   }
 
   /* .navigation li {
@@ -127,7 +163,7 @@
     /* text-decoration: none; */
     border-radius: 40px;
     transition: all 0.5s ease-in-out;
-    transition-delay: 0.5s;
+    /* transition-delay: 0.5s; */
     opacity: 0;
   }
   .navigation a:hover {
@@ -139,12 +175,16 @@
   }
 
   main {
-    position: relative;
-    width: 100%;
+    /* position: relative; */
+    /* width: 100%; */
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+  }
+
+  .hero {
+    position: relative;
   }
 
   video, 
@@ -155,22 +195,24 @@
   .video, 
   video {
     position: absolute;
-    top: 0;left: 0;
+    top: 0;
+    left: 0;
     /* width: 100%; */
-    height: 100%;
+    height: 98%;
     object-fit: cover;
     transition: 0.5s ease-in-out;
   }
 
   .mask {
-    position: absolute;
-    top: 0;left: 0;
+    /* position: absolute; */
+    /* top: 0; */
+    /* left: 0; */
     /* width: 100%; */
-    height: 100%;
+    /* height: 100%; */
     mix-blend-mode: screen;
     /* pointer-events: none; */
     /* user-select: none; */
-    z-index: 2;
+    /* z-index: 2; */
   }
   .dark .mask {
     filter: invert(1);
@@ -178,43 +220,88 @@
   }
 
   main h2 {
-    position: relative;
-    color: var(--white);
-    font-size: 16vw;
+    /* position: relative; */
+    position: absolute;
+    top: 42%;
+    width: 100%;
+    /* color: var(--white); */
+    color: #fff;
+    /* font-size: 16vw; */
+    font-size: 13vw;
+    text-align: center;
     text-transform: uppercase;
-    text-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+    transform: translateY(-42%);
+    /* text-shadow: 0 20px 30px rgba(0, 0, 0, 0.2); */
     z-index: 2;
   }
 
+  .main-footer {
+    padding: 3% 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    /* background-color: var(--white); */
+  }
+
   /* main h2,  */
-  main p {
-    position: absolute;
-    bottom: 40px;
-    left: 100px;
+  .main-footer p {
+    /* position: absolute; */
+    /* bottom: 40px; */
+    /* left: 100px; */
     color: var(--black);
     font-size: 1.2rem;
     font-weight: 500;
     text-transform: capitalize;
-    z-index: 3;
+    /* z-index: 3; */
   }
 
   .sci {
-    position: absolute;
-    right: 100px;
-    bottom: 30px;
+    /* position: absolute; */
+    /* right: 100px; */
+    /* bottom: 30px; */
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     text-align: center;
-    z-index: 3;
+    /* z-index: 3; */
   }
-  /* .sci li {
-    list-style: none;
-  } */
+  .sci li {
+    margin: 2px 0.5rem;
+  }
   .sci a {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
     /* text-decoration: none; */
     color: var(--black);
     font-size: 1.75rem;
+    border-radius: 50%;
+    background-color: var(--white);
     transition: 0.5s;
+  }
+  .sci i {
+    margin: auto;
+  }
+  .sci a:hover {
+    color: var(--white);
+    background-color: var(--black);
+  }
+
+  @media screen and (max-width: 30rem) {
+    .right, 
+    .logo {
+      margin: auto;
+    }
+    .main-footer p, .sci {
+      width: 100%;
+      margin: 0.5rem;
+      text-align: center;
+    }
+    .sci {
+      flex-direction: row;
+      justify-content: center;
+    }
   }
 </style>
   </head>
@@ -226,12 +313,20 @@
       <a href="#" class="logo">journey</a>
       <div class="right">
         <div class="btns">
-          <i class="fa fa-moon-o"></i>
-          <i class="fa fa-sun-o"></i>
+          <button class="theme-btn">dark mode
+            <i class="fa fa-moon-o"></i>
+          </button>
+          <button class="theme-btn">light mode
+            <i class="fa fa-sun-o"></i>
+          </button>
         </div>
         <div class="btns">
-          <i class="fa fa-bars"></i>
-          <i class="fa fa-close"></i>
+          <button class="menu-btn">open menu
+            <i class="fa fa-bars"></i>
+          </button>
+          <button class="menu-btn">close menu
+            <i class="fa fa-close"></i>
+          </button>
         </div>
       </div>
     </header>
@@ -244,17 +339,44 @@
       </ul>
     </nav>
     <main>
-      <!-- <video src="./images/forest.mp4" autoplay muted loop></video> -->
-      <img src="../../../CSS/assets/img/rainforest-kunal-shinde--f0YLss50Bs-unsplash.jpg" alt="" class="video">
-      <img class="mask" src="./images/tree.jpg">
-      <h2>forest</h2>
-      <p>watch, like & subscribe</p>
-      <ul class="sci">
-        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-        <li><a href="#"><i class="fa fa-youtube-play"></i></a></li>
-        <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-      </ul>
+      <div class="hero">
+        <!-- <video src="./images/forest.mp4" autoplay muted loop></video> -->
+        <img src="../../../CSS/assets/img/rainforest-kunal-shinde--f0YLss50Bs-unsplash.jpg" alt="" class="video">
+        <img class="mask" src="./images/tree.jpg">
+        <h2>forest</h2>
+      </div>
+      <div class="main-footer">
+        <p>watch, like & subscribe</p>
+        <ul class="sci">
+          <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+          <li><a href="#"><i class="fa fa-youtube-play"></i></a></li>
+          <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+        </ul>
+      </div>
     </main>
+
+    <script>
+      const toggleMenuBtns = document.querySelectorAll(".menu-btn");
+      const navigation = document.querySelector(".navigation");
+
+      toggleMenuBtns.forEach(button => {
+        button.addEventListener("click", () => {
+          button.parentElement.classList.toggle("active");
+          navigation.classList.toggle("active");
+        })
+      })
+
+      const toggleThemeBtns = document.querySelectorAll(".theme-btn");
+      // const hero = document.querySelector(".hero");
+
+      toggleThemeBtns.forEach(button => {
+        button.addEventListener("click", () => {
+          button.parentElement.classList.toggle("active");
+          document.body.classList.toggle("dark");
+        })
+      })
+    </script>
+
     <h1 style="display: none;">URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
     <script src="./in-fetch-api.js"></script>
