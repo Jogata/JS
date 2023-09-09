@@ -4,381 +4,138 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  :root {
-    --white: #fff;
-    --black: #2e2e2e
-  }
-
-  a {
-    text-decoration: none;
-  }
-  a:focus-visible {
-    outline: 1px solid currentColor;
-  }
-
-
-  ul {
-    list-style: none;
-  }
-
-  button {
-    background-color: transparent;
-    cursor: pointer;
-  }
-
-  .dark {
-    --white: #000;
-    --black: #fff;
-  }
-
-  body {
-    min-height: 100vh;
-    background-color: var(--white);
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center; */
-  }
-
-  header {
-    /* position: absolute; */
-    width: 100%;
-    /* padding: 40px 100px; */
-    padding: 3% 5%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
-    /* background-color: var(--white); */
-    /* z-index: 4; */
-  }
-
-  .logo {
-    position: relative;
-    display: inline-block;
-    color: var(--black);
-    font-size: 2rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    /* text-decoration: none; */
-  }
-
-  .right {
-    display: flex;
-  }
-
-  .btns {
-    position: relative;
-    /* width: 40px; */
-    /* height: 40px; */
-    margin-left: 10px;
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center; */
-    /* cursor: pointer; */
-  }
-  .btns button {
-    font-size: 0;
-    border-width: 0px;
-    outline: none;
-  }
-  .btns button:focus-visible i {
-    outline: 1px solid currentColor;
-  }
-  .btns i {
-    /* padding: 10px 12px; */
-    padding: 0.4em 0.48em;
-    color: var(--black);
-    font-size: 1.5rem;
-    /* border: 1px solid currentColor; */
-    border-radius: 0.4em;
-    box-shadow: 1px 1px 2px #000, -1px -1px 2px #fff;
-  }
-  .btns i:active {
-    box-shadow: inset 1px 1px 1px #0005, inset -1px -1px 1px #fff;
-  }
-  .btns.menu-toggle i {
-    font-size: 3rem;
-  }
-  .btns button:nth-child(2) {
-    display: none;
-  }
-  .btns.active button:nth-child(1) {
-    display: none;
-  }
-  .btns.active button:nth-child(2) {
-    display: block;
-  }
-
-  nav {
-    position: relative;
-  }
-
-  .navigation {
-    position: absolute;
-    top: 0;
-    /* left: -100%; */
-    left: 0;
-    width: 100%;
-    min-height: 100vh;
-    padding-bottom: 5%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background-color: var(--white);
-    transform: translateX(-100%);
-    transition: opacity 1s ease-in, transform 0s;
-    transition-delay: 0s, 1s;
-    opacity: 0;
-    z-index: 3;
-    /* border: 1px solid red; */
-  }
-  .navigation.active {
-    transform: translateX(0);
-    transition: all 0s;
-    opacity: 1;
-  }
-
-  /* .navigation li {
-    list-style: none;
-  } */
-
-  .navigation a {
-    display: inline-block;
-    margin: 5px 0;
-    padding: 10px 20px 8px;
-    color: var(--black);
-    font-size: 1.35rem;
-    text-transform: uppercase;
-    /* text-decoration: none; */
-    border-radius: 40px;
-    transition: all 0.5s ease-in-out;
-    /* transition-delay: 0.5s; */
-    opacity: 0;
-  }
-  .navigation a:hover {
-    color: var(--white);
-    background-color: var(--black);
-  }
-  .navigation.active a {
-    opacity: 1;
-  }
-
-  main {
-    /* position: relative; */
-    /* width: 100%; */
-    min-height: 100vh;
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center; */
-  }
-
-  .hero {
-    position: relative;
-  }
-
-  video, 
-  img {
-    width: 100%;
-  }
-
-  .video, 
-  video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    /* width: 100%; */
-    height: 98%;
-    object-fit: cover;
-    transition: 0.5s ease-in-out;
-  }
-
-  .mask {
-    /* position: absolute; */
-    /* top: 0; */
-    /* left: 0; */
-    /* width: 100%; */
-    /* height: 100%; */
-    mix-blend-mode: screen;
-    /* pointer-events: none; */
-    /* user-select: none; */
-    /* z-index: 2; */
-  }
-  .dark .mask {
-    filter: invert(1);
-    mix-blend-mode: multiply;
-  }
-
-  main h2 {
-    /* position: relative; */
-    position: absolute;
-    top: 42%;
-    width: 100%;
-    /* color: var(--white); */
-    color: #fff;
-    /* font-size: 16vw; */
-    font-size: 13vw;
-    text-align: center;
-    text-transform: uppercase;
-    transform: translateY(-42%);
-    /* text-shadow: 0 20px 30px rgba(0, 0, 0, 0.2); */
-    z-index: 2;
-  }
-
-  .main-footer {
-    padding: 3% 5%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    /* background-color: var(--white); */
-  }
-
-  /* main h2,  */
-  .main-footer p {
-    /* position: absolute; */
-    /* bottom: 40px; */
-    /* left: 100px; */
-    color: var(--black);
-    font-size: 1.2rem;
-    font-weight: 500;
-    text-transform: capitalize;
-    /* z-index: 3; */
-  }
-
-  .sci {
-    /* position: absolute; */
-    /* right: 100px; */
-    /* bottom: 30px; */
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    text-align: center;
-    /* z-index: 3; */
-  }
-  .sci li {
-    margin: 2px 0.5rem;
-  }
-  .sci a {
-    width: 3rem;
-    height: 3rem;
-    display: flex;
-    /* text-decoration: none; */
-    color: var(--black);
-    font-size: 1.75rem;
-    border-radius: 50%;
-    background-color: var(--white);
-    transition: 0.5s;
-  }
-  .sci i {
-    margin: auto;
-  }
-  .sci a:hover {
-    color: var(--white);
-    background-color: var(--black);
-  }
-
-  @media screen and (max-width: 30rem) {
-    .right, 
-    .logo {
-      margin: auto;
-    }
-    .main-footer p, .sci {
-      width: 100%;
-      margin: 0.5rem;
-      text-align: center;
-    }
-    .sci {
-      flex-direction: row;
-      justify-content: center;
-    }
-  }
-</style>
   </head>
-  <body>
-
-    <!-- <h1>hello</h1> -->
-
-    <header>
-      <a href="#" class="logo">journey</a>
-      <div class="right">
-        <div class="btns">
-          <button class="theme-btn">dark mode
-            <i class="fa fa-moon-o"></i>
-          </button>
-          <button class="theme-btn">light mode
-            <i class="fa fa-sun-o"></i>
-          </button>
-        </div>
-        <div class="btns">
-          <button class="menu-btn">open menu
-            <i class="fa fa-bars"></i>
-          </button>
-          <button class="menu-btn">close menu
-            <i class="fa fa-close"></i>
-          </button>
-        </div>
-      </div>
+  <body><header>
+      <a href="#" class="menu" onclick="toggleNav()">
+        <i>menu</i>
+      </a>
+      <a href="#" class="logo">logo</a>
+      <div class="search">
+        <input type="text" name="search" id="search" placeholder="Search">
+        <i>glass</i></div>
     </header>
-    <nav>
-      <ul class="navigation">
-        <li><a href="#">home</a></li>
-        <li><a href="#">about</a></li>
-        <li><a href="#">features</a></li>
-        <li><a href="#">contact</a></li>
-      </ul>
-    </nav>
-    <main>
-      <div class="hero">
-        <!-- <video src="./images/forest.mp4" autoplay muted loop></video> -->
-        <img src="../../../CSS/assets/img/rainforest-kunal-shinde--f0YLss50Bs-unsplash.jpg" alt="" class="video">
-        <img class="mask" src="./images/tree.jpg">
-        <h2>forest</h2>
+    <div class="banner">
+      <!-- <nav> -->
+        <ul class="nav">
+          <li><a href="#">health</a></li>
+          <li><a href="#">fitness</a></li>
+          <li><a href="#">workout</a></li>
+          <li><a href="#">contact</a></li></ul>
+      <!-- </nav> -->
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="./assets/fitness-model-1.png" alt="" class="model-img">
+          </div>
+          <div class="swiper-slide">
+            <img src="./assets/fitness-model-2.png" alt="" class="model-img">
+          </div>
+          <div class="swiper-slide">
+            <img src="./assets/fitness-model-3.png" alt="" class="model-img">
+          </div></div>
+        <div class="control">
+          <div class="swiper-pagination"><span class="bullet active"></span></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+        </div></div>
+      <div class="content">
+        <h2>start shining</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit tempore non quam consectetur velit ducimus, dolores cupiditate obcaecati aut molestias voluptatem similique, amet aperiam eligendi culpa beatae suscipit nemo totam. Hic esse voluptas inventore? Odio repellendus labore tempora numquam quis perspiciatis sequi architecto eligendi enim.
+        </p>
+        <a href="#">join us</a></div>
+      <h1 class="title-left">fitness</h1>
+      <h1 class="title-right">life style</h1>
+      <video src="./assets/fitness-1.mp4" class="bg-video" autoplay loop muted></video>
+      <div class="video">
+        <div class="services">
+          <h3>health</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus nihil nisi laboriosam cumque? Perspiciatis ullam cum perferendis delectus.
+          </p></div>
+        <div class="services">
+          <h3>fitness</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores repellat rerum ullam vel.
+          </p></div>
+        <div class="services">
+          <h3>workout</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque at quaerat perferendis distinctio, dolorum quo incidunt enim tempora, itaque in voluptates sit commodi.
+          </p>
+        </div>
+      <video src="./assets/fitness-1.mp4" class="bg-video" autoplay loop muted></video>
+      <a href="#" class="play">
+        <i class="open">play</i>
+        <i class="close">stop</i>
+      </a></div>
+      <form action="">
+        <h2>ready to join us</h2>
+        <input type="text" name="username" id="username" placeholder="Username">
+        <input type="text" name="email" id="email" placeholder="Email Address">
+        <input type="password" name="password" id="password" placeholder="Password">
+        <input type="password" name="confirm" id="confirm" placeholder="Confirm Password">
+        <input type="submit" value="Sign Up">
+        <p class="sign-up">
+          already have an account?
+          <a href="#">sign in</a>
+        </p>
+      </form>
+    </div>
+    <ul class="sci">
+      <li>
+        <a href="#">
+          <i>facebook</i>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i>instagram</i>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          youtube
+        </a>
+      </li>
+    </ul>
+    <!-- <h1 style="display: none;">URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+    <div class="container">
+      <div class="box">
+        <span style="--i:1;">
+          <img src="../AJAX/slides/348752785_505207435051669_8291971845639749599_n.jpg" alt="">
+        </span>
+        <span style="--i:1;">
+          <img src="../AJAX/slides/356798994_967012961190529_4412407967034851009_n.jpg" alt="">
+        </span>
+        <span style="--i:1;">
+          <img src="../AJAX/slides/356940129_1021872482095940_7163622879331713946_n.jpg" alt="">
+        </span>
+        <span style="--i:1;">
+          <img src="../AJAX/slides/358794262_2029410497404504_8220717208730657446_n.jpg" alt="">
+        </span>
+        <span style="--i:1;">
+          <img src="../AJAX/slides/361293658_1300947700520880_5496842987114781813_n.jpg" alt="">
+        </span>
+        <span style="--i:1;">
+          <img src="../AJAX/slides/363501547_634324178451363_8761577603587065923_n.jpg" alt="">
+        </span>
+        <span style="--i:1;">
+          <img src="../AJAX/slides/366450015_726469829245996_6761655007762136773_n.jpg" alt="">
+        </span>
+        <span style="--i:1;">
+          <img src="../AJAX/slides/369574743_310081231683408_1150608101548640433_n.jpg" alt="">
+        </span>
       </div>
-      <div class="main-footer">
-        <p>watch, like & subscribe</p>
-        <ul class="sci">
-          <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-          <li><a href="#"><i class="fa fa-youtube-play"></i></a></li>
-          <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-        </ul>
+      <div class="btns">
+        <div class="btn prev">
+          <button>prev</button>
+        </div>
+        <div class="btn next">
+          <button>next</button>
+        </div>
       </div>
-    </main>
-
-    <script>
-      const toggleMenuBtns = document.querySelectorAll(".menu-btn");
-      const navigation = document.querySelector(".navigation");
-
-      toggleMenuBtns.forEach(button => {
-        button.addEventListener("click", () => {
-          button.parentElement.classList.toggle("active");
-          navigation.classList.toggle("active");
-        })
-      })
-
-      const toggleThemeBtns = document.querySelectorAll(".theme-btn");
-      // const hero = document.querySelector(".hero");
-
-      toggleThemeBtns.forEach(button => {
-        button.addEventListener("click", () => {
-          button.parentElement.classList.toggle("active");
-          document.body.classList.toggle("dark");
-        })
-      })
-    </script>
-
-    <h1 style="display: none;">URLSearchParams in JavaScript - Constructing Query Strings</h1>
-
+    </div>
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
       // Create Query String as String
