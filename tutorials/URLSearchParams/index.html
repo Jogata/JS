@@ -4,15 +4,94 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #000;
+        transform-style: preserve-3d;
+      }
+
+      .box {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        transform: perspective(1000px) rotateY(0deg);
+        transform-style: preserve-3d;
+        transition: all 1.5s;
+      }
+
+      .box span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: rotateY(calc(var(--i) * 45deg)) translateZ(300px);
+        transform-style: preserve-3d;
+        transform-origin: center;
+      }
+
+      .box span img {
+        /* position: absolute; */
+        /* top: 0; */
+        /* left: 0; */
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .btns {
+        position: absolute;
+        bottom: 100px;
+        display: flex;
+        gap: 30px;
+      }
+
+      .btn button {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        background-color: transparent;
+        cursor: pointer;
+      }
+
+      .btn button::before {
+        position: absolute;
+      }
+
+      header {
+        display: none;
+      }
+      .banner {
+        display: none;
+      }
+      .sci {
+        display: none;
+      }
+    </style>
   </head>
-  <body><header>
+  <body>
+    <header>
       <a href="#" class="menu" onclick="toggleNav()">
-        <i>menu</i>
+        <i class="fa fa-th-large"></i>
       </a>
       <a href="#" class="logo">logo</a>
       <div class="search">
         <input type="text" name="search" id="search" placeholder="Search">
-        <i>glass</i></div>
+        <i class="fa fa-search"></i>
+      </div>
     </header>
     <div class="banner">
       <!-- <nav> -->
@@ -20,7 +99,8 @@
           <li><a href="#">health</a></li>
           <li><a href="#">fitness</a></li>
           <li><a href="#">workout</a></li>
-          <li><a href="#">contact</a></li></ul>
+          <li><a href="#">contact</a></li>
+        </ul>
       <!-- </nav> -->
       <div class="swiper">
         <div class="swiper-wrapper">
@@ -32,18 +112,27 @@
           </div>
           <div class="swiper-slide">
             <img src="./assets/fitness-model-3.png" alt="" class="model-img">
-          </div></div>
+          </div>
+        </div>
         <div class="control">
-          <div class="swiper-pagination"><span class="bullet active"></span></div>
-          <div class="swiper-button-prev"></div>
-          <div class="swiper-button-next"></div>
-        </div></div>
+          <div class="swiper-pagination">
+            <span class="bullet active"></span>
+          </div>
+          <div class="swiper-button-prev">
+            <span class="bullet"></span>
+          </div>
+          <div class="swiper-button-next">
+            <span class="bullet"></span>
+          </div>
+        </div>
+      </div>
       <div class="content">
         <h2>start shining</h2>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit tempore non quam consectetur velit ducimus, dolores cupiditate obcaecati aut molestias voluptatem similique, amet aperiam eligendi culpa beatae suscipit nemo totam. Hic esse voluptas inventore? Odio repellendus labore tempora numquam quis perspiciatis sequi architecto eligendi enim.
         </p>
-        <a href="#">join us</a></div>
+        <a href="#">join us</a>
+      </div>
       <h1 class="title-left">fitness</h1>
       <h1 class="title-right">life style</h1>
       <video src="./assets/fitness-1.mp4" class="bg-video" autoplay loop muted></video>
@@ -52,23 +141,26 @@
           <h3>health</h3>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus nihil nisi laboriosam cumque? Perspiciatis ullam cum perferendis delectus.
-          </p></div>
+          </p>
+        </div>
         <div class="services">
           <h3>fitness</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores repellat rerum ullam vel.
-          </p></div>
+          </p>
+        </div>
         <div class="services">
           <h3>workout</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque at quaerat perferendis distinctio, dolorum quo incidunt enim tempora, itaque in voluptates sit commodi.
           </p>
         </div>
-      <video src="./assets/fitness-1.mp4" class="bg-video" autoplay loop muted></video>
-      <a href="#" class="play">
-        <i class="open">play</i>
-        <i class="close">stop</i>
-      </a></div>
+        <video src="./assets/fitness-1.mp4" class="bg-video" autoplay loop muted></video>
+        <a href="#" class="play">
+          <i class="open">play</i>
+          <i class="close">stop</i>
+        </a>
+      </div>
       <form action="">
         <h2>ready to join us</h2>
         <input type="text" name="username" id="username" placeholder="Username">
@@ -85,45 +177,56 @@
     <ul class="sci">
       <li>
         <a href="#">
-          <i>facebook</i>
+          <i class="fa fa-facebook"></i>
         </a>
       </li>
       <li>
         <a href="#">
-          <i>instagram</i>
+          <i class="fa fa-instagram"></i>
         </a>
       </li>
       <li>
         <a href="#">
-          youtube
+          <i class="fa fa-youtube-play"></i>
         </a>
       </li>
     </ul>
+
+    <script>
+      function toggleNav() {
+        const nav = document.querySelector(".nav");
+        const menu = document.querySelector(".menu");
+        nav.classList.toggle("active");
+        menu.classList.toggle("active");
+      }
+    </script>
+
     <!-- <h1 style="display: none;">URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+
     <div class="container">
       <div class="box">
         <span style="--i:1;">
           <img src="../AJAX/slides/348752785_505207435051669_8291971845639749599_n.jpg" alt="">
         </span>
-        <span style="--i:1;">
+        <span style="--i:2;">
           <img src="../AJAX/slides/356798994_967012961190529_4412407967034851009_n.jpg" alt="">
         </span>
-        <span style="--i:1;">
+        <span style="--i:3;">
           <img src="../AJAX/slides/356940129_1021872482095940_7163622879331713946_n.jpg" alt="">
         </span>
-        <span style="--i:1;">
+        <span style="--i:4;">
           <img src="../AJAX/slides/358794262_2029410497404504_8220717208730657446_n.jpg" alt="">
         </span>
-        <span style="--i:1;">
+        <span style="--i:5;">
           <img src="../AJAX/slides/361293658_1300947700520880_5496842987114781813_n.jpg" alt="">
         </span>
-        <span style="--i:1;">
+        <span style="--i:6;">
           <img src="../AJAX/slides/363501547_634324178451363_8761577603587065923_n.jpg" alt="">
         </span>
-        <span style="--i:1;">
+        <span style="--i:7;">
           <img src="../AJAX/slides/366450015_726469829245996_6761655007762136773_n.jpg" alt="">
         </span>
-        <span style="--i:1;">
+        <span style="--i:8;">
           <img src="../AJAX/slides/369574743_310081231683408_1150608101548640433_n.jpg" alt="">
         </span>
       </div>
@@ -136,6 +239,7 @@
         </div>
       </div>
     </div>
+
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
       // Create Query String as String
