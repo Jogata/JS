@@ -187,124 +187,133 @@
         visibility: hidden;
         opacity: 0;
       }
-    </style>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        /* min-height: 100vh; */
-        /* display: flex; */
-        /* align-items: center; */
-        /* justify-content: center; */
-        /* background-color: #000; */
-        /* transform-style: preserve-3d; */
-      }
-
-      .container {
-        display: none;
-        margin: auto;
-        overflow: hidden;
-      }
-
-      .box {
-        position: relative;
-        /* width: 200px; */
-        width: 700px;
-        /* height: 200px; */
-        height: 500px;
-        /* margin: auto; */
-        /* margin-bottom: 100px; */
-        transform: perspective(1000px) rotateY(0deg);
-        transform-style: preserve-3d;
-        transition: all 1.5s;
-      }
-
-      .box span {
-        position: absolute;
-        /* top: 0; */
-        top: 50%;
-        /* left: 0; */
-        left: 50%;
-        /* width: 100%; */
-        width: 200px;
-        /* height: 100%; */
-        height: 300px;
-        /* transform: rotateY(calc(var(--i) * 45deg)) translateZ(300px); */
-        transform: translateX(-50%) translateY(-50%) rotateY(calc(var(--i) * 45deg)) translateZ(300px);
-        transform-style: preserve-3d;
-        /* transform-origin: center; */
-      }
-
-      .box span img {
-        /* position: absolute; */
-        /* top: 0; */
-        /* left: 0; */
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .btns {
-        /* position: absolute; */
-        /* bottom: 100px; */
-        width: 220px;
-        margin: 20px auto;
-        display: flex;
-        justify-content: space-between;
-        gap: 30px;
-      }
-
-      /* .btn {
-        margin: auto;
-      } */
-
-      .btn button {
-        position: relative;
-        width: 60px;
-        height: 60px;
-        font-size: 0px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 2px solid #fff;
-        border-radius: 50%;
-        background-color: transparent;
-        cursor: pointer;
-      }
-      .btn button:hover {
-        background-color: rgba(255, 255, 255, 0.4);
-      }
-
-      .btn button::before {
-        position: absolute;
+      .swiper .model-img {
+        position: absolute;bottom: 100px;
+        left: 120px;
+        max-width: 70%;
+        transform-origin: bottom;
+        transition: 0.5s ease-in-out;
+        visibility: visible;
+        opacity: 0.85;
+        z-index: 10;}
+      .swiper .control {
+        position: absolute;top: 50%;
+        right: 2%;
+        transform: translateY(-50%);
+        width: 50px;
+        height: 200px;
+        z-index: 1000;}
+      .swiper .swiper-pagination {
+        position: absolute;top: 50%;
+        right: 50%;
+        transform: translate(50%, -50%);
+        z-index: 10;}
+      .swiper .swiper-pagination .bullet {
+        display: block;
+        width: 8px;
+        height: 8px;
+        border: 1px solid var(--primary);
+        border-radius: 50%;background-color: transparent;
+        opacity: 1;
+        z-index: 10;
+        cursor: pointer;}
+      .swiper .swiper-pagination .bullet.active {
+        background-color: var(--primary);}
+      .swiper .swiper-button-prev {
+        position: absolute;top: 30%;
+        right: 50%;
+        transform: rotateZ(90deg);
+        width: 25px;
+        height: 25px;}
+      .swiper .swiper-button-next {
+        position: absolute;top: 80%;
+        right: 30%;
+        transform: rotateZ(90deg);
+        width: 25px;
+        height: 25px;}
+      .swiper .swiper-button-prev::after, 
+      .swiper .swiper-button-next::after {
+        font-size: 0.8em;
+        line-height: 0;
         content: "";
-        width: 15px;
-        height: 15px;
-        border-top: 3px solid #fff;
-        border-right: 3px solid #fff;
-      }
-
-      .btn.prev button::before {
-        transform: rotate(-135deg) translate(-2.5px, 2.5px);
-      }
-
-      .btn.next button::before {
-        transform: rotate(45deg) translate(-2.5px, 2.5px);
-      }
-
-      header {
-        /* display: none; */
-      }
-      .banner {
-        /* display: none; */
-      }
-      .sci {
-        /* display: none; */
-      }
+        width: 25px;
+        height: 25px;
+        display: flex;align-items: center;
+        justify-content: center;
+        color: var(--primary);
+        border: 1px solid var(--primary);
+        border-radius: 50%;background-color: transparent;
+        backdrop-filter: blur(10px);
+        transition: 0.5s;}
+      .swiper .swiper-button-prev::after:hover, 
+      .swiper .swiper-button-next::after:hover {
+        color: rgba(255, 255, 255, 0.8);
+        background-color: rgba(26, 36, 72, 0.3);
+        border-radius: 50%;}
+      .banner .content {
+        position: absolute;top: 50%;
+        left: 57%;
+        transform: translateY(-50%) scale(1);
+        max-width: 600px;
+        display: flex;gap: 30px;
+        align-items: flex-end;
+        justify-content: center;
+        /* justify-content: center; */
+        flex-direction: column;
+        transition: 0.5s;
+        z-index: 100;}
+      .banner .content.active {
+        transform: translateY(-50%) scale(0);}
+      .banner .content h2 {
+        color: var(--primary);
+        font-size: 5em;
+        font-weight: 500;
+        text-transform: uppercase;}
+      .banner .content p {
+        color: var(--primary);
+        font-size: 0.8em;
+        font-weight: 300;
+        text-align: end;}
+      .banner .content a {
+        padding: 10px 20px;
+        color: #fff;
+        font-size: 1.1em;
+        font-weight: 300;
+        text-decoration: none;
+        text-transform: uppercase;
+        border: 1px solid var(--primary);
+        background-color: var(--primary);
+        transition: 0.3s;}
+        .banner .content a:hover {
+        color: var(--primary);
+        background-color: transparent;}
+      .banner .title-left {
+        position: absolute;top: 50%;
+        left: -20px;
+        transform: translateY(-50%) rotateZ(90deg);
+        color: var(--primary);
+        font-size: 10em;
+        line-height: 1em;
+        letter-spacing: 10px;
+        text-transform: uppercase;
+        opacity: 0.1;
+        z-index: 1;}
+      .banner .title-right {
+        position: absolute;top: 70%;
+        right: 6%;
+        color: var(--primary);
+        font-size: 7em;
+        line-height: 1em;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        opacity: 0.1;
+        z-index: 1;}
+        video {
+          display: none;
+        }
+        .swiper {
+          border: 1px solid red;
+        }
     </style>
   </head>
   <body>
