@@ -178,9 +178,11 @@
       }
 
       .swiper {
+        position: relative;
         width: 100%;
         height: 100vh;
         transition: 0.5s;
+        overflow: hidden;
       }
 
       .swiper.active {
@@ -188,10 +190,22 @@
         opacity: 0;
       }
 
-      .swiper .model-img {
+      .swiper .swiper-slide {
         position: absolute;
-        bottom: 100px;
-        left: 120px;
+        transform: translateY(100%);
+        opacity: 0;
+        transition: 1s;
+        z-index: 2;
+      }
+      .swiper .swiper-slide.active {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .swiper .model-img {
+        /* position: absolute; */
+        /* bottom: 100px; */
+        /* left: 120px; */
         max-width: 70%;
         transform-origin: bottom;
         transition: 0.5s ease-in-out;
@@ -211,6 +225,7 @@
       }
 
       .swiper .swiper-pagination {
+        margin: 10px 0;
         /* position: absolute; */
         /* top: 50%; */
         /* right: 50%; */
@@ -235,21 +250,39 @@
         background-color: var(--primary);
       }
 
-      .swiper .swiper-button-prev {
+      /* .swiper .swiper-button-prev { */
         /* position: absolute; */
         /* top: 30%; */
         /* right: 50%; */
-        transform: rotateZ(90deg);
-        width: 25px;
-        height: 25px;
-        margin: auto;
-        cursor: pointer;
-      }
+        /* display: flex; */
+        /* align-items: center; */
+        /* justify-content: center; */
+        /* transform: rotateZ(90deg); */
+        /* width: 25px; */
+        /* height: 25px; */
+        /* margin: auto; */
+        /* cursor: pointer; */
+      /* } */
 
-      .swiper .swiper-button-next {
+      /* .swiper .swiper-button-next { */
         /* position: absolute; */
         /* top: 80%; */
         /* right: 30%; */
+        /* display: flex; */
+        /* align-items: center; */
+        /* justify-content: center; */
+        /* transform: rotateZ(90deg); */
+        /* width: 25px; */
+        /* height: 25px; */
+        /* margin: auto; */
+        /* cursor: pointer; */
+      /* } */
+
+      .swiper .swiper-button-prev, 
+      .swiper .swiper-button-next {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         transform: rotateZ(90deg);
         width: 25px;
         height: 25px;
@@ -259,14 +292,17 @@
 
       .swiper .swiper-button-prev::after, 
       .swiper .swiper-button-next::after {
+        position: absolute;
+        top: 0;
+        right: 0;
         font-size: 0.8em;
         line-height: 0;
         content: "";
         width: 25px;
         height: 25px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        /* display: flex; */
+        /* align-items: center; */
+        /* justify-content: center; */
         color: var(--primary);
         border: 1px solid var(--primary);
         border-radius: 50%;
@@ -274,11 +310,16 @@
         backdrop-filter: blur(10px);
         transition: 0.5s;
       }
-      .swiper .swiper-button-prev::after:hover, 
-      .swiper .swiper-button-next::after:hover {
+      .swiper .swiper-button-prev:hover::after, 
+      .swiper .swiper-button-next:hover::after {
         color: rgba(255, 255, 255, 0.8);
         background-color: rgba(26, 36, 72, 0.3);
         border-radius: 50%;
+      }
+
+      .swiper .swiper-button-prev i, 
+      .swiper .swiper-button-next i {
+        z-index: 1;
       }
 
       .banner .content {
@@ -450,28 +491,28 @@
         color: #fff;
         font-size: 3em;
       }
-      .banner .video .play .close {
+      .banner .video .play .fa-pause {
         display: none;
       }
-      .banner .video .play.active .close {
+      .banner .video .play.active .fa-pause {
         display: block;
       }
-      .banner .video .play.active .open {
+      .banner .video .play.active .fa-play {
         display: none;
       }
 
-      .banner .video .play {
-        position: relative;
-        border: 1px solid red;
-      }
-      .banner .video .play::after {
-        position: absolute;
-        content: "";
-        width: 20px;
-        height: 20px;
-        border-top: 2px solid #fff;
-        border-right: 2px solid #fff;
-      }
+      /* .banner .video .play { */
+        /* position: relative; */
+        /* border: 1px solid red; */
+      /* } */
+      /* .banner .video .play::after { */
+        /* position: absolute; */
+        /* content: ""; */
+        /* width: 20px; */
+        /* height: 20px; */
+        /* border-top: 2px solid #fff; */
+        /* border-right: 2px solid #fff; */
+      /* } */
       .banner .video video {
         display: initial;
       }
@@ -618,6 +659,7 @@
         }
         .banner {
           padding: 0 20px;
+          overflow: auto;
         }
         .banner::after {
           top: 20px;
@@ -627,9 +669,9 @@
           box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
         }
         .swiper .model-img {
-          position: absolute;
-          top: -20px;
-          left: 0;
+          /* position: absolute; */
+          /* top: -20px; */
+          /* left: 0; */
           max-width: 120%;
           padding-top: 100px;
           transition: 0.5s ease-in-out;
@@ -653,6 +695,46 @@
         .banner .content h2 {
           font-size: 1.6em;
           font-weight: 500;
+        }
+        .banner .content p {
+          font-size: 0.8em;
+          text-align: center;
+        }
+        .banner .video {
+          bottom: 20px;
+          left: 20px;
+          width: calc(100% - 20px);
+          flex-wrap: wrap;
+        }
+        .banner .video .services {
+          /* display: none; */
+          flex: 1;
+          order: 3;
+          /* width: 100%; */
+          /* display: block; */
+        }
+        .banner .video video {
+          order: 1;
+        }
+        .banner .video .play {
+          order: 2;
+          padding: 10px;
+        }
+        .banner form {
+          width: 300px;
+          height: 400px;
+          padding: 20px;
+        }
+        .sci {
+          position: absolute;
+          top: 50%;
+          left: 35px;
+          transform: translateY(-50%);
+          display: flex;
+          gap: 20px;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
         }
       }
 
@@ -683,7 +765,7 @@
       <!-- </nav> -->
       <div class="swiper">
         <div class="swiper-wrapper">
-          <div class="swiper-slide">
+          <div class="swiper-slide active">
             <img src="./assets/fitness-model-1.png" alt="" class="model-img">
           </div>
           <div class="swiper-slide">
@@ -694,14 +776,16 @@
           </div>
         </div>
         <div class="control">
+          <div class="swiper-button-prev">
+            <i class="fa fa-angle-left" aria-hidden="true"></i>
+          </div>
           <div class="swiper-pagination">
             <span class="bullet active"></span>
             <span class="bullet"></span>
             <span class="bullet"></span>
           </div>
-          <div class="swiper-button-prev">
-          </div>
           <div class="swiper-button-next">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
           </div>
         </div>
       </div>
@@ -714,7 +798,7 @@
       </div>
       <h1 class="title-left">fitness</h1>
       <h1 class="title-right">life style</h1>
-      <video src="./assets/fitness-1.mp4" class="bg-video" autoplay loop muted></video>
+      <video src="./assets/fitness-1.mp4" class="bg-video" loop muted></video>
       <div class="video">
         <div class="services">
           <h3>health</h3>
@@ -734,10 +818,10 @@
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque at quaerat perferendis distinctio, dolorum quo incidunt enim tempora, itaque in voluptates sit commodi.
           </p>
         </div>
-        <video src="./assets/fitness-1.mp4" autoplay loop muted></video>
+        <video src="./assets/fitness-1.mp4" loop muted></video>
         <a href="#" class="play" onclick="toggleVideo()">
-          <i class="open">play</i>
-          <i class="close">stop</i>
+          <i class="fa fa-play"></i>
+          <i class="fa fa-pause"></i>
         </a>
       </div>
       <form action="">
@@ -780,24 +864,63 @@
       }
 
       function toggleVideo() {
-        const video = document.querySelector(".bg-video");
+        // const video = document.querySelector(".bg-video");
+        const video1 = document.querySelector(".bg-video");
+        const video2 = document.querySelector(".video video");
         const play = document.querySelector(".play");
         const slider = document.querySelector(".swiper");
         const content = document.querySelector(".content");
         const form = document.querySelector("form");
         const sci = document.querySelector(".sci");
 
-        video.classList.toggle("active");
+        video1.classList.toggle("active");
+        if (video2.paused) {
+          // video1.play();
+          video2.play();
+        } else {
+          // video1.pause();
+          video2.pause();
+        }
         play.classList.toggle("active");
         slider.classList.toggle("active");
         content.classList.toggle("active");
+        form.classList.toggle("active");
         sci.classList.toggle("active");
+      }
+
+      const slides = document.querySelectorAll(".swiper-slide");
+      let index = 0;
+
+      const nextBtn = document.querySelector(".swiper-button-next");
+
+      nextBtn.addEventListener("click", rotateSliderUp);
+
+      const prevBtn = document.querySelector(".swiper-button-prev");
+
+      prevBtn.addEventListener("click", rotateSliderDown);
+
+      function rotateSliderUp() {
+        slides[index].classList.remove("active");
+        index++;
+        if (index > slides.length - 1) {
+          index = 0;
+        }
+        slides[index].classList.add("active");
+      }
+
+      function rotateSliderDown() {
+        slides[index].classList.remove("active");
+        index--;
+        if (index < 0) {
+          index = slides.length - 1;
+        }
+        slides[index].classList.add("active");
       }
     </script>
 
     <!-- <h1 style="display: none;">URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
-    <div class="container">
+    <div class="container" style="display: none;">
       <div class="box">
         <span style="--i:1;">
           <img src="../AJAX/slides/348752785_505207435051669_8291971845639749599_n.jpg" alt="">
@@ -834,20 +957,20 @@
       </div>
 
       <script>
-        const prevBtn = document.querySelector(".prev");
-        const nextBtn = document.querySelector(".next");
+        // const prevBtn = document.querySelector(".prev");
+        // const nextBtn = document.querySelector(".next");
         const box = document.querySelector(".box");
         let degrees = 0;
 
-        prevBtn.addEventListener("click", () => {
-          degrees += 45;
-          box.style.transform = `perspective(1000px) rotateY(${degrees}deg)`;
-        })
+        // prevBtn.addEventListener("click", () => {
+        //   degrees += 45;
+        //   box.style.transform = `perspective(1000px) rotateY(${degrees}deg)`;
+        // })
 
-        nextBtn.addEventListener("click", () => {
-          degrees -= 45;
-          box.style.transform = `perspective(1000px) rotateY(${degrees}deg)`;
-        })
+        // nextBtn.addEventListener("click", () => {
+        //   degrees -= 45;
+        //   box.style.transform = `perspective(1000px) rotateY(${degrees}deg)`;
+        // })
       </script>
     </div>
 
