@@ -211,17 +211,18 @@
       }
 
       .swiper .swiper-pagination {
-        position: absolute;
-        top: 50%;
-        right: 50%;
-        transform: translate(50%, -50%);
-        z-index: 10;
+        /* position: absolute; */
+        /* top: 50%; */
+        /* right: 50%; */
+        /* transform: translate(50%, -50%); */
+        /* z-index: 10; */
       }
 
       .swiper .swiper-pagination .bullet {
         display: block;
         width: 8px;
         height: 8px;
+        margin: 5px auto;
         border: 1px solid var(--primary);
         border-radius: 50%;
         background-color: transparent;
@@ -229,24 +230,31 @@
         z-index: 10;
         cursor: pointer;
       }
+
       .swiper .swiper-pagination .bullet.active {
-        background-color: var(--primary);}
+        background-color: var(--primary);
+      }
+
       .swiper .swiper-button-prev {
-        position: absolute;
-        top: 30%;
-        right: 50%;
+        /* position: absolute; */
+        /* top: 30%; */
+        /* right: 50%; */
         transform: rotateZ(90deg);
         width: 25px;
         height: 25px;
+        margin: auto;
+        cursor: pointer;
       }
 
       .swiper .swiper-button-next {
-        position: absolute;
-        top: 80%;
-        right: 30%;
+        /* position: absolute; */
+        /* top: 80%; */
+        /* right: 30%; */
         transform: rotateZ(90deg);
         width: 25px;
         height: 25px;
+        margin: auto;
+        cursor: pointer;
       }
 
       .swiper .swiper-button-prev::after, 
@@ -546,6 +554,108 @@
         text-decoration: none;
       }
 
+      .sci {
+        position: absolute;
+        bottom: 130px;
+        left: 150px;
+        gap: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transform: scale(1);
+        transition: 0.5s;
+        z-index: 1000;
+      }
+
+      .sci.active {
+        transform: scale(0);
+      }
+
+      .sci li {
+        list-style: none;
+      }
+
+      .sci li a {
+        display: inline-block;
+        text-decoration: none;
+      }
+
+      .sci li a i {
+        color: var(--primary);
+        font-size: 1.5em;
+        transition: 0.5s;
+      }
+
+      .sci li:hover a i {
+        color: #8d20fa;
+      }
+
+      @media screen and (max-width: 600px) {
+        header {
+          top: 20px;
+          right: 20px;
+          left: 20px;
+          padding: 10px;
+        }
+        header::before {
+          width: 130px;
+          height: 45px;
+        }
+        header::after {
+          width: 220px;
+          height: 45px;
+        }
+        .search {
+          width: 200px;
+        }
+        .nav {
+          top: 65px;
+          bottom: 20px;
+          left: 20px;
+        }
+        .nav.active {
+          width: 200px;
+        }
+        .banner {
+          padding: 0 20px;
+        }
+        .banner::after {
+          top: 20px;
+          left: 20px;
+          right: 20px;
+          bottom: 20px;
+          box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+        }
+        .swiper .model-img {
+          position: absolute;
+          top: -20px;
+          left: 0;
+          max-width: 120%;
+          padding-top: 100px;
+          transition: 0.5s ease-in-out;
+          z-index: 10;
+        }
+        .banner .title-left {
+          left: -65%;
+          font-size: 8em;
+          letter-spacing: 6px;
+        }
+        .banner .title-right {
+          display: none;
+        }
+        .banner .content {
+          top: 60%;
+          left: 50%;
+          gap: 20px;
+          align-items: center;
+          transform: translate(-50%, -50%) scale(1);
+        }
+        .banner .content h2 {
+          font-size: 1.6em;
+          font-weight: 500;
+        }
+      }
+
       .swiper {
         /* z-index: -1; */
       }
@@ -586,12 +696,12 @@
         <div class="control">
           <div class="swiper-pagination">
             <span class="bullet active"></span>
+            <span class="bullet"></span>
+            <span class="bullet"></span>
           </div>
           <div class="swiper-button-prev">
-            <span class="bullet"></span>
           </div>
           <div class="swiper-button-next">
-            <span class="bullet"></span>
           </div>
         </div>
       </div>
@@ -675,12 +785,13 @@
         const slider = document.querySelector(".swiper");
         const content = document.querySelector(".content");
         const form = document.querySelector("form");
+        const sci = document.querySelector(".sci");
 
         video.classList.toggle("active");
         play.classList.toggle("active");
         slider.classList.toggle("active");
         content.classList.toggle("active");
-        form.classList.toggle("active");
+        sci.classList.toggle("active");
       }
     </script>
 
