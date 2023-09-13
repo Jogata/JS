@@ -4,975 +4,94 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      :root {
-        --primary: #1a2448;
-      }
-
-      body {
-        /* position: relative; */
-        background-color: #fff;
-        font-family: Georgia, serif;
-        /* width: 100%; */
-        min-height: 100vh;
-        /* overflow: hidden; */
-      }
-
-      header {
-        position: absolute;
-        top: 100px;
-        left: 100px;
-        right: 100px;
-        padding: 20px 50px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        z-index: 20 !important;
-        /* background-color: transparent; */
-      }
-
-      header::before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 200px;
-        height: 65px;
-        background-color: var(--primary);
-      }
-
-      header::after {
-        position: absolute;
-        top: 0;
-        right: 0;
-        content: "";
-        width: 320px;
-        height: 65px;
-        background-color: var(--primary);
-      }
-
-      header .menu {
-        position: absolute;
-        text-decoration: none;
-        color: #fff;
-        font-size: 1.2em;
-        display: flex;
-        align-items: center;
-        transition: 0.5s;
-      }
-
-      header .menu.active {
-        transform: rotateZ(45deg);
-      }
-
-      header .logo {
-        position: relative;
-        text-decoration: none;
-        color: #fff;
-        margin-left: 40px;
-        font-size: 1.2em;
-        text-transform: uppercase;
-      }
-
-      .search {
-        position: relative;
-        width: 220px;
-        z-index: 100;
-      }
-
-      .search input {
-        width: 100%;
-        padding: 5px 15px;
-        color: #fff;
-        border: none;
-        outline: none;
-        background-color: transparent;
-        backdrop-filter: blur(5px);
-      }
-
-      .search input::placeholder {
-        color: #fff;
-        text-transform: uppercase;
-      }
-
-      .search i {
-        position: absolute;
-        top: 50%;
-        right: 8px;
-        transform: translateY(-50%);
-        color: #fff;
-        font-size: 1.2em;
-      }
-
-      .banner {
-        position: relative;
-        width: 100%;
-        height: 100vh;
-        padding: 0 100px;
-        display: flex;
-        justify-content: center;
-        background-image: linear-gradient(-45deg, #d8e7fc, #e8d8fc);
-        align-items: end;
-        transition: 0.5s;
-        overflow: hidden;
-      }
-
-      .banner::after {
-        position: absolute;
-        top: 100px;
-        right: 100px;
-        bottom: 100px;
-        left: 100px;
-        content: "";
-        background-color: transparent;
-        box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
-        backdrop-filter: blur(20px);
-        transition: 0.5s;
-      }
-
-      .nav {
-        position: absolute;
-        top: 165px;
-        left: 100px;
-        bottom: 100px;
-        width: 0px;
-        display: flex;
-        gap: 20px;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        background-color: transparent;
-        box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
-        backdrop-filter: blur(10px);
-        transition: 0.5s;
-        visibility: hidden;
-        opacity: 0;
-        z-index: 1000;
-      }
-
-      .nav.active {
-        width: 200px;
-        visibility: visible;
-        opacity: 1;
-      }
-
-      .nav li {
-        list-style: none;
-      }
-
-      .nav li a {
-        color: var(--primary);
-        text-decoration: none;
-        text-transform: uppercase;
-        transition: 0.3s;
-      }
-      .nav li a:hover {
-        color: #8d20fa;
-      }
-
-      .swiper {
-        position: relative;
-        width: 100%;
-        height: 100vh;
-        transition: 0.5s;
-        overflow: hidden;
-      }
-
-      .swiper.active {
-        visibility: hidden;
-        opacity: 0;
-      }
-
-      .swiper .swiper-slide {
-        position: absolute;
-        transform: translateY(100%);
-        opacity: 0;
-        transition: 1s;
-        z-index: 2;
-      }
-      .swiper .swiper-slide.active {
-        transform: translateY(0);
-        opacity: 1;
-      }
-
-      .swiper .model-img {
-        /* position: absolute; */
-        /* bottom: 100px; */
-        /* left: 120px; */
-        max-width: 70%;
-        transform-origin: bottom;
-        transition: 0.5s ease-in-out;
-        visibility: visible;
-        opacity: 0.85;
-        z-index: 10;
-      }
-
-      .swiper .control {
-        position: absolute;
-        top: 50%;
-        right: 2%;
-        transform: translateY(-50%);
-        width: 50px;
-        height: 200px;
-        z-index: 1000;
-      }
-
-      .swiper .swiper-pagination {
-        margin: 10px 0;
-        /* position: absolute; */
-        /* top: 50%; */
-        /* right: 50%; */
-        /* transform: translate(50%, -50%); */
-        /* z-index: 10; */
-      }
-
-      .swiper .swiper-pagination .bullet {
-        display: block;
-        width: 8px;
-        height: 8px;
-        margin: 5px auto;
-        border: 1px solid var(--primary);
-        border-radius: 50%;
-        background-color: transparent;
-        opacity: 1;
-        z-index: 10;
-        cursor: pointer;
-      }
-
-      .swiper .swiper-pagination .bullet.active {
-        background-color: var(--primary);
-      }
-
-      /* .swiper .swiper-button-prev { */
-        /* position: absolute; */
-        /* top: 30%; */
-        /* right: 50%; */
-        /* display: flex; */
-        /* align-items: center; */
-        /* justify-content: center; */
-        /* transform: rotateZ(90deg); */
-        /* width: 25px; */
-        /* height: 25px; */
-        /* margin: auto; */
-        /* cursor: pointer; */
-      /* } */
-
-      /* .swiper .swiper-button-next { */
-        /* position: absolute; */
-        /* top: 80%; */
-        /* right: 30%; */
-        /* display: flex; */
-        /* align-items: center; */
-        /* justify-content: center; */
-        /* transform: rotateZ(90deg); */
-        /* width: 25px; */
-        /* height: 25px; */
-        /* margin: auto; */
-        /* cursor: pointer; */
-      /* } */
-
-      .swiper .swiper-button-prev, 
-      .swiper .swiper-button-next {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transform: rotateZ(90deg);
-        width: 25px;
-        height: 25px;
-        margin: auto;
-        cursor: pointer;
-      }
-
-      .swiper .swiper-button-prev::after, 
-      .swiper .swiper-button-next::after {
-        position: absolute;
-        top: 0;
-        right: 0;
-        font-size: 0.8em;
-        line-height: 0;
-        content: "";
-        width: 25px;
-        height: 25px;
-        /* display: flex; */
-        /* align-items: center; */
-        /* justify-content: center; */
-        color: var(--primary);
-        border: 1px solid var(--primary);
-        border-radius: 50%;
-        background-color: transparent;
-        backdrop-filter: blur(10px);
-        transition: 0.5s;
-      }
-      .swiper .swiper-button-prev:hover::after, 
-      .swiper .swiper-button-next:hover::after {
-        color: rgba(255, 255, 255, 0.8);
-        background-color: rgba(26, 36, 72, 0.3);
-        border-radius: 50%;
-      }
-
-      .swiper .swiper-button-prev i, 
-      .swiper .swiper-button-next i {
-        z-index: 1;
-      }
-
-      .banner .content {
-        position: absolute;
-        top: 50%;
-        left: 57%;
-        transform: translateY(-50%) scale(1);
-        max-width: 600px;
-        display: flex;
-        gap: 30px;
-        align-items: flex-end;
-        justify-content: center;
-        flex-direction: column;
-        transition: 0.5s;
-        z-index: 100;
-      }
-      .banner .content.active {
-        transform: translateY(-50%) scale(0);
-      }
-
-      .banner .content h2 {
-        color: var(--primary);
-        font-size: 5em;
-        font-weight: 500;
-        text-transform: uppercase;
-      }
-      .banner .content p {
-        color: var(--primary);
-        font-size: 0.8em;
-        font-weight: 300;
-        text-align: end;
-      }
-      .banner .content a {
-        padding: 10px 20px;
-        color: #fff;
-        font-size: 1.1em;
-        font-weight: 300;
-        text-decoration: none;
-        text-transform: uppercase;
-        border: 1px solid var(--primary);
-        background-color: var(--primary);
-        transition: 0.3s;
-      }
-      .banner .content a:hover {
-        color: var(--primary);
-        background-color: transparent;
-      }
-
-      .banner .title-left {
-        position: absolute;
-        top: 50%;
-        left: -20px;
-        transform: translateY(-50%) rotateZ(90deg);
-        color: var(--primary);
-        font-size: 10em;
-        line-height: 1em;
-        letter-spacing: 10px;
-        text-transform: uppercase;
-        opacity: 0.1;
-        z-index: 1;
-      }
-
-      .banner .title-right {
-        position: absolute;
-        top: 70%;
-        right: 6%;
-        color: var(--primary);
-        font-size: 7em;
-        line-height: 1em;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        opacity: 0.1;
-        z-index: 1;
-      }
-
-      .bg-video {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: 0.5s;
-        visibility: hidden;
-        opacity: 0;
-        z-index: 0;
-      }
-
-      .bg-video.active {
-        visibility: visible;
-        opacity: 1;
-      }
-
-      .banner .video {
-        position: absolute;
-        right: 100px;
-        bottom: 100px;
-        width: 40%;
-        height: 150px;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: transparent;
-        box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
-        backdrop-filter: blur(5px);
-        z-index: 1;
-      }
-
-      .banner .video video {
-        position: relative;
-        max-height: 150px;
-      }
-
-      .banner .video .services {
-        position: relative;
-        padding: 10px 20px;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        cursor: pointer;
-      }
-
-      .banner .video .services:hover::before {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-color: rgba(26, 36, 72, 0.1);
-      }
-
-      .banner .video h3 {
-        margin-bottom: 10px;
-        color: var(--primary);
-        font-size: 0.9em;
-        font-weight: 400;
-        text-align: center;
-        text-transform: uppercase;
-      }
-
-      .banner .video p {
-        color: var(--primary);
-        font-size: 0.7em;
-        font-weight: 300;
-        text-align: center;
-      }
-
-      video {
-        display: none;
-      }
-      /* .swiper { */
-        /* border: 1px solid red; */
-      /* } */
-
-      .banner .video .play {
-        height: 100%;
-        padding: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--primary);
-      }
-
-      .banner .video .play i {
-        color: #fff;
-        font-size: 3em;
-      }
-      .banner .video .play .fa-pause {
-        display: none;
-      }
-      .banner .video .play.active .fa-pause {
-        display: block;
-      }
-      .banner .video .play.active .fa-play {
-        display: none;
-      }
-
-      /* .banner .video .play { */
-        /* position: relative; */
-        /* border: 1px solid red; */
-      /* } */
-      /* .banner .video .play::after { */
-        /* position: absolute; */
-        /* content: ""; */
-        /* width: 20px; */
-        /* height: 20px; */
-        /* border-top: 2px solid #fff; */
-        /* border-right: 2px solid #fff; */
-      /* } */
-      .banner .video video {
-        display: initial;
-      }
-
-      .banner form {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%) scale(0);
-        width: 400px;
-        height: 500px;
-        padding: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        background-color: rgba(26, 36, 72, 0.1);
-        box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
-        transition: 0.5s;
-        z-index: 1;
-      }
-
-      .banner form.active {
-        transform: translateY(-50%) scale(1);
-      }
-
-      form h2 {
-        /* width: 100%; */
-        margin-bottom: 20px;
-        color: #fff;
-        font-size: 18px;
-        font-weight: 400;
-        text-align: center;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
-
-      form input {
-        width: 100%;
-        margin-bottom: 20px;
-        padding: 8px 10px;
-        color: #fff;
-        font-size: 0.9em;
-        font-weight: 300;
-        outline: none;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        background-color: transparent;
-        box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.2);
-      }
-
-      form input::placeholder {
-        color: #fff;
-      }
-
-      form input:last-of-type {
-        max-width: 150px;
-        /* border: 1px solid rgba(255, 255, 255, 0.2); */
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-        transition: 0.3s;
-        cursor: pointer;
-      }
-      form input:last-of-type:active {
-        box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3);
-      }
-
-      form .sign-up {
-        position: relative;
-        margin-top: 20px;
-        color: #fff;
-        font-size: 0.7em;
-        font-weight: 300;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-      }
-
-      form .sign-up a {
-        color: var(--primary);
-        font-weight: 600;
-        text-decoration: none;
-      }
-
-      .sci {
-        position: absolute;
-        bottom: 130px;
-        left: 150px;
-        gap: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        transform: scale(1);
-        transition: 0.5s;
-        z-index: 1000;
-      }
-
-      .sci.active {
-        transform: scale(0);
-      }
-
-      .sci li {
-        list-style: none;
-      }
-
-      .sci li a {
-        display: inline-block;
-        text-decoration: none;
-      }
-
-      .sci li a i {
-        color: var(--primary);
-        font-size: 1.5em;
-        transition: 0.5s;
-      }
-
-      .sci li:hover a i {
-        color: #8d20fa;
-      }
-
-      @media screen and (max-width: 600px) {
-        header {
-          top: 20px;
-          right: 20px;
-          left: 20px;
-          padding: 10px;
-        }
-        header::before {
-          width: 130px;
-          height: 45px;
-        }
-        header::after {
-          width: 220px;
-          height: 45px;
-        }
-        .search {
-          width: 200px;
-        }
-        .nav {
-          top: 65px;
-          bottom: 20px;
-          left: 20px;
-        }
-        .nav.active {
-          width: 200px;
-        }
-        .banner {
-          padding: 0 20px;
-          overflow: auto;
-        }
-        .banner::after {
-          top: 20px;
-          left: 20px;
-          right: 20px;
-          bottom: 20px;
-          box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
-        }
-        .swiper .model-img {
-          /* position: absolute; */
-          /* top: -20px; */
-          /* left: 0; */
-          max-width: 120%;
-          padding-top: 100px;
-          transition: 0.5s ease-in-out;
-          z-index: 10;
-        }
-        .banner .title-left {
-          left: -65%;
-          font-size: 8em;
-          letter-spacing: 6px;
-        }
-        .banner .title-right {
-          display: none;
-        }
-        .banner .content {
-          top: 60%;
-          left: 50%;
-          gap: 20px;
-          align-items: center;
-          transform: translate(-50%, -50%) scale(1);
-        }
-        .banner .content h2 {
-          font-size: 1.6em;
-          font-weight: 500;
-        }
-        .banner .content p {
-          font-size: 0.8em;
-          text-align: center;
-        }
-        .banner .video {
-          bottom: 20px;
-          left: 20px;
-          width: calc(100% - 20px);
-          flex-wrap: wrap;
-        }
-        .banner .video .services {
-          /* display: none; */
-          flex: 1;
-          order: 3;
-          /* width: 100%; */
-          /* display: block; */
-        }
-        .banner .video video {
-          order: 1;
-        }
-        .banner .video .play {
-          order: 2;
-          padding: 10px;
-        }
-        .banner form {
-          width: 300px;
-          height: 400px;
-          padding: 20px;
-        }
-        .sci {
-          position: absolute;
-          top: 50%;
-          left: 35px;
-          transform: translateY(-50%);
-          display: flex;
-          gap: 20px;
-          align-items: center;
-          justify-content: center;
-          flex-direction: column;
-        }
-      }
-
-      .swiper {
-        /* z-index: -1; */
-      }
-    </style>
   </head>
   <body>
-    <header>
-      <a href="#" class="menu" onclick="toggleNav()">
-        <i class="fa fa-th-large"></i>
-      </a>
-      <a href="#" class="logo">logo</a>
-      <div class="search">
-        <input type="text" name="search" id="search" placeholder="Search">
-        <i class="fa fa-search"></i>
-      </div>
-    </header>
-    <div class="banner">
-      <!-- <nav> -->
-        <ul class="nav">
-          <li><a href="#">health</a></li>
-          <li><a href="#">fitness</a></li>
-          <li><a href="#">workout</a></li>
-          <li><a href="#">contact</a></li>
-        </ul>
-      <!-- </nav> -->
-      <div class="swiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide active">
-            <img src="./assets/fitness-model-1.png" alt="" class="model-img">
-          </div>
-          <div class="swiper-slide">
-            <img src="./assets/fitness-model-2.png" alt="" class="model-img">
-          </div>
-          <div class="swiper-slide">
-            <img src="./assets/fitness-model-3.png" alt="" class="model-img">
-          </div>
-        </div>
-        <div class="control">
-          <div class="swiper-button-prev">
-            <i class="fa fa-angle-left" aria-hidden="true"></i>
-          </div>
-          <div class="swiper-pagination">
-            <span class="bullet active"></span>
-            <span class="bullet"></span>
-            <span class="bullet"></span>
-          </div>
-          <div class="swiper-button-next">
-            <i class="fa fa-angle-right" aria-hidden="true"></i>
-          </div>
-        </div>
-      </div>
-      <div class="content">
-        <h2>start shining</h2>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit tempore non quam consectetur velit ducimus, dolores cupiditate obcaecati aut molestias voluptatem similique, amet aperiam eligendi culpa beatae suscipit nemo totam. Hic esse voluptas inventore? Odio repellendus labore tempora numquam quis perspiciatis sequi architecto eligendi enim.
-        </p>
-        <a href="#" onclick="toggleVideo()">join us</a>
-      </div>
-      <h1 class="title-left">fitness</h1>
-      <h1 class="title-right">life style</h1>
-      <video src="./assets/fitness-1.mp4" class="bg-video" loop muted></video>
-      <div class="video">
-        <div class="services">
-          <h3>health</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus nihil nisi laboriosam cumque? Perspiciatis ullam cum perferendis delectus.
-          </p>
-        </div>
-        <div class="services">
-          <h3>fitness</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores repellat rerum ullam vel.
-          </p>
-        </div>
-        <div class="services">
-          <h3>workout</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque at quaerat perferendis distinctio, dolorum quo incidunt enim tempora, itaque in voluptates sit commodi.
-          </p>
-        </div>
-        <video src="./assets/fitness-1.mp4" loop muted></video>
-        <a href="#" class="play" onclick="toggleVideo()">
-          <i class="fa fa-play"></i>
-          <i class="fa fa-pause"></i>
-        </a>
-      </div>
-      <form action="">
-        <h2>ready to join us</h2>
-        <input type="text" name="username" id="username" placeholder="Username">
-        <input type="text" name="email" id="email" placeholder="Email Address">
-        <input type="password" name="password" id="password" placeholder="Password">
-        <input type="password" name="confirm" id="confirm" placeholder="Confirm Password">
-        <input type="submit" value="Sign Up">
-        <p class="sign-up">
-          already have an account?
-          <a href="#">sign in</a>
-        </p>
-      </form>
-    </div>
-    <ul class="sci">
-      <li>
-        <a href="#">
-          <i class="fa fa-facebook"></i>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class="fa fa-instagram"></i>
-        </a>
-      </li>
-      <li>
-        <a href="#">
-          <i class="fa fa-youtube-play"></i>
-        </a>
-      </li>
-    </ul>
+    <a class="yt" href="https://youtu.be/Ivk8Blw2VTI">Watch the tutorial</a>
+<section>
+  <div class="wrapper">
+    <h1>Full-width on one side only</h1>
+  </div>
+</section>
 
-    <script>
-      function toggleNav() {
-        const nav = document.querySelector(".nav");
-        const menu = document.querySelector(".menu");
-        nav.classList.toggle("active");
-        menu.classList.toggle("active");
-      }
+<section class="full-width-split-screen">
+  <img src="https://images.unsplash.com/photo-1689046194076-62199393c464?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTE1MDg5Mjl8&ixlib=rb-4.0.3&q=85" alt="" />
+  <div>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+      Reprehenderit officiis dolores vitae sed libero ipsa.
+    </p>
+    <a href="#" class="button">Keep reading</a>
+  </div>
+</section>
 
-      function toggleVideo() {
-        // const video = document.querySelector(".bg-video");
-        const video1 = document.querySelector(".bg-video");
-        const video2 = document.querySelector(".video video");
-        const play = document.querySelector(".play");
-        const slider = document.querySelector(".swiper");
-        const content = document.querySelector(".content");
-        const form = document.querySelector("form");
-        const sci = document.querySelector(".sci");
+<section>
+  <div class="wrapper">
 
-        video1.classList.toggle("active");
-        if (video2.paused) {
-          // video1.play();
-          video2.play();
-        } else {
-          // video1.pause();
-          video2.pause();
-        }
-        play.classList.toggle("active");
-        slider.classList.toggle("active");
-        content.classList.toggle("active");
-        form.classList.toggle("active");
-        sci.classList.toggle("active");
-      }
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse
+      impedit cupiditate, quisquam reprehenderit rem nostrum quaerat
+      tempore molestias magnam maxime omnis hic enim, autem tempora
+      tenetur illo excepturi eaque fugiat.
+    </p>
 
-      const slides = document.querySelectorAll(".swiper-slide");
-      let index = 0;
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+      Reprehenderit officiis dolores vitae sed libero ipsa. Aut, eos
+      accusantium, quas at laborum tempore ab quidem eum exercitationem
+      odit excepturi incidunt iste.
+    </p>
 
-      const nextBtn = document.querySelector(".swiper-button-next");
+  </div>
+</section>
 
-      nextBtn.addEventListener("click", rotateSliderUp);
+<section class="full-width-split-screen">
+  <div class="accent">
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit officiis dolores vitae sed libero ipsa. Aut, eos accusantium, quas at laborum tempore ab quidem eum exercitationem odit excepturi incidunt iste.</p>
+    <p>Deleniti voluptates harum nemo eos deserunt? Cum quos blanditiis dignissimos facilis , pariatur vel nostrum consectetur nesciunt in numquam.</p>
+  </div>
+  <img src='https://images.unsplash.com/photo-1689443111223-fdba9d92dbd7?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTE2OTAxMjB8&ixlib=rb-4.0.3&q=85' alt=''>
+</section>
 
-      const prevBtn = document.querySelector(".swiper-button-prev");
+<section class="">
+  <div class="wrapper">
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse impedit cupiditate, quisquam reprehenderit rem nostrum quaerat tempore molestias magnam maxime omnis hic enim, autem tempora tenetur illo excepturi eaque fugiat.</p>
 
-      prevBtn.addEventListener("click", rotateSliderDown);
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit officiis dolores vitae sed libero ipsa. Aut, eos accusantium, quas at laborum tempore ab quidem eum exercitationem odit excepturi incidunt iste.</p>
+  </div>
+</section>
 
-      function rotateSliderUp() {
-        slides[index].classList.remove("active");
-        index++;
-        if (index > slides.length - 1) {
-          index = 0;
-        }
-        slides[index].classList.add("active");
-      }
+<section class="full-width-split-screen">
+  <div class="accent">
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit officiis dolores vitae sed libero ipsa. Aut, eos accusantium, quas at laborum tempore ab quidem eum exercitationem odit excepturi incidunt iste.</p>
+    <p>Deleniti voluptates harum nemo eos deserunt? Cum quos blanditiis dignissimos facilis , pariatur vel nostrum consectetur nesciunt in numquam.</p>
+  </div>
+  <div class="primary">
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit officiis dolores vitae sed libero ipsa. Aut, eos accusantium, quas at laborum tempore ab quidem eum exercitationem odit excepturi incidunt iste.</p>
+    <p>Deleniti voluptates harum nemo eos deserunt? Cum quos blanditiis dignissimos facilis , pariatur vel nostrum consectetur nesciunt in numquam.</p>
+  </div>
+</section>
 
-      function rotateSliderDown() {
-        slides[index].classList.remove("active");
-        index--;
-        if (index < 0) {
-          index = slides.length - 1;
-        }
-        slides[index].classList.add("active");
-      }
-    </script>
+<section class="">
+  <div class="wrapper">
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse impedit cupiditate, quisquam reprehenderit rem nostrum quaerat tempore molestias magnam maxime omnis hic enim, autem tempora tenetur illo excepturi eaque fugiat.</p>
 
-    <!-- <h1 style="display: none;">URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit officiis dolores vitae sed libero ipsa. Aut, eos accusantium, quas at laborum tempore ab quidem eum exercitationem odit excepturi incidunt iste.</p>
+  </div>
+</section>
 
-    <div class="container" style="display: none;">
-      <div class="box">
-        <span style="--i:1;">
-          <img src="../AJAX/slides/348752785_505207435051669_8291971845639749599_n.jpg" alt="">
-        </span>
-        <span style="--i:2;">
-          <img src="../AJAX/slides/356798994_967012961190529_4412407967034851009_n.jpg" alt="">
-        </span>
-        <span style="--i:3;">
-          <img src="../AJAX/slides/356940129_1021872482095940_7163622879331713946_n.jpg" alt="">
-        </span>
-        <span style="--i:4;">
-          <img src="../AJAX/slides/358794262_2029410497404504_8220717208730657446_n.jpg" alt="">
-        </span>
-        <span style="--i:5;">
-          <img src="../AJAX/slides/361293658_1300947700520880_5496842987114781813_n.jpg" alt="">
-        </span>
-        <span style="--i:6;">
-          <img src="../AJAX/slides/363501547_634324178451363_8761577603587065923_n.jpg" alt="">
-        </span>
-        <span style="--i:7;">
-          <img src="../AJAX/slides/366450015_726469829245996_6761655007762136773_n.jpg" alt="">
-        </span>
-        <span style="--i:8;">
-          <img src="../AJAX/slides/369574743_310081231683408_1150608101548640433_n.jpg" alt="">
-        </span>
-      </div>
-      <div class="btns">
-        <div class="btn prev">
-          <button>prev</button>
-        </div>
-        <div class="btn next">
-          <button>next</button>
-        </div>
-      </div>
+<section class="full-width-split-screen">
+  <img src="https://images.unsplash.com/photo-1689046194076-62199393c464?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTE1MDg5Mjl8&ixlib=rb-4.0.3&q=85" alt="" />
+  <img src='https://images.unsplash.com/photo-1689443111223-fdba9d92dbd7?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTE2OTAxMjB8&ixlib=rb-4.0.3&q=85' alt='' />
+</section>
+<section class="">
+  <div class="wrapper">
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse impedit cupiditate, quisquam reprehenderit rem nostrum quaerat tempore molestias magnam maxime omnis hic enim, autem tempora tenetur illo excepturi eaque fugiat.</p>
 
-      <script>
-        // const prevBtn = document.querySelector(".prev");
-        // const nextBtn = document.querySelector(".next");
-        const box = document.querySelector(".box");
-        let degrees = 0;
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit officiis dolores vitae sed libero ipsa. Aut, eos accusantium, quas at laborum tempore ab quidem eum exercitationem odit excepturi incidunt iste.</p>
 
-        // prevBtn.addEventListener("click", () => {
-        //   degrees += 45;
-        //   box.style.transform = `perspective(1000px) rotateY(${degrees}deg)`;
-        // })
+</section>
 
-        // nextBtn.addEventListener("click", () => {
-        //   degrees -= 45;
-        //   box.style.transform = `perspective(1000px) rotateY(${degrees}deg)`;
-        // })
-      </script>
-    </div>
+    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
@@ -1009,6 +128,51 @@
       // Convert URLSearchParams Object to Query String
       console.log(uspFromString.toString());
       console.log(uspFromObject.toString());
+    </script>
+
+    <script>
+        // 05. PC Game Shop
+
+  function calcPCGameShopSales(params) {
+    const sales = Number(params[0]);
+    let f = 0;
+    let h = 0;
+    let o = 0;
+    let r = 0;
+
+    for (let sale = 1; sale <= sales; sale++) {
+      let game = params[sale];
+      
+      switch (game) {
+        case "Hearthstone":
+          h++;
+          break;
+        case "Fornite":
+          f++
+          break;
+        case "Overwatch":
+          o++;
+          break;
+        default:
+          r++;
+          break;
+      }
+    }
+
+    const fP = (f / sales) * 100;
+    const hP = (h / sales) * 100;
+    const oP = (o / sales) * 100;
+    const rP = (r / sales) * 100;
+    
+    console.log(`Hearthstone - ${hP.toFixed(2)}%`);
+    console.log(`Fornite - ${fP.toFixed(2)}%`);
+    console.log(`Overwatch - ${oP.toFixed(2)}%`);
+    console.log(`Others - ${rP.toFixed(2)}%`);
+
+  }
+
+  calcPCGameShopSales(["4", "Hearthstone", "Fornite", "Overwatch", "Counter-Strike"]);
+  calcPCGameShopSales(["3", "Hearthstone", "Diablo 2", "Star Craft 2"]);
     </script>
   </body>
 </html>
