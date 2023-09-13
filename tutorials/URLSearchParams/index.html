@@ -4,214 +4,140 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
-    <style>
-      :root {
-  --clr-primary: hsl(229 33% 21%);
-  --clr-secondary: #302047;
-  --clr-accent: hsl(21deg 85% 60%);
-
-  --padding-inline-1rem: 1rem;
-  --max-width-50rem: 50rem;
-
-  --section-padding-block: 3rem;
-}
-
-body {
-  margin: 0;
-  color: white;
-  font-size: 1.125rem;
-  font-family: Georgia, serif;
-  line-height: 1.7;
-  background-color: var(--clr-primary);
-  background-image: linear-gradient(to bottom right, blue, purple, red);
-  background-blend-mode: multiply;
-}
-
-img {
-  max-width: 100%;
-  display: block;
-}
-
-h1 {
-  margin-bottom: 1.5rem;
-  font-size: clamp(3rem, 10vw, 5rem);
-  line-height: 1;
-}
-
-section {
-  padding-block: 3rem;
-}
-
-.primary {
-  color: white;
-  background-color: var(--clr-primary);
-}
-
-.secondary {
-  color: white;
-  background-color: var(--clr-secondary);
-}
-
-.accent {
-  background-color: var(--clr-accent);
-}
-
-.button {
-  display: inline-flex;
-  padding: 0.75em 1.5em;
-  color: var(--clr-primary);
-  font-size: 0.875em;
-  font-weight: 700;
-  text-decoration: none;
-  text-transform: uppercase;
-  background: var(--clr-accent);
-}
-
-.button:hover,
-.button:focus {
-  background-color: white;
-}
-
-.wrapper {
-  max-width: var(--max-width-50rem);
-  margin-inline: auto;
-  padding-inline: var(--padding-inline-1rem);
-}
-
-.full-width-split-screen > div {
-  /* background-color: red; */
-  padding-inline: var(--padding-inline-1rem);
-}
-
-@media (min-width: 600px) {
-  .full-width-split-screen {
-    /* position: relative; */
-    display: grid;
-    grid-template-columns: 
-    minmax(var(--padding-inline-1rem), 1fr) 
-    minmax(0, calc(var(--max-width-50rem) / 2)) 
-    minmax(0, calc(var(--max-width-50rem) / 2)) 
-    minmax(var(--padding-inline-1rem), 1fr);
-    overflow: hidden;
-  }
-  .full-width-split-screen img:first-child {
-    grid-column: 1 / 3;
-    z-index: 1;
-  }
-  .full-width-split-screen img:last-child {
-    grid-column: 3 / -1;
-    z-index: 1;
-  }
-  .full-width-split-screen > div {
-    position: relative;
-    display: grid;
-    place-content: center;
-    justify-items: start;
-    /* box-shadow: 100vw 0px 0px red; */
-  }
-  .full-width-split-screen > div:first-child {
-    grid-column: 2 / 3;
-  }
-  .full-width-split-screen > div::before {
-    position: absolute;
-    top: 0;
-    left: 100%;
-    content: "";
-    width: 100vw;
-    height: 100%;
-    background: inherit;
-    /* grid-column: 4 / 5; */
-  }
-  .full-width-split-screen > div::after {
-    position: absolute;
-    top: 0;
-    right: 100%;
-    content: "";
-    width: 100vw;
-    height: 100%;
-    background: inherit;
-    /* grid-column: 4 / 5; */
-  }
-}
-    </style>
   </head>
   <body>
-<section>
-  <div class="wrapper">
-    <h1>Full-width on one side only</h1>
-  </div>
-</section>
-
-<section class="full-width-split-screen">
-  <img src="https://images.unsplash.com/photo-1689046194076-62199393c464?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTE1MDg5Mjl8&ixlib=rb-4.0.3&q=85" alt="" />
-  <div class="primary">
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit officiis dolores vitae sed libero ipsa.
-    </p>
-    <a href="#" class="button">Keep reading</a>
-  </div>
-</section>
-
-<section>
-  <div class="wrapper">
-
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse impedit cupiditate, quisquam reprehenderit rem nostrum quaerat tempore molestias magnam maxime omnis hic enim, autem tempora tenetur illo excepturi eaque fugiat.
-    </p>
-
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit officiis dolores vitae sed libero ipsa. Aut, eos accusantium, quas at laborum tempore ab quidem eum exercitationem odit excepturi incidunt iste.
-    </p>
-
-  </div>
-</section>
-
-<section class="full-width-split-screen">
-  <div class="accent">
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit officiis dolores vitae sed libero ipsa. Aut, eos accusantium, quas at laborum tempore ab quidem eum exercitationem odit excepturi incidunt iste.</p>
-    <p>Deleniti voluptates harum nemo eos deserunt? Cum quos blanditiis dignissimos facilis , pariatur vel nostrum consectetur nesciunt in numquam.</p>
-  </div>
-  <img src='https://images.unsplash.com/photo-1689443111223-fdba9d92dbd7?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTE2OTAxMjB8&ixlib=rb-4.0.3&q=85' alt=''>
-</section>
-
-<section class="">
-  <div class="wrapper">
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse impedit cupiditate, quisquam reprehenderit rem nostrum quaerat tempore molestias magnam maxime omnis hic enim, autem tempora tenetur illo excepturi eaque fugiat.</p>
-
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit officiis dolores vitae sed libero ipsa. Aut, eos accusantium, quas at laborum tempore ab quidem eum exercitationem odit excepturi incidunt iste.</p>
-  </div>
-</section>
-
-<section class="full-width-split-screen">
-  <div class="accent">
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit officiis dolores vitae sed libero ipsa. Aut, eos accusantium, quas at laborum tempore ab quidem eum exercitationem odit excepturi incidunt iste.</p>
-    <p>Deleniti voluptates harum nemo eos deserunt? Cum quos blanditiis dignissimos facilis , pariatur vel nostrum consectetur nesciunt in numquam.</p>
-  </div>
-  <div class="primary">
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit officiis dolores vitae sed libero ipsa. Aut, eos accusantium, quas at laborum tempore ab quidem eum exercitationem odit excepturi incidunt iste.</p>
-    <p>Deleniti voluptates harum nemo eos deserunt? Cum quos blanditiis dignissimos facilis , pariatur vel nostrum consectetur nesciunt in numquam.</p>
-  </div>
-</section>
-
-<section class="">
-  <div class="wrapper">
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse impedit cupiditate, quisquam reprehenderit rem nostrum quaerat tempore molestias magnam maxime omnis hic enim, autem tempora tenetur illo excepturi eaque fugiat.</p>
-
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit officiis dolores vitae sed libero ipsa. Aut, eos accusantium, quas at laborum tempore ab quidem eum exercitationem odit excepturi incidunt iste.</p>
-  </div>
-</section>
-
-<section class="full-width-split-screen">
-  <img src="https://images.unsplash.com/photo-1689046194076-62199393c464?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTE1MDg5Mjl8&ixlib=rb-4.0.3&q=85" alt="" />
-  <img src='https://images.unsplash.com/photo-1689443111223-fdba9d92dbd7?crop=entropy&cs=srgb&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2OTE2OTAxMjB8&ixlib=rb-4.0.3&q=85' alt='' />
-</section>
-<section class="">
-  <div class="wrapper">
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse impedit cupiditate, quisquam reprehenderit rem nostrum quaerat tempore molestias magnam maxime omnis hic enim, autem tempora tenetur illo excepturi eaque fugiat.</p>
-
-    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reprehenderit officiis dolores vitae sed libero ipsa. Aut, eos accusantium, quas at laborum tempore ab quidem eum exercitationem odit excepturi incidunt iste.</p>
-
-</section>
+    <div class="banner">
+      <header>
+        <div class="nav-container">
+          <div >
+            <a href="#" class="menu" onclick="toggleNav()">
+              <i class="fa fa-th-large"></i>
+            </a>
+            <a href="#" class="logo">logo</a>
+          </div>
+          <nav>
+            <ul>
+              <li><a href="#">health</a></li>
+              <li><a href="#">fitness</a></li>
+              <li><a href="#">workout</a></li>
+              <li><a href="#">contact</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="search-bar-container">
+          <input type="text" name="search" id="search" placeholder="Search">
+          <i class="fa fa-search"></i>
+        </div>
+      </header>
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide visible relative">
+            <img src="./assets/fitness-model-1.png" alt="" class="model-img">
+          </div>
+          <div class="swiper-slide">
+            <img src="./assets/fitness-model-2.png" alt="" class="model-img">
+          </div>
+          <div class="swiper-slide">
+            <img src="./assets/fitness-model-3.png" alt="" class="model-img">
+          </div>
+        </div>
+        <div class="content">
+          <h2>start shining</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit tempore non quam consectetur velit ducimus, dolores cupiditate obcaecati aut molestias voluptatem similique, amet aperiam eligendi culpa beatae suscipit nemo totam. Hic esse voluptas inventore? Odio repellendus labore tempora numquam quis perspiciatis sequi architecto eligendi enim.
+          </p>
+          <a href="#" onclick="toggleVideo()">join us</a>
+        </div>
+        <div class="control">
+          <button class="swiper-button-prev">
+            <i class="fa fa-angle-up"></i>
+          </button>
+          <div class="swiper-pagination">
+            <span class="bullet active"></span>
+            <span class="bullet"></span>
+            <span class="bullet"></span>
+          </div>
+          <button class="swiper-button-next">
+            <i class="fa fa-angle-down"></i>
+          </button>
+        </div>
+      </div>
+      <h1 class="title-left">fitness</h1>
+      <h1 class="title-right">life style</h1>
+      <video src="./assets/fitness-1.mp4" class="bg-video" loop muted></video>
+      <div class="video">
+        <div class="services">
+          <h3>health</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus nihil nisi laboriosam cumque? Perspiciatis ullam cum perferendis delectus.
+          </p>
+        </div>
+        <div class="services">
+          <h3>fitness</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores repellat rerum ullam vel.
+          </p>
+        </div>
+        <div class="services">
+          <h3>workout</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque at quaerat perferendis distinctio, dolorum quo incidunt enim tempora, itaque in voluptates sit commodi.
+          </p>
+        </div>
+        <video src="./assets/fitness-1.mp4" loop muted></video>
+        <div>
+          <button href="#" class="play" onclick="toggleVideo()">
+            <i class="fa fa-play"></i>
+            <i class="fa fa-pause"></i>
+          </button>
+        </div>
+      </div>
+      <form action="">
+        <h2>ready to join us</h2>
+        <input type="text" name="username" id="username" placeholder="Username">
+        <input type="text" name="email" id="email" placeholder="Email Address">
+        <input type="password" name="password" id="password" placeholder="Password">
+        <input type="password" name="confirm" id="confirm" placeholder="Confirm Password">
+        <input type="submit" value="Sign Up">
+        <p class="sign-up">
+          already have an account?
+          <a href="#">sign in</a>
+        </p>
+      </form>
+    </div>
+    <ul class="sci">
+      <li>
+        <a href="#">
+          <i class="fa fa-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="fa fa-instagram"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="fa fa-youtube-play"></i>
+        </a>
+      </li>
+    </ul>
+    <script>
+       function toggleNav() {
+        const nav = document.querySelector("nav");
+        const menu = document.querySelector(".menu");
+        nav.classList.toggle("active");
+        menu.classList.toggle("active");
+      }
+       function rotateSliderUp() {
+        slides[index].classList.remove("visible");
+        index++;
+        if (index > slides.length - 1) {
+          index = 0;
+        }
+        slides[index].classList.add("visible");
+      }
+    </script>
 
     <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
