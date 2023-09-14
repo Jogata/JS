@@ -4,317 +4,135 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      fieldset {
-        display: none;
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      
-      body {
-      width: 100%;
-        /* min-height: 100vh; */
-        font-family: Georgia, serif;
-        background-image: url("./images/banner.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-      }
-      
-      header {
-        position: relative;
-        width: 100%;
-        /* height: 100%; */
-        min-height: 100vh;
-      }
-      
-      .top-header {
-        width: 100%;
-        max-width: 170rem;
-        margin: auto;
-        padding: 0.5rem min(2%, 3rem);
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        border-bottom: 1px solid #4a4a4a;
-      }
-      
-      .left {
-        display: flex;
-        flex-wrap: wrap;
-      }
-      .left p {
-        margin: auto;
-        padding: 0.5rem 1rem;
-        color: #999;
-        font-size: 1rem;
-        border-right: 1px solid #fff;
-        transition: color 400ms;
-        cursor: pointer;
-      }
-      .left p:last-child {
-        /* padding-left: 1rem; */
-        border-right: 0px solid transparent;
-      }
-      .left p:hover {
-        color: #fff;
-      }
-      .left p i {
-        padding-right: 0.6em;
-        font-size: 1rem;
-        color: #fb5b21;
-      }
-      
-      .right {
-        padding: 0.5rem 1rem;
-      }
-      .right i {
-        padding: 0.5rem 1rem;
-        color: #afafaf;
-        font-size: 1rem;
-        border-right: 1px solid #fff;
-        transition: color 400ms;
-        cursor: pointer;
-      }
-      .right i:last-child {
-        padding-left: 1rem;
-        padding-right: 0;
-        border-right: 0px solid transparent;
-      }
-      .right i:hover {
-        color: #fb5b21;
-      }
-      
-      .header {
-      width: 100%;
-        max-width: 170rem;
-        margin: auto;
-        padding: 1rem;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-      }
-      
-      .logo {
-        width: 9rem;
-        cursor: pointer;
-      }
-      .logo img {
-        width: 100%;
-      }
-      
-      .menu ul {
-        padding: 1rem 0;
-        display: flex;
-        flex-wrap: wrap;
-      }
-      .menu ul li {
-        list-style: none;
-        margin-right: 1.5rem;
-      }
-      .menu ul li:last-child {
-        margin-right: 0;
-      }
-      .menu ul li a {
-        display: inline-block;
-        padding: 0.4em;
-        color: #fff;
-        font-size: 1rem;
-        font-weight: 500;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        text-decoration: none;
-        transition: color 400ms;
-      }
-      .menu ul li a:hover {
-        color: #fb5b21;
-      }
-
-      .banner-text {
-        /* position: absolute; */
-        /* top: 0; */
-        /* right: 0; */
-        /* bottom: 0; */
-        width: fit-content;
-        min-width: 50%;
-        /* height: 70%; */
-        margin-left: auto;
-        padding: 4rem;
-        padding: max(20vh, 4rem) 0;
-      }
-      .banner-text h3 {
-      width: 100%;
-        color: #fff;
-        font-size: 2.5rem;
-        font-weight: 400;
-        /* text-transform: capitalize; */
-        text-transform: capitalize;
-      }
-      .banner-text h1 {
-      width: 100%;
-        color: #fff;
-        font-size: 3.4rem;
-        font-weight: 400;
-        /* text-transform: capitalize; */
-        text-transform: capitalize;
-      }
-      .banner-text h1 span {
-        font-weight: 600;
-      }
-      .banner-text p {
-        padding: 1em 0;
-        color: #fff;
-        /* width: 60%; */
-        max-width: 35rem;
-        line-height: 1.6;
-      }
-      
-      .sci {
-        display: flex;
-        padding: 1rem 0;
-      }
-      .sci a {
-        margin-right: 1rem;
-        text-decoration: none;
-      }
-      .sci i {
-        width: 2.5rem;
-        height: 2.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #fb5b21;
-        font-size: 1rem;
-        border: 1px solid #fff2;
-        border-radius: 50%;
-        transition: all 400ms;
-        cursor: pointer;
-      }
-      .sci i:hover {
-        color: #fff;
-        background-color: #fb5b21;
-      }
-      
-      .banner-text button {
-        padding: 0.4em 1em;
-        color: #fff;
-        font-size: 1rem;
-        font-family: inherit;
-        text-transform: uppercase;
-        border: 1px solid #fb5b21;
-        border-radius: 2em;
-        /* background-color: transparent; */
-        background-color: transparent;
-        transition: all 400ms;
-        cursor: pointer;
-      }
-      .banner-text button:hover {
-        background-color: #fb5b21;
-      }
-      
-      /* .banner-text, 
-      header {
-        border: 1px solid red;
-      } */
-      
-      .flex-container {
-      width: 100%;
-        display: flex;
-      }
-      
-      .banner-text {
-        width: min-content;
-        margin-left: auto;
-      }
-      
-      @media screen and (max-width: 1100px) {
-        .banner-text {
-          width: auto;
-          margin: auto;
-          text-align: center;
-        }
-        .sci {
-          display: block;
-        }
-        .sci a {
-          display: inline-block;
-        }
-      }
-    </style>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   </head>
   <body>
-    <header>
-      <div class="top-header">
-        <div class="left">
-          <p>
-            <i class="fa fa-phone" aria-hidden="true"></i>
-            + 123 456 78910
-          </p>
-          <p>
-            <i class="fa fa-envelope-o" aria-hidden="true"></i>
-          user1211@gmail.com
-          </p>
-        </div>
-        <div class="right">
-          <i class="fa fa-search" aria-hidden="true"></i>
-          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-        </div>
-      </div>
-      <div class="header">
-        <div class="logo">
-          <img src="./images/logo.png" alt="">
-        </div>
-        <div class="menu">
-          <ul>
-            <li><a href="#">home</a></li>
-            <li><a href="#">about</a></li>
-            <li><a href="#">classes</a></li>
-            <li><a href="#">shedule</a></li>
-            <li><a href="#">trainers</a></li>
-            <li><a href="#">news</a></li>
-            <li><a href="#">pages</a></li>
-            <li><a href="#">contact</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="flex-container">
-        <div class="banner-text">
-          <h3>hi</h3>
-          <h1>i'm <span>john smith</span></h1>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia maxime error ipsa assumenda exercitationem. Odio, ad impedit veritatis odit incidunt, aliquid id laudantium maiores tenetur quo, eligendi cumque.</p>
-          <div class="sci">
-            <a href="#f">
-              <i class="fa fa-facebook" aria-hidden="true"></i>
-            </a>
-            <a href="#t">
-              <i class="fa fa-twitter" aria-hidden="true"></i>
-            </a>
-            <a href="#l">
-              <i class="fa fa-linkedin" aria-hidden="true"></i>
-            </a>
-            <a href="#s">
-              <i class="fa fa-skype" aria-hidden="true"></i>
-            </a>
-          </div>
-          <button>join us</button>
-        </div>
-      </div>
-    </header>
 
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <nav>
+      <ul>
+        <li>
+          <a href="#">gaming</a>
+        </li>
+        <li>
+          <a href="#">music</a>
+        </li>
+        <li>
+          <a href="#" class="cap">css</a>
+        </li>
+        <li>
+          <a href="#">python</a>
+        </li>
+        <li>
+          <a href="#">balls</a>
+        </li>
+        <li>
+          <a href="#">databases</a>
+        </li>
+      </ul>
+    </nav>
 
+    <div class="cards">
+      <div>
+        <img src="" alt="">
+        <span>In stock</span>
+        <h1>HAMA Mouse 182620</h1>
+        <ul>
+          <li>Optical senzor</li>
+          <li>Wireless connection </li>
+          <li>Resolution 1200 dpi</li>
+        </ul>
+        <p>1.100 $</p>
+        <h2>890 $</h2>
+        <button>Add to cart</button>
+      </div>
+      <div>
+        <img src="" alt="">
+        <h1>HAMA Optical Mouse MV-300</h1>
+        <ul>
+          <li>Great wireless optical miss</li>
+          <li>Three buttons and wheel</li>
+          <li>Mouse resolution up to 1200 dpi</li>
+        </ul>
+        <p></p>
+        <h2></h2>
+        <button>Add to cart</button>
+    </div>
+      <div>
+        <img src="" alt="">
+        <h1></h1>
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+        <p></p>
+        <h2></h2>
+        <button>Add to cart</button>
+      </div>
+      <div>
+        <img src="" alt="">
+        <h1></h1>
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+        <p></p>
+        <h2></h2>
+        <button>Add to cart</button>
+      </div>
+    </div>
+
+    <footer>
+      <div id="col-1">
+        <h1>Shop trade</h1>
+        <a href="#">How the store works</a>
+        <a href="#">Contact me</a>
+        <a href="#">Add a tarde</a>
+        <a href="#">Buisness</a>
+        <a href="#">Usage Agreement</a>
+        <a href="#">Blog</a>
+        <a href="#">Allowed use of cookies</a>
+        <a href="#">Rulebook about yourself</a>
+    </div>
+      <div id="col-2">
+        <h2>Trade Application</h2>
+        <p>With this application you have fashion information at hand! New items, collections and discounts - all in one place and for free.</p>
+        <a href="#">
+          <img src="./slides/appstore.png" alt="">
+        </a>
+        <a href="#">
+          <img src="./slides/googleplay.png" alt="">
+        </a>
+        <h1>Store logo</h1>
+        <p>Currently you can find 637,448 items from 2,000 brands on our website.</p>
+        <a href="#">
+          <i>facebook</i>
+        </a>
+        <a href="#">
+          <i>instagram</i>
+        </a>
+      </div>
+      <div id="col-3">
+        <h2 class="cap">country</h2>
+        <form action="#" method="post">
+          <select name="" id="">
+            <option value="#">slovenia</option>
+            <option value="#">serbia</option>
+            <option value="#">croatia</option>
+            <option value="#">bulgaria</option>
+          </select>
+          <p>Fashion inspiration group</p>
+          <a href="#">www.blog</a>
+        </form>
+      </div>
+    </footer>
+    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
     <!-- ================= Get data from local JSON file ================= -->
-    <!-- <fieldset> -->
-      <!-- <legend>Get all users from local JSON file</legend> -->
-      <!-- <button id="local">Send Request</button> -->
-    <!-- </fieldset> -->
+    <fieldset>
+      <legend>Get all users from local JSON file</legend>
+      <button id="local">Send Request</button>
+    </fieldset>
 
     <script>
       const btnLocalJSON = document.querySelector("#local");
@@ -341,11 +159,11 @@
     </script>
 
     <!-- ================= Get data from GitHub API ================= -->
-    <!-- <fieldset> -->
-      <!-- <legend>Get users from GitHub API</legend> -->
-      <!-- <button id="github">Send Request</button> -->
-      <!-- <span id="userGithub"></span> -->
-    <!-- </fieldset> -->
+    <fieldset>
+      <legend>Get users from GitHub API</legend>
+      <button id="github">Send Request</button>
+      <span id="userGithub"></span>
+    </fieldset>
 
     <script>
       const btnGithub = document.querySelector("#github");
