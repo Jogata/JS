@@ -4,9 +4,129 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
+    <style>
+      .search-bar {
+        position: relative;
+        width: 220px;
+        z-index: 100;
+      }
+
+      .search-bar-container input, 
+      .search-bar-container i {
+        border: 1px solid red;
+      }
+
+      .banner {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        padding: 0 100px;
+        display: flex;
+        justify-content: center;
+        background-image: linear-gradient(-45deg, #d8e7fc, #e8d8fc);
+        align-items: end;
+        transition: 0.5s;
+        overflow: hidden;
+      }
+
+      .banner .video .play {
+        position: relative;
+        border: 1px solid red;
+      }
+      .banner .video .play::after {
+        position: absolute;
+        content: "";
+        width: 20px;
+        height: 20px;
+        border-top: 2px solid #fff;
+        border-right: 2px solid #fff;
+      }
+
+      @media screen and (max-width: 600px) {
+        header {
+          top: 20px;
+          right: 20px;
+          left: 20px;
+          padding: 10px;
+        }
+        header::before {
+          width: 130px;
+          height: 45px;
+        }
+        header::after {
+          width: 220px;
+          height: 45px;
+        }
+        .search {
+          width: 200px;
+        }
+        .nav {
+          top: 65px;
+          bottom: 20px;
+          left: 20px;
+        }
+        .nav.active {
+          width: 200px;
+        }
+        .banner {
+          padding: 0 20px;
+        }
+        .banner::after {
+          top: 20px;
+          left: 20px;
+          right: 20px;
+          bottom: 20px;
+          box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+        }
+        .swiper .model-img {
+          position: absolute;
+          top: -20px;
+          left: 0;
+          max-width: 120%;
+          padding-top: 100px;
+          transition: 0.5s ease-in-out;
+          z-index: 10;
+        }
+        .banner .title-left {
+          left: -65%;
+          font-size: 8em;
+          letter-spacing: 6px;
+        }
+        .banner .title-right {
+          display: none;
+        }
+        .banner .content {
+          top: 60%;
+          left: 50%;
+          gap: 20px;
+          align-items: center;
+          transform: translate(-50%, -50%) scale(1);
+        }
+        .banner .content h2 {
+          font-size: 1.6em;
+          font-weight: 500;
+        }
+      }
+
+      .swiper {
+        /* z-index: -1; */
+      }
+
+      .banner .video video {
+        display: initial;
+      }
+      video {
+        display: none;
+      }
+      .swiper {
+        border: 1px solid red;
+      }
+    </style>
   </head>
   <body>
+    
     <div class="banner">
+
       <header>
         <div class="nav-container">
           <div >
@@ -29,6 +149,7 @@
           <i class="fa fa-search"></i>
         </div>
       </header>
+
       <div class="swiper">
         <div class="swiper-wrapper">
           <div class="swiper-slide visible relative">
@@ -62,9 +183,11 @@
           </button>
         </div>
       </div>
+
       <h1 class="title-left">fitness</h1>
       <h1 class="title-right">life style</h1>
       <video src="./assets/fitness-1.mp4" class="bg-video" loop muted></video>
+
       <div class="video">
         <div class="services">
           <h3>health</h3>
@@ -92,6 +215,7 @@
           </button>
         </div>
       </div>
+
       <form action="">
         <h2>ready to join us</h2>
         <input type="text" name="username" id="username" placeholder="Username">
@@ -104,7 +228,9 @@
           <a href="#">sign in</a>
         </p>
       </form>
+
     </div>
+
     <ul class="sci">
       <li>
         <a href="#">
@@ -122,14 +248,16 @@
         </a>
       </li>
     </ul>
+
     <script>
-       function toggleNav() {
+      function toggleNav() {
         const nav = document.querySelector("nav");
         const menu = document.querySelector(".menu");
         nav.classList.toggle("active");
         menu.classList.toggle("active");
       }
-       function rotateSliderUp() {
+
+      function rotateSliderUp() {
         slides[index].classList.remove("visible");
         index++;
         if (index > slides.length - 1) {
@@ -139,7 +267,7 @@
       }
     </script>
 
-    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
