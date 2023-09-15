@@ -4,398 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-      }
-
-      body {
-        min-height: 99vh;
-        background-image: url("../../../CSS/assets/img/scenic-view-of-lake-against-sky-during-sunset-copy.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-      }
-
-      nav {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-      }
-
-      nav ul {
-        padding: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      nav ul li {
-        list-style: none;
-        position: relative;
-        margin: 5px;
-        border: 1px solid transparent;
-        cursor: pointer;
-      }
-      nav ul li::before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        border: 1px solid transparent;
-        border-top-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-        background-color: rgba(0, 0, 0, 0.4);
-        transition: all 0.3s;
-        z-index: -1;
-      }
-      nav ul li:hover::before {
-        border-color: dodgerblue;
-        background-color: rgba(255, 255, 255, 0.4);
-      }
-      
-      nav ul li a {
-        display: inline-block;
-        padding: 20px 45px;
-        color: white;
-        font-size: 22px;
-        font-family: Georgia, Times, serif;
-        text-transform: capitalize;
-        text-decoration: none;
-        transition: color 0.3s;
-      }
-
-      nav ul li:hover a {
-        color: dodgerblue;
-      }
-
-      footer {
-        /* position: fixed; */
-        /* bottom: 0; */
-        display: flex;
-        width: 100%;
-        padding: 45px;
-        color: white;
-        font-size: 15px;
-        font-family: Georgia, Times, serif;
-        text-shadow: 0 0 3px black;
-        background-color: #003366;
-      }
-
-      #col-1 {
-        width: 27%;
-        padding-left: 100px;
-      }
-
-      #col-1 a {
-        display: block;
-        padding: 5px;
-        color: white;
-        line-height: 20px;
-        text-decoration: none;
-        transition: color 0.3s;
-      }
-      #col-1 a:hover {
-        color: lightskyblue;
-      }
-
-      #col-2 {
-        width: 27%;
-        padding-left: 30px;
-        padding-right: 30px;
-        text-align: center;
-        border-left: 1px solid gray;
-      }
-
-      #col-2 img {
-        width: 150px;
-      }
-      #col-2 a:first-of-type img {
-        filter: invert(1);
-      }
-
-      #col-2 i {
-        padding-left: 15px;
-        color: white;
-        font-size: 25px;
-        transition: color 0.3s;
-        cursor: pointer;
-      }
-      #col-2 i:hover {
-        color: lightskyblue;
-      }
-
-      #col-2 p {
-        padding: 15px;
-      }
-
-      #col-3 {
-        width: 36%;
-        padding-left: 70px;
-        border-left: 1px solid gray;
-        line-height: 25px;
-      }
-
-      #col-3 form select {
-        width: 260px;
-        margin: 5px 0 10px;
-        padding: 9px;
-        color: white;
-        text-transform: capitalize;
-        border: 1px solid gray;
-        background-color: #003366;
-      }
-
-      option {
-        text-transform: capitalize;
-        background-color: #003366;
-      }
-
-      #col-3 a {
-        color: white;
-        transition: color 0.3s;
-      }
-      #col-3 a:hover {
-        color: lightskyblue;
-      }
-
-      .cards {
-        position: relative;
-        /* min-height: 100vh; */
-        margin: 10rem auto;
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        /* align-items: center; */
-        justify-content: center;
-      }
-
-      .cards div {
-        /* height: 100%; */
-        width: 310px;
-        padding: 5px;
-        text-align: center;
-        /* border: 1px solid red; */
-        border-radius: 3px;
-        background-color: white;
-        box-shadow: 1px 1px 1px 0 black;
-      }
-
-      .cards span {
-        color: green;
-        font-weight: bold;
-      }
-
-      .cards img {
-        /* width: 250px; */
-        width: 100%;
-        height: 350px;
-        /* height: 100%; */
-        object-fit: cover;
-      }
-
-      .cards h1 {
-        width: 100%;
-        height: 50px;
-        font-size: 17px;
-        line-height: 1.2;
-        clear: both;
-        color: #333;
-        transition: color 0.3s;
-        cursor: pointer;
-      }
-      .cards h1:hover {
-        color: black;
-      }
-
-      .cards ul {
-        float: left;
-        width: 100%;
-        height: 70px;
-        padding-bottom: 5px;
-        text-align: center;
-        list-style-type: none;
-      }
-
-      .cards li {
-        color: gray;
-        font-size: 14px;
-        text-indent: 5px;
-      }
-
-      .cards p {
-        /* float: right; */
-        color: gray;
-        text-decoration: line-through;
-        text-align: right;
-      }
-
-      .cards h2 {
-        /* float: right; */
-        text-align: right;
-        color: red;
-      }
-
-      .cards button {
-        float: left;
-        position: relative;
-        bottom: -30px;
-        background-color: #46b05a;
-        border: none;
-        outline: none;
-        font-family: inherit;
-        width: 70px;
-        height: 70px;
-        color: white;
-        border-radius: 50%;
-        transition: all 0.3s;
-        cursor: pointer;
-      }
-      .cards button:hover {
-        background-color: green
-      }
-
-      .cap {
-        text-transform: uppercase;
-      }
-
-      fieldset {
-        display: none;
-      }
-    </style>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   </head>
   <body>
-
-    <nav>
-      <ul>
-        <li>
-          <a href="#">gaming</a>
-        </li>
-        <li>
-          <a href="#">music</a>
-        </li>
-        <li>
-          <a href="#" class="cap">css</a>
-        </li>
-        <li>
-          <a href="#">python</a>
-        </li>
-        <li>
-          <a href="#">balls</a>
-        </li>
-        <li>
-          <a href="#">databases</a>
-        </li>
-      </ul>
-    </nav>
-
-    <div class="cards">
-      <div>
-        <img src="./slides/348752785_505207435051669_8291971845639749599_n.jpg" alt="">
-        <span>In stock</span>
-        <h1>HAMA Mouse 182620</h1>
-        <ul>
-          <li>Optical senzor</li>
-          <li>Wireless connection </li>
-          <li>Resolution 1200 dpi</li>
-        </ul>
-        <p>1.100 $</p>
-        <h2>890 $</h2>
-        <button>Add to cart</button>
-      </div>
-      <div>
-        <img src="./slides/356798994_967012961190529_4412407967034851009_n.jpg" alt="">
-        <span>In stock</span>
-        <h1>HAMA Optical Mouse MV-300</h1>
-        <ul>
-          <li>Great wireless optical miss</li>
-          <li>Three buttons and wheel</li>
-          <li>Mouse resolution up to 1200 dpi</li>
-        </ul>
-        <p>1.200 $</p>
-        <h2>990 $</h2>
-        <button>Add to cart</button>
-      </div>
-      <div>
-        <img src="./slides/356940129_1021872482095940_7163622879331713946_n.jpg" alt="">
-        <span>In stock</span>
-        <h1>Hama Laptop Beds 53070 AB</h1>
-        <ul>
-          <li>Laptop compatible</li>
-          <li>Fam diameter 125mm</li>
-          <li>Noise level 20dgBA</li>
-        </ul>
-        <p>2.340 $</p>
-        <h2>1.990 $</h2>
-        <button>Add to cart</button>
-      </div>
-      <div>
-        <img src="./slides/358794262_2029410497404504_8220717208730657446_n.jpg" alt="">
-        <span>In stock</span>
-        <h1>HP Monitor 9RV / AA 23.8 / IPS</h1>
-        <ul>
-          <li>23.8" monitor screen</li>
-          <li>FULL HD Resolution 1920 x 1080 px</li>
-          <li>Brightness 250 nits</li>
-          <li>60HZ frequency</li>
-        </ul>
-        <p>2.430 $</p>
-        <h2>2.199 $</h2>
-        <button>Add to cart</button>
-      </div>
-    </div>
-
-    <footer>
-      <div id="col-1">
-        <h1>Shop trade</h1>
-        <a href="#">How the store works</a>
-        <a href="#">Contact me</a>
-        <a href="#">Add a tarde</a>
-        <a href="#">Buisness</a>
-        <a href="#">Usage Agreement</a>
-        <a href="#">Blog</a>
-        <a href="#">Allowed use of cookies</a>
-        <a href="#">Rulebook about yourself</a>
-      </div>
-      <div id="col-2">
-        <h2>Trade Application</h2>
-        <p>With this application you have fashion information at hand! New items, collections and discounts - all in one place and for free.</p>
-        <a href="#">
-          <img src="./slides/appstore.png" alt="">
-        </a>
-        <a href="#">
-          <img src="./slides/googleplay.png" alt="">
-        </a>
-        <h1>Store logo</h1>
-        <p>Currently you can find 637,448 items from 2,000 brands on our website.</p>
-        <a href="#">
-          <i class="fa fa-facebook"></i>
-        </a>
-        <a href="#">
-          <i class="fa fa-instagram"></i>
-        </a>
-      </div>
-      <div id="col-3">
-        <h2 class="cap">country</h2>
-        <form action="#" method="post">
-          <select name="" id="">
-            <option value="#">slovenia</option>
-            <option value="#">serbia</option>
-            <option value="#">croatia</option>
-            <option value="#">bulgaria</option>
-          </select>
-          <p>Fashion inspiration group</p>
-          <a href="#">www.blog</a>
-        </form>
-      </div>
-    </footer>
-
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
 
@@ -463,104 +75,151 @@
     </script>
 
     <script>
-      // 01. Multiply Number by 2
+      // 06. Theatre Promotions
 
-      function multiplyBytwo(num) {
-        console.log(num * 2);
-      }
+      function calcTicketPrice(day, age) {
+        age = Number(age);
 
-      // multiplyBytwo(2);
-      // multiplyBytwo(5);
-      // multiplyBytwo(20);
-
-      // 02. Student Information
-
-      function printStudentInformation(name, age, grade) {
-        console.log(`Name: ${name}, Age: ${age}, Grade: ${grade.toFixed(2)}`);
-      }
-
-      // printStudentInformation("John", 15, 5.54678);
-      // printStudentInformation("Steve", 16, 2.1426);
-      // printStudentInformation("Marry", 12, 6.00);
-
-      // 03. Excellent grade
-
-      function printExcellentGrade(grade) {
-        if (grade >= 5.5) {
-          console.log("Excellent");
-        } else {
-          console.log("Not excellent");
-        }
-      }
-
-      // printExcellentGrade(5.5);
-      // printExcellentGrade(4.35);
-
-      // 04. Foreign Languages
-
-      function printCountry(lang) {
-        if (lang == "England") {
-          console.log("English");
-        } else if (lang == "USA") {
-          console.log("English");
-        } else if (lang == "Spain") {
-          console.log("Spanish");
-        } else if (lang == "Argentina") {
-          console.log("Spanish");
-        } else if (lang == "Mexico") {
-          console.log("Spanish");
-        } else {
-          console.log("unknown");
-        }
-      }
-
-      // printCountry("USA");
-      // printCountry("Germany");
-      // printCountry("Mexico");
-
-      // 05. Month Printer
-
-      function printMonth(num) {
-        if (num < 1 || num > 12) {
+        if (age < 0 || age > 122) {
           console.log("Error!");
-        } 
-        else if (num == 1) {
-          console.log("January");
-        }
-        else if (num == 2) {
-          console.log("February");
-        }
-        else if (num == 3) {
-          console.log("March");
-        }
-        else if (num == 4) {
-          console.log("April");
-        }
-        else if (num == 5) {
-          console.log("May");
-        }
-        else if (num == 6) {
-          console.log("June");
-        }
-        else if (num == 7) {
-          console.log("July");
-        }
-        else if (num == 8) {
-          console.log("August");
-        }
-        else if (num == 9) {
-          console.log("September");
-        }
-        else if (num == 10) {
-          console.log("October");
-        }
-        else if (num == 11) {
-          console.log("November");
-        }
-        else {
-          console.log("December");
+        } else {
+          switch (day) {
+            case "Weekday":
+              if (age <= 18) {
+                console.log("12$");
+              } else if (age <= 64) {
+                console.log("18$");
+              } else {
+                console.log("12$");
+              }
+              break;
+            case "Weekend":
+              if (age <= 18) {
+                console.log("15$");
+              } else if (age <= 64) {
+                console.log("20$");
+              } else {
+                console.log("15$");
+              }
+              break;
+            case "Holiday":
+              if (age <= 18) {
+                console.log("5$");
+              } else if (age <= 64) {
+                console.log("12$");
+              } else {
+                console.log("10$");
+              }
+              break;
+          }
         }
       }
+
+      // calcTicketPrice("S", -1);
+      // console.log("-----------");
+      // calcTicketPrice("Weekday", 1);
+      // calcTicketPrice("Weekday", 64);
+      // calcTicketPrice("Weekday", 65);
+      // console.log("-----------");
+      // calcTicketPrice("Weekend", 1);
+      // calcTicketPrice("Weekend", 64);
+      // calcTicketPrice("Weekend", 65);
+      // console.log("-----------");
+      // calcTicketPrice("Holiday", 1);
+      // calcTicketPrice("Holiday", 64);
+      // calcTicketPrice("Holiday", 65);
+      // console.log("-----------");
+      // calcTicketPrice("S", 155);
+
+      // 07. Numbers from 1 to 5
+
+      function printNumbersfrom1to5() {
+        for (let i = 1; i <=5 ; i++) {
+          console.log(i);
+        }
+      }
+
+      // 08. Divisible by 3
+
+      function printNumbersDivisibleby3(params) {
+        for (let num = 1; num <= 100; num++) {
+          if (num % 3 == 0) {
+            console.log(num);
+          }
+        }
+      }
+      function printNumbersDivisibleby3(params) {
+        for (let num = 3; num <= 100; num += 3) {
+          console.log(num);
+        }
+      }
+
+      // 09. Numbers from N to 1
+
+      function printNumbersfromNto1(num) {
+        for (let i = num; i > 0; i--) {
+          console.log(i);
+        }
+      }
+      function printNumbersfromNto1(num) {
+
+        while (num > 0) {
+          console.log(num);
+          num--;
+        }
+
+      }
+
+      // printNumbersfromNto1(10);
+
+      // 09. Numbers from M to N
+
+      function printNumbersfromMtoN(start, end) {
+        for (let i = start; i >= end; i--) {
+          console.log(i);
+        }
+      }
+      function printNumbersfromMtoN(start, end) {
+        while (start >= end) {
+          console.log(start);
+          start--;
+        }
+      }
+
+      // printNumbersfromMtoN(6, 2);
+
+      // 11. Sum of Odd Numbers
+
+      function printSumofOddNumbers(count) {
+        let odd = 1;
+        let sum = 0;
+
+        for (let i = 0; i < count; i++) {
+          console.log(odd);
+          sum += odd;
+          odd += 2;
+        }
+
+        console.log(`Sum: ${sum}`);
+      }
+
+      function printSumofOddNumbers(count) {
+        let odd = 1;
+        let sum = 0;
+
+        while (count > 0) {
+          console.log(odd);
+          sum += odd;
+          odd += 2;
+          count--;
+        }
+
+        console.log(`Sum: ${sum}`);
+      }
+
+      printSumofOddNumbers(5);
+      console.log("-----------");
+      printSumofOddNumbers(3);
     </script>
   </body>
 </html>
