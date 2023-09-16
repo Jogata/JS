@@ -6,6 +6,10 @@
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <style>
+      fieldset {
+        display: none;
+      }
+      
       * {
         margin: 0;
         padding: 0;
@@ -67,12 +71,17 @@
           var(--gradient-third) 100%);
       }
 
+      ul {
+        list-style: none;
+      }
+
       button {
         cursor: pointer;
       }
 
       a {
         color: var(--text-primary);
+        text-transform: capitalize;
         text-decoration: none;
         transition: color 300ms;
       }
@@ -92,6 +101,7 @@
       header {
         color: var(--text-primary);
         background: var(--gradient-mobile);
+        background: var(--gradient-bg);
       }
 
       .menu ul {
@@ -114,6 +124,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        text-transform: capitalize;
       }
 
       .title h1 {
@@ -125,7 +136,7 @@
         left: calc(50% - 4em);
         animation: text-opacity 800ms forwards;
         animation-delay: 500ms;
-        opacity: 0;
+        /* opacity: 0; */
         z-index: 2;
       }
       .text-2, 
@@ -169,6 +180,10 @@
         text-align: center;
       }
 
+      .controls h3 {
+        text-transform: capitalize;
+      }
+
       .controls button {
         width: 4em;
         height: 4em;
@@ -195,9 +210,124 @@
         align-items: center;
         justify-content: center;
       }
+      .pagination span {
+        width: 0.8em;
+        height: 0.8em;
+        border-radius: 50%;
+        background-color: var(--pagination);
+        cursor: pointer;
+      }
+      .pagination span.active {
+        background-color: var(--text-primary);
+      }
+
+      .slideCount {
+        position: absolute;
+        top: 20%;
+        right: 10%;
+        letter-spacing: -3px;
+      }
+      .slideCount span:nth-child(1), 
+      .slideCount span:nth-child(2) {
+        font-size: 1.5em;
+      }
+      .slideCount span:nth-child(2), 
+      .slideCount span:nth-child(3) {
+        color: var(--pagination);
+      }
+
+      #about {
+        padding: 2em 2em 1em;
+        color: var(--text-primary);
+        background-color: var(--gradient-third);
+      }
+
+      #about h1 {
+        margin: 1em 0;
+        font-size: 2em;
+      }
+
+      p {
+        margin: 2em 0;
+        font-size: 1.1em;
+        line-height: 30px;
+      }
+
+      @media screen and (max-width: 1000px) {
+        .navbar .container {
+          padding: 2em;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .brand {
+          font-size: 1.7em;
+          font-weight: bold;
+        }
+        .menu-btn {
+          color: var(--text-primary);
+          border: 1px solid currentColor;
+          background-color: transparent;
+          z-index: 4;
+        }
+        .menu-btn i {
+          font-size: 2.5em;
+        }
+        .menu {
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          min-height: 100vh;
+          padding: 4em 2em;
+          background-color: var(--gradient-third);
+          display: flex;
+          gap: 4em;
+          align-items: center;
+          justify-content: space-around;
+          flex-direction: column;
+          transition: 500ms ease-in-out;
+          z-index: 3;
+        }
+        .menu.open {
+          left: 0;
+        }
+      }
+      @media screen and (max-height: 400px) and (max-width: 1000px) {
+        .slideCount {
+          top: 4em;
+        }
+      }
+      @media screen and (min-width: 1000px) {
+        header {
+          background: var(--gradient-bg);
+        }
+        header > .container {
+          position: relative;
+        }
+        .pagination {
+          position: absolute;
+          top: 50%;
+          right: 2em;
+          transform: translateY(-50%);
+          flex-direction: column;
+        }
+        .controls {
+          gap: 0.6em;
+          justify-content: flex-start;
+        }
+        .controls .name {
+          position: absolute;
+          right: 2em;
+          bottom: 2em;
+        }
+      }
+      @media screen and (max-width: 1000px) {
+        
+      }
     </style>
   </head>
-  <body>
+  <body class="theme-1">
     <header>
       <div class="container">
         <nav class="navbar">
