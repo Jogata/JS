@@ -5,9 +5,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      .theme-1 {
+        --accent: #50ff57;
+        --gradient-first: #686868;
+        --gradient-second: #383838;
+        --gradient-third: #1b1b1b;
+        --button-primary: #515151;
+        --button-secondary: #acacac;
+        --pagination: #898989;
+      }
+
+      .theme-2 {
+        --accent: #fff849;
+        --gradient-first: #394f66;
+        --gradient-second: #233648;
+        --gradient-third: #1b2c3c;
+        --button-primary: #394f66;
+        --button-secondary: #5c83a8;
+        --pagination: #4b6b89;
+      }
+
+      .theme-3 {
+        --accent: #6fbaff;
+        --gradient-first: #aa3c3c;
+        --gradient-second: #b14141;
+        --gradient-third: #872c2c;
+        --button-primary: #9c5050;
+        --button-secondary: #eb9393;
+        --pagination: #ba6f6f;
+      }
+
+      .theme-4 {
+        --accent: #ff2e2e;
+        --gradient-first: #f6ec91;
+        --gradient-second: #bbbe3e;
+        --gradient-third: #99a939;
+        --button-primary: #8e9048;
+        --button-secondary: #d0eb81;
+        --pagination: #e8eb5c;
+      }
+
+      body {
+        --text-primary: #fff;
+        font-family: Georgia, serif;
+        --gradient-bg: radial-gradient(
+          50% 50% at 50% 50%, 
+          var(--gradient-first) 0%, 
+          var(--gradient-second) 51%, 
+          var(--gradient-third) 100%);
+        --gradient-mobile: 
+          radial-gradient(180deg, 
+          var(--gradient-first) 0%, 
+          var(--gradient-second) 51%, 
+          var(--gradient-third) 100%);
+      }
+    </style>
   </head>
   <body>
-    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+    <header>
+      <div class="container">
+        <nav class="navbar">
+          <div class="container">
+            <a href="#" class="brand">pc</a>
+            <button class="menu-btn">menu
+              <i class="fa fa-bars"></i>
+            </button>
+            <div class="menu">
+              <ul class="links">
+                <li><a href="#">home</a></li>
+                <li><a href="#">products</a></li>
+                <li><a href="#">contact</a></li>
+              </ul>
+              <ul class="sci">
+                <li><a href="#">twitter</a></li>
+                <li><a href="#">instagram</a></li>
+                <li><a href="#">facebook</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <div class="container">
+          <div class="title">
+            <h1 class="text-1">
+              <span>premium</span>
+              <span class="text-overlay"></span>
+            </h1>
+            <img src="./images/controller.png" alt="" class="img">
+            <h1 class="text-2">controllers.</h1>
+            <h1 class="text-3">controllers.</h1>
+          </div>
+          <h2 class="slideCount">
+            <span class="theme-number">1</span>
+            <span>/</span>
+            <span>4</span>
+          </h2>
+          <div class="controls">
+            <button id="prev">p</button>
+            <div>
+              <h3 class="name">deep black</h3>
+              <div class="pagination">
+                <span class="active"></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+            <button id="next">n</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section id="about">
+      <div class="container">
+        <h1>Welcome to Premium Controllers Where Your Gaming Experience Meets Artistry!</h1>
+        <p>At Premium Controllers we're passionate about gaming and believe that every gamer deserves a truly unique and personalized gaming experience. That's why we specialize in creating custom premium console controller desings that not only enchance your gamong performance but also reflect your individual style and personality.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus tenetur quis, itaque soluta quam aperiam distinctio placeat facilis reprehenderit exercitationem provident illum illo debitis minima! Vel dolores, perferendis magni nesciunt expedita cumque cupiditate perspiciatis doloremque qui, corrupti sint. Harum unde corporis, amet quisquam velit ipsa rerum, modi adipisci ea eius provident? Vero illo voluptatibus facilis.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur reprehenderit hic temporibus quae qui optio rerum at doloremque, possimus fugiat recusandae doloribus sequi harum illo. Iusto, maiores ex nostrum nobis consequatur blanditiis adipisci, officiis hic, iure distinctio magnam quibusdam.</p>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta doloribus est nobis atque cum tempore quis ratione voluptate ut libero, quidem, voluptates maiores.</p>
+      </div>
+    </section>
+
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <!-- ================= Get data from local JSON file ================= -->
 
@@ -72,154 +198,6 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
-    </script>
-
-    <script>
-      // 06. Theatre Promotions
-
-      function calcTicketPrice(day, age) {
-        age = Number(age);
-
-        if (age < 0 || age > 122) {
-          console.log("Error!");
-        } else {
-          switch (day) {
-            case "Weekday":
-              if (age <= 18) {
-                console.log("12$");
-              } else if (age <= 64) {
-                console.log("18$");
-              } else {
-                console.log("12$");
-              }
-              break;
-            case "Weekend":
-              if (age <= 18) {
-                console.log("15$");
-              } else if (age <= 64) {
-                console.log("20$");
-              } else {
-                console.log("15$");
-              }
-              break;
-            case "Holiday":
-              if (age <= 18) {
-                console.log("5$");
-              } else if (age <= 64) {
-                console.log("12$");
-              } else {
-                console.log("10$");
-              }
-              break;
-          }
-        }
-      }
-
-      // calcTicketPrice("S", -1);
-      // console.log("-----------");
-      // calcTicketPrice("Weekday", 1);
-      // calcTicketPrice("Weekday", 64);
-      // calcTicketPrice("Weekday", 65);
-      // console.log("-----------");
-      // calcTicketPrice("Weekend", 1);
-      // calcTicketPrice("Weekend", 64);
-      // calcTicketPrice("Weekend", 65);
-      // console.log("-----------");
-      // calcTicketPrice("Holiday", 1);
-      // calcTicketPrice("Holiday", 64);
-      // calcTicketPrice("Holiday", 65);
-      // console.log("-----------");
-      // calcTicketPrice("S", 155);
-
-      // 07. Numbers from 1 to 5
-
-      function printNumbersfrom1to5() {
-        for (let i = 1; i <=5 ; i++) {
-          console.log(i);
-        }
-      }
-
-      // 08. Divisible by 3
-
-      function printNumbersDivisibleby3(params) {
-        for (let num = 1; num <= 100; num++) {
-          if (num % 3 == 0) {
-            console.log(num);
-          }
-        }
-      }
-      function printNumbersDivisibleby3(params) {
-        for (let num = 3; num <= 100; num += 3) {
-          console.log(num);
-        }
-      }
-
-      // 09. Numbers from N to 1
-
-      function printNumbersfromNto1(num) {
-        for (let i = num; i > 0; i--) {
-          console.log(i);
-        }
-      }
-      function printNumbersfromNto1(num) {
-
-        while (num > 0) {
-          console.log(num);
-          num--;
-        }
-
-      }
-
-      // printNumbersfromNto1(10);
-
-      // 09. Numbers from M to N
-
-      function printNumbersfromMtoN(start, end) {
-        for (let i = start; i >= end; i--) {
-          console.log(i);
-        }
-      }
-      function printNumbersfromMtoN(start, end) {
-        while (start >= end) {
-          console.log(start);
-          start--;
-        }
-      }
-
-      // printNumbersfromMtoN(6, 2);
-
-      // 11. Sum of Odd Numbers
-
-      function printSumofOddNumbers(count) {
-        let odd = 1;
-        let sum = 0;
-
-        for (let i = 0; i < count; i++) {
-          console.log(odd);
-          sum += odd;
-          odd += 2;
-        }
-
-        console.log(`Sum: ${sum}`);
-      }
-
-      function printSumofOddNumbers(count) {
-        let odd = 1;
-        let sum = 0;
-
-        while (count > 0) {
-          console.log(odd);
-          sum += odd;
-          odd += 2;
-          count--;
-        }
-
-        console.log(`Sum: ${sum}`);
-      }
-
-      printSumofOddNumbers(5);
-      console.log("-----------");
-      printSumofOddNumbers(3);
     </script>
   </body>
 </html>
