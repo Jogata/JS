@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
       fieldset {
         display: none;
@@ -135,8 +135,8 @@
       .text-1 {
         left: calc(50% - 4em);
         animation: text-opacity 800ms forwards;
-        animation-delay: 500ms;
-        /* opacity: 0; */
+        animation-delay: 200ms;
+        opacity: 0;
         z-index: 2;
       }
       .text-2, 
@@ -160,8 +160,8 @@
         width: 0;
         height: 100%;
         background-color: #fff;
-        animation: overlay 800ms;
-        animation-delay: 500ms;
+        /* animation: overlay 800ms; */
+        /* animation-delay: 500ms; */
       }
 
       .img {
@@ -180,28 +180,44 @@
         text-align: center;
       }
 
-      .controls h3 {
+      .color {
         text-transform: capitalize;
       }
 
-      .controls button {
-        width: 4em;
-        height: 4em;
+      .controls > button {
+        /* width: 4em; */
+        /* height: 4em; */
+        /* padding: 0.386em 0.32em 0.546em 0.28em; */
+        color: var(--text-primary);
+        font-size: 4.3rem;
+        font-family: initial;
+        line-height: 0;
         border: 1px solid currentColor;
         border-radius: 50%;
+        /* background-color: var(--button-primary); */
+        /* display: flex; */
+        /* align-items: center; */
+        /* justify-content: center; */
+        transition: all 300ms;
+      }
+      .controls button#prev {
+        padding: 0.386em 0.32em 0.546em 0.28em;
+      }
+      .controls button#next {
+        padding: 0.386em 0.28em 0.546em 0.32em;
+      }
+
+      .controls button {
         background-color: var(--button-primary);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: color 300ms;
       }
       .controls button:hover {
+        color: var(--button-primary);
         background-color: var(--button-secondary);
       }
-      .controls button i {
+      /* .controls button i {
         color: var(--text-primary);
         font-size: 2.3em;
-      }
+      } */
 
       .pagination {
         margin-top: 1em;
@@ -210,14 +226,16 @@
         align-items: center;
         justify-content: center;
       }
-      .pagination span {
-        width: 0.8em;
-        height: 0.8em;
+      .pagination .dot {
+        /* width: 0.8em; */
+        /* height: 0.8em; */
+        padding: 1rem;
+        border: 1px solid var(--pagination);
         border-radius: 50%;
         background-color: var(--pagination);
         cursor: pointer;
       }
-      .pagination span.active {
+      .pagination .dot.active {
         background-color: var(--text-primary);
       }
 
@@ -266,12 +284,13 @@
         }
         .menu-btn {
           color: var(--text-primary);
-          border: 1px solid currentColor;
+          font-size: 0px;
+          border: 1px solid transparent;
           background-color: transparent;
           z-index: 4;
         }
         .menu-btn i {
-          font-size: 2.5em;
+          font-size: 2rem;
         }
         .menu {
           position: absolute;
@@ -321,9 +340,74 @@
           right: 2em;
           bottom: 2em;
         }
+        .brand {
+          font-size: 2em;
+          font-weight: bold;
+        }
+        .menu-btn {
+          display: none;
+        }
+        .navbar .container {
+          padding: 2em;
+          display: flex;
+          gap: 2em;
+          align-items: center;
+          justify-content: flex-start;
+        }
+        .navbar .links {
+          flex-direction: row;
+        }
+        .navbar .sci {
+          position: absolute;
+          top: 50%;
+          left: 2em;
+          transform: translateY(-50%) rotate(180deg);
+          /* border: 1px solid red; */
+        }
+        .sci a {
+          writing-mode: vertical-rl;
+        }
+        .slideCount {
+          position: absolute;
+          top: 1.3em;
+          right: 2em;
+        }
       }
-      @media screen and (max-width: 1000px) {
-        
+
+      @keyframes fade-up {
+        0% {
+          transform: translateY(8rem) rotate(0deg);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0) rotate(15deg);
+          opacity: 1;
+        }
+      }
+
+      @keyframes overlay {
+        49% {
+          left: 0;
+        }
+        50% {
+          width: 100%;
+          left: auto;
+          right: 0;
+        }
+        100% {
+          width: 0;
+          left: auto;
+          right: 0;
+        }
+      }
+
+      @keyframes text-opacity {
+        20% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
       }
     </style>
   </head>
@@ -334,7 +418,7 @@
           <div class="container">
             <a href="#" class="brand">pc</a>
             <button class="menu-btn">menu
-              <i class="fa fa-bars"></i>
+              <i class="fa fa-bars" aria-hidden="true"></i>
             </button>
             <div class="menu">
               <ul class="links">
@@ -366,17 +450,17 @@
             <span>4</span>
           </h2>
           <div class="controls">
-            <button id="prev">p</button>
+            <button id="prev">&#139;</button>
+            <button id="next">&#155;</button>
             <div>
-              <h3 class="name">deep black</h3>
+              <h3 class="color">deep black</h3>
               <div class="pagination">
-                <span class="active"></span>
-                <span></span>
-                <span></span>
-                <span></span>
+                <button class="dot active">1</button>
+                <button class="dot">2</button>
+                <button class="dot">3</button>
+                <button class="dot">4</button>
               </div>
             </div>
-            <button id="next">n</button>
           </div>
         </div>
       </div>
@@ -391,6 +475,32 @@
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dicta doloribus est nobis atque cum tempore quis ratione voluptate ut libero, quidem, voluptates maiores.</p>
       </div>
     </section>
+
+    <script>
+      const menu = document.querySelector(".menu");
+      const menuBtn = document.querySelector(".menu-btn");
+      let menuOpen = false;
+
+      menuBtn.addEventListener("click", () => {
+        // if (!menuOpen) {
+          menuBtn.firstElementChild.classList.toggle("fa-bars");
+          menuBtn.firstElementChild.classList.toggle("fa-close");
+          // menuOpen = true;
+        // } else {
+          // menuBtn.firstElementChild.classList.add("fa-bars");
+          // menuOpen = false;
+        // }
+        menu.classList.toggle("open");
+      })
+
+      const prevBtn = document.querySelector("#prev");
+      const nextBtn = document.querySelector("#next");
+      const color = document.querySelector(".color");
+      const image = document.querySelector(".img");
+      const theme = document.querySelector(".theme-number");
+      const dots = document.querySelectorAll(".dot");
+      let themeID = 0;
+    </script>
 
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
