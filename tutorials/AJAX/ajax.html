@@ -7,6 +7,10 @@
     <title>Circular Slider</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <style>
+      fieldset {
+        display: none;
+      }
+
       * {
         margin: 0;
         padding: 0;
@@ -39,6 +43,7 @@
       .text h1 {
         margin: 0.5rem 0;
         font-size: 3rem;
+        text-transform: capitalize;
       }
 
       .text p {
@@ -54,16 +59,29 @@
         transform: translateX(-50%);
       }
 
-      .slider .img {
+      .images {
+        position: relative;
         width: 70vw;
         height: 70vw;
         max-width: 600px;
         max-height: 600px;
-        background-image: url("./images/img3.png");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
+        /* background-image: url("./images/img3.png"); */
+        /* background-repeat: no-repeat; */
+        /* background-position: center; */
+        /* background-size: cover; */
         transition: all 300ms;
+      }
+      .image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 300ms;
+      }
+      .image.visible {
+        opacity: 1;
       }
 
       .indicator {
@@ -74,10 +92,62 @@
         width: 80vw;
         height: 80vw;
         max-width: 700px;
-        min-height: 700px;
+        max-height: 700px;
         border: 2px solid #fff;
         border-radius: 50%;
         transition: transform 300ms;
+      }
+      .indicator::before {
+        position: absolute;
+        top: -0.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        content: "";
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        background-color: #fff;
+      }
+
+      .menu, .menu div {
+        position: absolute;
+        top: 50%;
+        left: 50%;transform: translate(-50%, -50%);
+        width: 85vw;
+        height: 85vw;
+        max-width: 750px;
+        max-height: 750px;
+        border-radius: 50%;
+      }
+
+      .menu span {
+        position: absolute;
+        top: -1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        text-transform: capitalize;
+        transition: all 200ms;
+        cursor: pointer;
+      }
+      .menu span:hover {
+        color: #ccc;
+      }
+
+      .menu div:nth-child(1) {
+        transform: translate(-50%, -50%) rotate(-58deg);
+      }
+      .menu div:nth-child(2) {
+        transform: translate(-50%, -50%) rotate(-32deg);
+      }
+      .menu div:nth-child(3) {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+      .menu div:nth-child(4) {
+        transform: translate(-50%, -50%) rotate(32deg);
+      }
+      .menu div:nth-child(5) {
+        transform: translate(-50%, -50%) rotate(58deg);
       }
     </style>
   </head>
@@ -123,9 +193,72 @@
               <span>pecan pie</span>
             </div>
           </div>
-          <div class="img"></div>
+          <div class="images">
+            <img src="./images/img1.png" alt="" class="image">
+            <img src="./images/img2.png" alt="" class="image">
+            <img src="./images/img3.png" alt="" class="image visible">
+            <img src="./images/img4.png" alt="" class="image">
+            <img src="./images/img5.png" alt="" class="image">
+          </div>
         </div>
       </div>
+
+      <script>
+        const slider = document.querySelector(".circular-slider");
+        const imageContainer = document.querySelector(".images");
+        const images = document.querySelectorAll(".image");
+        const indicator = document.querySelector(".indicator");
+        const menuItems = document.querySelectorAll(".menu span");
+        const descriptions = document.querySelectorAll(".text");
+
+        const angles = [-58, -32, 0, 32, 58];
+
+        const colors = [
+          "radial-gradient(#a74255, #440412)", 
+          "radial-gradient(#ff4b5f, #a40b16)", 
+          "radial-gradient(#fdb76d, #f08a00)", 
+          "radial-gradient(#849ade, #42395f)", 
+          "radial-gradient(#e7ad59, #883e2a)"
+        ]
+
+        // const images = ["img1", "img2", "img3", "img4", "img5"];
+
+        let currentIndex = 2;
+
+        function rotate(angle) {
+          imageContainer.style.transform = `rotate(${angle}deg)`;
+          indicator.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
+        }
+
+        menuItems.forEach((menuItem, i) => {
+          menuItem.addEventListener("click", () => {
+            // image.style.backgroundImage = `url(./images/${images[i]}.png)`;
+            const currentimage = document.querySelector(".image.visible");
+            currentimage.classList.remove("visible");
+            images[i].classList.add("visible");
+            slider.style.background = colors[i];
+
+            if (i > currentIndex) {
+              rotate(angles[currentIndex] - 10);
+            } else if (i < currentIndex) {
+              rotate(angles[currentIndex] + 10);
+            } else {
+              return "";
+            }
+
+            setTimeout(() => {
+              rotate(angles[i]);
+            }, 300);
+
+            descriptions.forEach(text => {
+              text.style.display = "none";
+            });
+            descriptions[i].style.display = "block";
+
+            currentIndex = i;
+          })
+        })
+      </script>
     </section>
 
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
