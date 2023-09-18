@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <title>AJAX | XMLHttpRequest</title> -->
     <title>Circular Slider</title>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
       fieldset {
         display: none;
@@ -22,6 +22,18 @@
         background-color: #333;
       }
 
+      /* .page-container {
+        width: 100vw;
+        height: 100%;
+        min-height: 100vh;
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+ */
       .circular-slider {
         position: relative;
         height: 40rem;
@@ -33,21 +45,21 @@
         overflow: hidden;
       }
 
-      .text {
+      .description {
         display: none;
       }
-      .text:nth-child(3) {
+      .description.block {
         display: block;
       }
 
-      .text h1 {
+      .description h1 {
         margin: 0.5rem 0;
         font-size: 3rem;
         text-transform: capitalize;
       }
 
-      .text p {
-        max-width: 550px;
+      .description p {
+        max-width: 600px;
         margin: 0 auto;
         line-height: 30px;
       }
@@ -149,28 +161,135 @@
       .menu div:nth-child(5) {
         transform: translate(-50%, -50%) rotate(58deg);
       }
+
+      @media screen and (min-width: 800px) {
+        .slider {
+          bottom: -22rem;
+        }
+      }
+
+      #logo img {
+        width: 40px;
+        height: 40px;
+      }
+
+      header {
+        position: relative;
+        width: 100%;
+        z-index: 2;
+      }
+
+      header .main-menu {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-around;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        background-color: rgba(255, 255, 255, 0.4);
+      }
+
+      nav ul {
+        list-style: none;
+      }
+
+      nav ul li {
+        display: inline;
+        line-height: 60px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      
+      nav ul li a {
+        padding: 6px 8px;
+        color: dodgerblue;
+        text-transform: capitalize;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      nav ul li a:hover {
+        color: darkcyan;
+      }
+
+      #ico a {
+        padding: 10px;
+        margin-left: 10px;
+        text-decoration: none;
+      }
+
+      #logo {
+        transition: 0.3s;
+        cursor: pointer;
+      }
+      #logo:hover {
+        transform: rotate(90deg) scale(1.1);
+      }
+
+      #ico a i {
+        color: dodgerblue;
+        transition: color 0.3s;
+      }
+      #ico a:hover i {
+        color: darkcyan;
+      }
+
+      /* .menu span {
+        border: 1px solid red;
+        padding: 0.5em;
+        display: block;
+      } */
     </style>
   </head>
   <body>
-    <section class="circular-slider">
-      <div class="container">
-        <div class="text">
+    <header>
+      <div class="main-menu">
+        <div id="logo">
+          <img src="../images/decoration/logo.png" alt="">
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#">home</a></li>
+            <li><a href="#">about us</a></li>
+            <li><a href="#">services</a></li>
+            <li><a href="#">news</a></li>
+            <li><a href="#">sport</a></li>
+          </ul>
+        </nav>
+        <div id="ico">
+          <a href="#">
+            <i class="fa fa-search"></i>
+          </a>
+          <a href="#">
+            <i class="fa fa-user"></i>
+          </a>
+          <a href="#">
+            <i class="fa fa-shopping-cart"></i>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <section class="page-container">
+      <div class="circular-slider">
+        <div class="description">
           <h1>berry bliss pie</h1>
           <p>A luscious blend of ripe berries nestled in a flaky, buttery crust. This berry pie is a medley of strawberries, blueberries and more, creating a symphony of sweet and tart flavors that burst with every bite. Give it a try and see for yourself!</p>
         </div>
-        <div class="text">
+        <div class="description">
           <h1>strawberry symphony cake</h1>
           <p>Indulge in the delightful harmony of flavors with our strawberry cake. Layers of moist cake infused with fresh strawberries, complemented by a velvety strawberry frosting, come together to create a dessert that is both elegant and irresistibly fruity.</p>
         </div>
-        <div class="text">
+        <div class="description block">
           <h1>carrot delight cake</h1>
           <p>Experience the perfect balance of sweetness and spice in our carrot cake. Moist layers enriched with grated carrots and aromatic spices are bound together by a decadent cream cheese frosting, resulting in a classic treat that is a true crowd-pleaser.</p>
         </div>
-        <div class="text">
+        <div class="description">
           <h1>blueberry cascade cake</h1>
           <p>Immerse yourself in a cascade of blueberry goodness with our blueberry cake. Moist, tender layers infused with juicy blueberries, topped with a luscious blueberry frosting, create a cake that captures the essence of these vibrant berries in every mouthful.</p>
         </div>
-        <div class="text">
+        <div class="description">
           <h1>pecan perfection pie</h1>
           <p>Savor the rich, nutty essence of our pecan pie. A buttery crust cradles a filling of caramelized pecans, offering a harmonious blend os sweetness and crunch that embodies the comfort and warmth of a homemade dessert. A good choice!</p>
         </div>
@@ -209,7 +328,7 @@
         const images = document.querySelectorAll(".image");
         const indicator = document.querySelector(".indicator");
         const menuItems = document.querySelectorAll(".menu span");
-        const descriptions = document.querySelectorAll(".text");
+        const descriptions = document.querySelectorAll(".description");
 
         const angles = [-58, -32, 0, 32, 58];
 
@@ -233,8 +352,8 @@
         menuItems.forEach((menuItem, i) => {
           menuItem.addEventListener("click", () => {
             // image.style.backgroundImage = `url(./images/${images[i]}.png)`;
-            const currentimage = document.querySelector(".image.visible");
-            currentimage.classList.remove("visible");
+            const currentImage = document.querySelector(".image.visible");
+            currentImage.classList.remove("visible");
             images[i].classList.add("visible");
             slider.style.background = colors[i];
 
@@ -250,10 +369,12 @@
               rotate(angles[i]);
             }, 300);
 
-            descriptions.forEach(text => {
-              text.style.display = "none";
-            });
-            descriptions[i].style.display = "block";
+            // descriptions.forEach(text => {
+              // text.style.display = "none";
+            // });
+            const currentDescription = document.querySelector(".description.block");
+            currentDescription.classList.remove("block");
+            descriptions[i].classList.add("block");
 
             currentIndex = i;
           })
