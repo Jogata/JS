@@ -3,12 +3,132 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AJAX | XMLHttpRequest</title>
+    <!-- <title>AJAX | XMLHttpRequest</title> -->
+    <title>Circular Slider</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Georgia, serif;
+        background-color: #333;
+      }
+
+      .circular-slider {
+        position: relative;
+        height: 40rem;
+        min-height: 100vh;
+        padding: 1rem 2rem 0 2rem;
+        color: #fff;
+        text-align: center;
+        background-image: radial-gradient(#fdb76d, #f08a00);
+        overflow: hidden;
+      }
+
+      .text {
+        display: none;
+      }
+      .text:nth-child(3) {
+        display: block;
+      }
+
+      .text h1 {
+        margin: 0.5rem 0;
+        font-size: 3rem;
+      }
+
+      .text p {
+        max-width: 550px;
+        margin: 0 auto;
+        line-height: 30px;
+      }
+
+      .slider {
+        position: absolute;
+        bottom: -40vw;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .slider .img {
+        width: 70vw;
+        height: 70vw;
+        max-width: 600px;
+        max-height: 600px;
+        background-image: url("./images/img3.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        transition: all 300ms;
+      }
+
+      .indicator {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80vw;
+        height: 80vw;
+        max-width: 700px;
+        min-height: 700px;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        transition: transform 300ms;
+      }
+    </style>
   </head>
   <body>
+    <section class="circular-slider">
+      <div class="container">
+        <div class="text">
+          <h1>berry bliss pie</h1>
+          <p>A luscious blend of ripe berries nestled in a flaky, buttery crust. This berry pie is a medley of strawberries, blueberries and more, creating a symphony of sweet and tart flavors that burst with every bite. Give it a try and see for yourself!</p>
+        </div>
+        <div class="text">
+          <h1>strawberry symphony cake</h1>
+          <p>Indulge in the delightful harmony of flavors with our strawberry cake. Layers of moist cake infused with fresh strawberries, complemented by a velvety strawberry frosting, come together to create a dessert that is both elegant and irresistibly fruity.</p>
+        </div>
+        <div class="text">
+          <h1>carrot delight cake</h1>
+          <p>Experience the perfect balance of sweetness and spice in our carrot cake. Moist layers enriched with grated carrots and aromatic spices are bound together by a decadent cream cheese frosting, resulting in a classic treat that is a true crowd-pleaser.</p>
+        </div>
+        <div class="text">
+          <h1>blueberry cascade cake</h1>
+          <p>Immerse yourself in a cascade of blueberry goodness with our blueberry cake. Moist, tender layers infused with juicy blueberries, topped with a luscious blueberry frosting, create a cake that captures the essence of these vibrant berries in every mouthful.</p>
+        </div>
+        <div class="text">
+          <h1>pecan perfection pie</h1>
+          <p>Savor the rich, nutty essence of our pecan pie. A buttery crust cradles a filling of caramelized pecans, offering a harmonious blend os sweetness and crunch that embodies the comfort and warmth of a homemade dessert. A good choice!</p>
+        </div>
+        <div class="slider">
+          <div class="indicator"></div>
+          <div class="menu">
+            <div>
+              <span>berry pie</span>
+            </div>
+            <div>
+              <span>strawberry</span>
+            </div>
+            <div>
+              <span>carrot cake</span>
+            </div>
+            <div>
+              <span>blueberry</span>
+            </div>
+            <div>
+              <span>pecan pie</span>
+            </div>
+          </div>
+          <div class="img"></div>
+        </div>
+      </div>
+    </section>
 
-    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <!-- ================= Get data from local JSON file ================= -->
 
@@ -74,150 +194,5 @@
         users.send();
       }
     </script>
-
-<script>
-  // 09. Login
-
-  function login(params) {
-    const user = params[0];
-    let isCorrectPassword = false;
-
-    for (let i = 1; i < params.length; i++) {
-      let password = params[i];
-      
-      if (user.length == password.length) {
-        isCorrectPassword = true;
-
-        for (let index = 0; index < user.length; index++) {
-          // console.log(user[index]);
-          // console.log(password[user.length - 1 - index]);
-          if (user[index] !== password[user.length - 1 - index]) {
-            index = user.length;
-            isCorrectPassword = false;
-          }
-        }
-
-      }
-      
-      if (isCorrectPassword) {
-        console.log(`User ${user} logged in.`);
-        i = params.length;
-      } else if (i == 4) {
-        console.log(`User ${user} blocked!`);
-        i = params.length;
-      } else {
-        console.log("Incorrect password. Try again.");
-      }
-
-    }
-
-  }
-
-  login(['Acer','login','go','let me in','recA']);
-  login(['momo','omom']);
-  login(['sunny','rainy','cloudy','sunny','not sunny']);
-
-  // 10. The Pyramid Of King Djoser
-
-  function calcResources(base, increment) {
-    let stone = 0;
-    let marble = 0;
-    let lapis = 0;
-    let gold = 0;
-    // let current = base;
-    let height = 0;
-    const finalHeight = ((base + 1) / 2) * increment;
-
-    while (base > 2) {
-      height++;
-      const p = 4 * base - 4;
-      const s = base * base;
-      stone += (s - p) * increment;
-      if (height % 5 == 0) {
-        lapis += p * increment;
-      } else {
-        marble += p * increment;
-      }
-      // console.log(base);
-      // console.log(i);
-      // console.log(stone);
-      // console.log(marble);
-      // console.log(lapis);
-      base -= 2;
-
-      // if (base < 0) {
-      //   break;
-      // }
-    }
-
-    if (base % 2 == 0) {
-      gold = 4 * increment;
-    } else {
-      gold = 1 * increment;
-    }
-
-    // height = (base / 2) * increment;
-
-    // console.log(`Stone required: ${Math.ceil(stone)}`);
-    // console.log(`Marble required: ${Math.ceil(marble)}`);
-    // console.log(`Lapis Lazuli required: ${Math.ceil(lapis)}`);
-    // console.log(`Gold required: ${Math.ceil(gold)}`);
-    // console.log(`Final pyramid height: ${Math.floor(finalHeight)}`);
-
-  }
-
-  // calcResources(11, 1);
-  // calcResources(11, 0.75);
-  // calcResources(12, 1);
-  // calcResources(23, 0.5);
-
-  // 11. Bitcoin "Mining"
-
-  function calcBitcoins(days) {
-    days.unshift(0);
-    const bitcoinPrice = 11949.16;
-    const goldPrice = 67.51;
-    let totalGold = 0;
-    let bitcoins = 0;
-    let firstPurchase = 0;
-
-    for (let day = 1; day < days.length; day++) {
-      let dailyGold = days[day];
-      // console.log(days[day]);
-      // console.log(days);
-      if (day % 3 === 0) {
-        dailyGold = dailyGold * 0.7;
-      }
-
-      // console.log(dailyGold);
-
-      dailyGold = dailyGold * goldPrice;
-
-      totalGold += dailyGold;
-      
-      // console.log(totalGold, day);
-
-      if (totalGold >= bitcoinPrice) {
-        if (firstPurchase == 0) {
-          firstPurchase = day;
-        }
-        let dailyBitcoins = Math.floor(totalGold / bitcoinPrice);
-        bitcoins += dailyBitcoins;
-        totalGold = totalGold - dailyBitcoins * bitcoinPrice;
-      }
-    }
-
-    // console.log(bitcoins);
-    console.log(`Bought bitcoins: ${bitcoins}`);
-    if (bitcoins > 0) {
-      console.log(`Day of the first purchased bitcoin: ${firstPurchase}`);
-    }
-    console.log(`Left money: ${totalGold.toFixed(2)} lv.`);
-  }
-
-  // calcBitcoins([100, 200, 300]);
-  // calcBitcoins([50, 100]);
-  // calcBitcoins([3124.15, 504.212, 2511.124]);
-</script>
   </body>
 </html>
