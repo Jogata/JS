@@ -18,46 +18,65 @@
       }
 
       .slideshow {
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        flex-direction: column;
+        min-height: 100vh;
+        /* display: flex; */
+        /* align-items: center; */
+        /* justify-content: space-around; */
+        /* flex-direction: column; */
         background-color: antiquewhite;
+        overflow: hidden;
       }
 
       .carousel {
         position: relative;
-        width: 50rem;
-        height: 50rem;
+        /* top: -55%; */
+        /* translate: 0 -60%; */
+        translate: 0 -50%;
+        width: 45vw;
+        max-width: 80rem;
+        height: 45vw;
+        max-height: 80rem;
+        margin: auto;
+        /* flex-shrink: 0; */
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 7rem solid #eebe97;
-        border-radius: 50%;
+        /* border: 1rem solid #eebe97;
+        border-radius: 50%; */
         transition: rotate 1s;
+      }
+      .carousel::before {
+        position: absolute;
+        /* top: 10%; */
+        /* left: 10%; */
+        content: "";
+        width: 70%;
+        height: 70%;
+        border: 1rem solid #eebe97;
+        border-radius: 50%;
       }
 
       .slide {
         position: absolute;
-        width: 20rem;
+        /* width: 20%; */
+        width: 30%;
       }
 
       .slide:nth-child(1) {
-        bottom: -20rem;
+        bottom: 0;
       }
       .slide:nth-child(2) {
-        left: -20rem;
+        left: 0;
       }
       .slide:nth-child(3) {
-        top: -20rem;
+        top: 0;
       }
       .slide:nth-child(4) {
-        right: -20rem;
+        right: 0;
       }
 
       .slide.active {
-        transform: scale(2);
+        /* transform: scale(1.5); */
         transition: transform 0.5s 0.5s;
       }
 
@@ -67,14 +86,22 @@
       }
 
       .controls {
-        position: sticky;
-        bottom: 5rem;
+        /* position: sticky; */
+        /* bottom: 5rem; */
+        width: 100%;
+        text-align: center;
       }
 
-      .controls a {
+      .tab {
         display: inline-block;
-        padding: 1rem;
+        padding: 0.2rem;
+        border-radius: 50%;
         /* cursor: pointer; */
+      }
+      .tab.active {
+        /* scale: 2.5; */
+        background-color: #7dbd77;
+        /* outline: 0.2rem #7dbd77; */
       }
 
       .controls img {
@@ -99,16 +126,16 @@
         </div>
       </div>
       <div class="controls">
-        <a href="#" data-index="1">
+        <a href="#" data-index="1" class="tab active">
           <img src="./images/thumb-img-1.png" alt="">
         </a>
-        <a href="#" data-index="2">
+        <a href="#" data-index="2" class="tab">
           <img src="./images/thumb-img-2.png" alt="">
         </a>
-        <a href="#" data-index="3">
+        <a href="#" data-index="3" class="tab">
           <img src="./images/thumb-img-3.png" alt="">
         </a>
-        <a href="#" data-index="4">
+        <a href="#" data-index="4" class="tab">
           <img src="./images/thumb-img-4.png" alt="">
         </a>
       </div>
@@ -116,29 +143,66 @@
       <script>
         const carousel = document.querySelector(".carousel");
         const slides = document.querySelectorAll(".slide");
-        const controlLinks = document.querySelectorAll(".controls a");
+        const tabs = document.querySelectorAll(".controls a");
 
         let i = 0;
         let j = 1;
         let intervalID = 0;
 
-        const intervalFn = () => {
+        function rotateSlider() {
           intervalID = setInterval(() => {
             carousel.style.rotate = `-${++i * 90}deg`;
             const activeSlide = document.querySelector(".slide.active");
             activeSlide.classList.remove("active");
   
             slides[j].classList.add("active");
-            j++;
+
+            const activeLink = document.querySelector("a.active");
+            activeLink.classList.remove("active");
   
-            if (j >= slides.length) {
-              j = 0;
-            }
-          }, 2000);
+            tabs[j].classList.add("active");
+
+            j++;
+            j = j % slides.length;
+            // if (j >= slides.length) {
+            //   j = 0;
+            // }
+          }, 3000);
 
         }
 
-        intervalFn();
+        // rotateSlider();
+
+        tabs.forEach((tab, index) => {
+          tab.addEventListener("click", () => {
+            // console.log("click");
+            clearInterval(intervalID);
+            // carousel.style.rotate = `-${(i - j + Number(tab.dataset.index)) * 90}deg`;
+            carousel.style.rotate = `-${(i - j + (index + 1)) * 90}deg`;
+            
+            i = i - j;
+
+            const activeSlide = document.querySelector(".slide.active");
+            activeSlide.classList.remove("active");
+  
+            slides[index].classList.add("active");
+
+            const activeTab = document.querySelector("a.active");
+            activeTab.classList.remove("active");
+  
+            tabs[index].classList.add("active");
+
+            rotateSlider();
+          })
+        })
+
+        carousel.addEventListener("mouseenter", () => {
+          clearInterval(intervalID);
+          console.log("paused");
+        })
+        carousel.addEventListener("mouseleave", () => {
+          rotateSlider();
+        })
       </script>
     </div>
 
