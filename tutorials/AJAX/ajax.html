@@ -3,11 +3,146 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AJAX | XMLHttpRequest</title>
+    <!-- <title>AJAX | XMLHttpRequest</title> -->
+    <title>Circle Slider</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <style>
+      fieldset {
+        display: none;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .slideshow {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column;
+        background-color: antiquewhite;
+      }
+
+      .carousel {
+        position: relative;
+        width: 50rem;
+        height: 50rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 7rem solid #eebe97;
+        border-radius: 50%;
+        transition: rotate 1s;
+      }
+
+      .slide {
+        position: absolute;
+        width: 20rem;
+      }
+
+      .slide:nth-child(1) {
+        bottom: -20rem;
+      }
+      .slide:nth-child(2) {
+        left: -20rem;
+      }
+      .slide:nth-child(3) {
+        top: -20rem;
+      }
+      .slide:nth-child(4) {
+        right: -20rem;
+      }
+
+      .slide.active {
+        transform: scale(2);
+        transition: transform 0.5s 0.5s;
+      }
+
+      .slide img {
+        width: 100%;
+        object-fit: cover;
+      }
+
+      .controls {
+        position: sticky;
+        bottom: 5rem;
+      }
+
+      .controls a {
+        display: inline-block;
+        padding: 1rem;
+        /* cursor: pointer; */
+      }
+
+      .controls img {
+        width: 10rem;
+      }
+    </style>
   </head>
   <body>
-    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+    <div class="slideshow">
+      <div class="carousel">
+        <div class="slide active">
+          <img src="./images/food-img-1.png" alt="">
+        </div>
+        <div class="slide">
+          <img src="./images/food-img-2.png" alt="">
+        </div>
+        <div class="slide">
+          <img src="./images/food-img-3.png" alt="">
+        </div>
+        <div class="slide">
+          <img src="./images/food-img-4.png" alt="">
+        </div>
+      </div>
+      <div class="controls">
+        <a href="#" data-index="1">
+          <img src="./images/thumb-img-1.png" alt="">
+        </a>
+        <a href="#" data-index="2">
+          <img src="./images/thumb-img-2.png" alt="">
+        </a>
+        <a href="#" data-index="3">
+          <img src="./images/thumb-img-3.png" alt="">
+        </a>
+        <a href="#" data-index="4">
+          <img src="./images/thumb-img-4.png" alt="">
+        </a>
+      </div>
+
+      <script>
+        const carousel = document.querySelector(".carousel");
+        const slides = document.querySelectorAll(".slide");
+        const controlLinks = document.querySelectorAll(".controls a");
+
+        let i = 0;
+        let j = 1;
+        let intervalID = 0;
+
+        const intervalFn = () => {
+          intervalID = setInterval(() => {
+            carousel.style.rotate = `-${++i * 90}deg`;
+            const activeSlide = document.querySelector(".slide.active");
+            activeSlide.classList.remove("active");
+  
+            slides[j].classList.add("active");
+            j++;
+  
+            if (j >= slides.length) {
+              j = 0;
+            }
+          }, 2000);
+
+        }
+
+        intervalFn();
+      </script>
+    </div>
+
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <!-- ================= Get data from local JSON file ================= -->
 
@@ -72,135 +207,6 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
-    </script>
-
-    <script>
-            // 03. World Snooker Championship
-
-            function calcTicketCosts(params) {
-        const etap = params[0];
-        const type = params[1];
-        const tickets = Number(params[2]);
-        const snimka = params[3];
-
-        let total = 0;
-        let price = 0;
-
-        switch (etap) {
-          case "Quarter final":
-            switch (type) {
-              case "Standard":
-                price = 55.5;
-                break;
-              case "Premium":
-                price = 105.2;
-                break;
-              case "VIP":
-                price = 118.9;
-                break;
-            }
-            break;
-          case "Semi final":
-            switch (type) {
-              case "Standard":
-                price = 75.88;
-                break;
-              case "Premium":
-                price = 125.22;
-                break;
-              case "VIP":
-                price = 300.4;
-                break;
-            }
-            break;
-          case "Final":
-            switch (type) {
-              case "Standard":
-                price = 110.1;
-                break;
-              case "Premium":
-                price = 160.66;
-                break;
-              case "VIP":
-                price = 400;
-                break;
-            }
-            break;
-        }
-
-        // console.log(price);
-        total = tickets * price;
-        // console.log(total);
-
-        if (total <= 2500) {
-          if (snimka == "Y") {
-            total = total + tickets * 40;
-          }
-        } else if (total > 2500 && total <= 4000) {
-          total = total * 0.9;
-          if (snimka == "Y") {
-            total = total + tickets * 40;
-          }
-        } else if (total > 4000) {
-          total = total * 0.75;
-        }
-
-        console.log(total.toFixed(2));
-        
-      }
-
-      // calcTicketCosts(["Final", "Premium", "25", "Y"]);
-      // calcTicketCosts(["Semi final", "VIP", "9", "Y"]);
-      // calcTicketCosts(["Quarter final", "Standard", "11", "N"]);
-
-        // 03. Coffee Machine
-
-  function calcCoffeePrice(params) {
-    const drink = params[0];
-    const sugar = params[1];
-    const broi = Number(params[2]);
-
-    const products = {
-      espresso: {
-        without: 0.9,
-        normal: 1,
-        extra: 1.2,
-      }, 
-      cappuccino: {
-        without: 1,
-        normal: 1.2,
-        extra: 1.6,
-      }, 
-      tea: {
-        without: 0.5,
-        normal: 0.6,
-        extra: 0.7,
-      }
-    }
-
-    let price = products[drink.toLowerCase()][sugar.toLowerCase()];
-
-    let total = broi * price;
-
-    if (sugar === "Without") {
-      total = total * 0.65;
-    }
-
-    if (drink === "Espresso" && broi >= 5) {
-      total = total * 0.75;
-    }
-
-    if (total > 15) {
-      total = total * 0.8;
-    }
-
-    console.log(`You bought ${broi} cups of ${drink} for ${total.toFixed(2)} lv.`);
-
-  }
-
-  calcCoffeePrice(["Espresso", "Without", "10"]);
-  calcCoffeePrice(["Cappuccino", "Normal", "13"]);
-  calcCoffeePrice(["Tea", "Extra", "3"]);
     </script>
   </body>
 </html>
