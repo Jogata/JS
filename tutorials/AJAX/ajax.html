@@ -17,44 +17,94 @@
         box-sizing: border-box;
       }
 
-      .slideshow {
+      body {
         min-height: 100vh;
+        background-color: antiquewhite;
+      }
+
+      .slideshow {
+        position: relative;
+        margin: auto;
         /* display: flex; */
         /* align-items: center; */
         /* justify-content: space-around; */
         /* flex-direction: column; */
-        background-color: antiquewhite;
-        overflow: hidden;
+        /* background-color: antiquewhite; */
+        /* overflow: hidden; */
+        /* box-shadow: inset -10px -10px 10px #000; */
       }
-
-      .carousel {
-        position: relative;
-        /* top: -55%; */
-        /* translate: 0 -60%; */
-        translate: 0 -50%;
-        width: 45vw;
-        max-width: 80rem;
-        height: 45vw;
-        max-height: 80rem;
-        margin: auto;
-        /* flex-shrink: 0; */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        /* border: 1rem solid #eebe97;
-        border-radius: 50%; */
-        transition: rotate 1s;
-      }
-      .carousel::before {
+      .slideshow::before {
         position: absolute;
+        bottom: 30%;
+        left: 15%;
         /* top: 10%; */
         /* left: 10%; */
         content: "";
         width: 70%;
-        height: 70%;
-        border: 1rem solid #eebe97;
+        height: 140%;
+        border: 1vw solid #eebe97;
+        /* background-color: #eebe97; */
+        /* border: 1vw solid antiquewhite; */
         border-radius: 50%;
+        /* filter: drop-shadow(1px 1px 1px #000); */
+        /* box-shadow: inset -10px -10px 10px #000; */
+        /* box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.5), -4px -4px 16px rgba(255, 255, 255, 0.5); */
+        /* box-shadow: inset 4px 4px 16px rgba(0, 0, 0, 0.5), inset -4px -4px 16px rgba(255, 255, 255, 0.5); */
       }
+
+
+      .carousel {
+        /* position: relative; */
+        /* top: -55%; */
+        /* translate: 0 -60%; */
+        /* translate: 0 -50%; */
+        /* width: 45vw; */
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        /* max-width: 80rem; */
+        max-width: inherit;
+        /* height: 45vw; */
+        height: 200%;
+        /* max-height: 80rem; */
+        max-height: 200%;
+        /* margin: auto; */
+        /* flex-shrink: 0; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* border: 1rem solid #eebe97; */
+        border-radius: 50%;
+        /* animation: rotate 12s infinite; */
+        transition: rotate 1s;
+      }
+      /* .carousel::before { */
+        /* position: absolute; */
+        /* top: 10%; */
+        /* left: 10%; */
+        /* content: ""; */
+        /* width: 70%; */
+        /* height: 70%; */
+        /* border: 1vw solid #eebe97; */
+        /* border: 1vw solid antiquewhite; */
+        /* border-radius: 50%; */
+      /* } */
+
+      /* @keyframes rotate {
+        20%, 25% {
+          transform: rotate(-90deg);
+        }
+        45%, 50% {
+          transform: rotate(-180deg);
+        }
+        70%, 75% {
+          transform: rotate(-270deg);
+        }
+        95%, 100% {
+          transform: rotate(-360deg);
+        }
+      } */
 
       .slide {
         position: absolute;
@@ -76,7 +126,7 @@
       }
 
       .slide.active {
-        /* transform: scale(1.5); */
+        transform: scale(1.2);
         transition: transform 0.5s 0.5s;
       }
 
@@ -89,23 +139,47 @@
         /* position: sticky; */
         /* bottom: 5rem; */
         width: 100%;
+        margin-top: 5rem;
+        padding: 1rem 0;
         text-align: center;
+        background-color: #eebe97;
       }
 
       .tab {
         display: inline-block;
-        padding: 0.2rem;
+        margin: 0.5rem;
+        /* padding: 0.2rem; */
         border-radius: 50%;
+        transition: all 0.5s;
+        opacity: 0.8;
         /* cursor: pointer; */
       }
       .tab.active {
-        /* scale: 2.5; */
-        background-color: #7dbd77;
+        scale: 1.1;
+        opacity: 1;
+        filter: drop-shadow(3px 3px 6px #000);
+        /* background-color: #7dbd77; */
+        /* border: 0.5rem solid #7dbd77; */
         /* outline: 0.2rem #7dbd77; */
       }
 
       .controls img {
         width: 10rem;
+      }
+
+      .slideshow {
+        position: relative;
+        width: 45vw;
+        max-width: 80rem;
+        height: 22.5vw;
+        max-height: 40rem;
+        /* border: 1px solid red; */
+      }
+      .slideshow::before {
+        /* border: 1px solid blue; */
+      }
+      .carousel {
+        /* border: 1px solid green; */
       }
     </style>
   </head>
@@ -125,86 +199,95 @@
           <img src="./images/food-img-4.png" alt="">
         </div>
       </div>
-      <div class="controls">
-        <a href="#" data-index="1" class="tab active">
-          <img src="./images/thumb-img-1.png" alt="">
-        </a>
-        <a href="#" data-index="2" class="tab">
-          <img src="./images/thumb-img-2.png" alt="">
-        </a>
-        <a href="#" data-index="3" class="tab">
-          <img src="./images/thumb-img-3.png" alt="">
-        </a>
-        <a href="#" data-index="4" class="tab">
-          <img src="./images/thumb-img-4.png" alt="">
-        </a>
-      </div>
-
-      <script>
-        const carousel = document.querySelector(".carousel");
-        const slides = document.querySelectorAll(".slide");
-        const tabs = document.querySelectorAll(".controls a");
-
-        let i = 0;
-        let j = 1;
-        let intervalID = 0;
-
-        function rotateSlider() {
-          intervalID = setInterval(() => {
-            carousel.style.rotate = `-${++i * 90}deg`;
-            const activeSlide = document.querySelector(".slide.active");
-            activeSlide.classList.remove("active");
-  
-            slides[j].classList.add("active");
-
-            const activeLink = document.querySelector("a.active");
-            activeLink.classList.remove("active");
-  
-            tabs[j].classList.add("active");
-
-            j++;
-            j = j % slides.length;
-            // if (j >= slides.length) {
-            //   j = 0;
-            // }
-          }, 3000);
-
-        }
-
-        // rotateSlider();
-
-        tabs.forEach((tab, index) => {
-          tab.addEventListener("click", () => {
-            // console.log("click");
-            clearInterval(intervalID);
-            // carousel.style.rotate = `-${(i - j + Number(tab.dataset.index)) * 90}deg`;
-            carousel.style.rotate = `-${(i - j + (index + 1)) * 90}deg`;
-            
-            i = i - j;
-
-            const activeSlide = document.querySelector(".slide.active");
-            activeSlide.classList.remove("active");
-  
-            slides[index].classList.add("active");
-
-            const activeTab = document.querySelector("a.active");
-            activeTab.classList.remove("active");
-  
-            tabs[index].classList.add("active");
-
-            rotateSlider();
-          })
-        })
-
-        carousel.addEventListener("mouseenter", () => {
-          clearInterval(intervalID);
-          console.log("paused");
-        })
-        carousel.addEventListener("mouseleave", () => {
-          rotateSlider();
-        })
-      </script>
     </div>
+    <div class="controls">
+      <a href="#" data-index="1" class="tab active">
+        <img src="./images/thumb-img-1.png" alt="">
+      </a>
+      <a href="#" data-index="2" class="tab">
+        <img src="./images/thumb-img-2.png" alt="">
+      </a>
+      <a href="#" data-index="3" class="tab">
+        <img src="./images/thumb-img-3.png" alt="">
+      </a>
+      <a href="#" data-index="4" class="tab">
+        <img src="./images/thumb-img-4.png" alt="">
+      </a>
+    </div>
+    <script>
+      const carousel = document.querySelector(".carousel");
+      const slides = document.querySelectorAll(".slide");
+      const tabs = document.querySelectorAll(".controls a");
+
+      let angle = 0;
+      let currentSlide = 0;
+      let intervalID = 0;
+
+      function rotateSlider() {
+        intervalID = setInterval(() => {
+          angle -= 90;
+          carousel.style.rotate = `${angle}deg`;
+
+          // const activeSlide = document.querySelector(".slide.active");
+          slides[currentSlide].classList.remove("active");
+          tabs[currentSlide].classList.remove("active");
+          currentSlide++;
+          currentSlide = currentSlide % slides.length;
+          slides[currentSlide].classList.add("active");
+          tabs[currentSlide].classList.add("active");
+
+          // const activeLink = document.querySelector("a.active");
+          // j++;
+          // j = j % slides.length;
+          // if (j >= slides.length) {
+          //   j = 0;
+          // }
+        }, 3000);
+
+      }
+
+      rotateSlider();
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => {
+          // console.log("click");
+          clearInterval(intervalID);
+          // carousel.style.rotate = `-${(i - j + Number(tab.dataset.index)) * 90}deg`;
+          let correction = index - currentSlide;
+          angle -= correction * 90;
+          currentSlide = index;
+          slides[currentSlide].classList.remove("active");
+          slides[currentSlide].classList.add("active");
+          tabs[currentSlide].classList.remove("active");
+          tabs[currentSlide].classList.add("active");
+          carousel.style.rotate = `${angle}deg`;
+          rotateSlider();
+          // carousel.style.rotate = `-${(i - j + (index + 1)) * 90}deg`;
+          
+          // i = i - j;
+
+          // const activeSlide = document.querySelector(".slide.active");
+          // activeSlide.classList.remove("active");
+
+          // slides[index].classList.add("active");
+
+          // const activeTab = document.querySelector("a.active");
+          // activeTab.classList.remove("active");
+
+          // tabs[index].classList.add("active");
+
+          // rotateSlider();
+        })
+      })
+
+      carousel.addEventListener("mouseenter", () => {
+        clearInterval(intervalID);
+        console.log("paused");
+      })
+      carousel.addEventListener("mouseleave", () => {
+        rotateSlider();
+      })
+    </script>
 
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
