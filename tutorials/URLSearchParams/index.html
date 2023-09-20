@@ -5,121 +5,142 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
     <style>
-      .search-bar {
-        position: relative;
-        width: 220px;
-        z-index: 100;
-      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      } 
+ 
+      :root {
+        --primary: #1a2448;
+        --white: #fff;
+      } 
+ 
+      ul {
+        list-style: none;
+      } 
+ 
+      a {
+        text-decoration: none;
+      } 
 
-      .search-bar-container input, 
-      .search-bar-container i {
-        border: 1px solid red;
+      button {
+        cursor: pointer;
+      } 
+ 
+      body {
+        min-height: 100vh;
+        padding: 3%;
+        font-family: Georgia, serif;
+        /* background-color: var(--white); */
+        background-image: linear-gradient(-45deg, #d8e7fc, #e8d8fc);
       }
 
       .banner {
-        position: relative;
-        width: 100%;
-        height: 100vh;
-        padding: 0 100px;
-        display: flex;
-        justify-content: center;
-        background-image: linear-gradient(-45deg, #d8e7fc, #e8d8fc);
-        align-items: end;
-        transition: 0.5s;
-        overflow: hidden;
+        /* position: absolute; */
+        /* top: 100px; */
+        /* right: 100px; */
+        /* bottom: 100px; */
+        /* left: 100px; */
+        /* content: ""; */
+        max-width: 112.5rem;
+        margin: 2% auto;
+        /* padding: 2% 3%; */
+        background-color: transparent;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(20px);
+        /* transition: 0.5s; */
       }
 
-      .banner .video .play {
-        position: relative;
-        border: 1px solid red;
-      }
-      .banner .video .play::after {
+      header {
+        /* padding: 2% 3%; */
+        /* position: relative; */
         position: absolute;
-        content: "";
-        width: 20px;
-        height: 20px;
-        border-top: 2px solid #fff;
-        border-right: 2px solid #fff;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        /* align-items: flex-start; */
+        justify-content: space-between;
+        pointer-events: none;
+        z-index: 4;
       }
 
-      @media screen and (max-width: 600px) {
-        header {
-          top: 20px;
-          right: 20px;
-          left: 20px;
-          padding: 10px;
-        }
-        header::before {
-          width: 130px;
-          height: 45px;
-        }
-        header::after {
-          width: 220px;
-          height: 45px;
-        }
-        .search {
-          width: 200px;
-        }
-        .nav {
-          top: 65px;
-          bottom: 20px;
-          left: 20px;
-        }
-        .nav.active {
-          width: 200px;
-        }
-        .banner {
-          padding: 0 20px;
-        }
-        .banner::after {
-          top: 20px;
-          left: 20px;
-          right: 20px;
-          bottom: 20px;
-          box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
-        }
-        .swiper .model-img {
-          position: absolute;
-          top: -20px;
-          left: 0;
-          max-width: 120%;
-          padding-top: 100px;
-          transition: 0.5s ease-in-out;
-          z-index: 10;
-        }
-        .banner .title-left {
-          left: -65%;
-          font-size: 8em;
-          letter-spacing: 6px;
-        }
-        .banner .title-right {
-          display: none;
-        }
-        .banner .content {
-          top: 60%;
-          left: 50%;
-          gap: 20px;
-          align-items: center;
-          transform: translate(-50%, -50%) scale(1);
-        }
-        .banner .content h2 {
-          font-size: 1.6em;
-          font-weight: 500;
-        }
+      header div {
+        /* margin: 1%; */
+        /* padding: 0.5rem 1rem; */
+        /* background-color: var(--primary); */
+        pointer-events: all;
       }
 
-      .swiper {
-        /* z-index: -1; */
+      /* header::before {} */
+      /* header::after {} */
+      .search-bar-container,
+      .nav-container {
+        position: relative;
       }
+
+      .nav-container {
+        display: flex;
+        flex-direction: column;
+      }
+      .search-bar-container {
+        align-self: flex-start;
+      }
+      .search-bar-container, 
+      .nav-container div {
+        padding: 0.5rem 1rem;
+        background-color: var(--primary);
+        z-index: 1;
+      }
+
+      header input, 
+      header i, 
+      header a {
+        display: inline-block;
+        /* border: 1px solid red; */
+      }
+
+      header .menu {
+        /* position: absolute; */
+        padding: 0.5rem 0.63rem;
+        color: var(--white);
+        font-size: 1.2rem;
+        /* display: flex; */
+        /* align-items: center; */
+        transition: 0.5s;
+      }
+
+      header .menu.active {
+        transform: rotateZ(45deg);
+      }
+
+      header .logo {
+        /* position: relative; */
+        /* text-decoration: none; */
+        color: var(--white);
+        padding: 0.5rem 1rem;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+      } 
+ 
+      .search-bar-container input {
+        /* width: 100%; */
+        padding: 0.5rem 1rem;
+        color: var(--white);
+        font-size: 0.8rem;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        backdrop-filter: blur(5px);
+      } 
 
       .banner .video video {
         display: initial;
       }
       video {
         display: none;
-      }
-      .swiper {
-        border: 1px solid red;
       }
     </style>
   </head>
