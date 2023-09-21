@@ -12,6 +12,151 @@
 
     <!-- ================= Get data from local JSON file ================= -->
 
+    <script>
+      // 9. *Gladiator Expenses
+
+      function calcGladiatorExpenses(loses, hP, swP, shP, aP) {
+        // let helmet = 0;
+        // let sword = 0;
+        let shield = 0;
+        // let armor = 0;
+        let expenses = 0;
+
+        for (let fight = 1; fight <= loses; fight++) {
+          let isHelmet = false;
+          let isSword = false;
+          let isShield = false;
+          // let isArmor = false;
+
+          if (fight % 2 == 0) {
+            // helmet++;
+            isHelmet = true;
+            expenses += hP;
+          }
+
+          if (fight % 3 == 0) {
+            // sword++;
+            isSword = true;
+            expenses += swP;
+          }
+
+          if (isHelmet && isSword) {
+            shield++;
+            expenses += shP;
+
+            if (shield % 2 == 0) {
+              expenses += aP;
+            }
+          }
+        }
+
+        console.log(`Gladiator expenses: ${expenses.toFixed(2)} aureus`);
+
+      }
+
+      // calcGladiatorExpenses(7, 2, 3, 4, 5);
+      // calcGladiatorExpenses(23, 12.5, 21.5, 40, 200);
+
+      // 10. *Spice Must Flow
+
+      function menageSpiceMinning(yield) {
+        let total = 0;
+        let days = 0;
+        const food = 26;
+
+        for (let index = yield; index >= 100; index -= 10) {
+          days++;
+          total = total + index;
+
+          // if (food > total) {
+            // total = 0;
+          // } else {
+            total = total - food;
+          // }
+        }
+
+        if (food > total) {
+            total = 0;
+          } else {
+
+            total = total - food;
+          }
+
+        console.log(days);
+        console.log(total);
+
+      }
+
+      // menageSpiceMinning(111);
+      // menageSpiceMinning(450);
+
+      // 01. Type
+
+      function printType(input) {
+        if (typeof input == "string" || typeof input == "number") {
+          console.log(typeof input);
+          console.log(input);
+        } else {
+          console.log(typeof input);
+          console.log("Parameter is not suitable for printing");
+        }
+      }
+
+      // printType("hello");
+      // printType(18);
+      // printType(null);
+
+      // 02. Concatenate Names
+
+      function printNames(n1, n2, d) {
+        console.log(n1 + d + n2);
+      }
+
+      // printNames('John', 'Smith', '->');
+      // printNames('Jan', 'White', '<->');
+      // printNames('Linda', 'Terry', '=>');
+
+      // 03. Right Place
+
+      function compare(p1, p2, p3) {
+
+        let result = "";
+
+        for (let index = 0; index < p1.length; index++) {
+          if (p1[index] == "_") {
+            result += p2;
+          } else {
+            result += p1[index];
+          }
+        }
+
+        if (result == p3) {
+          console.log("Matched");
+        } else {
+          console.log("Not Matched");
+        }
+
+      }
+
+      // compare('Str_ng', 'I', 'Strong');
+      // compare('Str_ng', 'i', 'String');
+
+      // 04. Integer and Float
+
+      function printType(n1, n2, n3) {
+        let sum = n1 + n2 + n3;
+
+        if (Math.floor(sum) == sum) {
+          console.log(sum + " - Integer");
+        } else {
+          console.log(sum + " - Float");
+        }
+      }
+
+      // printType(9, 100, 1.1);
+      // printType(100, 200, 303);
+    </script>
+
     <fieldset>
       <legend>Get all users from local JSON file</legend>
       <button id="local">Send Request</button>
@@ -73,146 +218,6 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
-    </script>
-
-    <script>
-      // 1. Sum Digits
-
-      function calcSum(num) {
-        const word = String(num);
-        let sum = 0;
-
-        for (let index = 0; index < word.length; index++) {
-          const letter = word[index];
-          const dogit = Number(letter);
-          sum += dogit;
-        }
-
-        console.log(sum);
-
-      }
-
-      // calcSum(245678);
-      // calcSum(97561);
-      // calcSum(543);
-
-      function concatinate(a, b, c) {
-        a = String(a);
-        let result = a + b + c;
-
-        console.log(result);
-
-      }
-
-      // concatinate("a", "b", "c");
-      // concatinate("%", "2", "o");
-      // concatinate("1", "5", "p");
-
-      // 03.Town Info
-
-      function printTownInfo(town, population, area) {
-        console.log(`Town ${town} has population of ${population} and area ${area} square km.`);
-      }
-
-      // printTownInfo('Sofia',1286383, 492);
-      // printTownInfo('Plovdiv', 1481353, 512);
-
-      // 04. Convert Meters to Kilometres
-
-      function convertMetersKilometres(meters) {
-        meters = Number(meters);
-        const k = meters / 1000;
-
-        console.log(k.toFixed(2));
-
-      }
-
-      // convertMetersKilometres(1852);
-      // convertMetersKilometres(798);
-
-      // 05. Pounds to Dollars
-
-      function convertPoundstoDollars(pounds) {
-        pounds = Number(pounds);
-        const dollars = pounds * 1.31;
-
-        console.log(dollars.toFixed(3));
-
-      }
-
-      // convertPoundstoDollars(80);
-      // convertPoundstoDollars(39);
-
-      // 06.Reversed Chars
-
-      function printinReverseOrder(a, b, c) {
-        // c = String(c);
-        const reverse = `${c} ${b} ${a}`;
-
-        console.log(reverse);
-
-      }
-
-      // printinReverseOrder("1", "L", "&");
-      // printinReverseOrder("A", "B", "C");
-
-      // 07. Lower or Upper
-
-      function isLowerorUpper(ch) {
-        // console.log("a".charCodeAt(0));
-        // console.log("z".charCodeAt(0));
-        // console.log("A".charCodeAt(0));
-        // console.log("L".charCodeAt(0));
-
-        ch = ch.charCodeAt(0);
-
-        if (ch >= 65 && ch <= 90) {
-          console.log("upper-case");
-        } else {
-          console.log("lower-case");
-        }
-
-      }
-
-      // isLowerorUpper("L");
-      // isLowerorUpper("f");
-
-      // 8. *Calculator
-
-      function calc(n1, o, n2) {
-        const str = `${n1} ${o} ${n2}`;
-        const result = eval(str);
-
-        console.log(result.toFixed(2));
-
-      }
-
-      function calc(n1, o, n2) {
-
-        let result = null;
-        
-        switch (o) {
-          case "+":
-            result = n1 + n2;
-            break;
-          case "-":
-            result = n1 - n2;
-            break;
-          case "/":
-            result = n1 / n2;
-            break;
-          case "*":
-            result = n1 * n2;
-            break;
-        }
-
-        console.log(result.toFixed(2));
-
-      }
-
-
-      calc(5, "+", 10);
-      calc(25.5, "-", 3);
     </script>
   </body>
 </html>
