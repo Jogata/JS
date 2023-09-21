@@ -4,121 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
+    <!-- <title>iMovies | Movie Website</title> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-<style>
-  fieldset {
-    display: none;
-  }
-  * {
-    margin: 0;
-    padding: 0;
-  }
-  body {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: Georgia, Times, serif;
-    background-color: #1d1e22;
-  }
-  .loading-box {
-    position: relative;
-    width: 300px;
-    height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    color: #f0f8ff;
-    border-radius: 12px;
-    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.5), 
-    -4px -4px 16px rgba(255, 255, 255, 0.05);
-  }
-  .title {
-    font-size: 1.5rem;
-    font-weight: 300;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    transform: translateY(-12px);
-  }
-  .circle {
-    position: relative;
-    width: 180px;
-    height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: 
-    conic-gradient(
-      from 0deg at 50% 50%, 
-      rgba(111, 123, 247, 1) 0%, 
-      rgba(155, 248, 244, 1) 0%, 
-      rgb(16, 16, 18) 0%);
-    border-radius: 100px;
-    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.75), 
-    -4px -4px 16px rgba(255, 255, 255, 0.1);
-    /* animation: spin 1s infinite linear; */
-  }
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-  .count {
-    top: 3px;
-    left: 3px;
-    width: 174px;
-    height: 174px;
-    content: " ";
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 100px;
-    background-color: #1d1e22;
-    box-shadow: inset 4px 4px 16px rgba(0, 0, 0, 0.75), 
-    inset -4px -4px 16px rgba(255, 255, 255, 0.1);
-    /* animation: spin 1s infinite linear reverse; */
-  }
-  .number {
-    font-size: 4em;
-  }
-</style>
   </head>
   <body>
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
-
-<div class="loading-box">
-  <p class="title">loading</p>
-  <div class="circle">
-    <p class="count">
-      <span class="number">0</span>%
-    </p>
-  </div>
-</div>
-
-<script>
-  const number = document.querySelector(".number");
-  const circle = document.querySelector(".circle");
-
-  let load = 0;
-
-  setInterval(() => {
-    updateLoader();
-  }, 150);
-
-  function updateLoader() {
-    load += (load < 100);
-    number.innerHTML = load;
-    circle.style.background = `conic-gradient(
-      from 0deg at 50% 50%, 
-      rgba(111, 123, 247, 1) 0%, 
-      rgba(155, 248, 244, 1) ${load}%, 
-      rgb(16, 16, 18) ${load}%)`;
-  }
-</script>
+    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
 
@@ -186,24 +76,143 @@
     </script>
 
     <script>
-      const myThis = 5;
+      // 1. Sum Digits
 
-      const test = () => {
-        console.log(this);
-        console.log(myThis);
+      function calcSum(num) {
+        const word = String(num);
+        let sum = 0;
+
+        for (let index = 0; index < word.length; index++) {
+          const letter = word[index];
+          const dogit = Number(letter);
+          sum += dogit;
+        }
+
+        console.log(sum);
+
       }
 
-      function logThis() {
-        const myThis = this;
-        return test;
+      // calcSum(245678);
+      // calcSum(97561);
+      // calcSum(543);
+
+      function concatinate(a, b, c) {
+        a = String(a);
+        let result = a + b + c;
+
+        console.log(result);
+
       }
 
-      const obj = {
-        log: logThis(),
+      // concatinate("a", "b", "c");
+      // concatinate("%", "2", "o");
+      // concatinate("1", "5", "p");
+
+      // 03.Town Info
+
+      function printTownInfo(town, population, area) {
+        console.log(`Town ${town} has population of ${population} and area ${area} square km.`);
       }
 
-      obj.log();
-      console.log(obj.log);
+      // printTownInfo('Sofia',1286383, 492);
+      // printTownInfo('Plovdiv', 1481353, 512);
+
+      // 04. Convert Meters to Kilometres
+
+      function convertMetersKilometres(meters) {
+        meters = Number(meters);
+        const k = meters / 1000;
+
+        console.log(k.toFixed(2));
+
+      }
+
+      // convertMetersKilometres(1852);
+      // convertMetersKilometres(798);
+
+      // 05. Pounds to Dollars
+
+      function convertPoundstoDollars(pounds) {
+        pounds = Number(pounds);
+        const dollars = pounds * 1.31;
+
+        console.log(dollars.toFixed(3));
+
+      }
+
+      // convertPoundstoDollars(80);
+      // convertPoundstoDollars(39);
+
+      // 06.Reversed Chars
+
+      function printinReverseOrder(a, b, c) {
+        // c = String(c);
+        const reverse = `${c} ${b} ${a}`;
+
+        console.log(reverse);
+
+      }
+
+      // printinReverseOrder("1", "L", "&");
+      // printinReverseOrder("A", "B", "C");
+
+      // 07. Lower or Upper
+
+      function isLowerorUpper(ch) {
+        // console.log("a".charCodeAt(0));
+        // console.log("z".charCodeAt(0));
+        // console.log("A".charCodeAt(0));
+        // console.log("L".charCodeAt(0));
+
+        ch = ch.charCodeAt(0);
+
+        if (ch >= 65 && ch <= 90) {
+          console.log("upper-case");
+        } else {
+          console.log("lower-case");
+        }
+
+      }
+
+      // isLowerorUpper("L");
+      // isLowerorUpper("f");
+
+      // 8. *Calculator
+
+      function calc(n1, o, n2) {
+        const str = `${n1} ${o} ${n2}`;
+        const result = eval(str);
+
+        console.log(result.toFixed(2));
+
+      }
+
+      function calc(n1, o, n2) {
+
+        let result = null;
+        
+        switch (o) {
+          case "+":
+            result = n1 + n2;
+            break;
+          case "-":
+            result = n1 - n2;
+            break;
+          case "/":
+            result = n1 / n2;
+            break;
+          case "*":
+            result = n1 * n2;
+            break;
+        }
+
+        console.log(result.toFixed(2));
+
+      }
+
+
+      calc(5, "+", 10);
+      calc(25.5, "-", 3);
     </script>
   </body>
 </html>
