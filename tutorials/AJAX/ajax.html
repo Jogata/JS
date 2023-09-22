@@ -3,159 +3,155 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AJAX | XMLHttpRequest</title>
-    <!-- <title>iMovies | Movie Website</title> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <!-- <title>AJAX | XMLHttpRequest</title> -->
+    <title>iMovies | Movie Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #ff3700;
+      }
+
+      body {
+        min-height: 100vh;
+        background-color: #000;
+        font-family: Georgia, serif;
+      }
+
+      header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 30px 100px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 2;
+      }
+
+      .logo {
+        color: #fff;
+        font-size: 40px;
+        font-weight: 800;
+        letter-spacing: 1px;
+      }
+
+      .nav {
+        list-style: none;
+      }
+      .nav li {
+        margin: 0 10px;
+      }
+      .nav a {
+        color: #fff;
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        /* text-decoration: none; */
+        text-transform: capitalize;
+        transition: all 300ms;
+        /* cursor: pointer; */
+      }
+      .nav a:hover {
+        color: var(--primary);
+      }
+
+      .search {
+        position: relative;
+        width: 300px;
+        height: 40px;
+      }
+
+      .search input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        padding: 0 10px 0 45px;
+        color: #fff;
+        /* outline: none; */
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        border-radius: 4px;
+        background-color: transparent;
+        backdrop-filter: blur(10px);
+      }
+      .search input::placeholder {
+        color: #fff;
+      }
+      .search i {
+        position: absolute;
+        top: 50%;
+        left: 10px;
+        transform: translateY(-50%);
+        padding-right: 10px;
+        color: #fff;
+      }
+    </style>
   </head>
   <body>
-    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+    <header>
+      <a href="#" class="logo">iMovies</a>
+      <ul class="nav">
+        <li><a href="#">home</a></li>
+        <li><a href="#">adults</a></li>
+        <li><a href="#">kids</a></li>
+        <li><a href="#">trend</a></li>
+        <li><a href="#">my list</a></li>
+      </ul>
+      <div class="search">
+        <input type="text" name="search" id="search" placeholder="Search">
+        <i class="fa fa-search"></i>
+      </div>
+    </header>
+    <div class="banner">
+      <div class="content">
+        <img src="./images/the-little-mermaid-title.png" alt="" class="movie-title">
+        <h4>
+          <span>2023</span>
+          <span>12+</span>
+          <span>2h 14min</span>
+          <span>romance</span>
+        </h4>
+        <p>A young mermaid makes a deal with a sea witch to trade her beautiful voice for human legs so she can discover the world above water and impress a prince.</p>
+        <div class="buttons">
+          <a href="#">
+            <i class="fa fa-play"></i>
+            watch
+          </a>
+          <a href="#">
+            <i class="fa fa-plus"></i>
+            my list
+          </a>
+        </div>
+      </div>
+      <div class="carousel-box"></div>
+      <a href="#" class="play">
+        <i class="fa fa-play-circle-o"></i>
+        watch trailer
+      </a>
+      <ul class="sci">
+        <li><a href="#">
+          <i class="fa fa-facebook"></i>
+        </a></li>
+        <li><a href="#">
+          <i class="fa fa-youtube-play"></i>
+        </a></li>
+        <li><a href="#">
+          <i class="fa fa-twitter"></i>
+        </a></li>
+      </ul>
+    </div>
+    
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <!-- ================= Get data from local JSON file ================= -->
-
-    <script>
-      // 9. *Gladiator Expenses
-
-      function calcGladiatorExpenses(loses, hP, swP, shP, aP) {
-        // let helmet = 0;
-        // let sword = 0;
-        let shield = 0;
-        // let armor = 0;
-        let expenses = 0;
-
-        for (let fight = 1; fight <= loses; fight++) {
-          let isHelmet = false;
-          let isSword = false;
-          let isShield = false;
-          // let isArmor = false;
-
-          if (fight % 2 == 0) {
-            // helmet++;
-            isHelmet = true;
-            expenses += hP;
-          }
-
-          if (fight % 3 == 0) {
-            // sword++;
-            isSword = true;
-            expenses += swP;
-          }
-
-          if (isHelmet && isSword) {
-            shield++;
-            expenses += shP;
-
-            if (shield % 2 == 0) {
-              expenses += aP;
-            }
-          }
-        }
-
-        console.log(`Gladiator expenses: ${expenses.toFixed(2)} aureus`);
-
-      }
-
-      // calcGladiatorExpenses(7, 2, 3, 4, 5);
-      // calcGladiatorExpenses(23, 12.5, 21.5, 40, 200);
-
-      // 10. *Spice Must Flow
-
-      function menageSpiceMinning(yield) {
-        let total = 0;
-        let days = 0;
-        const food = 26;
-
-        for (let index = yield; index >= 100; index -= 10) {
-          days++;
-          total = total + index;
-
-          // if (food > total) {
-            // total = 0;
-          // } else {
-            total = total - food;
-          // }
-        }
-
-        if (food > total) {
-            total = 0;
-          } else {
-
-            total = total - food;
-          }
-
-        console.log(days);
-        console.log(total);
-
-      }
-
-      // menageSpiceMinning(111);
-      // menageSpiceMinning(450);
-
-      // 01. Type
-
-      function printType(input) {
-        if (typeof input == "string" || typeof input == "number") {
-          console.log(typeof input);
-          console.log(input);
-        } else {
-          console.log(typeof input);
-          console.log("Parameter is not suitable for printing");
-        }
-      }
-
-      // printType("hello");
-      // printType(18);
-      // printType(null);
-
-      // 02. Concatenate Names
-
-      function printNames(n1, n2, d) {
-        console.log(n1 + d + n2);
-      }
-
-      // printNames('John', 'Smith', '->');
-      // printNames('Jan', 'White', '<->');
-      // printNames('Linda', 'Terry', '=>');
-
-      // 03. Right Place
-
-      function compare(p1, p2, p3) {
-
-        let result = "";
-
-        for (let index = 0; index < p1.length; index++) {
-          if (p1[index] == "_") {
-            result += p2;
-          } else {
-            result += p1[index];
-          }
-        }
-
-        if (result == p3) {
-          console.log("Matched");
-        } else {
-          console.log("Not Matched");
-        }
-
-      }
-
-      // compare('Str_ng', 'I', 'Strong');
-      // compare('Str_ng', 'i', 'String');
-
-      // 04. Integer and Float
-
-      function printType(n1, n2, n3) {
-        let sum = n1 + n2 + n3;
-
-        if (Math.floor(sum) == sum) {
-          console.log(sum + " - Integer");
-        } else {
-          console.log(sum + " - Float");
-        }
-      }
-
-      // printType(9, 100, 1.1);
-      // printType(100, 200, 303);
-    </script>
 
     <fieldset>
       <legend>Get all users from local JSON file</legend>
