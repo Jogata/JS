@@ -543,6 +543,80 @@
         display: flex;
         justify-content: center;
       }
+      .gallery-controls button {
+        background-color: transparent;
+        border: 0;
+        cursor: pointer;
+        font-size: 30px;
+        margin: 0 50px;
+        padding: 0 12px;
+        text-transform: capitalize;
+      }
+      .gallery-controls button:focus {
+        outline: none;
+      }
+      .gallery-controls-prev {
+        position: relative;
+      }
+      .gallery-controls-prev::before {
+        border: solid #000;
+        border-width: 0 5px 5px 0;
+        content: "";
+        display: inline-block;
+        width: 5px;
+        height: 5px;
+        padding: 10px;
+        position: absolute;
+        top: 25%;
+        left: -30px;
+        transform: rotate(135deg) translateY(-50%);
+        transition: left 0.15s ease-in-out;
+      }
+      .gallery-controls-prev:hover::before {
+        left: -40px;
+      }
+
+      .gallery-controls-next {
+        position: relative;
+      }
+      .gallery-controls-next::after {
+        border: solid #000;
+        border-width: 0 5px 5px 0;
+        content: "";
+        display: inline-block;
+        width: 5px;
+        height: 5px;
+        padding: 10px;
+        position: absolute;
+        top: 45%;
+        right: -30px;
+        transform: rotate(-45deg) translateY(-50%);
+        transition: right 0.15s ease-in-out;
+      }
+      .gallery-controls-next:hover::after {
+        right: -40px;
+      }
+
+      .gallery-nav {
+        bottom: -15px;
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+        position: absolute;
+        width: 100%;
+      }
+
+      .gallery nav li {
+        width: 10px;
+        height: 10px;
+        margin: 0 16px;
+        border-radius: 50%;
+        background-color: #ccc;
+      }
+      .gallery-nav li.gallery-item-selected {
+        background-color: #555;
+      }
     </style>
   </head>
   <body>
@@ -716,6 +790,65 @@
             <img src="./images/movies/bg-the-tank.jpeg" alt="" class="gallery-item gallery-item-5" data-index="5">
           </div>
           <div class="gallery-controls"></div>
+          <script>
+            const galleryContainer = document.querySelector(".gallery-container");
+            const galleryControlsContainer = document.querySelector(".gallery-controls");
+            const galleryControls = ["prev", "next"];
+            const galleryItems = document.querySelectorAll(".gallery-item");
+
+            class Carousel {
+              constructor(container, items, controls) {
+                this.carouselContainer = container;
+                this.carouselControls = controls;
+                this.carouselArray = [...items];
+              }
+
+              updateGallery() {
+                this.carouselArray.forEach(el => {
+                  el.classList.remove("gallery-item-1");
+                  el.classList.remove("gallery-item-2");
+                  el.classList.remove("gallery-item-3");
+                  el.classList.remove("gallery-item-4");
+                  el.classList.remove("gallery-item-5");
+                })
+
+                this.carouselArray.slice(0, 5).forEach((el, i) => {
+                  el.classList.add(`gallery-item-${i + 1}`);
+                })
+              };
+
+              setCurrentState(direction) {
+                if (direction.className == "gallery-controls-prev") {
+                  this.carouselArray.unshift(this.carouselArray.pop());
+                } else {
+                  this.carouselArray.push(this.carouselArray.shift());
+                }
+                this.updateGallery();
+              }
+
+              setControls() {
+                this.carouselControls.forEach(control => {
+                  galleryControlsContainer.appendChild(document.createElement("button")).className = `gallery-controls-${control}`;
+                  document.querySelector(`.gallery-controls-${control}`).innerText = control;
+                })
+              }
+
+              useControls() {
+                const triggers = [...galleryControlsContainer.childNodes];
+                triggers.forEach(control => {
+                  control.addEventListener("click", e => {
+                    e.preventDefault();
+                    this.setCurrentState(control);
+                  })
+                })
+              }
+            }
+
+            const example = new Carousel(galleryContainer, galleryItems, galleryControls);
+
+            example.setControls();
+            example.useControls();
+          </script>
         </div>
       </main>
     </div>
