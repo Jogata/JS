@@ -57,11 +57,11 @@
         position: relative;
         min-height: 100vh;
         padding: 2%;
-        background-image: url("./images/movies/bg-little-mermaid.jpg");
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-        background-position: top;
-        background-size: cover;
+        /* background-image: url("./images/movies/bg-little-mermaid.jpg"); */
+        /* background-attachment: fixed; */
+        /* background-repeat: no-repeat; */
+        /* background-position: top; */
+        /* background-size: cover; */
         z-index: 1;
       }
       .page::before {
@@ -203,6 +203,7 @@
         display: none;
         text-align: center;
         visibility: hidden;
+        /* opacity: 0; */
         transform: scale(0);
         transition: all 500ms;
       }
@@ -434,10 +435,125 @@
       /* .banner { */
         /* border: 1px solid red; */
       /* } */
+
+      .backgrounds {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+        /* background-color: red; */
+      }
+
+      .bg {
+        min-height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-position: top;
+        background-size: cover;
+        transition: opacity 1s;
+        opacity: 0;
+      }
+      .bg.visible {
+        opacity: 1;
+        transition: opacity 3s;
+      }
+    </style>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background: 
+          linear-gradient(180deg, 
+          rgb(236, 213, 232) 0%, 
+          rgb(50, 112, 118) 100%);
+      }
+
+      .gallery {
+        width: 100%;
+      }
+
+      .gallery-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        max-width: 1000px;
+        height: 400px;
+        margin: 0 auto;
+      }
+
+      .gallery-item {
+        position: absolute;
+        width: 330px;
+        height: 200px;
+        border-radius: 15px;
+        background-size: contain;
+        transition: all 0.3s ease-in-out;
+        opacity: 0;
+        z-index: 0;
+      }
+      .gallery-item-1 {
+        left: 15%;
+        opacity: 0.4;
+        transform: translateX(-50%);
+      }
+      .gallery-item-2, 
+      .gallery-item-4 {
+        width: 380px;
+        height: 250px;
+        opacity: 0.8;
+        z-index: 1;
+      }
+      .gallery-item-2 {
+        left: 30%;
+        transform: translateX(-50%);
+      }
+      .gallery-item-3 {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 430px;
+        height: 300px;
+        box-shadow: 
+          -2px 5px 33px 6px 
+          rgba(0, 0, 0, 0.35);
+        z-index: 2;
+      }
+      .gallery-item-4 {
+        left: 70%;
+        transform: translateX(-50%);
+      }
+      .gallery-item-5 {
+        left: 85%;
+        opacity: 0.4;
+        transform: translateX(-50%);
+      }
+
+      .gallery-controls {
+        height: 100px;
+        margin: 25px 0;
+        display: flex;
+        justify-content: center;
+      }
     </style>
   </head>
   <body>
     <div class="page">
+      <div class="backgrounds">
+        <div class="bg"></div>
+        <div class="bg"></div>
+        <div class="bg visible"></div>
+        <div class="bg"></div>
+        <div class="bg"></div>
+      </div>
       <header class="max-width">
         <a href="#" class="logo">iMovies</a>
         <ul class="nav">
@@ -591,6 +707,16 @@
             </a></li>
           </ul>  
         </div>
+        <div class="gallery">
+          <div class="gallery-container">
+            <img src="./images/movies/bg-65.jpeg" alt="" class="gallery-item gallery-item-1" data-index="1">
+            <img src="./images/movies/bg-little-mermaid.jpg" alt="" class="gallery-item gallery-item-2" data-index="2">
+            <img src="./images/movies/bg-the-black-demon.jpeg" alt="" class="gallery-item gallery-item-3" data-index="3">
+            <img src="./images/movies/bg-the-covenant.jpeg" alt="" class="gallery-item gallery-item-4" data-index="4">
+            <img src="./images/movies/bg-the-tank.jpeg" alt="" class="gallery-item gallery-item-5" data-index="5">
+          </div>
+          <div class="gallery-controls"></div>
+        </div>
       </main>
     </div>
 
@@ -613,13 +739,20 @@
         const slider = document.querySelector(".carousel");
         const contents = document.querySelectorAll(".content");
 
-        const bg = [
+        const backgroundImages = [
           "./images/movies/bg-the-covenant.jpeg", 
           "./images/movies/bg-65.jpeg", 
           "./images/movies/bg-little-mermaid.jpg", 
           "./images/movies/bg-the-black-demon.jpeg", 
           "./images/movies/bg-the-tank.jpeg"
         ]
+
+        const backgroundFrames = document.querySelectorAll(".bg");
+
+        backgroundFrames.forEach((frame, index) => {
+          frame.style.backgroundImage = `url("${backgroundImages[index]}")`;
+          console.log("a");
+        })
 
         const middle = Math.floor(slides.length / 2);
 
@@ -686,8 +819,10 @@
               })
             }
 
-            const page = document.querySelector(".page");
-            page.style.backgroundImage = `url("${bg[index]}")`;
+            // const page = document.querySelector(".page");
+            const visibleBack = document.querySelector(".bg.visible");
+            visibleBack.classList.remove("visible");
+            backgroundFrames[index].classList.add("visible");
             const activeContent = document.querySelector(".content.active");
             activeContent.classList.remove("active");
             contents[index].classList.add("active");
