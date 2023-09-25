@@ -3,971 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>AJAX | XMLHttpRequest</title> -->
-    <title>iMovies | Movie Website</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      :root {
-        --primary: #ff3700;
-      }
-
-      body {
-        min-width: fit-content;
-        min-height: 100vh;
-        background-color: #222;
-        font-family: Georgia, serif;
-        /* display: flex; */
-        /* align-items: center; */
-        /* justify-content: center; */
-        /* flex-direction: column; */
-      }
-
-      ul {
-        list-style: none;
-      }
-
-      a {
-        text-decoration: none;
-      }
-
-      button, i {
-        cursor: pointer;
-      }
-
-      img {
-        width: 100%;
-      }
-
-      .max-width {
-        max-width: 113rem;
-        margin: auto;
-      }
-
-      .capitalize {
-        text-transform: capitalize;
-      }
-
-      .page {
-        position: relative;
-        min-height: 100vh;
-        padding: 2%;
-        /* background-image: url("./images/movies/bg-little-mermaid.jpg"); */
-        /* background-attachment: fixed; */
-        /* background-repeat: no-repeat; */
-        /* background-position: top; */
-        /* background-size: cover; */
-        z-index: 1;
-      }
-      .page::before {
-        position: absolute;
-        top: 0;
-        /* right: 0; */
-        /* bottom: 0; */
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-      }
-
-      header {
-        /* position: absolute; */
-        /* top: 0; */
-        /* left: 0; */
-        /* width: 100%; */
-        /* padding: 30px 100px; */
-        padding-bottom: 4%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 1rem;
-        z-index: 2;
-      }
-
-      .logo {
-        color: #fff;
-        font-size: 2.5rem;
-        font-weight: 800;
-        letter-spacing: 1px;
-        /* text-decoration: none; */
-        transition: all 300ms;
-      }
-      .logo:hover {
-        transform: scale(1.1);
-        /* color: transparent; */
-        /* -webkit-text-stroke: 1px #fff; */
-        /* transition: all 300ms; */
-      }
-
-      .nav {
-        /* list-style: none; */
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px 20px;
-      }
-      /* .nav li {
-        margin: 0 10px;
-      } */
-      .nav a {
-        color: #fff;
-        font-size: 1.2rem;
-        font-weight: 500;
-        letter-spacing: 1px;
-        /* text-decoration: none; */
-        text-transform: capitalize;
-        transition: all 300ms;
-        /* cursor: pointer; */
-      }
-      .nav a:hover {
-        color: var(--primary);
-      }
-
-      .search {
-        position: relative;
-        width: 19rem;
-        /* height: 40px; */
-      }
-
-      .search input {
-        /* position: absolute; */
-        /* left: 0; */
-        /* top: 0; */
-        width: 100%;
-        /* height: 100%; */
-        /* padding: 0 10px 0 45px; */
-        padding: 1rem 1rem 1rem 4rem;
-        color: #fff;
-        /* outline: none; */
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        border-radius: 4px;
-        background-color: transparent;
-        backdrop-filter: blur(10px);
-      }
-      .search input::placeholder {
-        color: #fff;
-      }
-      .search i {
-        position: absolute;
-        top: 50%;
-        /* left: 10px; */
-        left: 0;
-        transform: translateY(-50%);
-        /* padding-right: 10px; */
-        padding: 0.8rem 1rem;
-        color: #fff;
-        border-right: 1px solid rgba(255, 255, 255, 0.5);
-      }
-
-      .banner {
-        /* position: relative; */
-        /* width: 100%; */
-        min-height: 80vh;
-        /* padding: 0 100px; */
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 2rem;
-        /* background-image: url("./images/movies/bg-little-mermaid.jpg");
-        background-repeat: no-repeat;
-        background-position: top;
-        background-size: cover; */
-        /* transition: all 500ms; */
-        /* overflow: hidden; */
-        z-index: 2;
-      }
-      /* .banner::before {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-      } */
-
-      .content {
-        /* position: relative; */
-        max-width: 35rem;
-        margin: auto;
-        display: none;
-        text-align: center;
-        visibility: hidden;
-        /* opacity: 0; */
-        transform: scale(0);
-        transition: all 500ms;
-      }
-      .content.active {
-        display: block;
-        visibility: visible;
-        transform: scale(1);
-      }
-
-      .movie-title {
-        max-width: 16rem;
-        margin: 1rem auto;
-      }
-
-      /* .banner .content h4 { */
-      .info {
-        color: rgba(255, 255, 255, 0.5);
-        font-size: 2rem;
-        font-weight: 400;
-      }
-
-      /* .banner .content h4 span { */
-      .info li {
-        display: inline-block;
-        margin: 10px 0;
-        padding: 0 10px;
-        border-right: 1px solid rgba(255, 255, 255, 0.5);
-        /* border: 1px solid red; */
-      }
-      /* .banner .content h4 span:first-child { */
-      .info li:first-child {
-        padding-left: 0;
-      }
-      .info li:last-child {
-        border-right: 1px solid transparent;
-      }
-      .info li.primary-bg {
-        display: inline-block;
-        margin: 0 8px;
-        padding: 0 8px 4px 8px;
-        color: #fff;
-        border-right: 1px solid transparent;
-        border-radius: 2px;
-        background-color: var(--primary);
-      }
-      .info li.primary-bg + li {
-        border-left: 1px solid rgba(255, 255, 255, 0.5);
-      }
-
-      .content p {
-        margin: 10px 0 20px;
-        color: #fff;
-        font-size: 1rem;
-        font-weight: 300;
-        line-height: 1.5em;
-      }
-
-      .buttons a {
-        /* position: relative; */
-        display: inline-block;
-        margin: 10px 10px 10px 0;
-        padding: 0 1.2em 0 0.6em;
-        color: #fff;
-        font-size: 1rem;
-        font-weight: 500;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        border-radius: 3px;
-        background-color: var(--primary);
-        /* text-decoration: none; */
-        transition: all 500ms;
-        /* cursor: pointer; */
-      }
-      .buttons a i {
-        padding: 10px;
-      }
-      .buttons a:last-child {
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        background-color: rgba(0, 0, 0, 0.5);
-      }
-      .buttons a:hover:last-child {
-        background-color: var(--primary);
-      }
-
-      .carousel-container {
-        /* width: 50%; */
-        max-width: 90rem;
-        margin: 1rem auto 3rem;
-        padding: 2.5rem 1.2rem;
-        display: flex;
-        /* align-items: center; */
-        justify-content: center;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-        background-color: rgba(0, 0, 0, 0.2);
-        box-shadow: 20px 20px 50px rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(20px);
-        overflow: hidden;
-      }
-
-      .carousel {
-        /* position: relative; */
-        /* min-width: 950px; */
-        /* max-width: 1200px; */
-        /* height: 550px; */
-        /* perspective: 1500; */
-        min-width: 53rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        perspective: 1500px;
-        transform-style: preserve-3d;
-        pointer-events: none;
-      }
-
-      .carousel-item {
-        position: absolute;
-        width: 16rem;
-        transition: transform 1s, filter 500ms;
-        pointer-events: all;
-        cursor: pointer;
-      }
-      .carousel-item.relative {
-        position: relative;
-      }
-      .carousel-item:hover {
-        /* filter: invert(1); */
-        filter: brightness(0.8);
-      }
-      .carousel-item:nth-child(1) {
-        /* transform: translateX(30%) translateZ(-400px); */
-        transform: translateX(-150%) translateZ(-400px);
-      }
-      .carousel-item:nth-child(2) {
-        transform: translateX(-75%) translateZ(-200px);
-      }
-      .carousel-item:nth-child(3) {
-        transform: translateX(0%) translateZ(0);
-      }
-      .carousel-item:nth-child(4) {
-        transform: translateX(75%) translateZ(-200px);
-      }
-      .carousel-item:nth-child(5) {
-        transform: translateX(150%) translateZ(-400px);
-      }
-
-      .carousel-item img {
-        display: block;
-        max-width: 94%;
-        margin: auto;
-        border-radius: 10px;
-        /* transform: translateX(8px) translateY(-100px); */
-        object-fit: cover;
-        object-position: center;
-      }
-
-      .footer {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 1rem;
-      }
-
-      .play {
-        /* position: absolute; */
-        /* bottom: 50px; */
-        /* left: 100px; */
-        display: inline-flex;
-        align-items: center;
-        justify-content: flex-start;
-        color: #fff;
-        font-size: 1.2rem;
-        font-weight: 500;
-        letter-spacing: 1px;
-        /* text-decoration: none; */
-        text-transform: uppercase;
-        transition: all 300ms;
-        /* cursor: pointer; */
-      }
-      .play:hover {
-        color: var(--primary);
-      }
-      .play i {
-        margin-right: 10px;
-        font-size: 2.5rem;
-        /* cursor: pointer; */
-      }
-
-      .sci {
-        /* position: absolute; */
-        /* right: 30px; */
-        /* bottom: 50px; */
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 25px;
-        /* border: 1px solid red; */
-      }
-
-      .sci a {
-        color: #fff;
-        font-size: 1.5rem;
-        font-weight: 500;
-        letter-spacing: 1px;
-        /* text-decoration: none; */
-        transition: all 300ms;
-        /* cursor: pointer; */
-      }
-      .sci a:hover {
-        color: var(--primary);
-      }
-
-      @media screen and (max-width: 25rem) {
-        .logo {
-          margin: auto;
-        }
-        .carousel-item {
-          max-width: 50vw;
-        }
-      }
-
-      /* delete */
-      /* .banner .content h4 span:last-child { */
-        /* text-transform: capitalize; */
-      /* } */
-      fieldset {
-        display: none;
-      }
-      /* .banner { */
-        /* border: 1px solid red; */
-      /* } */
-
-      .backgrounds {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -2;
-        /* background-color: red; */
-      }
-
-      .bg {
-        min-height: 100vh;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-repeat: no-repeat;
-        background-position: top;
-        background-size: cover;
-        transition: opacity 1s;
-        opacity: 0;
-      }
-      .bg.visible {
-        opacity: 1;
-        transition: opacity 3s;
-      }
-    </style>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        background: 
-          linear-gradient(180deg, 
-          rgb(236, 213, 232) 0%, 
-          rgb(50, 112, 118) 100%);
-      }
-
-      .gallery {
-        width: 100%;
-      }
-
-      .gallery-container {
-        position: relative;
-        display: flex;
-        align-items: center;
-        max-width: 1000px;
-        height: 400px;
-        margin: 0 auto;
-      }
-
-      .gallery-item {
-        position: absolute;
-        width: 330px;
-        height: 200px;
-        border-radius: 15px;
-        background-size: contain;
-        transition: all 0.3s ease-in-out;
-        opacity: 0;
-        z-index: 0;
-      }
-      .gallery-item-1 {
-        left: 15%;
-        opacity: 0.4;
-        transform: translateX(-50%);
-      }
-      .gallery-item-2, 
-      .gallery-item-4 {
-        width: 380px;
-        height: 250px;
-        opacity: 0.8;
-        z-index: 1;
-      }
-      .gallery-item-2 {
-        left: 30%;
-        transform: translateX(-50%);
-      }
-      .gallery-item-3 {
-        left: 50%;
-        transform: translateX(-50%);
-        width: 430px;
-        height: 300px;
-        box-shadow: 
-          -2px 5px 33px 6px 
-          rgba(0, 0, 0, 0.35);
-        z-index: 2;
-      }
-      .gallery-item-4 {
-        left: 70%;
-        transform: translateX(-50%);
-      }
-      .gallery-item-5 {
-        left: 85%;
-        opacity: 0.4;
-        transform: translateX(-50%);
-      }
-
-      .gallery-controls {
-        height: 100px;
-        margin: 25px 0;
-        display: flex;
-        justify-content: center;
-      }
-      .gallery-controls button {
-        background-color: transparent;
-        border: 0;
-        cursor: pointer;
-        font-size: 30px;
-        margin: 0 50px;
-        padding: 0 12px;
-        text-transform: capitalize;
-      }
-      .gallery-controls button:focus {
-        outline: none;
-      }
-      .gallery-controls-prev {
-        position: relative;
-      }
-      .gallery-controls-prev::before {
-        border: solid #000;
-        border-width: 0 5px 5px 0;
-        content: "";
-        display: inline-block;
-        width: 5px;
-        height: 5px;
-        padding: 10px;
-        position: absolute;
-        top: 25%;
-        left: -30px;
-        transform: rotate(135deg) translateY(-50%);
-        transition: left 0.15s ease-in-out;
-      }
-      .gallery-controls-prev:hover::before {
-        left: -40px;
-      }
-
-      .gallery-controls-next {
-        position: relative;
-      }
-      .gallery-controls-next::after {
-        border: solid #000;
-        border-width: 0 5px 5px 0;
-        content: "";
-        display: inline-block;
-        width: 5px;
-        height: 5px;
-        padding: 10px;
-        position: absolute;
-        top: 45%;
-        right: -30px;
-        transform: rotate(-45deg) translateY(-50%);
-        transition: right 0.15s ease-in-out;
-      }
-      .gallery-controls-next:hover::after {
-        right: -40px;
-      }
-
-      .gallery-nav {
-        bottom: -15px;
-        display: flex;
-        justify-content: center;
-        list-style: none;
-        padding: 0;
-        position: absolute;
-        width: 100%;
-      }
-
-      .gallery nav li {
-        width: 10px;
-        height: 10px;
-        margin: 0 16px;
-        border-radius: 50%;
-        background-color: #ccc;
-      }
-      .gallery-nav li.gallery-item-selected {
-        background-color: #555;
-      }
-    </style>
+    <title>AJAX | XMLHttpRequest</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   </head>
   <body>
-    <div class="page">
-      <div class="backgrounds">
-        <div class="bg"></div>
-        <div class="bg"></div>
-        <div class="bg visible"></div>
-        <div class="bg"></div>
-        <div class="bg"></div>
-      </div>
-      <header class="max-width">
-        <a href="#" class="logo">iMovies</a>
-        <ul class="nav">
-          <li><a href="#">home</a></li>
-          <li><a href="#">adults</a></li>
-          <li><a href="#">kids</a></li>
-          <li><a href="#">trend</a></li>
-          <li><a href="#">my list</a></li>
-        </ul>
-        <div class="search">
-          <input type="text" name="search" id="search" placeholder="Search">
-          <i class="fa fa-search" aria-hidden="true"></i>
-        </div>
-      </header>
-      <main class="max-width">
-        <div class="banner">
-          <div class="content">
-            <img src="./images/the-covenant-title.png" alt="" class="movie-title">
-            <ul class="info">
-              <li>2023</li>
-              <li class="primary-bg">12+</li>
-              <li>2h 03min</li>
-              <li class="capitalize">war/action</li>
-            </ul>
-            <p>During the war in Afghanistan, a local interpreter risks his own life to carry an injured sergeant across miles of grueling terrain.</p>
-            <div class="buttons">
-              <a href="#">
-                <i class="fa fa-play" aria-hidden="true"></i>
-                watch
-              </a>
-              <a href="#">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                my list
-              </a>
-            </div>
-          </div>
-          <div class="content">
-            <img src="./images/the-65-title.png" alt="" class="movie-title">
-            <ul class="info">
-              <li>2023</li>
-              <li class="primary-bg">15+</li>
-              <li>1h 33min</li>
-              <li class="capitalize">action</li>
-            </ul>
-            <p>An astronaut crash lands on a mysterious planet only to discover he's not alone.</p>
-            <div class="buttons">
-              <a href="#">
-                <i class="fa fa-play" aria-hidden="true"></i>
-                watch
-              </a>
-              <a href="#">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                my list
-              </a>
-            </div>
-          </div>
-          <div class="content active">
-            <img src="./images/the-little-mermaid-title.png" alt="" class="movie-title">
-            <ul class="info">
-              <li>2023</li>
-              <li class="primary-bg">12+</li>
-              <li>2h 14min</li>
-              <li class="capitalize">romance</li>
-            </ul>
-            <p>A young mermaid makes a deal with a sea witch to trade her beautiful voice for human legs so she can discover the world above water and impress a prince.</p>
-            <div class="buttons">
-              <a href="#">
-                <i class="fa fa-play" aria-hidden="true"></i>
-                watch
-              </a>
-              <a href="#">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                my list
-              </a>
-            </div>
-          </div>
-          <div class="content">
-            <img src="./images/the-black-demon-title.png" alt="" class="movie-title">
-            <ul class="info">
-              <li>2023</li>
-              <li class="primary-bg">16+</li>
-              <li>1h 40min</li>
-              <li class="capitalize">thriller</li>
-            </ul>
-            <p>Stranded on a crumbling rig in Baja, a family faces off against a vengeful megalodon shark.</p>
-            <div class="buttons">
-              <a href="#">
-                <i class="fa fa-play" aria-hidden="true"></i>
-                watch
-              </a>
-              <a href="#">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                my list
-              </a>
-            </div>
-          </div>
-          <div class="content">
-            <img src="./images/the-tank-title.png" alt="" class="movie-title">
-            <ul class="info">
-              <li>2023</li>
-              <li class="primary-bg">15+</li>
-              <li>1h 40min</li>
-              <li class="capitalize">horror</li>
-            </ul>
-            <p>After mysteriously inheriting an abandoned coastal property, Ben and his family accidentally unleash an ancient, long-dormant creature that terrorized the entire region-including his own ancestors-for generations.</p>
-            <div class="buttons">
-              <a href="#">
-                <i class="fa fa-play" aria-hidden="true"></i>
-                watch
-              </a>
-              <a href="#">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                my list
-              </a>
-            </div>
-          </div>
-          <div class="carousel-container">
-            <div class="carousel">
-              <div class="carousel-item">
-                <img src="./images/movies/the-covenant.jpg" alt="">
-              </div>
-              <div class="carousel-item">
-                <img src="./images/movies/65.jpg" alt="">
-              </div>
-              <div class="carousel-item relative">
-                <img src="./images/movies/the-little-mermaid.jpeg" alt="">
-              </div>
-              <div class="carousel-item">
-                <img src="./images/movies/the-black-demon.jpg" alt="">
-              </div>
-              <div class="carousel-item">
-                <img src="./images/movies/the-tank.jpeg" alt="">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="footer">
-          <a href="#" class="play">
-            <i class="fa fa-play-circle-o" aria-hidden="true"></i>
-            watch trailer
-          </a>
-          <ul class="sci">
-            <li><a href="#">
-              <i class="fa fa-facebook" aria-hidden="true"></i>
-            </a></li>
-            <li><a href="#">
-              <i class="fa fa-youtube-play" aria-hidden="true"></i>
-            </a></li>
-            <li><a href="#">
-              <i class="fa fa-twitter" aria-hidden="true"></i>
-            </a></li>
-          </ul>  
-        </div>
-        <div class="gallery">
-          <div class="gallery-container">
-            <img src="./images/movies/bg-65.jpeg" alt="" class="gallery-item gallery-item-1" data-index="1">
-            <img src="./images/movies/bg-little-mermaid.jpg" alt="" class="gallery-item gallery-item-2" data-index="2">
-            <img src="./images/movies/bg-the-black-demon.jpeg" alt="" class="gallery-item gallery-item-3" data-index="3">
-            <img src="./images/movies/bg-the-covenant.jpeg" alt="" class="gallery-item gallery-item-4" data-index="4">
-            <img src="./images/movies/bg-the-tank.jpeg" alt="" class="gallery-item gallery-item-5" data-index="5">
-          </div>
-          <div class="gallery-controls"></div>
-          <script>
-            const galleryContainer = document.querySelector(".gallery-container");
-            const galleryControlsContainer = document.querySelector(".gallery-controls");
-            const galleryControls = ["prev", "next"];
-            const galleryItems = document.querySelectorAll(".gallery-item");
-
-            class Carousel {
-              constructor(container, items, controls) {
-                this.carouselContainer = container;
-                this.carouselControls = controls;
-                this.carouselArray = [...items];
-              }
-
-              updateGallery() {
-                this.carouselArray.forEach(el => {
-                  el.classList.remove("gallery-item-1");
-                  el.classList.remove("gallery-item-2");
-                  el.classList.remove("gallery-item-3");
-                  el.classList.remove("gallery-item-4");
-                  el.classList.remove("gallery-item-5");
-                })
-
-                this.carouselArray.slice(0, 5).forEach((el, i) => {
-                  el.classList.add(`gallery-item-${i + 1}`);
-                })
-              };
-
-              setCurrentState(direction) {
-                if (direction.className == "gallery-controls-prev") {
-                  this.carouselArray.unshift(this.carouselArray.pop());
-                } else {
-                  this.carouselArray.push(this.carouselArray.shift());
-                }
-                this.updateGallery();
-              }
-
-              setControls() {
-                this.carouselControls.forEach(control => {
-                  galleryControlsContainer.appendChild(document.createElement("button")).className = `gallery-controls-${control}`;
-                  document.querySelector(`.gallery-controls-${control}`).innerText = control;
-                })
-              }
-
-              useControls() {
-                const triggers = [...galleryControlsContainer.childNodes];
-                triggers.forEach(control => {
-                  control.addEventListener("click", e => {
-                    e.preventDefault();
-                    this.setCurrentState(control);
-                  })
-                })
-              }
-            }
-
-            const example = new Carousel(galleryContainer, galleryItems, galleryControls);
-
-            example.setControls();
-            example.useControls();
-          </script>
-        </div>
-      </main>
-    </div>
-
-    <script>
-      // const slides = document.querySelectorAll(".carousel-item");
-      // const slider = document.querySelector(".carousel");
-
-      // slides.forEach((slide, index) => {
-      //   slide.addEventListener("click", () => {
-      //     const slides = document.querySelectorAll(".carousel-item");
-      //     const copy = slide.cloneNode(true);
-      //     const middle = slides[2];
-      //     slider.removeChild(slide);
-      //     slider.insertBefore(copy, middle);
-      //   })
-      // })
-
-      function setSlider() {
-        const slides = document.querySelectorAll(".carousel-item");
-        const slider = document.querySelector(".carousel");
-        const contents = document.querySelectorAll(".content");
-
-        const backgroundImages = [
-          "./images/movies/bg-the-covenant.jpeg", 
-          "./images/movies/bg-65.jpeg", 
-          "./images/movies/bg-little-mermaid.jpg", 
-          "./images/movies/bg-the-black-demon.jpeg", 
-          "./images/movies/bg-the-tank.jpeg"
-        ]
-
-        const backgroundFrames = document.querySelectorAll(".bg");
-
-        backgroundFrames.forEach((frame, index) => {
-          frame.style.backgroundImage = `url("${backgroundImages[index]}")`;
-          console.log("a");
-        })
-
-        const middle = Math.floor(slides.length / 2);
-
-        let diff = middle;
-
-        slides.forEach((slide, index) => {
-          slide.addEventListener("click", () => {
-            diff = index;
-            // console.log(diff, 523);
-            // console.log(middle);
-
-            // slides.forEach((slide, index) => {
-            //   let position = index - diff;
-
-            //     if (diff >= middle) {
-            //       if (position < -2) {
-            //         position = position + slides.length;
-            //       }
-            //       console.log(position);
-            //       slide.style.transform = `translateX(${(position) * 75}%) translateZ(-${Math.abs(position) * 200}px)`;
-            //     } else if (diff < middle) {
-            //   slides.forEach((slide, index) => {
-            //     let position = index - diff;
-  
-            //     if (position > 2) {
-            //       position = position - slides.length;
-            //     }
-            //     console.log(position);
-            //     slide.style.transform = `translateX(${(position) * 75}%) translateZ(-${Math.abs(position) * 200}px)`;
-            //     })
-            //   }
-            // })
-
-            if (diff >= middle) {
-              slides.forEach((slide, index) => {
-                let position = index - diff; // 2 + 1 = 3
-
-                if (position < -2) {
-                  position = position + slides.length; // -4 + 5 = 1
-                }
-                // console.log(position);
-                slide.style.transform = `translateX(${(position) * 75}%) translateZ(-${Math.abs(position) * 200}px)`;
-                // 0 -> 1
-                // 1 -> 2
-                // 2 -> -2
-                // 3 -> -1
-                // 4 -> 0
-              })
-            } else if (diff < middle) {
-              slides.forEach((slide, index) => {
-                let position = index - diff; // 0 + 1 = 2
-  
-                if (position > 2) {
-                  position = position - slides.length; // 3 - 5 = -2
-                }
-                // console.log(position);
-                slide.style.transform = `translateX(${(position) * 75}%) translateZ(-${Math.abs(position) * 200}px)`;
-  
-                // 0 -> -1
-                // 1 -> 0
-                // 2 -> 1
-                // 3 -> 2
-                // 4 -> -2
-              })
-            }
-
-            // const page = document.querySelector(".page");
-            const visibleBack = document.querySelector(".bg.visible");
-            visibleBack.classList.remove("visible");
-            backgroundFrames[index].classList.add("visible");
-            const activeContent = document.querySelector(".content.active");
-            activeContent.classList.remove("active");
-            contents[index].classList.add("active");
-
-          })
-        })
-      }
-
-      setSlider();
-    </script>
-    
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
 
@@ -1033,5 +73,139 @@
         users.send();
       }
     </script>
+
+<script>
+  // 02. English Name of the Last Digit
+
+  function printLastDigit(num) {
+    // let lastDigit = num / 10;
+    // lastDigit = lastDigit - Math.floor(lastDigit);
+    // lastDigit = lastDigit * 10;
+    // lastDigit = Math.floor(lastDigit);
+
+    num = String(num);
+    let letter = num[num.length - 1];
+
+    let result = "";
+
+    // console.log(letter);
+
+    if (letter == 0) {
+      result = "zero";
+    } else if (letter == 1) {
+      result = "one";
+    } else if (letter == 2) {
+      result = "two";
+    } else if (letter == 3) {
+      result = "three";
+    } else if (letter == 4) {
+      result = "four";
+    } else if (letter == 5) {
+      result = "five";
+    } else if (letter == 6) {
+      result = "six";
+    } else if (letter == 7) {
+      result = "seven";
+    } else if (letter == 8) {
+      result = "eight";
+    } else if (letter == 9) {
+      result = "nine";
+    }
+
+    console.log(result);
+
+  }
+
+  // printLastDigit(512);
+  // printLastDigit(1);
+  // printLastDigit(1643);
+
+  // 03. Next Day
+
+  function printNextDay(y, m, d) {
+    const date = new Date(y, m - 1, d);
+
+    let nexday = date.setDate(d+1);
+
+    var d = new Date(nexday),
+    month = '' + (d.getMonth() + 1),
+    day = '' + d.getDate(),
+    year = d.getFullYear();
+
+// if (month.length < 2) 
+//     month = '0' + month;
+// if (day.length < 2) 
+//     day = '0' + day;
+
+return [year, month, day].join('-');
+
+    // console.log(date.toDateString());
+    // console.log(date.toISOString());
+    // console.log(date.toLocaleDateString());
+    // console.log(date.toLocaleString());
+  }
+
+  // printNextDay(2016, 9, 30);
+  // console.log(printNextDay(2016, 9, 30));
+  // console.log(printNextDay(2020, 3, 24));
+
+  // 04. Reverse String
+
+  function reverseString(input) {
+    input = String(input);
+    let reversed = "";
+
+    for (let index = input.length - 1; index >= 0; index--) {
+      reversed = reversed + input[index];
+    }
+
+    console.log(reversed);
+
+  }
+
+  // reverseString("Hello");
+  // reverseString("SoftUni");
+  // reverseString("1234");
+
+  // 05. Distance between Points
+
+  function calcDistancebetweenPoints(x1, y1, x2, y2) {
+    const x = x2 - x1;
+    const y = y2 - y1;
+
+    let z = x * x + y * y;
+    z = Math.sqrt(z);
+
+    console.log(z);
+
+  }
+
+  // calcDistancebetweenPoints(2, 4, 5, 0);
+  // calcDistancebetweenPoints(2.34, 15.66, -13.55, -2.9985);
+
+  // 01. Sort Numbers
+
+  function sort(...arr) {
+    // const arr = [n1, n2, n3];
+
+    function compareNumbers(a, b) {
+      return b - a;
+    }
+
+    arr.sort(compareNumbers);
+
+    for (let index = 0; index < arr.length; index++) {
+      console.log(arr[index]);
+    }
+
+  }
+
+  // sort(2, 1, 3);
+  // console.log("------------");
+  // sort(-2, 1, 3);
+  // console.log("------------");
+  // sort(0, 0, 2);
+
+</script>
   </body>
 </html>
