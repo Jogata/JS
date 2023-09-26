@@ -3,278 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>AJAX | XMLHttpRequest</title> -->
-    <title>Slider</title>
+    <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        /* width: 100%; */
-        /* min-width: 100vw; */
-        /* overflow: hidden; */
-        min-height: 100vh;
-        padding: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: Georgia, Times, serif;
-      }
-
-      .slider-container {
-        position: relative;
-        width: 50%;
-        margin: auto;
-        /* background-color: aquamarine; */
-        border: 1px solid red;
-      }
-
-      .slider-items {
-        list-style: none;
-        position: relative;
-        height: 45vw;
-        margin: 50px 0 0;
-        /* background-color: blue; */
-        border: 1px solid blue;
-      }
-
-      .slider-items li {
-        position: absolute;
-        width: 30%;
-        height: 50%;
-        top: 15%;
-        left: 50%;
-        /* background-color: black; */
-        transition: transform 1.4s cubic-bezier(0.19, 1, 0.22, 1);
-        cursor: pointer;
-        z-index: 1;
-      }
-      .slider-items img {
-        width: 100%;
-        /* height: auto; */
-        transform: scale(1.3) rotate(25deg);
-        transition: 250ms;
-      }
-      /* .slider-items li::after {
-        display: block;
-        position: absolute;
-        top: 30%;
-        left: 50%;
-        transform: translateX(-50%);
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-image: url();
-        background-repeat: no-repeat;
-        background-position: 50% 85%;
-        background-size: 100% auto;
-        transition: 0.3s;
-      } */
-
-      .slider-items li.item-1 {
-        transform: 
-          translateX(-50%) 
-          scale(1.5) 
-          translate3d(0, 0, 0);
-        z-index: 2;
-      }
-      .slider-items li.item-1 img {
-        transform: scale(1.5) rotate(5deg);
-      }
-
-      .slider-items li.item-2 {
-        transform: 
-          translateX(-50%) 
-          scale(0.7) 
-          translate3d(240%, -10%, 0);
-        z-index: 1;
-      }
-      .slider-items li.item-3 {
-        transform: 
-          translateX(-50%) 
-          scale(0.5) 
-          translate3d(180%, -31%, 0);
-        z-index: 0;
-      }
-      .slider-items li.item-4 {
-        transform: 
-          translateX(-50%) 
-          scale(0.5) 
-          translate3d(-180%, -31%, 0);
-        z-index: 0;
-      }
-      .slider-items li.item-5 {
-        transform: 
-          translateX(-50%) 
-          scale(0.7) 
-          translate3d(-240%, -10%, 0);
-        z-index: 1;
-      }
-
-      .slider-nav {
-        position: absolute;
-        top: 45%;
-        width: 50px;
-        height: 50px;
-        border-top: 2px solid #009e5f;
-        border-right: 2px solid #009e5f;
-        border-bottom: none;
-        border-left: none;
-        background-color: transparent;
-        cursor: pointer;
-        z-index: 1;
-      }
-
-      .slider-nav.next {
-        right: -35%;
-        transform: rotate(45deg);
-      }
-      .slider-nav.prev {
-        left: -35%;
-        transform: rotate(-135deg);
-      }
-
-      .slider-dots {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        z-index: 3;
-      }
-
-      .slider-dots ul {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 50px;
-      }
-
-      .slider-dots ul li {
-        width: 10px;
-        height: 10px;
-        margin: 0 15px;
-        display: inline-block;
-        border-radius: 50%;
-        background-color: #ccc;
-        cursor: pointer;
-      }
-      .slider-dots ul li.active {
-        background-color: #009e5f;
-      }
-
-      h1 {
-        display: none;
-      }
-      fieldset {
-        display: none;
-      }
-    </style>
   </head>
   <body>
-    <div class="slider-container">
-      <ul class="slider-items">
-        <li class="item-1">
-          <img src="./images/2.png" alt="">
-        </li>
-        <li class="item-2">
-          <img src="./images/3.png" alt="">
-        </li>
-        <li class="item-3">
-          <img src="./images/4.png" alt="">
-        </li>
-        <li class="item-4">
-          <img src="./images/5.png" alt="">
-        </li>
-        <li class="item-5">
-          <img src="./images/6.png" alt="">
-        </li>
-      </ul>
-      <div class="slider-navigation">
-        <button class="slider-nav prev"></button>
-        <button class="slider-nav next"></button>
-      </div>
-      <div class="slider-dots">
-        <ul>
-          <li class="dot active"></li>
-          <li class="dot"></li>
-          <li class="dot"></li>
-          <li class="dot"></li>
-          <li class="dot"></li>
-        </ul>
-      </div>
-
-      <script>
-        const sliderItems = document.querySelectorAll(".slider-items li");
-        const dots = document.querySelectorAll(".dot");
-        const navNext = document.querySelector(".slider-nav.next");
-        const navPrev = document.querySelector(".slider-nav.prev");
-
-        let selectedItem = 0;
-
-        sliderItems.forEach((item, index) => {
-          item.addEventListener("click", () => {
-            setItemSlider(index);
-            // console.log(index);
-          })
-        })
-
-        dots.forEach((dot, index) => {
-          dot.addEventListener("click", () => {
-            setItemSlider(index);
-          })
-        })
-
-        navNext.addEventListener("click", () => {
-          selectedItem++;
-          // if (selectedItem > sliderItems.length - 1) {
-          //   selectedItem = 0;
-          // }
-          selectedItem = selectedItem % sliderItems.length;
-          setItemSlider(selectedItem);
-        })
-
-        navPrev.addEventListener("click", () => {
-          selectedItem--;
-          // if (selectedItem < 0) {
-          //   selectedItem = sliderItems.length - 1;
-          // }
-          selectedItem = selectedItem + sliderItems.length;
-          selectedItem = selectedItem % sliderItems.length;
-          setItemSlider(selectedItem);
-        })
-
-        function setItemSlider(index) {
-          selectedItem = index;
-          // console.log(this);
-          // const currenSlides = document.querySelectorAll(".slider-items li");
-
-          sliderItems.forEach((item, index) => {
-            let offset = index - selectedItem;
-
-            if (offset < 0) {
-              offset += sliderItems.length;
-            }
-
-            console.log(offset);
-
-            for (let i = 1; i <= sliderItems.length; i++) {
-              // console.log(sliderItems.length);
-              item.classList.remove(`item-${i}`);
-            }
-
-            item.classList.add(`item-${offset + 1}`);
-
-            const activeDot = document.querySelector(".dot.active");
-            activeDot.classList.remove("active");
-            dots[selectedItem].classList.add("active");
-
-            // console.log(offset);
-          })
-        }
-      </script>
-    </div>
 
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
@@ -342,5 +74,137 @@
         users.send();
       }
     </script>
+
+    
+<script>
+  // 01. Digits with Words
+  
+  function printDigit(digit) {
+    let result = "";
+
+    if (digit == "zero") {
+      result = 0;
+    } else if (digit == "one") {
+      result = 1;
+    } else if (digit == "two") {
+      result = 2;
+    } else if (digit == "three") {
+      result = 3;
+    } else if (digit == "four") {
+      result = 4;
+    } else if (digit == "five") {
+      result = 5;
+    } else if (digit == "six") {
+      result = 6;
+    } else if (digit == "seven") {
+      result = 7;
+    } else if (digit == "eight") {
+      result = 8;
+    } else if (digit == "nine") {
+      result = 9;
+    }
+
+    console.log(result);
+
+  }
+
+  // printDigit("zero");
+  // printDigit("one");
+  // printDigit("two");
+  // printDigit("three");
+  // printDigit("four");
+  // printDigit("five");
+  // printDigit("six");
+  // printDigit("seven");
+  // printDigit("eight");
+  // printDigit("nine");
+
+  // 02. Prime Number Checker
+
+  function isPrimeNumber(num) {
+    let isPrime = true;
+    
+    for (let index = 2; index < num; index++) {
+
+      if (num % index == 0) {
+        isPrime = false;
+        index = num;
+      }
+      // console.log("if");
+    }
+
+    console.log(isPrime);
+
+  }
+
+  // isPrimeNumber(7);
+  // isPrimeNumber(8);
+  // isPrimeNumber(81);
+
+  // 03. Cone
+
+  function calcCone(r, h) {
+    let l = r * r + h * h;
+    l = Math.sqrt(l);
+    let area = Math.PI * r * r + Math.PI * r * l;
+    let volume = (Math.PI * r * r * h) / 3;
+
+    console.log(`volume = ${volume.toFixed(4)}`);
+    console.log(`area = ${area.toFixed(4)}`);
+
+  }
+
+  // calcCone(3, 5);
+  // calcCone(3.3, 7.8);
+
+  // 04. Biggest of 3 Numbers
+
+  function findBiggestNumber(n1, n2, n3) {
+    let biggest = n1;
+
+    if (n2 > biggest) {
+      biggest = n2;
+    }
+
+    if (n3 > biggest) {
+      biggest = n3;
+    }
+
+    console.log(biggest);
+
+  }
+
+  function findBiggestNumber(n1, n2, n3) {
+    const numbers = [n1, n2, n3];
+
+    let biggest = numbers[0];
+
+    for (let index = 1; index < numbers.length; index++) {
+      if (numbers[index] > biggest) {
+        biggest = numbers[index];
+      }
+    }
+
+    console.log(biggest);
+
+  }
+
+  function findBiggestNumber(...numbers) {
+    let biggest = numbers[0];
+
+    for (let index = 1; index < numbers.length; index++) {
+      if (numbers[index] > biggest) {
+        biggest = numbers[index];
+      }
+    }
+
+    console.log(biggest);
+
+  }
+
+  // findBiggestNumber(-2, 7, 3, 40, 50, 1000, 13, 4653, 7566, 746464464);
+  // findBiggestNumber(130, 5);
+  // findBiggestNumber(43, 43.2, 43.1);
+</script>
   </body>
 </html>
