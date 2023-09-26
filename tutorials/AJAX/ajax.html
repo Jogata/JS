@@ -3,10 +3,158 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AJAX | XMLHttpRequest</title>
+    <!-- <title>AJAX | XMLHttpRequest</title> -->
+    <title>Slider</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        /* width: 100%; */
+        /* min-width: 100vw; */
+        /* overflow: hidden; */
+        min-height: 100vh;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Georgia, Times, serif;
+      }
+
+      .slider-container {
+        position: relative;
+        width: 50%;
+        margin: auto;
+        /* background-color: aquamarine; */
+        border: 1px solid red;
+      }
+
+      .slider-items {
+        list-style: none;
+        position: relative;
+        height: 45vw;
+        margin: 50px 0 0;
+        /* background-color: blue; */
+        border: 1px solid blue;
+      }
+
+
+      h1 {
+        display: none;
+      }
+      fieldset {
+        display: none;
+      }
+    </style>
   </head>
   <body>
+    <div class="slider-container">
+      <ul class="slider-items">
+        <li class="item-1">
+          <img src="./images/2.png" alt="">
+        </li>
+        <li class="item-2">
+          <img src="./images/3.png" alt="">
+        </li>
+        <li class="item-3">
+          <img src="./images/4.png" alt="">
+        </li>
+        <li class="item-4">
+          <img src="./images/5.png" alt="">
+        </li>
+        <li class="item-5">
+          <img src="./images/6.png" alt="">
+        </li>
+      </ul>
+      <div class="slider-navigation">
+        <button class="slider-nav prev"></button>
+        <button class="slider-nav next"></button>
+      </div>
+      <div class="slider-dots">
+        <ul>
+          <li class="dot active"></li>
+          <li class="dot"></li>
+          <li class="dot"></li>
+          <li class="dot"></li>
+          <li class="dot"></li>
+        </ul>
+      </div>
+
+      <script>
+        const sliderItems = document.querySelectorAll(".slider-items li");
+        const dots = document.querySelectorAll(".dot");
+        const navNext = document.querySelector(".slider-nav.next");
+        const navPrev = document.querySelector(".slider-nav.prev");
+
+        let selectedItem = 0;
+
+        sliderItems.forEach((item, index) => {
+          item.addEventListener("click", () => {
+            setItemSlider(index);
+            // console.log(index);
+          })
+        })
+
+        dots.forEach((dot, index) => {
+          dot.addEventListener("click", () => {
+            setItemSlider(index);
+          })
+        })
+
+        navNext.addEventListener("click", () => {
+          selectedItem++;
+          // if (selectedItem > sliderItems.length - 1) {
+          //   selectedItem = 0;
+          // }
+          selectedItem = selectedItem % sliderItems.length;
+          setItemSlider(selectedItem);
+        })
+
+        navPrev.addEventListener("click", () => {
+          selectedItem--;
+          // if (selectedItem < 0) {
+          //   selectedItem = sliderItems.length - 1;
+          // }
+          selectedItem = selectedItem + sliderItems.length;
+          selectedItem = selectedItem % sliderItems.length;
+          setItemSlider(selectedItem);
+        })
+
+        function setItemSlider(index) {
+          selectedItem = index;
+          // console.log(this);
+          // const currenSlides = document.querySelectorAll(".slider-items li");
+
+          sliderItems.forEach((item, index) => {
+            let offset = index - selectedItem;
+
+            if (offset < 0) {
+              offset += sliderItems.length;
+            }
+
+            console.log(offset);
+
+            for (let i = 1; i <= sliderItems.length; i++) {
+              // console.log(sliderItems.length);
+              item.classList.remove(`item-${i}`);
+            }
+
+            item.classList.add(`item-${offset + 1}`);
+
+            const activeDot = document.querySelector(".dot.active");
+            activeDot.classList.remove("active");
+            dots[selectedItem].classList.add("active");
+
+            // console.log(offset);
+          })
+        }
+      </script>
+    </div>
+
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
@@ -73,139 +221,5 @@
         users.send();
       }
     </script>
-
-<script>
-  // 02. English Name of the Last Digit
-
-  function printLastDigit(num) {
-    // let lastDigit = num / 10;
-    // lastDigit = lastDigit - Math.floor(lastDigit);
-    // lastDigit = lastDigit * 10;
-    // lastDigit = Math.floor(lastDigit);
-
-    num = String(num);
-    let letter = num[num.length - 1];
-
-    let result = "";
-
-    // console.log(letter);
-
-    if (letter == 0) {
-      result = "zero";
-    } else if (letter == 1) {
-      result = "one";
-    } else if (letter == 2) {
-      result = "two";
-    } else if (letter == 3) {
-      result = "three";
-    } else if (letter == 4) {
-      result = "four";
-    } else if (letter == 5) {
-      result = "five";
-    } else if (letter == 6) {
-      result = "six";
-    } else if (letter == 7) {
-      result = "seven";
-    } else if (letter == 8) {
-      result = "eight";
-    } else if (letter == 9) {
-      result = "nine";
-    }
-
-    console.log(result);
-
-  }
-
-  // printLastDigit(512);
-  // printLastDigit(1);
-  // printLastDigit(1643);
-
-  // 03. Next Day
-
-  function printNextDay(y, m, d) {
-    const date = new Date(y, m - 1, d);
-
-    let nexday = date.setDate(d+1);
-
-    var d = new Date(nexday),
-    month = '' + (d.getMonth() + 1),
-    day = '' + d.getDate(),
-    year = d.getFullYear();
-
-// if (month.length < 2) 
-//     month = '0' + month;
-// if (day.length < 2) 
-//     day = '0' + day;
-
-return [year, month, day].join('-');
-
-    // console.log(date.toDateString());
-    // console.log(date.toISOString());
-    // console.log(date.toLocaleDateString());
-    // console.log(date.toLocaleString());
-  }
-
-  // printNextDay(2016, 9, 30);
-  // console.log(printNextDay(2016, 9, 30));
-  // console.log(printNextDay(2020, 3, 24));
-
-  // 04. Reverse String
-
-  function reverseString(input) {
-    input = String(input);
-    let reversed = "";
-
-    for (let index = input.length - 1; index >= 0; index--) {
-      reversed = reversed + input[index];
-    }
-
-    console.log(reversed);
-
-  }
-
-  // reverseString("Hello");
-  // reverseString("SoftUni");
-  // reverseString("1234");
-
-  // 05. Distance between Points
-
-  function calcDistancebetweenPoints(x1, y1, x2, y2) {
-    const x = x2 - x1;
-    const y = y2 - y1;
-
-    let z = x * x + y * y;
-    z = Math.sqrt(z);
-
-    console.log(z);
-
-  }
-
-  // calcDistancebetweenPoints(2, 4, 5, 0);
-  // calcDistancebetweenPoints(2.34, 15.66, -13.55, -2.9985);
-
-  // 01. Sort Numbers
-
-  function sort(...arr) {
-    // const arr = [n1, n2, n3];
-
-    function compareNumbers(a, b) {
-      return b - a;
-    }
-
-    arr.sort(compareNumbers);
-
-    for (let index = 0; index < arr.length; index++) {
-      console.log(arr[index]);
-    }
-
-  }
-
-  // sort(2, 1, 3);
-  // console.log("------------");
-  // sort(-2, 1, 3);
-  // console.log("------------");
-  // sort(0, 0, 2);
-
-</script>
   </body>
 </html>
