@@ -5,10 +5,191 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <style>
+      * {
+        /* margin: 0; */
+        /* padding: 0; */
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 100%;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        background-color: #292430;
+      }
+
+      .ctr-accordion {
+        max-width: 1400px;
+        height: 720px;
+        margin: 150px auto;
+        display: flex;
+        /* flex-direction: row; */
+        align-items: center;
+        justify-content: space-around;
+        gap: 20px;
+        overflow: hidden;
+      }
+
+      .tab {
+        position: relative;
+        /* width: 20%; */
+        flex: 1;
+        height: inherit;
+        padding: 20px;
+        border-radius: 25px;
+        background: rgba(150, 150, 150);
+        transition: all 0.5s ease;
+        cursor: pointer;
+      }
+      .tab img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        object-fit: cover;
+        transition: all 0.51s ease;
+      }
+      .tab:hover img {
+        opacity: 0.6;
+      }
+      .tab:hover {
+        /* width: 80%; */
+        flex: 4;
+      }
+
+      .slider {
+        position: relative;
+        width: 90%;
+        height: 250px;
+        margin: 200px auto;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+      }
+
+      .slide-track {
+        display: flex;
+        width: calc(250px * 9);
+        animation: scroll 10s infinite linear;
+      }
+      .slide-track:hover {
+        animation-play-state: paused;
+      }
+
+      .slide {
+        min-width: 250px;
+        height: 200px;
+        padding: 15px;
+        display: flex;
+        align-items: center;
+        perspective: 100px;
+      }
+      .slide img {
+        width: 100%;
+        transition: transform 1s;
+      }
+      .slide img:hover {
+        transform: translateZ(20px);
+      }
+
+      @keyframes scroll {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+
+      fieldset {
+        display: none;
+      }
+    </style>
   </head>
   <body>
+    <div class="ctr-accordion">
+      <div class="tab">
+        <img src="./slides/348752785_505207435051669_8291971845639749599_n.jpg" alt="">
+      </div>
+      <div class="tab">
+        <img src="./slides/356798994_967012961190529_4412407967034851009_n.jpg" alt="">
+      </div>
+      <div class="tab">
+        <img src="./slides/356940129_1021872482095940_7163622879331713946_n.jpg" alt="">
+      </div>
+      <div class="tab">
+        <img src="./slides/358794262_2029410497404504_8220717208730657446_n.jpg" alt="">
+      </div>
+      <!-- <div class="tab">
+        <img src="./slides/361293658_1300947700520880_5496842987114781813_n.jpg" alt="">
+      </div> -->
+    </div>
 
-    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+    <div class="slider">
+      <div class="slide-track">
+        <div class="slide">
+          <img src="./slides/348752785_505207435051669_8291971845639749599_n.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img src="./slides/356798994_967012961190529_4412407967034851009_n.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img src="./slides/356940129_1021872482095940_7163622879331713946_n.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img src="./slides/358794262_2029410497404504_8220717208730657446_n.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img src="./slides/361293658_1300947700520880_5496842987114781813_n.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img src="./slides/363501547_634324178451363_8761577603587065923_n.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img src="./slides/366450015_726469829245996_6761655007762136773_n.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img src="./slides/369574743_310081231683408_1150608101548640433_n.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img src="./slides/369600102_688341202630518_728054106325483819_n.jpg" alt="">
+        </div>
+
+        <div class="slide">
+          <img src="./slides/348752785_505207435051669_8291971845639749599_n.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img src="./slides/356798994_967012961190529_4412407967034851009_n.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img src="./slides/356940129_1021872482095940_7163622879331713946_n.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img src="./slides/358794262_2029410497404504_8220717208730657446_n.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img src="./slides/361293658_1300947700520880_5496842987114781813_n.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img src="./slides/363501547_634324178451363_8761577603587065923_n.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img src="./slides/366450015_726469829245996_6761655007762136773_n.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img src="./slides/369574743_310081231683408_1150608101548640433_n.jpg" alt="">
+        </div>
+        <div class="slide">
+          <img src="./slides/369600102_688341202630518_728054106325483819_n.jpg" alt="">
+        </div>
+      </div>
+    </div>
+
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <!-- ================= Get data from local JSON file ================= -->
 
@@ -74,137 +255,5 @@
         users.send();
       }
     </script>
-
-    
-<script>
-  // 01. Digits with Words
-  
-  function printDigit(digit) {
-    let result = "";
-
-    if (digit == "zero") {
-      result = 0;
-    } else if (digit == "one") {
-      result = 1;
-    } else if (digit == "two") {
-      result = 2;
-    } else if (digit == "three") {
-      result = 3;
-    } else if (digit == "four") {
-      result = 4;
-    } else if (digit == "five") {
-      result = 5;
-    } else if (digit == "six") {
-      result = 6;
-    } else if (digit == "seven") {
-      result = 7;
-    } else if (digit == "eight") {
-      result = 8;
-    } else if (digit == "nine") {
-      result = 9;
-    }
-
-    console.log(result);
-
-  }
-
-  // printDigit("zero");
-  // printDigit("one");
-  // printDigit("two");
-  // printDigit("three");
-  // printDigit("four");
-  // printDigit("five");
-  // printDigit("six");
-  // printDigit("seven");
-  // printDigit("eight");
-  // printDigit("nine");
-
-  // 02. Prime Number Checker
-
-  function isPrimeNumber(num) {
-    let isPrime = true;
-    
-    for (let index = 2; index < num; index++) {
-
-      if (num % index == 0) {
-        isPrime = false;
-        index = num;
-      }
-      // console.log("if");
-    }
-
-    console.log(isPrime);
-
-  }
-
-  // isPrimeNumber(7);
-  // isPrimeNumber(8);
-  // isPrimeNumber(81);
-
-  // 03. Cone
-
-  function calcCone(r, h) {
-    let l = r * r + h * h;
-    l = Math.sqrt(l);
-    let area = Math.PI * r * r + Math.PI * r * l;
-    let volume = (Math.PI * r * r * h) / 3;
-
-    console.log(`volume = ${volume.toFixed(4)}`);
-    console.log(`area = ${area.toFixed(4)}`);
-
-  }
-
-  // calcCone(3, 5);
-  // calcCone(3.3, 7.8);
-
-  // 04. Biggest of 3 Numbers
-
-  function findBiggestNumber(n1, n2, n3) {
-    let biggest = n1;
-
-    if (n2 > biggest) {
-      biggest = n2;
-    }
-
-    if (n3 > biggest) {
-      biggest = n3;
-    }
-
-    console.log(biggest);
-
-  }
-
-  function findBiggestNumber(n1, n2, n3) {
-    const numbers = [n1, n2, n3];
-
-    let biggest = numbers[0];
-
-    for (let index = 1; index < numbers.length; index++) {
-      if (numbers[index] > biggest) {
-        biggest = numbers[index];
-      }
-    }
-
-    console.log(biggest);
-
-  }
-
-  function findBiggestNumber(...numbers) {
-    let biggest = numbers[0];
-
-    for (let index = 1; index < numbers.length; index++) {
-      if (numbers[index] > biggest) {
-        biggest = numbers[index];
-      }
-    }
-
-    console.log(biggest);
-
-  }
-
-  // findBiggestNumber(-2, 7, 3, 40, 50, 1000, 13, 4653, 7566, 746464464);
-  // findBiggestNumber(130, 5);
-  // findBiggestNumber(43, 43.2, 43.1);
-</script>
   </body>
 </html>
