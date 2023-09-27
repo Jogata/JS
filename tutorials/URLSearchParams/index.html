@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
       * {
         margin: 0;
@@ -680,6 +681,60 @@
         color: #8d20fa;
       }
 
+      .show-up {
+        animation: show-up 500ms linear forwards;
+        visibility: visible;
+        opacity: 1;
+      }
+      .show-down {
+        animation: show-down 500ms linear forwards;
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .hide-up {
+        animation: hide-up 500ms linear;
+      }
+      .hide-down {
+        animation: hide-down 500ms linear;
+      }
+
+      @keyframes hide-up {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(-100%);
+        }
+      }
+
+      @keyframes show-up {
+        0% {
+          transform: translateY(100%);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes hide-down {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(100%);
+        }
+      }
+
+      @keyframes show-down {
+        0% {
+          transform: translateY(-100%);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
       .banner .video video {
         display: initial;
       }
@@ -694,7 +749,7 @@
 
       <header>
         <div class="nav-container">
-          <div >
+          <div>
             <a href="#" class="menu" onclick="toggleNav()">
               <i class="fa fa-th-large"></i>
             </a>
@@ -822,13 +877,101 @@
         menu.classList.toggle("active");
       }
 
+      function toggleVideo() {
+        const video1 = document.querySelector(".bg-video");
+        const video2 = document.querySelector(".video video");
+        const play = document.querySelector(".play");
+        const slider = document.querySelector(".swiper");
+        const content = document.querySelector(".content");
+        const form = document.querySelector("form");
+        const sci = document.querySelector(".sci");
+
+        video1.classList.toggle("active");
+        if (video2.paused) {
+          // video1.play();
+          video2.play();
+        } else {
+          // video1.pause();
+          video2.pause();
+        }
+        play.classList.toggle("active");
+        slider.classList.toggle("active");
+        content.classList.toggle("active");
+        form.classList.toggle("active");
+        sci.classList.toggle("active");
+      }
+
+      const slides = document.querySelectorAll(".swiper-slide");
+      const numberOfSlides = slides.length;
+      let index = 0;
+
+      const nextBtn = document.querySelector(".swiper-button-next");
+      nextBtn.addEventListener("click", rotateSliderUp);
+
+      const prevBtn = document.querySelector(".swiper-button-prev");
+      prevBtn.addEventListener("click", rotateSliderDown);
+
+      const dotBtns = document.querySelectorAll(".bullet");
+      dotBtns.forEach((button, currentIndex) => {
+        button.addEventListener("click", () => {
+          if (currentIndex > index) {
+            changeSlideUp(currentIndex);
+          } else if (currentIndex < index) {
+            changeSlideDown(currentIndex);
+          }
+        })
+      })
+
       function rotateSliderUp() {
         slides[index].classList.remove("visible");
+        dotBtns[index].classList.remove("active");
+        slides[index].classList.remove("hide-down", "show-up", "show-down");
+        slides[index].classList.add("hide-up");
         index++;
-        if (index > slides.length - 1) {
-          index = 0;
-        }
-        slides[index].classList.add("visible");
+        // if (index > slides.length - 1) {
+        //   index = 0;
+        // }
+        index = index % numberOfSlides;
+        dotBtns[index].classList.add("active");
+        slides[index].classList.remove("hide-down", "hide-up", "show-down");
+        slides[index].classList.add("show-up");
+      }
+
+      function rotateSliderDown() {
+        slides[index].classList.remove("visible");
+        dotBtns[index].classList.remove("active");
+        slides[index].classList.remove("hide-up", "show-up", "show-down");
+        slides[index].classList.add("hide-down");
+        index--;
+        // if (index < 0) {
+        //   index = slides.length - 1;
+        // }
+        index = index + numberOfSlides;
+        index = index % numberOfSlides;
+        dotBtns[index].classList.add("active");
+        slides[index].classList.remove("hide-down", "hide-up", "show-up");
+        slides[index].classList.add("show-down");
+        // slides[index].classList.add("visible");
+      }
+
+      function changeSlideDown(currentIndex) {
+        dotBtns[index].classList.remove("active");
+        slides[index].classList.remove("hide-up", "show-up", "show-down");
+        slides[index].classList.add("hide-down");
+        index = currentIndex;
+        dotBtns[index].classList.add("active");
+        slides[index].classList.remove("hide-down", "hide-up", "show-up");
+        slides[index].classList.add("show-down");
+      }
+
+      function changeSlideUp(currentIndex) {
+        dotBtns[index].classList.remove("active");
+        slides[index].classList.remove("hide-down", "show-up", "show-down");
+        slides[index].classList.add("hide-up");
+        index = currentIndex;
+        dotBtns[index].classList.add("active");
+        slides[index].classList.remove("hide-down", "hide-up", "show-down");
+        slides[index].classList.add("show-up");
       }
     </script>
 
