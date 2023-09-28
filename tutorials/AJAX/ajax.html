@@ -5,191 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      * {
-        /* margin: 0; */
-        /* padding: 0; */
-        box-sizing: border-box;
-      }
-
-      body {
-        width: 100%;
-        min-height: 100vh;
-        margin: 0;
-        padding: 0;
-        background-color: #292430;
-      }
-
-      .ctr-accordion {
-        max-width: 1400px;
-        height: 720px;
-        margin: 150px auto;
-        display: flex;
-        /* flex-direction: row; */
-        align-items: center;
-        justify-content: space-around;
-        gap: 20px;
-        overflow: hidden;
-      }
-
-      .tab {
-        position: relative;
-        /* width: 20%; */
-        flex: 1;
-        height: inherit;
-        padding: 20px;
-        border-radius: 25px;
-        background: rgba(150, 150, 150);
-        transition: all 0.5s ease;
-        cursor: pointer;
-      }
-      .tab img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: inherit;
-        object-fit: cover;
-        transition: all 0.51s ease;
-      }
-      .tab:hover img {
-        opacity: 0.6;
-      }
-      .tab:hover {
-        /* width: 80%; */
-        flex: 4;
-      }
-
-      .slider {
-        position: relative;
-        width: 90%;
-        height: 250px;
-        margin: 200px auto;
-        display: grid;
-        place-items: center;
-        overflow: hidden;
-      }
-
-      .slide-track {
-        display: flex;
-        width: calc(250px * 9);
-        animation: scroll 10s infinite linear;
-      }
-      .slide-track:hover {
-        animation-play-state: paused;
-      }
-
-      .slide {
-        min-width: 250px;
-        height: 200px;
-        padding: 15px;
-        display: flex;
-        align-items: center;
-        perspective: 100px;
-      }
-      .slide img {
-        width: 100%;
-        transition: transform 1s;
-      }
-      .slide img:hover {
-        transform: translateZ(20px);
-      }
-
-      @keyframes scroll {
-        0% {
-          transform: translateX(0);
-        }
-        100% {
-          transform: translateX(-100%);
-        }
-      }
-
-      fieldset {
-        display: none;
-      }
-    </style>
   </head>
   <body>
-    <div class="ctr-accordion">
-      <div class="tab">
-        <img src="./slides/348752785_505207435051669_8291971845639749599_n.jpg" alt="">
-      </div>
-      <div class="tab">
-        <img src="./slides/356798994_967012961190529_4412407967034851009_n.jpg" alt="">
-      </div>
-      <div class="tab">
-        <img src="./slides/356940129_1021872482095940_7163622879331713946_n.jpg" alt="">
-      </div>
-      <div class="tab">
-        <img src="./slides/358794262_2029410497404504_8220717208730657446_n.jpg" alt="">
-      </div>
-      <!-- <div class="tab">
-        <img src="./slides/361293658_1300947700520880_5496842987114781813_n.jpg" alt="">
-      </div> -->
-    </div>
-
-    <div class="slider">
-      <div class="slide-track">
-        <div class="slide">
-          <img src="./slides/348752785_505207435051669_8291971845639749599_n.jpg" alt="">
-        </div>
-        <div class="slide">
-          <img src="./slides/356798994_967012961190529_4412407967034851009_n.jpg" alt="">
-        </div>
-        <div class="slide">
-          <img src="./slides/356940129_1021872482095940_7163622879331713946_n.jpg" alt="">
-        </div>
-        <div class="slide">
-          <img src="./slides/358794262_2029410497404504_8220717208730657446_n.jpg" alt="">
-        </div>
-        <div class="slide">
-          <img src="./slides/361293658_1300947700520880_5496842987114781813_n.jpg" alt="">
-        </div>
-        <div class="slide">
-          <img src="./slides/363501547_634324178451363_8761577603587065923_n.jpg" alt="">
-        </div>
-        <div class="slide">
-          <img src="./slides/366450015_726469829245996_6761655007762136773_n.jpg" alt="">
-        </div>
-        <div class="slide">
-          <img src="./slides/369574743_310081231683408_1150608101548640433_n.jpg" alt="">
-        </div>
-        <div class="slide">
-          <img src="./slides/369600102_688341202630518_728054106325483819_n.jpg" alt="">
-        </div>
-
-        <div class="slide">
-          <img src="./slides/348752785_505207435051669_8291971845639749599_n.jpg" alt="">
-        </div>
-        <div class="slide">
-          <img src="./slides/356798994_967012961190529_4412407967034851009_n.jpg" alt="">
-        </div>
-        <div class="slide">
-          <img src="./slides/356940129_1021872482095940_7163622879331713946_n.jpg" alt="">
-        </div>
-        <div class="slide">
-          <img src="./slides/358794262_2029410497404504_8220717208730657446_n.jpg" alt="">
-        </div>
-        <div class="slide">
-          <img src="./slides/361293658_1300947700520880_5496842987114781813_n.jpg" alt="">
-        </div>
-        <div class="slide">
-          <img src="./slides/363501547_634324178451363_8761577603587065923_n.jpg" alt="">
-        </div>
-        <div class="slide">
-          <img src="./slides/366450015_726469829245996_6761655007762136773_n.jpg" alt="">
-        </div>
-        <div class="slide">
-          <img src="./slides/369574743_310081231683408_1150608101548640433_n.jpg" alt="">
-        </div>
-        <div class="slide">
-          <img src="./slides/369600102_688341202630518_728054106325483819_n.jpg" alt="">
-        </div>
-      </div>
-    </div>
-
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <!-- ================= Get data from local JSON file ================= -->
 
@@ -254,6 +72,151 @@
         users.open('get', 'https://api.github.com/users', true);
         users.send();
       }
+    </script>
+
+    <script>
+      // 1. Sum First and Last Array Elements
+
+      function sumFirstandLastArrayElements(params) {
+        const first = params[0];
+        const last = params[params.length - 1];
+
+        const sum = first + last;
+
+        console.log(sum);
+
+      }
+
+      // sumFirstandLastArrayElements([20, 30, 40]);
+      // sumFirstandLastArrayElements([10, 17, 22, 33]);
+      // sumFirstandLastArrayElements([11, 58, 69]);
+
+      // 2. Day of Week
+
+      function printDayofWeek(num) {
+        const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+        let day = days[num - 1];
+
+        if (day == undefined) {
+          day = 'Invalid day!';
+        }
+
+        console.log(day);
+
+      }
+
+      // printDayofWeek(3);
+      // printDayofWeek(6);
+      // printDayofWeek(11);
+
+      // 3. Reverse an Array of Numbers
+
+      function ReverseArrayofNumbers(num, params) {
+        const reversed = [];
+
+        for (let index = 0; index < num; index++) {
+          reversed.unshift(params[index]);
+        }
+
+        console.log(reversed.join(" "));
+
+      }
+
+      // ReverseArrayofNumbers(3, [10, 20, 30, 40, 5]);
+      // ReverseArrayofNumbers(4, [-1, 20, 99, 5]);
+      // ReverseArrayofNumbers(2, [66, 43, 75, 89, 47]);
+
+      // 4. Reverse In Place
+
+      function ReverseArray(params) {
+        params.reverse();
+
+        console.log(params.join(" "));
+
+      }
+
+      // ReverseArray(['a', 'b', 'c', 'd', 'e']);
+      // ReverseArray(['abc', 'def', 'hig', 'klm', 'nop']);
+      // ReverseArray(['33', '123', '0', 'dd']);
+
+      // 05. Sum Even Numbers
+
+      function sumEvenNumbers(params) {
+        let sum = 0;
+
+        for (let index = 0; index < params.length; index++) {
+          const num = Number(params[index]);
+
+          if (num % 2 == 0) {
+            sum += num;
+          }
+        }
+
+        console.log(sum);
+
+      }
+
+      // sumEvenNumbers(['1','2','3','4','5','6']);
+      // sumEvenNumbers(['3','5','7','9']);
+      // sumEvenNumbers(['2','4','6','8','10']);
+
+      // 06. Even and Odd Subtraction
+
+      function evenAndOddSubtraction(params) {
+        let odd = 0;
+        let even = 0;
+
+        for (let index = 0; index < params.length; index++) {
+          const num = params[index];
+
+          if (num % 2 == 0) {
+            even += num;
+          } else {
+            odd += num;
+          }
+        }
+
+        let diff = even - odd;
+
+        console.log(diff);
+
+      }
+
+      // evenAndOddSubtraction([1,2,3,4,5,6]);
+      // evenAndOddSubtraction([3,5,7,9]);
+      // evenAndOddSubtraction([2,4,6,8,10]);
+
+      // 07. Equal Arrays
+
+      function sravniArrays(arr1, arr2) {
+        let sum = 0;
+        let areEqual = true;
+
+        // if (arr1.length != arr2.length) {
+        //   areEqual = false;
+        // }
+
+        for (let index = 0; index < arr1.length; index++) {
+          if (arr1[index] != arr2[index]) {
+            areEqual = false;
+            console.log(`Arrays are not identical. Found difference at ${index} index`);
+            index = arr1.length;
+          } else {
+            sum +=Number(arr1[index]);
+            // console.log(sum);
+          }
+        }
+
+        if (areEqual) {
+          console.log(`Arrays are identical. Sum: ${sum}`);
+        }
+
+      }
+
+      // sravniArrays(['10','20','30'], ['10','20','30']);
+      // sravniArrays(['1','2','3','4','5'], ['1','2','4','4','5']);
+      // sravniArrays(['1'], ['10']);
     </script>
   </body>
 </html>
