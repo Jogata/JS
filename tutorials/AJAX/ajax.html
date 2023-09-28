@@ -350,5 +350,139 @@
       // rotateArray([32, 21, 61, 1], 4);
       // rotateArray([2, 4, 15, 31], 5);
     </script>
+    <script>
+            // 5. Max Number
+
+            function findMaxNumber(array) {
+        const topIntegers = [];
+        
+        for (let index = 0; index < array.length; index++) {
+          let isTop = true;
+
+          for (let index2 = index + 1; index2 < array.length; index2++) {
+            if (array[index2] >= array[index]) {
+              isTop = false;
+              index2 = array.length;
+            }
+          }
+
+          if (isTop) {
+            topIntegers.push(array[index]);
+          }
+
+        }
+
+        console.log(topIntegers.join(" "));
+
+      }
+
+      // findMaxNumber([1, 4, 3, 2]);
+      // findMaxNumber([14, 24, 3, 19, 15, 17]);
+      // findMaxNumber([41, 41, 34, 20]);
+      // findMaxNumber([27, 19, 42, 2, 13, 45, 48]);
+
+      // 06. Equal Sums
+
+      function findEqualSum(array) {
+        let index = null;
+        array.unshift(0);
+        array.push(0);
+
+        // console.log(array);
+        
+        for (let i = 1; i < array.length - 1; i++) {
+          let left = 0;
+          let right = 0;
+
+          for (let leftindex = i - 1; leftindex >= 0; leftindex--) {
+            left += array[leftindex];
+          }
+
+          for (let rightIndex = i + 1; rightIndex < array.length; rightIndex++) {
+            right += array[rightIndex];
+          }
+
+          if (left == right) {
+            index = i - 1;
+          }
+
+        }
+
+        if (typeof index == "number") {
+          console.log(index);
+        } else {
+          console.log("no");
+        }
+
+      }
+
+      // findEqualSum([1, 2, 3, 3]);
+      // findEqualSum([1, 2]);
+      // findEqualSum([1]);
+      // findEqualSum([1, 2, 3]);
+      // findEqualSum([10, 5, 5, 99, 3, 4, 2, 5, 1, 1, 4]);
+
+      // 7. Max Sequence of Equal Elements
+
+      function findMaxSequenceofEqualElements(array) {
+        let sequence = [];
+
+        for (let index = 0; index < array.length; index++) {
+
+          if (array[index] == array[index + 1]) {
+            let newSequence = [];
+            newSequence.push(array[index]);
+
+            while (array[index] == array[index + 1]) {
+              newSequence.push(array[index]);
+              index++;
+
+              if (index > 20) {
+                break;
+              }
+            }
+
+            if (newSequence.length > sequence.length) {
+              sequence = newSequence;
+            }
+
+          }
+
+        }
+
+        console.log(sequence.join(" "));
+
+      }
+
+      // findMaxSequenceofEqualElements([2, 1, 1, 2, 3, 3, 2, 2, 2, 1]);
+      // findMaxSequenceofEqualElements([1, 1, 1, 2, 3, 1, 3, 3]);
+      // findMaxSequenceofEqualElements([4, 4, 4, 4]);
+      // findMaxSequenceofEqualElements([0, 1, 1, 5, 2, 2, 6, 3, 3]);
+
+      // 08. Magic Sum
+
+      function findMagicSum(array, mn) {
+        
+        for (let index = 0; index < array.length; index++) {
+
+          for (let index2 = index + 1; index2 < array.length; index2++) {            
+            const sum = array[index] + array[index2];
+            
+            if (sum == mn) {
+              // console.log(sum, mn);
+              console.log(array[index] + " " + array[index2]);
+            }
+
+          }
+        }
+
+      }
+
+      // findMagicSum([1, 7, 6, 2, 19, 23], 8);
+      // findMagicSum([14, 20, 60, 13, 7, 19, 8], 27);
+      // findMagicSum([1, 2, 3, 4, 5, 6], 6);
+
+      // 09. Dungeonest Dark
+    </script>
   </body>
 </html>
