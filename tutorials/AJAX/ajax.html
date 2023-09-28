@@ -218,5 +218,137 @@
       // sravniArrays(['1','2','3','4','5'], ['1','2','4','4','5']);
       // sravniArrays(['1'], ['10']);
     </script>
+
+    <script>
+            // 8. Condense Array to Number
+
+            function condenseArraytoNumber(params) {
+        // params.push(0);
+        // console.log(params);
+        
+        while (params.length > 2) {
+          let newArray = [];
+
+          for (let index = 0; index < params.length - 1; index++) {
+            const current = params[index];
+            // console.log(current);
+            const next = params[index + 1];
+            // console.log(next);
+            let sum = current + next;
+            newArray.push(sum);
+          }
+
+          params = newArray;
+          // params.pop();
+          // console.log(params);
+
+        }
+
+        let sum = 0;
+
+        for (let index = 0; index < params.length; index++) {
+          sum = sum + params[index];
+        }
+
+        console.log(sum);
+
+      }
+
+      // condenseArraytoNumber([2,10,3]);
+      // condenseArraytoNumber([1]);
+      // condenseArraytoNumber([5,0,4,1,2]);
+
+      // 1. Add and Subtract
+
+      function addSubstract(array = []) {
+        let sumOriginal = 0;
+        let sumNew = 0;
+
+        for (let index = 0; index < array.length; index++) {
+          sumOriginal += array[index];
+
+          if (array[index] % 2 == 0) {
+            array[index] += index;
+          } else {
+            array[index] -= index;
+          }
+
+          sumNew += array[index];
+        }
+
+        console.log(array);
+        console.log(sumOriginal);
+        console.log(sumNew);
+
+      }
+
+      // addSubstract([5, 15, 23, 56, 35]);
+      // addSubstract([-5, 11, 3, 0, 2]);
+
+      // 2. Common Elements
+
+      function findMathces(arr1, arr2) {
+        const matches = [];
+
+        for (let index1 = 0; index1 < arr1.length; index1++) {
+
+          for (let index2 = 0; index2 < arr2.length; index2++) {            
+            if (arr1[index1] === arr2[index2]) {
+              matches.push(arr1[index1]);
+            }
+          }
+
+        }
+
+        for (let index = 0; index < matches.length; index++) {
+          console.log(matches[index]);
+        }
+
+      }
+
+      // findMathces(['Hey', 'hello', 2, 4, 'Peter', 'e'], ['Petar', 10, 'hey', 4, 'hello', '2']);
+      // findMathces(['S', 'o', 'f', 't', 'U', 'n', 'i', ' '], ['s', 'o', 'c', 'i', 'a', 'l']);
+
+      // 3. Merge Arrays
+
+      function mergeArrays(arr1, arr2) {
+        const arr3 = [];
+        
+        for (let index = 0; index < arr1.length; index++) {
+          if (index % 2 == 0) {
+            let sum = Number(arr1[index]) + Number(arr2[index]);
+            arr3.push(sum);
+            // console.log(sum);
+          } else {
+            let concat = arr1[index] + arr2[index];
+            arr3.push(concat);
+          }
+        }
+
+        console.log(arr3.join(" - "));
+
+      }
+
+      // mergeArrays(['5', '15', '23', '56', '35'], ['17', '22', '87', '36', '11']);
+      // mergeArrays(['13', '12312', '5', '77', '4'], ['22', '333', '5', '122', '44']);
+
+      // 04. Array Rotation
+
+      function rotateArray(array, rotations) {
+        rotations = rotations % array.length;
+
+        for (let rotation = 0; rotation < rotations; rotation++) {
+          const first = array.shift();
+          array.push(first);
+        }
+
+        console.log(array.join(" "));
+
+      }
+
+      // rotateArray([51, 47, 32, 61, 21], 2);
+      // rotateArray([32, 21, 61, 1], 4);
+      // rotateArray([2, 4, 15, 31], 5);
+    </script>
   </body>
 </html>
