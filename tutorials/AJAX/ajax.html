@@ -483,6 +483,135 @@
       // findMagicSum([1, 2, 3, 4, 5, 6], 6);
 
       // 09. Dungeonest Dark
+
+      function setGame(rooms) {
+        let HP = 100;
+        let totalCoins = 0;
+        let isDead = false;
+
+        const inputType = {
+          potion: "potion", 
+          chest: "chest", 
+          undefined: "monster"
+        }
+
+        const options = {
+          potion: function(type, health) {
+            health = Number(health);
+            if (HP + health > 100) {
+              health = 100 - HP;
+              HP = 100;
+            } else {
+              HP += health;
+            }
+            console.log(`You healed for ${health} hp.`);
+            console.log(`Current health: ${HP} hp.`);
+          }, 
+          chest: function(type, coins) {
+            coins = Number(coins);
+            totalCoins += coins;
+            console.log(`You found ${coins} coins.`);
+          }, 
+          monster: function(monster, attack, room) {
+            if (attack >= HP) {
+              isDead = true;
+              console.log(`You died! Killed by ${monster}.`);
+              console.log(`Best room: ${room}`);
+            } else {
+              HP -= attack;
+              console.log(`You slayed ${monster}.`);
+            }
+          }
+        }
+
+        const roomsAsArray = rooms[0].split("|");
+
+        // console.log(roomsAsArray);
+
+        for (let room = 0; room < roomsAsArray.length; room++) {
+          const roomData = roomsAsArray[room].split(" ");
+
+          let roomContent = roomData[0];
+          roomContent = inputType[roomContent];
+          roomContent = inputType[roomContent];
+          // console.log(roomContent);
+          let action = options[roomContent];
+          // console.log(action);
+
+          action(roomData[0], roomData[1], room + 1);
+
+          if (isDead) {
+            room = roomsAsArray.length;
+          }
+
+        }
+
+        if (!isDead) {
+          console.log("You've made it!");
+          console.log(`Coins: ${totalCoins}`);
+          console.log(`Health: ${HP}`);
+        }
+      }
+
+      // setGame(["rat 10|bat 20|potion 10|rat 10|chest 100|boss 70|chest 1000"]);
+      // setGame(["cat 10|potion 30|orc 10|chest 10|snake 25|chest 110"]);
+
+      // 10. * Ladybugs
+
+      function playLadybugs(params) {
+        const fieldSize = params[0]
+        const ladybugsPositions = params[1].split(" ");
+        // console.log(ladybugsPositions);
+        // const flights = params[2];
+
+        const field = [];
+        field.length = fieldSize;
+        field.fill(0);
+        
+        for (let index = 0; index < ladybugsPositions.length; index++) {
+          const position = Number(ladybugsPositions[index]);
+
+          if (position < fieldSize) {
+            field[position] = 1;
+            // console.log(field);
+          }
+        }
+
+        for (let flight = 2; flight < params.length; flight++) {
+          let currentFlight = params[flight].split(" ");
+          // console.log(currentFlight);
+          let start = Number(currentFlight[0]);
+          let direction = currentFlight[1];
+          let end = Number(currentFlight[2]);
+          // console.log(start, direction, end);
+          
+          if (start >= 0 && start < fieldSize && field[start] == 1) {
+            const directions = {
+              left: function(position, number) {
+                return position -= number;
+              }, 
+              right: function(position, number) {
+                return position += number;
+              }
+            }
+
+            const newPosition = directions[direction](start, end);
+            // console.log(newPosition);
+            field[start] = 0;
+
+            if (newPosition >= 0 && newPosition < fieldSize) {
+              field[newPosition] = 1;
+            }
+
+          }
+        }
+
+        console.log(field.join(" "));
+
+      }
+
+      playLadybugs([3, '0 1', '0 right 1', '2 right 1']);
+      playLadybugs([ 3, '0 1 2', '0 right 1', '1 right 1', '2 right 1']);
+      playLadybugs([ 5, '3', '3 left 2', '1 left -2']);
     </script>
   </body>
-</html>
