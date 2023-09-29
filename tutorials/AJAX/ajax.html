@@ -755,7 +755,125 @@
 
       }
 
-      calcTraingleArea(2, 3.5, 4);
-      calcTraingleArea(3, 5.5, 4);
+      // calcTraingleArea(2, 3.5, 4);
+      // calcTraingleArea(3, 5.5, 4);
+
+      // 06. Chess Board
+
+      function printChessBoard(side) {
+        console.log('<div class="chessboard">');
+        
+        for (let side1 = 0; side1 < side; side1++) {
+          console.log(' <div>');
+
+            const classes = ["black", "white"];
+            let currentClass = side1;
+            currentClass = currentClass % classes.length;
+          
+            for (let side2 = 0; side2 < side; side2++) {
+              console.log(`  <span class="${classes[currentClass]}"></span>`);
+              currentClass++;
+              currentClass = currentClass % classes.length;
+            }
+
+          console.log(' </div>');
+
+        }
+
+        console.log('</div>');
+
+      }
+
+      // printChessBoard(3);
+      // printChessBoard(6);
+
+      // 01. Print N-th Element
+
+      function printNthElement(params) {
+        const step = Number(params[params.length - 1]);
+        const result = [];
+        // console.log(step);
+
+        for (let index = 0; index < params.length - 1; index+=step) {
+          result.push(params[index]);
+        }
+
+        console.log(result.join(" "));
+
+      }
+
+      // printNthElement(['5', '20', '31', '4', '20', '2']);
+      // printNthElement(['dsa', 'asd', 'test', 'test', '2']);
+      // printNthElement(['1', '2', '3', '4', '5', '6']);
+
+      // 02. Add and Remove
+
+      function addRemove(inputs) {
+        const result = [];
+
+        const operations = {
+          add: function(arr, num) {
+            arr.push(num);
+          },
+          remove: function(arr) {
+            arr.pop();
+          }
+        }
+
+        for (let index = 0; index < inputs.length; index++) {
+          const operation = operations[inputs[index]];
+          operation(result, index + 1);
+        }
+
+        if (result.length == 0) {
+          console.log("Empty");
+        } else {
+          console.log(result.join(" "));
+        }
+
+      }
+
+      // addRemove(['add', 'add', 'add', 'add']);
+      // addRemove(['add', 'add', 'remove', 'add', 'add']);
+      // addRemove(['remove', 'remove', 'remove']);
+
+      // 3. Rotate Array
+
+      function rotateArray(array) {
+        let rotations = array.pop();
+        rotations = rotations % array.length;
+
+        for (let index = 0; index < rotations; index++) {
+          const lastValue = array.pop();
+          array.unshift(lastValue);
+        }
+
+        console.log(array.join(" "));
+
+      }
+
+      // rotateArray(['1', '2', '3', '4', '2']);
+      // rotateArray(['Banana', 'Orange', 'Coconut','Apple', '15']);
+
+      // 04. Non-Decreasing Subset
+
+      function getNonDecreasingSubset(array) {
+        let biggest = array[0];
+        // console.log(first);
+        const result = array.filter(x => {
+          if (x > biggest) {
+            biggest = x;
+          }
+
+          return x >= biggest;
+        });
+
+        console.log(result.join(" "));
+
+      }
+
+      getNonDecreasingSubset([1, 3, 8, 4, 10, 12, 3, 2, 24]);
+      getNonDecreasingSubset([ 1, 2, 3, 4]);
+      getNonDecreasingSubset([ 20, 3, 2, 15, 6, 1]);
     </script>
   </body>
