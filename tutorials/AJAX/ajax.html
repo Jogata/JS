@@ -614,4 +614,148 @@
       playLadybugs([ 3, '0 1 2', '0 right 1', '1 right 1', '2 right 1']);
       playLadybugs([ 5, '3', '3 left 2', '1 left -2']);
     </script>
+    <script>
+      // 5. Amazing Numbers
+
+      function findAmazingNumber(num) {
+        let isAmazing = "False";
+
+        const numAsString = String(num);
+        let sum = 0;
+
+        for (let index = 0; index < numAsString.length; index++) {
+          const digit = Number(numAsString[index]);
+          sum += digit;
+        }
+
+        const sumAsString = String(sum);
+
+        for (let index = 0; index < sumAsString.length; index++) {
+          const digit = sumAsString[index];
+
+          if (digit == "9") {
+            isAmazing = "True";
+            index = sumAsString.length;
+          }
+
+        }
+
+        console.log(`${num} Amazing? ${isAmazing}`);
+
+      }
+
+      // findAmazingNumber(1233);
+      // findAmazingNumber(999);
+
+      // 06. Gramophone
+
+      function findsongDuration(band, album, song) {
+        let duration = (album.length * band.length) * song.length / 2;
+        const rotations = Math.ceil(duration / 2.5);
+        console.log(`The plate was rotated ${rotations} times.`);
+      }
+
+      // findsongDuration('Black Sabbath', 'Paranoid', 'War Pigs');
+      // findsongDuration('Rammstein', 'Sehnsucht', 'Engel');
+
+      // 07. Required reading 
+
+      function calcReadingDailyTime(pages, pagesPerHour, days) {
+        const totalTime = pages / pagesPerHour;
+        const dailyHours = totalTime / days;
+        console.log(dailyHours);
+      }
+
+      // calcReadingDailyTime(212, 20, 2);
+      // calcReadingDailyTime(432, 15, 4);
+
+      // 8. Centuries to Minutes
+
+      function convertCenturiestoMinutes(centuries) {
+        const years = centuries * 100;
+        const days = Math.trunc(years * 365.2422);
+        const hours = days * 24;
+        const minutes = hours * 60;
+
+        console.log(`${centuries} centuries = ${years} years = ${days} days = ${hours} hours = ${minutes} minutes`);
+
+      }
+
+      // convertCenturiestoMinutes(1);
+      // convertCenturiestoMinutes(5);
+
+      // 09. Special Numbers
+
+      function findSpecialNumber(num) {
+        for (let index = 1; index <= num; index++) {
+          let sum = 0;
+          const indexAsString = String(index);
+
+          for (let index = 0; index < indexAsString.length; index++) {
+            const digit = Number(indexAsString[index]);
+            sum += digit;
+          }
+
+          if (sum == 5 || sum == 7 || sum == 11) {
+            console.log(`${index} -> True`);
+          } else {
+            console.log(`${index} -> False`);
+          }
+        }
+      }
+
+      // findSpecialNumber(15);
+      // findSpecialNumber(20);
+
+      // 10. Triples of Latin Letters
+
+      function printTriplesofNLatinLetters(n) {
+        n = Number(n);
+        // console.log(String.fromCharCode(97));
+        for (let first = 97; first < n + 97; first++) {
+          const firstLetter = String.fromCharCode(first);
+          
+          for (let second = 97; second < n + 97; second++) {
+            const secondLetter = String.fromCharCode(second);
+            
+            for (let third = 97; third < n + 97; third++) {
+              const thirdLetter = String.fromCharCode(third);
+              const result = firstLetter + secondLetter + thirdLetter;
+              console.log(result);
+            }
+          }
+        }
+      }
+
+      // printTriplesofNLatinLetters("3");
+      // printTriplesofNLatinLetters("2");
+
+      // 05. Binary to Decimal
+
+      function convertBtoD(b) {
+        const digit = parseInt(b, 2);
+        console.log(digit);
+      }
+
+      // convertBtoD("00001001");
+      // convertBtoD("11110000");
+
+      // 07. Triangle Area
+
+      function calcTraingleArea(side1, side2, side3) {
+        // calculate the semi-perimeter
+        const s = (side1 + side2 + side3) / 2;
+
+        //calculate the area
+        const areaValue = Math.sqrt(
+          s * (s - side1) * (s - side2) * (s - side3)
+        );
+
+        console.log(areaValue);
+
+      }
+
+      calcTraingleArea(2, 3.5, 4);
+      calcTraingleArea(3, 5.5, 4);
+    </script>
   </body>
