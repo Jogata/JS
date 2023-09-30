@@ -613,6 +613,7 @@
       playLadybugs([3, '0 1', '0 right 1', '2 right 1']);
       playLadybugs([ 3, '0 1 2', '0 right 1', '1 right 1', '2 right 1']);
       playLadybugs([ 5, '3', '3 left 2', '1 left -2']);
+      console.log("=====================");
     </script>
     <script>
       // 5. Amazing Numbers
@@ -1021,12 +1022,12 @@
 
       }
 
-      checkIsMatrixMagical([[4, 5, 6], [6, 5, 4], [5, 5, 5]]);
-      checkIsMatrixMagical([[11, 32, 45], [21, 0, 1], [21, 1, 1]]);
-      checkIsMatrixMagical([[1, 0, 0], [0, 0, 1], [0, 1, 0]]);
-      checkIsMatrixMagical([[1, 0, 0], [0, 0, 1]]);
-      checkIsMatrixMagical([[1, 0, 1], [0, 1, 1], [0, 1]]);
-      checkIsMatrixMagical([[0, 0, 0], [0, 0, 0], [0, 0, 0]]);
+      // checkIsMatrixMagical([[4, 5, 6], [6, 5, 4], [5, 5, 5]]);
+      // checkIsMatrixMagical([[11, 32, 45], [21, 0, 1], [21, 1, 1]]);
+      // checkIsMatrixMagical([[1, 0, 0], [0, 0, 1], [0, 1, 0]]);
+      // checkIsMatrixMagical([[1, 0, 0], [0, 0, 1]]);
+      // checkIsMatrixMagical([[1, 0, 1], [0, 1, 1], [0, 1]]);
+      // checkIsMatrixMagical([[0, 0, 0], [0, 0, 0], [0, 0, 0]]);
 
       function name(params) {
         if (params.length == 3) {
@@ -1049,5 +1050,150 @@
       }
 
       // name([[3, 3, 3], [3, 3, 3], [3, 3, 3]]);
+
+      // 07. Spiral Matrix 
+
+      function printSpiralMatrix(side1, side2) {
+        let num = 1;
+        const matrix = [];
+
+        for (let i = 0; i < side2; i++) {
+          const insideArray = [];
+          insideArray.length = side1;
+          insideArray.fill(1);
+          matrix.push(insideArray);
+        }
+
+        // console.log(matrix);
+
+        let left = 0;
+        let right = side1 - 1;
+        let top = 0;
+        let bottom = side2 - 1;
+
+        // console.log(left, right, top, bottom);
+
+        // for (let index = 1; index <= 3; index++) {
+          while (top <= bottom || left <= right) {
+            
+          // }
+          
+          for (let i = top; i <= right; i++) {
+            // console.log(num);
+            matrix[top][i] = num;
+            num++;
+          }
+          // console.log("===========");
+
+          top++;
+
+          // let h = bottom - top;
+
+          for (let i = top; i <= bottom; i++) {
+            // console.log(num);
+            matrix[i][right] = num;
+            num++;
+          }
+          // console.log("===========");
+
+          right--;
+
+          for (let i = right; i >= left; i--) {
+            // console.log(num);
+            matrix[bottom][i] = num;
+            num++;
+          }
+          // console.log("===========");
+
+          bottom--;
+
+          for (let i = bottom; i >= top; i--) {
+            // console.log(num);
+            matrix[i][left] = num;
+            num++;
+          }
+          // console.log("===========");
+
+          left++;
+
+          if (top > 30) {
+            break;
+          }
+
+        }
+
+        for (let row = 0; row < side2; row++) {
+          console.log(matrix[row].join(" "));
+        }
+
+      }
+
+      // printSpiralMatrix(5, 5);
+      // printSpiralMatrix(3, 3);
+      // printSpiralMatrix(4, 3);
+      // printSpiralMatrix(3, 6);
+
+      // 08. Diagonal Attack
+
+      function checkDiagonalsSums(input) {
+        const matrix = [];
+        matrix.length = input.length;
+
+        for (let row = 0; row < input.length; row++) {
+          const arr = input[row].split(" ");
+
+          for (let index = 0; index < arr.length; index++) {
+            arr[index] = Number(arr[index]);
+          }
+
+          matrix[row] = arr;
+
+        }
+
+// ===================================================================
+
+let d1sum = 0;
+let d2sum = 0;
+
+        for (let d1 = 0; d1 < matrix.length; d1++) {
+          d1sum += matrix[d1][d1];
+          d2sum += matrix[d1][matrix.length - 1 - d1];
+        }
+
+        // console.log(d1sum);
+        // console.log(d2sum);
+
+        if (d1sum != d2sum) {
+          console.log(matrix);
+        } else {
+          const altMatrix = [];
+
+          const arr = [];
+          arr.length = input.length;
+          arr.fill(d1sum);
+
+          for (let index = 0; index < input.length; index++) {
+            altMatrix[index] = arr;
+          }
+
+          for (let d1 = 0; d1 < matrix.length; d1++) {
+            // console.log(matrix[d1][d1]);
+            // console.log(altMatrix[d1][d1]);
+            // console.log("----------------------");
+            // console.log(matrix[d1][matrix.length - 1 - d1]);
+            // console.log(altMatrix[d1][matrix.length - 1 - d1]);
+            // console.log("====================");
+            altMatrix[d1][0] = 5;
+            // altMatrix[d1][matrix.length - 1 - d1] = matrix[d1][matrix.length - 1 - d1];
+          }
+
+          console.log(altMatrix);
+
+        }
+
+      }
+
+      checkDiagonalsSums(['5 3 12 3 1', '11 4 23 2 5', '101 12 3 21 10', '1 4 5 2 2', '5 22 33 11 1']);
+      // checkDiagonalsSums(['1 1 1', '1 1 1', '1 1 0']);
     </script>
   </body>
