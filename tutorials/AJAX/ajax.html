@@ -872,8 +872,182 @@
 
       }
 
-      getNonDecreasingSubset([1, 3, 8, 4, 10, 12, 3, 2, 24]);
-      getNonDecreasingSubset([ 1, 2, 3, 4]);
-      getNonDecreasingSubset([ 20, 3, 2, 15, 6, 1]);
+      // getNonDecreasingSubset([1, 3, 8, 4, 10, 12, 3, 2, 24]);
+      // getNonDecreasingSubset([ 1, 2, 3, 4]);
+      // getNonDecreasingSubset([ 20, 3, 2, 15, 6, 1]);
+
+      // 05. Tseam Account
+
+      function menageAccount(params) {
+        let games = params[0].split(" ");
+        // console.log(games);
+        let index = 1;
+        let inputString = params[index];
+        const todos = [];
+
+        const actions = {
+          install: function(game) {
+            // console.log("install", game);
+            const isGameOwn = games.includes(game);
+            if (!isGameOwn) {
+              games.push(game);
+            }
+          }, 
+          uninstall: function(game) {
+            // console.log("uninstall", game);
+            const isGameOwn = games.includes(game);
+            if (isGameOwn) {
+              const filtered = games.filter(x => {
+                // console.log(x == game);
+                return x !== game;
+              });
+              games = filtered;
+              // console.log("uninstalled");
+            }
+          }, 
+          update: function(game) {
+            // console.log("update", game);
+            const isGameOwn = games.includes(game);
+            // console.log(isGameOwn);
+            if (isGameOwn) {
+              const filtered = games.filter(x => {
+                // console.log(x == game);
+                return x !== game;
+              });
+              games = filtered;
+              games.push(game);
+            }
+          }, 
+          expansion: function(str) {
+            // console.log("expansion", expansion);
+            const game = str.split("-")[0];
+            const expansion = str.split("-")[1];
+            const isGameOwn = games.includes(game);
+            if (isGameOwn) {
+              const index = games.indexOf(game);
+              const newName = `${game}:${expansion}`;
+              games.splice(index + 1, 0, newName);
+            }
+          }, 
+          // skip: function() {}
+        }
+
+        while (inputString != "Play!") {
+          const inputArray= inputString.split(" ");
+          // console.log(inputArray);
+          const currentGame = inputArray[1];
+          const action = inputArray[0].toLowerCase();
+          let todo = actions[action];
+          // todo();
+
+          // for (const game of games) {
+          //   if (game == currentGame) {
+          //     todo = actions.skip;
+          //   }
+          // }
+
+          todo(currentGame);
+          // todos[0] = todo;
+          // console.log(todos[0]);
+          // console.log(games);
+          
+          // console.log(inputString);
+          index++;
+          inputString = params[index];
+        }
+
+        console.log(games.join(" "));
+      }
+
+      // menageAccount(['CS WoW Diablo', 'Install LoL', 'Uninstall WoW', 'Update Diablo', 'Expansion CS-Go', 'Play!']);
+      // menageAccount(['CS WoW Diablo', 'Uninstall XCOM', 'Update PeshoGame', 'Update WoW', 'Expansion Civ-V', 'Play!']);
+
+      // 06. Magic Matrices
+
+      function checkIsMatrixMagical(arr) {
+        let isMatrixMagical = true;
+        let start = 0;
+        let sum = 0;
+
+        for (let index = 0; index < arr.length; index++) {
+          sum += arr[0][index];
+        }
+
+        // if (arr.length !== arr[0].length) {
+        //   console.log("diff");
+        // }
+
+        // console.log(arr[0][2]);
+
+        for (let index = 0; index < arr.length; index++) {
+          if (arr.length !== arr[index].length) {
+            // console.log(arr.length);
+            // console.log(arr[index].length);
+            // console.log("first");
+            isMatrixMagical = false;
+            index = arr.length;
+            start = arr.length;
+          }
+        }
+
+        // if (arr.length == 0) {
+        //   isMatrixMagical = false;
+        //   console.log("second");
+        //   start = 5;
+        // }
+
+        // console.log(isMatrixMagical);
+        
+        for (let index = start; index < arr.length; index++) {
+          let sumH = 0;
+          let sumV = 0;
+          
+          for (let index1 = 0; index1 < arr[index].length; index1++) {
+            sumH += arr[index][index1];
+            sumV += arr[index1][index];
+          }
+          // console.log(sumH);
+          // console.log(sumV);
+          // console.log(sum);
+
+          if (sumH != sum || sumV != sum) {
+            isMatrixMagical = false;
+            index = arr.length;
+          }
+
+        }
+
+        console.log(isMatrixMagical);
+
+      }
+
+      checkIsMatrixMagical([[4, 5, 6], [6, 5, 4], [5, 5, 5]]);
+      checkIsMatrixMagical([[11, 32, 45], [21, 0, 1], [21, 1, 1]]);
+      checkIsMatrixMagical([[1, 0, 0], [0, 0, 1], [0, 1, 0]]);
+      checkIsMatrixMagical([[1, 0, 0], [0, 0, 1]]);
+      checkIsMatrixMagical([[1, 0, 1], [0, 1, 1], [0, 1]]);
+      checkIsMatrixMagical([[0, 0, 0], [0, 0, 0], [0, 0, 0]]);
+
+      function name(params) {
+        if (params.length == 3) {
+          if (params[0].length !== 3) {
+            return false;
+          }
+        }
+      }
+
+      function name(array) {
+        for (let index = 0; index < 3; index++) {
+          for (let index1 = 0; index1 < 3; index1++) {
+            if (array[index][index1] == 3) {
+              console.log(false);
+              // index = array.length;
+              // index1 = array.length;
+            }
+          }
+        }
+      }
+
+      // name([[3, 3, 3], [3, 3, 3], [3, 3, 3]]);
     </script>
   </body>
