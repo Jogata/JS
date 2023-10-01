@@ -10,26 +10,32 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-      } 
+      }
  
       :root {
         --primary: #1a2448;
         --white: #fff;
-      } 
+      }
  
       ul {
         list-style: none;
-      } 
+      }
  
       a {
         text-decoration: none;
-      } 
+      }
 
       button {
         cursor: pointer;
-      } 
+      }
+
+      video, 
+      img {
+        width: 100%;
+      }
  
       body {
+        position: relative;
         min-width: fit-content;
         min-height: 100vh;
         padding: 3%;
@@ -480,10 +486,11 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: top;
         transition: 0.5s;
         visibility: hidden;
         opacity: 0;
-        z-index: 0;
+        z-index: -1;
       }
 
       .bg-video.active {
@@ -585,6 +592,7 @@
       }
       .video .play.active .fa-pause {
         display: block;
+        padding: 0.5em 0.572em;
       }
       .services .play.active .fa-play {
         display: none;
@@ -592,8 +600,9 @@
 
       .banner form {
         position: absolute;
-        top: 50%;
-        transform: translateY(-50%) scale(0);
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%) scale(0);
         width: 400px;
         height: 500px;
         padding: 40px;
@@ -604,11 +613,11 @@
         background-color: rgba(26, 36, 72, 0.1);
         box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
         transition: 0.5s;
-        z-index: 1;
+        z-index: 4;
       }
 
       .banner form.active {
-        transform: translateY(-50%) scale(1);
+        transform: translateX(-50%) scale(1);
       }
 
       form h2 {
@@ -811,12 +820,12 @@
         }
       }
 
-      /* .banner .services video {
-        display: initial;
+      .banner .services video {
+        /* display: initial; */
       }
       video {
-        display: none;
-      } */
+        /* display: none; */
+      }
     </style>
   </head>
   <body>
@@ -826,7 +835,7 @@
       <header>
         <div class="nav-container">
           <div>
-            <a href="#" class="menu" onclick="toggleNav()">
+            <a href="#" class="menu">
               <i class="fa fa-th-large"></i>
             </a>
             <a href="#" class="logo">logo</a>
@@ -898,7 +907,7 @@
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit tempore non quam consectetur velit ducimus, dolores cupiditate obcaecati aut molestias voluptatem similique, amet aperiam eligendi culpa beatae suscipit nemo totam. Hic esse voluptas inventore? Odio repellendus labore tempora numquam quis perspiciatis sequi architecto eligendi enim.
             </p>
-            <a href="#" onclick="toggleVideo()">join us</a>
+            <a href="#" class="toggle-video">join us</a>
           </div>  
         </div>
         <div class="inner-container">
@@ -920,7 +929,7 @@
 
       <h1 class="title-left">fitness</h1>
       <h1 class="title-right">life style</h1>
-      <video src="./assets/fitness-1.mp4" class="bg-video" loop muted></video>
+      <!-- <video src="./assets/fitness-1.mp4" class="bg-video" loop muted></video> -->
 
       <div class="services">
         <div class="service">
@@ -944,7 +953,7 @@
         <div class="video">
           <video src="./assets/fitness-1.mp4" loop muted></video>
           <div>
-            <button href="#" class="play" onclick="toggleVideo()">
+            <button href="#" class="play toggle-video">
               <i class="fa fa-play"></i>
               <i class="fa fa-pause"></i>
             </button>
@@ -981,17 +990,29 @@
             <i class="fa fa-youtube-play"></i>
           </a>
         </li>
-      </ul>   -->
+      </ul> -->
 
     </div>
+    
+    <video src="./assets/fitness-1.mp4" class="bg-video" loop muted></video>
 
     <script>
+      const menu = document.querySelector(".menu");
+
+      menu.addEventListener("click", toggleNav);
+
       function toggleNav() {
         const nav = document.querySelector("nav");
-        const menu = document.querySelector(".menu");
         nav.classList.toggle("active");
+        // this.classList.toggle("active");
         menu.classList.toggle("active");
       }
+
+      const toggleVideoBtns = document.querySelectorAll(".toggle-video");
+
+      toggleVideoBtns.forEach(button => {
+        button.addEventListener("click", toggleVideo);
+      })
 
       function toggleVideo() {
         const video1 = document.querySelector(".bg-video");
@@ -1004,10 +1025,10 @@
 
         video1.classList.toggle("active");
         if (video2.paused) {
-          // video1.play();
+          video1.play();
           video2.play();
         } else {
-          // video1.pause();
+          video1.pause();
           video2.pause();
         }
         play.classList.toggle("active");
@@ -1089,6 +1110,91 @@
         slides[index].classList.remove("hide-down", "hide-up", "show-down");
         slides[index].classList.add("show-up");
       }
+    </script>
+
+    <script>
+            function printOrbit(params) {
+        const width = params[0];
+        const height = params[1];
+        const x = params[2];
+        const y = params[3];
+
+        const matrix = [];
+
+        for (let dimension = 0; dimension < height; dimension++) {
+          const arr = [];
+          arr.length = width;
+          arr.fill("!");
+          matrix[dimension] = arr;
+          // console.log(height);
+        }
+
+        // console.log(matrix);
+
+        // const start = matrix[x][y];
+
+        let colNum = 0;
+        
+        for (let row = x; row < height; row++) {
+          // console.log(row);
+          colNum++;
+          
+          matrix[row][y] = colNum;
+          
+          let rowNum = 2;
+
+          for (let colRight = y + 1; colRight < width; colRight++) {
+            // console.log(colNum, rowNum);
+            matrix[row][colRight] = Math.max(rowNum, colNum);
+            rowNum++;
+          }
+
+          rowNum = 2;
+          
+          for (let colLeft = y - 1; colLeft >= 0; colLeft--) {
+            matrix[row][colLeft] = Math.max(rowNum, colNum);
+            rowNum++;
+            // console.log(colLeft);
+            // num++;
+          }
+          
+        }
+
+        colNum = 1;
+
+        for (let row = x - 1; row >= 0; row--) {
+          // console.log(row);
+          colNum++;
+          
+          matrix[row][y] = colNum;
+          
+          let rowNum = 2;
+
+          for (let colRight = y + 1; colRight < width; colRight++) {
+            // console.log(colNum, rowNum);
+            matrix[row][colRight] = Math.max(rowNum, colNum);
+            rowNum++;
+          }
+
+          rowNum = 2;
+          
+          for (let colLeft = y - 1; colLeft >= 0; colLeft--) {
+            matrix[row][colLeft] = Math.max(rowNum, colNum);
+            rowNum++;
+            // console.log(colLeft);
+            // num++;
+          }
+          
+        }
+
+        for (let row = 0; row < matrix.length; row++) {
+          console.log(matrix[row].join(" "));
+          // console.log(row);
+        }
+
+      }
+
+      printOrbit([5, 5, 2, 1]);
     </script>
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
