@@ -1150,31 +1150,36 @@
 
         }
 
-// ===================================================================
+        // console.log(matrix);
 
-let d1sum = 0;
-let d2sum = 0;
+        let d1sum = 0;
+        let d2sum = 0;
 
         for (let d1 = 0; d1 < matrix.length; d1++) {
           d1sum += matrix[d1][d1];
           d2sum += matrix[d1][matrix.length - 1 - d1];
         }
 
+        // console.log(matrix);
+
         // console.log(d1sum);
         // console.log(d2sum);
 
         if (d1sum != d2sum) {
-          console.log(matrix);
+          for (let row = 0; row < matrix.length; row++) {
+            console.log(matrix[row].join(" "));
+          }
         } else {
           const altMatrix = [];
 
-          const arr = [];
-          arr.length = input.length;
-          arr.fill(d1sum);
-
           for (let index = 0; index < input.length; index++) {
+            const arr = [];
+            arr.length = input.length;
+            arr.fill(d1sum);
             altMatrix[index] = arr;
           }
+
+          // console.log(altMatrix);
 
           for (let d1 = 0; d1 < matrix.length; d1++) {
             // console.log(matrix[d1][d1]);
@@ -1183,17 +1188,128 @@ let d2sum = 0;
             // console.log(matrix[d1][matrix.length - 1 - d1]);
             // console.log(altMatrix[d1][matrix.length - 1 - d1]);
             // console.log("====================");
-            altMatrix[d1][0] = 5;
-            // altMatrix[d1][matrix.length - 1 - d1] = matrix[d1][matrix.length - 1 - d1];
+            // altMatrix[0][0] = matrix[0][0];
+            // altMatrix[1][1] = matrix[1][1];
+            // altMatrix[2][2] = matrix[2][2];
+            // altMatrix[3][3] = matrix[3][3];
+            // altMatrix[4][4] = matrix[4][4];
+            altMatrix[d1][d1] = matrix[d1][d1];
+            altMatrix[d1][matrix.length - 1 - d1] = matrix[d1][matrix.length - 1 - d1];
           }
 
-          console.log(altMatrix);
+          // altMatrix[0][0] = 21;
+          // altMatrix[1][1] = 22;
+          // altMatrix[2][2] = 23;
+          // altMatrix[3][3] = 24;
+          // altMatrix[4][4] = 25;
 
+          // console.log(matrix);
+          for (let row = 0; row < altMatrix.length; row++) {
+            console.log(altMatrix[row].join(" "));
+          }
+
+        }
+
+        // for (let row = 0; row < altMatrix.length; row++) {
+        //   console.log(altMatrix[row].join(" "));
+        // }
+
+      }
+
+      // checkDiagonalsSums(['5 3 12 3 1', '11 4 23 2 5', '101 12 3 21 10', '1 4 5 2 2', '5 22 33 11 1']);
+      // checkDiagonalsSums(['1 1 1', '1 1 1', '1 1 0']); 
+
+      // 09. Orbit
+
+      function printOrbit(params) {
+        const width = params[0];
+        const height = params[1];
+        const x = params[2];
+        const y = params[3];
+
+        const matrix = [];
+
+        for (let dimension = 0; dimension < height; dimension++) {
+          const arr = [];
+          arr.length = width;
+          arr.fill("!");
+          matrix[dimension] = arr;
+          // console.log(height);
+        }
+
+        // console.log(matrix);
+
+        // const start = matrix[x][y];
+
+        let colNum = 0;
+        
+        for (let row = y; row < height; row++) {
+          // console.log(row);
+          colNum++;
+          
+          matrix[row][x] = colNum;
+          
+          let rowNum = 2;
+
+          for (let colRight = x + 1; colRight < width; colRight++) {
+            // console.log(colNum, rowNum);
+            matrix[row][colRight] = Math.max(rowNum, colNum);
+            rowNum++;
+          }
+
+          rowNum = 2;
+          
+          for (let colLeft = x - 1; colLeft >= 0; colLeft--) {
+            matrix[row][colLeft] = Math.max(rowNum, colNum);
+            rowNum++;
+            // console.log(colLeft);
+            // num++;
+          }
+          
+        }
+
+        colNum = 1;
+
+        for (let row = y - 1; row >= 0; row--) {
+          // console.log(row);
+          colNum++;
+          
+          matrix[row][x] = colNum;
+          
+          let rowNum = 2;
+
+          for (let colRight = x + 1; colRight < width; colRight++) {
+            // console.log(colNum, rowNum);
+            matrix[row][colRight] = Math.max(rowNum, colNum);
+            rowNum++;
+          }
+
+          rowNum = 2;
+          
+          for (let colLeft = x - 1; colLeft >= 0; colLeft--) {
+            matrix[row][colLeft] = Math.max(rowNum, colNum);
+            rowNum++;
+            // console.log(colLeft);
+            // num++;
+          }
+          
+        }
+
+        for (let row = 0; row < matrix.length; row++) {
+          console.log(matrix[row].join(" "));
+          // console.log(row);
         }
 
       }
 
-      checkDiagonalsSums(['5 3 12 3 1', '11 4 23 2 5', '101 12 3 21 10', '1 4 5 2 2', '5 22 33 11 1']);
-      // checkDiagonalsSums(['1 1 1', '1 1 1', '1 1 0']);
+      // printOrbit([4, 4, 0, 0]);
+      // printOrbit([5, 5, 2, 2]);
+      // printOrbit([3, 3, 2, 2]);
+      // printOrbit([11, 11, 5, 5]);
+      printOrbit([2, 3, 1, 0]);
+
+      function test(params) {
+        console.log(1);
+      }
     </script>
   </body>
