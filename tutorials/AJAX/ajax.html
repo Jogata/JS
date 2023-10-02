@@ -3,11 +3,139 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AJAX | XMLHttpRequest</title>
+    <!-- <title>AJAX | XMLHttpRequest</title> -->
+    <title>McLAREN | Sport Cars</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <style>
+      fieldset {
+        display: none;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #00c2de;
+      }
+
+      .caps {
+        text-transform: uppercase;
+      }
+
+      body {
+        background-color: #000;
+        font-family: Georgia, serif;
+      }
+
+      header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 30px 100px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 1000;
+      }
+      header::after {
+        position: absolute;
+        top: 50%;
+        /* left: 100px; */
+        left: 5%;
+        transform: translateY(-50%);
+        content: "";
+        width: 30%;
+        height: 5px;
+        background: linear-gradient(90deg, var(--primary), transparent);
+      }
+
+      .year {
+        margin-top: 40px;
+        color: #fff;
+        font-size: 1em;
+        font-weight: 800;
+        letter-spacing: 1px;
+      }
+
+      .logo {
+        color: #fff;
+        font-size: 30px;
+      }
+      .logo img {
+        max-width: 200px;
+        filter: invert(1);
+      }
+
+      .menu {
+        position: relative;
+        width: 30px;
+        height: 30px;
+        background-image: url("./assets/menu-3-fill.png");
+        background-position: center;
+        background-size: 30px;
+        filter: invert(1);
+        cursor: pointer;
+      }
+      .menu.active {
+        position: relative;
+        width: 35px;
+        height: 35px;
+        background-image: url("./assets/close-line.png");
+        background-position: center;
+        background-size: 35px;
+        filter: invert(1);
+        cursor: pointer;
+      }
+
+      nav {
+        position: absolute;
+        top: 0;
+        right: 100px;
+        width: 30%;
+        height: 5px;
+        border-bottom: 5px solid;
+        border-image: linear-gradient(90deg, transparent, var(--primary), var(--primary)) 30;
+        background-color: transparent;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(20px);
+        z-index: 200;
+      }
+    </style>
   </head>
   <body>
-    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+    <header>
+      <span class="year">2018 - 2023</span>
+      <a href="#" class="logo">
+        <img src="./assets/logo.png" alt="McLAREN logo">
+      </a>
+      <a href="#" class="menu"></a>
+    </header>
+    <div class="banner">
+      <nav>
+        <ul>
+          <li><a href="#">supercars</a></li>
+          <li><a href="#"><spen class="caps">gt</spen></a></li>
+          <li><a href="#">ultimate</a></li>
+          <li><a href="#">solus <span class="caps">gt</span></a></li>
+          <li><a href="#">legacy</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <script>
+      const menuBtn = document.querySelector(".menu");
+      menuBtn.addEventListener("click", toggleMenu);
+
+      function toggleMenu() {
+        menuBtn.classList.toggle("active");
+      }
+    </script>
+
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <!-- ================= Get data from local JSON file ================= -->
 
@@ -71,1245 +199,6 @@
   
         users.open('get', 'https://api.github.com/users', true);
         users.send();
-      }
-    </script>
-
-    <script>
-      // 1. Sum First and Last Array Elements
-
-      function sumFirstandLastArrayElements(params) {
-        const first = params[0];
-        const last = params[params.length - 1];
-
-        const sum = first + last;
-
-        console.log(sum);
-
-      }
-
-      // sumFirstandLastArrayElements([20, 30, 40]);
-      // sumFirstandLastArrayElements([10, 17, 22, 33]);
-      // sumFirstandLastArrayElements([11, 58, 69]);
-
-      // 2. Day of Week
-
-      function printDayofWeek(num) {
-        const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-
-        let day = days[num - 1];
-
-        if (day == undefined) {
-          day = 'Invalid day!';
-        }
-
-        console.log(day);
-
-      }
-
-      // printDayofWeek(3);
-      // printDayofWeek(6);
-      // printDayofWeek(11);
-
-      // 3. Reverse an Array of Numbers
-
-      function ReverseArrayofNumbers(num, params) {
-        const reversed = [];
-
-        for (let index = 0; index < num; index++) {
-          reversed.unshift(params[index]);
-        }
-
-        console.log(reversed.join(" "));
-
-      }
-
-      // ReverseArrayofNumbers(3, [10, 20, 30, 40, 5]);
-      // ReverseArrayofNumbers(4, [-1, 20, 99, 5]);
-      // ReverseArrayofNumbers(2, [66, 43, 75, 89, 47]);
-
-      // 4. Reverse In Place
-
-      function ReverseArray(params) {
-        params.reverse();
-
-        console.log(params.join(" "));
-
-      }
-
-      // ReverseArray(['a', 'b', 'c', 'd', 'e']);
-      // ReverseArray(['abc', 'def', 'hig', 'klm', 'nop']);
-      // ReverseArray(['33', '123', '0', 'dd']);
-
-      // 05. Sum Even Numbers
-
-      function sumEvenNumbers(params) {
-        let sum = 0;
-
-        for (let index = 0; index < params.length; index++) {
-          const num = Number(params[index]);
-
-          if (num % 2 == 0) {
-            sum += num;
-          }
-        }
-
-        console.log(sum);
-
-      }
-
-      // sumEvenNumbers(['1','2','3','4','5','6']);
-      // sumEvenNumbers(['3','5','7','9']);
-      // sumEvenNumbers(['2','4','6','8','10']);
-
-      // 06. Even and Odd Subtraction
-
-      function evenAndOddSubtraction(params) {
-        let odd = 0;
-        let even = 0;
-
-        for (let index = 0; index < params.length; index++) {
-          const num = params[index];
-
-          if (num % 2 == 0) {
-            even += num;
-          } else {
-            odd += num;
-          }
-        }
-
-        let diff = even - odd;
-
-        console.log(diff);
-
-      }
-
-      // evenAndOddSubtraction([1,2,3,4,5,6]);
-      // evenAndOddSubtraction([3,5,7,9]);
-      // evenAndOddSubtraction([2,4,6,8,10]);
-
-      // 07. Equal Arrays
-
-      function sravniArrays(arr1, arr2) {
-        let sum = 0;
-        let areEqual = true;
-
-        // if (arr1.length != arr2.length) {
-        //   areEqual = false;
-        // }
-
-        for (let index = 0; index < arr1.length; index++) {
-          if (arr1[index] != arr2[index]) {
-            areEqual = false;
-            console.log(`Arrays are not identical. Found difference at ${index} index`);
-            index = arr1.length;
-          } else {
-            sum +=Number(arr1[index]);
-            // console.log(sum);
-          }
-        }
-
-        if (areEqual) {
-          console.log(`Arrays are identical. Sum: ${sum}`);
-        }
-
-      }
-
-      // sravniArrays(['10','20','30'], ['10','20','30']);
-      // sravniArrays(['1','2','3','4','5'], ['1','2','4','4','5']);
-      // sravniArrays(['1'], ['10']);
-    </script>
-
-    <script>
-            // 8. Condense Array to Number
-
-            function condenseArraytoNumber(params) {
-        // params.push(0);
-        // console.log(params);
-        
-        while (params.length > 2) {
-          let newArray = [];
-
-          for (let index = 0; index < params.length - 1; index++) {
-            const current = params[index];
-            // console.log(current);
-            const next = params[index + 1];
-            // console.log(next);
-            let sum = current + next;
-            newArray.push(sum);
-          }
-
-          params = newArray;
-          // params.pop();
-          // console.log(params);
-
-        }
-
-        let sum = 0;
-
-        for (let index = 0; index < params.length; index++) {
-          sum = sum + params[index];
-        }
-
-        console.log(sum);
-
-      }
-
-      // condenseArraytoNumber([2,10,3]);
-      // condenseArraytoNumber([1]);
-      // condenseArraytoNumber([5,0,4,1,2]);
-
-      // 1. Add and Subtract
-
-      function addSubstract(array = []) {
-        let sumOriginal = 0;
-        let sumNew = 0;
-
-        for (let index = 0; index < array.length; index++) {
-          sumOriginal += array[index];
-
-          if (array[index] % 2 == 0) {
-            array[index] += index;
-          } else {
-            array[index] -= index;
-          }
-
-          sumNew += array[index];
-        }
-
-        console.log(array);
-        console.log(sumOriginal);
-        console.log(sumNew);
-
-      }
-
-      // addSubstract([5, 15, 23, 56, 35]);
-      // addSubstract([-5, 11, 3, 0, 2]);
-
-      // 2. Common Elements
-
-      function findMathces(arr1, arr2) {
-        const matches = [];
-
-        for (let index1 = 0; index1 < arr1.length; index1++) {
-
-          for (let index2 = 0; index2 < arr2.length; index2++) {            
-            if (arr1[index1] === arr2[index2]) {
-              matches.push(arr1[index1]);
-            }
-          }
-
-        }
-
-        for (let index = 0; index < matches.length; index++) {
-          console.log(matches[index]);
-        }
-
-      }
-
-      // findMathces(['Hey', 'hello', 2, 4, 'Peter', 'e'], ['Petar', 10, 'hey', 4, 'hello', '2']);
-      // findMathces(['S', 'o', 'f', 't', 'U', 'n', 'i', ' '], ['s', 'o', 'c', 'i', 'a', 'l']);
-
-      // 3. Merge Arrays
-
-      function mergeArrays(arr1, arr2) {
-        const arr3 = [];
-        
-        for (let index = 0; index < arr1.length; index++) {
-          if (index % 2 == 0) {
-            let sum = Number(arr1[index]) + Number(arr2[index]);
-            arr3.push(sum);
-            // console.log(sum);
-          } else {
-            let concat = arr1[index] + arr2[index];
-            arr3.push(concat);
-          }
-        }
-
-        console.log(arr3.join(" - "));
-
-      }
-
-      // mergeArrays(['5', '15', '23', '56', '35'], ['17', '22', '87', '36', '11']);
-      // mergeArrays(['13', '12312', '5', '77', '4'], ['22', '333', '5', '122', '44']);
-
-      // 04. Array Rotation
-
-      function rotateArray(array, rotations) {
-        rotations = rotations % array.length;
-
-        for (let rotation = 0; rotation < rotations; rotation++) {
-          const first = array.shift();
-          array.push(first);
-        }
-
-        console.log(array.join(" "));
-
-      }
-
-      // rotateArray([51, 47, 32, 61, 21], 2);
-      // rotateArray([32, 21, 61, 1], 4);
-      // rotateArray([2, 4, 15, 31], 5);
-    </script>
-    <script>
-            // 5. Max Number
-
-            function findMaxNumber(array) {
-        const topIntegers = [];
-        
-        for (let index = 0; index < array.length; index++) {
-          let isTop = true;
-
-          for (let index2 = index + 1; index2 < array.length; index2++) {
-            if (array[index2] >= array[index]) {
-              isTop = false;
-              index2 = array.length;
-            }
-          }
-
-          if (isTop) {
-            topIntegers.push(array[index]);
-          }
-
-        }
-
-        console.log(topIntegers.join(" "));
-
-      }
-
-      // findMaxNumber([1, 4, 3, 2]);
-      // findMaxNumber([14, 24, 3, 19, 15, 17]);
-      // findMaxNumber([41, 41, 34, 20]);
-      // findMaxNumber([27, 19, 42, 2, 13, 45, 48]);
-
-      // 06. Equal Sums
-
-      function findEqualSum(array) {
-        let index = null;
-        array.unshift(0);
-        array.push(0);
-
-        // console.log(array);
-        
-        for (let i = 1; i < array.length - 1; i++) {
-          let left = 0;
-          let right = 0;
-
-          for (let leftindex = i - 1; leftindex >= 0; leftindex--) {
-            left += array[leftindex];
-          }
-
-          for (let rightIndex = i + 1; rightIndex < array.length; rightIndex++) {
-            right += array[rightIndex];
-          }
-
-          if (left == right) {
-            index = i - 1;
-          }
-
-        }
-
-        if (typeof index == "number") {
-          console.log(index);
-        } else {
-          console.log("no");
-        }
-
-      }
-
-      // findEqualSum([1, 2, 3, 3]);
-      // findEqualSum([1, 2]);
-      // findEqualSum([1]);
-      // findEqualSum([1, 2, 3]);
-      // findEqualSum([10, 5, 5, 99, 3, 4, 2, 5, 1, 1, 4]);
-
-      // 7. Max Sequence of Equal Elements
-
-      function findMaxSequenceofEqualElements(array) {
-        let sequence = [];
-
-        for (let index = 0; index < array.length; index++) {
-
-          if (array[index] == array[index + 1]) {
-            let newSequence = [];
-            newSequence.push(array[index]);
-
-            while (array[index] == array[index + 1]) {
-              newSequence.push(array[index]);
-              index++;
-
-              if (index > 20) {
-                break;
-              }
-            }
-
-            if (newSequence.length > sequence.length) {
-              sequence = newSequence;
-            }
-
-          }
-
-        }
-
-        console.log(sequence.join(" "));
-
-      }
-
-      // findMaxSequenceofEqualElements([2, 1, 1, 2, 3, 3, 2, 2, 2, 1]);
-      // findMaxSequenceofEqualElements([1, 1, 1, 2, 3, 1, 3, 3]);
-      // findMaxSequenceofEqualElements([4, 4, 4, 4]);
-      // findMaxSequenceofEqualElements([0, 1, 1, 5, 2, 2, 6, 3, 3]);
-
-      // 08. Magic Sum
-
-      function findMagicSum(array, mn) {
-        
-        for (let index = 0; index < array.length; index++) {
-
-          for (let index2 = index + 1; index2 < array.length; index2++) {            
-            const sum = array[index] + array[index2];
-            
-            if (sum == mn) {
-              // console.log(sum, mn);
-              console.log(array[index] + " " + array[index2]);
-            }
-
-          }
-        }
-
-      }
-
-      // findMagicSum([1, 7, 6, 2, 19, 23], 8);
-      // findMagicSum([14, 20, 60, 13, 7, 19, 8], 27);
-      // findMagicSum([1, 2, 3, 4, 5, 6], 6);
-
-      // 09. Dungeonest Dark
-
-      function setGame(rooms) {
-        let HP = 100;
-        let totalCoins = 0;
-        let isDead = false;
-
-        const inputType = {
-          potion: "potion", 
-          chest: "chest", 
-          undefined: "monster"
-        }
-
-        const options = {
-          potion: function(type, health) {
-            health = Number(health);
-            if (HP + health > 100) {
-              health = 100 - HP;
-              HP = 100;
-            } else {
-              HP += health;
-            }
-            console.log(`You healed for ${health} hp.`);
-            console.log(`Current health: ${HP} hp.`);
-          }, 
-          chest: function(type, coins) {
-            coins = Number(coins);
-            totalCoins += coins;
-            console.log(`You found ${coins} coins.`);
-          }, 
-          monster: function(monster, attack, room) {
-            if (attack >= HP) {
-              isDead = true;
-              console.log(`You died! Killed by ${monster}.`);
-              console.log(`Best room: ${room}`);
-            } else {
-              HP -= attack;
-              console.log(`You slayed ${monster}.`);
-            }
-          }
-        }
-
-        const roomsAsArray = rooms[0].split("|");
-
-        // console.log(roomsAsArray);
-
-        for (let room = 0; room < roomsAsArray.length; room++) {
-          const roomData = roomsAsArray[room].split(" ");
-
-          let roomContent = roomData[0];
-          roomContent = inputType[roomContent];
-          roomContent = inputType[roomContent];
-          // console.log(roomContent);
-          let action = options[roomContent];
-          // console.log(action);
-
-          action(roomData[0], roomData[1], room + 1);
-
-          if (isDead) {
-            room = roomsAsArray.length;
-          }
-
-        }
-
-        if (!isDead) {
-          console.log("You've made it!");
-          console.log(`Coins: ${totalCoins}`);
-          console.log(`Health: ${HP}`);
-        }
-      }
-
-      // setGame(["rat 10|bat 20|potion 10|rat 10|chest 100|boss 70|chest 1000"]);
-      // setGame(["cat 10|potion 30|orc 10|chest 10|snake 25|chest 110"]);
-
-      // 10. * Ladybugs
-
-      function playLadybugs(params) {
-        const fieldSize = params[0]
-        const ladybugsPositions = params[1].split(" ");
-        // console.log(ladybugsPositions);
-        // const flights = params[2];
-
-        const field = [];
-        field.length = fieldSize;
-        field.fill(0);
-        
-        for (let index = 0; index < ladybugsPositions.length; index++) {
-          const position = Number(ladybugsPositions[index]);
-
-          if (position < fieldSize) {
-            field[position] = 1;
-            // console.log(field);
-          }
-        }
-
-        for (let flight = 2; flight < params.length; flight++) {
-          let currentFlight = params[flight].split(" ");
-          // console.log(currentFlight);
-          let start = Number(currentFlight[0]);
-          let direction = currentFlight[1];
-          let end = Number(currentFlight[2]);
-          // console.log(start, direction, end);
-          
-          if (start >= 0 && start < fieldSize && field[start] == 1) {
-            const directions = {
-              left: function(position, number) {
-                return position -= number;
-              }, 
-              right: function(position, number) {
-                return position += number;
-              }
-            }
-
-            const newPosition = directions[direction](start, end);
-            // console.log(newPosition);
-            field[start] = 0;
-
-            if (newPosition >= 0 && newPosition < fieldSize) {
-              field[newPosition] = 1;
-            }
-
-          }
-        }
-
-        console.log(field.join(" "));
-
-      }
-
-      playLadybugs([3, '0 1', '0 right 1', '2 right 1']);
-      playLadybugs([ 3, '0 1 2', '0 right 1', '1 right 1', '2 right 1']);
-      playLadybugs([ 5, '3', '3 left 2', '1 left -2']);
-      console.log("=====================");
-    </script>
-    <script>
-      // 5. Amazing Numbers
-
-      function findAmazingNumber(num) {
-        let isAmazing = "False";
-
-        const numAsString = String(num);
-        let sum = 0;
-
-        for (let index = 0; index < numAsString.length; index++) {
-          const digit = Number(numAsString[index]);
-          sum += digit;
-        }
-
-        const sumAsString = String(sum);
-
-        for (let index = 0; index < sumAsString.length; index++) {
-          const digit = sumAsString[index];
-
-          if (digit == "9") {
-            isAmazing = "True";
-            index = sumAsString.length;
-          }
-
-        }
-
-        console.log(`${num} Amazing? ${isAmazing}`);
-
-      }
-
-      // findAmazingNumber(1233);
-      // findAmazingNumber(999);
-
-      // 06. Gramophone
-
-      function findsongDuration(band, album, song) {
-        let duration = (album.length * band.length) * song.length / 2;
-        const rotations = Math.ceil(duration / 2.5);
-        console.log(`The plate was rotated ${rotations} times.`);
-      }
-
-      // findsongDuration('Black Sabbath', 'Paranoid', 'War Pigs');
-      // findsongDuration('Rammstein', 'Sehnsucht', 'Engel');
-
-      // 07. Required reading 
-
-      function calcReadingDailyTime(pages, pagesPerHour, days) {
-        const totalTime = pages / pagesPerHour;
-        const dailyHours = totalTime / days;
-        console.log(dailyHours);
-      }
-
-      // calcReadingDailyTime(212, 20, 2);
-      // calcReadingDailyTime(432, 15, 4);
-
-      // 8. Centuries to Minutes
-
-      function convertCenturiestoMinutes(centuries) {
-        const years = centuries * 100;
-        const days = Math.trunc(years * 365.2422);
-        const hours = days * 24;
-        const minutes = hours * 60;
-
-        console.log(`${centuries} centuries = ${years} years = ${days} days = ${hours} hours = ${minutes} minutes`);
-
-      }
-
-      // convertCenturiestoMinutes(1);
-      // convertCenturiestoMinutes(5);
-
-      // 09. Special Numbers
-
-      function findSpecialNumber(num) {
-        for (let index = 1; index <= num; index++) {
-          let sum = 0;
-          const indexAsString = String(index);
-
-          for (let index = 0; index < indexAsString.length; index++) {
-            const digit = Number(indexAsString[index]);
-            sum += digit;
-          }
-
-          if (sum == 5 || sum == 7 || sum == 11) {
-            console.log(`${index} -> True`);
-          } else {
-            console.log(`${index} -> False`);
-          }
-        }
-      }
-
-      // findSpecialNumber(15);
-      // findSpecialNumber(20);
-
-      // 10. Triples of Latin Letters
-
-      function printTriplesofNLatinLetters(n) {
-        n = Number(n);
-        // console.log(String.fromCharCode(97));
-        for (let first = 97; first < n + 97; first++) {
-          const firstLetter = String.fromCharCode(first);
-          
-          for (let second = 97; second < n + 97; second++) {
-            const secondLetter = String.fromCharCode(second);
-            
-            for (let third = 97; third < n + 97; third++) {
-              const thirdLetter = String.fromCharCode(third);
-              const result = firstLetter + secondLetter + thirdLetter;
-              console.log(result);
-            }
-          }
-        }
-      }
-
-      // printTriplesofNLatinLetters("3");
-      // printTriplesofNLatinLetters("2");
-
-      // 05. Binary to Decimal
-
-      function convertBtoD(b) {
-        const digit = parseInt(b, 2);
-        console.log(digit);
-      }
-
-      // convertBtoD("00001001");
-      // convertBtoD("11110000");
-
-      // 07. Triangle Area
-
-      function calcTraingleArea(side1, side2, side3) {
-        // calculate the semi-perimeter
-        const s = (side1 + side2 + side3) / 2;
-
-        //calculate the area
-        const areaValue = Math.sqrt(
-          s * (s - side1) * (s - side2) * (s - side3)
-        );
-
-        console.log(areaValue);
-
-      }
-
-      // calcTraingleArea(2, 3.5, 4);
-      // calcTraingleArea(3, 5.5, 4);
-
-      // 06. Chess Board
-
-      function printChessBoard(side) {
-        console.log('<div class="chessboard">');
-        
-        for (let side1 = 0; side1 < side; side1++) {
-          console.log(' <div>');
-
-            const classes = ["black", "white"];
-            let currentClass = side1;
-            currentClass = currentClass % classes.length;
-          
-            for (let side2 = 0; side2 < side; side2++) {
-              console.log(`  <span class="${classes[currentClass]}"></span>`);
-              currentClass++;
-              currentClass = currentClass % classes.length;
-            }
-
-          console.log(' </div>');
-
-        }
-
-        console.log('</div>');
-
-      }
-
-      // printChessBoard(3);
-      // printChessBoard(6);
-
-      // 01. Print N-th Element
-
-      function printNthElement(params) {
-        const step = Number(params[params.length - 1]);
-        const result = [];
-        // console.log(step);
-
-        for (let index = 0; index < params.length - 1; index+=step) {
-          result.push(params[index]);
-        }
-
-        console.log(result.join(" "));
-
-      }
-
-      // printNthElement(['5', '20', '31', '4', '20', '2']);
-      // printNthElement(['dsa', 'asd', 'test', 'test', '2']);
-      // printNthElement(['1', '2', '3', '4', '5', '6']);
-
-      // 02. Add and Remove
-
-      function addRemove(inputs) {
-        const result = [];
-
-        const operations = {
-          add: function(arr, num) {
-            arr.push(num);
-          },
-          remove: function(arr) {
-            arr.pop();
-          }
-        }
-
-        for (let index = 0; index < inputs.length; index++) {
-          const operation = operations[inputs[index]];
-          operation(result, index + 1);
-        }
-
-        if (result.length == 0) {
-          console.log("Empty");
-        } else {
-          console.log(result.join(" "));
-        }
-
-      }
-
-      // addRemove(['add', 'add', 'add', 'add']);
-      // addRemove(['add', 'add', 'remove', 'add', 'add']);
-      // addRemove(['remove', 'remove', 'remove']);
-
-      // 3. Rotate Array
-
-      function rotateArray(array) {
-        let rotations = array.pop();
-        rotations = rotations % array.length;
-
-        for (let index = 0; index < rotations; index++) {
-          const lastValue = array.pop();
-          array.unshift(lastValue);
-        }
-
-        console.log(array.join(" "));
-
-      }
-
-      // rotateArray(['1', '2', '3', '4', '2']);
-      // rotateArray(['Banana', 'Orange', 'Coconut','Apple', '15']);
-
-      // 04. Non-Decreasing Subset
-
-      function getNonDecreasingSubset(array) {
-        let biggest = array[0];
-        // console.log(first);
-        const result = array.filter(x => {
-          if (x > biggest) {
-            biggest = x;
-          }
-
-          return x >= biggest;
-        });
-
-        console.log(result.join(" "));
-
-      }
-
-      // getNonDecreasingSubset([1, 3, 8, 4, 10, 12, 3, 2, 24]);
-      // getNonDecreasingSubset([ 1, 2, 3, 4]);
-      // getNonDecreasingSubset([ 20, 3, 2, 15, 6, 1]);
-
-      // 05. Tseam Account
-
-      function menageAccount(params) {
-        let games = params[0].split(" ");
-        // console.log(games);
-        let index = 1;
-        let inputString = params[index];
-        const todos = [];
-
-        const actions = {
-          install: function(game) {
-            // console.log("install", game);
-            const isGameOwn = games.includes(game);
-            if (!isGameOwn) {
-              games.push(game);
-            }
-          }, 
-          uninstall: function(game) {
-            // console.log("uninstall", game);
-            const isGameOwn = games.includes(game);
-            if (isGameOwn) {
-              const filtered = games.filter(x => {
-                // console.log(x == game);
-                return x !== game;
-              });
-              games = filtered;
-              // console.log("uninstalled");
-            }
-          }, 
-          update: function(game) {
-            // console.log("update", game);
-            const isGameOwn = games.includes(game);
-            // console.log(isGameOwn);
-            if (isGameOwn) {
-              const filtered = games.filter(x => {
-                // console.log(x == game);
-                return x !== game;
-              });
-              games = filtered;
-              games.push(game);
-            }
-          }, 
-          expansion: function(str) {
-            // console.log("expansion", expansion);
-            const game = str.split("-")[0];
-            const expansion = str.split("-")[1];
-            const isGameOwn = games.includes(game);
-            if (isGameOwn) {
-              const index = games.indexOf(game);
-              const newName = `${game}:${expansion}`;
-              games.splice(index + 1, 0, newName);
-            }
-          }, 
-          // skip: function() {}
-        }
-
-        while (inputString != "Play!") {
-          const inputArray= inputString.split(" ");
-          // console.log(inputArray);
-          const currentGame = inputArray[1];
-          const action = inputArray[0].toLowerCase();
-          let todo = actions[action];
-          // todo();
-
-          // for (const game of games) {
-          //   if (game == currentGame) {
-          //     todo = actions.skip;
-          //   }
-          // }
-
-          todo(currentGame);
-          // todos[0] = todo;
-          // console.log(todos[0]);
-          // console.log(games);
-          
-          // console.log(inputString);
-          index++;
-          inputString = params[index];
-        }
-
-        console.log(games.join(" "));
-      }
-
-      // menageAccount(['CS WoW Diablo', 'Install LoL', 'Uninstall WoW', 'Update Diablo', 'Expansion CS-Go', 'Play!']);
-      // menageAccount(['CS WoW Diablo', 'Uninstall XCOM', 'Update PeshoGame', 'Update WoW', 'Expansion Civ-V', 'Play!']);
-
-      // 06. Magic Matrices
-
-      function checkIsMatrixMagical(arr) {
-        let isMatrixMagical = true;
-        let start = 0;
-        let sum = 0;
-
-        for (let index = 0; index < arr.length; index++) {
-          sum += arr[0][index];
-        }
-
-        // if (arr.length !== arr[0].length) {
-        //   console.log("diff");
-        // }
-
-        // console.log(arr[0][2]);
-
-        for (let index = 0; index < arr.length; index++) {
-          if (arr.length !== arr[index].length) {
-            // console.log(arr.length);
-            // console.log(arr[index].length);
-            // console.log("first");
-            isMatrixMagical = false;
-            index = arr.length;
-            start = arr.length;
-          }
-        }
-
-        // if (arr.length == 0) {
-        //   isMatrixMagical = false;
-        //   console.log("second");
-        //   start = 5;
-        // }
-
-        // console.log(isMatrixMagical);
-        
-        for (let index = start; index < arr.length; index++) {
-          let sumH = 0;
-          let sumV = 0;
-          
-          for (let index1 = 0; index1 < arr[index].length; index1++) {
-            sumH += arr[index][index1];
-            sumV += arr[index1][index];
-          }
-          // console.log(sumH);
-          // console.log(sumV);
-          // console.log(sum);
-
-          if (sumH != sum || sumV != sum) {
-            isMatrixMagical = false;
-            index = arr.length;
-          }
-
-        }
-
-        console.log(isMatrixMagical);
-
-      }
-
-      // checkIsMatrixMagical([[4, 5, 6], [6, 5, 4], [5, 5, 5]]);
-      // checkIsMatrixMagical([[11, 32, 45], [21, 0, 1], [21, 1, 1]]);
-      // checkIsMatrixMagical([[1, 0, 0], [0, 0, 1], [0, 1, 0]]);
-      // checkIsMatrixMagical([[1, 0, 0], [0, 0, 1]]);
-      // checkIsMatrixMagical([[1, 0, 1], [0, 1, 1], [0, 1]]);
-      // checkIsMatrixMagical([[0, 0, 0], [0, 0, 0], [0, 0, 0]]);
-
-      function name(params) {
-        if (params.length == 3) {
-          if (params[0].length !== 3) {
-            return false;
-          }
-        }
-      }
-
-      function name(array) {
-        for (let index = 0; index < 3; index++) {
-          for (let index1 = 0; index1 < 3; index1++) {
-            if (array[index][index1] == 3) {
-              console.log(false);
-              // index = array.length;
-              // index1 = array.length;
-            }
-          }
-        }
-      }
-
-      // name([[3, 3, 3], [3, 3, 3], [3, 3, 3]]);
-
-      // 07. Spiral Matrix 
-
-      function printSpiralMatrix(side1, side2) {
-        let num = 1;
-        const matrix = [];
-
-        for (let i = 0; i < side2; i++) {
-          const insideArray = [];
-          insideArray.length = side1;
-          insideArray.fill(1);
-          matrix.push(insideArray);
-        }
-
-        // console.log(matrix);
-
-        let left = 0;
-        let right = side1 - 1;
-        let top = 0;
-        let bottom = side2 - 1;
-
-        // console.log(left, right, top, bottom);
-
-        // for (let index = 1; index <= 3; index++) {
-          while (top <= bottom || left <= right) {
-            
-          // }
-          
-          for (let i = top; i <= right; i++) {
-            // console.log(num);
-            matrix[top][i] = num;
-            num++;
-          }
-          // console.log("===========");
-
-          top++;
-
-          // let h = bottom - top;
-
-          for (let i = top; i <= bottom; i++) {
-            // console.log(num);
-            matrix[i][right] = num;
-            num++;
-          }
-          // console.log("===========");
-
-          right--;
-
-          for (let i = right; i >= left; i--) {
-            // console.log(num);
-            matrix[bottom][i] = num;
-            num++;
-          }
-          // console.log("===========");
-
-          bottom--;
-
-          for (let i = bottom; i >= top; i--) {
-            // console.log(num);
-            matrix[i][left] = num;
-            num++;
-          }
-          // console.log("===========");
-
-          left++;
-
-          if (top > 30) {
-            break;
-          }
-
-        }
-
-        for (let row = 0; row < side2; row++) {
-          console.log(matrix[row].join(" "));
-        }
-
-      }
-
-      // printSpiralMatrix(5, 5);
-      // printSpiralMatrix(3, 3);
-      // printSpiralMatrix(4, 3);
-      // printSpiralMatrix(3, 6);
-
-      // 08. Diagonal Attack
-
-      function checkDiagonalsSums(input) {
-        const matrix = [];
-        matrix.length = input.length;
-
-        for (let row = 0; row < input.length; row++) {
-          const arr = input[row].split(" ");
-
-          for (let index = 0; index < arr.length; index++) {
-            arr[index] = Number(arr[index]);
-          }
-
-          matrix[row] = arr;
-
-        }
-
-        // console.log(matrix);
-
-        let d1sum = 0;
-        let d2sum = 0;
-
-        for (let d1 = 0; d1 < matrix.length; d1++) {
-          d1sum += matrix[d1][d1];
-          d2sum += matrix[d1][matrix.length - 1 - d1];
-        }
-
-        // console.log(matrix);
-
-        // console.log(d1sum);
-        // console.log(d2sum);
-
-        if (d1sum != d2sum) {
-          for (let row = 0; row < matrix.length; row++) {
-            console.log(matrix[row].join(" "));
-          }
-        } else {
-          const altMatrix = [];
-
-          for (let index = 0; index < input.length; index++) {
-            const arr = [];
-            arr.length = input.length;
-            arr.fill(d1sum);
-            altMatrix[index] = arr;
-          }
-
-          // console.log(altMatrix);
-
-          for (let d1 = 0; d1 < matrix.length; d1++) {
-            // console.log(matrix[d1][d1]);
-            // console.log(altMatrix[d1][d1]);
-            // console.log("----------------------");
-            // console.log(matrix[d1][matrix.length - 1 - d1]);
-            // console.log(altMatrix[d1][matrix.length - 1 - d1]);
-            // console.log("====================");
-            // altMatrix[0][0] = matrix[0][0];
-            // altMatrix[1][1] = matrix[1][1];
-            // altMatrix[2][2] = matrix[2][2];
-            // altMatrix[3][3] = matrix[3][3];
-            // altMatrix[4][4] = matrix[4][4];
-            altMatrix[d1][d1] = matrix[d1][d1];
-            altMatrix[d1][matrix.length - 1 - d1] = matrix[d1][matrix.length - 1 - d1];
-          }
-
-          // altMatrix[0][0] = 21;
-          // altMatrix[1][1] = 22;
-          // altMatrix[2][2] = 23;
-          // altMatrix[3][3] = 24;
-          // altMatrix[4][4] = 25;
-
-          // console.log(matrix);
-          for (let row = 0; row < altMatrix.length; row++) {
-            console.log(altMatrix[row].join(" "));
-          }
-
-        }
-
-        // for (let row = 0; row < altMatrix.length; row++) {
-        //   console.log(altMatrix[row].join(" "));
-        // }
-
-      }
-
-      // checkDiagonalsSums(['5 3 12 3 1', '11 4 23 2 5', '101 12 3 21 10', '1 4 5 2 2', '5 22 33 11 1']);
-      // checkDiagonalsSums(['1 1 1', '1 1 1', '1 1 0']); 
-
-      // 09. Orbit
-
-      function printOrbit(params) {
-        const width = params[0];
-        const height = params[1];
-        const x = params[2];
-        const y = params[3];
-
-        const matrix = [];
-
-        for (let dimension = 0; dimension < height; dimension++) {
-          const arr = [];
-          arr.length = width;
-          arr.fill("!");
-          matrix[dimension] = arr;
-          // console.log(height);
-        }
-
-        // console.log(matrix);
-
-        // const start = matrix[x][y];
-
-        let colNum = 0;
-        
-        for (let row = y; row < height; row++) {
-          // console.log(row);
-          colNum++;
-          
-          matrix[row][x] = colNum;
-          
-          let rowNum = 2;
-
-          for (let colRight = x + 1; colRight < width; colRight++) {
-            // console.log(colNum, rowNum);
-            matrix[row][colRight] = Math.max(rowNum, colNum);
-            rowNum++;
-          }
-
-          rowNum = 2;
-          
-          for (let colLeft = x - 1; colLeft >= 0; colLeft--) {
-            matrix[row][colLeft] = Math.max(rowNum, colNum);
-            rowNum++;
-            // console.log(colLeft);
-            // num++;
-          }
-          
-        }
-
-        colNum = 1;
-
-        for (let row = y - 1; row >= 0; row--) {
-          // console.log(row);
-          colNum++;
-          
-          matrix[row][x] = colNum;
-          
-          let rowNum = 2;
-
-          for (let colRight = x + 1; colRight < width; colRight++) {
-            // console.log(colNum, rowNum);
-            matrix[row][colRight] = Math.max(rowNum, colNum);
-            rowNum++;
-          }
-
-          rowNum = 2;
-          
-          for (let colLeft = x - 1; colLeft >= 0; colLeft--) {
-            matrix[row][colLeft] = Math.max(rowNum, colNum);
-            rowNum++;
-            // console.log(colLeft);
-            // num++;
-          }
-          
-        }
-
-        for (let row = 0; row < matrix.length; row++) {
-          console.log(matrix[row].join(" "));
-          // console.log(row);
-        }
-
-      }
-
-      // printOrbit([4, 4, 0, 0]);
-      // printOrbit([5, 5, 2, 2]);
-      // printOrbit([3, 3, 2, 2]);
-      // printOrbit([11, 11, 5, 5]);
-      printOrbit([2, 3, 1, 0]);
-
-      function test(params) {
-        console.log(1);
       }
     </script>
   </body>
