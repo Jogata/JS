@@ -29,6 +29,11 @@
         text-decoration: none;
       }
 
+      img, 
+      video {
+        width: 100%;
+      }
+
       .caps {
         text-transform: uppercase;
       }
@@ -292,6 +297,80 @@
         border-bottom: 2px solid rgba(0, 194, 222, 0.8);
         box-shadow: inset 0 0 50px rgba(0, 194, 222, 0.5);
       }
+
+      .banner .screen {
+        position: absolute;
+        right: 10%;
+        bottom: 100px;
+        width: 300px;
+        height: 200px;
+        transform-style: preserve-3d;
+        transform: rotateX(-30deg) rotateY(0deg);
+        animation: rotate 30s linear infinite;
+        z-index: 100;
+      }
+
+      @keyframes rotate {
+        0% {
+          transform: rotateX(-30deg) rotateY(0deg);
+        }
+        100% {
+          transform: rotateX(-30deg) rotateY(360deg);
+        }
+      }
+
+      .banner .screen div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        /* transform: rotateX(45deg); */
+      }
+
+      .banner .screen div span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(transparent, var(--primary));
+        transform: rotateY(calc(90deg * var(--i))) translateZ(150px);
+        overflow: hidden;
+      }
+
+      .banner .screen .shadow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 300px;
+        height: 200px;
+        background-color: var(--primary);
+        transform: rotateX(-90deg) translateZ(150px);
+        filter: blur(20px);
+        box-shadow: 
+        0 0 120px rgba(0, 194, 222, 0.2), 
+        0 0 120px rgba(0, 194, 222, 0.4), 
+        0 0 120px rgba(0, 194, 222, 0.6), 
+        0 0 120px rgba(0, 194, 222, 0.8), 
+        0 0 120px rgba(0, 194, 222, 1);
+      }
+
+      .banner .screen div span video {
+        position: absolute;
+        bottom: 0;
+        /* width: 100%; */
+        height: 75%;
+        object-fit: cover;
+        /* object-position: center; */
+        transition: 0.5s;
+      }
+
+      /* <!-- delete --> */
+      .bg-videos {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -372,10 +451,62 @@
       <div class="screen">
         <div class="shadow"></div>
         <div>
-          <span style="--i: 0"></span>
-          <span style="--i: 1"></span>
-          <span style="--i: 2"></span>
-          <span style="--i: 3"></span>
+          <span style="--i: 0">
+            <video class="trailer screen-video mclaren-1 active" 
+              src="./assets/videos/mclaren-1.mp4" 
+              autoplay 
+              loop 
+              muted>
+            </video>
+            <video class="trailer screen-video mclaren-2 active" 
+              src="./assets/videos/mclaren-2.mp4" 
+              autoplay 
+              loop 
+              muted>
+            </video>
+            <video class="trailer screen-video mclaren-3 active" 
+              src="./assets/videos/mclaren-3.mp4" 
+              autoplay 
+              loop 
+              muted>
+            </video>
+            <video class="trailer screen-video mclaren-4 active" 
+              src="./assets/videos/mclaren-4.mp4" 
+              autoplay 
+              loop 
+              muted>
+            </video>
+            <video class="trailer screen-video mclaren-5 active" 
+              src="./assets/videos/mclaren-5.mp4" 
+              autoplay 
+              loop 
+              muted>
+            </video>
+          </span>
+          <span style="--i: 1">
+            <video class="screen-video" 
+              src="./assets/videos/trailer-1.mp4" 
+              autoplay 
+              loop 
+              muted>
+            </video>
+          </span>
+          <span style="--i: 2">
+            <video class="screen-video" 
+              src="./assets/videos/trailer-2.mp4" 
+              autoplay 
+              loop 
+              muted>
+            </video>
+          </span>
+          <span style="--i: 3">
+            <video class="screen-video" 
+              src="./assets/videos/trailer-3.mp4" 
+              autoplay 
+              loop 
+              muted>
+            </video>
+          </span>
         </div>
       </div>
     </div>
