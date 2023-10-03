@@ -252,13 +252,13 @@
       .banner .content .model.mclaren-2 {
         color: #92ff00;
       }
-      .banner .content .model.mclaren-2 {
+      .banner .content .model.mclaren-3 {
         color: #ff0015;
       }
-      .banner .content .model.mclaren-2 {
+      .banner .content .model.mclaren-4 {
         color: #ff2e00;
       }
-      .banner .content .model.mclaren-2 {
+      .banner .content .model.mclaren-5 {
         color: #bbc0dd;
       }
 
@@ -309,6 +309,23 @@
         animation: rotate 30s linear infinite;
         z-index: 100;
       }
+      .banner .screen::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-color: var(--primary);
+        transform: rotateX(-90deg) translateZ(150px);
+        filter: blur(20px);
+        box-shadow: 
+        0 0 120px rgba(0, 194, 222, 0.2), 
+        0 0 120px rgba(0, 194, 222, 0.4), 
+        0 0 120px rgba(0, 194, 222, 0.6), 
+        0 0 120px rgba(0, 194, 222, 0.8), 
+        0 0 120px rgba(0, 194, 222, 1);
+      }
 
       @keyframes rotate {
         0% {
@@ -340,7 +357,7 @@
         overflow: hidden;
       }
 
-      .banner .screen .shadow {
+      /* .banner .screen .shadow {
         position: absolute;
         top: 0;
         left: 0;
@@ -356,7 +373,7 @@
         0 0 120px rgba(0, 194, 222, 0.8), 
         0 0 120px rgba(0, 194, 222, 1);
       }
-
+ */
       .banner .screen div span video {
         position: absolute;
         bottom: 0;
@@ -367,9 +384,101 @@
         transition: 0.5s;
       }
 
+      .banner .screen div span video.trailer {
+        display: none;
+      }
+
+      .banner .screen div span video.trailer.active {
+        display: block;
+      }
+
+      .banner .gallery {
+        position: absolute;
+        left: 100px;
+        bottom: 0;
+        width: 55%;
+        height: 30%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* background-color: transparent; */
+        box-shadow: 
+          0px 10px 40px rgba(0, 0, 0, 0.5), 
+          0px -10px 40px rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(20px);
+        z-index: 100;
+      }
+      .banner .gallery::before {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        content: "";
+        width: 100%;
+        height: 10px;
+        background-color: var(--primary);
+        filter: blur(15px);
+      }
+
+      .banner .gallery .carousel {
+        /* width: 100%; */
+        /* height: 100%; */
+        display: flex;
+        /* align-items: center; */
+        justify-content: center;
+      }
+
+      .banner .gallery .carousel .carousel-item {
+        flex: 1;
+        /* width: 100%; */
+        width: 250px;
+        /* height: 100%; */
+        /* object-fit: cover; */
+        cursor: pointer;
+      }
+
+      .banner .gallery .carousel .carousel-item h4 {
+        color: var(--primary);
+        font-size: 1.3em;
+        font-weight: 300;
+        text-align: center;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .banner .gallery .carousel .carousel-item:nth-child(2) h4 {
+        color: #92ff00;
+      }
+      .banner .gallery .carousel .carousel-item:nth-child(3) h4 {
+        color: #ff0015;
+      }
+      .banner .gallery .carousel .carousel-item:nth-child(4) h4 {
+        color: #ff2e00;
+      }
+      .banner .gallery .carousel .carousel-item:nth-child(5) h4 {
+        color: #bbc0dd;
+      }
+
+      .banner .gallery .carousel .carousel-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+
       /* <!-- delete --> */
       .bg-videos {
         display: none;
+      }
+      .screen {
+        display: none;
+      }
+      .gallery {
+        border: 1px solid green;
+      }
+      .carousel {
+        border: 1px solid blue;
+      }
+      .carousel-item {
+        border: 1px solid red;
       }
     </style>
   </head>
@@ -437,7 +546,7 @@
           artura
         </h3>
         <h3 class="model mclaren-3">
-          7505
+          750s
         </h3>
         <h3 class="model mclaren-4">
           765lt
@@ -449,7 +558,7 @@
         <a href="#">enquire</a>
       </div>
       <div class="screen">
-        <div class="shadow"></div>
+        <!-- <div class="shadow"></div> -->
         <div>
           <span style="--i: 0">
             <video class="trailer screen-video mclaren-1 active" 
@@ -507,6 +616,30 @@
               muted>
             </video>
           </span>
+        </div>
+      </div>
+      <div class="gallery">
+        <div class="carousel">
+          <a href="#" class="carousel-item">
+            <img src="./assets/cars/mclaren-1.jpg" alt="">
+            <h4>765lt spider</h4>
+          </a>
+          <a href="#" class="carousel-item">
+            <img src="./assets/cars/mclaren-2.jpg" alt="">
+            <h4>artura</h4>
+          </a>
+          <a href="#" class="carousel-item">
+            <img src="./assets/cars/mclaren-3.jpeg" alt="">
+            <h4>750s</h4>
+          </a>
+          <a href="#" class="carousel-item">
+            <img src="./assets/cars/mclaren-4.jpeg" alt="">
+            <h4>765lt</h4>
+          </a>
+          <a href="#" class="carousel-item">
+            <img src="./assets/cars/mclaren-5.jpeg" alt="">
+            <h4>750s spider</h4>
+          </a>
         </div>
       </div>
     </div>
