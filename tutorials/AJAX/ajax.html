@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <title>AJAX | XMLHttpRequest</title> -->
     <title>McLAREN | Sport Cars</title>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
       fieldset {
         display: none;
@@ -298,6 +298,31 @@
         box-shadow: inset 0 0 50px rgba(0, 194, 222, 0.5);
       }
 
+      .banner .pause, 
+      .banner .play {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 70%;
+        transform: translate(-50%, -50%);
+        color: var(--primary);
+        font-size: 8em;
+        transition: 0.3s;
+        opacity: 0.3;
+        z-index: 100;
+      }
+      .banner .pause:hover, 
+      .banner .play:hover {
+        color: #fff;
+        opacity: 1;
+      }
+      .banner .pause.active {
+        display: block;
+      }
+      .banner .play.active {
+        display: block;
+      }
+
       .banner .screen {
         position: absolute;
         right: 10%;
@@ -463,10 +488,42 @@
         object-fit: cover;
         border-radius: 10px;
       }
+      .banner .gallery .carousel .carousel-item:nth-child(5) img {
+        transform: rotateY(180deg);
+      }
+
+      .sci {
+        position: absolute;
+        top: 50%;
+        right: 100px;
+        transform: translateY(-50%);
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      .sci li {
+        list-style: none;
+      }
+
+      .sci li a {
+        text-decoration: none;
+      }
+
+      .sci li a i {
+        color: #fff;
+        font-size: 1.2em;
+        transition: 0.3s;
+      }
+      .sci li:hover a i {
+        color: var(--primary);
+      }
 
       /* <!-- delete --> */
       .bg-videos {
-        display: none;
+        /* display: none; */
       }
       .screen {
         display: none;
@@ -557,6 +614,12 @@
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe, possimus sunt! Nemo dolorem earum cumque commodi perferendis esse quae maiores reiciendis, voluptatibus dignissimos.</p>
         <a href="#">enquire</a>
       </div>
+      <a href="#" class="pause active">
+        <i class="fa fa-pause"></i>
+      </a>
+      <a href="#" class="play">
+        <i class="fa fa-play"></i>
+      </a>
       <div class="screen">
         <!-- <div class="shadow"></div> -->
         <div>
@@ -567,25 +630,25 @@
               loop 
               muted>
             </video>
-            <video class="trailer screen-video mclaren-2 active" 
+            <video class="trailer screen-video mclaren-2" 
               src="./assets/videos/mclaren-2.mp4" 
               autoplay 
               loop 
               muted>
             </video>
-            <video class="trailer screen-video mclaren-3 active" 
+            <video class="trailer screen-video mclaren-3" 
               src="./assets/videos/mclaren-3.mp4" 
               autoplay 
               loop 
               muted>
             </video>
-            <video class="trailer screen-video mclaren-4 active" 
+            <video class="trailer screen-video mclaren-4" 
               src="./assets/videos/mclaren-4.mp4" 
               autoplay 
               loop 
               muted>
             </video>
-            <video class="trailer screen-video mclaren-5 active" 
+            <video class="trailer screen-video mclaren-5" 
               src="./assets/videos/mclaren-5.mp4" 
               autoplay 
               loop 
@@ -620,29 +683,48 @@
       </div>
       <div class="gallery">
         <div class="carousel">
-          <a href="#" class="carousel-item">
+          <a href="#" class="carousel-item" onclick="changeVideoBackground('mclaren-1')">
             <img src="./assets/cars/mclaren-1.jpg" alt="">
             <h4>765lt spider</h4>
           </a>
-          <a href="#" class="carousel-item">
+          <a href="#" class="carousel-item" onclick="changeVideoBackground('mclaren-2')">
             <img src="./assets/cars/mclaren-2.jpg" alt="">
             <h4>artura</h4>
           </a>
-          <a href="#" class="carousel-item">
+          <a href="#" class="carousel-item" onclick="changeVideoBackground('mclaren-3')">
             <img src="./assets/cars/mclaren-3.jpeg" alt="">
             <h4>750s</h4>
           </a>
-          <a href="#" class="carousel-item">
+          <a href="#" class="carousel-item" onclick="changeVideoBackground('mclaren-4')">
             <img src="./assets/cars/mclaren-4.jpeg" alt="">
             <h4>765lt</h4>
           </a>
-          <a href="#" class="carousel-item">
-            <img src="./assets/cars/mclaren-5.jpeg" alt="">
+          <a href="#" class="carousel-item" onclick="changeVideoBackground('mclaren-5')">
+            <!-- <img src="./assets/cars/mclaren-5a.jpeg" alt=""> -->
+            <!-- <img src="./assets/cars/mclaren-5b.png" alt=""> -->
+            <img src="./assets/cars/mclaren-5.jpg" alt="">
             <h4>750s spider</h4>
           </a>
         </div>
       </div>
     </div>
+    <ul class="sci">
+      <li>
+        <a href="#">
+          <i class="fa fa-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="fa fa-instagram"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="fa fa-youtube-play"></i>
+        </a>
+      </li>
+    </ul>
 
     <script>
       const menuBtn = document.querySelector(".menu");
@@ -652,6 +734,47 @@
         const nav = document.querySelector("nav");
         nav.classList.toggle("active");
         menuBtn.classList.toggle("active");
+      }
+
+      function changeVideoBackground(name) {
+        const videos = document.querySelectorAll(".bg-video");
+        const trailers = document.querySelectorAll(".trailer");
+        const models = document.querySelectorAll(".model");
+
+        videos.forEach(video => {
+          video.classList.remove("active");
+          if (video.classList.contains(name)) {
+            video.classList.add("active");
+          }
+        })
+
+        models.forEach(model => {
+          model.classList.remove("active");
+          if (model.classList.contains(name)) {
+            model.classList.add("active");
+          }
+        })
+
+        trailers.forEach(model => {
+          model.classList.remove("active");
+          if (model.classList.contains(name)) {
+            model.classList.add("active");
+          }
+        })
+      }
+
+      function pauseVideoBackground() {
+        const videos = document.querySelectorAll(".bg-video");
+        videos.forEach(video => {
+          video.pause();
+        })
+      }
+
+      function playVideoBackground() {
+        const videos = document.querySelectorAll(".bg-video");
+        videos.forEach(video => {
+          video.play();
+        })
       }
     </script>
 
