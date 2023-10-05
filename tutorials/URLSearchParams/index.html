@@ -3,137 +3,144 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URLSearchParams in JS</title>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <!-- <title>URLSearchParams in JS</title> -->
+    <title>Education Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      a {
+        color: var(--color-white);
+        text-decoration: none;
+      }
+
+      button {
+        outline: none;
+        border: none;
+      }
+
+      :root {
+        --color-primary: #6c63ff;
+        --color-success: #00bf8e;
+        --color-warning: #f7c94b;
+        --color-danger: #f75842;
+        --color-danger-variant: rgba(247, 88, 66, 0.4);
+        --color-white: #fff;
+        --color-light: rgba(255, 255, 255, 0.7);
+        --color-black: #000;
+        --color-bg: #1f2641;
+        --color-bg1: #2e3267;
+        --color-bg2: #424890;
+
+        --container-width-lg: 76%;
+        --container-width-md: 90%;
+        --container-width-sm: 94%;
+
+        --transition: all 400ms ease;
+      }
+
+      body {
+        font-family: Georgia, Times, serif;
+        line-height: 1.7;
+        color: var(--color-white);
+        background-color: var(--color-bg);
+      }
+
+      .container {
+        width: var(--container-width-lg);
+        margin: auto;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 1rem 2rem;
+        color: var(--color-black);
+        font-weight: 500;
+        border: 1px solid transparent;
+        background-color: var(--color-white);
+      }
+      .btn:hover {
+        color: var(--color-white);
+        border-color: var(--color-white);
+        background-color: transparent;
+      }
+
+      section {
+        padding: 6rem 0;
+      }
+
+      section h2 {
+        margin-bottom: 4rem;
+        text-align: center;
+      }
+
+      h1, 
+      h2, 
+      h3, 
+      h4, 
+      h5 {
+        line-height: 1.2;
+      }
+
+      h1 {
+        font-size: 2.4rem;
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      h3 {
+        font-size: 1.6rem;
+      }
+
+      h4 {
+        font-size: 1.3rem;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+        object-fit: cover;
+      }
+
+      .nav-container {}
+    </style>
   </head>
   <body>
-    <script>
-      // 1. Smallest of Three Number
-    
-      function findSmallestofThreeNumber(n1, n2, n3) {
-        // const numbers = [n1, n2, n3];
-        const numbers = Array.from(arguments)
-        let smallest = n1
-        // console.log(numbers)
-        for (let number of numbers) {
-          // if (smallest > number) {
-          //   smallest = number;
-          // }
-          // console.log(numbers);
-          // console.log(smallest)
-          smallest = Math.min(smallest, number)
-        
-        // for (let index = 0; index < numbers.length; index++) {
-          // console.log(typeof numbers[index]);
-          // console.log(index);
-          // console.log(smallest);
-          // smallest = Math.min(smallest, numbers[index]);
-          // console.log(smallest);
-        }
-        
-        return smallest;
-    
-      } 
-      
-      // console.log(findSmallestofThreeNumber(2, 5, 3));
-      // console.log(findSmallestofThreeNumber(600, 342, 123));
-      // console.log(findSmallestofThreeNumber(25, 21, 4));
-      // console.log(findSmallestofThreeNumber(2, 2, 3))
-    
-      // 02. Add and Subtract 
-    
-      function calc(n1, n2, n3) {
-        function sum(num1, num2) {
-          return num1 + num2;
-        }
-    
-        function substarct(num1, num2) {
-          return num1 - num2;
-        }
-    
-        let result = sum(n1, n2);
-        result = substarct(result, n3);
-    
-        return result;
-        // console.log(result);
-    
-      } 
-    
-      // calc(23, 6, 10);
-      // calc(1, 17, 30);
-      // calc(42, 58, 100);
-    
-      // 03. Characters in Range
-    
-      function printASCIICharacters(char1, char2) {
-        const number1 = char1.charCodeAt(0);
-        const number2 = char2.charCodeAt(0);
-    
-        const start = Math.min(number1, number2);
-        const end = Math.max(number1, number2);
-    
-        // console.log(start);
-        // console.log(end);
-    
-        const charsASCII = [];
-    
-        for (let index = start + 1; index < end; index++) {
-          const char = String(index);
-          // console.log(char);
-          const charASCII = String.fromCharCode(char);
-          charsASCII.push(charASCII);
-        }
-    
-        console.log(charsASCII.join(" "));
-    
-      } 
-    
-      // printASCIICharacters("a", "d");
-      // printASCIICharacters("#", ":");
-      // printASCIICharacters("C", "#");
-    
-      // 05. Palindrome Integers
-    
-      function printPalindromeIntegers(arr) {
-    
-        
-        for (let index = 0; index < arr.length; index++) {
-          // console.log(index);
-          checkIsPalindrome(arr[index]);
-        } 
-    
-        function checkIsPalindrome(num) {
-          const numAsString = String(num);
-    
-          const middle = Math.floor(numAsString.length/2);
-    
-          let isPalindrome  = true;
-    
-          // console.log(typeof numAsString);
-    
-          for (let index = 0; index < middle; index++) {
-            // console.log(index);
-            const left = numAsString[index];
-            const right = numAsString[numAsString.length - 1 - index];
-            // console.log(left, right);
-            // console.log(left != (right));
-            if (left != right) {
-              isPalindrome = false;
-              index = middle;
-              // console.log("inside");
-            }
-          } 
-    
-          console.log(isPalindrome);
-    
-        } 
-    
-      } 
-    
-      // printPalindromeIntegers([123,323,421,121]);
-      // printPalindromeIntegers([32,2,232,1010]);
-      // printPalindromeIntegers([1221]);
-    </script>
+    <nav>
+      <div class="container nav-container">
+        <a href="#" class="logo">egator</a>
+        <ul class="nav-menu">
+          <li>
+            <a href="#">home</a>
+          </li>
+          <li>
+            <a href="#">about</a>
+          </li>
+          <li>
+            <a href="#">courses</a>
+          </li>
+          <li>
+            <a href="#">contact</a>
+          </li>
+        </ul>
+        <button id="open-menu">
+          <i class="fa fa-bars"></i>
+        </button>
+        <button id="close-menu">
+          <i class="fa fa-times"></i>
+        </button>
+      </div>
+    </nav>
 
     <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
