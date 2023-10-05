@@ -4,1200 +4,138 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
- 
-      :root {
-        --primary: #1a2448;
-        --white: #fff;
-      }
- 
-      ul {
-        list-style: none;
-      }
- 
-      a {
-        text-decoration: none;
-      }
-
-      button {
-        cursor: pointer;
-      }
-
-      video, 
-      img {
-        width: 100%;
-      }
- 
-      body {
-        position: relative;
-        min-width: fit-content;
-        min-height: 100vh;
-        padding: 3%;
-        font-family: Georgia, serif;
-        /* background-color: var(--white); */
-        background-image: linear-gradient(-45deg, #d8e7fc, #e8d8fc);
-      }
-
-      .banner {
-        /* position: absolute; */
-        /* top: 100px; */
-        /* right: 100px; */
-        /* bottom: 100px; */
-        /* left: 100px; */
-        /* content: ""; */
-        min-width: fit-content;
-        max-width: 112.5rem;
-        margin: 2% auto 10rem;
-        /* padding: 2% 3%; */
-        background-color: transparent;
-        box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
-        backdrop-filter: blur(20px);
-        /* transition: 0.5s; */
-      }
-
-      header {
-        /* padding: 2% 3%; */
-        /* position: relative; */
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-        /* align-items: flex-start; */
-        justify-content: space-between;
-        pointer-events: none;
-        z-index: 4;
-      }
-
-      header div {
-        /* margin: 1%; */
-        /* padding: 0.5rem 1rem; */
-        /* background-color: var(--primary); */
-        pointer-events: all;
-      }
-
-      /* header::before {} */
-      /* header::after {} */
-      .search-bar-container,
-      .nav-container {
-        position: relative;
-      }
-
-      .nav-container {
-        display: flex;
-        flex-direction: column;
-      }
-      .search-bar-container {
-        align-self: flex-start;
-      }
-      .search-bar-container, 
-      .nav-container div {
-        padding: 0.5rem 1rem;
-        background-color: var(--primary);
-        z-index: 1;
-      }
-
-      header input, 
-      header i, 
-      header a {
-        display: inline-block;
-        /* border: 1px solid red; */
-      }
-
-      header .menu {
-        /* position: absolute; */
-        padding: 0.5rem 0.63rem;
-        color: var(--white);
-        font-size: 1.2rem;
-        /* display: flex; */
-        /* align-items: center; */
-        transition: 0.5s;
-      }
-
-      header .menu.active {
-        transform: rotateZ(45deg);
-      }
-
-      header .logo {
-        /* position: relative; */
-        /* text-decoration: none; */
-        color: var(--white);
-        padding: 0.5rem 1rem;
-        font-size: 1.2rem;
-        text-transform: uppercase;
-      }
- 
-      .search-bar-container input {
-        /* width: 100%; */
-        padding: 0.5rem 1rem;
-        color: var(--white);
-        font-size: 0.8rem;
-        border: none;
-        outline: none;
-        background-color: transparent;
-        backdrop-filter: blur(5px);
-      }
-
-      .search-bar-container input::placeholder {
-        color: #fff;
-        text-transform: uppercase;
-      }
-
-      .search-bar-container i {
-        /* position: absolute; */
-        /* top: 50%; */
-        /* right: 8px; */
-        /* transform: translateY(-50%); */
-        padding: 0.5rem;
-        color: var(--white);
-        font-size: 1.2rem;
-        cursor: pointer;
-      }
-
-      nav {
-        /* position: absolute; */
-        /* top: 165px; */
-        /* top: 0; */
-        /* left: 100px; */
-        /* left: 0; */
-        width: 100%;
-        height: 100%;
-        padding: 1rem 2rem;
-        /* bottom: 100px; */
-        /* width: 0px; */
-        /* display: flex; */
-        /* gap: 20px; */
-        /* align-items: center; */
-        /* justify-content: center; */
-        /* flex-direction: column; */
-        /* background-color: transparent; */
-        transform: translateX(-100%);
-        box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
-        backdrop-filter: blur(10px);
-        transition: 0.5s;
-        /* visibility: hidden; */
-        opacity: 0;
-        /* z-index: 3; */
-      }
-
-      nav.active {
-        /* width: 200px; */
-        transform: translateX(0);
-        /* visibility: visible; */
-        opacity: 1;
-      }
-
-      /* .nav li {
-        list-style: none;
-      } */
-
-      nav ul {
-        margin: 5rem auto;
-      }
-
-      nav li {
-        margin: 1rem;
-      }
-
-      nav li a {
-        color: var(--primary);
-        /* text-decoration: none; */
-        text-transform: uppercase;
-        transition: 0.3s;
-      }
-      nav li a:hover {
-        color: #8d20fa;
-      }
-
-      .swiper {
-        position: relative;
-        width: 100%;
-        /* height: 100vh; */
-        transition: 0.5s;
-      }
-
-      .swiper.active {
-        visibility: hidden;
-        opacity: 0;
-      }
-
-      .swiper-slide {
-        position: absolute;
-        top: 0;
-        left: 0;
-        /* max-width: 1200px; */
-        max-width: 75rem;
-        transform: translateY(100%);
-        transition: 0.5s ease-in-out;
-        visibility: hidden;
-        opacity: 0;
-        z-index: -1;
-      }
-      .swiper-slide.relative {
-        position: relative;
-      }
-      .swiper-slide.visible {
-        transform: translateY(0);
-        visibility: visible;
-        opacity: 1;
-        z-index: 2;
-      }
-
-      .swiper {
-        display: flex;
-        /* flex-wrap: wrap; */
-        /* border: 1px solid blue; */
-      }
-      .swiper-slide {
-        /* border: 1px solid red; */
-      }
-
-      .inner-container {
-        display: flex;
-        flex-wrap: wrap;
-      }
-
-      .swiper-wrapper {
-        position: relative;
-        margin-top: 5rem;
-        margin-right: -15%;
-        overflow: hidden;
-      }
-
-      .model-img {
-        display: block;
-        width: 90%;
-        margin-left: auto;
-        /* border: 1px solid green; */
-        /* position: absolute; */
-        /* top: 0; */
-        /* left: 0; */
-        /* bottom: 100px; */
-        /* left: 120px; */
-        /* max-width: 100%; */
-        /* transform: translateY(100%); */
-        /* transform-origin: bottom; */
-        /* transition: 0.5s ease-in-out; */
-        /* visibility: visible; */
-        /* opacity: 0.1; */
-        /* z-index: 10; */
-      }
-
-      .model-img.relative {
-        position: relative;
-      }
-
-      .control {
-        position: relative;
-        margin: auto;
-        padding: 1rem;
-        /* position: absolute; */
-        /* top: 50%; */
-        /* right: 2%; */
-        /* transform: translateY(-50%); */
-        /* width: 50px; */
-        /* height: 200px; */
-        z-index: 1000;
-      }
-
-      .swiper-pagination {
-        margin: 1rem auto;
-        /* position: absolute; */
-        /* top: 50%; */
-        /* right: 50%; */
-        /* transform: translate(50%, -50%); */
-        /* z-index: 10; */
-      }
-
-      .swiper-pagination .bullet {
-        display: block;
-        width: 1rem;
-        height: 1rem;
-        margin: 0.5rem auto;
-        border: 1px solid var(--primary);
-        border-radius: 50%;
-        background-color: transparent;
-        opacity: 1;
-        z-index: 10;
-        cursor: pointer;
-      }
-
-      .swiper-pagination .bullet.active {
-        background-color: var(--primary);
-      }
-
-      .swiper-button-prev {
-        /* position: absolute; */
-        /* top: 30%; */
-        /* right: 50%; */
-        /* transform: rotateZ(90deg); */
-        /* width: 25px; */
-        /* height: 25px; */
-        display: block;
-        margin: auto;
-        border: 1px solid var(--primary);
-        border-radius: 50%;
-        cursor: pointer;
-      }
-
-      .swiper-button-next {
-        /* position: absolute; */
-        /* top: 80%; */
-        /* right: 30%; */
-        /* transform: rotateZ(90deg); */
-        /* width: 25px; */
-        /* height: 25px; */
-        display: block;
-        margin: auto;
-        /* padding: 1rem; */
-        border: 1px solid var(--primary);
-        border-radius: 50%;
-        cursor: pointer;
-      }
-
-      .swiper-button-prev i, 
-      .swiper-button-next i {
-        /* line-height: 0; */
-        /* content: ""; */
-        /* width: 25px; */
-        /* height: 25px; */
-        /* display: flex; */
-        /* align-items: center; */
-        /* justify-content: center; */
-        /* padding: 1em; */
-        /* padding: 0.3em 0.48em; */
-        color: var(--primary);
-        font-size: min(3vw, 2rem);
-        /* background-color: transparent; */
-        border-radius: inherit;
-        backdrop-filter: blur(10px);
-        transition: 0.5s;
-      }
-      .swiper-button-prev:hover i, 
-      .swiper-button-next:hover i {
-        color: rgba(255, 255, 255, 0.8);
-        background-color: rgba(26, 36, 72, 0.3);
-        /* border-radius: 50%; */
-      }
-      .swiper-button-prev i {
-        padding: 0.26em 0.48em 0.34em;
-      }
-      .swiper-button-next i {
-        padding: 0.34em 0.48em 0.26em;
-      }
-
-      .banner .content {
-        /* position: absolute; */
-        /* top: 50%; */
-        /* left: 57%; */
-        transform: translateY(0%) scale(1);
-        /* max-width: 600px; */
-        /* max-width: min-content; */
-        margin: auto;
-        /* padding-right: 9%; */
-        display: flex;
-        gap: 30px;
-        align-items: flex-end;
-        justify-content: center;
-        flex-direction: column;
-        text-align: right;
-        transition: 0.5s;
-        /* z-index: 100; */
-      }
-      .banner .content.active {
-        transform: translateY(-50%) scale(0);
-      }
-
-      .banner .content h2 {
-        padding-left: 5%;
-        color: var(--primary);
-        font-size: 5rem;
-        font-weight: 500;
-        text-transform: uppercase;
-      }
-      .banner .content p {
-        max-width: 38rem;
-        color: var(--primary);
-        font-size: 0.8em;
-        font-weight: 300;
-        /* text-align: end; */
-      }
-      .banner .content a {
-        padding: 10px 20px;
-        color: #fff;
-        font-size: 1.1em;
-        font-weight: 300;
-        text-decoration: none;
-        text-transform: uppercase;
-        border: 1px solid var(--primary);
-        background-color: var(--primary);
-        transition: 0.3s;
-      }
-
-      .banner .content a:hover {
-        color: var(--primary);
-        background-color: transparent;
-      }
-
-      .banner .title-left {
-        position: absolute;
-        /* top: 50%; */
-        /* top: 20px; */
-        top: 5rem;
-        /* left: -20px; */
-        left: 0;
-        transform: translateX(120%);
-        color: var(--primary);
-        /* font-size: max(8rem, 8vw); */
-        font-size: 8rem;
-        /* line-height: 1em; */
-        letter-spacing: 10px;
-        writing-mode: vertical-lr;
-        text-transform: uppercase;
-        user-select: none;
-        opacity: 0.1;
-        z-index: -2;
-      }
-
-      .banner .title-right {
-        position: absolute;
-        top: 70%;
-        right: 6%;
-        color: var(--primary);
-        font-size: 7em;
-        line-height: 1em;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        opacity: 0.1;
-        z-index: 1;
-      }
-
-      .bg-video {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: top;
-        transition: 0.5s;
-        visibility: hidden;
-        opacity: 0;
-        z-index: -1;
-      }
-
-      .bg-video.active {
-        visibility: visible;
-        opacity: 1;
-      }
-
-      .services {
-        position: absolute;
-        /* right: 100px; */
-        right: 0;
-        /* bottom: 100px; */
-        bottom: 0;
-        /* width: 1000px; */
-        width: 90%;
-        max-width: 63rem;
-        /* height: 150px; */
-        /* padding: 0; */
-        display: flex;
-        flex-wrap: wrap;
-        /* align-items: center; */
-        justify-content: space-between;
-        /* background-color: transparent; */
-        box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
-        transform: translate(5%, 20%);
-        backdrop-filter: blur(5px);
-        z-index: 2;
-      }
-
-      .services video {
-        position: relative;
-        /* max-height: 150px; */
-        max-width: 250px;
-        object-fit: cover;
-      }
-
-      .service {
-        position: relative;
-        flex: 1;
-        padding: 10px 20px;
-        /* flex: 1; */
-        /* height: 100%; */
-        /* display: flex; */
-        /* align-items: center; */
-        /* justify-content: center; */
-        /* flex-direction: column; */
-        cursor: pointer;
-      }
-
-      .service:hover::before {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-color: rgba(26, 36, 72, 0.1);
-      }
-
-      .services h3 {
-        margin-bottom: 10px;
-        color: var(--primary);
-        font-size: 0.9em;
-        font-weight: 400;
-        text-align: center;
-        text-transform: uppercase;
-      }
-
-      .services p {
-        color: var(--primary);
-        font-size: 0.7em;
-        font-weight: 300;
-        text-align: center;
-      }
-
-      .video {
-        display: flex;
-      }
-
-      .video .play {
-        height: 100%;
-        padding: min(2vw, 20px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid var(--primary);
-        background-color: var(--primary);
-      }
-
-      .video .play i {
-        padding: 0.5em 0.5em 0.5em 0.7em;
-        color: var(--white);
-        font-size: min(2vw, 2rem);
-        border: 0.14em solid var(--white);
-        border-radius: 50%;
-      }
-      .video .play .fa-pause {
-        display: none;
-      }
-      .video .play.active .fa-pause {
-        display: block;
-        padding: 0.5em 0.572em;
-      }
-      .services .play.active .fa-play {
-        display: none;
-      }
-
-      .banner form {
-        position: absolute;
-        top: 10%;
-        left: 50%;
-        transform: translateX(-50%) scale(0);
-        width: 400px;
-        height: 500px;
-        padding: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        background-color: rgba(26, 36, 72, 0.1);
-        box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
-        transition: 0.5s;
-        z-index: 4;
-      }
-
-      .banner form.active {
-        transform: translateX(-50%) scale(1);
-      }
-
-      form h2 {
-        /* width: 100%; */
-        margin-bottom: 20px;
-        color: #fff;
-        font-size: 18px;
-        font-weight: 400;
-        text-align: center;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
-
-      form input {
-        width: 100%;
-        margin-bottom: 20px;
-        padding: 8px 10px;
-        color: #fff;
-        font-size: 0.9em;
-        font-weight: 300;
-        outline: none;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        background-color: transparent;
-        box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.2);
-      }
-
-      form input::placeholder {
-        color: #fff;
-      }
-
-      form input:last-of-type {
-        max-width: 150px;
-        /* border: 1px solid rgba(255, 255, 255, 0.2); */
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-        transition: 0.3s;
-        cursor: pointer;
-      }
-      form input:last-of-type:active {
-        box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3);
-      }
-
-      form .sign-up {
-        position: relative;
-        margin-top: 20px;
-        color: #fff;
-        font-size: 0.7em;
-        font-weight: 300;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-      }
-
-      form .sign-up a {
-        color: var(--primary);
-        font-weight: 600;
-        text-decoration: none;
-      }
-
-      .sci {
-        position: absolute;
-        bottom: 1rem;
-        /* left: 150px; */
-        left: 0;
-        /* width: 100%; */
-        padding: 1rem 2rem;
-        gap: 1rem;
-        display: flex;
-        flex-wrap: wrap;
-        /* align-items: center; */
-        /* justify-content: space-evenly; */
-        transform: scale(1);
-        transition: 0.5s;
-        z-index: 1000;
-      }
-
-      .sci.active {
-        transform: scale(0);
-      }
-
-      .sci li {
-        list-style: none;
-      }
-
-      .sci li a {
-        display: inline-block;
-        text-decoration: none;
-      }
-
-      .sci li a i {
-        color: var(--primary);
-        font-size: 1.5em;
-        transition: 0.5s;
-      }
-
-      .sci li:hover a i {
-        color: #8d20fa;
-      }
-
-      .show-up {
-        animation: show-up 500ms linear forwards;
-        visibility: visible;
-        opacity: 1;
-      }
-      .show-down {
-        animation: show-down 500ms linear forwards;
-        visibility: visible;
-        opacity: 1;
-      }
-
-      .hide-up {
-        animation: hide-up 500ms linear;
-      }
-      .hide-down {
-        animation: hide-down 500ms linear;
-      }
-
-      @keyframes hide-up {
-        0% {
-          transform: translateY(0);
-        }
-        100% {
-          transform: translateY(-100%);
-        }
-      }
-
-      @keyframes show-up {
-        0% {
-          transform: translateY(100%);
-        }
-        100% {
-          transform: translateY(0);
-        }
-      }
-
-      @keyframes hide-down {
-        0% {
-          transform: translateY(0);
-        }
-        100% {
-          transform: translateY(100%);
-        }
-      }
-
-      @keyframes show-down {
-        0% {
-          transform: translateY(-100%);
-        }
-        100% {
-          transform: translateY(0);
-        }
-      }
-
-      @media screen and (max-width: 120rem) {
-        .sci {
-          position: relative;
-          /* width: auto; */
-          /* top: 20%; */
-          bottom: auto;
-          /* left: 0; */
-          margin: auto;
-          padding: 1rem;
-          gap: 1rem;
-          flex-direction: column;
-          text-align: center;
-        }
-        .swiper-wrapper {
-          margin: 5rem auto auto;
-        }
-        .banner .content {
-          align-items: center;
-          margin: 2rem auto;
-          text-align: center;
-        }
-        .banner .title-right {
-          display: none;
-        }
-        .services {
-          position: relative;
-          margin: auto;
-          transform: translate(0%, 10%);
-          max-width: 80%;
-        }
-        .service {
-          padding: 3rem;
-          flex: 1 1 20rem;
-        }
-        .service h3 {
-          font-size: 2rem;
-        }
-        .service p {
-          font-size: 1rem;
-        }
-        .video {
-          padding: 3rem;
-        }
-        .video video {
-          width: 100%;
-          max-width: 100%;
-        }
-      }
-
-      .banner .services video {
-        /* display: initial; */
-      }
-      video {
-        /* display: none; */
-      }
-    </style>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   </head>
   <body>
-    
-    <div class="banner">
-
-      <header>
-        <div class="nav-container">
-          <div>
-            <a href="#" class="menu">
-              <i class="fa fa-th-large"></i>
-            </a>
-            <a href="#" class="logo">logo</a>
-          </div>
-          <nav>
-            <ul>
-              <li><a href="#">health</a></li>
-              <li><a href="#">fitness</a></li>
-              <li><a href="#">workout</a></li>
-              <li><a href="#">contact</a></li>
-            </ul>
-          </nav>
-          <!-- <ul class="sci">
-            <li>
-              <a href="#">
-                <i class="fa fa-facebook"></i>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fa fa-instagram"></i>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fa fa-youtube-play"></i>
-              </a>
-            </li>
-          </ul> -->
-        </div>
-        <div class="search-bar-container">
-          <input type="text" name="search" id="search" placeholder="Search">
-          <i class="fa fa-search"></i>
-        </div>
-      </header>
-
-      <div class="swiper">
-          <ul class="sci">
-            <li>
-              <a href="#">
-                <i class="fa fa-facebook"></i>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fa fa-instagram"></i>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fa fa-youtube-play"></i>
-              </a>
-            </li>
-          </ul>
-        <div class="inner-container">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide visible relative">
-              <img src="./assets/fitness-model-1.png" alt="" class="model-img">
-            </div>
-            <div class="swiper-slide">
-              <img src="./assets/fitness-model-2.png" alt="" class="model-img">
-            </div>
-            <div class="swiper-slide">
-              <img src="./assets/fitness-model-3.png" alt="" class="model-img">
-            </div>
-          </div>
-          <div class="content">
-            <h2>start shining</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit tempore non quam consectetur velit ducimus, dolores cupiditate obcaecati aut molestias voluptatem similique, amet aperiam eligendi culpa beatae suscipit nemo totam. Hic esse voluptas inventore? Odio repellendus labore tempora numquam quis perspiciatis sequi architecto eligendi enim.
-            </p>
-            <a href="#" class="toggle-video">join us</a>
-          </div>  
-        </div>
-        <div class="inner-container">
-          <div class="control">
-            <button class="swiper-button-prev">
-              <i class="fa fa-angle-up"></i>
-            </button>
-            <div class="swiper-pagination">
-              <span class="bullet active"></span>
-              <span class="bullet"></span>
-              <span class="bullet"></span>
-            </div>
-            <button class="swiper-button-next">
-              <i class="fa fa-angle-down"></i>
-            </button>
-          </div>  
-        </div>
-      </div>
-
-      <h1 class="title-left">fitness</h1>
-      <h1 class="title-right">life style</h1>
-      <!-- <video src="./assets/fitness-1.mp4" class="bg-video" loop muted></video> -->
-
-      <div class="services">
-        <div class="service">
-          <h3>health</h3>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus nihil nisi laboriosam cumque? Perspiciatis ullam cum perferendis delectus.
-          </p>
-        </div>
-        <div class="service">
-          <h3>fitness</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores repellat rerum ullam vel.
-          </p>
-        </div>
-        <div class="service">
-          <h3>workout</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque at quaerat perferendis distinctio, dolorum quo incidunt enim tempora, itaque in voluptates sit commodi.
-          </p>
-        </div>
-        <div class="video">
-          <video src="./assets/fitness-1.mp4" loop muted></video>
-          <div>
-            <button href="#" class="play toggle-video">
-              <i class="fa fa-play"></i>
-              <i class="fa fa-pause"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <form action="">
-        <h2>ready to join us</h2>
-        <input type="text" name="username" id="username" placeholder="Username">
-        <input type="text" name="email" id="email" placeholder="Email Address">
-        <input type="password" name="password" id="password" placeholder="Password">
-        <input type="password" name="confirm" id="confirm" placeholder="Confirm Password">
-        <input type="submit" value="Sign Up">
-        <p class="sign-up">
-          already have an account?
-          <a href="#">sign in</a>
-        </p>
-      </form>
-
-      <!-- <ul class="sci">
-        <li>
-          <a href="#">
-            <i class="fa fa-facebook"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-instagram"></i>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fa fa-youtube-play"></i>
-          </a>
-        </li>
-      </ul> -->
-
-    </div>
-    
-    <video src="./assets/fitness-1.mp4" class="bg-video" loop muted></video>
-
     <script>
-      const menu = document.querySelector(".menu");
-
-      menu.addEventListener("click", toggleNav);
-
-      function toggleNav() {
-        const nav = document.querySelector("nav");
-        nav.classList.toggle("active");
-        // this.classList.toggle("active");
-        menu.classList.toggle("active");
-      }
-
-      const toggleVideoBtns = document.querySelectorAll(".toggle-video");
-
-      toggleVideoBtns.forEach(button => {
-        button.addEventListener("click", toggleVideo);
-      })
-
-      function toggleVideo() {
-        const video1 = document.querySelector(".bg-video");
-        const video2 = document.querySelector(".video video");
-        const play = document.querySelector(".play");
-        const slider = document.querySelector(".swiper");
-        const content = document.querySelector(".content");
-        const form = document.querySelector("form");
-        const sci = document.querySelector(".sci");
-
-        video1.classList.toggle("active");
-        if (video2.paused) {
-          video1.play();
-          video2.play();
-        } else {
-          video1.pause();
-          video2.pause();
-        }
-        play.classList.toggle("active");
-        slider.classList.toggle("active");
-        content.classList.toggle("active");
-        form.classList.toggle("active");
-        sci.classList.toggle("active");
-      }
-
-      const slides = document.querySelectorAll(".swiper-slide");
-      const numberOfSlides = slides.length;
-      let index = 0;
-
-      const nextBtn = document.querySelector(".swiper-button-next");
-      nextBtn.addEventListener("click", rotateSliderUp);
-
-      const prevBtn = document.querySelector(".swiper-button-prev");
-      prevBtn.addEventListener("click", rotateSliderDown);
-
-      const dotBtns = document.querySelectorAll(".bullet");
-      dotBtns.forEach((button, currentIndex) => {
-        button.addEventListener("click", () => {
-          if (currentIndex > index) {
-            changeSlideUp(currentIndex);
-          } else if (currentIndex < index) {
-            changeSlideDown(currentIndex);
-          }
-        })
-      })
-
-      function rotateSliderUp() {
-        slides[index].classList.remove("visible");
-        dotBtns[index].classList.remove("active");
-        slides[index].classList.remove("hide-down", "show-up", "show-down");
-        slides[index].classList.add("hide-up");
-        index++;
-        // if (index > slides.length - 1) {
-        //   index = 0;
-        // }
-        index = index % numberOfSlides;
-        dotBtns[index].classList.add("active");
-        slides[index].classList.remove("hide-down", "hide-up", "show-down");
-        slides[index].classList.add("show-up");
-      }
-
-      function rotateSliderDown() {
-        slides[index].classList.remove("visible");
-        dotBtns[index].classList.remove("active");
-        slides[index].classList.remove("hide-up", "show-up", "show-down");
-        slides[index].classList.add("hide-down");
-        index--;
-        // if (index < 0) {
-        //   index = slides.length - 1;
-        // }
-        index = index + numberOfSlides;
-        index = index % numberOfSlides;
-        dotBtns[index].classList.add("active");
-        slides[index].classList.remove("hide-down", "hide-up", "show-up");
-        slides[index].classList.add("show-down");
-        // slides[index].classList.add("visible");
-      }
-
-      function changeSlideDown(currentIndex) {
-        dotBtns[index].classList.remove("active");
-        slides[index].classList.remove("hide-up", "show-up", "show-down");
-        slides[index].classList.add("hide-down");
-        index = currentIndex;
-        dotBtns[index].classList.add("active");
-        slides[index].classList.remove("hide-down", "hide-up", "show-up");
-        slides[index].classList.add("show-down");
-      }
-
-      function changeSlideUp(currentIndex) {
-        dotBtns[index].classList.remove("active");
-        slides[index].classList.remove("hide-down", "show-up", "show-down");
-        slides[index].classList.add("hide-up");
-        index = currentIndex;
-        dotBtns[index].classList.add("active");
-        slides[index].classList.remove("hide-down", "hide-up", "show-down");
-        slides[index].classList.add("show-up");
-      }
-    </script>
-
-    <script>
-            function printOrbit(params) {
-        const width = params[0];
-        const height = params[1];
-        const x = params[2];
-        const y = params[3];
-
-        const matrix = [];
-
-        for (let dimension = 0; dimension < height; dimension++) {
-          const arr = [];
-          arr.length = width;
-          arr.fill("!");
-          matrix[dimension] = arr;
-          // console.log(height);
-        }
-
-        // console.log(matrix);
-
-        // const start = matrix[x][y];
-
-        let colNum = 0;
+      // 1. Smallest of Three Number
+    
+      function findSmallestofThreeNumber(n1, n2, n3) {
+        // const numbers = [n1, n2, n3];
+        const numbers = Array.from(arguments)
+        let smallest = n1
+        // console.log(numbers)
+        for (let number of numbers) {
+          // if (smallest > number) {
+          //   smallest = number;
+          // }
+          // console.log(numbers);
+          // console.log(smallest)
+          smallest = Math.min(smallest, number)
         
-        for (let row = x; row < height; row++) {
-          // console.log(row);
-          colNum++;
-          
-          matrix[row][y] = colNum;
-          
-          let rowNum = 2;
-
-          for (let colRight = y + 1; colRight < width; colRight++) {
-            // console.log(colNum, rowNum);
-            matrix[row][colRight] = Math.max(rowNum, colNum);
-            rowNum++;
-          }
-
-          rowNum = 2;
-          
-          for (let colLeft = y - 1; colLeft >= 0; colLeft--) {
-            matrix[row][colLeft] = Math.max(rowNum, colNum);
-            rowNum++;
-            // console.log(colLeft);
-            // num++;
-          }
-          
+        // for (let index = 0; index < numbers.length; index++) {
+          // console.log(typeof numbers[index]);
+          // console.log(index);
+          // console.log(smallest);
+          // smallest = Math.min(smallest, numbers[index]);
+          // console.log(smallest);
         }
-
-        colNum = 1;
-
-        for (let row = x - 1; row >= 0; row--) {
-          // console.log(row);
-          colNum++;
-          
-          matrix[row][y] = colNum;
-          
-          let rowNum = 2;
-
-          for (let colRight = y + 1; colRight < width; colRight++) {
-            // console.log(colNum, rowNum);
-            matrix[row][colRight] = Math.max(rowNum, colNum);
-            rowNum++;
-          }
-
-          rowNum = 2;
-          
-          for (let colLeft = y - 1; colLeft >= 0; colLeft--) {
-            matrix[row][colLeft] = Math.max(rowNum, colNum);
-            rowNum++;
-            // console.log(colLeft);
-            // num++;
-          }
-          
+        
+        return smallest;
+    
+      } 
+      
+      // console.log(findSmallestofThreeNumber(2, 5, 3));
+      // console.log(findSmallestofThreeNumber(600, 342, 123));
+      // console.log(findSmallestofThreeNumber(25, 21, 4));
+      // console.log(findSmallestofThreeNumber(2, 2, 3))
+    
+      // 02. Add and Subtract 
+    
+      function calc(n1, n2, n3) {
+        function sum(num1, num2) {
+          return num1 + num2;
         }
-
-        for (let row = 0; row < matrix.length; row++) {
-          console.log(matrix[row].join(" "));
-          // console.log(row);
+    
+        function substarct(num1, num2) {
+          return num1 - num2;
         }
-
-      }
-
-      printOrbit([5, 5, 2, 1]);
+    
+        let result = sum(n1, n2);
+        result = substarct(result, n3);
+    
+        return result;
+        // console.log(result);
+    
+      } 
+    
+      // calc(23, 6, 10);
+      // calc(1, 17, 30);
+      // calc(42, 58, 100);
+    
+      // 03. Characters in Range
+    
+      function printASCIICharacters(char1, char2) {
+        const number1 = char1.charCodeAt(0);
+        const number2 = char2.charCodeAt(0);
+    
+        const start = Math.min(number1, number2);
+        const end = Math.max(number1, number2);
+    
+        // console.log(start);
+        // console.log(end);
+    
+        const charsASCII = [];
+    
+        for (let index = start + 1; index < end; index++) {
+          const char = String(index);
+          // console.log(char);
+          const charASCII = String.fromCharCode(char);
+          charsASCII.push(charASCII);
+        }
+    
+        console.log(charsASCII.join(" "));
+    
+      } 
+    
+      // printASCIICharacters("a", "d");
+      // printASCIICharacters("#", ":");
+      // printASCIICharacters("C", "#");
+    
+      // 05. Palindrome Integers
+    
+      function printPalindromeIntegers(arr) {
+    
+        
+        for (let index = 0; index < arr.length; index++) {
+          // console.log(index);
+          checkIsPalindrome(arr[index]);
+        } 
+    
+        function checkIsPalindrome(num) {
+          const numAsString = String(num);
+    
+          const middle = Math.floor(numAsString.length/2);
+    
+          let isPalindrome  = true;
+    
+          // console.log(typeof numAsString);
+    
+          for (let index = 0; index < middle; index++) {
+            // console.log(index);
+            const left = numAsString[index];
+            const right = numAsString[numAsString.length - 1 - index];
+            // console.log(left, right);
+            // console.log(left != (right));
+            if (left != right) {
+              isPalindrome = false;
+              index = middle;
+              // console.log("inside");
+            }
+          } 
+    
+          console.log(isPalindrome);
+    
+        } 
+    
+      } 
+    
+      // printPalindromeIntegers([123,323,421,121]);
+      // printPalindromeIntegers([32,2,232,1010]);
+      // printPalindromeIntegers([1221]);
     </script>
 
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
