@@ -128,6 +128,11 @@
         z-index: 11;
       }
 
+      .window-scroll {
+        background-color: var(--color-primary);
+        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+      }
+
       .nav-container {
         height: 100%;
         display: flex;
@@ -178,16 +183,99 @@
       }
 
       .categories {
+        height: 29rem;
         background-color: var(--color-bg1);
       }
 
       .categories-container {
         display: grid;
+        grid-template-columns: 40% 60%;
+        /* gap: 4rem; */
       }
 
-      .categories h1 {
+      .categories-left {
+        margin-right: 4rem;
+      }
+      .categories-left h1 {
         margin-bottom: 3rem;
         line-height: 1;
+      }
+      .categories-left p {
+        margin: 1rem 0 3rem;
+      }
+
+      .categories-right {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 1.2rem;
+      }
+
+      .category {
+        padding: 2rem;
+        border-radius: 2rem;
+        background-color: var(--color-bg2);
+        transition: var(--transition);
+      }
+      .category:hover {
+        box-shadow: 0 3rem 3rem rgba(0, 0, 0, 0.3);
+        z-index: 1;
+      }
+
+      .category:nth-child(2) .category-icon {
+        background-color: var(--color-danger);
+      }
+      .category:nth-child(3) .category-icon {
+        background-color: var(--color-success);
+      }
+      .category:nth-child(4) .category-icon {
+        background-color: var(--color-warning);
+      }
+      .category:nth-child(5) .category-icon {
+        background-color: var(--color-success);
+      }
+
+      .category h5 {
+        margin: 2rem 0 1rem;
+        text-transform: capitalize;
+      }
+      .category p {
+        font-size: 0.85rem;
+      }
+
+      .category-icon {
+        padding: 0.7rem;
+        border-radius: 0.9rem;
+        background-color: var(--color-primary);
+      }
+
+      .courses {
+        margin-top: 10rem;
+      }
+
+      .courses-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 2rem;
+      }
+
+      .course {
+        text-align: center;
+        border: 1px solid transparent;
+        background-color: var(--color-bg1);
+        transition: var(--transition);
+      }
+      .course:hover {
+        border-color: var(--color-primary);
+        background-color: transparent;
+      }
+
+      .course-info {
+        padding: 2rem;
+      }
+
+      .course-info p {
+        margin: 1.2rem 0 2rem;
+        font-size: 0.9rem;
       }
     </style>
   </head>
@@ -234,6 +322,12 @@
         </div>
       </div>
     </header>
+    <script>
+      window.addEventListener("scroll", () => {
+        const nav = document.querySelector("nav");
+        nav.classList.toggle("window-scroll", window.scrollY > 0);
+      })
+    </script>
 
     <section class="categories">
       <div class="container categories-container">
@@ -247,7 +341,7 @@
         <div class="categories-right">
           <article class="category">
             <span class="category-icon">
-              <i>bitcoin</i>
+              <i class="fa fa-btc" aria-hidden="true"></i>
             </span>
             <h5>blockchain</h5>
             <p>
@@ -255,6 +349,48 @@
             </p>
           </article>
         </div>
+      </div>
+    </section>
+
+    <section class="courses">
+      <h2>our popular courses</h2>
+      <div class="container courses-container">
+        <article class="course">
+          <div class="course-image">
+            <img src="./images/course1.jpg" alt="">
+          </div>
+          <div class="course-info">
+            <h4>responsive social media website ui design</h4>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, ipsam cum nesciunt et sunt fugiat soluta.
+            </p>
+          </div>
+          <a href="#courses" class="btn btn-primary">learn more</a>
+        </article>
+        <article class="course">
+          <div class="course-image">
+            <img src="./images/course2.jpg" alt="">
+          </div>
+          <div class="course-info">
+            <h4>responsive smarthome website design</h4>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam aliquid laboriosam odit praesentium laborum eius sunt aliquam optio! Voluptate provident, alias molestiae similique tempora officiis.
+            </p>  
+          </div>
+          <a href="#courses" class="btn btn-primary">learn more</a>
+        </article>
+        <article class="course">
+          <div class="course-image">
+            <img src="./images/course3.jpg" alt="">
+          </div>
+          <div class="course-info">
+            <h4>responsive admin dashboard ui design</h4>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro officia vitae minus, fugiat dignissimos ex. Minus amet voluptatibus aut id numquam architecto.
+            </p>  
+          </div>
+          <a href="#courses" class="btn btn-primary">learn more</a>
+        </article>
       </div>
     </section>
 
