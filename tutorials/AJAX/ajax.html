@@ -19,6 +19,7 @@
 
       :root {
         --primary: #00c2de;
+        --primary-transparent: rgba(0, 194, 222, 0.4);
       }
 
       ul {
@@ -43,12 +44,58 @@
         font-family: Georgia, serif;
       }
 
+      .banner {
+        position: relative;
+        /* width: 100%; */
+        min-height: 100vh;
+        margin: 20px;
+        padding: 0 100px;
+        /* display: flex; */
+        /* align-items: center; */
+        /* justify-content: flex-start; */
+        /* transition: 0.5s; */
+        /* overflow: hidden; */
+        display: flex;
+        flex-direction: column;
+      }
+      .banner::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+          rgba(0, 0, 0, 0.1), 
+          rgba(0, 0, 0, 0.3), 
+          rgba(0, 0, 0, 0.6), 
+          rgba(0, 0, 0, 0.9)
+        );
+      }
+      .banner::before {
+        position: absolute;
+        top: 25%;
+        left: 0;
+        content: "";
+        width: 5px;
+        height: 40%;
+        background: linear-gradient(
+          var(--primary), 
+          var(--primary), 
+          transparent
+        );
+        z-index: 100;
+      }
+
       header {
         /* position: absolute; */
         /* top: 0; */
         /* left: 0; */
         /* width: 100%; */
-        padding: 30px 100px;
+        /* padding: 30px 100px; */
+        padding: 30px 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -56,9 +103,9 @@
       }
       header::after {
         position: absolute;
-        top: 50%;
+        /* top: 50%; */
         /* left: 100px; */
-        left: 5%;
+        /* left: 5%; */
         transform: translateY(-50%);
         content: "";
         width: 30%;
@@ -125,7 +172,7 @@
       nav.active {
         top: 100px;
         width: 40%;
-        height: 100px;
+        height: auto;
         border-top: 5px solid;
         border-bottom: none;
         border-image: linear-gradient(
@@ -137,6 +184,7 @@
 
       nav ul {
         margin: auto;
+        padding: 30px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -173,51 +221,7 @@
         box-shadow: inset 0 0 20px rgba(0, 194, 222, 0.5);
       }
 
-      .banner {
-        position: relative;
-        /* width: 100%; */
-        min-height: 100vh;
-        padding: 0 100px;
-        /* display: flex; */
-        /* align-items: center; */
-        /* justify-content: flex-start; */
-        /* transition: 0.5s; */
-        /* overflow: hidden; */
-        display: flex;
-        flex-direction: column;
-      }
-      .banner::after {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background: radial-gradient(
-          rgba(0, 0, 0, 0.1), 
-          rgba(0, 0, 0, 0.3), 
-          rgba(0, 0, 0, 0.6), 
-          rgba(0, 0, 0, 0.9)
-        );
-      }
-      .banner::before {
-        position: absolute;
-        top: 25%;
-        left: 0;
-        content: "";
-        width: 5px;
-        height: 40%;
-        background: linear-gradient(
-          var(--primary), 
-          var(--primary), 
-          transparent
-        );
-        z-index: 100;
-      }
-
-      .banner .bg-video {
+      .bg-video {
         display: none;
         position: absolute;
         top: 0;
@@ -228,18 +232,23 @@
         object-fit: cover;
         /* object-position: center; */
       }
-      .banner .bg-video.active {
+      .bg-video.active {
         display: block;
       }
 
-      .banner .content {
+      .main {
+        display: flex;
+        margin: auto 0;
+      }
+
+      .content {
         position: relative;
         max-width: 900px;
         margin: auto 0;
         padding: 200px 0;
         z-index: 100;
       }
-      .banner .content h1 {
+      .content h1 {
         color: #fff;
         font-size: 10em;
         font-weight: 500;
@@ -247,36 +256,39 @@
         letter-spacing: 5px;
       }
 
-      .banner .content .model {
-        color: var(--primary);
-        font-size: 4em;
+      .model {
+        /* color: var(--primary); */
+        font-size: 4rem;
         text-transform: uppercase;
         display: none;
       }
-      .banner .content .model.active {
+      .model.active {
         display: block;
       }
-      .banner .content .model.mclaren-2 {
+      .model.mclaren-1 {
+        color: var(--primary);
+      }
+      .model.mclaren-2 {
         color: #92ff00;
       }
-      .banner .content .model.mclaren-3 {
+      .model.mclaren-3 {
         color: #ff0015;
       }
-      .banner .content .model.mclaren-4 {
+      .model.mclaren-4 {
         color: #ff2e00;
       }
-      .banner .content .model.mclaren-5 {
+      .model.mclaren-5 {
         color: #bbc0dd;
       }
 
-      .banner .content p {
+      .content p {
         color: #fff;
         font-size: 16px;
         font-weight: 200;
         letter-spacing: 1px;
         margin: 50px 0;
       }
-      .banner .content a {
+      .content a {
         /* text-decoration: none; */
         position: relative;
         /* width: 200px; */
@@ -300,14 +312,14 @@
         backdrop-filter: blur(20px);
         transition: 0.5s;
       }
-      .banner .content a:hover {
+      .content a:hover {
         border-top: 2px solid rgba(0, 194, 222, 0.8);
         border-bottom: 2px solid rgba(0, 194, 222, 0.8);
         box-shadow: inset 0 0 50px rgba(0, 194, 222, 0.5);
       }
 
-      .banner .pause, 
-      .banner .play {
+      .pause-btn, 
+      .play-btn {
         display: none;
         position: absolute;
         top: 50%;
@@ -321,21 +333,33 @@
         opacity: 0.3;
         z-index: 100;
       }
-      .banner .pause:hover, 
-      .banner .play:hover {
-        color: #fff;
+      .pause-btn:hover, 
+      .play-btn:hover {
+        /* color: #fff; */
+        outline: 
+          0.1em solid var(--primary-transparent);
+        box-shadow: 
+          inset 0 0 15px var(--primary), 
+          0 0 15px var(--primary), 
+          0 0 30px var(--primary), 
+          0 0 50px var(--primary);
         opacity: 1;
       }
-      .banner .pause.active {
+      .pause-btn.active {
         display: block;
         padding: 0.4em 0.544em;
       }
-      .banner .play.active {
+      .play-btn.active {
         display: block;
         padding: 0.4em 0.488em 0.4em 0.668em;
       }
+      .pause-btn i, 
+      .play-btn i {
+        color: transparent;
+        -webkit-text-stroke: 0.06em var(--primary);
+      }
 
-      .banner .screen {
+      .screen {
         position: absolute;
         right: 10%;
         bottom: 100px;
@@ -346,7 +370,7 @@
         animation: rotate 30s linear infinite;
         z-index: 100;
       }
-      .banner .screen::after {
+      .screen::after {
         position: absolute;
         top: 0;
         left: 0;
@@ -357,11 +381,11 @@
         transform: rotateX(-90deg) translateZ(150px);
         filter: blur(20px);
         box-shadow: 
-        0 0 120px rgba(0, 194, 222, 0.2), 
-        0 0 120px rgba(0, 194, 222, 0.4), 
-        0 0 120px rgba(0, 194, 222, 0.6), 
-        0 0 120px rgba(0, 194, 222, 0.8), 
-        0 0 120px rgba(0, 194, 222, 1);
+          0 0 120px rgba(0, 194, 222, 0.2), 
+          0 0 120px rgba(0, 194, 222, 0.4), 
+          0 0 120px rgba(0, 194, 222, 0.6), 
+          0 0 120px rgba(0, 194, 222, 0.8), 
+          0 0 120px rgba(0, 194, 222, 1);
       }
 
       @keyframes rotate {
@@ -373,7 +397,7 @@
         }
       }
 
-      .banner .screen div {
+      .screen div {
         position: absolute;
         top: 0;
         left: 0;
@@ -383,7 +407,7 @@
         /* transform: rotateX(45deg); */
       }
 
-      .banner .screen div span {
+      .screen div span {
         position: absolute;
         top: 0;
         left: 0;
@@ -394,7 +418,7 @@
         overflow: hidden;
       }
 
-      /* .banner .screen .shadow {
+      /* .screen .shadow {
         position: absolute;
         top: 0;
         left: 0;
@@ -411,7 +435,7 @@
         0 0 120px rgba(0, 194, 222, 1);
       }
  */
-      .banner .screen div span video {
+      .screen div span video {
         position: absolute;
         bottom: 0;
         /* width: 100%; */
@@ -421,23 +445,26 @@
         transition: 0.5s;
       }
 
-      .banner .screen div span video.trailer {
+      .screen div span video.trailer {
         display: none;
       }
 
-      .banner .screen div span video.trailer.active {
+      .screen div span video.trailer.active {
         display: block;
       }
 
-      .banner .gallery {
+      .gallery {
         /* position: absolute; */
         /* left: 100px; */
         /* bottom: 0; */
-        width: 55%;
-        height: 30%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        /* width: 55%; */
+        max-width: 900px;
+        /* height: 30%; */
+        margin-right: auto;
+        padding-bottom: 100px;
+        /* display: flex; */
+        /* align-items: center; */
+        /* justify-content: center; */
         /* background-color: transparent; */
         box-shadow: 
           0px 10px 40px rgba(0, 0, 0, 0.5), 
@@ -445,7 +472,7 @@
         backdrop-filter: blur(20px);
         z-index: 100;
       }
-      .banner .gallery::before {
+      .gallery::before {
         position: absolute;
         left: 0;
         bottom: 0;
@@ -456,7 +483,7 @@
         filter: blur(15px);
       }
 
-      .banner .gallery .carousel {
+      .carousel {
         /* width: 100%; */
         /* height: 100%; */
         display: flex;
@@ -464,56 +491,68 @@
         justify-content: center;
       }
 
-      .banner .gallery .carousel .carousel-item {
+      .carousel-item {
         flex: 1;
         /* width: 100%; */
         width: 250px;
+        height: 170px;
         /* height: 100%; */
         /* object-fit: cover; */
         cursor: pointer;
       }
 
-      .banner .gallery .carousel .carousel-item h4 {
-        color: var(--primary);
+      .carousel-item h4 {
+        /* color: var(--primary); */
         font-size: 1.3em;
         font-weight: 300;
         text-align: center;
         text-transform: uppercase;
         letter-spacing: 1px;
       }
-      .banner .gallery .carousel .carousel-item:nth-child(2) h4 {
+
+      .mclaren-1 {
+        color: var(--primary);
+      }
+      /* .carousel-item:nth-child(2) h4,  */
+      .mclaren-2 {
         color: #92ff00;
       }
-      .banner .gallery .carousel .carousel-item:nth-child(3) h4 {
+      /* .carousel-item:nth-child(3) h4,  */
+      .mclaren-3 {
         color: #ff0015;
       }
-      .banner .gallery .carousel .carousel-item:nth-child(4) h4 {
+      /* .carousel-item:nth-child(4) h4,  */
+      .mclaren-4 {
         color: #ff2e00;
       }
-      .banner .gallery .carousel .carousel-item:nth-child(5) h4 {
+      /* .carousel-item:nth-child(5) h4,  */
+      .mclaren-5 {
         color: #bbc0dd;
       }
 
-      .banner .gallery .carousel .carousel-item img {
+      .carousel-item img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         border-radius: 10px;
       }
-      .banner .gallery .carousel .carousel-item:nth-child(5) img {
+      .carousel-item:nth-child(5) img {
         transform: rotateY(180deg);
       }
 
       .sci {
-        position: absolute;
-        top: 50%;
-        right: 100px;
-        transform: translateY(-50%);
+        /* position: absolute; */
+        /* top: 50%; */
+        /* right: 100px; */
+        /* transform: translateY(-50%); */
+        margin-left: auto;
+        position: relative;
         display: flex;
         gap: 10px;
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        z-index: 100;
       }
 
       .sci li {
@@ -596,39 +635,65 @@
         }
       }
 
+      .gallery {
+        width: 100%;
+        /* align-items: flex-start; */
+      }
+      .carousel {
+        width: 250px;
+        height: 170px;
+        transform-style: preserve-3d;
+        perspective: 1000px;
+        align-items: center;
+      }
+      .carousel-item {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform-origin: center;
+        transform-style: preserve-3d;
+        transform: rotateY(calc(var(--i) * 72deg)) translateZ(250px) ;
+      }
+      .carousel-item h4, 
+      .carousel-item img {
+        transform: rotateY(calc(var(--i) * (-72deg)));
+      }
+
       /* <!-- delete --> */
       .bg-videos {
-        display: none;
+        /* display: none; */
       }
       .screen {
         display: none;
       }
       .gallery {
-        border: 1px solid green;
+        /* border: 1px solid green; */
       }
       .carousel {
-        border: 1px solid blue;
+        /* border: 1px solid blue; */
       }
       .carousel-item {
-        border: 1px solid red;
+        /* border: 1px solid red; */
       }
       .banner {
-        border: 1px solid gray;
+        /* border: 1px solid gray; */
       }
       .content {
-        border: 1px solid tomato;
+        /* border: 1px solid tomato; */
       }
     </style>
   </head>
   <body>
-    <header>
-      <span class="year">2018 - 2023</span>
-      <a href="#" class="logo">
-        <img src="./assets/logo.png" alt="McLAREN logo">
-      </a>
-      <a href="#" class="menu"></a>
-    </header>
     <div class="banner">
+      <header>
+        <span class="year">2018 - 2023</span>
+        <a href="#" class="logo">
+          <img src="./assets/logo.png" alt="McLAREN logo">
+        </a>
+        <a href="#" class="menu"></a>
+      </header>
       <nav>
         <ul>
           <li><a href="#">supercars</a></li>
@@ -675,30 +740,10 @@
           muted>
         </video>
       </div>
-      <div class="content">
-        <h1>McLAREN</h1>
-        <h3 class="model mclaren-1 active">
-          765lt spider
-        </h3>
-        <h3 class="model mclaren-2">
-          artura
-        </h3>
-        <h3 class="model mclaren-3">
-          750s
-        </h3>
-        <h3 class="model mclaren-4">
-          765lt
-        </h3>
-        <h3 class="model mclaren-5">
-          7505 spider
-        </h3>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe, possimus sunt! Nemo dolorem earum cumque commodi perferendis esse quae maiores reiciendis, voluptatibus dignissimos.</p>
-        <a href="#">enquire</a>
-      </div>
-      <a href="#" class="pause active">
+      <a href="#" class="pause-btn active">
         <i class="fa fa-pause"></i>
       </a>
-      <a href="#" class="play">
+      <a href="#" class="play-btn">
         <i class="fa fa-play"></i>
       </a>
       <div class="screen">
@@ -764,32 +809,32 @@
       </div>
       <div class="gallery">
         <div class="carousel">
-          <a href="#" class="carousel-item" onclick="changeVideoBackground('mclaren-1')">
+          <a href="#" class="carousel-item" style="--i: 1" onclick="changeVideoBackground('mclaren-1')">
             <img src="./assets/cars/mclaren-1.jpg" alt="">
-            <h4>765lt spider</h4>
+            <h4 class="mclaren-1">765lt spider</h4>
           </a>
-          <a href="#" class="carousel-item" onclick="changeVideoBackground('mclaren-2')">
+          <a href="#" class="carousel-item" style="--i: 2" onclick="changeVideoBackground('mclaren-2')">
             <img src="./assets/cars/mclaren-2.jpg" alt="">
-            <h4>artura</h4>
+            <h4 class="mclaren-2">artura</h4>
           </a>
-          <a href="#" class="carousel-item" onclick="changeVideoBackground('mclaren-3')">
+          <a href="#" class="carousel-item" style="--i: 3" onclick="changeVideoBackground('mclaren-3')">
             <img src="./assets/cars/mclaren-3.jpeg" alt="">
-            <h4>750s</h4>
+            <h4 class="mclaren-3">750s</h4>
           </a>
-          <a href="#" class="carousel-item" onclick="changeVideoBackground('mclaren-4')">
+          <a href="#" class="carousel-item" style="--i: 4" onclick="changeVideoBackground('mclaren-4')">
             <img src="./assets/cars/mclaren-4.jpeg" alt="">
-            <h4>765lt</h4>
+            <h4 class="mclaren-4">765lt</h4>
           </a>
-          <a href="#" class="carousel-item" onclick="changeVideoBackground('mclaren-5')">
+          <a href="#" class="carousel-item" style="--i: 5" onclick="changeVideoBackground('mclaren-5')">
             <!-- <img src="./assets/cars/mclaren-5a.jpeg" alt=""> -->
             <!-- <img src="./assets/cars/mclaren-5b.png" alt=""> -->
             <img src="./assets/cars/mclaren-5.jpg" alt="">
-            <h4>750s spider</h4>
+            <h4 class="mclaren-5">750s spider</h4>
           </a>
         </div>
       </div>
     </div>
-    <ul class="sci">
+    <!-- <ul class="sci">
       <li>
         <a href="#">
           <i class="fa fa-facebook"></i>
@@ -805,7 +850,7 @@
           <i class="fa fa-youtube-play"></i>
         </a>
       </li>
-    </ul>
+    </ul> -->
 
     <script>
       const menuBtn = document.querySelector(".menu");
@@ -844,10 +889,10 @@
         })
       }
 
-      const pauseBtn = document.querySelector(".pause");
+      const pauseBtn = document.querySelector(".pause-btn");
       pauseBtn.addEventListener("click", pauseVideoBackground);
 
-      const playBtn = document.querySelector(".play");
+      const playBtn = document.querySelector(".play-btn");
       playBtn.addEventListener("click", playVideoBackground);
 
       function pauseVideoBackground() {
@@ -871,8 +916,8 @@
       }
 
       function togglePlay() {
-        const pauseBtn = document.querySelector(".pause");
-        const playBtn = document.querySelector(".play");
+        // const pauseBtn = document.querySelector(".pause");
+        // const playBtn = document.querySelector(".play-btn");
         playBtn.classList.toggle("active");
         pauseBtn.classList.toggle("active");
       }
