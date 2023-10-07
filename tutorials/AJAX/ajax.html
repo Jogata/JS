@@ -498,7 +498,13 @@
         height: 170px;
         /* height: 100%; */
         /* object-fit: cover; */
+        transition: filter 300ms ease-in-out;
         cursor: pointer;
+        z-index: 1;
+      }
+      .carousel-item:hover {
+        filter: grayscale(0.8);
+        z-index: 2;
       }
 
       .carousel-item h4 {
@@ -537,7 +543,8 @@
         border-radius: 10px;
       }
       .carousel-item:nth-child(5) img {
-        transform: rotateY(180deg);
+        /* transform: rotateY(180deg); */
+        transform: rotateY(calc(((-1) * var(--i) * 72deg) - 2 * var(--angle) + 180deg));
       }
 
       .sci {
@@ -640,11 +647,14 @@
         /* align-items: flex-start; */
       }
       .carousel {
+        --angle: 0deg;
         width: 250px;
         height: 170px;
+        margin: auto;
         transform-style: preserve-3d;
-        perspective: 1000px;
+        /* perspective: 1000px; */
         align-items: center;
+        transform: perspective(1000px) rotateY(var(--angle));
       }
       .carousel-item {
         position: absolute;
@@ -654,34 +664,36 @@
         height: 100%;
         transform-origin: center;
         transform-style: preserve-3d;
-        transform: rotateY(calc(var(--i) * 72deg)) translateZ(250px) ;
+        /* transform: rotateY(calc(var(--i) * (72deg + var(--angle)))) translateZ(250px); */
+        transform: rotateY(calc((var(--i) * 72deg) + var(--angle))) translateZ(250px);
       }
       .carousel-item h4, 
       .carousel-item img {
-        transform: rotateY(calc(var(--i) * (-72deg)));
+        /* transform: rotateY(calc((-1) * var(--i) * (72deg + (var(--angle))))); */
+        transform: rotateY(calc(((-1) * var(--i) * 72deg) - 2 * var(--angle)));
       }
 
       /* <!-- delete --> */
       .bg-videos {
-        /* display: none; */
+        display: none;
       }
       .screen {
         display: none;
       }
       .gallery {
-        /* border: 1px solid green; */
+        border: 1px solid green;
       }
       .carousel {
-        /* border: 1px solid blue; */
+        border: 1px solid blue;
       }
       .carousel-item {
-        /* border: 1px solid red; */
+        border: 1px solid red;
       }
       .banner {
-        /* border: 1px solid gray; */
+        border: 1px solid gray;
       }
       .content {
-        /* border: 1px solid tomato; */
+        border: 1px solid tomato;
       }
     </style>
   </head>
@@ -739,6 +751,66 @@
           loop 
           muted>
         </video>
+      </div>
+      <!-- <div class="content">
+        <h1>McLAREN</h1>
+        <h3 class="model mclaren-1 active">
+          765lt spider
+        </h3>
+        <h3 class="model mclaren-2">
+          artura
+        </h3>
+        <h3 class="model mclaren-3">
+          750s
+        </h3>
+        <h3 class="model mclaren-4">
+          765lt
+        </h3>
+        <h3 class="model mclaren-5">
+          7505 spider
+        </h3>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe, possimus sunt! Nemo dolorem earum cumque commodi perferendis esse quae maiores reiciendis, voluptatibus dignissimos.</p>
+        <a href="#">enquire</a>
+      </div> -->
+      <div class="main">
+        <div class="content">
+          <h1>McLAREN</h1>
+          <h3 class="model mclaren-1 active">
+            765lt spider
+          </h3>
+          <h3 class="model mclaren-2">
+            artura
+          </h3>
+          <h3 class="model mclaren-3">
+            750s
+          </h3>
+          <h3 class="model mclaren-4">
+            765lt
+          </h3>
+          <h3 class="model mclaren-5">
+            7505 spider
+          </h3>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe, possimus sunt! Nemo dolorem earum cumque commodi
+            perferendis esse quae maiores reiciendis, voluptatibus dignissimos.</p>
+          <a href="#">enquire</a>
+        </div>
+        <ul class="sci">
+          <li>
+            <a href="#">
+              <i class="fa fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-instagram"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fa fa-youtube-play"></i>
+            </a>
+          </li>
+        </ul>
       </div>
       <a href="#" class="pause-btn active">
         <i class="fa fa-pause"></i>
