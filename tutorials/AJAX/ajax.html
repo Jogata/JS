@@ -48,8 +48,10 @@
         position: relative;
         /* width: 100%; */
         min-height: 100vh;
-        margin: 20px;
-        padding: 0 100px;
+        /* margin: 20px; */
+        margin: min(3vw, 1rem);
+        /* padding: 0 100px; */
+        padding: 0 min(3vw, 1rem);
         /* display: flex; */
         /* align-items: center; */
         /* justify-content: flex-start; */
@@ -76,12 +78,13 @@
       }
       .banner::before {
         position: absolute;
-        top: 25%;
-        left: 0;
+        top: 15%;
+        right: 100%;
         content: "";
         width: 5px;
-        height: 40%;
+        height: 60%;
         background: linear-gradient(
+          transparent, 
           var(--primary), 
           var(--primary), 
           transparent
@@ -108,7 +111,8 @@
         /* left: 5%; */
         transform: translateY(-50%);
         content: "";
-        width: 30%;
+        /* width: 30%; */
+        width: 40%;
         height: 5px;
         background: linear-gradient(90deg, var(--primary), transparent);
       }
@@ -154,7 +158,8 @@
       nav {
         position: absolute;
         top: 0;
-        right: 100px;
+        /* right: 100px; */
+        right: min(3vw, 1rem);
         width: 30%;
         height: 5px;
         display: flex;
@@ -166,7 +171,8 @@
         box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
         backdrop-filter: blur(20px);
         transform-origin: right;
-        transition: 1s;
+        transition: all 1s ease-out;
+        overflow: hidden;
         z-index: 200;
       }
       nav.active {
@@ -326,7 +332,8 @@
         left: 70%;
         transform: translate(-50%, -50%);
         color: var(--primary);
-        font-size: 6em;
+        font-size: min(3vw, 6em);
+        /* font-size: max(3vw, 2rem); */
         outline: 0.1em solid currentColor;
         border-radius: 50%;
         transition: 0.3s;
@@ -498,14 +505,14 @@
         height: 170px;
         /* height: 100%; */
         /* object-fit: cover; */
-        transition: filter 300ms ease-in-out;
+        /* transition: filter 300ms ease-in-out; */
         cursor: pointer;
         z-index: 1;
       }
-      .carousel-item:hover {
+      /* .carousel-item:hover {
         filter: grayscale(0.8);
         z-index: 2;
-      }
+      } */
 
       .carousel-item h4 {
         /* color: var(--primary); */
@@ -544,7 +551,8 @@
       }
       .carousel-item:nth-child(5) img {
         /* transform: rotateY(180deg); */
-        transform: rotateY(calc(((-1) * var(--i) * 72deg) - 2 * var(--angle) + 180deg));
+        transform: rotateY(calc(((-1) * var(--i) * 72deg) - (var(--angle)) + 180deg));
+        /* transform: rotateY(calc(var(--i) * (var(--angle)) * (-1) - 180deg)); */
       }
 
       .sci {
@@ -592,7 +600,7 @@
           background: var(--primary);
         }
         .logo {
-          margin-top: 10px;
+          /* margin-top: 10px; */
         }
         nav {
           right: 0;
@@ -601,44 +609,40 @@
         nav.active {
           top: 0;
           right: 0;
-          width: 100vw;
-          height: 100vh;
+          width: 100%;
+          min-height: 100vh;
           display: flex;
-          flex-direction: column;
-          /* border: none; */
+          /* flex-direction: column; */
         }
         nav.active ul {
-          /* display: flex; */
           flex-direction: column;
         }
         .banner {
-          padding: 50px 30px 100px;
+          /* padding: 50px 30px 100px; */
         }
         .banner .content {
-          position: relative;
-          /* max-width: 700px; */
-          padding: 50px 0 100px;
+          /* position: relative; */
+          /* padding: 50px 0 100px; */
         }
         .banner .content h1 {
-          font-size: 5em;
+          /* font-size: 5em; */
         }
         .banner .content .model {
-          font-size: 2em;
+          /* font-size: 2em; */
         }
         .banner .content a {
-          width: 150px;
-          padding: 10px 15px;
+          /* width: 150px; */
+          /* padding: 10px 15px; */
         }
         .banner .screen {
           display: none;
         }
         .banner .gallery {
-          left: 0;
-          width: 100%;
-          /* height: 320px; */
+          /* left: 0; */
+          /* width: 100%; */
         }
         .sci {
-          right: 20px;
+          /* right: 20px; */
         }
       }
 
@@ -652,9 +656,13 @@
         height: 170px;
         margin: auto;
         transform-style: preserve-3d;
+        transition: all 600ms ease-in-out;
+        transition-delay: -400ms;
         /* perspective: 1000px; */
         align-items: center;
-        transform: perspective(1000px) rotateY(var(--angle));
+        /* transform: perspective(1000px) rotateY(var(--angle)); */
+        /* transform: perspective(1000px) rotateY(0deg); */
+        transform: perspective(1000px);
       }
       .carousel-item {
         position: absolute;
@@ -665,12 +673,34 @@
         transform-origin: center;
         transform-style: preserve-3d;
         /* transform: rotateY(calc(var(--i) * (72deg + var(--angle)))) translateZ(250px); */
+        /* transform: rotateY(calc((var(--i) * 72deg))) translateZ(250px); */
         transform: rotateY(calc((var(--i) * 72deg) + var(--angle))) translateZ(250px);
+        /* transform: translateZ(250px); */
+        transition: transform 400ms ease-in-out;
+        /* opacity: 0.8; */
+        /* transition-delay: -400ms; */
       }
       .carousel-item h4, 
       .carousel-item img {
         /* transform: rotateY(calc((-1) * var(--i) * (72deg + (var(--angle))))); */
-        transform: rotateY(calc(((-1) * var(--i) * 72deg) - 2 * var(--angle)));
+        /* transform: rotateY(calc(((-1) * var(--i) * 72deg) - var(--angle))); */
+        transform: rotateY(calc(((-1) * var(--i) * 72deg) - var(--angle)));
+        transition: transform 400ms ease-in-out, opacity 300ms ease-out;
+        /* transform: rotateY(calc(var(--i) * (var(--angle)) * (-1))); */
+        /* transition: opacity 300ms ease-out; */
+        opacity: 0;
+      }
+      .carousel .carousel-item:hover * {
+        opacity: 1;
+      }
+
+      .non-transparent h4, 
+      .non-transparent img {
+        opacity: 1;
+      }
+      .semi-transparent h4, 
+      .semi-transparent img {
+        opacity: 0.6;
       }
 
       /* <!-- delete --> */
@@ -681,19 +711,19 @@
         display: none;
       }
       .gallery {
-        border: 1px solid green;
+        /* border: 1px solid green; */
       }
       .carousel {
-        border: 1px solid blue;
+        /* border: 1px solid blue; */
       }
       .carousel-item {
-        border: 1px solid red;
+        /* border: 1px solid red; */
       }
       .banner {
-        border: 1px solid gray;
+        /* border: 1px solid gray; */
       }
       .content {
-        border: 1px solid tomato;
+        /* border: 1px solid tomato; */
       }
     </style>
   </head>
@@ -881,23 +911,23 @@
       </div>
       <div class="gallery">
         <div class="carousel">
-          <a href="#" class="carousel-item" style="--i: 1" onclick="changeVideoBackground('mclaren-1')">
+          <a href="#" class="carousel-item non-transparent" style="--i: 0" onclick="changeVideoBackground('mclaren-1')">
             <img src="./assets/cars/mclaren-1.jpg" alt="">
             <h4 class="mclaren-1">765lt spider</h4>
           </a>
-          <a href="#" class="carousel-item" style="--i: 2" onclick="changeVideoBackground('mclaren-2')">
+          <a href="#" class="carousel-item semi-transparent" style="--i: 1" onclick="changeVideoBackground('mclaren-2')">
             <img src="./assets/cars/mclaren-2.jpg" alt="">
             <h4 class="mclaren-2">artura</h4>
           </a>
-          <a href="#" class="carousel-item" style="--i: 3" onclick="changeVideoBackground('mclaren-3')">
+          <a href="#" class="carousel-item" style="--i: 2" onclick="changeVideoBackground('mclaren-3')">
             <img src="./assets/cars/mclaren-3.jpeg" alt="">
             <h4 class="mclaren-3">750s</h4>
           </a>
-          <a href="#" class="carousel-item" style="--i: 4" onclick="changeVideoBackground('mclaren-4')">
+          <a href="#" class="carousel-item" style="--i: 3" onclick="changeVideoBackground('mclaren-4')">
             <img src="./assets/cars/mclaren-4.jpeg" alt="">
             <h4 class="mclaren-4">765lt</h4>
           </a>
-          <a href="#" class="carousel-item" style="--i: 5" onclick="changeVideoBackground('mclaren-5')">
+          <a href="#" class="carousel-item semi-transparent" style="--i: 4" onclick="changeVideoBackground('mclaren-5')">
             <!-- <img src="./assets/cars/mclaren-5a.jpeg" alt=""> -->
             <!-- <img src="./assets/cars/mclaren-5b.png" alt=""> -->
             <img src="./assets/cars/mclaren-5.jpg" alt="">
@@ -933,6 +963,57 @@
         nav.classList.toggle("active");
         menuBtn.classList.toggle("active");
       }
+
+      const carousel = document.querySelector(".carousel");
+      const thumbs = document.querySelectorAll(".carousel-item");
+      let currentRotation = 0;
+
+      const startingIndexes = [];
+      startingIndexes.length = thumbs.length;
+      startingIndexes[0] = 0;
+      startingIndexes[thumbs.length - 1] = -1;
+      startingIndexes[1] = 1;
+      console.log(startingIndexes);
+
+      thumbs.forEach((thumb, index) => {
+        let middle = Math.floor(thumbs.length/2);
+        // let initialSlidePosition = index - middle;
+
+        thumb.addEventListener("click", (e) => {
+          e.preventDefault();
+          const diff = startingIndexes[index];
+          // console.log(initialSlidePosition);
+          // let newSlidePosition = initialSlidePosition + currentRotation;
+          // console.log(newSlidePosition);
+          // console.log(startingIndexes, index);
+          startingIndexes.fill(0);
+          let previousIndex = index - 1;
+          previousIndex = previousIndex + thumbs.length;
+          previousIndex = previousIndex % thumbs.length;
+          let nextIndex = index + 1;
+          nextIndex = nextIndex % thumbs.length;
+          startingIndexes[previousIndex] = -1;
+          startingIndexes[nextIndex] = 1;
+          // console.log(previousIndex, nextIndex);
+          // startingIndexes[index] = 0;
+          // let diff = currentRotation + newSlidePosition;
+          // console.log(diff);
+          // console.log(startingIndexes);
+          // currentRotation++;
+          // console.log(currentRotation);
+          const degrees = getComputedStyle(carousel).getPropertyValue("--angle");
+          const newDegrees = Number.parseInt(degrees) - (72 * diff);
+          carousel.style.setProperty("--angle", `${newDegrees}deg`);
+          thumbs.forEach(thumb => thumb.className = "carousel-item");
+          thumb.classList.add("non-transparent");
+          thumbs[previousIndex].classList.add("semi-transparent");
+          thumbs[nextIndex].classList.add("semi-transparent");
+          // const transform = `perspective(1000px) rotateY(${newDegrees}deg)`;
+          // console.log(newDegrees, transform);
+          // carousel.style.transform = transform;
+          // carousel.style.width = "400px";
+        })
+      })
 
       function changeVideoBackground(name) {
         const videos = document.querySelectorAll(".bg-video");
