@@ -433,7 +433,7 @@
       .footer-container {
         display: grid;
         gap: 5rem;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: repeat(4, 1fr);
       }
       .footer-container > div h4 {
         margin-bottom: 1.2rem;
@@ -510,7 +510,17 @@
           width: 100%;
           height: 5.8rem;
           transform-origin: top right;
-          animation: animateNavItems 1s linear forwards;
+          animation: animateNavItems 400ms linear forwards;
+          opacity: 0;
+        }
+        .nav-menu li:nth-child(2) {
+          animation-delay: 200ms;
+        }
+        .nav-menu li:nth-child(3) {
+          animation-delay: 400ms;
+        }
+        .nav-menu li:nth-child(4) {
+          animation-delay: 600ms;
         }
         .nav-menu li a {
           width: 100%;
@@ -524,14 +534,104 @@
           color: var(--color-white);
           background-color: var(--color-bg2);
         }
+        header {
+          height: 52vh;
+          margin-bottom: 4rem;
+        }
+        .header-container {
+          gap: 0;
+          padding-bottom: 3rem;
+        }
+        .categories {
+          height: auto;
+        }
+        .categories-container {
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+        .categories-left {
+          margin-right: 0;
+        }
+        .courses {
+          margin-top: 0;
+        }
+        .courses-container {
+          grid-template-columns: 1fr 1fr;
+        }
+        .faqs-container {
+          grid-template-columns: 1fr;
+        }
+        .faq {
+          padding: 1.5re;
+        }
+        .faqs-container {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      @media screen and (max-width: 600px) {
+        .container {
+          width: var(--container-width-sm);
+        }
+        .nav-menu {
+          right: 3%;
+        }
+        header {
+          height: 100vh;
+        }
+        .header-container {
+          grid-template-columns: 1fr;
+          margin-top: 0;
+          text-align: center;
+        }
+        .header-left p {
+          margin-bottom: 1.3rem;
+        }
+        .categories-right {
+          grid-template-columns: 1fr 1fr;
+          gap: 0.7rem;
+        }
+        .category {
+          padding: 1rem;
+          border-radius: 1rem;
+        }
+        .category-icon {
+          display: inline-block;
+          margin-top: 4px;
+        }
+        .courses-container {
+          grid-template-columns: 1fr;
+        }
+        .faqs-container {
+          grid-template-columns: 1fr;
+        }
+        .testimonial-body {
+          padding: 1.2rem;
+        }
+        .testimonial {
+          min-width: calc(100% - 2rem);
+          margin: 1rem;
+        }
+        .footer-container {
+          grid-template-columns: 1fr;
+          text-align: center;
+          gap: 2rem;
+        }
+        .footer-1 p {
+          margin: 1rem auto;
+        }
+        .footer-socials {
+          justify-content: center;
+        }
       }
 
       @keyframes animateNavItems {
         0% {
-          transform: rotateZ(-90deg);
+          transform: rotateZ(-90deg) rotateX(90deg) scale(0.1);
         }
         100% {
-          transform: rotateZ(0deg);
+          transform: rotateZ(0deg) rotateX(0) scale(1);
+          opacity: 1;
         }
       }
     </style>
@@ -1066,6 +1166,34 @@
 
     <div class="copyrights">
       <small>Copyrights &copy; <span class="upper">egator</span> </small>
+    </div>
+
+    <div id="about">
+      <nav>
+        <div class="container nav-container">
+          <a href="#" class="logo">egator</a>
+          <ul class="nav-menu">
+            <li>
+              <a href="#">home</a>
+            </li>
+            <li>
+              <a href="#">about</a>
+            </li>
+            <li>
+              <a href="#">courses</a>
+            </li>
+            <li>
+              <a href="#">contact</a>
+            </li>
+          </ul>
+          <button id="open-menu">
+            <i class="fa fa-bars"></i>
+          </button>
+          <button id="close-menu">
+            <i class="fa fa-times"></i>
+          </button>
+        </div>
+      </nav>
     </div>
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
