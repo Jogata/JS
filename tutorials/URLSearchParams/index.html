@@ -191,7 +191,7 @@
       }
 
       .categories {
-        height: 29rem;
+        height: 32rem;
         background-color: var(--color-bg1);
       }
 
@@ -423,6 +423,117 @@
           );
         transform: translate(-50%, -50%) rotate(45deg);
       }
+
+      footer {
+        padding-top: 5rem;
+        font-size: 0.9rem;
+        background-color: var(--color-bg1);
+      }
+
+      .footer-container {
+        display: grid;
+        gap: 5rem;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+      }
+      .footer-container > div h4 {
+        margin-bottom: 1.2rem;
+        text-transform: capitalize;
+      }
+
+      footer ul li {
+        margin-bottom: 0.7rem;
+      }
+      footer ul li a {
+        font-size: 1rem;
+        text-transform: capitalize;
+      }
+      footer ul li a:hover {
+        text-decoration: underline;
+      }
+
+      .footer-1 p {
+        margin: 0 0 2rem;
+      }
+
+      .footer-socials {
+        margin-top: 2rem;
+        display: flex;
+        gap: 1rem;
+        font-size: 1.2rem;
+      }
+
+      .copyrights {
+        margin-top: 4rem;
+        padding: 1.2rem 0;
+        text-align: center;
+        border-top: 1px solid var(--color-bg2);
+        background-color: var(--color-bg1);
+      }
+
+      @media screen and (max-width: 1024px) {
+        .container {
+          width: var(--container-width-md);
+        }
+        h1 {
+          font-size: 2.2rem;
+        }
+        h2 {
+          font-size: 1.7rem;
+        }
+        h3 {
+          font-size: 1.4rem;
+        }
+        h4 {
+          font-size: 1.2rem;
+        }
+        nav button {
+          display: inline-block;
+          color: var(--color-white);
+          font-size: 1.8rem;
+          background-color: transparent;
+          cursor: pointer;
+        }
+        nav button#close-menu {
+          display: none;
+        }
+        .nav-menu {
+          display: none;
+          position: fixed;
+          top: 5rem;
+          right: 5%;
+          width: 18rem;
+          height: fit-content;
+          flex-direction: column;
+          gap: 0;
+        }
+        .nav-menu li {
+          width: 100%;
+          height: 5.8rem;
+          transform-origin: top right;
+          animation: animateNavItems 1s linear forwards;
+        }
+        .nav-menu li a {
+          width: 100%;
+          height: 100%;
+          display: grid;
+          place-items: center;
+          background-color: var(--color-primary);
+          box-shadow: -4rem 6rem 10rem rgba(0, 0, 0, 0.6);
+        }
+        .nav-menu li a:hover {
+          color: var(--color-white);
+          background-color: var(--color-bg2);
+        }
+      }
+
+      @keyframes animateNavItems {
+        0% {
+          transform: rotateZ(-90deg);
+        }
+        100% {
+          transform: rotateZ(0deg);
+        }
+      }
     </style>
   </head>
   <body>
@@ -451,6 +562,23 @@
         </button>
       </div>
     </nav>
+    <script>
+      const menu = document.querySelector(".nav-menu");
+      const menuBtn = document.querySelector("#open-menu");
+      const closeBtn = document.querySelector("#close-menu");
+
+      menuBtn.addEventListener("click", () => {
+        menu.style.display = "flex";
+        closeBtn.style.display = "inline-block";
+        menuBtn.style.display = "none";
+      })
+
+      closeBtn.addEventListener("click", () => {
+        menu.style.display = "none";
+        menuBtn.style.display = "inline-block";
+        closeBtn.style.display = "none";
+      })
+    </script>
 
     <header>
       <div class="container header-container">
@@ -891,8 +1019,8 @@
           </ul>
         </div>
         <div class="footer-3">
-          <h4>primacy</h4>
-          <ul class="primacy">
+          <h4>privacy</h4>
+          <ul class="privacy">
             <li>
               <a href="#">privacy policy</a>
             </li>
@@ -913,28 +1041,32 @@
           <ul class="footer-socials">
             <li>
               <a href="#">
-                <i class="fa fa-facebook"></i>
+                <i class="fa fa-facebook" aria-hidden="true"></i>
               </a>
             </li>
             <li>
               <a href="#">
-                <i class="fa fa-instagram"></i>
+                <i class="fa fa-instagram" aria-hidden="true"></i>
               </a>
             </li>
             <li>
               <a href="#">
-                <i class="fa fa-twitter"></i>
+                <i class="fa fa-twitter" aria-hidden="true"></i>
               </a>
             </li>
             <li>
               <a href="#">
-                <i class="fa fa-linkedin"></i>
+                <i class="fa fa-linkedin" aria-hidden="true"></i>
               </a>
             </li>
           </ul>
         </div>
       </div>
     </footer>
+
+    <div class="copyrights">
+      <small>Copyrights &copy; <span class="upper">egator</span> </small>
+    </div>
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
