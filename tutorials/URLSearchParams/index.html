@@ -60,6 +60,13 @@
         margin: auto;
       }
 
+      button {
+        font-family: inherit;
+        border: 1px solid transparent;
+        background-color: transparent;
+        cursor: pointer;
+      }
+
       .btn {
         display: inline-block;
         padding: 1rem 2rem;
@@ -68,6 +75,7 @@
         border: 1px solid transparent;
         background-color: var(--color-white);
         transition: var(--transition);
+        /* cursor: pointer; */
       }
       .btn:hover {
         color: var(--color-white);
@@ -82,6 +90,10 @@
 
       .upper {
         text-transform: uppercase;
+      }
+
+      .caps {
+        text-transform: capitalize;
       }
 
       .hidden {
@@ -364,12 +376,12 @@
         padding: 1rem 1.5rem;
         color: var(--color-primary);
         font-size: 2rem;
-        font-family: inherit;
+        /* font-family: inherit; */
         text-transform: uppercase;
         background-color: transparent;
         border: 10px solid var(--color-primary);
         border-radius: 50%;
-        cursor: pointer;
+        /* cursor: pointer; */
       }
 
       .testimonial {
@@ -491,7 +503,7 @@
           color: var(--color-white);
           font-size: 1.8rem;
           background-color: transparent;
-          cursor: pointer;
+          /* cursor: pointer; */
         }
         nav button#close-menu {
           display: none;
@@ -836,6 +848,117 @@
         padding: 3rem;
         border-radius: 1rem;
         background-color: var(--color-primary);
+      }
+
+      .aside-image {
+        width: 12rem;
+        margin-bottom: 2rem;
+      }
+
+      .contact-aside h2 {
+        margin-bottom: 1rem;
+        font-size: 3rem;
+        text-align: left;
+      }
+
+      .contact-aside p {
+        margin-bottom: 2rem;
+        font-size: 0.9rem;
+      }
+
+      .contact-details li {
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .contact-socials {
+        display: flex;
+        gap: 0.8rem;
+        margin-top: 3rem;
+      }
+
+      .contact-socials a {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+        border-radius: 50%;
+        background-color: var(--color-bg2);
+        transition: var(--transition);
+      }
+      .contact-socials a:hover {
+        background-color: transparent;
+      }
+
+      .contact-form {
+        margin-right: 4rem;
+        display: flex;
+        gap: 1.2rem;
+        flex-direction: column;
+      }
+
+      .form-name {
+        display: flex;
+        gap: 1.2rem;
+      }
+
+      .contact-form input, 
+      textarea {
+        width: 100%;
+        padding: 1rem;
+        color: var(--color-white);
+        background-color: var(--color-bg);
+      }
+
+      .contact-form input[type="text"] {
+        width: 50%;
+      }
+
+      .contact-form .btn {
+        width: max-content;
+        margin-top: 1rem;
+        text-transform: capitalize;
+        /* font-family: inherit; */
+        /* cursor: pointer; */
+      }
+
+      @media screen and (max-width: 1024px) {
+        .contact {
+          padding-bottom: 0;
+        }
+        .contact-container {
+          height: auto;
+          margin-top: 3rem;
+          padding: 1.5rem;
+          gap: 1.5rem;
+        }
+        .contact-aside {
+          bottom: 0;
+          width: auto;
+          padding: 1.5rem;
+        }
+        .contact-form {
+          align-self: center;
+          margin-right: 1.5rem;
+        }
+      }
+
+      @media screen and (max-width: 600px) {
+        .contact-container {
+          margin-top: 0;
+          padding: 0;
+          grid-template-columns: 1fr;
+          gap: 3rem;
+        }
+        .contact-form {
+          margin: 0 1.5rem 3rem;
+        }
+        .form-name {
+          flex-direction: column;
+        }
+        .form-name input[type="text"] {
+          width: 100%;
+        }
       }
     </style>
   </head>
@@ -2004,7 +2127,8 @@
     </div>
 
     <div id="contact">
-      <!-- <nav>
+    <!-- 
+      <nav>
         <div class="container nav-container">
           <a href="#" class="logo">egator</a>
           <ul class="nav-menu">
@@ -2028,7 +2152,8 @@
             <i class="fa fa-times"></i>
           </button>
         </div>
-      </nav> -->
+      </nav>
+     -->
 
       <section class="contact">
         <div class="container contact-container">
@@ -2042,16 +2167,16 @@
             </p>
             <ul class="contact-details">
               <li>
-                <i>phone</i>
+                <i class="fa fa-phone" aria-hidden="true"></i>
                 <h5>+01 234 567 8910</h5>
               </li>
               <li>
-                <i>envelope</i>
+                <i class="fa fa-envelope" aria-hidden="true"></i>
                 <h5>email@abv.bg</h5>
               </li>
               <li>
-                <i>location</i>
-                <h5>city, country</h5>
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <h5 class="caps">city, country</h5>
               </li>
             </ul>
             <ul class="contact-socials">
@@ -2078,7 +2203,7 @@
             </ul>
           </aside>
 
-          <form>
+          <form class="contact-form">
             <div class="form-name">
               <input type="text" name="First Name" id="fn" placeholder="First Name" required>
               <input type="text" name="Last Name" id="ln" placeholder="Last Name" required>
