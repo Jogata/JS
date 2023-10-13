@@ -2260,6 +2260,135 @@
 
       // 4. Sorting
 
+      function sort(params) {
+        const result = new Array(params.length);
+
+        for (let index = 0; index < params.length; index+=2) {
+          const big = findBig(params);
+          const small = findSmall(params);
+
+          // console.log(big, small);
+
+          // result.push(big);
+          result[index] = big;
+          // result.push(small);
+          result[index + 1] = small;
+        }
+
+        function findSmall(params) {
+          let small = Number.MAX_SAFE_INTEGER;
+
+          for (let index = 0; index < params.length; index++) {
+            if (params[index] < small) {
+              small = params[index];
+              // console.log(small);
+            }
+          }
+
+          nuull(params, small);
+
+          return small;
+
+        }
+
+        function findBig(params) {
+          let big = Number.MIN_SAFE_INTEGER;
+
+          for (let index = 0; index < params.length; index++) {
+            if (params[index] > big) {
+              big = params[index];
+            }
+          }
+
+          nuull(params, big);
+
+          return big;
+          
+        }
+
+        function nuull(params, num) {
+          const ndex = params.indexOf(num);
+          params[ndex] = undefined;
+        }
+
+        console.log(result.join(" "));
+
+        // console.log(result);
+        // console.log(params);
+        // console.log(undefined > 1);
+      }
+
+      function sort(params) {
+        params.sort((a, b) => b - a);
+
+        // console.log(params.length/2);
+        
+        const result = [];
+
+        for (let index = 0; index < params.length/2 - 0.5; index++) {
+          console.log(index);
+          result.push(params[index]);
+          result.push(params[params.length - 1 - index]);
+        }
+
+        if (params.length != result.length) {
+          result.push(params[params.length/2 - 0.5]);
+        }
+
+        console.log(result.join(" "));
+      }
+
+      // sort([1, 21, 3, 52, 69, 30, 63, 31, 2, 18, 94]);
+      // sort([34, 2, 32, 45, 690, 6, 32, 7, 19, 47]);
+
+      // 05. Sort an Array by 2 Criteria
+
+      function sortBy2(params) {
+        params.sort((word1, word2) => {
+          word1 = word1.toLowerCase();
+          word2 = word2.toLowerCase();
+          if (word1.length == word2.length) {
+            // console.log("log1");
+            // console.log(word1, word2);
+            if (word1 > word2) {
+              return 1;
+            }
+            // else {
+              // return -1;
+            // }
+            // return 0;
+          }
+
+          return word1.length - word2.length;
+
+        })
+
+        // console.log(params);
+        // console.log("test");
+        for (const word of params) {
+          console.log(word);
+        }
+
+      }
+
+      // sortBy2(['alpha', 'beta', 'gamma']);
+      // sortBy2(['Isacc', 'Theodor', 'Jack', "aest", 'Harrison', 'George']);
+      // sortBy2(["test", "Deny", "omen", "Default"]);
+
+      const numbers = [5, 9, 2, 4, 3];
+
+      const is = numbers.indexOf(4) > -1;
+
+      const is2 = numbers.includes(4);
+
+      const iseven = numbers.find(num => {
+        return num % 2;
+      })
+
+      console.log(is);
+      console.log(is2);
+      console.log(iseven);
+
     </script>
 
     <div id="contact">
