@@ -857,8 +857,9 @@
 
       .contact-aside h2 {
         margin-bottom: 1rem;
-        font-size: 3rem;
+        font-size: 2.4rem;
         text-align: left;
+        text-transform: capitalize;
       }
 
       .contact-aside p {
@@ -2125,6 +2126,141 @@
         </div>  
       </footer>
     </div>
+
+    <script>
+      // 01. Train
+
+      function train(params) {
+        const wagonsData = params[0].split(" ");
+        const wagons = wagonsData.map(wagon => {
+          return wagon = Number(wagon);
+        })
+        // console.log(wagons);
+        const max = Number(params[1]);
+        // console.log(max);
+
+        for (let input = 2; input < params.length; input++) {
+          let data = params[input];
+          data = data.split(" ");
+
+          if (data[0] == "Add") {
+            const people = Number(data[1]);
+            addWagon(people);
+            // console.log("add");
+            // console.log(wagons);
+          } else {
+            const people = Number(data[0]);
+            findPlace(people);
+            // console.log("find wagon");
+            // console.log(people);
+          }
+        }
+
+        function addWagon(people) {
+          wagons.push(people);
+        }
+
+        function findPlace(people) {
+          for (let wagon = 0; wagon < wagons.length; wagon++) {
+            const free = max - wagons[wagon];
+            // console.log(free);
+            if (free >= people) {
+              wagons[wagon] += people;
+              wagon = wagons.length;
+            }
+            // wagons.push(people);
+          }
+        }
+
+        console.log(wagons.join(" "));
+      }
+
+      // train(['32 54 21 12 4 0 23', '75', 'Add 10', 'Add 0', '30', '10', '75']);
+      // train(['0 0 0 10 2 4', '10', 'Add 10', '10', '10', '10', '8', '6']);
+
+      // 02. Distinct Array
+
+      function istinctArray(params) {
+        const result = [];
+
+        for (let index = 0; index < params.length; index++) {
+          const currentNumber = params[index];
+          // console.log(currentNumber);
+
+          if (!result.includes(currentNumber)) {
+            result.push(currentNumber);
+            // console.log(result.includes(currentNumber));
+          }
+        }
+
+        console.log(result.join(" "));
+
+      }
+
+      // istinctArray([1, 2, 3, 4]);
+      // istinctArray([7, 8, 9, 7, 2, 3, 4, 1, 2]);
+      // istinctArray([20, 8, 12, 13, 4, 4, 8, 5]);
+
+      // 03. House Party
+
+      function createList(params) {
+        const options = {
+          n: remove, 
+          g: add
+        }
+
+        const list = [];
+
+        for (let index = 0; index < params.length; index++) {
+          const input = params[index];
+
+          const option = input.split(' ')[2][0];
+          const name = input.split(" ")[0];
+
+          // console.log(options[option]);
+          // console.log(name);
+
+          const call = options[option];
+          call(name);
+
+        }
+
+        function add(name) {
+          if (list.includes(name)) {
+            console.log(`${name} is already in the list!`);
+          } else {
+            list.push(name);
+          }
+        }
+
+        function remove(name) {
+          const position = list.indexOf(name);
+          // console.log("re");
+
+          if (position == -1) {
+            console.log(`${name} is not in the list!`);
+          } else {
+            // list.filter(person => {
+            //   console.log(person != name);
+            //   return person != name;
+            // });
+            list.splice(position, 1);
+          }
+        }
+
+        // console.log(list.join(" "));
+        for (const name of list) {
+          console.log(name);
+        }
+
+      }
+
+      // createList(['Allie is going!', 'George is going!', 'John is not going!', 'George is not going!']);
+      // createList(['Tom is going!', 'Annie is going!', 'Tom is going!', 'Garry is going!', 'Jerry is going!']);
+
+      // 4. Sorting
+
+    </script>
 
     <div id="contact">
     <!-- 
