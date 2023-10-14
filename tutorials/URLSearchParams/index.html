@@ -2513,9 +2513,137 @@
     // market(63.5, 3.57, 6.35, 8.15, 2.5);
 
       // 06. Bomb Numbers
-      // 07. Search for a Number
 
-      function searchNumber(params) {
+      function detonation(params, params1) {
+        const field = params;
+        const bombInfo = params1;
+        const bomb = bombInfo[0];
+        // console.log(bomb);
+        const range = bombInfo[1];
+
+        let index = field.indexOf(bomb);
+
+        while (index > -1) {
+          const start = Math.max(0, index - range);
+          field.splice(start, range*2 + 1);
+          // console.log(index);
+          // console.log(index - range, index + range + 1);
+          // console.log(field);
+          index = field.indexOf(bomb);
+        }
+
+        let sum = 0;
+
+        for (let index = 0; index < field.length; index++) {
+          sum += field[index];
+        }
+
+        console.log(sum);
+
+      }
+
+      // detonation([1, 2, 2, 4, 2, 2, 2, 9], [4, 2]);
+      // detonation([1, 4, 4, 2, 8, 9, 1], [9, 3]);
+      // detonation([1, 7, 7, 1, 2, 3], [7, 1]);
+      // detonation([1, 1, 2, 1, 1, 1, 2, 1, 1, 1], [2, 1]);
+
+      // 08. Array Manipulator
+
+      function manipulateArray(arr = [], commands) {
+        // arr = []
+
+        const operations = {
+          add: add, 
+          addMany: addMany, 
+          contains: contains, 
+          remove: remove, 
+          shift: shift, 
+          sumPairs: sumPairs, 
+          print: print
+        }
+
+        for (const command of commands) {
+          const data = command.split(" ");
+          const instr = data[0];
+          
+          for (let index = 1; index < data.length; index++) {
+            data[index] = Number(data[index]);
+          }
+
+          const operation = operations[instr];
+          operation(data);
+        }
+
+        function add(params) {
+          const index = params[1];
+          const element = params[2];
+          arr.splice(index, 0, element);
+          // console.log(index, element);
+        }
+
+        function addMany(params) {
+          const start = params[1];
+          const elements = params.slice(2);
+          arr.splice(start, 0, ...elements);
+          // console.log(arr);
+        }
+
+        function contains(params) {
+          // console.log(params);
+          const index = arr.indexOf(params[1]);
+          console.log(index);
+        }
+
+        function remove(params) {
+          const index = params[1];
+          arr.splice(index, 1);
+        }
+
+        function shift(params) {
+          const positions = params[1] % arr.length;
+          const nums = arr.splice(0, positions);
+          arr.push(...nums);
+        }
+
+        function sumPairs() {
+          const result = [];
+          const end = arr.length - arr.length % 2;
+
+          for (let index = 0; index < end; index+=2) {
+            const sum = arr[index] + arr[index + 1];
+            result.push(sum);
+          }
+
+          if (arr.length % 2) {
+            result.push(arr[arr.length - 1]);
+          }
+
+          arr = result;
+        }
+
+        function print() {
+          const srrString = arr.join(", ");
+          console.log(`[ ${srrString} ]`);
+        }
+
+        // console.log(arr);
+
+      }
+
+      manipulateArray([1, 2, 4, 5, 6, 7], ["shift 7", "print"]);
+      // manipulateArray([1, 2, 4, 5, 6, 7], ['add 1 8', 'contains 1', 'contains 3', 'print']);
+      // manipulateArray([1, 2, 3, 4, 5], ['addMany 5 9 8 7 6 5', 'contains 15', 'remove 3', 'shift 1', 'print']);
+      // manipulateArray([1, 2, 4, 5, 6, 7], ['add 1 8', 'print']);
+
+      // 09. Gladiator Inventory
+
+      function menageInventory(params) {
+        
+      }
+
+      // 10. Build a Wall
+
+      function buildWall(params) {
         
       }
 
