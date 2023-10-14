@@ -2385,6 +2385,21 @@
         return num % 2;
       })
 
+      const users = [
+        {
+          id: 37891, 
+          name: "Dom"
+        }, 
+        {
+          id: 20021, 
+          name: "Johnny"
+        }, 
+        {
+          id: 41107, 
+          name: "Stacey"
+        }, 
+      ]
+
       // console.log(is);
       // console.log(is2);
       // console.log(iseven);
@@ -2547,6 +2562,27 @@
       // detonation([1, 7, 7, 1, 2, 3], [7, 1]);
       // detonation([1, 1, 2, 1, 1, 1, 2, 1, 1, 1], [2, 1]);
 
+
+      // 07. Search for a Number
+
+      function searchNumber(params1, params2) {
+        const params1a = params1.slice(0, params2[0]);
+        // console.log(params1a);
+        const params1b = params1a.splice(0, params2[1]);
+        // console.log(params1b);
+        const searched = params2[2];
+        const filtered = params1a.filter(num => {
+          return num == searched;
+        });
+        // console.log(filtered);
+
+        console.log(`Number ${searched} occurs ${filtered.length} times.`);
+
+      }
+
+      // searchNumber([5, 2, 3, 4, 1, 6], [5, 2, 3]);
+      // searchNumber([7, 1, 5, 8, 2, 7], [3, 1, 5]);
+
       // 08. Array Manipulator
 
       function manipulateArray(arr = [], commands) {
@@ -2630,7 +2666,7 @@
 
       }
 
-      manipulateArray([1, 2, 4, 5, 6, 7], ["shift 7", "print"]);
+      // manipulateArray([1, 2, 4, 5, 6, 7], ["shift 7", "print"]);
       // manipulateArray([1, 2, 4, 5, 6, 7], ['add 1 8', 'contains 1', 'contains 3', 'print']);
       // manipulateArray([1, 2, 3, 4, 5], ['addMany 5 9 8 7 6 5', 'contains 15', 'remove 3', 'shift 1', 'print']);
       // manipulateArray([1, 2, 4, 5, 6, 7], ['add 1 8', 'print']);
@@ -2638,14 +2674,116 @@
       // 09. Gladiator Inventory
 
       function menageInventory(params) {
-        
+        // const commands = params.split(", ");
+        const inventory = params[0].split(" ");
+        // console.log(commands);
+        // console.log(inventory);
+
+        const operations = {
+          buy: buy, 
+          trash: trash, 
+          repair: repair, 
+          upgrade: upgrade
+        }
+
+        for (let index = 1; index < params.length; index++) {
+          const command = params[index];
+          const commandTokens = command.split(" ");
+          const operation = commandTokens[0].toLowerCase();
+          const item = commandTokens[1];
+          // console.log(commandTokens);
+          // console.log(operation);
+          // console.log(item);
+          const callback = operations[operation];
+          callback(item);
+        }
+
+        function buy(item) {
+          // console.log("buy");
+          if (!inventory.includes(item)) {
+            inventory.push(item);
+          }
+        }
+
+        function trash(item) {
+          // console.log("trash");
+          const index = inventory.indexOf(item);
+          if (index > -1) {
+            inventory.splice(index, 1);
+          }
+        }
+
+        function repair(item) {
+          // console.log("repair");
+          const index = inventory.indexOf(item);
+          // console.log(index);
+          if (index > -1) {
+            inventory.splice(index, 1);
+            inventory.push(item);
+          }
+        }
+
+        function upgrade(item) {
+          // console.log("upgrade");
+          const info = item.split("-");
+          const itemName = info[0];
+          const newInfo = info.join(":");
+          // console.log(newInfo);
+          const index = inventory.indexOf(itemName);
+          // inventory[index] = newInfo;
+          if (index > -1) {
+            inventory.splice(index + 1, 0, newInfo);
+          }
+        }
+
+        console.log(inventory.join(" "));
+
       }
+
+      // menageInventory(['SWORD Shield Spear', 'Buy Bag', 'Trash Shield', 'Repair Spear', 'Upgrade SWORD-Steel']);
+      // menageInventory(['SWORD Shield Spear', 'Trash Bow', 'Repair Shield', 'Upgrade Helmet-V']);
 
       // 10. Build a Wall
 
-      function buildWall(params) {
-        
+      function buildWall(sections) {
+        // let sections= [1, 2, 3];
+        sections.map(x => Number);
+        // console.log(sections);
+        const daily =[];
+        let concrete = 0;
+
+        // sections= sections.map(x => x + 1);
+        // console.log(sections);
+        sections = sections.filter(x => x < 30);
+
+        while (sections.length > 0) {
+          // sections= sections.map(x => x + 1);
+          for (let index = 0; index < sections.length; index++) {
+            sections[index]++;
+          }
+
+          let concreteDaily = sections.length * 195;
+          daily.push(concreteDaily);
+          concrete += concreteDaily;
+          // console.log(sections);
+          sections = sections.filter(x => x != 30);
+
+          // if (sections[0] > 31) {
+          //   break;
+          // }
+        }
+
+        const total = concrete * 1900;
+
+        console.log(daily.join(", "));
+        console.log(`${total} pesos`);
+
       }
+
+      // buildWall([21, 25, 28]);
+      // buildWall([17, 22, 17, 19, 17]);
+      // buildWall([17]);
+      // buildWall([0, 0, 30]);
 
     </script>
 
