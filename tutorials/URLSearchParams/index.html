@@ -2382,7 +2382,7 @@
       const is2 = numbers.includes(4);
 
       const iseven = numbers.find(num => {
-        return num % 2;
+        return num % 2 == 0;
       })
 
       const users = [
@@ -2400,9 +2400,12 @@
         }, 
       ]
 
+      const user = users.find(({ id }) => id === 20021);
+
       // console.log(is);
       // console.log(is2);
-      // console.log(iseven);
+      console.log(iseven);
+      console.log(user);
 
         // 01. Car Wash
 
@@ -2784,6 +2787,133 @@
       // buildWall([17, 22, 17, 19, 17]);
       // buildWall([17]);
       // buildWall([0, 0, 30]);
+
+      // https://softuni.bg/trainings/resources/officedocument/88019/arrays-advanced-more-exercises-programming-fundamentals-with-javascript-september-2023/4221
+      // https://judge.softuni.org/Contests/Practice/Index/1301#0
+
+      // 1. Equal Neighbors
+
+      function findSame(params) {
+        let pairs = 0;
+
+        for (let row = 0; row < params.length; row++) {
+
+          const rowData = params[row];
+          // console.log(rowData);
+
+          for (let col = 0; col < rowData.length - 1; col++) {
+            let num = rowData[col];
+            let next = rowData[col + 1];
+            // console.log(col);
+
+            if (num == next) {
+              pairs++;
+            }
+          }
+
+        }
+
+        for (let row = 0; row < params.length - 1; row++) {
+          const rowData = params[row];
+          const nextRow = params[row + 1];
+
+          const length = Math.min(rowData.length, nextRow.length);
+
+          for (let col = 0; col < length; col++) {
+            
+            if (rowData[col] == nextRow[col]) {
+              pairs++;
+            }
+
+          }
+
+        }
+
+        console.log(pairs);
+      }
+
+      // findSame([['2', '3', '4', '7', '0'], 
+      //           ['4', '0', '5', '3', '4'], 
+      //           ['2', '3', '5', '4', '2'], 
+      //           ['9', '8', '7', '5', '4']]);
+      // findSame([['test', 'yo', 'yo', 'ho'], 
+      //           ['well', 'done', 'no', '6'], 
+      //           ['not', 'done', 'yet', '5']]);
+
+      // 2. Bunny Kill
+
+      function killBandits(params) {
+        const hangar = [];
+        const bombsData = params[params.length - 1];
+        const bombs = bombsData.split(" ");
+        let kills = 0;
+        let damage = 0;
+
+        for (let index = 0; index < params.length - 1; index++) {
+          const data = params[index];
+          let row = data.split(" ");
+          row = row.map(x => Number(x));
+          // console.log(row);
+          hangar.push(row);
+        }
+
+        for (let index = 0; index < bombs.length; index++) {
+          const bombdata = bombs[index];
+          const bomb = bombdata.split(",");
+          const x = Number(bomb[0]);
+          const y = Number(bomb[1]);
+          const power = hangar[x][y];
+          hangar[x][y] = 0;
+
+          const hangarX = hangar[0].length - 1;
+          const hangarY = hangar.length - 1;
+
+          if (power > 0) {
+            kills++;
+            damage += power;
+            const top = Math.max(0, x - 1);
+            const bottom = Math.min(x + 1, hangarY);
+            const left = Math.max(0, y - 1);
+            const right = Math.min(y + 1, hangarX);
+
+            // console.log(top, bottom, left, right);
+
+            for (let row = top; row <= bottom; row++) {
+              for (let col = left; col <= right; col++) {
+                // console.log(row, col, power);
+                hangar[row][col] -= power;
+              }
+            }
+
+          }
+          // console.log(x, y, power);
+        }
+
+        for (let row = 0; row < hangar.length; row++) {
+          for (let col = 0; col < hangar[row].length; col++) {
+            let value = hangar[row][col];
+            // console.log(row);
+
+            if (value > 0) {
+              damage += value;
+              kills++;
+            }
+          }
+        }
+
+        console.log(damage);
+        console.log(kills);
+
+        // console.log(hangar);
+
+      }
+
+      // killBandits(['5 10 15 20', '10 10 10 10', '10 15 10 10', '10 10 10 10', '2,2 0,1']);
+      killBandits(['10 10 10', '10 10 10', '10 10 10', '2,0']);
+
+      // 03. Air Pollution
+      // 04. Jan's Notation
+      // 05. Rosetta Stone
 
     </script>
 
