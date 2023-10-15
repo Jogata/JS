@@ -2381,9 +2381,20 @@
 
       const is2 = numbers.includes(4);
 
-      const iseven = numbers.find(num => {
+      const firsteven = numbers.find(num => {
         return num % 2 == 0;
       })
+
+      const lastevennumberIndex = numbers.findLastIndex(num => {
+        return num % 2 == 0;
+      })
+
+      const lastevennumber = numbers.findLast(num => {
+        return num % 2 == 0;
+      })
+
+      console.log(lastevennumber);
+      console.log(lastevennumberIndex);
 
       const users = [
         {
@@ -2404,8 +2415,22 @@
 
       // console.log(is);
       // console.log(is2);
-      console.log(iseven);
-      console.log(user);
+      // console.log(firsteven);
+      // console.log(user);
+
+      const person = {
+        id: 252, 
+        username: "jogata", 
+        age : 32, 
+        hobbies: ["games", "programming"], 
+        active: true
+      }
+
+      const keys = Object.keys(person);
+      console.log(keys);
+
+      const values = Object.values(person);
+      console.log(values);
 
         // 01. Car Wash
 
@@ -2830,6 +2855,7 @@
         }
 
         console.log(pairs);
+
       }
 
       // findSame([['2', '3', '4', '7', '0'], 
@@ -2909,9 +2935,108 @@
       }
 
       // killBandits(['5 10 15 20', '10 10 10 10', '10 15 10 10', '10 10 10 10', '2,2 0,1']);
-      killBandits(['10 10 10', '10 10 10', '10 10 10', '2,0']);
+      // killBandits(['10 10 10', '10 10 10', '10 10 10', '2,0']);
 
       // 03. Air Pollution
+
+      function printMap(mapData, data) {
+        const map = [];
+
+        for (let index = 0; index < mapData.length; index++) {
+          let row = mapData[index].split(" ").map(x => Number(x));
+          // row = row.map(x => Number(x));
+          map.push(row);
+        }
+
+        const callbacks = {
+          breeze: breeze, 
+          gale: gale, 
+          smog: smog
+        }
+
+        for (let index = 0; index < data.length; index++) {
+          const token = data[index];
+          const tokens = token.split(" ");
+          const force = tokens[0];
+          const value = Number(tokens[1]);
+          const callback = callbacks[force];
+          callback(value);
+        }
+
+        function breeze(rowIndex) {
+          // console.log("breeze");
+          const row = map[rowIndex];
+
+          for (let index = 0; index < row.length; index++) {
+            row[index] -= 15;
+            row[index] = Math.max(row[index], 0);
+          }
+          // console.log(map);
+        }
+
+        function gale(colIndex) {
+          // console.log("gale");
+          for (let row = 0; row < map.length; row++) {
+            map[row][colIndex] -= 20;
+            map[row][colIndex] = Math.max(map[row][colIndex], 0);
+          }
+          // console.log(map);
+        }
+
+        function smog(value) {
+          // console.log("smog");
+          for (let row = 0; row < map.length; row++) {
+            for (let col = 0; col < map[row].length; col++) {
+              map[row][col] += value;
+            }
+          }
+          // console.log(map);
+        }
+
+        const polutedAreas = [];
+
+        for (let row = 0; row < map.length; row++) {
+          for (let col = 0; col < map[row].length; col++) {
+            const areaValue = map[row][col];
+
+            if (areaValue >= 50) {
+              const area = `[${row}-${col}]`;
+              polutedAreas.push(area);
+            }
+          }
+        }
+
+        if (polutedAreas.length) {
+          console.log(`Polluted areas: ${polutedAreas.join(", ")}`);
+        } else {
+          console.log("No polluted areas");
+        }
+        // console.log(map);
+
+      }
+
+      // printMap(['5 7 72 14 4', 
+                  // '41 35 37 27 33', 
+                  // '23 16 27 42 12', 
+                  // '2 20 28 39 14', 
+                  // '16 34 31 10 24'], 
+                  // ['breeze 1', 'gale 2', 
+                  // 'smog 25']);
+      // printMap(['5 7 3 28 32', 
+                  // '41 12 49 30 33', 
+                  // '3 16 20 42 12', 
+                  // '2 20 10 39 14', 
+                  // '7 34 4 27 24'], 
+                  // ['smog 11', 'gale 3', 
+                  // 'breeze 1', 'smog 2']);
+      // printMap(['5 7 2 14 4', 
+                  // '21 14 2 5 3', 
+                  // '3 16 7 42 12', 
+                  // '2 20 8 39 14', 
+                  // '7 34 1 10 24'], 
+                  // ['breeze 1', 'gale 2', 
+                  // 'smog 35']);
+
       // 04. Jan's Notation
       // 05. Rosetta Stone
 
