@@ -2426,26 +2426,26 @@
         active: true
       }
 
-      const keys = Object.keys(person);
+      // const keys = Object.keys(person);
       // console.log(keys);
 
-      const values = Object.values(person);
+      // const values = Object.values(person);
       // console.log(values);
 
-      const entries = Object.entries(person);
-      console.log(entries);
-      console.log(entries[3]);
+      // const entries = Object.entries(person);
+      // console.log(entries);
+      // console.log(entries[3]);
 
-      for (const key in person) {
-        if (person.hasOwnProperty(key)) {
-          console.log(person[key]);
-        }
-      }
+      // for (const key in person) {
+      //   if (person.hasOwnProperty(key)) {
+      //     console.log(person[key]);
+      //   }
+      // }
 
-      for (const [key, value] of entries) {
-        console.log(key);
-        console.log(value);
-      }
+      // for (const [key, value] of entries) {
+      //   console.log(key);
+      //   console.log(value);
+      // }
 
         // 01. Car Wash
 
@@ -3234,6 +3234,37 @@ function signCheck(n1, n2, n3) {
     <script>
       // 01. Computer Store
 
+      function calcPrice(params) {
+        let total = 0;
+
+        for (let index = 0; index < params.length - 1; index++) {
+          let price = params[index];
+          if (price <= 0) {
+            console.log("Invalid price!");
+          } else {
+            price = Number(price);
+            total += price;
+          }
+        }
+
+        if (total > 0) {
+          let priceWithout = total;
+          let taxes = total * 0.2;
+          total = total * 1.20;
+          if (params[params.length - 1] == "special") {
+            total = total * 0.9;
+          }
+          console.log("Congratulations you've just bought a new computer!");
+          console.log(`Price without taxes: ${priceWithout.toFixed(2)}$`);
+          console.log(`Taxes: ${taxes.toFixed(2)}$`);
+          console.log("-----------");
+          console.log(`Total price: ${total.toFixed(2)}$`);
+        } else {
+          console.log("Invalid order!");
+        }
+
+      }
+
       // calcPrice((['1050', '200', '450', '2', '18.50', '16.86', 'special']));
       // calcPrice((['1023', '15', '-20','-5.50','450', '20', '17.66', '19.30', 'regular']));
       // calcPrice((['regular']));
@@ -3291,13 +3322,114 @@ function signCheck(n1, n2, n3) {
       // 03. Memory Game
 
       function playGame(params) {
-        
+        const seq = params[0].split(" ");
+        let turns = 0;
+
+        for (let index = 1; index < params.length - 1; index++) {
+          turns++;
+          const opit = params[index].split(" ").map(x => Number(x));
+
+          if (opit[0] == opit[1] || opit[0] < 0 || opit[0] >= seq.length || opit[1] < 0 || opit[1] >= seq.length) {
+            const newEl = `-${turns}a`;
+            seq.splice(seq.length/2, 0, newEl, newEl)
+            console.log("Invalid input! Adding additional elements to the board");
+          } else {
+            // console.log(seq);
+            // console.log(opit[0], opit[1]);
+            if (seq[opit[0]] === seq[opit[1]]) {
+              let first = Math.max(opit[0], opit[1]);
+              let second = Math.min(opit[0], opit[1]);
+              // console.log(first, second);
+              console.log(`Congrats! You have found matching elements - ${seq[opit[1]]}!`);
+              seq.splice(first, 1);
+              seq.splice(second, 1);
+            } else {
+              console.log("Try again!");
+            }
+          }
+
+          if (seq.length == 0) {
+            // console.log(`You have won in ${turns} turns!`);
+            index = params.length;
+          }
+        }
+
+        if (seq.length == 0) {
+          console.log(`You have won in ${turns} turns!`);
+        } else {
+          console.log("Sorry you lose :(");
+          console.log(seq.join(" "));
+        }
+
+        // console.log(seq);
       }
 
-      playGame();
-      playGame();
-      playGame();
-      playGame();
+      // playGame( ["1 1 2 2 3 3 4 4 5 5", "1 0", "-1 0", "1 0", "1 0", "1 0", "end"]);
+      // playGame(["a 2 4 a 2 4", "0 3", "0 2", "0 1", "0 1", "end"]);
+      // playGame(["a 2 4 a 2 4", "4 0", "0 2", "0 1", "0 1", "end"]);
+    </script>
+    <script>
+      // 01. The Imitation Game
+
+      function decode(params) {
+        const code = params[0].split("");
+        // console.log(code);
+
+        for (let index = 1; index < params.length; index++) {
+          let command = params[index];
+          let tokens = command.split("|");
+
+          if (tokens[0] == "ChangeAll") {
+            // console.log("ChangeAll");
+            // for (let el of code) {
+            //   console.log(el);
+            //   if (el === tokens[1]) {
+            //     el = tokens[2];
+            //     console.log(el);
+            //   }
+            // }
+            for (let index = 0; index < code.length; index++) {
+              if (code[index] === tokens[1]) {
+                code[index] = tokens[2];
+                // console.log(code[index]);
+              }
+              
+            }
+            // code.map((x, i) => {
+            //   if (x === tokens[1]) {
+            //     code[i] = tokens[2];
+            //     console.log(tokens[1], tokens[2]);
+            //   }
+            // })
+          } else if (tokens[0] == "Insert") {
+            // console.log("Insert");
+            code.splice(Number(tokens[1]), 0, tokens[2]);
+          } else if (tokens[0] == "Move") {
+            // console.log("Move");
+            // console.log(tokens[1]);
+            tokens[1] = Number(tokens[1]) % code.length;
+            const removed = code.splice(0, Number(tokens[1]));
+            // code.push(...removed);
+            for (let index = 0; index < removed.length; index++) {
+              code.push(removed[index]);
+            }
+          } else if (tokens[0] == "Decode") {
+            // console.log("Decode");
+            index = params.length;
+          }
+          // console.log(index);
+        }
+
+        // console.log(code);
+        console.log(`The decrypted message is: ${code.join("")}`);
+      }
+
+      // decode(['zzHe', 'ChangeAll|z|l', 'Insert|2|o', 'Move|3', 'Decode',]);
+      // decode(['owyouh', 'Move|2', 'Move|3', 'Insert|3|are', 'Insert|9|?', 'Decode', ]);
+      // decode(['zzHe', 'Insert|2|o', 'Decode']);
+      // decode(["test"]);
+      // decode(['zzHe', 'ChangeAll|z|l', 'Decode', ,]);
+      // decode(['zzHe', 'Move|5', 'Decode',]);
     </script>
 
     <div id="contact">
