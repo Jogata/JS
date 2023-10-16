@@ -47,6 +47,20 @@
     </script>
 
     <script>
+      const course = {
+        name: "Web Programming"
+      }
+
+      const grade = {
+        score: 92
+      }
+
+      const studentInfo = Object.assign(course, grade);
+      
+      console.log(studentInfo);
+    </script>
+
+    <script>
             // 03. The Pianist
 
             function organizePieces(params) {
@@ -187,13 +201,138 @@
 
       }
 
-      reception(['5','6','4','20']);
-      reception(['1','2','3','45']);
-      reception(['3','2','5','40']);
-      reception(['3','2','5','60']);
+      // reception(['5','6','4','20']);
+      // reception(['1','2','3','45']);
+      // reception(['3','2','5','40']);
+      // reception(['3','2','5','60']);
 
       // 02. Array Modifier
+
+      function modArray(params) {
+        let numbers = params[0]
+                          .split(" ")
+                          .map(x => Number(x));
+        // console.log(numbers);
+
+        // const test = [1, 2, 3]
+        // test.map(x => x + 1);
+        // console.log(test);
+
+        for (let index = 1; index < params.length; index++) {
+          const rawData = params[index];
+          const data = rawData.split(" ");
+          const operation = data[0];
+
+          if (operation == "swap") {
+            // console.log("swap");
+            const index1 = Number(data[1]);
+            const index2 = Number(data[2]);
+            // console.log(index1, index2);
+            const old = numbers[index1];
+            numbers[index1] = numbers[index2];
+            numbers[index2] = old;
+          } else if (operation == "multiply") {
+            // console.log("multiply");
+            const index1 = Number(data[1]);
+            const index2 = Number(data[2]);
+            numbers[index1] = numbers[index1] * numbers[index2];
+          } else if (operation == "decrease") {
+            // console.log("decrease");
+            numbers = numbers.map(num => num - 1);
+          }
+        }
+
+        console.log(numbers.join(", "));
+
+      }
+
+      // modArray(['23 -2 321 87 42 90 -123', 'swap 1 3', 'swap 3 6', 'swap 1 0', 'multiply 1 2', 'multiply 2 1', 'decrease', 'end']);
+      // modArray(['1 2 3 4', 'swap 0 1', 'swap 1 2', 'swap 2 3', 'multiply 1 2', 'decrease', 'end']);
+
       // 03. Numbers
+
+      function printTopFive(params) {
+        const numbers = params
+        .split(" ")
+        .map(x => Number(x));
+
+        let average = 0;
+        let sum = 0;
+
+        for (let index = 0; index < numbers.length; index++) {
+          sum = sum + numbers[index];
+        }
+
+        average = sum / numbers.length;
+        // console.log(average);
+
+        const filtered = numbers.filter(x => x > average);
+        // console.log(filtered);
+        const sorted = filtered.sort((a, b) => b - a);
+        const sliced = sorted.slice(0, 5);
+        
+        if (sliced.length == 0) {
+          console.log("No");
+        } else {
+          console.log(sliced.join(" "));
+        }
+
+      }
+
+      // printTopFive("10 20 30 40 50");
+      // printTopFive("5 2 3 4 -10 30 40 50 20 50 60 60 51");
+      // printTopFive("1");
+      // printTopFive('-1 -2 -3 -4 -5 -6');
+    </script>
+    <script>
+      // 01. Counter-Strike
+
+      function playCS(params) {
+        let energy = Number(params[0]);
+        let index = 1;
+        let input = params[index];
+        let wins = 0;
+        let ended = false;
+
+        while (input != "End of battle") {
+          let dist = Number(input);
+
+          if (energy >= dist) {
+            energy -= dist;
+            wins++;
+
+            if (wins % 3 == 0) {
+              energy += wins;
+            }
+          } else {
+            ended = true;
+            console.log(`Not enough energy! Game ends with ${wins} won battles and ${energy} energy`);
+            break;
+          }
+
+          // console.log(dist);
+          // if (index > 50) {
+          //   console.log("infinity");
+          //   break;
+          // }
+
+          index++;
+          input = params[index];
+        }
+
+        // console.log(wins);
+        // console.log(energy);
+        if (ended == false) {
+          console.log(`Won battles: ${wins}. Energy left: ${energy}`);
+        }
+
+      }
+
+      // playCS(["100", "10", "10", "10", "1", "2", "3", "73", "10"]);
+      // playCS(["200", "54", "14", "28", "13", "End of battle"]);
+
+      // 02. Shoot for the Win
+      // 03. Moving Target
     </script>
   </body>
 </html>
