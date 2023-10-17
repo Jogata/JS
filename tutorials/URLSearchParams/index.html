@@ -79,10 +79,10 @@
         console.log(`${options.firstName} ${options.lastname}`);
       }
 
-      printName({
-        firstName: "Jogata", 
+      // printName({
+        // firstName: "Jogata", 
         // lastname: "SoftUni"
-      })
+      // })
     </script>
 
     <script>
@@ -458,6 +458,136 @@
         // console.log(numbers.join("|"));
       }
 
+      function trackTargets(params) {
+        const numbers = params[0]
+        .split(" ")
+        .map(x => Number(x));
+        // console.log(numbers);
+        let index = 1;
+        let input = params[index]
+
+        while (input != "End") {
+          const rawData = params[index];
+          const data = rawData.split(" ");
+          const operation = data[0];
+          // console.log(operation);
+
+          if (operation == "Shoot") {
+            // console.log("Shoot");
+            const index = Number(data[1]);
+            const power = Number(data[2]);
+
+            if (index < numbers.length && index >= 0) {
+              numbers[index] -= power;
+
+              if (numbers[index] <= 0) {
+                numbers.splice(index, 1);
+              }
+            }
+          } else if (operation == "Strike") {
+            // console.log("Strike");
+            const index = Number(data[1]);
+            const range = Number(data[2]);
+            // console.log(index, range);
+            if (index >= 0 && index < numbers.length) {
+              // console.log("Strike missed!");
+            // } else 
+            if (index - range < 0 || index + range >= numbers.length) {
+              console.log("Strike missed!");
+            } else {
+              const start = index - range;
+              const area = range + 1 + range;
+              console.log(start, area);
+              numbers.splice(start, area);
+            }
+          }
+          } else if (operation == "Add") {
+            // console.log("Add");
+            const index = Number(data[1]);
+            const value = Number(data[2]);
+            if (index < numbers.length && index >= 0) {
+              // console.log(index, value);
+              numbers.splice(index, 0, value);
+            } else {
+              console.log("Invalid placement!");
+            }
+          } else if (operation == "test") {
+            // console.log("End");
+            // index = params.length;
+            // console.log(numbers.join("|"));
+          }
+
+          index++;
+          input = params[index];
+
+          if (index > 50) {
+            console.log("infinity");
+            break;
+          }
+        }
+        
+        // console.log(numbers);
+        console.log(numbers.join("|"));
+      }
+
+      // trackTargets(["52 74 23 44 96 110", "Shoot 5 10", "Shoot 1 80", "Strike 2 1", "Add 22 3", "End"]);
+      // trackTargets(["1 2 3 4 5", "Strike 0 1", "End"]);
+      // trackTargets(["1 2 3 4 5", "Strike 1 -1", "End"]);
+      // trackTargets(["1 2 3 4 5", "Shoot 4 2", "End"]);
+      // trackTargets(["1 2 3 4 5", "Shoot 0 1", "Shoot 0 2", "Shoot 0 3", "Shoot 0 4", "Shoot 0 6", "End"]);
+      // trackTargets(["1 2 3 4 5", "Shoot -1 1", "End"]);
+      // trackTargets(["1 2 3 4 5", "Shoot 5 1", "End"]);
+      // trackTargets(["1 2 3 4 5", "Add 5 8", "End"]);
+      // trackTargets(["1 2 3 4 5", "Add 5 6", "End"]);
+    </script>
+    <script>
+      // 01. Guinea Pig
+
+      function feedPig(params) {
+        const food = Number(params[0]) * 1000;
+        const hay = Number(params[1]) * 1000;
+        const cover = Number(params[2]) * 1000;
+        const weight = Number(params[3]) * 1000;
+        let isEn = true;
+
+        let foodLeft = food;
+        let hayLeft = hay;
+        let coverLeft = cover;
+
+        const foodDaily = 300;
+
+        for (let day = 1; day <= 30; day++) {
+          foodLeft -= foodDaily;
+
+          if (day % 2 == 0) {
+            const dailyHay = foodLeft * 0.05;
+            hayLeft -= dailyHay;
+          }
+
+          if (day % 3 == 0) {
+            const usedCover = weight / 3;
+            coverLeft -= usedCover;
+          }
+
+          if (foodLeft <= 0 || hayLeft <= 0 || coverLeft <= 0) {
+            isEn = false;
+            day = 30;
+          }
+        }
+
+        if (isEn) {
+          console.log(`Everything is fine! Puppy is happy! Food: ${(foodLeft/1000).toFixed(2)}, Hay: ${(hayLeft/1000).toFixed(2)}, Cover: ${(coverLeft/1000).toFixed(2)}.`);
+        } else {
+          console.log("Merry must go to the pet store!");
+        }
+
+      }
+
+      // feedPig((["10", "5", "5.2", "1"]));
+      // feedPig(["1", "1.5", "3", "1.5"]);
+      // feedPig(["9", "5", "5.2", "1"]);
+      // 02. Shopping List
+      // 03. Heart Delivery
     </script>
   </body>
 </html>
