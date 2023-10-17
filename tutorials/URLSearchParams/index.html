@@ -575,8 +575,12 @@
           }
         }
 
+        foodLeft = foodLeft / 1000;
+        hayLeft = hayLeft / 1000;
+        coverLeft = coverLeft / 1000;
+
         if (isEn) {
-          console.log(`Everything is fine! Puppy is happy! Food: ${(foodLeft/1000).toFixed(2)}, Hay: ${(hayLeft/1000).toFixed(2)}, Cover: ${(coverLeft/1000).toFixed(2)}.`);
+          console.log(`Everything is fine! Puppy is happy! Food: ${foodLeft.toFixed(2)}, Hay: ${hayLeft.toFixed(2)}, Cover: ${coverLeft.toFixed(2)}.`);
         } else {
           console.log("Merry must go to the pet store!");
         }
@@ -586,8 +590,140 @@
       // feedPig((["10", "5", "5.2", "1"]));
       // feedPig(["1", "1.5", "3", "1.5"]);
       // feedPig(["9", "5", "5.2", "1"]);
+
       // 02. Shopping List
+
+      function menageList(params) {
+        const list = params[0].split("!");
+        // console.log(list);
+        let index = 1;
+        let input = params[index];
+
+        while (input != "Go Shopping!") {
+          const data = input.split(" ");
+          const command = data[0];
+
+          if (command == "Urgent") {
+            // console.log("Urgent");
+            const item = data[1];
+            // console.log(item);
+            if (!list.includes(item)) {
+              list.unshift(item);
+            }
+          } else if (command == "Unnecessary") {
+            // console.log("Unnecessary");
+            const item = data[1];
+            // console.log(item);
+            const index = list.indexOf(item);
+            if (index >= 0) {
+              list.splice(index, 1);
+            }
+          } else if (command == "Correct") {
+            // console.log("Correct");
+            const oldItem = data[1];
+            const newItem = data[2];
+            // console.log(oldItem, newItem);
+            const index = list.indexOf(oldItem);
+            if (index >= 0) {
+              list[index] = newItem;
+            }
+          } else if (command == "Rearrange") {
+            // console.log("Rearrange");
+            const item = data[1];
+            // console.log(item);
+            const index = list.indexOf(item);
+            if (index >= 0) {
+              list.splice(index, 1);
+              list.push(item);
+            }
+          }
+
+          index++;
+          input = params[index];
+
+          // if (index > 50) {
+          //   console.log("infinity");
+          //   break;
+          // }
+        }
+
+        console.log(list.join(", "));
+
+      }
+
+      // menageList(["Tomatoes!Potatoes!Bread", "Unnecessary Milk", "Urgent Tomatoes", "Go Shopping!"]);
+      // menageList(["Milk!Pepper!Salt!Water!Banana", "Urgent Salt", "Unnecessary Grapes", "Correct Pepper Onion", "Rearrange Grapes", "Correct Tomatoes Potatoes", "Go Shopping!"]);
+
       // 03. Heart Delivery
+
+      function deliverHeart(params) {
+        const houses = params[0]
+        .split("@")
+        .map(x => Number(x));
+        // console.log(houses);
+        let index = 1;
+        let input = params[index];
+        let currentHouse = 0;
+
+        while (input != "Love!") {
+          const data = input.split(" ");
+          const jumpLength = Number(data[1]);
+          // console.log(data);
+          // console.log(typeof jumpLength);
+
+          currentHouse += jumpLength;
+          // console.log(currentHouse);
+
+          if (currentHouse >= houses.length) {
+            // console.log(currentHouse);
+            let iteration = Math.floor(currentHouse / houses.length);
+            // currentHouse = currentHouse % houses.length;
+            // for (let index = 0; index < jumpLength; index++) {
+            //   currentHouse++;
+            //   currentHouse = currentHouse % houses.length;
+            //   console.log(currentHouse);
+            // }
+            console.log(iteration, index);
+            currentHouse = currentHouse - (iteration * houses.length);
+            // const last = houses.length - 1;
+          }
+
+          if (houses[currentHouse] > 0) {
+            houses[currentHouse] = houses[currentHouse] - 2;
+
+            if (houses[currentHouse] == 0) {
+              console.log(`Place ${currentHouse} has Valentine's day.`);
+            }
+          } else {
+            console.log(`Place ${currentHouse} already had Valentine's day.`);
+          }
+
+          index++;
+          input = params[index];
+
+          if (index > 50) {
+            console.log("infinity");
+            break;
+          }
+        }
+
+        // console.log(houses);
+        console.log(`Cupid's last position was ${currentHouse}.`);
+        const filtered = houses.filter(x => x > 0);
+
+        if (filtered.length == 0) {
+          console.log(`Mission was successful.`);
+        } else {
+          console.log(`Cupid has failed ${filtered.length} places.`);
+        }
+
+      }
+
+2/2/0
+
+      // deliverHeart(["10@10@10@2", "Jump 1", "Jump 2", "Love!"]);
+      deliverHeart(["2@4@2", "Jump 2", "Jump 2", "Jump 8", "Jump 3", "Jump 1", "Love!"]);
+      // deliverHeart(["2@4@2", "Jump 2", "Jump 2", "Love!"]);/
     </script>
   </body>
 </html>
