@@ -46,18 +46,43 @@
       console.log(uspFromObject.toString());
     </script>
 
-    <script>
+    <script src="doestexist.js">
       const course = {
-        name: "Web Programming"
+        name: "Web Programming", 
+        score: 75
       }
 
       const grade = {
-        score: 92
+        score: 12
       }
 
-      const studentInfo = Object.assign(course, grade);
-      
+      const studentInfo = Object.assign(course, grade, {teacher: "Mrs Water"});
+
       console.log(studentInfo);
+
+      const copy = Object.assign({}, studentInfo);
+
+      studentInfo.score = 55;
+
+      console.log(studentInfo);
+      console.log(copy);
+    </script>
+    <script>
+      function printName(options) {
+        const defaults = {
+          firstName: "Steve", 
+          lastname: "Jobs"
+        }
+
+        options = Object.assign(defaults, options);
+
+        console.log(`${options.firstName} ${options.lastname}`);
+      }
+
+      printName({
+        firstName: "Jogata", 
+        // lastname: "SoftUni"
+      })
     </script>
 
     <script>
@@ -332,7 +357,107 @@
       // playCS(["200", "54", "14", "28", "13", "End of battle"]);
 
       // 02. Shoot for the Win
+
+      function playShoot(params) {
+        const numbers = params[0]
+        .split(" ")
+        .map(x => Number(x));
+
+        let shots = 0;
+
+        // console.log(numbers);
+
+        for (let index = 1; index < params.length - 1; index++) {
+          // console.log(params[index]);
+          const position = Number(params[index]);
+          // console.log(position);
+          if (position < numbers.length && position >= 0) {
+            const value = numbers[position];
+            // console.log(value);
+            if (value != -1) {
+              shots++;
+              numbers[position] = -1;
+              
+              for (let index = 0; index < numbers.length; index++) {
+                if (numbers[index] != -1) {
+                  if (numbers[index] > value) {
+                    numbers[index] = numbers[index] - value;
+                  } else {
+                    numbers[index] = numbers[index] + value;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        console.log(`Shot targets: ${shots} -> ${numbers.join(" ")}`);
+        // console.log(shots);
+      }
+
+      // playShoot(["24 50 36 70", "0", "4", "3", "1", "End"]);
+      // playShoot(["30 30 12 60 54 66", "5", "2", "4", "0", "End"]);
+
       // 03. Moving Target
+
+      function trackTargets(params) {
+        const numbers = params[0]
+        .split(" ")
+        .map(x => Number(x));
+        // console.log(numbers);
+        for (let index = 1; index < params.length; index++) {
+          const rawData = params[index];
+          const data = rawData.split(" ");
+          const operation = data[0];
+          // console.log(operation);
+
+          if (operation == "Shoot") {
+            // console.log("Shoot");
+            const index = Number(data[1]);
+            const power = Number(data[2]);
+
+            if (index < numbers.length && index >= 0) {
+              numbers[index] -= power;
+
+              if (numbers[index] <= 0) {
+                numbers.splice(index, 1);
+              }
+            }
+          } else if (operation == "Strike") {
+            // console.log("Strike");
+            const index = Number(data[1]);
+            const range = Number(data[2]);
+            // console.log(index, range);
+            if (index < 0 || index >= numbers.length) {
+              console.log("Strike missed!");
+            } else if (index - range < 0 || index + range >= numbers.length) {
+              console.log("Strike missed!");
+            } else {
+              const start = index - range;
+              const area = range + 1 + range;
+              numbers.splice(start, area);
+            }
+          } else if (operation == "Add") {
+            // console.log("Add");
+            const index = Number(data[1]);
+            const value = Number(data[2]);
+            if (index <= numbers.length && index >= 0) {
+              // console.log(index, value);
+              numbers.splice(index, 0, value);
+            } else {
+              console.log("Invalid placement!");
+            }
+          } else if (operation == "End") {
+            // console.log("End");
+            index = params.length;
+            console.log(numbers.join("|"));
+          }
+        }
+        
+        // console.log(numbers);
+        // console.log(numbers.join("|"));
+      }
+
     </script>
   </body>
 </html>
