@@ -84,6 +84,38 @@
         // lastname: "SoftUni"
       // })
     </script>
+    <script>
+      const user = {
+        username: "Jogata", 
+        age: 43, 
+        active: true, 
+        friends: ["Matt", "Ange", "Johnny"]
+      }
+
+      // const userCopy = { ...user };
+      // const userCopy = Object.assign({}, user);
+      const userCopy = JSON.parse(JSON.stringify(user));
+
+      user.age = 23;
+      user.friends.push("Dom");
+
+      console.log(userCopy);
+      console.log(userCopy.friends === user.friends);
+      console.log(userCopy === user);
+
+      const hasEvenNumber = (numbers) => {
+        let retVal;
+
+        for (let i = 0; i < numbers.length; i++) {
+          if (numbers[i] % 2 === 0) {
+            return true;
+          }
+        }
+
+        return false;
+        
+      }
+    </script>
 
     <script>
             // 03. The Pianist
@@ -675,16 +707,20 @@
           // console.log(currentHouse);
 
           if (currentHouse >= houses.length) {
+            currentHouse = 0;
+            // while (currentHouse >= houses.length) {
+            //   currentHouse -= houses.length;
+            // }
             // console.log(currentHouse);
-            let iteration = Math.floor(currentHouse / houses.length);
+            // let iteration = Math.floor(currentHouse / houses.length);
             // currentHouse = currentHouse % houses.length;
             // for (let index = 0; index < jumpLength; index++) {
             //   currentHouse++;
             //   currentHouse = currentHouse % houses.length;
-            //   console.log(currentHouse);
+              // console.log(currentHouse);
             // }
-            console.log(iteration, index);
-            currentHouse = currentHouse - (iteration * houses.length);
+            // console.log(iteration, index);
+            // currentHouse = currentHouse - (iteration * houses.length);
             // const last = houses.length - 1;
           }
 
@@ -719,11 +755,106 @@
 
       }
 
-2/2/0
-
       // deliverHeart(["10@10@10@2", "Jump 1", "Jump 2", "Love!"]);
-      deliverHeart(["2@4@2", "Jump 2", "Jump 2", "Jump 8", "Jump 3", "Jump 1", "Love!"]);
+      // deliverHeart(["2@4@2", "Jump 2", "Jump 2", "Jump 8", "Jump 3", "Jump 1", "Love!"]);
       // deliverHeart(["2@4@2", "Jump 2", "Jump 2", "Love!"]);/
+    </script>
+    <script>
+      // 01. Bonus Scoring System
+
+      function calcBonus(params) {
+        const students = Number(params[0]);
+        const lectures = Number(params[1]);
+        const lectureBonus = Number(params[2]);
+
+        const attendances = params.slice(3).map(x => Number(x));
+
+        // console.log(attendances);
+
+        let max = 0;
+        let a = 0;
+
+        for (let index = 0; index < students; index++) {
+          let bonus =  attendances[index] / lectures * (5 + lectureBonus);
+          bonus = Math.round(bonus);
+          if (bonus > max) {
+            max = bonus;
+            a = attendances[index];
+          }
+        }
+
+        console.log(`Max Bonus: ${max}.`);
+        console.log(`The student has attended ${a} lectures.`);
+
+      }
+
+      // calcBonus(['5',  '25', '30', '12', '19', '24', '16', '20']);
+      // calcBonus(['10', '30', '14', '8', '23', '27', '28', '15', '17', '25', '26', '5', '18']);
+
+      // 02. MuOnline
+
+      // 03. Inventory
+
+      function craft(params) {
+        const items = params[0].split(", ");
+        // console.log(items);
+        let index = 1;
+        let input = params[index];
+
+        while (input != "Craft!") {
+          const data = input.split(" - ");
+          // console.log(data);
+          const operation = data[0];
+          const item = data[1];
+          // console.log(operation, "/", item);
+
+          if (operation == "Collect") {
+            // console.log("Collect");
+            const index = items.indexOf(item);
+            if (index == -1) {
+              items.push(item);
+            }
+          } else if (operation == "Drop") {
+            // console.log("Drop");
+            const index = items.indexOf(item);
+            if (index != -1) {
+              items.splice(index, 1);
+            }
+          } else if (operation == "Combine Items") {
+            // console.log("Combine Items");
+            const tokens = item.split(":");
+            const oldItem = tokens[0];
+            const newItem = tokens[1];
+            const index = items.indexOf(oldItem);
+            if (index != -1) {
+              items.splice(index + 1, 0, newItem);
+            }
+            // console.log(typeof item, item);
+            // console.log(tokens);
+          } else if (operation == "Renew") {
+            // console.log("Renew");
+            const index = items.indexOf(item);
+            if (index != -1) {
+              items.splice(index, 1);
+              items.push(item);
+            }
+          }
+
+          index++;
+          input = params[index];
+
+          // if (index > 10) {
+          //   console.log("infinity");
+          //   break;
+          // }
+        }
+
+        console.log(items.join(", "));
+
+      }
+
+      // craft(['Iron, Wood, Sword', 'Collect - Gold', 'Drop - Wood', 'Craft!']);
+      // craft(['Iron, Sword', 'Drop - Bronze', 'Combine Items - Sword:Bow', 'Renew - Iron', 'Craft!']);
     </script>
   </body>
 </html>
