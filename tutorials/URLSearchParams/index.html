@@ -99,9 +99,9 @@
       user.age = 23;
       user.friends.push("Dom");
 
-      console.log(userCopy);
-      console.log(userCopy.friends === user.friends);
-      console.log(userCopy === user);
+      // console.log(userCopy);
+      // console.log(userCopy.friends === user.friends);
+      // console.log(userCopy === user);
 
       const hasEvenNumber = (numbers) => {
         let retVal;
@@ -113,8 +113,28 @@
         }
 
         return false;
-        
+
       }
+
+      const nums = [2, 3, 4, 6];
+
+      console.log(hasEvenNumber(nums));
+      console.log(hasEvenNumber([1, 3, 5, 7, 9]));
+
+      const printPersonName = (person) => {
+        if (!person) {
+          return "Invalid person";
+        }
+         return person.name;
+      }
+
+      console.log(printPersonName());
+
+      const printPersonName2 = (person) => {
+         return person?.name;
+      }
+
+      console.log(printPersonName2());
     </script>
 
     <script>
@@ -855,6 +875,119 @@
 
       // craft(['Iron, Wood, Sword', 'Collect - Gold', 'Drop - Wood', 'Craft!']);
       // craft(['Iron, Sword', 'Drop - Bronze', 'Combine Items - Sword:Bow', 'Renew - Iron', 'Craft!']);
+    </script>
+    <script>
+      // 01. Black Flag
+
+      function calcPlunder(params) {
+        const days = Number(params[0]);
+        const daily = Number(params[1]);
+        const exp = Number(params[2]);
+
+        let total = 0;
+
+        for (let day = 1; day <= days; day++) {
+          
+          if (day % 3 == 0) {
+            total += daily * 1.5;
+          } else {
+            total += daily;
+          }
+
+          if (day % 5 == 0) {
+            total = total * 0.7;
+          }
+
+        }
+
+        if (total >= exp) {
+          console.log(`Ahoy! ${total.toFixed(2)} plunder gained.`);
+        } else {
+          // console.log(total);
+          const percentage = (total / exp) * 100;
+          console.log(`Collected only ${percentage.toFixed(2)}% of the plunder.`);
+        }
+
+      }
+
+      // calcPlunder(["5", "40", "100"]);
+      // calcPlunder(["10", "20", "380"]);
+
+      // 02. Treasure Hunt
+
+      function menageChest(params) {
+        const items = params[0].split("|");
+        // console.log(items);
+        let index = 1;
+        let input = params[index];
+
+        while (input != "Yohoho!") {
+          const data = input.split(" ");
+          // console.log(data);
+          const operation = data[0];
+
+          if (operation == "Loot") {
+            // console.log("Loot");
+            for (let i = 1; i < data.length; i++) {
+              const item = data[i];
+              const have = items.includes(item);
+              if (!have) {
+                items.unshift(item);
+              }
+            }
+          }
+          if (operation == "Drop") {
+            // console.log("Drop");
+            // const item = data[i];
+            const index = data[1];
+            if (index >= 0 && index < items.length) {
+              const removed = items.splice(index, 1);
+              // console.log(items.length);
+              items.push(removed[0]);
+            }
+          }
+          if (operation == "Steal") {
+            // console.log("Steal");
+            const num = data[1];
+            const start = (items.length - 1) * (-1);
+            // console.log(start);
+            // console.log(items);
+            const stolen = items.splice(-num, num);
+            console.log(stolen.join(", "));
+          }
+          
+          index++;
+          input = params[index];
+
+          // if (index > 20) {
+          //   console.log("inf");
+          //   break;
+          // }
+        }
+
+        if (items.length == 0) {
+          console.log(`Failed treasure hunt.`);
+        } else {
+          let averageGain = 0;
+            let sum = 0;
+
+          for (let index = 0; index < items.length; index++) {
+            // console.log(index);
+            sum += items[index].length;
+          }
+
+          averageGain = sum / items.length;
+          console.log(`Average treasure gain: ${averageGain.toFixed(2)} pirate credits.`);
+        }
+
+      }
+
+      // menageChest(["Gold|Silver|Bronze|Medallion|Cup", "Loot Wood Gold Coins", "Loot Silver Pistol", "Drop 3", "Steal 3", "Yohoho!"]);
+      // menageChest(["Diamonds|Silver|Shotgun|Gold", "Loot Silver Medals Coal", "Drop -1", "Drop 1", "Steal 6", "Yohoho!"]);
+      // menageChest(["Diamonds|Silver|Shotgun|Gold", "Drop 4", "Yohoho!"]);
+
+
+      // 03. Man O War
     </script>
   </body>
 </html>
