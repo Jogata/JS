@@ -4,10 +4,141 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #ff4000;
+      }
+
+      body {
+        width: 100px;
+        min-height: 100vh;
+        font-family: Georgia, serif;
+        background-color: #fff;
+        overflow: hidden;
+      }
+
+      header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 20px 100px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #fff;
+        box-shadow: 50px 50px 50px 50px rgba(250, 250, 250, 0.6);
+        z-index: 2;
+      }
+
+      .logo {
+        max-width: 6rem;
+        color: #000;
+        /* padding: 10px; */
+        /* font-size: 2.5em; */
+        /* font-weight: 800; */
+        /* display: flex; */
+        /* align-items: center; */
+        /* justify-content: center; */
+        border-radius: 50%;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+      }
+      .logo:active {
+        box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1);
+      }
+      .logo img {
+        width: 100%;
+        padding: 10% 0;
+      }
+
+      .search {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        /* width: 60px; */
+        /* height: 60px; */
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.5s;
+      }
+
+      .search svg {
+        width: 3rem;
+        height: 3rem;
+        color: #000;
+        transition: all 0.5s;
+        cursor: pointer;
+      }
+      .search:hover svg {
+        color: var(--primary);
+      }
+
+      .search input {
+        display: none;
+      }
+      .search.active {
+        width: 300px;
+        border-radius: 50px;
+        justify-content: flex-start;
+      }
+      .search.active input {
+        display: block;
+        width: 100%;
+      }
+
+      .nav-mobile {
+        display: none;
+      }
+    </style>
   </head>
   <body>
-    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+
+    <header>
+      <a href="#" class="logo">
+        <!-- <i class="fa fa-cutlery"></i> -->
+        <img src="./images/menu-png.png" alt="">
+      </a>
+      <div class="search">
+        <!-- <i class="fa fa-search"></i> -->
+        <svg aria-hidden="true" class="pre-nav-design-icon" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none">
+          <path stroke="currentColor" stroke-width="1.5" d="M13.962 16.296a6.716 6.716 0 01-3.462.954 6.728 6.728 0 01-4.773-1.977A6.728 6.728 0 013.75 10.5c0-1.864.755-3.551 1.977-4.773A6.728 6.728 0 0110.5 3.75c1.864 0 3.551.755 4.773 1.977A6.728 6.728 0 0117.25 10.5a6.726 6.726 0 01-.921 3.407c-.517.882-.434 1.988.289 2.711l3.853 3.853"></path>
+        </svg>
+        <input type="text" name="search" id="search" placeholder="SEARCH">
+      </div>
+      <div class="bar">
+        <ul class="nav">
+          <li><a href="#">breakfast</a></li>
+          <li><a href="#">lunch</a></li>
+          <li><a href="#">dinner</a></li>
+        </ul>
+        <div class="check-out">
+          <svg aria-hidden="true" class="pre-nav-design-icon" focusable="false" viewBox="0 0 24 24" role="img" width="24px" height="24px" fill="none">
+            <path stroke="currentColor" stroke-width="1.5" d="M8.25 8.25V6a2.25 2.25 0 012.25-2.25h3a2.25 2.25 0 110 4.5H3.75v8.25a3.75 3.75 0 003.75 3.75h9a3.75 3.75 0 003.75-3.75V8.25H17.5"></path>
+          </svg>
+          <span class="number">4</span>
+        </div>
+      </div>
+      <div class="menu">
+        <i class="fa fa-ellipsis-v"></i>
+      </div>
+      <ul class="nav-mobile">
+        <li><a href="#">breakfast</a></li>
+        <li><a href="#">lunch</a></li>
+        <li><a href="#">dinner</a></li>
+      </ul>
+    </header>
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
@@ -44,1080 +175,6 @@
       // Convert URLSearchParams Object to Query String
       console.log(uspFromString.toString());
       console.log(uspFromObject.toString());
-    </script>
-
-    <script src="doestexist.js">
-      const course = {
-        name: "Web Programming", 
-        score: 75
-      }
-
-      const grade = {
-        score: 12
-      }
-
-      const studentInfo = Object.assign(course, grade, {teacher: "Mrs Water"});
-
-      console.log(studentInfo);
-
-      const copy = Object.assign({}, studentInfo);
-
-      studentInfo.score = 55;
-
-      console.log(studentInfo);
-      console.log(copy);
-    </script>
-    <script>
-      function printName(options) {
-        const defaults = {
-          firstName: "Steve", 
-          lastname: "Jobs"
-        }
-
-        options = Object.assign(defaults, options);
-
-        console.log(`${options.firstName} ${options.lastname}`);
-      }
-
-      // printName({
-        // firstName: "Jogata", 
-        // lastname: "SoftUni"
-      // })
-    </script>
-    <script>
-      const user = {
-        username: "Jogata", 
-        age: 43, 
-        active: true, 
-        friends: ["Matt", "Ange", "Johnny"]
-      }
-
-      // const userCopy = { ...user };
-      // const userCopy = Object.assign({}, user);
-      const userCopy = JSON.parse(JSON.stringify(user));
-
-      user.age = 23;
-      user.friends.push("Dom");
-
-      // console.log(userCopy);
-      // console.log(userCopy.friends === user.friends);
-      // console.log(userCopy === user);
-
-      const hasEvenNumber = (numbers) => {
-        let retVal;
-
-        for (let i = 0; i < numbers.length; i++) {
-          if (numbers[i] % 2 === 0) {
-            return true;
-          }
-        }
-
-        return false;
-
-      }
-
-      const nums = [2, 3, 4, 6];
-
-      // console.log(hasEvenNumber(nums));
-      // console.log(hasEvenNumber([1, 3, 5, 7, 9]));
-
-      const printPersonName = (person) => {
-        if (!person) {
-          return "Invalid person";
-        }
-         return person.name;
-      }
-
-      // console.log(printPersonName());
-
-      const printPersonName2 = (person) => {
-         return person?.name;
-      }
-
-      // console.log(printPersonName2());
-
-      const person1 = {
-        usernsme: "Jogata", 
-        displayName: "jogata", 
-        hobbies: ["Programming", "Gaming"], 
-        education: {
-          subject: "Computer Science", 
-          year: 2023
-        }
-      }
-
-      const { 
-        usernsme, 
-        displayName, 
-        id = 43
-      } = person1;
-
-      console.log(usernsme);
-      console.log(displayName);
-      console.log(id);
-    </script>
-
-    <script>
-            // 03. The Pianist
-
-            function organizePieces(params) {
-        const pieces = [];
-        const n = Number(params[0]);
-
-        for (let index = 1; index <= n; index++) {
-          const rawData = params[index];
-          // console.log(rawData);
-          if (rawData == "Stop") {
-            // console.log("break");
-            return;
-          }
-          const data = rawData.split("|");
-          pieces.push(data);
-        }
-
-        for (let index = n + 1; index < params.length; index++) {
-          const rawData = params[index];
-          const data = rawData.split("|");
-          const operation = data[0];
-          const pieceName = data[1];
-
-          if (operation == "Add") {
-            // console.log("Add");
-            let has = false;
-            for (const piece of pieces) {
-              // console.log(pieceName, piece[0]);
-              if (pieceName == piece[0]) {
-                has = true;
-              }
-            }
-            if (has) {
-              console.log(`${pieceName} is already in the collection!`);
-            } else {
-              console.log(`${pieceName} by ${data[2]} in ${data[3]} added to the collection!`);
-              const pieceInfo = data.slice(1);
-              pieces.push(pieceInfo);
-            }
-          } else if (operation == "Remove") {
-            // console.log("Remove");
-            let has = false;
-            for (let index = 0; index < pieces.length; index++) {
-              // console.log(pieceName, piece[0]);
-              if (pieceName == pieces[index][0]) {
-                pieces.splice(index, 1);
-                has = true;
-              }
-            }
-            if (has) {
-              console.log(`Successfully removed ${pieceName}!`);
-            } else {
-              console.log(`Invalid operation! ${pieceName} does not exist in the collection.`);
-            }
-          } else if (operation == "ChangeKey") {
-            // console.log("ChangeKey");
-            for (let index = 0; index < pieces.length; index++) {
-              // console.log(pieceName, piece[0]);
-              if (pieceName == pieces[index][0]) {
-                pieces[index][2] = data[2];
-                has = true;
-              }
-            }
-            if (has) {
-              console.log(`Changed the key of ${pieceName} to ${data[2]}!`);
-            } else {
-              console.log(`Invalid operation! ${pieceName} does not exist in the collection.`);
-            }
-          } else if (operation == "Stop") {
-            // console.log("Stop");
-            for (const piece of pieces) {
-              console.log(`${piece[0]} -> Composer: ${piece[1]}, Key: ${piece[2]}`);
-              // console.log(pieceName);
-            }
-          }
-
-        }
-      }
-
-      // organizePieces(['3', 'Fur Elise|Beethoven|A Minor', 'Moonlight Sonata|Beethoven|C# Minor', 'Clair de Lune|Debussy|C# Minor', 'Add|Sonata No.2|Chopin|B Minor', 'Add|Hungarian Rhapsody No.2|Liszt|C# Minor', 'Add|Fur Elise|Beethoven|C# Minor', 'Remove|Clair de Lune', 'ChangeKey|Moonlight Sonata|C# Major', 'Stop']);
-      // organizePieces(['4', 'Eine kleine Nachtmusik|Mozart|G Major', 'La Campanella|Liszt|G# Minor', 'The Marriage of Figaro|Mozart|G Major', 'Hungarian Dance No.5|Brahms|G Minor', 'Add|Spring|Vivaldi|E Major', 'Remove|The Marriage of Figaro', 'Remove|Turkish March', 'ChangeKey|Spring|C Major', 'Add|Nocturne|Chopin|C# Minor', 'Stop']);
-      // organizePieces(["4", "1|2|3", "4|5|6", "7|8|9", "0|0|0", "Stop"]);
-    </script>
-    <script>
-      // 01. SoftUni Reception
-
-      function reception(params) {
-        const f = Number(params[0]);
-        const s = Number(params[1]);
-        const t = Number(params[2]);
-
-        let students = Number(params[3]);
-
-        const total = f + s + t;
-        // let time = 0;
-
-        // let time = students / total;
-
-        // let breaks = time / 3;
-
-        // if (time >= 3) {
-          // time++;
-        // }
-
-        // breaks = Math.floor(breaks);
-        // console.log(breaks);
-
-        // time = time + breaks;
-
-        // time = Math.ceil(time);
-
-        // if (total * 3 * breaks == students) {
-        //   time--;
-        // }
-
-        let time = 0;
-        let breakTime = 0;
-
-        while (students >= total) {
-          students = students - total;
-          time++;
-          breakTime++;
-          
-          console.log(students, time);
-
-          if (breakTime % 3 == 0 && students > 0) {
-            time++;
-            breakTime = 0;
-          }
-          
-        }
-
-        if (students > 0) {
-          time++;
-        }
-
-        console.log(`Time needed: ${time}h.`);
-
-      }
-
-      // reception(['5','6','4','20']);
-      // reception(['1','2','3','45']);
-      // reception(['3','2','5','40']);
-      // reception(['3','2','5','60']);
-
-      // 02. Array Modifier
-
-      function modArray(params) {
-        let numbers = params[0]
-                          .split(" ")
-                          .map(x => Number(x));
-        // console.log(numbers);
-
-        // const test = [1, 2, 3]
-        // test.map(x => x + 1);
-        // console.log(test);
-
-        for (let index = 1; index < params.length; index++) {
-          const rawData = params[index];
-          const data = rawData.split(" ");
-          const operation = data[0];
-
-          if (operation == "swap") {
-            // console.log("swap");
-            const index1 = Number(data[1]);
-            const index2 = Number(data[2]);
-            // console.log(index1, index2);
-            const old = numbers[index1];
-            numbers[index1] = numbers[index2];
-            numbers[index2] = old;
-          } else if (operation == "multiply") {
-            // console.log("multiply");
-            const index1 = Number(data[1]);
-            const index2 = Number(data[2]);
-            numbers[index1] = numbers[index1] * numbers[index2];
-          } else if (operation == "decrease") {
-            // console.log("decrease");
-            numbers = numbers.map(num => num - 1);
-          }
-        }
-
-        console.log(numbers.join(", "));
-
-      }
-
-      // modArray(['23 -2 321 87 42 90 -123', 'swap 1 3', 'swap 3 6', 'swap 1 0', 'multiply 1 2', 'multiply 2 1', 'decrease', 'end']);
-      // modArray(['1 2 3 4', 'swap 0 1', 'swap 1 2', 'swap 2 3', 'multiply 1 2', 'decrease', 'end']);
-
-      // 03. Numbers
-
-      function printTopFive(params) {
-        const numbers = params
-        .split(" ")
-        .map(x => Number(x));
-
-        let average = 0;
-        let sum = 0;
-
-        for (let index = 0; index < numbers.length; index++) {
-          sum = sum + numbers[index];
-        }
-
-        average = sum / numbers.length;
-        // console.log(average);
-
-        const filtered = numbers.filter(x => x > average);
-        // console.log(filtered);
-        const sorted = filtered.sort((a, b) => b - a);
-        const sliced = sorted.slice(0, 5);
-        
-        if (sliced.length == 0) {
-          console.log("No");
-        } else {
-          console.log(sliced.join(" "));
-        }
-
-      }
-
-      // printTopFive("10 20 30 40 50");
-      // printTopFive("5 2 3 4 -10 30 40 50 20 50 60 60 51");
-      // printTopFive("1");
-      // printTopFive('-1 -2 -3 -4 -5 -6');
-    </script>
-    <script>
-      // 01. Counter-Strike
-
-      function playCS(params) {
-        let energy = Number(params[0]);
-        let index = 1;
-        let input = params[index];
-        let wins = 0;
-        let ended = false;
-
-        while (input != "End of battle") {
-          let dist = Number(input);
-
-          if (energy >= dist) {
-            energy -= dist;
-            wins++;
-
-            if (wins % 3 == 0) {
-              energy += wins;
-            }
-          } else {
-            ended = true;
-            console.log(`Not enough energy! Game ends with ${wins} won battles and ${energy} energy`);
-            break;
-          }
-
-          // console.log(dist);
-          // if (index > 50) {
-          //   console.log("infinity");
-          //   break;
-          // }
-
-          index++;
-          input = params[index];
-        }
-
-        // console.log(wins);
-        // console.log(energy);
-        if (ended == false) {
-          console.log(`Won battles: ${wins}. Energy left: ${energy}`);
-        }
-
-      }
-
-      // playCS(["100", "10", "10", "10", "1", "2", "3", "73", "10"]);
-      // playCS(["200", "54", "14", "28", "13", "End of battle"]);
-
-      // 02. Shoot for the Win
-
-      function playShoot(params) {
-        const numbers = params[0]
-        .split(" ")
-        .map(x => Number(x));
-
-        let shots = 0;
-
-        // console.log(numbers);
-
-        for (let index = 1; index < params.length - 1; index++) {
-          // console.log(params[index]);
-          const position = Number(params[index]);
-          // console.log(position);
-          if (position < numbers.length && position >= 0) {
-            const value = numbers[position];
-            // console.log(value);
-            if (value != -1) {
-              shots++;
-              numbers[position] = -1;
-              
-              for (let index = 0; index < numbers.length; index++) {
-                if (numbers[index] != -1) {
-                  if (numbers[index] > value) {
-                    numbers[index] = numbers[index] - value;
-                  } else {
-                    numbers[index] = numbers[index] + value;
-                  }
-                }
-              }
-            }
-          }
-        }
-
-        console.log(`Shot targets: ${shots} -> ${numbers.join(" ")}`);
-        // console.log(shots);
-      }
-
-      // playShoot(["24 50 36 70", "0", "4", "3", "1", "End"]);
-      // playShoot(["30 30 12 60 54 66", "5", "2", "4", "0", "End"]);
-
-      // 03. Moving Target
-
-      function trackTargets(params) {
-        const numbers = params[0]
-        .split(" ")
-        .map(x => Number(x));
-        // console.log(numbers);
-        for (let index = 1; index < params.length; index++) {
-          const rawData = params[index];
-          const data = rawData.split(" ");
-          const operation = data[0];
-          // console.log(operation);
-
-          if (operation == "Shoot") {
-            // console.log("Shoot");
-            const index = Number(data[1]);
-            const power = Number(data[2]);
-
-            if (index < numbers.length && index >= 0) {
-              numbers[index] -= power;
-
-              if (numbers[index] <= 0) {
-                numbers.splice(index, 1);
-              }
-            }
-          } else if (operation == "Strike") {
-            // console.log("Strike");
-            const index = Number(data[1]);
-            const range = Number(data[2]);
-            // console.log(index, range);
-            if (index < 0 || index >= numbers.length) {
-              console.log("Strike missed!");
-            } else if (index - range < 0 || index + range >= numbers.length) {
-              console.log("Strike missed!");
-            } else {
-              const start = index - range;
-              const area = range + 1 + range;
-              numbers.splice(start, area);
-            }
-          } else if (operation == "Add") {
-            // console.log("Add");
-            const index = Number(data[1]);
-            const value = Number(data[2]);
-            if (index <= numbers.length && index >= 0) {
-              // console.log(index, value);
-              numbers.splice(index, 0, value);
-            } else {
-              console.log("Invalid placement!");
-            }
-          } else if (operation == "End") {
-            // console.log("End");
-            index = params.length;
-            console.log(numbers.join("|"));
-          }
-        }
-        
-        // console.log(numbers);
-        // console.log(numbers.join("|"));
-      }
-
-      function trackTargets(params) {
-        const numbers = params[0]
-        .split(" ")
-        .map(x => Number(x));
-        // console.log(numbers);
-        let index = 1;
-        let input = params[index]
-
-        while (input != "End") {
-          const rawData = params[index];
-          const data = rawData.split(" ");
-          const operation = data[0];
-          // console.log(operation);
-
-          if (operation == "Shoot") {
-            // console.log("Shoot");
-            const index = Number(data[1]);
-            const power = Number(data[2]);
-
-            if (index < numbers.length && index >= 0) {
-              numbers[index] -= power;
-
-              if (numbers[index] <= 0) {
-                numbers.splice(index, 1);
-              }
-            }
-          } else if (operation == "Strike") {
-            // console.log("Strike");
-            const index = Number(data[1]);
-            const range = Number(data[2]);
-            // console.log(index, range);
-            if (index >= 0 && index < numbers.length) {
-              // console.log("Strike missed!");
-            // } else 
-            if (index - range < 0 || index + range >= numbers.length) {
-              console.log("Strike missed!");
-            } else {
-              const start = index - range;
-              const area = range + 1 + range;
-              console.log(start, area);
-              numbers.splice(start, area);
-            }
-          }
-          } else if (operation == "Add") {
-            // console.log("Add");
-            const index = Number(data[1]);
-            const value = Number(data[2]);
-            if (index < numbers.length && index >= 0) {
-              // console.log(index, value);
-              numbers.splice(index, 0, value);
-            } else {
-              console.log("Invalid placement!");
-            }
-          } else if (operation == "test") {
-            // console.log("End");
-            // index = params.length;
-            // console.log(numbers.join("|"));
-          }
-
-          index++;
-          input = params[index];
-
-          if (index > 50) {
-            console.log("infinity");
-            break;
-          }
-        }
-        
-        // console.log(numbers);
-        console.log(numbers.join("|"));
-      }
-
-      // trackTargets(["52 74 23 44 96 110", "Shoot 5 10", "Shoot 1 80", "Strike 2 1", "Add 22 3", "End"]);
-      // trackTargets(["1 2 3 4 5", "Strike 0 1", "End"]);
-      // trackTargets(["1 2 3 4 5", "Strike 1 -1", "End"]);
-      // trackTargets(["1 2 3 4 5", "Shoot 4 2", "End"]);
-      // trackTargets(["1 2 3 4 5", "Shoot 0 1", "Shoot 0 2", "Shoot 0 3", "Shoot 0 4", "Shoot 0 6", "End"]);
-      // trackTargets(["1 2 3 4 5", "Shoot -1 1", "End"]);
-      // trackTargets(["1 2 3 4 5", "Shoot 5 1", "End"]);
-      // trackTargets(["1 2 3 4 5", "Add 5 8", "End"]);
-      // trackTargets(["1 2 3 4 5", "Add 5 6", "End"]);
-    </script>
-    <script>
-      // 01. Guinea Pig
-
-      function feedPig(params) {
-        const food = Number(params[0]) * 1000;
-        const hay = Number(params[1]) * 1000;
-        const cover = Number(params[2]) * 1000;
-        const weight = Number(params[3]) * 1000;
-        let isEn = true;
-
-        let foodLeft = food;
-        let hayLeft = hay;
-        let coverLeft = cover;
-
-        const foodDaily = 300;
-
-        for (let day = 1; day <= 30; day++) {
-          foodLeft -= foodDaily;
-
-          if (day % 2 == 0) {
-            const dailyHay = foodLeft * 0.05;
-            hayLeft -= dailyHay;
-          }
-
-          if (day % 3 == 0) {
-            const usedCover = weight / 3;
-            coverLeft -= usedCover;
-          }
-
-          if (foodLeft <= 0 || hayLeft <= 0 || coverLeft <= 0) {
-            isEn = false;
-            day = 30;
-          }
-        }
-
-        foodLeft = foodLeft / 1000;
-        hayLeft = hayLeft / 1000;
-        coverLeft = coverLeft / 1000;
-
-        if (isEn) {
-          console.log(`Everything is fine! Puppy is happy! Food: ${foodLeft.toFixed(2)}, Hay: ${hayLeft.toFixed(2)}, Cover: ${coverLeft.toFixed(2)}.`);
-        } else {
-          console.log("Merry must go to the pet store!");
-        }
-
-      }
-
-      // feedPig((["10", "5", "5.2", "1"]));
-      // feedPig(["1", "1.5", "3", "1.5"]);
-      // feedPig(["9", "5", "5.2", "1"]);
-
-      // 02. Shopping List
-
-      function menageList(params) {
-        const list = params[0].split("!");
-        // console.log(list);
-        let index = 1;
-        let input = params[index];
-
-        while (input != "Go Shopping!") {
-          const data = input.split(" ");
-          const command = data[0];
-
-          if (command == "Urgent") {
-            // console.log("Urgent");
-            const item = data[1];
-            // console.log(item);
-            if (!list.includes(item)) {
-              list.unshift(item);
-            }
-          } else if (command == "Unnecessary") {
-            // console.log("Unnecessary");
-            const item = data[1];
-            // console.log(item);
-            const index = list.indexOf(item);
-            if (index >= 0) {
-              list.splice(index, 1);
-            }
-          } else if (command == "Correct") {
-            // console.log("Correct");
-            const oldItem = data[1];
-            const newItem = data[2];
-            // console.log(oldItem, newItem);
-            const index = list.indexOf(oldItem);
-            if (index >= 0) {
-              list[index] = newItem;
-            }
-          } else if (command == "Rearrange") {
-            // console.log("Rearrange");
-            const item = data[1];
-            // console.log(item);
-            const index = list.indexOf(item);
-            if (index >= 0) {
-              list.splice(index, 1);
-              list.push(item);
-            }
-          }
-
-          index++;
-          input = params[index];
-
-          // if (index > 50) {
-          //   console.log("infinity");
-          //   break;
-          // }
-        }
-
-        console.log(list.join(", "));
-
-      }
-
-      // menageList(["Tomatoes!Potatoes!Bread", "Unnecessary Milk", "Urgent Tomatoes", "Go Shopping!"]);
-      // menageList(["Milk!Pepper!Salt!Water!Banana", "Urgent Salt", "Unnecessary Grapes", "Correct Pepper Onion", "Rearrange Grapes", "Correct Tomatoes Potatoes", "Go Shopping!"]);
-
-      // 03. Heart Delivery
-
-      function deliverHeart(params) {
-        const houses = params[0]
-        .split("@")
-        .map(x => Number(x));
-        // console.log(houses);
-        let index = 1;
-        let input = params[index];
-        let currentHouse = 0;
-
-        while (input != "Love!") {
-          const data = input.split(" ");
-          const jumpLength = Number(data[1]);
-          // console.log(data);
-          // console.log(typeof jumpLength);
-
-          currentHouse += jumpLength;
-          // console.log(currentHouse);
-
-          if (currentHouse >= houses.length) {
-            currentHouse = 0;
-            // while (currentHouse >= houses.length) {
-            //   currentHouse -= houses.length;
-            // }
-            // console.log(currentHouse);
-            // let iteration = Math.floor(currentHouse / houses.length);
-            // currentHouse = currentHouse % houses.length;
-            // for (let index = 0; index < jumpLength; index++) {
-            //   currentHouse++;
-            //   currentHouse = currentHouse % houses.length;
-              // console.log(currentHouse);
-            // }
-            // console.log(iteration, index);
-            // currentHouse = currentHouse - (iteration * houses.length);
-            // const last = houses.length - 1;
-          }
-
-          if (houses[currentHouse] > 0) {
-            houses[currentHouse] = houses[currentHouse] - 2;
-
-            if (houses[currentHouse] == 0) {
-              console.log(`Place ${currentHouse} has Valentine's day.`);
-            }
-          } else {
-            console.log(`Place ${currentHouse} already had Valentine's day.`);
-          }
-
-          index++;
-          input = params[index];
-
-          if (index > 50) {
-            console.log("infinity");
-            break;
-          }
-        }
-
-        // console.log(houses);
-        console.log(`Cupid's last position was ${currentHouse}.`);
-        const filtered = houses.filter(x => x > 0);
-
-        if (filtered.length == 0) {
-          console.log(`Mission was successful.`);
-        } else {
-          console.log(`Cupid has failed ${filtered.length} places.`);
-        }
-
-      }
-
-      // deliverHeart(["10@10@10@2", "Jump 1", "Jump 2", "Love!"]);
-      // deliverHeart(["2@4@2", "Jump 2", "Jump 2", "Jump 8", "Jump 3", "Jump 1", "Love!"]);
-      // deliverHeart(["2@4@2", "Jump 2", "Jump 2", "Love!"]);/
-    </script>
-    <script>
-      // 01. Bonus Scoring System
-
-      function calcBonus(params) {
-        const students = Number(params[0]);
-        const lectures = Number(params[1]);
-        const lectureBonus = Number(params[2]);
-
-        const attendances = params.slice(3).map(x => Number(x));
-
-        // console.log(attendances);
-
-        let max = 0;
-        let a = 0;
-
-        for (let index = 0; index < students; index++) {
-          let bonus =  attendances[index] / lectures * (5 + lectureBonus);
-          bonus = Math.round(bonus);
-          if (bonus > max) {
-            max = bonus;
-            a = attendances[index];
-          }
-        }
-
-        console.log(`Max Bonus: ${max}.`);
-        console.log(`The student has attended ${a} lectures.`);
-
-      }
-
-      // calcBonus(['5',  '25', '30', '12', '19', '24', '16', '20']);
-      // calcBonus(['10', '30', '14', '8', '23', '27', '28', '15', '17', '25', '26', '5', '18']);
-
-      // 02. MuOnline
-
-      // 03. Inventory
-
-      function craft(params) {
-        const items = params[0].split(", ");
-        // console.log(items);
-        let index = 1;
-        let input = params[index];
-
-        while (input != "Craft!") {
-          const data = input.split(" - ");
-          // console.log(data);
-          const operation = data[0];
-          const item = data[1];
-          // console.log(operation, "/", item);
-
-          if (operation == "Collect") {
-            // console.log("Collect");
-            const index = items.indexOf(item);
-            if (index == -1) {
-              items.push(item);
-            }
-          } else if (operation == "Drop") {
-            // console.log("Drop");
-            const index = items.indexOf(item);
-            if (index != -1) {
-              items.splice(index, 1);
-            }
-          } else if (operation == "Combine Items") {
-            // console.log("Combine Items");
-            const tokens = item.split(":");
-            const oldItem = tokens[0];
-            const newItem = tokens[1];
-            const index = items.indexOf(oldItem);
-            if (index != -1) {
-              items.splice(index + 1, 0, newItem);
-            }
-            // console.log(typeof item, item);
-            // console.log(tokens);
-          } else if (operation == "Renew") {
-            // console.log("Renew");
-            const index = items.indexOf(item);
-            if (index != -1) {
-              items.splice(index, 1);
-              items.push(item);
-            }
-          }
-
-          index++;
-          input = params[index];
-
-          // if (index > 10) {
-          //   console.log("infinity");
-          //   break;
-          // }
-        }
-
-        console.log(items.join(", "));
-
-      }
-
-      // craft(['Iron, Wood, Sword', 'Collect - Gold', 'Drop - Wood', 'Craft!']);
-      // craft(['Iron, Sword', 'Drop - Bronze', 'Combine Items - Sword:Bow', 'Renew - Iron', 'Craft!']);
-    </script>
-    <script>
-      // 01. Black Flag
-
-      function calcPlunder(params) {
-        const days = Number(params[0]);
-        const daily = Number(params[1]);
-        const exp = Number(params[2]);
-
-        let total = 0;
-
-        for (let day = 1; day <= days; day++) {
-          
-          if (day % 3 == 0) {
-            total += daily * 1.5;
-          } else {
-            total += daily;
-          }
-
-          if (day % 5 == 0) {
-            total = total * 0.7;
-          }
-
-        }
-
-        if (total >= exp) {
-          console.log(`Ahoy! ${total.toFixed(2)} plunder gained.`);
-        } else {
-          // console.log(total);
-          const percentage = (total / exp) * 100;
-          console.log(`Collected only ${percentage.toFixed(2)}% of the plunder.`);
-        }
-
-      }
-
-      // calcPlunder(["5", "40", "100"]);
-      // calcPlunder(["10", "20", "380"]);
-
-      // 02. Treasure Hunt
-
-      function menageChest(params) {
-        const items = params[0].split("|");
-        // console.log(items);
-        let index = 1;
-        let input = params[index];
-
-        while (input != "Yohoho!") {
-          const data = input.split(" ");
-          // console.log(data);
-          const operation = data[0];
-
-          if (operation == "Loot") {
-            // console.log("Loot");
-            for (let i = 1; i < data.length; i++) {
-              const item = data[i];
-              const have = items.includes(item);
-              if (!have) {
-                items.unshift(item);
-              }
-            }
-          }
-          if (operation == "Drop") {
-            // console.log("Drop");
-            // const item = data[i];
-            const index = data[1];
-            if (index >= 0 && index < items.length) {
-              const removed = items.splice(index, 1);
-              // console.log(items.length);
-              items.push(removed[0]);
-            }
-          }
-          if (operation == "Steal") {
-            // console.log("Steal");
-            const num = data[1];
-            const start = (items.length - 1) * (-1);
-            // console.log(start);
-            // console.log(items);
-            const stolen = items.splice(-num, num);
-            console.log(stolen.join(", "));
-          }
-          
-          index++;
-          input = params[index];
-
-          // if (index > 20) {
-          //   console.log("inf");
-          //   break;
-          // }
-        }
-
-        if (items.length == 0) {
-          console.log(`Failed treasure hunt.`);
-        } else {
-          let averageGain = 0;
-            let sum = 0;
-
-          for (let index = 0; index < items.length; index++) {
-            // console.log(index);
-            sum += items[index].length;
-          }
-
-          averageGain = sum / items.length;
-          console.log(`Average treasure gain: ${averageGain.toFixed(2)} pirate credits.`);
-        }
-
-      }
-
-      // menageChest(["Gold|Silver|Bronze|Medallion|Cup", "Loot Wood Gold Coins", "Loot Silver Pistol", "Drop 3", "Steal 3", "Yohoho!"]);
-      // menageChest(["Diamonds|Silver|Shotgun|Gold", "Loot Silver Medals Coal", "Drop -1", "Drop 1", "Steal 6", "Yohoho!"]);
-      // menageChest(["Diamonds|Silver|Shotgun|Gold", "Drop 4", "Yohoho!"]);
-
-
-      // 03. Man O War
-
-      function trackBattle(params) {
-        const pirateShip = params[0].split(">").map(x => Number(x));
-        const warShip = params[1].split(">").map(x => Number(x));
-        const maxHP = Number(params[2]);
-
-        // console.log(pirateShip);
-        // console.log(warShip);
-        // console.log(maxHP);
-
-        let index = 3;
-        let input = params[index];
-
-        while (input != "Retire") {
-          const data = input.split(" ");
-          const operation = data[0];
-
-          if (operation == "Fire") {
-            // console.log("Fire");
-            const index = Number(data[1]);
-            const damage = Number(data[2]);
-
-            if (index >= 0 && index < warShip.length) {
-              warShip[index] -= damage;
-
-              if (warShip[index] <= 0) {
-                console.log("You won! The enemy ship has sunken.");
-                return;
-              }
-            }
-          } else if (operation == "Defend") {
-            // console.log("Defend");
-            const start = Number(data[1]);
-            const end = Number(data[2]);
-            const damage = Number(data[3]);
-
-            if (start >= 0 && start < pirateShip.length) {
-              if (end >= 0 && end < pirateShip.length) {
-                for (let index = start; index <= end; index++) {
-                  pirateShip[index] -= damage;
-
-                  if (pirateShip[index] <= 0) {
-                    console.log("You lost! The pirate ship has sunken.");
-                    return;
-                  }
-                }
-              }
-            }
-          } else if (operation == "Repair") {
-            // console.log("Repair");
-            const index= Number(data[1]);
-            const health = Number(data[2]);
-
-            if (index >= 0 && index < pirateShip.length) {
-              pirateShip[index] += health;
-              pirateShip[index] = Math.min(pirateShip[index], maxHP);
-              // if (pirateShip[index] > maxHP) {
-              //   pirateShip[index] = maxHP;
-              // }
-            }
-          } else if (operation == "Status") {
-            // console.log("Status");
-            const minHP = maxHP * 0.2;
-            // console.log(minHP);
-            const damaged = pirateShip.filter(x => x < minHP);
-            console.log(`${damaged.length} sections need repair.`);
-          }
-
-          index++;
-          input = params[index];
-
-          // if (index > 20) {
-          //   console.log("infinity");
-          //   break;
-          // }
-        }
-
-        let pirateShipSum = 0;
-        let warshipSum = 0;
-
-        for (let index = 0; index < pirateShip.length; index++) {
-          pirateShipSum += pirateShip[index];
-        }
-
-        for (let index = 0; index < warShip.length; index++) {
-          warshipSum += warShip[index];
-        }
-
-        // console.log(pirateShip);
-        console.log(`Pirate ship status: ${pirateShipSum}`);
-        console.log(`Warship status: ${warshipSum}`);
-
-      }
-
-      // trackBattle(["12>13>11>20>66", 
-      //              "12>22>33>44>55>32>18", 
-      //              "70", "Fire 2 11", "Fire 8 100", 
-      //              "Defend 3 6 11", "Defend 0 3 5", 
-      //              "Repair 1 33", "Status", 
-      //              "Retire"]);
-      // trackBattle(["12>13>11>18>66", 
-      //              "12>22>33>44>55>32>18", "70", 
-      //              "Defend 0 3 5", "Repair 5 100", 
-      //              "Status", "Retire"]);
-      // trackBattle(["2>3>4>5>2", 
-      //              "6>7>8>9>10>11", "20", 
-      //               "Status", "Fire 2 3", 
-      //               "Defend 0 4 11", "Repair 3 18", 
-      //               "Retire"]);
-
     </script>
   </body>
 </html>
