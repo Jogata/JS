@@ -17,7 +17,7 @@
       }
 
       body {
-        width: 100px;
+        width: 100%;
         min-height: 100vh;
         font-family: Georgia, serif;
         background-color: #fff;
@@ -209,6 +209,118 @@
 
       .banner {
         position: relative;
+        /* width: 100%; */
+        min-height: 100vh;
+        padding: 0 100px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        perspective: 1000px;
+        transition: all 0.5s;
+        overflow: hidden;
+      }
+
+      .banner .img-box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 700px;
+        height: 700px;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        border-radius: 50%;
+        transform-style: preserve-3d;
+        box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.5s;
+      }
+      .banner .img-box.active {
+        transform: translate(-50%, -50%) rotateY(180deg);
+      }
+
+      .banner .img-box .food {
+        position: absolute;
+        width: 650px;
+        height: 650px;
+        border-radius: 50%;
+        backface-visibility: hidden;
+        box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.5s;
+      }
+      .banner .img-box .food img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+
+      .banner .img-box .desc {
+        position: absolute;
+        width: 650px;
+        height: 650px;
+        padding: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        border-radius: 50%;
+        transform: rotateY(180deg);
+        box-shadow: inset 5px 5px 5px 10px rgba(0, 0, 0, 0.1);
+        backface-visibility: hidden;
+        transition: all 0.5s;
+      }
+
+      .desc h3 {
+        margin-bottom: 20px;
+        font-size: 2.5rem;
+        font-weight: 500;
+      }
+      .desc p {
+        margin-bottom: 20px;
+        font-size: 1.1rem;
+        font-weight: 300;
+        letter-spacing: 1px;
+        text-align: center;
+      }
+
+      .desc .download {
+        margin-bottom: 30px;
+        gap: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .desc .download li {
+        list-style: none;
+        padding: 5px 5px 0;
+        gap: 10px;
+        border-radius: 20px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .desc .download li img {
+        max-width: 200px;
+      }
+
+      .desc .price {
+        padding: 10px 20px;
+        color: var(--primary);
+        font-size: 1.5rem;
+        font-weight: 400;
+        letter-spacing: 1px;
+        border-radius: 20px;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .desc .btn {
+        position: absolute;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background-color: #fff;
       }
     </style>
   </head>
@@ -267,6 +379,27 @@
         </h1>
         <h2>lovers</h2>
       </div>
+      <div class="img-box active">
+        <div class="food">
+          <img src="./images/food-3.jpeg" alt="" class="food-img">
+        </div>
+        <div class="desc">
+          <h3>Lorem ipsum dolor</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio veniam necessitatibus fuga dolorem! Totam est aliquid suscipit consequuntur optio eum laudantium fugit eius quisquam placeat nesciunt quos praesentium ducimus sed, error quibusdam eligendi? Quasi itaque cumque dolorum libero commodi est veritatis quisquam dicta qui, laboriosam voluptate repellendus eos architecto quos voluptatum perspiciatis earum voluptas.
+          </p>
+          <ul class="download">
+            <li>
+              <img src="./images/apple.png" alt="">
+            </li>
+            <li>
+              <img src="./images/google.png" alt="">
+            </li>
+          </ul>
+          <span class="price">$35.49</span>
+        </div>
+      </div>
+      <a href="#" class="btn">learn more</a>
     </div>
 
     <script src="./in-fetch-api.js"></script>
