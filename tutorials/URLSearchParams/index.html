@@ -266,6 +266,7 @@
         justify-content: center;
         flex-direction: column;
         border-radius: 50%;
+        background-color: #fff;
         transform: rotateY(180deg);
         box-shadow: inset 5px 5px 5px 10px rgba(0, 0, 0, 0.1);
         backface-visibility: hidden;
@@ -315,12 +316,113 @@
         box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
       }
 
-      .desc .btn {
+      .banner .btn {
         position: absolute;
+        bottom: 7%;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 15px 30px;
         display: inline-flex;
         align-items: center;
         gap: 10px;
+        color: #000;
+        font-size: 1.2rem;
+        font-weight: 300;
+        /* font-family: inherit; */
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-decoration: none;
+        border-top-left-radius: 30px;
+        border-bottom-right-radius: 30px;
         background-color: #fff;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s;
+        /* cursor: pointer; */
+      }
+      .banner .btn.active {
+        box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1);
+      }
+      .banner .btn:hover {
+        color: var(--primary);
+      }
+
+      .banner .order {
+        position: absolute;
+        bottom: 20%;
+        left: 70%;
+        transform: translate(-50%, -50%);
+        width: 80px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 1px solid transparent;
+        background-color: transparent;
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.5s;
+        cursor: pointer;
+      }
+      .banner .order:active {
+        box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1);
+      }
+      .banner .order i {
+        color: #000;
+        font-size: 2rem;
+        font-weight: 300;
+        transition: all 0.3s;
+      }
+      .banner .order:hover i {
+        color: var(--primary);
+      }
+
+      .banner .content h1 {
+        position: absolute;
+        top: 45%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        /* justify-content: center; */
+        font-size: 10rem;
+        line-height: 1em;
+        letter-spacing: 2px;
+        text-transform: capitalize;
+        z-index: 1;
+      }
+
+      .banner .content h2 {
+        position: absolute;
+        top: 58%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        font-size: 9rem;
+        letter-spacing: 5px;
+        text-transform: capitalize;
+        z-index: 1;
+      }
+
+      .banner .content h1 i {
+        margin: 20px;
+        color: var(--primary);
+        transform: rotate(-45deg);
+      }
+
+      .banner .selections {
+        position: relative;
+        width: 20%;
+        height: 100vh;
+      }
+
+      .banner .selections .circle {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 900px;
+        height: 900px;
+        border-radius: 50%;
+        box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1);
+        animation: rotate 10s linear infinite;
       }
     </style>
   </head>
@@ -352,7 +454,7 @@
           <span class="number">4</span>
         </div>
         <div class="menu">
-          <i class="fa fa-ellipsis-v"></i>
+          <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
         </div>
       </div>
       <ul class="nav-mobile">
@@ -379,7 +481,7 @@
         </h1>
         <h2>lovers</h2>
       </div>
-      <div class="img-box active">
+      <div class="img-box">
         <div class="food">
           <img src="./images/food-3.jpeg" alt="" class="food-img">
         </div>
@@ -400,7 +502,28 @@
         </div>
       </div>
       <a href="#" class="btn">learn more</a>
+      <button class="order">
+        <i class="fa fa-cart-plus" aria-hidden="true"></i>
+      </button>
+      <div class="selections">
+        <div class="circle">
+          <div class="option one"></div>
+          <div class="option two"></div>
+          <div class="option three"></div>
+        </div>
+        <h1>healthy life</h1>
+      </div>
     </div>
+    <script>
+      const btn = document.querySelector(".btn");
+      btn.addEventListener("click", flip);
+
+      function flip() {
+        const imgBox = document.querySelector(".img-box");
+        imgBox.classList.toggle("active");
+        btn.classList.toggle("active");
+      }
+    </script>
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
