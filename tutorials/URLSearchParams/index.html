@@ -33,19 +33,23 @@
         top: 0;
         left: 0;
         width: 100%;
-        padding: 20px 6rem;
+        padding: 20px min(2%, 6rem);
         display: flex;
         align-items: center;
         justify-content: space-between;
         flex-wrap: wrap;
         gap: 20px;
         background-color: #fff;
-        box-shadow: 50px 50px 50px 50px rgba(250, 250, 250, 0.8);
+        box-shadow: 50px 50px 50px 50px rgba(255, 255, 255, 0.9);
         overflow: hidden;
         z-index: 2;
       }
+      header.active {
+        overflow: visible;
+      }
 
       .logo {
+        flex-shrink: 0;
         max-width: 6rem;
         color: #000;
         /* padding: 10px; */
@@ -129,14 +133,14 @@
       }
 
       .nav-mobile {
-        /* display: none; */
+        display: none;
         position: absolute;
         top: 0;
         left: 0;
         /* content: ""; */
         width: 100%;
-        height: 100vh;
-        display: flex;
+        min-height: 100vh;
+        /* display: flex; */
         align-items: center;
         justify-content: center;
         flex-direction: column;
@@ -146,6 +150,12 @@
         visibility: hidden;
         opacity: 0;
         z-index: 2;
+      }
+      header.active .nav-mobile {
+        display: flex;
+        transform: translateX(0);
+        visibility: visible;
+        opacity: 1;
       }
       .nav-mobile li {
         list-style: none;
@@ -214,10 +224,16 @@
 
       .menu {
         display: none;
+        padding: 0.1em 0.5em;
         color: #000;
         font-size: 2rem;
+        transition: color 300ms;
+        /* border: 1px solid; */
         cursor: pointer;
         z-index: 3;
+      }
+      .menu:hover {
+        color: var(--primary);
       }
 
       .banner {
@@ -225,7 +241,7 @@
         /* width: 100%; */
         min-height: 100vh;
         margin-top: 5rem;
-        padding: 5rem 6rem;
+        padding: 5rem min(2%, 6rem);
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -236,6 +252,8 @@
 
       .banner .hero {
         position: relative;
+        width: 700px;
+        /* height: 700px; */
         text-align: center;
       }
 
@@ -244,8 +262,7 @@
         /* top: 50%; */
         /* left: 50%; */
         /* transform: translate(-50%, -50%); */
-        width: 700px;
-        height: 700px;
+        width: 100%;
         margin-bottom: 60px;
         /* display: flex; */
         /* gap: 20px; */
@@ -413,9 +430,9 @@
         /* align-items: center; */
         /* justify-content: center; */
         color: #fff;
-        font-size: 10rem;
-        line-height: 1em;
-        letter-spacing: 2px;
+        font-size: min(20vw, 10rem);
+        /* line-height: 1em; */
+        /* letter-spacing: 2px; */
         text-transform: capitalize;
         filter: drop-shadow(2px 2px 2px #000);
         /* z-index: 1; */
@@ -426,10 +443,12 @@
         top: 0;
         /* margin: 20px; */
         color: var(--primary);
+        font-size: 1em;
         transform: rotate(-45deg) scaleX(90%);
         filter: drop-shadow(2px 2px 2px #000);
       }
       .banner .main-title h1 span {
+        position: absolute;
         margin-left: 3rem;
         /* transform: scaleX(90%); */
       }
@@ -447,8 +466,8 @@
         /* display: flex; */
         /* align-items: center; */
         color: #fff;
-        font-size: 9rem;
-        letter-spacing: 5px;
+        font-size: min(18vw, 9rem);
+        /* letter-spacing: 5px; */
         text-transform: capitalize;
         filter: drop-shadow(2px 2px 2px #000);
         /* z-index: 1; */
@@ -458,15 +477,22 @@
         position: relative;
         /* width: 20%; */
         width: 450px;
+        /* width: 100vw; */
+        max-width: 80vw;
         /* height: 100vh; */
       }
 
       .banner .selections .circle {
+        position: relative;
         /* position: absolute; */
         /* top: 50%; */
         /* transform: translateY(-50%); */
         width: 900px;
+        /* width: 80vw; */
+        max-width: 80vw;
         height: 900px;
+        /* height: 80vw; */
+        max-height: 80vw;
         border-radius: 50%;
         box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1);
         animation: rotate 10s linear infinite;
@@ -489,9 +515,14 @@
 
       .banner .selections .option {
         position: absolute;
-        width: 200px;
-        height: 200px;
-        padding: 15px;
+        /* width: 200px; */
+        /* width: 50%; */
+        width: 22%;
+        /* height: 200px; */
+        /* height: 50%; */
+        height: 22%;
+        /* padding: 15px; */
+        /* padding: 5px; */
         display: flex;
         align-items: center;
         justify-content: center;
@@ -518,8 +549,10 @@
       }
 
       .banner .selections img {
-        width: 190px;
-        height: 190px;
+        /* width: 190px; */
+        width: 100%;
+        /* height: 190px; */
+        height: 100%;
         border-radius: 50%;
       }
 
@@ -546,13 +579,14 @@
 
       .sci {
         /* position: absolute; */
-        /* position: relative; */
+        position: relative;
         /* left: 100px; */
         /* bottom: 60px; */
-        padding-left: 6rem;
+        padding-left: min(2%, 6rem);
+        margin-bottom: 1rem;
         display: flex;
-        gap: 20px;
-        z-index: 1;
+        gap: 1.2rem;
+        z-index: 3;
       }
       .sci li {
         list-style: none;
@@ -588,7 +622,7 @@
         position: relative;
         width: fit-content;
         margin-left: auto;
-        padding: 15px 6rem;
+        padding: 15px min(2%, 6rem);
         /* display: flex; */
         /* align-items: center; */
         /* justify-content: flex-end; */
@@ -613,13 +647,18 @@
         .banner {
           /* display: block; */
           margin-top: 15rem;
+          align-items: unset;
           flex-direction: column;
+        }
+        .main-title {
+          margin: auto;
         }
         .hero {
           margin: 10rem auto 15rem;
         }
         .banner .selections {
           width: 900px;
+          margin: auto;
         }
         .banner .selections .circle {
           animation: rotate-mobile 10s linear infinite;
@@ -651,10 +690,44 @@
         }
       }
 
+      @media screen and (max-width: 900px) {
+        /* .bar {
+          display: none;
+        } */
+        .nav {
+          display: none;
+        }
+        .nav-mobile {
+          display: flex;
+        }
+        .menu {
+          display: block;
+          margin: 0 2rem;
+        }
+        .banner .hero {
+          width: 96%;
+          /* height: auto; */
+          margin: 5rem auto 10rem;
+        }
+        .banner .order {
+          top: 0;
+          bottom: auto;
+        }
+        .sci {
+          justify-content: center;
+          margin-bottom: 2rem;
+        }
+        footer {
+          width: 100%;
+          border-radius: 0;
+        }
+      }
+
       .test1 {
-        width: 100%;
+        display: none;
+        /* width: 100%; */
         height: 100vh;
-        display: flex;
+        /* display: flex; */
         align-items: center;
         justify-content: center;
         background-color: #000;
@@ -800,10 +873,17 @@
       searchBar.addEventListener("click", () => {
         searchBar.classList.toggle("active");
       })
+
+      const menuBtn = document.querySelector(".menu");
+
+      menuBtn.addEventListener("click", () => {
+        const header = document.querySelector("header");
+        header.classList.toggle("active");
+      })
     </script>
 
     <div class="banner">
-      <div class="content main-title">
+      <div class="main-title">
         <h1>food 
           <span>
             <i class="fa fa-heart" aria-hidden="true"></i>
@@ -909,16 +989,16 @@
     <div class="test1">
       <div class="container">
       <div class="btn1">
-        <i class="fa fa-home"></i>
+        <i class="fa fa-home" aria-hidden="true"></i>
       </div>
       <div class="btn2">
-        <i class="fa fa-volume-up"></i>
+        <i class="fa fa-volume-up" aria-hidden="true"></i>
       </div>
       <div class="btn3">
-        <i class="fa fa-picture-o"></i>
+        <i class="fa fa-picture-o" aria-hidden="true"></i>
       </div>
       <div class="btn4">
-        <i class="fa fa-cog"></i>
+        <i class="fa fa-cog" aria-hidden="true"></i>
       </div>
       </div>
     </div>
