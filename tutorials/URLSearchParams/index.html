@@ -4,10 +4,77 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      body {
+        /* width: 100%; */
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Georgia, Times, serif;
+        background-color: pink;
+      }
+    </style>
   </head>
   <body>
-    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+
+    <div class="container">
+      <div class="login-wrapper">
+        <div class="left-side">
+          <h2>sign up to long life</h2>
+          <div class="box">
+            <input type="text" name="" id="name" placeholder="Enter Name">
+            <i class="fa fa-user"></i>
+          </div>
+          <div class="box">
+            <input type="text" name="" id="email2" placeholder="Enter Email">
+            <i class="fa fa-envelope"></i>
+          </div>
+          <div class="box">
+            <input type="password" name="" id="password" placeholder="Enter password">
+            <i class="fa fa-lock"></i>
+          </div>
+          <button>register</button>
+          <p>Already have Account? 
+            <a href="#">login here</a>
+          </p>
+        </div>
+        <div class="center">
+          <img src="../AJAX/slides/profile-renet-del.jpg" alt="">
+          <button>login with facebook</button>
+          <button>login with google</button>
+        </div>
+        <div class="right-side">
+          <h2>sign in to long life</h2>
+          <div class="box">
+            <input type="text" name="" id="email" placeholder="Enter Email">
+            <i class="fa fa-envelope"></i>
+          </div>
+          <div class="box">
+            <input type="password" name="" id="password" placeholder="Enter password">
+            <i class="fa fa-lock"></i>
+          </div>
+          <p><input type="checkbox" name="" id="">remember me
+          <a href="#">forgot password</a></p>
+          <button>login</button>
+          <p>Dont have Account? 
+            <a href="#">signup here</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
@@ -46,161 +113,73 @@
       console.log(uspFromObject.toString());
     </script>
 
-    <script>
-      // 01. The Biscuit Factory
-
-      function compareProduction(params) {
-        const biscuitsPerWorker = Number(params[0]);
-        const workers = Number(params[1]);
-        const otherF = Number(params[2]);
-
-        let total = 0;
-
-        // console.log(biscuitsPerWorker * workers);
-
-        for (let index = 1; index <= 30; index++) {
-          let current = biscuitsPerWorker * workers;
-
-          if (index % 3 == 0) {
-            current = Math.floor(current * 0.75);
-          }
-
-          total = total + current;
-
-        }
-
-        // console.log(total);
-        let diff = total - otherF;
-        let per = (diff / otherF) * 100;
-        // console.log(diff);
-        // console.log(per);
-
-        console.log(`You have produced ${total} biscuits for the past month.`);
-
-        if (per > 0) {
-          console.log(`You produce ${per.toFixed(2)} percent more biscuits.`);
-        } else {
-          per = per * (-1);
-          console.log(`You produce ${per.toFixed(2)} percent less biscuits.`);
-        }
-
-        // console.log(per.toFixed(2));
-
-      }
-
-      // compareProduction(["78", "8", "16000"]);
-      // compareProduction(["65", "12", "26000"]);
-      // compareProduction(["163", "16", "67020"]);
-
-      
-      // 02. Coffee Lover
-      
-      function menageList(params) {
-        const coffees = params[0].split(" ");
-        const numCommands = Number(params[1]);
-        // console.log(coffees);
-
-        for (let index = 2; index < params.length; index++) {
-          let data = params[index].split(" ");
-          const action = data[0];
-          // console.log(action);
-
-          if (action == "Include") {
-            coffees.push(data[1]);
-          } else if (action == "Remove") {
-            const option = data[1];
-            let num = Number(data[2]);
-            
-            if (num <= coffees.length) {
-              if (option == "first") {
-                coffees.splice(0, num);
-              } else if (option == "last") {
-                num = num * (-1);
-                coffees.splice(num);
-              }
-            }
-          } else if (action == "Prefer") {
-            const index1 = Number(data[1]);
-            const index2 = Number(data[2]);
-            if (index1 < coffees.length && index1 >= 0) {
-              if (index2 < coffees.length && index2 >= 0) {
-                const old = coffees[index2];
-                coffees[index2] = coffees[index1];
-                coffees[index1] = old;
-              }
-            }
-          } else if (action == "Reverse") {
-            coffees.reverse();
-          }
-        }
-
-        console.log("Coffees:");
-        console.log(coffees.join(" "));
-
-      }
-
-      // menageList(["Arabica Liberica Charrieriana Magnistipula Robusta BulkCoffee StrongCoffee", "5", "Include TurkishCoffee", "Remove first 2", "Remove last 1", "Prefer 3 1", "Reverse"]);
-      // menageList(["Arabica Robusta BulkCoffee StrongCoffee TurkishCoffee", "5", "Include OrdinaryCoffee", "Remove first 1", "Prefer 0 1", "Prefer 3 1", "Reverse"]);
-      // menageList(["Robusta StrongCoffee BulkCoffee TurkishCoffee Arabica", "3", "Include OrdinaryCoffee", "Remove first 1", "Prefer 4 1"]);
-      // menageList(["Arabica Liberica Charrieriana Magnistipula Robusta BulkCoffee StrongCoffee", "5", "Remove first 2"]);
-      // menageList(["Arabica Liberica Charrieriana Magnistipula Robusta BulkCoffee StrongCoffee", "5", "Remove last 1"]);
-      // menageList(["Arabica Liberica Charrieriana Magnistipula Robusta BulkCoffee StrongCoffee", "5", "Prefer 3 1"]);
-      // menageList(["Arabica Liberica Charrieriana Magnistipula Robusta BulkCoffee StrongCoffee", "5", "Reverse"]);
-    </script>
 <script>
-  const person = {
-    username: "jogata", 
-    name: "Ionko", 
-    hobbies: ["Programming", "Gaming"], 
-    education: {
-          subject: "Computer Science", 
-          year: 2016
+  // 03. Deck of Cards
+
+  function menageCards(params) {
+    const cards = params[0].split(", ");
+    const numCommands = Number(params[1]);
+
+    // console.log(cards.join(" / "));
+
+    for (let index = 2; index < params.length; index++) {
+      let data = params[index].split(", ");
+      const action = data[0];
+
+      if (action == "Add") {
+        const card = data[1];
+        if (cards.includes(card)) {
+          console.log("Card is already in the deck");
+        } else {
+          console.log("Card successfully added");
+          cards.push(card);
         }
+      } else if (action == "Remove") {
+        const card = data[1];
+        const index = cards.indexOf(card);
+        if (index == -1) {
+          console.log("Card not found");
+        } else {
+          cards.splice(index, 1);
+          console.log("Card successfully removed");
+        }
+      } else if (action == "Remove At") {
+        const index = Number(data[1]);
+        if (index < cards.length && index >= 0) {
+          cards.splice(index, 1);
+          console.log("Card successfully removed");
+        } else {
+          console.log("Index out of range");
+        }
+      } else if (action == "Insert") {
+        const index = Number(data[1]);
+        const card = data[2];
+        if (index < cards.length && index >= 0) {
+          const exist = cards.includes(card);
+          if (exist) {
+            console.log("Card is already added");
+          } else {
+            cards.splice(index, 0, card);
+            console.log("Card successfully added");
+          }
+        } else {
+          console.log("Index out of range");
+        }
+
       }
-      
-      const {
-        username, 
-        hobbies: interests = [], 
-        ...others
-      } = person;
-      
-      console.log(interests);
-      console.log(others);
-      
-      const {
-        education, 
-        education: {
-          subject
-        }
-      } = person;
-      
-      console.log(education);
-      console.log(subject);
-      
-      const cars = [
-        {
-          year: 2019, 
-          make: "Honda"
-        }, 
-        {
-          year: 2007, 
-          make: "Toyota"
-        }, 
-        {
-          year: 2020, 
-          make: "Ford"
-        }
-      ]
-      
-      for (const { make } of cars) {
-        // console.log(car);
-        // const { make } = car;
-        console.log(make);
-      }
-      
-      const { length } = cars;
-      
-      console.log(length);
+    }
+
+    console.log(cards.join(", "));
+
+  }
+
+  // menageCards(["Ace of Diamonds, Queen of Hearts, King of Clubs", "3", "Add, King of Diamonds", "Insert, 2, Jack of Spades", "Remove, Ace of Diamonds"]);
+  // menageCards(["Two of Clubs, King of Spades, Five of Spades, Jack of Hearts", "2", "Add, Two of Clubs", "Remove, Five of Hearts"]);
+  // menageCards(["Jack of Spades, Ace of Clubs, Jack of Clubs", "2", "Insert, -1, Queen of Spades", "Remove At, 1"]);
+  // menageCards(["Jack of Spades, Ace of Clubs, Jack of Clubs", "2", "Remove At, -1"]);
+  // menageCards(["Ace of Diamonds, Queen of Hearts, King of Clubs", "3", "Insert, 2, Jack of Spades"]);
+  // menageCards(["Ace of Diamonds, Queen of Hearts, King of Clubs", "3", "Insert, 2, Queen of Hearts"]);
+  // menageCards(["Ace of Diamonds, Queen of Hearts, King of Clubs", "3", "Remove, Ace of Diamonds"]);
 </script>
   </body>
 </html>
