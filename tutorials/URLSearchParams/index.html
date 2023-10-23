@@ -25,13 +25,132 @@
         font-family: Georgia, Times, serif;
         background-color: pink;
       }
-    </style>
+
+      .login-wrapper {
+        position: relative;
+        width: 1250px;
+        height: 650px;
+        display: flex;
+        border: 1px solid rgb(255, 45, 87);
+        border-radius: 12px;
+        box-shadow: 0 0 50px rgb(255, 106, 131);
+        overflow: hidden;
+      }
+
+      .left-side {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 48%;
+      }
+
+      .center {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 48%;
+      }
+      .center img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .right-side {
+        position: absolute;
+        top: 20%;
+        left: 51%;
+        width: 48%;
+      }
+
+      h2 {
+        color: #2d2d2d;
+        font-weight: 500;
+        text-transform: capitalize;
+      }
+
+      .box {
+        position: relative;
+      }
+
+      .box i {
+        position: absolute;
+        right: 23%;
+        top: 34%;
+        color: crimson;
+      }
+
+      input {
+        width: 80%;
+        height: 45px;
+        margin: 12px 0;
+        padding-left: 15px;
+        color: crimson;
+        outline: none;
+        border: 1px solid crimson;
+        border-radius: 30px;
+      }
+
+      input[type="checkbox"] {
+        width: 15px;
+        height: 15px;
+        margin-top: 8px;
+        margin-right: 8px;
+      }
+
+      button {
+        width: 80%;
+        height: 40px;
+        margin: 12px 0;
+        color: #fff;
+        font-size: 1rem;
+        font-family: inherit;
+        text-transform: capitalize;
+        outline: none;
+        border: 1px solid crimson;
+        border-radius: 30px;
+        background-color: crimson;
+        cursor: pointer;
+      }
+
+      #btn-social {
+        position: absolute;
+        right: 15%;
+        bottom: 20%;
+        background-color: rgb(59, 59, 255);
+        border-color: rgb(59, 59, 255);
+      }
+      #btn-social:nth-of-type(2) {
+        position: absolute;
+        bottom: 30%;
+        background-color: crimson;
+        border-color: crimson;
+      }
+
+      .left-side {
+        top: 20%;
+        left: -50%;
+      }
+
+      p, p a {
+        color: #1c1c1c;
+        font-size: 1rem;
+        text-transform: capitalize;
+        transition: .6s;
+      }
+      p a {
+        text-decoration: underline;
+      }
+      p a:hover {
+        color: crimson;
+      }
+      </style>
   </head>
   <body>
 
     <div class="container">
       <div class="login-wrapper">
-        <div class="left-side">
+        <div class="left-side register-form">
           <h2>sign up to long life</h2>
           <div class="box">
             <input type="text" name="" id="name" placeholder="Enter Name">
@@ -47,15 +166,15 @@
           </div>
           <button>register</button>
           <p>Already have Account? 
-            <a href="#">login here</a>
+            <a href="#" id="btn-signin">login here</a>
           </p>
         </div>
         <div class="center">
           <img src="../AJAX/slides/profile-renet-del.jpg" alt="">
-          <button>login with facebook</button>
-          <button>login with google</button>
+          <button id="btn-social">login with facebook</button>
+          <button id="btn-social">login with google</button>
         </div>
-        <div class="right-side">
+        <div class="right-side signin-form">
           <h2>sign in to long life</h2>
           <div class="box">
             <input type="text" name="" id="email" placeholder="Enter Email">
@@ -69,11 +188,21 @@
           <a href="#">forgot password</a></p>
           <button>login</button>
           <p>Dont have Account? 
-            <a href="#">signup here</a>
+            <a href="#" id="btn-signup">signup here</a>
           </p>
         </div>
       </div>
     </div>
+    <script>
+      const btnsignup = document.querySelector("#btn-signup");
+      const btnsignin = document.querySelector("#btn-signin");
+
+      const signupform = document.querySelector(".register-form");
+      const signinform = document.querySelector(".signin-form");
+
+      const img = document.querySelector(".center");
+    </script>
+
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
     <script src="./in-fetch-api.js"></script>
