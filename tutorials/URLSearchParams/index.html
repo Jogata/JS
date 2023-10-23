@@ -35,6 +35,7 @@
         border-radius: 12px;
         box-shadow: 0 0 50px rgb(255, 106, 131);
         overflow: hidden;
+        z-index: 3;
       }
 
       .left-side {
@@ -42,6 +43,7 @@
         top: 0;
         left: 0;
         width: 48%;
+        transition: .0s;
       }
 
       .center {
@@ -61,6 +63,7 @@
         top: 20%;
         left: 51%;
         width: 48%;
+        transition: .5s;
       }
 
       h2 {
@@ -144,7 +147,86 @@
       p a:hover {
         color: crimson;
       }
-      </style>
+
+      .center {
+        top: 0;
+        left: 0;
+        transition: .5s;
+      }
+
+      .signincall {
+        left: 5%;
+      }
+
+      .signupcall {
+        left: 100%;
+      }
+
+      .imgslide {
+        left: 53%;
+      }
+
+      img {
+        transform: scale(1.2);
+      }
+
+      .hearts {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* border: 1px solid; */
+        overflow: hidden;
+      }
+
+      .fa-heart {
+        font-size: 5rem;
+        color: palevioletred;
+        filter: drop-shadow(2px 2px 2px #000);
+      }
+      .fa-heart:nth-child(odd) {
+        font-size: 8rem;
+      }
+      .fa-heart:nth-child(2) {
+        font-size: 6.5rem;
+      }
+      .fa-heart:nth-child(5) {
+        font-size: 6.3rem;
+      }
+      .fa-heart:nth-child(9) {
+        font-size: 10rem;
+      }
+      .fa-heart.single {
+        position: absolute;
+        /* bottom: -10rem; */
+        animation: up 10s linear infinite backwards;
+        opacity: 0.5;
+      }
+
+      .couple-hearts {
+        position: absolute;
+        display: inline-block;
+        /* bottom: -10rem; */
+        animation: up 12s linear infinite backwards;
+        opacity: 0.7;
+      }
+      .couple-hearts .fa-heart:first-child {
+        position: absolute;
+        color: palevioletred;
+        font-size: 3rem;
+        z-index: 2;
+      }
+
+      @keyframes up {
+        0% {
+          bottom: -10rem;
+        }
+        100% {
+          bottom: 110%;
+        }
+      }
+    </style>
   </head>
   <body>
 
@@ -193,6 +275,36 @@
         </div>
       </div>
     </div>
+    <div class="hearts">
+      <div class="couple-hearts">
+        <i class="fa fa-heart bottom right"></i>
+        <i class="fa fa-heart"></i>
+      </div>
+      <i class="fa fa-heart single"></i>
+      <i class="fa fa-heart single"></i>
+      <i class="fa fa-heart single"></i>
+      <div class="couple-hearts">
+        <i class="fa fa-heart"></i>
+        <i class="fa fa-heart"></i>
+      </div>
+      <i class="fa fa-heart single"></i>
+      <i class="fa fa-heart single"></i>
+      <div class="couple-hearts">
+        <i class="fa fa-heart right"></i>
+        <i class="fa fa-heart"></i>
+      </div>
+      <i class="fa fa-heart single"></i>
+      <i class="fa fa-heart single"></i>
+      <i class="fa fa-heart single"></i>
+      <div class="couple-hearts">
+        <i class="fa fa-heart bottom"></i>
+        <i class="fa fa-heart"></i>
+      </div>
+      <div class="couple-hearts">
+        <i class="fa fa-heart"></i>
+        <i class="fa fa-heart"></i>
+      </div>
+    </div>
     <script>
       const btnsignup = document.querySelector("#btn-signup");
       const btnsignin = document.querySelector("#btn-signin");
@@ -201,6 +313,18 @@
       const signinform = document.querySelector(".signin-form");
 
       const img = document.querySelector(".center");
+
+      btnsignup.addEventListener("click", () => {
+        signupform.classList.toggle("signincall");
+        signinform.classList.toggle("signupcall");
+        img.classList.toggle("imgslide");
+      })
+
+      btnsignin.addEventListener("click", () => {
+        signupform.classList.toggle("signincall");
+        signinform.classList.toggle("signupcall");
+        img.classList.toggle("imgslide");
+      })
     </script>
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
