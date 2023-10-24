@@ -166,9 +166,9 @@
         left: 53%;
       }
 
-      img {
+      /* img {
         transform: scale(1.2);
-      }
+      } */
 
       .hearts {
         position: absolute;
@@ -319,10 +319,10 @@
 }
 
 body {
-    margin: 2rem 0 0 0;
-    background-color: #fff;
-    color: var(--dark-color);
-    font-family: var(--body-font);
+    /* margin: 2rem 0 0 0; */
+    /* background-color: #fff; */
+    /* color: var(--dark-color); */
+    /* font-family: var(--body-font); */
 }
 
 h1 {
@@ -340,6 +340,7 @@ a {
 }
 
 .main {
+  margin: 4rem auto;
   padding: 2rem 0;
 }
 
@@ -348,7 +349,7 @@ a {
   margin-left: 2.5rem;
   margin-right: 2.5rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   align-items: center;
   gap: 2rem;
 }
@@ -369,10 +370,10 @@ a {
 
 .card {
   position: relative;
-  padding: 1.5rem 2rem;
+  /* padding: 1.5rem 2rem; */
   display: flex;
-  align-items: center;
-  flex-direction: column;
+  /* align-items: center; */
+  /* flex-direction: column; */
   border-radius: 1rem;
   overflow: hidden;
 }
@@ -414,35 +415,54 @@ article:nth-child(4) {
 }
 
 .card-img {
-  width: 180px;
-  height: auto;
+  /* width: 180px; */
+  /* height: auto; */
+  width: 90%;
+  margin: auto;
   padding: 3rem 0;
   transition: all 500ms;
 }
 .card:hover .card-img {
-  margin-left: 3.5rem;
+  /* margin-left: 3.5rem; */
   transform: rotate(30deg);
 }
 
 .card-name {
-  position: absolute;
-  top: 0;
-  left: -25%;
-  width: 3.5rem;
-  height: 100%;
+  /* position: absolute; */
+  /* top: 0; */
+  /* left: -25%; */
+  /* width: 3.5rem; */
+  width: 0;
+  /* flex-grow: 0; */
+  /* flex: 0; */
+  /* height: 100%; */
   color: #fff;
   font-size: 1.2rem;
   font-weight: bold;
   text-align: center;
   text-transform: uppercase;
-  line-height: 3.5rem;
+  /* line-height: 3.5rem; */
   writing-mode: vertical-rl;
   background-color: var(--dark-color);
+  /* transform: translateX(-100%) rotate(180deg); */
   transform: rotate(180deg);
   transition: all 500ms;
+  overflow: hidden;
 }
 .card:hover .card-name {
-  left: 0;
+  /* left: 0; */
+  width: 50%;
+  padding: 0 1rem;
+  /* flex: 1; */
+  /* transform: translateX(0%) rotate(180deg); */
+}
+
+.product {
+  padding: 2rem;
+  /* flex: 1; */
+}
+.card:hover .product {
+  width: 400%;
 }
 
 .card-icon {
@@ -453,16 +473,16 @@ article:nth-child(4) {
   color: var(--accent-color);
 }
 
-.card-precis {
-  width: 100%;
+.card-details {
+  /* width: 100%; */
   display: flex;
   align-items: center;
   justify-content: space-between;
   transition: all 500ms;
 }
-.card:hover .card-precis {
-  margin-left: 3.5rem;
-  padding: 0 1.5rem;
+.card:hover .card-details {
+  /* margin-left: 3.5rem; */
+  /* padding: 0 1.5rem; */
 }
 
 .card-preci {
@@ -493,12 +513,83 @@ body {
   font-family: Georgia, Times, serif;
   background-color: var(--clr);
 }
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 10px 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #2196f3;
+  overflow: hidden;
+  z-index: 10;
+}
+
+header .logo {
+  position: relative;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  text-decoration: none;
+}
+
+header nav {
+  display: flex;
+  gap: 10px;
+}
+
+header nav a {
+  position: relative;
+  padding: 12px 20px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: capitalize;
+  text-decoration: none;
+}
+
+#indicator {
+  position: absolute;
+  width: 88px;
+  /* height: 60px; */
+  height: 84%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background-color: var(--clr);
+  transition: 0.25s;
+}
+#indicator::before {
+  position: absolute;
+  bottom: 0;
+  left: -30px;
+  content: "";
+  width: 30px;
+  height: 30px;
+  /* background-color: red; */
+  border-bottom-right-radius: 20px;
+  box-shadow: 5px 5px 0 5px var(--clr);
+}
+#indicator::after {
+  position: absolute;
+  bottom: 0;
+  right: -30px;
+  content: "";
+  width: 30px;
+  height: 30px;
+  /* background-color: red; */
+  border-bottom-left-radius: 20px;
+  box-shadow: -5px 5px 0 5px var(--clr);
+}
     </style>
   </head>
   <body>
 
     <header>
-      <a href="#" class="logo"></a>
+      <a href="#" class="logo">logo</a>
       <nav>
         <div id="indicator"></div>
         <a href="#">home</a>
@@ -508,28 +599,47 @@ body {
         <a href="#">contact</a>
       </nav>
     </header>
+    <script>
+      // const indicator = document.querySelector("#indicator");
+      let items = document.querySelectorAll("nav a");
+      console.log(indicator);
 
-    <h1 class="shop-title">shop</h1>
+      function marker(el) {
+        indicator.style.left = el.offsetLeft + "px";
+        indicator.style.width = el.offsetWidth + "px";
+      }
+
+      items.forEach(link => {
+        link.addEventListener("click", () => {
+          // marker(e.target);
+          marker(link);
+        })
+      })
+    </script>
+
+    <h1 class="shop-title" style="display: none;">shop</h1>
 
     <main class="main bd-grid">
       <article class="card">
-        <div class="card-img">
-          <img src="./img-shop/img1.png" alt="">
-        </div>
         <div class="card-name">
           <p>air zoom pegasus</p>
         </div>
-        <div class="card-precis">
-          <a href="#1" class="card-icon">
-            <i class="fa fa-heart-o" aria-hidden="true"></i>
-          </a>
-          <div>
-            <span class="card-preci before">$990.00</span>
-            <span class="card-preci now">$749.00</span>
+        <div class="product">
+          <div class="card-img">
+            <img src="./img-shop/img1.png" alt="">
           </div>
-          <a href="#1" class="card-icon">
-            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-          </a>
+          <div class="card-details">
+            <a href="#1" class="card-icon">
+              <i class="fa fa-heart-o" aria-hidden="true"></i>
+            </a>
+            <div>
+              <span class="card-preci before">$990.00</span>
+              <span class="card-preci now">$749.00</span>
+            </div>
+            <a href="#1" class="card-icon">
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            </a>
+          </div>
         </div>
       </article>
       <article class="card">
@@ -539,7 +649,7 @@ body {
         <div class="card-name">
           <p>air zoom pegasus</p>
         </div>
-        <div class="card-precis">
+        <div class="card-details">
           <a href="#1" class="card-icon">
             <i class="fa fa-heart-o" aria-hidden="true"></i>
           </a>
@@ -559,7 +669,7 @@ body {
         <div class="card-name">
           <p>air zoom pegasus</p>
         </div>
-        <div class="card-precis">
+        <div class="card-details">
           <a href="#1" class="card-icon">
             <i class="fa fa-heart-o" aria-hidden="true"></i>
           </a>
@@ -579,7 +689,7 @@ body {
         <div class="card-name">
           <p>air zoom pegasus</p>
         </div>
-        <div class="card-precis">
+        <div class="card-details">
           <a href="#1" class="card-icon">
             <i class="fa fa-heart-o" aria-hidden="true"></i>
           </a>
