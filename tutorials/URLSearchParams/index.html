@@ -4,818 +4,139 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      a {
-        text-decoration: none;
-      }
-
-      body {
-        /* width: 100%; */
-        /* min-height: 100vh; */
-        /* display: flex; */
-        /* align-items: center; */
-        /* justify-content: center; */
-        font-family: Georgia, Times, serif;
-        /* background-color: pink; */
-      }
-
-      .login-wrapper {
-        position: relative;
-        width: 1250px;
-        height: 650px;
-        display: flex;
-        border: 1px solid rgb(255, 45, 87);
-        border-radius: 12px;
-        box-shadow: 0 0 50px rgb(255, 106, 131);
-        overflow: hidden;
-        z-index: 3;
-      }
-
-      .left-side {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 48%;
-        transition: .0s;
-      }
-
-      .center {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 48%;
-      }
-      .center img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .right-side {
-        position: absolute;
-        top: 20%;
-        left: 51%;
-        width: 48%;
-        transition: .5s;
-      }
-
-      h2 {
-        color: #2d2d2d;
-        font-weight: 500;
-        text-transform: capitalize;
-      }
-
-      .box {
-        position: relative;
-      }
-
-      .box i {
-        position: absolute;
-        right: 23%;
-        top: 34%;
-        color: crimson;
-      }
-
-      input {
-        width: 80%;
-        height: 45px;
-        margin: 12px 0;
-        padding-left: 15px;
-        color: crimson;
-        outline: none;
-        border: 1px solid crimson;
-        border-radius: 30px;
-      }
-
-      input[type="checkbox"] {
-        width: 15px;
-        height: 15px;
-        margin-top: 8px;
-        margin-right: 8px;
-      }
-
-      button {
-        width: 80%;
-        height: 40px;
-        margin: 12px 0;
-        color: #fff;
-        font-size: 1rem;
-        font-family: inherit;
-        text-transform: capitalize;
-        outline: none;
-        border: 1px solid crimson;
-        border-radius: 30px;
-        background-color: crimson;
-        cursor: pointer;
-      }
-
-      #btn-social {
-        position: absolute;
-        right: 15%;
-        bottom: 20%;
-        background-color: rgb(59, 59, 255);
-        border-color: rgb(59, 59, 255);
-      }
-      #btn-social:nth-of-type(2) {
-        position: absolute;
-        bottom: 30%;
-        background-color: crimson;
-        border-color: crimson;
-      }
-
-      .left-side {
-        top: 20%;
-        left: -50%;
-      }
-
-      p, p a {
-        /* color: #1c1c1c; */
-        /* font-size: 1rem; */
-        /* text-transform: capitalize; */
-        /* transition: .6s; */
-      }
-      p a {
-        /* text-decoration: underline; */
-      }
-      p a:hover {
-        /* color: crimson; */
-      }
-
-      .center {
-        top: 0;
-        left: 0;
-        transition: .5s;
-      }
-
-      .signincall {
-        left: 5%;
-      }
-
-      .signupcall {
-        left: 100%;
-      }
-
-      .imgslide {
-        left: 53%;
-      }
-
-      /* img {
-        transform: scale(1.2);
-      } */
-
-      .hearts {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        /* border: 1px solid; */
-        overflow: hidden;
-      }
-
-      .fa-heart {
-        font-size: 5rem;
-        color: palevioletred;
-        filter: drop-shadow(2px 2px 2px #000);
-      }
-      .fa-heart:nth-child(odd) {
-        font-size: 8rem;
-      }
-      .fa-heart:nth-child(2) {
-        font-size: 6.5rem;
-      }
-      .fa-heart:nth-child(5) {
-        font-size: 6.3rem;
-      }
-      .fa-heart:nth-child(9) {
-        font-size: 10rem;
-      }
-      .fa-heart.single {
-        position: absolute;
-        /* bottom: -10rem; */
-        animation: up 10s linear infinite backwards;
-        opacity: 0.5;
-      }
-
-      .hearts > .fa-heart:nth-child(2) {
-        left: 3%;
-        animation-delay: 1.3s;
-      }
-      .hearts > .fa-heart:nth-child(3) {
-        left: 12%;
-        animation-delay: 1.7s;
-      }
-      .hearts > .fa-heart:nth-child(4) {
-        left: 66%;
-        animation-delay: 2.5s;
-      }
-      .hearts > .fa-heart:nth-child(6) {
-        left: 23%;
-        animation-delay: 0.4s;
-      }
-      .hearts > .fa-heart:nth-child(7) {
-        left: 30%;
-        animation-delay: 2s;
-      }
-      .hearts > .fa-heart:nth-child(9) {
-        left: 37%;
-        animation-delay: 3.2s;
-      }
-      .hearts > .fa-heart:nth-child(10) {
-        left: 47%;
-        animation-delay: 4s;
-      }
-      .hearts > .fa-heart:nth-child(11) {
-        left: 87%;
-        animation-delay: 2.7s;
-      }
-
-      .couple-hearts {
-        position: absolute;
-        display: inline-block;
-        /* bottom: -10rem; */
-        animation: up 12s linear infinite backwards;
-        opacity: 0.7;
-      }
-      .couple-hearts .fa-heart:first-child {
-        position: absolute;
-        color: palevioletred;
-        font-size: 3rem;
-        z-index: 2;
-      }
-
-      .couple-hearts:nth-of-type(1) {
-        left: 10%;
-        animation-delay: 1s;
-      }
-      .couple-hearts:nth-of-type(2) {
-        left: 20%;
-        animation-delay: 5s;
-      }
-      .couple-hearts:nth-of-type(3) {
-        left: 55%;
-        animation-delay: 3s;
-      }
-      .couple-hearts:nth-of-type(4) {
-        left: 75%;
-        animation-delay: 2s;
-      }
-      .couple-hearts:nth-of-type(5) {
-        left: 95%;
-        animation-delay: 0s;
-      }
-
-      .fa-heart.right {
-        right: 0;
-      }
-      .fa-heart.bottom {
-        bottom: 0;
-      }
-
-      @keyframes up {
-        0% {
-          bottom: -10rem;
-        }
-        100% {
-          bottom: 110%;
-        }
-      }
-
-      .container {
-        display: none;
-      }
-      .hearts {
-        display: none;
-      }
-
-      :root{
-    --first-color: #E3F8FF;
-    --second-color: #DCFAFB;
-    --third-color: #FFE8DF;
-    --accent-color: #FF5151;
-    --dark-color: #161616;
-}
-
-/*Tipografia responsive*/
-:root{
-    --body-font: 'Open Sans';
-    --h1-font-size: 1.5rem;
-    --h3-font-size: 1rem;
-    --normal-font-size: 0.938rem;
-    --smaller-font-size: 0.75rem;
-}
-
-*, 
-::after, 
-::before {
-    box-sizing: border-box;
-}
-
-body {
-    /* margin: 2rem 0 0 0; */
-    /* background-color: #fff; */
-    /* color: var(--dark-color); */
-    /* font-family: var(--body-font); */
-}
-
-h1 {
-    font-size: var(--h1-font-size);
-    text-transform: uppercase;
-}
-
-img {
-    max-width: 100%;
-    /* height: auto; */
-}
-
-a {
-    text-decoration: none;
-}
-
-.main {
-  margin: 4rem auto;
-  padding: 2rem 0;
-}
-
-.bd-grid {
-  max-width: 1200px;
-  margin-left: 2.5rem;
-  margin-right: 2.5rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  /* align-items: center; */
-  gap: 2rem;
-}
-
-.shop-title {
-  position: relative;
-  margin: 0 2.5rem;
-}
-.shop-title::after {
-  position: absolute;
-  top: 50%;
-  content: "";
-  width: 72px;
-  height: 2px;
-  margin-left: 0.25rem;
-  background-color: var(--dark-color);
-}
-
-.card {
-  position: relative;
-  /* padding: 1.5rem 2rem; */
-  display: flex;
-  /* align-items: center; */
-  /* flex-direction: column; */
-  border-radius: 1rem;
-  overflow: hidden;
-}
-.card:hover {
-  box-shadow: 0 0.5rem 1rem #D1D9E6;
-}
-article:nth-child(1) {
-  background-color: var(--first-color);
-}
-article:nth-child(2) {
-  background-color: var(--second-color);
-}
-article:nth-child(3) {
-  background-color: var(--third-color);
-}
-article:nth-child(4) {
-  background-color: var(--second-color);
-}
-
-@media screen and (min-width: 1200px){
-    body{
-        margin: 3rem 0 0 0;
-    }
-    .title-shop{
-        margin: 0 5rem;
-    }
-    .bd-grid{
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-
-@media screen and (min-width: 768px){
-    :root{
-        --h1-font-size: 2rem;
-        --normal-font-size: 1rem;
-        --smaller-font-size: 0.813rem;
-    }
-}
-
-.card-img {
-  /* width: 180px; */
-  /* height: auto; */
-  width: 90%;
-  margin: auto;
-  padding: 3rem 0;
-  transition: all 500ms;
-}
-.card:hover .card-img {
-  /* margin-left: 3.5rem; */
-  transform: rotate(30deg);
-}
-
-.card-name {
-  /* position: absolute; */
-  /* top: 0; */
-  /* left: -25%; */
-  /* width: 3.5rem; */
-  width: 0;
-  /* flex-grow: 0; */
-  /* flex: 0; */
-  /* height: 100%; */
-  color: #fff;
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-align: center;
-  text-transform: uppercase;
-  /* line-height: 3.5rem; */
-  writing-mode: vertical-rl;
-  background-color: var(--dark-color);
-  /* transform: translateX(-100%) rotate(180deg); */
-  transform: rotate(180deg);
-  transition: all 500ms;
-  overflow: hidden;
-}
-.card:hover .card-name {
-  /* left: 0; */
-  width: 50%;
-  padding: 0 1rem;
-  /* flex: 1; */
-  /* transform: translateX(0%) rotate(180deg); */
-}
-
-.product {
-  margin-top: auto;
-  padding: 2rem;
-  /* flex: 1; */
-}
-.card:hover .product {
-  width: 400%;
-}
-
-.card-icon {
-  color: var(--dark-color);
-  font-size: 1.5rem;
-}
-.card-icon:hover .fa-heart-o {
-  color: var(--accent-color);
-}
-.card-icon .fa-shopping-cart {
-  color: transparent;
-  -webkit-text-stroke: 1.2px #000;
-}
-.card-icon .fa-shopping-cart:hover {
-  -webkit-text-stroke-color: var(--accent-color);
-}
-
-.card-details {
-  /* width: 100%; */
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: all 500ms;
-}
-.card:hover .card-details {
-  /* margin-left: 3.5rem; */
-  /* padding: 0 1.5rem; */
-}
-
-.card-preci {
-  display: block;
-  text-align: center;
-}
-.before {
-  margin-bottom: 0.25rem;
-  color: var(--accent-color);
-  font-size: var(--smaller-font-size);
-}
-.now {
-  font-size: var(--h3-font-size);
-  font-weight: bold;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-:root {
-  --clr: #2c363f;
-}
-
-body {
-  font-family: Georgia, Times, serif;
-  background-color: var(--clr);
-}
-
-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  padding: 10px 50px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #2196f3;
-  overflow: hidden;
-  z-index: 10;
-}
-
-header .logo {
-  position: relative;
-  color: #fff;
-  font-size: 2rem;
-  font-weight: 600;
-  text-transform: capitalize;
-  text-decoration: none;
-}
-
-header nav {
-  display: flex;
-  gap: 10px;
-}
-
-header nav a {
-  position: relative;
-  padding: 12px 20px;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-  text-transform: capitalize;
-  text-decoration: none;
-}
-
-#indicator {
-  position: absolute;
-  width: 88px;
-  /* height: 60px; */
-  height: 84%;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  background-color: var(--clr);
-  transition: 0.25s;
-}
-#indicator::before {
-  position: absolute;
-  bottom: 0;
-  left: -30px;
-  content: "";
-  width: 30px;
-  height: 30px;
-  /* background-color: red; */
-  border-bottom-right-radius: 20px;
-  box-shadow: 5px 5px 0 5px var(--clr);
-}
-#indicator::after {
-  position: absolute;
-  bottom: 0;
-  right: -30px;
-  content: "";
-  width: 30px;
-  height: 30px;
-  /* background-color: red; */
-  border-bottom-left-radius: 20px;
-  box-shadow: -5px 5px 0 5px var(--clr);
-}
-    </style>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   </head>
   <body>
+    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
-    <header>
-      <a href="#" class="logo">logo</a>
-      <nav>
-        <div id="indicator"></div>
-        <a href="#">home</a>
-        <a href="#">about</a>
-        <a href="#">portfolio</a>
-        <a href="#">team</a>
-        <a href="#">contact</a>
+    <!--===== HEADER =====-->
+    <header class="l-header">
+      <nav class="nav bd-grid">
+        <div>
+          <a href="#" class="nav-logo">Marlon</a>
+        </div>
+    
+        <div class="nav-menu" id="nav-menu">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="#home" class="nav-link active">home</a>
+            </li>
+            <li class="nav-item">
+              <a href="#about" class="nav-link">about</a>
+            </li>
+            <li class="nav-item">
+              <a href="#skills" class="nav-link">skills</a>
+            </li>
+            <li class="nav-item">
+              <a href="#work" class="nav-link">work</a>
+            </li>
+            <li class="nav-item">
+              <a href="#contact" class="nav-link">contact</a>
+            </li>
+          </ul>
+        </div>
+    
+        <div class="nav-toggle" id="nav-toggle">
+          <i class='fa'></i>
+        </div>
       </nav>
     </header>
-    <script>
-      // const indicator = document.querySelector("#indicator");
-      let items = document.querySelectorAll("nav a");
-      console.log(indicator);
-
-      function marker(el) {
-        indicator.style.left = el.offsetLeft + "px";
-        indicator.style.width = el.offsetWidth + "px";
-      }
-
-      items.forEach(link => {
-        link.addEventListener("click", () => {
-          // marker(e.target);
-          marker(link);
-        })
-      })
-    </script>
-
-    <h1 class="shop-title" style="display: none;">shop</h1>
-
-    <main class="main bd-grid">
-      <article class="card">
-        <div class="card-name">
-          <p>air zoom pegasus</p>
+    
+    <main class="l-main">
+      <!--===== HOME =====-->
+      <section class="home bd-grid" id="home">
+        <div class="home-data">
+          <h1 class="home-title">Hi,<br>I'am <span class="home-title-color">Marlon</span><br> Web Designer</h1>
+    
+          <a href="#" class="button">Contact</a>
         </div>
-        <div class="product">
-          <div class="card-img">
-            <img src="./img-shop/img1.png" alt="">
-          </div>
-          <div class="card-details">
-            <a href="#1" class="card-icon">
-              <i class="fa fa-heart-o" aria-hidden="true"></i>
-            </a>
-            <div>
-              <span class="card-preci before">$990.00</span>
-              <span class="card-preci now">$749.00</span>
-            </div>
-            <a href="#1" class="card-icon">
-              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-            </a>
-          </div>
+    
+        <div class="home-social">
+          <a href="" class="home-social-icon">
+            <i class='fa'></i>
+          </a>
+          <a href="" class="home-social-icon">
+            <i class='fa'></i>
+          </a>
+          <a href="" class="home-social-icon">
+            <i class='fa'></i>
+          </a>
         </div>
-      </article>
-      <article class="card">
-        <div class="card-name">
-          <p>air zoom pegasus</p>
+    
+        <div class="home-img">
+          <svg class="home-blob" viewBox="0 0 479 467" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+            <mask id="mask0" mask-type="alpha">
+              <path
+                d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z" />
+            </mask>
+            <g mask="url(#mask0)">
+              <path
+                d="M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z" />
+              <image class="home-blob-img" x="50" y="60" href="assets/img/perfil.png" />
+            </g>
+          </svg>
         </div>
-        <div class="product">
-          <div class="card-img">
-            <img src="./img-shop/img2.png" alt="">
+      </section>
+    
+      <!--===== ABOUT =====-->
+      <section class="about section " id="about">
+        <h2 class="section-title">About</h2>
+    
+        <div class="about-container bd-grid">
+          <div class="about-img">
+            <img src="assets/img/about.jpg" alt="">
           </div>
-          <div class="card-details">
-            <a href="#1" class="card-icon">
-              <i class="fa fa-heart-o" aria-hidden="true"></i>
-            </a>
-            <div>
-              <span class="card-preci before">$990.00</span>
-              <span class="card-preci now">$749.00</span>
-            </div>
-            <a href="#1" class="card-icon">
-              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-            </a>
+    
+          <div>
+            <h2 class="about-subtitle">I'am Marlon</h2>
+            <p class="about-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate cum expedita quo
+              culpa tempora, assumenda, quis fugiat ut voluptates soluta, aut earum nemo recusandae cumque perferendis!
+              Recusandae alias accusamus atque.</p>
           </div>
         </div>
-      </article>
-      <article class="card">
-        <div class="card-name">
-          <p>air zoom pegasus</p>
+      </section>
+    
+      <!--===== WORK =====-->
+      <section class="work section" id="work">
+        <h2 class="section-title">Work</h2>
+    
+        <div class="work-container bd-grid">
+          <a href="" class="work-img">
+            <img src="assets/img/work1.jpg" alt="">
+          </a>
+          <a href="" class="work-img">
+            <img src="assets/img/work2.jpg" alt="">
+          </a>
+          <a href="" class="work-img">
+            <img src="assets/img/work3.jpg" alt="">
+          </a>
+          <a href="" class="work-img">
+            <img src="assets/img/work4.jpg" alt="">
+          </a>
+          <a href="" class="work-img">
+            <img src="assets/img/work5.jpg" alt="">
+          </a>
+          <a href="" class="work-img">
+            <img src="assets/img/work6.jpg" alt="">
+          </a>
         </div>
-        <div class="product">
-          <div class="card-img">
-            <img src="./img-shop/img3.png" alt="">
-          </div>
-          <div class="card-details">
-            <a href="#1" class="card-icon">
-              <i class="fa fa-heart-o" aria-hidden="true"></i>
-            </a>
-            <div>
-              <span class="card-preci before">$990.00</span>
-              <span class="card-preci now">$749.00</span>
-            </div>
-            <a href="#1" class="card-icon">
-              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-            </a>
-          </div>
+      </section>
+    
+      <!--===== CONTACT =====-->
+      <section class="contact section" id="contact">
+        <h2 class="section-title">Contact</h2>
+    
+        <div class="contact-container bd-grid">
+          <form action="" class="contact-form">
+            <input type="text" placeholder="Name" class="contact-input">
+            <input type="mail" placeholder="Email" class="contact-input">
+            <textarea name="" id="" cols="0" rows="10" class="contact-input"></textarea>
+            <input type="button" value="Enviar" class="contact-button button">
+          </form>
         </div>
-      </article>
-      <article class="card">
-        <div class="card-name">
-          <p>air zoom pegasus</p>
-        </div>
-        <div class="product">
-          <div class="card-img">
-            <img src="./img-shop/img4.png" alt="">
-          </div>
-          <div class="card-details">
-            <a href="#1" class="card-icon">
-              <i class="fa fa-heart-o" aria-hidden="true"></i>
-            </a>
-            <div>
-              <span class="card-preci before">$990.00</span>
-              <span class="card-preci now">$749.00</span>
-            </div>
-            <a href="#1" class="card-icon">
-              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-            </a>
-          </div>
-        </div>
-      </article>
+      </section>
     </main>
-
-    <div class="container">
-      <div class="login-wrapper">
-        <div class="left-side register-form">
-          <h2>sign up to long life</h2>
-          <div class="box">
-            <input type="text" name="" id="name" placeholder="Enter Name">
-            <i class="fa fa-user"></i>
-          </div>
-          <div class="box">
-            <input type="text" name="" id="email2" placeholder="Enter Email">
-            <i class="fa fa-envelope"></i>
-          </div>
-          <div class="box">
-            <input type="password" name="" id="password" placeholder="Enter password">
-            <i class="fa fa-lock"></i>
-          </div>
-          <button>register</button>
-          <p>Already have Account? 
-            <a href="#" id="btn-signin">login here</a>
-          </p>
-        </div>
-        <div class="center">
-          <img src="../AJAX/slides/profile-renet-del.jpg" alt="">
-          <button id="btn-social">login with facebook</button>
-          <button id="btn-social">login with google</button>
-        </div>
-        <div class="right-side signin-form">
-          <h2>sign in to long life</h2>
-          <div class="box">
-            <input type="text" name="" id="email" placeholder="Enter Email">
-            <i class="fa fa-envelope"></i>
-          </div>
-          <div class="box">
-            <input type="password" name="" id="password" placeholder="Enter password">
-            <i class="fa fa-lock"></i>
-          </div>
-          <p><input type="checkbox" name="" id="">remember me
-          <a href="#">forgot password</a></p>
-          <button>login</button>
-          <p>Dont have Account? 
-            <a href="#" id="btn-signup">signup here</a>
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="hearts">
-      <div class="couple-hearts">
-        <i class="fa fa-heart bottom right"></i>
-        <i class="fa fa-heart"></i>
-      </div>
-      <i class="fa fa-heart single"></i>
-      <i class="fa fa-heart single"></i>
-      <i class="fa fa-heart single"></i>
-      <div class="couple-hearts">
-        <i class="fa fa-heart"></i>
-        <i class="fa fa-heart"></i>
-      </div>
-      <i class="fa fa-heart single"></i>
-      <i class="fa fa-heart single"></i>
-      <div class="couple-hearts">
-        <i class="fa fa-heart right"></i>
-        <i class="fa fa-heart"></i>
-      </div>
-      <i class="fa fa-heart single"></i>
-      <i class="fa fa-heart single"></i>
-      <i class="fa fa-heart single"></i>
-      <div class="couple-hearts">
-        <i class="fa fa-heart bottom"></i>
-        <i class="fa fa-heart"></i>
-      </div>
-      <div class="couple-hearts">
-        <i class="fa fa-heart"></i>
-        <i class="fa fa-heart"></i>
-      </div>
-    </div>
-    <script>
-      const btnsignup = document.querySelector("#btn-signup");
-      const btnsignin = document.querySelector("#btn-signin");
-
-      const signupform = document.querySelector(".register-form");
-      const signinform = document.querySelector(".signin-form");
-
-      const img = document.querySelector(".center");
-
-      btnsignup.addEventListener("click", () => {
-        signupform.classList.toggle("signincall");
-        signinform.classList.toggle("signupcall");
-        img.classList.toggle("imgslide");
-      })
-
-      btnsignin.addEventListener("click", () => {
-        signupform.classList.toggle("signincall");
-        signinform.classList.toggle("signupcall");
-        img.classList.toggle("imgslide");
-      })
-    </script>
-
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
@@ -853,74 +174,5 @@ header nav a {
       console.log(uspFromString.toString());
       console.log(uspFromObject.toString());
     </script>
-
-<script>
-  // 03. Deck of Cards
-
-  function menageCards(params) {
-    const cards = params[0].split(", ");
-    const numCommands = Number(params[1]);
-
-    // console.log(cards.join(" / "));
-
-    for (let index = 2; index < params.length; index++) {
-      let data = params[index].split(", ");
-      const action = data[0];
-
-      if (action == "Add") {
-        const card = data[1];
-        if (cards.includes(card)) {
-          console.log("Card is already in the deck");
-        } else {
-          console.log("Card successfully added");
-          cards.push(card);
-        }
-      } else if (action == "Remove") {
-        const card = data[1];
-        const index = cards.indexOf(card);
-        if (index == -1) {
-          console.log("Card not found");
-        } else {
-          cards.splice(index, 1);
-          console.log("Card successfully removed");
-        }
-      } else if (action == "Remove At") {
-        const index = Number(data[1]);
-        if (index < cards.length && index >= 0) {
-          cards.splice(index, 1);
-          console.log("Card successfully removed");
-        } else {
-          console.log("Index out of range");
-        }
-      } else if (action == "Insert") {
-        const index = Number(data[1]);
-        const card = data[2];
-        if (index < cards.length && index >= 0) {
-          const exist = cards.includes(card);
-          if (exist) {
-            console.log("Card is already added");
-          } else {
-            cards.splice(index, 0, card);
-            console.log("Card successfully added");
-          }
-        } else {
-          console.log("Index out of range");
-        }
-
-      }
-    }
-
-    console.log(cards.join(", "));
-
-  }
-
-  // menageCards(["Ace of Diamonds, Queen of Hearts, King of Clubs", "3", "Add, King of Diamonds", "Insert, 2, Jack of Spades", "Remove, Ace of Diamonds"]);
-  // menageCards(["Two of Clubs, King of Spades, Five of Spades, Jack of Hearts", "2", "Add, Two of Clubs", "Remove, Five of Hearts"]);
-  // menageCards(["Jack of Spades, Ace of Clubs, Jack of Clubs", "2", "Insert, -1, Queen of Spades", "Remove At, 1"]);
-  // menageCards(["Jack of Spades, Ace of Clubs, Jack of Clubs", "2", "Remove At, -1"]);
-  // menageCards(["Ace of Diamonds, Queen of Hearts, King of Clubs", "3", "Insert, 2, Jack of Spades"]);
-  // menageCards(["Ace of Diamonds, Queen of Hearts, King of Clubs", "3", "Insert, 2, Queen of Hearts"]);
-  // menageCards(["Ace of Diamonds, Queen of Hearts, King of Clubs", "3", "Remove, Ace of Diamonds"]);
-</script>
   </body>
 </html>
