@@ -228,6 +228,7 @@ img {
   margin-bottom: var(--mb-2);
   color: var(--second-color);
   font-size: 1.5rem;
+  transition: .3s;
 }
 .home-social-icon:hover {
   color: var(--first-color);
@@ -400,6 +401,29 @@ img {
   background-color: var(--second-color);
 }
 
+.footer-title {
+  margin-bottom: var(--mb-4);
+  font-size: 2rem;
+}
+
+.footer-social {
+  margin-bottom: var(--mb-4);
+}
+
+.footer-icon {
+  margin: 0 var(--mb-2);
+  color: #fff;
+  font-size: 1.5rem;
+  transition: .3s;
+}
+.footer-icon:hover {
+  color: var(--first-color);
+}
+
+.footer-copy {
+  font-size: var(--smaller-font-size);
+}
+
 @media screen and (min-width: 968px) {
   :root {
     --big-font-size: 3.5rem;
@@ -410,12 +434,12 @@ img {
 }
 
 /* delete */
-.bd-grid {
+/* .bd-grid { */
   /* border: 1px solid red; */
-}
-.l-header {
+/* } */
+/* .l-header { */
   /* border: 1px solid blue; */
-}
+/* } */
     </style>
   </head>
   <body>
@@ -697,6 +721,122 @@ img {
       // Convert URLSearchParams Object to Query String
       console.log(uspFromString.toString());
       console.log(uspFromObject.toString());
+    </script>
+
+    <script>
+      // 01. Person Info
+
+      function createperson(firstName, lastName, age) {
+        const person = {};
+
+        person.firstName = firstName;
+        person.lastName = lastName;
+        person.age = age;
+
+        return person;
+
+      }
+
+      // createperson("Peter", "Pan", "20");
+      // createperson("George", "Smith", "18");
+      
+      // 02. City
+
+      function prinntCityInfo(city) {
+        const entries = Object.entries(city);
+
+        for (const [key, value] of entries) {
+          console.log(`${key} -> ${value}`);
+        }
+      }
+
+      function prinntCityInfo(city) {
+        for (const key in city) {
+          // console.log(key);
+          // console.log(city[key]);
+          const value = city[key];
+
+          console.log(`${key} -> ${value}`);
+
+        }
+      }
+
+      prinntCityInfo({
+        name: "Sofia", 
+        area: 492, 
+        population: 1238438, 
+        country: "Bulgaria", 
+        postCode: "1000"});
+      prinntCityInfo({
+        name: "Plovdiv", 
+        area: 389, 
+        population: 1162358, 
+        country: "Bulgaria", 
+        postCode: "4000"});
+
+      // 03. Convert to Object
+
+      function convertToObj(jsonStr) {
+        const result = JSON.parse(jsonStr);
+        // console.log(result);
+
+        for (const key in result) {
+          const value = result[key];
+          console.log(`${key}: ${value}`);
+        }
+
+      }
+
+      // convertToObj('{"name": "George", "age": 40, "town": "Sofia"}');
+      // convertToObj('{"name": "Peter", "age": 35, "town": "Plovdiv"}');
+
+      // 04. Convert to JSON
+      function convertToJSON(firstName, lastName, hairColor) {
+        const person = {
+          name: firstName, 
+          lastName, 
+          hairColor
+        }
+
+        const result = JSON.stringify(person);
+
+        console.log(result);
+
+      }
+
+      // convertToJSON('George', 'Jones', 'Brown');
+      // convertToJSON('Peter', 'Smith', 'Blond');
+
+      // 05. Cats
+
+      function printCat(params) {
+        class Cat {
+          constructor(name, age) {
+            this.name = name;
+            this.age = age;
+          }
+
+          meow() {
+            console.log(`${this.name}, age ${this.age} says Meow`);
+          }
+        }
+
+        for (const input of params) {
+          const data = input.split(" ");
+          // console.log(data);
+          const name = data[0];
+          const age = data[1];
+
+          const cat = new Cat(name, age);
+          cat.meow();
+        }
+
+      }
+
+      printCat(['Mellow 2', 'Tom 5']);
+      printCat(['Candy 1', 'Poppy 3', 'Nyx 2']);
+
+      // 06. Songs
     </script>
   </body>
 </html>
