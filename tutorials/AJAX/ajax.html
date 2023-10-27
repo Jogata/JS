@@ -161,31 +161,40 @@
         /* right: 100px; */
         right: min(3vw, 1rem);
         width: 30%;
-        height: 5px;
+        /* height: 5px; */
         display: flex;
         /* align-items: center; */
         /* justify-content: center; */
-        border-bottom: 5px solid;
-        border-image: linear-gradient(90deg, transparent, var(--primary), var(--primary)) 30;
-        background-color: transparent;
+        /* border-bottom: 5px solid; */
+        border-top: 5px solid;
+        border-image: 
+          linear-gradient(
+            90deg, transparent, 
+            var(--primary), 
+            var(--primary)) 30;
+        /* background-color: transparent; */
         box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
         backdrop-filter: blur(20px);
         transform-origin: right;
-        transition: all 1s ease-out;
+        transition: 
+          top 1s ease-out, 
+          width 1s ease-out;
+        transition-delay: 1s;
         overflow: hidden;
         z-index: 200;
       }
       nav.active {
         top: 100px;
         width: 40%;
-        height: auto;
+        /* height: auto; */
         border-top: 5px solid;
         border-bottom: none;
-        border-image: linear-gradient(
-          90deg, transparent, 
-          var(--primary), 
-          var(--primary), 
-          transparent) 30;
+        border-image: 
+          linear-gradient(
+            90deg, transparent, 
+            var(--primary), 
+            var(--primary), 
+            transparent) 30;
       }
 
       nav ul {
@@ -201,11 +210,13 @@
         /* list-style: none; */
         transform: translateY(-100px);
         transition: 0.5s;
+        /* transition-delay: 2s; */
         visibility: hidden;
         opacity: 0;
       }
       nav.active li {
         transform: translateY(0);
+        transition-delay: 2s;
         visibility: visible;
         opacity: 1;
       }
@@ -217,6 +228,7 @@
         align-items: center;
         justify-content: center;
         color: #fff;
+        font-size: 1rem;
         font-weight: 200;
         text-transform: capitalize;
         letter-spacing: 1px;
@@ -705,7 +717,7 @@
 
       /* <!-- delete --> */
       .bg-videos {
-        display: none;
+        /* display: none; */
       }
       .screen {
         display: none;
@@ -724,6 +736,129 @@
       }
       .content {
         /* border: 1px solid tomato; */
+      }
+
+      #showcase {
+        width: 1000px;
+        height: 550px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      section {
+        position: relative;
+        display: inline-block;
+        width: 25%;
+        height: 100%;
+        background-size: cover;
+      }
+      section::after {
+        position: absolute;
+        top: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        transition: all 500ms;
+      }
+
+      section:nth-child(1) {
+        animation: secn-1 8s infinite both;
+        background-image: url("./slides/scenic-view-of-lake-against-sky-during-sunset-copy.jpg");
+        background-position: 0 0;
+        /* clip-path: polygon(95% 10%, 100% 80%, 62% 77%, 45% 12%); */
+      }
+
+      @keyframes secn-1 {
+        0%, 20%, 100% {
+          background-image: url("./slides/forest.jpg");
+          background-position: 0 0;
+          clip-path: polygon(23% 18%, 95% 13%, 100% 91%, 55% 87%);
+        }
+        25%, 45% {
+          background-image: url("./slides/scenic-view-of-lake-against-sky-during-sunset-copy.jpg");
+          background-position: 0 0;
+          clip-path: polygon(95% 10%, 100% 80%, 62% 77%, 45% 12%);
+        }
+        50%, 70% {
+          background-image: url("./slides/road-copy.jpg");
+          background-position: 0 0;
+          clip-path: polygon(100% 67%, 48% 63%, 28% 9%, 95% 3%);
+        }
+        75%, 95% {
+          background-image: url("./slides/stock-photo-131318185-copy.jpg");
+          background-position: 0 0;
+          clip-path: polygon(78% 72%, 58% 34%, 95% 27%, 100% 73%);
+        }
+      }
+
+      section:nth-child(2) {
+        animation: secn-2 8s infinite both;
+        background-image: url("./slides/scenic-view-of-lake-against-sky-during-sunset-copy.jpg");
+        background-position: 33.333% 0;
+      }
+
+      @keyframes secn-2 {
+        0%, 20%, 100% {
+          background-image: url("./slides/forest.jpg");
+          background-position: 33.3333% 0;
+          clip-path: polygon(0% 7%, 100% 9%, 95% 93%, 5% 95%);
+        }
+        25%, 45% {
+          background-image: url("./slides/scenic-view-of-lake-against-sky-during-sunset-copy.jpg");
+          background-position: 33.3333% 0;
+          clip-path: polygon(100% 3%, 95% 95%, 5% 90%, 0% 5%);
+        }
+        50%, 70% {
+          background-image: url("./slides/road-copy.jpg");
+          background-position: 33.3333% 0;
+          clip-path: polygon(95% 83%, 5% 78%, 0% 6%, 100% 11%);
+        }
+        75%, 95% {
+          background-image: url("./slides/stock-photo-131318185-copy.jpg");
+          background-position: 33.3333% 0;
+          clip-path: polygon(5% 79%, 0% 21%, 100% 16%, 95% 83%);
+        }
+      }
+
+      section:nth-child(3) {
+        animation: secn-3 8s infinite both;
+        background-image: url("./slides/scenic-view-of-lake-against-sky-during-sunset-copy.jpg");
+        background-position: 0 0;
+      }
+
+      @keyframes secn-3 {
+        0%, 20%, 100% {
+          background-image: url("./slides/forest.jpg");
+          background-position: 66.6666% 0;
+          clip-path: polygon(5% 11%, 100% 14%, 95% 88%, 0% 91%);
+        }
+        25%, 45% {
+          background-image: url("./slides/scenic-view-of-lake-against-sky-during-sunset-copy.jpg");
+          background-position: 66.6666% 0;
+          clip-path: polygon(100% 14%, 95% 84%, 0% 91%, 5% 7%);
+        }
+        50%, 70% {
+          background-image: url("./slides/road-copy.jpg");
+          background-position: 66.6666% 0;
+          clip-path: polygon(95% 79%, 0% 86%, 5% 7%, 100% 3%);
+        }
+        75%, 95% {
+          background-image: url("./slides/stock-photo-131318185-copy.jpg");
+          background-position: 66.6666% 0;
+          clip-path: polygon(0% 85%, 5% 14%, 100% 3%, 95% 95%);
+        }
+      }
+
+      @media (max-width: 1000px) {
+        #showcase {
+          position: absolute;
+          top: -115px;
+          left: -200px;
+          margin: 0;
+          transform: scale(0.65);
+        }
       }
     </style>
   </head>
@@ -936,6 +1071,13 @@
         </div>
       </div>
     </div>
+
+    <div id="showcase" style="display: none;">
+      <section></section>
+      <section></section>
+      <section></section>
+      <section></section>
+    </div>
     <!-- <ul class="sci">
       <li>
         <a href="#">
@@ -973,7 +1115,7 @@
       startingIndexes[0] = 0;
       startingIndexes[thumbs.length - 1] = -1;
       startingIndexes[1] = 1;
-      console.log(startingIndexes);
+      // console.log(startingIndexes);
 
       thumbs.forEach((thumb, index) => {
         let middle = Math.floor(thumbs.length/2);
@@ -1055,7 +1197,7 @@
         })
         // pauseBtn.classList.remove("active");
         // playBtn.classList.add("active");
-        togglePlay();
+        togglePlayButton();
       }
 
       function playVideoBackground() {
@@ -1065,10 +1207,10 @@
         })
         // playBtn.classList.remove("active");
         // pauseBtn.classList.add("active");
-        togglePlay();
+        togglePlayButton();
       }
 
-      function togglePlay() {
+      function togglePlayButton() {
         // const pauseBtn = document.querySelector(".pause");
         // const playBtn = document.querySelector(".play-btn");
         playBtn.classList.toggle("active");
