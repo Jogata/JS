@@ -717,7 +717,7 @@
 
       /* <!-- delete --> */
       .bg-videos {
-        /* display: none; */
+        display: none;
       }
       .screen {
         display: none;
@@ -739,8 +739,8 @@
       }
 
       #showcase {
-        width: 1000px;
-        height: 550px;
+        width: 63rem;
+        height: 35rem;
         margin: 0 auto;
         display: flex;
         align-items: center;
@@ -764,13 +764,13 @@
       }
 
       section:nth-child(1) {
-        animation: secn-1 8s infinite both;
+        animation: clip-v1 8s infinite both;
         background-image: url("./slides/scenic-view-of-lake-against-sky-during-sunset-copy.jpg");
         background-position: 0 0;
         /* clip-path: polygon(95% 10%, 100% 80%, 62% 77%, 45% 12%); */
       }
 
-      @keyframes secn-1 {
+      @keyframes clip-v1 {
         0%, 20%, 100% {
           background-image: url("./slides/forest.jpg");
           background-position: 0 0;
@@ -794,12 +794,12 @@
       }
 
       section:nth-child(2) {
-        animation: secn-2 8s infinite both;
+        animation: clip-v2 8s infinite both;
         background-image: url("./slides/scenic-view-of-lake-against-sky-during-sunset-copy.jpg");
         background-position: 33.333% 0;
       }
 
-      @keyframes secn-2 {
+      @keyframes clip-v2 {
         0%, 20%, 100% {
           background-image: url("./slides/forest.jpg");
           background-position: 33.3333% 0;
@@ -823,12 +823,12 @@
       }
 
       section:nth-child(3) {
-        animation: secn-3 8s infinite both;
+        animation: clip-v3 8s infinite both;
         background-image: url("./slides/scenic-view-of-lake-against-sky-during-sunset-copy.jpg");
         background-position: 0 0;
       }
 
-      @keyframes secn-3 {
+      @keyframes clip-v3 {
         0%, 20%, 100% {
           background-image: url("./slides/forest.jpg");
           background-position: 66.6666% 0;
@@ -859,6 +859,102 @@
           margin: 0;
           transform: scale(0.65);
         }
+      }
+
+      .trailers {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        max-width: 750px;
+        z-index: 2;
+      }
+
+      .model-trailer-section {
+        padding-bottom: 4rem;
+        display: flex;
+        flex-wrap: wrap;
+        /* gap: 1rem; */
+        transition: all 0.5s;
+      }
+
+      .trailer-test {
+        flex: 0 0 330px;
+        transition: all 0.5s;
+        cursor: pointer;
+        /* border: 1px solid red; */
+      }
+
+      .trailer-test:nth-child(1) {
+        transform: translate(100%, 100%);
+        background-color: #000;
+        display: flex;
+        z-index: 1;
+      }
+      .trailer-test:nth-child(2) {
+        transform: translateY(100%) rotate(-10deg);
+      }
+      .trailer-test:nth-child(3) {
+        transform: translateX(100%) rotate(10deg);
+      }
+
+      .trailer-test video {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+      }
+
+      .trailers:hover .model-trailer-section {
+        gap: 1rem;
+      }
+      .trailers:hover .trailer-test {
+        transform: translate(0) rotate(0deg);
+      }
+
+      @media screen and (max-width: 1800px) {
+        .model-trailer-section {
+          max-width: 400px;
+        }
+        .trailers:hover .model-trailer-section {
+          gap: 0.5rem;
+        }
+        .trailer-test:nth-child(1) {
+          transform: translateY(300%);
+        }
+        .trailer-test:nth-child(2) {
+          transform: translateY(200%) rotate(-10deg);
+        }
+        .trailer-test:nth-child(3) {
+          transform: translateY(100%) rotate(10deg);
+        }
+        .trailer-test:nth-child(1) video {
+          margin: 1rem 0;
+        }
+      }
+
+      @media screen and (max-width: 1700px) {
+        .trailers {
+          display: none;
+        }
+      }
+
+      .container {
+        position: relative;
+        width: 700px;
+        height: 396px;
+        border-radius: 30px;
+        border: 3px solid #fff;
+        overflow: hidden;
+      }
+
+      .container video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 700px;
+        height: 400px;
+        background-position: center;
+        background-size: cover;
       }
     </style>
   </head>
@@ -1044,6 +1140,22 @@
           </span>
         </div>
       </div>
+      <div class="trailers">
+        <div class="model-trailer-section">
+          <div class="trailer-test">
+            <video src="./assets/videos/mclaren-1.mp4"></video>
+          </div>
+          <div class="trailer-test">
+            <video src="./assets/videos/trailer-1.mp4"></video>
+          </div>
+          <div class="trailer-test">
+            <video src="./assets/videos/trailer-2.mp4"></video>
+          </div>
+          <div class="trailer-test">
+            <video src="./assets/videos/trailer-3.mp4"></video>
+          </div>
+        </div>
+      </div>
       <div class="gallery">
         <div class="carousel">
           <a href="#" class="carousel-item non-transparent" style="--i: 0" onclick="changeVideoBackground('mclaren-1')">
@@ -1072,7 +1184,7 @@
       </div>
     </div>
 
-    <div id="showcase" style="display: none;">
+    <div id="showcase" style="display: block;">
       <section></section>
       <section></section>
       <section></section>
@@ -1217,6 +1329,22 @@
         pauseBtn.classList.toggle("active");
       }
     </script>
+
+    <div class="container">
+      <div id="range">
+        <i class="fa fa-volume-up"></i>
+        <input type="range" name="" id="" value="50" min="0" max="100">
+      </div>
+      <video src="./assets/videos/trailer-1.mp4" id="video"></video>
+      <div id="menu">
+        <i class="fa fa-pause"></i>
+        <i class="fa fa-backward"></i>
+        <i class="fa fa-play"></i>
+        <i class="fa fa-forward"></i>
+        <i id="full" class="fa fa-arrows-alt"></i>
+        <i id="close" class="fa fa-times"></i>
+      </div>
+    </div>
 
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
