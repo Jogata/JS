@@ -749,8 +749,12 @@
 
       section {
         position: relative;
+        /* position: absolute; */
+        /* top: 0; */
+        /* left: 0; */
         display: inline-block;
         width: 25%;
+        /* width: 100%; */
         height: 100%;
         background-size: cover;
       }
@@ -848,6 +852,35 @@
           background-image: url("./slides/stock-photo-131318185-copy.jpg");
           background-position: 66.6666% 0;
           clip-path: polygon(0% 85%, 5% 14%, 100% 3%, 95% 95%);
+        }
+      }
+
+      section:nth-child(4) {
+        animation: clip-v4 8s infinite both;
+        background-image: url("./slides/scenic-view-of-lake-against-sky-during-sunset-copy.jpg");
+        background-position: 100% 0;
+      }
+
+      @keyframes clip-v4 {
+        0%, 20%, 100% {
+          background-image: url("./slides/forest.jpg");
+          background-position: 100% 0;
+          clip-path: polygon(5% 18%, 89% 21%, 62% 73%, 0% 83%);
+        }
+        25%, 45% {
+          background-image: url("./slides/scenic-view-of-lake-against-sky-during-sunset-copy.jpg");
+          background-position: 100% 0;
+          clip-path: polygon(57% 31%, 45% 67%, 0% 77%, 5% 18%);
+        }
+        50%, 70% {
+          background-image: url("./slides/road-copy.jpg");
+          background-position: 100% 0;
+          clip-path: polygon(45% 57%, 0% 67%, 5% 8%, 72% 12%);
+        }
+        75%, 95% {
+          background-image: url("./slides/stock-photo-131318185-copy.jpg");
+          background-position: 100% 0;
+          clip-path: polygon(0% 77%, 5% 18%, 47% 21%, 32% 67%);
         }
       }
 
@@ -955,6 +988,103 @@
         height: 400px;
         background-position: center;
         background-size: cover;
+      }
+
+      .container #menu {
+        position: absolute;
+        left: 0;
+        /* bottom: 0; */
+        bottom: -90px;
+        width: 100%;
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        border-top: 2px solid #468284;
+        background-color: rgba(0, 0, 0, 0.7);
+        box-shadow: 0 3px 5px #000;
+        transition: 750ms linear;
+      }
+      .container:hover #menu {
+        bottom: 0;
+      }
+
+      .container #menu i {
+        color: #fff;
+        width: 60px;
+        text-align: center;
+        line-height: 60px;
+        cursor: pointer;
+      }
+      .container #menu i.fa-play {
+        padding-left: 5px;
+        color: #1e90ff;
+        font-size: 1.4rem;
+        line-height: 50px;
+        border: 5px solid #4169e1;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #fff, #5f9ea0);
+        box-shadow: 0 3px 5px #000;
+      }
+
+      .container #range {
+        position: relative;
+        /* top: 0; */
+        top: -61px;
+        left: 0;
+        width: 100%;
+        padding: 30px;
+        display: flex;
+        border-bottom: 1px solid #468284;
+        background-color: rgba(0, 0, 0, 0.7);
+        box-shadow: 0 3px 5px #000;
+        transition: 750ms linear;
+        z-index: 1;
+      }
+      .container:hover #range {
+        top: 0;
+      }
+
+      .container #range input {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 85%;
+        height: 2px;
+        background: linear-gradient(#468284, #fff);
+        box-shadow: 0 2px 4px #000;
+        cursor: pointer;
+      }
+      .container #range input::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: linear-gradient(#468284, #fff);
+        box-shadow: 0 2px 4px #000;
+        /* background: red; */
+        cursor: pointer;
+      }
+      .container #range input::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: linear-gradient(#468284, #fff);
+        box-shadow: 0 2px 4px #000;
+        cursor: pointer;
+      }
+
+      .container #range i {
+        line-height: 0;
+        padding-right: 10px;
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+      }
+
+      .container #menu #close {
+        display: none;
+        font-size: 2rem;
       }
     </style>
   </head>
@@ -1184,7 +1314,7 @@
       </div>
     </div>
 
-    <div id="showcase" style="display: block;">
+    <div id="showcase" style="display: none;">
       <section></section>
       <section></section>
       <section></section>
