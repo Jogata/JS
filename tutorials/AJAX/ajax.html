@@ -973,28 +973,33 @@
       .container {
         position: relative;
         width: 700px;
-        height: 396px;
-        border-radius: 30px;
+        /* height: 396px; */
         border: 3px solid #fff;
+        border-radius: 30px;
         overflow: hidden;
+      }
+      .container:fullscreen {
+        border: 3px solid transparent;
+        border-radius: 0px;
       }
 
       .container video {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 700px;
-        height: 400px;
+        /* position: absolute; */
+        /* top: 50%; */
+        /* left: 50%; */
+        /* transform: translate(-50%, -50%); */
+        /* width: 700px; */
+        width: 100%;
+        /* height: 400px; */
         background-position: center;
         background-size: cover;
       }
 
-      .container #menu {
+      #menu {
         position: absolute;
         left: 0;
-        /* bottom: 0; */
-        bottom: -90px;
+        bottom: 0;
+        /* bottom: -90px; */
         width: 100%;
         padding: 10px;
         display: flex;
@@ -1002,21 +1007,27 @@
         justify-content: space-around;
         border-top: 2px solid #468284;
         background-color: rgba(0, 0, 0, 0.7);
+        transform: translateY(100%);
         box-shadow: 0 3px 5px #000;
         transition: 750ms linear;
       }
       .container:hover #menu {
-        bottom: 0;
+        /* bottom: 0; */
+        transform: translateY(0);
       }
 
-      .container #menu i {
+      #menu i {
         color: #fff;
         width: 60px;
         text-align: center;
         line-height: 60px;
+        transition: color 500ms;
         cursor: pointer;
       }
-      .container #menu i.fa-play {
+      #menu i:hover {
+        color: #1e90ff;
+      }
+      #menu i.fa-play {
         padding-left: 5px;
         color: #1e90ff;
         font-size: 1.4rem;
@@ -1027,25 +1038,27 @@
         box-shadow: 0 3px 5px #000;
       }
 
-      .container #range {
-        position: relative;
-        /* top: 0; */
-        top: -61px;
+      #range {
+        position: absolute;
+        top: 0;
+        /* top: -61px; */
         left: 0;
         width: 100%;
         padding: 30px;
         display: flex;
         border-bottom: 1px solid #468284;
         background-color: rgba(0, 0, 0, 0.7);
+        transform: translateY(-100%);
         box-shadow: 0 3px 5px #000;
         transition: 750ms linear;
         z-index: 1;
       }
       .container:hover #range {
-        top: 0;
+        /* top: 0; */
+        transform: translateY(0);
       }
 
-      .container #range input {
+      #range input {
         -webkit-appearance: none;
         appearance: none;
         width: 85%;
@@ -1054,7 +1067,7 @@
         box-shadow: 0 2px 4px #000;
         cursor: pointer;
       }
-      .container #range input::-webkit-slider-thumb {
+      #range input::-webkit-slider-thumb {
         -webkit-appearance: none;
         appearance: none;
         width: 20px;
@@ -1065,7 +1078,7 @@
         /* background: red; */
         cursor: pointer;
       }
-      .container #range input::-moz-range-thumb {
+      #range input::-moz-range-thumb {
         width: 20px;
         height: 20px;
         border-radius: 50%;
@@ -1074,7 +1087,7 @@
         cursor: pointer;
       }
 
-      .container #range i {
+      #range i {
         line-height: 0;
         padding-right: 10px;
         color: #fff;
@@ -1082,9 +1095,16 @@
         cursor: pointer;
       }
 
-      .container #menu #close {
-        display: none;
+      #close {
         font-size: 2rem;
+        font-weight: 100;
+      }
+      #close.hidden {
+        display: none;
+      }
+
+      #full.hidden {
+        display: none;
       }
     </style>
   </head>
@@ -1203,10 +1223,10 @@
           </li>
         </ul>
       </div>
-      <a href="#" class="pause-btn active">
+      <a href="#" class="pause-btn active" id="pause-btn1">
         <i class="fa fa-pause"></i>
       </a>
-      <a href="#" class="play-btn">
+      <a href="#" class="play-btn" id="play-btn1">
         <i class="fa fa-play"></i>
       </a>
       <div class="screen">
@@ -1426,11 +1446,11 @@
         })
       }
 
-      const pauseBtn = document.querySelector(".pause-btn");
-      pauseBtn.addEventListener("click", pauseVideoBackground);
+      const pauseBtn1 = document.querySelector(".pause-btn");
+      pauseBtn1.addEventListener("click", pauseVideoBackground);
 
-      const playBtn = document.querySelector(".play-btn");
-      playBtn.addEventListener("click", playVideoBackground);
+      const playBtn1 = document.querySelector("#play-btn1");
+      playBtn1.addEventListener("click", playVideoBackground);
 
       function pauseVideoBackground() {
         const videos = document.querySelectorAll(".bg-video");
@@ -1455,26 +1475,108 @@
       function togglePlayButton() {
         // const pauseBtn = document.querySelector(".pause");
         // const playBtn = document.querySelector(".play-btn");
-        playBtn.classList.toggle("active");
-        pauseBtn.classList.toggle("active");
+        playBtn1.classList.toggle("active");
+        pauseBtn1.classList.toggle("active");
       }
     </script>
 
-    <div class="container">
+    <div id="cont" class="container">
       <div id="range">
         <i class="fa fa-volume-up"></i>
-        <input type="range" name="" id="" value="50" min="0" max="100">
+        <input type="range" name="" id="ran" value="50" min="0" max="100">
       </div>
-      <video src="./assets/videos/trailer-1.mp4" id="video"></video>
+      <video src="./assets/videos/trailer-2.mp4" id="video"></video>
       <div id="menu">
-        <i class="fa fa-pause"></i>
-        <i class="fa fa-backward"></i>
-        <i class="fa fa-play"></i>
-        <i class="fa fa-forward"></i>
+        <i id="pause-btn2" class="fa fa-pause"></i>
+        <i id="backward-btn" class="fa fa-backward"></i>
+        <i id="play-btn2" class="fa fa-play"></i>
+        <i id="forward-btn" class="fa fa-forward"></i>
         <i id="full" class="fa fa-arrows-alt"></i>
-        <i id="close" class="fa fa-times"></i>
+        <i id="close" class="fa fa-times hidden"></i>
       </div>
     </div>
+    <script>
+      const x = document.getElementById("video");
+      const y = document.getElementById("ran");
+      const z = document.getElementById("full");
+      const f = document.getElementById("cont");
+      const c = document.getElementById("close");
+
+      const test = document.createElement("video");
+
+      const playBtn2 = document.querySelector("#play-btn2");
+      playBtn2.addEventListener("click", play);
+
+      function play() {
+        x.play();
+        console.log("play");
+      }
+
+      const pauseBtn2 = document.querySelector("#pause-btn2");
+      pauseBtn2.addEventListener("click", pause);
+
+      function pause() {
+        x.pause();
+        console.log("paused");
+      }
+
+      const backwardBtn = document.querySelector("#backward-btn");
+      backwardBtn.addEventListener("click", backward);
+
+      function backward() {
+        x.currentTime -= 7;
+        console.log(x.currentTime);
+      }
+
+      const forwardBtn = document.querySelector("#forward-btn");
+      forwardBtn.addEventListener("click", forward);
+
+      function forward() {
+        x.currentTime += 7;
+        console.log(x.currentTime);
+      }
+
+      y.addEventListener("input", setVolume);
+
+      function setVolume() {
+        x.volume = (y.value)/100;
+        console.log(y.value/100, x.volume);
+      }
+
+      z.addEventListener("click", setFullScreen);
+
+      function setFullScreen() {
+        // x.requestFullscreen();
+        if (f.requestFullscreen) {
+          f.requestFullscreen();
+        } else if (f.webkitRequestFullscreen) {
+          /* Safari */
+          f.webkitRequestFullscreen();
+        } else if (f.msRequestFullscreen) {
+          /* IE11 */
+          f.msRequestFullscreen();
+        }
+        z.classList.toggle("hidden");
+        c.classList.toggle("hidden");
+      }
+
+      c.addEventListener("click", exitFullScreen);
+
+      function exitFullScreen() {
+        // x.requestFullscreen();
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+          /* Safari */
+          document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+          /* IE11 */
+          document.msExitFullscreen();
+        }
+        z.classList.toggle("hidden");
+        c.classList.toggle("hidden");
+      }
+      </script>
 
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
