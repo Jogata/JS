@@ -43,6 +43,9 @@
         background-color: #000;
         font-family: Georgia, serif;
       }
+      .min-body-width {
+        min-width: min-content;
+      }
 
       .banner {
         position: relative;
@@ -165,7 +168,7 @@
         /* height: 5px; */
         display: flex;
         /* align-items: center; */
-        /* justify-content: center; */
+        justify-content: flex-end;
         /* border-bottom: 5px solid; */
         border-top: 5px solid;
         border-image: 
@@ -181,7 +184,7 @@
           top 1s ease-out, 
           width 1s ease-out;
         transition-delay: 1s;
-        overflow: hidden;
+        /* overflow: hidden; */
         z-index: 200;
       }
       nav.active {
@@ -347,10 +350,12 @@
         color: var(--primary);
         font-size: min(3vw, 6em);
         /* font-size: max(3vw, 2rem); */
-        outline: 0.1em solid currentColor;
         border-radius: 50%;
+        outline: 0.1em solid currentColor;
+        background-color: transparent;
         transition: 0.3s;
         opacity: 0.3;
+        cursor: pointer;
         z-index: 100;
       }
       .pause-btn:hover, 
@@ -367,11 +372,11 @@
       }
       .pause-btn.active {
         display: block;
-        padding: 0.4em 0.544em;
+        padding: 0.4em 0.568em;
       }
       .play-btn.active {
         display: block;
-        padding: 0.4em 0.488em 0.4em 0.668em;
+        padding: 0.4em 0.508em 0.4em 0.698em;
       }
       .pause-btn i, 
       .play-btn i {
@@ -718,7 +723,7 @@
 
       /* <!-- delete --> */
       .bg-videos {
-        display: none;
+        /* display: none; */
       }
       .screen {
         display: none;
@@ -919,16 +924,19 @@
       }
 
       .trailer-test:nth-child(1) {
-        transform: translate(100%, 100%);
+        transform: translate(50%, 50%);
         background-color: #000;
         display: flex;
         z-index: 1;
       }
       .trailer-test:nth-child(2) {
-        transform: translateY(100%) rotate(-10deg);
+        transform: translate(-50%, 50%) rotate(-10deg);
       }
       .trailer-test:nth-child(3) {
-        transform: translateX(100%) rotate(10deg);
+        transform: translate(50%, -50%) rotate(10deg);
+      }
+      .trailer-test:nth-child(4) {
+        transform: translate(-50%, -50%);
       }
 
       .trailer-test video {
@@ -985,13 +993,14 @@
         border-radius: 0px;
       }
 
-      .preview-container video {
+      .preview-box video {
         /* position: absolute; */
         /* top: 50%; */
         /* left: 50%; */
         /* transform: translate(-50%, -50%); */
         /* width: 700px; */
         width: 100%;
+        margin: auto;
         /* height: 400px; */
         background-position: center;
         background-size: cover;
@@ -1120,7 +1129,9 @@
         top: 0;
         left: 0;
         width: 100%;
-        display: flex;
+        padding: 2rem;
+        /* display: flex; */
+        display: none;
         background-color: #000;
         overflow: auto;
         z-index: 2;
@@ -1129,9 +1140,10 @@
         position: relative;
         width: 100%;
         min-width: 300px;
-        max-width: 700px;
+        max-width: 1600px;
         min-height: 300px;
         margin: auto;
+        display: flex;
         border: 3px solid #fff;
         border-radius: 30px;
         overflow: hidden;
@@ -1153,9 +1165,13 @@
       body.preview-mode {
         overflow: hidden;
       }
+
+      body.preview-mode .preview-container {
+        display: flex;
+      }
     </style>
   </head>
-  <body class="preview-mode">
+  <body class="min-body-width">
     <div class="banner">
       <header>
         <span class="year">2018 - 2023</span>
@@ -1173,43 +1189,44 @@
           <li><a href="#">legacy</a></li>
         </ul>
       </nav>
-      <div class="bg-videos">
-        <video 
-          class="bg-video mclaren-1 active" 
-          src="./assets/videos/mclaren-1.mp4"
-          autoplay 
-          loop 
-          muted>
-        </video>
-        <video 
-          class="bg-video mclaren-2" 
-          src="./assets/videos/mclaren-2.mp4"
-          autoplay 
-          loop 
-          muted>
-        </video>
-        <video 
-          class="bg-video mclaren-3" 
-          src="./assets/videos/mclaren-3.mp4"
-          autoplay 
-          loop 
-          muted>
-        </video>
-        <video 
-          class="bg-video mclaren-4" 
-          src="./assets/videos/mclaren-4.mp4"
-          autoplay 
-          loop 
-          muted>
-        </video>
-        <video 
-          class="bg-video mclaren-5" 
-          src="./assets/videos/mclaren-5.mp4"
-          autoplay 
-          loop 
-          muted>
-        </video>
-      </div>
+      
+    <div class="bg-videos">
+      <video 
+        class="bg-video active" 
+        src="./assets/videos/mclaren-1.mp4"
+        autoplay 
+        loop 
+        muted>
+      </video>
+      <video 
+        class="bg-video" 
+        src="./assets/videos/mclaren-2.mp4"
+        autoplay 
+        loop 
+        muted>
+      </video>
+      <video 
+        class="bg-video" 
+        src="./assets/videos/mclaren-3.mp4"
+        autoplay 
+        loop 
+        muted>
+      </video>
+      <video 
+        class="bg-video" 
+        src="./assets/videos/mclaren-4.mp4"
+        autoplay 
+        loop 
+        muted>
+      </video>
+      <video 
+        class="bg-video" 
+        src="./assets/videos/mclaren-5.mp4"
+        autoplay 
+        loop 
+        muted>
+      </video>
+    </div>
       <!-- <div class="content">
         <h1>McLAREN</h1>
         <h3 class="model mclaren-1 active">
@@ -1270,12 +1287,12 @@
           </li>
         </ul>
       </div>
-      <a href="#" class="pause-btn active" id="pause-btn1">
+      <button href="#" class="pause-btn active" id="main-pause-btn">
         <i class="fa fa-pause" aria-hidden="true"></i>
-      </a>
-      <a href="#" class="play-btn" id="play-btn1">
+      </button>
+      <button href="#" class="play-btn" id="main-play-btn">
         <i class="fa fa-play" aria-hidden="true"></i>
-      </a>
+      </button>
       <div class="screen">
         <!-- <div class="shadow"></div> -->
         <div>
@@ -1355,23 +1372,23 @@
       </div>
       <div class="gallery">
         <div class="carousel">
-          <a href="#" class="carousel-item non-transparent" style="--i: 0" onclick="changeVideoBackground('mclaren-1')">
+          <a href="#" class="carousel-item non-transparent" style="--i: 0">
             <img src="./assets/cars/mclaren-1.jpg" alt="">
             <h4 class="mclaren-1">765lt spider</h4>
           </a>
-          <a href="#" class="carousel-item semi-transparent" style="--i: 1" onclick="changeVideoBackground('mclaren-2')">
+          <a href="#" class="carousel-item semi-transparent" style="--i: 1">
             <img src="./assets/cars/mclaren-2.jpg" alt="">
             <h4 class="mclaren-2">artura</h4>
           </a>
-          <a href="#" class="carousel-item" style="--i: 2" onclick="changeVideoBackground('mclaren-3')">
+          <a href="#" class="carousel-item" style="--i: 2">
             <img src="./assets/cars/mclaren-3.jpeg" alt="">
             <h4 class="mclaren-3">750s</h4>
           </a>
-          <a href="#" class="carousel-item" style="--i: 3" onclick="changeVideoBackground('mclaren-4')">
+          <a href="#" class="carousel-item" style="--i: 3">
             <img src="./assets/cars/mclaren-4.jpeg" alt="">
             <h4 class="mclaren-4">765lt</h4>
           </a>
-          <a href="#" class="carousel-item semi-transparent" style="--i: 4" onclick="changeVideoBackground('mclaren-5')">
+          <a href="#" class="carousel-item semi-transparent" style="--i: 4">
             <!-- <img src="./assets/cars/mclaren-5a.jpeg" alt=""> -->
             <!-- <img src="./assets/cars/mclaren-5b.png" alt=""> -->
             <img src="./assets/cars/mclaren-5.jpg" alt="">
@@ -1463,52 +1480,73 @@
           // console.log(newDegrees, transform);
           // carousel.style.transform = transform;
           // carousel.style.width = "400px";
+          changeVideoBackground(index);
         })
       })
 
-      const trailers = document.querySelectorAll(".trailer");
-      console.log(trailers);
+      // function changeVideoBackground(name) {
+      //   const videos = document.querySelectorAll(".bg-video");
+      //   const trailers = document.querySelectorAll(".trailer");
+      //   const models = document.querySelectorAll(".model");
 
-      function changeVideoBackground(name) {
+      //   videos.forEach(video => {
+      //     video.classList.remove("active");
+      //     if (video.classList.contains(name)) {
+      //       video.classList.add("active");
+      //     }
+      //   })
+
+      //   models.forEach(model => {
+      //     model.classList.remove("active");
+      //     if (model.classList.contains(name)) {
+      //       model.classList.add("active");
+      //     }
+      //   })
+
+      //   trailers.forEach(model => {
+      //     model.classList.remove("active");
+      //     if (model.classList.contains(name)) {
+      //       model.classList.add("active");
+      //     }
+      //   })
+      // }
+
+      function changeVideoBackground(index) {
         const videos = document.querySelectorAll(".bg-video");
-        const trailers = document.querySelectorAll(".trailer");
+        // const trailers = document.querySelectorAll(".trailer");
         const models = document.querySelectorAll(".model");
+        // console.log(videos);
+        // console.log(models);
 
-        videos.forEach(video => {
-          video.classList.remove("active");
-          if (video.classList.contains(name)) {
-            video.classList.add("active");
-          }
-        })
+        const activeVideo = document.querySelector(".bg-video.active");
+        activeVideo.classList.remove("active");
+        videos[index].classList.add("active");
 
-        models.forEach(model => {
-          model.classList.remove("active");
-          if (model.classList.contains(name)) {
-            model.classList.add("active");
-          }
-        })
+        const activeModel = document.querySelector(".model.active");
+        activeModel.classList.remove("active");
+        models[index].classList.add("active");
 
-        trailers.forEach(model => {
-          model.classList.remove("active");
-          if (model.classList.contains(name)) {
-            model.classList.add("active");
-          }
-        })
+        // trailers.forEach(model => {
+        //   model.classList.remove("active");
+        //   if (model.classList.contains(name)) {
+        //     model.classList.add("active");
+        //   }
+        // })
       }
 
-      const pauseBtn1 = document.querySelector(".pause-btn");
-      pauseBtn1.addEventListener("click", pauseVideoBackground);
+      const mainPauseBtn = document.querySelector("#main-pause-btn");
+      mainPauseBtn.addEventListener("click", pauseVideoBackground);
 
-      const playBtn1 = document.querySelector("#play-btn1");
-      playBtn1.addEventListener("click", playVideoBackground);
+      const mainPlayBtn = document.querySelector("#main-play-btn");
+      mainPlayBtn.addEventListener("click", playVideoBackground);
 
       function pauseVideoBackground() {
         const videos = document.querySelectorAll(".bg-video");
         videos.forEach(video => {
           video.pause();
         })
-        // pauseBtn.classList.remove("active");
-        // playBtn.classList.add("active");
+        // mainPauseBtn.classList.remove("active");
+        // mainPlayBtn.classList.add("active");
         togglePlayButton();
       }
 
@@ -1517,16 +1555,16 @@
         videos.forEach(video => {
           video.play();
         })
-        // playBtn.classList.remove("active");
-        // pauseBtn.classList.add("active");
+        // mainPlayBtn.classList.remove("active");
+        // mainPauseBtn.classList.add("active");
         togglePlayButton();
       }
 
       function togglePlayButton() {
-        // const pauseBtn = document.querySelector(".pause");
-        // const playBtn = document.querySelector(".play-btn");
-        playBtn1.classList.toggle("active");
-        pauseBtn1.classList.toggle("active");
+        // const mainPauseBtn = document.querySelector("#main-pause-btn");
+        // const mainPlayBtn = document.querySelector("#main-play-btn");
+        mainPlayBtn.classList.toggle("active");
+        mainPauseBtn.classList.toggle("active");
       }
     </script>
 
@@ -1549,30 +1587,30 @@
       </div>
     </div>
     <script>
-      const x = document.getElementById("preview-video");
-      const y = document.getElementById("volume-bar");
+      const previewVideo = document.getElementById("preview-video");
+      const volumeBar = document.getElementById("volume-bar");
       const fullScreenBtn = document.getElementById("full");
       // const f = document.getElementById("cont");
-      const f = document.querySelector(".preview-box");
+      const previewBox = document.querySelector(".preview-box");
       const closeBtn = document.getElementById("close");
       const muteBtn = document.getElementById("mute-btn");
       const unmuteBtn = document.getElementById("unmute-btn");
 
-      const test = document.createElement("video");
+      // const test = document.createElement("video");
       // console.log(x.volume);
-      x.volume = 0.1;
+      previewVideo.volume = 0.1;
       // console.log(x.volume);
 
-      x.addEventListener("ended", () => {
+      previewVideo.addEventListener("ended", () => {
         // console.log(x.currentTime, x.duration);
-        x.currentTime = 0;
+        previewVideo.currentTime = 0;
       })
 
       const playBtn2 = document.querySelector("#play-btn2");
       playBtn2.addEventListener("click", play);
 
       function play() {
-        x.play();
+        previewVideo.play();
         console.log("play");
       }
 
@@ -1580,7 +1618,7 @@
       pauseBtn2.addEventListener("click", pause);
 
       function pause() {
-        x.pause();
+        previewVideo.pause();
         console.log("paused");
       }
 
@@ -1588,37 +1626,37 @@
       backwardBtn.addEventListener("click", backward);
 
       function backward() {
-        x.currentTime -= 7;
-        console.log(x.currentTime);
+        previewVideo.currentTime -= 7;
+        console.log(previewVideo.currentTime);
       }
 
       const forwardBtn = document.querySelector("#forward-btn");
       forwardBtn.addEventListener("click", forward);
 
       function forward() {
-        x.currentTime += 7;
-        console.log(x.currentTime);
+        previewVideo.currentTime += 7;
+        console.log(previewVideo.currentTime);
       }
 
-      y.addEventListener("input", setVolume);
+      volumeBar.addEventListener("input", setVolume);
 
       function setVolume() {
-        x.volume = (y.value)/100;
-        console.log(y.value/100, x.volume);
+        previewVideo.volume = (volumeBar.value)/100;
+        console.log(volumeBar.value/100, previewVideo.volume);
       }
 
       fullScreenBtn.addEventListener("click", setFullScreen);
 
       function setFullScreen() {
-        // x.requestFullscreen();
-        if (f.requestFullscreen) {
-          f.requestFullscreen();
-        } else if (f.webkitRequestFullscreen) {
+        // previewVideo.requestFullscreen();
+        if (previewBox.requestFullscreen) {
+          previewBox.requestFullscreen();
+        } else if (previewBox.webkitRequestFullscreen) {
           /* Safari */
-          f.webkitRequestFullscreen();
-        } else if (f.msRequestFullscreen) {
+          previewBox.webkitRequestFullscreen();
+        } else if (previewBox.msRequestFullscreen) {
           /* IE11 */
-          f.msRequestFullscreen();
+          previewBox.msRequestFullscreen();
         }
         fullScreenBtn.classList.toggle("hidden");
         closeBtn.classList.toggle("hidden");
@@ -1627,7 +1665,7 @@
       closeBtn.addEventListener("click", exitFullScreen);
 
       function exitFullScreen() {
-        // x.requestFullscreen();
+        // previewVideo.requestFullscreen();
         if (document.exitFullscreen) {
           document.exitFullscreen();
         } else if (document.webkitExitFullscreen) {
@@ -1641,16 +1679,40 @@
         closeBtn.classList.toggle("hidden");
       }
 
+      previewVideo.addEventListener("fullscreenchange", fullscreenchanged);
+
+      console.log(document.fullscreenElement);
+
+      function fullscreenchanged(event) {
+  if (document.fullscreenElement) {
+    console.log(
+      `Element: ${document.fullscreenElement} entered fullscreen mode.`,
+    );
+  } else {
+    console.log("Leaving fullscreen mode.");
+  }
+}
+
+// const el = document.getElementById("fullscreen-div");
+
       muteBtn.addEventListener("click", muteVideoSound);
       unmuteBtn.addEventListener("click", muteVideoSound);
 
       function muteVideoSound() {
-        // console.log(x.muted);
-        x.muted = !x.muted;
+        // console.log(previewVideo.muted);
+        previewVideo.muted = !previewVideo.muted;
         muteBtn.classList.toggle("hidden");
         unmuteBtn.classList.toggle("hidden");
-        // console.log(x.muted);
+        // console.log(previewVideo.muted);
       }
+
+      const trailers = document.querySelectorAll(".trailer-test");
+      // console.log(trailers);
+      trailers.forEach(trailer => {
+        trailer.addEventListener("click", () => {
+          document.body.classList.add("preview-mode");
+        })
+      })
     </script>
 
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
