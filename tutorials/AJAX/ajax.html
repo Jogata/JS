@@ -59,6 +59,7 @@
         /* overflow: hidden; */
         display: flex;
         flex-direction: column;
+        z-index: 1;
       }
       .banner::after {
         position: absolute;
@@ -387,7 +388,7 @@
         transform-style: preserve-3d;
         transform: rotateX(-30deg) rotateY(0deg);
         animation: rotate 30s linear infinite;
-        z-index: 100;
+        z-index: 2;
       }
       .screen::after {
         position: absolute;
@@ -489,7 +490,7 @@
           0px 10px 40px rgba(0, 0, 0, 0.5), 
           0px -10px 40px rgba(0, 0, 0, 0.5);
         backdrop-filter: blur(20px);
-        z-index: 100;
+        z-index: 2;
       }
       .gallery::before {
         position: absolute;
@@ -646,9 +647,9 @@
           /* width: 150px; */
           /* padding: 10px 15px; */
         }
-        .banner .screen {
-          display: none;
-        }
+        /* .banner .screen { */
+          /* display: none; */
+        /* } */
         .banner .gallery {
           /* left: 0; */
           /* width: 100%; */
@@ -970,20 +971,21 @@
         }
       }
 
-      .container {
+      .preview-container {
         position: relative;
-        width: 700px;
+        /* width: 700px; */
         /* height: 396px; */
-        border: 3px solid #fff;
-        border-radius: 30px;
+        height: 100vh;
+        /* border: 3px solid #fff; */
+        /* border-radius: 30px; */
         overflow: hidden;
       }
-      .container:fullscreen {
+      .preview-container:fullscreen {
         border: 3px solid transparent;
         border-radius: 0px;
       }
 
-      .container video {
+      .preview-container video {
         /* position: absolute; */
         /* top: 50%; */
         /* left: 50%; */
@@ -995,7 +997,7 @@
         background-size: cover;
       }
 
-      #menu {
+      #preview-menu {
         position: absolute;
         left: 0;
         bottom: 0;
@@ -1011,12 +1013,12 @@
         box-shadow: 0 3px 5px #000;
         transition: 750ms linear;
       }
-      .container:hover #menu {
+      /* .preview-container:hover #preview-menu { */
         /* bottom: 0; */
-        transform: translateY(0);
-      }
+        /* transform: translateY(0); */
+      /* } */
 
-      #menu i {
+      #preview-menu i {
         color: #fff;
         width: 60px;
         text-align: center;
@@ -1024,10 +1026,10 @@
         transition: color 500ms;
         cursor: pointer;
       }
-      #menu i:hover {
+      #preview-menu i:hover {
         color: #1e90ff;
       }
-      #menu i.fa-play {
+      #preview-menu i.fa-play {
         padding-left: 5px;
         color: #1e90ff;
         font-size: 1.4rem;
@@ -1038,7 +1040,7 @@
         box-shadow: 0 3px 5px #000;
       }
 
-      #range {
+      #volume-control {
         position: absolute;
         top: 0;
         /* top: -61px; */
@@ -1053,12 +1055,12 @@
         transition: 750ms linear;
         z-index: 1;
       }
-      .container:hover #range {
+      /* .preview-container:hover #volume-control { */
         /* top: 0; */
-        transform: translateY(0);
-      }
+        /* transform: translateY(0); */
+      /* } */
 
-      #range input {
+      #volume-control input {
         -webkit-appearance: none;
         appearance: none;
         width: 85%;
@@ -1067,7 +1069,7 @@
         box-shadow: 0 2px 4px #000;
         cursor: pointer;
       }
-      #range input::-webkit-slider-thumb {
+      #volume-control input::-webkit-slider-thumb {
         -webkit-appearance: none;
         appearance: none;
         width: 20px;
@@ -1078,7 +1080,7 @@
         /* background: red; */
         cursor: pointer;
       }
-      #range input::-moz-range-thumb {
+      #volume-control input::-moz-range-thumb {
         width: 20px;
         height: 20px;
         border-radius: 50%;
@@ -1087,7 +1089,8 @@
         cursor: pointer;
       }
 
-      #range i {
+      #volume-control i {
+        width: 2rem;
         line-height: 0;
         padding-right: 10px;
         color: #fff;
@@ -1097,18 +1100,62 @@
 
       #close {
         font-size: 2rem;
-        font-weight: 100;
+        /* font-weight: 100; */
+        /* -webkit-text-stroke: 5px transparent; */
       }
-      #close.hidden {
+      /* #close.hidden {
+        display: none;
+      } */
+
+      /* #full.hidden {
+        display: none;
+      } */
+
+      i.hidden {
         display: none;
       }
 
-      #full.hidden {
-        display: none;
+      .preview-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        background-color: #000;
+        overflow: auto;
+        z-index: 2;
+      }
+      .preview-box {
+        position: relative;
+        width: 100%;
+        min-width: 300px;
+        max-width: 700px;
+        min-height: 300px;
+        margin: auto;
+        border: 3px solid #fff;
+        border-radius: 30px;
+        overflow: hidden;
+      }
+      .preview-box:fullscreen {
+        border: 3px solid transparent;
+        border-radius: 0px;
+      }
+
+      .preview-box:hover #volume-control {
+        /* top: 0; */
+        transform: translateY(0);
+      }
+      .preview-box:hover #preview-menu {
+        /* bottom: 0; */
+        transform: translateY(0);
+      }
+
+      body.preview-mode {
+        overflow: hidden;
       }
     </style>
   </head>
-  <body>
+  <body class="preview-mode">
     <div class="banner">
       <header>
         <span class="year">2018 - 2023</span>
@@ -1208,26 +1255,26 @@
         <ul class="sci">
           <li>
             <a href="#">
-              <i class="fa fa-facebook"></i>
+              <i class="fa fa-facebook" aria-hidden="true"></i>
             </a>
           </li>
           <li>
             <a href="#">
-              <i class="fa fa-instagram"></i>
+              <i class="fa fa-instagram" aria-hidden="true"></i>
             </a>
           </li>
           <li>
             <a href="#">
-              <i class="fa fa-youtube-play"></i>
+              <i class="fa fa-youtube-play" aria-hidden="true"></i>
             </a>
           </li>
         </ul>
       </div>
       <a href="#" class="pause-btn active" id="pause-btn1">
-        <i class="fa fa-pause"></i>
+        <i class="fa fa-pause" aria-hidden="true"></i>
       </a>
       <a href="#" class="play-btn" id="play-btn1">
-        <i class="fa fa-play"></i>
+        <i class="fa fa-play" aria-hidden="true"></i>
       </a>
       <div class="screen">
         <!-- <div class="shadow"></div> -->
@@ -1343,17 +1390,17 @@
     <!-- <ul class="sci">
       <li>
         <a href="#">
-          <i class="fa fa-facebook"></i>
+          <i class="fa fa-facebook" aria-hidden="true"></i>
         </a>
       </li>
       <li>
         <a href="#">
-          <i class="fa fa-instagram"></i>
+          <i class="fa fa-instagram" aria-hidden="true"></i>
         </a>
       </li>
       <li>
         <a href="#">
-          <i class="fa fa-youtube-play"></i>
+          <i class="fa fa-youtube-play" aria-hidden="true"></i>
         </a>
       </li>
     </ul> -->
@@ -1419,6 +1466,9 @@
         })
       })
 
+      const trailers = document.querySelectorAll(".trailer");
+      console.log(trailers);
+
       function changeVideoBackground(name) {
         const videos = document.querySelectorAll(".bg-video");
         const trailers = document.querySelectorAll(".trailer");
@@ -1480,29 +1530,43 @@
       }
     </script>
 
-    <div id="cont" class="container">
-      <div id="range">
-        <i class="fa fa-volume-up"></i>
-        <input type="range" name="" id="ran" value="50" min="0" max="100">
-      </div>
-      <video src="./assets/videos/trailer-2.mp4" id="video"></video>
-      <div id="menu">
-        <i id="pause-btn2" class="fa fa-pause"></i>
-        <i id="backward-btn" class="fa fa-backward"></i>
-        <i id="play-btn2" class="fa fa-play"></i>
-        <i id="forward-btn" class="fa fa-forward"></i>
-        <i id="full" class="fa fa-arrows-alt"></i>
-        <i id="close" class="fa fa-times hidden"></i>
+    <div id="cont" class="preview-container">
+      <div class="preview-box">
+        <div id="volume-control">
+          <i class="fa fa-volume-off hidden" id="unmute-btn" aria-hidden="true"></i>
+          <i class="fa fa-volume-up" id="mute-btn" aria-hidden="true"></i>
+          <input type="range" name="" id="volume-bar" value="20" min="0" max="100">
+        </div>
+        <video src="./assets/videos/trailer-2.mp4" id="preview-video"></video>
+        <div id="preview-menu">
+          <i id="pause-btn2" class="fa fa-pause" aria-hidden="true"></i>
+          <i id="backward-btn" class="fa fa-backward" aria-hidden="true"></i>
+          <i id="play-btn2" class="fa fa-play" aria-hidden="true"></i>
+          <i id="forward-btn" class="fa fa-forward" aria-hidden="true"></i>
+          <i id="full" class="fa fa-arrows-alt" aria-hidden="true"></i>
+          <i id="close" class="fa fa-times hidden" aria-hidden="true"></i>
+        </div>
       </div>
     </div>
     <script>
-      const x = document.getElementById("video");
-      const y = document.getElementById("ran");
-      const z = document.getElementById("full");
-      const f = document.getElementById("cont");
-      const c = document.getElementById("close");
+      const x = document.getElementById("preview-video");
+      const y = document.getElementById("volume-bar");
+      const fullScreenBtn = document.getElementById("full");
+      // const f = document.getElementById("cont");
+      const f = document.querySelector(".preview-box");
+      const closeBtn = document.getElementById("close");
+      const muteBtn = document.getElementById("mute-btn");
+      const unmuteBtn = document.getElementById("unmute-btn");
 
       const test = document.createElement("video");
+      // console.log(x.volume);
+      x.volume = 0.1;
+      // console.log(x.volume);
+
+      x.addEventListener("ended", () => {
+        // console.log(x.currentTime, x.duration);
+        x.currentTime = 0;
+      })
 
       const playBtn2 = document.querySelector("#play-btn2");
       playBtn2.addEventListener("click", play);
@@ -1543,7 +1607,7 @@
         console.log(y.value/100, x.volume);
       }
 
-      z.addEventListener("click", setFullScreen);
+      fullScreenBtn.addEventListener("click", setFullScreen);
 
       function setFullScreen() {
         // x.requestFullscreen();
@@ -1556,11 +1620,11 @@
           /* IE11 */
           f.msRequestFullscreen();
         }
-        z.classList.toggle("hidden");
-        c.classList.toggle("hidden");
+        fullScreenBtn.classList.toggle("hidden");
+        closeBtn.classList.toggle("hidden");
       }
 
-      c.addEventListener("click", exitFullScreen);
+      closeBtn.addEventListener("click", exitFullScreen);
 
       function exitFullScreen() {
         // x.requestFullscreen();
@@ -1573,10 +1637,21 @@
           /* IE11 */
           document.msExitFullscreen();
         }
-        z.classList.toggle("hidden");
-        c.classList.toggle("hidden");
+        fullScreenBtn.classList.toggle("hidden");
+        closeBtn.classList.toggle("hidden");
       }
-      </script>
+
+      muteBtn.addEventListener("click", muteVideoSound);
+      unmuteBtn.addEventListener("click", muteVideoSound);
+
+      function muteVideoSound() {
+        // console.log(x.muted);
+        x.muted = !x.muted;
+        muteBtn.classList.toggle("hidden");
+        unmuteBtn.classList.toggle("hidden");
+        // console.log(x.muted);
+      }
+    </script>
 
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
