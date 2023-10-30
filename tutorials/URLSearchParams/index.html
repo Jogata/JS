@@ -3,142 +3,165 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URLSearchParams in JS</title>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <!-- <title>URLSearchParams in JS</title> -->
+    <title>Personal Portfolio website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      body {
+        min-height: 100vh;
+        font-family: Georgia, Times, serif;
+      }
+
+      .hero {
+        width: 100vw;
+        height: 100vh;
+        background-color: #eff4fd;
+      }
+
+      nav {
+        padding: 30px 100px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo {
+        color: blue;
+        font-size: 30px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .logo::first-letter {
+        padding-left: 5px;
+        color: #fd4766;
+        font-size: 40px;
+        border: 2px solid blue;
+        border-right: transparent;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      nav li {
+        display: inline-block;
+        padding: 10px 20px;
+      }
+
+      nav a {
+        position: relative;
+        padding: 5px 0;
+        color: #1d1d24;
+        font-weight: bold;
+        text-transform: capitalize;
+        transition: .4s;
+      }
+      nav a:hover {
+        color: #fd4766;
+      }
+      nav ul a::after {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        content: "";
+        width: 0;
+        height: 3px;
+        background-color: #fd4766;
+        transition: .4s;
+      }
+      nav ul a:hover::after {
+        width: 100%;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 10px 30px;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 500;
+        text-transform: uppercase;
+        border: 2px solid #fd4766;
+        border-radius: 500px;
+        background-color: #fd4766;
+        transition: .4s ease-in-out;
+      }
+      .btn:hover {
+        color: #fd4766;
+        background-color: transparent;
+      }
+
+      .details {
+        position: absolute;
+        top: 35%;
+        left: 8%;
+      }
+
+      .details h1 {
+        color: #1f1f25;
+        font-size: 70px;
+        font-weight: 700;
+        line-height: 70px;
+      }
+      .details h1 span {
+        color: #fd4766;
+        text-transform: capitalize;
+      }
+
+      .details p {
+        color: #1f1f25;
+        font-size: 18px;
+        margin-top: 25px;
+        margin-bottom: 30px;
+      }
+
+      .image {
+        position: absolute;
+        right: 200px;
+        bottom: 0;
+        width: 30%;
+        height: 80%;
+      }
+      .image img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+    </style>
   </head>
   <body>
-    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+    <div class="hero">
+      <nav>
+        <a href="#" class="logo">sophia</a>
+        <ul>
+          <li><a href="#">home</a></li>
+          <li><a href="#">about</a></li>
+          <li><a href="#">services</a></li>
+          <li><a href="#">portfolio</a></li>
+          <li><a href="#">contact</a></li>
+        </ul>
+        <a href="#" class="btn">hire me</a>
+      </nav>
+    </div>
+    <div class="details">
+      <h1>Hey, I'm <span>sophia</span></h1>
+      <p>This is my official website to show all details and work <br> experience of web development</p>
+      <a href="#" class="btn">download cv</a>
+    </div>
+    <div class="image">
+      <img src="../AJAX/slides/366450015_726469829245996_6761655007762136773_n.jpg" alt="">
+    </div>
 
-    <script>
-      // 06. Songs
-
-      function printSongs(params) {
-        const n = Number(params[0]);
-        const type = params[params.length - 1];
-        // console.log(n, type);
-        const songs = [];
-
-        class Song {
-          constructor(typeList, name, time) {
-            this.type = typeList;
-            this.name = name;
-            this.time = time;
-          }
-        }
-
-        for (let index = 1; index < params.length - 1; index++) {
-          const songData = params[index].split("_");
-          // console.log(songData);
-          const type = songData[0];
-          const name = songData[1];
-          const time = songData[2];
-
-          const song = new Song(type, name, time);
-          // console.log(song);
-          songs.push(song);
-          // console.log(songs);
-        }
-
-        let filtered = [];
-
-        if (type == "all") {
-          filtered = songs;
-        } else {
-          filtered = songs.filter(song => {
-            return song.type === type;
-          })
-        }
-
-        // console.log(filtered);
-        for (const song of filtered) {
-          console.log(song.name);
-        }
-
-      }
-
-      // printSongs([3, 'favourite_DownTown_3:14', 'favourite_Kiss_4:16', 'favourite_Smooth Criminal_4:01', 'favourite']);
-      // printSongs([4, 'favourite_DownTown_3:14', 'listenLater_Andalouse_3:24', 'favourite_In To The Night_3:58', 'favourite_Live It Up_3:48', 'listenLater']);
-      // printSongs([2, 'like_Replay_3:15', 'ban_Photoshop_3:48', 'all']);
-    </script>
-    <script>
-      // 01. Employees
-
-      function createList(names) {
-        const list = {};
-
-        for (const name of names) {
-          list[name] = name.length;
-        }
-
-        for (const key in list) {
-          const perNum = list[key];
-          console.log(`Name: ${key} -- Personal Number: ${perNum}`);
-        }
-
-      }
-
-      // createList(['Silas Butler', 'Adnaan Buckley', 'Juan Peterson', 'Brendan Villarreal']);
-      // createList(['Samuel Jackson', 'Will Smith', 'Bruce Willis', 'Tom Holland']);
-
-      // 02. Towns
-
-      function createTowns(towns) {
-        for (const townInfo of towns) {
-          // const town = {};
-          const data = townInfo.split(" | ");
-          const name = data[0];
-          const latitude = Number(data[1]).toFixed(2);
-          const longitude = Number(data[2]).toFixed(2);
-          const town = {
-            town: name, 
-            latitude, 
-            longitude
-          }
-
-          console.log(town);
-
-        }
-      }
-
-      // createTowns(['Sofia | 42.696552 | 23.32601', 'Beijing | 39.913818 | 116.363625']);
-      // createTowns(['Plovdiv | 136.45 | 812.575']);
-
-      // 03. Store Provision
-
-      function menageStore(arr1, arr2) {
-        const stocks = {};
-
-        for (let index = 0; index < arr1.length; index+=2) {
-          const name = arr1[index];
-          const quantity = Number(arr1[index + 1]);
-          // console.log(name, quantity);
-
-          stocks[name] = quantity;
-        }
-
-        for (let index = 0; index < arr2.length; index+=2) {
-          const name = arr2[index];
-          const quantity = Number(arr2[index + 1]);
-          // console.log(name, quantity);
-
-          if (!stocks[name]) {
-            stocks[name] = 0;
-          }
-          stocks[name] += quantity;
-        }
-
-        for (const stock in stocks) {
-          const quantity = stocks[stock];
-          console.log(`${stock} -> ${quantity}`);
-        }
-
-      }
-
-      // menageStore(['Chips', '5', 'CocaCola', '9', 'Bananas', '14', 'Pasta', '4', 'Beer', '2'],
-                  // ['Flour', '44', 'Oil', '12', 'Pasta', '7', 'Tomatoes', '70', 'Bananas', '30']);
-      // menageStore([ 'Salt', '2', 'Fanta', '4', 'Apple', '14', 'Water', '4', 'Juice', '5' ], 
-                  // ['Sugar', '44', 'Oil', '12', 'Apple', '7', 'Tomatoes', '7', 'Bananas', '30']);
-    </script>
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
