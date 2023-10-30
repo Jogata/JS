@@ -3,165 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>URLSearchParams in JS</title> -->
-    <title>Personal Portfolio website</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      a {
-        text-decoration: none;
-      }
-
-      body {
-        min-height: 100vh;
-        font-family: Georgia, Times, serif;
-      }
-
-      .hero {
-        width: 100vw;
-        height: 100vh;
-        background-color: #eff4fd;
-      }
-
-      nav {
-        padding: 30px 100px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      .logo {
-        color: blue;
-        font-size: 30px;
-        font-weight: bold;
-        cursor: pointer;
-      }
-      .logo::first-letter {
-        padding-left: 5px;
-        color: #fd4766;
-        font-size: 40px;
-        border: 2px solid blue;
-        border-right: transparent;
-      }
-
-      ul {
-        list-style: none;
-      }
-
-      nav li {
-        display: inline-block;
-        padding: 10px 20px;
-      }
-
-      nav a {
-        position: relative;
-        padding: 5px 0;
-        color: #1d1d24;
-        font-weight: bold;
-        text-transform: capitalize;
-        transition: .4s;
-      }
-      nav a:hover {
-        color: #fd4766;
-      }
-      nav ul a::after {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        content: "";
-        width: 0;
-        height: 3px;
-        background-color: #fd4766;
-        transition: .4s;
-      }
-      nav ul a:hover::after {
-        width: 100%;
-      }
-
-      .btn {
-        display: inline-block;
-        padding: 10px 30px;
-        color: #fff;
-        font-size: 16px;
-        font-weight: 500;
-        text-transform: uppercase;
-        border: 2px solid #fd4766;
-        border-radius: 500px;
-        background-color: #fd4766;
-        transition: .4s ease-in-out;
-      }
-      .btn:hover {
-        color: #fd4766;
-        background-color: transparent;
-      }
-
-      .details {
-        position: absolute;
-        top: 35%;
-        left: 8%;
-      }
-
-      .details h1 {
-        color: #1f1f25;
-        font-size: 70px;
-        font-weight: 700;
-        line-height: 70px;
-      }
-      .details h1 span {
-        color: #fd4766;
-        text-transform: capitalize;
-      }
-
-      .details p {
-        color: #1f1f25;
-        font-size: 18px;
-        margin-top: 25px;
-        margin-bottom: 30px;
-      }
-
-      .image {
-        position: absolute;
-        right: 200px;
-        bottom: 0;
-        width: 30%;
-        height: 80%;
-      }
-      .image img {
-        display: block;
-        width: 100%;
-        height: auto;
-      }
-    </style>
+    <title>URLSearchParams in JS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">/
   </head>
   <body>
-    <div class="hero">
-      <nav>
-        <a href="#" class="logo">sophia</a>
-        <ul>
-          <li><a href="#">home</a></li>
-          <li><a href="#">about</a></li>
-          <li><a href="#">services</a></li>
-          <li><a href="#">portfolio</a></li>
-          <li><a href="#">contact</a></li>
-        </ul>
-        <a href="#" class="btn">hire me</a>
-      </nav>
-    </div>
-    <div class="details">
-      <h1>Hey, I'm <span>sophia</span></h1>
-      <p>This is my official website to show all details and work <br> experience of web development</p>
-      <a href="#" class="btn">download cv</a>
-    </div>
-    <div class="image">
-      <img src="../AJAX/slides/366450015_726469829245996_6761655007762136773_n.jpg" alt="">
-    </div>
-
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
@@ -198,6 +44,142 @@
       // Convert URLSearchParams Object to Query String
       console.log(uspFromString.toString());
       console.log(uspFromObject.toString());
+    </script>
+
+    <script>
+      // 06. Make a Dictionary
+
+      function makeDictionary(params) {
+        const items = {};
+
+        for (const input of params) {
+          const item = JSON.parse(input);
+          const entries = Object.entries(item);
+          // console.log(entries);
+          const key = entries[0][0];
+          // console.log(key);
+          const value = entries[0][1];
+
+          items[key] = value;
+          // console.log(item);
+          // const key = Object.keys(item)[0];
+          // console.log(key);
+          // const keys = Object.keys(items);
+          // console.log(keys);
+          // const index = keys.indexOf(key);
+          // console.log(index);
+          // if (index == -1) {
+          //   items.push(item);
+          //   console.log(items);
+          // }
+        }
+
+        // console.log(items);
+
+        const entries = Object.entries(items);
+
+        entries.sort();
+
+        // console.log(entries);
+
+        for (const term of entries) {
+          const key = term[0];
+          const value = term[1];
+          console.log(`Term: ${key} => Definition: ${value}`);
+        }
+
+        // for (const key in items) {
+        //   const value = items[key];
+        // }
+
+      }
+
+      // makeDictionary([
+      //   '{"Coffee":"A hot drink made from the roasted and ground seeds (coffee beans) of a tropical shrub."}',
+      //   '{"Bus":"A large motor vehicle carrying passengers by road, typically one serving the public on a fixed route and for a fare."}',
+      //   '{"Boiler":"A fuel-burningapparatus or container for heating water."}', 
+      //   '{"Tape":"A narrow strip of material, typically used to hold or fasten something."}',
+      //   '{"Microphone":"An instrument for converting sound waves into electrical energy variations which may then be amplified, transmitted, or recorded."}'
+      // ]);
+      // makeDictionary([
+      //   '{"Cup":"A small bowl-shaped container for drinking from, typically having a handle"}', 
+      //   '{"Cake":"An item of soft sweet food made from a mixture of flour, fat, eggs, sugar, and other ingredients, baked and sometimes iced or decorated."}', 
+      //   '{"Watermelon":"The large fruitof a plant of the gourd family, with smooth green skin, red pulp, and watery juice."} ', 
+      //   '{"Music":"Vocal or instrumental sounds (or both) combined in such a way as to produce beauty of form, harmony, and expression of emotion."} ', 
+      //   '{"Art":"The expression or application of human creative skill and imagination, typically in a visual form such as painting or sculpture, producing works to be appreciated primarily for their beauty or emotional power."} '
+      // ])
+
+      // 07. Class Vehicle
+
+      class Vehicle {
+        constructor(type, model, parts, fuel) {
+          this.type = type;
+          this.model = model;
+          this.parts = parts;
+          this.parts.quality = this.parts.engine * this.parts.power;
+          this.fuel = fuel;
+        }
+
+        drive(num) {
+          this.fuel -= num;
+        }
+      }
+
+      // let parts = { engine: 6, power: 100 };
+      // let vehicle = new Vehicle('a', 'b', parts, 200);
+
+      // let parts = {engine: 9, power: 500};
+      // let vehicle = new Vehicle('l', 'k', parts, 840);
+      
+      // console.log(vehicle.type);
+      // console.log(vehicle.model);
+      // console.log(vehicle.fuel);
+      // console.log(vehicle.parts.quality);
+      
+      // vehicle.drive(100);
+      // vehicle.drive(20);
+      // console.log(vehicle.fuel);
+
+          // 09. Loading Bar
+
+    function loading(progress) {
+
+function createBar(num) {
+  const length = num / 10;
+  const result = [];
+  // result.length= 10;
+
+  for (let i = 0; i < length; i++) {
+    result.push("%");
+  }
+
+  // console.log(result.length);
+
+  for (let i = length; i < 10; i++) {
+    result.push(".");
+  }
+
+  return result.join("");
+
+}
+
+const load = createBar(progress);
+
+if (progress == 100) {
+  let bar = `[${load}]`;
+  console.log("100% Complete!");
+  console.log(bar);
+} else {
+  let bar = `${progress}% [${load}]`;
+  console.log(bar);
+  console.log("Still loading...");
+}
+
+}
+
+// loading(30);
+// loading(50);
+// loading(100);
     </script>
   </body>
 </html>
