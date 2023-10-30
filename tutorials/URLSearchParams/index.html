@@ -47,139 +47,150 @@
     </script>
 
     <script>
-      // 06. Make a Dictionary
+      // 08. Class Storage
 
-      function makeDictionary(params) {
-        const items = {};
+      class Storage {
+        constructor(capacity) {
+          this.capacity = capacity;
+          this.storage = [];
+          // this.storage = {};
+          // this.totalCost = this.totalCost();
+          this.totalCost = 0;
+        }
+
+        addProduct(product) {
+          // const key = product.name;
+          // this.storage[key] = product;
+          this.storage.push(product);
+          this.capacity -= product.quantity;
+          this.totalCost += product.price * product.quantity;
+        }
+
+        getProducts() {
+          // console.log(this.storage);
+          // const storage = this.storage;
+          // let result = [];
+
+          // for (const key in storage) {
+            // const product = storage[key];
+            // const productJSON = JSON.stringify(product);
+            // result += productJSON + "\n";
+            // result.push(productJSON);
+            // console.log(productJSON);
+            // arr.push(productJSON);
+            // console.log(arr);
+            this.storage = this.storage.map(x => JSON.stringify(x));
+            // console.log(this.storage);
+            return this.storage.join("\n");
+          }
+
+          // console.log(JSON.stringify(arr));
+
+        }
+
+      //   totalCost() {
+      //     const storage = this.storage;
+      //     let sum = 0;
+
+      //     for (const key in storage) {
+      //       const product = storage[key];
+      //       console.log(product);
+      //       sum += product.price * product.quantity;
+      //     }
+
+      //     return sum;
+
+      //   }
+      // }
+
+      let productOne = {
+        name: 'Cucamber', 
+        price: 1.50, 
+        quantity: 15
+      };
+
+      let productTwo = {
+        name: 'Tomato', 
+        price: 0.90, 
+        quantity: 25
+      };
+
+      let productThree = {
+        name: 'Bread', 
+        price: 1.10, 
+        quantity: 8
+      };
+
+      let storage = new Storage(50);
+
+      storage.addProduct(productOne);
+      storage.addProduct(productTwo);
+      storage.addProduct(productThree);
+      
+      console.log(storage.getProducts());
+      console.log(storage.capacity);
+      console.log(storage.totalCost);
+
+      // let productOne = {
+      //   name: 'Tomato', 
+      //   price: 0.90, 
+      //   quantity: 19
+      // };
+
+      // let productTwo = {
+      //   name: 'Potato', 
+      //   price: 1.10, 
+      //   quantity: 10
+      // };
+
+      // let storage = new Storage(30);
+
+      // storage.addProduct(productOne);
+      // storage.addProduct(productTwo);
+      // console.log(storage.totalCost);
+
+            // 05. Inventory
+
+            function printheroData(params) {
+        const heroes = [];
 
         for (const input of params) {
-          const item = JSON.parse(input);
-          const entries = Object.entries(item);
-          // console.log(entries);
-          const key = entries[0][0];
-          // console.log(key);
-          const value = entries[0][1];
+          const data = input.split(" / ");
+          const name = data[0];
+          const level = Number(data[1]);
+          const items = data[2];
 
-          items[key] = value;
-          // console.log(item);
-          // const key = Object.keys(item)[0];
-          // console.log(key);
-          // const keys = Object.keys(items);
-          // console.log(keys);
-          // const index = keys.indexOf(key);
-          // console.log(index);
-          // if (index == -1) {
-          //   items.push(item);
-          //   console.log(items);
-          // }
+          const hero = {
+            name, 
+            level, 
+            items
+          }
+
+          // console.log(name);
+          // console.log(level);
+          // console.log(items);
+          // console.log(hero);
+
+          heroes.push(hero);
+
         }
 
-        // console.log(items);
+        heroes.sort((hero1, hero2) => hero1.level - hero2.level);
 
-        const entries = Object.entries(items);
+        // console.log(heroes);
 
-        entries.sort();
-
-        // console.log(entries);
-
-        for (const term of entries) {
-          const key = term[0];
-          const value = term[1];
-          console.log(`Term: ${key} => Definition: ${value}`);
+        for (const hero of heroes) {
+          console.log(`Hero: ${hero.name}`);
+          console.log(`level => ${hero.level}`);
+          if (hero.items) {
+            console.log(`items => ${hero.items}`);
+          }
         }
-
-        // for (const key in items) {
-        //   const value = items[key];
-        // }
 
       }
 
-      // makeDictionary([
-      //   '{"Coffee":"A hot drink made from the roasted and ground seeds (coffee beans) of a tropical shrub."}',
-      //   '{"Bus":"A large motor vehicle carrying passengers by road, typically one serving the public on a fixed route and for a fare."}',
-      //   '{"Boiler":"A fuel-burningapparatus or container for heating water."}', 
-      //   '{"Tape":"A narrow strip of material, typically used to hold or fasten something."}',
-      //   '{"Microphone":"An instrument for converting sound waves into electrical energy variations which may then be amplified, transmitted, or recorded."}'
-      // ]);
-      // makeDictionary([
-      //   '{"Cup":"A small bowl-shaped container for drinking from, typically having a handle"}', 
-      //   '{"Cake":"An item of soft sweet food made from a mixture of flour, fat, eggs, sugar, and other ingredients, baked and sometimes iced or decorated."}', 
-      //   '{"Watermelon":"The large fruitof a plant of the gourd family, with smooth green skin, red pulp, and watery juice."} ', 
-      //   '{"Music":"Vocal or instrumental sounds (or both) combined in such a way as to produce beauty of form, harmony, and expression of emotion."} ', 
-      //   '{"Art":"The expression or application of human creative skill and imagination, typically in a visual form such as painting or sculpture, producing works to be appreciated primarily for their beauty or emotional power."} '
-      // ])
-
-      // 07. Class Vehicle
-
-      class Vehicle {
-        constructor(type, model, parts, fuel) {
-          this.type = type;
-          this.model = model;
-          this.parts = parts;
-          this.parts.quality = this.parts.engine * this.parts.power;
-          this.fuel = fuel;
-        }
-
-        drive(num) {
-          this.fuel -= num;
-        }
-      }
-
-      // let parts = { engine: 6, power: 100 };
-      // let vehicle = new Vehicle('a', 'b', parts, 200);
-
-      // let parts = {engine: 9, power: 500};
-      // let vehicle = new Vehicle('l', 'k', parts, 840);
-      
-      // console.log(vehicle.type);
-      // console.log(vehicle.model);
-      // console.log(vehicle.fuel);
-      // console.log(vehicle.parts.quality);
-      
-      // vehicle.drive(100);
-      // vehicle.drive(20);
-      // console.log(vehicle.fuel);
-
-          // 09. Loading Bar
-
-    function loading(progress) {
-
-function createBar(num) {
-  const length = num / 10;
-  const result = [];
-  // result.length= 10;
-
-  for (let i = 0; i < length; i++) {
-    result.push("%");
-  }
-
-  // console.log(result.length);
-
-  for (let i = length; i < 10; i++) {
-    result.push(".");
-  }
-
-  return result.join("");
-
-}
-
-const load = createBar(progress);
-
-if (progress == 100) {
-  let bar = `[${load}]`;
-  console.log("100% Complete!");
-  console.log(bar);
-} else {
-  let bar = `${progress}% [${load}]`;
-  console.log(bar);
-  console.log("Still loading...");
-}
-
-}
-
-// loading(30);
-// loading(50);
-// loading(100);
+      // printheroData([ 'Isacc / 25 / Apple, GravityGun', 'Derek / 12 / BarrelVest, DestructionSword', 'Hes / 1 / Desolator, Sentinel, Antara']);
+      // printheroData(['Batman / 2 / Banana, Gun', 'Superman / 18 / Sword', 'Poppy / 28 / Sentinel, Antara']);
     </script>
   </body>
 </html>
