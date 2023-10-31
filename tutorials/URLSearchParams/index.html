@@ -3,11 +3,163 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URLSearchParams in JS</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">/
+    <!-- <title>URLSearchParams in JS</title> -->
+    <title>Game website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --color-1: #262b3f;
+        --color-2: #fff;
+        --color-3: #1e2337;
+        --color-4: rgba(255, 255, 255, 0.5);
+        --color-5: #adff2f;
+      }
+
+      body {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Georgia, Times, serif;
+        background-color: #1e2337;
+      }
+
+      header {
+        width: 85%;
+        height: 95%;
+        display: flex;
+        border-radius: 10px;
+        box-shadow: 0px 0px 30px rgb(20, 19, 19);
+      }
+
+      aside, 
+      article {
+        /* width: 85%; */
+        height: 100%;
+        border: 1px solid #fff;
+        /* border-radius: 10px; */
+        background-color: var(--color-3);
+      }
+
+      aside {
+        width: 15%;
+        border-radius: 10px 0 0 10px;
+        background-color: #663da6;
+      }
+
+      article {
+        width: 85%;
+        border-radius: 0 10px 10px 0;
+      }
+
+      header aside h1 {
+        width: 100%;
+        height: 10%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 22px;
+        font-weight: 800;
+        text-transform: capitalize;
+        border: 1px solid #fff;
+      }
+      header aside h1 i {
+        margin-left: 5px;
+      }
+
+      header aside button {
+        display: block;
+        margin: auto;
+        margin-top: 5px;
+        padding: 8px 20px;
+        color: #fff;
+        font-size: 12px;
+        font-family: inherit;
+        text-transform: capitalize;
+        border: none;
+        outline: none;
+        background-color: #270458;
+        transition: .3s linear;
+        cursor: pointer;
+      }
+      header aside button:hover {
+        background-color: #1e2337;
+      }
+
+      header aside ul {
+        position: relative;
+        margin-top: 10px;
+        margin-left: 12%;
+        padding-bottom: 20px;
+        list-style: none;
+      }
+      header aside ul::before {
+        position: absolute;
+        bottom: 0;
+        content: "";
+        width: 88%;
+        height: 2px;
+        background-color: rgba(184, 184, 184, .1);
+      }
+    </style>
   </head>
   <body>
-    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+    <header>
+      <aside>
+        <h1>game <i class="fa fa-gamepad"></i></h1>
+        <button>get game prime</button>
+        <ul>
+          <li>
+            <a href="#">
+              <i></i>
+              browse
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i></i>
+              channels
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i>calendar</i>
+              events
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i>people</i>
+              friends
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i>gamepad</i>
+              games
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i>bookmark</i>
+              store
+            </a>
+          </li>
+        </ul>
+      </aside>
+      <article></article>
+    </header>
+    <div class="hero"></div>
+
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
@@ -44,153 +196,6 @@
       // Convert URLSearchParams Object to Query String
       console.log(uspFromString.toString());
       console.log(uspFromObject.toString());
-    </script>
-
-    <script>
-      // 08. Class Storage
-
-      class Storage {
-        constructor(capacity) {
-          this.capacity = capacity;
-          this.storage = [];
-          // this.storage = {};
-          // this.totalCost = this.totalCost();
-          this.totalCost = 0;
-        }
-
-        addProduct(product) {
-          // const key = product.name;
-          // this.storage[key] = product;
-          this.storage.push(product);
-          this.capacity -= product.quantity;
-          this.totalCost += product.price * product.quantity;
-        }
-
-        getProducts() {
-          // console.log(this.storage);
-          // const storage = this.storage;
-          // let result = [];
-
-          // for (const key in storage) {
-            // const product = storage[key];
-            // const productJSON = JSON.stringify(product);
-            // result += productJSON + "\n";
-            // result.push(productJSON);
-            // console.log(productJSON);
-            // arr.push(productJSON);
-            // console.log(arr);
-            this.storage = this.storage.map(x => JSON.stringify(x));
-            // console.log(this.storage);
-            return this.storage.join("\n");
-          }
-
-          // console.log(JSON.stringify(arr));
-
-        }
-
-      //   totalCost() {
-      //     const storage = this.storage;
-      //     let sum = 0;
-
-      //     for (const key in storage) {
-      //       const product = storage[key];
-      //       console.log(product);
-      //       sum += product.price * product.quantity;
-      //     }
-
-      //     return sum;
-
-      //   }
-      // }
-
-      let productOne = {
-        name: 'Cucamber', 
-        price: 1.50, 
-        quantity: 15
-      };
-
-      let productTwo = {
-        name: 'Tomato', 
-        price: 0.90, 
-        quantity: 25
-      };
-
-      let productThree = {
-        name: 'Bread', 
-        price: 1.10, 
-        quantity: 8
-      };
-
-      let storage = new Storage(50);
-
-      storage.addProduct(productOne);
-      storage.addProduct(productTwo);
-      storage.addProduct(productThree);
-      
-      console.log(storage.getProducts());
-      console.log(storage.capacity);
-      console.log(storage.totalCost);
-
-      // let productOne = {
-      //   name: 'Tomato', 
-      //   price: 0.90, 
-      //   quantity: 19
-      // };
-
-      // let productTwo = {
-      //   name: 'Potato', 
-      //   price: 1.10, 
-      //   quantity: 10
-      // };
-
-      // let storage = new Storage(30);
-
-      // storage.addProduct(productOne);
-      // storage.addProduct(productTwo);
-      // console.log(storage.totalCost);
-
-            // 05. Inventory
-
-            function printheroData(params) {
-        const heroes = [];
-
-        for (const input of params) {
-          const data = input.split(" / ");
-          const name = data[0];
-          const level = Number(data[1]);
-          const items = data[2];
-
-          const hero = {
-            name, 
-            level, 
-            items
-          }
-
-          // console.log(name);
-          // console.log(level);
-          // console.log(items);
-          // console.log(hero);
-
-          heroes.push(hero);
-
-        }
-
-        heroes.sort((hero1, hero2) => hero1.level - hero2.level);
-
-        // console.log(heroes);
-
-        for (const hero of heroes) {
-          console.log(`Hero: ${hero.name}`);
-          console.log(`level => ${hero.level}`);
-          if (hero.items) {
-            console.log(`items => ${hero.items}`);
-          }
-        }
-
-      }
-
-      // printheroData([ 'Isacc / 25 / Apple, GravityGun', 'Derek / 12 / BarrelVest, DestructionSword', 'Hes / 1 / Desolator, Sentinel, Antara']);
-      // printheroData(['Batman / 2 / Banana, Gun', 'Superman / 18 / Sword', 'Poppy / 28 / Sentinel, Antara']);
     </script>
   </body>
 </html>
