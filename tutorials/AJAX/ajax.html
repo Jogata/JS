@@ -47,6 +47,26 @@
         min-width: min-content;
       }
 
+      .page-container {
+        position: relative;
+      }
+      .page-container::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        content: "";
+        /* width: 100%; */
+        /* height: 100%; */
+        background: radial-gradient(
+          rgba(0, 0, 0, 0.1), 
+          rgba(0, 0, 0, 0.3), 
+          rgba(0, 0, 0, 0.6), 
+          rgba(0, 0, 0, 0.9)
+        );
+      }
+
       .banner {
         position: relative;
         /* width: 100%; */
@@ -64,7 +84,7 @@
         flex-direction: column;
         z-index: 1;
       }
-      .banner::after {
+      /* .banner::after {
         position: absolute;
         top: 0;
         right: 0;
@@ -79,7 +99,7 @@
           rgba(0, 0, 0, 0.6), 
           rgba(0, 0, 0, 0.9)
         );
-      }
+      } */
       .banner::before {
         position: absolute;
         top: 15%;
@@ -93,7 +113,7 @@
           var(--primary), 
           transparent
         );
-        z-index: 100;
+        z-index: 2;
       }
 
       header {
@@ -106,7 +126,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        z-index: 1000;
+        z-index: 3;
       }
       header::after {
         position: absolute;
@@ -149,14 +169,14 @@
         cursor: pointer;
       }
       .menu.active {
-        position: relative;
+        /* position: relative; */
         width: 35px;
         height: 35px;
         background-image: url("./assets/close-line.png");
         background-position: center;
         background-size: 35px;
-        filter: invert(1);
-        cursor: pointer;
+        /* filter: invert(1); */
+        /* cursor: pointer; */
       }
 
       nav {
@@ -177,18 +197,20 @@
             var(--primary), 
             var(--primary)) 30;
         /* background-color: transparent; */
-        box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(20px);
+        /* box-shadow: 0 0 40px rgba(0, 0, 0, 0.5); */
+        /* backdrop-filter: blur(20px); */
         transform-origin: right;
+        transform: translateY(0);
         transition: 
           top 1s ease-out, 
-          width 1s ease-out;
-        transition-delay: 1s;
+          width 1s ease-out, 
+          transform 0.5s ease-out;
+        transition-delay: 1s, 1s, 0s;
         /* overflow: hidden; */
-        z-index: 200;
+        z-index: 2;
       }
       nav.active {
-        top: 100px;
+        /* top: 100px; */
         width: 40%;
         /* height: auto; */
         border-top: 5px solid;
@@ -199,6 +221,7 @@
             var(--primary), 
             var(--primary), 
             transparent) 30;
+        transform: translateY(100%);
       }
 
       nav ul {
@@ -207,6 +230,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(20px);
       }
 
       nav li {
@@ -243,12 +268,19 @@
         box-shadow: inset 0 0 20px rgba(0, 194, 222, 0.5);
       }
 
+      .bg-videos {
+        /* position: absolute; */
+        /* top: 0; */
+        /* left: 0; */
+        /* width: 100%; */
+        /* height: 100%; */
+      }
       .bg-video {
         display: none;
         position: absolute;
         top: 0;
         left: 0;
-        content: "";
+        /* content: ""; */
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -261,6 +293,7 @@
       .main {
         display: flex;
         margin: auto 0;
+        z-index: 1;
       }
 
       .content {
@@ -268,7 +301,7 @@
         max-width: 900px;
         margin: auto 0;
         padding: 200px 0;
-        z-index: 100;
+        /* z-index: 100; */
       }
       .content h1 {
         color: #fff;
@@ -350,6 +383,7 @@
         color: var(--primary);
         font-size: min(3vw, 6em);
         /* font-size: max(3vw, 2rem); */
+        border: 0px solid currentColor;
         border-radius: 50%;
         outline: 0.1em solid currentColor;
         background-color: transparent;
@@ -623,6 +657,8 @@
         nav {
           right: 0;
           width: 100%;
+          box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+          backdrop-filter: blur(20px);
         }
         nav.active {
           top: 0;
@@ -952,7 +988,7 @@
         transform: translate(0) rotate(0deg);
       }
 
-      @media screen and (max-width: 1800px) {
+      @media screen and (max-width: 112.5rem) {
         .model-trailer-section {
           max-width: 400px;
         }
@@ -968,12 +1004,15 @@
         .trailer-test:nth-child(3) {
           transform: translateY(100%) rotate(10deg);
         }
+        .trailer-test:nth-child(4) {
+          transform: translate(0%) rotate(0deg);
+        }
         .trailer-test:nth-child(1) video {
           margin: 1rem 0;
         }
       }
 
-      @media screen and (max-width: 1700px) {
+      @media screen and (max-width: 100rem) {
         .trailers {
           display: none;
         }
@@ -1172,83 +1211,64 @@
     </style>
   </head>
   <body class="min-body-width">
-    <div class="banner">
-      <header>
-        <span class="year">2018 - 2023</span>
-        <a href="#" class="logo">
-          <img src="./assets/logo.png" alt="McLAREN logo">
-        </a>
-        <a href="#" class="menu"></a>
-      </header>
-      <nav>
-        <ul>
-          <li><a href="#">supercars</a></li>
-          <li><a href="#"><spen class="caps">gt</spen></a></li>
-          <li><a href="#">ultimate</a></li>
-          <li><a href="#">solus <span class="caps">gt</span></a></li>
-          <li><a href="#">legacy</a></li>
-        </ul>
-      </nav>
-      
-    <div class="bg-videos">
-      <video 
-        class="bg-video active" 
-        src="./assets/videos/mclaren-1.mp4"
-        autoplay 
-        loop 
-        muted>
-      </video>
-      <video 
-        class="bg-video" 
-        src="./assets/videos/mclaren-2.mp4"
-        autoplay 
-        loop 
-        muted>
-      </video>
-      <video 
-        class="bg-video" 
-        src="./assets/videos/mclaren-3.mp4"
-        autoplay 
-        loop 
-        muted>
-      </video>
-      <video 
-        class="bg-video" 
-        src="./assets/videos/mclaren-4.mp4"
-        autoplay 
-        loop 
-        muted>
-      </video>
-      <video 
-        class="bg-video" 
-        src="./assets/videos/mclaren-5.mp4"
-        autoplay 
-        loop 
-        muted>
-      </video>
-    </div>
-      <!-- <div class="content">
-        <h1>McLAREN</h1>
-        <h3 class="model mclaren-1 active">
-          765lt spider
-        </h3>
-        <h3 class="model mclaren-2">
-          artura
-        </h3>
-        <h3 class="model mclaren-3">
-          750s
-        </h3>
-        <h3 class="model mclaren-4">
-          765lt
-        </h3>
-        <h3 class="model mclaren-5">
-          7505 spider
-        </h3>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe, possimus sunt! Nemo dolorem earum cumque commodi perferendis esse quae maiores reiciendis, voluptatibus dignissimos.</p>
-        <a href="#">enquire</a>
-      </div> -->
-      <div class="main">
-        <div class="content">
+    <div class="page-container">
+
+      <div class="banner">
+        <header>
+          <span class="year">2018 - 2023</span>
+          <a href="#" class="logo">
+            <img src="./assets/logo.png" alt="McLAREN logo">
+          </a>
+          <a href="#" class="menu"></a>
+        </header>
+        <nav>
+          <ul>
+            <li><a href="#">supercars</a></li>
+            <li><a href="#"><spen class="caps">gt</spen></a></li>
+            <li><a href="#">ultimate</a></li>
+            <li><a href="#">solus <span class="caps">gt</span></a></li>
+            <li><a href="#">legacy</a></li>
+          </ul>
+        </nav>
+        
+        <div class="bg-videos">
+          <video 
+            class="bg-video active" 
+            src="./assets/videos/mclaren-1.mp4"
+            autoplay 
+            loop 
+            muted>
+          </video>
+          <video 
+            class="bg-video" 
+            src="./assets/videos/mclaren-2.mp4"
+            autoplay 
+            loop 
+            muted>
+          </video>
+          <video 
+            class="bg-video" 
+            src="./assets/videos/mclaren-3.mp4"
+            autoplay 
+            loop 
+            muted>
+          </video>
+          <video 
+            class="bg-video" 
+            src="./assets/videos/mclaren-4.mp4"
+            autoplay 
+            loop 
+            muted>
+          </video>
+          <video 
+            class="bg-video" 
+            src="./assets/videos/mclaren-5.mp4"
+            autoplay 
+            loop 
+            muted>
+          </video>
+        </div>
+        <!-- <div class="content">
           <h1>McLAREN</h1>
           <h3 class="model mclaren-1 active">
             765lt spider
@@ -1265,135 +1285,157 @@
           <h3 class="model mclaren-5">
             7505 spider
           </h3>
-          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe, possimus sunt! Nemo dolorem earum cumque commodi
-            perferendis esse quae maiores reiciendis, voluptatibus dignissimos.</p>
+          <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe, possimus sunt! Nemo dolorem earum cumque commodi perferendis esse quae maiores reiciendis, voluptatibus dignissimos.</p>
           <a href="#">enquire</a>
+        </div> -->
+        <div class="main">
+          <div class="content">
+            <h1>McLAREN</h1>
+            <h3 class="model mclaren-1 active">
+              765lt spider
+            </h3>
+            <h3 class="model mclaren-2">
+              artura
+            </h3>
+            <h3 class="model mclaren-3">
+              750s
+            </h3>
+            <h3 class="model mclaren-4">
+              765lt
+            </h3>
+            <h3 class="model mclaren-5">
+              7505 spider
+            </h3>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe, possimus sunt! Nemo dolorem earum cumque commodi
+              perferendis esse quae maiores reiciendis, voluptatibus dignissimos.</p>
+            <a href="#">enquire</a>
+          </div>
+          <ul class="sci">
+            <li>
+              <a href="#">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-instagram" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa fa-youtube-play" aria-hidden="true"></i>
+              </a>
+            </li>
+          </ul>
         </div>
-        <ul class="sci">
-          <li>
-            <a href="#">
-              <i class="fa fa-facebook" aria-hidden="true"></i>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="fa fa-instagram" aria-hidden="true"></i>
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="fa fa-youtube-play" aria-hidden="true"></i>
-            </a>
-          </li>
-        </ul>
-      </div>
-      <button href="#" class="pause-btn active" id="main-pause-btn">
-        <i class="fa fa-pause" aria-hidden="true"></i>
-      </button>
-      <button href="#" class="play-btn" id="main-play-btn">
-        <i class="fa fa-play" aria-hidden="true"></i>
-      </button>
-      <div class="screen">
-        <!-- <div class="shadow"></div> -->
-        <div>
-          <span style="--i: 0">
-            <video class="trailer screen-video mclaren-1 active" 
-              src="./assets/videos/mclaren-1.mp4" 
-              autoplay 
-              loop 
-              muted>
-            </video>
-            <video class="trailer screen-video mclaren-2" 
-              src="./assets/videos/mclaren-2.mp4" 
-              autoplay 
-              loop 
-              muted>
-            </video>
-            <video class="trailer screen-video mclaren-3" 
-              src="./assets/videos/mclaren-3.mp4" 
-              autoplay 
-              loop 
-              muted>
-            </video>
-            <video class="trailer screen-video mclaren-4" 
-              src="./assets/videos/mclaren-4.mp4" 
-              autoplay 
-              loop 
-              muted>
-            </video>
-            <video class="trailer screen-video mclaren-5" 
-              src="./assets/videos/mclaren-5.mp4" 
-              autoplay 
-              loop 
-              muted>
-            </video>
-          </span>
-          <span style="--i: 1">
-            <video class="screen-video" 
-              src="./assets/videos/trailer-1.mp4" 
-              autoplay 
-              loop 
-              muted>
-            </video>
-          </span>
-          <span style="--i: 2">
-            <video class="screen-video" 
-              src="./assets/videos/trailer-2.mp4" 
-              autoplay 
-              loop 
-              muted>
-            </video>
-          </span>
-          <span style="--i: 3">
-            <video class="screen-video" 
-              src="./assets/videos/trailer-3.mp4" 
-              autoplay 
-              loop 
-              muted>
-            </video>
-          </span>
-        </div>
-      </div>
-      <div class="trailers">
-        <div class="model-trailer-section">
-          <div class="trailer-test">
-            <video src="./assets/videos/mclaren-1.mp4"></video>
-          </div>
-          <div class="trailer-test">
-            <video src="./assets/videos/trailer-1.mp4"></video>
-          </div>
-          <div class="trailer-test">
-            <video src="./assets/videos/trailer-2.mp4"></video>
-          </div>
-          <div class="trailer-test">
-            <video src="./assets/videos/trailer-3.mp4"></video>
+        <button href="#" class="pause-btn active" id="main-pause-btn">
+          <i class="fa fa-pause" aria-hidden="true"></i>
+        </button>
+        <button href="#" class="play-btn" id="main-play-btn">
+          <i class="fa fa-play" aria-hidden="true"></i>
+        </button>
+        <div class="screen">
+          <!-- <div class="shadow"></div> -->
+          <div>
+            <span style="--i: 0">
+              <video class="trailer screen-video mclaren-1 active" 
+                src="./assets/videos/mclaren-1.mp4" 
+                autoplay 
+                loop 
+                muted>
+              </video>
+              <video class="trailer screen-video mclaren-2" 
+                src="./assets/videos/mclaren-2.mp4" 
+                autoplay 
+                loop 
+                muted>
+              </video>
+              <video class="trailer screen-video mclaren-3" 
+                src="./assets/videos/mclaren-3.mp4" 
+                autoplay 
+                loop 
+                muted>
+              </video>
+              <video class="trailer screen-video mclaren-4" 
+                src="./assets/videos/mclaren-4.mp4" 
+                autoplay 
+                loop 
+                muted>
+              </video>
+              <video class="trailer screen-video mclaren-5" 
+                src="./assets/videos/mclaren-5.mp4" 
+                autoplay 
+                loop 
+                muted>
+              </video>
+            </span>
+            <span style="--i: 1">
+              <video class="screen-video" 
+                src="./assets/videos/trailer-1.mp4" 
+                autoplay 
+                loop 
+                muted>
+              </video>
+            </span>
+            <span style="--i: 2">
+              <video class="screen-video" 
+                src="./assets/videos/trailer-2.mp4" 
+                autoplay 
+                loop 
+                muted>
+              </video>
+            </span>
+            <span style="--i: 3">
+              <video class="screen-video" 
+                src="./assets/videos/trailer-3.mp4" 
+                autoplay 
+                loop 
+                muted>
+              </video>
+            </span>
           </div>
         </div>
-      </div>
-      <div class="gallery">
-        <div class="carousel">
-          <a href="#" class="carousel-item non-transparent" style="--i: 0">
-            <img src="./assets/cars/mclaren-1.jpg" alt="">
-            <h4 class="mclaren-1">765lt spider</h4>
-          </a>
-          <a href="#" class="carousel-item semi-transparent" style="--i: 1">
-            <img src="./assets/cars/mclaren-2.jpg" alt="">
-            <h4 class="mclaren-2">artura</h4>
-          </a>
-          <a href="#" class="carousel-item" style="--i: 2">
-            <img src="./assets/cars/mclaren-3.jpeg" alt="">
-            <h4 class="mclaren-3">750s</h4>
-          </a>
-          <a href="#" class="carousel-item" style="--i: 3">
-            <img src="./assets/cars/mclaren-4.jpeg" alt="">
-            <h4 class="mclaren-4">765lt</h4>
-          </a>
-          <a href="#" class="carousel-item semi-transparent" style="--i: 4">
-            <!-- <img src="./assets/cars/mclaren-5a.jpeg" alt=""> -->
-            <!-- <img src="./assets/cars/mclaren-5b.png" alt=""> -->
-            <img src="./assets/cars/mclaren-5.jpg" alt="">
-            <h4 class="mclaren-5">750s spider</h4>
-          </a>
+        <div class="trailers">
+          <div class="model-trailer-section">
+            <div class="trailer-test">
+              <video src="./assets/videos/mclaren-1.mp4"></video>
+            </div>
+            <div class="trailer-test">
+              <video src="./assets/videos/trailer-1.mp4"></video>
+            </div>
+            <div class="trailer-test">
+              <video src="./assets/videos/trailer-2.mp4"></video>
+            </div>
+            <div class="trailer-test">
+              <video src="./assets/videos/trailer-3.mp4"></video>
+            </div>
+          </div>
+        </div>
+        <div class="gallery">
+          <div class="carousel">
+            <a href="#" class="carousel-item non-transparent" style="--i: 0">
+              <img src="./assets/cars/mclaren-1.jpg" alt="">
+              <h4 class="mclaren-1">765lt spider</h4>
+            </a>
+            <a href="#" class="carousel-item semi-transparent" style="--i: 1">
+              <img src="./assets/cars/mclaren-2.jpg" alt="">
+              <h4 class="mclaren-2">artura</h4>
+            </a>
+            <a href="#" class="carousel-item" style="--i: 2">
+              <img src="./assets/cars/mclaren-3.jpeg" alt="">
+              <h4 class="mclaren-3">750s</h4>
+            </a>
+            <a href="#" class="carousel-item" style="--i: 3">
+              <img src="./assets/cars/mclaren-4.jpeg" alt="">
+              <h4 class="mclaren-4">765lt</h4>
+            </a>
+            <a href="#" class="carousel-item semi-transparent" style="--i: 4">
+              <!-- <img src="./assets/cars/mclaren-5a.jpeg" alt=""> -->
+              <!-- <img src="./assets/cars/mclaren-5b.png" alt=""> -->
+              <img src="./assets/cars/mclaren-5.jpg" alt="">
+              <h4 class="mclaren-5">750s spider</h4>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -1569,6 +1611,9 @@
     </script>
 
     <div id="cont" class="preview-container">
+      <button id="close-preview-btn">
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>
       <div class="preview-box">
         <div id="volume-control">
           <i class="fa fa-volume-off hidden" id="unmute-btn" aria-hidden="true"></i>
@@ -1582,7 +1627,7 @@
           <i id="play-btn2" class="fa fa-play" aria-hidden="true"></i>
           <i id="forward-btn" class="fa fa-forward" aria-hidden="true"></i>
           <i id="full" class="fa fa-arrows-alt" aria-hidden="true"></i>
-          <i id="close" class="fa fa-times hidden" aria-hidden="true"></i>
+          <i id="exit" class="fa fa-times hidden" aria-hidden="true"></i>
         </div>
       </div>
     </div>
@@ -1592,9 +1637,10 @@
       const fullScreenBtn = document.getElementById("full");
       // const f = document.getElementById("cont");
       const previewBox = document.querySelector(".preview-box");
-      const closeBtn = document.getElementById("close");
+      const exitBtn = document.getElementById("exit");
       const muteBtn = document.getElementById("mute-btn");
       const unmuteBtn = document.getElementById("unmute-btn");
+      const closeBtn = document.getElementById("close-preview-btn");
 
       // const test = document.createElement("video");
       // console.log(x.volume);
@@ -1611,7 +1657,7 @@
 
       function play() {
         previewVideo.play();
-        console.log("play");
+        // console.log("play");
       }
 
       const pauseBtn2 = document.querySelector("#pause-btn2");
@@ -1619,7 +1665,7 @@
 
       function pause() {
         previewVideo.pause();
-        console.log("paused");
+        // console.log("paused");
       }
 
       const backwardBtn = document.querySelector("#backward-btn");
@@ -1627,7 +1673,7 @@
 
       function backward() {
         previewVideo.currentTime -= 7;
-        console.log(previewVideo.currentTime);
+        // console.log(previewVideo.currentTime);
       }
 
       const forwardBtn = document.querySelector("#forward-btn");
@@ -1635,14 +1681,14 @@
 
       function forward() {
         previewVideo.currentTime += 7;
-        console.log(previewVideo.currentTime);
+        // console.log(previewVideo.currentTime);
       }
 
       volumeBar.addEventListener("input", setVolume);
 
       function setVolume() {
         previewVideo.volume = (volumeBar.value)/100;
-        console.log(volumeBar.value/100, previewVideo.volume);
+        // console.log(volumeBar.value/100, previewVideo.volume);
       }
 
       fullScreenBtn.addEventListener("click", setFullScreen);
@@ -1658,11 +1704,11 @@
           /* IE11 */
           previewBox.msRequestFullscreen();
         }
-        fullScreenBtn.classList.toggle("hidden");
-        closeBtn.classList.toggle("hidden");
+        // fullScreenBtn.classList.toggle("hidden");
+        // exitBtn.classList.toggle("hidden");
       }
 
-      closeBtn.addEventListener("click", exitFullScreen);
+      exitBtn.addEventListener("click", exitFullScreen);
 
       function exitFullScreen() {
         // previewVideo.requestFullscreen();
@@ -1675,23 +1721,27 @@
           /* IE11 */
           document.msExitFullscreen();
         }
-        fullScreenBtn.classList.toggle("hidden");
-        closeBtn.classList.toggle("hidden");
+        // fullScreenBtn.classList.toggle("hidden");
+        // exitBtn.classList.toggle("hidden");
+        // console.log(document.fullscreenElement);
       }
 
-      previewVideo.addEventListener("fullscreenchange", fullscreenchanged);
+      previewBox.addEventListener("fullscreenchange", fullscreenchanged);
 
-      console.log(document.fullscreenElement);
+      // console.log(document.fullscreenElement);
 
       function fullscreenchanged(event) {
-  if (document.fullscreenElement) {
-    console.log(
-      `Element: ${document.fullscreenElement} entered fullscreen mode.`,
-    );
-  } else {
-    console.log("Leaving fullscreen mode.");
-  }
-}
+        // if (document.fullscreenElement) {
+          // console.log(
+            // `Element: ${document.fullscreenElement} entered fullscreen mode.`,
+          // );
+        // } else {
+          // console.log("Leaving fullscreen mode.");
+          fullScreenBtn.classList.toggle("hidden");
+          exitBtn.classList.toggle("hidden");
+          // console.log(1696);
+        // }
+      }
 
 // const el = document.getElementById("fullscreen-div");
 
@@ -1704,6 +1754,14 @@
         muteBtn.classList.toggle("hidden");
         unmuteBtn.classList.toggle("hidden");
         // console.log(previewVideo.muted);
+      }
+
+      closeBtn.addEventListener("click", closePreviewWindow);
+
+      function closePreviewWindow() {
+        pause();
+        previewVideo.currentTime = 0;
+        document.body.classList.remove("preview-mode");
       }
 
       const trailers = document.querySelectorAll(".trailer-test");
