@@ -47,7 +47,7 @@
       article {
         /* width: 85%; */
         height: 100%;
-        border: 1px solid #fff;
+        /* border: 1px solid #fff; */
         /* border-radius: 10px; */
         background-color: var(--color-3);
       }
@@ -73,7 +73,7 @@
         font-size: 22px;
         font-weight: 800;
         text-transform: capitalize;
-        border: 1px solid #fff;
+        /* border: 1px solid #fff; */
       }
       header aside h1 i {
         margin-left: 5px;
@@ -243,7 +243,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border: 1px solid #fff;
+        /* border: 1px solid #fff; */
         border-radius: 0px 10px 0px 0px;
         background-color: var(--color-1);
       }
@@ -294,7 +294,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border: 1px solid #fff;
+        /* border: 1px solid #fff; */
       }
       header article nav .right-box i {
         color: var(--color-4);
@@ -365,11 +365,19 @@
         position: absolute;
         top: 50px;
         width: 130px;
-        height: 200px;
+        height: 0px;
         display: flex;align-items: center;
         flex-direction: column;
         /* border: 1px solid #fff; */
+        transition: 1s linear;
+        opacity: 0;
+        overflow: hidden;
         z-index: 9999;
+      }
+      header article nav .right-box .user-data:hover .card {
+        height: 200px;
+        opacity: 1;
+        overflow: visible;
       }
       header article nav .right-box .user-data .card::before {
         position: absolute;
@@ -381,18 +389,106 @@
         backdrop-filter: blur(5px);
         z-index: -1;
       }
+      header article nav .right-box .user-data .card::after {
+        position: absolute;
+        top: -10px;
+        right: 20px;
+        content: "";
+        border-top: 15px solid rgba(184, 184, 184, .1);
+        border-right: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+        transform: rotate(45deg);
+      }
       header article nav .right-box .user-data .card img {
         width: 35px;
         height: 35px;
         margin-top: 10px;
         border-radius: 50%;
       }
-      header article nav .right-box .user-data .card h6 {}
-      header article nav .right-box {}
-      header article nav .right-box {}
-      header article nav .right-box {}
-      header article nav .right-box {}
-      header article nav .right-box {}
+      header article nav .right-box .user-data .card h6 {
+        display: block;
+        width: auto;
+        margin-top: 10px;
+        color: #fff;
+        text-align: center;
+        transition: .5s linear;
+        overflow: unset;
+      }
+      header article nav .right-box .user-data .card p {
+        margin-bottom: 10px;
+        /* color: var(--color-2); */
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 9px;
+        transition: .5s linear;
+      }
+      header article nav .right-box .user-data .card .gta-img {
+        width: 110px;
+        height: 60px;
+        margin: 15px;
+        border-radius: 15px;
+      }
+
+      header article .game-1 {
+        position: relative;
+        width: 100%;
+        height: 200px;
+        margin-top: 20px;
+        padding: 0 30px;
+        border: 1px solid red;
+      }
+      header article .game-1 h3 {
+        color: var(--color-2);
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: capitalize;
+        transition: .5s linear;
+      }
+
+      header article .game-1 .game-box {
+        width: 100%;
+        height: 175px;
+        display: flex;
+        align-items: center;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+        overflow: scroll;
+        scroll-behavior: smooth;
+        border: 1px solid wheat;
+      }
+      header article .game-1 .game-box::-webkit-scrollbar {
+        display: none;
+      }
+
+      header article .game-1 .game-box .card {
+        min-width: 230px;
+        height: 160px;
+        margin-top: 10px;
+        margin-right: 20px;
+        border: 1px solid greenyellow;
+        border-radius: 10px;
+      }
+      header article .game-1 .game-box .card:last-child {
+        margin-right: 0;
+      }
+      header article .game-1 .game-box .card img {
+        width: 100%;
+        height: 75%;
+        border-radius: 5px;
+      }
+      header article .game-1 .game-box .card .content {
+        width: 100%;
+        height: 25%;
+        margin-top: -5px;
+        display: flex;
+        justify-content: space-between;
+        color: var(--color-2);
+        transition: .5s linear;
+        border: 1px solid blue;
+      }
+      header article .game-1 .game-box .card .content .left {
+        color: var(--color-2);
+        transition: .5s linear;
+      }
     </style>
   </head>
   <body>
@@ -529,11 +625,48 @@
                 <h6>jahid khan</h6>
                 <p class="upper">gta v</p>
                 <button>premium</button>
-                <img src="./assets/img/GTA V Premium.webp" alt="">
+                <img class="gta-img" src="./assets/img/GTA V Premium.webp" alt="">
               </div>
             </div>
           </div>
         </nav>
+        <div class="game-1">
+          <h3>recommend for you</h3>
+          <div class="game-box">
+
+            <div class="card">
+              <img src="./assets/img/GTA V Premium.webp" alt="">
+              <div class="content">
+                <div class="left">
+                  <h5>grand teft auto v</h5>
+                  <p>jahid khan</p>
+                </div>
+                <h6>354,452 views</h6>
+              </div>
+            </div>
+            <div class="card">
+              <img src="./assets/img/GTA V Premium.webp" alt="">
+              <div class="content">
+                <div class="left">
+                  <h5>grand teft auto v</h5>
+                  <p>jahid khan</p>
+                </div>
+                <h6>354,452 views</h6>
+              </div>
+            </div>
+            <div class="card">
+              <img src="./assets/img/GTA V Premium.webp" alt="">
+              <div class="content">
+                <div class="left">
+                  <h5>grand teft auto v</h5>
+                  <p>jahid khan</p>
+                </div>
+                <h6>354,452 views</h6>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </article>
     </header>
     <div class="hero"></div>
