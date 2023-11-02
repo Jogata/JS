@@ -434,9 +434,10 @@
         height: 200px;
         margin-top: 20px;
         padding: 0 30px;
-        border: 1px solid red;
+        /* border: 1px solid red; */
       }
       header article .game-1 h3 {
+        margin: 10px 0;
         color: var(--color-2);
         font-size: 14px;
         font-weight: 600;
@@ -453,7 +454,7 @@
         scrollbar-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
         overflow: scroll;
         scroll-behavior: smooth;
-        border: 1px solid wheat;
+        /* border: 1px solid wheat; */
       }
       header article .game-1 .game-box::-webkit-scrollbar {
         display: none;
@@ -464,7 +465,7 @@
         height: 160px;
         margin-top: 10px;
         margin-right: 20px;
-        border: 1px solid greenyellow;
+        /* border: 1px solid greenyellow; */
         border-radius: 10px;
       }
       header article .game-1 .game-box .card:last-child {
@@ -483,11 +484,79 @@
         justify-content: space-between;
         color: var(--color-2);
         transition: .5s linear;
-        border: 1px solid blue;
+        /* border: 1px solid blue; */
       }
       header article .game-1 .game-box .card .content .left {
         color: var(--color-2);
         transition: .5s linear;
+      }
+      header article .game-1 .game-box .card .content .left h5 {
+        width: 150px;
+        font-size: 12px;
+        font-weight: 500;
+        text-transform: capitalize;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      header article .game-1 .game-box .card .content .left p {
+        width: 150px;
+        color: var(--color-4);
+        font-size: 8px;
+        font-weight: 500;
+        text-transform: capitalize;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      header article .game-1 .game-box .card .content h6 {
+        margin-top: 5px;
+        color: var(--color-4);
+        font-size: 10px;
+        font-weight: 500;
+        text-transform: capitalize;
+        transition: .5s linear;
+      }
+
+      header article .game-1 .btns {
+        position: absolute;
+        top: 0;
+        right: 3%;
+        display: flex;
+        align-items: center;
+        color: var(--color-4);
+        transition: .5s linear;
+      }
+      header article .game-1 .btns i {
+        margin-left: 5px;
+        transition: .5s linear;
+        cursor: pointer;
+      }
+      header article .game-1 .btns i:hover {
+        color: var(--color-2);
+      }
+
+      header article .game-2 {
+        position: relative;
+        width: 100%;
+        height: 380px;
+        padding: 0 30px;
+        border: 1px solid red;
+        overflow: hidden;
+      }
+      header article .game-2 h3 {
+        color: var(--color-2);
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: capitalize;
+        transition: .5s linear;
+      }
+
+      header article .game-2 .games-box {
+        width: 100%;
+        height: 350px;
+        margin-top: 9px;
+        border: 1px solid greenyellow;
       }
     </style>
   </head>
@@ -631,9 +700,43 @@
           </div>
         </nav>
         <div class="game-1">
+          <div class="btns">
+            <i class="fa fa-chevron-left" id="left-btn"></i>
+            <i class="fa fa-chevron-right" id="right-btn"></i>
+          </div>
           <h3>recommend for you</h3>
-          <div class="game-box">
+          <div class="game-box" id="game-box-1">
 
+            <div class="card">
+              <img src="./assets/img/GTA V Premium.webp" alt="">
+              <div class="content">
+                <div class="left">
+                  <h5>grand teft auto v</h5>
+                  <p>jahid khan</p>
+                </div>
+                <h6>354,452 views</h6>
+              </div>
+            </div>
+            <div class="card">
+              <img src="./assets/img/GTA V Premium.webp" alt="">
+              <div class="content">
+                <div class="left">
+                  <h5>grand teft auto v</h5>
+                  <p>jahid khan</p>
+                </div>
+                <h6>354,452 views</h6>
+              </div>
+            </div>
+            <div class="card">
+              <img src="./assets/img/GTA V Premium.webp" alt="">
+              <div class="content">
+                <div class="left">
+                  <h5>grand teft auto v</h5>
+                  <p>jahid khan</p>
+                </div>
+                <h6>354,452 views</h6>
+              </div>
+            </div>
             <div class="card">
               <img src="./assets/img/GTA V Premium.webp" alt="">
               <div class="content">
@@ -667,9 +770,28 @@
 
           </div>
         </div>
+        <div class="game-2">
+          <h3>most played</h3>
+          <div class="games-box">
+            <div class="card"></div>
+          </div>
+        </div>
       </article>
     </header>
     <div class="hero"></div>
+
+    <script>
+      const gameBox1 = document.getElementById("game-box-1");
+      const leftBtn = document.getElementById("left-btn");
+      const rightBtn = document.getElementById("right-btn");
+
+      leftBtn.addEventListener("click", () => {
+        gameBox1.scrollLeft -= 250;
+      })
+      rightBtn.addEventListener("click", () => {
+        gameBox1.scrollLeft += 250;
+      })
+    </script>
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
