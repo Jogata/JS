@@ -3,1089 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>URLSearchParams in JS</title> -->
-    <title>Game website</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      :root {
-        --color-1: #262b3f;
-        --color-2: #fff;
-        --color-3: #1e2337;
-        --color-4: rgba(255, 255, 255, 0.5);
-        --color-5: #adff2f;
-      }
-
-      .upper {
-        text-transform: uppercase !important;
-      }
-
-      body {
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: Georgia, Times, serif;
-        background-color: #1e2337;
-      }
-
-      header {
-        width: 85%;
-        height: 95%;
-        display: flex;
-        border-radius: 10px;
-        box-shadow: 0px 0px 30px rgb(20, 19, 19);
-      }
-
-      aside, 
-      article {
-        /* width: 85%; */
-        height: 100%;
-        /* border: 1px solid #fff; */
-        /* border-radius: 10px; */
-        background-color: var(--color-3);
-      }
-
-      aside {
-        width: 15%;
-        border-radius: 10px 0 0 10px;
-        background-color: #663da6;
-      }
-
-      article {
-        width: 85%;
-        border-radius: 0 10px 10px 0;
-      }
-
-      header aside h1 {
-        width: 100%;
-        height: 10%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        font-size: 22px;
-        font-weight: 800;
-        text-transform: capitalize;
-        /* border: 1px solid #fff; */
-      }
-      header aside h1 i {
-        margin-left: 5px;
-      }
-
-      header aside button {
-        display: block;
-        margin: auto;
-        margin-top: 5px;
-        padding: 8px 20px;
-        color: #fff;
-        font-size: 12px;
-        font-family: inherit;
-        text-transform: capitalize;
-        border: none;
-        outline: none;
-        background-color: #270458;
-        transition: .3s linear;
-        cursor: pointer;
-      }
-      header aside button:hover {
-        background-color: #1e2337;
-      }
-
-      header aside ul {
-        position: relative;
-        margin-top: 10px;
-        margin-left: 12%;
-        padding-bottom: 20px;
-        list-style: none;
-      }
-      header aside ul::before {
-        position: absolute;
-        bottom: 0;
-        content: "";
-        width: 88%;
-        height: 2px;
-        background-color: rgba(184, 184, 184, .1);
-      }
-      header aside ul li {
-        padding: 2.5px 0;
-      }
-      header aside ul li a {
-        text-decoration: none;
-        color: rgba(255, 255, 255, 0.7);
-        font-size: 12px;
-        font-weight: 400;
-        text-transform: capitalize;
-        transition: .3s linear;
-      }
-      header aside ul li a:hover {
-        color: #fff;
-      }
-      header aside ul li a i {
-        margin-right: 15px;
-      }
-      header aside ul li.active {
-        border-right: 3px solid #fff;
-      }
-      header aside ul li.active a {
-        color: #fff;
-        font-size: 13px;
-      }
-
-      header aside .subscriptions {
-        width: 99%;
-        height: auto;
-        margin-top: 15px;
-        margin-left: 12%;
-        /* border: 1px solid #fff; */
-      }
-      header aside .subscriptions h5 {
-        padding: 5px 0;
-        color: #fff;
-        font-size: 12px;
-        font-weight: 600;
-        text-transform: capitalize;
-      }
-      header aside .subscriptions .cards {
-        width: 88%;
-        height: 300px;
-        margin-top: 15px;
-        /* border: 1px solid #fff; */
-        scrollbar-width: thin;
-        scrollbar-color: rgba(184, 184, 184, .7) rgba(184, 184, 184, .2);
-        overflow-x: hidden;
-        overflow-y: auto;
-      }
-      header aside .subscriptions .cards::-webkit-scrollbar {
-        width: 5px;
-        border-radius: 20px;
-        background-color: rgba(184, 184, 184, .2);
-        transition: .3s linear;
-        visibility: hidden;
-      }
-      header aside .subscriptions .cards::-webkit-scrollbar-thumb {
-        border-radius: 20px;
-        background-color: rgba(184, 184, 184, .7);
-        transition: .3s linear;
-        visibility: hidden;
-      }
-      header aside .subscriptions .cards:hover:-webkit-scrollbar {
-        visibility: visible;
-      }
-      header aside .subscriptions .cards:hover:-webkit-scrollbar-thumb {
-        visibility: visible;
-      }
-
-      header aside .subscriptions .cards .card {
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        /* border: 1px solid #fff; */
-      }
-
-      header aside .subscriptions .cards .card .img-box {
-        position: relative;
-        width: 35px;
-        height: 35px;
-        border-radius: 50%;
-      }
-      header aside .subscriptions .cards .card .img-box::before {
-        position: absolute;
-        top: 13px;
-        right: -5px;
-        content: "";
-        width: 7px;
-        height: 7px;
-        border: 3px solid #663da6;
-        border-radius: 50%;
-        background-color: greenyellow;
-      }
-      header aside .subscriptions .cards .card .img-box img {
-        width: 35px;
-        height: 35px;
-        object-fit: cover;
-        border-radius: inherit;
-      }
-
-      header aside .subscriptions .cards .card .content {
-        margin-left: 8px;
-      }
-      header aside .subscriptions .cards .card .content h6 {
-        width: 100px;
-        color: #fff;
-        font-size: 10px;
-        text-transform: capitalize;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-      }
-      header aside .subscriptions .cards .card .content p {
-        width: 100px;
-        color: rgba(255, 255, 255, 0.5);
-        font-size: 8px;
-        font-weight: 700;
-        text-transform: capitalize;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-      }
-
-      header article nav {
-        width: 100%;
-        height: 10%;
-        padding: 0 30px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        /* border: 1px solid #fff; */
-        border-radius: 0px 10px 0px 0px;
-        background-color: var(--color-1);
-      }
-
-      header article nav button {
-        padding: 7px 20px;
-        color: #fff;
-        font-size: 16px;
-        font-family: inherit;
-        font-weight: 400;
-        text-transform: capitalize;
-        outline: none;
-        border: none;
-        border-radius: 5px;
-        background-color: #663da6;
-        cursor: pointer;
-      }
-
-      header article nav .search {
-        width: 40%;
-        padding: 4px 10px;
-        background-color: var(--color-3);
-        transition: .5s linear;
-      }
-      header article nav .search input {
-        width: 94%;
-        padding: 0 10px;
-        color: var(--color-2);
-        border: none;
-        outline: none;
-        background-color: transparent;
-        transition: .5s linear;
-      }
-      header article nav .search input::placeholder {
-        color: var(--color-4);
-        font-size: 12px;
-        font-family: inherit;
-        transition: .5s linear;
-      }
-      header article nav .search i {
-        color: var(--color-4);
-        font-size: 13px;
-        transition: .5s linear;
-      }
-
-      header article nav .right-box {
-        width: 38%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        /* border: 1px solid #fff; */
-      }
-      header article nav .right-box i {
-        color: var(--color-4);
-        font-size: 20px;
-        transition: .5s linear;
-        cursor: pointer;
-      }
-      header article nav .right-box i:hover {
-        color: #fff;
-      }
-
-      header article nav .right-box button {
-        padding: 0 20px;
-        color: #fff;
-        font-size: 12px;
-        display: flex;
-        align-items: center;
-        border: 2px solid rgba(255, 255, 255, 0.2);
-        background-color: rgba(184, 184, 184, .2);
-        transition: .5s linear;
-      }
-      header article nav .right-box button span {
-        margin: -2px 0 0 10px;
-      }
-      header article nav .right-box .active-battery {
-        background-color: #663da6;
-        box-shadow: 0px 0px 20px #663da6;
-      }
-
-      header article nav .right-box .user-data {
-        position: relative;
-        display: flex;
-        align-items: center;
-        transition: .5s linear;
-        cursor: pointer;
-      }
-      header article nav .right-box .user-data h6 {
-        width: 70px;
-        color: var(--color-4);
-        font-size: 9px;
-        font-weight: 600;
-        text-transform: capitalize;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        transition: .5s linear;
-        overflow: hidden;
-      }
-      header article nav .right-box .user-data h5 {
-        color: #fff;
-        margin: 0 5px;
-        padding: 7px 9px;
-        font-size: 11px;
-        text-transform: uppercase;
-        border-radius: 50%;
-        background-color: #663da6;
-        transition: .5s linear;
-      }
-      header article nav .right-box .user-data i {
-        color: var(--color-2);
-        font-size: 12px;
-        transition: 1s linear;
-      }
-      header article nav .right-box .user-data:hover i {
-        transform: rotate(180deg);
-      }
-
-      header article nav .right-box .user-data .card {
-        position: absolute;
-        top: 50px;
-        width: 130px;
-        height: 0px;
-        display: flex;align-items: center;
-        flex-direction: column;
-        /* border: 1px solid #fff; */
-        transition: 1s linear;
-        opacity: 0;
-        overflow: hidden;
-        z-index: 9999;
-      }
-      header article nav .right-box .user-data:hover .card {
-        height: 200px;
-        opacity: 1;
-        overflow: visible;
-      }
-      header article nav .right-box .user-data .card::before {
-        position: absolute;
-        content: "";
-        width: 100%;
-        height: 100%;
-        border-radius: 10px;
-        background-color: rgba(184, 184, 184, .1);
-        backdrop-filter: blur(5px);
-        z-index: -1;
-      }
-      header article nav .right-box .user-data .card::after {
-        position: absolute;
-        top: -10px;
-        right: 20px;
-        content: "";
-        border-top: 15px solid rgba(184, 184, 184, .1);
-        border-right: 15px solid transparent;
-        border-bottom: 15px solid transparent;
-        transform: rotate(45deg);
-      }
-      header article nav .right-box .user-data .card img {
-        width: 35px;
-        height: 35px;
-        margin-top: 10px;
-        border-radius: 50%;
-      }
-      header article nav .right-box .user-data .card h6 {
-        display: block;
-        width: auto;
-        margin-top: 10px;
-        color: #fff;
-        text-align: center;
-        transition: .5s linear;
-        overflow: unset;
-      }
-      header article nav .right-box .user-data .card p {
-        margin-bottom: 10px;
-        /* color: var(--color-2); */
-        color: rgba(255, 255, 255, 0.5);
-        font-size: 9px;
-        transition: .5s linear;
-      }
-      header article nav .right-box .user-data .card .gta-img {
-        width: 110px;
-        height: 60px;
-        margin: 15px;
-        border-radius: 15px;
-      }
-
-      header article .game-1 {
-        position: relative;
-        width: 100%;
-        height: 200px;
-        margin-top: 20px;
-        padding: 0 30px;
-        /* border: 1px solid red; */
-      }
-      header article .game-1 h3 {
-        margin: 10px 0;
-        color: var(--color-2);
-        font-size: 14px;
-        font-weight: 600;
-        text-transform: capitalize;
-        transition: .5s linear;
-      }
-
-      header article .game-1 .game-box {
-        width: 100%;
-        height: 175px;
-        display: flex;
-        align-items: center;
-        scrollbar-width: thin;
-        scrollbar-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
-        overflow: scroll;
-        scroll-behavior: smooth;
-        /* border: 1px solid wheat; */
-      }
-      header article .game-1 .game-box::-webkit-scrollbar {
-        display: none;
-      }
-
-      header article .game-1 .game-box .card {
-        min-width: 230px;
-        height: 160px;
-        margin-top: 10px;
-        margin-right: 20px;
-        /* border: 1px solid greenyellow; */
-        border-radius: 10px;
-      }
-      header article .game-1 .game-box .card:last-child {
-        margin-right: 0;
-      }
-      header article .game-1 .game-box .card img {
-        width: 100%;
-        height: 75%;
-        border-radius: 5px;
-      }
-      header article .game-1 .game-box .card .content {
-        width: 100%;
-        height: 25%;
-        margin-top: -5px;
-        display: flex;
-        justify-content: space-between;
-        color: var(--color-2);
-        transition: .5s linear;
-        /* border: 1px solid blue; */
-      }
-      header article .game-1 .game-box .card .content .left {
-        color: var(--color-2);
-        transition: .5s linear;
-      }
-      header article .game-1 .game-box .card .content .left h5 {
-        width: 150px;
-        font-size: 12px;
-        font-weight: 500;
-        text-transform: capitalize;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-      }
-      header article .game-1 .game-box .card .content .left p {
-        width: 150px;
-        color: var(--color-4);
-        font-size: 8px;
-        font-weight: 500;
-        text-transform: capitalize;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-      }
-      header article .game-1 .game-box .card .content h6 {
-        margin-top: 5px;
-        color: var(--color-4);
-        font-size: 10px;
-        font-weight: 500;
-        text-transform: capitalize;
-        transition: .5s linear;
-      }
-
-      header article .game-1 .btns {
-        position: absolute;
-        top: 0;
-        right: 3%;
-        display: flex;
-        align-items: center;
-        color: var(--color-4);
-        transition: .5s linear;
-      }
-      header article .game-1 .btns i {
-        margin-left: 5px;
-        transition: .5s linear;
-        cursor: pointer;
-      }
-      header article .game-1 .btns i:hover {
-        color: var(--color-2);
-      }
-
-      header article .game-2 {
-        position: relative;
-        width: 100%;
-        height: 380px;
-        padding: 0 30px;
-        /* border: 1px solid red; */
-        overflow: hidden;
-      }
-      header article .game-2 h3 {
-        color: var(--color-2);
-        font-size: 14px;
-        font-weight: 600;
-        text-transform: capitalize;
-        transition: .5s linear;
-      }
-
-      header article .game-2 .games-box {
-        width: 100%;
-        height: 350px;
-        margin-top: 9px;
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        overflow-y: auto;
-        /* border: 1px solid greenyellow; */
-      }
-      header article .game-2 .games-box::-webkit-scrollbar {
-        width: 5px;
-        border-radius: 20px;
-        background: rgba(184, 184, 184, .2);
-        visibility: hidden;
-      }
-      header article .game-2 .games-box:hover:-webkit-scrollbar {
-        visibility: visible;
-      }
-      header article .game-2 .games-box::-webkit-scrollbar-thumb {
-        border-radius: 20px;
-        background: rgba(184, 184, 184, .7);
-        visibility: hidden;
-      }
-      header article .game-2 .games-box:hover:-webkit-scrollbar-thumb {
-        visibility: visible;
-      }
-
-      header article .game-2 .games-box .card {
-        width: 100px;
-        height: 170px;
-        margin: 0 5px 11px 0;
-        /* border: 1px solid blue; */
-      }
-
-      header article .game-2 .games-box .card img {
-        width: 100%;
-        height: 80%;
-        border-radius: 10px;
-      }
-
-      header article .game-2 .games-box .card .content {
-        width: 100%;
-        height: 20%;
-        overflow: hidden;
-      }
-      header article .game-2 .games-box .card .content h6 {
-        width: 100%;
-        color: var(--color-2);
-        font-size: 9px;
-        font-weight: 500;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        transition: .5s linear;
-        overflow: hidden;
-      }
-      /* header article .game-2 .games-box .card .content {} */
-      /* header article .game-2 {} */
-
-    </style>
+    <title>URLSearchParams in JS</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   </head>
   <body>
-    <header>
-      <aside>
-        <h1>game <i class="fa fa-gamepad" aria-hidden="true"></i></h1>
-        <button>get game prime</button>
-        <ul>
-          <li class="active"><a href="#"><i class="fa fa-firefox" aria-hidden="true"></i>browse</a></li>
-          <li><a href="#"><i class="fa fa-television" aria-hidden="true"></i>channels</a></li>
-          <li><a href="#"><i class="fa fa-calendar" aria-hidden="true"></i>events</a></li>
-          <li><a href="#"><i class="fa fa-users" aria-hidden="true"></i>friends</a></li>
-          <li><a href="#"><i class="fa fa-gamepad" aria-hidden="true"></i>games</a></li>
-          <li><a href="#"><i class="fa fa-shopping-bag" aria-hidden="true"></i>store</a></li>
-        </ul>
-        <div class="subscriptions">
-          <h5>subscriptions</h5>
-          <div class="cards">
-            <div class="card">
-              <div class="img-box">
-                <img src="./assets/user_img/user1.jfif" alt="">
-              </div>
-              <div class="content">
-                <h6>jahid khan</h6>
-                <p class="upper">gta v</p>
-              </div>
-            </div>
-            <div class="card">
-              <div class="img-box">
-                <img src="./assets/user_img/4.png" alt="">
-              </div>
-              <div class="content">
-                <h6>jahid khan</h6>
-                <p>gta v</p>
-              </div>
-            </div>
-            <div class="card">
-              <div class="img-box">
-                <img src="./assets/user_img/5.png" alt="">
-              </div>
-              <div class="content">
-                <h6>jahid khan</h6>
-                <p>gta v</p>
-              </div>
-            </div>
-            <div class="card">
-              <div class="img-box">
-                <img src="./assets/user_img/6.png" alt="">
-              </div>
-              <div class="content">
-                <h6>jahid khan</h6>
-                <p>gta v</p>
-              </div>
-            </div>
-            <div class="card">
-              <div class="img-box">
-                <img src="./assets/user_img/u1.webp" alt="">
-              </div>
-              <div class="content">
-                <h6>jahid khan</h6>
-                <p>gta v</p>
-              </div>
-            </div>
-            <div class="card">
-              <div class="img-box">
-                <img src="./assets/user_img/u2.jpg" alt="">
-              </div>
-              <div class="content">
-                <h6>jahid khan</h6>
-                <p>gta v</p>
-              </div>
-            </div>
-            <div class="card">
-              <div class="img-box">
-                <img src="./assets/user_img/u3.webp" alt="">
-              </div>
-              <div class="content">
-                <h6>jahid khan</h6>
-                <p>gta v</p>
-              </div>
-            </div>
-            <div class="card">
-              <div class="img-box">
-                <img src="./assets/user_img/u4.jpg" alt="">
-              </div>
-              <div class="content">
-                <h6>jahid khan</h6>
-                <p>gta v</p>
-              </div>
-            </div>
-            <div class="card">
-              <div class="img-box">
-                <img src="./assets/user_img/user2.png" alt="">
-              </div>
-              <div class="content">
-                <h6>jahid khan</h6>
-                <p>gta v</p>
-              </div>
-            </div>
-            <div class="card">
-              <div class="img-box">
-                <img src="./assets/user_img/user3.png" alt="">
-              </div>
-              <div class="content">
-                <h6>jacklin ptasr2536</h6>
-                <p>fortline</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </aside>
-      <article>
-        <nav>
-          <button>stream</button>
-          <div class="search">
-            <input type="text" name="search" id="search" placeholder="Search...">
-            <i class="fa fa-search" aria-hidden="true"></i>
-          </div>
-          <div class="right-box">
-            <i class="fa fa-moon-o" id="dark" aria-hidden="true"></i>
-            <i class="fa fa-sun-o" id="light" aria-hidden="true"></i>
-            <i class="fa fa-wifi" aria-hidden="true" id="wifi"></i>
-            <i class="fa fa-gear" aria-hidden="true"></i>
-            <button id="active-battery">
-              <i class="fa fa-battery-half" id="battery-icon" aria-hidden="true"></i>
-              <span id="battery-level">84%</span>
-            </button>
-            <div class="user-data">
-              <h6>jahid khan</h6>
-              <h5>jk</h5>
-              <i class="fa fa-caret-down" aria-hidden="true"></i>
-              <div class="card">
-                <img src="./assets/user_img/user1.jfif" alt="">
-                <h6>jahid khan</h6>
-                <p class="upper">gta v</p>
-                <button>premium</button>
-                <img class="gta-img" src="./assets/img/GTA V Premium.webp" alt="">
-              </div>
-            </div>
-          </div>
-        </nav>
-        <div class="game-1">
-          <div class="btns">
-            <i class="fa fa-chevron-left" id="left-btn" aria-hidden="true"></i>
-            <i class="fa fa-chevron-right" id="right-btn" aria-hidden="true"></i>
-          </div>
-          <h3>recommend for you</h3>
-          <div class="game-box" id="game-box-1">
-
-            <div class="card">
-              <img src="./assets/img/GTA V Premium.webp" alt="">
-              <div class="content">
-                <div class="left">
-                  <h5>grand teft auto v</h5>
-                  <p>jahid khan</p>
-                </div>
-                <h6>354,452 views</h6>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/call-of-duty-mobile.jpg" alt="">
-              <div class="content">
-                <div class="left">
-                  <h5>grand teft auto v</h5>
-                  <p>jahid khan</p>
-                </div>
-                <h6>354,452 views</h6>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/frontline.jpg" alt="">
-              <div class="content">
-                <div class="left">
-                  <h5>grand teft auto v</h5>
-                  <p>jahid khan</p>
-                </div>
-                <h6>354,452 views</h6>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/need_for_speed.jpg" alt="">
-              <div class="content">
-                <div class="left">
-                  <h5>grand teft auto v</h5>
-                  <p>jahid khan</p>
-                </div>
-                <h6>354,452 views</h6>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/pubg.jpg" alt="">
-              <div class="content">
-                <div class="left">
-                  <h5>grand teft auto v</h5>
-                  <p>jahid khan</p>
-                </div>
-                <h6>354,452 views</h6>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/pubg1.jpg" alt="">
-              <div class="content">
-                <div class="left">
-                  <h5>grand teft auto v</h5>
-                  <p>jahid khan</p>
-                </div>
-                <h6>354,452 views</h6>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/pubg2.webp" alt="">
-              <div class="content">
-                <div class="left">
-                  <h5>grand teft auto v</h5>
-                  <p>jahid khan</p>
-                </div>
-                <h6>354,452 views</h6>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/sniper2.jpg" alt="">
-              <div class="content">
-                <div class="left">
-                  <h5>grand teft auto v</h5>
-                  <p>jahid khan</p>
-                </div>
-                <h6>354,452 views</h6>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/war_face.jpg" alt="">
-              <div class="content">
-                <div class="left">
-                  <h5>grand teft auto v</h5>
-                  <p>jahid khan</p>
-                </div>
-                <h6>354,452 views</h6>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="game-2">
-          <h3>most played</h3>
-          <div class="games-box">
-
-            <div class="card">
-              <img src="./assets/img/unchartes4.jpg" alt="">
-              <div class="content">
-                <h6>uncharted 4</h6>
-                <p>4512 streamers</p>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/battlefield.jpg" alt="">
-              <div class="content">
-                <h6>uncharted 4</h6>
-                <p>4512 streamers</p>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/brother_in_ arms.jpg" alt="">
-              <div class="content">
-                <h6>uncharted 4</h6>
-                <p>4512 streamers</p>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img//the last of us.jpg" alt="">
-              <div class="content">
-                <h6>uncharted 4</h6>
-                <p>4512 streamers</p>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/call_of_duty.jpg" alt="">
-              <div class="content">
-                <h6>uncharted 4</h6>
-                <p>4512 streamers</p>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/cyberpunk.jpg" alt="">
-              <div class="content">
-                <h6>uncharted 4</h6>
-                <p>4512 streamers</p>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/elden ring.jpg" alt="">
-              <div class="content">
-                <h6>uncharted 4</h6>
-                <p>4512 streamers</p>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/fan_cry_3.jpg" alt="">
-              <div class="content">
-                <h6>uncharted 4</h6>
-                <p>4512 streamers</p>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/triangle-strategy.jpg" alt="">
-              <div class="content">
-                <h6>uncharted 4</h6>
-                <p>4512 streamers</p>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/zelda.jpg" alt="">
-              <div class="content">
-                <h6>uncharted 4</h6>
-                <p>4512 streamers</p>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/halo.jpg" alt="">
-              <div class="content">
-                <h6>uncharted 4</h6>
-                <p>4512 streamers</p>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/hitman.jpg" alt="">
-              <div class="content">
-                <h6>uncharted 4</h6>
-                <p>4512 streamers</p>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/igi.jpg" alt="">
-              <div class="content">
-                <h6>uncharted 4</h6>
-                <p>4512 streamers</p>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/max payne.jpg" alt="">
-              <div class="content">
-                <h6>uncharted 4</h6>
-                <p>4512 streamers</p>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/medal-of-honor.jpg" alt="">
-              <div class="content">
-                <h6>uncharted 4</h6>
-                <p>4512 streamers</p>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/metal-gear-solid-5.jpg" alt="">
-              <div class="content">
-                <h6>uncharted 4</h6>
-                <p>4512 streamers</p>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/minecraft.jpg" alt="">
-              <div class="content">
-                <h6>uncharted 4</h6>
-                <p>4512 streamers</p>
-              </div>
-            </div>
-            <div class="card">
-              <img src="./assets/img/sanadreas.jfif" alt="">
-              <div class="content">
-                <h6>uncharted 4</h6>
-                <p>4512 streamers</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </article>
-    </header>
-    <!-- <div class="hero"></div> -->
-
-    <script>
-      const gameBox1 = document.getElementById("game-box-1");
-      const leftBtn = document.getElementById("left-btn");
-      const rightBtn = document.getElementById("right-btn");
-
-      leftBtn.addEventListener("click", () => {
-        gameBox1.scrollLeft -= 250;
-      })
-      rightBtn.addEventListener("click", () => {
-        gameBox1.scrollLeft += 250;
-      })
-
-      const darkBtn = document.getElementById("dark");
-      const lightBtn = document.getElementById("light");
-
-      lightBtn.style.display = "none";
-
-      darkBtn.addEventListener("click", () => {
-        document.documentElement.style.setProperty("--color-1", "rgba(184, 184, 184, 0.5)");
-        document.documentElement.style.setProperty("--color-2", "#000");
-        document.documentElement.style.setProperty("--color-3", "#fff");
-        document.documentElement.style.setProperty("--color-4", "rgba(0, 0, 0, 0.5)");
-        document.documentElement.style.setProperty("--color-5", "#663da6");
-        lightBtn.style.display = "unset";
-        darkBtn.style.display = "none";
-      })
-
-      lightBtn.addEventListener("click", () => {
-        document.documentElement.style.setProperty("--color-1", "#262b3f");
-        document.documentElement.style.setProperty("--color-2", "#fff");
-        document.documentElement.style.setProperty("--color-3", "#000");
-        document.documentElement.style.setProperty("--color-4", "rgba(255, 255, 255, 0.5)");
-        document.documentElement.style.setProperty("--color-5", "greenyellow");
-        lightBtn.style.display = "none";
-        darkBtn.style.display = "unset";
-      })
-
-      const activeBattery = document.getElementById("active-battery");
-      const batteryIcon = document.getElementById("battery-icon");
-      const batteryLevel = document.getElementById("battery-level");
-
-      const audio = new Audio("./assets/audio/Charging.mp3");
-      // audio.play();
-
-      const wifi = document.getElementById("wifi");
-
-wifiChange();
-
-function wifiChange() {
-  if (navigator.onLine) {
-    wifi.style.color = "var(--color-5)";
-    console.log(navigator.onLine);
-  } else {
-    wifi.style.color = "#fff";
-  }
-}
-
-setInterval(() => {
-  wifiChange();
-}, 1000);
-
-      // navigator.getBattery = () => {
-      //   console.log("not suported");
-      // }
-
-      navigator.getBattery()
-        .then(battery => {
-          changeBatteryLevel();
-          function changeBatteryLevel() {
-            batteryLevel.innerText = (battery.level * 100) + "%";
-          }
-
-          batteryIcon.classList.replace("fa-battery-half", "fa-battery-full");
-
-          battery.addEventListener("chargingchange", () => {
-            switch (battery.charging) {
-              case true:
-                batteryIcon.classList.remove("fa-battery-half");
-                batteryIcon.classList.add("fa-battery-full");
-                activeBattery.classList.add("active-battery");
-                batteryIcon.style.color = "#fff";
-                audio.play();
-                break;
-              case true:
-                batteryIcon.classList.add("fa-battery-half");
-                batteryIcon.classList.remove("fa-battery-full");
-                activeBattery.classList.remove("active-battery");
-                batteryIcon.style.color = "unset";
-                break;
-            }
-          })
-        })
-    </script>
-
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
@@ -1125,88 +47,152 @@ setInterval(() => {
     </script>
 
     <script>
-            // 01. Class Laptop
+        // 06. Password Validator
 
-            class Laptop {
-        constructor(info, quality) {
-          this.info = info;
-          this.isOn = false;
-          this.quality = quality;
-        }
+    function validatePassword(password) {
+      let isValid = true;
+      let numbers = 0;
+      let areOnlyLetters = true;
 
-        turnOn() {
-          this.isOn = true;
-          this.quality--;
-        }
-
-        turnOff() {
-          this.isOn = false;
-          this.quality--;
-        }
-
-        get price() {
-          return 800 - (this.info.age * 2) + (this.quality * 0.5);
-        }
-
-        showInfo() {
-          return JSON.stringify(this.info);
-        }
+      if (password.length < 6 || password.length > 10) {
+        isValid = false;
+        console.log("Password must be between 6 and 10 characters");
       }
 
-      // let info = {
-      //   producer: "Dell", 
-      //   age: 2, 
-      //   brand: "XPS"
-      // }
-      
-      // let laptop = new Laptop(info, 10);
-      // laptop.turnOn();
+        for (let index = 0; index < password.length; index++) {
+          const letter = password[index];
 
-      // console.log(laptop.showInfo());
+          // console.log(letter);
 
-      // laptop.turnOff();
+          const isNumber = checkIsNumber(letter);
 
-      // console.log(laptop.quality);
+          if (isNumber) {
+            numbers++;
+            // console.log(numbers);
+          } else {
+            checkOnlyLetters(letter);
+          }
+          
+        }
 
-      // laptop.turnOn();
+      if (numbers < 2) {
+        isValid = false;
+        // console.log("Password must have at least 2 digits");
+      }
 
-      // console.log(laptop.isOn);
+      if (isValid) {
+        console.log("Password is valid");
+      } else if (!areOnlyLetters) {
+        console.log("Password must consist only of letters and digits");
+      }
 
-      // console.log(laptop.price);
+      if (numbers < 2) {
+        // isValid = false;
+        console.log("Password must have at least 2 digits");
+      }
 
-      // let info = {
-      //   producer: "Lenovo", 
-      //   age: 1, 
-      //   brand: "Legion"
-      // }
+      function checkIsNumber(input) {
+            const num = Number(input);
+            const isNumber = Number.isInteger(num);
+            return isNumber;
+          }
 
-      // let laptop = new Laptop(info, 10);
+          function checkOnlyLetters(input) {
+            const letterLowerCase = input.toLowerCase();
+            if (letterLowerCase.charCodeAt(0) < 97 || letterLowerCase.charCodeAt(0) > 122) {
+              // console.log(letter.toLowerCase().charCodeAt(0));
+              isValid = false;
+              // index = password.length;
+              areOnlyLetters = false;
+              // console.log("Password must consist only of letters and digits");
+            }
+          }
 
-      // laptop.turnOn();
-      
-      // console.log(laptop.showInfo());
-      
-      // laptop.turnOff();
-      // laptop.turnOn();
-      // laptop.turnOff();
-
-      // console.log(laptop.isOn);
-    </script>
-    <script>
-        // 05. Leap Year
-
-  function isLeapYear(year) {
-    if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
-      console.log("yes");
-    } else {
-      console.log("no");
     }
+
+    // validatePassword('logIn');
+    // validatePassword('MyPass123');
+    // validatePassword('Pa$s$s');
+
+      // 03. Points Validation
+
+  function validatePoints(coordinates) {
+    let dist = 0;
+    // let isValid = true;
+
+    function calcDist(x1, y1, x2, y2) {
+      const a = x1 - x2;
+      const b = y1 - y2;
+      const dist = Math.sqrt(a * a + b * b);
+      // console.log(dist);
+      return dist;
+    }
+
+    // console.log(calcDist(100, 100, 400, 300));
+
+    function isValidDist(dist) {
+      let isValid = "invalid";
+
+      if (Number.isInteger(dist)) {
+        isValid = "valid";
+      }
+
+      return isValid;
+      
+    }
+
+    function checkPoints(x1, y1, x2, y2) {
+      let isValid = "invalid";
+      // console.log(x1, y1);
+      // console.log(x2, y2);
+      const dist = calcDist(x1, y1, x2, y2);
+      isValid = isValidDist(dist);
+      return isValid;
+    }
+
+    function printResult(coordinates) {
+      const x1 = coordinates[0];
+      const y1 = coordinates[1];
+      const x2 = coordinates[2];
+      const y2 = coordinates[3];
+      let isValid = checkPoints(x1, y1, x2, y2);
+      console.log(`{${x1}, ${y1}} to {${x2}, ${y2}} is ${isValid}`);
+    }
+
+    printResult([coordinates[0], coordinates[1], 0, 0]);
+    printResult([coordinates[2], coordinates[3], 0, 0]);
+    printResult(coordinates);
+
+    // console.log(checkPoints(coordinates[0], coordinates[1], 0, 0));
+    // console.log(checkPoints(coordinates[2], coordinates[3], 0, 0));
+    // console.log(checkPoints(coordinates[0], coordinates[1], coordinates[2], coordinates[3]));
+
+    // dist = calcDist(coordinates[0], coordinates[1], 0, 0);
+
+    // if (Number.isInteger(dist)) {
+    //   dist = calcDist(coordinates[2], coordinates[3], 0, 0);
+
+    //   if (Number.isInteger(dist)) {
+    //     dist = calcDist(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
+
+    //     if (!Number.isInteger(dist)) {
+    //       isValid = false;
+    //     }
+
+    //   } else {
+    //     isValid = false;
+    //   }
+
+    // } else {
+    //   isValid = false;
+    // }
+
+    // console.log(isValid);
+
   }
 
-  // isLeapYear(1984);
-  // isLeapYear(2003);
-  // isLeapYear(4);
-  // isLeapYear(200);
+  // validatePoints([3, 0, 0, 4]);
+  // validatePoints([2, 1, 1, 1]);
     </script>
   </body>
 </html>
