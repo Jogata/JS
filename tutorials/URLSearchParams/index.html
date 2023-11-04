@@ -3,11 +3,155 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URLSearchParams in JS</title>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <!-- <title>URLSearchParams in JS</title> -->
+    <title>eCommerce Website</title>
+    <link rel="shortcut icon" href="./images/logo/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      :root {
+        /* colors */
+        --spanish-gray: hsl(0, 0%, 60%);
+        --sonic-silver: hsl(0, 0%, 47%);
+        --eerie-black: hsl(0, 0%, 13%);
+        --salmon-pink: hsl(353, 100%, 78%);
+        --sandy-brown: hsl(29, 90%, 65%);
+        --bittersweet: hsl(0, 100%, 70%);
+        --ocean-green: hsl(152, 51%, 52%);
+        --davys-gray: hsl(0, 0%, 33%);
+        --cultured: hsl(0, 0%, 93%);
+        --white: hsl(0, 100%, 100%);
+        --onyx: hsl(0, 0%, 27%);
+        
+        /* typography */
+        --fs-1: 1.563rem;
+        --fs-2: 1.375rem;
+        --fs-3: 1.25rem;
+        --fs-4: 1.125rem;
+        --fs-5: 1rem;
+        --fs-6: 0.938rem;
+        --fs-7: 0.875rem;
+        --fs-8: 0.813rem;
+        --fs-9: 0.75rem;
+        --fs-10: 0.688rem;
+        --fs-11: 0.625rem;
+        
+        --weight-300: 300;
+        --weight-400: 400;
+        --weight-500: 500;
+        --weight-600: 600;
+        --weight-700: 700;
+        
+        /* border-radius */
+        --border-radius-md: 10px;
+        --border-radius-sm: 5px;
+        
+        /* transition */
+        --transition-timing: 0.2s ease;
+      }
+      
+      *, *::before, *::after {
+        margin: 0;
+        padding: 0;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+      }
+      
+      a {
+        text-decoration: none;
+      }
+      
+      li {
+        list-style: none;
+      }
+      
+      button {
+        background-color: transparent;
+        font-family: inherit;
+        border: none;
+        cursor: pointer;
+      }
+      
+      img, i, button, a {
+        display: block;
+      }
+      
+      span {
+        display: inline-block;
+      }
+      
+      input {
+        display: block;
+        width: 100%;
+        font-family: inherit;
+      }
+      
+      input::-webkit-input-placeholder {
+        font-family: inherit;
+      }
+      input::-moz-placeholder {
+        font-family: inherit;
+      }
+      input:-ms-input-placeholder {
+        font-family: inherit;
+      }
+      input::-ms-input-placeholder {
+        font-family: inherit;
+      }
+      input::placeholder {
+        font-family: inherit;
+      }
+      
+      html {
+        font-family: Georgia, serif;
+        -ms-scroll-chaining: none;
+        overscroll-behavior: contain;
+      }
+      
+      body {
+        background-color: var(--white);
+        scrollbar-width: 15px;
+        scrollbar-color: var(--white) hsl(0, 0%, 80%);
+      }
+
+      body::-webkit-scrollbar {
+        width: 15px;
+      }
+
+      body::-webkit-scrollbar-track {
+        background: var(--white);
+        border-left: 1px solid var(--cultured);
+      }
+      
+      body::-webkit-scrollbar-thumb {
+        background: hsl(0, 0%, 80%);
+        border: 3px solid var(--white);
+        -webkit-border-radius: 10px;
+                border-radius: 10px;
+      }
+
+      .newsletter-img img {
+        width: 400px;
+        height: 400px;
+      }
+    </style>
   </head>
   <body>
-    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+    <div class="overlay"></div>
+
+    <div class="modal">
+
+      <div class="modal-close-overlay"></div>
+      <div class="modal-content">
+        <button class="modal-close-btn">
+          <i class="fa fa-times"></i>
+        </button>
+        <div class="newsletter-img">
+          <img src="./images/newsletter.png" alt="">
+        </div>
+      </div>
+
+    </div>
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
@@ -44,155 +188,6 @@
       // Convert URLSearchParams Object to Query String
       console.log(uspFromString.toString());
       console.log(uspFromObject.toString());
-    </script>
-
-    <script>
-        // 06. Password Validator
-
-    function validatePassword(password) {
-      let isValid = true;
-      let numbers = 0;
-      let areOnlyLetters = true;
-
-      if (password.length < 6 || password.length > 10) {
-        isValid = false;
-        console.log("Password must be between 6 and 10 characters");
-      }
-
-        for (let index = 0; index < password.length; index++) {
-          const letter = password[index];
-
-          // console.log(letter);
-
-          const isNumber = checkIsNumber(letter);
-
-          if (isNumber) {
-            numbers++;
-            // console.log(numbers);
-          } else {
-            checkOnlyLetters(letter);
-          }
-          
-        }
-
-      if (numbers < 2) {
-        isValid = false;
-        // console.log("Password must have at least 2 digits");
-      }
-
-      if (isValid) {
-        console.log("Password is valid");
-      } else if (!areOnlyLetters) {
-        console.log("Password must consist only of letters and digits");
-      }
-
-      if (numbers < 2) {
-        // isValid = false;
-        console.log("Password must have at least 2 digits");
-      }
-
-      function checkIsNumber(input) {
-            const num = Number(input);
-            const isNumber = Number.isInteger(num);
-            return isNumber;
-          }
-
-          function checkOnlyLetters(input) {
-            const letterLowerCase = input.toLowerCase();
-            if (letterLowerCase.charCodeAt(0) < 97 || letterLowerCase.charCodeAt(0) > 122) {
-              // console.log(letter.toLowerCase().charCodeAt(0));
-              isValid = false;
-              // index = password.length;
-              areOnlyLetters = false;
-              // console.log("Password must consist only of letters and digits");
-            }
-          }
-
-    }
-
-    // validatePassword('logIn');
-    // validatePassword('MyPass123');
-    // validatePassword('Pa$s$s');
-
-      // 03. Points Validation
-
-  function validatePoints(coordinates) {
-    let dist = 0;
-    // let isValid = true;
-
-    function calcDist(x1, y1, x2, y2) {
-      const a = x1 - x2;
-      const b = y1 - y2;
-      const dist = Math.sqrt(a * a + b * b);
-      // console.log(dist);
-      return dist;
-    }
-
-    // console.log(calcDist(100, 100, 400, 300));
-
-    function isValidDist(dist) {
-      let isValid = "invalid";
-
-      if (Number.isInteger(dist)) {
-        isValid = "valid";
-      }
-
-      return isValid;
-      
-    }
-
-    function checkPoints(x1, y1, x2, y2) {
-      let isValid = "invalid";
-      // console.log(x1, y1);
-      // console.log(x2, y2);
-      const dist = calcDist(x1, y1, x2, y2);
-      isValid = isValidDist(dist);
-      return isValid;
-    }
-
-    function printResult(coordinates) {
-      const x1 = coordinates[0];
-      const y1 = coordinates[1];
-      const x2 = coordinates[2];
-      const y2 = coordinates[3];
-      let isValid = checkPoints(x1, y1, x2, y2);
-      console.log(`{${x1}, ${y1}} to {${x2}, ${y2}} is ${isValid}`);
-    }
-
-    printResult([coordinates[0], coordinates[1], 0, 0]);
-    printResult([coordinates[2], coordinates[3], 0, 0]);
-    printResult(coordinates);
-
-    // console.log(checkPoints(coordinates[0], coordinates[1], 0, 0));
-    // console.log(checkPoints(coordinates[2], coordinates[3], 0, 0));
-    // console.log(checkPoints(coordinates[0], coordinates[1], coordinates[2], coordinates[3]));
-
-    // dist = calcDist(coordinates[0], coordinates[1], 0, 0);
-
-    // if (Number.isInteger(dist)) {
-    //   dist = calcDist(coordinates[2], coordinates[3], 0, 0);
-
-    //   if (Number.isInteger(dist)) {
-    //     dist = calcDist(coordinates[0], coordinates[1], coordinates[2], coordinates[3]);
-
-    //     if (!Number.isInteger(dist)) {
-    //       isValid = false;
-    //     }
-
-    //   } else {
-    //     isValid = false;
-    //   }
-
-    // } else {
-    //   isValid = false;
-    // }
-
-    // console.log(isValid);
-
-  }
-
-  // validatePoints([3, 0, 0, 4]);
-  // validatePoints([2, 1, 1, 1]);
     </script>
   </body>
 </html>
