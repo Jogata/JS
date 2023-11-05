@@ -640,7 +640,7 @@
         /* bottom: 0; */
         /* width: 55%; */
         width: 100%;
-        max-width: 900px;
+        max-width: 56.25rem;
         /* height: 30%; */
         margin-right: auto;
         padding: 6.25rem 0;
@@ -669,30 +669,44 @@
         /* width: 100%; */
         /* height: 100%; */
         --angle: 0deg;
-        width: 250px;
-        height: 170px;
+        width: 15.6rem;
+        height: 10.6rem;
         margin: auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        /* display: flex; */
+        /* align-items: center; */
+        /* justify-content: center; */
         transform-style: preserve-3d;
         /* perspective: 1000px; */
         /* transform: perspective(1000px) rotateY(var(--angle)); */
         /* transform: perspective(1000px) rotateY(0deg); */
-        transform: perspective(1000px);
+        transform: perspective(62.5rem);
         /* align-items: center; */
         transition: all 600ms ease-in-out;
         transition-delay: -400ms;
       }
 
       .carousel-item {
-        flex: 1;
+        /* flex: 1; */
         /* width: 100%; */
-        width: 250px;
-        height: 170px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        /* width: 250px; */
+        /* height: 170px; */
         /* height: 100%; */
         /* object-fit: cover; */
         /* transition: filter 300ms ease-in-out; */
+        width: 100%;
+        height: 100%;
+        transform-origin: center;
+        transform-style: preserve-3d;
+        /* transform: rotateY(calc(var(--i) * (72deg + var(--angle)))) translateZ(250px); */
+        /* transform: rotateY(calc((var(--i) * 72deg))) translateZ(250px); */
+        transform: rotateY(calc((var(--i) * 72deg) + var(--angle))) translateZ(15.6rem);
+        /* transform: translateZ(250px); */
+        transition: transform 400ms ease-in-out;
+        /* opacity: 0.8; */
+        /* transition-delay: -400ms; */
         cursor: pointer;
         z-index: 1;
       }
@@ -703,7 +717,7 @@
 
       .carousel-item h4 {
         /* color: var(--primary); */
-        font-size: 1.3em;
+        font-size: 1.3rem;
         font-weight: 300;
         text-align: center;
         text-transform: uppercase;
@@ -765,18 +779,18 @@
         /* transform: perspective(1000px); */
       }
       .carousel-item {
-        position: absolute;
+        /* position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
         transform-origin: center;
-        transform-style: preserve-3d;
+        transform-style: preserve-3d; */
         /* transform: rotateY(calc(var(--i) * (72deg + var(--angle)))) translateZ(250px); */
         /* transform: rotateY(calc((var(--i) * 72deg))) translateZ(250px); */
-        transform: rotateY(calc((var(--i) * 72deg) + var(--angle))) translateZ(250px);
+        /* transform: rotateY(calc((var(--i) * 72deg) + var(--angle))) translateZ(250px); */
         /* transform: translateZ(250px); */
-        transition: transform 400ms ease-in-out;
+        /* transition: transform 400ms ease-in-out; */
         /* opacity: 0.8; */
         /* transition-delay: -400ms; */
       }
@@ -984,15 +998,42 @@
 
 
       .preview-container {
-        position: relative;
+        /* position: relative; */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        padding: 2rem;
+        /* display: flex; */
+        display: none;
+        background-color: #000;
         /* width: 700px; */
         /* height: 396px; */
-        height: 100vh;
         /* border: 3px solid #fff; */
         /* border-radius: 30px; */
-        overflow: hidden;
+        /* overflow: hidden; */
+        overflow: auto;
+        z-index: 4;
       }
       .preview-container:fullscreen {
+        border: 3px solid transparent;
+        border-radius: 0px;
+      }
+
+      .preview-box {
+        position: relative;
+        width: 100%;
+        min-width: 300px;
+        max-width: 1600px;
+        min-height: 300px;
+        margin: auto;
+        display: flex;
+        border: 3px solid #fff;
+        border-radius: 30px;
+        overflow: hidden;
+      }
+      .preview-box:fullscreen {
         border: 3px solid transparent;
         border-radius: 0px;
       }
@@ -1128,19 +1169,19 @@
         display: none;
       }
 
-      .preview-container {
+      /* .preview-container {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         padding: 2rem;
-        /* display: flex; */
+        display: flex;
         display: none;
         background-color: #000;
         overflow: auto;
         z-index: 4;
-      }
-      .preview-box {
+      } */
+      /* .preview-box {
         position: relative;
         width: 100%;
         min-width: 300px;
@@ -1155,7 +1196,7 @@
       .preview-box:fullscreen {
         border: 3px solid transparent;
         border-radius: 0px;
-      }
+      } */
 
       .preview-box:hover #volume-control {
         /* top: 0; */
@@ -1213,15 +1254,15 @@
       /* .p-c { */
         /* position: relative; */
       /* } */
-      .banner {
+      /* .banner { */
         /* border: 1px solid red; */
-      }
-      .bg-v {
+      /* } */
+      /* .bg-v { */
         /* border: 1px solid blueviolet; */
-      }
-      .bg-v video.active {
+      /* } */
+      /* .bg-v video.active { */
         /* display: none; */
-      }
+      /* } */
 
       @media screen and (max-width: 112.5rem) {
         .model-trailer-section {
@@ -1295,9 +1336,9 @@
           margin: 30px 0 20px;
           text-align: center;
         }
-        .logo {
+        /* .logo { */
           /* margin-top: 10px; */
-        }
+        /* } */
         nav {
           top: 0;
           right: 0;
@@ -1339,27 +1380,27 @@
           left: 50%;
           font-size: 8vw;
         }
-        .banner .content {
+        /* .banner .content { */
           /* position: relative; */
           /* padding: 50px 0 100px; */
-        }
-        .banner .content h1 {
+        /* } */
+        /* .banner .content h1 { */
           /* font-size: 5em; */
-        }
-        .banner .content .model {
+        /* } */
+        /* .banner .content .model { */
           /* font-size: 2em; */
-        }
-        .banner .content a {
+        /* } */
+        /* .banner .content a { */
           /* width: 150px; */
           /* padding: 10px 15px; */
-        }
+        /* } */
         /* .banner .screen { */
           /* display: none; */
         /* } */
-        .banner .gallery {
+        /* .banner .gallery { */
           /* left: 0; */
           /* width: 100%; */
-        }
+        /* } */
         .sci {
           /* right: 20px; */
           flex-direction: row;
@@ -1834,9 +1875,9 @@
         </div>
         <video src="./assets/videos/trailer-2.mp4" id="preview-video"></video>
         <div id="preview-menu">
-          <i id="pause-btn2" class="fa fa-pause" aria-hidden="true"></i>
+          <i id="pause-btn" class="fa fa-pause" aria-hidden="true"></i>
           <i id="backward-btn" class="fa fa-backward" aria-hidden="true"></i>
-          <i id="play-btn2" class="fa fa-play" aria-hidden="true"></i>
+          <i id="play-btn" class="fa fa-play" aria-hidden="true"></i>
           <i id="forward-btn" class="fa fa-forward" aria-hidden="true"></i>
           <i id="full" class="fa fa-arrows-alt" aria-hidden="true"></i>
           <i id="exit" class="fa fa-times hidden" aria-hidden="true"></i>
@@ -1864,16 +1905,16 @@
         previewVideo.currentTime = 0;
       })
 
-      const playBtn2 = document.querySelector("#play-btn2");
-      playBtn2.addEventListener("click", play);
+      const playBtn = document.querySelector("#play-btn");
+      playBtn.addEventListener("click", play);
 
       function play() {
         previewVideo.play();
         // console.log("play");
       }
 
-      const pauseBtn2 = document.querySelector("#pause-btn2");
-      pauseBtn2.addEventListener("click", pause);
+      const pauseBtn = document.querySelector("#pause-btn");
+      pauseBtn.addEventListener("click", pause);
 
       function pause() {
         previewVideo.pause();
@@ -2018,13 +2059,79 @@
       })
     </script>
 
-    <button id="test">debounce</button>
+    <!-- <button id="test">debounce</button> -->
 
     <script>
-      const initApp = () => {
-        const btn = document.getElementById("test");
-        // btn.addEventListener("click", debounce(log, 2000));
+      // 08. Travel Time✶
+
+      function sortTravelInfo(params) {
+        const destinations = {};
+
+        for (const input of params) {
+          const data = input.split(" > ");
+          // console.log(data);
+          const country = data[0];
+          const city = data[1];
+          const cost = Number(data[2]);
+          // console.log(country, city, cost);
+          destinations[country] = destinations[country] || {};
+          destinations[country][city] = destinations[country][city] || cost;
+          destinations[country][city] = Math.min(destinations[country][city], cost);
+        }
+
+        // console.log(destinations);
+        for (const key in destinations) {
+          // console.log(destinations[key]);
+          let entries = Object.entries(destinations[key]);
+          // console.log(entries);
+          entries.sort((a, b) => a[1] - b[1]);
+          // console.log(entries);
+          entries = entries.map(x => x.join(" -> "));
+          // console.log(entries);
+          destinations[key] = entries;
+        }
+        // console.log(destinations);
+
+        const contries = Object.keys(destinations);
+        // console.log(contries);
+        const sorted = contries.sort((a, b) => a.localeCompare(b));
+        // console.log(sorted);
+        for (const country of sorted) {
+          // console.log(country);
+          console.log(`${country} -> ${destinations[country].join(" ")}`);
+        }
+
       }
+
+      // sortTravelInfo([
+        // "Bulgaria > Sofia > 500",
+        // "Bulgaria > Sopot > 800",
+        // "Bulgaria > Sopot > 100",
+        // "France > Paris > 2000",
+        // "Albania > Tirana > 1000",
+        // "Bulgaria > Sofia > 200", 
+      // ]);
+      // sortTravelInfo([
+      //   'Bulgaria > Sofia > 25000',
+      //   'Bulgaria > Sofia > 25000',
+      //   'Kalimdor > Orgrimar > 25000',
+      //   'Albania > Tirana > 25000',
+      //   'Bulgaria > Varna > 25010',
+      //   'Bulgaria > Lukovit > 10'
+      // ]);
+      sortTravelInfo([
+        'Bulgaria > Sofia > 25000',
+        'aaa > Sofia > 1',
+        'aa > Orgrimar > 0',
+        'Albania > Tirana > 25000',
+        'zz > Aarna > 25010',
+        'Bulgaria > Lukovit > 10'
+      ]);
+
+      // const initApp = () => {
+        // <!-- const btn = document.getElementById("test"); -->
+        // btn.addEventListener("click", debounce(log, 2000));
+      // <!-- } -->
 
       // const log = (x, y) => {
         // console.log(x, y);
