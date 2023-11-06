@@ -227,7 +227,6 @@
           opacity: 1;
         }
       }
-      
       @keyframes popup {
         0% {
           visibility: hidden;
@@ -240,10 +239,135 @@
           opacity: 1;
         }        
       }
+
+      .modal.closed {
+        display: none;
+      }
+
+      .modal-close-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+      }
       
+      .modal-content {
+        position: relative;
+        max-width: 350px;
+        margin: 20px;
+        background: var(--white);
+        -webkit-border-radius: var(--border-radius-md);
+                border-radius: var(--border-radius-md);
+                -webkit-animation: scaleUp 0.5s ease-in-out 5s forwards;
+                        animation: scaleUp 0.5s ease-in-out 5s forwards;
+        overflow: hidden;
+        z-index: 2;
+      }
+
+      @-webkit-keyframes scaleUp {
+        0% {
+          -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+        }
+        100% {
+          -webkit-transform: scale(1);
+          transform: scale(1);
+        }
+      }
+      @keyframes scaleUp {
+        0% {
+          -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+        }
+        100% {
+          -webkit-transform: scale(1);
+          transform: scale(1);
+        }
+      }
+
+      .modal-close-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        padding: 5px 9px 7px;
+        color: var(--white);
+        font-size: 16px;
+        -webkit-border-radius: var(--border-radius-sm);
+                border-radius: var(--border-radius-sm);
+        background-color: var(--salmon-pink);
+      }
+      .modal-close-btn:hover {
+        opacity: 0.9;
+      }
+
+      .newsletter-img {
+        display: none;
+      }
       .newsletter-img img {
         width: 400px;
         height: 400px;
+      }
+
+      .newsletter {
+        padding: 50px 30px;
+        text-align: center;
+      }
+      
+      .newsletter-header {
+        margin-bottom: 20px;
+      }
+
+      .newsletter-title {
+        margin-bottom: 10px;
+        color: var(--onyx);
+        font-size: var(--fs-2);
+        font-weight: var(--weight-600);
+      }
+
+      .newsletter-desc {
+        color: var(--sonic-silver);
+        font-size: var(--fs-7);
+        line-height: 1.6;
+      }
+      .newsletter-desc span {
+        font-weight: bold;
+      }
+
+      .email-field {
+        margin-bottom: 16px;
+        padding: 8px 16px;
+        font-size: var(--fs-7);
+        border: 1px solid var(--cultured);
+        -webkit-border-radius: var(--border-radius-sm);
+                border-radius: var(--border-radius-sm);
+      }
+
+      .btn-newsletter {
+        margin: auto;
+        padding: 10px 15px;
+        color: var(--white);
+        font-size: var(--fs-7);
+        font-weight: var(--weight-600);
+        text-transform: uppercase;
+        -webkit-border-radius: var(--border-radius-sm);
+                border-radius: var(--border-radius-sm);
+        background-color: var(--eerie-black);
+        -webkit-transition: var(--transition-timing);
+            -o-transition: var(--transition-timing);
+            transition: var(--transition-timing);
+      }
+      .btn-newsletter:hover {
+        background-color: var(--salmon-pink);
+      }
+
+
+
+
+      /* delete */
+      .modal-content {
+        background-color: red;
       }
     </style>
   </head>
@@ -265,14 +389,28 @@
             <div class="newsletter-header">
               <h3 class="newsletter-title">Subscribe Newsletter.</h3>
               <p class="newsletter-desc">
-                Subscribe the <b>Anon</b> to get latest products and discount update.
+                Subscribe the <span>Anon</span> to get latest products and discount update.
               </p>
             </div>
-            <input type="email" name="email" class="email-field" placeholder="Email Address">
+            <input type="email" name="email" class="email-field" placeholder="Email Address" required>
             <button type="submit" class="btn-newsletter">Subscribe</button>
           </form>
         </div>
       </div>
+      <script>
+        'use strict';
+
+        const modal = document.querySelector('[data-modal]');
+        const modalCloseBtn = document.querySelector('[data-modal-close]');
+        const modalCloseOverlay = document.querySelector('[data-modal-overlay]');
+        
+        modalCloseOverlay.addEventListener('click', modalCloseFunc);
+        modalCloseBtn.addEventListener('click', modalCloseFunc);
+
+        function modalCloseFunc() {
+          modal.classList.add('closed');
+        }
+      </script>
 
     </div>
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
