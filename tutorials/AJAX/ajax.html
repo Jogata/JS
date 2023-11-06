@@ -283,7 +283,7 @@
             if (movie.name == movieName) {
               movie.director = director;
             }
-            
+
           }
         } else {
           const data = input.split(" onDate ");
@@ -390,6 +390,135 @@ for (const arr of result) {
 //   "[7.339, 80.0990, 7.140000, 7.18]",
 //   "[7.339, 7.180, 7.14, 80.099]"]
 // );
+
+// 03. School Register
+
+function createSchoolRegister(params) {
+const grades = [];
+
+for (const input of params) {
+const data = input.split(", ");
+// console.log(data);
+
+const nameData = data[0].split(": ");
+const name = nameData[1];
+// console.log(name);
+const gradeData = data[1].split(": ");
+const grade = Number(gradeData[1]);
+// console.log(grade);
+const scoreData = data[2].split(": ");
+const score = Number(scoreData[1]);
+// console.log(score);
+
+if (score >= 3) {
+  const student = {
+  name, 
+  grade, 
+  score
+}
+
+grades[grade] = grades[grade] || [];
+
+grades[grade].push(student);
+}
+
+}
+
+// console.log(grades);
+
+for (let index = 0; index < grades.length; index++) {
+// console.log(grades[index]);
+if (grades[index]) {
+  // const filtered = grades[index].filter(x => x.score >= 3);
+  // console.log(filtered);
+  // if (filtered.length > 0) {
+    const sum = grades[index].reduce((acc, x) => {
+    return acc + x.score;
+  }, 0)
+
+  // console.log(sum);
+
+  const average = sum / grades[index].length;
+  // console.log(average);
+  const students = [];
+
+  for (const student of grades[index]) {
+    students.push(student.name);
+  }
+  // console.log(students);
+
+  console.log(`${index+1} Grade`);
+  console.log(`List of students: ${students.join(", ")}`);
+  console.log(`Average annual score from last year: ${average.toFixed(2)}`);
+  console.log();
+  }
+// }
+}
+
+}
+
+// createSchoolRegister([
+//   "Student name: Mark, Grade: 8, Graduated with an average score: 4.75",
+//   "Student name: Ethan, Grade: 9, Graduated with an average score: 5.66",
+//   "Student name: George, Grade: 8, Graduated with an average score: 2.83",
+//   "Student name: Steven, Grade: 10, Graduated with an average score: 4.20",
+//   "Student name: Joey, Grade: 9, Graduated with an average score: 4.90",  
+//   "Student name: Angus, Grade: 11, Graduated with an average score: 2.90", 
+//   "Student name: Bob, Grade: 11, Graduated with an average score: 5.15", 
+//   "Student name: Daryl, Grade: 8, Graduated with an average score: 5.95", 
+//   "Student name: Bill, Grade: 9, Graduated with an average score: 6.00", 
+//   "Student name: Philip, Grade: 10, Graduated with an average score: 5.05", 
+//   "Student name: Peter, Grade: 11, Graduated with an average score: 4.88", 
+//   "Student name: Gavin, Grade: 10, Graduated with an average score: 4.00"
+// ]);
+// createSchoolRegister([
+//   'Student name: George, Grade: 5, Graduated with an average score: 2.75', 
+//   'Student name: Alex, Grade: 9, Graduated with an average score: 3.66',
+//   'Student name: Peter, Grade: 8, Graduated with an average score: 2.83',
+//   'Student name: Boby, Grade: 5, Graduated with an average score: 4.20',
+//   'Student name: John, Grade: 9, Graduated with an average score: 2.90',
+//   'Student name: Steven, Grade: 2, Graduated with an average score: 4.90',
+//   'Student name: Darsy, Grade: 1, Graduated with an average score: 5.15'
+// ]);
+
+    // 5. Simple Calculator
+
+    function setCalc(n1, n2, operation) {
+      const operations = {
+        multiply: multiply, 
+        divide: divide, 
+        add: add, 
+        subtract: subtract
+      }
+
+      function multiply(n1, n2) {
+        return n1 * n2;
+      }
+
+      function divide(n1, n2) {
+        return n1 / n2;
+      }
+
+      function add(n1, n2) {
+        return n1 + n2;
+      }
+
+      function subtract(n1, n2) {
+        return n1 - n2;
+      }
+
+      let result = 0;
+
+      result = operations[operation](n1, n2);
+
+      console.log(result);
+
+    }
+
+    // setCalc(5, 5, 'multiply');
+    // setCalc(40, 8, 'divide');
+    // setCalc(12, 19, 'add');
+    // setCalc(50, 13, 'subtract');
 </script>
   </body>
 </html>
