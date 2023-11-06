@@ -87,12 +87,22 @@
           // console.log(data);
 
           if (data.length == 3) {
-            const name = data[0];
-            const technique = data[1];
-            const skill = Number(data[2]);
+            let name = data[0];
+            let technique = data[1];
+            let skill = Number(data[2]);
             // console.log(name);
             // console.log(technique);
             // console.log(skill);
+
+            // if (!skill) {
+            //   skill = 0;
+            // }
+            // if (!technique) {
+            //   technique = "random";
+            // }
+            // if (!name) {
+            //   name = "random";
+            // }
             
             const gladiatorData = {
               // name, 
@@ -142,26 +152,32 @@
                       } else if (glad1TotalSkills < glad2TotalSkills) {
                         delete gladiators[glad1];
                       }
-                    } else {
+                    } 
+                    // else {
                       // console.log(`${glad1} and ${glad2} don't have a common technique for now.`);
-                    }
+                    // }
                   }
                 }
-              } else {
+              } 
+              // else {
                 // console.log(`${glad2} doesnt exist`);
-              }
-            } else {
+              // }
+            } 
+            // else {
               // console.log(`${glad1} doesnt exist`);
-            }
+            // }
           }
           
           index++;
           input = params[index];
 
-          // if (index > 50) {
-          //   console.log("infinity");
-          //   break;
-          // }
+          if (index >= 14) {
+            // console.log("infinity");
+            // console.log(index);
+            // break;
+            input = "Ave Cesar";
+            // console.log(input);
+          }
         }
 
         const remainingGladiators = [];
@@ -187,7 +203,7 @@
         // console.log(gladiators);
         // console.log(remainingGladiators);
 
-        const sorted = remainingGladiators.sort((a, b) => b.totalSkills - a.totalSkills);
+        const sorted = remainingGladiators.sort((a, b) => b.totalSkills - a.totalSkills || a.name.localeCompare(b.name));
 
         // console.log(sorted);
 
@@ -202,11 +218,31 @@
 
       arenaFights(
         [
-          'Peter -> BattleCry -> 400', 
-          'Alex -> PowerPunch -> 300',
-          'Stefan -> Duck -> 200',
-          'Stefan -> Tiger -> 250', 
-          // 'Stefan -> Tiger -> 300', 
+          '"" -> "" -> 550',
+          'Alex -> PowerPunch -> 450',
+          'Stefan -> Tiger -> 550', 
+          'Peter -> BattleCry -> 450', 
+          'Stefan -> Tiger -> 300', 
+          'Stefan -> Tiger -> 300', 
+          'Stefan -> Tiger -> 300', 
+          'Stefan -> Tiger -> 300', 
+          'Stefan -> Tiger -> 300', 
+          'Stefan -> Tiger -> 300', 
+          'Stefan -> Tiger -> 300', 
+          'Stefan -> Tiger -> 300', 
+          'Stefan -> Tiger -> 300', 
+          'Stefan -> Tiger -> 300', 
+          'Stefan -> Tiger -> 300', 
+          'Stefan -> Tiger -> 300', 
+          'Stefan -> Tiger -> 300', 
+          'Stefan -> Tiger -> 300', 
+          'Stefan -> Tiger -> 300', 
+          'Stefan -> Tiger -> 300', 
+          'Stefan -> Tiger -> 300', 
+          'Stefan -> Tiger -> 300', 
+          'Stefan -> Tiger -> 300', 
+          'Stefan -> Tiger -> 300', 
+          'Stefan -> Tiger -> 600', 
           'Ave Cesar'
         ]
       )
@@ -227,5 +263,133 @@
 
       // 10. Legendary Farming✶
     </script>
+    <script>
+      // 04. Movies
+
+      function printMoviesInfo(params) {
+      const movies = [];
+
+      for (const input of params) {
+        const data = input.split(" directedBy ");
+
+        if (data.length > 1) {
+          // console.log("directedBy");
+          const movieName = data[0];
+          const director = data[1];
+
+          for (let index = 0; index < movies.length; index++) {
+            const movie = movies[index];
+
+            if (movie.name == movieName) {
+              movie.director = director;
+            }
+            
+          }
+        } else {
+          const data = input.split(" onDate ");
+
+          if (data.length > 1) {
+            // console.log("onDate");
+            const movieName = data[0];
+            const movieDate = data[1];
+
+            for (let index = 0; index < movies.length; index++) {
+            const movie = movies[index];
+
+              if (movie.name == movieName) {
+                movie.date = movieDate;
+              }
+            }
+          } else {
+            const data = input.split("addMovie ")
+            // console.log(data);
+            const movieName = data[1];
+
+            const movie = {
+              name: movieName
+            }
+
+            movies.push(movie);
+
+          }
+
+        }
+      }
+
+      for (const movie of movies) {
+        if (movie.director && movie.date) {
+          console.log(JSON.stringify(movie));
+        }
+      }
+
+    }
+
+    // printMoviesInfo(['addMovie Fast and Furious', 'addMovie Godfather', 'Inception directedBy Christopher Nolan', 'Godfather directedBy Francis Ford Coppola', 'Godfather onDate 29.07.2018', 'Fast and Furious onDate 30.07.2018', 'Batman onDate 01.08.2018', 'Fast and Furious directedBy Rob Cohen']);
+    // printMoviesInfo(['addMovie The Avengers', 'addMovie Superman', 'The Avengers directedBy Anthony Russo', 'The Avengers onDate 30.07.2010', 'Captain America onDate 30.07.2010', 'Captain America directedBy Joe Russo']);
+
+    // 05. Sequences
+
+function printUniqueSequences(params) {
+let result = [];
+
+for (const input of params) {
+const arr = JSON.parse(input);
+// console.log(arr);
+arr.sort((a, b) => b - a);
+const str = arr.join(" ");
+result.push(str);
+}
+
+// console.log(result);
+
+for (let outher = 0; outher < result.length; outher++) {
+const matches = [];
+
+for (let inner = outher+1; inner < result.length; inner++) {
+  // console.log(outher, inner);
+  if (result[outher] == result[inner]) {
+    matches.push(inner - matches.length);
+    // console.log(outher, inner);
+    // console.log(matches);
+  }
+}
+
+// if (matches.length > 1) {
+  // matches.unshift(outher);
+  // console.log(matches);
+// }
+
+for (let index = 0; index < matches.length; index++) {
+  result.splice(matches[index], 1);
+  // console.log(result);
+}
+}
+
+result = result.map(string => string.split(" "));
+result.sort((x, y) => x.length - y.length);
+// console.log(result);
+
+for (const arr of result) {
+  console.log(`[${arr.join(", ")}]`);
+}
+
+}
+
+// printUniqueSequences(
+// ["[-3, -2, -1, 0, 1, 2, 3, 4]",
+// "[10, 1, -17, 0, 2, 13]",
+// "[4, -3, 3, -2, 2, -1, 1, 0]",
+// "[3, 3]",
+// "[3, 3]",
+// "[2, 2]",
+// "[3, 3]",
+// "[4, -3, 3, -2, 2, -1, 1, 0]"]
+// );
+// printUniqueSequences(
+//   ["[7.14, 7.180, 7.339, 80.099]",
+//   "[7.339, 80.0990, 7.140000, 7.18]",
+//   "[7.339, 7.180, 7.14, 80.099]"]
+// );
+</script>
   </body>
 </html>
