@@ -362,6 +362,108 @@
         background-color: var(--salmon-pink);
       }
 
+      .notification-toast {
+        position: fixed;
+        bottom: 80px;
+        left: 20px;
+        right: 20px;
+        max-width: 300px;
+        padding: 15px;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: start;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+        gap: 15px;
+        -webkit-border-radius: var(--border-radius-md);
+        border-radius: var(--border-radius-md);
+        background-color: var(--white);
+        -webkit-transform: translateX(-webkit-calc(-100% - 40px));
+        -ms-transform: translateX(calc(-100% - 40px));
+        transform: translateX(calc(-100% - 40px));
+        -webkit-box-shadow: 0 5px 20px hsla(0, 0%, 0%, 0.15);
+        box-shadow: 0 5px 20px hsla(0, 0%, 0%, 0.15);
+        -webkit-animation: slideInOut 10s ease-in-out infinite;
+        animation: slideInOut 10s ease-in-out infinite;
+        -webkit-transition: 0.5s ease-in-out;
+        -o-transition: 0.5s ease-in-out;
+        transition: 0.5s ease-in-out;
+        z-index: 5;
+      }
+      
+      @-webkit-keyframes slideInOut {
+        0%,
+        45%,
+        100% {
+          -webkit-transform: translateX(-webkit-calc(-100% - 40px));
+          transform: translateX(calc(-100% - 40px));
+          visibility: hidden;
+          opacity: 0;
+        }
+        50%,
+        95% {
+          -webkit-transform: translateX(0);
+          transform: translateX(0);
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+      @keyframes slideInOut {
+        0%,
+        45%,
+        100% {
+          -webkit-transform: translateX(-webkit-calc(-100% - 40px));
+          transform: translateX(calc(-100% - 40px));
+          visibility: hidden;
+          opacity: 0;
+        }
+        50%,
+        95% {
+          -webkit-transform: translateX(0);
+          transform: translateX(0);
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+      
+      .notification-toast.closed {
+        display: none;
+      }
+
+      .toast-close-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: var(--sonic-silver);
+      }
+      
+      .toast-banner {
+        width: 70px;
+        height: 70px;
+        flex-shrink: 0;
+        border: 1px solid var(--cultured);
+        -webkit-border-radius: var(--border-radius-sm);
+        border-radius: var(--border-radius-sm);
+      }
+      
+      .toast-banner img {
+        width: 100%;
+        height: 100%;
+        -o-object-fit: contain;
+        object-fit: contain;
+        -o-object-position: center;
+        object-position: center;
+      }
+      
+      .toast-detail {
+        width: -webkit-calc(100% - 85px);
+        width: calc(100% - 85px);
+        padding-right: 10px;
+      }
+
       /* delete */
       .modal-content {
         background-color: red;
@@ -410,9 +512,9 @@
       </script>
     </div>
 
-    <div class="notification-toast">
+    <div class="notification-toast" data-toast>
 
-      <button class="toast-close-btn">
+      <button class="toast-close-btn" data-toast-close>
         <i class="fa fa-times"></i>
       </button>
   
@@ -437,6 +539,14 @@
       </div>
   
     </div>
+    <script>
+      const notificationToast = document.querySelector('[data-toast]');
+      const toastCloseBtn = document.querySelector('[data-toast-close]');
+      
+      toastCloseBtn.addEventListener('click', function () {
+        notificationToast.classList.add('closed');
+      });
+    </script>
 
     <header>
 
@@ -474,7 +584,7 @@
   
           <div class="header-alert-news">
             <p>
-              <b>Free Shipping</b>
+              <span>Free Shipping</span>
               This Week Order Over - $55
             </p>
           </div>
@@ -515,7 +625,7 @@
             <input type="search" name="search" class="search-field" placeholder="Enter your product name...">
   
             <button class="search-btn">
-              <i></i>
+              <i class="fa fa-search"></i>
             </button>
   
           </div>
@@ -523,16 +633,16 @@
           <div class="header-user-actions">
   
             <button class="action-btn">
-              <i></i>
+              <i class="fa fa-user-o"></i>
             </button>
   
             <button class="action-btn">
-              <i></i>
+              <i class="fa fa-heart-o"></i>
               <span class="count">0</span>
             </button>
   
             <button class="action-btn">
-              <i></i>
+              <i class="fa fa-shopping-bag"></i>
               <span class="count">0</span>
             </button>
             
@@ -736,30 +846,30 @@
                       </li>
                     </ul>
                   </li>
-          
-          <li class="menu-category">
-            <a href="#" class="menu-title">Jewelry</a>
-          
-            <ul class="dropdown-list">
-          
-              <li class="dropdown-item">
-                <a href="#">Earrings</a>
-              </li>
-          
-              <li class="dropdown-item">
-                <a href="#">Couple Rings</a>
-              </li>
-          
-              <li class="dropdown-item">
-                <a href="#">Necklace</a>
-              </li>
-          
-              <li class="dropdown-item">
-                <a href="#">Bracelets</a>
-              </li>
-          
-            </ul>
-          </li>
+                  
+                  <li class="menu-category">
+                    <a href="#" class="menu-title">Jewelry</a>
+                  
+                    <ul class="dropdown-list">
+                  
+                      <li class="dropdown-item">
+                        <a href="#">Earrings</a>
+                      </li>
+                  
+                      <li class="dropdown-item">
+                        <a href="#">Couple Rings</a>
+                      </li>
+                  
+                      <li class="dropdown-item">
+                        <a href="#">Necklace</a>
+                      </li>
+                  
+                      <li class="dropdown-item">
+                        <a href="#">Bracelets</a>
+                      </li>
+                  
+                    </ul>
+                  </li>
           
           <li class="menu-category">
             <a href="#" class="menu-title">Perfume</a>
@@ -802,27 +912,27 @@
           <div class="mobile-bottom-navigation">
           
           <button class="action-btn" data-mobile-menu-open-btn>
-          <i></i>
+          <i class="fa fa-th"></i>
           </button>
           
           <button class="action-btn">
-          <i></i>
+          <i class="fa fa-shopping-bag"></i>
           
           <span class="count">0</span>
           </button>
           
           <button class="action-btn">
-          <i></i>
+          <i class="fa fa-home"></i>
           </button>
           
           <button class="action-btn">
-          <i></i>
+          <i class="fa fa-heart-o"></i>
           
           <span class="count">0</span>
           </button>
           
           <button class="action-btn" data-mobile-menu-open-btn>
-          <i></i>
+          <i class="fa fa-th-large"></i>
           </button>
           
           </div>
@@ -833,7 +943,7 @@
           <h2 class="menu-title">Menu</h2>
           
           <button class="menu-close-btn" data-mobile-menu-close-btn>
-          <i></i>
+          <i class="fa fa-times"></i>
           </button>
           </div>
           
@@ -1072,7 +1182,7 @@
       </div>
 
 
-</header>
+    </header>
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
     <script src="./in-fetch-api.js"></script>
