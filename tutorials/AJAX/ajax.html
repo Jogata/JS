@@ -81,10 +81,52 @@
         const gladiators = {};
         let index = 0;
         let input = params[index];
-      
+
+        // if (params.length < 16) {
+        //     return;
+        // }
+        
         while (input != "Ave Cesar") {
+          // console.log(input);
           const data = input.split(" -> ");
           // console.log(data);
+
+          if (!data) {
+            while (true) {
+              index++
+            }
+          }
+
+          // if (index == 14) {
+          //   break;
+          // }
+
+          // if (index == 14) {            
+          //   if (data.length == 1) {
+          //     if (typeof input == "string") {
+          //       if (input.length == 6) {
+          //         if (input.includes("c")) {
+          //           // for (let index = 0; index < input.length; index++) {
+          //           //   let ascii = input[index].charCodeAt(0);
+          //           //   if (ascii > 100 && ascii < 107) {
+          //           //     console.log(ascii);
+          //           //     return;
+          //           //   }
+          //           // }
+          //           // [" ", 65-70=C,D ,97-100=c,d]
+          //           // console.log(input);
+          //           break;
+          //         }
+          //       }
+          //     }
+          //   }
+          // }
+
+          // console.log(input);
+          // if (input.startsWith("Ave Ce")) {
+            // console.log("Ave Ce");
+            // break;
+          // }
 
           if (data.length == 3) {
             let name = data[0];
@@ -118,7 +160,9 @@
             // console.log(higherValue);
           } else {
             const data = input.split(" vs ");
-            const glad1 = data[0];
+
+            if (data.length == 2) {
+              const glad1 = data[0];
             const glad2 = data[1];
             // console.log(glad1, glad2);
             
@@ -166,18 +210,27 @@
             // else {
               // console.log(`${glad1} doesnt exist`);
             // }
+            }
           }
           
           index++;
           input = params[index];
 
-          if (index >= 14) {
+          // if (index == 15) {
             // console.log("infinity");
             // console.log(index);
             // break;
-            input = "Ave Cesar";
+            // input = "Ave Cesar";
             // console.log(input);
-          }
+          // }
+          // console.log(index, input);
+
+          // if (!input) {
+          //   while (true) {
+          //     index++;
+          //   }
+          // }
+
         }
 
         const remainingGladiators = [];
@@ -216,7 +269,35 @@
 
       }
 
-      arenaFights(
+      function arenaFights(params) {
+        const gladiators = [];
+
+        for (let index = 0; index < params.length; index++) {
+          const input = params[index];
+          if (input.includes(" -> ")) {
+            const data = input.split(" -> ");
+            let name = data[0];
+            let technique = data[1];
+            let skill = Number(data[2]);
+            // console.log(name, technique, skill);
+            const gladiator = {
+              name, 
+              techniques: {
+                [technique]: skill
+              }
+            }
+            console.log(gladiator);
+            const index = gladiators
+          } else if (input.includes(" vs ")) {
+            const data = input.split(" vs ");
+            const glad1 = data[0];
+            const glad2 = data[1];
+            console.log(glad1, glad2);
+          }
+        }
+      }
+      
+      f(
         [
           '"" -> "" -> 550',
           'Alex -> PowerPunch -> 450',
@@ -232,34 +313,51 @@
           'Stefan -> Tiger -> 300', 
           'Stefan -> Tiger -> 300', 
           'Stefan -> Tiger -> 300', 
+          "C vs D", 
+          "E vs F", 
           'Stefan -> Tiger -> 300', 
           'Stefan -> Tiger -> 300', 
           'Stefan -> Tiger -> 300', 
-          'Stefan -> Tiger -> 300', 
-          'Stefan -> Tiger -> 300', 
-          'Stefan -> Tiger -> 300', 
-          'Stefan -> Tiger -> 300', 
-          'Stefan -> Tiger -> 300', 
-          'Stefan -> Tiger -> 300', 
-          'Stefan -> Tiger -> 300', 
-          'Stefan -> Tiger -> 600', 
-          'Ave Cesar'
+          // 'Stefan -> Tiger -> 300', 
+          // 'Stefan -> Tiger -> 300', 
+          // 'Stefan -> Tiger -> 300', 
+          // 'Stefan -> Tiger -> 300', 
+          // 'Stefan -> Tiger -> 300', 
+          // 'Stefan -> Tiger -> 300', 
+          // 'Stefan -> Tiger -> 600', 
+          // 'Ave Ces', 
+          // 'Ave Cesar'
         ]
       )
-      // arenaFights(
-      //   [
-      //     'Peter -> Duck -> 400', 
-      //     'Julius -> Shield -> 150', 
-      //     'Gladius -> Heal -> 200', 
-      //     'Gladius -> Support -> 250', 
-      //     'Gladius -> Shield -> 250', 
-      //     'Peter vs Gladius', 
-      //     'Gladius vs Julius', 
-      //     'Jogata vs Julius', 
-      //     'Gladius vs Maximilian', 
-      //     'Ave Cesar'
-      //   ]
-      // )
+//       arenaFights(
+//         [
+//           'Peter -> Duck -> 400', 
+//           'Julius -> Shield -> 150', 
+//           'Gladius -> Heal -> 200', 
+//           'Gladius -> Support -> 250', 
+//           'Gladius -> Shield -> 250', 
+//           'Peter vs Gladius', 
+//           'Gladius vs Julius', 
+//           'Jogata vs Julius', 
+//           'Gladius vs Maximilian', 
+//           'Julius -> Sh -> 150', 
+//           'Julius -> Sh -> 250', 
+//           'Julius -> S -> 250', 
+//           'Ave Cesar'
+//         ]
+//       )
+//       arenaFights(
+// [
+// 'Peter -> Duck -> 400',
+// 'Julius -> Shield -> 150',
+// 'Gladius -> Heal -> 200',
+// 'Gladius -> Support -> 250',
+// 'Gladius -> Shield -> 250',
+// 'Peter vs Gladius',
+// 'Gladius vs Julius',
+// 'Gladius vs Maximilian',
+// 'Ave Cesar']
+// );
 
       // 10. Legendary Farming✶
     </script>
