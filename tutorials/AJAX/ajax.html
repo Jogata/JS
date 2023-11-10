@@ -747,6 +747,136 @@ if (grades[index]) {
   // revealWords('great', 'softuni is ***** place for learning new programming languages');
   // revealWords('great, learning', 'softuni is ***** place for ******** new programming languages');
 
+  // 02. Modern Times of #(HashTag)
+
+  function findHashTags(phrase) {
+    // console.log(phrase);
+    const words = phrase.split(" ");
+    // console.log(words);
+    const filtered = words.filter(x => x.startsWith("#") && x.length > 1);
+    // console.log(filtered);
+
+    for (let word of filtered) {
+      let isNumber = false;
+      for (const letter of word) {
+        // console.log(Number.parseInt(letter));
+        // console.log(letter);
+        if (Number.parseInt(letter)) {
+          isNumber = true;
+          // console.log(word);
+          break;
+        }
+      }
+
+      if (!isNumber) {
+        word = word.replace("#", "");
+        console.log(word);
+      }
+    }
+
+  }
+
+  // findHashTags('Nowadays everyone uses # to tag a #spec1ial word in #socialMedia');
+  // findHashTags('The symbol # is known #variously in English-speaking #regions as the #number sign');
+
+  // 03. Extract File
+
+  function extractFile(path) {
+    // console.log(path);
+    const parts = path.split("\\");
+    // console.log(parts);
+    const file = parts[parts.length - 1];
+    // console.log(file);
+    const fileParts = file.split(".");
+    // console.log(fileParts);
+    let fileName = "";
+    const ext = fileParts[fileParts.length - 1];
+    // console.log(ext);
+
+    for (let index = 0; index < fileParts.length - 2; index++) {
+      let part = fileParts[index] + ".";
+      fileName += part;
+    }
+
+    fileName += fileParts[fileParts.length - 2];
+
+    console.log(`File name: ${fileName}`);
+    console.log(`File extension: ${ext}`);
+
+  }
+
+  // extractFile("C:\\Internal\\training-internal\\Template.bss.pptx");
+  // extractFile('C:\\Projects\\Data-Structures\\LinkedList.cs');
+
+  // 04. String Substring
+
+  function findString(searched, phrase) {
+    // console.log(phrase);
+    // console.log(searched);
+    const words = phrase.split(" ");
+    let isFound = false;
+
+    for (const word of words) {
+      if (searched.toLowerCase() == word.toLowerCase()) {
+        isFound = true;
+        break;
+      }
+    }
+
+    if (isFound) {
+      console.log(searched);
+    } else {
+      console.log(`${searched} not found!`);
+    }
+
+  }
+
+  findString('javascript', 'JavaScript is the best programming language');
+  findString('python', 'JavaScript is the best programming language');
+
+  // 05. Replace Repeating Chars
+
+  function replaceRepeatingChars(word) {
+    // console.log(word);
+    let current = word[0];
+    let newWord = current;
+
+    for (let index = 1; index < word.length; index++) {
+      if (word[index] != current) {
+        current = word[index];
+        newWord += current;
+      }
+    }
+
+    console.log(newWord);
+
+  }
+
+  function replaceRepeatingChars(word) {
+    // console.log(word);
+    
+    for (let index = 0; index < word.length - 1; index++) {
+      if (word[index] == word[index + 1]) {
+        let current = word[index];
+        const removed = current + current;
+        word = word.replaceAll(removed, current);
+        index = -1;
+      }
+      
+    }
+    // word = word.replaceAll("aa", "a");
+    console.log(word);
+    
+  }
+
+  replaceRepeatingChars('aaaaabbbbbcdddeeeedssaa');
+  replaceRepeatingChars('qqqwerqwecccwd');
+
+  // 06. Pascal-Case Splitter
+  // 07. Cut and Reverse
+  // 08. Hard Word✶
+  // 09. Password Generator✶
+  // 10. Letters Change Numbers✶
 </script>
   </body>
 </html>
