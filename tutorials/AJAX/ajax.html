@@ -831,8 +831,8 @@ if (grades[index]) {
 
   }
 
-  findString('javascript', 'JavaScript is the best programming language');
-  findString('python', 'JavaScript is the best programming language');
+  // findString('javascript', 'JavaScript is the best programming language');
+  // findString('python', 'JavaScript is the best programming language');
 
   // 05. Replace Repeating Chars
 
@@ -866,17 +866,140 @@ if (grades[index]) {
     }
     // word = word.replaceAll("aa", "a");
     console.log(word);
-    
+
   }
 
-  replaceRepeatingChars('aaaaabbbbbcdddeeeedssaa');
-  replaceRepeatingChars('qqqwerqwecccwd');
+  // replaceRepeatingChars('aaaaabbbbbcdddeeeedssaa');
+  // replaceRepeatingChars('qqqwerqwecccwd');
 
   // 06. Pascal-Case Splitter
+
+  function splitPascal(phrase) {
+    // console.log(phrase.length);
+    const indexes = [];
+
+    for (let index = 0; index < phrase.length; index++) {
+      const letter = phrase[index];
+      const ascii = letter.charCodeAt(0);
+      if (ascii > 64 && ascii < 91) {
+        // console.log(letter, ascii);
+        indexes.push(index);
+      }
+    }
+    indexes.push(phrase.length);
+    // console.log(indexes);
+    const words = [];
+
+    for (let index = 0; index < indexes.length - 1; index++) {
+      const start = indexes[index];
+      const end = indexes[index + 1];
+      const word = phrase.slice(start, end);
+      // console.log(word);
+      words.push(word);
+    }
+
+    console.log(words.join(', '));
+
+  }
+
+  // splitPascal('SplitMeIfYouCanHaHaYouCantOrYouCan');
+  // splitPascal('HoldTheDoor');
+  // splitPascal('ThisIsSoAnnoyingToDo');
+
   // 07. Cut and Reverse
+
+  function revarseWords(phrase) {
+    // console.log(phrase);
+    const middle = Math.floor(phrase.length / 2);
+    // console.log(middle);
+    const leftHalf = phrase.slice(0, middle);
+    const rightHalf = phrase.slice(middle);
+    const left = leftHalf.split("");
+    const right = rightHalf.split("");
+    const reversedLeft = left.reverse();
+    const reversedRight = right.reverse();
+    // console.log(reversedLeft);
+    // console.log(reversedRight);
+    console.log(reversedLeft.join(""));
+    console.log(reversedRight.join(""));
+  }
+
+  // revarseWords('tluciffiDsIsihTgnizamAoSsIsihT');
+  // revarseWords('sihToDtnaCuoYteBIboJsihTtAdooGoSmI');
+
   // 08. Hard Word✶
-  // 09. Password Generator✶
-  // 10. Letters Change Numbers✶
+
+  function completeText(params) {
+    const text = params[0];
+    const words = params[1];
+    // console.log(text);
+    // console.log(words);
+
+    const splittedText = text.split(" ");
+    // console.log(splittedText);
+
+    for (let index = 0; index < splittedText.length; index++) {
+      let word = splittedText[index];
+      let lastSymbol = "";
+      // console.log(word);
+      if (word.startsWith("_")) {
+        // console.log(word);
+        let length = word.length;
+        // console.log(length);
+
+        if (!word.endsWith("_")) {
+          lastSymbol = word[word.length - 1];
+          length -= 1;
+        }
+
+        // console.log(length);
+
+        const indexToReplace = words.findIndex(x => x.length == length);
+        // console.log(indexToReplace);
+        let newWord = words[indexToReplace];
+        newWord += lastSymbol;
+
+        splittedText[index] = newWord;
+        words[indexToReplace] = "";
+
+      }
+    }
+
+    console.log(splittedText.join(" "));
+
+  }
+
+  // completeText(
+  //   [
+  //     'Hi, grandma! I\'m so ____ to write to you. ______ the winter vacation, so _______ things happened. My dad bought me a sled. Mom started a new job as a __________. My brother\'s ankle is ________, and now it bothers me even more. Every night Mom cooks ___ on your recipe because it is the most delicious. I hope this year Santa will _____ me a robot.', 
+  //     ['pie', 'bring', 'glad', 'During', 'amazing', 'pharmacist', 'sprained']
+  //   ]);
+
+    // 04. Odd And Even Sum
+
+    function printOddEvenSums(input) {
+    const inputAsString = String(input);
+
+    let odd = 0;
+    let even = 0;
+
+    for (let index = 0; index < inputAsString.length; index++) {
+      const num = Number(inputAsString[index]);
+
+      if (num % 2 == 0) {
+        even += num;
+      } else {
+        odd += num;
+      }
+
+    }
+
+    console.log(`Odd sum = ${odd}, Even sum = ${even}`);
+
+  }
+
+  // printOddEvenSums(1000435);
+  // printOddEvenSums(3495892137259234);
 </script>
   </body>
 </html>
