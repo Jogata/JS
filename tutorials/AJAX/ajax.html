@@ -1000,6 +1000,139 @@ if (grades[index]) {
 
   // printOddEvenSums(1000435);
   // printOddEvenSums(3495892137259234);
+
+  // 09. Password Generator✶
+
+  function generatePassword(params) {
+    // console.log(params);
+    const p1 = params[0];
+    const p2 = params[1];
+    const tamplete = params[2];
+
+    const pass = p1 + p2;
+    // console.log(pass);
+    // console.log(tamplete);
+    const passArr = pass.split("");
+
+    const vowels = {
+      a: true, 
+      o: true, 
+      e: true, 
+      i: true, 
+      u: true, 
+      // y: true, 
+    }
+
+    let current = 0;
+
+    for (let index = 0; index < passArr.length; index++) {
+      const letter = passArr[index];
+
+      if (vowels[letter]) {
+        // console.log(letter);
+        // pass = pass.replace(letter, tamplete[current]);
+        passArr[index] = tamplete[current].toUpperCase();
+        current++;
+
+        if (current == tamplete.length) {
+          current = 0;
+        }
+        
+      }
+
+    }
+
+    const reversedPassword = passArr.reverse();
+    console.log(`Your generated password is ${reversedPassword.join("")}`);
+
+  }
+
+  // generatePassword(['ilovepizza', 'ihatevegetables', 'orange']);
+  // generatePassword(['easymoneyeazylife', 'atleasttencharacters', 'absolute']);
+  // generatePassword(['areyousureaboutthisone', 'notquitebutitrustyou', 'disturbed']);
+
+  // 10. Letters Change Numbers✶
+
+  function playGame(data) {
+    // console.log(data);
+    const entries = data.split(" ").filter(x => x);
+    // console.log(entries);
+    let sum = 0;
+    
+    for (const entry of entries) {
+      // console.log(entry);
+      const firstLetter = entry[0];
+      let typeOfFirstLetter = findType(firstLetter);
+      let firstLetterPosition = findPosition(firstLetter, typeOfFirstLetter);
+
+      const lastLetter = entry[entry.length - 1];
+      let typeOfLastLetter = findType(lastLetter);
+      let lastLetterPosition = findPosition(lastLetter, typeOfLastLetter);
+
+      const number = Number.parseInt(entry.substring(1));
+
+      let result = number;
+      // console.log(number);
+      // console.log(firstLetter);
+      // console.log(lastLetter);
+      // console.log(typeOfLastLetter);
+      // console.log(typeOfFirstLetter);
+      // console.log(firstLetterPosition);
+      // console.log(lastLetterPosition);
+
+      if (typeOfFirstLetter == "upper") {
+        result = result / firstLetterPosition;
+      } else {
+        result = result * firstLetterPosition;
+      }
+
+      if (typeOfLastLetter == "upper") {
+        result = result - lastLetterPosition;
+      } else {
+        result = result + lastLetterPosition;
+      }
+
+      // console.log(result);
+      sum += result;
+
+    }
+
+    function findType(letter) {
+      let type = "";
+      const ascii = letter.charCodeAt(0);
+      if (ascii > 64 && ascii < 91) {
+        type = "upper";
+      } else {
+        type = "lower";
+      }
+
+      return type;
+
+    }
+
+    function findPosition(letter, letterType) {
+      let position = 0;
+      const ascii = letter.charCodeAt(0);
+      if (letterType == "upper") {
+        position = ascii - 64;
+      } else {
+        position = ascii - 96;
+      }
+
+      return position;
+
+    }
+
+    console.log(sum.toFixed(2));
+
+  }
+
+  playGame('A12b s17G');
+  playGame("P34562Z q2576f   H456z");
+  playGame("a1A");
+
+  // console.log("z".charCodeAt(0));
+
 </script>
   </body>
 </html>
