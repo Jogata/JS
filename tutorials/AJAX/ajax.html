@@ -1382,8 +1382,8 @@ if (grades[index]) {
     }
   }
 
-  printCharacters('AWord');
-  printCharacters('Sentence');
+  // printCharacters('AWord');
+  // printCharacters('Sentence');
 
   // 02. Substring
 
@@ -1392,14 +1392,140 @@ if (grades[index]) {
     console.log(substring);
   }
 
-  getSubstring('ASentence', 1, 8);
-  getSubstring('SkipWord', 4, 7);
+  // getSubstring('ASentence', 1, 8);
+  // getSubstring('SkipWord', 4, 7);
 
   // 03. Censored Words
+
+  function censore(phrase, word) {
+    const length = word.length;
+    const newWord = "*".repeat(length);
+    // console.log(newWord);
+    // const censored = phrase.replaceAll(word, newWord);
+    let censored = phrase.replace(word, newWord);
+
+    while (censored.includes(word)) {
+      censored = censored.replace(word, newWord);
+    }
+
+    console.log(censored);
+
+  }
+
+  // censore('A small sentence with some words', 'small');
+  // censore('Find hidden the hidden word', 'hidden');
+
   // 04. Count String Occurrences
 
-  shakeItOff(['astalavista baby', 'sta']);
-  shakeItOff(['##mtm!!mm.mm*mtm.#', 'mtm']);
+  function findStringOccurrences(text, word) {
+    const words = text.split(" ");
+    // console.log(words);
+    let counter = 0;
+
+    for (const current of words) {
+      if (word == current) {
+        counter++;
+      }
+    }
+
+    console.log(counter);
+
+  }
+
+  // findStringOccurrences('This is a word and it also is a sentence', 'is');
+  // findStringOccurrences('softuni is great place for learning new programming languages', 'softuni');
+
+  function shakeItOff(params) {
+    // console.log(params);
+    let word = params[0];
+    let pattern = params[1];
+    // console.log(word, pattern);
+    let index = 0;
+
+    while (true) {
+      // const first = word.indexOf(pattern);
+      // const last = word.lastIndexOf(pattern);
+      // console.log(first, last);
+      // if (first == last) {
+        // console.log("No shake.");
+        // break;
+      // }
+
+      const parts = word.split(pattern);
+      // console.log(parts);
+      if (parts.length >= 3) {
+        const start = parts.shift();
+        const end = parts.pop();
+        const middle = parts.join(pattern);
+        word = start + middle + end;
+        // console.log(middle);
+        console.log("Shaked it.");
+        // word = middle;
+      } else {
+        console.log("No shake.");
+        break;
+      }
+
+      const middle = Math.floor(pattern.length / 2);
+      const middleChar = pattern[middle];
+      // console.log(middle);
+      // console.log(middleChar);
+      pattern = pattern.replace(middleChar, "");
+      // console.log(apattern);
+      if (pattern.length == 0) {
+        console.log("No shake.");
+        break;
+      }
+
+      // if (!word.includes(pattern)) {
+        // console.log("No shake.");
+        // break;
+      // }
+      index++;
+
+      if (index > 50) {
+        console.log("infinity");
+        break;
+      }
+
+    }
+
+    console.log(word);
+
+  }
+
+  // shakeItOff(['astalavista baby', 'sta']);
+  // shakeItOff(['##mtm!!mm.mm*mtm.#', 'mtm']);
+
+  // 01. Phone Book
+
+  function createPhoneBook(people) {
+    const book = {};
+
+    for (const person of people) {
+      const data = person.split(" ");
+      const name = data[0];
+      const phone = data[1];
+      // console.log(name,phone);
+      book[name] = phone;
+    }
+
+    // console.log(book);
+    for (const person in book) {
+      const number = book[person];
+      console.log(`${person} -> ${number}`);
+    }
+
+  }
+
+  createPhoneBook(['Tim 0834212554', 'Peter 0877547887', 'Bill 0896543112', 'Tim 0876566344']);
+  createPhoneBook(['George 0552554', 'Peter 087587', 'George 0453112', 'Bill 0845344']);
+
+  // 02. Meetings
+  // 03. Address Book
+  // 04. Storage
+  // 05. School Grades
+  // 06. Word Occurrences
 </script>
   </body>
 </html>
