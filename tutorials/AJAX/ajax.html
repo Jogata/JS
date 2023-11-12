@@ -1260,12 +1260,146 @@ if (grades[index]) {
 
   }
 
-  asciiSumator(['.', '@', 'dsg12gr5653feee5']);
-  asciiSumator(['?', 'E', '@ABCEF']);
-  asciiSumator(['a', '1', 'jfe392$#@j24ui9ne#@$']);
+  // asciiSumator(['.', '@', 'dsg12gr5653feee5']);
+  // asciiSumator(['?', 'E', '@ABCEF']);
+  // asciiSumator(['a', '1', 'jfe392$#@j24ui9ne#@$']);
 
   // 05. Treasure Finder
+
+  function findTreasure(params) {
+    // console.log(params);
+    const key = params[0];
+    const keys = key.split(" ");
+    const mapped = keys.map(key => key = Number(key));
+    // console.log(key);
+    // console.log(mapped);
+    let index = 1;
+    let input = params[index];
+    
+    while (input != "find") {
+      let result = "";
+      let indexKey = 0;
+
+      const lettters = input.split("");
+      // console.log(lettters);
+
+      for (const letter of lettters) {
+        // console.log(letter);
+        let ascii = letter.charCodeAt(0);
+        let currentKey = mapped[indexKey];
+        // console.log(ascii);
+        ascii -= currentKey;
+        indexKey++;
+
+        const newLetter = String.fromCharCode(ascii);
+        result += newLetter;
+
+        if (indexKey == mapped.length) {
+          indexKey = 0;
+        }
+        // console.log(index);
+      }
+
+      // console.log(result);
+      let start = result.indexOf("<") + 1;
+      let end = result.indexOf(">");
+      const coords = result.substring(start, end);
+      // console.log(coords);
+      start = result.indexOf("&") + 1;
+      end = result.indexOf("&", start);
+      // console.log(start, end);
+      const type = result.substring(start, end);
+      // console.log(type);
+      console.log(`Found ${type} at ${coords}`);
+
+      index++;
+      input = params[index];
+
+      // if (index > 20) {
+      //   console.log("infinity");
+      //   break;
+      // }
+
+    }
+  }
+
+  // findTreasure(["1 2 1 3", "ikegfp'jpne)bv=41P83X@", "ujfufKt)Tkmyft'duEprsfjqbvfv=53V55XA", "find"]);
+  // findTreasure(["1 4 2 5 3 2 1", `Ulgwh"jt$ozfj!'kqqg(!bx"A3U237GC`, "tsojPqsf$(lrne'$CYfqpshksdvfT$>634O57YC", "'stj)>34W68Z@", "find"]);
+
   // 06. Melrah Shake
+
+  function shakeItOff(params) {
+    // console.log(params);
+    let word = params[0];
+    let pattern = params[1];
+    // console.log(word, pattern);
+
+    while (true) {
+      const first = word.indexOf(pattern);
+      // const last = word.indexOf(pattern, first + pattern.length);
+      const last = word.lastIndexOf(pattern);
+      // console.log(first, last);
+      if (first != last) {
+        const start = word[last - 1];
+        const end = word[last + pattern.length];
+        const removed = start + pattern + end;
+        // console.log(removed);
+        word = word.replace(removed, start + "" + end);
+        word = word.replace(pattern, "");
+        console.log("Shaked it.");
+      } else {
+        console.log("No shake.");
+        break;
+      }
+
+      const middle = Math.floor(pattern.length / 2);
+      const middleChar = pattern[middle];
+      // console.log(middle);
+      // console.log(middleChar);
+      pattern = pattern.replace(middleChar, "");
+      // console.log(apattern);
+      if (pattern.length == 0) {
+        console.log("No shake.");
+        break;
+      }
+
+      if (!word.includes(pattern)) {
+        console.log("No shake.");
+        break;
+      }
+
+    }
+
+    console.log(word);
+
+  }
+
+  // 01. Print Characters
+
+  function printCharacters(word) {
+    for (const char of word) {
+      console.log(char);
+    }
+  }
+
+  printCharacters('AWord');
+  printCharacters('Sentence');
+
+  // 02. Substring
+
+  function getSubstring(word, start, end) {
+    const substring = word.substring(start, start + end);
+    console.log(substring);
+  }
+
+  getSubstring('ASentence', 1, 8);
+  getSubstring('SkipWord', 4, 7);
+
+  // 03. Censored Words
+  // 04. Count String Occurrences
+
+  shakeItOff(['astalavista baby', 'sta']);
+  shakeItOff(['##mtm!!mm.mm*mtm.#', 'mtm']);
 </script>
   </body>
 </html>
