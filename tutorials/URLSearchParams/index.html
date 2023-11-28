@@ -3108,6 +3108,12 @@
         padding: 0;
         box-sizing: border-box;
       }
+      
+      html {
+        font-size: 62.5%;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
 
       .main-container {
         /* width: 100%; */
@@ -3117,10 +3123,17 @@
         background-size: cover;
       }
 
-      html {
-        font-size: 62.5%;
-        scroll-behavior: smooth;
-        overflow-x: hidden;
+      .background-text h2 {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        font-size: 50px;
+        text-transform: capitalize;
+      }
+      .background-text h2 span {
+        color: #ffc61a;
       }
 
       header.header {
@@ -3132,6 +3145,9 @@
       }
       .header #logo img {
         width: 100%;
+      }
+      .navbar {
+        transition: 400ms ease-in-out;
       }
       .header .navbar a {
         margin-left: 1rem;
@@ -3154,22 +3170,83 @@
         text-decoration: none;
       }
 
+      .taxi-img {
+        width: 50%;
+        margin: 0 auto;
+      }
+      .taxi-img img {
+        width: 100%;
+        margin-top: 260px;
+      }
+
+      .home-container {
+        /* width: 100%; */
+        height: 100vh;
+        padding: 2rem 7%;
+        background-color: #ffc61a;
+      }
+
+      .home-content {
+        padding-top: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .inner-content {
+        flex: 1 1 45rem;
+        padding: 2rem;
+      }
+      .inner-content h2 {
+        font-size: 38px;
+        text-transform: capitalize;
+      }
+      .inner-content h3 {
+        font-size: 31px;
+        text-transform: capitalize;
+      }
+      .inner-content p {
+        padding-bottom: 1rem;
+        font-size: 1.5rem;
+      }
+      .inner-content a {
+        padding: 1rem 3rem;
+        color: #000;
+        font-size: 1.5rem;
+        text-transform: capitalize;
+        transition: 400ms ease-out;
+      }
+      .inner-content a:hover {
+        padding: 1.5rem 3rem;
+        border: 1px solid #fff;
+        border-radius: 16px;
+        background-color: #fff;
+      }
+
+
       @media (max-width: 768px) {
         html {
           font-size: 50%;
         }
+        .header {
+          padding: 2rem;
+        }
         .navbar {
           position: absolute;
-          top: 100%;
+          top: -100%;
           left: 0;
           width: 100%;
+        }
+        .navbar.active {
+          top: 10%;
         }
         .header .navbar a {
           display: block;
           margin: 1rem;
           padding: 1rem;
           color: #fff;
-          background-color: yellow;
+          background-color: #ffc61a;
         }
         #menu-bars {
           display: initial;
@@ -3179,6 +3256,9 @@
   </head>
   <body>
     <div class="main-container">
+      <div class="background-text">
+        <h2>book a <span>cab now</span></h2>
+      </div>
       <header class="header">
         <a href="#" id="logo">
           <img src="../AJAX/images/CabHUB.png" alt="Logo">
@@ -3191,7 +3271,32 @@
           <a href="#">contact</a>
         </nav>
         <a href="#" id="menu-bars" class="fa fa-bars"></a>
+        <script>
+          const menubar = document.querySelector("#menu-bars");
+          const navbar = document.querySelector(".navbar");
+          
+          menubar.addEventListener("click", () => {
+            menubar.classList.toggle("fa-times");
+            menubar.classList.toggle("fa-bars");
+            navbar.classList.toggle("active");
+          })
+        </script>
       </header>
+      <div class="taxi-img">
+        <img src="../AJAX/images/car-main.png" alt="">
+      </div>
+    </div>
+
+    <div class="home-container">
+      <div class="home-content">
+        <div class="inner-content">
+          <h3>best in the city</h3>
+          <h2>trusted cab service in the county</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum, eveniet ad. Corrupti velit accusamus alias, facilis ipsum tenetur minus fugiat, omnis maxime, natus blanditiis quod cum a impedit quidem beatae.</p>
+          <a href="#">book now</a>
+        </div>
+        <div class="inner-content"></div>
+      </div>
     </div>
 
     <div class="overlay" data-overlay></div>
@@ -5070,7 +5175,6 @@
     
               </div>
               
-              
               <div class="product-showcase">
       
                 <h2 class="title">Top Rated</h2>
@@ -5124,54 +5228,54 @@
                       </div>
               
                     </div>
-
-                <div class="showcase">
-  
-                  <a href="#" class="showcase-img-box">
-                    <img src="./images/products/perfume.jpg" alt="titan 100 ml womens perfume" class="showcase-img">
-                  </a>
-          
-                  <div class="showcase-content">
-          
-                    <a href="#">
-                      <h4 class="showcase-title">Titan 100 Ml Womens Perfume</h4>
-                    </a>
-          
-                    <a href="#" class="showcase-category">Perfume</a>
-          
-                    <div class="price-box">
-                      <p class="price">$42.00</p>
-                      <del>$10.00</del>
+                    
+                    <div class="showcase">
+      
+                      <a href="#" class="showcase-img-box">
+                        <img src="./images/products/perfume.jpg" alt="titan 100 ml womens perfume" class="showcase-img">
+                      </a>
+              
+                      <div class="showcase-content">
+              
+                        <a href="#">
+                          <h4 class="showcase-title">Titan 100 Ml Womens Perfume</h4>
+                        </a>
+              
+                        <a href="#" class="showcase-category">Perfume</a>
+              
+                        <div class="price-box">
+                          <p class="price">$42.00</p>
+                          <del>$10.00</del>
+                        </div>
+              
+                      </div>
+              
                     </div>
-          
-                  </div>
-          
-                </div>
-
-                <div class="showcase">
-  
-                  <a href="#" class="showcase-img-box">
-                    <img src="./images/products/belt.jpg" alt="men's leather reversible belt" class="showcase-img">
-                  </a>
-          
-                  <div class="showcase-content">
-          
-                    <a href="#">
-                      <h4 class="showcase-title">Men's Leather Reversible Belt</h4>
-                    </a>
-          
-                    <a href="#" class="showcase-category">Belt</a>
-          
-                    <div class="price-box">
-                      <p class="price">$24.00</p>
-                      <del>$10.00</del>
+    
+                    <div class="showcase">
+      
+                      <a href="#" class="showcase-img-box">
+                        <img src="./images/products/belt.jpg" alt="men's leather reversible belt" class="showcase-img">
+                      </a>
+              
+                      <div class="showcase-content">
+              
+                        <a href="#">
+                          <h4 class="showcase-title">Men's Leather Reversible Belt</h4>
+                        </a>
+              
+                        <a href="#" class="showcase-category">Belt</a>
+              
+                        <div class="price-box">
+                          <p class="price">$24.00</p>
+                          <del>$10.00</del>
+                        </div>
+              
+                      </div>
+              
                     </div>
-          
+    
                   </div>
-          
-                </div>
-
-              </div>
 
               <div class="showcase-container">
 
