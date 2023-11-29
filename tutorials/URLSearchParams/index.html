@@ -3117,7 +3117,7 @@
 
       .main-container {
         /* width: 100%; */
-        height: 100vh;
+        min-height: 100vh;
         background-image: url("../AJAX/images/background.png");
         background-position: center;
         background-size: cover;
@@ -3247,6 +3247,9 @@
         border: 1px solid transparent;
         border-bottom: 1px solid #000;
       }
+      input::placeholder {
+        text-transform: capitalize;
+      }
 
       .submit {
         padding-top: 2rem;
@@ -3262,9 +3265,12 @@
 
       .main-tariff {
         padding: 3rem 7%;
-        height: 100vh;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
       }
       .main-tariff h1 {
+        width: 100%;
         padding-bottom: 6rem;
         font-size: 38px;
         text-align: center;
@@ -3275,6 +3281,7 @@
       }
       
       .inner-tariff {
+        margin: auto;
         display: flex;
         gap: 15px;
         flex-wrap: wrap;
@@ -3283,17 +3290,22 @@
 
       .tariff-container {
         flex: 1 1 250px;
-        border: 1px solid rebeccapurple;
+        display: flex;
+        /* border: 1px solid rebeccapurple; */
       }
 
       .inner-box {
+        position: relative;
         text-align: center;
-        border: 1px solid red;
+        display: flex;
+        flex-direction: column;
+        /* border: 1px solid red; */
       }
       .inner-box img {
         width: 60%;
-        margin: -50px auto auto;
-        border: 1px solid black;
+        margin: auto;
+        /* margin: -50px auto auto; */
+        /* border: 1px solid black; */
       }
       .inner-box h2 {
         font-size: 30px;
@@ -3310,7 +3322,7 @@
       }
       .inner-box a {
         display: inline-block;
-        margin-top: 2rem;
+        margin: 2rem auto 0;
         padding: 1rem 3rem;
         color: #fff;
         font-size: 1.5rem;
@@ -3318,11 +3330,28 @@
         background-color: #000;
       }
 
-      .tariff-container .yellow-box {
-        background-color: #ffc61a;
-      }
+      /* .tariff-container .yellow-box { */
+        /* position: relative; */
+        /* background-color: #ffc61a; */
+      /* } */
       .inner-box.yellow-box h3 {
         color: #000;
+      }
+      .inner-box::after {
+        position: absolute;
+        top: 15%;
+        left: 0;
+        content: "";
+        width: 100%;
+        /* height: 100%; */
+        height: 80%;
+        box-shadow: 
+            2px 2px 4px rgba(0, 0, 0, 0.2), 
+          -2px -2px 4px rgba(0, 0, 0, 0.02);
+        z-index: -1;
+      }
+      .yellow-box::after {
+        background-color: #ffc61a;
       }
       /* .inner-box.yellow-box a {
         color: #fff;
@@ -3330,7 +3359,7 @@
 
       .fast-booking {
         /* width: 100%; */
-        height: 100vh;
+        min-height: 100vh;
         background-image: url("../AJAX/images/secbg.png");
         background-position: center;
         background-size: cover;
@@ -3342,7 +3371,8 @@
         text-align: center;
         text-transform: capitalize;
       }
-      .fast-booking h2 {
+      .fast-booking h1 span {
+        display: block;
         font-size: 31px;
         color: #fff;
         text-align: center;
@@ -3382,14 +3412,61 @@
         padding: 2rem;
         color: #ffc61a;
         font-size: 22px;
-        text-align: left;
+        /* text-align: left; */
+        text-transform: capitalize;
       }
       .inner-fast-text p {
+        padding: 0 2rem 2rem;
+        font-size: 1.5rem;
+      }
+
+      .testimonials {
+        width: 100%;
+        height: 100vh;
+        background-image: url("../AJAX/images/testimonial-bg.png");
+        background-position: center;
+        background-size: cover;
+      }
+      .testimonials h1 {
+        padding: 2rem;
+        color: #ffc61a;
+        font-size: 38px;
+        text-align: center;
+        text-transform: capitalize;
+      }
+
+      .main-testimonials {
+        padding: 2rem 7%;
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .inner-testimonial {
+        flex: 1 1 45rem;
+        padding: 2rem;
+        color: #fff;
+        border-radius: 20px;
+        background-color: #000;
+        box-shadow: 2px 2px 4px #000,
+          -2px -2px 4px rgba(255, 255, 255, 0.2);
+      }
+      .inner-testimonial p {
         padding: 2rem;
         font-size: 1.5rem;
       }
 
-      .testimonials {}
+      .client {
+        display: flex;
+        align-items: center;
+        /* justify-content: center; */
+      }
+      .client h2 {
+        color: #ffc61a;
+        margin-left: 1rem;
+        text-transform: capitalize;
+      }
 
 
       @media (max-width: 768px) {
@@ -3417,6 +3494,10 @@
         }
         #menu-bars {
           display: initial;
+        }
+        .background-text h2 {
+          width: 100%;
+          text-align: center;
         }
         .inner-box img {
           margin: 0 auto;
@@ -3472,12 +3553,12 @@
               <h1>book a cab</h1>
             </div>
             <div class="form-fields">
-              <input type="text" name="" id="">
-              <input type="text" name="" id="">
-              <input type="text" name="" id="">
-              <input type="text" name="" id="">
-              <input type="text" name="" id="">
-              <input type="text" name="" id="">
+              <input type="text" name="name" id="name" placeholder="name">
+              <input type="text" name="phone" id="phone" placeholder="phone">
+              <input type="text" name="when" id="when" placeholder="when">
+              <input type="text" name="date" id="date" placeholder="date">
+              <input type="text" name="start" id="start" placeholder="start">
+              <input type="text" name="end" id="end" placeholder="end">
             </div>
             <div class="submit">
               <a href="#">submit</a>
@@ -3525,65 +3606,73 @@
     </div>
 
     <div class="fast-booking">
-      <h1>we do better</h1>
-      <h2>than you wish</h2>
+      <h1>we do better <span>than you wish</span></h1>
+      <!-- <h2>than you wish</h2> -->
       <div class="inner-fast">
+
         <div class="booking-content">
           <div class="icon-fast">
-            <span><i class="fa fa-star"></i></span>
+            <span><i class="fa fa-star" aria-hidden="true"></i></span>
           </div>
           <div class="inner-fast-text">
             <h2>fast booking</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur corrupti autem et numquam dicta optio! Nobis quasi illum veritatis exercitationem, beatae iure?</p>
           </div>
         </div>
+
         <div class="booking-content">
           <div class="icon-fast">
-            <span><i class="fa fa-map-marker"></i></span>
+            <span><i class="fa fa-map-marker" aria-hidden="true"></i></span>
           </div>
           <div class="inner-fast-text">
             <h2>fast booking</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas facilis est beatae expedita fugiat totam earum porro, dolorum aliquam repellat enim eligendi reiciendis dignissimos.</p>
           </div>
         </div>
+
         <div class="booking-content">
           <div class="icon-fast">
-            <span><i class="fa fa-map-marker"></i></span>
+            <span><i class="fa fa-map-marker" aria-hidden="true"></i></span>
           </div>
           <div class="inner-fast-text">
             <h2>fast booking</h2>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas ratione quisquam delectus molestias? Expedita repudiandae labore possimus totam, ducimus unde, libero ex reiciendis reprehenderit voluptatibus nobis accusamus.</p>
           </div>
         </div>
+
         <div class="booking-content">
           <div class="icon-fast">
-            <span><i class="fa fa-map-marker"></i></span>
+            <span><i class="fa fa-map-marker" aria-hidden="true"></i></span>
           </div>
           <div class="inner-fast-text">
             <h2>fast booking</h2>
             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eveniet maiores tempora dolore. Esse laborum odio eum nobis amet.</p>
           </div>
         </div>
+
       </div>
     </div>
 
     <div class="testimonials">
       <h1>our clients</h1>
       <div class="main-testimonials">
-        <div class="inner-test">
+
+        <div class="inner-testimonial">
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, quod dolor eaque sint cum perspiciatis, itaque voluptas aliquid, voluptatem quasi natus doloribus rem qui.</p>
-          <div class="clients">
+          <div class="client">
             <img src="../AJAX/images/jhon.png" alt="">
-            <h1>john doe</h1>
+            <h2>john doe</h2>
           </div>
         </div>
-        <div class="inner-test">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, quod dolor eaque sint cum perspiciatis, itaque voluptas aliquid, voluptatem quasi natus doloribus rem qui.</p>
-          <div class="clients">
+
+        <div class="inner-testimonial">
+          <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis doloremque labore blanditiis odio error asperiores soluta numquam. Explicabo ab ipsam mollitia.</p>
+          <div class="client">
             <img src="../AJAX/images/jhon.png" alt="">
-            <h1>john doe</h1>
+            <h2>john doe</h2>
           </div>
         </div>
+
       </div>
     </div>
 
@@ -5721,47 +5810,47 @@
             
                         <div class="showcase-status-bar"></div>
                       </div>
-        
-                  <div class="countdown-box">
-        
-                    <p class="countdown-desc">
-                      Hurry Up! Offer ends in:
-                    </p>
-        
-                    <div class="countdown">
-        
-                      <div class="countdown-content">
-        
-                        <p class="display-number">360</p>
-        
-                        <p class="display-text">Days</p>
-        
+                      
+                      <div class="countdown-box">
+            
+                        <p class="countdown-desc">
+                          Hurry Up! Offer ends in:
+                        </p>
+            
+                        <div class="countdown">
+            
+                          <div class="countdown-content">
+            
+                            <p class="display-number">360</p>
+            
+                            <p class="display-text">Days</p>
+            
+                          </div>
+            
+                          <div class="countdown-content">
+                            <p class="display-number">24</p>
+                            <p class="display-text">Hours</p>
+                          </div>
+            
+                          <div class="countdown-content">
+                            <p class="display-number">59</p>
+                            <p class="display-text">Min</p>
+                          </div>
+            
+                          <div class="countdown-content">
+                            <p class="display-number">00</p>
+                            <p class="display-text">Sec</p>
+                          </div>
+            
+                        </div>
+            
                       </div>
-        
-                      <div class="countdown-content">
-                        <p class="display-number">24</p>
-                        <p class="display-text">Hours</p>
-                      </div>
-        
-                      <div class="countdown-content">
-                        <p class="display-number">59</p>
-                        <p class="display-text">Min</p>
-                      </div>
-        
-                      <div class="countdown-content">
-                        <p class="display-number">00</p>
-                        <p class="display-text">Sec</p>
-                      </div>
-        
+            
                     </div>
-        
+            
                   </div>
-        
+            
                 </div>
-        
-              </div>
-        
-            </div>
 
             <div class="showcase-container">
     
