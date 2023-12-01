@@ -3051,8 +3051,10 @@
       }
 
       .contact-test-container {
+        display: none;
         width: 100%;
-        height: 100vh;
+        min-height: 100vh;
+        padding: 50px 0;
         font-family: Georgia, 'Times New Roman', Times, serif;
         background-image: url("../AJAX/images/background.png");
         background-position: center;
@@ -3063,7 +3065,7 @@
         position: relative;
         width: 100%;
         /* height: 100vh; */
-        padding-top: 50px;
+        /* padding-top: 50px; */
         text-align: center;
         z-index: 1;
       }
@@ -3177,6 +3179,40 @@
         font-weight: 400;
       }
        
+      @media (max-width: 850px) {
+        .contact-details {
+          flex-direction: column;
+        }
+        .contact-details input {
+          width: 500px;
+        }
+        .contact-msg textarea {
+          width: 500px;
+        }
+        .address {
+          margin-bottom: 50px;
+          flex-direction: column;
+          gap: 30px;
+        }
+      }
+
+      @media (max-width: 540px) {
+        .contact-details input {
+          width: 340px;
+        }
+        .contact-msg textarea {
+          width: 340px;
+        }
+      }
+
+      @media (max-width: 400px) {
+        .contact-details input {
+          width: 100%;
+        }
+        .contact-msg textarea {
+          width: 100%;
+        }
+      }
 
       /* delete */
       /* .modal-content {
@@ -3262,6 +3298,7 @@
 
       header.header {
         /* width: 100%; */
+        position: relative;
         padding: 2rem 7%;
         display: flex;
         align-items: center;
@@ -3336,25 +3373,68 @@
         font-size: 1.5rem;
       }
       .inner-content a {
-        padding: 1rem 3rem;
+        /* width: min-content; */
+        /* padding: 1rem 3rem; */
+        margin-top: 2rem;
+        padding: 1em 2em;
         color: #000;
+        font-weight: bold;
+        /* font-family: inherit; */
         font-size: 1.5rem;
         text-transform: capitalize;
+        border: 2px solid #ffc61a;
+        border-radius: 2em;
+        background: linear-gradient(#ffc61a, #fff8);
+        box-shadow: 3px 3px 3px #0004, -3px -3px 3px #fff4;
         transition: 400ms ease-out;
       }
       .inner-content a:hover {
-        padding: 1.5rem 3rem;
-        border: 1px solid #fff;
-        border-radius: 16px;
-        background-color: #fff;
+        padding: 1.2em 2.2em;
+        /* border: 1px solid #fff; */
+        /* border-radius: 16px; */
+        /* background-color: #fff; */
+        box-shadow: 3px 3px 3px #0004, -3px -3px 3px #fff4, 
+        inset 1px 1px 3px #0004, inset -1px -1px 3px #fff4;
       }
+
+/* .inner-content a { */
+    /* color: #fff; */
+    /* font-family: 'Limelight', cursive; */
+    /* background-color: #8a2435; */
+/* } */
+/* .inner-content a:hover, .inner-content a:focus-visible { */
+    /* color: #8a2435; */
+    /* background-color: transparent; */
+/* } */
+/* .inner-content a:hover { */
+    /* border-bottom: currentColor 2px solid; */
+    /* box-shadow: inset 12px 12px 14px rgba(70, 70, 70, 0.12),  */
+          /* inset -11px -11px 14px rgba(255, 255, 255, 0.623); */
+/* } */
+
+/* .inner-content a { */
+    /* width: 5rem; */
+    /* height: 5rem; */
+    /* padding: 18px 10px 2px; */
+    /* padding: 1.2rem 0.5rem; */
+    /* border-radius: 50%; */
+    /* font-size: 1.2rem; */
+    /* text-align: center; */
+    /* white-space: break-spaces; */
+/* } */
 
       .contact-form {
         width: 45rem;
         margin: 0 auto;
-        padding: 2rem 1rem;
+        /* padding: 2rem 1rem; */
+        padding: 2rem;
         text-align: center;
         background-color: #fff;
+        /* background: linear-gradient(#fff, #ffc61a, #fff); */
+        /* backdrop-filter: blur(10px); */
+        /* border: 6px solid #ffc61a; */
+        /* box-shadow: -3px -3px 6px #fff8, 3px 3px 6px #0006, */
+        /* inset -3px -3px 6px #fff8, inset 3px 3px 6px #0006; */
       }
 
       .form-heading {
@@ -3363,13 +3443,18 @@
       }
       .form-heading h1 {
         color: #fff;
+        font-size: 2.6rem;
         text-transform: capitalize;
+      }
+      .form-heading h1 span {
+        text-transform: lowercase;
       }
 
       .form-fields input {
         padding: 2rem;
         border: 1px solid transparent;
         border-bottom: 1px solid #000;
+        background-color: transparent;
       }
       input::placeholder {
         text-transform: capitalize;
@@ -3384,7 +3469,8 @@
         padding: 2rem 0;
         color: #fff;
         font-size: 1.5rem;
-        background-color: #000;
+        border: 1px solid #000;
+        background: #000;
       }
 
       .main-tariff {
@@ -3616,22 +3702,56 @@
         }
         .header {
           padding: 2rem;
+          z-index: 1;
         }
         .navbar {
           position: absolute;
-          top: -100%;
+          top: 0;
+          right: 0;
           left: 0;
+          /* bottom: 0; */
+          /* width: fit-content; */
           width: 100%;
+          min-height: 100vh;
+          /* margin: auto; */
+          background-color: rgba(0, 0, 0, 0.4);
+          transform: translateY(-100%);
+          z-index: -1;
         }
         .navbar.active {
-          top: 10%;
+          top: 100%;
+          transform: translateY(0);
         }
+        .navbar::before {
+          position: absolute;
+          bottom: 100%;
+          left: 0;
+          content: "";
+          width: 100%;
+          height: 100%;
+          background-color: inherit;
+        }
+        /* .navbar { */
+          /* position: absolute; */
+          /* top: -100%; */
+          /* left: 0; */
+          /* width: 100%; */
+        /* } */
+        /* .navbar.active { */
+          /* top: 10%; */
+        /* } */
         .header .navbar a {
           display: block;
           margin: 1rem;
           padding: 1rem;
           color: #fff;
-          background-color: #ffc61a;
+          /* background-color: #ffc61a; */
+        }
+        .header .navbar a:hover {
+          color: #ffc61a;
+          margin: 1rem 1rem 1rem 2rem;
+          padding: 1rem;
+          background-color: transparent;
         }
         #menu-bars {
           display: initial;
@@ -3717,22 +3837,9 @@
         /* transform: translateY(20%); */
       }
 
-      .header {
-        position: relative;
-      }
-      .navbar {
-        top: 0;
-        right: 0;
-        /* bottom: 0; */
-        width: fit-content;
-        margin: auto;
-        transform: translateY(-100%);
-        /* z-index: -1; */
-      }
-      .navbar.active {
-        top: 100%;
-        transform: translateY(0);
-      }
+      /* .header { */
+        /* position: relative; */
+      /* } */
     </style>
   </head>
   <body>
@@ -3815,7 +3922,7 @@
         <div class="inner-content">
           <div class="contact-form">
             <div class="form-heading">
-              <h1>book a cab</h1>
+              <h1>book <span>a</span> cab</h1>
             </div>
             <div class="form-fields">
               <input type="text" name="name" id="name" placeholder="name">
