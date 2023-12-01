@@ -3277,23 +3277,46 @@
 
       .main-container {
         /* width: 100%; */
-        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
         background-image: url("../AJAX/images/background.png");
         background-position: center;
         background-size: cover;
       }
 
+      /* .background-text h2 { */
+        /* position: absolute; */
+        /* top: 50%; */
+        /* left: 50%; */
+        /* transform: translate(-50%, -50%); */
+        /* color: #fff; */
+        /* font-size: 50px; */
+        /* text-transform: capitalize; */
+      /* } */
+      /* .background-text h2 span { */
+        /* color: #ffc61a; */
+      /* } */
+
+      .background-text {
+        /* min-height: 40vh; */
+        /* padding-top: 15rem; */
+        padding-top: min(15rem, 20%);
+        display: flex;
+      }
       .background-text h2 {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        margin: auto auto 0;
         color: #fff;
-        font-size: 50px;
+        font-size: 5vw;
+        text-align: center;
         text-transform: capitalize;
       }
-      .background-text h2 span {
-        color: #ffc61a;
+      .background-text h2 span.stroke {
+        color: transparent;
+        -webkit-text-stroke: 0.12vw #ffc61a;
+      }
+      .background-text h2 span.lower {
+        text-transform: lowercase;
+
       }
 
       header.header {
@@ -3304,13 +3327,17 @@
         align-items: center;
         justify-content: space-between;
       }
+      .header #logo {
+        max-width: 30%;
+      }
       .header #logo img {
         width: 100%;
       }
+
       .navbar {
         transition: 400ms ease-in-out;
       }
-      .header .navbar a {
+      .navbar a {
         margin-left: 1rem;
         color: #fff;
         font-size: 1.7rem;
@@ -3318,7 +3345,7 @@
         text-decoration: none;
         transition: 400ms ease-out;
       }
-      .header .navbar a:hover {
+      .navbar a:hover {
         padding: 0.5rem 3rem;
         border-radius: 16px;
         background-color: #ffc61a;
@@ -3331,29 +3358,78 @@
         text-decoration: none;
       }
 
+      /* .taxi-img { */
+        /* width: 50%; */
+        /* margin: 0 auto; */
+      /* } */
+      /* .taxi-img img { */
+        /* width: 100%; */
+        /* margin-top: 260px; */
+      /* } */
+
       .taxi-img {
-        width: 50%;
-        margin: 0 auto;
+        position: relative;
+        /* width: 50%; */
+        margin-top: auto;
+        padding-top: 6rem;
+      }
+      .taxi-img::before {
+        position: absolute;
+        left: 0;
+        bottom: 15%;
+        content: "";
+        width: 105%;
+        height: 100px;
+        background-color: transparent;
+        box-shadow: -5px 10px 10px #000;
+        z-index: 1;
+      }
+      .taxi-img::after {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        content: "";
+        width: 100%;
+        height: 15%;
+        background-color: #ffc61a;
+        /* box-shadow: 0px 3px 10px #000; */
+        /* z-index: -1; */
       }
       .taxi-img img {
-        width: 100%;
-        margin-top: 260px;
+        position: relative;
+        width: 50%;
+        /* max-width: 500px; */
+        margin: auto auto 0;
+        z-index: 2;
+        /* transform: translateY(20%); */
       }
 
       .home-container {
         /* width: 100%; */
-        min-height: 100vh;
-        padding: 2rem 7%;
+        /* min-height: 100vh; */
+        /* max-width: 2600px;
+        margin: auto; */
+        /* padding: 2rem 7%; */
+        padding: 2rem 7% 7rem;
         background-color: #ffc61a;
       }
 
       .home-content {
+        max-width: 2600px;
+        margin: auto;
         padding-top: 4rem;
         /* padding: 2rem 0; */
         display: flex;
         align-items: center;
-        justify-content: center;
+        /* justify-content: center; */
+        justify-content: space-evenly;
         flex-wrap: wrap;
+      }
+      .home-content .inner-content:first-child {
+        max-width: 80rem;
+      }
+      .home-content .inner-content:last-child {
+        max-width: 50rem;
       }
 
       .inner-content {
@@ -3474,14 +3550,18 @@
       }
 
       .main-tariff {
-        padding: 3rem 7%;
-        min-height: 100vh;
+        /* padding: 3rem 7%; */
+        padding: 10rem 7%;
+        /* min-height: 100vh; */
+        max-width: 2600px;
+        margin: auto;
         display: flex;
         flex-direction: column;
       }
       .main-tariff h1 {
         width: 100%;
-        padding-bottom: 6rem;
+        /* padding-bottom: 6rem; */
+        padding-bottom: 8rem;
         font-size: 38px;
         text-align: center;
         text-transform: capitalize;
@@ -3493,7 +3573,9 @@
       .inner-tariff {
         margin: auto;
         display: flex;
-        gap: 15px;
+        /* gap: 15px; */
+        column-gap: 1.5rem;
+        row-gap: 5rem;
         flex-wrap: wrap;
         justify-content: center;
       }
@@ -3586,7 +3668,10 @@
 
       .fast-booking {
         /* width: 100%; */
-        min-height: 100vh;
+        /* min-height: 100vh; */
+        max-width: 2600px;
+        margin: auto;
+        padding: 7rem 0;
         background-image: url("../AJAX/images/secbg.png");
         background-position: center;
         background-size: cover;
@@ -3643,13 +3728,17 @@
         text-transform: capitalize;
       }
       .inner-fast-text p {
+        max-width: 45rem;
         padding: 0 2rem 2rem;
         font-size: 1.5rem;
       }
 
       .testimonials {
         width: 100%;
-        min-height: 100vh;
+        /* min-height: 100vh; */
+        max-width: 2600px;
+        margin: auto;
+        padding: 7rem 0;
         background-image: url("../AJAX/images/testimonial-bg.png");
         background-position: center;
         background-size: cover;
@@ -3758,7 +3847,11 @@
         }
         .background-text h2 {
           width: 100%;
+          font-size: 15vw;
           text-align: center;
+        }
+        .taxi-img img {
+          width: 86%;
         }
         /* .inner-box img {
           margin: 0 auto;
@@ -3766,40 +3859,40 @@
         
       }
 
-      .main-container {
+      /* .main-container {
         min-height: auto;
-      }
+      } */
 
-      .test {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        background-image: url("../AJAX/images/background.png");
-        background-position: center;
-        background-size: cover;
-      }
+      /* .test { */
+        /* min-height: 100vh; */
+        /* display: flex; */
+        /* flex-direction: column; */
+        /* background-image: url("../AJAX/images/background.png"); */
+        /* background-position: center; */
+        /* background-size: cover; */
+      /* } */
       
-      .background-text-test {
-        min-height: 40vh;
-        padding-top: 15rem;
-        display: flex;
-      }
-      .background-text-test h2 {
-        margin: auto auto 0;
-        color: #fff;
-        font-size: 5vw;
-        text-align: center;
-        text-transform: capitalize;
-      }
-      .background-text-test h2 span.stroke {
+      /* .background-text-test { */
+        /* min-height: 40vh; */
+        /* padding-top: 15rem; */
+        /* display: flex; */
+      /* } */
+      /* .background-text-test h2 { */
+        /* margin: auto auto 0; */
+        /* color: #fff; */
+        /* font-size: 5vw; */
+        /* text-align: center; */
+        /* text-transform: capitalize; */
+      /* } */
+      /* .background-text-test h2 span.stroke { */
         /* color: #ffc61a; */
-        color: transparent;
-        -webkit-text-stroke: 1px #ffc61a;
-      }
-      .background-text-test h2 span.lower {
-        text-transform: lowercase;
+        /* color: transparent; */
+        /* -webkit-text-stroke: 0.12vw #ffc61a; */
+      /* } */
+      /* .background-text-test h2 span.lower { */
+        /* text-transform: lowercase; */
 
-      }
+      /* } */
       
       .taxi-img-test {
         position: relative;
@@ -3843,7 +3936,7 @@
     </style>
   </head>
   <body>
-    <div class="main-container">
+    <!-- <div class="main-container"> -->
       <!-- <div class="background-text">
         <h2>book a <span>cab now</span></h2>
       </div> -->
@@ -3875,9 +3968,9 @@
       <!-- <div class="taxi-img">
         <img src="../AJAX/images/car-main.png" alt="">
       </div> -->
-    </div>
+    <!-- </div> -->
 
-    <div class="test">
+    <div class="main-container">
       <header class="header">
         <a href="#" id="logo">
           <img src="../AJAX/images/CabHUB.png" alt="Logo">
@@ -3901,10 +3994,10 @@
           })
         </script>
       </header>
-      <div class="background-text-test">
+      <div class="background-text">
         <h2>book <span class="lower">a</span> <span class="stroke">cab now</span></h2>
       </div>
-      <div class="taxi-img-test">
+      <div class="taxi-img">
         <img src="../AJAX/images/car-main.png" alt="">
       </div>
     </div>
