@@ -3280,6 +3280,22 @@
         overflow-x: hidden;
       }
 
+      .black-bg {
+        position: relative;
+        background-color: #000;
+        /* box-shadow: 0px 6px 10px #000; */
+      }
+      .black-bg::before {
+        position: absolute;
+        top: 0;
+        left: -5%;
+        content: "";
+        width: 110%;
+        height: 30px;
+        /* background-image: linear-gradient(#fff, transparent); */
+        /* box-shadow: inset 0px 5px 15px #fff; */
+      }
+
       .main-container {
         /* width: 100%; */
         display: flex;
@@ -4115,8 +4131,8 @@
 
       .div-test-2 form #toggle {
         position: absolute;
-        -webkit-appearance: none;
-                appearance: none;
+        /* -webkit-appearance: none; */
+                /* appearance: none; */
         /* display: none; */
         width: 200px;
         height: 100px;
@@ -4124,13 +4140,50 @@
         cursor: pointer;
         z-index: 999;
       }
+      .div-test-2 form #toggle:checked {
+        background-color: transparent;
+        opacity: 0.1;
+      }
 
-      .black-bg {
+      .div-test-2 form div {
+        position: absolute;
+        width: 200px;
+        height: 16px;
+        border-radius: 15px;
+        background-image: 
+          linear-gradient(black, white, black);
+        transition: 0.5s ease-in-out;
+      }
+      .div-test-2 form div#line-1 {
+        top: 0;
+        left: 0;
+      }
+      .div-test-2 form div#line-2 {
+        top: 50%;
+        left: 0;
+      }
+      .div-test-2 form div#line-3 {
+        top: 100%;
+        left: 0;
+      }
+      .div-test-2 form #toggle:checked ~ #line-1 {
+        top: 50%;
+        transform: rotate(45deg);
+      }
+      .div-test-2 form #toggle:checked ~ #line-2 {
+        opacity: 0;
+      }
+      .div-test-2 form #toggle:checked ~ #line-3 {
+        top: 50%;
+        transform: rotate(-45deg);
+      }
+
+      .black-bg-test {
         position: relative;
         background-color: #000;
         /* box-shadow: 0px 6px 10px #000; */
       }
-      .black-bg::before {
+      .black-bg-test::before {
         position: absolute;
         top: 0;
         left: -5%;
@@ -6944,58 +6997,58 @@
                   </div>
                 
                 </div>
-
-            <div class="showcase">
-    
-              <div class="showcase-banner">
-                <img src="./images/products/shoe-2.jpg" alt="Casual Men's Brown shoes" class="product-img default">
-                <img src="./images/products/shoe-2_1.jpg" alt="Casual Men's Brown shoes" class="product-img hover">
-            
-                  <div class="showcase-actions">
                 
-                    <button class="btn-action">
-                      <i class="fa fa-heart-o"></i>
-                    </button>
-          
-                    <button class="btn-action">
-                      <i class="fa"></i>
-                    </button>
-          
-                    <button class="btn-action">
-                      <i class="fa"></i>
-                    </button>
-          
-                    <button class="btn-action">
-                      <i class="fa"></i>
-                    </button>
-          
+                <div class="showcase">
+        
+                  <div class="showcase-banner">
+                    <img src="./images/products/shoe-2.jpg" alt="Casual Men's Brown shoes" class="product-img default">
+                    <img src="./images/products/shoe-2_1.jpg" alt="Casual Men's Brown shoes" class="product-img hover">
+                
+                      <div class="showcase-actions">
+                    
+                        <button class="btn-action">
+                          <i class="fa fa-heart-o"></i>
+                        </button>
+              
+                        <button class="btn-action">
+                          <i class="fa"></i>
+                        </button>
+              
+                        <button class="btn-action">
+                          <i class="fa"></i>
+                        </button>
+              
+                        <button class="btn-action">
+                          <i class="fa"></i>
+                        </button>
+              
+                      </div>
+            
                   </div>
-        
-              </div>
+                
+                  <div class="showcase-content">
+                    <a href="#" class="showcase-category">casual</a>
+                
+                    <h3>
+                      <a href="#" class="showcase-title">Casual Men's Brown shoes</a>
+                    </h3>
+                
+                    <div class="showcase-rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-half-o"></i>
+                      <i class="fa fa-star-half-o"></i>
+                    </div>
             
-              <div class="showcase-content">
-                <a href="#" class="showcase-category">casual</a>
-            
-                <h3>
-                  <a href="#" class="showcase-title">Casual Men's Brown shoes</a>
-                </h3>
-            
-                <div class="showcase-rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star-half-o"></i>
-                  <i class="fa fa-star-half-o"></i>
+                    <div class="price-box">
+                      <p class="price">$99.00</p>
+                      <del>$105.00</del>
+                    </div>
+                
+                  </div>
+                
                 </div>
-        
-                <div class="price-box">
-                  <p class="price">$99.00</p>
-                  <del>$105.00</del>
-                </div>
-            
-              </div>
-            
-            </div>
 
             <div class="showcase">
     
@@ -7943,6 +7996,57 @@
       // Convert URLSearchParams Object to Query String
       console.log(uspFromString.toString());
       console.log(uspFromObject.toString());
+    </script>
+    <script>
+            function generateActivationKeys(params) {
+        let rawKey = params[0];
+    
+        let index = 1;
+        let input = params[index];
+    
+        while (input != "Generate") {
+          const data = input.split(">>>");
+          const command = data[0];
+    
+          if (command == "Slice") {
+            const start = Number(data[1]);
+            const end = Number(data[2]);
+            const left = rawKey.slice(0, start);
+            const right = rawKey.slice(end);
+            rawKey = left + right;
+            console.log(rawKey);
+          } else if (command == "Flip") {
+            const type = data[1];
+            const start = Number(data[2]);
+            const end = Number(data[3]);
+            const left = rawKey.slice(0, start);
+            const right = rawKey.slice(end);
+            const substring = rawKey.slice(start, end);
+            let newSubstring = "";
+            if (type == "Upper") {
+              newSubstring = substring.toUpperCase();
+            } else if (type == "Lower") {
+              newSubstring = substring.toLowerCase();
+            }
+            rawKey = left + newSubstring + right;
+            console.log(rawKey);
+          } else if (command == "Contains") {
+            const substring = data[1];
+            if (rawKey.includes(substring)) {
+              console.log(`${rawKey} contains ${substring}`);
+            } else {
+              console.log("Substring not found!");
+            }
+          }
+    
+          index++;
+          input = params[index];
+        
+        }
+
+        console.log(`Your activation key is: ${rawKey}`);
+    
+      }
     </script>
   </body>
 </html>
