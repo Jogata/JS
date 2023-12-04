@@ -4365,6 +4365,60 @@
         /* transform: scaleX(200%); */
       }
 
+      .body-slider-test .slider .thumbnails {
+        position: absolute;
+        bottom: 50px;
+        width: 100%;
+        height: 250px;
+        padding: 0 50px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        scrollbar-width: thin;
+        scrollbar-color: transparent transparent;
+        overflow: auto;
+        z-index: 11;
+      }
+      .thumbnails::-webkit-scrollbar {
+        width: 0;
+      }
+
+      .body-slider-test .slider .thumbnails .thumb {
+        flex-shrink: 0;
+        width: 150px;
+        height: 220px;
+        filter: brightness(0.5);
+        transition: 0.5s ease-in-out;
+        cursor: pointer;
+      }
+      .body-slider-test .slider .thumbnails .thumb.active {
+        filter: brightness(1);
+      }
+      .body-slider-test .slider .thumbnails .thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+
+      .body-slider-test .slider .thumbnails .thumb .thumb-content {
+        position: absolute;
+        right: 10px;
+        left: 10px;
+        bottom: 10px;
+      }
+
+      @media screen and (max-width: 678px) {
+        .body-slider-test .thumbnails {
+          justify-content: start;
+        }
+        .body-slider-test .slider .item .content h2 {
+          font-size: 60px;
+        }
+        .body-slider-test .slider .arrows {
+          top: 10%;
+        }
+      }
     </style>
   </head>
   <body>
@@ -4758,38 +4812,84 @@
 
         <div class="thumbnails">
 
-          <div class="thumb">
-            <img src="../AJAX/sllides/bg-65.jpeg" alt="">
-            <div class="thumb-content">
-              <h3>slider name</h3>
-            </div>
-          </div>
-          <div class="thumb">
-            <img src="../AJAX/sllides/bg-65.jpeg" alt="">
-            <div class="thumb-content">
-              <h3>slider name</h3>
-            </div>
-          </div>
-          <div class="thumb">
-            <img src="../AJAX/sllides/bg-65.jpeg" alt="">
-            <div class="thumb-content">
-              <h3>slider name</h3>
-            </div>
-          </div>
-          <div class="thumb">
-            <img src="../AJAX/sllides/bg-65.jpeg" alt="">
-            <div class="thumb-content">
-              <h3>slider name</h3>
-            </div>
-          </div>
-          <div class="thumb">
+          <div class="thumb active">
             <img src="../AJAX/sllides/bg-65.jpeg" alt="">
             <div class="thumb-content">
               <h3>slider name</h3>
             </div>
           </div>
 
+          <div class="thumb">
+            <img src="../AJAX/sllides/bg-little-mermaid.jpg" alt="">
+            <div class="thumb-content">
+              <h3>slider name</h3>
+            </div>
+          </div>
+
+          <div class="thumb">
+            <img src="../AJAX/sllides/bg-the-black-demon.jpeg" alt="">
+            <div class="thumb-content">
+              <h3>slider name</h3>
+            </div>
+          </div>
+
+          <div class="thumb">
+            <img src="../AJAX/sllides/bg-the-covenant.jpeg" alt="">
+            <div class="thumb-content">
+              <h3>slider name</h3>
+            </div>
+          </div>
+
+          <div class="thumb">
+            <img src="../AJAX/sllides/bg-the-tank.jpeg" alt="">
+            <div class="thumb-content">
+              <h3>slider name</h3>
+            </div>
+          </div>
+          
         </div>
+
+        <script>
+          const items = document.querySelectorAll(".list .item");
+          const next = document.querySelector("#next");
+          const prev = document.querySelector("#prev");
+          const thumbs = document.querySelectorAll(".thumb");
+
+          let count = items.length;
+          let itemActive = 0;
+
+          next.addEventListener("click", () => {
+            itemActive++;
+            if (itemActive >= count) {
+              itemActive = 0;
+            }
+            showSlider();
+          })
+
+          prev.addEventListener("click", () => {
+            itemActive--;
+            if (itemActive < 0) {
+              itemActive = count - 1;
+            }
+            showSlider();
+          })
+
+          thumbs.forEach((thumb, index) => {
+            thumb.addEventListener("click", () => {
+              itemActive = index;
+              showSlider();
+            })
+          })
+
+          function showSlider() {
+            const itemActiveOld = document.querySelector(".slider .item.active");
+            itemActiveOld.classList.remove('active');
+            const thumbActiveOld = document.querySelector(".thumb.active");
+            thumbActiveOld.classList.remove('active');
+            items[itemActive].classList.add("active");
+            thumbs[itemActive].classList.add("active");
+          }
+        </script>
 
       </div>
 
@@ -7496,58 +7596,58 @@
                   </div>
                 
                 </div>
-
-            <div class="showcase">
-    
-              <div class="showcase-banner">
-                <img src="./images/products/jacket-1.jpg" alt="Mens Winter Leathers Jackets" class="product-img default">
-                <img src="./images/products/jacket-2.jpg" alt="Mens Winter Leathers Jackets" class="product-img hover">
-            
-                  <div class="showcase-actions">
                 
-                    <button class="btn-action">
-                      <i class="fa fa-heart-o"></i>
-                    </button>
-          
-                    <button class="btn-action">
-                      <i class="fa"></i>
-                    </button>
-          
-                    <button class="btn-action">
-                      <i class="fa"></i>
-                    </button>
-          
-                    <button class="btn-action">
-                      <i class="fa"></i>
-                    </button>
-          
+                <div class="showcase">
+        
+                  <div class="showcase-banner">
+                    <img src="./images/products/jacket-1.jpg" alt="Mens Winter Leathers Jackets" class="product-img default">
+                    <img src="./images/products/jacket-2.jpg" alt="Mens Winter Leathers Jackets" class="product-img hover">
+                
+                      <div class="showcase-actions">
+                    
+                        <button class="btn-action">
+                          <i class="fa fa-heart-o"></i>
+                        </button>
+              
+                        <button class="btn-action">
+                          <i class="fa"></i>
+                        </button>
+              
+                        <button class="btn-action">
+                          <i class="fa"></i>
+                        </button>
+              
+                        <button class="btn-action">
+                          <i class="fa"></i>
+                        </button>
+              
+                      </div>
+            
                   </div>
-        
-              </div>
+                
+                  <div class="showcase-content">
+                    <a href="#" class="showcase-category">jacket</a>
+                
+                    <h3>
+                      <a href="#" class="showcase-title">Mens Winter Leathers Jackets</a>
+                    </h3>
+                
+                    <div class="showcase-rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-half-o"></i>
+                      <i class="fa fa-star-half-o"></i>
+                    </div>
             
-              <div class="showcase-content">
-                <a href="#" class="showcase-category">jacket</a>
-            
-                <h3>
-                  <a href="#" class="showcase-title">Mens Winter Leathers Jackets</a>
-                </h3>
-            
-                <div class="showcase-rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star-half-o"></i>
-                  <i class="fa fa-star-half-o"></i>
+                    <div class="price-box">
+                      <p class="price">$32.00</p>
+                      <del>$45.00</del>
+                    </div>
+                
+                  </div>
+                
                 </div>
-        
-                <div class="price-box">
-                  <p class="price">$32.00</p>
-                  <del>$45.00</del>
-                </div>
-            
-              </div>
-            
-            </div>
 
             <div class="showcase">
     
