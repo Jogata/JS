@@ -3279,6 +3279,9 @@
       footer {
         display: none;
       }
+      .body-slider-test {
+        display: none !important;
+      }
 
       a {
         display: inline-block;
@@ -4237,8 +4240,9 @@
         margin: auto;
         padding-top: 1rem;
         display: grid;
-        grid-template-columns: 50px 1fr 50px;
-        grid-template-columns: 1fr 1fr 1fr;
+        /* grid-template-columns: 50px 1fr 50px; */
+        /* grid-template-columns: 1fr 1fr 1fr; */
+        grid-template-columns: repeat(auto-fill, minmax(max(30%, 10rem), 1fr));
         /* grid-template-rows: 50px; */
         /* display: flex; */
         align-items: center;
@@ -4270,6 +4274,7 @@
         display: flex;
         gap: 20px;
         justify-content: center;
+        flex-wrap: wrap;
       }
       .body-slider-test header .menu a {
         color: white;
@@ -4432,16 +4437,22 @@
         position: absolute;
         /* bottom: 50px; */
         bottom: 5rem;
-        width: 100%;
+        /* width: 100%; */
+        width: 94%;
         /* height: 250px; */
         height: 25rem;
+        /* margin: auto; */
+        margin: 0 2% 0 4%;
         /* padding: 0 50px; */
-        padding: 0 5rem;
+        /* padding: 0 5rem; */
         display: flex;
         gap: 10px;
-        justify-content: center;
+        /* justify-content: center; */
         scrollbar-width: thin;
-        scrollbar-color: transparent transparent;
+        scrollbar-color: white transparent;
+        /* scrollbar-face-color: #0064a7; */
+        /* scrollbar-shadow-color: #8ea5b5; */
+        /* scrollbar-highlight-color: #8ea5b5; */
         overflow: auto;
         z-index: 11;
       }
@@ -4451,6 +4462,7 @@
 
       .body-slider-test .slider .thumbnails .thumb {
         flex-shrink: 0;
+        position: relative;
         /* width: 150px; */
         width: 15rem;
         /* height: 220px; */
@@ -4458,6 +4470,21 @@
         filter: brightness(0.5);
         transition: 0.5s ease-in-out;
         cursor: pointer;
+      }
+      .body-slider-test .slider .thumbnails .thumb:first-child {
+        margin-left: auto;
+      }
+      .body-slider-test .slider .thumbnails .thumb::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        background-image: 
+          linear-gradient(transparent, transparent, #000);
+        z-index: 1;
       }
       .body-slider-test .slider .thumbnails .thumb.active {
         filter: brightness(1);
@@ -4474,12 +4501,17 @@
         right: 10px;
         left: 10px;
         bottom: 10px;
+        z-index: 2;
+      }
+      .body-slider-test .slider .thumbnails .thumb .thumb-content h3 {
+        font-size: 1.5rem;
+        text-transform: capitalize;
       }
 
-      @media screen and (max-width: 678px) {
-        .body-slider-test .thumbnails {
+      @media screen and (max-width: 70rem) {
+        /* .body-slider-test .thumbnails {
           justify-content: start;
-        }
+        } */
         .body-slider-test .slider .item .content h2 {
           /* font-size: 60px; */
           font-size: 6rem;
@@ -4489,6 +4521,49 @@
           top: max(10rem, 10%);
         }
       }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .body-slider-test-2 {
+        position: relative;
+        /* width: 100%; */
+        height: 100vh;
+        /* background-image: url("./slides/lion-resting-on-a-rock.jpeg"); */
+        /* background-position: center; */
+        /* background-size: cover; */
+      }
+      .body-slider-test-2::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.2);
+        z-index: -1;
+      }
+
+      .body-slider-test-2 .background {
+        position: absolute;
+        /* top: 3%; */
+        width: 100%;
+        /* height: 94%; */
+        height: 100%;
+        /* object-fit: contain; */
+        object-fit: cover;
+        z-index: -1;
+        /* box-shadow: 5px 5px 15px #0005; */
+      }
+
+      .body-slider-test-2 header {
+        padding: 30px 0;
+      }
+
+      .body-slider-test-2 .container {}
     </style>
   </head>
   <body>
@@ -4804,6 +4879,28 @@
 
     </footer>
 
+    <div class="body-slider-test-2">
+
+      <img src="./slides/lion-resting-on-a-rock.jpeg" alt="" class="background">
+
+      <header>
+        <div class="container">
+          <div class="img-box">
+            loga
+          </div>
+          <nav>
+            <ul>
+            </ul>
+            <li><a href="#">species</a></li>
+            <li><a href="#">about us</a></li>
+            <li><a href="#">our work</a></li>
+            <li><a href="#">get involved</a></li>
+          </nav>
+        </div>
+      </header>
+
+    </div>
+
     <div class="body-slider-test">
 
       <header>
@@ -4833,7 +4930,8 @@
             <div class="content">
               <p>design</p>
               <h2>slider 01</h2>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, quibusdam! Sint, provident.</p>
+              <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, quibusdam! Sint, provident.</p> -->
+              <p>An astronaut crash lands on a mysterious planet only to discover he's not alone.</p>
             </div>
           </div>
 
@@ -4842,7 +4940,8 @@
             <div class="content">
               <p>design</p>
               <h2>slider 02</h2>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis modi voluptatum nisi eum assumenda culpa sequi doloribus, nihil maxime iusto molestiae. Eligendi consequuntur debitis veniam dolores minus.</p>
+              <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis modi voluptatum nisi eum assumenda culpa sequi doloribus, nihil maxime iusto molestiae. Eligendi consequuntur debitis veniam dolores minus.</p> -->
+              <p>A young mermaid makes a deal with a sea witch to trade her beautiful voice for human legs so she can discover the world above water and impress a prince.</p>
             </div>
           </div>
 
@@ -4851,7 +4950,8 @@
             <div class="content">
               <p>design</p>
               <h2>slider 03</h2>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi minus eos corporis, numquam hic totam saepe quasi deleniti cupiditate.</p>
+              <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi minus eos corporis, numquam hic totam saepe quasi deleniti cupiditate.</p> -->
+              <p>Stranded on a crumbling rig in Baja, a family faces off against a vengeful megalodon shark.</p>
             </div>
           </div>
 
@@ -4860,7 +4960,8 @@
             <div class="content">
               <p>design</p>
               <h2>slider 04</h2>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint nostrum nulla eaque rem, commodi, recusandae ea rerum, harum iste labore quo culpa sit quisquam reprehenderit.</p>
+              <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint nostrum nulla eaque rem, commodi, recusandae ea rerum, harum iste labore quo culpa sit quisquam reprehenderit.</p> -->
+              <p>During the war in Afghanistan, a local interpreter risks his own life to carry an injured sergeant across miles of grueling terrain.</p>
             </div>
           </div>
 
@@ -4869,7 +4970,8 @@
             <div class="content">
               <p>design</p>
               <h2>slider 05</h2>
-              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod itaque expedita illum! Consectetur ad blanditiis eum assumenda.</p>
+              <!-- <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod itaque expedita illum! Consectetur ad blanditiis eum assumenda.</p> -->
+              <p>After mysteriously inheriting an abandoned coastal property, Ben and his family accidentally unleash an ancient, long-dormant creature that terrorized the entire region-including his own ancestors-for generations.</p>
             </div>
           </div>
 
@@ -7800,58 +7902,58 @@
                   </div>
                 
                 </div>
-
-            <div class="showcase">
-    
-              <div class="showcase-banner">
-                <img src="./images/products/shoe-1.jpg" alt="Men's Leather Formal Wear shoes" class="product-img default">
-                <img src="./images/products/shoe-1_1.jpg" alt="Men's Leather Formal Wear shoes" class="product-img hover">
-            
-                  <div class="showcase-actions">
                 
-                    <button class="btn-action">
-                      <i class="fa fa-heart-o"></i>
-                    </button>
-          
-                    <button class="btn-action">
-                      <i class="fa"></i>
-                    </button>
-          
-                    <button class="btn-action">
-                      <i class="fa"></i>
-                    </button>
-          
-                    <button class="btn-action">
-                      <i class="fa"></i>
-                    </button>
-          
+                <div class="showcase">
+        
+                  <div class="showcase-banner">
+                    <img src="./images/products/shoe-1.jpg" alt="Men's Leather Formal Wear shoes" class="product-img default">
+                    <img src="./images/products/shoe-1_1.jpg" alt="Men's Leather Formal Wear shoes" class="product-img hover">
+                
+                      <div class="showcase-actions">
+                    
+                        <button class="btn-action">
+                          <i class="fa fa-heart-o"></i>
+                        </button>
+              
+                        <button class="btn-action">
+                          <i class="fa"></i>
+                        </button>
+              
+                        <button class="btn-action">
+                          <i class="fa"></i>
+                        </button>
+              
+                        <button class="btn-action">
+                          <i class="fa"></i>
+                        </button>
+              
+                      </div>
+            
                   </div>
-        
-              </div>
+                
+                  <div class="showcase-content">
+                    <a href="#" class="showcase-category">formal</a>
+                
+                    <h3>
+                      <a href="#" class="showcase-title">Men's Leather Formal Wear shoes</a>
+                    </h3>
+                
+                    <div class="showcase-rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star-half-o"></i>
+                      <i class="fa fa-star-half-o"></i>
+                    </div>
             
-              <div class="showcase-content">
-                <a href="#" class="showcase-category">formal</a>
-            
-                <h3>
-                  <a href="#" class="showcase-title">Men's Leather Formal Wear shoes</a>
-                </h3>
-            
-                <div class="showcase-rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star-half-o"></i>
-                  <i class="fa fa-star-half-o"></i>
+                    <div class="price-box">
+                      <p class="price">$50.00</p>
+                      <del>$65.00</del>
+                    </div>
+                
+                  </div>
+                
                 </div>
-        
-                <div class="price-box">
-                  <p class="price">$50.00</p>
-                  <del>$65.00</del>
-                </div>
-            
-              </div>
-            
-            </div>
 
             <div class="showcase">
     
