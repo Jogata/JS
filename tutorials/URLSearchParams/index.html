@@ -4572,8 +4572,18 @@
         height: 100%;
         /* object-fit: contain; */
         object-fit: cover;
-        z-index: -1;
+        transition: opacity 800ms ease-in-out;
+        visibility: hidden;
+        opacity: 0;
+        z-index: -2;
         /* box-shadow: 5px 5px 15px #0005; */
+      }
+      .body-slider-test-2 .background.visible {
+        transition: opacity 400ms ease-in-out;
+        visibility: visible;
+        z-index: -1;
+        opacity: 1;
+        /* z-index: -1; */
       }
 
       .body-slider-test-2 .container {
@@ -4636,12 +4646,63 @@
         transition: 400ms ease-in-out;
         cursor: pointer;
       }
+      .body-slider-test-2 button:hover {
+        transform: scale(1.1);
+      }
+
       .body-slider-test-2 main .container {
         /* width: 100%; */
         /* padding: 0 150px; */
         padding-top: 80px;
         color: #fff;
         pointer-events: none;
+      }
+
+      .body-slider-test-2 main .container span {
+        position: relative;
+        margin-bottom: 60px;
+        font-size: 24px;
+      }
+      .body-slider-test-2 main .container span::before {
+        position: absolute;
+        top: 50%;
+        right: -50px;
+        content: "";
+        width: 40px;
+        height: 2px;
+        background-color: #dbdbdb;
+      }
+      .body-slider-test-2 main .container h1 {
+        width: 30%;
+        margin: 10px 0 60px;
+        font-size: 60px;
+        line-height: 1.2;
+        text-transform: uppercase;
+      }
+      .body-slider-test-2 main .container h3 {
+        font-size: 34px;
+        text-transform: uppercase;
+      }
+
+      .body-slider-test-2 .buttons {
+        display: flex;
+        gap: 4px;
+        justify-content: center;
+      }
+      .body-slider-test-2 .buttons .btn {
+        color: #fff;
+        border-radius: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+      .body-slider-test-2 .buttons .btn.prev {
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        transform-origin: right;
+      }
+      .body-slider-test-2 .buttons .btn.next {
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        transform-origin: left;
       }
     </style>
   </head>
@@ -4960,7 +5021,10 @@
 
     <div class="body-slider-test-2">
 
-      <img src="./slides/lion-resting-on-a-rock.jpeg" alt="" class="background">
+      <img src="./slides/lion-resting-on-a-rock.jpeg" alt="" class="background visible">
+      <img src="./slides/leaping-leopard.jpeg" alt="" class="background">
+      <img src="./slides/elephant.jpeg" alt="" class="background">
+      <img src="./slides/white-tiger-on-fire.jpg" alt="" class="background">
 
       <header>
         <div class="container">
@@ -4984,20 +5048,82 @@
         <section>
           <div class="container">
             <span>species</span>
-            <h1 class="text">asiatic lion</h1>
+            <h1 class="animal">asiatic lion</h1>
             <span>status</span>
-            <h3>endangered</h3>
+            <h3 class="status">endangered</h3>
           </div>
           <div class="buttons">
             <button class="btn prev">
-              <i class="fa fa-chevron-left"></i>
+              <i class="fa fa-chevron-left" aria-hidden="true"></i>
             </button>
             <button class="btn next">
-              <i class="fa fa-chevron-right"></i>
+              <i class="fa fa-chevron-right" aria-hidden="true"></i>
             </button>
           </div>
         </section>
       </main>
+
+      <script>
+        const animals = [
+          {
+            animal: "asiatic lion", 
+            status: "endangered"
+          }, 
+          {
+            animal: "american jaguar", 
+            status: "vulnerable"
+          }, 
+          {
+            animal: "african elephant", 
+            status: "endangered"
+          }, 
+          {
+            animal: "indian tiger", 
+            status: "vulnerable"
+          }, 
+        ]
+
+        const backgrounds = document.querySelectorAll(".background");
+        const animalName = document.querySelector(".animal");
+        const status = document.querySelector(".status");
+
+        const prevBtn = document.querySelector(".prev");
+        const nextBtn = document.querySelector(".next");
+
+        let index = 0;
+        const maxIndexValue = backgrounds.length;
+
+        prevBtn.addEventListener("click", () => {
+          index--;
+
+          // if (index < 0) {
+          //   index = backgrounds.length - 1;
+          // }
+          index = index + maxIndexValue;
+          index = index % maxIndexValue;
+
+          const currentBackground = document.querySelector(".background.visible");
+          currentBackground.classList.remove("visible");
+          backgrounds[index].classList.add("visible");
+          animalName.textContent = animals[index].animal;
+          status.textContent = animals[index].status;
+        })
+
+        nextBtn.addEventListener("click", () => {
+          index++;
+
+          // if (index >= backgrounds.length - 1) {
+          //   index = 0;
+          // }
+          index = index % maxIndexValue;
+
+          const currentBackground = document.querySelector(".background.visible");
+          currentBackground.classList.remove("visible");
+          backgrounds[index].classList.add("visible");
+          animalName.textContent = animals[index].animal;
+          status.textContent = animals[index].status;
+        })
+      </script>
 
     </div>
 
@@ -8108,16 +8234,16 @@
                   </div>
                 
                 </div>
-
+                
+              </div>
+    
+            </div>
+    
           </div>
-
+    
         </div>
-
+    
       </div>
-
-    </div>
-
-  </div>
 
       <div>
 
