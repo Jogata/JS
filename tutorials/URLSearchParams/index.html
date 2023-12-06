@@ -4544,6 +4544,10 @@
         box-sizing: border-box;
       }
 
+      body {
+        background-color: black;
+      }
+
       .body-slider-test-2 {
         position: relative;
         /* width: 100%; */
@@ -4572,6 +4576,7 @@
         height: 100%;
         /* object-fit: contain; */
         object-fit: cover;
+        object-position: top;
         transition: opacity 800ms ease-in-out;
         visibility: hidden;
         opacity: 0;
@@ -4579,7 +4584,8 @@
         /* box-shadow: 5px 5px 15px #0005; */
       }
       .body-slider-test-2 .background.visible {
-        transition: opacity 400ms ease-in-out;
+        /* transition: opacity 400ms ease-in-out; */
+        /* transition: opacity 800ms ease-in-out; */
         visibility: visible;
         z-index: -1;
         opacity: 1;
@@ -4588,32 +4594,39 @@
 
       .body-slider-test-2 .container {
         /* width: 100%; */
-        padding: 0 150px;
+        /* padding: 0 150px; */
+        padding: 0 7%;
       }
       
       .body-slider-test-2 header {
-        padding: 30px 0;
+        /* padding: 30px 0; */
+        padding: 2rem 0;
       }
 
       .body-slider-test-2 header .container {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 2rem;
       }
 
-      .body-slider-test-2 .img-box {
-        width: 60px;
-        height: 60px;
+      .body-slider-test-2 .logo {
+        /* width: 60px; */
+        flex-shrink: 0;
+        width: 4rem;
+        /* height: 60px; */
+        height: 4rem;
         padding: 5px;
         border-radius: 50%;
         background-color: white;
         transition: 400ms ease-in-out;
         cursor: pointer;
       }
-      .body-slider-test-2 .img-box:hover {
+      .body-slider-test-2 .logo:hover {
         transform: scale(1.1);
       }
-      .body-slider-test-2 .img-box img {
+      .body-slider-test-2 .logo img {
         width: 100%;
         /* filter: invert(1); */
       }
@@ -4621,7 +4634,9 @@
       .body-slider-test-2 nav ul {
         list-style: none;
         display: flex;
-        gap: 40px;
+        flex-wrap: wrap;
+        column-gap: 2.5rem;
+        row-gap: 1.5rem;
       }
       .body-slider-test-2 nav ul a {
         color: #dbdbdb;
@@ -4635,7 +4650,8 @@
 
       .body-slider-test-2 button {
         /* color: #dbdbdb; */
-        padding: 10px 25px;
+        /* padding: 10px 25px; */
+        padding: 0.6em 1.6em;
         font-size: 1rem;
         font-weight: 500;
         font-family: inherit;
@@ -4678,13 +4694,39 @@
         font-size: 60px;
         line-height: 1.2;
         text-transform: uppercase;
+        transform: translateY(50px);
+        /* transition: all 500ms ease-in; */
+        /* transition-delay: 2000ms; */
+        opacity: 0;
       }
       .body-slider-test-2 main .container h3 {
         font-size: 34px;
         text-transform: uppercase;
+        transform: translateY(50px);
+        /* transition: all 500ms ease-in; */
+        opacity: 0;
+      }
+      .body-slider-test-2 main .container h1.visible {
+        /* transform: translateY(0); */
+        animation: show-up 1s ease-in forwards;
+        /* opacity: 1; */
+      }
+      .body-slider-test-2 main .container h3.visible {
+        /* transform: translateY(0); */
+        animation: show-up 1s ease-in forwards;
+        animation-delay: 500ms;
+        /* opacity: 1; */
+      }
+
+      @keyframes show-up {
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
       }
 
       .body-slider-test-2 .buttons {
+        padding: 3rem 0;
         display: flex;
         gap: 4px;
         justify-content: center;
@@ -4703,6 +4745,31 @@
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px;
         transform-origin: left;
+      }
+
+      /* Full-screen */
+      .body-slider-test-2 {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .body-slider-test-2 header {
+        width: 100%;
+      }
+      .body-slider-test-2 main {
+        display: flex;
+        width: 100%;
+      }
+      .body-slider-test-2 main section {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+      }
+      .body-slider-test-2 main .container {
+        width: 100%;
+      }
+      .body-slider-test-2 main .buttons {
+        width: 100%;
+        align-self: flex-end;
       }
     </style>
   </head>
@@ -5028,7 +5095,7 @@
 
       <header>
         <div class="container">
-          <div class="img-box">
+          <div class="logo">
             <!-- <img src="./slides/logo.png" alt="logo"> -->
             <img src="./slides/logo-2.png" alt="logo">
           </div>
@@ -5048,9 +5115,9 @@
         <section>
           <div class="container">
             <span>species</span>
-            <h1 class="animal">asiatic lion</h1>
+            <h1 class="animal visible">asiatic lion</h1>
             <span>status</span>
-            <h3 class="status">endangered</h3>
+            <h3 class="status visible">endangered</h3>
           </div>
           <div class="buttons">
             <button class="btn prev">
@@ -5332,6 +5399,19 @@
     </div>
 
     <!-- Toggle Menu Bar Button CSS only -->
+
+    <!-- search-bar -->
+    <div class="search-bar-test">
+      <div class="box">
+        <div class="search-box">
+          <input type="text" name="test" id="test">
+          <label for="">
+            <i class="fa fa-search"></i>
+          </label>
+        </div>
+      </div>
+    </div>
+    <!-- search-bar -->
 
     <div class="overlay" data-overlay></div>
 
@@ -7901,11 +7981,11 @@
                     </h3>
                 
                     <div class="showcase-rating">
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-half-o"></i>
-                      <i class="fa fa-star-half-o"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                      <i class="fa fa-star-half-o" aria-hidden="true"></i>
                     </div>
             
                     <div class="price-box">
@@ -7926,19 +8006,19 @@
                     <div class="showcase-actions">
                     
                       <button class="btn-action">
-                        <i class="fa fa-heart-o"></i>
+                        <i class="fa fa-heart-o" aria-hidden="true"></i>
                       </button>
             
                       <button class="btn-action">
-                        <i class="fa"></i>
+                        <i class="fa" aria-hidden="true"></i>
                       </button>
             
                       <button class="btn-action">
-                        <i class="fa"></i>
+                        <i class="fa" aria-hidden="true"></i>
                       </button>
             
                       <button class="btn-action">
-                        <i class="fa"></i>
+                        <i class="fa" aria-hidden="true"></i>
                       </button>
             
                     </div>
@@ -7953,11 +8033,11 @@
                     </h3>
                 
                     <div class="showcase-rating">
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-half-o"></i>
-                      <i class="fa fa-star-half-o"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                      <i class="fa fa-star-half-o" aria-hidden="true"></i>
                     </div>
             
                     <div class="price-box">
@@ -7980,19 +8060,19 @@
                     <div class="showcase-actions">
                       
                       <button class="btn-action">
-                        <i class="fa fa-heart-o"></i>
+                        <i class="fa fa-heart-o" aria-hidden="true"></i>
                       </button>
             
                       <button class="btn-action">
-                        <i class="fa"></i>
+                        <i class="fa" aria-hidden="true"></i>
                       </button>
             
                       <button class="btn-action">
-                        <i class="fa"></i>
+                        <i class="fa" aria-hidden="true"></i>
                       </button>
             
                       <button class="btn-action">
-                        <i class="fa"></i>
+                        <i class="fa" aria-hidden="true"></i>
                       </button>
             
                     </div>
@@ -8007,11 +8087,11 @@
                     </h3>
                 
                     <div class="showcase-rating">
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-half-o"></i>
-                      <i class="fa fa-star-half-o"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                      <i class="fa fa-star-half-o" aria-hidden="true"></i>
                     </div>
             
                     <div class="price-box">
@@ -8032,19 +8112,19 @@
                       <div class="showcase-actions">
                     
                         <button class="btn-action">
-                          <i class="fa fa-heart-o"></i>
+                          <i class="fa fa-heart-o" aria-hidden="true"></i>
                         </button>
               
                         <button class="btn-action">
-                          <i class="fa"></i>
+                          <i class="fa" aria-hidden="true"></i>
                         </button>
               
                         <button class="btn-action">
-                          <i class="fa"></i>
+                          <i class="fa" aria-hidden="true"></i>
                         </button>
               
                         <button class="btn-action">
-                          <i class="fa"></i>
+                          <i class="fa" aria-hidden="true"></i>
                         </button>
               
                       </div>
@@ -8059,11 +8139,11 @@
                     </h3>
                 
                     <div class="showcase-rating">
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-half-o"></i>
-                      <i class="fa fa-star-half-o"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                      <i class="fa fa-star-half-o" aria-hidden="true"></i>
                     </div>
             
                     <div class="price-box">
@@ -8086,19 +8166,19 @@
                     <div class="showcase-actions">
                     
                       <button class="btn-action">
-                        <i class="fa fa-heart-o"></i>
+                        <i class="fa fa-heart-o" aria-hidden="true"></i>
                       </button>
             
                       <button class="btn-action">
-                        <i class="fa"></i>
+                        <i class="fa" aria-hidden="true"></i>
                       </button>
             
                       <button class="btn-action">
-                        <i class="fa"></i>
+                        <i class="fa" aria-hidden="true"></i>
                       </button>
             
                       <button class="btn-action">
-                        <i class="fa"></i>
+                        <i class="fa" aria-hidden="true"></i>
                       </button>
             
                     </div>
@@ -8113,11 +8193,11 @@
                     </h3>
                 
                     <div class="showcase-rating">
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-half-o"></i>
-                      <i class="fa fa-star-half-o"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                      <i class="fa fa-star-half-o" aria-hidden="true"></i>
                     </div>
             
                     <div class="price-box">
@@ -8138,19 +8218,19 @@
                       <div class="showcase-actions">
                     
                         <button class="btn-action">
-                          <i class="fa fa-heart-o"></i>
+                          <i class="fa fa-heart-o" aria-hidden="true"></i>
                         </button>
               
                         <button class="btn-action">
-                          <i class="fa"></i>
+                          <i class="fa" aria-hidden="true"></i>
                         </button>
               
                         <button class="btn-action">
-                          <i class="fa"></i>
+                          <i class="fa" aria-hidden="true"></i>
                         </button>
               
                         <button class="btn-action">
-                          <i class="fa"></i>
+                          <i class="fa" aria-hidden="true"></i>
                         </button>
               
                       </div>
@@ -8165,11 +8245,11 @@
                     </h3>
                 
                     <div class="showcase-rating">
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-half-o"></i>
-                      <i class="fa fa-star-half-o"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star" aria-hidden="true"></i>
+                      <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                      <i class="fa fa-star-half-o" aria-hidden="true"></i>
                     </div>
             
                     <div class="price-box">
