@@ -3,151 +3,141 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URLSearchParams in JS</title>
+    <!-- <title>URLSearchParams in JS</title> -->
+    <title>Headphones</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
-    <script>
-// 05. Nether Realms✶
+    <!--=============== HEADER ===============-->
+    <header class="header" id="header">
+      <nav class="nav container">
+        <a href="#" class="nav-logo">
+          <img src="assets/img/logo.png" alt="">
+        </a>
+        <div class="nav-menu" id="nav-menu">
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="#home" class="nav-link active-link">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="#specs" class="nav-link">Specs</a>
+            </li>
+            <li class="nav-item">
+              <a href="#case" class="nav-link">Case</a>
+            </li>
+            <li class="nav-item">
+              <a href="#products" class="nav-link">Products</a>
+            </li>
+          </ul>
+          <div class="nav-close" id="nav-close">
+            <i class="fa-close-line"></i>
+          </div>
+        </div>
+        <div class="nav-toggle" id="nav-toggle">
+          <i class="fa-function-line"></i>
+        </div>
+      </nav>
+    </header>
+    <main class="main">
+      <!--=============== HOME ===============-->
+      <section class="home section" id="home">
+        <div class="home-container container grid">
+          <div>
+            <img src="assets/img/home.png" alt="" class="home-img">
+          </div>
+          <div class="home-data">
+            <div class="home-header">
+              <h1 class="home-title">On ear</h1>
+              <h2 class="home-subtitle">Beats 3</h2>
+            </div>
+            <div class="home-footer">
+              <h3 class="home-title-description">Overview</h3>
+              <p class="home-description">Enjoy award-winning Beats sound with wireless listening freedom and a sleek, 
+                streamlined design with comfortable padded earphones, delivering first-rate playback.
+              </p>
+              <a href="#" class="button button--flex">
+                <span class="button--flex">
+                  <i class="fa-shopping-bag-line button-icon"></i></i> Add to Bag
+                </span>
+                <span class="home-price">$299</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!--=============== SPONSOR ===============-->
+      <section class="sponsor section">
+        <div class="sponsor-container container grid">
+          <img src="assets/img/sponsor1.png" alt="" class="sponsor-img">
+          <img src="assets/img/sponsor2.png" alt="" class="sponsor-img">
+          <img src="assets/img/sponsor3.png" alt="" class="sponsor-img">
+          <img src="assets/img/sponsor4.png" alt="" class="sponsor-img">
+        </div>
+      </section>
+      <!--=============== SPECS ===============-->
+      <section class="specs section grid" id="specs">
+        <h2 class="section-title section-title-gradient">Specs</h2>
+        <div class="specs-container container grid">
+          <div class="specs-content grid">
+            <div class="specs-data">
+              <i class="fa-bluetooth-line specs-icon"></i>
+              <h3 class="specs-title">Connection</h3>
+              <span class="specs-subtitle">Bluetooth v5.2</span>
+            </div>
+            <div class="specs-data">
+              <i class="fa-battery-charge-line specs-icon"></i>
+              <h3 class="specs-title">Battery</h3>
+              <span class="specs-subtitle">Duration 40h</span>
+            </div>
+            <div class="specs-data">
+              <i class="fa-plug-line specs-icon"></i>
+              <h3 class="specs-title">Load</h3>
+              <span class="specs-subtitle">Fast charge 4.2-AAC</span>
+            </div>
+            <div class="specs-data">
+              <i class="fa-mic-line specs-icon"></i>
+              <h3 class="specs-title">Microphone</h3>
+              <span class="specs-subtitle">Supports Apple Siri <br> and Google</span>
+            </div>
+          </div>
+          <div>
+            <img src="assets/img/specs.png" alt="" class="specs-img">
+          </div>
+        </div>
+      </section>
+      <!--=============== CASE ===============-->
+      <section class="case section grid" id="case">
+        <h2 class="section-title section-title-gradient">Case</h2>
+        <div class="case-container container grid">
+          <div>
+            <img src="assets/img/case.png" alt="" class="case-img">
+          </div>
+          <div class="case-data">
+            <p class="case-description">With a comfortable and adaptable case so that you can 
+              store it whenever you want, and keep your durability forever.
+            </p>
+            <a href="#" class="button button--flex">
+              <i class="fa-information-line button-icon"></i> More info
+            </a>
+          </div>
+        </div>
+      </section>
+      <!--=============== DISCOUNT ===============-->
+      <section class="discount section">
+        <div class="discount-container container grid">
+          <div class="discount-animate">
+            <h2 class="discount-title">Immerse yourself in <br> your music</h2>
+            <p class="discount-description">Get it now, up to 50% off.</p>
+            <a href="#" class="button button--flex">
+              <i class="fa-shopping-bag-line button-icon"></i> Shop Now
+            </a>
+          </div>
+          <img src="assets/img/discount.png" alt="" class="discount-img">
+        </div>
+      </section>
+    </main>  
 
-function createDemonBook(params) {
-// console.log(params);
-const data = params.split(",");
-// console.log(data);
-const demons = [];
-
-const healthPattern = /[^0-9+\-*\/.]/g;
-const damagePattern = /[+-]?[0-9.]+/g;
-const alterPattern = /[*\/]/g;
-
-for (const string of data) {
-  // console.log(string);
-  let name = string.split(" ").join("");
-  // console.log(name);
-  const healthSymbols = name.match(healthPattern);
-  // console.log(healthSymbols);
-  let hp = healthSymbols.reduce((acc, x) => {
-    const ascii = x.charCodeAt(0);
-    // console.log(x, ascii);
-    return acc + ascii;
-  }, 0);
-  // console.log(hp);
-  const danmageSymbols = name.match(damagePattern) || [];
-  // console.log(danmageSymbols);
-  let damage = danmageSymbols.reduce((acc, x) => {
-    const num = Number(x);
-    return acc + num;
-  }, 0);
-  // console.log(damage);
-  const alterSymbols = name.match(alterPattern) || [];
-  // console.log(alterSymbols);
-  alterSymbols.forEach(x => {
-    if (x == "*") {
-      damage = damage * 2;
-    } else if (x == "/") {
-      damage = damage / 2;
-    }
-  })
-  // console.log(damage);
-
-  const demon = {
-    name, 
-    hp, 
-    damage
-  }
-  // console.log(demon);
-
-  demons.push(demon);
-
-}
-// console.log(demons);
-demons.sort((a, b) => a.name.localeCompare(b.name));
-
-demons.forEach(demon => {
-  console.log(`${demon.name} - ${demon.hp} health, ${demon.damage.toFixed(2)} damage`);
-})
-
-}
-
-// createDemonBook("M3ph-0.5s-0.5t0.0**");
-// createDemonBook("M3ph1st0**, Aza zel");
-// createDemonBook("Gos/ho ");
-
-// 01. Furniture
-
-function calcTotalCost(params) {
-// console.log(params);
-const furnitures = [];
-let total = 0;
-let index = 0;
-let input = params[index];
-// console.log(input);
-
-while (input != "Purchase") {
-  // console.log(input);
-  const pattern = />>(?<name>[A-z][A-za-z]+)<<(?<price>[\d]+\.?[\d]+)!(?<q>\d+)/;
-
-  const match = input.match(pattern);
-  // console.log(match);
-  
-  if (match) {
-    const {name, price, q} = match.groups;
-    // console.log(name, price, q);
-    furnitures.push(name);
-    const cost = Number(price) * Number(q);
-    total += cost;
-  }
-  
-  index++;
-  input = params[index];
-
-  // if (index > 20) {
-  //   console.log("infinity");
-  //   break;
-  // }
-}
-
-// console.log(furnitures);
-console.log("Bought furniture:");
-for (const name of furnitures) {
-  console.log(name);
-}
-
-console.log(`Total money spend: ${total.toFixed(2)}`);
-
-}
-
-// calcTotalCost(
-//   [
-//     '>>Sofa<<312.23!3',
-//     '>>TV<<300!5',
-//     '>Invalid<<!5',
-//     'Purchase'
-//   ]
-// );
-// calcTotalCost(
-//   [
-//     '>>Laptop<<312.2323!3',
-//     '>>TV<<300.21314!5',
-//     '>Invalid<<!5',
-//     '>>TV<<300.21314!20',
-//     '>>Invalid<!5',
-//     '>>TV<<30.21314!5',
-//     '>>Invalid<<!!5',
-//     'Purchase'
-//   ]
-// );
-// calcTotalCost(
-//   [
-//     '>Invalid<<!4', 
-//     '>Invalid<<!2', 
-//     '>Invalid<<!5', 
-//     'Purchase'
-//   ]
-// )
-    </script>
-
-    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
