@@ -359,6 +359,7 @@
       .card .card-image img {
         width: 100%;
         height: 100%;
+        object-fit: cover;
         transition: transform 0.2s;
       }
       .card .card-image .card-img-overlay {
@@ -372,24 +373,30 @@
         align-items: center;
         border: 1px solid black;
         background-color: white;
-        transition: opacity 0.2s;
-        opacity: 0;
+        transform: translateY(100%);
+        /* transition: transform 0.4s; */
+        transition: all 0.4s ease-in-out;
+        /* transition: opacity 0.2s; */
+        /* opacity: 0; */
         cursor: pointer;
       }
       .card:hover .card-img-overlay {
-        animation: slidertop 0.4s ease forwards;
+        /* animation: slidertop 0.4s ease forwards; */
+        /* background-color: rgba(0, 0, 0, 0.9); */
+        transform: translateY(0);
+        /* opacity: 1; */
       }
 
-      @keyframes slidertop {
-        0% {
-          transform: translateY(100px);
-          opacity: 0;
-        }
-        100% {
-          transform: translateY(0);
-          opacity: 1;
-        }
-      }
+      /* @keyframes slidertop { */
+        /* 0% { */
+          /* transform: translateY(100px); */
+          /* opacity: 0; */
+        /* } */
+        /* 100% { */
+          /* transform: translateY(0); */
+          /* opacity: 1; */
+        /* } */
+      /* } */
 
       .add-to-cart {
         color: black;
@@ -398,7 +405,105 @@
         border: none;
         outline: none;
         background-color: transparent;
+        transition: all 0.4s ease-in-out;
         cursor: pointer;
+      }
+
+      .card .card-image .card-img-overlay:hover {
+        background-color: rgba(0, 0, 0, 0.9);
+      }
+      .card-img-overlay:hover .add-to-cart {
+        color: white;
+        /* background-color: rgba(0, 0, 0, 0.9); */
+      }
+
+      .card-sale {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 2px 6px;
+        color: white;
+        font-size: 14px;
+        text-transform: capitalize;
+        background-color: #e95144;
+      }
+
+      .addtowish {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        /* display: flex; */
+        display: none;
+        align-items: center;
+        animation: sliderleft 0.6s ease forwards;
+        cursor: pointer;
+      }
+      .card:hover .addtowish {
+        display: block;
+      }
+      
+      @keyframes sliderleft {
+        0% {
+          transform: translateX(100px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+
+      .heart {
+        position: relative;
+        display: inline-block;
+        font-size: 10px;
+        cursor: pointer;
+      }
+
+      .wishlist {
+        position: absolute;
+        top: 50%;
+        right: 78%;
+        width: 105px;
+        padding: 5px;
+        color: #333;
+        font-size: 12px;
+        text-align: center;
+        border: none;
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
+        background-color: white;
+        transform: translateY(-50%);
+        z-index: 1;
+      }
+      .heart:hover .wishlist {
+        display: block;
+      }
+
+      .fa-heart {
+        content: "\f004";
+        padding: 8px;
+        color: rgba(0, 0, 0, 0.7);
+        border-radius: 50%;
+        background-color: white;
+      }
+
+      .card .card-title {
+        text-decoration: underline;
+      }
+
+      .card .card-price {
+        margin-top: 5px;
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+
+      .bmoney {
+        padding: 10px;
+        color: rgba(0, 0, 0, 0.3);
+        font-size: 15px;
+        text-decoration: line-through;
       }
     </style>
   </head>
@@ -1251,10 +1356,10 @@
                 <button type="submit" class="submit">Submit</button>
               </form>
               <div class="socialicon">
-                <a href="/"><i class="fa-brands fa-square-instagram"></i></a>
-                <a href="/"><i class="fa-brands fa-facebook"></i></a>
-                <a href="/"><i class="fa-brands fa-twitter"></i></a>
-                <a href="/"><i class="fa-brands fa-youtube"></i></a>
+                <a href="/"><i class="fa fa-instagram"></i></a>
+                <a href="/"><i class="fa fa-facebook"></i></a>
+                <a href="/"><i class="fa fa-twitter"></i></a>
+                <a href="/"><i class="fa fa-youtube-play"></i></a>
               </div>
             </div>
 
@@ -1268,13 +1373,13 @@
             </div>
 
             <div class="payment">
-              <i class="fa-brands fa-google-pay"></i>
-              <i class="fa-brands fa-paypal"></i>
-              <i class="fa-brands fa-cc-visa"></i>
-              <i class="fa-regular fa-credit-card"></i>
-              <i class="fa-brands fa-cc-apple-pay"></i>
-              <i class="fa-brands fa-amazon-pay"></i>
-              <i class="fa-brands fa-cc-discover"></i>
+              <i class="fa fa-google-wallet"></i>
+              <i class="fa fa-paypal"></i>
+              <i class="fa fa-cc-visa"></i>
+              <i class="fa fa-credit-card"></i>
+              <i class="fa fa-apple"></i>
+              <i class="fa fa-amazon"></i>
+              <i class="fa fa-cc-discover"></i>
             </div>
 
           </div>
