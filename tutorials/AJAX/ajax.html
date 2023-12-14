@@ -341,7 +341,7 @@
         position: relative;
         min-width: 280px;
         max-width: 280px;
-        height: 450px;
+        /* height: 450px; */
         margin-bottom: 10px;
         padding: 10px;
         overflow: hidden;
@@ -353,13 +353,16 @@
       .card .card-image {
         position: relative;
         width: 100%;
-        height: 100%;
+        /* height: 100%; */
+        height: 450px;
         margin-bottom: 10px;
+        overflow: hidden;
       }
       .card .card-image img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        /* object-position: center top; */
         transition: transform 0.2s;
       }
       .card .card-image .card-img-overlay {
@@ -402,6 +405,7 @@
         color: black;
         font-size: 18px;
         font-weight: 600;
+        font-family: inherit;
         border: none;
         outline: none;
         background-color: transparent;
@@ -421,9 +425,9 @@
         position: absolute;
         top: 0;
         left: 0;
-        padding: 2px 6px;
+        padding: 4px 10px;
         color: white;
-        font-size: 14px;
+        font-size: 18px;
         text-transform: capitalize;
         background-color: #e95144;
       }
@@ -435,11 +439,11 @@
         /* display: flex; */
         display: none;
         align-items: center;
-        animation: sliderleft 0.6s ease forwards;
         cursor: pointer;
       }
       .card:hover .addtowish {
         display: block;
+        animation: sliderleft 0.6s ease forwards;
       }
       
       @keyframes sliderleft {
@@ -458,6 +462,7 @@
         position: relative;
         display: inline-block;
         font-size: 10px;
+        /* transition: 0.5s ease-in-out; */
         cursor: pointer;
       }
 
@@ -465,6 +470,7 @@
         position: absolute;
         top: 50%;
         right: 78%;
+        display: none;
         width: 105px;
         padding: 5px;
         color: #333;
@@ -474,11 +480,29 @@
         border-top-left-radius: 30px;
         border-bottom-left-radius: 30px;
         background-color: white;
-        transform: translateY(-50%);
+        /* transform: translateY(-50%); */
+        animation: sliderleftwish 1s ease forwards;
+        /* transition: opacity 1s ease-in-out; */
+        /* opacity: 0; */
         z-index: 1;
       }
       .heart:hover .wishlist {
         display: block;
+        /* opacity: 1; */
+      }
+
+      @keyframes sliderleftwish {
+        0% {
+          transform: translateX(10px) translateY(-50%);
+          opacity: 0;
+        }
+        50% {
+          transform: translateX(0) translateY(-50%);
+        }
+        100% {
+          transform: translateY(-50%);
+          opacity: 1;
+        }
       }
 
       .fa-heart {
@@ -489,7 +513,13 @@
         background-color: white;
       }
 
-      .card .card-title {
+      .card-title {
+        padding: 10px;
+        color: #1f1e1e;
+        font-size: 14px;
+        font-weight: bold;
+      }
+      .card:hover .card-title {
         text-decoration: underline;
       }
 
@@ -505,6 +535,106 @@
         font-size: 15px;
         text-decoration: line-through;
       }
+
+      .moneytext {
+        color: rgba(0, 0, 0, 0.4);
+        font-size: 15px;
+      }
+
+      .money {
+        padding: 10px;
+        color: #e95144;
+        font-size: 18px;
+      }
+
+      .loadmorebtn {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      #load-more-btn {
+        padding: 8px 100px;
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
+        font-family: inherit;
+        text-transform: uppercase;
+        border: 2px solid rgba(0, 0, 0, 0.8);
+        outline: none;
+        background-color: rgba(0, 0, 0, 0.8);
+        transition: 0.3s ease-in-out;
+        cursor: pointer;
+      }
+      #load-more-btn:hover {
+        color: black;
+        background-color: white;
+      }
+
+      .centerclothimg {
+        margin-top: 30px;
+        width: 100%;
+        /* min-height: 80vh; */
+        background-image: url("./img/banner.avif");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+
+      .centerimgcont {
+        position: relative;
+        max-width: 1200px;
+        /* height: 100%; */
+        min-height: 80vh;
+        margin: 0 auto;
+      }
+
+      .centerimgdetails {
+        position: absolute;
+        top: 30%;
+        left: 10%;
+        width: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .centerimgdetails h2 {
+        text-transform: uppercase;
+      }
+      .centerimgdetails span {
+        width: 60px;
+        height: 3px;
+        margin: 20px;
+        /* font-weight: 600; */
+        background-color: black;
+      }
+      .centerimgdetails p {
+        padding: 10px 20px;
+        color: rgba(0, 0, 0, 0.7);
+        font-size: 16px;
+        text-align: center;
+      }
+
+      .centerbtn {
+        margin: 20px 0;
+        padding: 10px 40px;
+        color: white;
+        font-size: 16px;
+        text-align: center;
+        text-transform: uppercase;
+        border: 1px solid black;
+        background-color: rgba(0, 0, 0, 0.8);
+        box-shadow: 0px 2px 88px 50px rgba(255, 255, 255, 0.4);
+        transition: 0.3s ease-in-out;
+      }
+
+      .scrollshopcards {}
+      
+      .card-wrapper {}
+      
+      .card {}
+      .card-image {}
     </style>
   </head>
   <body>
@@ -1195,10 +1325,10 @@
           </div>
           
           <button class="arrow prev">
-            <i class="ri-arrow-left-s-line"></i>
+            <i class="fa fa-chevron-left"></i>
           </button>
           <button class="arrow next">
-            <i class="ri-arrow-right-s-line"></i>
+            <i class="fa fa-chevron-right"></i>
           </button>
           
         </div>
