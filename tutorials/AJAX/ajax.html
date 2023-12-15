@@ -863,6 +863,7 @@
         max-width: 1200px;
         /* height: 100%; */
         margin: 0 auto;
+        padding-bottom: 50px;
         color: white;
       }
 
@@ -884,6 +885,7 @@
       .shop ul h4 {
         padding-bottom: 15px;
         color: white;
+        font-size: 16px;
         font-weight: 600;
         text-transform: uppercase;
       }
@@ -911,6 +913,7 @@
       .information ul h4 {
         padding-bottom: 15px;
         color: white;
+        font-size: 16px;
         font-weight: 600;
         text-transform: uppercase;
       }
@@ -938,6 +941,7 @@
       .customerService ul h4 {
         padding-bottom: 15px;
         color: white;
+        font-size: 16px;
         font-weight: 600;
         text-transform: uppercase;
       }
@@ -962,6 +966,7 @@
       .signup h4 {
         padding-bottom: 15px;
         color: white;
+        font-size: 16px;
         font-weight: 600;
         text-transform: uppercase;
       }
@@ -986,6 +991,74 @@
         border: 1px solid #ccc;
         border-radius: 5px;
         background-color: transparent;
+        transition: all 0.8s ease-in-out;
+      }
+
+      .submit {
+        padding: 10px;
+        color: white;
+        font-size: 16px;
+        font-family: inherit;
+        text-transform: capitalize;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        cursor: pointer;
+      }
+      .submit:hover {
+        background-color: #0062cc;
+      }
+
+      .inputemail:focus + label, 
+      input:not(:placeholder-shown) + label {
+        top: -20px;
+        left: 0;
+        color: #007bff;
+        font-size: 14px;
+        transition: all 0.8s ease-in-out;
+      }
+
+      .socialicons {
+        display: flex;
+        align-items: center;
+      }
+      .socialicons a {
+        margin: 10px;
+        color: white;
+        font-size: 30px;
+      }
+
+      .copyright {
+        margin-top: 50px;
+        /* margin-bottom: 50px; */
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 1px solid #282828;
+      }
+
+      .rights {
+        padding-top: 30px;
+        padding-left: 10px;
+      }
+      .rights p {
+        padding: 4px 0;
+        color: #cfcfcf;
+        font-size: 15px;
+      }
+      .rights p a {
+        color: inherit;
+        font-size: inherit;
+        font-weight: 600;
+      }
+      .rights p a:hover {
+        color: #4caf50;
+      }
+
+      .payment i {
+        margin: 10px;
+        font-size: 30px;
+        cursor: pointer;
       }
     </style>
   </head>
@@ -1779,6 +1852,42 @@
           <button class="arrowb right">
               <i class="fa fa-chevron-right" aria-hidden="true"></i>
           </button>
+          <script>
+            const postarea = document.querySelector('.postarea');
+            const arrowLeft = document.querySelector('.left');
+            const arrowRight = document.querySelector('.right');
+
+            console.log(arrowLeft);
+            console.log(arrowRight);
+            
+            let scrollAmount = 0;
+            
+            arrowRight.addEventListener('click', () => {
+              scrollAmount += 300;
+              postarea.scrollTo({
+                left: scrollAmount,
+                behavior: 'smooth'
+              });
+              
+              // Reset scroll amount if end is reached
+              if (scrollAmount >= postarea.scrollWidth - postarea.clientWidth) {
+                scrollAmount = 0;
+              }
+            });
+            
+            arrowLeft.addEventListener('click', () => {
+              scrollAmount -= 100;
+              postarea.scrollTo({
+                left: scrollAmount,
+                behavior: 'smooth'
+              });
+              
+              // Reset scroll amount if beginning is reached
+              if (scrollAmount < 0) {
+                scrollAmount = postarea.scrollWidth - postarea.clientWidth;
+              }
+            });
+          </script>
           
         </section>
         
@@ -1832,17 +1941,39 @@
             <div class="signup">
               <h4>newuser sign up</h4>
               <p>Sign up for exclusive updates, new arrivals &amp; insider only discounts</p>
+
               <form id="email-form">
                 <label for="email-input">email address:</label>
                 <input class="inputemail" type="email" id="email-input" name="email" placeholder="Enter your email address" required="">
                 <button type="submit" class="submit">submit</button>
               </form>
+              <script>
+                // placeholer animation
+                const form = document.querySelector('#email-form');
+                const emailInput = document.querySelector('#email-input');
+                const submit = document.querySelector('.submit');
+                
+                emailInput.addEventListener('click', () => {
+                  emailInput.setAttribute('placeholder', '');
+                });
+                submit.addEventListener('click', () => {
+                  alert('Your email address submit succesfull!');
+                });
+                
+                document.addEventListener('click', (e) => {
+                  if (!emailInput.contains(e.target)) {
+                    emailInput.setAttribute('placeholder', 'Enter your email address');
+                  }
+                });
+              </script>
+
               <div class="socialicons">
                 <a href="/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
                 <a href="/"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                 <a href="/"><i class="fa fa-twitter" aria-hidden="true"></i></a>
                 <a href="/"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
               </div>
+
             </div>
 
           </div>
