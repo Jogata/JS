@@ -2000,6 +2000,135 @@
         </div>
 
       </footer>
+
+      <!-- <script src="/js/script.js"></script> -->
+      <script>
+        const cardWrapper = document.querySelector('.card-wrapper');
+        const cardWrapperChildren = Array.from(cardWrapper.children);
+        const widthToScroll = cardWrapper.children[0].offsetWidth;
+        const arrowPrev = document.querySelector('.arrow.prev');
+        const arrowNext = document.querySelector('.arrow.next');
+        const cardBounding = cardWrapper.getBoundingClientRect();
+        const column = Math.floor(cardWrapper.offsetWidth / (widthToScroll + 24));
+        let currScroll = 0;
+        let initPos = 0;
+        let clicked = false;
+        
+        cardWrapperChildren.slice(-column).reverse().forEach(item => {
+          cardWrapper.insertAdjacentHTML('afterbegin', item.outerHTML);
+        })
+        
+        cardWrapperChildren.slice(0, column).forEach(item => {
+          cardWrapper.insertAdjacentHTML('beforeend', item.outerHTML);
+        })
+        
+        const cardImageAndLink = cardWrapper.querySelectorAll('img, a');
+        cardImageAndLink.forEach(item => {
+          item.setAttribute('draggable', false);
+        })
+        
+        cardWrapper.classList.add('no-smooth');
+        cardWrapper.scrollLeft = cardWrapper.offsetWidth;
+        cardWrapper.classList.remove('no-smooth');
+        
+        arrowPrev.onclick = function () {
+          cardWrapper.scrollLeft -= widthToScroll;
+        }
+        
+        arrowNext.onclick = function () {
+          cardWrapper.scrollLeft += widthToScroll;
+        }
+        
+        cardWrapper.onmousedown = function (e) {
+          cardWrapper.classList.add('grab');
+          initPos = e.clientX - cardBounding.left;
+          currScroll = cardWrapper.scrollLeft;
+          clicked = true;
+        }
+        
+        cardWrapper.onmousemove = function (e) {
+          if (clicked) {
+            const xPos = e.clientX - cardBounding.left;
+            cardWrapper.scrollLeft = currScroll + -(xPos - initPos);
+          }
+        }
+        
+        cardWrapper.onmouseup = mouseUpAndLeave;
+        cardWrapper.onmouseleave = mouseUpAndLeave;
+        
+        function mouseUpAndLeave() {
+          cardWrapper.classList.remove('grab');
+          clicked = false;
+        }
+        
+        let autoScroll;
+        
+        cardWrapper.onscroll = function () {
+          if (cardWrapper.scrollLeft === 0) {
+            cardWrapper.classList.add('no-smooth');
+            cardWrapper.scrollLeft = cardWrapper.scrollWidth - (2 * cardWrapper.offsetWidth);
+            cardWrapper.classList.remove('no-smooth');
+          } else if (cardWrapper.scrollLeft === cardWrapper.scrollWidth - cardWrapper.offsetWidth) {
+            cardWrapper.classList.add('no-smooth');
+            cardWrapper.scrollLeft = cardWrapper.offsetWidth;
+            cardWrapper.classList.remove('no-smooth');
+          }
+          
+          if (autoScroll) {
+            clearTimeout(autoScroll);
+          }
+          
+          autoScroll = setTimeout(() => {
+            cardWrapper.classList.remove('no-smooth');
+            cardWrapper.scrollLeft += widthToScroll;
+          }, 1900)
+        }
+      </script>
+    <script>
+      // Get all the card elements on the page
+      const cards = document.querySelectorAll('.card');
+      
+      // Loop through each card element
+      cards.forEach(function (card) {
+          // Get the "Add to Cart" button element
+          const addToCartBtn = card.querySelector('.card-img-overlay');
+      
+          // Add a click event listener to the "Add to Cart" button
+          addToCartBtn.addEventListener('click', function () {
+              alert('Item added to cart!');
+          });
+      
+          // Get the "Add to Wishlist" button element
+          const addToWishlistBtn = card.querySelector('.addtowish .fa-heart');
+      
+          // Add a click event listener to the "Add to Wishlist" button
+          addToWishlistBtn.addEventListener('click', function () {
+              alert('Item added to wishlist!');
+          });
+      
+          // Get the heart icon element
+          const heartIcon = card.querySelector('.fa-heart');
+      
+          // Add a click event listener to the heart icon element
+          heartIcon.addEventListener('click', function () {
+              // Toggle the "filled" class on
+              heartIcon.classList.toggle('filled');
+          });
+      });
+    </script>
+
+    <h1 id="welcome">Loading...</h1>
+
+    <script>
+      const ls = {user: "Joagata"};
+
+      updateH1(ls.user || "Anonymous");
+
+      function updateH1(user) {
+        const h1 = document.getElementById("welcome");
+        h1.textContent = `Welcome back, ${user}`;
+      }
+    </script>
         
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
