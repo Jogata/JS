@@ -4,149 +4,141 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-  .button {
-    padding: 8px 16px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    text-transform: capitalize;
-    font-size: 20px;
-    background-color: #166df7;
-    /* border: 0px solid #166df7; */
-    border-radius: 5px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    cursor: pointer;
-    outline: none;
-  }
-
-  .success {
-    color: white;
-    background-color: #3cba02;
-  }
-
-  .error {
-    color: white;
-    background-color: #dd050c;
-  }
-</style>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   </head>
   <body>
 
-<script>
-  /*
-<button class="button" type="button">
-  <i class="fa fa-floppy-o"></i>
-  <span class="label">save</span>
-</button>
-  */
+    <header>
 
-  function createButton(options) {
-    const template = document.createElement("template");
- 
-    template.innerHTML = `
-    <button class="button" type="button">
-      <span class="label">${options.label}</span>
-    </button>
-    `
-    const button = template.content.firstElementChild;
- 
-    if (options.icon) {
-      button.insertAdjacentHTML("afterbegin", `<i class="fa fa-${options.icon}"></i>`);
-    }
- 
-    if (options.onClick) {
-      button.addEventListener("click", options.onClick);
-    }
- 
-    if (options.variant) {
-      button.classList.add(options.variant);
-    }
- 
-    return button;
- 
-  }
- 
-  const deleteButtonObj = {
-    label: "delete", 
-    icon: "floppy-o", 
-    variant: "error", 
-    onClick: (e) => {
-      console.log("clicked");
-    }
-  }
- 
-  const deleteByn = createButton(deleteButtonObj);
- 
-  document.body.appendChild(deleteByn);
- 
-</script>
- 
-<script>
-  class Button extends HTMLElement {
-    constructor() {
-      super();
- 
-      this.attachShadow({mode: "open"});
-    }
- 
-    connectedCallback() {
-      const variant = this.dataset.variant;
-      console.log(variant);
-      const icon = this.dataset.icon;
-      console.log(icon);
- 
-      this.shadowRoot.innerHTML = `
-        <style>${css}</style>
-        <button class="button ${variant}">
-          <i class="fa fa-${icon}"></i>
-          <span class="label">
-            span
-          </span>
-        </button>
-      `;
-    }
-  }
- 
-  customElements.define("custom-button", Button);
- 
-  const css = `
-  .button {
-    padding: 8px 16px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    color: white;
-    font-family: Georgia, serif;
-    text-transform: capitalize;
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    background-color: #166df7;
-    cursor: pointer;
-  }
-  .fa-book::before {
-    color: red;
-    content: "\f02d";
-  }
-  .success {
-    color: white;
-    background-color: #3cba02;
-  }
-  .error {
-    color: white;
-    background-color: #dd050c;
-  }
-  `;
-</script>
+      <nav>
 
-    <custom-button data-variant="success" data-icon="book">add</custom-button>
-    <custom-button data-variant="error" data-icon="bin">delete</custom-button>
+        <div class="navtop">
 
-    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+          <div class="navone flex container">
+
+            <ul class="flex">
+              <li><a href="/">home</a></li>
+              <li><a href="/">about us</a></li>
+              <li><a href="/">privacy policy</a></li>
+              <li><a href="/">contact us</a></li>
+            </ul>
+
+            <div class="sociallink flex">
+              <a href="/" title="facebook">
+                <i class="fa-brands fa-facebook"></i>
+              </a>
+              <a href="/" title="twitter">
+                <i class="fa-brands fa-x-twitter"></i>
+              </a>
+              <a href="/" title="youtube">
+                <i class="fa-brands fa-youtube"></i>
+              </a>
+              <a href="/" title="pinterest">
+                <i class="fa-brands fa-pinterest"></i>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="navmain">
+
+          <div class="navtwo flex container">
+
+            <div class="logo navlist flex">
+
+              <a href="/" class="flex">
+                <i class="fa-solid fa-laptop-code"></i>
+                <h1>codespot</h1>
+              </a>
+
+              <ul class="flex">
+                <button class="navoff">X</button>
+                <li><a href="/">home</a></li>
+                <li><a href="/">features <i class="fa-solid fa-angle-down"></i></a></li>
+                <li><a href="/">mega menu <i class="fa-solid fa-angle-down"></i></a></li>
+                <li><a href="/">mega tegs <i class="fa-solid fa-angle-down"></i></a></li>
+                <li><a href="/">posts</a></li>
+                <li><a href="/">shortcodes</a></li>
+              </ul>
+
+            </div>
+
+            <div class="navsearch flex">
+
+              <div class="darkmode">
+                <div class="checkboxdarkmode">
+                  <input type="checkbox" id="toggledark">
+                </div>
+              </div>
+
+              <div class="searchbar">
+                <i class="fa-solid fa-xmark" id="removesearch" style="display: none;"></i>
+                <i class="fa-solid fa-magnifying-glass" id="searchicon"></i>
+              </div>
+
+              <input type="search" placeholder="Search here..." id="searchinput" style="display: none;">
+              <button class="navon">X</button>
+
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="container">
+      <section class="trendingsec flex">
+        <div class="flex">
+          <div class="trending-title">
+            <h3>Trending<i class="fa-solid fa-angle-right"></i></h3>
+          </div>
+          <div class="text-change">18 Practices for Building Responsive Web Applications</div>
+        </div>
+        <div class="leftrightchange">
+          <button><i class="fa-solid fa-angle-left" id="notileft"></i></button>
+          <button><i class="fa-solid fa-angle-right" id="notiright"></i></button>
+        </div>
+      </section>
+      <section class="headerpostsec">
+        <div class="hposts">
+          <a href="/" class="bigpost toppost" id="firstpost">
+            <img src=".images/img/leptop post.jpg" alt="" id="bigpost-image">
+            <div class="postinfo">
+              <span class="label" id="bigpost-label">laptop</span>
+              <h2 id="bigpost-title">11 of best laptops evaluated based on budget</h2>
+              <p>by CODER October 02, 2023</p>
+            </div>
+          </a>
+          <div class="gridpost">
+            <a href="/" class="gpost toppost">
+              <img src=".images/img/watch post.jpg" alt="">
+              <div class="postinfo">
+                <span class="label">Apple</span>
+                <h2>apple watch series 5 is the best one yet by consumer</h2>
+                <p>October 02, 2023</p>
+              </div>
+            </a>
+            <a href="/" class="gpost toppost">
+              <img src=".images/img/leptop post.jpg" alt="">
+              <div class="postinfo">
+                <span class="label">laptop</span>
+                <h2>11 of Best Laptops Evaluated Based on Budget</h2>
+                <p>October 18, 2023</p>
+              </div>
+            </a>
+            <a href="/" class="gpost toppost">
+              <img src=".images/img/post4.jpg" alt="">
+              <div class="postinfo">
+                <span class="label">Apple</span>
+                <h2>18 Practices for building responsive web applications</h2>
+                <p>October 02, 2023</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <!-- ================= Get data from local JSON file ================= -->
 
