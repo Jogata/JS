@@ -246,6 +246,16 @@
         z-index: 1;
       }
 
+      .searchbar.active #searchicon {
+        display: none;
+      }
+      .searchbar.active ~ #searchinput {
+        display: block;
+      }
+      .searchbar.active #removesearch {
+        display: block;
+      }
+
       main {
         width: 100%;
         /* height: auto; */
@@ -313,6 +323,116 @@
         font-size: 11px;
       }
 
+      .text-change {
+        margin-left: 8px;
+        color: #555;
+        font-size: 18px;
+        font-weight: 500;
+        text-transform: capitalize;
+        transition: .3s ease-in;
+        cursor: pointer;
+      }
+      .text-change:hover {
+        color: var(--main-color);
+      }
+
+      .leftrightchange button {
+        outline: none;
+        border: none;
+        border-radius: 5px;
+      }
+      .leftrightchange button i {
+        padding: 8px;
+        color: black;
+        font-size: 13px;
+        border-radius: 2px;
+        background-color: #eee;
+      }
+
+      .headerpostsec {
+        position: relative;
+        width: 100%;
+        height: 452px;
+        padding: 20px;
+        border-radius: 5px;
+        background-color: white;
+        box-shadow: var(--main-box-shadow);
+      }
+
+      .hposts {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        gap: 2px;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .bigpost {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transition: .3s ease-in-out;
+        overflow: hidden;
+      }
+      .bigpost img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* background-size: cover; */
+        transition: .3s ease-in-out;
+        overflow: hidden;
+      }
+      .bigpost:hover img {
+        transform: scale(1.05);
+      }
+      .bigpost::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        display: block;
+        background-image: 
+          linear-gradient(to bottom, 
+              rgba(0, 0, 0, 0) 25%, 
+              rgba(0, 0, 0, 0.85));
+        backface-visibility: hidden;
+        transition: opacity .25s ease;
+        z-index: 2;
+      }
+
+      .postinfo {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        padding: 20px;
+        z-index: 2;
+      }
+      .label {
+        height: 17px;
+        padding: 3px 8px;
+        color: white;
+        font-size: 10px;
+        text-transform: uppercase;
+        border-radius: 2px;
+        background-color: var(--main-color);
+      }
+      .postinfo h2 {
+        margin: 12px 0;
+        color: white;
+        font-size: 25px;
+        text-transform: capitalize;
+      }
+      .postinfo p {
+        color: #ffffffa9;
+      }
+      .postinfo p span {
+        color: white;
+      }
+
       main {
         /* display: none; */
       }
@@ -320,10 +440,10 @@
         display: none;
       }
       #removesearch {
-        /* display: none; */
+        display: none;
       }
       #searchinput {
-        /* display: none; */
+        display: none;
       }
       #backtotop {
         opacity: 0;
@@ -419,19 +539,20 @@
               const searchinput = document.querySelector("#searchinput");
               const removesearch = document.querySelector("#removesearch");
 
-              searchinput.style.display = "none";
-              removesearch.style.display = "none";
+              // searchinput.style.display = "none";
+              // removesearch.style.display = "none";
 
               search.addEventListener("click", () => {
-                if (searchinput.style.display === "none") {
-                  searchinput.style.display = "block";
-                  removesearch.style.display = "block";
-                  searchicon.style.display = "none";
-                } else {
-                  searchinput.style.display = "none";
-                  removesearch.style.display = "none";
-                  searchicon.style.display = "block";
-                }
+                search.classList.toggle("active");
+                // if (searchinput.style.display === "none") {
+                //   searchinput.style.display = "block";
+                //   removesearch.style.display = "block";
+                //   searchicon.style.display = "none";
+                // } else {
+                //   searchinput.style.display = "none";
+                //   removesearch.style.display = "none";
+                //   searchicon.style.display = "block";
+                // }
               })
             </script>
 
@@ -474,7 +595,7 @@
             <div class="postinfo">
               <span class="label" id="bigpost-label">laptop</span>
               <h2 id="bigpost-title">11 of best laptops evaluated based on budget</h2>
-              <p>by CODER October 02, 2023</p>
+              <p>by <span>coder</span> October 02, 2023</p>
             </div>
           </a>
 
@@ -490,7 +611,7 @@
             </a>
 
             <a href="/" class="gpost toppost">
-              <img src="./images/img/leptop post.jpg" alt="">
+              <img src="./images/img/post3.jpg" alt="">
               <div class="postinfo">
                 <span class="label">laptop</span>
                 <h2>11 of Best Laptops Evaluated Based on Budget</h2>
