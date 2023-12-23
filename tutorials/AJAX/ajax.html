@@ -24,11 +24,24 @@
           0 0 5px rgba(0, 0, 0, 0.01);
       }
 
+      html {
+        scrollbar-width: thin;
+        scrollbar-color: var(--main-color) transparent;
+      }
+
       body {
         /* width: 100%; */
         /* min-height: 100vh; */
         font-family: Georgia, serif;
         background-color: #f5f6f7;
+      }
+
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: var(--main-color);
       }
 
       a {
@@ -1185,6 +1198,7 @@
       .fcategories a h4 {
         font-size: 14px;
         font-weight: 500;
+        text-transform: capitalize;
       }
       .fcategories a p {
         font-size: 13px;
@@ -1313,7 +1327,22 @@
         color: var(--main-color);
       }
 
-      .backtotop {}
+      .backtotop {
+        position: fixed;
+        right: 2%;
+        bottom: 2%;
+        padding: 11px 13px;
+        color: white;
+        border: 1px solid transparent;
+        border-radius: 5px;
+        background-color: var(--main-color);
+        transition: .3s ease-in;
+        opacity: 0;
+        cursor: pointer;
+      }
+      .backtotop i {
+        font-size: 20px;
+      }
 
       /* Dark Mode */
       body.dark {
@@ -1405,10 +1434,12 @@
       }
 
       .dark .socialsec {
+        color: white;
         background-color: #202024;
       }
 
       .dark .popularsec {
+        color: white;
         background-color: #202024;
       }
 
@@ -1461,6 +1492,13 @@
         color: white;
         background-color: #202024;
       }
+      .dark .categories a h3, 
+      .dark .categories a p {
+        color: #d4d4d4;
+      }
+      .dark .categories a:hover h3 {
+        color: var(--main-color);
+      }
 
       .dark .maintegsbox {
         color: white;
@@ -1470,7 +1508,7 @@
       
       main {
         /* display: none; */
-        /* width: 1474px; */
+        /* width: 1604px; */
       }
       footer {
         /* display: none; */
@@ -2466,9 +2504,104 @@
       
     </footer>
 
+    <script>
+      // JSON data
+      const postData = {
+        "gridposts": [
+          {
+            "id": "1",
+            "image": "img/leptop post.jpg",
+            "label": "laptop",
+            "title": "11 of best laptops evaluated based on budget",
+            "author": "Coder Mak",
+            "date": "by CODER October 02, 2023",
+            "href": "https://www.google.com"
+          },
+          {
+            "id": "1",
+            "image": "img/watch post.jpg",
+            "label": "Apple",
+            "title": "apple watch series 5 is the best one yet by consumer",
+            "date": "October 02, 2023",
+            "time": "2023-10-01",
+            "href": "https://www.google.com"
+          },
+        {
+            "id": "2",
+            "image": "img/leptop post.jpg",
+            "label": "laptop",
+            "title": "11 of Best Laptops Evaluated Based on Budget",
+            "date": "October 18, 2023",
+            "time": "2023-10-01",
+            "href": "https://www.facebook.com"
+          },
+          {
+            "id": "3",
+            "image": "img/post4.jpg",
+            "label": "Apple",
+            "title": "18 Practices for building responsive web applications",
+            "date": "October 02, 2023",
+            "time": "2023-10-01",
+            "href": "https://www.instagram.com"
+          },
+        ]
+      };
+    </script>
+
     <button class="backtotop" id="backtotop">
       <i class="fa fa-angle-up"></i>
     </button>
+    <script>
+      // scroll up
+      window.onscroll = function() {
+        scrollFunction();
+      };
+      
+      function scrollFunction() {
+        const backToTopBtn = document.getElementById("backtotop");
+        
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+          backToTopBtn.style.opacity = "1";
+        } else {
+          backToTopBtn.style.opacity = "0";
+        }
+      }
+      
+      // Smooth scroll to top when button is clicked
+      document.getElementById("backtotop").addEventListener("click", function() {
+        scrollToTop(1000); // Scroll to top in 1000 milliseconds (1 second)
+      });
+      
+      function scrollToTop(duration) {
+        const start = window.pageYOffset;
+        const startTime = performance.now();
+        
+        function scroll() {
+          const currentTime = performance.now();
+          const timeElapsed = currentTime - startTime;
+          window.scrollTo(0, easeInout(timeElapsed, start, -start, duration));
+          
+          if (timeElapsed < duration) {
+            requestAnimationFrame(scroll);
+          } else {
+            window.scrollTo(0, 0);
+          }
+        }
+        
+        function easeInout(t, b, c, d) {
+          t /= d / 2;
+          if (t < 1) return c / 2 * t * t + b;
+          t--;
+          return -c / 2 * (t * (t - 2) - 1) + b;
+        }
+        
+        requestAnimationFrame(scroll);
+
+      }
+      
+      // Initially hide the button when the page loads
+      document.getElementById("backtotop").style.opacity = "0";
+    </script>
 
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
