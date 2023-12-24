@@ -2612,7 +2612,7 @@
             "href": "https://www.google.com"
           },
           {
-            "id": "11",
+            "id": "12",
             "image": "img/post15.jpg",
             "label": "deals",
             "title": "the best wired and wireless gaming headset",
@@ -2621,7 +2621,7 @@
             "href": "https://www.google.com"
           },
           {
-            "id": "11",
+            "id": "13",
             "image": "img/post16.jpg",
             "label": "deals",
             "title": "lessons learned selling cheap electronics",
@@ -2630,7 +2630,7 @@
             "href": "https://www.google.com"
           },
           {
-            "id": "11",
+            "id": "14",
             "image": "img/post17.jpg",
             "label": "consoles",
             "title": "13 playstation 5 tips to get the most out",
@@ -2639,7 +2639,7 @@
             "href": "https://www.google.com"
           },
           {
-            "id": "11",
+            "id": "15",
             "image": "img/post18.jpg",
             "label": "gadgets",
             "title": "6 wealth building alternatives",
@@ -2648,7 +2648,7 @@
             "href": "https://www.google.com"
           },
           {
-            "id": "11",
+            "id": "16",
             "image": "img/gadgets1.jpg",
             "label": "gadgets",
             "title": "Start a Digital Marketing Website for your Service",
@@ -2657,7 +2657,7 @@
             "href": "https://www.google.com"
           },
           {
-            "id": "11",
+            "id": "17",
             "image": "img/gadgets2.jpg",
             "label": "gadgets",
             "title": "Part-time Trading on Forex as an Alternative Income",
@@ -2666,7 +2666,7 @@
             "href": "https://www.google.com"
           },
           {
-            "id": "11",
+            "id": "18",
             "image": "img/gadgets3.jpg",
             "label": "gadgets",
             "title": "Catch the Best iPhone X Deals Plus Your Favorite gadgets",
@@ -2675,7 +2675,7 @@
             "href": "https://www.google.com"
           },
           {
-            "id": "11",
+            "id": "19",
             "image": "img/leptop post.jpg",
             "label": "laptop",
             "title": "11 of best laptops evaluated based on budget",
@@ -2799,6 +2799,136 @@
           }
         });
       });
+    </script>
+    <script>
+      const filteredhealthy = postData.gridposts.filter(post => post.label === 'healthy');
+      
+      filteredhealthy.forEach(function (post, index) {
+        const gridpost = document.getElementsByClassName('healthpost')[index];
+        gridpost.getElementsByTagName('img')[0].src = post.image;
+        gridpost.getElementsByClassName('label')[0].textContent = post.label;
+        gridpost.getElementsByTagName('h2')[0].textContent = post.title;
+        gridpost.getElementsByTagName('p')[0].textContent = post.date;
+        gridpost.getElementsByClassName('a').href = post.href;
+        gridpost.href = post.href;
+      });
+    </script>
+    <script>
+      const filterConsole = postData.gridposts.filter(post => post.label === 'consoles' || post.label === 'deals');
+      
+      filterConsole.forEach(function (post, index) {
+        const revpost = document.getElementsByClassName('revpost')[index];
+        revpost.getElementsByTagName('img')[0].src = post.image;
+        revpost.getElementsByClassName('label')[0].textContent = post.label;
+        revpost.getElementsByTagName('h2')[0].textContent = post.title;
+        revpost.getElementsByTagName('p')[0].textContent = post.date;
+        revpost.getElementsByClassName('a').href = post.href;
+        revpost.href = post.href;
+      });
+    </script>
+    <script>
+      const filterGadgets = postData.gridposts.filter(post => post.label === 'gadgets');
+      
+      filterGadgets.forEach(function (post, index) {
+        const gadpost = document.getElementsByClassName('gadpost')[index];
+        gadpost.getElementsByTagName('img')[0].src = post.image;
+        gadpost.getElementsByClassName('label')[0].textContent = post.label;
+        gadpost.getElementsByTagName('h2')[0].textContent = post.title;
+        gadpost.getElementsByTagName('p')[0].textContent = post.date;
+        gadpost.getElementsByClassName('a').href = post.href;
+        gadpost.href = post.href;
+      });
+    </script>
+    <script>
+      const filterLaptop = postData.gridposts.filter(post => post.label === 'laptop');
+      
+      document.addEventListener('DOMContentLoaded', function () {
+        filterLaptop.forEach(function (post, index) {
+          let laptpost = document.getElementsByClassName('laptpost')[index];
+          if (laptpost) {
+            laptpost.getElementsByTagName('img')[0].src = post.image;
+            laptpost.getElementsByClassName('label')[0].textContent = post.label;
+            laptpost.getElementsByTagName('h2')[0].textContent = post.title;
+            laptpost.getElementsByTagName('p')[0].textContent = post.date;
+            laptpost.href = post.href;
+          }
+        });
+      });
+    </script>
+    <script>
+      const latestPostCont = document.querySelector('.latestdata');
+      latestPostCont.innerHTML = "";
+      
+      const latestPostData = () => {
+        postData.gridposts.slice(0, 5).map((latestdata) => {
+          const postElement = document.createElement('a');
+          postElement.classList.add('gpost');
+          postElement.classList.add('flex');
+          postElement.classList.add('latepost');
+          postElement.href = `${latestdata.href}`;
+          postElement.innerHTML = `
+                            <div class="latepostimg">
+                              <img src="${latestdata.image}" alt="">
+                              <span class="label">${latestdata.label}</span>
+                            </div>
+                            <div class="postinfo npostinfo">
+                              <h2>${latestdata.title}</h2>
+                              <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus inventore, beatae sequi temporibus soluta assumenda....</h5>
+                              <p>${latestdata.date}</p>
+                            </div>`;
+          latestPostCont.appendChild(postElement);
+        })
+      }
+
+      latestPostData();
+    </script>
+    <script>
+      const footerLatestPosts = document.querySelector('.footerlatestposts');
+
+      const latestPostfooter = () => {
+        postData.gridposts.slice(4, 7).map((latestdata) => {
+          const postElementF = document.createElement('a');
+          postElementF.classList.add('gpost');
+          postElementF.classList.add('flex');
+          postElementF.classList.add('npost');
+          postElementF.classList.add('ppost');
+          postElementF.href = `${latestdata.href}`;
+          postElementF.innerHTML = `
+            <img src="${latestdata.image}" alt="${latestdata.title}">
+            <div class="postinfo npostinfo ppostinfo">
+              <span class="label"></span>
+              <h2>${latestdata.title}</h2>
+              <p>${latestdata.date}</p>
+            </div>`;
+
+          footerLatestPosts.appendChild(postElementF);
+        })
+      }
+      
+      latestPostfooter();
+      
+      const footerLatestPosts2 = document.querySelector('.footerpopu');
+      
+      const PopuPostfooter = () => {
+        postData.gridposts.slice(6, 9).map((latestdata) => {
+          const postElementF = document.createElement('a');
+          postElementF.classList.add('gpost');
+          postElementF.classList.add('flex');
+          postElementF.classList.add('npost');
+          postElementF.classList.add('ppost');
+          postElementF.href = `${latestdata.href}`;
+          postElementF.innerHTML = `
+            <img src="${latestdata.image}" alt="${latestdata.title}">
+            <div class="postinfo npostinfo ppostinfo">
+              <span class="label"></span>
+              <h2>${latestdata.title}</h2>
+              <p>${latestdata.date}</p>
+            </div>`
+          footerLatestPosts2.appendChild(postElementF);
+        })
+      }
+      
+      PopuPostfooter();
     </script>
 
     <button class="backtotop" id="backtotop">
