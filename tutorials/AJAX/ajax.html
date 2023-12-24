@@ -354,6 +354,7 @@
         outline: none;
         border: none;
         border-radius: 5px;
+        cursor: pointer;
       }
       .leftrightchange button i {
         padding: 8px;
@@ -1505,14 +1506,16 @@
         background-color: #202024;
       }
 
-      
-      /* main { */
-        /* display: none; */
+      header {
+        display: none;
+      }
+      main {
+        display: none;
         /* width: 1604px; */
-      /* } */
-      /* footer { */
-        /* display: none; */
-      /* } */
+      }
+      footer {
+        display: none;
+      }
       #removesearch {
         display: none;
       }
@@ -1522,9 +1525,155 @@
       #backtotop {
         /* opacity: 0; */
       }
+
+      body{
+        color: #fefefe;
+        background-color: black;
+      }
+
+      .home {
+        width: 100%;
+        min-height: 100vh;
+        background-image: url("./images/games-the-elder-scrolls-v-skyrim-50003-copy.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+
+      .home .menubar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        padding: 25px 100px;
+        display: flex;
+        align-items: center;
+        transition: padding 0.5s, background-color 0.5s;
+        z-index: 2;
+      }
+      .home .menubar.active {
+        padding: 16px 100px;
+        background-color: #efefef;
+      }
+
+      .menubar .logo {
+        margin-right: 50px;
+        color: inherit;
+        font-size: 22px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: color 0.5s;
+      }
+      .home .menubar.active .logo {
+        color: black;
+      }
+
+      .menubar .logo i {
+        margin-right: 5px;
+        color: dodgerblue;
+      }
+
+      .menubar .menulist {
+        list-style: none;
+        margin-left: auto;
+        margin-right: 20px;
+        display: flex;
+      }
+
+      .menubar .menulist li {
+        position: relative;
+        margin: 0 20px;
+      }
+      .menubar .menulist li a {
+        display: block;
+        padding: 10px;
+        color: inherit;
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: capitalize;
+        text-decoration: none;
+        transition: color 0.5s;
+      }
+      .menubar .menulist li:hover a {
+        color: lightblue;
+      }
+      .home .menubar.active .menulist li a {
+        color: black;
+      }
+
+      .menubar button {
+        padding: 0.5em 1.2em;
+        color: inherit;
+        font-size: 18px;
+        font-family: inherit;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: capitalize;
+        outline: 3px solid transparent;
+        border-radius: 25px;
+        border: 1px solid dodgerblue;
+        background-color: dodgerblue;
+        transition: all 0.5s;
+        cursor: pointer;
+      }
+      .menubar button:hover {
+        color: dodgerblue;
+        /* border: 1px solid white; */
+        background-color: whitesmoke;
+      }
+      .menubar button:focus-visible {
+        outline: 3px solid lightblue;
+      }
+
+      .content {
+        min-height: 100vh;
+        padding: 100px;
+      }
+      .content h1 {
+        margin-bottom: 40px;
+        font-size: 50px;
+        text-transform: capitalize;
+      }
+
+      .backtotop {
+        background-color: dodgerblue;
+      }
     </style>
   </head>
   <body>
+    <section class="home">
+      <nav class="menubar">
+        <div class="logo">
+          <i class="fa fa-plane"></i>
+          <span>trawell</span>
+        </div>
+        <ul class="menulist">
+          <li><a href="#">home</a></li>
+          <li><a href="#">about</a></li>
+          <li><a href="#">services</a></li>
+          <li><a href="#">portfolio</a></li>
+        </ul>
+        <button>contact</button>
+      </nav>
+      <script>
+        const menubar = document.querySelector('.menubar');
+
+        window.addEventListener("scroll", callback);
+
+        function callback() {
+          if (window.scrollY > 150) {
+            menubar.classList.add("active");
+          } else {
+            menubar.classList.remove("active");
+          }
+        }
+      </script>
+    </section>
+    <section class="content">
+      <h1>sticky navigation bar on scroll</h1>
+      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid, perspiciatis dicta consectetur, officia nemo inventore in culpa, tempora vel dignissimos ad. Incidunt, laudantium! Alias, inventore reprehenderit pariatur obcaecati ducimus tempora.</p>
+    </section>
 
     <header>
 
@@ -2883,7 +3032,40 @@
       latestPostData();
     </script>
     <script>
+      const popularPost = postData.gridposts.sort((a, b) => new Date(b.time) - new Date(a.time));
+
+      document.addEventListener('DOMContentLoaded', function () {
+        popularPost.forEach(function (post, index) {
+          let laptpost = document.getElementsByClassName('popular')[index];
+          if (laptpost) {
+            laptpost.getElementsByTagName('img')[0].src = post.image;
+            laptpost.getElementsByClassName('label')[0].textContent = post.label;
+            laptpost.getElementsByTagName('h2')[0].textContent = post.title;
+            laptpost.getElementsByTagName('p')[0].textContent = post.date;
+            laptpost.href = post.href;
+          }
+        });
+      });
+    </script>
+    <script>
+      const TravelFilter = postData.gridposts.filter(post => post.label === 'travel');
+      
+      document.addEventListener('DOMContentLoaded', function () {
+        TravelFilter.forEach(function (post, index) {
+          let laptpost = document.getElementsByClassName('trapost')[index];
+          if (laptpost) {
+            laptpost.getElementsByTagName('img')[0].src = post.image;
+            laptpost.getElementsByClassName('label')[0].textContent = post.label;
+            laptpost.getElementsByTagName('h2')[0].textContent = post.title;
+            laptpost.getElementsByTagName('p')[0].textContent = post.date;
+            laptpost.href = post.href;
+          }
+        });
+      });
+    </script>
+    <script>
       const footerLatestPosts = document.querySelector('.footerlatestposts');
+      footerLatestPosts.innerHTML = "";
 
       const latestPostfooter = () => {
         postData.gridposts.slice(4, 7).map((latestdata) => {
@@ -2908,6 +3090,7 @@
       latestPostfooter();
       
       const footerLatestPosts2 = document.querySelector('.footerpopu');
+      footerLatestPosts2.innerHTML = "";
       
       const PopuPostfooter = () => {
         postData.gridposts.slice(6, 9).map((latestdata) => {
