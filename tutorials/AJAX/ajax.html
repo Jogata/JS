@@ -1506,13 +1506,13 @@
       }
 
       
-      main {
+      /* main { */
         /* display: none; */
         /* width: 1604px; */
-      }
-      footer {
+      /* } */
+      /* footer { */
         /* display: none; */
-      }
+      /* } */
       #removesearch {
         display: none;
       }
@@ -2526,8 +2526,8 @@
             "time": "2023-10-01",
             "href": "https://www.google.com"
           },
-        {
-            "id": "2",
+          {
+          "id": "2",
             "image": "img/leptop post.jpg",
             "label": "laptop",
             "title": "11 of Best Laptops Evaluated Based on Budget",
@@ -2674,8 +2674,131 @@
             "date": "October 02, 2023",
             "href": "https://www.google.com"
           },
+          {
+            "id": "11",
+            "image": "img/leptop post.jpg",
+            "label": "laptop",
+            "title": "11 of best laptops evaluated based on budget",
+            "author": "Coder Mak",
+            "date": "October 02, 2023",
+            "href": "https://www.google.com"
+          },
+          {
+            "id": "11",
+            "image": "img/post19.jpg",
+            "label": "laptop",
+            "title": "Apple Watch Series 5 is the Best One Yet By Consumer",
+            "author": "Coder Mak",
+            "date": "October 02, 2023",
+            "href": "https://www.google.com"
+          },
+          {
+            "id": "11",
+            "image": "img/post20.jpg",
+            "label": "laptop",
+            "title": "Here's What People Think of iOS 13 New Dark Mode",
+            "author": "Coder Mak",
+            "date": "October 02, 2023",
+            "href": "https://www.google.com"
+          },
+          {
+            "id": "11",
+            "image": "img/post21.jpg",
+            "label": "laptop",
+            "title": "18 Practices for Building Responsive Web Applications",
+            "author": "Coder Mak",
+            "date": "October 02, 2023",
+            "href": "https://www.google.com"
+          },
+          {
+            "id": "11",
+            "image": "img/leptop post.jpg",
+            "label": "laptop",
+            "title": "11 of best laptops evaluated based on budget",
+            "author": "Coder Mak",
+            "date": "October 02, 2023",
+            "href": "https://www.google.com"
+          },
+          {
+            "id": "11",
+            "image": "img/travel1.jpg",
+            "label": "travel",
+            "title": "5 of best travel in budget",
+            "author": "Coder Mak",
+            "date": "October 02, 2023",
+            "href": "https://www.google.com"
+          },
+          {
+            "id": "11",
+            "image": "img/travel2.jpg",
+            "label": "travel",
+            "title": "11 of best travel in budget",
+            "author": "Coder Mak",
+            "date": "October 02, 2023",
+            "href": "https://www.google.com"
+          },
+          {
+            "id": "11",
+            "image": "img/travel3.jpg",
+            "label": "travel",
+            "title": "9 of best travel in budget",
+            "author": "Coder Mak",
+            "date": "October 02, 2023",
+            "href": "https://www.google.com"
+          },
+          {
+            "id": "11",
+            "image": "img/travel4.jpg",
+            "label": "travel",
+            "title": "45 of best travel in budget",
+            "author": "Coder Mak",
+            "date": "October 02, 2023",
+            "href": "https://www.google.com"
+          },
         ]
       };
+
+      const notileft = document.querySelector('#notileft');
+      const notiright = document.querySelector('#notiright');
+      let index = 0;
+
+      notileft.addEventListener('click', function () {
+        const newIndex = (index - 1 + postData.gridposts.length) % postData.gridposts.length;
+        changeText(newIndex);
+      });
+      
+      notiright.addEventListener('click', function () {
+        const newIndex = (index + 1) % postData.gridposts.length;
+        changeText(newIndex);
+      });
+
+      setInterval(function () {
+        const newIndex = (index + 1) % postData.gridposts.length;
+        changeText(newIndex);
+      }, 4000);
+
+      function changeText(newIndex) {
+        const textElement = document.querySelector('.text-change');
+        textElement.textContent = postData.gridposts[newIndex].title;
+        textElement.href = postData.gridposts[newIndex].href;
+        index = newIndex;
+      }
+    </script>
+    <script>
+      const sortedPosts = postData.gridposts.sort((a, b) => new Date(b.time) - new Date(a.time));
+
+      document.addEventListener('DOMContentLoaded', function () {
+        sortedPosts.forEach(function (post, index) {
+          let laptpost = document.getElementsByClassName('toppost')[index];
+          if (laptpost) {
+            laptpost.getElementsByTagName('img')[0].src = post.image;
+            laptpost.getElementsByClassName('label')[0].textContent = post.label;
+            laptpost.getElementsByTagName('h2')[0].textContent = post.title;
+            laptpost.getElementsByTagName('p')[0].textContent = post.date;
+            laptpost.href = post.href;
+          }
+        });
+      });
     </script>
 
     <button class="backtotop" id="backtotop">
