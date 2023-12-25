@@ -3,331 +3,144 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AJAX | XMLHttpRequest</title>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <!-- <title>AJAX | XMLHttpRequest</title> -->
+    <title>Pro Recipe Blog Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        fieldset {
+            display: none;
+            margin: 2rem auto;
+        }
+      </style>
   </head>
   <body>
-    <script>
-          // 02. Rounding
-
-  function roundnumber(num, digits) {
-    num = num.toString();
-    let dotPosition = 0;
-    let position = 0;
-    let result = "";
-
-    while (num[position] !== ".") {
-      result += num[position];
-      position++;
-    }
-    
-    dotPosition = position++;
-    result += ".";
-
-    // console.log(result);
-    
-    let end = Math.min(dotPosition + digits, (num.length - 1), dotPosition + 15);
-    
-    // console.log(dotPosition);
-    // console.log(end);
-
-    for (let start = ++dotPosition; start <= end; start++) {
-      // console.log(start, end);
-      result += num[start];
-    }
-
-    if (result[result.length - 1] == 0) {
-      let zeroes = 0;
-      let digit = 0;
-
-      while (digit == 0) {
-        zeroes++;
-        digit = result[result.length - 1 - zeroes];
-        // console.log(digit, zeroes);
-      }
-
-      let roundedNumber = "";
-
-      for (let index = 0; index < result.length - zeroes; index++) {
-        roundedNumber += result[index];
-      }
-
-      result = roundedNumber;
-
-    }
-
-    if (result[result.length - 1] == ".") {
-      let roundedNumber = "";
-      // console.log(result);
-      for (let index = 0; index < result.length - 1; index++) {
-        roundedNumber += result[index];
-      }
-
-      result = roundedNumber;
-    }
-
-    console.log(result);
-
-  }
-
-  function roundnumber2(x, y) {
-    if(y > 15) {y = 15}
-    let result = x.toFixed(y);
-            if (result[result.length - 1] == 0) {
-      let zeroes = 0;
-      let digit = 0;
-
-      while (digit == 0) {
-        zeroes++;
-        digit = result[result.length - 1 - zeroes];
-        // console.log(digit, zeroes);
-      }
-
-      let roundedNumber = "";
-
-      for (let index = 0; index < result.length - zeroes; index++) {
-        roundedNumber += result[index];
-      }
-
-      result = roundedNumber;
-
-    }
-
-    if (result[result.length - 1] == ".") {
-      let roundedNumber = "";
-      // console.log(result);
-      for (let index = 0; index < result.length - 1; index++) {
-        roundedNumber += result[index];
-      }
-
-      result = roundedNumber;
-    }
-
-    console.log(result);
-
-  }
-
-  // roundnumber(3.1415926535897932384626433832795, 17);
-  // roundnumber(2.32, 0);
-  // roundnumber(345.756400065, 7);
-  // roundnumber(345.756400065, 8);
-  // roundnumber(10.5, 3);
-  
-  // roundnumber2(3.1415926535897932384626433832795, 17);
-  // roundnumber2(2.32, 0);
-  // roundnumber2(345.756400065, 7);
-  // roundnumber2(345.756400065, 8);
-  // roundnumber2(10.5, 3);
-
-    // 04. Vacation
-
-    function calcVacation(people, type, day) {
-    let price = 0;
-    let total = 0;
-    switch (type) {
-      case "Students": 
-        switch (day) {
-          case "Friday":
-          price = 8.45;
-          break;
-        case "Saturday":
-          price = 9.8;
-          break;
-        case "Sunday":
-          price = 10.46;
-          break;
-        }
-        total = people * price;
-        if (people >= 30) {
-      total = total * 0.85;
-    }
-        break;
-      case "Business": 
-        switch (day) {
-          case "Friday":
-          price = 10.9;
-          break;
-        case "Saturday":
-          price = 15.6;
-          break;
-        case "Sunday":
-          price = 16;
-          break;
-        }
-        total = people * price;
-        if (people >= 100) {
-      total = total - 10 * price;
-    }
-        break;
-      case "Regular": 
-        switch (day) {
-          case "Friday":
-          price = 15;
-          break;
-        case "Saturday":
-          price = 20;
-          break;
-        case "Sunday":
-          price = 22.5;
-          break;
-        }
-        total = people * price;
-        if (people >= 10 && people <= 20) {
-      total = total * 0.95;
-    }
-        break;
-    }
-
-    console.log(`Total price: ${total.toFixed(2)}`);
-
-  }
-
-  // calcVacation(30, "Students", "Sunday");
-  // calcVacation(40, "Regular", "Saturday");
-    </script>
-    <script>
-        // 02. Number Modification
-      
-        function modifyNumber(num) {
-          let average = 0;
-      
-          let numAsString = String(num);
-          
-          function calcSumOfDigits(numAsString) {
-            let sum = 0;
-      
-            // let numAsString = String(num);
-      
-            for (let index = 0; index < numAsString.length; index++) {
-              let digit = Number(numAsString[index]);
-              sum += digit;
-            }
-      
-            return sum;
-      
-          }
-      
-          function calcAverage(numAsString) {
-            let average = 0;
-      
-            // let numAsString = String(num);
-      
-            const sum = calcSumOfDigits(numAsString);
-      
-            // console.log(sum);
-            
-            average = sum / numAsString.length;
-      
-            // console.log(average);
-      
-            return average;
-      
-          }
-      
-          average = calcAverage(numAsString);
-      
-          // console.log(average);
-      
-          while (average <= 5) {
-            numAsString = numAsString + 9;
-      
-            average = calcAverage(numAsString);
-      
-            if (numAsString.length > 30) {
-              console.log("infinity");
-              break;
-            }
-      
-          }
-      
-          console.log(numAsString);
-      
-        }
-      
-        // modifyNumber(101);
-        // modifyNumber(5835);
-      </script>
-      <script>
-        // 04. Radio Crystals
-      
-        function proccessCristals(params) {
-          const final = params[0];
-      
-          for (let index = 1; index < params.length; index++) {
-            let start = params[index];
-            let current = start;
-      
-            const operations = [
-              cut, 
-              lap, 
-              grind, 
-              etch, 
-              x-ray, 
-              transport
-            ]
-          }
-      
-          function cut(num) {
-            return num / 4;
-          }
-          function lap(num) {
-            return num * 0.8;
-          }
-        }
-      
-        // 05. Print DNA
-      
-        function printDNA(n) {
-          const DNA = "ATCGTTAGGG";
-          const callbacks = [createRow1, createRow2, createRow3, createRow2];
-          let callbackIndex = 0;
-          let letter = 0;
-      
-          for (let row = 1; row <= n; row++) {
-            const l1 = DNA[letter];
-            letter++;
-      
-            if (letter >= DNA.length) {
-              letter = 0;
-            }
-      
-            const l2 = DNA[letter];
-            letter++;
-      
-            if (letter >= DNA.length) {
-              letter = 0;
-            }
-      
-            callbacks[callbackIndex](l1, l2);
-            callbackIndex++;
-      
-            if (callbackIndex >= callbacks.length) {
-              callbackIndex = 0;
-            }
-      
-          }
-      
-            function createRow1(l1, l2) {
-              const row = `**${l1}${l2}**`;
-              console.log(row);
-            }
-      
-            function createRow2(l1, l2) {
-              const row = `*${l1}--${l2}*`;
-              console.log(row);
-            }
-      
-            function createRow3(l1, l2) {
-              const row = `${l1}----${l2}`;
-              console.log(row);
-            }
-        }
-      
-        // printDNA(4);
-        // printDNA(10);
-      </script>
 
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+
+    <header id="header">
+        <div class="topnav flex">
+            <div class="container flex">
+                <div class="navicons flex">
+                    <a href="http://facebook.com/" target="_blank" title="facebook" rel="noopener noreferrer">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="http://twitter.com/" target="_blank" title="twitter" rel="noopener noreferrer">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                    <a href="http://linkedin.com/" target="_blank" title="linkedin" rel="noopener noreferrer">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                    <a href="http://youtube.com/" target="_blank" title="youtube" rel="noopener noreferrer">
+                        <i class="fa-brands fa-youtube"></i>
+                    </a>
+                </div>
+                <a href="/" class="srbtn">submit recipe 
+                    <i class="fa-solid fa-plus"></i>
+                </a>
+            </div>
+        </div>
+        <nav class="mainnav">
+            <div class="container flex">
+                <div class="logo flex">
+                    <img src="img/logo.png" alt="">
+                    <h1>recipe blog</h1>
+                </div>
+                <ul class="navlist flex">
+                    <li><a href="#header">home</a></li>
+                    <li><a href="#header">categories</a></li>
+                    <li><a href="#header">blog</a></li>
+                    <li><a href="#header">recipes</a></li>
+                    <li><a href="#header">pages</a></li>
+                    <li><a href="#header">contact us</a></li>
+                </ul>
+                <div class="searchbar flex">
+                    <input type="checkbox" name="check-toggle" id="checkbox" hidden="">
+                    <label for="checkbox" class="toggle">
+                        <div class="toggle-circle"></div>
+                    </label>
+                    <i class="fa-solid fa-magnifying-glass" id="searchopen"></i>
+                    <div class="navonoff">
+                        <input type="checkbox" id="checkbox2">
+                        <label for="checkbox2" class="toggle2">
+                            <div class="bar bar-top"></div>
+                            <div class="bar bar-middle"></div>
+                            <div class="bar bar-bottom"></div>
+                        </label>
+                    </div>
+                </div>
+                <div class="searchinput">
+                    <input type="text" placeholder="Search Here...">
+                    <i class="fa-solid fa-xmark" id="removesearch"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="headerimg">
+            <div class="container">
+                <div class="headerinfo flex">
+                    <h1 class="headertitle">cheese pizza</h1>
+                    <p class="headerpera">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
+                    <a href="#header" class="headerbtn">view recipe
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+        <section class="headerslider container">
+            <div class="slidertitle flex">
+                <h4>my latest recipes</h4>
+                <div class="sliderlfbtn">
+                    <button id="sleft"><i class="fa-solid fa-arrow-left"></i></button>
+                    <button id="sright"><i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="headercards flex">
+                <a class="headercard flex" href="#header">
+                    <img src="img/breakfast.jpg" alt="">
+                    <div class="hcardinfo">
+                        <span>pizza</span>
+                        <h3>cheese pizza</h3>
+                    </div>
+                </a>
+                <a class="headercard flex" href="#header">
+                    <img src="img/grill.jpg" alt="">
+                    <div class="hcardinfo">
+                        <span>cookies</span>
+                        <h3>oat cookies</h3>
+                    </div>
+                </a>
+                <a class="headercard flex" href="#header">
+                    <img src="img/cookies-7.jpg" alt="">
+                    <div class="hcardinfo">
+                        <span>cookies</span>
+                        <h3>browny cookies</h3>
+                    </div>
+                </a>
+                <a class="headercard flex" href="#header">
+                    <img src="img/cookies-6.jpg" alt="">
+                    <div class="hcardinfo">
+                        <span>cookies</span>
+                        <h3>caramel cookies</h3>
+                    </div>
+                </a>
+                <a class="headercard flex" href="#header">
+                    <img src="img/cheesepizza.jpg" alt="">
+                    <div class="hcardinfo">
+                        <span>cookies</span>
+                        <h3>healthy steak</h3>
+                    </div>
+                </a>
+                <a class="headercard flex" href="#header">
+                    <img src="img/breakfast.jpg" alt="">
+                    <div class="hcardinfo">
+                        <span>pizza</span>
+                        <h3>cheese pizza</h3>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
 
     <!-- ================= Get data from local JSON file ================= -->
 
