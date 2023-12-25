@@ -185,6 +185,147 @@
   // calcVacation(30, "Students", "Sunday");
   // calcVacation(40, "Regular", "Saturday");
     </script>
+    <script>
+        // 02. Number Modification
+      
+        function modifyNumber(num) {
+          let average = 0;
+      
+          let numAsString = String(num);
+          
+          function calcSumOfDigits(numAsString) {
+            let sum = 0;
+      
+            // let numAsString = String(num);
+      
+            for (let index = 0; index < numAsString.length; index++) {
+              let digit = Number(numAsString[index]);
+              sum += digit;
+            }
+      
+            return sum;
+      
+          }
+      
+          function calcAverage(numAsString) {
+            let average = 0;
+      
+            // let numAsString = String(num);
+      
+            const sum = calcSumOfDigits(numAsString);
+      
+            // console.log(sum);
+            
+            average = sum / numAsString.length;
+      
+            // console.log(average);
+      
+            return average;
+      
+          }
+      
+          average = calcAverage(numAsString);
+      
+          // console.log(average);
+      
+          while (average <= 5) {
+            numAsString = numAsString + 9;
+      
+            average = calcAverage(numAsString);
+      
+            if (numAsString.length > 30) {
+              console.log("infinity");
+              break;
+            }
+      
+          }
+      
+          console.log(numAsString);
+      
+        }
+      
+        // modifyNumber(101);
+        // modifyNumber(5835);
+      </script>
+      <script>
+        // 04. Radio Crystals
+      
+        function proccessCristals(params) {
+          const final = params[0];
+      
+          for (let index = 1; index < params.length; index++) {
+            let start = params[index];
+            let current = start;
+      
+            const operations = [
+              cut, 
+              lap, 
+              grind, 
+              etch, 
+              x-ray, 
+              transport
+            ]
+          }
+      
+          function cut(num) {
+            return num / 4;
+          }
+          function lap(num) {
+            return num * 0.8;
+          }
+        }
+      
+        // 05. Print DNA
+      
+        function printDNA(n) {
+          const DNA = "ATCGTTAGGG";
+          const callbacks = [createRow1, createRow2, createRow3, createRow2];
+          let callbackIndex = 0;
+          let letter = 0;
+      
+          for (let row = 1; row <= n; row++) {
+            const l1 = DNA[letter];
+            letter++;
+      
+            if (letter >= DNA.length) {
+              letter = 0;
+            }
+      
+            const l2 = DNA[letter];
+            letter++;
+      
+            if (letter >= DNA.length) {
+              letter = 0;
+            }
+      
+            callbacks[callbackIndex](l1, l2);
+            callbackIndex++;
+      
+            if (callbackIndex >= callbacks.length) {
+              callbackIndex = 0;
+            }
+      
+          }
+      
+            function createRow1(l1, l2) {
+              const row = `**${l1}${l2}**`;
+              console.log(row);
+            }
+      
+            function createRow2(l1, l2) {
+              const row = `*${l1}--${l2}*`;
+              console.log(row);
+            }
+      
+            function createRow3(l1, l2) {
+              const row = `${l1}----${l2}`;
+              console.log(row);
+            }
+        }
+      
+        // printDNA(4);
+        // printDNA(10);
+      </script>
 
     <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
