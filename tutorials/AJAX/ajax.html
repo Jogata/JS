@@ -219,6 +219,137 @@
                 background-color .4s ease-in;
             cursor: pointer;
         }
+        .toggle-circle::before, 
+        .toggle-circle::after {
+            position: absolute;
+            bottom: 134%;
+            content: "";
+            background-color: var(--bg-toggle);
+            transform-origin: bottom left;
+        }
+        .toggle-circle::before {
+            left: 32%;
+            width: 9px;
+            height: 18px;
+            border-radius: 0% 100% 0% 100% / 0% 27% 73% 100%;
+            transform: translateX(-70%) rotate(-2deg);
+        }
+        .toggle-circle::after {
+            left: 57%;
+            width: 16px;
+            height: 19px;
+            border-radius: 100% 0% 100% 0% / 100% 0% 100% 0%;
+            transform: rotate(-20deg);
+        }
+
+        #checkbox:checked + .toggle {
+            --bg-toggle: hsl(96, 85%, 34%);
+            --bg-circle: hsl(0, 0%, 96%);
+        }
+        #checkbox:checked + .toggle .toggle-circle {
+            margin-left: calc(90px - (0.3rem * 2) - 50px);
+            box-shadow: 
+                inset 1px 1px 1px #555, 
+                inset -1px -1px 1px #fff5;
+        }
+
+        .navonoff {
+            display: none;
+        }
+
+        #checkbox2 {
+            display: none;
+        }
+
+        .toggle2 {
+            position: relative;
+            display: block;
+            width: 40px;
+            height: calc(4px * 3 + 11px * 2);
+            margin: auto;
+            cursor: pointer;
+        }
+
+        .bar {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            color: inherit;
+            border-radius: calc(4px / 2);
+            background-color: #111;
+            transition: none 0.35s cubic-bezier(.5, -0.35, .35, 1.5) 0s;
+            opacity: 1;
+        }
+        .bar-top {
+            bottom: calc(50% + 11px + 4px / 2);
+            transition-property: bottom, transform;
+            transition-delay: calc(0s + 0.35s), 0s;
+        }
+        .bar-middle {
+            top: calc(50% - 4px / 2);
+            transition-property: opacity;
+            transition-delay: calc(0s + 0.35s);
+        }
+        .bar-bottom {
+            top: calc(50% + 11px + 4px / 2);
+            transition-property: top, transform;
+            transition-delay: calc(0s + 0.35s), 0s;
+        }
+
+        #checkbox2:checked + .toggle2 .bar-top {
+            bottom: calc(50% - 4px / 2);
+            transform: rotate(135deg);
+            transition-delay: 0s, calc(0s + 0.35s);
+        }
+        #checkbox2:checked + .toggle2 .bar-middle {
+            transition-duration: 0s;
+            transition-delay: calc(0s + 0.35s);
+            opacity: 0;
+        }
+        #checkbox2:checked + .toggle2 .bar-bottom {
+            top: calc(50% - 4px / 2);
+            transform: rotate(225deg);
+            transition-delay: 0s, calc(0s + 0.35s);
+        }
+
+        .searchinput {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            /* background-color: red; */
+        }
+        .searchinput input {
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            font-size: 16px;
+            font-family: inherit;
+            font-weight: 600;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+            /* border: 1px solid red; */
+        }
+        .searchinput i {
+            color: #111;
+            font-size: 18px;
+            width: 25px;
+            height: 25px;
+            margin-right: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: 0 0 5px #999;
+            transition: .3s ease-in-out;
+            cursor: pointer;
+        }
       </style>
   </head>
   <body>
