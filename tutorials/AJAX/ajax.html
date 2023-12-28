@@ -583,6 +583,123 @@
             font-size: 20px;
             text-transform: capitalize;
         }
+
+        .threecards {
+            gap: 25px;
+            margin-top: 6rem;
+            padding: 0 20px;
+        }
+
+        .tcard {
+            position: relative;
+            width: 350px;
+            height: auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px #ede9e9;
+            overflow: hidden;
+        }
+
+        .tcardimg {
+            position: relative;
+            width: 100%;
+            height: 190px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .tcardimg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: inherit;
+            transition: transform .3s ease-in;
+        }
+        .tcard:hover .tcardimg img {
+            transform: scale(1.1);
+        }
+        .tcardimg span {
+            position: absolute;
+            top: 2%;
+            left: 2%;
+            padding: 10px;
+            border-radius: inherit;
+            background-color: white;
+            transition: color .3s ease-in;
+            cursor: pointer;
+        }
+        .tcardimg span:hover {
+            color: orange;
+        }
+
+        .tcardinfo {
+            position: relative;
+            flex-direction: column;
+            margin-top: 10px;
+            padding: 5px;
+            gap: 15px;
+        }
+
+        .tlabel {
+            color: brown;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .tcardinfo h2 {
+            color: #222;
+            font-size: 20px;
+            text-align: center;
+            text-transform: capitalize;
+        }
+
+        .star-rating {
+            display: flex;
+        }
+
+        .fa-star {
+            color: #555;
+        }
+        .fa-star.checked {
+            color: orange;
+        }
+
+        .tcardinfo p {
+            color: #444;
+            font-size: 14px;
+            line-height: 22px;
+            text-align: center;
+        }
+
+        .tcardinfo ul {
+            gap: 12px;
+        }
+        .tcardinfo ul li {
+            font-size: 12px;
+            transition: color .3s ease-in;
+            cursor: pointer;
+        }
+        .tcardinfo ul li:hover {
+            color: brown;
+        }
+        .tcardinfo ul li i {
+            margin-right: 5px;
+            color: brown;
+        }
+
+        .tcardbtn {
+            position: relative;
+            width: 100%;
+            padding: 10px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            text-transform: capitalize;
+            border-radius: 8px;
+            background-color: var(--main-color);
+            overflow: hidden;
+            z-index: 2;
+        }
       </style>
   </head>
   <body>
@@ -780,35 +897,39 @@
                     {
                         title: "Browny Cookies",
                         description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
-                        link: "https://example.com/slide1",
+                        // link: "https://example.com/slide1",
+                        link: "img/cookies-7.jpg",
                         backgroundImage: "img/cookies-7.jpg",
                         label: "cookies"
                     },
                     {
                         title: "Caramel Cookies",
                         description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
-                        link: "https://example.com/slide2",
+                        // link: "https://example.com/slide2",
+                        link: "img/cookies-6.jpg",
                         backgroundImage: "img/cookies-6.jpg",
                         label: "cookies"
                     },
                     {
                         title: "Healthy Steak",
                         description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
-                        link: "https://example.com/slide3",
+                        // link: "https://example.com/slide3",
+                        link: "img/cheesepizza.jpg",
                         backgroundImage: "img/cheesepizza.jpg",
                         label: "cookies"
                     },
                     {
                         title: "Cheese Pizza",
                         description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
-                        link: "https://example.com/slide3",
+                        // link: "https://example.com/slide3",
+                        link: "img/breakfast.jpg",
                         backgroundImage: "img/breakfast.jpg",
                         label: "pizza"
                     },
                     {
                         title: "Oat Cookies",
                         description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
-                        link: "https://example.com/slide3",
+                        link: "img/grill.jpg",
                         backgroundImage: "img/grill.jpg",
                         label: "cookies"
                     }
@@ -839,6 +960,7 @@
                             postElement.classList.add('headercard');
                             postElement.classList.add('flex');
                             postElement.href = `${post.link}`;
+                            postElement.setAttribute("target", "__blanc");
                             postElement.innerHTML = `
                                 <img src="${post.backgroundImage}" alt="">
                                 <div class="hcardinfo">
@@ -853,13 +975,18 @@
                     const rightBtn = document.getElementById('sright');
                     
                     leftBtn.addEventListener('click', function () {
-                        currentSlide = (currentSlide - 6 + posts.length) % posts.length;
+                        // currentSlide = (currentSlide - 6 + posts.length) % posts.length;
+                        currentSlide--;
+                        currentSlide = currentSlide + posts.length;
+                        currentSlide = currentSlide % posts.length;
                         updateSlider();
                         showSlide(currentSlide);
                     });
                     
                     rightBtn.addEventListener('click', function () {
                         currentSlide = (currentSlide + 6) % posts.length;
+                        // currentSlide++;
+                        // currentSlide = currentSlide % posts.length;
                         updateSlider();
                         showSlide(currentSlide);
                     });
@@ -875,12 +1002,12 @@
                     headerPostsCards(currentSlide);
                 }
                 
-                setInterval(nextSlide, 3000);
+                // setInterval(nextSlide, 3000);
             </script>
 
         </section>
 
-        <section class="threecards container flex">
+        <section class="threecards container flex" id="cards">
 
             <div class="tcard">
                 <div class="tcardimg">
@@ -899,11 +1026,11 @@
                     </div>
                     <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies</p>
                     <ul class="flex">
-                        <li><i class="fa-solid fa-user"></i>by</li>
-                        <li><i class="fa-regular fa-clock"></i>10 mins</li>
-                        <li><i class="fa-regular fa-heart"></i>25 likes</li>
+                        <li><i class="fa fa-user"></i>by</li>
+                        <li><i class="fa fa-clock-o"></i>10 mins</li>
+                        <li><i class="fa fa-heart"></i>25 likes</li>
                     </ul>
-                    <a href="/" class="tcardbtn">read more</a>
+                    <a href="#cards" class="tcardbtn">read more</a>
                 </div>
             </div>
 
@@ -924,11 +1051,11 @@
                     </div>
                     <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies</p>
                     <ul class="flex">
-                        <li><i class="fa-solid fa-user"></i>by</li>
-                        <li><i class="fa-regular fa-clock"></i>30 mins</li>
-                        <li><i class="fa-regular fa-heart"></i>5 likes</li>
+                        <li><i class="fa fa-user"></i>by</li>
+                        <li><i class="fa fa-clock-o"></i>30 mins</li>
+                        <li><i class="fa fa-heart"></i>5 likes</li>
                     </ul>
-                    <a href="/" class="tcardbtn">read more</a>
+                    <a href="#cards" class="tcardbtn">read more</a>
                 </div>
             </div>
 
@@ -949,11 +1076,11 @@
                     </div>
                     <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies</p>
                     <ul class="flex">
-                        <li><i class="fa-solid fa-user"></i>by</li>
-                        <li><i class="fa-regular fa-clock"></i>55 mins</li>
-                        <li><i class="fa-regular fa-heart"></i>10 likes</li>
+                        <li><i class="fa fa-user"></i>by</li>
+                        <li><i class="fa fa-clock-o"></i>55 mins</li>
+                        <li><i class="fa fa-heart"></i>10 likes</li>
                     </ul>
-                    <a href="/" class="tcardbtn">read more</a>
+                    <a href="#cards" class="tcardbtn">read more</a>
                 </div>
             </div>
 
