@@ -329,6 +329,7 @@
             z-index: 2;
         }
         .searchinput.hidden {
+            transition: opacity .4s ease-in;
             visibility: hidden;
             opacity: 0;
         }
@@ -356,8 +357,11 @@
             border-radius: 5px;
             background-color: white;
             box-shadow: 0 0 5px #999;
-            transition: .3s ease-in-out;
+            transition: background-color .3s ease-in-out;
             cursor: pointer;
+        }
+        .searchinput i:hover {
+            background-color: var(--main-color);
         }
 
         .headerimg {
@@ -438,6 +442,122 @@
             transition: .2s ease-in;
             cursor: pointer;
         }
+        .headerbtn::before, 
+        .headerbtn::after {
+            position: absolute;
+            left: -2px;
+            top: -2px;
+            content: '';
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            border-radius: 10px;
+            background: 
+                linear-gradient(45deg, 
+                    var(--ch-black), var(--eer-black), 
+                    var(--night-rider), var(--ch-white), 
+                    var(--night-rider), var(--eer-black), 
+                    var(--ch-black), var(--ch-black));
+            background-size: 400%;
+            animation: steam 15s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes steam {
+            0% {
+                background-position: 0 0;
+            }
+            50% {
+                background-position: 400% 0;
+            }
+            100% {
+                background-position: 0 0;
+            }
+        }
+
+        .headerbtn::after {
+            filter: blur(50px);
+        }
+        .headerbtn:hover {
+            border: 1px solid white;
+            box-shadow: 0 0 10px white;
+        }
+
+        .headerslider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            margin-top: -120px;
+            overflow: hidden;
+            z-index: 3;
+        }
+
+        .slidertitle {
+            justify-content: space-between;
+            margin-bottom: 30px;
+            color: white;
+            text-transform: capitalize;
+        }
+        .slidertitle h4 {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .sliderlfbtn button {
+            position: relative;
+            margin-right: 5px;
+            padding: 15px 17px;
+            color: white;
+            outline: none;
+            border: 2px solid white;
+            border-radius: 50%;
+            background-color: transparent;
+            cursor: pointer;
+        }
+        .sliderlfbtn button::after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: "";
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            background-color: var(--main-color);
+            transform: scale(0);
+            transition: transform .4s ease-in;
+            z-index: -1;
+        }
+        .sliderlfbtn button:hover {
+            border: 2px solid var(--main-color);
+        } 
+        .sliderlfbtn button:hover::after {
+            transform: scale(1);
+        }
+        .sliderlfbtn button i {
+            font-size: 16px;
+        }
+
+        .headercards {
+            width: 100%;
+            gap: 30px;
+            white-space: nowrap;
+            overflow-x: scroll;
+            scroll-behavior: smooth;
+            transition: transform 0.5s ease-in-out;
+            scrollbar-width: thin;
+            /* scrollbar-color: transparent transparent; */
+        }
+        .headercards::-webkit-scrollbar {
+            display: none;
+        }
+
+        .headercard {
+            min-width: 345px;
+            max-width: 345px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #e2e1ec;
+            overflow: hidden;
+            cursor: pointer;
+        }
       </style>
   </head>
   <body>
@@ -507,7 +627,7 @@
                     </div>
                 </div>
 
-                <div class="searchinput">
+                <div class="searchinput hidden">
                     <input type="text" placeholder="Search Here...">
                     <i class="fa fa-times" id="removesearch" aria-hidden="true"></i>
                 </div>
@@ -516,22 +636,24 @@
                     const searchoff = document.querySelector('#removesearch');
                     const searchinput = document.querySelector('.searchinput');
                     
-                    searchinput.style.display = "none";
+                    // searchinput.style.display = "none";
                     
                     searchon.addEventListener('click', () => {
-                        if (searchinput.style.display === 'none') {
-                            searchinput.style.display = 'flex';
-                        } else {
-                            searchinput.style.display = 'none';
-                        }
+                        // if (searchinput.style.display === 'none') {
+                        //     searchinput.style.display = 'flex';
+                        // } else {
+                        //     searchinput.style.display = 'none';
+                        // }
+                        searchinput.classList.remove("hidden");
                     })
                     
                     searchoff.addEventListener('click', () => {
-                        if (searchinput.style.display === 'flex') {
-                            searchinput.style.display = 'none';
-                        } else {
-                            searchinput.style.display = 'flex';
-                        }
+                        // if (searchinput.style.display === 'flex') {
+                        //     searchinput.style.display = 'none';
+                        // } else {
+                        //     searchinput.style.display = 'flex';
+                        // }
+                        searchinput.classList.add("hidden");
                     });
                 </script>
 
@@ -577,6 +699,7 @@
             </div>
 
             <div class="headercards flex">
+
                 <a class="headercard flex" href="#header">
                     <img src="img/breakfast.jpg" alt="">
                     <div class="hcardinfo">
@@ -584,6 +707,7 @@
                         <h3>cheese pizza</h3>
                     </div>
                 </a>
+
                 <a class="headercard flex" href="#header">
                     <img src="img/grill.jpg" alt="">
                     <div class="hcardinfo">
@@ -591,6 +715,7 @@
                         <h3>oat cookies</h3>
                     </div>
                 </a>
+
                 <a class="headercard flex" href="#header">
                     <img src="img/cookies-7.jpg" alt="">
                     <div class="hcardinfo">
@@ -598,6 +723,7 @@
                         <h3>browny cookies</h3>
                     </div>
                 </a>
+
                 <a class="headercard flex" href="#header">
                     <img src="img/cookies-6.jpg" alt="">
                     <div class="hcardinfo">
@@ -605,6 +731,7 @@
                         <h3>caramel cookies</h3>
                     </div>
                 </a>
+
                 <a class="headercard flex" href="#header">
                     <img src="img/cheesepizza.jpg" alt="">
                     <div class="hcardinfo">
@@ -612,6 +739,7 @@
                         <h3>healthy steak</h3>
                     </div>
                 </a>
+
                 <a class="headercard flex" href="#header">
                     <img src="img/breakfast.jpg" alt="">
                     <div class="hcardinfo">
@@ -619,6 +747,7 @@
                         <h3>cheese pizza</h3>
                     </div>
                 </a>
+
             </div>
 
         </section>
