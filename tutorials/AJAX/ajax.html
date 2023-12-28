@@ -558,6 +558,31 @@
             overflow: hidden;
             cursor: pointer;
         }
+        .headercard:hover {
+            box-shadow: 0 0 15px var(--main-color);
+        }
+        .headercard img {
+            width: 110px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: inherit;
+        }
+
+        .hcardinfo {
+            margin-left: 10px;
+        }
+        .hcardinfo span {
+            margin-bottom: 10px;
+            color: brown;
+            font-size: 16px;
+            text-transform: capitalize;
+        }
+        .hcardinfo h3 {
+            margin-top: 8px;
+            color: #333;
+            font-size: 20px;
+            text-transform: capitalize;
+        }
       </style>
   </head>
   <body>
@@ -749,6 +774,109 @@
                 </a>
 
             </div>
+
+            <script>
+                const posts = [
+                    {
+                        title: "Browny Cookies",
+                        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
+                        link: "https://example.com/slide1",
+                        backgroundImage: "img/cookies-7.jpg",
+                        label: "cookies"
+                    },
+                    {
+                        title: "Caramel Cookies",
+                        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
+                        link: "https://example.com/slide2",
+                        backgroundImage: "img/cookies-6.jpg",
+                        label: "cookies"
+                    },
+                    {
+                        title: "Healthy Steak",
+                        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
+                        link: "https://example.com/slide3",
+                        backgroundImage: "img/cheesepizza.jpg",
+                        label: "cookies"
+                    },
+                    {
+                        title: "Cheese Pizza",
+                        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
+                        link: "https://example.com/slide3",
+                        backgroundImage: "img/breakfast.jpg",
+                        label: "pizza"
+                    },
+                    {
+                        title: "Oat Cookies",
+                        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard",
+                        link: "https://example.com/slide3",
+                        backgroundImage: "img/grill.jpg",
+                        label: "cookies"
+                    }
+                ];
+                
+                let currentSlide = 0;
+                
+                function showSlide(slideIndex) {
+                    const slide = posts[slideIndex];
+                    document.querySelector('.headertitle').textContent = slide.title;
+                    document.querySelector('.headerpera').textContent = slide.description;
+                    document.querySelector('.headerbtn').href = slide.link;
+                    document.querySelector('.headerimg').style.backgroundImage = `url(${slide.backgroundImage})`;
+                }
+
+                showSlide(currentSlide);
+                
+                const headerPosts = document.querySelector('.headercards');
+                
+                const headerPostsCards = () => {
+                    
+                    const updateSlider = () => {
+                        headerPosts.innerHTML = '';
+
+                        for (let i = currentSlide; i < currentSlide + 6; i++) {
+                            const post = posts[i % posts.length];
+                            const postElement = document.createElement('a');
+                            postElement.classList.add('headercard');
+                            postElement.classList.add('flex');
+                            postElement.href = `${post.link}`;
+                            postElement.innerHTML = `
+                                <img src="${post.backgroundImage}" alt="">
+                                <div class="hcardinfo">
+                                    <span>${post.label}</span>
+                                    <h3>${post.title}</h3>
+                                </div>`;
+                            headerPosts.appendChild(postElement);
+                        }
+                    };
+                    
+                    const leftBtn = document.getElementById('sleft');
+                    const rightBtn = document.getElementById('sright');
+                    
+                    leftBtn.addEventListener('click', function () {
+                        currentSlide = (currentSlide - 6 + posts.length) % posts.length;
+                        updateSlider();
+                        showSlide(currentSlide);
+                    });
+                    
+                    rightBtn.addEventListener('click', function () {
+                        currentSlide = (currentSlide + 6) % posts.length;
+                        updateSlider();
+                        showSlide(currentSlide);
+                    });
+                    
+                    updateSlider();
+                };
+                
+                headerPostsCards();
+                
+                function nextSlide() {
+                    currentSlide = (currentSlide + 1) % posts.length;
+                    showSlide(currentSlide);
+                    headerPostsCards(currentSlide);
+                }
+                
+                setInterval(nextSlide, 3000);
+            </script>
 
         </section>
 
