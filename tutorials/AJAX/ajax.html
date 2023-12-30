@@ -899,6 +899,7 @@
             margin-right: 20px;
             background: #ff6767;
             background: linear-gradient(to right, transparent, #ff6767);
+            clip-path: polygon(0 45%, 100% 100%, 100% 0);
         }
         .titleicon::after {
             content: '';
@@ -907,6 +908,7 @@
             margin-left: 20px;
             background: #ff6767;
             background: linear-gradient(to right, #ff6767, transparent);
+            clip-path: polygon(0 0, 0 100%, 100% 50%);
         }
         .titleicon img {
             width: 40px;
@@ -939,6 +941,106 @@
             height: auto;
             border-radius: 10px;
             overflow: hidden;
+        }
+
+        .fcardimg {
+            position: relative;
+            width: 100%;
+            height: 430px;
+            border-radius: inherit;
+            overflow: hidden;
+        }
+        .fcardimg img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            background-size: cover;
+            transition: transform .3s ease-in;
+        }
+        .fcard:hover .fcardimg img {
+            transform: scale(1.08);
+        }
+
+        .fauthorname {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            padding: 15px;
+            border-top-right-radius: 10px;
+            background-color: white;
+        }
+        .fauthorname img {
+            width: 40px;
+            margin-right: 10px;
+        }
+
+        .fauth h5 {
+            color: #555;
+            font-size: 16px;
+            text-transform: capitalize;
+        }
+        .fauth p {
+            margin-top: 5px;
+            font-size: 12px;
+        }
+
+        .fcardimg i {
+            position: absolute;
+            top: 3%;
+            left: 3%;
+            padding: 8px;
+            color: #ff6767;
+            font-size: 14px;
+            border-radius: 50%;
+            background-color: #e8e5e5;
+            transition: all .4s ease-in-out;
+            cursor: pointer;
+        }
+        .fcardimg i:hover {
+            color: red;
+            background-color: white;
+        }
+
+        .fcardinfo {
+            gap: 15px;
+            align-items: flex-start;
+            flex-direction: column;
+            position: relative;
+            padding: 20px 0 0 60px;
+        }
+        .fcardinfo::before {
+            position: absolute;
+            top: 60px;
+            left: 0;
+            content: "";
+            width: 40px;
+            height: 2px;
+            background-color: #ff6767;
+        }
+        .fcardinfo label {
+            font-size: 14px;
+            text-transform: capitalize;
+        }
+        .fcardinfo h2 {
+            font-size: 20px;
+            text-transform: capitalize;
+        }
+        .fcardinfo p {
+            color: #777;
+            font-size: 16px;
+        }
+
+        .fcardbtn {
+            position: relative;
+            padding: 10px 20px;
+            color: white;
+            font-size: 16px;
+            border-radius: 10px;
+            background-color: #ff6767;
+            transition: all .3s ease-in-out;
+            z-index: 1;
         }
       </style>
   </head>
@@ -1538,6 +1640,7 @@
         </section>
 
         <section class="featuredrecipe container flex">
+
             <div class="featuredtitles flex">
                 <div class="titleicon">
                     <img src="img/logo.png" alt="">
@@ -1545,6 +1648,7 @@
                 <h1>featured recipes</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia officiis delectus itaque repudiandae eligendi mollitia</p>
             </div>
+
             <div class="featuredcards flex">
 
                 <div class="fcard">
@@ -1553,8 +1657,35 @@
                         <div class="fauthorname flex">
                             <img src="img/user.png" alt="">
                             <div class="fauth">
-                                <h5></h5>
+                                <h5>user name</h5>
                                 <p>33 recipes</p>
+                            </div>
+                        </div>
+                        <i class="fa fa-heart" aria-hidden="true"></i>
+                    </div>
+                    <div class="fcardinfo flex">
+                        <div class="star-rating">
+                            <span class="fa fa-star checked" aria-hidden="true"></span>
+                            <span class="fa fa-star checked" aria-hidden="true"></span>
+                            <span class="fa fa-star checked" aria-hidden="true"></span>
+                            <span class="fa fa-star" aria-hidden="true"></span>
+                            <span class="fa fa-star" aria-hidden="true"></span>
+                        </div>
+                        <label>beginner</label>
+                        <h2>browny cookies</h2>
+                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium earum quo impedit tenetur deleniti obcaecati laboriosam officia neque ad fuga.</p>
+                        <a href="/" class="fcardbtn">read more <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+                <div class="fcard">
+                    <div class="fcardimg">
+                        <img src="img/cookies-6.jpg" alt="">
+                        <div class="fauthorname flex">
+                            <img src="img/user.png" alt="">
+                            <div class="fauth">
+                                <h5>user name</h5>
+                                <p>15 recipes</p>
                             </div>
                         </div>
                         <i class="fa fa-heart"></i>
@@ -1567,37 +1698,10 @@
                             <span class="fa fa-star"></span>
                             <span class="fa fa-star"></span>
                         </div>
-                        <label>beginner</label>
-                        <h2>browny cookies</h2>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium earum quo impedit tenetur deleniti obcaecati laboriosam officia neque ad fuga.</p>
-                        <a href="/" class="fcardbtn">read more <i class="fa fa-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <div class="fcard">
-                    <div class="fcardimg">
-                        <img src="img/cookies-6.jpg" alt="">
-                        <div class="fauthorname flex">
-                            <img src="img/user.png" alt="">
-                            <div class="fauth">
-                                <h5></h5>
-                                <p>15 recipes</p>
-                            </div>
-                        </div>
-                        <i class="fa-regular fa-heart"></i>
-                    </div>
-                    <div class="fcardinfo flex">
-                        <div class="star-rating">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
                         <label>advanced</label>
                         <h2>caramel cookies</h2>
                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium earum quo impedit tenetur deleniti obcaecati laboriosam officia neque ad fuga.</p>
-                        <a href="/" class="fcardbtn">read more <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="/" class="fcardbtn">read more <i class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
 
@@ -1607,11 +1711,11 @@
                         <div class="fauthorname flex">
                             <img src="img/user.png" alt="">
                             <div class="fauth">
-                                <h5></h5>
+                                <h5>user name</h5>
                                 <p>23 recipes</p>
                             </div>
                         </div>
-                        <i class="fa-regular fa-heart"></i>
+                        <i class="fa fa-heart"></i>
                     </div>
                     <div class="fcardinfo flex">
                         <div class="star-rating">
@@ -1624,10 +1728,12 @@
                         <label>intermediate</label>
                         <h2>healthy steak</h2>
                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium earum quo impedit tenetur deleniti obcaecati laboriosam officia neque ad fuga.</p>
-                        <a href="/" class="fcardbtn">read more <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="/" class="fcardbtn">read more <i class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
+
             </div>
+
         </section>
 
         <section class="gfbg">
@@ -1638,7 +1744,7 @@
                         <span>vegen</span>
                         <h1>green world</h1>
                         <p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.</p>
-                        <a href="/">click here <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="/">click here <i class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
                 <div class="fruitworld flex">
@@ -1647,12 +1753,14 @@
                         <span>desserts</span>
                         <h1>fruity world</h1>
                         <p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.</p>
-                        <a href="/">click here <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="/">click here <i class="fa fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
         </section>
+
         <section class="breackfastsec container flex">
+
             <div class="leftsidesec">
                 <div class="leftboxtitle">
                     <h1>enjoy breakfast</h1>
@@ -1675,7 +1783,7 @@
                             <label class="tlabel">cookies</label>
                             <h2>cheese pizza</h2>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p>
-                            <a href="/" class="catecarbtn">read more <i class="fa-solid fa-arrow-right"></i></a>
+                            <a href="/" class="catecarbtn">read more <i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div>
                     <div class="tcard">
@@ -1694,7 +1802,7 @@
                             <label class="tlabel">cookies</label>
                             <h2>specialty fries</h2>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p>
-                            <a href="/" class="catecarbtn">read more <i class="fa-solid fa-arrow-right"></i></a>
+                            <a href="/" class="catecarbtn">read more <i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div>
                     <div class="tcard">
@@ -1713,7 +1821,7 @@
                             <label class="tlabel">healthy</label>
                             <h2>healthy steak</h2>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p>
-                            <a href="/" class="catecarbtn">read more <i class="fa-solid fa-arrow-right"></i></a>
+                            <a href="/" class="catecarbtn">read more <i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div>
                     <div class="tcard">
@@ -1732,7 +1840,7 @@
                             <label class="tlabel">pizza</label>
                             <h2>cheese pizza</h2>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's</p>
-                            <a href="/" class="catecarbtn">read more <i class="fa-solid fa-arrow-right"></i></a>
+                            <a href="/" class="catecarbtn">read more <i class="fa fa-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -1740,6 +1848,7 @@
                     <h1>Place Your Advertisemenst Here</h1>
                 </div>
             </div>
+            
         </section>
 
     </main>
