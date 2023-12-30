@@ -930,7 +930,8 @@
         .featuredcards {
             width: 100%;
             height: auto;
-            margin-top: 4rem;
+            margin-top: 3rem;
+            padding: 1rem 10px 2rem;
             gap: 22px;
             overflow: hidden;
         }
@@ -940,6 +941,7 @@
             width: 350px;
             height: auto;
             border-radius: 10px;
+            box-shadow: 0 0 10px #999999bb;
             overflow: hidden;
         }
 
@@ -1008,39 +1010,139 @@
             align-items: flex-start;
             flex-direction: column;
             position: relative;
-            padding: 20px 0 0 60px;
+            padding: 20px;
         }
-        .fcardinfo::before {
+        .fcardinfo label {
+            position: relative;
+            font-size: 14px;
+            padding-left: 50px;
+            text-transform: capitalize;
+        }
+        .fcardinfo label::before {
             position: absolute;
-            top: 60px;
+            /* top: 60px; */
+            top: 50%;
             left: 0;
             content: "";
-            width: 40px;
+            /* width: 40px; */
+            width: 100%;
+            max-width: 40px;
             height: 2px;
             background-color: #ff6767;
         }
-        .fcardinfo label {
-            font-size: 14px;
-            text-transform: capitalize;
-        }
         .fcardinfo h2 {
+            width: 100%;
             font-size: 20px;
+            text-align: center;
             text-transform: capitalize;
         }
         .fcardinfo p {
             color: #777;
             font-size: 16px;
+            text-align: center;
         }
 
         .fcardbtn {
+            align-self: center;
             position: relative;
             padding: 10px 20px;
             color: white;
             font-size: 16px;
+            text-transform: uppercase;
             border-radius: 10px;
             background-color: #ff6767;
             transition: all .3s ease-in-out;
             z-index: 1;
+        }
+        .fcardbtn::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: "";
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            background-color: #1111112a;
+            transform: scaleX(0);
+            transition: transform .4s ease-in;
+            z-index: -1;
+        }
+        .fcardbtn:hover::before {
+            transform: scaleX(1);
+        }
+
+        .gfbg {
+            position: relative;
+            width: 100%;
+            min-height: 45vh;
+            margin-top: 6rem;
+            background-image: url("img/fruit-salads-in-plate.jpg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        
+        .gfbg .container {
+            width: 100%;
+            height: 100%;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            border: 1px solid red;
+        }
+        
+        .greenworld {
+            flex-wrap: wrap;
+            position: relative;
+            width: 48%;
+            height: 100%;
+            padding: 28px;
+            border-radius: 10px;
+            background-color: white;
+            overflow: hidden;
+        }
+        .greenworld img {
+            position: absolute;
+            right: -50px;
+            bottom: 0;
+            width: 240px;
+        }
+
+        .fruitworld {
+            flex-wrap: wrap;
+            position: relative;
+            width: 48%;
+            height: 100%;
+            padding: 28px;
+            border-radius: 10px;
+            background-color: white;
+            overflow: hidden;
+
+        }
+        .fruitworld img {
+            position: absolute;
+            width: 320px;
+            right: -120px;
+            bottom: 0;
+        }
+
+        .gfinfo {
+            max-width: 60%;
+        }
+        .gfinfo span {
+            display: inline-block;
+            margin: 0 0 10px 0;
+            padding: 8px 12px;
+            color: #85b7c2;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: capitalize;
+            border: 1px solid;
+            border-radius: 8px;
+            background-color: #dde6ce;
+        }
+        .fruitworld .gfinfo span {
+            color: #ff6767;
+            background-color: #ffdbdb;
         }
       </style>
   </head>
@@ -1579,7 +1681,7 @@
                         <ul class="flex">
                             <li><i class="fa fa-user" aria-hidden="true"></i>by</li>
                             <li><i class="fa fa-clock-o" aria-hidden="true"></i>10 mins</li>
-                            <li><i class="fa fa-heart" aria-hidden="true"></i>25 like</li>
+                            <li><i class="fa fa-heart" aria-hidden="true"></i>25 likes</li>
                         </ul>
                         <a href="/" class="catecarbtn">read more <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
@@ -1604,7 +1706,7 @@
                         <ul class="flex">
                             <li><i class="fa fa-user" aria-hidden="true"></i>by</li>
                             <li><i class="fa fa-clock-o" aria-hidden="true"></i>30 mins</li>
-                            <li><i class="fa fa-heart" aria-hidden="true"></i>5 like</li>
+                            <li><i class="fa fa-heart" aria-hidden="true"></i>5 likes</li>
                         </ul>
                         <a href="/" class="catecarbtn">read more <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
@@ -1629,7 +1731,7 @@
                         <ul class="flex">
                             <li><i class="fa fa-user" aria-hidden="true"></i>by</li>
                             <li><i class="fa fa-clock-o" aria-hidden="true"></i>55 mins</li>
-                            <li><i class="fa fa-heart" aria-hidden="true"></i>10 like</li>
+                            <li><i class="fa fa-heart" aria-hidden="true"></i>10 likes</li>
                         </ul>
                         <a href="/" class="catecarbtn">read more <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
@@ -1661,7 +1763,7 @@
                                 <p>33 recipes</p>
                             </div>
                         </div>
-                        <i class="fa fa-heart" aria-hidden="true"></i>
+                        <i class="fa fa-heart-o" aria-hidden="true"></i>
                     </div>
                     <div class="fcardinfo flex">
                         <div class="star-rating">
@@ -1688,20 +1790,20 @@
                                 <p>15 recipes</p>
                             </div>
                         </div>
-                        <i class="fa fa-heart"></i>
+                        <i class="fa fa-heart" aria-hidden="true"></i>
                     </div>
                     <div class="fcardinfo flex">
                         <div class="star-rating">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star checked" aria-hidden="true"></span>
+                            <span class="fa fa-star checked" aria-hidden="true"></span>
+                            <span class="fa fa-star checked" aria-hidden="true"></span>
+                            <span class="fa fa-star" aria-hidden="true"></span>
+                            <span class="fa fa-star" aria-hidden="true"></span>
                         </div>
                         <label>advanced</label>
                         <h2>caramel cookies</h2>
                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium earum quo impedit tenetur deleniti obcaecati laboriosam officia neque ad fuga.</p>
-                        <a href="/" class="fcardbtn">read more <i class="fa fa-arrow-right"></i></a>
+                        <a href="/" class="fcardbtn">read more <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
@@ -1715,20 +1817,20 @@
                                 <p>23 recipes</p>
                             </div>
                         </div>
-                        <i class="fa fa-heart"></i>
+                        <i class="fa fa-heart" aria-hidden="true"></i>
                     </div>
                     <div class="fcardinfo flex">
                         <div class="star-rating">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star checked" aria-hidden="true"></span>
+                            <span class="fa fa-star checked" aria-hidden="true"></span>
+                            <span class="fa fa-star checked" aria-hidden="true"></span>
+                            <span class="fa fa-star" aria-hidden="true"></span>
+                            <span class="fa fa-star" aria-hidden="true"></span>
                         </div>
                         <label>intermediate</label>
                         <h2>healthy steak</h2>
                         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Praesentium earum quo impedit tenetur deleniti obcaecati laboriosam officia neque ad fuga.</p>
-                        <a href="/" class="fcardbtn">read more <i class="fa fa-arrow-right"></i></a>
+                        <a href="/" class="fcardbtn">read more <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
@@ -1736,36 +1838,43 @@
 
         </section>
 
-        <section class="gfbg">
+        <section class="gfbg flex">
+
             <div class="container flex">
+
                 <div class="greenworld flex">
                     <img src="img/greenworld.png" alt="">
                     <div class="gfinfo">
                         <span>vegen</span>
                         <h1>green world</h1>
                         <p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.</p>
-                        <a href="/">click here <i class="fa fa-arrow-right"></i></a>
+                        <a href="/">click here <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
+
                 <div class="fruitworld flex">
                     <img src="img/fruity-world.png" alt="">
                     <div class="gfinfo">
                         <span>desserts</span>
                         <h1>fruity world</h1>
                         <p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.</p>
-                        <a href="/">click here <i class="fa fa-arrow-right"></i></a>
+                        <a href="/">click here <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
+
             </div>
+
         </section>
 
         <section class="breackfastsec container flex">
 
             <div class="leftsidesec">
+
                 <div class="leftboxtitle">
                     <h1>enjoy breakfast</h1>
                     <p>Curabitur aliquet quam id dui posuere blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae</p>
                 </div>
+                
                 <div class="leftposts flex">
                     <div class="tcard">
                         <div class="tcardimg">
@@ -1848,7 +1957,7 @@
                     <h1>Place Your Advertisemenst Here</h1>
                 </div>
             </div>
-            
+
         </section>
 
     </main>
