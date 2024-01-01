@@ -68,7 +68,7 @@
             position: relative;
             /* width: 100%; */
             /* height: auto; */
-            z-index: 2;
+            z-index: 4;
         }
 
         .topnav {
@@ -131,7 +131,14 @@
             z-index: 3;
         }
         .mainnav.sticky {
-            position: sticky;
+            /* position: sticky; */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            transition: .5s ease-in-out;
+            /* z-index: 4; */
         }
 
         .mainnav .container {
@@ -1094,7 +1101,7 @@
             height: 100%;
             flex-wrap: wrap;
             justify-content: space-between;
-            border: 1px solid red;
+            /* border: 1px solid red; */
         }
         
         .greenworld {
@@ -1520,6 +1527,7 @@
 
         footer {
             width: 100%;
+            padding-bottom: 3rem;
             color: white;
             background-color: #0c121a;
         }
@@ -1553,25 +1561,81 @@
             font-size: 14px;
         }
 
-        .fsocial {}
+        .fsocial {
+            display: flex;
+            gap: 20px;
+        }
+        .fsocial i {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: #4f4d4d8e;
+            transition: background-color .3s ease-in;
+        }
+        .fsocial i:hover {
+            background-color: var(--main-color);
+        }
 
         .footernav {
             width: 13%;
             margin-right: 30px;
-            border: 1px solid red;
+            /* border: 1px solid red; */
         }
         .footernav:last-child {
             margin-right: 0;
         }
         .footernav h3 {
+            margin-bottom: 30px;
+            font-size: 22px;
             text-transform: capitalize;
         }
         .footernav ul {
+            row-gap: 20px;
             align-items: flex-start;
             flex-direction: column;
         }
         .footernav a {
+            font-size: 14px;
+            font-weight: 500;
             text-transform: capitalize;
+            transition: color .3s ease-in;
+        }
+        .footernav a:hover {
+            color: var(--main-color);
+        }
+
+        footer .container > div:last-child {
+            width: 100%;
+        }
+        footer h5 {
+            width: 100%;
+            font-size: 16px;
+            text-align: center;
+            text-transform: capitalize;
+        }
+
+        body.dark {
+            --bg-dark: #0c121a;
+            color: white;
+            background-color: var(--bg-dark);
+        }
+        body.dark .mainnav {
+            background-color: var(--bg-dark);
+        }
+        body.dark .logo img {
+            filter: invert(1);
+        }
+        body.dark .logo h1 {
+            color: white;
+        }
+        body.dark .titleicon img {
+            filter: invert(1);
+        }
+        body.dark .searchbar i {
+            color: #eaeaea;
         }
       </style>
   </head>
@@ -1683,6 +1747,51 @@
                     mainnav.classList.add('sticky');
                 } else {
                     mainnav.classList.remove('sticky');
+                }
+            });
+        </script>
+        <!-- Dark Mode -->
+        <script>
+            const myLS = {
+                darkMode: "true",
+                getItem: function () {
+                    return this.darkMode;
+                }, 
+                setItem: function (prop, value) {
+                    this[prop] = value;
+                }
+            }
+            
+            const darkmode = document.querySelector('#checkbox');
+            let body = document.body;
+            // const logoImage = document.querySelector('.logo img');
+            // const logoImage2 = document.querySelector('.titleicon img');
+            
+            // Check if there is a stored dark mode preference in MyLocalStorage
+            const isDarkMode = myLS.getItem('darkMode') === 'true';
+            
+            // Set the initial state based on the stored preference
+            if (isDarkMode) {
+                body.classList.add('dark');
+                darkmode.checked = true;
+                // logoImage.src = 'img/favicon.png';
+                // logoImage2.src = 'img/favicon.png';
+            } else {
+                // logoImage.src = 'img/logo.png';
+                // logoImage2.src = 'img/logo.png';
+            }
+            
+            darkmode.addEventListener('change', () => {
+                if (darkmode.checked) {
+                    body.classList.add('dark');
+                    myLS.setItem('darkMode', 'true');
+                    // logoImage.src = 'img/favicon.png';
+                    // logoImage2.src = 'img/favicon.png';
+                } else {
+                    body.classList.remove('dark');
+                    myLS.setItem('darkMode', 'false');
+                    // logoImage.src = 'img/logo.png';
+                    // logoImage2.src = 'img/logo.png';
                 }
             });
         </script>
@@ -2499,7 +2608,7 @@
 
         <div class="container flex">
 
-            <div class="footer flex">
+            <div class="footer flex" id="sec-11">
 
                 <div class="footerlogo">
 
@@ -2507,17 +2616,17 @@
                     <p>We provide new recipes with a twist on daily basis. We also post blog posts about fun ideas to do in the kitchen.</p>
 
                     <div class="fsocial">
-                        <a href="http://facebook.com/" target="_blank" title="facebook" rel="noopener noreferrer">
-                          <i class="fa-brands fa-facebook-f"></i>
+                        <a href="#sec-11" target="_blank" title="facebook" rel="noopener noreferrer">
+                          <i class="fa fa-facebook-f"></i>
                         </a>
-                        <a href="http://twitter.com/" target="_blank" title="twitter" rel="noopener noreferrer">
-                          <i class="fa-brands fa-twitter"></i>
+                        <a href="#sec-11" target="_blank" title="twitter" rel="noopener noreferrer">
+                          <i class="fa fa-twitter"></i>
                         </a>
-                        <a href="http://linkedin.com/" target="_blank" title="linkedin" rel="noopener noreferrer">
-                          <i class="fa-brands fa-linkedin"></i>
+                        <a href="#sec-11" target="_blank" title="linkedin" rel="noopener noreferrer">
+                          <i class="fa fa-linkedin"></i>
                         </a>
-                        <a href="http://youtube.com/" target="_blank" title="youtube" rel="noopener noreferrer">
-                          <i class="fa-brands fa-youtube"></i>
+                        <a href="#sec-11" target="_blank" title="youtube" rel="noopener noreferrer">
+                          <i class="fa fa-youtube-play"></i>
                         </a>
                     </div>
 
@@ -2526,20 +2635,20 @@
                 <div class="footernav">
                     <h3>recipes</h3>
                     <ul class="flex">
-                        <li><a href="/">breakfast</a></li>
-                        <li><a href="/">desserts</a></li>
-                        <li><a href="/">dinner</a></li>
-                        <li><a href="/">dairy</a></li>
+                        <li><a href="#sec-11">breakfast</a></li>
+                        <li><a href="#sec-11">desserts</a></li>
+                        <li><a href="#sec-11">dinner</a></li>
+                        <li><a href="#sec-11">dairy</a></li>
                     </ul>
                 </div>
 
                 <div class="footernav">
                     <h3>legal</h3>
                     <ul class="flex">
-                        <li><a href="/">privacy policy</a></li>
-                        <li><a href="/">refund policy</a></li>
-                        <li><a href="/">cookie policy</a></li>
-                        <li><a href="/">terms <span class="lower">and</span> conditions</a></li>
+                        <li><a href="#sec-11">privacy policy</a></li>
+                        <li><a href="#sec-11">refund policy</a></li>
+                        <li><a href="#sec-11">cookie policy</a></li>
+                        <li><a href="#sec-11">terms <span class="lower">and</span> conditions</a></li>
                     </ul>
                 </div>
 
