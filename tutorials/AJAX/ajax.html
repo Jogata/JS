@@ -259,8 +259,8 @@
         #checkbox:checked + .toggle .toggle-circle {
             margin-left: calc(90px - (0.3rem * 2) - 50px);
             box-shadow: 
-                inset 1px 1px 1px #555, 
-                inset -1px -1px 1px #fff5;
+                inset 2px 1px 1px #555, 
+                inset -2px -1px 1px #fff5;
         }
 
         .navonoff {
@@ -493,7 +493,8 @@
             position: relative;
             width: 100%;
             height: 100%;
-            margin-top: -120px;
+            /* margin-top: -120px; */
+            transform: translateY(-50%);
             overflow: hidden;
             z-index: 3;
         }
@@ -544,6 +545,7 @@
 
         .headercards {
             width: 100%;
+            padding: 10px;
             gap: 30px;
             white-space: nowrap;
             overflow-x: scroll;
@@ -595,7 +597,7 @@
             gap: 25px;
             flex-wrap: wrap;
             justify-content: center;
-            margin-top: 6rem;
+            /* margin-top: 6rem; */
             padding: 0 20px;
         }
 
@@ -1102,6 +1104,7 @@
             flex-wrap: wrap;
             justify-content: space-between;
             /* border: 1px solid red; */
+            z-index: 1;
         }
         
         .greenworld {
@@ -1281,7 +1284,7 @@
         .aboutsec {
             width: 100%;
             margin-bottom: 3rem;
-            overflow: hidden;
+            /* overflow: hidden; */
         }
 
         .tdesign {
@@ -1466,6 +1469,7 @@
         }
         .subscibeinfo {
             text-align: center;
+            z-index: 1;
         }
         .subscibeinfo h1 {
             margin-bottom: 20px;
@@ -1637,7 +1641,122 @@
         body.dark .searchbar i {
             color: #eaeaea;
         }
-      </style>
+
+        @media screen and (max-width: 800px) {
+            .topnav .container{
+                padding: 0 20px;
+            }
+            .navlist{
+                position: absolute;
+                width: 220px;
+                height: 100vh;
+                top: 100%;
+                right: -400px;
+                flex-direction: column;
+                background-color: #eaeaea;
+                padding: 30px;
+                z-index: 999999;
+                transition: 0.3s ease-in-out;
+            }
+            .dark .navlist {
+                background-color: #363636;
+            }
+            .navonoff{
+                display: block;
+            }
+            .headerimg{
+                min-height: 45vh;
+            }
+            .headertitle{
+                font-size: 30px;
+            }
+            .headerpera{
+                padding-right: 1rem;
+            }
+            .headerinfo{
+                /* padding: 4rem 20px; */
+                padding-inline: 20px;
+            }
+            .headerslider{
+                padding: 0 20px;
+            }
+            .sliderlfbtn{
+                display: none;
+            }
+            .headercard{
+                min-width: 100%;
+                max-width: 100%;
+            }
+            .threecards{
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .filter {
+                flex-wrap: wrap;
+            }
+            .filtername{
+                width: 45%;
+            }
+            .filtercards{
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            .featuredcards{
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 50px;
+            }
+            .gfbg{
+                height: auto;
+                padding: 30px 20px;
+            }
+            .gfbg .container{
+                flex-direction: column;
+                gap: 30px;
+            }
+            .greenworld, .fruitworld{
+                width: 100%;
+            }
+            .breackfastsec{
+                flex-direction: column;
+                padding: 0 20px;
+            }
+            .leftsidesec, 
+            .rightsidesec{
+                width: 100%;
+            }
+            .leftposts .tcard{
+                width: 100%;
+            }
+            .leftposts .tcardimg{
+                width: 100%;
+                height: 56%;
+            }
+            .rightsidesec{
+                margin-top: 3rem;
+            }
+            footer .container{
+                padding: 0 20px;
+            }
+        }
+        
+        @media screen and (max-width: 500px){
+            .logo h1{
+                font-size: 24px;
+            }
+            .logo img{
+                width: 38px;
+            }
+            .filtername{
+                width: 45%;
+                height: 130px;
+                padding: 10px;
+            }
+            .filtername .flex h3{
+                font-size: 15px;
+            }
+        }
+    </style>
   </head>
   <body>
 
@@ -1704,6 +1823,19 @@
                             <div class="bar bar-bottom"></div>
                         </label>
                     </div>
+                    <script>
+                        const navdiv = document.querySelector('.navonoff');
+                        const navtoggle = document.querySelector('#checkbox2');
+                        const navlist = document.querySelector('.navlist');
+                        
+                        navtoggle.addEventListener('change', ()=>{
+                            if (navtoggle.checked) {
+                                navlist.style.right = '-50px';
+                            } else {
+                                navlist.style.right = '-400px';
+                            }
+                        })
+                    </script>
                 </div>
 
                 <div class="searchinput hidden">
