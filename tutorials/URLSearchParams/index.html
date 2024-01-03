@@ -81,6 +81,9 @@
         font-size: var(--normal-font-size);
         background-color: var(--body-color);
       }
+      body.overflow-hidden {
+        overflow: hidden;
+      }
       
       h1, h2, h3 {
         color: var(--title-color);
@@ -132,6 +135,7 @@
 
       /*=============== LAYOUT ===============*/
       .main {
+        border-bottom: 1px solid #fff3;
         overflow: hidden;
       }
       
@@ -183,16 +187,22 @@
       @media screen and (max-width: 767px) {
         .nav-menu {
           position: fixed;
-          top: -100%;
+          /* top: -100%; */
+          top: 0;
           left: 0;
           width: 100%;
           padding: 4rem 0 3rem;
           background-color: var(--body-color);
-          transition: 0.4s;
+          transform: translateY(-100%);
+          transition: transform 0.4s;
+        }
+        .show-menu {
+          min-height: 100vh;
         }
       }
       
       .nav-list {
+        margin: auto;
         display: flex;
         align-items: center;
         flex-direction: column;
@@ -221,6 +231,9 @@
         /* position: absolute; */
         /* top: 1rem; */
         /* right: 1rem; */
+        position: absolute;
+        top: 2%;
+        right: 2%;
         color: var(--white-color);
         font-size: 1.5rem;
         cursor: pointer;
@@ -228,7 +241,12 @@
       
       /* show menu */
       .show-menu {
-        top: 0;
+        /* top: 0; */
+        /* min-height: 100vh; */
+        height: 100vh;
+        display: flex;
+        transform: translateY(0);
+        overflow: auto;
       }
       
       /* Change background header */
@@ -257,12 +275,14 @@
         /* top: -16rem; */
         /* right: 1.5rem; */
         /* width: 250px; */
+        display: block;
         max-width: 20rem;
-        transform: translateY(-15%);
+        margin: auto;
+        /* transform: translateY(-15%); */
       }
       .home-img img {
-        display: block;
-        margin: auto;
+        /* display: block; */
+        /* margin: auto; */
       }
       
       .home-data {
@@ -349,22 +369,32 @@
       }
       
       /*=============== SPONSOR ===============*/
+      .sponsor {}
+
       .sponsor-img {
         /* width: 90px; */
-        max-width: 90%;
+        /* max-width: 90%; */
+        max-width: 120px;
+        margin: 10px 20px;
+        vertical-align: middle;
       }
       
       .sponsor-container {
         /* grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); */
-        grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+        /* grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); */
         /* row-gap: 5rem; */
-        column-gap: 1rem;
-        row-gap: 3rem;
-        align-items: center;
-        justify-items: center;
+        /* column-gap: 1rem; */
+        /* row-gap: 3rem; */
+        /* align-items: center; */
+        /* justify-items: center; */
+        text-align: center;
       }
       
       /*=============== SPECS ===============*/
+      .specs {
+        margin-bottom: 10vh;
+      }
+
       .specs-container {
         /* position: relative; */
         display: flex;
@@ -425,19 +455,36 @@
       }
       
       /*=============== CASE ===============*/
+      .case {}
+
       .case-container {
-        position: relative;
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .case-data {
-        padding: 5rem 0 3rem;
+        display: flex;
+        /* position: relative; */
+        /* grid-template-columns: repeat(2, 1fr); */
       }
       
       .case-img {
-        position: absolute;
+        /* position: absolute;
         left: -7rem;
-        width: 250px;
+        width: 250px; */
+        flex: 1;
+        position: relative;
+        max-width: 300px;
+        min-height: 418px;
+        margin: auto 0 auto auto;
+      }
+      .case-img img {
+        min-width: 300px;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+
+      .case-data {
+        /* padding: 5rem 0 3rem; */
+        max-width: 340px;
+        margin: auto auto auto 0;
+        padding: 20px;
       }
       
       .case-description {
@@ -449,12 +496,13 @@
       .discount-container {
         display: flex;
         position: relative;
+        padding: 10vh 0;
         /* padding: 2rem 0; */
         /* border-radius: 0.75rem; */
         /* background-color: var(--container-color); */
       }
 
-      .discount-animate {
+      .discount-content {
         flex: 3;
         max-width: 230px;
         margin-left: auto;
@@ -723,11 +771,12 @@
       .scrollup {
         position: fixed;
         right: 1rem;
-        bottom: -20%;
-        padding: 0.45rem;
+        bottom: 1rem;
+        padding: 0.45rem 0.55rem 0.6rem;
         display: flex;
         border-radius: 0.25rem;
         background-color: var(--container-color);
+        filter: drop-shadow(-1px -1px 1px #fff2) drop-shadow(1px 1px 1px #000);
         z-index: var(--z-tooltip);
         transition: 0.4s;
         opacity: 0.9;
@@ -790,15 +839,15 @@
           /* width: 200px; */
         }
         .case-container {
-          grid-template-columns: 0.6fr 1fr;
+          /* grid-template-columns: 0.6fr 1fr; */
         }
         .case-img {
-          width: 220px;
-          top: -2rem;
-          left: -9rem;
+          /* width: 220px; */
+          /* top: -2rem; */
+          /* left: -9rem; */
         }
         .case-data {
-          padding: 0;
+          /* padding: 0; */
         }
         .products-container {
           /* grid-template-columns: 142px; */
@@ -827,16 +876,16 @@
           /* justify-items: center; */
         }
         .case-img {
-          position: initial;
+          /* position: initial; */
         }
         .case-data {
-          padding: 0;
+          /* padding: 0; */
         }
         .case-container {
-          grid-template-columns: max-content 250px;
+          /* grid-template-columns: max-content 250px;
           justify-content: center;
           align-items: center;
-          column-gap: 2rem;
+          column-gap: 2rem; */
         }
         .discount-img {
           /* position: initial; */
@@ -891,13 +940,13 @@
           /* width: 300px; */
         }
         .case-container {
-          column-gap: 5rem;
+          /* column-gap: 5rem; */
         }
         .case-img {
-          width: 300px;
+          /* width: 300px; */
         }
         .case-description {
-          margin-bottom: var(--mb-2);
+          /* margin-bottom: var(--mb-2); */
         }
         .discount-container {
           /* grid-template-columns: 250px max-content; */
@@ -964,7 +1013,7 @@
       
       /* delete */
       .header {
-        display: none;
+        /* display: none; */
       }
       .section {
         border: 1px solid red;
@@ -973,7 +1022,7 @@
         border: 1px solid blueviolet;
       }
       .header {
-        background-color: cadetblue;
+        /* background-color: cadetblue; */
       }
       .sponsor-img {
         border: 1px solid white;
@@ -993,7 +1042,7 @@
       .specs-img {
         border: 1px solid white;
       }
-      /* .discount-animate {
+      /* .discount-content {
         padding: 2rem;
         border-radius: 1rem;
         background-color: var(--container-color);
@@ -1025,7 +1074,7 @@
       .discount-img {
         border: 1px solid transparent;
       }
-      .discount-animate {
+      .discount-content {
         border: 0px solid transparent;
       }
       .specs-container {
@@ -1039,6 +1088,40 @@
       }
       .specs-img {
         border: 0px solid transparent;
+      }
+      .sponsor {
+        border: 0px solid transparent;
+      }
+      .sponsor-img {
+        border: 0px solid transparent;
+      }
+      .sponsor-container {
+        border: 0px solid transparent;
+      }
+      .home-container.container {
+        border: 0px solid transparent;
+      }
+      .case-container.container {
+        border: 0px solid transparent;
+      }
+      .nav.container {
+        border: 0px solid transparent;
+      }
+      #home.section {
+        border: 0px solid transparent;
+      }
+      #case.section {
+        border: 0px solid transparent;
+      }
+
+      .sponsor-container.grid {
+        display: block;
+      }
+      .case.grid {
+        display: block;
+      }
+      .case-container.grid {
+        display: block;
       }
 
       .specs-data {
@@ -1064,6 +1147,10 @@
 
         <div class="nav-menu" id="nav-menu">
 
+          <div class="nav-close" id="nav-close">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </div>
+
           <ul class="nav-list">
             <li class="nav-item">
               <a href="#home" class="nav-link active-link">Home</a>
@@ -1078,10 +1165,6 @@
               <a href="#products" class="nav-link">Products</a>
             </li>
           </ul>
-
-          <div class="nav-close" id="nav-close">
-            <i class="fa fa-times" aria-hidden="true"></i>
-          </div>
 
         </div>
 
@@ -1102,6 +1185,7 @@
         if(navToggle){
           navToggle.addEventListener('click', () =>{
             navMenu.classList.add('show-menu');
+            document.body.classList.add("overflow-hidden");
           })
         }
         
@@ -1110,18 +1194,27 @@
         if(navClose){
           navClose.addEventListener('click', () =>{
             navMenu.classList.remove('show-menu');
+            document.body.classList.remove("overflow-hidden");
           })
         }
 
         /*=============== HIDE MENU MOBILE ===============*/
-        const navLink = document.querySelectorAll('.nav-link');
+        const navLinks = document.querySelectorAll('.nav-link');
         
-        navLink.forEach(n => n.addEventListener('click', hideNavMenu));
+        navLinks.forEach(link => link.addEventListener('click', hideNavMenu));
 
         function hideNavMenu() {
           const navMenu = document.getElementById('nav-menu');
           // When we click on each nav-link, we remove the show-menu class
+          switchActiveLink(this);
           navMenu.classList.remove('show-menu');
+          document.body.classList.remove("overflow-hidden");
+        }
+
+        function switchActiveLink(link) {
+          const activeLink = document.querySelector(".nav-link.active-link");
+          activeLink.classList.remove("active-link");
+          link.classList.add("active-link");
         }
       </script>
 
@@ -1136,17 +1229,17 @@
         <div class="home-container container grid">
 
           <div class="home-img">
-            <img src="./images/home.png" alt="">
+            <img src="./images/home.png" alt="" class="hidden-up">
           </div>
 
-          <div class="home-data">
+          <div class="home-data hidden-down">
 
-            <div class="home-header">
+            <div>
               <h1 class="home-title">On ear</h1>
               <h2 class="home-subtitle">Beats 3</h2>
             </div>
 
-            <div class="home-footer">
+            <div>
               <h3 class="home-title-description">Overview</h3>
               <p class="home-description">Enjoy award-winning Beats sound with wireless listening freedom and a sleek, 
                 streamlined design with comfortable padded earphones, delivering first-rate playback.
@@ -1168,10 +1261,10 @@
       <!--=============== SPONSOR ===============-->
       <section class="sponsor section">
         <div class="sponsor-container container grid">
-          <img src="./images/sponsor1.png" alt="" class="sponsor-img">
-          <img src="./images/sponsor2.png" alt="" class="sponsor-img">
-          <img src="./images/sponsor3.png" alt="" class="sponsor-img">
-          <img src="./images/sponsor4.png" alt="" class="sponsor-img">
+          <img src="./images/sponsor1.png" alt="" class="sponsor-img hidden-up">
+          <img src="./images/sponsor2.png" alt="" class="sponsor-img hidden-up">
+          <img src="./images/sponsor3.png" alt="" class="sponsor-img hidden-up">
+          <img src="./images/sponsor4.png" alt="" class="sponsor-img hidden-up">
         </div>
       </section>
 
@@ -1179,33 +1272,33 @@
       <!-- <section class="specs section grid" id="specs"> -->
       <section class="specs section" id="specs">
 
-        <h2 class="section-title section-title-gradient">Specs</h2>
+        <h2 class="section-title section-title-gradient hidden-up">Specs</h2>
 
         <!-- <div class="specs-container container grid"> -->
         <div class="specs-container">
 
           <div class="specs-content grid">
 
-            <div class="specs-data">
+            <div class="specs-data hidden-left">
               <i class="fa fa-bluetooth-b specs-icon" aria-hidden="true"></i>
               <h3 class="specs-title">Connection</h3>
               <span class="specs-subtitle">Bluetooth v5.2</span>
             </div>
 
-            <div class="specs-data">
+            <div class="specs-data hidden-left">
               <i class="fa fa-battery-half specs-icon" aria-hidden="true"></i>
               <i class="fa fa-bolt specs-icon" aria-hidden="true"></i>
               <h3 class="specs-title">Battery</h3>
               <span class="specs-subtitle">Duration 40h</span>
             </div>
 
-            <div class="specs-data">
+            <div class="specs-data hidden-left">
               <i class="fa fa-plug specs-icon" aria-hidden="true"></i>
               <h3 class="specs-title">Load</h3>
               <span class="specs-subtitle">Fast charge 4.2-AAC</span>
             </div>
 
-            <div class="specs-data">
+            <div class="specs-data hidden-left">
               <i class="fa fa-microphone specs-icon" aria-hidden="true"></i>
               <h3 class="specs-title">Microphone</h3>
               <span class="specs-subtitle">Supports Apple Siri <br> and Google</span>
@@ -1213,7 +1306,7 @@
 
           </div>
 
-          <div class="specs-img">
+          <div class="specs-img hidden-right">
             <img src="./images/specs.png" alt="">
           </div>
 
@@ -1222,8 +1315,8 @@
       </section>
       
       <!--=============== CASE ===============-->
-      <section class="case section grid" id="case">
-        <h2 class="section-title section-title-gradient">Case</h2>
+      <!-- <section class="case section grid" id="case">
+        <h2 class="section-title section-title-gradient hidden-up">Case</h2>
         <div class="case-container container grid">
           <div>
             <img src="./images/case.png" alt="" class="case-img">
@@ -1237,13 +1330,33 @@
             </a>
           </div>
         </div>
+      </section> -->
+      <section class="section" id="case">
+        <h2 class="section-title section-title-gradient hidden-up">Case</h2>
+
+        <div class="case-container container">
+          <div  class="case-img hidden-up">
+            <img src="./images/case.png" alt="">
+          </div>
+          <div class="case-data hidden-down">
+            <p class="case-description">With a comfortable and adaptable case so that you can 
+              store it whenever you want, and keep your durability forever.
+            </p>
+            <a href="#" class="button button--flex">
+              <i class="fa fa-info button-icon" aria-hidden="true"></i> More info
+            </a>
+          </div>
+        </div>
+
       </section>
+
 
       <!--=============== DISCOUNT ===============-->
       <section class="discount section">
         <!-- <div class="discount-container container grid"> -->
         <div class="discount-container container">
-          <div class="discount-animate">
+
+          <div class="discount-content hidden-left">
             <!-- <h2 class="discount-title">Immerse yourself in <br> your music</h2> -->
             <h2 class="discount-title">Immerse yourself in your music</h2>
             <p class="discount-description">Get it now, up to 50% off.</p>
@@ -1251,22 +1364,25 @@
               <i class="fa fa-shopping-bag button-icon" aria-hidden="true"></i> Shop Now
             </a>
           </div>
-          <div class="discount-img">
+
+          <div class="discount-img hidden-right">
             <img src="./images/discount.png" alt="">
           </div>
+
         </div>
+
       </section>
 
       <!--=============== PRODUCTS ===============-->
       <section class="products section" id="products">
 
-        <h2 class="section-title section-title-gradient products-line">
+        <h2 class="section-title section-title-gradient hidden-up products-line">
           Choose <br> Your Style
         </h2>
 
         <div class="products-container container grid">
 
-          <article class="product-card">
+          <article class="product-card hidden-down">
             <div class="product-content">
               <img src="./images/product1.png" alt="" class="product-img">
               <h3 class="product-title">Black</h3>
@@ -1277,7 +1393,7 @@
             </div>
           </article>
 
-          <article class="product-card">
+          <article class="product-card hidden-down">
             <div class="product-content">
               <img src="./images/product2.png" alt="" class="product-img">
               <h3 class="product-title">Red Black</h3>
@@ -1288,7 +1404,7 @@
             </div>
           </article>
 
-          <article class="product-card">
+          <article class="product-card hidden-down">
             <div class="product-content">
               <img src="./images/product3.png" alt="" class="product-img">
               <h3 class="product-title">Night Black</h3>
@@ -1299,7 +1415,7 @@
             </div>
           </article>
 
-          <article class="product-card">
+          <article class="product-card hidden-down">
             <div class="product-content">
               <img src="./images/product4.png" alt="" class="product-img">
               <h3 class="product-title">Blue</h3>
@@ -1310,7 +1426,7 @@
             </div>
           </article>
 
-          <article class="product-card">
+          <article class="product-card hidden-down">
             <div class="product-content">
               <img src="./images/product5.png" alt="" class="product-img">
               <h3 class="product-title">Twilight Gray</h3>
@@ -1335,13 +1451,13 @@
         
         <div class="footer-links-container">
 
-          <a href="#" class="footer-logo">
+          <a href="#" class="footer-logo hidden-up">
             <img src="./images/logo.png" alt="">
           </a>
 
         <div class="footer-links-inner-container">
 
-        <div class="footer-content">
+        <div class="footer-content hidden-up">
           <h3 class="footer-title">Products</h3>
           
           <ul class="footer-links">
@@ -1360,7 +1476,7 @@
           </ul>
         </div>
 
-        <div class="footer-content">
+        <div class="footer-content hidden-up">
           <h3 class="footer-title">Support</h3>
           
           <ul class="footer-links">
@@ -1382,7 +1498,7 @@
         </div>
         </div>
 
-        <div class="footer-content">
+        <div class="footer-content hidden-up">
 
           <form action="" class="footer-form">
             <input type="email" placeholder="Email" class="footer-input">
@@ -1412,370 +1528,55 @@
       </p>
 
     </footer>
+    
     <!--=============== SCROLL UP ===============-->
     <a href="#" class="scrollup" id="scroll-up">
-      <i class="fa fa-arrow-up scrollup-icon" aria-hidden="true"></i>
+      <i class="fa fa-chevron-up scrollup-icon" aria-hidden="true"></i>
     </a>
 
+    <script>
+      const revealOptions = {
+        root: null, 
+        rootMargin: "0px 0px -100px 0px", 
+        treshhold: 0.5
+      }
 
-    <!-- <script> -->
-      <!-- /*  -->
-      <body class="">
+      const hiddenUpEllements = document.querySelectorAll(".hidden-up");
+      const hiddenDownEllements = document.querySelectorAll(".hidden-down");
+      const hiddenLeftEllements = document.querySelectorAll(".hidden-left");
+      const hiddenRightEllements = document.querySelectorAll(".hidden-right");
 
+      const observer = new IntersectionObserver(reveal, revealOptions);
 
-    <!-- <main class="container"> -->
+      hiddenUpEllements.forEach(element => {
+        // console.log(element);
+        observer.observe(element);
+      })
+      hiddenDownEllements.forEach(element => {
+        // console.log(element);
+        observer.observe(element);
+      })
+      hiddenLeftEllements.forEach(element => {
+        // console.log(element);
+        observer.observe(element);
+      })
+      hiddenRightEllements.forEach(element => {
+        // console.log(element);
+        observer.observe(element);
+      })
 
-        <!-- <section class="flex allmainpostsec"> -->
-          
-          <!-- <div class="leftsidesec"> -->
-          <!-- </div> -->
-
-          <div class="rightsidesec">
-
-            <div class="socialsec">
-              <div class="wtitle flex">
-                <h3>follow us</h3>
-              </div>
-              <div class="socialbtns flex">
-                <a href="https://www.instagram.com" target="_blank">
-                  <button class="socibtn"><i class="fa-brands fa-instagram"></i>Instagram</button>
-                </a>
-                <a href="https://www.facebook.com" target="_blank">
-                  <button class="socibtn"><i class="fa-brands fa-facebook"></i>Facebook</button>
-                </a>
-                <a href="https://www.youtube.com" target="_blank">
-                  <button class="socibtn"><i class="fa-brands fa-youtube"></i>Youtube</button>
-                </a>
-                <a href="https://www.twitter.com" target="_blank">
-                  <button class="socibtn"><i class="fa-brands fa-twitter"></i>Twitter</button>
-                </a>
-              </div>
-            </div>
-
-            <div class="popularsec">
-              <div class="wtitle flex">
-                <h3>popular posts</h3>
-              </div>
-              <a href="https://www.google.com" class="gpost bpopupost popular">
-                <img src="img/leptop post.jpg" alt="">
-                <div class="postinfo">
-                  <span class="label">laptop</span>
-                  <h2>11 of best laptops evaluated based on budget</h2>
-                  <p>by CODER October 02, 2023</p>
-                </div>
-              </a>
-              <div class="popuposts flex">
-                <a href="https://www.google.com" class="gpost npost flex ppost popular">
-                  <img src="img/watch post.jpg" alt="">
-                  <div class="postinfo npostinfo ppostinfo">
-                    <span class="label">Apple</span>
-                    <h2>apple watch series 5 is the best one yet by consumer</h2>
-                    <p>October 02, 2023</p>
-                  </div>
-                </a>
-                <a href="https://www.facebook.com" class="gpost npost flex ppost popular">
-                  <img src="img/leptop post.jpg" alt="">
-                  <div class="postinfo npostinfo ppostinfo">
-                    <span class="label">laptop</span>
-                    <h2>11 of Best Laptops Evaluated Based on Budget</h2>
-                    <p>October 18, 2023</p>
-                  </div>
-                </a>
-                <a href="https://www.instagram.com" class="gpost npost flex ppost popular">
-                  <img src="img/post4.jpg" alt="">
-                  <div class="postinfo npostinfo ppostinfo">
-                    <span class="label">Apple</span>
-                    <h2>18 Practices for building responsive web applications</h2>
-                    <p>October 02, 2023</p>
-                  </div>
-                </a>
-              </div>
-            </div>
-
-            <div class="travelsec">
-              <div class="wtitle flex">
-                <h3>travel</h3>
-              </div>
-              <div class="travelposts flex">
-                <a href="https://www.google.com" class="gpost revpost trapost">
-                  <div class="revpostimg">
-                    <img src="img/travel1.jpg" alt="">
-                    <span class="label">travel</span>
-                  </div>
-                  <div class="postinfo revpostinfo">
-                    <h2>5 of best travel in budget</h2>
-                    <p>October 02, 2023</p>
-                  </div>
-                </a>
-                <a href="https://www.google.com" class="gpost revpost trapost">
-                  <div class="revpostimg">
-                    <img src="img/travel2.jpg" alt="">
-                    <span class="label">travel</span>
-                  </div>
-                  <div class="postinfo revpostinfo">
-                    <h2>11 of best travel in budget</h2>
-                    <p>October 02, 2023</p>
-                  </div>
-                </a>
-                <a href="https://www.google.com" class="gpost revpost trapost">
-                  <div class="revpostimg">
-                    <img src="img/travel3.jpg" alt="">
-                    <span class="label">travel</span>
-                  </div>
-                  <div class="postinfo revpostinfo">
-                    <h2>9 of best travel in budget</h2>
-                    <p>October 02, 2023</p>
-                  </div>
-                </a>
-                <a href="https://www.google.com" class="gpost revpost trapost">
-                  <div class="revpostimg">
-                    <img src="img/travel4.jpg" alt="">
-                    <span class="label">travel</span>
-                  </div>
-                  <div class="postinfo revpostinfo">
-                    <h2>45 of best travel in budget</h2>
-                    <p>October 02, 2023</p>
-                  </div>
-                </a>
-              </div>
-            </div>
-
-            <div class="mailchimpform">
-              <h2>Mailchimp Form</h2>
-              <p>Subcribe to our mailing list to get the new updates.</p>
-              <form action="submit">
-                <input type="text" placeholder="Email Address">
-                <button type="submit">Subcribe</button>
-              </form>
-            </div>
-
-            <div class="commentsbox">
-              <div class="wtitle flex">
-                <h3>comments</h3>
-              </div>
-              <div class="comments">
-                <div class="comment flex">
-                  <div class="authimg">
-                    <img src="/img/user.png" alt="">
-                  </div>
-                  <div class="commenter">
-                    <h4>Programer</h4>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque, maiores?</p>
-                  </div>
-                </div>
-                <div class="comment flex">
-                  <div class="authimg">
-                    <img src="/img/user.png" alt="">
-                  </div>
-                  <div class="commenter">
-                    <h4>Coder</h4>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque, maiores?</p>
-                  </div>
-                </div>
-                <div class="comment flex">
-                  <div class="authimg">
-                    <img src="/img/user.png" alt="">
-                  </div>
-                  <div class="commenter">
-                    <h4>Anonymous</h4>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Atque, maiores?</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="categoriesbox">
-              <div class="wtitle flex">
-                <h3>categories</h3>
-              </div>
-              <div class="categries">
-                <a href="/">
-                  <h3>Gadgets</h3>
-                  <p>(6)</p>
-                </a>
-                <a href="/">
-                  <h3>Healthy</h3>
-                  <p>(10)</p>
-                </a>
-                <a href="/">
-                  <h3>Laptop</h3>
-                  <p>(15)</p>
-                </a>
-                <a href="/">
-                  <h3>Apple</h3>
-                  <p>(8)</p>
-                </a>
-              </div>
-            </div>
-
-            <div class="maintegsbox">
-              <div class="wtitle flex">
-                <h3>main tegs</h3>
-              </div>
-              <div class="maintegs flex">
-                <a href="">Cars</a>
-                <a href="">Gadgets</a>
-                <a href="">Games</a>
-                <a href="">Healthy</a>
-                <a href="">Podcasts</a>
-                <a href="">Reviews</a>
-              </div>
-            </div>
-            
-          </div>
-
-        <!-- </section> -->
+      function reveal(elements) {
+        elements.forEach(element => {
+          if (element.isIntersecting) {
+            // console.log(element.target);
+            element.target.classList.add("revealed");
+            // observer.unobserve(element);
+          }
+        })
         
-        
-      </main>
-      
-    <footer>
-        <section class="container footersec">
-            <div class="firstfooter flex">
-                <div class="fcatgegoriesbx">
-                    <h3>CATEGORIES</h3>
-                    <div class="fcategories">
-                        <a href="">
-                            <h4>Gadgets</h4>
-                            <p>(6)</p>
-                        </a>
-                        <a href="">
-                            <h4>Podcasts</h4>
-                            <p>(6)</p>
-                        </a>
-                        <a href="">
-                            <h4>Reviews</h4>
-                            <p>(7)</p>
-                        </a>
-                    </div>
-                    <div class="fmaintegsbx">
-                        <h3>MAIN TAGS</h3>
-                        <div class="maintegs flex">
-                            <a href="">Gadgets</a>
-                            <a href="">Games</a>
-                            <a href="">Healthy</a>
-                            <a href="">Padcasts</a>
-                            <a href="">Reviews</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="flatestpostbx">
-                    <h3>LATEST POSTS</h3>
-                    <div class="footerlatestposts flex">
-                       
-                    <a class="gpost flex npost ppost" href="https://www.instagram.com">
-        <img src="img/post5.jpg" alt="how to get COVID-19 related alerts on your phone">
-        <div class="postinfo npostinfo ppostinfo">
-            <span class="label"></span>
-            <h2>how to get COVID-19 related alerts on your phone</h2>
-            <p>undefined</p>
-        </div>
-       </a><a class="gpost flex npost ppost" href="https://www.instagram.com">
-        <img src="img/post6.jpg" alt="How We Know Disinfectants Should Kill the Covid-19">
-        <div class="postinfo npostinfo ppostinfo">
-            <span class="label"></span>
-            <h2>How We Know Disinfectants Should Kill the Covid-19</h2>
-            <p>October 02, 2023</p>
-        </div>
-       </a><a class="gpost flex npost ppost" href="https://www.instagram.com">
-        <img src="img/post7.jpg" alt="Car sefety tips to protect you and your family">
-        <div class="postinfo npostinfo ppostinfo">
-            <span class="label"></span>
-            <h2>Car sefety tips to protect you and your family</h2>
-            <p>October 02, 2023</p>
-        </div>
-       </a></div>
-                </div>
-                <div class="fpopupostbx">
-                    <h3>popular post</h3>
-                    <div class="footerlatestposts footerpopu flex">
-                        
-                      comment
-                      <a href="" class="gpost npost flex ppost">
-                            <img src="" alt="">
-                            <div class="postinfo npostinfo ppostinfo">
-                                <span class="label"></span>
-                                <h2></h2>
-                                <p></p>
-                            </div>
-                        </a>
-                        <a href="" class="gpost npost flex ppost">
-                            <img src="" alt="">
-                            <div class="postinfo npostinfo ppostinfo">
-                                <span class="label"></span>
-                                <h2></h2>
-                                <p></p>
-                            </div>
-                        </a>
-                        <a href="" class="gpost npost flex ppost">
-                            <img src="" alt="">
-                            <div class="postinfo npostinfo ppostinfo">
-                                <span class="label"></span>
-                                <h2></h2>
-                                <p></p>
-                            </div>
-                        </a>
-                        comment
+      }
+    </script>
 
-                    <a class="gpost flex npost ppost" href="https://www.instagram.com">
-        <img src="img/post7.jpg" alt="Car sefety tips to protect you and your family">
-        <div class="postinfo npostinfo ppostinfo">
-            <span class="label"></span>
-            <h2>Car sefety tips to protect you and your family</h2>
-            <p>October 02, 2023</p>
-        </div>
-       </a><a class="gpost flex npost ppost" href="https://www.instagram.com">
-        <img src="img/post8.jpg" alt="know how to protect your health when going out">
-        <div class="postinfo npostinfo ppostinfo">
-            <span class="label"></span>
-            <h2>know how to protect your health when going out</h2>
-            <p>October 02, 2023</p>
-        </div>
-       </a><a class="gpost flex npost ppost" href="https://www.instagram.com">
-        <img src="img/post9.jpg" alt="tracking pubic and private response to the COVIED-19">
-        <div class="postinfo npostinfo ppostinfo">
-            <span class="label"></span>
-            <h2>tracking pubic and private response to the COVIED-19</h2>
-            <p>October 02, 2023</p>
-        </div>
-       </a></div>
-                </div>
-            </div>
-            <div class="secondfooter flex">
-                <div class="logo">
-                    <a href="/" class="flex">
-                        <i class="fa-solid fa-laptop-code"></i>
-                        <h1>codespot</h1>
-                    </a>
-                </div>
-                <div class="fsocialicons">
-                    <div class="sociallink flex">
-                        <a href="/" title="facebook"><i class="fa-brands fa-facebook"></i></a>
-                        <a href="/" title="twitter"><i class="fa-brands fa-x-twitter"></i></a>
-                        <a href="/" title="youtube"><i class="fa-brands fa-youtube"></i></a>
-                        <a href="/" title="pinterest"><i class="fa-brands fa-pinterest"></i></a>
-                        <a href="/" title="pinterest"><i class="fa-brands fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="thirdfooter flex">
-                <div class="themeauthor">
-                    <h3>Copyright ©2023 Design by - <a href="/">company</a></h3>
-                </div>
-                <ul class="flex fnav">
-                    <li><a href="/">home</a></li>
-                    <li><a href="/">about us</a></li>
-                    <li><a href="/">privacy policy</a></li>
-                    <li><a href="/">contact us</a></li>
-                </ul>
-            </div>
-        </section>
-    </footer>
-
-    <button class="backtotop" id="backtotop" style="opacity: 0;"><i class="fa-solid fa-angles-up"></i></button>
-
-</body>
-      */
     </script>
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
