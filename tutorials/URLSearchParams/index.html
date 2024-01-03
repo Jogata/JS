@@ -1091,17 +1091,17 @@
         opacity: 1;
       }
 
-      .hidden-up {
+      /* .hidden-up {
         transform: translateY(0);
         opacity: 1;
         border: 1px solid white;
       }
       .hidden-up .hidden {
-        transform: translateY(-100px);
+        transform: translateY(-100px); */
         /* transition: 
           transform 3s cubic-bezier(0.13, 0.13, 0.16, 0.99), 
           opacity 6s cubic-bezier(0.13, 0.13, 0.16, 0.99); */
-        opacity: 0;
+        /* opacity: 0;
         border: 1px solid red;
       }
       .hidden-up.revealed .hidden {
@@ -1110,7 +1110,7 @@
           transform 3s cubic-bezier(0.13, 0.13, 0.16, 0.99), 
           opacity 3.4s cubic-bezier(0.13, 0.13, 0.16, 0.99);
         opacity: 1;
-      }
+      } */
       
       /* delete */
       .header {
@@ -1201,7 +1201,7 @@
       }
       .home-container.container {
         border: 0px solid transparent;
-        border: 1px solid red;
+        /* border: 1px solid red; */
       }
       .case-container.container {
         border: 0px solid transparent;
@@ -1218,7 +1218,7 @@
 
       .sponsor-container {
         /* display: block; */
-        border: 1px solid green;
+        /* border: 1px solid green; */
       }
       .case.grid {
         display: block;
@@ -1364,10 +1364,18 @@
       <!--=============== SPONSOR ===============-->
       <section class="sponsor section">
         <div class="sponsor-container container">
-          <div class="hidden-up"><img src="./images/sponsor1.png" alt="" class="sponsor-img hidden"></div>
-          <div class="hidden-up"><img src="./images/sponsor2.png" alt="" class="sponsor-img hidden"></div>
-          <div class="hidden-up"><img src="./images/sponsor3.png" alt="" class="sponsor-img hidden"></div>
-          <div class="hidden-up"><img src="./images/sponsor4.png" alt="" class="sponsor-img hidden"></div>
+          <!-- <div class="hidden-up"> -->
+            <img src="./images/sponsor1.png" alt="" class="sponsor-img hidden-up">
+          <!-- </div> -->
+          <!-- <div class="hidden-up"> -->
+            <img src="./images/sponsor2.png" alt="" class="sponsor-img hidden-up">
+          <!-- </div> -->
+          <!-- <div class="hidden-up"> -->
+            <img src="./images/sponsor3.png" alt="" class="sponsor-img hidden-up">
+          <!-- </div> -->
+          <!-- <div class="hidden-up"> -->
+            <img src="./images/sponsor4.png" alt="" class="sponsor-img hidden-up">
+          <!-- </div> -->
           <!-- <img src="./images/sponsor1.png" alt="" class="sponsor-img hidden-up">
           <img src="./images/sponsor2.png" alt="" class="sponsor-img hidden-up">
           <img src="./images/sponsor3.png" alt="" class="sponsor-img hidden-up">
@@ -1656,7 +1664,7 @@
       observerScrollTopButton.observe(homeSection);
 
       function revealScrollTopButton(elements) {
-        console.log(elements[0]);
+        // console.log(elements[0]);
         if (!elements[0].isIntersecting) {          
           // console.log("reveal");
           scrollTopButton.classList.add("visible");
@@ -1708,6 +1716,51 @@
         
       }
     </script>
+    <script>
+      const sections = [];
+
+      navLinks.forEach(link => {
+        // console.log(link.href);
+        const href = link.href;
+        const id = href.split("#")[1];
+        // console.log(id);
+        const section = document.querySelector(`#${id}`);
+        sections.push(section);
+      })
+
+      // console.log(sections);
+
+      const sectionOptions = {
+        root: null, 
+        rootMargin: "-10% 0px", 
+        treshhold: 0.5
+      };
+
+      const sectionEdgesObserver = new IntersectionObserver(detectSectionEdges, sectionOptions);
+
+      sections.forEach(section => {
+        sectionEdgesObserver.observe(section);
+      })
+
+      function detectSectionEdges(elements, sectionEdgesObserver) {
+        elements.forEach((element) => {
+          // console.log(index);
+          // console.log(elements);
+          // console.log(element.target);
+          if (element.isIntersecting) {
+            // console.log(sectionEdgesObserver);
+            // console.log(element.target);
+            // console.log(index);
+            // console.log(navLinks[index]);
+            const id = element.target.id;
+            // console.log(id);
+            const index = sections.findIndex(section => section.id == id);
+            // console.log(index);
+            switchActiveLink(navLinks[index]);
+          }
+        })
+      }
+    </script>
 
     </script>
 
@@ -1748,6 +1801,87 @@
       // Convert URLSearchParams Object to Query String
       console.log(uspFromString.toString());
       console.log(uspFromObject.toString());
+    </script>
+    <script>
+      function calcPCGameShopSales(params) {
+        const sales = Number(params[0]);
+    
+        const games = {
+          hearthstone: "hearthstone",
+          fornite: "fornite",
+          overwatch: "overwatch",
+        }
+    
+        const allGames = {
+          hearthstone: 0,
+          fornite: 0,
+          overwatch: 0,
+          undefined: 0,
+        }
+    
+        for (let sale = 1; sale <= sales; sale++) {
+          const game = params[sale].toLowerCase();
+          const gameName = games[game];
+          allGames[gameName]++;
+        }
+    
+        const fP = (allGames.fornite / sales) * 100;
+        const hP = (allGames.hearthstone / sales) * 100;
+        const oP = (allGames.overwatch / sales) * 100;
+        const rP = (allGames.undefined / sales) * 100;
+        
+        console.log(`Hearthstone - ${hP.toFixed(2)}%`);
+        console.log(`Fornite - ${fP.toFixed(2)}%`);
+        console.log(`Overwatch - ${oP.toFixed(2)}%`);
+        console.log(`Others - ${rP.toFixed(2)}%`);
+    
+      }
+    
+      // calcPCGameShopSales(["4", "Hearthstone", "Fornite", "Overwatch", "Counter-Strike"]);
+      // calcPCGameShopSales(["3", "Hearthstone", "Diablo 2", "Star Craft 2"]);
+
+      // 04. Car Number
+      
+      function generateCarNumber(params) {
+        const start = Number(params[0]);
+        const end = Number(params[1]);
+        let carNumbers = "";
+
+        for (let first = start; first <= end; first++) {
+          
+          for (let second = start; second <= end; second++) {
+            
+            for (let treti = start; treti <= end; treti++) {
+              
+              for (let forth = start; forth <= end; forth++) {
+
+                if (first > forth) {
+                  
+                  if ((first % 2 === 0 && forth % 2 !== 0) || 
+                      (first % 2 !== 0 && forth % 2 === 0)) {
+
+                        // console.log(first, forth);
+                  
+                    if (((second + treti) % 2) === 0) {
+                      const carNumber = "" + first + second + treti + forth;
+                      carNumbers += `${carNumber} `;
+                    }
+
+                  }
+                }
+
+              }
+            }
+          }
+        }
+
+        console.log(carNumbers);
+
+      }
+
+      // generateCarNumber(["2", "3"]);
+      // generateCarNumber(["3", "5"]);
+      // generateCarNumber(["5", "8"]);
     </script>
   </body>
 </html>
