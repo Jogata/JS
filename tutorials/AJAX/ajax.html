@@ -217,5 +217,137 @@ for (const car of sorted) {
       // calcWinnerEasterCompetition(["2", "Chef Angelov", "9", "9", "9", "Stop", "Chef Rowe", "10", "10", "10", "10", "Stop"]);
       // calcWinnerEasterCompetition(["3", "Chef Manchev", "10", "10", "10", "10", "Stop", "Natalie", "8", "2", "9", "Stop", "George", "9", "2", "4", "2", "Stop"]);
     </script>
+    <script>
+        // 01. Word Tracker
+
+function trackWords(params) {
+const wordsToTrack = params[0].split(" ");
+// console.log(wordsToTrack);
+
+const allWords = {};
+
+for (let index = 1; index < params.length; index++) {
+const word = params[index];
+// console.log(word);
+allWords[word] = 0;
+// allWords[word]++;
+}
+
+for (let index = 1; index < params.length; index++) {
+const word = params[index];
+// console.log(word);
+allWords[word]++;
+// allWords[word]++;
+}
+
+// console.log(allWords);
+
+const matches = {};
+
+for (const word of wordsToTrack) {
+matches[word] = allWords[word];
+
+if (!allWords.hasOwnProperty(word)) {
+  matches[word] = 0;
+}
+}
+
+// console.log(matches);
+const entries = Object.entries(matches);
+// console.log(entries);
+const sorted = entries.sort((a, b) => b[1] - a[1]);
+// console.log(sorted);
+for (const item of sorted) {
+const word = item[0];
+const matches = item[1];
+console.log(`${word} - ${matches}`);
+}
+
+}
+
+// trackWords(['this sentence exist', 'In', 'this', 'sentence', 'you', 'have', 'to', 'count', 'the', 'occurrences', 'of', 'the', 'words', 'this', 'and', 'sentence', 'because', 'this', 'is', 'your', 'task']);
+// trackWords(['is the', 'first', 'sentence', 'Here', 'is', 'another', 'the', 'And', 'finally', 'the', 'the', 'sentence']);
+
+// 04. Party Time
+
+function menageParty(params) {
+const guests = {
+"VIP": [], 
+"regular": [],
+};
+
+let index = 0;
+let input = params[index];
+
+while (input != "PARTY") {
+const guest = input;
+const num = Number.parseInt(guest);
+
+// console.log(guest);
+if (num >= 0) {
+  // console.log(guest);
+  guests.VIP.push(guest);
+} else {
+  guests.regular.push(guest);
+}
+
+index++;
+input = params[index];
+
+// if (index > 20) {
+  // console.log("infinity");
+  // break;
+// }
+}
+
+// console.log(input);
+// index++;
+
+while (index < params.length) {
+index++;
+input = params[index];
+const guest = input;
+const num = Number.parseInt(guest);
+// console.log(guest, index);
+// console.log(params.length);
+
+if (num >= 0) {
+  // console.log(guest);
+  const i = guests.VIP.indexOf(guest);
+
+  if (i > -1) {
+    guests.VIP.splice(i, 1);
+  }
+} else {
+  const i = guests.regular.indexOf(guest);
+
+  if (i > -1) {
+    guests.regular.splice(i, 1);
+  }
+}
+
+// if (index > 20) {
+//   console.log("infinity");
+//   break;
+// }
+
+}
+
+const count = guests.VIP.length + guests.regular.length;
+console.log(count);
+
+for (const guest of guests.VIP) {
+console.log(guest);
+}
+
+for (const guest of guests.regular) {
+console.log(guest);
+}
+
+}
+
+// menageParty(['7IK9Yo0h', '9NoBUajQ', 'Ce8vwPmE', 'SVQXQCbc', 'tSzE5t0p', 'PARTY', '9NoBUajQ', 'Ce8vwPmE', 'SVQXQCbc']);
+// menageParty(['m8rfQBvl', 'fc1oZCE0', 'UgffRkOn', '7ugX7bm0', '9CQBGUeJ', '2FQZT3uC', 'dziNz78I', 'mdSGyQCJ', 'LjcVpmDL', 'fPXNHpm1', 'HTTbwRmM', 'B5yTkMQi', '8N0FThqG', 'xys2FYzn', 'MDzcM9ZK', 'PARTY', '2FQZT3uC', 'dziNz78I', 'mdSGyQCJ', 'LjcVpmDL', 'fPXNHpm1', 'HTTbwRmM', 'B5yTkMQi', '8N0FThqG', 'm8rfQBvl', 'fc1oZCE0', 'UgffRkOn', '7ugX7bm0', '9CQBGUeJ']);
+    </script>
   </body>
 </html>
