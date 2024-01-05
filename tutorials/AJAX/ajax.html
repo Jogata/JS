@@ -3,12 +3,151 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AJAX | XMLHttpRequest</title>
+    <!-- <title>AJAX | XMLHttpRequest</title> -->
+    <title>Wanderlust</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      fieldset {
+        display: none;
+      }
+      :root {
+        --primary-color: #f13033;
+        --primary-color-dark: #c3282b;
+        --secondary-color: #f9f9f9;
+        --text-dark: #0f172a;
+        --text-light: #64748b;
+        --white: #ffffff;
+        --max-width: 1200px;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .section-container {
+        max-width: var(--max-width);
+        margin: auto;
+        padding: 5rem 1rem;
+      }
+      .section-header {
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--text-dark);
+      }
+      .section-nav {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+      .section-nav span {
+        padding: 0 7px;
+        color: var(--text-dark);
+        font-size: 1.75rem;
+        border: 1ox solid var(--text-dark);
+        border-radius: 100%;
+        transition: .4s;
+        cursor: pointer;
+      }
+      .section-nav span:hover {
+        color: white;
+        border-color: var(--primary-color);
+        background-color: var(--primary-color);
+      }
+      .btn {
+        padding: 0.75rem 1.5rem;
+        color: var(--white);
+        font-size: 1rem;
+        font-weight: 600;
+        white-space: nowrap;
+        text-transform: capitalize;
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        background-color: var(--primary-color);
+        transition: background-color .4s;
+        cursor: pointer;
+      }
+      .btn:hover {
+        background-color: var(--primary-color-dark);
+      }
+      .badge {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        padding: 2px 15px;
+        color: var(--primary-color);
+        font-size: 0.9rem;
+        font-weight: 600;
+        border-radius: 1rem;
+        background-color: #f0c8c9;
+      }
+      img {
+        width: 100%;
+        /* max-width: 100%; */
+        display: flex;
+      }
+      a {
+        text-decoration: none;
+      }
+      button {
+        font-family: inherit;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        /* width: 100%; */
+        /* min-height: 100vh; */
+        font-family: Georgia, serif;
+        background-color: var(--secondary-color);
+      }
+    </style>
   </head>
   <body>
+    <header class="header">
+      <nav>
+        <div class="nav-logo"><a href="#">wanderlust</a></div>
+        <ul class="nav-links">
+          <li class="link"><a href="#home">home</a></li>
+          <li class="link"><a href="#trending">trending</a></li>
+          <li class="link"><a href="#destination">destinations</a></li>
+          <li class="link"><a href="#guide">guide</a></li>
+          <li class="link"><a href="#client">client</a></li>
+        </ul>
+      </nav>
+      <div class="section-container header-container" id="home">
+        <h1>Explore the beauty of nature Discover the new you</h1>
+        <div class="header-form">
+          <form action="/">
+            <div class="input-group">
+              <label for="destination">Where do you want to go?</label>
+              <input type="text" placeholder="Country, ZIP" />
+            </div>
+            <div class="input-group">
+              <label for="checkIn">check in</label>
+              <input type="text" placeholder="Choose a date" />
+            </div>
+            <div class="input-group">
+              <label for="CheckOut">check out</label>
+              <input type="text" placeholder="Choose a date" />
+            </div>
+            <div class="input-group">
+              <label for="guests">guests</label>
+              <input type="text" placeholder="Number of guests" />
+            </div>
+            <button class="btn">check availability</button>
+          </form>
+        </div>
+      </div>
+    </header>
 
-    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <!-- ================= Get data from local JSON file ================= -->
 
@@ -75,406 +214,5 @@
       }
     </script>
 
-    <script>
-        // 02. Odd Occurrences
-
-function findOdd(params) {
-const wordsToTrack = params.split(" ");
-// console.log(wordsToTrack);
-
-const allWords = {};
-
-for (let index = 0; index < wordsToTrack.length; index++) {
-const word = wordsToTrack[index].toLowerCase();
-// console.log(word);
-allWords[word] = 0;
-// allWords[word]++;
-}
-
-for (let index = 0; index < wordsToTrack.length; index++) {
-const word = wordsToTrack[index].toLowerCase();
-// console.log(word);
-allWords[word]++;
-// allWords[word]++;
-}
-
-// console.log(allWords);
-const unic = [];
-
-for (let index = 0; index < wordsToTrack.length; index++) {
-let wordToLower = wordsToTrack[index].toLowerCase();
-let i = unic.indexOf(wordToLower);
-
-if (i == -1) {
-  unic.push(wordToLower);
-}
-
-}
-
-const odds = unic.filter(x => {
-return allWords[x] % 2 != 0;
-})
-
-// console.log(unic);
-// console.log(odds);
-
-// let result = [];
-
-// for (const word in allWords) {
-// const wordToLower = word.toLowerCase();
-// console.log(word.toLowerCase());
-
-// if (allWords[wordToLower] % 2 != 0) {
-  // result.push(word);
-// }
-// }
-
-console.log(odds.join(" "));
-
-}
-
-// findOdd('Java C# Php PHP Java PhP 3 C# 3 1 5 C#');
-// findOdd('Cake IS SWEET is Soft CAKE sweet Food');
-
-// 03. Piccolo
-
-function menageParking(params) {
-const cars = {};
-
-for (const input of params) {
-const tokens = input.split(", ");
-// console.log(tokens);
-const command = tokens[0];
-const num = tokens[1];
-
-if (command == "IN") {
-  cars[num] = true;
-} else if (command == "OUT") {
-  delete cars[num];
-}
-
-}
-
-// console.log(cars);
-const keys = Object.keys(cars);
-const sorted = keys.sort();
-// console.log(sorted);
-
-if (sorted.length == 0) {
-console.log("Parking Lot is Empty");
-} else {
-for (const car of sorted) {
-  console.log(car);
-}
-}
-
-}
-
-// menageParking(['IN, CA2844AA', 'IN, CA1234TA', 'OUT, CA2844AA', 'IN, CA9999TT', 'IN, CA2866HI', 'OUT, CA1234TA', 'IN, CA2844AA', 'OUT, CA2866HI', 'IN, CA9876HH', 'IN, CA2822UU']);
-// menageParking(['IN, CA2844AA', 'IN, CA1234TA', 'OUT, CA2844AA', 'OUT, CA1234TA']);
-
-      // 06. Easter Competition
-
-      function calcWinnerEasterCompetition(params) {
-        const bakers = Number(params[0]);
-
-        let index = 0;
-        let winner = "";
-        let max = 0;
-
-        for (let baker = 0; baker < bakers; baker++) {
-
-          index++;
-          let input = params[index];
-          let bakerName = input;
-          index++;
-          input = params[index];
-          let current = 0;
-          
-          while (input !== "Stop") {
-            input = Number(input);
-
-            current += input;
-
-            index++;
-            input = params[index];
-          }
-
-          console.log(`${bakerName} has ${current} points.`);
-
-          if (current > max) {
-            max = current;
-            winner = bakerName;
-            console.log(`${bakerName} is the new number 1!`);
-          }
-
-        }
-
-        console.log(`${winner} won competition with ${max} points!`);
-
-      }
-
-      // calcWinnerEasterCompetition(["2", "Chef Angelov", "9", "9", "9", "Stop", "Chef Rowe", "10", "10", "10", "10", "Stop"]);
-      // calcWinnerEasterCompetition(["3", "Chef Manchev", "10", "10", "10", "10", "Stop", "Natalie", "8", "2", "9", "Stop", "George", "9", "2", "4", "2", "Stop"]);
-    </script>
-    <script>
-        // 01. Word Tracker
-
-function trackWords(params) {
-const wordsToTrack = params[0].split(" ");
-// console.log(wordsToTrack);
-
-const allWords = {};
-
-for (let index = 1; index < params.length; index++) {
-const word = params[index];
-// console.log(word);
-allWords[word] = 0;
-// allWords[word]++;
-}
-
-for (let index = 1; index < params.length; index++) {
-const word = params[index];
-// console.log(word);
-allWords[word]++;
-// allWords[word]++;
-}
-
-// console.log(allWords);
-
-const matches = {};
-
-for (const word of wordsToTrack) {
-matches[word] = allWords[word];
-
-if (!allWords.hasOwnProperty(word)) {
-  matches[word] = 0;
-}
-}
-
-// console.log(matches);
-const entries = Object.entries(matches);
-// console.log(entries);
-const sorted = entries.sort((a, b) => b[1] - a[1]);
-// console.log(sorted);
-for (const item of sorted) {
-const word = item[0];
-const matches = item[1];
-console.log(`${word} - ${matches}`);
-}
-
-}
-
-// trackWords(['this sentence exist', 'In', 'this', 'sentence', 'you', 'have', 'to', 'count', 'the', 'occurrences', 'of', 'the', 'words', 'this', 'and', 'sentence', 'because', 'this', 'is', 'your', 'task']);
-// trackWords(['is the', 'first', 'sentence', 'Here', 'is', 'another', 'the', 'And', 'finally', 'the', 'the', 'sentence']);
-
-// 04. Party Time
-
-function menageParty(params) {
-const guests = {
-"VIP": [], 
-"regular": [],
-};
-
-let index = 0;
-let input = params[index];
-
-while (input != "PARTY") {
-const guest = input;
-const num = Number.parseInt(guest);
-
-// console.log(guest);
-if (num >= 0) {
-  // console.log(guest);
-  guests.VIP.push(guest);
-} else {
-  guests.regular.push(guest);
-}
-
-index++;
-input = params[index];
-
-// if (index > 20) {
-  // console.log("infinity");
-  // break;
-// }
-}
-
-// console.log(input);
-// index++;
-
-while (index < params.length) {
-index++;
-input = params[index];
-const guest = input;
-const num = Number.parseInt(guest);
-// console.log(guest, index);
-// console.log(params.length);
-
-if (num >= 0) {
-  // console.log(guest);
-  const i = guests.VIP.indexOf(guest);
-
-  if (i > -1) {
-    guests.VIP.splice(i, 1);
-  }
-} else {
-  const i = guests.regular.indexOf(guest);
-
-  if (i > -1) {
-    guests.regular.splice(i, 1);
-  }
-}
-
-// if (index > 20) {
-//   console.log("infinity");
-//   break;
-// }
-
-}
-
-const count = guests.VIP.length + guests.regular.length;
-console.log(count);
-
-for (const guest of guests.VIP) {
-console.log(guest);
-}
-
-for (const guest of guests.regular) {
-console.log(guest);
-}
-
-}
-
-// menageParty(['7IK9Yo0h', '9NoBUajQ', 'Ce8vwPmE', 'SVQXQCbc', 'tSzE5t0p', 'PARTY', '9NoBUajQ', 'Ce8vwPmE', 'SVQXQCbc']);
-// menageParty(['m8rfQBvl', 'fc1oZCE0', 'UgffRkOn', '7ugX7bm0', '9CQBGUeJ', '2FQZT3uC', 'dziNz78I', 'mdSGyQCJ', 'LjcVpmDL', 'fPXNHpm1', 'HTTbwRmM', 'B5yTkMQi', '8N0FThqG', 'xys2FYzn', 'MDzcM9ZK', 'PARTY', '2FQZT3uC', 'dziNz78I', 'mdSGyQCJ', 'LjcVpmDL', 'fPXNHpm1', 'HTTbwRmM', 'B5yTkMQi', '8N0FThqG', 'm8rfQBvl', 'fc1oZCE0', 'UgffRkOn', '7ugX7bm0', '9CQBGUeJ']);
-    </script>
-    <script>
-        // 05. Card Game
-
-function playCards(params) {
-const players = {};
-
-const powers = {
-"2": 2, 
-"3": 3, 
-"4": 4, 
-"5": 5, 
-"6": 6, 
-"7": 7, 
-"8": 8, 
-"9": 9, 
-"10": 10, 
-"J": 11, 
-"Q": 12, 
-"K": 13, 
-"A": 14, 
-}
-
-const types = {
-"S": 4,
-"H": 3, 
-"D": 2, 
-"C": 1, 
-}
-
-for (const input of params) {
-const tokens = input.split(": ");
-// console.log(tokens);
-const name = tokens[0];
-const cards = tokens[1].split(", ");
-// console.log(name, cards);
-players[name] = players[name] || {};
-
-for (const card of cards) {
-  let value = 0;
-  const cardType = card[card.length - 1];
-  const cardPower = card.substring(0, card.length - 1);
-  value = types[cardType] * powers[cardPower];
-  players[name][card] = value;
-}
-}
-
-const result = {};
-
-const keys = Object.keys(players);
-
-for (const key of keys) {
-const values = Object.values(players[key]);
-// console.log(values);
-const sum = values.reduce((acc, x) => {
-  return acc += x;
-}, 0)
-// console.log(sum);
-// result[key] = sum;
-console.log(`${key}: ${sum}`);
-}
-// console.log(players);
-// console.log(keys);
-// console.log(result);
-
-}
-
-// playCards(['Peter: 2C, 4H, 9H, AS, QS', 'Tomas: 3H, 10S, JC, KD, 5S, 10S', 'Andrea: QH, QC, QS, QD', 'Tomas: 6H, 7S, KC, KD, 5S, 10C', 'Andrea: QH, QC, JS, JD, JC', 'Peter: JD, JD, JD, JD, JD, JD']);
-// playCards(['John: 2C, 4H, 9H, AS, QS', 'Slav: 3H, 10S, JC, KD, 5S, 10S', 'Alex: 6H, 7S, KC, KD, 5S, 10C', 'Thomas: QH, QC, JS, JD, JC', 'Slav: 6H, 7S, KC, KD, 5S, 10C', 'Thomas: QH, QC, JS, JD, JC', 'Alex: 6H, 7S, KC, KD, 5S, 10C', 'Thomas: QH, QC, JS, JD, JC', 'John: JD, JD, JD, JD']);
-
-// 06. Company Users
-
-function menageUsers(params) {
-const companies = {};
-
-for (const input of params) {
-// console.log(input);
-const tokens = input.split(" -> ");
-// console.log(tokens);
-const company = tokens[0];
-const user = tokens[1];
-// console.log(company, user);
-companies[company] = companies[company] || {};
-companies[company][user] = true;
-// console.log(companies);
-}
-
-const keys = Object.keys(companies);
-const sorted = keys.sort();
-// console.log(sorted);
-
-for (const company of sorted) {
-console.log(company);
-const users = companies[company];
-// console.log(company, users);
-for (const user in users) {
-  console.log(`-- ${user}`);
-}
-}
-}
-
-// menageUsers([ 'SoftUni -> AA12345', 'SoftUni -> BB12345', 'Microsoft -> CC12345', 'HP -> BB12345' ]);
-// menageUsers([ 'SoftUni -> AA12345', 'SoftUni -> CC12344', 'Lenovo -> XX23456', 'SoftUni -> AA12345', 'Movement -> DD11111' ] );
-
-// 07. A Miner Task
-
-function printResource(params) {
-const resources = {};
-
-for (let index = 0; index < params.length; index+=2) {
-const resource = params[index];
-const q = Number(params[index+1]);
-// console.log(resource, q);
-resources[resource] = resources[resource] || 0;
-resources[resource] += q;
-}
-
-// console.log(resources);
-for (const resource in resources) {
-const q = resources[resource];
-console.log(`${resource} -> ${q}`);
-}
-
-}
-
-// printResource(['Gold', '155', 'Silver', '10', 'Copper', '17']);
-// printResource([ 'gold', '155', 'silver', '10', 'copper', '17', 'gold', '15' ]);
-    </script>
   </body>
 </html>
