@@ -792,6 +792,20 @@
         text-align: center;
       }
 
+      .hidden {
+        transform: translateY(100px);
+        transition: 
+          transform 1s ease-in-out, 
+          opacity 1s ease-in-out;
+        transition-delay: calc(0.2s * var(--i));
+        opacity: 0;
+      }
+
+      .revealed {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
       @media (width < 1200px) {
         .destination-grid {
           gap: 1rem;
@@ -888,9 +902,117 @@
           grid-template-columns: repeat(2, 1fr);
         }
       }
+
+      .test {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fefefe;
+        background-color: #272b34;
+      }
+
+      .text-container {
+        width: 400px;
+        display: flex;
+        /* border: 1px solid yellow; */
+      }
+
+      .text {
+        position: relative;
+        font-size: 32px;
+        text-transform: capitalize;
+        /* overflow: hidden; */
+      }
+
+      .text-1 {
+        margin-right: 20px;
+      }
+
+      .text-2 {
+        color: #fc852b;
+        padding-right: 5px;
+      }
+      .text-2::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        /* background-color: rgba(0, 0, 0, 0.5); */
+        border-left: 2px solid #fc852b;
+        background-color: #272b34;
+        animation: 
+          write 5s steps(14) infinite, 
+          blink 5s infinite;
+      }
+      @keyframes write {
+        3% {
+          left: 0;
+        }
+        30% {
+          left: 100%;
+        }
+        80% {
+          left: 100%;
+        }
+        100% {
+          left: 0;
+        }
+      }
+      @keyframes blink {
+        30% {
+          border-left: 2px solid #fc852b;
+        }
+        38% {
+          border-left: 2px solid transparent;
+        }
+        46% {
+          border-left: 2px solid #fc852b;
+        }
+        54% {
+          border-left: 2px solid transparent;
+        }
+        62% {
+          border-left: 2px solid #fc852b;
+        }
+        70% {
+          border-left: 2px solid transparent;
+        }
+        80% {
+          border-left: 2px solid #fc852b;
+        }
+      }
     </style>
   </head>
   <body>
+
+    <div class="test">
+      <div class="text-container">
+        <div class="text text-1">i'm</div>
+        <div class="text text-2">web developer</div>
+      </div>
+    </div>
+    <script>
+      const texts = [
+        "Web Developer", 
+        "UX Designer", 
+        "Freelancer", 
+        "YouTuber", 
+        "Blogger"
+      ]
+
+      const text = document.querySelector(".text-2");
+      let index = 1;
+
+      setInterval(() => {
+        index++;
+        index = index % texts.length;
+        text.textContent = texts[index];
+      }, 5000);
+    </script>
 
     <header class="header">
 
@@ -948,7 +1070,7 @@
 
       <div class="trending-grid">
 
-        <div class="trending-card">
+        <div class="trending-card hidden" style="--i: 0">
           <img src="assets/trending-1.jpg" alt="trending" />
           <h1>mountain hiking tour</h1>
           <p>hiking our | stoke on trent</p>
@@ -977,7 +1099,7 @@
           </p>
         </div>
 
-        <div class="trending-card">
+        <div class="trending-card hidden" style="--i: 1">
           <img src="assets/trending-2.jpg" alt="trending" />
           <h1>train tour skyline</h1>
           <p>adventure journey | group tour</p>
@@ -1006,7 +1128,7 @@
           </p>
         </div>
 
-        <div class="trending-card">
+        <div class="trending-card hidden" style="--i: 2">
           <img src="assets/trending-3.jpg" alt="trending" />
           <h1>wild forest life</h1>
           <p>scenic beauty | adrenaline rush</p>
@@ -1050,7 +1172,7 @@
 
       <div class="destination-grid">
 
-        <div class="destination-card">
+        <div class="destination-card hidden" style="--i: 0">
           <img src="assets/destination-1.jpg" alt="destination" />
           <div class="badge">4.7</div>
           <div class="destination-details">
@@ -1059,7 +1181,7 @@
           </div>
         </div>
 
-        <div class="destination-card">
+        <div class="destination-card hidden" style="--i: 1">
           <img src="assets/destination-2.jpg" alt="destination" />
           <div class="badge">4.5</div>
           <div class="destination-details">
@@ -1068,7 +1190,7 @@
           </div>
         </div>
 
-        <div class="destination-card">
+        <div class="destination-card hidden" style="--i: 2">
           <img src="assets/destination-3.jpg" alt="destination" />
           <div class="badge">4.3</div>
           <div class="destination-details">
@@ -1077,7 +1199,7 @@
           </div>
         </div>
 
-        <div class="destination-card">
+        <div class="destination-card hidden" style="--i: 3">
           <img src="assets/destination-4.jpg" alt="destination" />
           <div class="badge">4.8</div>
           <div class="destination-details">
@@ -1086,7 +1208,7 @@
           </div>
         </div>
 
-        <div class="destination-card">
+        <div class="destination-card hidden" style="--i: 4">
           <img src="assets/destination-5.jpg" alt="destination" />
           <div class="badge">4.2</div>
           <div class="destination-details">
@@ -1095,7 +1217,7 @@
           </div>
         </div>
         
-        <div class="destination-card">
+        <div class="destination-card hidden" style="--i: 5">
           <img src="assets/destination-6.jpg" alt="destination" />
           <div class="badge">4.7</div>
           <div class="destination-details">
@@ -1119,7 +1241,7 @@
 
       <div class="seller-grid">
 
-        <div class="seller-card">
+        <div class="seller-card hidden" style="--i: 0">
           <div class="seller-image">
             <img src="assets/seller-1.jpg" alt="seller" />
             <div class="seller-image-content">
@@ -1139,7 +1261,7 @@
           </div>
         </div>
 
-        <div class="seller-card">
+        <div class="seller-card hidden" style="--i: 1">
           <div class="seller-image">
             <img src="assets/seller-2.jpg" alt="seller" />
             <div class="seller-image-content">
@@ -1159,7 +1281,7 @@
           </div>
         </div>
 
-        <div class="seller-card">
+        <div class="seller-card hidden" style="--i: 2">
           <div class="seller-image">
             <img src="assets/seller-3.jpg" alt="seller" />
             <div class="seller-image-content">
@@ -1204,7 +1326,7 @@
 
       <div class="guide-grid">
 
-        <div class="guide-card">
+        <div class="guide-card hidden" style="--i: 0">
           <div class="guide-image">
             <img src="assets/guide-1.jpg" alt="guide" />
             <div class="guide-socials">
@@ -1234,7 +1356,7 @@
           </div>
         </div>
 
-        <div class="guide-card">
+        <div class="guide-card hidden" style="--i: 1">
           <div class="guide-image">
             <img src="assets/guide-2.jpg" alt="guide" />
             <div class="guide-socials">
@@ -1264,7 +1386,7 @@
           </div>
         </div>
 
-        <div class="guide-card">
+        <div class="guide-card hidden" style="--i: 2">
           <div class="guide-image">
             <img src="assets/guide-3.jpg" alt="guide" />
             <div class="guide-socials">
@@ -1310,7 +1432,7 @@
 
       <div class="client-grid">
 
-        <div class="client-card">
+        <div class="client-card hidden" style="--i: 0">
           <div class="client-card-header">
             <span><i class="fa fa-quote-right"></i></span>
             <div class="ratings">
@@ -1337,7 +1459,7 @@
           </div>
         </div>
         
-        <div class="client-card">
+        <div class="client-card hidden" style="--i: 1">
           <div class="client-card-header">
             <span><i class="fa fa-quote-right"></i></span>
             <div class="ratings">
@@ -1364,7 +1486,7 @@
           </div>
         </div>
 
-        <div class="client-card">
+        <div class="client-card hidden" style="--i: 2">
           <div class="client-card-header">
             <span><i class="fa fa-quote-right"></i></span>
             <div class="ratings">
@@ -1459,6 +1581,31 @@
       </div>
 
     </footer>
+
+    <script>
+      const hiddenElements = document.querySelectorAll(".hidden");
+      // console.log(hiddenElements);
+      const options = {
+        threshold: 0.1
+      }
+
+      const observer = new IntersectionObserver(revealElement, options);
+
+      hiddenElements.forEach(element => {
+        observer.observe(element);
+        // console.log(element);
+      })
+
+      function revealElement(elements) {
+        // console.log(elements[0]);
+        elements.forEach(element => {
+          if (element.isIntersecting) {
+            console.log(element);
+            element.target.classList.add("revealed");
+          }
+        })
+      }
+    </script>
 
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
