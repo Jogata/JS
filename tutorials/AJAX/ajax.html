@@ -112,6 +112,8 @@
       .lsbtn button:hover {
         color: black;
         background-color: white;
+      }
+      .lsbtn button:active {
         box-shadow: inset 1px 1px 1px #000;
       }
       
@@ -130,10 +132,12 @@
         font-size: 40px;
         font-weight: 800;
         font-family: var(--font-family);
+        text-transform: uppercase;
         transition: color 0.3s linear;
       }
       .logo h1 a span {
         color: var(--main-color);
+        transition: color 0.3s linear;
       }
       .logo h1 a:hover {
         color: var(--main-color);
@@ -195,11 +199,137 @@
         color: white;
         font-size: 13px;
         font-weight: 400;
+        text-transform: uppercase;
+        transition: color .4s ease-in;
       }
-      
+      .labels h3 a:hover {
+        color: var(--main-color);
+      }
+
       .labels h3 span {
         color: white;
         font-weight: 400;
+      }
+
+      .headercont h1 {
+        color: white;
+        font-size: 4.6vw;
+        font-weight: 900;
+        font-family: var(--font-family);
+        text-transform: uppercase;
+        z-index: 2;
+      }
+      
+      .headercont p {
+        color: #ffffffc7;
+        text-align: center;
+        z-index: 2;
+      }
+      
+      .headbtn {
+        margin: 60px 0;
+        gap: 50px;
+        z-index: 2;
+      }
+      
+      .button {
+        position: relative;
+        width: 150px;
+        height: 50px;
+        color: transparent;
+        font-size: 1.2rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-family: inherit;
+        border: none;
+        border-bottom: 2px solid var(--main-color);
+        background-color: transparent;
+        transition: all 0.5s ease-in-out;
+        overflow: hidden;
+        cursor: pointer;
+      }
+      .button:hover {
+        box-shadow: 0.5px 0.5px 150px #252525;
+      }
+      
+      .type1::after,
+      .type2::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: 'CLICK';
+        width: 150px;
+        height: 50px;
+        color: white;
+        font-size: 1.2rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--main-color);
+        transform: translateY(50px);
+        transition: all 0.5s ease-in-out;
+      }
+      
+      .type1::before,
+      .type2::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: 'GAME DETAILS';
+        width: 150px;
+        height: 50px;
+        color: white;
+        font-size: 0.9rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: translateY(0px) scale(1.2);
+        transition: all .5s ease-in-out;
+      }
+      .type2::before {
+        content: 'BUY NOW';
+      }
+      .type1:hover::after,
+      .type2:hover::after {
+        transform: translateY(0) scale(1.2);
+      }
+      .type1:hover::before,
+      .type2:hover::before {
+        transform: translateY(-50px) scale(0) rotate(120deg);
+      }
+      .type1:active::after,
+      .type2:active::after {
+        transform: translateY(0) scale(1);
+        box-shadow: 
+          inset 3px 3px 3px #0006, 
+          inset -1px -3px 3px #fff9;
+      }
+      /* .type1:active::before,
+      .type2:active::before {
+        box-shadow: inset 1px 1px 1px #000;
+      } */
+      
+      .dots {
+        position: absolute;
+        bottom: 5%;
+        left: 50%;
+        gap: 13px;
+        transform: translateX(-50%);
+        z-index: 2;
+      }
+      
+      .dot {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        border: 2px solid rgba(255, 255, 255, 0.7);
+        transition: 0.2s linear;
+        cursor: pointer;
+      }
+      .dot:hover {
+        background-color: white;
       }
     </style>
   </head>
@@ -267,8 +397,8 @@
           <h1 id="header-title">egypt and world</h1>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, minima. Illo, inventore ad. Itaque unde, aliquid perferendis temporibus facere delectus qui dolores id esse assumenda aut corporis, magni modi tenetur.</p>
           <div class="headbtn flex">
-              <a href="#top" id="d_btn1"><button class="button type1"></button></a>
-              <a href="#top" id="d_btn1"><button class="button type2"></button></a>
+              <a href="#top" id="d_btn1"><button class="button type1">game details</button></a>
+              <a href="#top" id="d_btn1"><button class="button type2">buy now</button></a>
           </div>
       </div>
 
