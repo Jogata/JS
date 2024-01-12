@@ -451,8 +451,11 @@
       }
       
       .gamecards {
+        gap: 1rem;
         flex-wrap: wrap;
-        justify-content: space-between;
+        align-items: stretch;
+        /* justify-content: space-between; */
+        justify-content: center;
         overflow: hidden;
       }
       
@@ -491,6 +494,9 @@
         color: var(--main-color);
       }
       
+      .cardinfo {
+        padding: 0 10px;
+      }
       .cardinfo h2 {
         width: 100%;
         margin-top: 10px;
@@ -713,6 +719,102 @@
         transition: .3s;
         z-index: -1;
       }
+      .newrelesed div a:hover::before {
+        height: 100%;
+      }
+
+      .featuredgames {
+        width: 100%;
+        flex-direction: column;
+      }
+      .featuredgames h2 {
+        margin-top: 100px;
+        color: black;
+        font-size: 3.5rem;
+        font-family: var(--font-family);
+        text-transform: uppercase;
+      }
+      
+      .featuredgames h2 span {
+        color: var(--main-color);
+      }
+      
+      .fgamescards {
+        width: 100%;
+        margin-top: 60px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      
+      .fcard {
+        position: relative;
+        min-width: 31.2%;
+        max-width: 31.2%;
+        height: 480px;
+        margin-top: 40px;
+        overflow: hidden;
+        cursor: pointer;
+      }
+      .fcard::before {
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        content: '';
+        width: 100%;
+        height: 100%;
+        background-color: #000000;
+        transition: .3s;
+        opacity: 0.2;
+        z-index: 1;
+      }
+      .fcard::after {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: '';
+        width: 100%;
+        height: 0;
+        background-color: var(--main-color);
+        transition: .7s;
+        opacity: .5;
+        z-index: 1;
+      }
+      .fcard:hover::after {
+        height: 100%;
+      }
+      
+      .fcard img {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      
+      .fcarddetails {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 30px;
+        transition: .5s linear;
+        z-index: 2;
+      }
+      
+      .fcarddetails h2 {
+        color: white;
+        font-size: 30px;
+        font-family: var(--font-family);
+        text-transform: uppercase;
+      }
+      
+      .fcarddetails i {
+        color: var(--main-color);
+        font-size: 14px;
+      }
+      
     </style>
   </head>
   <body>
@@ -1090,9 +1192,11 @@
             </div>
         </div>
       </div>
+
       <div class="featuredgames container flex" id="featured">
-        <h2>featured&nbsp;<span>games</span></h2>
+        <h2>featured <span>games</span></h2>
         <div class="fgamescards flex">
+
           <div class="fcard">
             <img src="img/spacewars.jpg" alt="">
             <div class="fcarddetails">
@@ -1118,6 +1222,7 @@
                 <h2>space wars</h2>
             </div>
           </div>
+
           <div class="fcard">
               <img src="img/cyberpunk.jpg" alt="">
               <div class="fcarddetails">
@@ -1143,6 +1248,7 @@
                   <h2>cyberpunk</h2>
               </div>
           </div>
+
           <div class="fcard">
               <img src="img/the-witcher-1.jpg" alt="">
               <div class="fcarddetails">
@@ -1168,6 +1274,7 @@
                   <h2>the worrior 3</h2>
               </div>
           </div>
+
           <div class="fcard">
               <img src="img/gta-5.jpg" alt="">
               <div class="fcarddetails">
@@ -1193,6 +1300,7 @@
                   <h2>Gta 5</h2>
               </div>
           </div>
+
           <div class="fcard">
               <img src="img/uncharted-4.jpg" alt="">
               <div class="fcarddetails">
@@ -1218,6 +1326,33 @@
                   <h2>uncharted 4</h2>
               </div>
           </div>
+
+          <div class="fcard">
+            <img src="img/return of the cars.jpg" alt="">
+            <div class="fcarddetails">
+                <h2>return of the cars</h2>
+                <div class="tegs2 flex">
+                    <div class="teg flex">
+                        <i class="fa-solid fa-tv"></i>
+                        <h3 class="flex">
+                            <a href="#featured">steam</a>
+                            <a href="#featured">xbox one</a>
+                        </h3>
+                    </div>
+                    <div class="teg flex">
+                        <i class="fa-solid fa-tags"></i>
+                        <h3 class="flex">
+                            <a href="#featured">advanture</a>
+                            <a href="#featured">fps</a>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="fhovercont">
+                <h2>return of the cars</h2>
+            </div>
+          </div>
+
         </div>
       </div>
     </main>
