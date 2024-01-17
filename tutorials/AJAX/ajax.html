@@ -235,7 +235,7 @@
         padding-right: 15px;
       }
 
-      .btn_hover1 {
+      .btn-hover1 {
         display: inline-block;
         position: relative;
         color: #ffffff;
@@ -247,7 +247,7 @@
         cursor: pointer;
         z-index: 1;
       }
-      .btn_hover1::before {
+      .btn-hover1::before {
         position: absolute;
         top: 0;
         right: 0;
@@ -259,7 +259,7 @@
         transition: all 0.3s ease-in;
         z-index: -1;
       }
-      .btn_hover1:hover::before {
+      .btn-hover1:hover::before {
         width: 0;
         background: linear-gradient(42deg, #7436bb 0.01%, #b520a3 100%);
       }
@@ -548,7 +548,8 @@
         width: 320px;
         height: 100vh;
         padding: 40px 20px 20px;
-        transition: 0.5s;
+        transform: translateX(-100%);
+        transition: transform 0.5s;
         overflow-x: hidden;
       }
       .sidepanel::-webkit-scrollbar {
@@ -557,6 +558,9 @@
       .sidepanel::-webkit-scrollbar-thumb {
         background: linear-gradient(42deg, #7436bb 0.01%, #b520a3 100%);
         border-radius: 10px;
+      }
+      .sidepanel.open {
+        transform: translateX(0);
       }
       
       .sidebar {
@@ -615,6 +619,95 @@
         margin: 11px 0 7px;
         color: #d3c9c1;
         font-weight: 500;
+      }
+
+      .collapse-btn {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row-reverse;
+      }
+      .collapse-btn i {
+        padding: 7px 8px;
+        border-radius: 40px;
+        border: 1px solid #d3c9c1;
+        transition: 0.4s;
+      }
+      .collapse-btn a:hover i {
+        border: 1px solid #f57c48;
+      }
+      
+      .plus-collapse {
+        height: 45px;
+        margin: -52px 0px 0 0;
+      }
+      
+      #pages {
+        height: 0;
+        transition: height 0.35s ease;
+        overflow: hidden;
+      }
+      #pages.show {
+        height: 500px;
+        transition: height 0.35s ease;
+      }
+      
+      /* Searchbar */
+      #search-bar {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 0;
+        display: flex;
+        border-radius: 0px;
+        background-color: #000000a6;
+        transition: all 0.5s ease;
+        z-index: 2;
+      }
+      
+      #search-bar div:first-child {
+        position: absolute;
+        right: 0;
+        width: 44px;
+        height: 44px;
+        margin: 30px;
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1.5px solid #b520a3;
+        border-radius: 0.25em;
+        background: linear-gradient(42deg, #7436bb 0.01%, #b520a3 100%);
+        cursor: pointer;
+      }
+      #search-bar div:first-child:hover {
+        background: inherit;
+      }
+      
+      #search-bar form {
+        width: 50%;
+        margin: auto;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50px;
+        border: 1px solid #6d2f8a;
+        background-color: #381a46;
+      }
+      
+      #search-bar form input {
+        width: 100%;
+        padding: 10px 20px;
+        color: #ffffff;
+        font-size: 18px;
+        border-radius: 50px;
+        border: none;
+        outline: none;
+        background-color: #381a46;
+      }
+      
+      #search-bar form button {
+        text-transform: uppercase;
+        transition: all 0.3s ease;
       }
 
       /* Slider */
@@ -794,6 +887,34 @@
             </div>
 
           </aside>
+          <script>
+            "use strict";
+            const openNavButton = document.querySelector(".navbar-toggler");
+            openNavButton.addEventListener("click", openNav);
+            
+            const closeNavButton = document.querySelector(".closebtn");
+            closeNavButton.addEventListener("click", closeNav);
+
+            function openNav() {
+              const sidepanel = document.getElementById("mySidepanel");
+              sidepanel.classList.add("open");
+              // if (sidepanel) {
+              //   sidepanel.style.left = "0";
+              // } else {
+              //   console.error("error: side panel not found");
+              // }
+            }
+
+            function closeNav() {
+              const sidepanel = document.getElementById("mySidepanel");
+              sidepanel.classList.remove("open");
+              // if (sidepanel) {
+              //   sidepanel.style.left = "-320px";
+              // } else {
+              //   console.error("error: side panel not found");
+              // }
+            }
+          </script>
 
           <!-- Searchbar -->
           <div id="search-bar">
@@ -803,6 +924,19 @@
               <button type="submit" class="btn-hover1">search</button>
             </form>
           </div>
+          <script>
+            const openSearchButton = document.querySelector(".nav-right .fa-search");
+            openSearchButton.addEventListener("click", openSearchBar);
+
+            function openSearchBar() {
+              const searchbar = document.getElementById("search-bar");
+              if (searchbar) {
+                searchbar.style.height = "100vh";
+              } else {
+                console.error("error: searchbar not found");
+              }
+            }
+          </script>
 
           <!-- Right Sidebar -->
           <section class="header-right-sidebar" id="right-side">
