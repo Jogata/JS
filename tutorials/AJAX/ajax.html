@@ -235,6 +235,35 @@
         padding-right: 15px;
       }
 
+      .btn_hover1 {
+        display: inline-block;
+        position: relative;
+        color: #ffffff;
+        letter-spacing: 0.8px;
+        border-radius: 50px;
+        border: 1.5px solid #d12bec;
+        background: linear-gradient(180deg, #ff7527 0%, #fabf28 100%);
+        overflow: hidden;
+        cursor: pointer;
+        z-index: 1;
+      }
+      .btn_hover1::before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        border-radius: 50px;
+        background: linear-gradient(42deg, #7436bb 0.01%, #b520a3 100%);
+        transition: all 0.3s ease-in;
+        z-index: -1;
+      }
+      .btn_hover1:hover::before {
+        width: 0;
+        background: linear-gradient(42deg, #7436bb 0.01%, #b520a3 100%);
+      }
+
       /* Flex class */
       .flex {
         display: flex;
@@ -365,105 +394,6 @@
         gap: 50px;
       }
 
-      /* Slider */
-      .slick-slider {
-        position: relative;
-        display: block;
-        box-sizing: border-box;
-        
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        
-        -webkit-touch-callout: none;
-        -khtml-user-select: none;
-        -ms-touch-action: pan-y;
-        touch-action: pan-y;
-        -webkit-tap-highlight-color: transparent;
-      }
-      
-      .slick-list {
-        position: relative;
-        display: block;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-      }
-      .slick-list:focus {
-        outline: none;
-      }
-      .slick-list.dragging {
-        cursor: pointer;
-        cursor: hand;
-      }
-      
-      .slick-slider .slick-track,
-      .slick-slider .slick-list {
-        -webkit-transform: translate3d(0, 0, 0);
-        -moz-transform: translate3d(0, 0, 0);
-        -ms-transform: translate3d(0, 0, 0);
-        -o-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-      }
-      
-      .slick-track {
-        position: relative;
-        top: 0;
-        left: 0;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .slick-track:before,
-      .slick-track:after {
-        display: table;
-        content: '';
-      }
-      .slick-track:after {
-        clear: both;
-      }
-      .slick-loading .slick-track {
-        visibility: hidden;
-      }
-      
-      .slick-slide {
-        display: none;
-        float: left;
-        height: 100%;
-        min-height: 1px;
-      }
-      [dir='rtl'] .slick-slide {
-        float: right;
-      }
-      .slick-slide img {
-        display: block;
-      }
-      .slick-slide.slick-loading img {
-        display: none;
-      }
-      .slick-slide.dragging img {
-        pointer-events: none;
-      }
-      .slick-initialized .slick-slide {
-        display: block;
-      }
-      .slick-loading .slick-slide {
-        visibility: hidden;
-      }
-      .slick-vertical .slick-slide {
-        display: block;
-        height: auto;
-        border: 1px solid transparent;
-      }
-      .slick-arrow.slick-hidden {
-        display: none;
-      }
-
-
-
-
-      
       .nav-link {
         color: #d3c9c1;
         font-weight: 400;
@@ -590,6 +520,197 @@
         color: #ffffff;
         font-size: 22px;
       }
+
+      @media screen and (max-width: 1000px) {
+        .navbar-toggler {
+          display: block !important;
+        }
+        .navbar-nav,
+        .nav-right {
+          display: none !important;
+        }
+        .container-nav {
+          width: 100%;
+          justify-content: space-between;
+        }
+      }
+
+      /* Sidebar */
+      aside {
+        background-color: #3d0f41;
+        z-index: 10;
+      }
+      
+      .sidepanel {
+        position: fixed;
+        top: 0;
+        /* left: -320px; */
+        width: 320px;
+        height: 100vh;
+        padding: 40px 20px 20px;
+        transition: 0.5s;
+        overflow-x: hidden;
+      }
+      .sidepanel::-webkit-scrollbar {
+        width: 3px;
+      }
+      .sidepanel::-webkit-scrollbar-thumb {
+        background: linear-gradient(42deg, #7436bb 0.01%, #b520a3 100%);
+        border-radius: 10px;
+      }
+      
+      .sidebar {
+        padding-bottom: 20px;
+        justify-content: space-between;
+      }
+      
+      .sidebar img {
+        width: 100px;
+      }
+      
+      .sidebar button {
+        /* width: 44px; */
+        /* height: 44px; */
+        /* margin-bottom: -15px; */
+        padding: 9px 15px 11px;
+        color: #ffffff;
+        border-radius: 0.25em;
+        border: 1.5px solid #b520a3;
+        background: linear-gradient(42deg, #7436bb 0.01%, #b520a3 100%);
+        cursor: pointer;
+      }
+      .sidebar button:hover {
+        background: inherit;
+      }
+      
+      .sidebar a {
+        padding: 10px 0;
+      }
+      
+      aside ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      aside ul li {
+        margin: 15px 0;
+      }
+      
+      aside li a {
+        color: #d3c9c1;
+        transition: 0.5s;
+        padding: 10px 0;
+      }
+      aside li a:hover {
+        color: #f57c48;
+        transition: 0.5s;
+      }
+      aside ul li a.active {
+        color: #f57c48;
+      }
+      
+      aside .pages {
+        margin: 11px 0 7px;
+        color: #d3c9c1;
+        font-weight: 500;
+      }
+
+      /* Slider */
+      .slick-slider {
+        position: relative;
+        display: block;
+        box-sizing: border-box;
+        
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        
+        -webkit-touch-callout: none;
+        -khtml-user-select: none;
+        -ms-touch-action: pan-y;
+        touch-action: pan-y;
+        -webkit-tap-highlight-color: transparent;
+      }
+      
+      .slick-list {
+        position: relative;
+        display: block;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      .slick-list:focus {
+        outline: none;
+      }
+      .slick-list.dragging {
+        cursor: pointer;
+        cursor: hand;
+      }
+      
+      .slick-slider .slick-track,
+      .slick-slider .slick-list {
+        -webkit-transform: translate3d(0, 0, 0);
+        -moz-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        -o-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+      
+      .slick-track {
+        position: relative;
+        top: 0;
+        left: 0;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .slick-track:before,
+      .slick-track:after {
+        display: table;
+        content: '';
+      }
+      .slick-track:after {
+        clear: both;
+      }
+      .slick-loading .slick-track {
+        visibility: hidden;
+      }
+      
+      .slick-slide {
+        display: none;
+        float: left;
+        height: 100%;
+        min-height: 1px;
+      }
+      [dir='rtl'] .slick-slide {
+        float: right;
+      }
+      .slick-slide img {
+        display: block;
+      }
+      .slick-slide.slick-loading img {
+        display: none;
+      }
+      .slick-slide.dragging img {
+        pointer-events: none;
+      }
+      .slick-initialized .slick-slide {
+        display: block;
+      }
+      .slick-loading .slick-slide {
+        visibility: hidden;
+      }
+      .slick-vertical .slick-slide {
+        display: block;
+        height: auto;
+        border: 1px solid transparent;
+      }
+      .slick-arrow.slick-hidden {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -638,10 +759,12 @@
 
           <!-- Sidebar -->
           <aside id="mySidepanel" class="sidepanel">
+
             <div class="sidebar flex">
               <a href="#logo"><img src="Images/logo.png" alt="logo"></a>
               <button class="closebtn btn-hover1"><i class="fa fa-times"></i></button>
             </div>
+
             <div>
               <!-- side menus -->
               <ul>
@@ -669,7 +792,9 @@
                 </li>
               </ul>
             </div>
+
           </aside>
+
           <!-- Searchbar -->
           <div id="search-bar">
             <div class="btn-hover1"><i class="fa fa-times"></i></div>
@@ -678,17 +803,19 @@
               <button type="submit" class="btn-hover1">search</button>
             </form>
           </div>
+
           <!-- Right Sidebar -->
           <section class="header-right-sidebar" id="right-side">
+
             <div class="flex flex-sb">
               <a href="/"><img src="Images/right-side-logo.png" alt="logo"></a>
               <button class="close-right-sidebar">
                 <i class="fa fa-times"></i>
               </button>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
+
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
             <a href="#about" class="btn-hover1">discover more</a>
             <hr>
             <h4>Connected details:</h4>
@@ -713,9 +840,11 @@
               <a href="#l"><i class="fa fa-linkedin"></i></a>
             </span>
           </section>
+
         </header>
         <!-- ====== End of 1.1. Header section ====== -->
-        <!-- ====== 1.2. hero section ====== -->
+
+        <!-- ====== 1.2. Hero section ====== -->
         <section class="hero">
           <div class="container aos-init aos-animate" data-aos="zoom-in">
             <div>
@@ -736,7 +865,7 @@
             </div>
           </div>
         </section>
-        <!-- ====== End of 1.2. hero section ====== -->
+        <!-- ====== End of 1.2. Hero section ====== -->
       </div>
     </div>
 
