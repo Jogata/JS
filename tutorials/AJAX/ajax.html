@@ -1291,6 +1291,9 @@
         display: none;
         padding: 6px 12px;
       }
+      .tabcontent.active {
+        display: block;
+      }
       
       .tabcontent .w-100 {
         display: flex;
@@ -1346,6 +1349,74 @@
         opacity: 1;
       }
       
+      .service-1 hr {
+        width: 100%;
+        height: 1px;
+        color: #461f72;
+        border: 1px solid;
+        opacity: 1;
+      }
+      
+      .service-1 .btn-hover2 {
+        padding: 15px 30px;
+        border: 1px solid #ff7527;
+      }
+
+      .service-card {
+        width: 100%;
+        padding: 40px 40px 30px 40px;
+        border: 1px solid #b520a3;
+        background: linear-gradient(11deg, #7436bb 0.01%, #b520a3 100%);
+        box-shadow: 8px 18px 30px 0px rgba(0, 0, 0, 0.2);
+      }
+      .service-card:hover {
+        transform: scale(1.05);
+        transition: transform 0.4s ease;
+      }
+
+      .service-card a {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: #d3c9c1;
+      }
+      .service-card a:hover {
+        gap: 8px;
+        color: #ffffff;
+        font-weight: 700;
+      }
+
+      .service-card h3 {
+        margin: 20px 0;
+        color: #ffffff;
+        letter-spacing: 1.25px;
+      }
+
+      .service-card img {
+        display: block;
+        margin: auto;
+        object-fit: cover;
+      }
+
+      .service-card figure {
+        width: 124px;
+        height: 85px;
+        padding: 12px;
+        display: flex;
+        border-radius: 10px;
+        background-color: #ffffff;
+        box-shadow: 10px 17px 28px 0px rgba(0, 0, 0, 0.3);
+      }
+      
+      .service-card img[alt="slider1"] {
+        width: 105px;
+      }
+      .service-card img[alt="slider2"] {
+        width: 75px;
+      }
+      .service-card img[alt="slider3"] {
+        width: 60px;
+      }
             
       
       /* Slider */
@@ -1446,9 +1517,28 @@
       .slick-arrow.slick-hidden {
         display: none;
       }
+
+      .test {
+        --rotate: 0deg;
+        height: 100vh;
+        background-image: conic-gradient(from var(--rotate), #233D47, #fff 50%);
+        animation: bgeffect1 5s linear infinite;
+      }
+
+      @keyframes bgeffect1 {
+        from { --rotate: 0deg }
+        to { --rotate: -360deg}
+      }
+
+      @keyframes bgeffect {
+        0% { background-image: conic-gradient(from 0deg, #233D47, #fff 50%); }
+        50% { background-image: conic-gradient(from 180deg, #233D47, #fff 50%); }
+        100% { background-image: conic-gradient(from 360deg, #233D47, #fff 50%); }
+      }
     </style>
   </head>
   <body>
+    <div class="test"></div>
     <div class="site-wrapper">
 
       <div class="header-index">
@@ -1859,17 +1949,17 @@
 
             <!-- Tab links -->
             <div class="tab mb-15">
-              <button class="tablinks active">all</button>
-              <button class="tablinks">design</button>
-              <button class="tablinks">development</button>
-              <button class="tablinks">branding</button>
-              <button class="tablinks">ui/ux</button>
-              <button class="tablinks">marketing</button>
-              <button class="tablinks">seo</button>
+              <button class="tablinks active" data-id="all">all</button>
+              <button class="tablinks" data-id="design">design</button>
+              <button class="tablinks" data-id="development">development</button>
+              <button class="tablinks" data-id="branding">branding</button>
+              <button class="tablinks" data-id="ui-ux">ui/ux</button>
+              <button class="tablinks" data-id="marketing">marketing</button>
+              <button class="tablinks" data-id="seo">seo</button>
             </div>
 
             <!-- Tab content -->
-            <div id="all" class="tabcontent" style="display: block;">
+            <div id="all" class="tabcontent active">
               <div class="flex flex-center">
                 <div class="flex w-100">
                   <div class="w-33">
@@ -1974,7 +2064,7 @@
               </div>
             </div>
 
-            <div id="markiting" class="tabcontent">
+            <div id="marketing" class="tabcontent">
               <div class="flex flex-center">
                 <div class="flex w-100">
                   <div class="w-33">
@@ -2023,7 +2113,40 @@
           </div>
 
         </div>
-        
+        <script>
+          const tablinks = document.querySelectorAll(".tablinks");
+
+          tablinks.forEach(tablink => {
+            tablink.addEventListener("click", () => {
+              const id = tablink.dataset.id;
+              // console.log(id);
+              openTab(tablink, id);
+            })
+          })
+
+          function openTab(el, cityName) {
+            // Hide all tab content
+            // const tabcontent = document.getElementsByClassName("tabcontent");
+            // for (let i = 0; i < tabcontent.length; i++) {
+            //   tabcontent[i].style.display = "none";
+            // }
+            
+            // Remove active class from all tab links
+            // for (i = 0; i < tablinks.length; i++) {
+            //   tablinks[i].classList.remove("active");
+            // }
+            const activeTabButton = document.querySelector(".tablinks.active");
+            activeTabButton.classList.remove("active");
+            
+            // Show the selected tab content and mark the corresponding tab link as active
+            const activeTabContent = document.querySelector(".tabcontent.active");
+            activeTabContent.classList.remove("active");
+
+            // document.getElementById(cityName).style.display = "block";
+            document.getElementById(cityName).classList.add("active");
+            el.classList.add("active");
+          }
+        </script>
       </section>
       <!-- ====== End of 1.6. Portfolio section ====== -->
       
@@ -2031,6 +2154,7 @@
       <section class="service">
         <div class="service-1">
           <div class="container">
+
             <div class="service-data aos-init" data-aos="fade-down">
               <div class="w-66">
                 <div class="flex gap-1">
@@ -2045,26 +2169,32 @@
               </div>
               <hr class="mt-15 mb-15">
             </div>
+
             <div class="flex gap-1 mt-15 s-card">
+
               <div class="service-card aos-init" data-aos="fade-down">
                 <figure><img src="Images/icon/slider1.png" alt="slider1"></figure>
                 <h3>UI/UX Design</h3>
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
                 <a href="#services">Read more <i class="fa fa-arrow-right"></i></a>
               </div>
+
               <div class="service-card aos-init" data-aos="fade-up">
                 <figure><img src="Images/icon/slider2.png" alt="slider2"></figure>
                 <h3>DEVELOPMENT</h3>
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
                 <a href="#services">Read more <i class="fa fa-arrow-right"></i></a>
               </div>
+
               <div class="service-card aos-init" data-aos="fade-down">
                 <figure><img src="Images/icon/slider3.png" alt="slider3"></figure>
                 <h3>Visual Design</h3>
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.</p>
                 <a href="#services">Read more <i class="fa fa-arrow-right"></i></a>
               </div>
+
             </div>
+
           </div>
         </div>
       </section>
