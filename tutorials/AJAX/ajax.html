@@ -1918,12 +1918,23 @@
       
       /* ====== 1.12. FAQ section ====== */
       .faq {
+        position: relative;
         padding: 120px 0;
         background-image: url("Images/bg/faq-bg.png");
         background-attachment: fixed;
         background-position: center;
         background-size: cover;
         z-index: 1;
+      }
+      .faq::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        contain: "";
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        opacity: 0.1;
       }
 
       #faq {
@@ -1973,11 +1984,29 @@
         padding: 1rem 1.5rem;
         color: #231f20;
         font-weight: 700;
+        font-family: inherit;
         text-align: left;
         outline: none;
         border: none;
         cursor: pointer;
       }
+
+      .accordion-button img {
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .accordion-collapse {
+        max-height: 0;
+        transition: max-height 0.3s ease-out;
+        overflow: hidden;
+      }
+
+      .accordion-collapse p {
+        padding: 15px;
+        color: #767676;
+        background-color: #fff;
+      }
+
 
 
       /* Slider */
@@ -3201,6 +3230,7 @@
         <span></span>
         <div class="container">
           <div class="flex flex-wrap">
+
             <div class="w-50 text-center aos-init" data-aos="fade-up">
               <div class="flex gap-2 ">
                 <hr class="faq-hr1">
@@ -3210,8 +3240,10 @@
               <p class="mt-1">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
                 the industry's standard dummy text ever.</p>
             </div>
+
             <div class="w-50 mt-15">
               <div class="accordion flex flex-col gap-2 aos-init" id="accordionExample" data-aos="fade-down">
+
                 <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button class="accordion-button flex-sb" type="button">
@@ -3224,6 +3256,7 @@
                       dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation.</p>
                   </div>
                 </div>
+                
                 <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button class="accordion-button flex-sb" type="button">
@@ -3236,6 +3269,7 @@
                       dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation.</p>
                   </div>
                 </div>
+                
                 <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button class="accordion-button flex-sb" type="button">
@@ -3248,6 +3282,7 @@
                       dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation.</p>
                   </div>
                 </div>
+                
                 <div class="accordion-item">
                   <h2 class="accordion-header">
                     <button class="accordion-button flex-sb" type="button">
@@ -3260,12 +3295,107 @@
                       dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
                   </div>
                 </div>
+
               </div>
             </div>
+
           </div>
+          <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              let accordionButtons = document.querySelectorAll('.accordion-button');
+              let acoimg = document.querySelectorAll('.accordion-button img');
+              
+              accordionButtons.forEach(function (button, index) {
+                button.addEventListener('click', function () {
+                  let collapse = this.parentElement.nextElementSibling;
+                  
+                  // Close all other accordion items
+                  accordionButtons.forEach(function (otherButton, otherIndex) {
+                    if (otherButton !== button) {
+                      const otherCollapse = otherButton.parentElement.nextElementSibling;
+                      otherCollapse.style.maxHeight = null;
+                      // Reset the image source and rotation for other accordion items
+                      acoimg[otherIndex].src = 'Images/icon/plus.png';
+                      acoimg[otherIndex].style.transform = 'rotate(0deg)';
+                      otherButton.style.backgroundColor = '#fff';
+                    }
+                  });
+                  
+                  // Toggle the clicked accordion item
+                  if (collapse.style.maxHeight) {
+                    collapse.style.maxHeight = null;
+                    // Reset the image source, rotation, and background color when collapsing
+                    acoimg[index].src = 'Images/icon/plus.png';
+                    acoimg[index].style.transform = 'rotate(90deg)';
+                    button.style.backgroundColor = '';
+                  } else {
+                    collapse.style.maxHeight = collapse.scrollHeight + "px";
+                    // Change the image source, set rotation, and background color when expanding
+                    acoimg[index].src = 'Images/icon/menus.png';
+                    acoimg[index].style.transform = 'rotate(180deg)';
+                    button.style.backgroundColor = '#c1b0d5';
+                  }
+                });
+              });
+            });
+          </script>
         </div>
       </section>
       <!-- ====== End of 1.12. FAQ section ====== -->
+      
+      <!-- ====== 1.13. Blogs section ====== -->
+      <section class="blog">
+        <div class="container">
+
+          <div class="flex blog-center aos-init" data-aos="fade-down">
+            <div class="w-66">
+              <div class="flex gap-1">
+                <hr class="blog-hr1">
+                <h5>blogs</h5>
+              </div>
+              <h2 class="mt-1">latest posts</h2>
+              <p class="mt-1 mb-15">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                been the industry's standard dummy text ever.</p>
+            </div>
+            <div class="w-33 mt-1 flex flex-end">
+              <a href="#blog" class="btn-hover2">See all blogs</a>
+            </div>
+          </div>
+
+          <div class="flex gap-2 mt-15 blog-cards">
+
+            <div data-aos="fade-up" class="blog-card w-100 aos-init">
+              <img src="Images/home/blog1.png" class="card-img-top" alt="img">
+              <div class="card-body">
+                <h4>10 Must-Know Digital Marketing Trends In 2023
+                </h4>
+                <a href="#more">learn more</a>
+              </div>
+            </div>
+
+            <div data-aos="fade-down" class="blog-card w-100 aos-init">
+              <img src="Images/home/blog2.png" class="card-img-top" alt="img">
+              <div class="card-body">
+                <h4>The Importance Of Responsive Web Design For Your Business
+                </h4>
+                <a href="#more">learn more</a>
+              </div>
+            </div>
+
+            <div data-aos="fade-up" class="blog-card w-100 aos-init">
+              <img src="Images/home/blog3.png" class="card-img-top" alt="img">
+              <div class="card-body">
+                <h4>How To Create A Successful Social Media Strategy
+                </h4>
+                <a href="#more">learn more</a>
+              </div>
+            </div>
+
+          </div>
+          
+        </div>
+      </section>
+      <!-- ====== End of 1.14. Blogs section ====== -->
       
     </div>
 
