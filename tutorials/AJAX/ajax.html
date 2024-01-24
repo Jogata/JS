@@ -2007,6 +2007,76 @@
         background-color: #fff;
       }
 
+      /* ====== 1.13. Blogs section ====== */
+      .blog {
+        padding: 120px 0;
+        background-color: #150725;
+      }
+
+      .blog h5 {
+        color: #ffffff;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .blog h2 {
+        color: #ffffff;
+        text-transform: capitalize;
+      }
+
+      .blog p {
+        padding: 0 296px 0 0;
+        color: #d3c9c1;
+      }
+
+      .blog .blog-hr1 {
+        width: 60px;
+        height: 1px;
+        color: #b520a3;
+        border: 1px solid;
+        opacity: 1;
+      }
+
+      .blog .btn-hover2 {
+        padding: 15px 30px;
+        border: 1.5px solid #ff8c4b;
+      }
+
+      .blog .row a {
+        border: 1.5px solid #ff8c4b;
+      }
+      
+      .blog-card {
+        flex: 0 0 33.33%;
+        padding-bottom: 20px;
+        overflow: hidden;
+      }
+
+      .blog-card img {
+        width: 100%;
+        transition: all 0.4s ease;
+      }
+      .blog-card:hover img {
+        transition: all 0.4s ease;
+        transform: scale(1.05);
+        opacity: .8;
+      }
+
+      .blog-card h4 {
+        margin: 18px 0;
+        padding: 0 30px 0 0;
+        color: #d3c9c1;
+      }
+
+      .blog-card a {
+        padding: 0 0 11px 0 !important;
+        letter-spacing: 2px;
+        border-bottom: 2px solid #ff8c4b;
+        background: linear-gradient(66.75deg, #f54a48 0.87%, #fa982f 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
 
 
       /* Slider */
@@ -2124,6 +2194,29 @@
         0% { background-image: conic-gradient(from 0deg, #233D47, #fff 50%); }
         50% { background-image: conic-gradient(from 180deg, #233D47, #fff 50%); }
         100% { background-image: conic-gradient(from 360deg, #233D47, #fff 50%); }
+      }
+
+      .accordion-item.active .accordion-header {
+        background-color: #c1b0d5;
+      }
+      .accordion-item .accordion-button img {
+        transform: rotate(90deg);
+      }
+      .accordion-item.active .accordion-button img {
+        transform: rotate(180deg);
+      }
+      .accordion-item .accordion-collapse {
+        height: 0;
+        min-height: 0;
+        max-height: unset;
+        transition: all 0.3s ease-out;
+      }
+      .accordion-item.active .accordion-collapse {
+        --height: 100px;
+        /* max-height: var(--height); */
+        height: auto;
+        min-height: var(--height);
+        /* max-height: unset; */
       }
     </style>
   </head>
@@ -3302,39 +3395,62 @@
           </div>
           <script>
             document.addEventListener("DOMContentLoaded", function () {
-              let accordionButtons = document.querySelectorAll('.accordion-button');
-              let acoimg = document.querySelectorAll('.accordion-button img');
+              const accordionButtons = document.querySelectorAll('.accordion-header');
+              // const acoimg = document.querySelectorAll('.accordion-button img');
               
-              accordionButtons.forEach(function (button, index) {
-                button.addEventListener('click', function () {
-                  let collapse = this.parentElement.nextElementSibling;
+              accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                  // let collapse = this.parentElement.nextElementSibling;
+                  // console.log(this);
+
+                  // const activeButton = document.querySelector(".accordion-item.active");
+                  if (button.parentElement.classList.contains("active")) {
+                    button.parentElement.classList.remove("active");
+                    button.firstElementChild.firstElementChild.src = 'Images/icon/plus.png';
+                  } else {
+                    accordionButtons.forEach(button => {
+                      button.parentElement.classList.remove("active");
+                      button.firstElementChild.firstElementChild.src = 'Images/icon/plus.png';
+                    });
+                    button.parentElement.classList.add("active");
+                    button.firstElementChild.firstElementChild.src = 'Images/icon/menus.png';
+                  }
+                  // if (activeButton) {
+                  //   console.log(activeButton);
+                  //   activeButton.classList.remove("active");
+                  //   activeButton.firstElementChild.firstElementChild.firstElementChild.style.transform = 'rotate(90deg)';
+                  // }
+
+                  // button.parentElement.parentElement.classList.toggle("active");
+                  // button.firstElementChild.src = 'Images/icon/menus.png';
+                  // button.firstElementChild.style.transform = 'rotate(0deg)';
                   
                   // Close all other accordion items
-                  accordionButtons.forEach(function (otherButton, otherIndex) {
-                    if (otherButton !== button) {
-                      const otherCollapse = otherButton.parentElement.nextElementSibling;
-                      otherCollapse.style.maxHeight = null;
+                  // accordionButtons.forEach(function (otherButton, otherIndex) {
+                    // if (otherButton !== button) {
+                    //   const otherCollapse = otherButton.parentElement.nextElementSibling;
+                    //   otherCollapse.style.maxHeight = null;
                       // Reset the image source and rotation for other accordion items
-                      acoimg[otherIndex].src = 'Images/icon/plus.png';
-                      acoimg[otherIndex].style.transform = 'rotate(0deg)';
-                      otherButton.style.backgroundColor = '#fff';
-                    }
-                  });
+                      // acoimg[otherIndex].src = 'Images/icon/plus.png';
+                      // acoimg[otherIndex].style.transform = 'rotate(0deg)';
+                      // otherButton.style.backgroundColor = '#fff';
+                  //   }
+                  // });
                   
                   // Toggle the clicked accordion item
-                  if (collapse.style.maxHeight) {
-                    collapse.style.maxHeight = null;
+                  // if (collapse.style.maxHeight) {
+                  //   collapse.style.maxHeight = null;
                     // Reset the image source, rotation, and background color when collapsing
-                    acoimg[index].src = 'Images/icon/plus.png';
-                    acoimg[index].style.transform = 'rotate(90deg)';
-                    button.style.backgroundColor = '';
-                  } else {
-                    collapse.style.maxHeight = collapse.scrollHeight + "px";
+                  //   acoimg[index].src = 'Images/icon/plus.png';
+                  //   acoimg[index].style.transform = 'rotate(90deg)';
+                  //   button.style.backgroundColor = '';
+                  // } else {
+                  //   collapse.style.maxHeight = collapse.scrollHeight + "px";
                     // Change the image source, set rotation, and background color when expanding
-                    acoimg[index].src = 'Images/icon/menus.png';
-                    acoimg[index].style.transform = 'rotate(180deg)';
-                    button.style.backgroundColor = '#c1b0d5';
-                  }
+                    // acoimg[index].src = 'Images/icon/menus.png';
+                    // acoimg[index].style.transform = 'rotate(180deg)';
+                    // button.style.backgroundColor = '#c1b0d5';
+                  // }
                 });
               });
             });
