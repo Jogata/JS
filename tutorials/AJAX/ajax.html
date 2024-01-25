@@ -164,6 +164,9 @@
       /* ===== 02. Global Style ===== */
 
       /* scrollbar full website */
+      html {
+        scroll-behavior: smooth;
+      }
 
       ::-webkit-scrollbar {
         width: 10px;
@@ -2190,6 +2193,9 @@
         transition: display all 0.3s ease;
         z-index: 10;
       }
+      #footer-message.visible {
+        display: flex;
+      }
 
       .footer-menu {
         margin-top: 77px;
@@ -2250,6 +2256,9 @@
 
       .copyright h6 {
         text-transform: capitalize;
+      }
+      .copyright h6 span {
+        font-weight: bold;
       }
 
       .copyright a {
@@ -2482,6 +2491,107 @@
         .gallary img[alt="sm_img"] {
           height: 150px;
         }
+
+        .service-1 {
+          padding: 70px 0;
+        }
+        
+        .service-1 .flex-column {
+          flex-wrap: wrap;
+        }
+        
+        .service-card {
+          width: 48%;
+        }
+        
+        .service-1 .s-card {
+          flex-wrap: wrap;
+        }
+        
+        .service-card img[alt="slider1"] {
+          width: 85px;
+        }
+        
+        .service-card img[alt="slider2"] {
+          width: 62px;
+        }
+        
+        .service-card img[alt="slider3"] {
+          width: 52px;
+        }
+        
+        .experience {
+          padding: 70px 0;
+        }
+        
+        .ex-card .flex {
+          padding: 26px 2px;
+        }
+        
+        .ex-card p {
+          margin-top: 5px;
+        }
+        
+        .work-line div {
+          padding: 33px 8px 32px 29px;
+        }
+        
+        .work {
+          padding: 70px 0;
+        }
+        
+        .work-para {
+          padding: 0 95px;
+        }
+        
+        .work-line div:first-child {
+          width: 185px;
+          min-height: 185px;
+        }
+        
+        .work-line div:nth-child(2) {
+          width: 170px;
+          min-height: 170px;
+        }
+        
+        .work-line div:nth-child(3) {
+          width: 185px;
+          min-height: 185px;
+        }
+        
+        .work-line div:last-child {
+          width: 170px;
+          min-height: 170px;
+        }
+        
+        .testimonial {
+          padding: 120px 0 70px 0;
+        }
+        
+        .team {
+          padding: 70px 0 0 0;
+        }
+        
+        #team {
+          padding: 70px 0;
+        }
+        
+        .overlay_text i {
+          font-size: 18px;
+        }
+        
+        .team-btn {
+          margin-top: 70px;
+        }
+        
+        .team h2 {
+          padding: 0;
+        }
+        
+        .team p {
+          padding: 0;
+        }
+        
       }
 
       /* Slider */
@@ -3939,6 +4049,22 @@
             <input type="email" required="" placeholder="Enter your mail">
             <button type="submit" class="btn-hover1">get started</button>
           </form>
+          <script>
+            const form = document.getElementById('footer-form');
+            const footerMessage = document.getElementById('footer-message');
+
+            form.addEventListener('submit', (event) => {
+              event.preventDefault();
+              footerMessage.innerHTML = 'Form submitted successfully!';
+              // footerMessage.style.display = 'flex';
+              footerMessage.classList.add("visible");
+              form.reset();
+              setTimeout(() => {
+                // footerMessage.style.display = 'none';
+                footerMessage.classList.remove("visible");
+              }, 3000);
+            });
+          </script>
 
         </div>
 
@@ -4017,20 +4143,23 @@
     </button>
     <script>
       window.onscroll = function () {
-        scrollFunction()
+        scrollFunction();
       };
 
       function scrollFunction() {
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-          document.getElementById("backToTopBtn").style.display = "block";
+          scrollToTopBtn.style.display = "block";
         } else {
-          document.getElementById("backToTopBtn").style.display = "none";
+          scrollToTopBtn.style.display = "none";
         }
       }
 
+      const scrollToTopBtn = document.getElementById("backToTopBtn");
+      scrollToTopBtn.addEventListener("click", scrollToTop);
+
       function scrollToTop() {
-        const scrollToTopBtn = document.documentElement || document.body;
-        scrollToTopBtn.scrollIntoView({
+        const top = document.body;
+        top.scrollIntoView({
           behavior: "smooth"
         });
       }
