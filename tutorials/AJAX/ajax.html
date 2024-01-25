@@ -2256,6 +2256,93 @@
         color: #ffffff;
       }
 
+      /* button back to top */
+
+      #backToTopBtn {
+        display: none;
+        position: fixed;
+        right: 30px;
+        bottom: 20px;
+        padding: 17px 20px;
+        color: #d12bec;
+        border: none;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        z-index: 99;
+        cursor: pointer;
+      }
+      #backToTopBtn:hover {
+        color: #ffffff;
+      }
+
+      @media screen and (max-width: 1400px) {
+        .container {
+          max-width: 1140px;
+        }
+
+        .logoipsum-slider figure {
+          padding: 30px 18px;
+        }
+
+        .team-img {
+          min-width: 277px;
+        }
+      }
+
+      @media screen and (max-width: 1200px) {
+        .container {
+          max-width: 960px;
+        }
+
+        .team-img {
+          min-width: 232px;
+        }
+      }
+      
+      @media screen and (max-width: 960px) {
+        .container {
+          max-width: 925px;
+        }
+        
+        .feature .flex {
+          flex-wrap: wrap;
+        }
+
+        .header-card {
+          width: 50%;
+        }
+
+        .header-card:nth-child(3),
+        .header-card:nth-child(4) {
+          margin: 0;
+        }
+
+        .feature h4 {
+          width: 100%;
+          margin: 19px 0 15px;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        .container {
+          max-width: 757px;
+        }
+
+        .hero-social-icon {
+          position: relative;
+          flex-direction: row;
+          justify-content: center;
+        }
+
+        .hero-social-icon hr {
+          display: none;
+        }
+        .team-img {
+          min-width: 232px;
+          object-position: center;
+          background-repeat: no-repeat;
+        }
+}
 
       /* Slider */
       .slick-slider {
@@ -3784,6 +3871,31 @@
       
     </div>
 
+    <!-- button Back to Top -->
+    <button id="backToTopBtn" class="btn-hover2">
+      <i class="fa fa-arrow-up"></i>
+    </button>
+    <script>
+      window.onscroll = function () {
+        scrollFunction()
+      };
+
+      function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+          document.getElementById("backToTopBtn").style.display = "block";
+        } else {
+          document.getElementById("backToTopBtn").style.display = "none";
+        }
+      }
+
+      function scrollToTop() {
+        const scrollToTopBtn = document.documentElement || document.body;
+        scrollToTopBtn.scrollIntoView({
+          behavior: "smooth"
+        });
+      }
+    </script>
+
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <!-- ================= Get data from local JSON file ================= -->
@@ -3868,6 +3980,30 @@
 
       // console.log(createCity('Tortuga', 7000, 15000));
       // console.log(createCity('Santo Domingo', 12000, 23500));
+    </script>
+
+    <script>
+      const matches4 = `
+      40 Desert Blade (Fragment)
+40 Minotaur's Head (Fragment)
+40 Diviner's Orb - Recipe (Fragment)
+50 Panoptic Orb - Recipe (Fragment)
+80 Hand of Glory (Fragment)
+
+40 Book of Prophecies - Recipe (Fragment)
+50 Book of Fate - Recipe (Fragment)
+80 Flaming Heart (Fragment)
+160 Pastor's Seal (Fragment)
+
+80 Riversar's Tiara (Fragment)
+`;
+      const matches3 = `740/120/100      640/320/150`;
+
+const patern = /[0-9]+/g;
+
+const result = matches3.match(patern).reduce((acc, n) => acc + Number(n), 0);
+
+console.log(result);
     </script>
 
   </body>
