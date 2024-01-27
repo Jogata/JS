@@ -3084,6 +3084,113 @@
         100% { background-image: conic-gradient(from 360deg, #233D47, #fff 50%); }
       }
 
+      .test-sidebar {
+        position: relative;
+        min-height: 100vh;
+        background-color: black;
+        background-image: url("./Images/412593916_291036520139404_239325443638945457_n.jpg");
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+      .test-sidebar::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 1;
+      }
+
+      .test-sidebar .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 80px;
+        height: 100%;
+        padding: 6px 14px;
+        /* border: 1px solid red; */
+        transition: 0.5s ease-in;
+        z-index: 2;
+      }
+      .test-sidebar .sidebar.active {
+        width: 260px;
+      }
+
+      .test-sidebar .sidebar .logo-menu {
+        width: 100%;
+        height: 70px;
+        display: flex;
+        align-items: center;
+      }
+
+      .test-sidebar .sidebar .logo-menu .logo {
+        color: white;
+        font-size: 25px;
+        text-transform: capitalize;
+        transition: 0.3s;
+        opacity: 0;
+        pointer-events: none;
+      }
+      .test-sidebar .sidebar.active .logo-menu .logo {
+        transition-delay: 0.2s;
+        opacity: 1;
+      }
+
+      .test-sidebar .sidebar .logo-menu .toggle-btn {
+        position: absolute;
+        left: 90%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 40px;
+        color: white;
+        font-size: 22px;
+        line-height: 40px;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      .test-sidebar .list {
+        margin-top: 10px;
+      }
+
+      .test-sidebar .list li {
+        list-style: none;
+        width: 100%;
+        height: 50px;
+        margin: 5px 0;
+        line-height: 50px;
+      }
+
+      .test-sidebar .list li a {
+        display: flex;
+        align-items: center;
+        color: white;
+        font-size: 18px;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: 0.5s ease-in;
+        padding: unset;
+        line-height: unset;
+      }
+      .test-sidebar .list li.active a, 
+      .test-sidebar .list li a:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .test-sidebar .list li a i {
+        min-width: 50px;
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+      }
+
+      .test-sidebar {}
+      .test-sidebar {}
+
       .accordion-item.active .accordion-header {
         background-color: #c1b0d5;
       }
@@ -3156,36 +3263,52 @@
       <nav class="sidebar">
         <div class="logo-menu">
           <h2 class="logo">logo</h2>
-          <i class="fa fa-bars"></i>
+          <i class="fa fa-bars toggle-btn"></i>
         </div>
         <ul class="list">
-          <li><a href="#">
+          <li class="active"><a href="#">
+            <i class="fa fa-th-large"></i>
             <span class="link-name">dashboard</span>
           </a></li>
           <li><a href="#">
-            <span class="link-name">dashboard</span>
+            <i class="fa fa-user-o"></i>
+            <span class="link-name">user</span>
           </a></li>
           <li><a href="#">
-            <span class="link-name">dashboard</span>
+            <i class="fa fa-comments-o"></i>
+            <span class="link-name">messages</span>
           </a></li>
           <li><a href="#">
-            <span class="link-name">dashboard</span>
+            <i class="fa fa-pie-chart"></i>
+            <span class="link-name">analytics</span>
           </a></li>
           <li><a href="#">
-            <span class="link-name">dashboard</span>
+            <i class="fa fa-folder-open-o"></i>
+            <span class="link-name">file manager</span>
           </a></li>
           <li><a href="#">
-            <span class="link-name">dashboard</span>
+            <i class="fa fa-tags"></i>
+            <span class="link-name">order</span>
           </a></li>
           <li><a href="#">
-            <span class="link-name">dashboard</span>
+            <i class="fa fa-database"></i>
+            <span class="link-name">saved</span>
           </a></li>
           <li><a href="#">
-            <span class="link-name">dashboard</span>
+            <i class="fa fa-cogs"></i>
+            <span class="link-name">settings</span>
           </a></li>
         </ul>
       </nav>
     </div>
+    <script>
+      const sidebar = document.querySelector(".sidebar");
+      const toggleBtn = document.querySelector(".toggle-btn");
+
+      toggleBtn.addEventListener("click", () => {
+        sidebar.classList.toggle("active");
+      })
+    </script>
 
     <div class="site-wrapper">
 
