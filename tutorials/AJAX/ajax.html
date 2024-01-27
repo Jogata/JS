@@ -3093,6 +3093,7 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
+        display: none;
       }
       .test-sidebar::after {
         position: absolute;
@@ -3113,6 +3114,10 @@
         height: 100%;
         padding: 6px 14px;
         /* border: 1px solid red; */
+        /* background: transparent; */
+        border-right: 2px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(40px);
         transition: 0.5s ease-in;
         z-index: 2;
       }
@@ -3142,7 +3147,7 @@
 
       .test-sidebar .sidebar .logo-menu .toggle-btn {
         position: absolute;
-        left: 90%;
+        left: 50%;
         transform: translateX(-50%);
         width: 40px;
         height: 40px;
@@ -3150,7 +3155,11 @@
         font-size: 22px;
         line-height: 40px;
         text-align: center;
+        transition: 0.5s;
         cursor: pointer;
+      }
+      .test-sidebar .sidebar.active .logo-menu .toggle-btn {
+        left: 90%;
       }
 
       .test-sidebar .list {
@@ -3170,6 +3179,7 @@
         align-items: center;
         color: white;
         font-size: 18px;
+        white-space: nowrap;
         text-decoration: none;
         border-radius: 6px;
         transition: 0.5s ease-in;
@@ -3188,8 +3198,68 @@
         line-height: 50px;
       }
 
-      .test-sidebar {}
-      .test-sidebar {}
+      .test-sidebar .sidebar .link-name {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease-in;
+      }
+      .test-sidebar .sidebar.active .link-name {
+        transition-delay: calc(var(--i) * 0.1s);
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      .test-navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        height: 80px;
+        padding: 0 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: white;
+        transition: 0.5s;
+        z-index: 10;
+      }
+      .test-navbar.icon {
+        background-color: #444;
+      }
+
+      .test-navbar .brand {
+        position: relative;
+        color: #333;
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-decoration: none;
+        overflow: hidden;
+      }
+      .test-navbar .brand span {
+        display: block;
+        padding: 5px 0;
+        transition: 0.5s;
+      }
+      .test-navbar.icon .brand span {
+        transform: translateY(100%);
+      }
+      .test-navbar .brand i {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 100%;
+        margin: auto;
+        font-size: 1.5rem;
+        text-align: center;
+        transition: 0.5s;
+      }
+      .test-navbar.icon .brand i {
+        color: white;
+        transform: translateY(100%);
+      }
+
+      .test-navbar ul {
+        display: flex;
+      }
 
       .accordion-item.active .accordion-header {
         background-color: #c1b0d5;
@@ -3268,46 +3338,102 @@
         <ul class="list">
           <li class="active"><a href="#">
             <i class="fa fa-th-large"></i>
-            <span class="link-name">dashboard</span>
+            <span class="link-name" style="--i: 1">dashboard</span>
           </a></li>
           <li><a href="#">
             <i class="fa fa-user-o"></i>
-            <span class="link-name">user</span>
+            <span class="link-name" style="--i: 2">user</span>
           </a></li>
           <li><a href="#">
             <i class="fa fa-comments-o"></i>
-            <span class="link-name">messages</span>
+            <span class="link-name" style="--i: 3">messages</span>
           </a></li>
           <li><a href="#">
             <i class="fa fa-pie-chart"></i>
-            <span class="link-name">analytics</span>
+            <span class="link-name" style="--i: 4">analytics</span>
           </a></li>
           <li><a href="#">
             <i class="fa fa-folder-open-o"></i>
-            <span class="link-name">file manager</span>
+            <span class="link-name" style="--i: 5">file manager</span>
           </a></li>
           <li><a href="#">
             <i class="fa fa-tags"></i>
-            <span class="link-name">order</span>
+            <span class="link-name" style="--i: 6">order</span>
           </a></li>
           <li><a href="#">
             <i class="fa fa-database"></i>
-            <span class="link-name">saved</span>
+            <span class="link-name" style="--i: 7">saved</span>
           </a></li>
           <li><a href="#">
             <i class="fa fa-cogs"></i>
-            <span class="link-name">settings</span>
+            <span class="link-name" style="--i: 8">settings</span>
           </a></li>
         </ul>
       </nav>
+      <script>
+        const sidebar = document.querySelector(".sidebar");
+        const toggleBtn = document.querySelector(".toggle-btn");
+        
+        toggleBtn.addEventListener("click", () => {
+          sidebar.classList.toggle("active");
+        })
+      </script>
     </div>
-    <script>
-      const sidebar = document.querySelector(".sidebar");
-      const toggleBtn = document.querySelector(".toggle-btn");
 
-      toggleBtn.addEventListener("click", () => {
-        sidebar.classList.toggle("active");
+    <nav class="test-navbar">
+      <a href="#" class="brand">
+        <i class="fa fa-apple"></i>
+        <span>apple</span>
+      </a>
+      <ul>
+        <li style="--i: 0;">
+          <a href="#home">
+            <span>home</span>
+            <i class="fa fa-home"></i>
+          </a>
+        </li>
+        <li style="--i: 1;">
+          <a href="#videos">
+            <span>videos</span>
+            <i class="fa fa-camera-retro"></i>
+          </a>
+        </li>
+        <li style="--i: 2;">
+          <a href="#photos">
+            <span>photos</span>
+            <i class="fa fa-picture-o"></i>
+          </a>
+        </li>
+        <li style="--i: 3;">
+          <a href="#team">
+            <span>team</span>
+            <i class="fa fa-user-o"></i>
+          </a>
+        </li>
+        <li style="--i: 4;">
+          <a href="#contact">
+            <span>contact</span>
+            <i class="fa fa-envelope-o"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <script>
+      const navbar = document.querySelector(".test-navbar");
+
+      window.addEventListener("scroll", () => {
+        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollTop > lastScrollTop) {
+          navbar.classList.add("icon");
+        } else {
+          navbar.classList.remove("icon");
+        }
+
+        lastScrollTop = scrollTop;
+
       })
+      let lastScrollTop = 0;
     </script>
 
     <div class="site-wrapper">
