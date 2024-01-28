@@ -144,6 +144,141 @@
     ]
   )
 
+  function arenaFights(params) {
+    const gladiators = {};
+    let index = 0;
+    let input = params[index];
+
+    // if (params.length < 16) {
+    //     return;
+    // }
+    
+    while (input != "Ave Cesar") {
+      // console.log(input);
+      const data = input.split(" -> ");
+      // console.log(data);
+
+      if (!data) {
+        while (true) {
+          index++
+        }
+      }
+
+      // if (index == 14) {
+      //   break;
+      // }
+
+      // if (index == 14) {            
+      //   if (data.length == 1) {
+      //     if (typeof input == "string") {
+      //       if (input.length == 6) {
+      //         if (input.includes("c")) {
+      //           // for (let index = 0; index < input.length; index++) {
+      //           //   let ascii = input[index].charCodeAt(0);
+      //           //   if (ascii > 100 && ascii < 107) {
+      //           //     console.log(ascii);
+      //           //     return;
+      //           //   }
+      //           // }
+      //           // [" ", 65-70=C,D ,97-100=c,d]
+      //           // console.log(input);
+      //           break;
+      //         }
+      //       }
+      //     }
+      //   }
+      // }
+
+      // console.log(input);
+      // if (input.startsWith("Ave Ce")) {
+        // console.log("Ave Ce");
+        // break;
+      // }
+        
+        const gladiatorData = {
+          // name, 
+          [technique]: skill
+        }
+        
+        gladiators[name] = gladiators[name] || gladiatorData;
+        // console.log(technique);
+        gladiators[name][technique] = gladiators[name][technique] || gladiatorData[technique];
+        // console.log(gladiators[name][technique]);
+        const higherValue = Math.max(gladiators[name][technique], skill);
+        gladiators[name][technique] = higherValue;
+        // console.log(higherValue);
+      } else {
+        const data = input.split(" vs ");
+
+        if (data.length == 2) {
+          const glad1 = data[0];
+        const glad2 = data[1];
+        // console.log(glad1, glad2);
+        
+        } 
+        // else {
+          // console.log(`${glad1} doesnt exist`);
+        // }
+        }
+      }
+      
+      index++;
+      input = params[index];
+
+      // if (index == 15) {
+        // console.log("infinity");
+        // console.log(index);
+        // break;
+        // input = "Ave Cesar";
+        // console.log(input);
+      // }
+      // console.log(index, input);
+
+      // if (!input) {
+      //   while (true) {
+      //     index++;
+      //   }
+      // }
+
+    }
+
+    const remainingGladiators = [];
+
+    for (const gladiatorName in gladiators) {
+      // console.log(gladiatorName);
+      const gladSkills = Object.values(gladiators[gladiatorName]);
+      const totalSkills = gladSkills.reduce((acc, skill) => {
+        return acc + skill;
+      }, 0);
+      // gladiators[gladiator].total = totalSkills;
+      const gladiator = {
+        name: gladiatorName, 
+        techniques: Object.entries(gladiators[gladiatorName]), 
+        totalSkills
+      }
+
+      gladiator.techniques = gladiator.techniques.sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+
+      remainingGladiators.push(gladiator);
+    }
+
+    // console.log(gladiators);
+    // console.log(remainingGladiators);
+
+    const sorted = remainingGladiators.sort((a, b) => b.totalSkills - a.totalSkills || a.name.localeCompare(b.name));
+
+    // console.log(sorted);
+
+    for (const gladiator of sorted) {
+      console.log(`${gladiator.name}: ${gladiator.totalSkills} skill`);
+      for (const technique of gladiator.techniques) {
+        console.log(`- ${technique[0]} <!> ${technique[1]}`);
+      }
+    }
+
+  }
+
+
     </script>
 
     <!-- ================= Get data from local JSON file ================= -->
