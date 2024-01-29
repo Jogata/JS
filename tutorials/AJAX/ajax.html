@@ -549,8 +549,145 @@
     }
   }
 
-  printMultiplicationTable(5);
-  printMultiplicationTable(2);
+  // printMultiplicationTable(5);
+  // printMultiplicationTable(2);
+
+        // 05.Assembly Line
+
+        function createAssemblyLine(carObj) {
+        const library = {
+          hasClima, 
+          hasAudio, 
+          hasParktronic
+        };
+
+        function hasClima(obj) {
+          obj.temp = 21;
+          obj.tempSettings = 21;
+          obj.adjustTemp = function () {
+            if (this.temp < this.tempSettings) {
+              this.temp++;
+            } else if (this.temp > this.tempSettings) {
+              this.temp--;
+            }
+          }
+
+          return obj;
+
+        }
+
+        function hasAudio(obj) {
+          obj.currentTrack = null;
+          obj.nowPlaying = function () {
+            if (this.currentTrack) {
+              console.log(`Now playing '${this.currentTrack.name}' by ${this.currentTrack.artist}`);
+            }
+          };
+
+          return obj;
+
+        }
+
+        function hasParktronic(obj) {
+          obj.checkDistance = checkDistance;
+
+          function checkDistance(distance) {
+            if (distance < 0.1) {
+              console.log("Beep! Beep! Beep");
+            } else if (distance < 0.25) {
+              console.log("Beep! Beep!");
+            } else if (distance < 0.5) {
+              console.log("Beep!");
+            } else {
+              console.log("");
+            }
+
+            return obj;
+
+          }
+        }
+
+        return library;
+
+      }
+
+      const assemblyLine = createAssemblyLine();
+
+const myCar = {
+  make: 'Toyota',
+  model: 'Avensis'
+};
+
+assemblyLine.hasClima(myCar);
+// console.log(myCar.temp);
+myCar.tempSettings = 18;
+myCar.adjustTemp();
+// console.log(myCar.temp);
+
+assemblyLine.hasAudio(myCar);
+myCar.currentTrack = {
+  name: 'Never Gonna Give You Up',
+  artist: 'Rick Astley'
+};
+// myCar.nowPlaying();
+
+assemblyLine.hasParktronic(myCar);
+// myCar.checkDistance(0.4);
+// myCar.checkDistance(0.2);
+
+// console.log(myCar);
+
+      // 11. Diagonal Attack✶
+
+      function checkDiagonalsSums(input) {
+        const matrix = [];
+        matrix.length = input.length;
+
+        for (let row = 0; row < input.length; row++) {
+          const arr = input[row].split(" ");
+
+          for (let index = 0; index < arr.length; index++) {
+            arr[index] = Number(arr[index]);
+          }
+
+          matrix[row] = arr;
+
+        }
+
+        let d1sum = 0;
+        let d2sum = 0;
+
+        for (let d1 = 0; d1 < matrix.length; d1++) {
+          d1sum += matrix[d1][d1];
+          d2sum += matrix[d1][matrix.length - 1 - d1];
+        }
+
+        if (d1sum != d2sum) {
+          for (let row = 0; row < matrix.length; row++) {
+            console.log(matrix[row].join(" "));
+          }
+        } else {
+          const altMatrix = [];
+
+          for (let index = 0; index < input.length; index++) {
+            const arr = [];
+            arr.length = input.length;
+            arr.fill(d1sum);
+            altMatrix[index] = arr;
+          }
+
+          for (let d1 = 0; d1 < matrix.length; d1++) {
+            altMatrix[d1][d1] = matrix[d1][d1];
+            altMatrix[d1][matrix.length - 1 - d1] = matrix[d1][matrix.length - 1 - d1];
+          }
+
+          for (let row = 0; row < altMatrix.length; row++) {
+            console.log(altMatrix[row].join(" "));
+          }
+
+        }
+
+      }
     </script>
 
     <!-- ================= Get data from local JSON file ================= -->
