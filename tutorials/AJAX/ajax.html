@@ -194,6 +194,24 @@
         // console.log("Ave Ce");
         // break;
       // }
+
+      if (data.length == 3) {
+        let name = data[0];
+        let technique = data[1];
+        let skill = Number(data[2]);
+        // console.log(name);
+        // console.log(technique);
+        // console.log(skill);
+
+        // if (!skill) {
+        //   skill = 0;
+        // }
+        // if (!technique) {
+        //   technique = "random";
+        // }
+        // if (!name) {
+        //   name = "random";
+        // }
         
         const gladiatorData = {
           // name, 
@@ -215,6 +233,46 @@
         const glad2 = data[1];
         // console.log(glad1, glad2);
         
+        if (gladiators[glad1]) {
+          if (gladiators[glad2]) {
+            const glad1Techniques = Object.keys(gladiators[glad1]);
+            const glad2Techniques = Object.keys(gladiators[glad2]);
+            // console.log(glad1Techniques);
+            // console.log(glad2Techniques);
+            for (const glad1Technique of glad1Techniques) {
+              for (const glad2Technique of glad2Techniques) {
+                if (glad1Technique == glad2Technique) {
+                  // console.log(glad1Technique);
+                  // console.log(glad2Technique);
+                  const glad1Skills = Object.values(gladiators[glad1]);
+                  const glad2Skills = Object.values(gladiators[glad2]);
+                  // console.log(glad1Skills);
+                  // console.log(glad2Skills);
+                  const glad1TotalSkills = glad1Skills.reduce((acc, skill) => {
+                    return acc + skill;
+                  }, 0);
+                  // const glad2TotalSkills = glad2Skills.reduce((acc, skill) => {
+                  //   return acc + skill;
+                  // }, 0);
+                  const glad2TotalSkills = glad2Skills.reduce((acc, skill) => acc + skill, 0);
+                  // console.log(glad1TotalSkills);
+                  // console.log(glad2TotalSkills);
+                  // console.log("fight");
+                  if (glad1TotalSkills > glad2TotalSkills) {
+                    delete gladiators[glad2];
+                  } else if (glad1TotalSkills < glad2TotalSkills) {
+                    delete gladiators[glad1];
+                  }
+                } 
+                // else {
+                  // console.log(`${glad1} and ${glad2} don't have a common technique for now.`);
+                // }
+              }
+            }
+          } 
+          // else {
+            // console.log(`${glad2} doesnt exist`);
+          // }
         } 
         // else {
           // console.log(`${glad1} doesnt exist`);
@@ -278,7 +336,82 @@
 
   }
 
+  function arenaFights(params) {
+    const gladiators = [];
 
+    for (let index = 0; index < params.length; index++) {
+      const input = params[index];
+      if (input.includes(" -> ")) {
+        const data = input.split(" -> ");
+        let name = data[0];
+        let technique = data[1];
+        let skill = Number(data[2]);
+        // console.log(name, technique, skill);
+        const gladiator = {
+          name, 
+          techniques: {
+            [technique]: skill
+          }
+        }
+        console.log(gladiator);
+        const index = gladiators
+      } else if (input.includes(" vs ")) {
+        const data = input.split(" vs ");
+        const glad1 = data[0];
+        const glad2 = data[1];
+        console.log(glad1, glad2);
+      }
+    }
+  }
+  
+
+//       arenaFights(
+//         [
+//           'Peter -> Duck -> 400', 
+//           'Julius -> Shield -> 150', 
+//           'Gladius -> Heal -> 200', 
+//           'Gladius -> Support -> 250', 
+//           'Gladius -> Shield -> 250', 
+//           'Peter vs Gladius', 
+//           'Gladius vs Julius', 
+//           'Jogata vs Julius', 
+//           'Gladius vs Maximilian', 
+//           'Julius -> Sh -> 150', 
+//           'Julius -> Sh -> 250', 
+//           'Julius -> S -> 250', 
+//           'Ave Cesar'
+//         ]
+//       )
+  arenaFights(
+    [
+    'Peter -> Duck -> 400',
+    'Julius -> Shield -> 150',
+    'Gladius -> Heal -> 200',
+    'Gladius -> Support -> 250',
+    'Gladius -> Shield -> 250',
+    'Peter vs Gladius',
+    'Gladius vs Julius',
+    'Gladius vs Maximilian',
+    'Ave Cesar']
+    );
+
+  // 06. Print And Sum
+
+  function sum(start, end) {
+    let result = "";
+    let sum = 0;
+    for (let index = start; index <= end; index++) {
+      sum = sum + index;
+      result = result + index + " ";
+    }
+
+    console.log(result);
+    console.log(`Sum: ${sum}`);
+  }
+
+  // sum(5, 10);
+  // sum(0, 26);
+  // sum(50, 60);
     </script>
 
     <!-- ================= Get data from local JSON file ================= -->
