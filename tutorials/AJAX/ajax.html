@@ -413,6 +413,145 @@
   // sum(0, 26);
   // sum(50, 60);
     </script>
+    <script>
+            // 10. Tic-Tac-Toe✶
+
+            function TTTgame(params) {
+        const ttt = [];
+        let taken = 0;
+
+        for (let index = 0; index < 3; index++) {
+          const row = [false, false, false];
+          ttt.push(row);
+        }
+
+        // console.log(ttt);
+
+        // for (const row of ttt) {
+        //   if (!row.includes(false)) {
+        //     console.log("game over");
+        //   }
+        // }
+
+        const symbols = {
+          "X": "O", 
+          "O": "X"
+        }
+
+        let symbol = "X";
+
+        for (let index = 0; index < params.length; index++) {
+          const input = params[index];
+          const tokens = input.split(" ");
+          const row = Number(tokens[0]);
+          const col = Number(tokens[1]);
+          // console.log(row, col);
+
+          // if (index % 2 != 0) {
+          //   symbol = "0";
+          // }
+
+          if (ttt[row][col] == false) {
+            ttt[row][col] = symbol;
+            symbol = symbols[symbol];
+            taken++;
+
+            if (taken == 9) {
+              console.log("The game ended! Nobody wins :(");
+              index = params.length;
+              continue;
+            }
+
+          } else {
+            console.log(`This place is already taken. Please choose another!`);
+          }
+
+          if (ttt[row][0] == ttt[row][1]) {
+            // console.log("check");
+            if (ttt[row][0] === ttt[row][2]) {
+              console.log(`Player ${symbols[symbol]} wins!`);
+              index = params.length;
+              continue;
+            }
+          }
+
+          if (ttt[0][col] == ttt[1][col]) {
+            // console.log("check");
+            if (ttt[0][col] === ttt[2][col]) {
+              console.log(`Player ${symbols[symbol]} wins!`);
+              index = params.length;
+              continue;
+            }
+          }
+
+          if (ttt[0][0]) {
+            if (ttt[0][0] == ttt[1][1]) {
+              if (ttt[0][0] == ttt[2][2]) {
+                console.log(`Player ${symbols[symbol]} wins!`);
+                index = params.length;
+                continue;
+              }
+            }
+          }
+
+
+          if (ttt[2][0]) {
+            if (ttt[2][0] == ttt[1][1]) {
+              if (ttt[2][0] == ttt[0][2]) {
+                console.log(`Player ${symbols[symbol]} wins!`);
+                index = params.length;
+                continue;
+              }
+            }
+          }
+
+        }
+
+        // console.log(ttt);
+        for (const row of ttt) {
+          console.log(row.join("\t"));
+        }
+
+      }
+
+      // TTTgame(["0 1", "0 0", "0 2", "2 0", "1 0", "1 1", "1 2", "2 2", "2 1", "0 0"]);
+      // TTTgame(["0 0", "0 0", "1 1", "0 1", "1 2", "0 2", "2 2", "1 2", "2 2", "2 1"]);
+      // TTTgame(["0 1", "0 0", "0 2", "2 0", "1 0", "1 2", "1 1", "2 1", "2 2", "0 0"]);
+      // TTTgame(["0 0", "0 0", "1 1", "0 1", "1 2", "0 2", "2 2", "1 2", "2 2", "2 1"]);
+      // TTTgame(["0 2", "0 0", "0 1", "2 0", "1 2", "1 0", "1 2", "0 0", "2 1"]);
+      // TTTgame(["0 0", "0 1", "0 2", "1 0", "1 0", "1 1", "1 2", "2 0", "2 1", "2 2"]);
+      // TTTgame(["0 1", "0 2", "0 0", "2 0", "1 0", "1 1", "1 2", "2 2", "2 1", "0 0"]);
+      // TTTgame(["0 1", "0 0", "0 2", "2 0", "1 0", "1 2", "1 1", "2 1", "2 2", "0 0"]);
+      // TTTgame(["0 1", "0 0", "0 2", "2 0", "1 0", "1 2", "1 1", "2 1", "2 2", "0 0"]);
+
+        // 07. Triangle Of Numbers
+
+  function printTriangleOfNumbers(num) {
+    for (let index = 1; index <= num; index++) {
+      let row = "";
+      for (let inner = 1; inner <= index; inner++) {
+        row = row + index + " ";
+      }
+      console.log(row);
+    }
+  }
+
+  // printTriangleOfNumbers(3);
+  // printTriangleOfNumbers(5);
+  // printTriangleOfNumbers(6);
+
+  // 08. Multiplication Table
+  
+  function printMultiplicationTable(num) {
+    for (let index = 1; index <= 10; index++) {
+      const result = num * index;
+      console.log(`${num} X ${index} = ${result}`);          
+    }
+  }
+
+  printMultiplicationTable(5);
+  printMultiplicationTable(2);
+    </script>
 
     <!-- ================= Get data from local JSON file ================= -->
 
