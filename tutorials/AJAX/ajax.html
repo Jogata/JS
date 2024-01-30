@@ -820,6 +820,139 @@ assemblyLine.hasParktronic(myCar);
 
 
     </script>
+    <script>
+            // 02. Argument Info
+
+            function displayArginfo(...params) {
+        // console.log(params);
+
+        const args = {};
+
+        for (const param of params) {
+          const type = typeof param;
+          // console.log(type);
+
+          if (!args.hasOwnProperty(type)) {
+            args[type] = 0;
+            // console.log(args[type]);
+          }
+
+          args[type]++;
+          console.log(`${type}: ${param}`);
+        }
+
+        const entries = Object.entries(args);
+        const sorted = entries.sort((a, b) => b[1] - a[1]);
+
+        for (const entry of sorted) {
+          // console.log(entry);
+          const [ type, count ] = entry;
+          console.log(`${type} = ${count}`);
+        }
+      }
+
+      // displayArginfo('cat', 42, function () { console.log('Hello world!'); });
+
+      // 04. Breakfast Robot
+
+            function solution() {
+
+const ingredients = {
+  protein: 0, 
+  carbohydrate: 0, 
+  fat: 0, 
+  flavour: 0, 
+}
+
+const recipes = {
+  apple: {carbohydrate: 1, flavour: 2, }, 
+  lemonade: {carbohydrate: 10, flavour: 20, }, 
+  burger: {carbohydrate: 5, fat: 7, flavour: 3, }, 
+  eggs: {protein: 5, fat: 1, flavour: 1, }, 
+  turkey: {protein: 10, carbohydrate: 10, fat: 10, flavour: 10, }
+}
+
+const operations = {
+  restock, 
+  prepare,
+  report
+}
+
+function manager(instruction) {
+  const tokens = instruction.split(" ");
+  // console.log(tokens);
+  const typeOperation = tokens[0];
+  // console.log(typeOperation);
+  const operation = operations[typeOperation];
+  return operation(tokens[1], tokens[2]);
+  
+}
+
+function restock(ingredient, quantity) {
+  // console.log(ingredient, quantity);
+  ingredients[ingredient] += Number(quantity);
+  // console.log(ingredients);
+  return "Success";
+}
+
+function prepare(recipe, quantityRecepes) {
+  // console.log(recipe, quantity);
+  const neededIngridients = recipes[recipe];
+  const neededIngridients2 = Object.entries(neededIngridients);
+  // console.log(neededIngridients2);
+
+  for (const [ name, quantityIngridients ] of neededIngridients2) {
+    const needed = Number(quantityRecepes) * quantityIngridients;
+    const available = ingredients[name];
+
+    if (available < needed) {
+      return `Error: not enough ${name} in stock`;
+    }
+
+  }
+
+  for (const [ name, quantityIngridients ] of neededIngridients2) {
+    ingredients[name] -= Number(quantityRecepes) * quantityIngridients;
+  }
+
+  return "Success";
+  
+}
+
+function report() {
+  // console.log("report");
+  // console.log(ingredients);
+  const reportString = `protein=${ingredients.protein} carbohydrate=${ingredients.carbohydrate} fat=${ingredients.fat} flavour=${ingredients.flavour}`;
+
+  return reportString;
+
+}
+
+return manager;
+
+}
+
+let manager = solution ();
+      // console.log (manager("restock flavour 50")); // Success
+      // console.log (manager("prepare lemonade 4")); // Error: not enough carbohydrate in stock
+      // console.log (manager("restock carbohydrate 10")); // Success
+      // console.log (manager("restock flavour 10")); // Success
+      // console.log (manager("prepare apple 1")); // Success
+      // console.log (manager("restock fat 10 ")); // Success
+      // console.log (manager("prepare burger 1")); // Success
+      // console.log (manager("report"));
+
+      // console.log(manager("prepare turkey 1"));
+      // console.log(manager("restock protein 10"));
+      // console.log(manager("prepare turkey 1"));
+      // console.log(manager("restock carbohydrate 10"));
+      // console.log(manager("prepare turkey 1"));
+      // console.log(manager("restock fat 10"));
+      // console.log(manager("prepare turkey 1"));
+      // console.log(manager("restock flavour 10"));
+      // console.log(manager("prepare turkey 1"));
+      // console.log(manager("report"));
+    </script>
 
     <!-- ================= Get data from local JSON file ================= -->
 
