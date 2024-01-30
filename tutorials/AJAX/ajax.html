@@ -953,6 +953,141 @@ let manager = solution ();
       // console.log(manager("prepare turkey 1"));
       // console.log(manager("report"));
     </script>
+    <script>
+            // 06. Store Catalogue
+
+            function createCatalog(params) {
+        // console.log(params);
+        params.sort();
+        // console.log(params);
+        const categories = new Set();
+        
+        for (const product of params) {
+          categories.add(product[0]);
+        }
+
+        // console.log(categories);
+
+        let i = 0;
+
+        for (const category of categories) {
+          console.log(category);
+          let input = params[i].replace(" :", ":");
+          // console.log(input);
+          // const tokens = input.split(" : ");
+          while (input[0] == category) {
+            console.log(`  ${input}`);
+            i++;
+            i = i % params.length;
+            input = params[i].replace(" :", ":");
+
+            // if (i > 20) {
+            //   console.log("infinity");
+            //   break;
+            // }
+          }
+
+          // i--;
+        }
+
+      }
+
+      // createCatalog(['Appricot : 20.4', 'Fridge : 1500', 'TV : 1499', 'Tv : 1499', 'Deodorant : 10', 'Boiler : 300', 'Apple : 1.25', 'Anti-Bug Spray : 15', 'T-Shirt : 10']);
+
+      // 07. Towns to JSON
+
+      function printTowns(params) {
+        // console.log(params);
+        const tokens = params[0].split("|");
+        // console.log(tokens);
+        const properties = [];
+
+        for (let index = 0; index < tokens.length; index++) {
+          // console.log(tokens[index]);
+          properties.push(tokens[index].trim());
+          // console.log(properties);
+        }
+
+        const towns = [];
+
+        for (let index = 1; index < params.length; index++) {
+          const town = {};
+          const data = params[index];
+          const tokens = data.split("|");
+          // const name = tokens[index].trim();
+
+          for (let index = 1; index < tokens.length - 1; index++) {
+            // console.log(tokens[index]);
+            town[properties[index]] = tokens[index].trim();
+            // properties.push(tokens[index].trim());
+            // console.log(properties);
+          }
+
+          // town.Latitude = Number(town.Latitude).toFixed(2);
+          // town.Longitude = Number(town.Longitude).toFixed(2);
+          town.Latitude = ((Number(town.Latitude) * 100).toFixed()) / 100;
+          town.Longitude = ((Number(town.Longitude) * 100).toFixed()) / 100;
+
+          // console.log(town);
+          towns.push(town);
+          
+        }
+
+        console.log(JSON.stringify(towns, null, 2));
+
+      }
+
+      // printTowns(['| Town | Latitude | Longitude |', '| Sofia | 42.696552 | 23.32601 |', '| Beijing | 39.913818 | 116.363625 |']);
+      // printTowns(['| Town | Latitude | Longitude |', '| Veliko Turnovo | 43.0757 | 25.6172 |', '| Monatevideo | 34.50 | 56.11 |']);
+
+      // 08. Hard Word✶
+
+function completeText(params) {
+const text = params[0];
+const words = params[1];
+// console.log(text);
+// console.log(words);
+
+const splittedText = text.split(" ");
+// console.log(splittedText);
+
+for (let index = 0; index < splittedText.length; index++) {
+  let word = splittedText[index];
+  let lastSymbol = "";
+  // console.log(word);
+  if (word.startsWith("_")) {
+    // console.log(word);
+    let length = word.length;
+    // console.log(length);
+
+    if (!word.endsWith("_")) {
+      lastSymbol = word[word.length - 1];
+      length -= 1;
+    }
+
+    // console.log(length);
+
+    const indexToReplace = words.findIndex(x => x.length == length);
+    // console.log(indexToReplace);
+    let newWord = words[indexToReplace];
+    newWord += lastSymbol;
+
+    splittedText[index] = newWord;
+    words[indexToReplace] = "";
+
+  }
+}
+
+console.log(splittedText.join(" "));
+
+}
+
+// completeText(
+//   [
+//     'Hi, grandma! I\'m so ____ to write to you. ______ the winter vacation, so _______ things happened. My dad bought me a sled. Mom started a new job as a __________. My brother\'s ankle is ________, and now it bothers me even more. Every night Mom cooks ___ on your recipe because it is the most delicious. I hope this year Santa will _____ me a robot.', 
+//     ['pie', 'bring', 'glad', 'During', 'amazing', 'pharmacist', 'sprained']
+//   ]);
+    </script>
 
     <!-- ================= Get data from local JSON file ================= -->
 
