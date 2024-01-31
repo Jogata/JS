@@ -1345,6 +1345,147 @@ console.log(splittedText.join(" "));
       // printArr(['How about no?', 'I', 'will', 'not', 'do', 'it!'], '_');
 
     </script>
+    <script>
+            // 12. Orbit✶
+
+            function printOrbit(params) {
+        const width = params[0];
+        const height = params[1];
+        const x = params[2];
+        const y = params[3];
+
+        const matrix = [];
+
+        for (let dimension = 0; dimension < height; dimension++) {
+          const arr = [];
+          arr.length = width;
+          arr.fill("!");
+          matrix[dimension] = arr;
+        }
+
+        let colNum = 0;
+        
+        for (let row = x; row < height; row++) {
+          colNum++;
+          
+          matrix[row][y] = colNum;
+          
+          let rowNum = 2;
+
+          for (let colRight = y + 1; colRight < width; colRight++) {
+            matrix[row][colRight] = Math.max(rowNum, colNum);
+            rowNum++;
+          }
+
+          rowNum = 2;
+          
+          for (let colLeft = y - 1; colLeft >= 0; colLeft--) {
+            matrix[row][colLeft] = Math.max(rowNum, colNum);
+            rowNum++;
+          }
+          
+        }
+
+        colNum = 1;
+
+        for (let row = x - 1; row >= 0; row--) {
+          colNum++;
+          
+          matrix[row][y] = colNum;
+          
+          let rowNum = 2;
+
+          for (let colRight = y + 1; colRight < width; colRight++) {
+            matrix[row][colRight] = Math.max(rowNum, colNum);
+            rowNum++;
+          }
+
+          rowNum = 2;
+          
+          for (let colLeft = y - 1; colLeft >= 0; colLeft--) {
+            matrix[row][colLeft] = Math.max(rowNum, colNum);
+            rowNum++;
+          }
+          
+        }
+
+        for (let row = 0; row < matrix.length; row++) {
+          console.log(matrix[row].join(" "));
+          // console.log(row);
+        }
+
+      }
+
+                  // 09. Magic Matrices
+
+                  function checkIsMatrixMagical(arr) {
+        let isMatrixMagical = true;
+        let start = 0;
+        let sum = 0;
+
+        for (let index = 0; index < arr.length; index++) {
+          sum += arr[0][index];
+        }
+
+        for (let index = 0; index < arr.length; index++) {
+          if (arr.length !== arr[index].length) {
+            isMatrixMagical = false;
+            index = arr.length;
+            start = arr.length;
+          }
+        }
+        
+        for (let index = start; index < arr.length; index++) {
+          let sumH = 0;
+          let sumV = 0;
+          
+          for (let index1 = 0; index1 < arr[index].length; index1++) {
+            sumH += arr[index][index1];
+            sumV += arr[index1][index];
+          }
+
+          if (sumH != sum || sumV != sum) {
+            isMatrixMagical = false;
+            index = arr.length;
+          }
+
+        }
+
+        console.log(isMatrixMagical);
+
+      }
+
+      // checkIsMatrixMagical([[4, 5, 6], [6, 5, 4], [5, 5, 5]]);
+      // checkIsMatrixMagical([[11, 32, 45], [21, 0, 1], [21, 1, 1]]);
+      // checkIsMatrixMagical([[1, 0, 0], [0, 0, 1], [0, 1, 0]]);
+
+            // 07. Sorting Numbers
+
+            function sortNumbers(params) {
+        // console.log(params);
+        const result = [];
+        const sorted = params.sort((x, y) => x - y);
+        // console.log(sorted);
+        const middle = Math.floor(params.length / 2);
+        // console.log(middle);
+
+        for (let index = 0; index < middle; index++) {
+          result.push(params[index]);
+          result.push(params[params.length - index - 1]);
+        }
+
+        if (params.length % 2 !== 0) {
+          result.push(params[middle]);
+        }
+        
+        // console.log(result);
+        return result;
+
+      }
+
+      // sortNumbers([1, 65, 3, 52, 48, 35, 63, 31, -3, 18, 56]);
+      // sortNumbers([22, 9, 63, 3, 2, 19, 54, 11, 21, 18]);
+    </script>
 
     <!-- ================= Get data from local JSON file ================= -->
 
