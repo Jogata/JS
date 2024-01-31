@@ -1088,6 +1088,141 @@ console.log(splittedText.join(" "));
 //     ['pie', 'bring', 'glad', 'During', 'amazing', 'pharmacist', 'sprained']
 //   ]);
     </script>
+    <script>
+            // 04. Heroic Inventory
+
+            function createHero(arr) {
+        const heroes = [];
+
+        for (const input of arr) {
+          // console.log(input);
+          const data = input.split(" / ");
+          // console.log(data);
+          const [ name, level, itemsData ] = data;
+          // console.log(name);
+          // console.log(level);
+          // console.log(itemsData);
+
+          const hero = {
+            name, 
+            level: Number(level), 
+            items: []
+          }
+
+          if (itemsData) {
+            hero.items = itemsData.split(", ");
+          }
+
+          // console.log(hero);
+          heroes.push(hero);
+
+        }
+
+        console.log(JSON.stringify(heroes));
+
+      }
+
+      // createHero(
+      //   [
+      //     'Isacc / 25 / Apple, GravityGun', 
+      //     'Derek / 12 / BarrelVest, DestructionSword', 
+      //     'Hes / 1 / Desolator, Sentinel, Antara'
+      //   ]
+      // );
+      // createHero(['Jake / 1000 / Gauss, HolidayGrenade']);
+
+      // 05. Lowest Prices in Cities
+
+      function findLowestPrice(params) {
+        const products = {};
+        const productNames = [];
+
+        for (const input of params) {
+          // console.log(input);
+          const data = input.split(" | ");
+          // console.log(data);
+          const [ town, productName, price ] = data;
+          // console.log(town);
+          // console.log(product);
+          // console.log(price);
+          const product = {
+            town, 
+            price: Number(price)
+          }
+
+          if (!products.hasOwnProperty(productName)) {
+            productNames.push(productName);
+            products[productName] = {
+              town,
+              price
+            }
+          }
+
+          if (products[productName].price > product.price) {
+            products[productName] = product;
+          }
+
+        }
+
+        for (const product of productNames) {
+          console.log(`${product} -> ${products[product].price} (${products[product].town})`);
+        }
+
+      }
+
+      // findLowestPrice(
+      //   [
+      //     'New York | Burger | 1', 
+      //     'Sample Town | Sample Product | 1000',
+      //     'Sample Town | Orange | 2',
+      //     'Jogata | Orange | 1',
+      //     'Sample Town | Peach | 1',
+      //     'Sofia | Orange | 3',
+      //     'Sofia | Peach | 2',
+      //     'New York | Sample Product | 1000.1',
+      //     'New York | Burger | 10'
+      //   ]
+      // );
+
+        // 5. Simple Calculator
+  
+  function setCalc(n1, n2, operation) {
+    const operations = {
+      multiply: multiply, 
+      divide: divide, 
+      add: add, 
+      subtract: subtract
+    }
+
+    function multiply(n1, n2) {
+      return n1 * n2;
+    }
+
+    function divide(n1, n2) {
+      return n1 / n2;
+    }
+
+    function add(n1, n2) {
+      return n1 + n2;
+    }
+
+    function subtract(n1, n2) {
+      return n1 - n2;
+    }
+
+    let result = 0;
+
+    result = operations[operation](n1, n2);
+
+    console.log(result);
+
+  }
+
+  // setCalc(5, 5, 'multiply');
+  // setCalc(40, 8, 'divide');
+  // setCalc(12, 19, 'add');
+  // setCalc(50, 13, 'subtract');
+    </script>
 
     <!-- ================= Get data from local JSON file ================= -->
 
