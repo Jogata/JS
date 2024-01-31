@@ -1223,6 +1223,128 @@ console.log(splittedText.join(" "));
   // setCalc(12, 19, 'add');
   // setCalc(50, 13, 'subtract');
     </script>
+    <script>
+      // 03. Car Factory
+      
+      const data = {
+        model: "",
+        power: 1,
+        color: "",
+        carriage: "",
+        wheelsize: 1
+      }
+
+      function createCar(data) {
+        const carriages = {
+          hatchback: { 
+            type: 'hatchback', 
+            color: data.color
+          }, 
+          coupe: { 
+            type: 'coupe', 
+            color: data.color
+          }
+        }
+
+        const engines = {
+          "Small": { power: 90, volume: 1800 }, 
+          "Normal": { power: 120, volume: 2400 }, 
+          "Monster": { power: 200, volume: 3500 }
+        }
+
+        let engine = "";
+
+        if (data.power <= 90) {
+          engine = "Small";
+        } else if (data.power <= 120) {
+          engine = "Normal";
+        } else {
+          engine = "Monster";
+        }
+
+        let wheelSize = Math.floor(data.wheelsize);
+
+        if (wheelSize % 2 == 0) {
+          wheelSize--;
+        }
+
+        const car = {
+          model: data.model, 
+          engine: engines[engine], 
+          carriage: carriages[data.carriage], 
+          wheels: [wheelSize, wheelSize, wheelSize, wheelSize]
+        }
+
+        // console.log(car);
+        return car;
+
+      }
+
+      // createCar({ model: 'VW Golf II', power: 90, color: 'blue', carriage: 'hatchback', wheelsize: 14 });
+      // createCar({ model: 'Opel Vectra', power: 110, color: 'grey', carriage: 'coupe', wheelsize: 17 });
+      
+      // 10. Heroes
+      
+      function createHero() {
+        const types = {
+          fighter: function (name) {
+            // console.log("create fighter");
+            const hero = {
+              name, 
+              health: 100, 
+              stamina: 100,
+              fight: function (spell) {
+                this.stamina--;
+                console.log(`${name} slashes at the foe!`);
+              }
+            }
+
+            return hero;
+
+          }, 
+          mage: function (name) {
+            // console.log("create mage");
+            const hero = {
+              name, 
+              health: 100, 
+              mana: 100,
+              cast: function (spell) {
+                this.mana--;
+                console.log(`${name} cast ${spell}`);
+              }
+            }
+
+            return hero;
+
+          }
+        }
+
+        return types;
+
+      }
+
+      // let create = createHero();
+      // const scorcher = create.mage("Scorcher");
+      // scorcher.cast("fireball");
+      // scorcher.cast("thunder");
+      // scorcher.cast("light");
+
+      // const scorcher2 = create.fighter("Scorcher 2");
+      // scorcher2.fight();
+
+      // console.log(scorcher2.stamina);
+      // console.log(scorcher.mana);
+      
+      // 01. Print an Array with a Given Delimiter
+      
+      function printArr(arr, del) {
+        console.log(arr.join(del));
+      }
+
+      // printArr(['One', 'Two', 'Three', 'Four', 'Five'], '-');
+      // printArr(['How about no?', 'I', 'will', 'not', 'do', 'it!'], '_');
+
+    </script>
 
     <!-- ================= Get data from local JSON file ================= -->
 
