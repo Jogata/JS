@@ -1752,6 +1752,141 @@ console.log(splittedText.join(" "));
   // );
 
     </script>
+    <script>
+        // 06. Bigger Half
+  
+  function getBiggerHalf(arr) {
+    arr.sort((a, b) => a - b);
+    const half = Math.ceil(arr.length) / 2;
+    // console.log(half);
+    const result = arr.slice(half);
+    // console.log(result);
+    return result;
+  }
+
+  // getBiggerHalf([4, 7, 2, 5]);
+  // getBiggerHalf([3, 19, 14, 7, 2, 19, 6]);
+
+  // 08. Process Odd Positions
+
+  function processOddPositions(params) {
+    const odds = [];
+
+    const half = Math.floor(params.length / 2);
+    // console.log(half);
+
+    for (let index = (half * 2) - 1; index > 0; index-=2) {
+      // console.log(index);
+      odds.push(params[index]);
+    }
+
+    const doubled = odds.map(x => x * 2);
+    console.log(doubled.join(" "));
+    // const result = [];
+    // console.log(result);
+    return doubled.join(" ");
+  }
+
+  // processOddPositions([10, 15, 20, 25]);
+  // processOddPositions([3, 0, 10, 4, 7, 3]);
+
+  // 09. Biggest Element
+
+  function findBiggestNumber(matrix) {
+    // console.log(matrix);
+    let biggest = matrix[0][0];
+    // console.log(biggest);
+
+    for (const row of matrix) {
+      // console.log(row);
+      for (const col of row) {
+        // console.log(col);
+        biggest = Math.max(biggest, col);
+      }
+    }
+
+    // console.log(biggest);
+    return biggest;
+
+  }
+
+  // findBiggestNumber([[20, 50, 10], [8, 33, 145]]);
+  // findBiggestNumber([[3, 5, 7, 12], [-1, 4, 33, 2], [8, 3, 0, 4]]);
+
+  // 10. Diagonal Sums
+
+  function findDiagonalSum(matrix) {
+    // console.log(matrix);
+    let sum1 = 0;
+    let sum2 = 0;
+
+    for (let row = 0; row < matrix[0].length; row++) {
+      const col = row;
+      sum1 += matrix[row][col];
+      sum2 += matrix[row][matrix[0].length - row - 1];
+    }
+
+    console.log(sum1 + " " + sum2);
+
+  }
+
+  // findDiagonalSum([[20, 40], [10, 60]]);
+  // findDiagonalSum([[3, 5, 17], [-1, 7, 14], [1, -8, 89]]);
+
+  // 11. Equal Neighbors
+
+  function countNeighbors(matrix) {
+    // console.log(matrix);
+    let neighbors = 0;
+
+    for (let row = 0; row < matrix.length; row++) {
+      // console.log(row.length);
+      for (let col = 0; col < matrix[row].length - 1; col++) {
+        const current = matrix[row][col];
+        const next = matrix[row][col + 1];
+        // console.log(current, next);
+        if (current === next) {
+          neighbors++;
+        }
+      }
+    }
+
+    for (let row = 0; row < matrix.length -1; row++) {
+      // console.log(row.length);
+      for (let col = 0; col < matrix[row].length; col++) {
+        const current = matrix[row][col];
+        const next = matrix[row + 1][col];
+        // console.log(current, next);
+        if (current === next) {
+          neighbors++;
+        }
+      }
+    }
+
+    console.log(neighbors);
+
+  }
+
+  // countNeighbors([['2', '3', '4', '7', '0'], ['4', '0', '5', '3', '4'], ['2', '3', '5', '4', '2'], ['9', '8', '7', '5', '4']]);
+  // countNeighbors([['test', 'yes', 'yo', 'ho'], ['well', 'done', 'yo', '6'], ['not', 'done', 'yet', '5']]);
+
+    // 08. Sort an Array by 2 Criteria
+
+    function sortByTwo(params) {
+    params.sort((a, b) => a.length - b.length || a.toLowerCase().localeCompare(b.toLowerCase()));
+
+    // console.log(params);
+    // return params;
+
+    params.forEach(a => console.log(a));
+
+  }
+
+  // sortByTwo(['alpha', 'beta', 'gamma']);
+  // sortByTwo(['Isacc', 'Theodor', 'Jack', 'Harrison', 'George']);
+  // sortByTwo(['test', 'Deny', 'omen', 'Default']);
+  
+    </script>
 
     <!-- ================= Get data from local JSON file ================= -->
 
