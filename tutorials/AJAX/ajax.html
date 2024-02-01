@@ -1486,6 +1486,138 @@ console.log(splittedText.join(" "));
       // sortNumbers([1, 65, 3, 52, 48, 35, 63, 31, -3, 18, 56]);
       // sortNumbers([22, 9, 63, 3, 2, 19, 54, 11, 21, 18]);
     </script>
+    <script>
+            // 13. Spiral Matrix✶
+
+            function printSpiralMatrix(side1, side2) {
+        let num = 1;
+        const matrix = [];
+
+        for (let i = 0; i < side2; i++) {
+          const insideArray = [];
+          insideArray.length = side1;
+          insideArray.fill(1);
+          matrix.push(insideArray);
+        }
+
+        // console.log(matrix);
+
+        let left = 0;
+        let right = side1 - 1;
+        let top = 0;
+        let bottom = side2 - 1;
+
+        // for (let index = 1; index <= 3; index++) {
+          while (top <= bottom || left <= right) {
+            
+          // }
+          
+          for (let i = top; i <= right; i++) {
+            // console.log(num);
+            matrix[top][i] = num;
+            num++;
+          }
+          // console.log("===========");
+
+          top++;
+
+          // let h = bottom - top;
+
+          for (let i = top; i <= bottom; i++) {
+            // console.log(num);
+            matrix[i][right] = num;
+            num++;
+          }
+          // console.log("===========");
+
+          right--;
+
+          for (let i = right; i >= left; i--) {
+            // console.log(num);
+            matrix[bottom][i] = num;
+            num++;
+          }
+          // console.log("===========");
+
+          bottom--;
+
+          for (let i = bottom; i >= top; i--) {
+            // console.log(num);
+            matrix[i][left] = num;
+            num++;
+          }
+          // console.log("===========");
+
+          left++;
+
+          if (top > 30) {
+            break;
+          }
+
+        }
+
+        for (let row = 0; row < side2; row++) {
+          console.log(matrix[row].join(" "));
+        }
+
+      }
+
+        // 01. Ages
+
+  function determineage(age) {
+    let output = "";
+
+    if (age < 0) {
+      output = "out of bounds";
+    } else if (age <= 2) {
+      output = "baby";
+    } else if (age <= 13) {
+      output = "child";
+    } else if (age <= 19) {
+      output = "teenager";
+    } else if (age <= 65) {
+      output = "adult";
+    } else {
+      output = "elder";
+    }
+
+    console.log(output);
+
+  }
+
+  // determineage(20);
+  // determineage(1);
+  // determineage(100);
+  // determineage(-1);
+
+  // 03. Division
+
+  function findBiggestDivisibleNember(num) {
+    let numbers = [2, 3, 6, 7, 10];
+    // let i = numbers.length - 1;
+    let biggestDivisibleNember = 0;
+
+    for (let index = numbers.length - 1; index >= 0; index--) {
+      // console.log(numbers[index]);
+      if (num % numbers[index] == 0) {
+        biggestDivisibleNember = numbers[index];
+        index = 0;
+      }
+    }
+
+    if (biggestDivisibleNember !== 0) {
+      console.log(`The number is divisible by ${biggestDivisibleNember}`);
+    } else {
+      console.log("Not divisible");
+    }
+  }
+
+  // findBiggestDivisibleNember(30);
+  // findBiggestDivisibleNember(7);
+  // findBiggestDivisibleNember(15);
+  // findBiggestDivisibleNember(12);
+  // findBiggestDivisibleNember(1643);
+    </script>
 
     <!-- ================= Get data from local JSON file ================= -->
 
