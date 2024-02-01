@@ -1618,6 +1618,140 @@ console.log(splittedText.join(" "));
   // findBiggestDivisibleNember(12);
   // findBiggestDivisibleNember(1643);
     </script>
+    <script>
+        // 01. Even Position Elements
+
+  function findEvenPositionElements(params) {
+    console.log(params);
+    const result = [];
+
+    for (let index = 0; index < params.length; index+=2) {
+      result.push(params[index]);
+    }
+
+    console.log(result.join(" "));
+
+  }
+
+  // findEvenPositionElements(['20', '30', '40', '50', '60']);
+  // findEvenPositionElements(['5', '10']);
+
+  // 02. Last K Numbers Sequence
+
+  function findLastSeq(n, k) {
+    // console.log(arguments);
+    const result = new Array(k);
+    result.fill(0);
+    result[result.length - 1] = 1;
+
+    const resultLenght = n + k - 1;
+    const startIndex = k;
+
+    fibonacci(startIndex, resultLenght);
+    
+    function fibonacci(start, length) {
+      // let num = 0;
+      
+      for (let i = start; i < length; i++) {
+        let sum = 0;
+        for (let index = i - start; index < i; index++) {
+          // console.log(i, index);
+          sum += result[index];
+        }
+        result.push(sum);
+        // sum = num1 + num2;
+        // num1 = num2;
+        // num2 = sum;
+        // result.push(num2);
+      }
+    }
+    
+    return result.slice(k - 1);
+
+  }
+
+  // findLastSeq(6, 3);
+  // findLastSeq(8, 2);
+
+  // 03. Sum First Last
+
+  function sumFL(params) {
+    // console.log(params);
+    let sum = 0;
+    const first = Number(params[0]);
+    const last = Number(params[params.length - 1]);
+    sum = first + last;
+
+    // console.log(sum);
+    return sum;
+
+  }
+
+  // sumFL(['20', '30', '40']);
+  // sumFL(['5', '10']);
+
+  // 04. Negative / Positive Numbers
+
+  function sortArr(params) {
+    // console.log(params);
+    const result = [];
+
+    for (const num of params) {
+      if (num < 0) {
+        result.unshift(num);
+      } else {
+        result.push(num);
+      }
+    }
+
+    // console.log(result);
+    for (const num of result) {
+      console.log(num);
+    }
+
+  }
+
+  // sortArr([7, -2, 8, 9]);
+  // console.log("------------");
+  // sortArr([3, -2, 0, -1]);
+
+  // 05. Smallest Two Numbers
+
+  function printSmallestTwoNumbers(arr) {
+    // console.log(arr);
+    arr.sort((a, b) => a - b);
+
+    console.log(arr[0] + " " + arr[1]);
+
+  }
+
+  // printSmallestTwoNumbers([30, 15, 50, 5]);
+  // printSmallestTwoNumbers([3, 0, 10, 4, 7, 3]);
+
+  // 07. Piece of Pie
+
+  function getPieFlavors(params, first, last) {
+    // console.log(arguments);
+    const start = params.indexOf(first);
+    const end = params.indexOf(last);
+    // console.log(start, end);
+    const result = params.slice(start, end + 1);
+    // console.log(result);
+    return result;
+  }
+
+  // getPieFlavors(
+  //   ['Pumpkin Pie', 'Key Lime Pie', 'Cherry Pie', 'Lemon Meringue Pie', 'Sugar Cream Pie'], 
+  //   'Key Lime Pie', 
+  //   'Lemon Meringue Pie'
+  // );
+  // getPieFlavors(
+  //   ['Apple Crisp', 'Mississippi Mud Pie', 'Pot Pie', 'Steak and Cheese Pie', 'Butter Chicken Pie', 'Smoked Fish Pie'], 
+  //   'Pot Pie', 
+  //   'Smoked Fish Pie'
+  // );
+
+    </script>
 
     <!-- ================= Get data from local JSON file ================= -->
 
