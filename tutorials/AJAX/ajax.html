@@ -2147,6 +2147,139 @@ console.log(splittedText.join(" "));
   // convertToUppercase("Functions in JS can be nested, i.e. hold other functions");
   // convertToUppercase(" ");
     </script>
+    <script>
+      // 01. Fruit
+    
+      function calcPrice(fruit, weightGr, priceKg) {
+        const priceGr = priceKg * 100 / 1000;
+        // console.log(priceGr);
+        const money = priceGr * weightGr / 100;
+        // console.log(money);
+        const weight = weightGr / 1000;
+        console.log(`I need $${money.toFixed(2)} to buy ${weight.toFixed(2)} kilograms ${fruit}.`);
+      }
+    
+      // calcPrice('orange', 2500, 1.80);
+      // calcPrice('apple', 1563, 2.35);
+    
+      // 02. Greatest Common Divisor – GCD
+    
+      function findGCD(n1, n2) {
+        const min = Math.min(n1, n2);
+        for (let index = min; index > 0; index--) {
+          // console.log(index);
+          if (n1 % index == 0) {
+            if (n2 % index == 0) {
+              // console.log(index);
+              return index;
+            }
+          }
+        }
+      }
+    
+      // findGCD(15, 5);
+      // findGCD(2154, 458);
+    
+      // 03. Same Numbers
+    
+      function magic(num) {
+        let aresame = true;
+        const numAsString = num.toString();
+        let sum = Number(numAsString[0]);
+    
+        for (let index = 1; index < numAsString.length; index++) {
+          sum += Number(numAsString[index]);
+          if (numAsString[0] != numAsString[index]) {
+            aresame = false;
+          }
+        }
+    
+        console.log(aresame);
+        console.log(sum);
+    
+      }
+    
+      // magic(2222222);
+      // magic(1234);
+    
+      // 04. Previous Day
+    
+      function printPreviousDay(y,m,d) {
+        const date = new Date(y,m+1,d);
+        // console.log(date);
+        // const preDate = date - 1;
+        // console.log(preDate);
+        date.setDate(d - 1);
+        console.log(`${date.getFullYear()}-${date.getMonth()-1}-${date.getDate()}`);
+      }
+    
+      // printPreviousDay(2016, 9, 30);
+      // printPreviousDay(2015, 5, 10);
+    
+      // 05. Time to Walk
+    
+      function calcTime(steps, footprint, speed) {
+        const m = steps * footprint;
+        // console.log(m);
+        const breaks = Math.floor(m / 500);
+        // console.log(breaks);
+        const cm = steps * (footprint * 100);
+        // console.log(footprint * 100);
+        const cms = speed * 27.777777777778;
+        // console.log(cms);
+        const t = Math.round(cm / cms) + breaks * 60;
+        // console.log(t/60 + breaks);
+        // console.log(t);
+        const date = new Date(2000, 0, 1);
+        // console.log(date);
+        date.setMilliseconds(date.getMilliseconds() + t * 1000);
+        // console.log(date);
+        // console.log(date.toString());
+        const time = date.toString().split(" ")[4];
+        console.log(time);
+        // console.log(`${date.getHours()}:${date.getMinutes()-1}:${date.getSeconds()}`);
+        // console.log(Number.parseInt("01a"));
+        // console.log(Number("01"));
+    
+      }
+    
+      // calcTime(4000, 0.60, 5);
+      // calcTime(2564, 0.70, 5.5);
+    
+      // 06. Road Radar
+    
+      function setUpRadar(speed, area) {
+        const areas = {
+          motorway: 130, 
+          interstate: 90, 
+          city: 50, 
+          residential: 20
+        }
+    
+        const speedLimit = areas[area];
+        const diff = speed - speedLimit;
+    
+        if (diff <= 0) {
+          console.log(`Driving ${speed} km/h in a ${speedLimit} zone`);
+        } else if (diff > 0) {
+          let status = null;
+    
+          if (diff > 40) {
+            status = "reckless driving";
+          } else if (diff > 20) {
+            status = "excessive speeding";
+          } else {
+            status = "speeding";
+          }
+          console.log(`The speed is ${diff} km/h faster than the allowed speed of ${speedLimit} - ${status}`);
+        }
+      }
+    
+      // setUpRadar(40, 'city');
+      // setUpRadar(21, 'residential');
+      // setUpRadar(120, 'interstate');
+      // setUpRadar(200, 'motorway');  
+    </script>    
 
     <!-- ================= Get data from local JSON file ================= -->
 
