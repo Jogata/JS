@@ -2017,6 +2017,136 @@ console.log(splittedText.join(" "));
   // );
 
     </script>
+    <script>
+        // 07. Cooking by Numbers
+
+  function cookingNumber(...params) {
+    let num = Number(params[0]);
+    // console.log(num);
+
+    const operations = {
+      chop: num => num / 2, 
+      dice: num => Math.sqrt(num), 
+      spice: num => num + 1, 
+      bake: num => num * 3, 
+      fillet: num => num - num / 5,
+    }
+
+    for (let index = 1; index < params.length; index++) {
+      // console.log(params[index]);
+      const operation = operations[params[index]];
+      // console.log(operation);
+      num = operation(num);
+      console.log(num);
+    }
+  }
+
+  // cookingNumber('32', 'chop', 'chop', 'chop', 'chop', 'chop');
+  // cookingNumber('9', 'dice', 'spice', 'chop', 'bake', 'fillet');
+
+  // 08. Validity Checker
+
+  function checker(x1, y1, x2, y2) {
+    const v1 = check(x1, y1, 0, 0);
+    const v2 = check(x2, y2, 0, 0);
+    const v3 = check(x1, y1, x2, y2);
+
+    function check(x1, y1, x2, y2) {
+      const dist = Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
+      // console.log(dist);
+      log(x1, y1, x2, y2, dist);
+      // return dist;
+    }
+
+    // console.log(v1, v2, v3);
+
+    function log(x1, y1, x2, y2, num) {
+      let isValid = "invalid";
+
+      if (Math.floor(num) == num) {
+        isValid = "valid";
+      }
+
+      console.log(`{${x1}, ${y1}} to {${x2}, ${y2}} is ${isValid}`);
+
+    }
+
+  }
+
+  // checker(3, 0, 0, 4);
+  // checker(2, 1, 1, 1);
+
+        // 09. Words Uppercase✶
+  function convertToUppercase2(params) {
+    const words = params.split(" ");
+
+    for (let index = 0; index < words.length; index++) {
+      let word = words[index];
+
+      if (word.endsWith(".")) {
+        // console.log(word);
+        word = word.substring(0, word.length - 1);
+        words[index] = word.toUpperCase();
+        if (word.includes(".")) {
+          // console.log(word);
+          words[index] = word.split(".");
+          // console.log(words[index]);
+          // console.log(words);
+        }
+      } else if (word.endsWith(",")) {
+        // console.log(word);
+        word = word.substring(0, word.length - 1);
+        words[index] = word.toUpperCase();
+      } else if (word.endsWith("!")) {
+        // console.log(word);
+        word = word.substring(0, word.length - 1);
+        words[index] = word.toUpperCase();
+      } else if (word.endsWith("?")) {
+        // console.log(word);
+        word = word.substring(0, word.length - 1);
+        words[index] = word.toUpperCase();
+      } else if (word.endsWith("-")) {
+        // console.log(word);
+        word = word.substring(0, word.length - 1);
+        words[index] = word.toUpperCase();
+      } else if (word.endsWith(":")) {
+        // console.log(word);
+        word = word.substring(0, word.length - 1);
+        words[index] = word.toUpperCase();
+      } else if (word.endsWith(";")) {
+        // console.log(word);
+        word = word.substring(0, word.length - 1);
+        words[index] = word.toUpperCase();
+      } else if (word.endsWith("...")) {
+        // console.log(word);
+        word = word.substring(0, word.length - 1);
+        words[index] = word.toUpperCase();
+      } 
+
+      // console.log(word.toUpperCase());
+      
+    }
+
+    // console.log(words);
+    const flat = words.flat(2).map(x => x.toUpperCase());
+    console.log(flat.join(", "));
+
+  }
+
+  function convertToUppercase(params) {
+    const patern = /\w+/g;
+
+    const matches = params.match(patern).map(x => x.toUpperCase());
+
+    console.log(matches.join(", "));
+    
+  }
+
+  // convertToUppercase('Hi, how are you?');
+  // convertToUppercase("hello");
+  // convertToUppercase("Functions in JS can be nested, i.e. hold other functions");
+  // convertToUppercase(" ");
+    </script>
 
     <!-- ================= Get data from local JSON file ================= -->
 
