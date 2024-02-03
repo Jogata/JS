@@ -7,25 +7,87 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <style>
       @import url('https://fonts.googleapis.com/css?family=Poppins');
-body {
-    font-family: 'Poppins', sans-serif;
+      @import url('https://fonts.googleapis.com/css?family=Lato');
+      @import url('https://fonts.googleapis.com/css?family=PT+Sans');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-main {
+html{
+  color: #234465;
+  font-size: 24px;
+}
+body{
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: "PT sans", sans-serif;
+}
+
+#exercise{   
+  float: left;
+  width: 70%;
+  padding: 1rem 0 1rem 1rem;
+}
+main:after{
+    display: block;
+    content:'';
+    clear: both;
+}
+
+input[type="button"], button{
+    padding: 0.3rem 0.5rem;
+    font-size: 0.7em;
+    margin: 1rem 0 1rem 0;
+    border: none;
+    color: white;
+    background: #234465;
+    border-radius: 5px;
+    outline: none;
+}
+
+.profile{
+    border:2px solid black;
+    display: inline-block;
+    margin-left: 12%;
+    width: 18%;
+    vertical-align: top;
+}
+
+.userIcon{
+    width: 99%;
+    height: auto;
+    margin: 0 auto;
+}
+
+input[name="user3Username"], input[name="user2Username"], input[name="user1Username"]{
+    display: inline-block;
+    width: 100%;
+}
+
+.main1 {
     width: 44%;
-    margin: 2rem auto;
+    margin: 5rem auto 2rem;
     text-align: center;
     background: #f6f6f6;
     padding: 1rem;
     border-radius: 4px;
 }
-main label, main input {
+.main1 label, 
+.main1 input {
     display: block;
 }
-main input {
-    text-align: center;
-    width: 50%;
-    margin: 1rem auto;
+.main1 input {
+  width: 50%;
+  margin: 1rem auto;
+  text-align: center;
 }
+
 #daysBtn, #hoursBtn, #minutesBtn, #secondsBtn {
     background: gray;
     width: 18%;
@@ -36,6 +98,7 @@ main input {
     font-weight: bold;
     color: white;
 }
+
 #content {
     width: 80%;
     margin: 0 auto;
@@ -58,8 +121,71 @@ main input {
 <body>
   
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <div id="container">
+      <main id="main">
+  
+        <div class="profile">
+          <img src="./iconProfile2.png" class="userIcon" />
+          <label>Lock</label>
+          <input type="radio" name="user1Locked" value="lock" checked>
+          <label>Unlock</label>
+          <input type="radio" name="user1Locked" value="unlock"><br>
+          <hr>
+          <label>Username</label>
+          <input type="text" name="user1Username" value="User 1 Userov" disabled readonly />
+          <div id="user1HiddenFields">
+            <hr>
+            <label>Email:</label>
+            <input type="email" name="user1Email" value="user1-userov@users.bg" disabled readonly />
+            <label>Age:</label>
+            <input type="email" name="user1Age" value="18" disabled readonly />
+          </div>
+          <button>Show more</button>
+        </div>
+  
+        <div class="profile">
+          <img src="./iconProfile2.png" class="userIcon" />
+          <label>Lock</label>
+          <input type="radio" name="user2Locked" value="lock" checked>
+          <label>Unlock</label>
+          <input type="radio" name="user2Locked" value="unlock"><br>
+          <hr>
+          <label>Username</label>
+          <input type="text" name="user2Username" value="User 2 Userov" disabled readonly />
+          <div id="user2HiddenFields">
+            <hr>
+            <label>Email:</label>
+            <input type="email" name="user2Email" value="user2-userov@users.bg" disabled readonly />
+            <label>Age:</label>
+            <input type="email" name="user2Age" value="25" disabled readonly />
+          </div>
+          <button>Show more</button>
+        </div>
+  
+        <div class="profile">
+          <img src="./iconProfile2.png" class="userIcon" />
+          <label>Lock</label>
+          <input type="radio" name="user3Locked" value="lock" checked>
+          <label>Unlock</label>
+          <input type="radio" name="user3Locked" value="unlock"><br>
+          <hr>
+          <label>Username</label>
+          <input type="text" name="user3Username" value="User 3 Userov" disabled readonly />
+          <div id="user3HiddenFields">
+            <hr>
+            <label>Email:</label>
+            <input type="email" name="user3Email" value="user3-userov@users.bg" disabled readonly />
+            <label>Age:</label>
+            <input type="email" name="user3Age" value="23" disabled readonly />
+          </div>
+          <button>Show more</button>
+        </div>
+      </main>
+    </div>
+    <script></script>
+  
 
-    <main>
+    <main class="main1">
       <h1>Time Converter</h1>
       <div>
           <label for="days">Days: </label>
@@ -157,6 +283,7 @@ main input {
         window.addEventListener("DOMContentLoaded", () => {
           create(['Section 1', 'Section 2', 'Section 3', 'Section 4']);
           attachEventsListeners();
+          lockedProfile();
         })
       </script>
     </div>
