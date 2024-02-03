@@ -9,6 +9,7 @@
       @import url('https://fonts.googleapis.com/css?family=Poppins');
       @import url('https://fonts.googleapis.com/css?family=Lato');
       @import url('https://fonts.googleapis.com/css?family=PT+Sans');
+      @import url('https://fonts.googleapis.com/css?family=Raleway');
 
 *{
     margin: 0;
@@ -22,11 +23,15 @@ html{
 body{
   margin: 0;
   min-height: 100vh;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+  /* flex-direction: column; */
   /* font-family: 'Poppins', sans-serif; */
   font-family: "PT sans", sans-serif;
+  width: 40%;
+  margin: 0 auto;
+  padding-top: 20px;
+  font-family: 'Raleway', sans-serif;
 }
 
 #exercise{   
@@ -65,9 +70,23 @@ input[type="button"], button{
     margin: 0 auto;
 }
 
-input[name="user3Username"], input[name="user2Username"], input[name="user1Username"]{
+input[name="user3Username"], 
+input[name="user2Username"], 
+input[name="user1Username"]{
     display: inline-block;
     width: 100%;
+}
+
+#user1HiddenFields input, 
+#user2HiddenFields input, 
+#user3HiddenFields input{
+	width: 100%;
+}
+
+#user1HiddenFields, 
+#user2HiddenFields, 
+#user3HiddenFields{
+    display: none;
 }
 
 .main1 {
@@ -116,11 +135,98 @@ input[name="user3Username"], input[name="user2Username"], input[name="user1Usern
     color: white;
     margin: 6em 3em 6em 3em;
 }
+
+h1 {
+    background-color: cadetblue;
+    margin: 0;
+    padding: 10px 20px;
+}
+
+article {
+  margin-bottom: 3rem;
+  padding: 10px 20px;
+  background-color: #DDDDDD;
+}
+
+#menu {
+    padding: 3px 7px;
+    border-radius: 15px;
+}
+
+input, select {
+    outline: none;
+    padding: 5px;
+}
+select {
+    margin-bottom: 12px;
+}
+
+input[type="text"] {
+    border: 1px solid darkgray;
+    border-radius: 15px;
+}
+
+input[type="button"] {
+    background: white;
+    margin-left: 20px;
+    padding: 5px 15px;
+    border: 1px solid darkgray;
+    border-radius: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #8198A2;
+    text-transform: uppercase;
+}
     </style>
   </head>
 <body>
   
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <h1>Dropdown Menu</h1>
+    <article>
+        <div>
+            <select id="menu"></select>
+        </div>
+        <label for="newItemText">
+            Text:
+        </label>
+        <input type="text" id="newItemText" />
+        <label for="newItemValue">
+            Value:
+        </label>
+        <input type="text" id="newItemValue" />
+        <input type="button" value="Add" onclick="addItem()">
+    </article>
+    <script>
+      function addItem() {
+    const nameField = document.getElementById("newItemText");
+    const valueField = document.getElementById("newItemValue");
+
+    const menu = document.getElementById("menu");
+
+    const button = document.querySelector("input:last-child");
+    // console.log(button);
+    // console.log(menu);
+    // console.log(nameField);
+    // console.log(valueField);
+
+    // button.addEventListener("click", () => {
+        const name = nameField.value;
+        const value = valueField.value;
+        // console.log(name, value);
+        
+        const option = document.createElement("option");
+        // console.log(option);
+        option.text = name;
+        option.value = value;
+        menu.appendChild(option);
+        
+        nameField.value = "";
+        valueField.value = "";
+    // })
+}
+    </script>
+
     <div id="container">
       <main id="main">
   
@@ -182,7 +288,41 @@ input[name="user3Username"], input[name="user2Username"], input[name="user1Usern
         </div>
       </main>
     </div>
-    <script></script>
+    <script>
+      function lockedProfile() {
+    const buttons = document.getElementsByTagName("button");
+
+    const displayStyles = {
+        "Hide it": {
+            newState: "none", 
+            text: "Show more"
+        }, 
+        "Show more": {
+            newState: "block", 
+            text: "Hide it"
+        }
+    }
+
+    for (const button of buttons) {
+        button.addEventListener("click", () => {
+            // console.log(button.parentElement);
+            const parent = button.parentElement;
+            const checkedRadioButton = parent.querySelector('input:checked');
+            // console.log(checkedRadioButton.value);
+
+            if (checkedRadioButton.value == "unlock") {
+                // console.log(button);
+                const hiddenElement = button.previousElementSibling;
+                // const currentState = window.getComputedStyle(hiddenElement).display;
+                const currentState = button.textContent;
+                // console.log(currentState);
+                hiddenElement.style.display = displayStyles[currentState].newState;
+                button.textContent = displayStyles[currentState].text;
+            }
+        })
+    }
+}
+    </script>
   
 
     <main class="main1">
