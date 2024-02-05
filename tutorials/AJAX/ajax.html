@@ -5,549 +5,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      body{
-  background:#eaeaea;
-  text-align: center;
-  font-family: Georgia;
-}
-
-#exercise {
-display: inline-block;
-padding: 1rem 0 1rem 1rem;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.wrapper{
-  width:100%;
-  max-width: 800px;
-  margin: 48px auto;
-}
-
-.card-wrapper{
-  border-radius:2px;
-  padding:24px;
-  background:white;
-  box-shadow: rgba(0,0,0,0.2) 0px 10px 20px;
-  margin-bottom:48px;
-}
-
-.wrapper table{
-  margin-top:24px;
-  vertical-align: center;
-}
-
-.wrapper table img{
-  max-width:80px;
-  max-height:80px;
-}
-
-.wrapper table td{
-  vertical-align:middle;
-}
-
-h1 {
-  margin-top: 10px;
-  text-decoration: underline;
-}
-
-#exercise input {
-  width: 30%;
-  margin: 0 auto;
-  text-align: center;
-  font-size: 24px;
-}
-
-#exercise button {
-  width: 50%;
-  height: 5vh;
-  margin-top: 10px;
-  color: white;
-  border: none;
-  font-weight: bold;
-  font-family: inherit;
-  border-radius: 10px;
-  background: #234465;
-  cursor: pointer;
-}
-
-.error {
-  border: 2px solid red;
-}
-
-body {
-    width: 600px;
-    text-align: center;
-    margin: auto;
-}
-
-.header {
-    background-color: #5555ff;
-    color: white;
-    position: relative;
-    left: 0;
-    top: 0;
-    padding: 0.5em;
-}
-
-.container {
-    position: relative;
-    border: 1px solid black;
-    padding: 0.5em;
-}
-
-.post {
-    margin: 48px;
-    text-align: left;
-}
-
-#notification {
-    float: right;
-    background: #119911;
-    color: #ffffff;
-    padding: 0.5em 2em 0.5em 2em;
-    margin: 1em;
-    display: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-    </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
-    <script>
-      // 01. Request Validator
-
-      function validateRequest(request) {
-      //   const request = {
-      //   method: 'GET',
-      //   // uri: 'svn.public.catalog',
-      //   uri: "value", 
-      //   version: 'HTTP/1.1',
-      //   message: ''
-      // };
-
-      const methods = ["GET", "POST", "DELETE", "CONNECT"];
-      const uriPattern = /^[\w.]+$/g;
-      
-      if (!methods.includes(request.method)) {
-        // console.log("yes");
-        throw new Error(`Invalid request header: Invalid Method`);
-      }
-      
-      // if (!request.uri == "*") {
-      //   throw new Error(`Invalid request header: Invalid URI`);
-      // }
-      if (!request.uri || !request.uri == "*" || !request.uri.match(uriPattern)) {
-        throw new Error(`Invalid request header: Invalid URI`);
-      }
-
-      const versions = ["HTTP/0.9", "HTTP/1.0", "HTTP/1.1", "HTTP/2.0"];
-      
-      if (!versions.includes(request.version)) {
-        // console.log("yes");
-        throw new Error(`Invalid request header: Invalid Version`);
-      }
-
-      if (!request.hasOwnProperty("message")) {
-        throw new Error(`Invalid request header: Invalid Message`);
-      }
-
-      const invalidSymbols = ["<", ">", "\\", "&", `'`, `"`];
-
-      for (const el of request.message) {
-        if (invalidSymbols.includes(el)) {
-          throw new Error(`Invalid request header: Invalid Message`);
-        }
-      }
-      
-      // console.log(request);
-        return request;
-
-      }
-
-      // validateRequest({
-      //   method: 'GET',
-      //   uri: `*`,
-      //   version: 'HTTP/1.1',
-      //   message: ''
-      // });
-      // validateRequest({
-      //   method: 'OPTIONS',
-      //   uri: 'git.master',
-      //   version: 'HTTP/1.1',
-      //   message: '-recursive'
-      // })
-      // validateRequest({
-      //   method: 'POST', 
-      //   uri: 'home.bash', 
-      //   message: 'rm -rf /*'
-      // })
-
-      // 02. Even Or Odd
-
-      function isOddOrEven(string) {
-
-        if (typeof(string) !== 'string') {
-          
-          return undefined;
-          
-        }
-        
-        if (string.length % 2 === 0) {
-          
-          return "even";
-          
-        }
-        
-        return "odd";
-        
-      }
-
-//       describe('test isOddOrEven function', function () {
-//     it('returns Odd', function () {
-//         expect(isOddOrEven("testodd")).to.equal("odd");
-//     })
-//     it('returns Even', function () {
-//         expect(isOddOrEven("testeven")).to.equal("even");
-//     })
-//     it('returns undefined', function () {
-//         expect(isOddOrEven({})).to.equal(undefined);
-//         expect(isOddOrEven(0)).to.equal(undefined);
-//         expect(isOddOrEven([])).to.equal(undefined);
-//     })
-// })
-
-      // 03. Char Lookup
-
-      function lookupChar(string, index) {
-
-        if (typeof(string) !== 'string' || !Number.isInteger(index)) {
-          
-          return undefined;
-          
-        }
-        
-        if (string.length <= index || index < 0) { 
-          return "Incorrect index";
-        } 
-        
-        return string.charAt(index);
-
-      };
-
-//       describe('test lookupChar function', function () {
-//     it('returns char at index', function () {
-//         expect(lookupChar("abc", 1)).to.equal("b");
-//     })
-//     it('returns Incorrect index', function () {
-//         expect(lookupChar("abc", -1)).to.equal("Incorrect index");
-//         expect(lookupChar("abc", 4)).to.equal("Incorrect index");
-//         expect(lookupChar("abc", 3)).to.equal("Incorrect index");
-//         expect(lookupChar("", 0)).to.equal("Incorrect index");
-//     })
-//     it('returns undefined with wrong type inputs', function () {
-//         expect(lookupChar("abc", 1.3)).to.equal(undefined);
-//         expect(lookupChar("abc", 3.3)).to.equal(undefined);
-//         expect(lookupChar("abc", "a")).to.equal(undefined);
-//         expect(lookupChar(4, 3)).to.equal(undefined);
-//         expect(lookupChar(["a", "b", "c"], 2)).to.equal(undefined);
-//     })
-// })
-
-
-      // console.log(lookupChar("abc", 1));
-      // console.log(lookupChar("", 0));
-      // console.log(lookupChar("abc", 3.3));
-      // console.log(lookupChar("abc", "a"));
-      // console.log(lookupChar("abc", 4));
-      // console.log(lookupChar("abc", -4));
-      // console.log(lookupChar(4, 1));
-
-      // 04. Math Enforcer
-
-      let mathEnforcer = {
-        addFive: function (num) {
-
-          if (typeof(num) !== 'number') {
-            return undefined;
-          }
-
-          return num + 5; 
-
-        }, 
-        subtractTen: function (num) { 
-          
-          if (typeof(num) !== 'number') { 
-            return undefined;
-          }
-
-          return num - 10;
-
-        }, 
-        sum: function (num1, num2) { 
-          
-          if (typeof(num1) !== 'number' || typeof(num2) !== 'number') { 
-            return undefined; 
-          } 
-
-          return num1 + num2; 
-
-        } 
-      };
-
-      // 05. Notification
-      // 06. Dynamic Validation
-      // 07. Form Validation
-    </script>
-
-<div class="container">
-  <header class="header">
-    <h1>Welcome to our site</h1>
-  </header>
-  <div id="content">
-    <article class="post">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat.</p>
-      <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </p>
-    </article>
-    <button onclick="notify('Something happened!')">Get notified</button>
-  </div>
-  <div id="notification"></div>
-  <script>
-    const output = document.getElementById("notification");
-
-    function notify(message) {
-// console.log('todo');
-
-output.textContent = message;
-output.style.display = "block";
-
-}
-
-output.addEventListener("click", () => {
-output.style.display = "none";
-})
-  </script>
-</div>
-
-    <div>
-      <label for="email">Enter email:</label>
-      <input id="email" type="text" />
-      <script>
-        function validate() {
-        const input = document.getElementById("email");
-        console.log(input);
-        input.addEventListener("change", onChange);
-    
-        function onChange() {
-            const email = input.value;
-            const pattern = /^[a-z0-9]+@[a-z0-9]+\.[a-z]+$/g;
-    
-            if (pattern.test(email)) {
-                input.classList.remove("error");
-            } else {
-                input.classList.add("error");
-            }
-        }
-    }
-    </script>      
-    </div>
-
-<div id="container">
-  <div id="exercise">
-      <h1>Furniture List</h1>
-      <textarea rows="5" cols="50"></textarea>
-      <button>Generate</button>
-
-      <div class="wrapper">
-          <div class="card-wrapper">
-              <div class="row">
-                  <div class="col-md-12">
-                      <table class="table">
-                          <thead>
-                              <tr>
-                                  <th scope="col">Image</th>
-                                  <th scope="col">Name</th>
-                                  <th scope="col">Price</th>
-                                  <th scope="col">Decoration factor</th>
-                                  <th scope="col">Mark</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                              <tr>
-                                  <td>
-                                      <img src="https://www.lidl-shop.nl/media/fcf868f9526b38d0b0a43cc2ace72b80.jpeg">
-                                  </td>
-                                  <td>
-                                      <p>Office chair</p>
-                                  </td>
-                                  <td>
-                                      <p>160</p>
-                                  </td>
-                                  <td>
-                                      <p>0.5</p>
-                                  </td>
-                                  <td>
-                                      <input type="checkbox" disabled />
-                                  </td>
-                              </tr>
-                          </tbody>
-                      </table>
-                  </div>
-              </div>
-          </div>
-      </div>
-
-      <textarea rows="4" cols="50" disabled></textarea>
-      <button>Buy</button>
-  </div>
-</div>
-<script>
-  window.addEventListener("DOMContentLoaded", () => {
-    solve();
-    validate();
-  })
-</script>
-<script>
-  function solve() {
-  const [ input, output ] = document.querySelectorAll("textarea");
-  const [ generateBtn, buyBtn ] = document.querySelectorAll("button");
-  const table = document.querySelector("tbody");
-
-  input.value = 
-    `[
-    {
-        "img":"https://www.boconcept.com/on/demandware.static/-/Sites-master-catalog/default/dw736adf25/images/1560000/1560164.jpg",
-        "name": "Sofa",
-        "price": "259",
-        "decFactor":"0.4"
-
-    },
-    {
-        "img":"https://www.bludot.com/media/catalog/product/s/h/sh1_cabnet_sk.2x_1_ipad_1.jpg?optimize=medium&fit=bounds&height=1200&width=1500&canvas=1500:1200",
-        "name": "Wardrobe",
-        "price": "120",
-        "decFactor":"1.2"
-    }
-]`;
-
-  generateBtn.addEventListener("click", () => {
-    const furnituresData = JSON.parse(input.value);
-    console.log(furnituresData);
-
-    // const data = { img: "https://www.boconcept.com/on/demandware.static/-/Sites-master-catalog/default/dw736adf25/images/1560000/1560164.jpg", name: "Sofa", price: "259", decFactor: "0.4" };
-
-    for (const data of furnituresData) {
-      // console.log(data.price);
-      const trHtml = `
-      <tr>
-        <td>
-          <img src="${data.img}">
-        </td>
-        <td>
-          <p>${data.name}</p>
-        </td>
-        <td>
-          <p>${data.price}</p>
-        </td>
-        <td>
-          <p>${data.decFactor}</p>
-        </td>
-        <td>
-          <input type="checkbox"/>
-        </td>
-      </tr>`;
-
-      table.innerHTML += trHtml;
-
-    }
-
-  })
-
-  
-  buyBtn.addEventListener("click", () => {
-    let totalPrice = 0;
-    let names = [];
-    let totalDecorationFactor = 0;
-
-    // console.log("buy");
-    const checkedInputs = document.querySelectorAll("input:checked");
-    // console.log(checkedInputs);
-    
-    for (const input of checkedInputs) {
-      const tr = input.parentElement.parentElement;
-      const productInfo = tr.querySelectorAll("p");
-
-      const productName = productInfo[0].textContent;
-      names.push(productName);
-      const productPrice = Number(productInfo[1].textContent);
-      totalPrice += productPrice;
-      const productFactor = Number(productInfo[2].textContent);
-      totalDecorationFactor += productFactor;
-      // console.log(productName, productPrice, productFactor);
-    }
-
-    // console.log(totalPrice, totalDecorationFactor);
-    // console.log(names);
-    const averageDecFactor = totalDecorationFactor / names.length;
-
-    let result = "";
-    result += `Bought furniture: ${names.join(", ")}\n`;
-    result += `Total price: ${totalPrice.toFixed(2)}\n`;
-    result += `Average decoration factor: ${averageDecFactor}`;
-
-    output.value = result;
-
-  })
-
-}
-</script>
-<script>
-      // 07. NxN Matrix
-
-      function printMatrix(num) {
-
-// const matrix = [];
-
-let row = createRow(num);
-
-function createRow(length) {
-  const row = [];
-  row.length = length;
-  row.fill(length);
-  const rowString = convertArrayToString(row);;
-  return rowString;
-}
-
-function convertArrayToString(arr) {
-  const str = arr.join(" ");
-  return str;
-}
-
-for (let h = 0; h < num; h++) {
-  console.log(row);
-}
-
-}
-
-// printMatrix(7);
-// printMatrix(2);
-// printMatrix(3);
-
-
-</script>
 
     <!-- ================= Get data from local JSON file ================= -->
+
+    <script>
+      // 06. Word Occurrences
+    
+      function findWordOccurrences(params) {
+        // console.log(params);
+        const occurrences = {};
+    
+        for (const word of params) {
+          // console.log(word);
+          if (!occurrences[word]) {
+            occurrences[word] = 0;
+          }
+    
+          occurrences[word]++;
+    
+        }
+    
+        // console.log(occurrences);
+        const entries = Object.entries(occurrences);
+        // console.log(entries);
+        const sorted = entries.sort((a, b) => b[1] - a[1]);
+        // console.log(sorted);
+    
+        for (const item of sorted) {
+          const word = item[0];
+          const occurrences = item[1];
+          console.log(`${word} -> ${occurrences} times`);
+        }
+    
+      }
+    
+      // findWordOccurrences(["Here", "is", "the", "first", "sentence", "Here", "is", "another", "sentence", "And", "finally", "the", "third", "sentence"]);
+      // findWordOccurrences(["dog", "bye", "city", "dog", "dad", "boys", "ginger"]);
+    </script>
+    <script>
+        // 03. Add and Remove Elements
+
+  function createArr(params) {
+    const result = [];
+    let num = 1;
+
+    const commands = {
+      add: (num) => {
+        num++;
+        result.push(num);
+      }, 
+      remove: (num) => {
+        num++;
+        result.pop();
+      }
+    }
+
+    for (let index = 0; index < params.length; index++) {
+      const command = commands[params[index]];
+      command(index);
+    }
+
+    if (result.length == 0) {
+      console.log("Empty");
+    } else {
+      for (const number of result) {
+        console.log(number);
+      }
+    }
+    // return result;
+
+  }
+
+  // createArr(['add', 'add', 'add', 'add']);
+  // createArr(['add', 'add', 'remove', 'add', 'add']);
+  // createArr(['remove', 'remove', 'remove']);
+    </script>
+    <script>
+      // 01. Reveal Words
+
+function revealWords(params, phrase) {
+const words = params.split(", ");
+// console.log(words);
+// let result = "";
+
+for (const word of words) {
+  // console.log(word);
+  const length = word.length;
+  // console.log(length);
+  const splited = phrase.split(" ");
+  const searched = "*".repeat(length);
+  // console.log(searched);
+  const index = splited.indexOf(searched);
+  // console.log(index);
+  if (index) {
+    splited[index] = word;
+  }
+  phrase = splited.join(" ");
+}
+
+console.log(phrase);
+
+}
+
+// revealWords('great', 'softuni is ***** place for learning new programming languages');
+// revealWords('great, learning', 'softuni is ***** place for ******** new programming languages');
+
+// 02. Modern Times of #(HashTag)
+
+function findHashTags(phrase) {
+// console.log(phrase);
+const words = phrase.split(" ");
+// console.log(words);
+const filtered = words.filter(x => x.startsWith("#") && x.length > 1);
+// console.log(filtered);
+
+for (let word of filtered) {
+  let isNumber = false;
+  for (const letter of word) {
+    // console.log(Number.parseInt(letter));
+    // console.log(letter);
+    if (Number.parseInt(letter)) {
+      isNumber = true;
+      // console.log(word);
+      break;
+    }
+  }
+
+  if (!isNumber) {
+    word = word.replace("#", "");
+    console.log(word);
+  }
+}
+
+}
+
+// findHashTags('Nowadays everyone uses # to tag a #spec1ial word in #socialMedia');
+// findHashTags('The symbol # is known #variously in English-speaking #regions as the #number sign');
+    </script>
 
     <fieldset>
       <legend>Get all users from local JSON file</legend>
