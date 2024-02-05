@@ -208,6 +208,134 @@ for (let word of filtered) {
         users.send();
       }
     </script>
+    <script>
+      // 03. Extract File
+
+function extractFile(path) {
+// console.log(path);
+const parts = path.split("\\");
+// console.log(parts);
+const file = parts[parts.length - 1];
+// console.log(file);
+const fileParts = file.split(".");
+// console.log(fileParts);
+let fileName = "";
+const ext = fileParts[fileParts.length - 1];
+// console.log(ext);
+
+for (let index = 0; index < fileParts.length - 2; index++) {
+  let part = fileParts[index] + ".";
+  fileName += part;
+}
+
+fileName += fileParts[fileParts.length - 2];
+
+console.log(`File name: ${fileName}`);
+console.log(`File extension: ${ext}`);
+
+}
+
+// extractFile("C:\\Internal\\training-internal\\Template.bss.pptx");
+// extractFile('C:\\Projects\\Data-Structures\\LinkedList.cs');
+
+// 04. String Substring
+
+function findString(searched, phrase) {
+// console.log(phrase);
+// console.log(searched);
+const words = phrase.split(" ");
+let isFound = false;
+
+for (const word of words) {
+  if (searched.toLowerCase() == word.toLowerCase()) {
+    isFound = true;
+    break;
+  }
+}
+
+if (isFound) {
+  console.log(searched);
+} else {
+  console.log(`${searched} not found!`);
+}
+
+}
+
+// findString('javascript', 'JavaScript is the best programming language');
+// findString('python', 'JavaScript is the best programming language');
+
+// 05. Replace Repeating Chars
+
+function replaceRepeatingChars(word) {
+// console.log(word);
+let current = word[0];
+let newWord = current;
+
+for (let index = 1; index < word.length; index++) {
+  if (word[index] != current) {
+    current = word[index];
+    newWord += current;
+  }
+}
+
+console.log(newWord);
+
+}
+
+function replaceRepeatingChars(word) {
+// console.log(word);
+
+for (let index = 0; index < word.length - 1; index++) {
+  if (word[index] == word[index + 1]) {
+    let current = word[index];
+    const removed = current + current;
+    word = word.replaceAll(removed, current);
+    index = -1;
+  }
+  
+}
+// word = word.replaceAll("aa", "a");
+console.log(word);
+
+}
+
+// replaceRepeatingChars('aaaaabbbbbcdddeeeedssaa');
+// replaceRepeatingChars('qqqwerqwecccwd');
+
+// 06. Pascal-Case Splitter
+
+function splitPascal(phrase) {
+// console.log(phrase.length);
+const indexes = [];
+
+for (let index = 0; index < phrase.length; index++) {
+  const letter = phrase[index];
+  const ascii = letter.charCodeAt(0);
+  if (ascii > 64 && ascii < 91) {
+    // console.log(letter, ascii);
+    indexes.push(index);
+  }
+}
+indexes.push(phrase.length);
+// console.log(indexes);
+const words = [];
+
+for (let index = 0; index < indexes.length - 1; index++) {
+  const start = indexes[index];
+  const end = indexes[index + 1];
+  const word = phrase.slice(start, end);
+  // console.log(word);
+  words.push(word);
+}
+
+console.log(words.join(', '));
+
+}
+
+// splitPascal('SplitMeIfYouCanHaHaYouCantOrYouCan');
+// splitPascal('HoldTheDoor');
+// splitPascal('ThisIsSoAnnoyingToDo');
+    </script>
 
     <script>
       const matches4 = `
