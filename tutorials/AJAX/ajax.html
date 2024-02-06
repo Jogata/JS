@@ -145,6 +145,138 @@
 
       }
 
+      // let list = new List();
+      // list.add(5);
+      // list.add(7);
+      // list.add(6);
+      // console.log(list.get(1));
+      // list.remove(1);
+      // console.log(list.get(1));
+      // console.log(list.size);
+      
+      // 05. Length Limit
+
+      class Stringer {
+        constructor(str, length) {
+          this.innerString = str;
+          this.innerLength = length;
+        }
+
+        increase(num) {
+          this.innerLength += num;
+        }
+
+        decrease(num) {
+          if (num > this.innerLength) {
+            this.innerLength = 0;
+          } else {
+            this.innerLength -= num;
+          }
+        }
+
+        toString() {
+          
+          if (this.innerLength == 0) {
+            return "...";
+          }
+
+          let newString = this.innerString.substring(0, this.innerLength);
+
+          if (this.innerString.length > this.innerLength) {
+            newString += "...";
+          }
+
+          return newString;
+
+        }
+
+      }
+
+      // let test = new Stringer("Test", 5);
+      // console.log(test.toString()); // Test
+      // test.decrease(3);
+      // console.log(test.toString()); // Te...
+      // test.decrease(5);
+      // console.log(test.toString()); // ...
+      // test.increase(4);
+      // console.log(test.toString()); // Test
+      // console.log(test);
+
+      // 06. Company
+
+      class Company {
+        constructor() {
+          this.departments = {};
+        }
+
+        addEmployee(name, salary, position, department) {
+          
+          if (!name, !salary, !position, !department) {
+            throw new Error("Invalid input!");
+          }
+
+          if (salary < 0) {
+            throw new Error("Invalid input!");
+          }
+
+          if (!this.departments[department]) {
+            this.departments[department] = [];
+          }
+
+          const employee = {
+            name, 
+            salary, 
+            position
+          }
+
+          // console.log(this.departments[department]);
+          this.departments[department].push(employee);
+
+          // console.log(`New employee is hired. Name: ${name}. Position: ${position}`);
+          return `New employee is hired. Name: ${name}. Position: ${position}`;
+
+        }
+
+        bestDepartment() {
+          const departmentsInfo = [];
+
+          for (const key in this.departments) {
+            // console.log(key);
+            const department = this.departments[key];
+            // console.log(department);
+
+            let total = 0;
+            let average = 0;
+
+            for (const employee of department) {
+              // console.log(employee, key);
+              total += employee.salary;
+            }
+
+          }
+
+          return "TODO";
+        }
+      }
+
+      let c = new Company();
+      c.addEmployee("Stanimir", 2000, "engineer", "Construction");
+      c.addEmployee("Pesho", 1500, "electrical engineer", "Construction");
+      c.addEmployee("Slavi", 500, "dyer", "Construction");
+      c.addEmployee("Stan", 2000, "architect", "Construction");
+      c.addEmployee("Stanimir", 1200, "digital marketing manager", "Marketing");
+      c.addEmployee("Pesho", 1000, "graphical designer", "Marketing");
+      c.addEmployee("Gosho", 1350, "HR", "Human resources");
+      console.log(c.departments);
+      console.log(c.bestDepartment());
+
+      // 07. HEX
+      // 08. Juice Flavors
+      // 09. Auto-Engineering Company
+      // 10. Contacts Builder✶
+      // 11. View Model✶
+      // 12. Payment Package
+      // 13. String Builder *✶
     </script>
 
     <!-- ================= Get data from local JSON file ================= -->
