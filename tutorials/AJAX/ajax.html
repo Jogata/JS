@@ -5,204 +5,149 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      #wrapper{
-    margin:auto;
-    width: 410px;
-}
-
-form{
-    box-sizing: border-box;
-    background-image: url("images/background3.jpg");
-    width: 420px;
-    padding: 5px;
-}
-
-.pairContainer{
-    width: 95%;
-    display: table;
-    margin: 10px 0;
-}
-
-input{
-    float:right;
-    width: 60%;
-}
-
-label, legend{
-    color: darkblue;
-    font-weight: bold;
-}
-
-#submit{
-    box-sizing: border-box;
-    font-weight: bold;
-    color:white;
-    margin: 5px auto;
-    width: 95%;
-    background-color: blue;
-    display: block;
-}
-
-#valid{
-    box-sizing: border-box;
-    width: 420px;
-    padding: 5px;
-    color: lime;
-    border: 2px solid lime;
-    text-align: center;
-}
-    </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <script>
-      // 01. Rectangle02. Data Class03. Tickets04. Sorted List05. Length Limit06. Company07. HEX08. Juice Flavors09. Auto-Engineering Company10. Contacts Builder✶11. View Model✶12. Payment Package13. String Builder *✶
+      // 01. Rectangle
+
+      class Rectangle {
+        constructor(width, height, color) {
+          this.width = width;
+          this.height = height;
+          this.color = color;
+        }
+
+        calcArea() {
+          return this.width * this.height;
+        }
+
+      }
+
+      // let rect = new Rectangle(4, 5, 'Red');
+      // console.log(rect.width);
+      // console.log(rect.height);      
+      // console.log(rect.color);
+      // console.log(rect.calcArea());
+
+      // 02. Data Class
+
+      class Request {
+        constructor(method, uri, version, message) {
+          this.method = method;
+          this.uri = uri;
+          this.version = version;
+          this.message = message;
+          this.response = undefined;
+          this.fulfilled = false;
+        }
+      }
+
+      // let myData = new Request('GET', 'http://google.com', 'HTTP/1.1', '');
+      // console.log(myData);
+      
+      // 03. Tickets
+
+      function menageTickets(arr, criteria) {
+        const tickets = [];
+
+        class Ticket {
+          constructor(destination, price, status) {
+            this.destination = destination;
+            this.price = price;
+            this.status = status;
+          }
+        }
+
+        for (const input of arr) {
+          // console.log(input);
+          const tokens = input.split("|");
+          // console.log(tokens);
+          const destination = tokens[0];
+          const price = Number(tokens[1]);
+          const status = tokens[2];
+          // console.log(destination, price, status);
+
+          const ticket = new Ticket(destination, price, status);
+          // console.log(ticket instanceof Ticket);
+          tickets.push(ticket);
+        }
+
+        // console.log(tickets);
+
+        if (criteria == "price") {
+          return tickets.sort((a, b) => a[criteria] - b[criteria]);
+        } else {
+          return tickets.sort((a, b) => a[criteria].localeCompare(b[criteria]));
+        }
+        // const sorted = tickets.sort();
+
+        // tickets.map(ticket => ticket[criteria]);
+        // console.log(tickets);
+
+        // return sorted;
+
+      }
+
+      // console.log(menageTickets(
+      //   [
+      //     'Philadelphia|94.20|available', 
+      //     'New York City|95.99|available', 
+      //     'New York City|95.99|sold', 
+      //     'Boston|126.20|departed'
+      //   ], 'destination'
+      //   ));
+      // console.log(menageTickets(
+      //   [
+      //     'Philadelphia|94.20|available', 
+      //     'New York City|95.99|available', 
+      //     'New York City|95.99|sold', 
+      //     'Boston|126.20|departed'
+      //   ], 'destination'
+      //   ));
+
+      // 04. Sorted List
+
+      class List {
+        constructor() {
+          this.list = [];
+          this.size = this.list.length;
+        }
+
+        add(num) {
+          this.list.push(num);
+          this.size++;
+          this.list.sort((a, b) => a - b);
+          // console.log(this.list);
+          return this.list;
+        }
+
+        remove(index) {
+          // this.list[index] = null;
+          if (index >= 0 && index < this.list.length) {
+            this.list.splice(index, 1);
+            this.size--;
+            // console.log(this.list);
+          }
+          return this.list;
+        }
+
+        get(index) {
+          if (index >= 0 && index < this.list.length) {
+            // console.log(this.list.length);
+            return this.list[index];
+          } 
+          // else {
+            // throw new Error();
+          // }
+        }
+
+      }
+
     </script>
 
     <!-- ================= Get data from local JSON file ================= -->
-
-    <script>
-      // 06. Word Occurrences
-    
-      function findWordOccurrences(params) {
-        // console.log(params);
-        const occurrences = {};
-    
-        for (const word of params) {
-          // console.log(word);
-          if (!occurrences[word]) {
-            occurrences[word] = 0;
-          }
-    
-          occurrences[word]++;
-    
-        }
-    
-        // console.log(occurrences);
-        const entries = Object.entries(occurrences);
-        // console.log(entries);
-        const sorted = entries.sort((a, b) => b[1] - a[1]);
-        // console.log(sorted);
-    
-        for (const item of sorted) {
-          const word = item[0];
-          const occurrences = item[1];
-          console.log(`${word} -> ${occurrences} times`);
-        }
-    
-      }
-    
-      // findWordOccurrences(["Here", "is", "the", "first", "sentence", "Here", "is", "another", "sentence", "And", "finally", "the", "third", "sentence"]);
-      // findWordOccurrences(["dog", "bye", "city", "dog", "dad", "boys", "ginger"]);
-    </script>
-    <script>
-        // 03. Add and Remove Elements
-
-  function createArr(params) {
-    const result = [];
-    let num = 1;
-
-    const commands = {
-      add: (num) => {
-        num++;
-        result.push(num);
-      }, 
-      remove: (num) => {
-        num++;
-        result.pop();
-      }
-    }
-
-    for (let index = 0; index < params.length; index++) {
-      const command = commands[params[index]];
-      command(index);
-    }
-
-    if (result.length == 0) {
-      console.log("Empty");
-    } else {
-      for (const number of result) {
-        console.log(number);
-      }
-    }
-    // return result;
-
-  }
-
-  // createArr(['add', 'add', 'add', 'add']);
-  // createArr(['add', 'add', 'remove', 'add', 'add']);
-  // createArr(['remove', 'remove', 'remove']);
-    </script>
-    <script>
-      // 01. Reveal Words
-
-function revealWords(params, phrase) {
-const words = params.split(", ");
-// console.log(words);
-// let result = "";
-
-for (const word of words) {
-  // console.log(word);
-  const length = word.length;
-  // console.log(length);
-  const splited = phrase.split(" ");
-  const searched = "*".repeat(length);
-  // console.log(searched);
-  const index = splited.indexOf(searched);
-  // console.log(index);
-  if (index) {
-    splited[index] = word;
-  }
-  phrase = splited.join(" ");
-}
-
-console.log(phrase);
-
-}
-
-// revealWords('great', 'softuni is ***** place for learning new programming languages');
-// revealWords('great, learning', 'softuni is ***** place for ******** new programming languages');
-
-// 02. Modern Times of #(HashTag)
-
-function findHashTags(phrase) {
-// console.log(phrase);
-const words = phrase.split(" ");
-// console.log(words);
-const filtered = words.filter(x => x.startsWith("#") && x.length > 1);
-// console.log(filtered);
-
-for (let word of filtered) {
-  let isNumber = false;
-  for (const letter of word) {
-    // console.log(Number.parseInt(letter));
-    // console.log(letter);
-    if (Number.parseInt(letter)) {
-      isNumber = true;
-      // console.log(word);
-      break;
-    }
-  }
-
-  if (!isNumber) {
-    word = word.replace("#", "");
-    console.log(word);
-  }
-}
-
-}
-
-// findHashTags('Nowadays everyone uses # to tag a #spec1ial word in #socialMedia');
-// findHashTags('The symbol # is known #variously in English-speaking #regions as the #number sign');
-    </script>
 
     <fieldset>
       <legend>Get all users from local JSON file</legend>
@@ -266,214 +211,6 @@ for (let word of filtered) {
         users.send();
       }
     </script>
-    <script>
-      // 03. Extract File
-
-function extractFile(path) {
-// console.log(path);
-const parts = path.split("\\");
-// console.log(parts);
-const file = parts[parts.length - 1];
-// console.log(file);
-const fileParts = file.split(".");
-// console.log(fileParts);
-let fileName = "";
-const ext = fileParts[fileParts.length - 1];
-// console.log(ext);
-
-for (let index = 0; index < fileParts.length - 2; index++) {
-  let part = fileParts[index] + ".";
-  fileName += part;
-}
-
-fileName += fileParts[fileParts.length - 2];
-
-console.log(`File name: ${fileName}`);
-console.log(`File extension: ${ext}`);
-
-}
-
-// extractFile("C:\\Internal\\training-internal\\Template.bss.pptx");
-// extractFile('C:\\Projects\\Data-Structures\\LinkedList.cs');
-
-// 04. String Substring
-
-function findString(searched, phrase) {
-// console.log(phrase);
-// console.log(searched);
-const words = phrase.split(" ");
-let isFound = false;
-
-for (const word of words) {
-  if (searched.toLowerCase() == word.toLowerCase()) {
-    isFound = true;
-    break;
-  }
-}
-
-if (isFound) {
-  console.log(searched);
-} else {
-  console.log(`${searched} not found!`);
-}
-
-}
-
-// findString('javascript', 'JavaScript is the best programming language');
-// findString('python', 'JavaScript is the best programming language');
-
-// 05. Replace Repeating Chars
-
-function replaceRepeatingChars(word) {
-// console.log(word);
-let current = word[0];
-let newWord = current;
-
-for (let index = 1; index < word.length; index++) {
-  if (word[index] != current) {
-    current = word[index];
-    newWord += current;
-  }
-}
-
-console.log(newWord);
-
-}
-
-function replaceRepeatingChars(word) {
-// console.log(word);
-
-for (let index = 0; index < word.length - 1; index++) {
-  if (word[index] == word[index + 1]) {
-    let current = word[index];
-    const removed = current + current;
-    word = word.replaceAll(removed, current);
-    index = -1;
-  }
-  
-}
-// word = word.replaceAll("aa", "a");
-console.log(word);
-
-}
-
-// replaceRepeatingChars('aaaaabbbbbcdddeeeedssaa');
-// replaceRepeatingChars('qqqwerqwecccwd');
-
-// 06. Pascal-Case Splitter
-
-function splitPascal(phrase) {
-// console.log(phrase.length);
-const indexes = [];
-
-for (let index = 0; index < phrase.length; index++) {
-  const letter = phrase[index];
-  const ascii = letter.charCodeAt(0);
-  if (ascii > 64 && ascii < 91) {
-    // console.log(letter, ascii);
-    indexes.push(index);
-  }
-}
-indexes.push(phrase.length);
-// console.log(indexes);
-const words = [];
-
-for (let index = 0; index < indexes.length - 1; index++) {
-  const start = indexes[index];
-  const end = indexes[index + 1];
-  const word = phrase.slice(start, end);
-  // console.log(word);
-  words.push(word);
-}
-
-console.log(words.join(', '));
-
-}
-
-// splitPascal('SplitMeIfYouCanHaHaYouCantOrYouCan');
-// splitPascal('HoldTheDoor');
-// splitPascal('ThisIsSoAnnoyingToDo');
-
-// 07. Cut and Reverse
-
-function revarseWords(phrase) {
-// console.log(phrase);
-const middle = Math.floor(phrase.length / 2);
-// console.log(middle);
-const leftHalf = phrase.slice(0, middle);
-const rightHalf = phrase.slice(middle);
-const left = leftHalf.split("");
-const right = rightHalf.split("");
-const reversedLeft = left.reverse();
-const reversedRight = right.reverse();
-// console.log(reversedLeft);
-// console.log(reversedRight);
-console.log(reversedLeft.join(""));
-console.log(reversedRight.join(""));
-}
-
-// revarseWords('tluciffiDsIsihTgnizamAoSsIsihT');
-// revarseWords('sihToDtnaCuoYteBIboJsihTtAdooGoSmI');
-    </script>
-    <script>
-      class Person {
-        set age(value) {
-          this._age = value;
-        }
-        get age() {
-          return this._age;
-        }
-        set name(value) {
-          this._name = value;
-        }
-        get name() {
-          return this._name;
-        }
-      }
-
-      const person1 = new Person();
-      person1.age = 5;
-      person1.name = "Jogata";
-      console.log(person1);
-      console.log(person1._age);
-    </script>
-
-<div id="wrapper">
-  <form id="registerForm">
-      <fieldset id="userInfo">
-          <legend>User Information:</legend>
-          <div class="pairContainer">
-              <label for="username">Userame:</label>
-              <input id="username" type="text">
-          </div>
-          <div class="pairContainer">
-              <label for="email">Email:</label>
-              <input id="email" type="text">
-          </div>
-          <div class="pairContainer">
-              <label for="password">Password:</label>
-              <input id="password" type="password">
-          </div>
-          <div class="pairContainer">
-              <label for="confirm-password">Confirm Password:</label>
-              <input id="confirm-password" type="password">
-          </div>
-          <div class="pairContainer">
-              <label for="company">Is Company?</label>
-              <input id="company" type="checkbox">
-          </div>
-      </fieldset>
-      <fieldset id="companyInfo" style="display: none;">
-          <legend>Company Informaion:</legend>
-          <div class="pairContainer">
-              <label for="companyNumber">Company Number</label>
-              <input id="companyNumber" type="number">
-          </div>
-      </fieldset>
-      <button id="submit">Submit</button>
-  </form>
-  <div id="valid" style="display: none">Valid</div>
-</div>
 
     <script>
       const matches4 = `
