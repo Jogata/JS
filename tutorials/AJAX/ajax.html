@@ -10,6 +10,20 @@
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <script>
+      // 06. List Of Names
+      
+      function createList(names) {
+        const sorted = names.sort((x, y) => x.localeCompare(y));
+        // console.log(sorted);
+        
+        for (let index = 0; index < sorted.length; index++) {
+          console.log(`${index + 1}.${sorted[index]}`);
+        }
+        
+      }
+      
+      // createList(["John", "Bob", "Christina", "Ema"]);
+      
       // 01. Rectangle
 
       class Rectangle {
@@ -211,7 +225,7 @@
 
         addEmployee(name, salary, position, department) {
           
-          if (!name, !salary, !position, !department) {
+          if (!name || !salary || !position || !department) {
             throw new Error("Invalid input!");
           }
 
@@ -253,25 +267,143 @@
               total += employee.salary;
             }
 
+            // console.log(total);
+            average = total / department.length;
+            // console.log(average);
+            const departmentInfo = {
+              key, 
+              average
+            }
+
+            departmentsInfo.push(departmentInfo);
+            // console.log(departmentsInfo);
           }
 
-          return "TODO";
+          departmentsInfo.sort((dep1, dep2) => dep2.average - dep1.average);
+          // console.log(departmentsInfo);
+          const theBestName = departmentsInfo[0].key;
+          const theBestAverage = departmentsInfo[0].average;
+          const theBest = this.departments[theBestName];
+          theBest.sort((emp1, emp2) => emp2.salary - emp1.salary || emp1.name.localeCompare(emp2.name));
+          // console.log(theBestName, theBestAverage, theBest);
+
+          let result = `Best Department is: ${theBestName}\n`;
+          result += `Average salary: ${theBestAverage.toFixed(2)}\n`;
+
+          for (const employee of theBest) {
+            // console.log(employee);
+            const employeeInfo = `${employee.name} ${employee.salary} ${employee.position}\n`;
+            // console.log(employeeInfo);
+            result += employeeInfo;
+          }
+
+
+          return result.trim();
+
         }
       }
 
-      let c = new Company();
-      c.addEmployee("Stanimir", 2000, "engineer", "Construction");
-      c.addEmployee("Pesho", 1500, "electrical engineer", "Construction");
-      c.addEmployee("Slavi", 500, "dyer", "Construction");
-      c.addEmployee("Stan", 2000, "architect", "Construction");
-      c.addEmployee("Stanimir", 1200, "digital marketing manager", "Marketing");
-      c.addEmployee("Pesho", 1000, "graphical designer", "Marketing");
-      c.addEmployee("Gosho", 1350, "HR", "Human resources");
-      console.log(c.departments);
-      console.log(c.bestDepartment());
+      // let c = new Company();
+      // c.addEmployee("Stanimir", 2000, "engineer", "Construction");
+      // c.addEmployee("Pesho", 1500, "electrical engineer", "Construction");
+      // c.addEmployee("Slavi", 500, "dyer", "Construction");
+      // c.addEmployee("Stan", 2000, "architect", "Construction");
+      // c.addEmployee("Stanimir", 1200, "digital marketing manager", "Marketing");
+      // c.addEmployee("Pesho", 1000, "graphical designer", "Marketing");
+      // c.addEmployee("Gosho", 1350, "HR", "Human resources");
+      // console.log(c.departments);
+      // console.log(c.bestDepartment());
 
       // 07. HEX
       // 08. Juice Flavors
+
+      function createJuice(arr) {
+        // console.log(arr);
+
+        class Juice {
+          constructor() {
+            this.flavors = {};
+            this.juices = {};
+          }
+
+          addFlavor(flavor, quantity) {
+            // console.log(flavor, quantity);
+            
+            if (typeof this.flavors[flavor] != "number") {
+              this.flavors[flavor] = 0;
+              // console.log(this.flavors);
+            }
+
+            // console.log(this.flavors);
+
+            let currentFlavor = this.flavors[flavor];
+            // console.log(currentFlavor);
+            currentFlavor += quantity;
+            // console.log(currentFlavor);
+
+            if (currentFlavor >= 1000) {
+              const bottles = Math.floor(currentFlavor / 1000);
+              // console.log(bottles);
+
+              if (typeof this.juices[flavor] != "number") {
+                this.juices[flavor] = 0;
+                // console.log(this.juices);
+              }
+              
+              this.juices[flavor] += bottles;
+              // console.log(this.juices);
+              currentFlavor = currentFlavor % 1000;
+              // console.log(currentFlavor);
+            }
+
+            this.flavors[flavor] = currentFlavor;
+
+          }
+        }
+
+        const menager = new Juice();
+
+        for (const input of arr) {
+          // console.log(input);
+          const tokens = input.split(" => ");
+          // console.log(tokens);
+          const name = tokens[0];
+          const quantity = Number(tokens[1]);
+          // console.log(name, quantity);
+          menager.addFlavor(name, quantity);
+        }
+
+        // console.log(menager.flavors);
+        // console.log(menager.juices);
+        const juiceNames = Object.keys(menager.juices);
+
+        for (const juiceName of juiceNames) {
+          // console.log(juiceName);
+          console.log(`${juiceName} => ${menager.juices[juiceName]}`);
+        }
+
+      }
+
+      createJuice(
+        [
+          'Kiwi => 234',
+          'Pear => 2345',
+          'Watermelon => 3456',
+          'Kiwi => 4567',
+          'Pear => 5678',
+          'Watermelon => 6789'
+        ]
+      );
+      createJuice(
+        [
+          'Orange => 2000',
+          'Peach => 1432',
+          'Banana => 450',
+          'Peach => 600',
+          'Strawberry => 549'
+        ]
+      );
+          
       // 09. Auto-Engineering Company
       // 10. Contacts Builder✶
       // 11. View Model✶
