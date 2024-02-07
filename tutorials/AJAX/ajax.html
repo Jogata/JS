@@ -23,6 +23,73 @@
       }
       
       // createList(["John", "Bob", "Christina", "Ema"]);
+
+        // 05. Functional Sum
+
+  function sum(num) {
+    let n1 = 0;
+    n1 += num;
+    Function.prototype.toString = function () {
+      return n1;
+    }
+    // console.log(n1);
+    return function inner (num) {
+      n1 += num;
+      // console.log(n1);
+      return inner;
+    }
+  }
+
+  function add(num) {
+let sum = num;
+
+function calc(num2) {
+    sum += num2;
+    return calc;
+}
+
+calc.toString = function() { return sum };
+return calc;
+}
+
+  // console.log(sum(1));
+  // console.log(sum(1)(6)(-3));
+  // sum(1)(6)(-3);
+
+  // 04. Ascii Sumator
+
+function asciiSumator(params) {
+// console.log(params);
+const symbol1 = params[0];
+const symbol2 = params[1];
+const word = params[2];
+// console.log(start, end, word);
+const ascii1 = symbol1.charCodeAt(0);
+const ascii2 = symbol2.charCodeAt(0);
+// console.log(ascii1, ascii2);
+
+const min = Math.min(ascii1, ascii2);
+const max = Math.max(ascii1, ascii2);
+// console.log(min, max);
+
+let sum = 0;
+
+for (const letter of word) {
+  // console.log(letter);
+  const ascii = letter.charCodeAt(0);
+  // console.log(ascii);
+  if (ascii > min && ascii < max) {
+    sum += ascii;
+  }
+}
+
+console.log(sum);
+
+}
+
+// asciiSumator(['.', '@', 'dsg12gr5653feee5']);
+// asciiSumator(['?', 'E', '@ABCEF']);
+// asciiSumator(['a', '1', 'jfe392$#@j24ui9ne#@$']);
       
       // 01. Rectangle
 
@@ -384,27 +451,97 @@
 
       }
 
-      createJuice(
-        [
-          'Kiwi => 234',
-          'Pear => 2345',
-          'Watermelon => 3456',
-          'Kiwi => 4567',
-          'Pear => 5678',
-          'Watermelon => 6789'
-        ]
-      );
-      createJuice(
-        [
-          'Orange => 2000',
-          'Peach => 1432',
-          'Banana => 450',
-          'Peach => 600',
-          'Strawberry => 549'
-        ]
-      );
+      // createJuice(
+      //   [
+      //     'Kiwi => 234',
+      //     'Pear => 2345',
+      //     'Watermelon => 3456',
+      //     'Kiwi => 4567',
+      //     'Pear => 5678',
+      //     'Watermelon => 6789'
+      //   ]
+      // );
+      // createJuice(
+      //   [
+      //     'Orange => 2000',
+      //     'Peach => 1432',
+      //     'Banana => 450',
+      //     'Peach => 600',
+      //     'Strawberry => 549'
+      //   ]
+      // );
           
       // 09. Auto-Engineering Company
+
+      function menageCarCompany(params) {
+        // console.log(params);
+        class IdontKnow {
+          constructor() {
+            this.brands = {};
+          }
+
+          addBrand(data) {
+            const tokens = data.split(" | ");
+            // console.log(tokens);
+            const brand = tokens[0];
+            const model = tokens[1];
+            const count = Number(tokens[2]);
+
+            if (!this.brands.hasOwnProperty(brand)) {
+              this.brands[brand] = {};
+            }
+
+            this.addModel(brand, model, count);
+
+          }
+
+          addModel(brand, model, number) {
+            if (!this.brands[brand].hasOwnProperty(model)) {
+              this.brands[brand][model] = 0;
+            }
+
+            this.brands[brand][model] += number;
+
+          }
+
+        }
+
+        const menager = new IdontKnow();
+
+        for (const input of params) {
+          // console.log(input);
+          menager.addBrand(input);
+        }
+
+        // console.log(menager.brands);
+        const brands = Object.keys(menager.brands);
+        
+        for (const brandName of brands) {
+          const models = Object.keys(menager.brands[brandName]);
+          // console.log(models);
+          console.log(brandName);
+          for (const modelName of models) {
+            console.log(`###${modelName} -> ${menager.brands[brandName][modelName]}`);
+          }
+        }
+
+      }
+
+      menageCarCompany(
+        [
+          'Audi | Q7 | 1000',
+          'Audi | Q6 | 100',
+          'BMW | X5 | 1000',
+          'BMW | X6 | 100',
+          'Citroen | C4 | 123',
+          'Volga | GAZ-24 | 1000000',
+          'Lada | Niva | 1000000',
+          'Lada | Jigula | 1000000',
+          'Citroen | C4 | 22',
+          'Citroen | C5 | 10'
+        ]
+      );
+
       // 10. Contacts Builder✶
       // 11. View Model✶
       // 12. Payment Package
