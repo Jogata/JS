@@ -10,6 +10,137 @@
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <script>
+      // 04. Count String Occurrences
+      
+      function findStringOccurrences(text, word) {
+        const words = text.split(" ");
+        // console.log(words);
+        let counter = 0;
+        
+        for (const current of words) {
+          if (word == current) {
+            counter++;
+          }
+        }
+        
+        console.log(counter);
+        
+      }
+      
+      // findStringOccurrences('This is a word and it also is a sentence', 'is');
+      // findStringOccurrences('softuni is great place for learning new programming languages', 'softuni');
+        
+        // 06. Melrah Shake
+        
+        function shakeItOff(params) {
+          // console.log(params);
+          let word = params[0];
+          let pattern = params[1];
+          // console.log(word, pattern);
+          
+          while (true) {
+            const first = word.indexOf(pattern);
+            // const last = word.indexOf(pattern, first + pattern.length);
+            const last = word.lastIndexOf(pattern);
+            // console.log(first, last);
+            if (first != last) {
+              const start = word[last - 1];
+              const end = word[last + pattern.length];
+              const removed = start + pattern + end;
+              // console.log(removed);
+              word = word.replace(removed, start + "" + end);
+              word = word.replace(pattern, "");
+              console.log("Shaked it.");
+            } else {
+              console.log("No shake.");
+              break;
+            }
+            
+            const middle = Math.floor(pattern.length / 2);
+            const middleChar = pattern[middle];
+            // console.log(middle);
+            // console.log(middleChar);
+            pattern = pattern.replace(middleChar, "");
+            // console.log(apattern);
+            if (pattern.length == 0) {
+              console.log("No shake.");
+              break;
+            }
+            
+            if (!word.includes(pattern)) {
+              console.log("No shake.");
+              break;
+            }
+            
+          }
+          
+          console.log(word);
+          
+        }
+        
+        function shakeItOff(params) {
+          // console.log(params);
+          let word = params[0];
+          let pattern = params[1];
+          // console.log(word, pattern);
+          let index = 0;
+          
+          while (true) {
+            // const first = word.indexOf(pattern);
+            // const last = word.lastIndexOf(pattern);
+            // console.log(first, last);
+            // if (first == last) {
+              // console.log("No shake.");
+              // break;
+              // }
+              
+              const parts = word.split(pattern);
+              // console.log(parts);
+              if (parts.length >= 3) {
+                const start = parts.shift();
+                const end = parts.pop();
+                const middle = parts.join(pattern);
+                word = start + middle + end;
+                // console.log(middle);
+                console.log("Shaked it.");
+                // word = middle;
+              } else {
+                console.log("No shake.");
+                break;
+              }
+              
+              const middle = Math.floor(pattern.length / 2);
+              const middleChar = pattern[middle];
+              // console.log(middle);
+              // console.log(middleChar);
+              pattern = pattern.replace(middleChar, "");
+              // console.log(apattern);
+              if (pattern.length == 0) {
+                console.log("No shake.");
+                break;
+              }
+              
+              // if (!word.includes(pattern)) {
+                // console.log("No shake.");
+                // break;
+                // }
+                index++;
+                
+                if (index > 50) {
+                  console.log("infinity");
+                  break;
+                }
+                
+              }
+              
+              console.log(word);
+              
+            }
+            
+            // shakeItOff(['astalavista baby', 'sta']);
+            // shakeItOff(['##mtm!!mm.mm*mtm.#', 'mtm']);
+      </script>
+    <script>
       // 06. List Of Names
       
       function createList(names) {
@@ -527,20 +658,20 @@ console.log(sum);
 
       }
 
-      menageCarCompany(
-        [
-          'Audi | Q7 | 1000',
-          'Audi | Q6 | 100',
-          'BMW | X5 | 1000',
-          'BMW | X6 | 100',
-          'Citroen | C4 | 123',
-          'Volga | GAZ-24 | 1000000',
-          'Lada | Niva | 1000000',
-          'Lada | Jigula | 1000000',
-          'Citroen | C4 | 22',
-          'Citroen | C5 | 10'
-        ]
-      );
+      // menageCarCompany(
+      //   [
+      //     'Audi | Q7 | 1000',
+      //     'Audi | Q6 | 100',
+      //     'BMW | X5 | 1000',
+      //     'BMW | X6 | 100',
+      //     'Citroen | C4 | 123',
+      //     'Volga | GAZ-24 | 1000000',
+      //     'Lada | Niva | 1000000',
+      //     'Lada | Jigula | 1000000',
+      //     'Citroen | C4 | 22',
+      //     'Citroen | C5 | 10'
+      //   ]
+      // );
 
       // 10. Contacts Builder✶
       // 11. View Model✶
