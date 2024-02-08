@@ -282,10 +282,141 @@
 
     <script>
       // 07. HEX
+
+      class Hex {
+        constructor(value) {
+          this.value = value;
+        }
+
+        valueOf() {
+          return this.value;
+        }
+        
+        toString() {
+          return `0x${this.valueOf().toString(16).toUpperCase()}`;
+        }
+        // This function will show its hexadecimal value starting with "0x"
+
+        plus(number) {
+          return new Hex(this.value + number);
+        }
+        // This function should add anumberor Hex object and return a new Hex object.
+
+        minus(number) {
+          return new Hex(this.value - number);
+        }
+        // This function should subtract a number or Hex object and return a new Hex object.
+
+        parse(string) {
+          return Number.parseInt(string, 16);
+        }
+        // Create a parse class method that can parse Hexadecimal numbers and convert them to standard decimal numbers.
+
+      }
+
+      // let FF = new Hex(255);
+      // console.log(FF.toString());
+      // console.log(FF.valueOf() + 1 == 256);
+      // let a = new Hex(10);
+      // let b = new Hex(5);
+      // console.log(a.plus(b).toString());
+      // console.log(a.plus(b).toString()==='0xF');
+      // console.log(FF.parse('AAA'));
+
       // 10. Contacts Builder✶
       // 11. View Model✶
       // 12. Payment Package
       // 13. String Builder *✶
+    </script>
+    <script>
+      class Test {
+        constructor(name) {
+          this.name = name;
+        }
+
+        get name () {
+          return hidden;
+        }
+
+        set name (newName) {
+          if (typeof newName != "string") {
+            throw new Error("the name should be a string");
+          }
+
+          this._name = newName;
+        }
+
+        // getName () {
+        //   return this._name;
+        // }
+
+        // setName (newName) {
+        //   if (typeof newName != "string") {
+        //     throw new Error("the name should be a string");
+        //   }
+
+        //   this._name = newName;
+        // }
+      }
+
+      Test.createNewTest = function (name) {
+        let hidden = "hidden";
+        const test = new Test(name);
+        test.getHidden = function () {
+          return hidden;
+        }
+        test.setHidden = function (value) {
+          hidden = value;
+        }
+        console.dir(test);
+        return test;
+      }
+
+      let atest = 5;
+
+      function geta() {
+        atest += 1;
+        // console.log(atest);
+      }
+
+      // console.dir(geta)
+
+      // console.log(test.getHidden());
+
+      // const test1 = new Test("jogata1");
+      // const test2 = new Test("jogata2");
+      // console.log(test1);
+
+      // test1._name = 5;
+
+      // test1.setName("new");
+      // test1.name = "new";
+      // console.log(test1);
+      
+      // try {
+      //   test1.name = 5;
+      // } catch (error) {
+      //   console.log(error.message);
+      // }
+
+      // console.log(test1.name);
+      
+      // test1.name = 5;
+      // console.log(test1.getName);
+
+      // console.log(test2.getName());
+
+        // 02. String Length
+
+  function calcStringsLength(str1, str2, str3) {
+    const length = str1.length + str2.length + str3.length;
+    const average = Math.floor(length / 3);
+    console.log(length);
+    console.log(average);
+  }
+
+  // calcStringsLength('chocolate', 'ice cream', 'cake');
+  // calcStringsLength('pasta', '5', '22.3');
     </script>
 
     <!-- ================= Get data from local JSON file ================= -->
