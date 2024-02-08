@@ -3,676 +3,150 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AJAX | XMLHttpRequest</title>
+    <!-- <title>AJAX | XMLHttpRequest</title> -->
+    <title>Travel</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Redressed&display=swap');
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      a {
+        text-transform: capitalize;
+        text-decoration: none;
+      }
+
+      button {
+        padding: 0.4em 1em;
+        border: none;
+        outline: none;
+        /* font-family: inherit; */
+        font-family: Georgia, serif;
+        text-transform: capitalize;
+        background-color: transparent;
+        cursor: pointer;
+      }
+      button:focus-within {
+        outline: 1px solid #fff8;
+      }
+
+      a, button {
+        transition: color 500ms ease-in-out;
+      }
+
+      img {
+        width: 100%;
+      }
+
+      body {
+        /* width: 100%; */
+        /* height: 100vh; */
+        min-height: 100vh;
+        /* align-items: center; */
+        /* justify-content: center; */
+        /* display: grid; */
+        /* place-items: center; */
+        font-family: 'Redressed', cursive;
+      }
+
+      .page {
+        /* width: 100%; */
+        position: relative;
+        min-height: 100vh;
+        padding: 2%;
+        display: flex;
+        /* align-items: center; */
+        /* justify-content: center; */
+        /* background-image: url("./travel/hero.webp");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover; */
+        overflow: hidden;
+      }
+      .page::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        z-index: -1;
+      }
+    </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
+    <div class="page">
+      <div class="container">
+        <div class="nav">
+          <a href="#logo" class="logo">
+            <img src="./travel/logo.png" alt="">
+          </a>
+          <ul class="menu" id="menu">
+            <li><a href="#">home</a></li>
+            <li><a href="#">about</a></li>
+            <li><a href="#">camp</a></li>
+            <li><a href="#">contact us</a></li>
+          </ul>
+          <button id="sign-up">sign up</button>
+          <div class="bars" id="bars">
+            <button>menu
+              <i class="fa fa-bars"></i>
+            </button>
+          </div>
+        </div>
+        <div class="form visible">
+          <div class="form-container">
+            <div class="top">
+              <button id="close-form">
+                <i class="fa fa-times"></i>
+              </button>
+            </div>
+            <div class="form-main">
+              <span class="form-title">login</span>
+              <div class="email">
+                <label for="email">email</label>
+                <input type="email" name="email" id="email" placeholder="Write Your Email...">
+              </div>
+              <div class="password">
+                <label for="password">password</label>
+                <input type="password" name="password" id="password" placeholder="Write Your Password...">
+              </div>
+              <a href="#">forgot password?</a>
+              <span>Don't Have an Account? <a href="#">sign up</a></span>
+              <button id="login">login</button>
+            </div>
+          </div>
+        </div>
+        <div class="main-container">
+          <h1>Discover hundreds of travel destinations...!</h1>
+          <p>Plan and book your trip in just a few steps, travel tips, destinations's information and inspiration from us.</p>
+          <button>discover now</button>
+        </div>
+      </div>
+    </div>
     <script>
-      // 04. Count String Occurrences
-      
-      function findStringOccurrences(text, word) {
-        const words = text.split(" ");
-        // console.log(words);
-        let counter = 0;
-        
-        for (const current of words) {
-          if (word == current) {
-            counter++;
-          }
-        }
-        
-        console.log(counter);
-        
-      }
-      
-      // findStringOccurrences('This is a word and it also is a sentence', 'is');
-      // findStringOccurrences('softuni is great place for learning new programming languages', 'softuni');
-        
-        // 06. Melrah Shake
-        
-        function shakeItOff(params) {
-          // console.log(params);
-          let word = params[0];
-          let pattern = params[1];
-          // console.log(word, pattern);
-          
-          while (true) {
-            const first = word.indexOf(pattern);
-            // const last = word.indexOf(pattern, first + pattern.length);
-            const last = word.lastIndexOf(pattern);
-            // console.log(first, last);
-            if (first != last) {
-              const start = word[last - 1];
-              const end = word[last + pattern.length];
-              const removed = start + pattern + end;
-              // console.log(removed);
-              word = word.replace(removed, start + "" + end);
-              word = word.replace(pattern, "");
-              console.log("Shaked it.");
-            } else {
-              console.log("No shake.");
-              break;
-            }
-            
-            const middle = Math.floor(pattern.length / 2);
-            const middleChar = pattern[middle];
-            // console.log(middle);
-            // console.log(middleChar);
-            pattern = pattern.replace(middleChar, "");
-            // console.log(apattern);
-            if (pattern.length == 0) {
-              console.log("No shake.");
-              break;
-            }
-            
-            if (!word.includes(pattern)) {
-              console.log("No shake.");
-              break;
-            }
-            
-          }
-          
-          console.log(word);
-          
-        }
-        
-        function shakeItOff(params) {
-          // console.log(params);
-          let word = params[0];
-          let pattern = params[1];
-          // console.log(word, pattern);
-          let index = 0;
-          
-          while (true) {
-            // const first = word.indexOf(pattern);
-            // const last = word.lastIndexOf(pattern);
-            // console.log(first, last);
-            // if (first == last) {
-              // console.log("No shake.");
-              // break;
-              // }
-              
-              const parts = word.split(pattern);
-              // console.log(parts);
-              if (parts.length >= 3) {
-                const start = parts.shift();
-                const end = parts.pop();
-                const middle = parts.join(pattern);
-                word = start + middle + end;
-                // console.log(middle);
-                console.log("Shaked it.");
-                // word = middle;
-              } else {
-                console.log("No shake.");
-                break;
-              }
-              
-              const middle = Math.floor(pattern.length / 2);
-              const middleChar = pattern[middle];
-              // console.log(middle);
-              // console.log(middleChar);
-              pattern = pattern.replace(middleChar, "");
-              // console.log(apattern);
-              if (pattern.length == 0) {
-                console.log("No shake.");
-                break;
-              }
-              
-              // if (!word.includes(pattern)) {
-                // console.log("No shake.");
-                // break;
-                // }
-                index++;
-                
-                if (index > 50) {
-                  console.log("infinity");
-                  break;
-                }
-                
-              }
-              
-              console.log(word);
-              
-            }
-            
-            // shakeItOff(['astalavista baby', 'sta']);
-            // shakeItOff(['##mtm!!mm.mm*mtm.#', 'mtm']);
-      </script>
+      const closeFormBtn = document.getElementById("close-form");
+      const form = document.querySelector(".form");
+
+      closeFormBtn.addEventListener("click", () => {
+        form.classList.remove("visible");
+      })
+    </script>
+
     <script>
-      // 06. List Of Names
-      
-      function createList(names) {
-        const sorted = names.sort((x, y) => x.localeCompare(y));
-        // console.log(sorted);
-        
-        for (let index = 0; index < sorted.length; index++) {
-          console.log(`${index + 1}.${sorted[index]}`);
-        }
-        
-      }
-      
-      // createList(["John", "Bob", "Christina", "Ema"]);
-
-        // 05. Functional Sum
-
-  function sum(num) {
-    let n1 = 0;
-    n1 += num;
-    Function.prototype.toString = function () {
-      return n1;
-    }
-    // console.log(n1);
-    return function inner (num) {
-      n1 += num;
-      // console.log(n1);
-      return inner;
-    }
-  }
-
-  function add(num) {
-let sum = num;
-
-function calc(num2) {
-    sum += num2;
-    return calc;
-}
-
-calc.toString = function() { return sum };
-return calc;
-}
-
-  // console.log(sum(1));
-  // console.log(sum(1)(6)(-3));
-  // sum(1)(6)(-3);
-
-  // 04. Ascii Sumator
-
-function asciiSumator(params) {
-// console.log(params);
-const symbol1 = params[0];
-const symbol2 = params[1];
-const word = params[2];
-// console.log(start, end, word);
-const ascii1 = symbol1.charCodeAt(0);
-const ascii2 = symbol2.charCodeAt(0);
-// console.log(ascii1, ascii2);
-
-const min = Math.min(ascii1, ascii2);
-const max = Math.max(ascii1, ascii2);
-// console.log(min, max);
-
-let sum = 0;
-
-for (const letter of word) {
-  // console.log(letter);
-  const ascii = letter.charCodeAt(0);
-  // console.log(ascii);
-  if (ascii > min && ascii < max) {
-    sum += ascii;
-  }
-}
-
-console.log(sum);
-
-}
-
-// asciiSumator(['.', '@', 'dsg12gr5653feee5']);
-// asciiSumator(['?', 'E', '@ABCEF']);
-// asciiSumator(['a', '1', 'jfe392$#@j24ui9ne#@$']);
-      
-      // 01. Rectangle
-
-      class Rectangle {
-        constructor(width, height, color) {
-          this.width = width;
-          this.height = height;
-          this.color = color;
-        }
-
-        calcArea() {
-          return this.width * this.height;
-        }
-
-      }
-
-      // let rect = new Rectangle(4, 5, 'Red');
-      // console.log(rect.width);
-      // console.log(rect.height);      
-      // console.log(rect.color);
-      // console.log(rect.calcArea());
-
-      // 02. Data Class
-
-      class Request {
-        constructor(method, uri, version, message) {
-          this.method = method;
-          this.uri = uri;
-          this.version = version;
-          this.message = message;
-          this.response = undefined;
-          this.fulfilled = false;
-        }
-      }
-
-      // let myData = new Request('GET', 'http://google.com', 'HTTP/1.1', '');
-      // console.log(myData);
-      
-      // 03. Tickets
-
-      function menageTickets(arr, criteria) {
-        const tickets = [];
-
-        class Ticket {
-          constructor(destination, price, status) {
-            this.destination = destination;
-            this.price = price;
-            this.status = status;
-          }
-        }
-
-        for (const input of arr) {
-          // console.log(input);
-          const tokens = input.split("|");
-          // console.log(tokens);
-          const destination = tokens[0];
-          const price = Number(tokens[1]);
-          const status = tokens[2];
-          // console.log(destination, price, status);
-
-          const ticket = new Ticket(destination, price, status);
-          // console.log(ticket instanceof Ticket);
-          tickets.push(ticket);
-        }
-
-        // console.log(tickets);
-
-        if (criteria == "price") {
-          return tickets.sort((a, b) => a[criteria] - b[criteria]);
-        } else {
-          return tickets.sort((a, b) => a[criteria].localeCompare(b[criteria]));
-        }
-        // const sorted = tickets.sort();
-
-        // tickets.map(ticket => ticket[criteria]);
-        // console.log(tickets);
-
-        // return sorted;
-
-      }
-
-      // console.log(menageTickets(
-      //   [
-      //     'Philadelphia|94.20|available', 
-      //     'New York City|95.99|available', 
-      //     'New York City|95.99|sold', 
-      //     'Boston|126.20|departed'
-      //   ], 'destination'
-      //   ));
-      // console.log(menageTickets(
-      //   [
-      //     'Philadelphia|94.20|available', 
-      //     'New York City|95.99|available', 
-      //     'New York City|95.99|sold', 
-      //     'Boston|126.20|departed'
-      //   ], 'destination'
-      //   ));
-
-      // 04. Sorted List
-
-      class List {
-        constructor() {
-          this.list = [];
-          this.size = this.list.length;
-        }
-
-        add(num) {
-          this.list.push(num);
-          this.size++;
-          this.list.sort((a, b) => a - b);
-          // console.log(this.list);
-          return this.list;
-        }
-
-        remove(index) {
-          // this.list[index] = null;
-          if (index >= 0 && index < this.list.length) {
-            this.list.splice(index, 1);
-            this.size--;
-            // console.log(this.list);
-          }
-          return this.list;
-        }
-
-        get(index) {
-          if (index >= 0 && index < this.list.length) {
-            // console.log(this.list.length);
-            return this.list[index];
-          } 
-          // else {
-            // throw new Error();
-          // }
-        }
-
-      }
-
-      // let list = new List();
-      // list.add(5);
-      // list.add(7);
-      // list.add(6);
-      // console.log(list.get(1));
-      // list.remove(1);
-      // console.log(list.get(1));
-      // console.log(list.size);
-      
-      // 05. Length Limit
-
-      class Stringer {
-        constructor(str, length) {
-          this.innerString = str;
-          this.innerLength = length;
-        }
-
-        increase(num) {
-          this.innerLength += num;
-        }
-
-        decrease(num) {
-          if (num > this.innerLength) {
-            this.innerLength = 0;
-          } else {
-            this.innerLength -= num;
-          }
-        }
-
-        toString() {
-          
-          if (this.innerLength == 0) {
-            return "...";
-          }
-
-          let newString = this.innerString.substring(0, this.innerLength);
-
-          if (this.innerString.length > this.innerLength) {
-            newString += "...";
-          }
-
-          return newString;
-
-        }
-
-      }
-
-      // let test = new Stringer("Test", 5);
-      // console.log(test.toString()); // Test
-      // test.decrease(3);
-      // console.log(test.toString()); // Te...
-      // test.decrease(5);
-      // console.log(test.toString()); // ...
-      // test.increase(4);
-      // console.log(test.toString()); // Test
-      // console.log(test);
-
-      // 06. Company
-
-      class Company {
-        constructor() {
-          this.departments = {};
-        }
-
-        addEmployee(name, salary, position, department) {
-          
-          if (!name || !salary || !position || !department) {
-            throw new Error("Invalid input!");
-          }
-
-          if (salary < 0) {
-            throw new Error("Invalid input!");
-          }
-
-          if (!this.departments[department]) {
-            this.departments[department] = [];
-          }
-
-          const employee = {
-            name, 
-            salary, 
-            position
-          }
-
-          // console.log(this.departments[department]);
-          this.departments[department].push(employee);
-
-          // console.log(`New employee is hired. Name: ${name}. Position: ${position}`);
-          return `New employee is hired. Name: ${name}. Position: ${position}`;
-
-        }
-
-        bestDepartment() {
-          const departmentsInfo = [];
-
-          for (const key in this.departments) {
-            // console.log(key);
-            const department = this.departments[key];
-            // console.log(department);
-
-            let total = 0;
-            let average = 0;
-
-            for (const employee of department) {
-              // console.log(employee, key);
-              total += employee.salary;
-            }
-
-            // console.log(total);
-            average = total / department.length;
-            // console.log(average);
-            const departmentInfo = {
-              key, 
-              average
-            }
-
-            departmentsInfo.push(departmentInfo);
-            // console.log(departmentsInfo);
-          }
-
-          departmentsInfo.sort((dep1, dep2) => dep2.average - dep1.average);
-          // console.log(departmentsInfo);
-          const theBestName = departmentsInfo[0].key;
-          const theBestAverage = departmentsInfo[0].average;
-          const theBest = this.departments[theBestName];
-          theBest.sort((emp1, emp2) => emp2.salary - emp1.salary || emp1.name.localeCompare(emp2.name));
-          // console.log(theBestName, theBestAverage, theBest);
-
-          let result = `Best Department is: ${theBestName}\n`;
-          result += `Average salary: ${theBestAverage.toFixed(2)}\n`;
-
-          for (const employee of theBest) {
-            // console.log(employee);
-            const employeeInfo = `${employee.name} ${employee.salary} ${employee.position}\n`;
-            // console.log(employeeInfo);
-            result += employeeInfo;
-          }
-
-
-          return result.trim();
-
-        }
-      }
-
-      // let c = new Company();
-      // c.addEmployee("Stanimir", 2000, "engineer", "Construction");
-      // c.addEmployee("Pesho", 1500, "electrical engineer", "Construction");
-      // c.addEmployee("Slavi", 500, "dyer", "Construction");
-      // c.addEmployee("Stan", 2000, "architect", "Construction");
-      // c.addEmployee("Stanimir", 1200, "digital marketing manager", "Marketing");
-      // c.addEmployee("Pesho", 1000, "graphical designer", "Marketing");
-      // c.addEmployee("Gosho", 1350, "HR", "Human resources");
-      // console.log(c.departments);
-      // console.log(c.bestDepartment());
-
       // 07. HEX
-      // 08. Juice Flavors
-
-      function createJuice(arr) {
-        // console.log(arr);
-
-        class Juice {
-          constructor() {
-            this.flavors = {};
-            this.juices = {};
-          }
-
-          addFlavor(flavor, quantity) {
-            // console.log(flavor, quantity);
-            
-            if (typeof this.flavors[flavor] != "number") {
-              this.flavors[flavor] = 0;
-              // console.log(this.flavors);
-            }
-
-            // console.log(this.flavors);
-
-            let currentFlavor = this.flavors[flavor];
-            // console.log(currentFlavor);
-            currentFlavor += quantity;
-            // console.log(currentFlavor);
-
-            if (currentFlavor >= 1000) {
-              const bottles = Math.floor(currentFlavor / 1000);
-              // console.log(bottles);
-
-              if (typeof this.juices[flavor] != "number") {
-                this.juices[flavor] = 0;
-                // console.log(this.juices);
-              }
-              
-              this.juices[flavor] += bottles;
-              // console.log(this.juices);
-              currentFlavor = currentFlavor % 1000;
-              // console.log(currentFlavor);
-            }
-
-            this.flavors[flavor] = currentFlavor;
-
-          }
-        }
-
-        const menager = new Juice();
-
-        for (const input of arr) {
-          // console.log(input);
-          const tokens = input.split(" => ");
-          // console.log(tokens);
-          const name = tokens[0];
-          const quantity = Number(tokens[1]);
-          // console.log(name, quantity);
-          menager.addFlavor(name, quantity);
-        }
-
-        // console.log(menager.flavors);
-        // console.log(menager.juices);
-        const juiceNames = Object.keys(menager.juices);
-
-        for (const juiceName of juiceNames) {
-          // console.log(juiceName);
-          console.log(`${juiceName} => ${menager.juices[juiceName]}`);
-        }
-
-      }
-
-      // createJuice(
-      //   [
-      //     'Kiwi => 234',
-      //     'Pear => 2345',
-      //     'Watermelon => 3456',
-      //     'Kiwi => 4567',
-      //     'Pear => 5678',
-      //     'Watermelon => 6789'
-      //   ]
-      // );
-      // createJuice(
-      //   [
-      //     'Orange => 2000',
-      //     'Peach => 1432',
-      //     'Banana => 450',
-      //     'Peach => 600',
-      //     'Strawberry => 549'
-      //   ]
-      // );
-          
-      // 09. Auto-Engineering Company
-
-      function menageCarCompany(params) {
-        // console.log(params);
-        class IdontKnow {
-          constructor() {
-            this.brands = {};
-          }
-
-          addBrand(data) {
-            const tokens = data.split(" | ");
-            // console.log(tokens);
-            const brand = tokens[0];
-            const model = tokens[1];
-            const count = Number(tokens[2]);
-
-            if (!this.brands.hasOwnProperty(brand)) {
-              this.brands[brand] = {};
-            }
-
-            this.addModel(brand, model, count);
-
-          }
-
-          addModel(brand, model, number) {
-            if (!this.brands[brand].hasOwnProperty(model)) {
-              this.brands[brand][model] = 0;
-            }
-
-            this.brands[brand][model] += number;
-
-          }
-
-        }
-
-        const menager = new IdontKnow();
-
-        for (const input of params) {
-          // console.log(input);
-          menager.addBrand(input);
-        }
-
-        // console.log(menager.brands);
-        const brands = Object.keys(menager.brands);
-        
-        for (const brandName of brands) {
-          const models = Object.keys(menager.brands[brandName]);
-          // console.log(models);
-          console.log(brandName);
-          for (const modelName of models) {
-            console.log(`###${modelName} -> ${menager.brands[brandName][modelName]}`);
-          }
-        }
-
-      }
-
-      // menageCarCompany(
-      //   [
-      //     'Audi | Q7 | 1000',
-      //     'Audi | Q6 | 100',
-      //     'BMW | X5 | 1000',
-      //     'BMW | X6 | 100',
-      //     'Citroen | C4 | 123',
-      //     'Volga | GAZ-24 | 1000000',
-      //     'Lada | Niva | 1000000',
-      //     'Lada | Jigula | 1000000',
-      //     'Citroen | C4 | 22',
-      //     'Citroen | C5 | 10'
-      //   ]
-      // );
-
       // 10. Contacts Builder✶
       // 11. View Model✶
       // 12. Payment Package
