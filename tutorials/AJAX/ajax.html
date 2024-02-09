@@ -433,6 +433,59 @@
       #login:active {
         box-shadow: inset 1px 2px 1px #000, inset -2px -2px 1px #fff9;
       }
+
+      @import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-family: "PT sans", sans-serif;
+    font-size: 24px;
+    color: #234465;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    min-height: 100vh;
+    flex-wrap: wrap;
+}
+#main{   
+    margin: 0 auto;
+    width: 50%;
+}
+
+main:after{
+    display: block;
+    content:'';
+    clear: both;
+}
+
+input[type="button"], button{
+    padding: 0.3rem 0.5rem;
+    font-size: 0.7em;
+    margin-bottom: 5%;
+    border: none;
+    color: white;
+    background: #234465;
+    border-radius: 5px;
+    outline: none;
+}
+
+textarea{
+    width: 100%;
+    height: 20vh;
+    resize: none;
+    display: block;
+}
+
+#exercise div{
+	display: inline-block;
+	width: 49%;
+}
     </style>
   </head>
   <body>
@@ -686,6 +739,25 @@
 
     // calcOreder("water", 5);
     // calcOreder("coffee", 2);
+
+      // 01. Sort Array
+
+  function sortSrray(arr, type) {
+    // console.log(arr);
+    const types = {
+      asc: (a, b) => a - b,
+      desc: (a, b) => b - a,
+    }
+
+    const sorted = arr.sort(types[type]);
+    // console.log(sorted);
+
+    return sorted;
+
+  }
+
+  // sortSrray([14, 7, 17, 6, 8], 'asc');
+  // sortSrray([14, 7, 17, 6, 8], 'desc');
     </script>
 
     <!-- ================= Get data from local JSON file ================= -->
@@ -775,5 +847,68 @@ const patern = /[0-9]+/g;
 const result = matches3.match(patern).reduce((acc, n) => acc + Number(n), 0);
 console.log(result);
     </script>
+
+<div id="container">
+  <main id="main">
+    <div>
+      <p>Message</p>
+      <textarea placeholder="Write your message here..."></textarea>
+      <button>Encode and send it</button>
+    </div>
+    <div>
+      <p>Last received message</p>
+      <textarea disabled placeholder="No messages..."></textarea>
+      <button>Decode and read it</button>
+    </div>
+  </main>
+  <script>
+    function encodeAndDecodeMessages() {
+    const [ sendArea, receivedArea ] = document.getElementsByTagName("textarea");
+    // console.log(sendArea);
+    // console.log(receivedArea);
+    const [ sendBtn, receiveBtn ] = document.getElementsByTagName("button");
+    // console.log(sendBtn);
+    // console.log(receiveBtn);
+
+    sendBtn.addEventListener("click", () => {
+        // console.log("sended");
+        const message = sendArea.value;
+        // console.log(message);
+        let encrypted = "";
+
+        for (const letter of message) {
+            const ascii = letter.charCodeAt(0) + 1;
+            const newLetter = String.fromCharCode(ascii);
+            encrypted += newLetter;
+        }
+
+        sendArea.value = "";
+        receivedArea.value = encrypted;
+    })
+
+    receiveBtn.addEventListener("click", () => {
+        // console.log("receved");
+        const message = receivedArea.value;
+        // console.log(message);
+        let decrypted = "";
+
+        for (const letter of message) {
+            const ascii = letter.charCodeAt(0) - 1;
+            const newLetter = String.fromCharCode(ascii);
+            decrypted += newLetter;
+        }
+
+        // sendArea.value = "";
+        receivedArea.value = decrypted;
+
+    })
+}
+  </script>
+</div>
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+		encodeAndDecodeMessages();
+  })
+</script>
   </body>
 </html>
