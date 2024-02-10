@@ -3,762 +3,157 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>AJAX | XMLHttpRequest</title> -->
-    <title>Travel</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Redressed&display=swap');
-
-      fieldset {
-        display: none;
-      }
-      
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      ul {
-        list-style: none;
-      }
-
-      a {
-        text-transform: capitalize;
-        text-decoration: none;
-      }
-
-      button {
-        padding: 0.4em 1em;
-        border: none;
-        outline: none;
-        /* font-family: inherit; */
-        font-family: Georgia, serif;
-        text-transform: capitalize;
-        background-color: transparent;
-        cursor: pointer;
-      }
-      button:focus-within {
-        outline: 1px solid #fff8;
-      }
-
-      a, button {
-        transition: color 500ms ease-in-out;
-      }
-
-      img {
-        width: 100%;
-      }
-
-      body {
-        /* width: 100%; */
-        /* height: 100vh; */
-        min-height: 100vh;
-        /* align-items: center; */
-        /* justify-content: center; */
-        /* display: grid; */
-        /* place-items: center; */
-        font-family: 'Redressed', cursive;
-      }
-
-      .page {
-        /* width: 100%; */
-        position: relative;
-        min-height: 100vh;
-        padding: 2%;
-        display: flex;
-        /* align-items: center; */
-        /* justify-content: center; */
-        /* background-image: url("./travel/hero.webp");
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: center;
-        background-size: cover; */
-        overflow: hidden;
-      }
-      .page::after {
-        position: absolute;
-        top: 0;
-        left: -20%;
-        content: "";
-        width: 120%;
-        height: 100%;
-        background-image: url("../URLSearchParams/travel/hero.webp");
-        background-repeat: no-repeat;
-        /* background-attachment: fixed; */
-        background-position: center;
-        background-size: cover;
-        animation: leftright 60s linear infinite;
-        z-index: -2;
-      }
-      @keyframes leftright {
-        50% {
-          transform: translateX(16%);
-          /* left: 0; */
-        }
-      }
-      .page::before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.3);
-        z-index: -1;
-      }
-
-      .container {
-        width: 90%;
-        max-width: 100rem;
-        min-height: min(56.25rem, 90vh);
-        margin: auto;
-        border: 2px solid rgba(255, 255, 255, 0.4);
-        border-radius: 20px;
-        overflow: hidden;
-      }
-
-      .nav {
-        /* width: 100%; */
-        /* height: 80px; */
-        padding: 0 4%;
-        display: flex;
-        row-gap: 0.5rem;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        background-color: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        /* border: 1px solid green; */
-      }
-
-      .logo {
-        width: 6.25rem;
-        /* border: 1px solid red; */
-      }
-
-      .menu {
-        /* display: flex; */
-        /* gap: 20px; */
-        /* align-items: center; */
-      }
-      .menu li {
-        display: inline-block;
-        margin: 0 0.6rem;
-      }
-      .menu a {
-        display: inline-block;
-        padding: 0.4em 1em;
-        color: #000;
-        font-size: 1.25rem;
-        /* border: 1px solid red; */
-      }
-      .menu a:hover {
-        color: #fff;
-        /* color: #d2b496; */
-        text-shadow: 1px 1px 1px #000;
-      }
-
-      .nav button {
-        /* width: 100px; */
-        /* height: 40px; */
-        margin: 0.6rem;
-        color: #fff;
-        font-size: 1.25rem;
-        /* color: #ed7140; */
-        /* border: 2px solid #ed7140 !important; */
-        /* color: #000; */
-        /* border: 2px solid transparent; */
-        /* border-radius: 10px; */
-        /* background-color: transparent; */
-        /* background-color: #d2b496; */
-        /* filter: drop-shadow(1px 1px 1px #000); */
-        border: 2px solid #fff;
-        border-radius: 20px;
-        background-color: rgba(0, 0, 0, 0.6);
-        transition: all .5s ease-in-out;
-      }
-      .nav button:hover {
-        /* color: #fff; */
-        /* border: 2px solid #fff; */
-        /* color: #000; */
-        /* line-height: 1px; */
-        /* background-color: #fff; */
-        /* color: #d2b496; */
-        /* background-color: #d2b496; */
-        /* border: 2px solid #d2b496; */
-        /* filter: drop-shadow(1px 1px 1px #000) drop-shadow(-1px -1px 1px #fff5); */
-        /* text-shadow: -1px -1px 1px #000, 1px 1px 1px #fff8; */
-        color: #000;
-        border: 2px solid #d2b496;
-        background-color: #d2b496;
-        filter: drop-shadow(1px 1px 1px #000) drop-shadow(-1px -1px 1px #fff5);
-      }
-      .nav button:focus-visible {
-        outline: 1px solid #000;
-      }
-      .nav button:focus {
-        outline: 1px solid transparent;
-      }
-
-      .bars {
-        display: none;
-      }
-      .bars button {
-        font-size: 0px;
-        border-radius: 0.5rem;
-      }
-      .bars button i {
-        font-size: 1.25rem;
-        padding: 0.55em 0.6em 0.45em;
-      }
-
-      @media screen and (max-width: 650px) {
-        .menu {
-          display: none;
-        }
-        .bars {
-          display: block;
-        }
-      }
-
-      .main-container {
-        /* height: 80vh; */
-        min-height: 28rem;
-        padding-top: 10vh;
-        display: flex;
-        align-items: center;
-        justify-content: start;
-        flex-direction: column;
-      }
-
-      h1 {
-        width: 60%;
-        margin-top: 1.9rem;
-        color: #fff;
-        font-size: 2.2rem;
-        text-align: center;
-        /* font-weight: 600; */
-      }
-      .main-container p {
-        margin-bottom: 2.5rem;
-        color: #fff;
-        font-size: 1.25rem;
-        text-align: center;
-      }
-      .main-container button {
-        padding: 0.5em 1em;
-        color: #fff;
-        /* color: #000; */
-        font-size: 1.25rem;
-        border: 2px solid #fff;
-        /* border: 2px solid #000; */
-        /* border: 2px solid #d2b496; */
-        border-radius: 1.25rem;
-        background-color: rgba(0, 0, 0, 0.6);
-        /* background-color: #d2b496; */
-        /* box-shadow: 10px 10px 20px #101010; */
-        transition: all 500ms ease-in-out;
-        /* cursor: pointer; */
-      }
-      .main-container button:hover {
-        /* color: #fff; */
-        color: #000;
-        /* background-color: #000; */
-        /* color: #d2b496; */
-        /* line-height: 1px; */
-        border: 2px solid #d2b496;
-        /* border: 2px solid #fff; */
-        background-color: #d2b496;
-        /* background-color: #fff; */
-        /* background-color: rgba(0, 0, 0, 0.4); */
-        filter: drop-shadow(1px 1px 1px #000) drop-shadow(-1px -1px 1px #fff5);
-        /* text-shadow: -1px -1px 1px #000, 1px 1px 1px #fff8; */
-      }
-
-      .form {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        padding: 0.6rem;
-        /* display: flex; */
-        /* align-items: center; */
-        /* justify-content: center; */
-        /* flex-direction: column; */
-        display: none;
-      }
-      .form.visible {
-        display: flex;
-      }
-      /* .form {
-        display: flex;
-      } */
-      .form-container {
-        /* width: 100%; */
-        /* height: 100%; */
-        width: 26.25rem;
-        min-height: 28rem;
-        margin: auto;
-        display: flex;
-        flex-direction: column;
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        border-radius: 1rem;
-        background-color: rgba(0, 0, 0, 0.5);
-        box-shadow: 10px 10px 8px rgba(0, 0, 0, 0.2);
-        backdrop-filter: blur(30px);
-        /* display: flex; */
-        /* gap: 20px; */
-        /* align-items: center; */
-        /* justify-content: center; */
-        /* flex-direction: column; */
-      }
-      .form-main {
-        width: 100%;
-        margin: auto;
-        padding: 0 10% 10%;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        /* position: relative; */
-        /* align-items: flex-start; */
-        /* overflow: hidden; */
-      }
-
-      .form-container .top {
-        /* width: 100%; */
-        padding: 3% 3% 0;
-        text-align: right;
-      }
-      #close-form {
-        padding: 0;
-        border-radius: 8px;
-      }
-      #close-form i {
-        /* position: absolute; */
-        /* top: 0; */
-        /* right: 0; */
-        /* width: 50px; */
-        /* height: 50px; */
-        /* display: flex; */
-        /* align-items: center; */
-        /* justify-content: center; */
-        /* color: #000; */
-        /* color: #ed7140; */
-        /* padding: 0.15em 0.3em 0.23em; */
-        padding: 0.1em 0.26em 0.18em;
-        color: transparent;
-        font-size: 1.9rem;
-        /* -webkit-text-stroke: 5px rgba(0, 0, 0, 0.5); */
-        -webkit-text-stroke: 3px #ed7140;
-      }
-      #close-form:hover i {
-        color: #ed7140;
-        -webkit-text-stroke: 16px transparent;
-      }
-
-      .form-title {
-        font-size: 50px;
-        /* text-align: center; */
-        text-transform: capitalize;
-      }
-      .email, 
-      .password {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-      }
-      label {
-        margin-bottom: 5px;
-        color: #fff;
-        text-transform: capitalize;
-      }
-      .email label {
-        margin-top: 20px;
-      }
-      input {
-        /* width: 350px; */
-        width: 100%;
-        /* height: 45px; */
-        margin-bottom: 20px;
-        /* padding: 10px; */
-        padding: 15px 20px;
-        color: #fff;
-        outline: 1px solid transparent;
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        /* border-radius: 10px; */
-        border-radius: 2em;
-        background-color: rgba(255, 255, 255, 0.1);
-      }
-      /* input::placeholder {
-        color: #fff;
-      } */
-      input:focus-visible {
-        outline: 1px solid #fff;
-        background-color: transparent;
-      }
-      .form-main span {
-        color: #fff;
-      }
-      .form-main a {
-        /* margin-top: -8px; */
-        margin-bottom: 15px;
-        color: #ed7140;
-      }
-      .form-main a:hover {
-        color: #ed714094;
-      }
-
-      #login {
-        /* width: 100%; */
-        /* height: 40px; */
-        margin-top: 25px;
-        color: #fff;
-        font-size: 20px;
-        border: 2px solid #ed7140;
-        border-radius: 20px;
-        background-color: #ed7140;
-        /* background-color: rgba(0, 0, 0, 0.6); */
-        /* transition: all 0.5s; */
-        transition-property: border-color;
-      }
-      #login:hover {
-        /* border-color: #fff; */
-        /* background-color: #ed7140; */
-        box-shadow: inset 1px 1px 1px #000, inset -1px -1px 1px #fff;
-      }
-      #login:active {
-        box-shadow: inset 1px 2px 1px #000, inset -2px -2px 1px #fff9;
-      }
-
-      @import url('https://fonts.googleapis.com/css?family=Lato');
-@import url('https://fonts.googleapis.com/css?family=PT+Sans');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-html{
-    font-family: "PT sans", sans-serif;
-    font-size: 24px;
-    color: #234465;
-}
-body{
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    min-height: 100vh;
-    flex-wrap: wrap;
-}
-#main{   
-    margin: 0 auto;
-    width: 50%;
-}
-
-main:after{
-    display: block;
-    content:'';
-    clear: both;
-}
-
-input[type="button"], button{
-    padding: 0.3rem 0.5rem;
-    font-size: 0.7em;
-    margin-bottom: 5%;
-    border: none;
-    color: white;
-    background: #234465;
-    border-radius: 5px;
-    outline: none;
-}
-
-textarea{
-    width: 100%;
-    height: 20vh;
-    resize: none;
-    display: block;
-}
-
-#exercise div{
-	display: inline-block;
-	width: 49%;
-}
-    </style>
+    <title>AJAX | XMLHttpRequest</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+<script>
+  // 10. Contacts Builder✶
+  // 11. View Model✶
+  // 12. Payment Package
+  // 13. String Builder *✶
+</script>
+<script>
+  // task 1
+  function name(params) {
+    console.log(params);
+    const text = params[0];
+    console.log(text);
 
-    <div class="page">
-      <div class="container">
-        <div class="nav">
-          <a href="#logo" class="logo">
-            <img src="../URLSearchParams/travel/logo.png" alt="">
-          </a>
-          <ul class="menu" id="menu">
-            <li><a href="#">home</a></li>
-            <li><a href="#">about</a></li>
-            <li><a href="#">camp</a></li>
-            <li><a href="#">contact us</a></li>
-          </ul>
-          <button id="sign-up">sign up</button>
-          <div class="bars" id="bars">
-            <button>menu
-              <i class="fa fa-bars"></i>
-            </button>
-          </div>
-        </div>
-        <div class="form visible">
-          <div class="form-container">
-            <div class="top">
-              <button id="close-form">
-                <i class="fa fa-times"></i>
-              </button>
-            </div>
-            <div class="form-main">
-              <span class="form-title">login</span>
-              <div class="email">
-                <label for="email">email</label>
-                <input type="email" name="email" id="email" placeholder="Write Your Email...">
-              </div>
-              <div class="password">
-                <label for="password">password</label>
-                <input type="password" name="password" id="password" placeholder="Write Your Password...">
-              </div>
-              <a href="#">forgot password?</a>
-              <span>Don't Have an Account? <a href="#">sign up</a></span>
-              <button id="login">login</button>
-            </div>
-          </div>
-        </div>
-        <div class="main-container">
-          <h1>Discover hundreds of travel destinations...!</h1>
-          <p>Plan and book your trip in just a few steps, travel tips, destinations's information and inspiration from us.</p>
-          <button>discover now</button>
-        </div>
-      </div>
-    </div>
-    <script>
-      const closeFormBtn = document.getElementById("close-form");
-      const form = document.querySelector(".form");
+    let index = 1;
+    let input = params[index];
 
-      closeFormBtn.addEventListener("click", () => {
-        form.classList.remove("visible");
-      })
-    </script>
+    while (input != "") {
+      console.log(input);
+      const data = input.split(":");
+      const command = data[0];
 
-    <script>
-      // 07. HEX
-
-      class Hex {
-        constructor(value) {
-          this.value = value;
-        }
-
-        valueOf() {
-          return this.value;
-        }
-        
-        toString() {
-          return `0x${this.valueOf().toString(16).toUpperCase()}`;
-        }
-        // This function will show its hexadecimal value starting with "0x"
-
-        plus(number) {
-          return new Hex(this.value + number);
-        }
-        // This function should add anumberor Hex object and return a new Hex object.
-
-        minus(number) {
-          return new Hex(this.value - number);
-        }
-        // This function should subtract a number or Hex object and return a new Hex object.
-
-        parse(string) {
-          return Number.parseInt(string, 16);
-        }
-        // Create a parse class method that can parse Hexadecimal numbers and convert them to standard decimal numbers.
-
+      if (command == "") {
+        console.log("");
+      } else if (command == "") {
+        console.log("");
+      } else if (command == "") {
+        console.log("");
       }
 
-      // let FF = new Hex(255);
-      // console.log(FF.toString());
-      // console.log(FF.valueOf() + 1 == 256);
-      // let a = new Hex(10);
-      // let b = new Hex(5);
-      // console.log(a.plus(b).toString());
-      // console.log(a.plus(b).toString()==='0xF');
-      // console.log(FF.parse('AAA'));
+      index++;
+      input = params[index];
 
-      // 10. Contacts Builder✶
-      // 11. View Model✶
-      // 12. Payment Package
-      // 13. String Builder *✶
-    </script>
-    <script>
-      class Test {
-        constructor(name) {
-          this.name = name;
-        }
-
-        get name () {
-          return hidden;
-        }
-
-        set name (newName) {
-          if (typeof newName != "string") {
-            throw new Error("the name should be a string");
-          }
-
-          this._name = newName;
-        }
-
-        getProto () {
-          return "proto";
-        }
-
-        // getName () {
-        //   return this._name;
-        // }
-
-        // setName (newName) {
-        //   if (typeof newName != "string") {
-        //     throw new Error("the name should be a string");
-        //   }
-
-        //   this._name = newName;
-        // }
+      if (index > 100) {
+        console.log("infinity");
+        break;
       }
 
-      Test.createNewTest = function (name) {
-        let hidden = "hidden";
-        const test = new Test(name);
-        test.getHidden = function () {
-          return hidden;
-        }
-        test.setHidden = function (value) {
-          hidden = value;
-        }
-        console.dir(test);
-        return test;
+    }
+
+  }
+
+  function task3(params) {
+    // console.log(params);
+    const cars = {};
+    const n = Number(params[0]);
+    // console.log(n);
+    let index = 1;
+    let input = "";
+
+    for (let i = 1; i <= n; i++) {
+      input = params[i];
+      // console.log(input);
+      const data = input.split("");
+      // console.log(data);
+      const name = data[0];
+      const mileage = Number(data[1]);
+      const fuel = Number(data[2]);
+      // console.log(name);
+      // console.log(mileage);
+      // console.log(fuel);
+
+      const car = {
+        mileage, 
+        fuel
       }
 
-      const test = Test.createNewTest("jogata");
-      console.log(test);
-      console.log(test.getHidden());
-      test.setHidden("nothidden");
-      console.log(test.getHidden());
-      console.log(test.getProto());
-      console.log(test instanceof Test);
-
-      let atest = 5;
-
-      function geta() {
-        atest += 1;
-        // console.log(atest);
-      }
-
-      let place = {
-        name: 'India',
-        state: 'Delhi'
-      };
-
-      place['state'] = 'Mumbai';
-      place.city = {};
-      place['city']['name'] = 'Navi Mumbai';
-      place.city['street'] = 12;
-
-      const obj1 = {
-        name: "jogata"
-      }
-
-      // obj1["age"] = 35;
-      obj1.age = 35;
-
-      console.log(obj1.name);
-      console.log(obj1.age);
-
-      // console.dir(geta)
-
-      // console.log(test.getHidden());
-
-      // const test1 = new Test("jogata1");
-      // const test2 = new Test("jogata2");
-      // console.log(test1);
-
-      // test1._name = 5;
-
-      // test1.setName("new");
-      // test1.name = "new";
-      // console.log(test1);
+      cars[name] = car;
       
-      // try {
-      //   test1.name = 5;
-      // } catch (error) {
-      //   console.log(error.message);
+      index++;
+
+    }
+    // console.log(cars);
+
+    input = params[index];
+    // console.log(input);
+
+    while (input != "") {
+      // console.log(input);
+      const data = input.split("");
+      // console.log(data);
+      const command = data[0];
+      // console.log(command);
+      const name = data[1];
+      // console.log(name);
+
+      if (command == "") {
+        console.log("");
+      } else if (command == "") {
+        console.log("");
+      } else if (command == "") {
+        console.log("");
+      }
+      
+      index++;
+      input = params[index];
+
+      // if (index > 100) {
+      //   console.log("infinity");
+      //   break;
       // }
 
-      // console.log(test1.name);
-      
-      // test1.name = 5;
-      // console.log(test1.getName);
-
-      // console.log(test2.getName());
-
-        // 02. String Length
-
-  function calcStringsLength(str1, str2, str3) {
-    const length = str1.length + str2.length + str3.length;
-    const average = Math.floor(length / 3);
-    console.log(length);
-    console.log(average);
+    }
   }
+</script>
+<script>
+    // 05. Math Operations
 
-  // calcStringsLength('chocolate', 'ice cream', 'cake');
-  // calcStringsLength('pasta', '5', '22.3');
+    function calc(n1, n2, operator) {
+    const operations = new Map();
+    operations.set("+", sum);
+    operations.set("-", sub);
+    operations.set("*", multi);
+    operations.set("/", devide);
+    operations.set("%", module);
+    operations.set("**", paw);
 
-      // Orders
-
-      function calcOreder(product, q) {
-      const prices = {
-        coffee: 1.5, 
-        water: 1, 
-        coke: 1.4, 
-        snacks: 2, 
-      }
-
-      let total = 0;
-
-      total = prices[product]* q;
-
-      console.log(total.toFixed(2));
-
+    function sum(n1, n2) {
+      return n1 + n2;
+    }
+    function sub(n1, n2) {
+      return n1 - n2;
+    }
+    function multi(n1, n2) {
+      return n1 * n2;
+    }
+    function devide(n1, n2) {
+      return n1 / n2;
+    }
+    function module(n1, n2) {
+      return n1 % n2;
+    }
+    function paw(n1, n2) {
+      return n1 ** n2;
     }
 
-    // calcOreder("water", 5);
-    // calcOreder("coffee", 2);
-
-      // 01. Sort Array
-
-  function sortSrray(arr, type) {
-    // console.log(arr);
-    const types = {
-      asc: (a, b) => a - b,
-      desc: (a, b) => b - a,
-    }
-
-    const sorted = arr.sort(types[type]);
-    // console.log(sorted);
-
-    return sorted;
+    // console.log(operations);
+    const callback = operations.get(operator)
+    // console.log(callback);
+    const result = callback(n1, n2);
+    console.log(result);
 
   }
 
-  // sortSrray([14, 7, 17, 6, 8], 'asc');
-  // sortSrray([14, 7, 17, 6, 8], 'desc');
-    </script>
+  // calc(5, 6, '+');
+  // calc(3, 5.5, '*');
+</script>
 
     <!-- ================= Get data from local JSON file ================= -->
 
@@ -847,68 +242,5 @@ const patern = /[0-9]+/g;
 const result = matches3.match(patern).reduce((acc, n) => acc + Number(n), 0);
 console.log(result);
     </script>
-
-<div id="container">
-  <main id="main">
-    <div>
-      <p>Message</p>
-      <textarea placeholder="Write your message here..."></textarea>
-      <button>Encode and send it</button>
-    </div>
-    <div>
-      <p>Last received message</p>
-      <textarea disabled placeholder="No messages..."></textarea>
-      <button>Decode and read it</button>
-    </div>
-  </main>
-  <script>
-    function encodeAndDecodeMessages() {
-    const [ sendArea, receivedArea ] = document.getElementsByTagName("textarea");
-    // console.log(sendArea);
-    // console.log(receivedArea);
-    const [ sendBtn, receiveBtn ] = document.getElementsByTagName("button");
-    // console.log(sendBtn);
-    // console.log(receiveBtn);
-
-    sendBtn.addEventListener("click", () => {
-        // console.log("sended");
-        const message = sendArea.value;
-        // console.log(message);
-        let encrypted = "";
-
-        for (const letter of message) {
-            const ascii = letter.charCodeAt(0) + 1;
-            const newLetter = String.fromCharCode(ascii);
-            encrypted += newLetter;
-        }
-
-        sendArea.value = "";
-        receivedArea.value = encrypted;
-    })
-
-    receiveBtn.addEventListener("click", () => {
-        // console.log("receved");
-        const message = receivedArea.value;
-        // console.log(message);
-        let decrypted = "";
-
-        for (const letter of message) {
-            const ascii = letter.charCodeAt(0) - 1;
-            const newLetter = String.fromCharCode(ascii);
-            decrypted += newLetter;
-        }
-
-        // sendArea.value = "";
-        receivedArea.value = decrypted;
-
-    })
-}
-  </script>
-</div>
-<script>
-  window.addEventListener("DOMContentLoaded", () => {
-		encodeAndDecodeMessages();
-  })
-</script>
   </body>
 </html>
