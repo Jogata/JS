@@ -259,6 +259,97 @@
       // console.log(ribbon);
 
       // 05. People
+
+      function initPeople() {
+
+        class Employee {
+          constructor(name, age) {
+            this.name = name;
+            this.age = age;
+            this.salary = 0;
+            this.tasks = [];
+          }
+
+          work() {
+            console.log(`${this.tasks[0]}`);
+            // console.log(this.tasks);
+            // this.tasks.pop();
+            this.tasks.push(this.tasks.shift());
+          }
+
+          collectSalary() {
+            console.log(`${this.name} received ${this.salary} this month.`);
+            // return `${this.name} received ${this.salary} this month.`;
+          }
+
+        }
+
+        class Junior extends Employee {
+          constructor(name, age) {
+            super(name, age);
+            this.tasks = [`${this.name} is working on a simple task.`];
+          }
+        }
+        
+        class Senior extends Employee {
+          constructor(name, age) {
+            super(name, age);
+            this.tasks = [
+              `${this.name} is working on a complicated task.`, 
+              `${this.name} is taking time off work.`, 
+              `${this.name} is supervising junior workers.`
+            ];
+          }
+
+        }
+        
+        class Manager extends Employee {
+          constructor(name, age) {
+            super(name, age);
+            this.dividend = 0;
+            this.tasks = [
+              `${this.name} scheduled a meeting.`, 
+              `${this.name} is preparing a quarterly report.`
+            ];
+          }
+
+          collectSalary() {
+            console.log(`${this.name} received ${this.salary + this.dividend} this month.`);
+            // return `${this.name} received ${this.salary} this month.`;
+          }
+
+        }
+
+        return {
+          Employee, 
+          Junior, 
+          Senior, 
+          Manager
+        }
+
+      }
+
+      // const classes = initPeople();
+      // const junior = new classes.Junior('Ivan',25);
+      // junior.work();
+      // junior.work();
+      // junior.salary = 5811;
+      // junior.collectSalary();
+
+      // const sinior = new classes.Senior('Alex', 31);
+      // sinior.work();
+      // sinior.work();
+      // sinior.work();
+      // sinior.work();
+      // sinior.salary = 12050;
+      // sinior.collectSalary();
+      
+      // const manager = new classes.Manager('Tom', 55); 
+      // manager.salary = 15000; 
+      // manager.collectSalary(); 
+      // manager.dividend = 2500;
+      // manager.collectSalary();
+
       // 06. Posts
       // 07. Computer *✶
     </script>
@@ -367,6 +458,53 @@
   }
 </script>
 <script>
+  // 01. Value of a String
+
+function findLettersSum(params) {
+const word = params[0];
+const type = params[1];
+// console.log(word, type);
+let sumLower = 0;
+let sumUpper = 0;
+
+for (const letter of word) {
+  const ascii = letter.charCodeAt(0)
+  // console.log(ascii);
+  if (ascii > 64 && ascii < 91) {
+    sumUpper += ascii;
+  } else if (ascii > 96 && ascii < 123) {
+    sumLower += ascii;
+  }
+}
+
+if (type == "LOWERCASE") {
+  console.log(`The total sum is: ${sumLower}`);
+} else {
+  console.log(`The total sum is: ${sumUpper}`);
+}
+
+}
+
+// findLettersSum(['HelloFromMyAwesomePROGRAM', 'LOWERCASE']);
+// findLettersSum(['AC/DC', 'UPPERCASE']);
+
+  // 01. Calorie Object
+
+  function createCalorieData(params) {
+    const calories = {};
+
+    for (let index = 0; index < params.length; index+=2) {
+      // console.log(index);
+      calories[params[index]] = Number(params[index + 1]);
+    }
+
+    console.log(calories);
+
+  }
+
+  // createCalorieData(['Yoghurt', '48', 'Rise', '138', 'Apple', '52']);
+  // createCalorieData(['Potato', '93', 'Skyr', '63', 'Cucumber', '18', 'Milk', '42']);
+
     // 09. Square of Stars
 
     function printStars(num = 5) {
