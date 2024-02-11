@@ -351,6 +351,100 @@
       // manager.collectSalary();
 
       // 06. Posts
+      function solution() {
+        
+        class Post {
+          constructor(title, content) {
+            this.title = title;
+            this.content = content;
+          }
+          
+          toString() {
+            return `Post: ${this.title}\nContent: ${this.content}`
+          }
+          
+        }
+        
+        class SocialMediaPost extends Post {
+          constructor(title, content, likes, dislikes) {
+            super(title, content);
+            this.likes = likes;
+            this.dislikes = dislikes;
+            this.comments = [];
+          }
+          
+          addComment(comment) {
+            this.comments.push(` * ${comment}`);
+          }
+          
+          toString() {
+            let info = `Post: ${this.title}\nContent: ${this.content}\nRating: ${this.likes - this.dislikes}`;
+            // "Comments:" " * {comment1}" " * {comment2}"`;
+            // console.log(this.comments);
+            if (this.comments.length > 0) {
+              info += '\nComments:\n';
+              info += this.comments.join("\n");
+            }
+            
+            return info;
+            
+          }
+          
+        }
+        
+        class BlogPost extends Post {
+          constructor(title, content, views) {
+            super(title, content);
+            this.views = views;
+          }
+          
+          view() {
+            this.views++;
+            return this;
+          }
+          
+          toString() {
+            let blogInfo = super.toString();
+            blogInfo += `\nViews: ${this.views}`;
+            return blogInfo;
+          }
+          
+        }
+        
+        return {
+          Post, 
+          SocialMediaPost, 
+          BlogPost
+        }
+        
+      }
+      
+      // const classes = solution();
+      
+      // let post = new classes.Post("Post", "Content");
+      // console.log(post.toString());
+      
+      // let scm = new classes.SocialMediaPost("TestTitle", "TestContent", 25, 30);
+      // scm.addComment("Good post");
+      // scm.addComment("Very good post");
+      // scm.addComment("Wow!");
+      // console.log(scm.toString());
+      
+      // let bp = new classes.BlogPost("BlogTitle", "BlogContent", 3);
+      // bp.view();
+      // console.log(bp.views);
+      // bp.view();
+      // console.log(bp.views);
+      // bp.view();
+      // console.log(bp.views);
+      // bp.view();
+      // console.log(bp.views);
+      // bp.view();
+      // console.log(bp.views);
+      // bp.view();
+      // console.log(bp.views);
+      // console.log(bp.toString());
+      
       // 07. Computer *✶
     </script>
 <script>
@@ -559,6 +653,45 @@ if (type == "LOWERCASE") {
 
   // calc(5, 6, '+');
   // calc(3, 5.5, '*');
+
+  // 06. Extract Emails✶
+
+function extractEmails(params) {
+// console.log(params);
+
+const emailPattern2 = /[a-z]+([_\.-][a-z]+)*@[a-z]+([_\.-][a-z]+)*\.[a-z]+/g;
+const emailPattern = /[^a-z0-9 ]?[a-z0-9]+([_\.-][a-z0-9]+)*@[a-z]+([_\.-][a-z]+)*\.[a-z]+[^a-z0-9 .,]?/g;
+
+const emails = params.match(emailPattern);
+// console.log(emails);
+
+const firstSymbolTemplate = /[a-z0-9]/;
+const lastSymbolTemplate = /[a-z]/;
+
+for (const email of emails) {      
+  // console.log(email);
+  const isFirstSymbolValid = firstSymbolTemplate.test(email[0]);
+
+  if (isFirstSymbolValid) {
+    // console.log("true");
+    const isLastSymbolValid = lastSymbolTemplate.test(email[email.length - 1]);
+
+    if (isLastSymbolValid) {
+      // console.log(email[email.length - 1]);
+      // console.log("true");
+      console.log(email);
+    }
+
+  }
+
+}
+
+}
+
+// extractEmails(" 4a5@abv.bg-,. b hbhs");
+// extractEmails("Just send email to s.miller@mit.edu and j.hopking@york.ac.uk for more information.");
+// extractEmails("Please contact us at: support@github.com.");
+// extractEmails("Many users @ SoftUni confuse email addresses. We @ Softuni.BG provide high-quality training @ home or @ class. -- steve.parker@softuni.de.");
 </script>
 
     <!-- ================= Get data from local JSON file ================= -->
