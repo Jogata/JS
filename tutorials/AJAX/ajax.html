@@ -109,7 +109,135 @@ label {
             <option value="ft">Feet</option>
             <option value="in">Inches</option>
         </select>
+        <script>
+          window.addEventListener("DOMContentLoaded", () => {
+            attachEventsListeners();
+          })
+        </script>
+        <script>
+          function attachEventsListeners() {
+
+const convertToMetersFrom = {
+    "km": 1000, 
+    "m": 1, 
+    "cm": 0.01, 
+    "mm": 0.001, 
+    "mi": 1609.34, 
+    "yrd": 0.9144, 
+    "ft": 0.3048, 
+    "in": 0.0254, 
+}
+
+const convertfromMetersTo = {
+    "km": 1000, 
+    "m": 1, 
+    "cm": 0.01, 
+    "mm": 0.001, 
+    "mi": 1609.34, 
+    "yrd": 0.9144, 
+    "ft": 0.3048, 
+    "in": 0.0254, 
+}
+
+const convertButton = document.getElementById("convert");
+
+convertButton.addEventListener("click", () => {
+    const inputDistance = Number(document.getElementById("inputDistance").value);
+    const inputUnit = document.getElementById("inputUnits").value;
+    const outputUnit = document.getElementById("outputUnits").value;
+    // console.log(inputDistance, inputUnit, outputUnit);
+
+    const meters = convertToMetersFrom[inputUnit] * inputDistance;
+    // console.log(meters);
+    const result = meters / convertfromMetersTo[outputUnit];
+    // console.log(result);
+    
+    const outputDistance = document.getElementById("outputDistance");
+    outputDistance.value = result;
+})
+}
+        </script>
     </div>
+    <script>
+      class FashionRetailInventory {
+        constructor(storehouse, location) {
+          this.storehouse = storehouse;
+          this.location = location;
+          this.productStock = [];
+        }
+
+        addProduct (productName, size, quantity, price) {
+          const product = this.productStock.find(p => p.productName == productName && p.size == size);
+
+          if (product) {
+            product.quantity += quantity;
+            return `You added ${quantity} more pieces of product ${productName} size ${size}`;
+          } else {
+            const newProduct = {
+              productName, 
+              size, 
+              quantity, 
+              price
+            };
+            this.productStock.push(newProduct);
+            return `The product ${productName}, size ${size} was successfully added to the inventory`;
+          }
+        }
+
+        sendProduct (productName, size) {
+          const productIndex = this.productStock.findIndex(p => p.productName == productName && p.size == size);
+          // console.log(product);
+
+          if (productIndex > 0) {
+            return `The product ${productName}, size ${size} was successfully removed from the inventory`;
+          } else {
+            throw new Error(`The product ${productName}, size ${size} is not in the inventory`);
+          }
+        }
+
+        findProductsBySize (size) {
+          const products = this.productStock.filter(p => p.size == size);
+          const formatted = products.map(x => x = `${x.productName}-${x.quantity} pieces`);
+          
+          if (products.length == 0) {
+            return `There are no products available in that size`;
+          } else {
+            return formatted.join(", ");
+          }
+        }
+
+        listProducts () {
+        }
+
+      }
+
+      // const storeHouse = new FashionRetailInventory("East", "Milano");
+      // console.log(storeHouse.addProduct("Shirt", "M", 10, 25.0));
+      // console.log(storeHouse.addProduct("T-Shirt", "M", 10, 25.0));
+      // console.log(storeHouse.addProduct("Sweather", "M", 10, 25.0));
+      // console.log(storeHouse.addProduct("Sweather", "M", 10, 25.0));
+
+      // const storeHouse = new FashionRetailInventory("East", "Milano");
+      // console.log(storeHouse.addProduct("Shirt", "M", 10, 25.0));
+      // console.log(storeHouse.addProduct("T-Shirt", "M", 10, 25.0));
+      // console.log(storeHouse.sendProduct("T-Shirt", "M"));
+      // console.log(storeHouse.sendProduct("Sweather", "M"));
+      // console.log(storeHouse.sendProduct("Sweat", "M"));
+
+      // const storeHouse = new FashionRetailInventory("East", "Milano");
+      // console.log(storeHouse.addProduct("Shirt", "M", 10, 25.0));
+      // console.log(storeHouse.addProduct("T-Shirt", "M", 10, 25.0));
+      // console.log(storeHouse.findProductsBySize("M"));
+      // console.log(storeHouse.findProductsBySize("XL"));
+
+      const storeHouse = new FashionRetailInventory("East", "Milano");
+      console.log(storeHouse.addProduct("Shirt", "M", 10, 25.0));
+      console.log(storeHouse.addProduct("T-Shirt", "M", 10, 25.0));
+      console.log(storeHouse.addProduct("Shirt", "L", 5, 30.0));
+      console.log(storeHouse.addProduct("Shoes", "9", 8, 50.0));
+      console.log(storeHouse.sendProduct("Shoes", "9", 8, 50.0));
+      console.log(storeHouse.listProducts());
+    </script>
 
     <script>
       // 01. Array Extension
