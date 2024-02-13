@@ -5,1226 +5,155 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      @import url('https://fonts.googleapis.com/css?family=Raleway');
-
-      fieldset {
-        display: none;
-      }
-
-body {
-    width: 30%;
-    margin: 0 auto;
-    padding-top: 20px;
-    font-family: 'Raleway', sans-serif;
-    text-align: center;
-}
-
-h1 {
-    background: #453f3f;
-    color: white;
-    margin: 0;
-    padding: 10px 10px;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-}
-
-div {
-    background: #dfdfde;
-    margin: 0;
-    padding: 10px 10px;
-    text-align: left;
-}
-
-div:last-of-type {
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-}
-
-label, input {
-    display: inline-block;
-    width: 5em;
-}
-
-input, select {
-    padding: 3px;
-    border-radius: 4px;
-    border: none;
-}
-
-label {
-    text-align: right;
-}
-
-#convert {
-    background: #453f3f;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    font-weight: bold;
-    text-transform: uppercase;
-    width: 86px;
-    cursor: pointer;
-    outline: none;
-    position: relative;
-    left: 16px;
-}
-
-#convert:hover {
-    background: white;
-    color: #453f3f;
-}
-    </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
-    <h1>Distance Converter</h1>
-    <div>
-        <label for="inputDistance">From:</label>
-        <input type="text" id="inputDistance">
-        <select id="inputUnits">
-            <option value="km">Kilometers</option>
-            <option value="m">Meters</option>
-            <option value="cm">Centimeters</option>
-            <option value="mm">Millimeters</option>
-            <option value="mi">Miles</option>
-            <option value="yrd">Yards</option>
-            <option value="ft">Feet</option>
-            <option value="in">Inches</option>
-        </select>
-        <input type="button" id="convert" value="Convert">
-    </div>
-    <div>
-        <label for="outputDistance">To:</label>
-        <input type="text" id="outputDistance" disabled="disabled">
-        <select id="outputUnits">
-            <option value="km">Kilometers</option>
-            <option value="m">Meters</option>
-            <option value="cm">Centimeters</option>
-            <option value="mm">Millimeters</option>
-            <option value="mi">Miles</option>
-            <option value="yrd">Yards</option>
-            <option value="ft">Feet</option>
-            <option value="in">Inches</option>
-        </select>
-        <script>
-          window.addEventListener("DOMContentLoaded", () => {
-            attachEventsListeners();
-          })
-        </script>
-        <script>
-          function attachEventsListeners() {
+    <div id="container">
+      <main id="main">
+        <div id="exercise">
+          <table>
+            <thead>
+              <tr>
+                <th colspan="9">SUDOMU</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <td colspan="3">
+                  <button>Quick Check</button>
+                  <button>Clear</button>
+                </td>
+              </tr>
+            </tfoot>
+            <tbody>
+              <tr>
+                <td>
+                  <input min="1" max="3" type="number" />
+                </td>
+                <td>
+                  <input min="1" max="3" type="number" />
+                </td>
+                <td>
+                  <input min="1" max="3" type="number" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input min="1" max="3" type="number" />
+                </td>
+                <td>
+                  <input min="1" max="3" type="number" />
+                </td>
+                <td>
+                  <input min="1" max="3" type="number" />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input min="1" max="3" type="number" />
+                </td>
+                <td>
+                  <input min="1" max="3" type="number" />
+                </td>
+                <td>
+                  <input min="1" max="3" type="number" />
+                </td>
+              </tr>
+  
+            </tbody>
+          </table>
+          <div id="check">
+            <p></p>
+          </div>
+        </div>
+      </main>
+      <script>
+        solve();
+        function solve() {
+    const table = document.querySelector("table");
+    const tr = document.querySelectorAll("tbody tr");
+    const [ checkBtn, clearBtn ] = document.getElementsByTagName("button");
+    const resultField = document.querySelector("#check p");
 
-const convertToMetersFrom = {
-    "km": 1000, 
-    "m": 1, 
-    "cm": 0.01, 
-    "mm": 0.001, 
-    "mi": 1609.34, 
-    "yrd": 0.9144, 
-    "ft": 0.3048, 
-    "in": 0.0254, 
-}
+    checkBtn.addEventListener("click", () => {
+        const matrix = [];
 
-const convertfromMetersTo = {
-    "km": 1000, 
-    "m": 1, 
-    "cm": 0.01, 
-    "mm": 0.001, 
-    "mi": 1609.34, 
-    "yrd": 0.9144, 
-    "ft": 0.3048, 
-    "in": 0.0254, 
-}
-
-const convertButton = document.getElementById("convert");
-
-convertButton.addEventListener("click", () => {
-    const inputDistance = Number(document.getElementById("inputDistance").value);
-    const inputUnit = document.getElementById("inputUnits").value;
-    const outputUnit = document.getElementById("outputUnits").value;
-    // console.log(inputDistance, inputUnit, outputUnit);
-
-    const meters = convertToMetersFrom[inputUnit] * inputDistance;
-    // console.log(meters);
-    const result = meters / convertfromMetersTo[outputUnit];
-    // console.log(result);
+        for (let row = 0; row < tr.length; row++) {
+            const currentRow = tr[row];
+            const currentRowInputs = currentRow.querySelectorAll("input");
+            // console.log(currentRowInputs);
+            const arr = [];
     
-    const outputDistance = document.getElementById("outputDistance");
-    outputDistance.value = result;
-})
-}
-        </script>
-    </div>
-    <script>
-      class FashionRetailInventory {
-        constructor(storehouse, location) {
-          this.storehouse = storehouse;
-          this.location = location;
-          this.productStock = [];
-        }
-
-        addProduct (productName, size, quantity, price) {
-          const product = this.productStock.find(p => p.productName == productName && p.size == size);
-
-          if (product) {
-            product.quantity += quantity;
-            return `You added ${quantity} more pieces of product ${productName} size ${size}`;
-          } else {
-            const newProduct = {
-              productName, 
-              size, 
-              quantity, 
-              price
-            };
-            this.productStock.push(newProduct);
-            return `The product ${productName}, size ${size} was successfully added to the inventory`;
-          }
-        }
-
-        sendProduct (productName, size) {
-          const productIndex = this.productStock.findIndex(p => p.productName == productName && p.size == size);
-          // console.log(productIndex);
-
-          if (productIndex >= 0) {
-            // const productIndex = this.productStock.find(p => p.productName == productName && p.size == size);
-            this.productStock.splice(productIndex, 1);
-            return `The product ${productName}, size ${size} was successfully removed from the inventory`;
-          } else {
-            throw new Error(`The product ${productName}, size ${size} is not in the inventory`);
-          }
-        }
-
-        findProductsBySize (size) {
-          const products = this.productStock.filter(p => p.size == size);
-          const formatted = products.map(x => x = `${x.productName}-${x.quantity} pieces`);
-          
-          if (products.length == 0) {
-            return `There are no products available in that size`;
-          } else {
-            return formatted.join(", ");
-          }
-        }
-
-        listProducts () {
-          if (this.productStock.length == 0) {
-            return `${this.storehouse} storehouse is empty`;
-          } else {
-            const result = [`${this.storehouse} storehouse in ${this.location} available products:`];
-            const sorted = this.productStock.sort((p1, p2) => p1.productName.localeCompare(p2.productName));
-            // console.log(sorted[3]);
-            // console.log(this.productStock.length);
-            // for (let index = 0; index < sorted.length; index++) {
-            //   const element = sorted[index];
-            //   console.log(element);
-              
-            // }
-            for (const product of sorted) {
-              // console.log(product);
-              const formatted = `${product.productName}/Size:${product.size}/Quantity:${product.quantity}/Price:${product.price}$`;
-              // console.log(formatted);
-              result.push(formatted);
+            for (let col = 0; col < currentRowInputs.length; col++) {
+                // console.log(currentRowInputs[col]);
+                arr.push(Number(currentRowInputs[col].value));
             }
-            return result.join("\n");
-          }
+    
+            matrix.push(arr);
         }
+    
+        // console.log(matrix);
+    
+        const sum = matrix[0].reduce((acc, x) => acc + x, 0);
+        // console.log(sum);
+        let isOver = false;
 
-      }
-
-      // const storeHouse = new FashionRetailInventory("East", "Milano");
-      // console.log(storeHouse.addProduct("Shirt", "M", 10, 25.0));
-      // console.log(storeHouse.addProduct("T-Shirt", "M", 10, 25.0));
-      // console.log(storeHouse.addProduct("Sweather", "M", 10, 25.0));
-      // console.log(storeHouse.addProduct("Sweather", "M", 10, 25.0));
-
-      // const storeHouse = new FashionRetailInventory("East", "Milano");
-      // console.log(storeHouse.addProduct("Shirt", "M", 10, 25.0));
-      // console.log(storeHouse.addProduct("T-Shirt", "M", 10, 25.0));
-      // console.log(storeHouse.sendProduct("T-Shirt", "M"));
-      // console.log(storeHouse.sendProduct("Sweather", "M"));
-      // console.log(storeHouse.sendProduct("Sweat", "M"));
-
-      // const storeHouse = new FashionRetailInventory("East", "Milano");
-      // console.log(storeHouse.addProduct("Shirt", "M", 10, 25.0));
-      // console.log(storeHouse.addProduct("T-Shirt", "M", 10, 25.0));
-      // console.log(storeHouse.findProductsBySize("M"));
-      // console.log(storeHouse.findProductsBySize("XL"));
-
-      // const storeHouse = new FashionRetailInventory("East", "Milano");
-      // console.log(storeHouse.addProduct("Shirt", "M", 10, 25.0));
-      // console.log(storeHouse.addProduct("T-Shirt", "M", 10, 25.0));
-      // console.log(storeHouse.addProduct("Shirt", "L", 5, 30.0));
-      // console.log(storeHouse.addProduct("Shoes", "9", 8, 50.0));
-      // console.log(storeHouse.sendProduct("Shoes", "9", 8, 50.0));
-      // console.log(storeHouse.listProducts());
-
-      let Store = new FashionRetailInventory("East", "Milano");
-      console.log(Store.addProduct("Shirt", "M", 10, 25.0) , "The product Shirt, size M was successfully added to the inventory");
-      console.log(Store.findProductsBySize("M"), "Shirt-10 pieces");
-      // console.log(Store.productStock);
-      console.log(Store.sendProduct("Shirt", "M"), "The product Shirt, size M was successfully removed from the inventory");
-      console.log(Store.listProducts(), "East storehouse is empty");
-    </script>
-    <script>
-          // 02. Math Power
-
-    function calcPower(num, power) {
-      // let result = Math.pow(num, power);
-      let result = 1;
-
-      for (let i = 0; i < power; i++) {
-        result *= num;
-      }
-
-      console.log(result);
-
-    }
-
-    // calcPower(2, 8);
-    // calcPower(3, 4);
-
-      function add(a, b) {
-    return a + b;
-}
-
-function product(a, b) {
-    return a * b;
-}
-
-function sum(arr) {
-    let sum = 0;
-
-    for (const num of arr) {
-        sum += Number(num);
-    }
-
-    return sum;
+        if (sum > 0) {
+    
+            for (let row = 1; row < tr.length; row++) {
+                const currentRow = tr[row];
+                const currentRowInputs = currentRow.querySelectorAll("input");
+                const current = Array.from(currentRowInputs).reduce((acc, x) => acc + Number(x.value), 0);
+        
+                if (sum != current) {
+                    // console.log("fail");
+                    isOver = true;
+                    break;
+                }
+            }
+        
+            for (let col = 0; col < matrix[0].length; col++) {
+                let current = 0;
+        
+                for (let row = 0; row < matrix.length; row++) {
+                    current += matrix[row][col];
+                    // console.log(col, row);
+                    // console.log(row, col);
+                }
+        
+                if (sum != current) {
+                    // console.log("fail");
+                    isOver = true;
+                    break;
+                }
+            }
+    
+        } else {
+            isOver = true;
+        }
+        
+        if (isOver) {
+            table.style.border = "2px solid red";
+            resultField.textContent = "NOP! You are not done yet...";
+            resultField.style.color = "red";
+        } else {
+            table.style.border = "2px solid green";
+            resultField.textContent = "You solve it! Congratulations!";
+            resultField.style.color = "green";
+        }
+    
+    })
 
 }
+      </script>
+    </div>  
 
-function isOddOrEven(string) {
-
-    if (typeof(string) !== 'string') {
-      
-      return undefined;
-      
-    }
-    
-    if (string.length % 2 === 0) {
-      
-      return "even";
-      
-    }
-    
-    return "odd";
-    
-  }
-
-  function lookupChar(string, index) {
-
-    if (typeof(string) !== 'string' || !Number.isInteger(index)) {
-      
-      return undefined;
-      
-    }
-    
-    if (string.length <= index || index < 0) { 
-      return "Incorrect index";
-    } 
-    
-    return string.charAt(index);
-
-  };
-
-  let mathEnforcer = {
-    addFive: function (num) {
-
-      if (typeof(num) !== 'number') {
-        return undefined;
-      }
-
-      return num + 5; 
-
-    }, 
-    subtractTen: function (num) { 
-      
-      if (typeof(num) !== 'number') { 
-        return undefined;
-      }
-
-      return num - 10;
-
-    }, 
-    sum: function (num1, num2) { 
-      
-      if (typeof(num1) !== 'number' || typeof(num2) !== 'number') { 
-        return undefined; 
-      } 
-
-      return num1 + num2; 
-
-    } 
-  };
-
-    console.log(add(3, 4));
-    console.log(product(5, 6));
-    console.log(sum([1,2 ,3]));
-    console.log(isOddOrEven("123"));
-    console.log(lookupChar("abcd", 2));
-    console.log(mathEnforcer.addFive(5));
-    console.log(mathEnforcer.subtractTen(10));
-    console.log(mathEnforcer.sum(10, 20));
-    </script>
-
-    <script>
-      // 01. Array Extension
-
-      // (function () {
-
-      //   Array.prototype.last = function () {
-      //     return this[this.length  -1];
-      //   }
-
-      //   Array.prototype.skip = function (n) {
-      //     const newArray = this.slice(n);
-      //     return newArray;
-      //   }
-
-      //   Array.prototype.take = function (n) {
-      //     const newArray = this.slice(0, n);
-      //     return newArray;
-      //   }
-
-      //   Array.prototype.sum = function () {
-      //     let total = this.reduce((acc, num) => acc + num);
-      //     return total;
-      //   }
-
-      //   Array.prototype.average = function () {
-      //     const avg = this.sum() / this.last();
-      //     return avg;
-      //   }
-      // })()
-
-      // const nums = [1, 2, 3];
-      // console.log(nums.last());
-      // console.log(nums.skip(1));
-      // console.log(nums.take(2));
-      // console.log(nums.sum());
-      // console.log(nums.average());
-
-      // 02. String Extension
-
-      (function () {
-        String.prototype.ensureStart = function (str) {
-          if (!this.startsWith(str)) {
-            // console.log(str + this);
-            return str + this;
-          }
-          // console.log(this);
-          return this.toString();
-        }
-
-        // · ensureEnd(str) – if the current string doesn't end with str parameter, return a new string in which str parameter appended to the end of the current string, otherwise returns the original string
-        String.prototype.ensureEnd = function (str) {
-          if (!this.endsWith(str)) {
-            // console.log(this + str);
-            return this + str;
-          }
-          // console.log(this);
-          return this.toString();
-        }
-
-        // · isEmpty() - return true if the string is empty and false otherwise
-        String.prototype.isEmpty = function () {
-          if (this.length == 0) {
-            return true;
-          }
-          return false;
-        }
-
-        // · truncate(n) – returns the string truncated to n characters by removing words and appends an ellipsis (three periods) to the end. If a string is less than n characters long, return the same string. If it is longer, split the string where a space occurs and append an ellipsis to it so that the total length is less than or equal to n. If no space occurs anywhere in the string, return n - 3 characters and an ellipsis. If n is less than 4, return n amount of periods.
-        String.prototype.truncate = function (n) {
-          // console.log(n);
-          if (n < 4) {
-            return ".".repeat(n);
-          }
-
-          if (this.length <= n) {
-            return this.toString();
-          }
-
-          const splited = this.split(" ");
-          // console.log(splited);
-
-          if (splited.length == 1) {
-            return this.substring(0, n - 3) + "...";
-          }
-
-          let result = [];
-          // let i = 0;
-
-          // while (result.length + 3 + splited[i].length <= n) {
-          //   result += splited[i] + " ";
-          //   console.log(this.length, result.length, n);
-          //   i++;
-
-          //   if (i > 20) {
-          //     console.log("inf");
-          //     break;
-          //   }
-          // }
-
-          for (const word of splited) {
-            // console.log(result);
-            if (result.join(" ").length + word.length + 3 > n) {
-              break;
-            }
-
-            result.push(word);
-
-          }
-
-          return result.join(" ") + "...";
-
-        }
-
-        // · format(string, …params)
-        String.format = function (str, ...params) {
-          // console.log(str, params);
-          for (let index = 0; index < params.length; index++) {
-            str = str.replace(`{${index}}`, params[index]);
-          }
-          // console.log(str);
-          return str;
-        }
-      })()
-
-      let str = 'my string';
-      // console.log(str.isEmpty());
-      // str = "";
-      // console.log(str.isEmpty());
-      // str = str.ensureStart('my');
-      // console.log(str);
-      // str = str.ensureStart('hello ');
-      // console.log(str);
-      // str = str.ensureEnd('ing');
-      // str = str.ensureEnd(' end');
-      // console.log(str = str.truncate(16));
-      // str += " is very long ";
-      // console.log(str = str.truncate(14));
-      // console.log(str = str.truncate(8));
-      // console.log(str = str.truncate(4));
-      // console.log(str = str.truncate(2));
-      // str = String.format('The {0} {1} fox', 'quick', 'brown');
-      // console.log(str);
-      // str = String.format('jumps {0} {1}', 'dog');
-      // console.log(str);
-
-      // 03. Extensible Object
-
-      function extensibleObject() {
-        const proto = {};
-
-        const copied = Object.create(proto);
-
-        copied.extend = function (obj) {
-          const entries = Object.entries(obj);
-
-          for (const entry of entries) {
-            // console.log(entry);
-            const type = typeof entry[1];
-            const name = entry[0];
-            const value = entry[1];
-            // console.log(type);
-            if (type == "function") {
-              proto[name] = value;
-            } else {
-              this[name] = value;
-            }
-          }
-        }
-
-        return copied;
-
-      }
-
-      // const myObj = extensibleObject();
-      
-      // const template = {
-      //   extensionMethod: function () {},
-      //   extensionProperty: 'someString'
-      // }
-      
-      // myObj.extend(template);
-      // console.log(myObj);
-
-      // 04. Balloons
-
-      function initBalloons() {
-
-        class Balloon {
-          constructor(color, gasWeight) {
-            this.color = color;
-            this.gasWeight = gasWeight;
-          }
-        }
-
-        // let a = 5;
-
-        class PartyBalloon extends Balloon {
-          constructor(color, gasWeight, ribbonColor, ribbonLength) {
-            super(color, gasWeight);
-            this._ribbon = {
-              color: ribbonColor, 
-              length: ribbonLength
-            };
-            // this.num = a;
-            // this.getHidden = () => {
-            //   console.log("inside");
-            //   return a;
-            // };
-          }
-
-          // getHidden() {
-          //   return a;
-          // }
-
-          get ribbon() {
-            return this._ribbon;
-            // return a;
-          }
-
-        }
-
-        class BirthdayBalloon extends PartyBalloon {
-          constructor(color, gasWeight, ribbonColor, ribbonLength, text) {
-            super(color, gasWeight, ribbonColor, ribbonLength);
-            this._text = text;
-          }
-
-          get text() {
-            return this._text;
-          }
-
-        }
-
-        return {
-          Balloon, 
-          PartyBalloon, 
-          BirthdayBalloon
-        }
-      }
-
-      // let classes = initBalloons();
-      // let testBalloon = new classes.Balloon("yellow", 20.5);
-      // let testPartyBalloon = new classes.PartyBalloon("yellow", 20.5, "red", 10.25);
-      
-      // let ribbon = testPartyBalloon.ribbon;
-      // console.log(testBalloon);
-      // console.log(testPartyBalloon);
-      // console.log(testPartyBalloon.getHidden());
-      // console.log(ribbon);
-
-      // 05. People
-
-      function initPeople() {
-
-        class Employee {
-          constructor(name, age) {
-            this.name = name;
-            this.age = age;
-            this.salary = 0;
-            this.tasks = [];
-          }
-
-          work() {
-            console.log(`${this.tasks[0]}`);
-            // console.log(this.tasks);
-            // this.tasks.pop();
-            this.tasks.push(this.tasks.shift());
-          }
-
-          collectSalary() {
-            console.log(`${this.name} received ${this.salary} this month.`);
-            // return `${this.name} received ${this.salary} this month.`;
-          }
-
-        }
-
-        class Junior extends Employee {
-          constructor(name, age) {
-            super(name, age);
-            this.tasks = [`${this.name} is working on a simple task.`];
-          }
-        }
-        
-        class Senior extends Employee {
-          constructor(name, age) {
-            super(name, age);
-            this.tasks = [
-              `${this.name} is working on a complicated task.`, 
-              `${this.name} is taking time off work.`, 
-              `${this.name} is supervising junior workers.`
-            ];
-          }
-
-        }
-        
-        class Manager extends Employee {
-          constructor(name, age) {
-            super(name, age);
-            this.dividend = 0;
-            this.tasks = [
-              `${this.name} scheduled a meeting.`, 
-              `${this.name} is preparing a quarterly report.`
-            ];
-          }
-
-          collectSalary() {
-            console.log(`${this.name} received ${this.salary + this.dividend} this month.`);
-            // return `${this.name} received ${this.salary} this month.`;
-          }
-
-        }
-
-        return {
-          Employee, 
-          Junior, 
-          Senior, 
-          Manager
-        }
-
-      }
-
-      // const classes = initPeople();
-      // const junior = new classes.Junior('Ivan',25);
-      // junior.work();
-      // junior.work();
-      // junior.salary = 5811;
-      // junior.collectSalary();
-
-      // const sinior = new classes.Senior('Alex', 31);
-      // sinior.work();
-      // sinior.work();
-      // sinior.work();
-      // sinior.work();
-      // sinior.salary = 12050;
-      // sinior.collectSalary();
-      
-      // const manager = new classes.Manager('Tom', 55); 
-      // manager.salary = 15000; 
-      // manager.collectSalary(); 
-      // manager.dividend = 2500;
-      // manager.collectSalary();
-
-      // 06. Posts
-      function solution() {
-        
-        class Post {
-          constructor(title, content) {
-            this.title = title;
-            this.content = content;
-          }
-          
-          toString() {
-            return `Post: ${this.title}\nContent: ${this.content}`
-          }
-          
-        }
-        
-        class SocialMediaPost extends Post {
-          constructor(title, content, likes, dislikes) {
-            super(title, content);
-            this.likes = likes;
-            this.dislikes = dislikes;
-            this.comments = [];
-          }
-          
-          addComment(comment) {
-            this.comments.push(` * ${comment}`);
-          }
-          
-          toString() {
-            let info = `Post: ${this.title}\nContent: ${this.content}\nRating: ${this.likes - this.dislikes}`;
-            // "Comments:" " * {comment1}" " * {comment2}"`;
-            // console.log(this.comments);
-            if (this.comments.length > 0) {
-              info += '\nComments:\n';
-              info += this.comments.join("\n");
-            }
-            
-            return info;
-            
-          }
-          
-        }
-        
-        class BlogPost extends Post {
-          constructor(title, content, views) {
-            super(title, content);
-            this.views = views;
-          }
-          
-          view() {
-            this.views++;
-            return this;
-          }
-          
-          toString() {
-            let blogInfo = super.toString();
-            blogInfo += `\nViews: ${this.views}`;
-            return blogInfo;
-          }
-          
-        }
-        
-        return {
-          Post, 
-          SocialMediaPost, 
-          BlogPost
-        }
-        
-      }
-      
-      // const classes = solution();
-      
-      // let post = new classes.Post("Post", "Content");
-      // console.log(post.toString());
-      
-      // let scm = new classes.SocialMediaPost("TestTitle", "TestContent", 25, 30);
-      // scm.addComment("Good post");
-      // scm.addComment("Very good post");
-      // scm.addComment("Wow!");
-      // console.log(scm.toString());
-      
-      // let bp = new classes.BlogPost("BlogTitle", "BlogContent", 3);
-      // bp.view();
-      // console.log(bp.views);
-      // bp.view();
-      // console.log(bp.views);
-      // bp.view();
-      // console.log(bp.views);
-      // bp.view();
-      // console.log(bp.views);
-      // bp.view();
-      // console.log(bp.views);
-      // bp.view();
-      // console.log(bp.views);
-      // console.log(bp.toString());
-      
-      // 07. Computer *✶
-      function createComputerHierarchy() {
-        
-        class Computer {
-          constructor(manufacturer, processorSpeed, ram, hardDiskSpace) {
-            this.manufacturer = manufacturer;
-            this.processorSpeed = processorSpeed;
-            this.ram = ram;
-            this.hardDiskSpace = hardDiskSpace;
-      
-            // if (this instanceof Computer) {
-            //   throw new Error();
-            // }
-          }
-        } 
-      
-        class Laptop extends Computer {
-          constructor(manufacturer, processorSpeed, ram, hardDiskSpace, weight, color, battery) {
-            super(manufacturer, processorSpeed, ram, hardDiskSpace);
-            this.weight = weight;
-            this.color = color;
-            this.battery = battery;
-          }
-      
-          get battery() {
-            return this._battery;
-          }
-      
-          set battery(obj) {
-            if (obj instanceof Battery) {
-              this._battery = obj;
-            } else {
-              throw new TypeError();
-            }
-          }
-      
-        }
-      
-        class Desktop extends Computer {
-          constructor(manufacturer, processorSpeed, ram, hardDiskSpace, keyboard, monitor) {
-            super(manufacturer, processorSpeed, ram, hardDiskSpace);
-            this.keyboard = keyboard;
-            this.monitor = monitor;
-          }
-      
-          get keyboard() {
-            return this._keyboard;
-          }
-      
-          set keyboard(obj) {
-            if (obj instanceof Keyboard) {
-              this._keyboard = obj;
-            } else {
-              throw new TypeError();
-            }
-          }
-      
-          get monitor() {
-            return this._monitor;
-          }
-      
-          set monitor(obj) {
-            if (obj instanceof Monitor) {
-              this._monitor = obj;
-            } else {
-              throw new TypeError();
-            }
-          }
-      
-        }
-      
-        class Monitor {
-          constructor(manufacturer, width, height) {
-            this.manufacturer = manufacturer;
-            this.width = width;
-            this.height = height;
-          }
-        }
-      
-        class Battery {
-          constructor(manufacturer, expectedLife) {
-            this.manufacturer = manufacturer;
-            this.expectedLife = expectedLife;
-          }
-        }
-      
-        // let counter = 0;
-      
-        class Keyboard {
-          constructor(manufacturer, responseTime, counter) {
-            // console.log(counter);
-            this.manufacturer = manufacturer;
-            this.responseTime = responseTime;
-            this.getCounter = function () {
-              console.log(counter);
-            }
-            this.setCounter = function () {
-              counter++;
-            }
-          }
-        }
-      
-        Keyboard.create = function (manufacturer, responseTime) {
-          let counter = 0;
-          return new Keyboard(manufacturer, responseTime, counter);
-        }
-      
-        return {
-          Computer, 
-          Laptop, 
-          Desktop, 
-          Monitor, 
-          Battery, 
-          Keyboard
-        }
-        
-      }
-      
-      let classes = createComputerHierarchy();
-      
-      let Computer = classes.Computer;
-      
-      let Laptop = classes.Laptop;
-      
-      let Desktop = classes.Desktop;
-      
-      let Monitor = classes.Monitor;
-      
-      let Battery = classes.Battery;
-      
-      let Keyboard = classes.Keyboard;
-      
-      let battery = new Battery('Energy', 3);
-      console.log(battery);
-      
-      let laptop = new Laptop("Hewlett Packard", 2.4, 4, 0.5, 3.12, "Silver", battery);
-      // let laptop = new Laptop("Hewlett Packard", 2.4, 4, 0.5, 3.12, "Silver", {});
-      console.log(laptop);
-      console.log(laptop.battery);
-      
-      let monitor = new Monitor("me", 1920, 1080);
-      console.log(monitor);
-      
-      // let keyboard = new Keyboard("logitech", 5);
-      let keyboard = Keyboard.create("logitech", 5);
-      console.log(keyboard);
-      keyboard.getCounter();
-      keyboard.setCounter();
-      keyboard.setCounter();
-      keyboard.setCounter();
-      // console.log(keyboard.counter);
-      keyboard.getCounter();
-      let keyboard2 = Keyboard.create("logitech", 5);
-      console.log(keyboard2);
-      keyboard2.getCounter();
-      keyboard2.setCounter();
-      keyboard2.getCounter();
-      
-      let pc = new Desktop("asus", 4, 16, 500, keyboard, monitor);
-      // let pc = new Desktop("asus", 4, 16, 500, {}, monitor);
-      // let pc = new Desktop("asus", 4, 16, 500, keyboard, {});
-      console.log(pc);
-      console.log(pc.keyboard);
-      console.log(pc.monitor);
-    </script>
 <script>
   // 10. Contacts Builder✶
   // 11. View Model✶
   // 12. Payment Package
   // 13. String Builder *✶
-</script>
-<script>
-  // task 1
-  function name(params) {
-    console.log(params);
-    const text = params[0];
-    console.log(text);
-
-    let index = 1;
-    let input = params[index];
-
-    while (input != "") {
-      console.log(input);
-      const data = input.split(":");
-      const command = data[0];
-
-      if (command == "") {
-        console.log("");
-      } else if (command == "") {
-        console.log("");
-      } else if (command == "") {
-        console.log("");
-      }
-
-      index++;
-      input = params[index];
-
-      if (index > 100) {
-        console.log("infinity");
-        break;
-      }
-
-    }
-
-  }
-
-  function task3(params) {
-    // console.log(params);
-    const cars = {};
-    const n = Number(params[0]);
-    // console.log(n);
-    let index = 1;
-    let input = "";
-
-    for (let i = 1; i <= n; i++) {
-      input = params[i];
-      // console.log(input);
-      const data = input.split("");
-      // console.log(data);
-      const name = data[0];
-      const mileage = Number(data[1]);
-      const fuel = Number(data[2]);
-      // console.log(name);
-      // console.log(mileage);
-      // console.log(fuel);
-
-      const car = {
-        mileage, 
-        fuel
-      }
-
-      cars[name] = car;
-      
-      index++;
-
-    }
-    // console.log(cars);
-
-    input = params[index];
-    // console.log(input);
-
-    while (input != "") {
-      // console.log(input);
-      const data = input.split("");
-      // console.log(data);
-      const command = data[0];
-      // console.log(command);
-      const name = data[1];
-      // console.log(name);
-
-      if (command == "") {
-        console.log("");
-      } else if (command == "") {
-        console.log("");
-      } else if (command == "") {
-        console.log("");
-      }
-      
-      index++;
-      input = params[index];
-
-      // if (index > 100) {
-      //   console.log("infinity");
-      //   break;
-      // }
-
-    }
-  }
-</script>
-<script>
-  // 01. Value of a String
-
-function findLettersSum(params) {
-const word = params[0];
-const type = params[1];
-// console.log(word, type);
-let sumLower = 0;
-let sumUpper = 0;
-
-for (const letter of word) {
-  const ascii = letter.charCodeAt(0)
-  // console.log(ascii);
-  if (ascii > 64 && ascii < 91) {
-    sumUpper += ascii;
-  } else if (ascii > 96 && ascii < 123) {
-    sumLower += ascii;
-  }
-}
-
-if (type == "LOWERCASE") {
-  console.log(`The total sum is: ${sumLower}`);
-} else {
-  console.log(`The total sum is: ${sumUpper}`);
-}
-
-}
-
-// findLettersSum(['HelloFromMyAwesomePROGRAM', 'LOWERCASE']);
-// findLettersSum(['AC/DC', 'UPPERCASE']);
-
-  // 01. Calorie Object
-
-  function createCalorieData(params) {
-    const calories = {};
-
-    for (let index = 0; index < params.length; index+=2) {
-      // console.log(index);
-      calories[params[index]] = Number(params[index + 1]);
-    }
-
-    console.log(calories);
-
-  }
-
-  // createCalorieData(['Yoghurt', '48', 'Rise', '138', 'Apple', '52']);
-  // createCalorieData(['Potato', '93', 'Skyr', '63', 'Cucumber', '18', 'Milk', '42']);
-
-    // 09. Square of Stars
-
-    function printStars(num = 5) {
-    for (let index = 0; index < num; index++) {
-      console.log("* ".repeat(num));
-    }
-  }
-
-  // printStars(1);
-  // printStars(2);
-  // printStars(7);
-  // printStars();
-  // printStars(5);
-
-    // 05. Math Operations
-
-    function calc(n1, n2, operator) {
-    const operations = new Map();
-    operations.set("+", sum);
-    operations.set("-", sub);
-    operations.set("*", multi);
-    operations.set("/", devide);
-    operations.set("%", module);
-    operations.set("**", paw);
-
-    function sum(n1, n2) {
-      return n1 + n2;
-    }
-    function sub(n1, n2) {
-      return n1 - n2;
-    }
-    function multi(n1, n2) {
-      return n1 * n2;
-    }
-    function devide(n1, n2) {
-      return n1 / n2;
-    }
-    function module(n1, n2) {
-      return n1 % n2;
-    }
-    function paw(n1, n2) {
-      return n1 ** n2;
-    }
-
-    // console.log(operations);
-    const callback = operations.get(operator)
-    // console.log(callback);
-    const result = callback(n1, n2);
-    console.log(result);
-
-  }
-
-  // calc(5, 6, '+');
-  // calc(3, 5.5, '*');
-
-  // 06. Extract Emails✶
-
-function extractEmails(params) {
-// console.log(params);
-
-const emailPattern2 = /[a-z]+([_\.-][a-z]+)*@[a-z]+([_\.-][a-z]+)*\.[a-z]+/g;
-const emailPattern = /[^a-z0-9 ]?[a-z0-9]+([_\.-][a-z0-9]+)*@[a-z]+([_\.-][a-z]+)*\.[a-z]+[^a-z0-9 .,]?/g;
-
-const emails = params.match(emailPattern);
-// console.log(emails);
-
-const firstSymbolTemplate = /[a-z0-9]/;
-const lastSymbolTemplate = /[a-z]/;
-
-for (const email of emails) {      
-  // console.log(email);
-  const isFirstSymbolValid = firstSymbolTemplate.test(email[0]);
-
-  if (isFirstSymbolValid) {
-    // console.log("true");
-    const isLastSymbolValid = lastSymbolTemplate.test(email[email.length - 1]);
-
-    if (isLastSymbolValid) {
-      // console.log(email[email.length - 1]);
-      // console.log("true");
-      console.log(email);
-    }
-
-  }
-
-}
-
-}
-
-// extractEmails(" 4a5@abv.bg-,. b hbhs");
-// extractEmails("Just send email to s.miller@mit.edu and j.hopking@york.ac.uk for more information.");
-// extractEmails("Please contact us at: support@github.com.");
-// extractEmails("Many users @ SoftUni confuse email addresses. We @ Softuni.BG provide high-quality training @ home or @ class. -- steve.parker@softuni.de.");
 </script>
 
     <!-- ================= Get data from local JSON file ================= -->
