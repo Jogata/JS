@@ -186,9 +186,11 @@ convertButton.addEventListener("click", () => {
 
         sendProduct (productName, size) {
           const productIndex = this.productStock.findIndex(p => p.productName == productName && p.size == size);
-          // console.log(product);
+          // console.log(productIndex);
 
-          if (productIndex > 0) {
+          if (productIndex >= 0) {
+            // const productIndex = this.productStock.find(p => p.productName == productName && p.size == size);
+            this.productStock.splice(productIndex, 1);
             return `The product ${productName}, size ${size} was successfully removed from the inventory`;
           } else {
             throw new Error(`The product ${productName}, size ${size} is not in the inventory`);
@@ -207,6 +209,26 @@ convertButton.addEventListener("click", () => {
         }
 
         listProducts () {
+          if (this.productStock.length == 0) {
+            return `${this.storehouse} storehouse is empty`;
+          } else {
+            const result = [`${this.storehouse} storehouse in ${this.location} available products:`];
+            const sorted = this.productStock.sort((p1, p2) => p1.productName.localeCompare(p2.productName));
+            // console.log(sorted[3]);
+            // console.log(this.productStock.length);
+            // for (let index = 0; index < sorted.length; index++) {
+            //   const element = sorted[index];
+            //   console.log(element);
+              
+            // }
+            for (const product of sorted) {
+              // console.log(product);
+              const formatted = `${product.productName}/Size:${product.size}/Quantity:${product.quantity}/Price:${product.price}$`;
+              // console.log(formatted);
+              result.push(formatted);
+            }
+            return result.join("\n");
+          }
         }
 
       }
@@ -230,13 +252,130 @@ convertButton.addEventListener("click", () => {
       // console.log(storeHouse.findProductsBySize("M"));
       // console.log(storeHouse.findProductsBySize("XL"));
 
-      const storeHouse = new FashionRetailInventory("East", "Milano");
-      console.log(storeHouse.addProduct("Shirt", "M", 10, 25.0));
-      console.log(storeHouse.addProduct("T-Shirt", "M", 10, 25.0));
-      console.log(storeHouse.addProduct("Shirt", "L", 5, 30.0));
-      console.log(storeHouse.addProduct("Shoes", "9", 8, 50.0));
-      console.log(storeHouse.sendProduct("Shoes", "9", 8, 50.0));
-      console.log(storeHouse.listProducts());
+      // const storeHouse = new FashionRetailInventory("East", "Milano");
+      // console.log(storeHouse.addProduct("Shirt", "M", 10, 25.0));
+      // console.log(storeHouse.addProduct("T-Shirt", "M", 10, 25.0));
+      // console.log(storeHouse.addProduct("Shirt", "L", 5, 30.0));
+      // console.log(storeHouse.addProduct("Shoes", "9", 8, 50.0));
+      // console.log(storeHouse.sendProduct("Shoes", "9", 8, 50.0));
+      // console.log(storeHouse.listProducts());
+
+      let Store = new FashionRetailInventory("East", "Milano");
+      console.log(Store.addProduct("Shirt", "M", 10, 25.0) , "The product Shirt, size M was successfully added to the inventory");
+      console.log(Store.findProductsBySize("M"), "Shirt-10 pieces");
+      // console.log(Store.productStock);
+      console.log(Store.sendProduct("Shirt", "M"), "The product Shirt, size M was successfully removed from the inventory");
+      console.log(Store.listProducts(), "East storehouse is empty");
+    </script>
+    <script>
+          // 02. Math Power
+
+    function calcPower(num, power) {
+      // let result = Math.pow(num, power);
+      let result = 1;
+
+      for (let i = 0; i < power; i++) {
+        result *= num;
+      }
+
+      console.log(result);
+
+    }
+
+    // calcPower(2, 8);
+    // calcPower(3, 4);
+
+      function add(a, b) {
+    return a + b;
+}
+
+function product(a, b) {
+    return a * b;
+}
+
+function sum(arr) {
+    let sum = 0;
+
+    for (const num of arr) {
+        sum += Number(num);
+    }
+
+    return sum;
+
+}
+
+function isOddOrEven(string) {
+
+    if (typeof(string) !== 'string') {
+      
+      return undefined;
+      
+    }
+    
+    if (string.length % 2 === 0) {
+      
+      return "even";
+      
+    }
+    
+    return "odd";
+    
+  }
+
+  function lookupChar(string, index) {
+
+    if (typeof(string) !== 'string' || !Number.isInteger(index)) {
+      
+      return undefined;
+      
+    }
+    
+    if (string.length <= index || index < 0) { 
+      return "Incorrect index";
+    } 
+    
+    return string.charAt(index);
+
+  };
+
+  let mathEnforcer = {
+    addFive: function (num) {
+
+      if (typeof(num) !== 'number') {
+        return undefined;
+      }
+
+      return num + 5; 
+
+    }, 
+    subtractTen: function (num) { 
+      
+      if (typeof(num) !== 'number') { 
+        return undefined;
+      }
+
+      return num - 10;
+
+    }, 
+    sum: function (num1, num2) { 
+      
+      if (typeof(num1) !== 'number' || typeof(num2) !== 'number') { 
+        return undefined; 
+      } 
+
+      return num1 + num2; 
+
+    } 
+  };
+
+    console.log(add(3, 4));
+    console.log(product(5, 6));
+    console.log(sum([1,2 ,3]));
+    console.log(isOddOrEven("123"));
+    console.log(lookupChar("abcd", 2));
+    console.log(mathEnforcer.addFive(5));
+    console.log(mathEnforcer.subtractTen(10));
+    console.log(mathEnforcer.sum(10, 20));
     </script>
 
     <script>
