@@ -5,6 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html{
+    font-family: "PT sans", sans-serif;
+    font-size: 24px;
+    color: #234465;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    min-height: 100vh;
+    flex-wrap: wrap;
+}
+
+#exercise{   
+    width: 70%;
+    float: left;
+    padding: 1rem 0 1rem 1rem;
+}
+main:after{
+    display: block;
+    content:'';
+    clear: both;
+}
+button{
+    padding: 0.3rem 0.5rem;
+    font-size: 0.7em;
+    margin: 1rem 0 1rem 0;
+    border: none;
+    color: white;
+    background: #234465;
+    border-radius: 5px;
+    outline: none;
+}
+
+table{
+    margin: 0 auto;
+    text-align: center;
+    border:none;
+}
+
+td{
+    width: 10%;
+    border:2px solid gray;
+    height: 5vh;
+    color: #234465;
+    font-size: 22px;
+    margin:0;
+    padding:0;
+	background-color: aliceblue;
+	border:1px solid #234465;
+}
+
+input{
+    width: 95%;
+    text-align: center;
+    background: aliceblue;
+    border: none;
+    font-family: Calibri;
+    font-size: 22px;
+}
+
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+#check{
+	margin: 0 auto;
+    text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+}
+    </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
@@ -76,6 +161,11 @@
     const [ checkBtn, clearBtn ] = document.getElementsByTagName("button");
     const resultField = document.querySelector("#check p");
 
+    // console.log(tr);
+    // const firstRow = tr[0];
+    // const firstRowInputs = firstRow.querySelectorAll("input");
+    // console.log(firstRowInputs);
+
     checkBtn.addEventListener("click", () => {
         const matrix = [];
 
@@ -145,9 +235,54 @@
     
     })
 
+    clearBtn.addEventListener("click", () => {
+        const inputs = document.querySelectorAll("tbody input");
+
+        for (const input of inputs) {
+            input.value = "";
+        }
+
+        table.style = "";
+        resultField.textContent = "";
+        resultField.style = "";
+    })
+
 }
       </script>
-    </div>  
+    </div>
+    <script>
+      // 02. Meetings
+
+function createShedule(params) {
+// console.log(params);
+const meetings = {};
+
+for (const input of params) {
+  // console.log(input);
+  const data = input.split(' ');
+  // console.log(data);
+  const day = data[0];
+  const name = data[1];
+
+  if (meetings[day]) {
+    console.log(`Conflict on ${day}!`);
+  } else {
+    meetings[day] = name;
+    console.log(`Scheduled for ${day}`);
+  }
+}
+
+// console.log(meetings);
+for (const day in meetings) {
+  const name = meetings[day]
+  console.log(`${day} -> ${name}`);
+}
+
+}
+
+// createShedule(['Monday Peter', 'Wednesday Bill', 'Monday Tim', 'Friday Tim']);
+// createShedule(['Friday Bob', 'Saturday Ted', 'Monday Bill', 'Monday John', 'Wednesday George']);
+    </script>
 
 <script>
   // 10. Contacts Builder✶
