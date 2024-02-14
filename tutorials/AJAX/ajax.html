@@ -96,6 +96,34 @@ input {
   border-radius: 3px;
   background-color: beige;
 }
+#email {
+  width: 183px;
+}
+
+#time, 
+#date {
+  width: 95px;
+}
+
+.event-content{
+    list-style-type: none;
+    margin-top: -50px;
+}
+
+article {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 400px;
+    flex-wrap: wrap;
+}
+
+  @media (max-width: 1000px) {
+    #wrapper {
+      flex-direction: column;
+    }
+  }
     </style>
   </head>
   <body>
@@ -145,6 +173,108 @@ input {
         </div>
       </div>
     </div>
+    <script>
+      window.addEventListener('load', solve);
+
+function solve() {
+    const form = document.querySelector("form");
+    const upcomingList = document.getElementById("upcoming-list");
+    const checkList = document.getElementById("check-list");
+    const finishedList = document.getElementById("finished-list");
+    // console.log(form, upcomingList, checkList, finishedList);
+    const timeInput = document.getElementById("time");
+    const dateInput = document.getElementById("date");
+    const placeInput = document.getElementById("place");
+    const eventInput = document.getElementById("event-name");
+    const emailInput = document.getElementById("email");
+    // console.log(timeInput, dateInput, placeInput, eventInput, emailInput);
+    const addBtn = document.getElementById("add-btn");
+
+    // timeInput.value = "19:00";
+    // dateInput.value = "2020-01-01";
+    // placeInput.value = "test place";
+    // eventInput.value = "test event";
+    // emailInput.value = "test@abv.bg";
+
+    addBtn.addEventListener("click", (e) => {
+        // console.log("get info");
+        // e.preventDefault();
+
+        if (timeInput.value.length == 0) {
+            return;
+        }
+        if (dateInput.value.length == 0) {
+            return;
+        }
+        if (placeInput.value.length == 0) {
+            return;
+        }
+        if (eventInput.value.length == 0) {
+            return;
+        }
+        if (emailInput.value.length == 0) {
+            return;
+        }
+
+        const timeInputValue = timeInput.value;
+        const dateInputValue = dateInput.value;
+        const placeInputValue = placeInput.value;
+        const eventInputValue = eventInput.value;
+        const emailInputValue = emailInput.value;
+        // console.log(timeInputValue, dateInputValue, placeInputValue, eventInputValue, emailInputValue);
+        addBtn.disabled = true;
+        form.reset();
+
+        const li = document.createElement("li");
+        const html = `<article><p>Begins: ${dateInputValue} at ${timeInputValue}</p><p>In: ${placeInputValue}</p><p>Event: ${eventInputValue}</p><p>Contact: ${emailInputValue}</p></article>`;
+        li.innerHTML = html;
+        li.classList.add("event-content");
+        const editBtn = document.createElement("button");
+        editBtn.textContent = "Edit";
+        editBtn.classList.add("edit-btn");
+        editBtn.addEventListener("click", () => {
+            li.remove();
+            timeInput.value = timeInputValue;
+            dateInput.value = dateInputValue;
+            placeInput.value = placeInputValue;
+            eventInput.value = eventInputValue;
+            emailInput.value = emailInputValue;
+            addBtn.disabled = false;
+        })
+        const continueBtn = document.createElement("button");
+        continueBtn.textContent = "Continue";
+        continueBtn.classList.add("continue-btn");
+        continueBtn.addEventListener("click", () => {
+            upcomingList.appendChild(li);
+            continueBtn.remove();
+            editBtn.remove();
+            addBtn.disabled = false;
+            const moveBtn = document.createElement("button");
+            moveBtn.textContent = "Move to Finished";
+            moveBtn.classList.add("finished-btn");
+            const buttons = document.querySelectorAll(".finished-btn");
+            moveBtn.addEventListener("click", () => {
+                finishedList.appendChild(li);
+                moveBtn.remove();
+                console.log(buttons);
+                buttons.forEach(button => {
+                    console.log("cclick");
+                    button.click()
+                });
+            })
+            li.appendChild(moveBtn);
+        });
+        li.appendChild(editBtn);
+        li.appendChild(continueBtn);
+        checkList.appendChild(li);
+    })
+
+    const clearBtn = document.getElementById("clear");
+    clearBtn.addEventListener("click", () => {
+        finishedList.textContent = "";
+    })
+}
+    </script>
 
     <script>
       // 01. Phone Book
