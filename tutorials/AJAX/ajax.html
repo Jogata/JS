@@ -5,254 +5,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      @import url('https://fonts.googleapis.com/css?family=Lato');
-@import url('https://fonts.googleapis.com/css?family=PT+Sans');
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-html{
-    font-family: "PT sans", sans-serif;
-    font-size: 24px;
-    color: #234465;
-}
-body{
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    min-height: 100vh;
-    flex-wrap: wrap;
-}
-
-#exercise{   
-    width: 70%;
-    float: left;
-    padding: 1rem 0 1rem 1rem;
-}
-main:after{
-    display: block;
-    content:'';
-    clear: both;
-}
-button{
-    padding: 0.3rem 0.5rem;
-    font-size: 0.7em;
-    margin: 1rem 0 1rem 0;
-    border: none;
-    color: white;
-    background: #234465;
-    border-radius: 5px;
-    outline: none;
-}
-
-table{
-    margin: 0 auto;
-    text-align: center;
-    border:none;
-}
-
-td{
-    width: 10%;
-    border:2px solid gray;
-    height: 5vh;
-    color: #234465;
-    font-size: 22px;
-    margin:0;
-    padding:0;
-	background-color: aliceblue;
-	border:1px solid #234465;
-}
-
-input{
-    width: 95%;
-    text-align: center;
-    background: aliceblue;
-    border: none;
-    font-family: Calibri;
-    font-size: 22px;
-}
-
-input[type='number'] {
-    -moz-appearance:textfield;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-}
-
-#check{
-	margin: 0 auto;
-    text-align: center;
-    font-weight: bold;
-    font-size: 24px;
-}
-    </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
-    <div id="container">
-      <main id="main">
-        <div id="exercise">
-          <table>
-            <thead>
-              <tr>
-                <th colspan="9">SUDOMU</th>
-              </tr>
-            </thead>
-            <tfoot>
-              <tr>
-                <td colspan="3">
-                  <button>Quick Check</button>
-                  <button>Clear</button>
-                </td>
-              </tr>
-            </tfoot>
-            <tbody>
-              <tr>
-                <td>
-                  <input min="1" max="3" type="number" />
-                </td>
-                <td>
-                  <input min="1" max="3" type="number" />
-                </td>
-                <td>
-                  <input min="1" max="3" type="number" />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <input min="1" max="3" type="number" />
-                </td>
-                <td>
-                  <input min="1" max="3" type="number" />
-                </td>
-                <td>
-                  <input min="1" max="3" type="number" />
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <input min="1" max="3" type="number" />
-                </td>
-                <td>
-                  <input min="1" max="3" type="number" />
-                </td>
-                <td>
-                  <input min="1" max="3" type="number" />
-                </td>
-              </tr>
-  
-            </tbody>
-          </table>
-          <div id="check">
-            <p></p>
-          </div>
-        </div>
-      </main>
-      <script>
-        solve();
-        function solve() {
-    const table = document.querySelector("table");
-    const tr = document.querySelectorAll("tbody tr");
-    const [ checkBtn, clearBtn ] = document.getElementsByTagName("button");
-    const resultField = document.querySelector("#check p");
+    <script>
+      // 01. Phone Book
 
-    // console.log(tr);
-    // const firstRow = tr[0];
-    // const firstRowInputs = firstRow.querySelectorAll("input");
-    // console.log(firstRowInputs);
+function createPhoneBook(people) {
+const book = {};
 
-    checkBtn.addEventListener("click", () => {
-        const matrix = [];
+for (const person of people) {
+  const data = person.split(" ");
+  const name = data[0];
+  const phone = data[1];
+  // console.log(name,phone);
+  book[name] = phone;
+}
 
-        for (let row = 0; row < tr.length; row++) {
-            const currentRow = tr[row];
-            const currentRowInputs = currentRow.querySelectorAll("input");
-            // console.log(currentRowInputs);
-            const arr = [];
-    
-            for (let col = 0; col < currentRowInputs.length; col++) {
-                // console.log(currentRowInputs[col]);
-                arr.push(Number(currentRowInputs[col].value));
-            }
-    
-            matrix.push(arr);
-        }
-    
-        // console.log(matrix);
-    
-        const sum = matrix[0].reduce((acc, x) => acc + x, 0);
-        // console.log(sum);
-        let isOver = false;
-
-        if (sum > 0) {
-    
-            for (let row = 1; row < tr.length; row++) {
-                const currentRow = tr[row];
-                const currentRowInputs = currentRow.querySelectorAll("input");
-                const current = Array.from(currentRowInputs).reduce((acc, x) => acc + Number(x.value), 0);
-        
-                if (sum != current) {
-                    // console.log("fail");
-                    isOver = true;
-                    break;
-                }
-            }
-        
-            for (let col = 0; col < matrix[0].length; col++) {
-                let current = 0;
-        
-                for (let row = 0; row < matrix.length; row++) {
-                    current += matrix[row][col];
-                    // console.log(col, row);
-                    // console.log(row, col);
-                }
-        
-                if (sum != current) {
-                    // console.log("fail");
-                    isOver = true;
-                    break;
-                }
-            }
-    
-        } else {
-            isOver = true;
-        }
-        
-        if (isOver) {
-            table.style.border = "2px solid red";
-            resultField.textContent = "NOP! You are not done yet...";
-            resultField.style.color = "red";
-        } else {
-            table.style.border = "2px solid green";
-            resultField.textContent = "You solve it! Congratulations!";
-            resultField.style.color = "green";
-        }
-    
-    })
-
-    clearBtn.addEventListener("click", () => {
-        const inputs = document.querySelectorAll("tbody input");
-
-        for (const input of inputs) {
-            input.value = "";
-        }
-
-        table.style = "";
-        resultField.textContent = "";
-        resultField.style = "";
-    })
+// console.log(book);
+for (const person in book) {
+  const number = book[person];
+  console.log(`${person} -> ${number}`);
+}
 
 }
-      </script>
-    </div>
-    <script>
-      // 02. Meetings
 
+// createPhoneBook(['Tim 0834212554', 'Peter 0877547887', 'Bill 0896543112', 'Tim 0876566344']);
+// createPhoneBook(['George 0552554', 'Peter 087587', 'George 0453112', 'Bill 0845344']);
+
+      const petAdoptionAgency = {
+    isPetAvailable(pet, availableCount, vaccinated) {
+      if (typeof pet !== "string" || typeof availableCount !== "number" || typeof vaccinated !== "boolean") {
+        throw new Error("Invalid input");
+      }
+
+      if (availableCount <= 0) {
+        return `Sorry, there are no ${pet}(s) available for adoption at the agency.`;
+      } else {
+        if(vaccinated){
+            return `Great! We have ${availableCount} vaccinated ${pet}(s) available for adoption at the agency.`;
+        }else{
+            return `Great! We have ${availableCount} ${pet}(s) available for adoption, but they need vaccination.`;
+        }
+        
+      }
+    },
+    getRecommendedPets(petList, desiredTraits) {
+      let recommendedPets = [];
+  
+      if (!Array.isArray(petList) || typeof desiredTraits !== "string") {
+        throw new Error("Invalid input");
+      }
+  
+      petList.forEach((pet) => {
+        if (pet.traits === desiredTraits) {
+          recommendedPets.push(pet.name);
+        }
+      });
+  
+      if (recommendedPets.length === 0) {
+        return `Sorry, we currently have no recommended pets with the desired traits: ${desiredTraits}.`;
+      } else {
+        return `Recommended pets with the desired traits (${desiredTraits}): ${recommendedPets.join(", ")}`;
+      }
+    },
+    adoptPet(pet, adopterName) {
+      if (typeof pet !== "string" || typeof adopterName !== "string") {
+        throw new Error("Invalid input");
+      }
+  
+      return `Congratulations, ${adopterName}! You have adopted ${pet} from the agency. Enjoy your time with your new furry friend!`;
+    },
+  };
+
+//   describe('test petAdoptionAgency', function () {
+//     it('isPetAvailable functionality', function () {
+//         expect(petAdoptionAgency.isPetAvailable("dog", 2, true)).to.equal(`Great! We have 2 vaccinated dog(s) available for adoption at the agency.`);
+//     it('isPetAvailable functionality', function () {
+//         expect(petAdoptionAgency.isPetAvailable("dog", 2, false)).to.equal(`Great! We have 2 dog(s) available for adoption, but they need vaccination.`);
+//     })
+//     it('isPetAvailable functionality', function () {
+//         expect(petAdoptionAgency.isPetAvailable("dog", 0, false)).to.equal(`Sorry, there are no dog(s) available for adoption at the agency.`);
+//     })
+//     it('isPetAvailable functionality', function () {
+//         expect(() => petAdoptionAgency.isPetAvailable(5, 2, false)).to.throw();
+//     })
+//     it('isPetAvailable functionality', function () {
+//         expect(() => petAdoptionAgency.isPetAvailable("dog", "2", false)).to.throw();
+//     })
+//     it('isPetAvailable functionality', function () {
+//         expect(() => petAdoptionAgency.isPetAvailable("dog", 2, "")).to.throw();
+//     })
+//     // expect(petAdoptionAgency.isPetAvailable("dog", 2, false)).to.equal(``);
+//     })
+//     it('getRecommendedPets functionality', function () {
+//         expect(() => petAdoptionAgency.getRecommendedPets({}, "desiredTraits")).to.throw();
+//     it('getRecommendedPets functionality', function () {
+//         expect(() => petAdoptionAgency.getRecommendedPets([], 6)).to.throw();
+//     })
+//     it('getRecommendedPets functionality', function () {
+//         expect(petAdoptionAgency.getRecommendedPets([{traits: "desiredTraits1"}], "desiredTraits2")).to.equal("Sorry, we currently have no recommended pets with the desired traits: desiredTraits2.");
+//     })
+//     it('getRecommendedPets functionality', function () {
+//         expect(petAdoptionAgency.getRecommendedPets([{name: "pesho", traits: "desiredTraits"}], "desiredTraits")).to.equal("Recommended pets with the desired traits (desiredTraits): pesho");
+//     })
+//     it('getRecommendedPets functionality', function () {
+//         expect(petAdoptionAgency.getRecommendedPets([{name: "pesho", traits: "desiredTraits"}, {name: "goho", traits: "desiredTraits2"}, {name: "ivan", traits: "desiredTraits"}], "desiredTraits")).to.equal("Recommended pets with the desired traits (desiredTraits): pesho, ivan");
+//     })
+//         // expect().to.equal();
+//     })
+//     it('adoptPet functionality', function () {
+//         expect(() => petAdoptionAgency.adoptPet("dog", {})).to.throw();
+//     it('adoptPet functionality', function () {
+//         expect(() => petAdoptionAgency.adoptPet({}, "ivan")).to.throw();
+//     })
+//     it('adoptPet functionality', function () {
+//         expect(petAdoptionAgency.adoptPet("dog", "ivan")).to.equal("Congratulations, ivan! You have adopted dog from the agency. Enjoy your time with your new furry friend!");
+//     })
+//     // expect(petAdoptionAgency.adoptPet("dog", "ivan")).to.equal("Congratulations, ivan! You have adopted dog from the agency. Enjoy your time with your new furry friend!");
+//     // expect(petAdoptionAgency.adoptPet()).to.equal();
+//     })
+// })
+
+console.log(petAdoptionAgency.isPetAvailable("dog", 2, true));
+console.log(petAdoptionAgency.isPetAvailable("dog", 2, false));
+console.log(petAdoptionAgency.isPetAvailable("dog", 0, false));
+const dogs = [{traits: "desiredTraits1"}];
+console.log(petAdoptionAgency.getRecommendedPets(dogs, "desiredTraits2"));
+dogs.push({name: "pesho", traits: "desiredTraits"});
+dogs.shift();
+console.log(petAdoptionAgency.getRecommendedPets(dogs, "desiredTraits"));
+dogs.push({name: "goho", traits: "desiredTraits2"});
+dogs.push({name: "ivan", traits: "desiredTraits"});
+console.log(petAdoptionAgency.getRecommendedPets([{name: "pesho", traits: "desiredTraits"}, {name: "goho", traits: "desiredTraits2"}, {name: "ivan", traits: "desiredTraits"}], "desiredTraits"));
+console.log(petAdoptionAgency.adoptPet("dog", "ivan"));
+</script>
+
+<script>
+  // 02. Meetings
+  
 function createShedule(params) {
 // console.log(params);
 const meetings = {};
