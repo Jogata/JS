@@ -5,9 +5,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+body {
+  font-family: 'Kaushan Script', cursive;
+  background-image: url("./img/pexels-lukas-628241.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+#wrapper {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap: 30px;
+}
+
+#form, 
+#first-field, 
+#second-field, 
+#third-field {
+  width: 450px;
+  height: 215px;
+  margin: 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  background-color: rgba(240, 248, 255, 0.753);
+  -webkit-box-shadow: 6px 19px 16px 5px rgba(0,0,0,0.58); 
+  box-shadow: 6px 19px 16px 5px rgba(0,0,0,0.58);
+}
+#form > p, 
+#first-field > p, 
+#second-field > p, 
+#third-field > p {
+  font-size: 16px;
+  font-weight: 800;
+  border-bottom: 1px solid black;
+}
+
+body > h1{
+  margin-bottom: -105px;
+  font-size: 50px;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#add-btn, 
+.edit-btn, 
+.continue-btn, 
+.finished-btn,
+#clear {
+  border: none;
+  border-radius: 3px;
+  font-family: 'Kaushan Script', cursive;
+  background-color: bisque;
+  -webkit-box-shadow: 0px 0px 27px -2px #000000; 
+  box-shadow: 0px 0px 27px -2px #000000;
+}
+.edit-btn, 
+.continue-btn{
+  margin-right: 20px;
+  scale: 1.2;
+}
+#add-btn:hover, 
+.edit-btn:hover, 
+.continue-btn:hover , 
+#clear:hover {
+  color: white;
+  background-color: chocolate;
+}
+
+#add-btn:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}
+
+input {
+  width: 200px;
+  border-radius: 3px;
+  background-color: beige;
+}
+    </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+
+        <h1>Autumn Adventures</h1>
+    <div id="wrapper">
+      <div class="content-first">
+        <div id="form">
+          <p>Add Autumn Event</p>
+        <form>
+          <div>
+            <label for="time">When:</label>
+            <input id="time" type="time">
+            <input id="date" type="date">
+          </div>
+          <div>
+            <label for="place">Place:</label>
+            <input id="place" type="text" placeholder="Place">
+          </div>
+          <div>
+            <label for="event-name">Event:</label>
+            <input id="event-name" type="text" placeholder="Event Name">
+          </div>
+          <div>
+            <label for="email">Contacts:</label>
+            <input id="email" type="email" placeholder="Email">
+          </div>
+         
+          <input id="add-btn" type="button" value="Add Event">
+        </form>
+        </div>
+        <div id="first-field">
+          <p>Upcoming</p>
+          <ul id="upcoming-list"></ul>
+        </div>
+      </div>
+      <div class="content-second">
+        <div id="second-field">
+          <p>Last Check</p>
+          <ul id="check-list"></ul>
+        </div>
+        <div id="third-field">
+          <p>Finished</p>
+          <ul id="finished-list"></ul>
+          <button id="clear">Clear</button>
+        </div>
+      </div>
+    </div>
 
     <script>
       // 01. Phone Book
