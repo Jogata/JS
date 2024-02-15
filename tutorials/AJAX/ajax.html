@@ -5,708 +5,159 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
-      fieldset {
-        display: none;
-      }
-
-body {
-  font-family: 'Kaushan Script', cursive;
-  background-image: url("./img/pexels-lukas-628241.jpg");
-  background-attachment: fixed;
-  background-size: cover;
-}
-
-#wrapper {
-  margin-top: 100px;
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  gap: 30px;
-  display: none;
-}
-
-#form, 
-#first-field, 
-#second-field, 
-#third-field {
-  width: 450px;
-  height: 215px;
-  margin: 20px;
-  border-radius: 10px;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  flex-direction: column;
-  background-color: rgba(240, 248, 255, 0.753);
-  -webkit-box-shadow: 6px 19px 16px 5px rgba(0,0,0,0.58); 
-  box-shadow: 6px 19px 16px 5px rgba(0,0,0,0.58);
-}
-#form > p, 
-#first-field > p, 
-#second-field > p, 
-#third-field > p {
-  font-size: 16px;
-  font-weight: 800;
-  border-bottom: 1px solid black;
-}
-
-body > h1{
-  margin-bottom: -105px;
-  font-size: 50px;
-  text-align: center;
-}
-
-form {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 8px;
-}
-
-#add-btn, 
-.edit-btn, 
-.continue-btn, 
-.finished-btn,
-#clear {
-  border: none;
-  border-radius: 3px;
-  font-family: 'Kaushan Script', cursive;
-  background-color: bisque;
-  -webkit-box-shadow: 0px 0px 27px -2px #000000; 
-  box-shadow: 0px 0px 27px -2px #000000;
-}
-.edit-btn, 
-.continue-btn{
-  margin-right: 20px;
-  scale: 1.2;
-}
-#add-btn:hover, 
-.edit-btn:hover, 
-.continue-btn:hover , 
-#clear:hover {
-  color: white;
-  background-color: chocolate;
-}
-
-#add-btn:disabled {
-  background-color: gray;
-  cursor: not-allowed;
-}
-
-input {
-  width: 200px;
-  border-radius: 3px;
-  background-color: beige;
-}
-#email {
-  width: 183px;
-}
-
-#time, 
-#date {
-  width: 95px;
-}
-
-.event-content{
-    list-style-type: none;
-    margin-top: -50px;
-}
-
-article {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 400px;
-    flex-wrap: wrap;
-}
-
-#finished-list article {
-    font-size: 12px;
-    margin-top: 10px;
-    gap: 10px;
-}
-
-#third-field {
-    position: relative;
-}
-
-#clear{
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-bottom: 11px;
-  }
-  
-  
-  /* Ensure that #third-field is relatively positioned */
-  #third-field {
-    position: relative;
-  }
-  
-  /* Style the #clear button */
-  #clear {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-bottom: 11px;
-  }
-  
-  /* Style the #finished-list */
-  #finished-list {
-    overflow-y: auto; /* Add a vertical scrollbar if content exceeds the height */
-    padding: 0; /* Remove default padding */
-    margin-top: -40px;
- 
-  }
-  
-  /* Style the individual list items */
-  #finished-list li {
-    height: 50px; /* Set a fixed height for each item */
-    margin: 20px 0; /* Add some spacing between items */
-    
-  }
-  
-  #finished-list article {
-    font-size: 10px;
-    gap: 10px;
-    
-  }
-  
-
-  @media (max-width: 1000px) {
-    #wrapper {
-      flex-direction: column;
-    }
-  }
-
-  @import url('https://fonts.googleapis.com/css2?family=Redressed&display=swap');
-      
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        min-height: 100vh;
-        padding: 50px 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: 'Redressed', cursive;
-        background-color: #000;
-        /* overflow: hidden; */
-      }
-      
-      .main {
-        max-width: 1600px;
-        display: flex;
-        gap: 30px;
-        justify-content: space-evenly;
-        align-items: center;
-        flex-flow: row wrap;
-      }
-      
-      .sec {
-        position: relative;
-        /* width: 30%; */
-        max-width: 500px;
-        text-align: center;
-        border-radius: 30px;
-        border: 2px solid #999999;
-        background-position: center;
-        background-size: cover;
-        transform: scale(1);
-        transition: all .5s ease-in-out;
-      }
-      .sec:hover {
-        transform: scale(0.9);
-      }
-      
-      .bg1 {
-        background-image: url(img/bg1.jpg);
-      }
-      
-      .bg2 {
-        background-image: url(img/bg2.jpg);
-      }
-      
-      .bg3 {
-        background-image: url(img/bg3.jpg);
-      }
-      
-      .sec img {
-        width: 100%;
-        transition: all .5s ease-in-out;
-        opacity: 0;
-      }
-      .sec:hover img {
-        transform: scale(1.4);
-        opacity: 1;
-      }
-      
-      .sec h1 {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        /* width: 100%; */
-        padding: 1em 0;
-        color:#fff;
-        font-size: 3rem;
-        transition: all .5s ease-in-out;
-        z-index: 2;
-      }
-      .sec:hover h1 {
-        transform: scale(1.4);
-      }
-      
-      /* @media (max-width: 769px) {
-        .sec {
-          width: 40%;
-          margin-bottom: 20px;
-        }
-      }
-      
-      @media (max-width: 576px) {
-        body {
-          height: auto;
-          overflow: unset;
-        }
-        .sec {
-          width: 95%;
-          margin-bottom: 30px;
-        }
-        .sec:hover img {
-          transform: scale(1.2);
-        }
-        .sec:hover h1 {
-          transform: scale(1);
-        }
-      } */
-
-      #quizzie {
-        display: none;
-      }
-    </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
-    <div class="main">
-      <div class="sec bg1">
-        <h1 class="title">Jack Sparrow</h1>
-        <img src="./img/jack-sparrow.png">
-      </div>
-      <div class="sec bg2">
-        <h1 class="title">Elizabeth</h1>
-        <img src="./img/elizabeth.png">
-      </div>
-      <div class="sec bg3">
-        <h1 class="title">Will Turner</h1>
-        <img src="./img/will-turner.png">
-      </div>
-    </div>
-
-    <div id="quizzie">
-      <h1>JavaScript Quiz</h1>
-
-      <section>
-          <ul class="quiz-step step1 current">
-              <li class="question">
-                  <div class="question-wrap">
-                      <h2>Question #1: Which event occurs when the user clicks on an HTML element?</h2>
-                  </div>
-              </li>
-              <li class="quiz-answer low-value" data-quizIndex="2">
-                  <div class="answer-wrap">
-                      <p class="answer-text">onclick</p>
-                  </div>
-              </li>
-              <li class="quiz-answer high-value" data-quizIndex="4">
-                  <div class="answer-wrap">
-                      <p class="answer-text">onmouseclick</p>
-                  </div>
-              </li>
-          </ul>
-      </section>
-      <section class="hidden">
-          <ul class="quiz-step step1 current">
-              <li class="question">
-                  <div class="question-wrap">
-                      <h2>Question #2: Which function converting JSON to string?</h2>
-                  </div>
-              </li>
-              <li class="quiz-answer low-value" data-quizIndex="2">
-                  <div class="answer-wrap">
-                      <p class="answer-text">JSON.toString()</p>
-                  </div>
-              </li>
-              <li class="quiz-answer high-value" data-quizIndex="4">
-                  <div class="answer-wrap">
-                      <p class="answer-text">JSON.stringify()</p>
-                  </div>
-              </li>
-          </ul>
-      </section>
-      <section class="hidden">
-          <ul class="quiz-step step1 current">
-              <li class="question">
-                  <div class="question-wrap">
-                      <h2>Question #3: What is DOM?</h2>
-                  </div>
-              </li>
-              <li class="quiz-answer low-value" data-quizIndex="2">
-                  <div class="answer-wrap">
-                      <p class="answer-text">A programming API for HTML and XML documents</p>
-                  </div>
-              </li>
-              <li class="quiz-answer high-value" data-quizIndex="4">
-                  <div class="answer-wrap">
-                      <p class="answer-text">The DOM is your source HTML</p>
-                  </div>
-              </li>
-          </ul>
-      </section>
-      <ul id="results">
-          <li class="results-inner">
-              <h1></h1>
-          </li>
-      </ul>
-  </div>
-  </main>
-  </div>
-  <script>
-    solve();
-  </script>
-
-        <h1>Autumn Adventures</h1>
-    <div id="wrapper">
-      <div class="content-first">
-        <div id="form">
-          <p>Add Autumn Event</p>
-        <form>
-          <div>
-            <label for="time">When:</label>
-            <input id="time" type="time">
-            <input id="date" type="date">
-          </div>
-          <div>
-            <label for="place">Place:</label>
-            <input id="place" type="text" placeholder="Place">
-          </div>
-          <div>
-            <label for="event-name">Event:</label>
-            <input id="event-name" type="text" placeholder="Event Name">
-          </div>
-          <div>
-            <label for="email">Contacts:</label>
-            <input id="email" type="email" placeholder="Email">
-          </div>
-         
-          <input id="add-btn" type="button" value="Add Event">
-        </form>
-        </div>
-        <div id="first-field">
-          <p>Upcoming</p>
-          <ul id="upcoming-list"></ul>
-        </div>
-      </div>
-      <div class="content-second">
-        <div id="second-field">
-          <p>Last Check</p>
-          <ul id="check-list"></ul>
-        </div>
-        <div id="third-field">
-          <p>Finished</p>
-          <ul id="finished-list"></ul>
-          <button id="clear">Clear</button>
-        </div>
-      </div>
-    </div>
     <script>
-      // window.addEventListener('load', solve);
-
-function solve2() {
-    const form = document.querySelector("form");
-    const upcomingList = document.getElementById("upcoming-list");
-    const checkList = document.getElementById("check-list");
-    const finishedList = document.getElementById("finished-list");
-    // console.log(form, upcomingList, checkList, finishedList);
-    const timeInput = document.getElementById("time");
-    const dateInput = document.getElementById("date");
-    const placeInput = document.getElementById("place");
-    const eventInput = document.getElementById("event-name");
-    const emailInput = document.getElementById("email");
-    // console.log(timeInput, dateInput, placeInput, eventInput, emailInput);
-    const addBtn = document.getElementById("add-btn");
-
-    // timeInput.value = "19:00";
-    // dateInput.value = "2020-01-01";
-    // placeInput.value = "test place";
-    // eventInput.value = "test event";
-    // emailInput.value = "test@abv.bg";
-
-    addBtn.addEventListener("click", (e) => {
-        // console.log("get info");
-        // e.preventDefault();
-
-        if (timeInput.value.length == 0) {
-            return;
-        }
-        if (dateInput.value.length == 0) {
-            return;
-        }
-        if (placeInput.value.length == 0) {
-            return;
-        }
-        if (eventInput.value.length == 0) {
-            return;
-        }
-        if (emailInput.value.length == 0) {
-            return;
+      class FlightBookingSystem {
+        constructor (agencyName) {
+          this.agencyName = agencyName;
+          this.flights = [];
+          this.bookings = [];
+          this.bookingsCount = 0;
         }
 
-        const timeInputValue = timeInput.value;
-        const dateInputValue = dateInput.value;
-        const placeInputValue = placeInput.value;
-        const eventInputValue = eventInput.value;
-        const emailInputValue = emailInput.value;
-        // console.log(timeInputValue, dateInputValue, placeInputValue, eventInputValue, emailInputValue);
-        addBtn.disabled = true;
-        form.reset();
+        addFlight (flightNumber, destination, departureTime, price) {
+          const flight = this.flights.find(flight => flight.flightNumber == flightNumber);
 
-        const li = document.createElement("li");
-        const html = `<article><p>Begins: ${dateInputValue} at ${timeInputValue}</p><p>In: ${placeInputValue}</p><p>Event: ${eventInputValue}</p><p>Contact: ${emailInputValue}</p></article>`;
-        li.innerHTML = html;
-        li.classList.add("event-content");
-        const editBtn = document.createElement("button");
-        editBtn.textContent = "Edit";
-        editBtn.classList.add("edit-btn");
-        editBtn.addEventListener("click", () => {
-            li.remove();
-            timeInput.value = timeInputValue;
-            dateInput.value = dateInputValue;
-            placeInput.value = placeInputValue;
-            eventInput.value = eventInputValue;
-            emailInput.value = emailInputValue;
-            addBtn.disabled = false;
-        })
-        const continueBtn = document.createElement("button");
-        continueBtn.textContent = "Continue";
-        continueBtn.classList.add("continue-btn");
-        continueBtn.addEventListener("click", () => {
-            upcomingList.appendChild(li);
-            continueBtn.remove();
-            editBtn.remove();
-            addBtn.disabled = false;
-            const moveBtn = document.createElement("button");
-            moveBtn.textContent = "Move to Finished";
-            moveBtn.classList.add("finished-btn");
-            const buttons = document.querySelectorAll(".finished-btn");
-            moveBtn.addEventListener("click", () => {
-                finishedList.appendChild(li);
-                moveBtn.remove();
-                console.log(buttons);
-                buttons.forEach(button => {
-                    console.log("cclick");
-                    button.click()
-                });
-            })
-            li.appendChild(moveBtn);
-        });
-        li.appendChild(editBtn);
-        li.appendChild(continueBtn);
-        checkList.appendChild(li);
-    })
+          if (flight) {
 
-    const clearBtn = document.getElementById("clear");
-    clearBtn.addEventListener("click", () => {
-        finishedList.textContent = "";
-    })
-}
+            return `Flight ${flight.flightNumber} to ${flight.destination} is already available.`;
+
+          } else {
+
+            const newFlight = {
+              flightNumber, 
+              destination, 
+              departureTime, 
+              price
+            }
+
+            this.flights.push(newFlight);
+            return `Flight ${newFlight.flightNumber} to ${newFlight.destination} has been added to the system.`;
+
+          }
+        }
+
+        bookFlight (passengerName, flightNumber) {
+          const flight = this.flights.find(flight => flight.flightNumber == flightNumber);
+          // console.log(flight);
+
+          if (flight) {
+
+            const booking = {
+              passengerName, 
+              flightNumber
+            }
+            
+            // console.log(booking);
+            this.bookings.push(booking);
+            // console.log(this.bookings);
+            this.bookingsCount++;
+            return `Booking for passenger ${passengerName} on flight ${flightNumber} is confirmed.`;
+            
+          } else {
+
+            return `Flight ${flightNumber} is not available for booking.`;
+
+          }
+        }
+
+        showBookings (criteria) {
+
+          if (this.bookings.length == 0) {
+
+            throw new Error(`No bookings have been made yet.`);
+
+          } else {
+
+            if (criteria == "all") {
+
+              const result = [`All bookings(${this.bookingsCount}):`];
+
+              for (const booking of this.bookings) {
+                const info = `${booking.passengerName} booked for flight ${booking.flightNumber}.`;
+                result.push(info);
+              }
+
+              return result.join("\n");
+
+            } else if (criteria == "cheap") {
+
+              const cheapFlights = this.flights.filter(flight => flight.price <= 100);
+              // console.log(cheapFlights);
+
+              if (cheapFlights.length > 0) {
+
+                const result = ["Cheap bookings:"];
+                
+                for (const flight of cheapFlights) {
+                  const flightNumber = flight.flightNumber;
+                  const cheapBookings = this.bookings.filter(booking => booking.flightNumber == flightNumber);
+
+                  for (const passenger of cheapBookings) {
+                    
+                    const info = `${passenger.passengerName} booked for flight ${flightNumber}.`;
+                    result.push(info);
+
+                  }
+                }
+                
+                return result.join("\n");
+
+              } else {
+
+                return "No cheap bookings found.";
+
+              }
+              
+            } else if (criteria == "expensive") {
+
+              const expensiveFlights = this.flights.filter(flight => flight.price > 100);
+              
+              if (expensiveFlights.length > 0) {
+                
+                const result = ["Expensive bookings:"];
+                
+                for (const flight of expensiveFlights) {
+                  const flightNumber = flight.flightNumber;
+                  const expensiveBookings = this.bookings.filter(booking => booking.flightNumber == flightNumber);
+                  
+                  for (const passenger of expensiveBookings) {
+                    
+                    const info = `${passenger.passengerName} booked for flight ${flightNumber}.`;
+                    result.push(info);
+                    
+                  }
+                }
+                
+                return result.join("\n");
+                
+              } else {
+                
+                return "No expensive bookings found.";
+                
+              }
+
+            }
+          }
+        }
+      }
+
+      // const system = new FlightBookingSystem("TravelWorld");
+      // console.log(system.addFlight("AA101", "Los Angeles", "09:00 AM", 250));
+      // console.log(system.addFlight("BB202", "New York", "10:30 AM", 180));
+      // console.log(system.addFlight("CC303", "Chicago", "11:45 AM", 120));
+      // console.log(system.addFlight("AA101", "Los Angeles", "09:00 AM", 250));
+
+      // const system = new FlightBookingSystem("TravelWorld");
+      // console.log(system.addFlight("AA101", "Los Angeles", "09:00 AM", 250));
+      // console.log(system.addFlight("BB202", "New York", "10:30 AM", 180));
+      // console.log(system.bookFlight("Alice", "AA101"));
+      // console.log(system.bookFlight("Bob", "BB202"));
+      // console.log(system.bookFlight("Charlie", "CC303"));
     </script>
-
-    <script>
-      // 01. Phone Book
-
-function createPhoneBook(people) {
-const book = {};
-
-for (const person of people) {
-  const data = person.split(" ");
-  const name = data[0];
-  const phone = data[1];
-  // console.log(name,phone);
-  book[name] = phone;
-}
-
-// console.log(book);
-for (const person in book) {
-  const number = book[person];
-  console.log(`${person} -> ${number}`);
-}
-
-}
-
-// createPhoneBook(['Tim 0834212554', 'Peter 0877547887', 'Bill 0896543112', 'Tim 0876566344']);
-// createPhoneBook(['George 0552554', 'Peter 087587', 'George 0453112', 'Bill 0845344']);
-
-      const petAdoptionAgency = {
-    isPetAvailable(pet, availableCount, vaccinated) {
-      if (typeof pet !== "string" || typeof availableCount !== "number" || typeof vaccinated !== "boolean") {
-        throw new Error("Invalid input");
-      }
-
-      if (availableCount <= 0) {
-        return `Sorry, there are no ${pet}(s) available for adoption at the agency.`;
-      } else {
-        if(vaccinated){
-            return `Great! We have ${availableCount} vaccinated ${pet}(s) available for adoption at the agency.`;
-        }else{
-            return `Great! We have ${availableCount} ${pet}(s) available for adoption, but they need vaccination.`;
-        }
-        
-      }
-    },
-    getRecommendedPets(petList, desiredTraits) {
-      let recommendedPets = [];
-  
-      if (!Array.isArray(petList) || typeof desiredTraits !== "string") {
-        throw new Error("Invalid input");
-      }
-  
-      petList.forEach((pet) => {
-        if (pet.traits === desiredTraits) {
-          recommendedPets.push(pet.name);
-        }
-      });
-  
-      if (recommendedPets.length === 0) {
-        return `Sorry, we currently have no recommended pets with the desired traits: ${desiredTraits}.`;
-      } else {
-        return `Recommended pets with the desired traits (${desiredTraits}): ${recommendedPets.join(", ")}`;
-      }
-    },
-    adoptPet(pet, adopterName) {
-      if (typeof pet !== "string" || typeof adopterName !== "string") {
-        throw new Error("Invalid input");
-      }
-  
-      return `Congratulations, ${adopterName}! You have adopted ${pet} from the agency. Enjoy your time with your new furry friend!`;
-    },
-  };
-
-//   describe('test petAdoptionAgency', function () {
-//     it('isPetAvailable functionality', function () {
-//         expect(petAdoptionAgency.isPetAvailable("dog", 2, true)).to.equal(`Great! We have 2 vaccinated dog(s) available for adoption at the agency.`);
-//     it('isPetAvailable functionality', function () {
-//         expect(petAdoptionAgency.isPetAvailable("dog", 2, false)).to.equal(`Great! We have 2 dog(s) available for adoption, but they need vaccination.`);
-//     })
-//     it('isPetAvailable functionality', function () {
-//         expect(petAdoptionAgency.isPetAvailable("dog", 0, false)).to.equal(`Sorry, there are no dog(s) available for adoption at the agency.`);
-//     })
-//     it('isPetAvailable functionality', function () {
-//         expect(() => petAdoptionAgency.isPetAvailable(5, 2, false)).to.throw();
-//     })
-//     it('isPetAvailable functionality', function () {
-//         expect(() => petAdoptionAgency.isPetAvailable("dog", "2", false)).to.throw();
-//     })
-//     it('isPetAvailable functionality', function () {
-//         expect(() => petAdoptionAgency.isPetAvailable("dog", 2, "")).to.throw();
-//     })
-//     // expect(petAdoptionAgency.isPetAvailable("dog", 2, false)).to.equal(``);
-//     })
-//     it('getRecommendedPets functionality', function () {
-//         expect(() => petAdoptionAgency.getRecommendedPets({}, "desiredTraits")).to.throw();
-//     it('getRecommendedPets functionality', function () {
-//         expect(() => petAdoptionAgency.getRecommendedPets([], 6)).to.throw();
-//     })
-//     it('getRecommendedPets functionality', function () {
-//         expect(petAdoptionAgency.getRecommendedPets([{traits: "desiredTraits1"}], "desiredTraits2")).to.equal("Sorry, we currently have no recommended pets with the desired traits: desiredTraits2.");
-//     })
-//     it('getRecommendedPets functionality', function () {
-//         expect(petAdoptionAgency.getRecommendedPets([{name: "pesho", traits: "desiredTraits"}], "desiredTraits")).to.equal("Recommended pets with the desired traits (desiredTraits): pesho");
-//     })
-//     it('getRecommendedPets functionality', function () {
-//         expect(petAdoptionAgency.getRecommendedPets([{name: "pesho", traits: "desiredTraits"}, {name: "goho", traits: "desiredTraits2"}, {name: "ivan", traits: "desiredTraits"}], "desiredTraits")).to.equal("Recommended pets with the desired traits (desiredTraits): pesho, ivan");
-//     })
-//         // expect().to.equal();
-//     })
-//     it('adoptPet functionality', function () {
-//         expect(() => petAdoptionAgency.adoptPet("dog", {})).to.throw();
-//     it('adoptPet functionality', function () {
-//         expect(() => petAdoptionAgency.adoptPet({}, "ivan")).to.throw();
-//     })
-//     it('adoptPet functionality', function () {
-//         expect(petAdoptionAgency.adoptPet("dog", "ivan")).to.equal("Congratulations, ivan! You have adopted dog from the agency. Enjoy your time with your new furry friend!");
-//     })
-//     // expect(petAdoptionAgency.adoptPet("dog", "ivan")).to.equal("Congratulations, ivan! You have adopted dog from the agency. Enjoy your time with your new furry friend!");
-//     // expect(petAdoptionAgency.adoptPet()).to.equal();
-//     })
-// })
-
-console.log(petAdoptionAgency.isPetAvailable("dog", 2, true));
-console.log(petAdoptionAgency.isPetAvailable("dog", 2, false));
-console.log(petAdoptionAgency.isPetAvailable("dog", 0, false));
-const dogs = [{traits: "desiredTraits1"}];
-console.log(petAdoptionAgency.getRecommendedPets(dogs, "desiredTraits2"));
-dogs.push({name: "pesho", traits: "desiredTraits"});
-dogs.shift();
-console.log(petAdoptionAgency.getRecommendedPets(dogs, "desiredTraits"));
-dogs.push({name: "goho", traits: "desiredTraits2"});
-dogs.push({name: "ivan", traits: "desiredTraits"});
-console.log(petAdoptionAgency.getRecommendedPets([{name: "pesho", traits: "desiredTraits"}, {name: "goho", traits: "desiredTraits2"}, {name: "ivan", traits: "desiredTraits"}], "desiredTraits"));
-console.log(petAdoptionAgency.adoptPet("dog", "ivan"));
-    </script>
-
-<script>
-  // 02. Meetings
-  
-function createShedule(params) {
-// console.log(params);
-const meetings = {};
-
-for (const input of params) {
-  // console.log(input);
-  const data = input.split(' ');
-  // console.log(data);
-  const day = data[0];
-  const name = data[1];
-
-  if (meetings[day]) {
-    console.log(`Conflict on ${day}!`);
-  } else {
-    meetings[day] = name;
-    console.log(`Scheduled for ${day}`);
-  }
-}
-
-// console.log(meetings);
-for (const day in meetings) {
-  const name = meetings[day]
-  console.log(`${day} -> ${name}`);
-}
-
-}
-
-// createShedule(['Monday Peter', 'Wednesday Bill', 'Monday Tim', 'Friday Tim']);
-// createShedule(['Friday Bob', 'Saturday Ted', 'Monday Bill', 'Monday John', 'Wednesday George']);
-class FlightBookingSystem {
-  constructor (agencyName) {
-    this.agencyName = agencyName;
-    this.flights = [];
-    this.bookings = [];
-    this.bookingsCount = 0;
-  }
-}
-</script>
 
 <script>
   // 10. Contacts Builder✶
