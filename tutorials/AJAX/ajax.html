@@ -123,6 +123,45 @@
       #quizzie .answer-wrap:hover {
         background: DarkTurquoise;
       }
+
+      @import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&display=swap');
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        width: 100vw;
+        margin: 0; 
+        display: flex;
+        /* place-items: center; */
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        font-family: 'ADLaM Display', cursive;
+        background-image: url(../img/zero.jpg);
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+        scale: 0.9;
+        overflow: hidden;
+      }
+      
+      #wrapper {
+        margin: 2.35rem 0 0;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
+      
+      #header {
+        margin: 0;
+        padding: 0px 150px;
+        border-radius: 10px;
+        background-color: rgba(17, 16, 16, 0.425);
+      }
     </style>
   </head>
   <body>
@@ -179,6 +218,21 @@ function solution() {
       return;
     }
 
+    if (urgencyFieldValue.length == 0) {
+      // console.log("return");
+      return;
+    }
+
+    if (assignedTeamFieldValue.length == 0) {
+      // console.log("return");
+      return;
+    }
+
+    if (descriptionFieldValue.length == 0) {
+      // console.log("return");
+      return;
+    }
+
     addBtn.disabled = true;
 
     const li = document.createElement("li");
@@ -230,6 +284,85 @@ function solution() {
 
 }
     </script>
+    
+    <section id="header">
+      <h1>Tech Troubleshoot Hub</h1>
+      <div class="heading-container"></div>
+    </section>
+    
+    <div id="wrapper">
+      <section id="add-problem">
+        <div class="container">
+          <h1>Problem</h1>
+          <div class="container-text">
+            <form action="">
+              <label for="employee">Employee:</label>
+              <input type="text" id="employee" name="employee" />
+    
+              <label for="category">Category:</label>
+              <select name="category" id="category">
+                <option value=""></option>
+                <option value="Software">Software</option>
+                <option value="Hardware" selected>Hardware</option>
+                <option value="Network">Network</option>
+              </select>
+    
+              <label for="urgency">Urgency:</label>
+              <select name="urgency" id="urgency">
+                <option value=""></option>
+                <option value="Low" selected>Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
+    
+              <label for="team">Assigned Team:</label>
+              <select name="team" id="team">
+                <option value=""></option>
+                <option value="Software Solutions Team" selected>
+                  Software Solutions Team
+                </option>
+                <option value="Hardware Support Division">
+                  Hardware Support Division
+                </option>
+                <option value="Network Operations Center">
+                  Network Operations Center
+                </option>
+              </select>
+    
+              <label for="description">Description:</label>
+              <input type="text" id="description" name="description" />
+              <button id="add-btn" type="submit">Add</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    
+      <section id="preview">
+        <div class="preview-container">
+          <div class="container">
+            <h1>Preview</h1>
+            <ul class="preview-list"></ul>
+          </div>
+        </div>
+      </section>
+    
+      <section id="pending">
+        <div class="pending-container">
+          <div class="container">
+            <h1>Pending</h1>
+            <ul class="pending-list"></ul>
+          </div>
+        </div>
+      </section>
+      <section id="resolved">
+        <div class="resolved-container">
+          <div class="container">
+            <h1>Resolved</h1>
+            <ul class="resolved-list"></ul>
+          </div>
+        </div>
+      </section>
+    </div>
 
     <script>
       class FlightBookingSystem {
