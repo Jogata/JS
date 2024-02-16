@@ -5,6 +5,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Satisfy|Pathway+Gothic+One);
+
+      * {
+        box-sizing: border-box;
+      }
+
+      /* Defaults */
+      html, 
+      body, 
+      #quizzie {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+      }
+      
+      .hidden {
+        display: none;
+      }
+      
+      body {
+        background: #677c8a;
+        color: #fff;
+      }
+      
+      h1 {
+        font-family: 'Satisfy', 'cursive';
+        font-size: 2.5em;
+      }
+      
+      h2, p {
+        font-family: 'Pathway Gothic One', 'sans-serif';
+        font-size: 2em;
+      }
+      
+      h1, h2, p {
+        text-align: center;
+        display: block;
+        width: auto;
+        margin: 1%;
+      }
+      
+      #quizzie {
+        padding: 5% 0;
+        /* Individual Steps/Sections */
+        /* Content */
+      }
+      
+      #quizzie ul {
+        list-style: none;
+        display: block;
+        width: auto;
+        margin: 2% 2%;
+        padding: 2%;
+        overflow: auto;
+        display: none;
+        /* Step Questions and Answer Options */
+      }
+      
+      #quizzie ul.current {
+        display: block;
+      }
+      
+      #quizzie ul li {
+        display: inline-block;
+        float: left;
+        width: 49%;
+        margin-right: 2%;
+        overflow: auto;
+        text-align: center;
+      }
+      
+      #quizzie ul li.quiz-answer {
+        cursor: pointer;
+      }
+      
+      #quizzie ul li.question, #quizzie ul li.results-inner {
+        display: block;
+        float: none;
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        margin-bottom: 2%;
+      }
+      
+      #quizzie ul li.results-inner {
+        padding: 5% 2%;
+      }
+    </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
@@ -64,6 +154,22 @@
           }
         }
 
+        cancelBooking (passengerName, flightNumber) {
+          const bookingIndex = this.bookings.findIndex(booking => booking.passengerName == passengerName && booking.flightNumber == flightNumber);
+    
+          if (bookingIndex >= 0) {
+    
+            this.bookings.splice(bookingIndex, 1);
+            this.bookingsCount--;
+            return `Booking for passenger ${passengerName} on flight ${flightNumber} is cancelled.`;
+    
+          } else {
+    
+            throw new Error(`Booking for passenger ${passengerName} on flight ${flightNumber} not found.`);
+    
+          }
+        }
+          
         showBookings (criteria) {
 
           if (this.bookings.length == 0) {
@@ -157,6 +263,36 @@
       // console.log(system.bookFlight("Alice", "AA101"));
       // console.log(system.bookFlight("Bob", "BB202"));
       // console.log(system.bookFlight("Charlie", "CC303"));
+      
+      // const system = new FlightBookingSystem("TravelWorld");
+      // console.log(system.addFlight("AA101", "Los Angeles", "09:00 AM", 250));
+      // console.log(system.addFlight("BB202", "New York", "10:30 AM", 180));
+      // console.log(system.bookFlight("Alice", "AA101"));
+      // console.log(system.bookFlight("Bob", "BB202"));
+      // console.log(system.bookings);
+      // console.log(system.bookingsCount);
+      // console.log(system.cancelBooking("Alice", "AA101"));
+      // console.log(system.bookings);
+      // console.log(system.bookingsCount);
+      
+      // const system = new FlightBookingSystem("TravelWorld");
+      // console.log(system.addFlight("AA101", "Los Angeles", "09:00 AM", 250));
+      // console.log(system.addFlight("BB202", "New York", "10:30 AM", 180));
+      // console.log(system.bookFlight("Alice", "AA101"));
+      // console.log(system.bookFlight("Bob", "BB202"));
+      // console.log(system.showBookings("all"));
+
+      // const system = new FlightBookingSystem("TravelWorld");
+      // console.log(system);
+      // console.log(system.addFlight("AA101", "Los Angeles", "09:00 AM", 250));
+      // console.log(system.addFlight("BB202", "New York", "10:30 AM", 180));
+      // console.log(system.addFlight("AA101", "Los Angeles", "09:00 AM", 50));
+      // console.log(system.addFlight("BB202", "New York", "10:30 AM", 80));
+      // console.log(system.bookFlight("Alice", "AA101"));
+      // console.log(system.bookFlight("Bob", "BB202"));
+      // console.log(system.bookings);
+      // console.log(system.showBookings("expensive"));
+      // console.log(system.showBookings("cheap"));
     </script>
 
 <script>
