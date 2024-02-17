@@ -5,839 +5,156 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      @import url(https://fonts.googleapis.com/css?family=Satisfy|Pathway+Gothic+One);
-
-      * {
-        box-sizing: border-box;
-      }
-
-      /* Defaults */
-      html, 
-      body, 
-      #quizzie {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
-      }
-      
-      .hidden {
-        display: none;
-      }
-      
-      body {
-        background: #677c8a;
-        color: #fff;
-      }
-      
-      h1 {
-        font-family: 'Satisfy', 'cursive';
-        font-size: 2.5em;
-      }
-      
-      h2, p {
-        font-family: 'Pathway Gothic One', 'sans-serif';
-        font-size: 2em;
-      }
-      
-      h1, h2, p {
-        text-align: center;
-        display: block;
-        width: auto;
-        margin: 1%;
-      }
-      
-      #quizzie {
-        padding: 5% 0;
-        /* Individual Steps/Sections */
-        /* Content */
-      }
-      
-      #quizzie ul {
-        list-style: none;
-        display: block;
-        width: auto;
-        margin: 2% 2%;
-        padding: 2%;
-        overflow: auto;
-        display: none;
-        /* Step Questions and Answer Options */
-      }
-      
-      #quizzie ul.current {
-        display: block;
-      }
-      
-      #quizzie ul li {
-        display: inline-block;
-        float: left;
-        width: 49%;
-        margin-right: 2%;
-        overflow: auto;
-        text-align: center;
-      }
-      
-      #quizzie ul li.quiz-answer {
-        cursor: pointer;
-      }
-      
-      #quizzie ul li.question, #quizzie ul li.results-inner {
-        display: block;
-        float: none;
-        width: 100%;
-        text-align: center;
-        margin: 0;
-        margin-bottom: 2%;
-      }
-      
-      #quizzie ul li.results-inner {
-        padding: 5% 2%;
-      }
-
-      #quizzie ul li.results-inner img {
-        width: 250px;
-      }
-      
-      #quizzie ul li:last-child {
-        margin-right: 0;
-      }
-      
-      #quizzie .question-wrap, #quizzie .answer-wrap {
-        display: block;
-        padding: 1%;
-        margin: 1em 10%;
-        -moz-border-radius: 10px;
-        -webkit-border-radius: 10px;
-        border-radius: 10px;
-      }
-      
-      #quizzie .answer-wrap {
-        background: Turquoise;
-        -moz-transition: background-color 0.5s ease;
-        -o-transition: background-color 0.5s ease;
-        -webkit-transition: background-color 0.5s ease;
-        transition: background-color 0.5s ease;
-      }
-      
-      #quizzie .answer-wrap:hover {
-        background: DarkTurquoise;
-      }
-
-      @import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&display=swap');
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      
-      body {
-        width: 100vw;
-        margin: 0; 
-        display: flex;
-        /* place-items: center; */
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        font-family: 'ADLaM Display', cursive;
-        background-image: url(../img/zero.jpg);
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-        background-size: cover;
-        scale: 0.9;
-        overflow: hidden;
-      }
-      
-      #wrapper {
-        margin: 2.35rem 0 0;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-      }
-      
-      #header {
-        margin: 0;
-        padding: 0px 150px;
-        border-radius: 10px;
-        background-color: rgba(17, 16, 16, 0.425);
-      }
-
-      #header > h1 {
-        text-align: center;
-        font-size: 3rem;
-        letter-spacing: 0.1rem;
-        background: linear-gradient(180deg, rgb(88, 156, 245) 17%, rgb(228, 161, 235) 48%, rgb(118, 208, 214) 78%);
-        text-shadow: 3px 3px #1b1a1a49;
-        color: transparent;
-        background-clip: text;
-        -webkit-background-clip: text;
-      }
-        
-      .heading-container {
-        top: 0%;
-        left: 50%;
-        margin: 0px auto 4px 0;
-        height:1rem;
-        display: flex;
-        text-align: center;
-      }
-      
-      .info {
-        position: relative;
-        flex: 1;
-        display: flex;
-        justify-items: legacy;
-        flex-direction: column;
-        margin-top: 10rem;
-      }
-      
-      .info > h1 {
-        position: relative;
-        padding: 0;
-        color: rgb(9, 9, 9);
-        margin: -10rem 0 0px;
-        font-size: 1.5rem;
-        font-weight: 700;
-        letter-spacing: 0px;
-        text-transform: uppercase;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-      }
-      
-      .container {
-          width: 100vw;
-          /* height: 19vh; */
-          margin-bottom: 10px;
-          display: flex;
-          align-items:center;
-          justify-content:flex-start;
-          flex-direction: column;
-          border-radius: 5px;
-          background-color: rgba(231, 228, 224, 0.637);
-      }
-      
-      ul {
-          overflow: auto;
-          /* overflow: scroll; */
-      }
-      
-      .container > h1 {
-        color: rgb(0, 0, 0);
-      }
-      
-      .container-text {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-      }
-      
-      .container-text > form {
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      form > input, 
-      select {
-          width: 5rem;
-          height: 1.5rem;
-          border-radius: 5px;
-      }
-      
-      form > label {
-          color: rgb(15, 15, 15); 
-      }
-      
-      #complete-order {
-          border-radius: 5px;
-          width: 40vw;
-          /* height: 12vh; */
-          margin:auto;
-          display: flex;
-          align-items:center;
-          flex-direction: column;
-          opacity: 0.95;
-      }
-      #complete-order img {
-          height: 150px;
-          width: 150px;
-          margin-top: -30px;
-          visibility:hidden;
-      }
-      
-      label {
-          display: block;
-          padding-right: 10px;
-          padding-left: 5px;
-          color: #1A2250;
-          border: none;
-          outline: none;
-          font-size: 0.8rem;
-          font-weight: 600;
-          box-sizing: border-box;
-      }
-      
-      #add-btn {
-        width: 50px; 
-        height: 50px;
-        margin-left: 10px;
-        color: white;
-        font-size:large;
-        font-weight: 600;
-        border-radius: 50%;
-        background-color: rgb(70, 203, 236);
-        cursor: pointer;
-      }
-      #add-btn:disabled {
-        color: white;
-        background-color: red;
-        cursor: not-allowed;
-      }
-      #add-btn:hover {
-        color: black;
-        background-color: rgb(173, 160, 248);
-      }
-
-      li {
-        list-style-type: none;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        /* margin-top: -25px;    */
-      }
-        
-      li > article {
-        display: flex;
-        flex-wrap: wrap;
-      }
-      
-      article> h3,p {
-        padding: 0.1rem 0.6rem;
-        font-size: 1rem;
-        font-weight: 600;
-        font-family: 'Alkalami', serif;
-      }
-      
-      .edit-btn, 
-      .continue-btn, 
-      .resolve-btn, 
-      .clear-btn {
-        width: 7.5rem;
-        margin: 2.6rem 1rem;
-        font-size: large;
-        font-weight: 700;
-        border-radius: 5px;
-        background-color: rgb(255, 255, 252);
-        opacity: 0.9;
-      }
-      
-      .edit-btn:hover, 
-      .continue-btn:hover, 
-      .resolve-btn:hover, 
-      .clear-btn:hover {
-          background-color: rgb(173, 160, 248);
-      }
-      .problem-content p {
-          color: rgb(255, 255, 255);
-          font-size: 20px;
-          text-shadow: 1px 1px rgb(3, 3, 3);
-      }
-      
-      #complete-order p {
-          color: white;
-      }
-    </style>
   </head>
-  <body>
+  <body id="body">
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
-    <script>
-      window.addEventListener('load', solution);
+    <div id="main">
 
-function solution() {
-  const form = document.querySelector("form");
-  const previewList = document.querySelector(".preview-list");
-  const pendingList = document.querySelector(".pending-list");
-  const resolvedList = document.querySelector(".resolved-list");
-  // console.log(previewList, pendingList, resolvedList);
-  // console.log(form);
-  
-  const employeeField = document.getElementById("employee");
-  const categoryField = document.getElementById("category");
-  const urgencyField = document.getElementById("urgency");
-  const assignedTeamField = document.getElementById("team");
-  const descriptionField = document.getElementById("description");
-  // console.log(employeeField, categoryField, urgencyField, assignedTeamField, descriptionField);
-
-  // employeeField.value = "emp";
-  // categoryField.value = "cat";
-  // urgencyField.value = "ureg";
-  // assignedTeamField.value = "team";
-  // descriptionField.value = "desc";
-
-  const addBtn = document.getElementById("add-btn");
-  // console.log(addBtn);
-
-  addBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-  
-    const employeeFieldValue = employeeField.value;
-    const categoryFieldValue = categoryField.value;
-    const urgencyFieldValue = urgencyField.value;
-    const assignedTeamFieldValue = assignedTeamField.value;
-    const descriptionFieldValue = descriptionField.value;
-    // console.log(employeeFieldValue, categoryFieldValue, urgencyFieldValue, assignedTeamFieldValue, descriptionFieldValue);
-
-    form.reset();
-    const options = document.querySelectorAll("option[selected]");
-    Array.from(options).forEach(option => option.selected = false);
-
-    if (employeeFieldValue.length == 0) {
-      // console.log("return");
-      return;
-    }
-
-    if (categoryFieldValue.length == 0) {
-      // console.log("return");
-      return;
-    }
-
-    if (urgencyFieldValue.length == 0) {
-      // console.log("return");
-      return;
-    }
-
-    if (assignedTeamFieldValue.length == 0) {
-      // console.log("return");
-      return;
-    }
-
-    if (descriptionFieldValue.length == 0) {
-      // console.log("return");
-      return;
-    }
-
-    addBtn.disabled = true;
-
-    const li = document.createElement("li");
-    li.classList.add("problem-content");
-    const html = `<article><p>From: ${employeeFieldValue}</p><p>Category: ${categoryFieldValue}</p><p>Urgency: ${urgencyFieldValue}</p><p>Assigned to: ${assignedTeamFieldValue}</p><p>Description: ${descriptionFieldValue}</p></article>`;
-    li.innerHTML = html;
-
-    const editBtn = document.createElement("button");
-    editBtn.classList.add("edit-btn");
-    editBtn.textContent = "Edit";
-    editBtn.addEventListener("click", () => {
-      // console.log("edit");
-      addBtn.disabled = false;
-      li.remove();
-    })
-
-    const contBtn = document.createElement("button");
-    contBtn.classList.add("continue-btn");
-    contBtn.textContent = "Continue";
-    contBtn.addEventListener("click", () => {
-      // console.log("continue");
-      editBtn.remove();
-      contBtn.remove();
+      <section id="start">
+          <img src="./static/img/dumbell.png" alt="">
+          <h1>Start Your Fitness Journey with Us</h1>
+          <img src="./static/img/dumbell.png" alt="">
+      </section>
       
-      const resolvedBtn = document.createElement("button");
-      resolvedBtn.classList.add("resolve-btn");
-      resolvedBtn.textContent = "Resolved";
-      resolvedBtn.addEventListener("click", () => {
-        // console.log("resolve");
-        resolvedList.appendChild(li);
-        resolvedBtn.remove();
-        const clearBtn = document.createElement("button");
-        clearBtn.classList.add("clear-btn");
-        clearBtn.textContent = "Clear";
-        clearBtn.addEventListener("click", () => {
-          // console.log("resolve");
-          li.remove();
-        })
-        li.appendChild(clearBtn);
-      })
-      li.appendChild(resolvedBtn);
-      pendingList.appendChild(li);
-    })
-    li.appendChild(editBtn);
-    li.appendChild(contBtn);
-    previewList.appendChild(li);
-    // console.log(document.querySelector(".preview-list > li").length);
-  })
-
-}
-    </script>
-    
-    <section id="header">
-      <h1>Tech Troubleshoot Hub</h1>
-      <div class="heading-container"></div>
-    </section>
-    
-    <div id="wrapper">
-      <section id="add-problem">
-        <div class="container">
-          <h1>Problem</h1>
-          <div class="container-text">
-            <form action="">
-              <label for="employee">Employee:</label>
-              <input type="text" id="employee" name="employee" />
-    
-              <label for="category">Category:</label>
-              <select name="category" id="category">
-                <option value=""></option>
-                <option value="Software">Software</option>
-                <option value="Hardware" selected>Hardware</option>
-                <option value="Network">Network</option>
-              </select>
-    
-              <label for="urgency">Urgency:</label>
-              <select name="urgency" id="urgency">
-                <option value=""></option>
-                <option value="Low" selected>Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
-              </select>
-    
-              <label for="team">Assigned Team:</label>
-              <select name="team" id="team">
-                <option value=""></option>
-                <option value="Software Solutions Team" selected>
-                  Software Solutions Team
-                </option>
-                <option value="Hardware Support Division">
-                  Hardware Support Division
-                </option>
-                <option value="Network Operations Center">
-                  Network Operations Center
-                </option>
-              </select>
-    
-              <label for="description">Description:</label>
-              <input type="text" id="description" name="description" />
-              <button id="add-btn" type="submit">Add</button>
-            </form>
-          </div>
-        </div>
-      </section>
-    
-      <section id="preview">
-        <div class="preview-container">
-          <div class="container">
-            <h1>Preview</h1>
-            <ul class="preview-list"></ul>
-          </div>
-        </div>
-      </section>
-    
-      <section id="pending">
-        <div class="pending-container">
-          <div class="container">
-            <h1>Pending</h1>
-            <ul class="pending-list"></ul>
-          </div>
-        </div>
-      </section>
-      <section id="resolved">
-        <div class="resolved-container">
-          <div class="container">
-            <h1>Resolved</h1>
-            <ul class="resolved-list"></ul>
-          </div>
-        </div>
-      </section>
-    </div>
-
-    <script>
-      class FlightBookingSystem {
-        constructor (agencyName) {
-          this.agencyName = agencyName;
-          this.flights = [];
-          this.bookings = [];
-          this.bookingsCount = 0;
-        }
-
-        addFlight (flightNumber, destination, departureTime, price) {
-          const flight = this.flights.find(flight => flight.flightNumber == flightNumber);
-
-          if (flight) {
-
-            return `Flight ${flight.flightNumber} to ${flight.destination} is already available.`;
-
-          } else {
-
-            const newFlight = {
-              flightNumber, 
-              destination, 
-              departureTime, 
-              price
-            }
-
-            this.flights.push(newFlight);
-            return `Flight ${newFlight.flightNumber} to ${newFlight.destination} has been added to the system.`;
-
-          }
-        }
-
-        bookFlight (passengerName, flightNumber) {
-          const flight = this.flights.find(flight => flight.flightNumber == flightNumber);
-          // console.log(flight);
-
-          if (flight) {
-
-            const booking = {
-              passengerName, 
-              flightNumber
-            }
-            
-            // console.log(booking);
-            this.bookings.push(booking);
-            // console.log(this.bookings);
-            this.bookingsCount++;
-            return `Booking for passenger ${passengerName} on flight ${flightNumber} is confirmed.`;
-            
-          } else {
-
-            return `Flight ${flightNumber} is not available for booking.`;
-
-          }
-        }
-
-        cancelBooking (passengerName, flightNumber) {
-          const bookingIndex = this.bookings.findIndex(booking => booking.passengerName == passengerName && booking.flightNumber == flightNumber);
-    
-          if (bookingIndex >= 0) {
-    
-            this.bookings.splice(bookingIndex, 1);
-            this.bookingsCount--;
-            return `Booking for passenger ${passengerName} on flight ${flightNumber} is cancelled.`;
-    
-          } else {
-    
-            throw new Error(`Booking for passenger ${passengerName} on flight ${flightNumber} not found.`);
-    
-          }
-        }
-          
-        showBookings (criteria) {
-
-          if (this.bookings.length == 0) {
-
-            throw new Error(`No bookings have been made yet.`);
-
-          } else {
-
-            if (criteria == "all") {
-
-              const result = [`All bookings(${this.bookingsCount}):`];
-
-              for (const booking of this.bookings) {
-                const info = `${booking.passengerName} booked for flight ${booking.flightNumber}.`;
-                result.push(info);
-              }
-
-              return result.join("\n");
-
-            } else if (criteria == "cheap") {
-
-              const cheapFlights = this.flights.filter(flight => flight.price <= 100);
-              // console.log(cheapFlights);
-
-              if (cheapFlights.length > 0) {
-
-                const result = ["Cheap bookings:"];
-                
-                for (const flight of cheapFlights) {
-                  const flightNumber = flight.flightNumber;
-                  const cheapBookings = this.bookings.filter(booking => booking.flightNumber == flightNumber);
-
-                  for (const passenger of cheapBookings) {
-                    
-                    const info = `${passenger.passengerName} booked for flight ${flightNumber}.`;
-                    result.push(info);
-
-                  }
-                }
-                
-                return result.join("\n");
-
-              } else {
-
-                return "No cheap bookings found.";
-
-              }
-              
-            } else if (criteria == "expensive") {
-
-              const expensiveFlights = this.flights.filter(flight => flight.price > 100);
-              
-              if (expensiveFlights.length > 0) {
-                
-                const result = ["Expensive bookings:"];
-                
-                for (const flight of expensiveFlights) {
-                  const flightNumber = flight.flightNumber;
-                  const expensiveBookings = this.bookings.filter(booking => booking.flightNumber == flightNumber);
+      <div id="wrapper">
+  
+          <section id="info-section">
+              <div class="section-container"> 
+                               
+                  <h1>Pick Class</h1>
                   
-                  for (const passenger of expensiveBookings) {
-                    
-                    const info = `${passenger.passengerName} booked for flight ${flightNumber}.`;
-                    result.push(info);
-                    
-                  }
-                }
-                
-                return result.join("\n");
-                
-              } else {
-                
-                return "No expensive bookings found.";
-                
-              }
+                  <div class="container-text">
+                      <form action="">
+                          <label for="name">Name:</label>
+                          <input type="text" id="name" name="name">
+  
+                          <label for="email">Email:</label>
+                          <input type="text" id="email" name="email">                     
+  
+                              <label for="contact-number">Contact Number:</label>
+                              <input type="number" id="contact-number" name="contact-number" >
+  
+                              <label for="Preferred Class Type">Preferred Class Type:</label>
+                              <select type="" id="class-type" name="class-type">
+                                  <option value=""></option>
+                                  <option value="Yoga" selected>Yoga</option>
+                                  <option value="Zumba">Zumba</option>
+                                  <option value="Kango Jumps">Kango Jumps</option>
+                                  <option value="Pilates">Pilates</option>
+                              </select>
+                              <label for="class-time">Preferred Class Time:</label>
+                              <select type="" id="class-time" name="class-time">
+                                  <option value=""></option>
+                                  <option value="17:00">17:00</option>
+                                  <option value="18:00">18:00</option>
+                                  <option value="19:00">19:00</option>
+                                  <option value="20:00">20:00</option>
+                              </select>
+                              
+                          <button id="next-btn" type="submit">Next</button>
+                      </form>
+                      
+                  </div>
+              </div>
+          </section>
+  
+          <section id="preview-section">
+              <div class="preview-info-container">
+                  <div class="section-container"> 
+                  <h1>Preview</h1>
+                  <ul class="class-info">
+                  </ul>
+              </div>
+              </div>
+          </section>
+  
+          <section id="confirm-section">
+              <div class="confirm-container">
+                  <div class="section-container"> 
+                  <h1>Confirm Class</h1>
+                  <ul class="confirm-class">
+                  </ul>
+              </div>
+              </div>
+          </section>
+          
+      </div>
+      
+    </div>
+    
+    <footer>
+      <p>Exam @ SoftUni</p>
+    </footer>
 
-            }
+    <script>
+      const recipeSelection = {
+        isTypeSuitable(type, dietaryRestriction) {
+
+          if (typeof type !== "string" || typeof dietaryRestriction !== "string"){
+            throw new Error("Invalid input");
           }
-        }
-      }
 
-      // const system = new FlightBookingSystem("TravelWorld");
-      // console.log(system.addFlight("AA101", "Los Angeles", "09:00 AM", 250));
-      // console.log(system.addFlight("BB202", "New York", "10:30 AM", 180));
-      // console.log(system.addFlight("CC303", "Chicago", "11:45 AM", 120));
-      // console.log(system.addFlight("AA101", "Los Angeles", "09:00 AM", 250));
-
-      // const system = new FlightBookingSystem("TravelWorld");
-      // console.log(system.addFlight("AA101", "Los Angeles", "09:00 AM", 250));
-      // console.log(system.addFlight("BB202", "New York", "10:30 AM", 180));
-      // console.log(system.bookFlight("Alice", "AA101"));
-      // console.log(system.bookFlight("Bob", "BB202"));
-      // console.log(system.bookFlight("Charlie", "CC303"));
-      
-      // const system = new FlightBookingSystem("TravelWorld");
-      // console.log(system.addFlight("AA101", "Los Angeles", "09:00 AM", 250));
-      // console.log(system.addFlight("BB202", "New York", "10:30 AM", 180));
-      // console.log(system.bookFlight("Alice", "AA101"));
-      // console.log(system.bookFlight("Bob", "BB202"));
-      // console.log(system.bookings);
-      // console.log(system.bookingsCount);
-      // console.log(system.cancelBooking("Alice", "AA101"));
-      // console.log(system.bookings);
-      // console.log(system.bookingsCount);
-      
-      // const system = new FlightBookingSystem("TravelWorld");
-      // console.log(system.addFlight("AA101", "Los Angeles", "09:00 AM", 250));
-      // console.log(system.addFlight("BB202", "New York", "10:30 AM", 180));
-      // console.log(system.bookFlight("Alice", "AA101"));
-      // console.log(system.bookFlight("Bob", "BB202"));
-      // console.log(system.showBookings("all"));
-
-      // const system = new FlightBookingSystem("TravelWorld");
-      // console.log(system);
-      // console.log(system.addFlight("AA101", "Los Angeles", "09:00 AM", 250));
-      // console.log(system.addFlight("BB202", "New York", "10:30 AM", 180));
-      // console.log(system.addFlight("AA101", "Los Angeles", "09:00 AM", 50));
-      // console.log(system.addFlight("BB202", "New York", "10:30 AM", 80));
-      // console.log(system.bookFlight("Alice", "AA101"));
-      // console.log(system.bookFlight("Bob", "BB202"));
-      // console.log(system.bookings);
-      // console.log(system.showBookings("expensive"));
-      // console.log(system.showBookings("cheap"));
-    </script>
-
-<script>
-  const lottery = {
-      buyLotteryTicket(ticketPrice, ticketCount, buy) {
-        if (buy === false) {
-          throw new Error("Unable to buy lottery ticket!");
-        } else {
-          if (
-            ticketPrice <= 0 ||
-            ticketCount < 1 ||
-            typeof ticketPrice !== "number" ||
-            typeof ticketCount !== "number"||
-            typeof buy !== "boolean"
-          ) {
-            throw new Error("Invalid input!");
+          if (dietaryRestriction === "Vegetarian" && type === "Meat") {
+            return "This recipe is not suitable for vegetarians";
+          } else if (dietaryRestriction === "Vegan" && (type === "Meat" || type === "Dairy")) {
+            return "This recipe is not suitable for vegans";
           } else {
-            let totalPrice = ticketPrice * ticketCount;
-            return `You bought ${ticketCount} tickets for ${totalPrice}$.`;
+            return "This recipe is suitable for your dietary restriction";
           }
-        }
-      },
-     checkTicket(ticketNumbers, luckyNumbers) {
-        if (
-          !Array.isArray(ticketNumbers) ||
-          !Array.isArray(luckyNumbers) ||
-          ticketNumbers.length !== 6 ||
-          luckyNumbers.length !== 6
-        ) {
-          throw new Error("Invalid input!");
-        }
-      
-        const uniqueTicketNumbers = ticketNumbers.filter((number, index, array) => array.indexOf(number) === index);
-        let winningNumbers = 0;
-      
-        for (const number of uniqueTicketNumbers) {
-          if (luckyNumbers.includes(number)) {
-            winningNumbers++;
+        },
+        isItAffordable(price, budget) {
+
+          if (typeof price !== "number" || typeof budget !== "number") {
+            throw new Error("Invalid input");
           }
-        }
       
-        if (winningNumbers >= 3 && winningNumbers < 6) {
-          return "Congratulations you win, check your reward!";
-        } else if (winningNumbers === 6) {
-          return "You win the JACKPOT!!!";
-        }
-      },
-      secondChance(ticketID, secondChanceWinningIDs) {
-        if (typeof ticketID !== "number" || !Array.isArray(secondChanceWinningIDs)) {
-          throw new Error("Invalid input!");
-        }
+          let remainingBudget = budget - price;
+      
+          if (remainingBudget < 0) {
+            return "You don't have enough budget to afford this recipe";
+          } else {
+            return `Recipe ingredients bought. You have ${remainingBudget}$ left`;
+          }
+        },
+        getRecipesByCategory(recipes, category) {
+
+          if (!Array.isArray(recipes) || typeof category !== "string") {
+            throw new Error("Invalid input");
+          }
+      
+          const filteredRecipes = recipes.filter((recipe) => recipe.category === category);
+
+          return filteredRecipes.map((recipe) => recipe.title);
+
+        },
+      };
         
-        if (secondChanceWinningIDs.includes(ticketID)) {
-          return "You win our second chance prize!";
-        } else {
-          return "Sorry, your ticket didn't win!";
-        }
-      },
-    };
-      
-  // describe('test lottery', function () {
-  //     it('buyLotteryTicket functionality', function () {
-  //         expect(lottery.buyLotteryTicket(2, 4, true)).to.equal("You bought 4 tickets for 8$.");
-  //         expect(lottery.buyLotteryTicket(1, 1, true)).to.equal("You bought 1 tickets for 1$.");
-  //         expect(() => lottery.buyLotteryTicket(1, "test", false)).to.throw("Unable to buy lottery ticket!");
-  //         expect(() => lottery.buyLotteryTicket(1, 2, "true")).to.throw("Invalid input!");
-  //         expect(() => lottery.buyLotteryTicket("1", 2, true)).to.throw("Invalid input!");
-  //         expect(() => lottery.buyLotteryTicket(-1, 2, true)).to.throw("Invalid input!");
-  //         expect(() => lottery.buyLotteryTicket(0, 2, true)).to.throw("Invalid input!");
-  //         expect(() => lottery.buyLotteryTicket(1, 0, true)).to.throw("Invalid input!");
-  //         expect(() => lottery.buyLotteryTicket(1, -2, true)).to.throw("Invalid input!");
-  //     })
-  //     it('checkTicket functionality', function () {
-  //         expect(lottery.checkTicket([1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6])).to.equal("You win the JACKPOT!!!");
-  //         expect(lottery.checkTicket([1, 2, 3, 4, 5, 6], [6, 5, 4, 3, 2, 1])).to.equal("You win the JACKPOT!!!");
-  //         expect(lottery.checkTicket([1, 2, 3, 4, 5, 5], [6, 5, 4, 3, 2, 1])).to.equal("Congratulations you win, check your reward!");
-  //         expect(lottery.checkTicket([1, 2, 3, 3, 5, 5], [6, 5, 4, 3, 2, 1])).to.equal("Congratulations you win, check your reward!");
-  //         expect(lottery.checkTicket([1, 1, 3, 3, 5, 5], [6, 5, 4, 3, 2, 1])).to.equal("Congratulations you win, check your reward!");
-  //         expect(() => lottery.checkTicket([], "")).to.throw("Invalid input!");
-  //         expect(() => lottery.checkTicket({}, [])).to.throw("Invalid input!");
-  //         expect(() => lottery.checkTicket([1, 2, 3, 4, 5], [1, 2, 3, 4, 5, 6])).to.throw("Invalid input!");
-  //         expect(() => lottery.checkTicket([1, 2, 3, 4, 5, 6, 7], [1, 2, 3, 4, 5, 6])).to.throw("Invalid input!");
-  //         expect(() => lottery.checkTicket([1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5])).to.throw("Invalid input!");
-  //         expect(() => lottery.checkTicket([1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6, 7])).to.throw("Invalid input!");
-  //     })
-  //     it('secondChance functionality', function () {
-  //         expect(() => lottery.secondChance([], "1")).to.throw("Invalid input!");
-  //         expect(() => lottery.secondChance(2, {})).to.throw("Invalid input!");
-  //         // expect(() => lottery.secondChance()).to.throw();
-  //         expect(lottery.secondChance(25, [12, 25, 8])).to.equal("You win our second chance prize!");
-  //         expect(lottery.secondChance(24, [12, 25, 8])).to.equal("Sorry, your ticket didn't win!");
-  //     })
-  // })
-</script>
+      // describe('test recipeSelection', function () {
+      //     it('isTypeSuitable functionality', function () {
+      //         expect(recipeSelection.isTypeSuitable("Meat", "Vegetarian")).to.equal("This recipe is not suitable for vegetarians");
+      //         expect(recipeSelection.isTypeSuitable("Meat", "Vegan")).to.equal("This recipe is not suitable for vegans");
+      //         expect(recipeSelection.isTypeSuitable("food", "restriction")).to.equal("This recipe is suitable for your dietary restriction");
+      //         expect(() => recipeSelection.isTypeSuitable("test", 8)).to.throw("Invalid input");
+      //         expect(() => recipeSelection.isTypeSuitable(6, "test")).to.throw("Invalid input");
+      //     })
+      //     it('isItAffordable functionality', function () {
+      //         expect(recipeSelection.isItAffordable(8, 4)).to.equal("You don't have enough budget to afford this recipe");
+      //         expect(recipeSelection.isItAffordable(4, 8)).to.equal("Recipe ingredients bought. You have 4$ left");
+      //         expect(recipeSelection.isItAffordable(8, 8)).to.equal("Recipe ingredients bought. You have 0$ left");
+      //         expect(() => recipeSelection.isItAffordable("test", 8)).to.throw("Invalid input");
+      //         expect(() => recipeSelection.isItAffordable(8, "test")).to.throw("Invalid input");
+      //     })
+      //     it('getRecipesByCategory functionality', function () {
+      //         expect(recipeSelection.getRecipesByCategory([], "Asian")).to.deep.equal([]);
+      //         expect(recipeSelection.getRecipesByCategory([{title: "Food1", category: "Asian"}, {title: "Food2", category: "Asian"}], "Asian")).to.deep.equal(["Food1", "Food2"]);
+      //         expect(recipeSelection.getRecipesByCategory([{title: "Food1", category: "Asian"}, {title: "Food2", category: "Asian"}, {title: "Food3", category: "African"}], "Asian")).to.deep.equal(["Food1", "Food2"]);
+      //         expect(recipeSelection.getRecipesByCategory([{title: "Food3", category: "African"}], "Asian")).to.deep.equal([]);
+      //         expect(() => recipeSelection.getRecipesByCategory({}, "")).to.throw("Invalid input");
+      //         expect(() => recipeSelection.getRecipesByCategory([], 7)).to.throw("Invalid input");
+      //     })
+      // })
+    </script>
 
 <script>
   // 10. Contacts Builder✶
