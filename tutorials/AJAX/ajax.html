@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;   
+      }
+    </style>
   </head>
   <body id="body">
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
@@ -86,6 +93,132 @@
     <footer>
       <p>Exam @ SoftUni</p>
     </footer>
+
+    <script>
+      window.addEventListener('load', solve);
+  
+  function solve() {
+      const form = document.querySelector("form");
+      const previewList = document.querySelector(".class-info");
+      const confirmList = document.querySelector(".confirm-class");
+      // console.log(previewList, confirmList);
+  
+      const nameField = document.getElementById("name");
+      const emailField = document.getElementById("email");
+      const contactField = document.getElementById("contact-number");
+      const classField = document.getElementById("class-type");
+      const timeField = document.getElementById("class-time");
+      // console.log(nameField, emailField, contactField, classField, timeField);
+  
+      // nameField.value = "testName";
+      // emailField.value = "test@abv.bg";
+      // contactField.value = "";
+      // classField.value = "";
+      // timeField.value = "";
+  
+      const nextBtn = document.getElementById("next-btn");
+      // console.log(nextBtn);
+  
+      nextBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+  
+          const nameFieldValue = nameField.value;
+          const emailFieldValue = emailField.value;
+          const contactFieldValue = contactField.value;
+          const classFieldValue = classField.value;
+          const timeFieldValue = timeField.value;
+          // console.log(nameFieldValue, emailFieldValue, contactFieldValue, classFieldValue, timeFieldValue);
+          // console.log(contactFieldValue.length);
+  
+          if (nameFieldValue.length == 0) {
+              console.log("name is empty");
+              return;
+          }
+  
+          if (emailFieldValue.length == 0) {
+              console.log("email is empty");
+              return;
+          }
+  
+          if (contactFieldValue.length.toString() == 0) {
+              console.log("number is empty");
+              return;
+          }
+  
+          if (classFieldValue.length == 0) {
+              console.log("class is empty");
+              return;
+          }
+  
+          if (timeFieldValue.length == 0) {
+              console.log("time is empty");
+              return;
+          }
+  
+          form.reset();
+          nextBtn.disabled = true;
+  
+          const selected = document.querySelectorAll("option[selected]");
+          Array.from(selected).forEach(option => option.selected = false);
+  
+          const li = document.createElement("li");
+          li.classList.add("info-item");
+          const html = `<article class="personal-info"><p>${nameFieldValue}</p><p>${emailFieldValue}</p><p>${contactFieldValue}</p><p>${classFieldValue}</p><p>${timeFieldValue}</p></article>`;
+          li.innerHTML = html;
+  
+          const editBtn = document.createElement("button");
+          editBtn.classList.add("edit-btn");
+          editBtn.textContent = "Edit";
+          editBtn.addEventListener("click", () => {
+            // console.log("edit");
+            nextBtn.disabled = false;
+            li.remove();
+          })
+  
+          const contBtn = document.createElement("button");
+          contBtn.classList.add("continue-btn");
+          contBtn.textContent = "Continue";
+          contBtn.addEventListener("click", () => {
+              // console.log("continue");
+              editBtn.remove();
+              contBtn.remove();
+  
+              li.className = "continue-info";
+  
+              const cancelBtn = document.createElement("button");
+              cancelBtn.classList.add("cancel-btn");
+              cancelBtn.textContent = "Cancel";
+              cancelBtn.addEventListener("click", () => {
+                  li.remove();
+                  nextBtn.disabled = false;
+              })
+              li.appendChild(cancelBtn);
+  
+              const confirmBtn = document.createElement("button");
+              confirmBtn.classList.add("confirm-btn");
+              confirmBtn.textContent = "Confirm";
+              confirmBtn.addEventListener("click", () => {
+                // console.log("confirm");
+                const main = document.getElementById("main");
+                main.remove();
+                const h1 = document.createElement("h1");
+                h1.id = "thank-you";
+                h1.textContent = "Thank you for scheduling your appointment, we look forward to seeing you!";
+                const doneBtn = document.createElement("button");
+                doneBtn.id = "done-btn";
+                doneBtn.textContent = "Done";
+                document.body.appendChild(h1);
+                document.body.appendChild(doneBtn);
+              })
+              li.appendChild(confirmBtn);
+              confirmList.appendChild(li);
+            })
+          li.appendChild(editBtn);
+          li.appendChild(contBtn);
+          previewList.appendChild(li);
+      });
+  }
+    </script>
 
     <script>
       const recipeSelection = {
