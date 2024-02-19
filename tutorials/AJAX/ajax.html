@@ -9,6 +9,10 @@
       @import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
       @import url('https://fonts.googleapis.com/css2?family=Julee&display=swap');
 
+      fieldset {
+        display: none;
+      }
+
       * {
         margin: 0;
         padding: 0;
@@ -228,6 +232,45 @@
       
       #done {
           text-align: center;
+      }
+
+      #thank-you {
+        text-align: center;
+        margin-top: 7%;
+        font-size: 67px;
+        font-family: 'Monoton', cursive;
+        text-shadow: 2px 2px black;
+        opacity: 0.8;
+        font-weight: 300;
+        color: #fff;
+      }
+      
+      #done-btn{
+          width: 200px;
+          height: 100px;
+          margin-left: 40%;
+          padding: 0px 30px;
+          background-color:  rgba(197, 35, 238, 0.815);
+          opacity: 0.9;
+          font-weight: 800;
+          clip-path: 
+          polygon(0% 15%, 21% 16%, 21% 39%, 78% 39%, 
+              78% 15%, 100% 15%, 100% 85%, 80% 85%, 
+              79% 57%, 21% 57%, 20% 85%, 0% 85%);
+          border: none;
+          box-shadow: 
+          rgba(0, 0, 0, 0.06) 0px 2px 1px, 
+          rgba(0, 0, 0, 0.09) 0px 4px 2px, 
+          rgba(0, 0, 0, 0.09) 0px 8px 4px, 
+          rgba(0, 0, 0, 0.09) 0px 16px 8px, 
+          rgba(0, 0, 0, 0.09) 0px 32px 16px, 
+          rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, 
+          rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, 
+          rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset;
+      }
+      #done-btn:hover {
+          scale: 1.5;
+          background-color: lightblue;
       }
 
       footer{
@@ -689,6 +732,101 @@
       // console.log(manager.restockItem("Paintbrush", 1));
       // console.log(manager.getInventorySummary());
     </script>
+        <script>
+          const planYourTrip = {
+      choosingDestination(destination, season, year) {
+        if (year != 2024) {
+          throw new Error(`Invalid Year!`);
+        } else {
+          if (destination == "Ski Resort") {
+            if (season === "Winter") {
+              return `Great choice! The ${season} is the perfect time to visit the ${destination}.`;
+            } else {
+              return `Consider visiting during the Winter for the best experience at the ${destination}.`;
+            }
+          } else {
+            throw new Error(`This destination is not what you are looking for.`);
+          }
+        }
+      },
+    
+      exploreOptions(activities, activityIndex) {
+        let result = [];
+    
+        if (
+          !Array.isArray(activities) ||
+          !Number.isInteger(activityIndex) ||
+          activityIndex < 0 ||
+          activityIndex >= activities.length
+        ) {
+          throw new Error("Invalid Information!");
+        }
+        for (let i = 0; i < activities.length; i++) {
+          if (i !== activityIndex) {
+            result.push(activities[i]);
+          }
+        }
+        return result.join(", ");
+      },
+    
+      estimateExpenses(distanceInKilometers, fuelCostPerLiter) {
+        let totalCost = (distanceInKilometers * fuelCostPerLiter).toFixed(2);
+    
+        if (
+          typeof distanceInKilometers !== "number" ||
+          distanceInKilometers <= 0 ||
+          typeof fuelCostPerLiter !== "number" ||
+          fuelCostPerLiter <= 0
+        ) {
+          throw new Error("Invalid Information!");
+        } else if (totalCost <= 500) {
+          return `The trip is budget-friendly, estimated cost is $${totalCost}.`;
+        } else {
+          return `The estimated cost for the trip is $${totalCost}, plan accordingly.`;
+        }
+      },
+    };
+    
+    // describe('test planYourTrip', function () {
+    //     it('choosingDestination(destination, season, year) functionality', function () {
+    //         expect(planYourTrip.choosingDestination("Ski Resort", "Winter", 2024)).to.equal("Great choice! The Winter is the perfect time to visit the Ski Resort.");
+    //         expect(planYourTrip.choosingDestination("Ski Resort", "Summer", 2024)).to.equal("Consider visiting during the Winter for the best experience at the Ski Resort.");
+    //         expect(() => planYourTrip.choosingDestination("Ski Resort", "season", 2023)).to.throw("Invalid Year!");
+    //         expect(() => planYourTrip.choosingDestination("Not Ski Resort", "season", 2024)).to.throw("This destination is not what you are looking for.");
+    //     })
+    //     it('exploreOptions(activities[], activityIndex) functionality', function () {
+    //         expect(planYourTrip.exploreOptions(["1", "2", "3"], 0)).to.equal("2, 3");
+    //         expect(planYourTrip.exploreOptions(["1", "2", "3"], 2)).to.equal("1, 2");
+    //         expect(() => planYourTrip.exploreOptions({}, 6)).to.throw("Invalid Information!");
+    //         expect(() => planYourTrip.exploreOptions([], "")).to.throw("Invalid Information!");
+    //         expect(() => planYourTrip.exploreOptions([1], -1)).to.throw("Invalid Information!");
+    //         expect(() => planYourTrip.exploreOptions([1], 1)).to.throw("Invalid Information!");
+    //         expect(() => planYourTrip.exploreOptions([1], 2)).to.throw("Invalid Information!");
+    //         expect(() => planYourTrip.exploreOptions([1, 2], 1.2)).to.throw("Invalid Information!");
+    //     })
+    //     it('estimateExpenses(distanceInKilometers, fuelCostPerLiter) functionality', function () {
+    //         expect(planYourTrip.estimateExpenses(2, 6)).to.equal("The trip is budget-friendly, estimated cost is $12.00.");
+    //         expect(planYourTrip.estimateExpenses(2.5, 6.5)).to.equal("The trip is budget-friendly, estimated cost is $16.25.");
+    //         expect(planYourTrip.estimateExpenses(2, 3.4)).to.equal("The trip is budget-friendly, estimated cost is $6.80.");
+    //         expect(planYourTrip.estimateExpenses(2, 250)).to.equal("The trip is budget-friendly, estimated cost is $500.00.");
+    //         expect(planYourTrip.estimateExpenses(2, 251)).to.equal("The estimated cost for the trip is $502.00, plan accordingly.");
+    //         expect(planYourTrip.estimateExpenses(2, 251.5)).to.equal("The estimated cost for the trip is $503.00, plan accordingly.");
+    //         expect(planYourTrip.estimateExpenses(2.8, 251)).to.equal("The estimated cost for the trip is $702.80, plan accordingly.");
+    //         expect(() => planYourTrip.estimateExpenses("", 1)).to.throw("Invalid Information!");
+    //         expect(() => planYourTrip.estimateExpenses({}, 1)).to.throw("Invalid Information!");
+    //         expect(() => planYourTrip.estimateExpenses([], 1)).to.throw("Invalid Information!");
+    //         expect(() => planYourTrip.estimateExpenses(2, "")).to.throw("Invalid Information!");
+    //         expect(() => planYourTrip.estimateExpenses(2, {})).to.throw("Invalid Information!");
+    //         expect(() => planYourTrip.estimateExpenses(2, [])).to.throw("Invalid Information!");
+    //         expect(() => planYourTrip.estimateExpenses(0, 1)).to.throw("Invalid Information!");
+    //         expect(() => planYourTrip.estimateExpenses(2, 0)).to.throw("Invalid Information!");
+    //         expect(() => planYourTrip.estimateExpenses(-1, 1)).to.throw("Invalid Information!");
+    //         expect(() => planYourTrip.estimateExpenses(-1.5, 1)).to.throw("Invalid Information!");
+    //         expect(() => planYourTrip.estimateExpenses(2, -2)).to.throw("Invalid Information!");
+    //         expect(() => planYourTrip.estimateExpenses(2, -2.5)).to.throw("Invalid Information!");
+    //     })
+    // })
+        </script>
 <script>
   // 10. Contacts Builder✶
   // 11. View Model✶
