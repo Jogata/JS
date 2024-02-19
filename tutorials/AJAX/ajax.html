@@ -5,828 +5,158 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Julee&display=swap');
-
-      fieldset {
-        display: none;
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;   
-      }
-
-      body {
-        margin: 0; 
-        place-items: center;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-        background-image: url("./static/img/zero.jpg");
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-        background-size: cover;
-      }
-      
-      #wrapper {
-          margin: 2.35rem 0 0;
-          display: flex;
-          gap: 25px;
-          justify-content: center;
-          /* justify-content: center; */
-      }
-      
-      #start>h1 {
-          margin-top: 80px;
-          color:rgb(255, 255, 255);
-          font-size: 3rem;
-          font-weight: 500;
-          text-align: center;
-          font-family: 'Monoton', cursive;
-          letter-spacing: 0.1rem;
-          text-shadow: 2px 2px black;
-          -webkit-background-clip: text;
-          background-clip: text;
-      }
-      
-      #start {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-      }
-      
-      img {
-          width: 5rem;
-      }
-      
-      .home-container {
-          height: 1rem;
-          margin: 0px auto 4px 0;
-          top: 0%;
-          left: 50%;
-          display: flex;
-          text-align: center;
-      }
-      
-      .info {
-          position: relative;
-          margin-top: 8rem;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-items: legacy;
-      }
-      
-      .info > h1 {
-          position: relative;
-          margin: -9.3rem 0 0px;
-          padding: 0;
-          color: rgb(242, 238, 213);
-          font-size: 2rem;
-          font-weight: 300;
-          font-family: 'Monoton', cursive;
-          text-transform: uppercase;
-          letter-spacing: 0px;
-      }
-      
-      .section-container {
-          grid-template-columns: 1fr 1fr;
-          width: 30vw;
-          height: 58vh;
-          display: flex;
-          align-items:center;
-          justify-content:baseline;
-          flex-direction: column;
-          place-items: center;
-          border-radius: 10px;
-          font-family: 'Julee', cursive;
-          background-color:  rgb(235, 232, 223);
-          box-shadow: 
-          rgba(0, 0, 0, 0.06) 0px 2px 1px, 
-          rgba(0, 0, 0, 0.09) 0px 4px 2px, 
-          rgba(0, 0, 0, 0.09) 0px 8px 4px, 
-          rgba(0, 0, 0, 0.09) 0px 16px 8px, 
-          rgba(0, 0, 0, 0.09) 0px 32px 16px,
-          rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, 
-          rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, 
-          rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset;
-          opacity: 0.95;
-      }
-      
-      .section-container > h1 {
-        background-color:  rgb(235, 232, 223);
-        opacity: 0.95;
-        padding: 0.25rem 0rem;
-        /* margin-right: 5rem; */
-        border-radius: 10px 10px 0 0;
-        border-bottom: 3px groove #000000;
-        font-size: 1.5rem;
-        font-weight: 600;
-      }
-      
-      .container-text {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-      }
-      
-      .container-text > form {
-          padding: 1rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-direction: column;
-          margin-right: -25px;
-      }
-
-      form > input, 
-      select {
-          width: 13rem;
-          height: 1.5rem;
-          border-radius: 5px;
-      }
-      
-      label {
-          display: block;
-          width: 100%;
-          padding: 0;
-          color: #1A2250;
-          font-size: 0.8rem;
-          font-weight: 600;
-          border: none;
-          outline: none;
-          box-sizing: border-box;
-      }
-      
-      #next-btn {
-          width: 13rem;
-          margin-top: 0.6rem;
-          display: block;
-          font-size: large;
-          font-weight: 700;
-          font-family: 'Play', sans-serif;
-          background-color: rgb(248, 248, 239);
-          border-radius: 5px;
-          opacity: 0.9;
-      }
-      #next-btn:hover{
-          background-color: lightblue;
-      }
-      #next-btn:disabled:hover{
-          background-color: rgb(248, 248, 239);
-      }
-      
-      li {
-          list-style-type: none;
-      }
-      
-      li > article {
-          margin-top: 2rem;
-          margin-left: 2rem;
-          border: 1px dotted black;
-          padding: 10px;
-          border-radius: 3px;
-      }
-      
-      article > h3, p {
-          font-size: 1rem;
-          font-weight: 600;
-          padding: 0.1rem 0.6rem;
-          font-family: 'Alkalami', serif;
-      }
-      
-      .ticket-content {
-          margin-left: 2rem;
-      }
-      
-      .edit-btn, 
-      .continue-btn, 
-      .confirm-btn, 
-      .cancel-btn {
-          margin: 2.6rem 1rem ;
-          width: 6.5rem;
-          border-radius: 5px;
-          font-family: 'Play', sans-serif;
-          background-color: rgb(248, 248, 239);
-          font-size:large;
-          font-weight: 700;
-          opacity: 0.9;
-      }
-      .edit-btn:hover, 
-      .continue-btn:hover, 
-      .confirm-btn:hover, 
-      .cancel-btn:hover {
-          background-color: lightblue;
-      }
-      
-      #complete-tickets {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding-top: 50px;
-          font-size: 50px;
-          color: rgb(0, 0, 0);
-          opacity: 0.9;
-      }
-      
-      #done {
-          text-align: center;
-      }
-
-      #thank-you {
-        text-align: center;
-        margin-top: 7%;
-        font-size: 67px;
-        font-family: 'Monoton', cursive;
-        text-shadow: 2px 2px black;
-        opacity: 0.8;
-        font-weight: 300;
-        color: #fff;
-      }
-      
-      #done-btn{
-          width: 200px;
-          height: 100px;
-          margin-left: 40%;
-          padding: 0px 30px;
-          background-color:  rgba(197, 35, 238, 0.815);
-          opacity: 0.9;
-          font-weight: 800;
-          clip-path: 
-          polygon(0% 15%, 21% 16%, 21% 39%, 78% 39%, 
-              78% 15%, 100% 15%, 100% 85%, 80% 85%, 
-              79% 57%, 21% 57%, 20% 85%, 0% 85%);
-          border: none;
-          box-shadow: 
-          rgba(0, 0, 0, 0.06) 0px 2px 1px, 
-          rgba(0, 0, 0, 0.09) 0px 4px 2px, 
-          rgba(0, 0, 0, 0.09) 0px 8px 4px, 
-          rgba(0, 0, 0, 0.09) 0px 16px 8px, 
-          rgba(0, 0, 0, 0.09) 0px 32px 16px, 
-          rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, 
-          rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, 
-          rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset;
-      }
-      #done-btn:hover {
-          scale: 1.5;
-          background-color: lightblue;
-      }
-
-      footer{
-          position: fixed;
-          bottom: 0;
-          width: 100%;
-          height: 20px;
-          background: rgb(165, 164, 164);
-          text-align: center;
-      }
-    </style>
   </head>
-  <body id="body">
+  <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <h1>Snow Showdown</h1>
+    <main id="hero">
 
-    <div id="main">
-
-      <section id="start">
-          <img src="./static/img/dumbell.png" alt="">
-          <h1>Start Your Fitness Journey with Us</h1>
-          <img src="./static/img/dumbell.png" alt="">
-      </section>
-      
-      <div id="wrapper">
-  
-          <section id="info-section">
-              <div class="section-container"> 
-                               
-                  <h1>Pick Class</h1>
-                  
-                  <div class="container-text">
-                      <form action="">
-                          <label for="name">Name:</label>
-                          <input type="text" id="name" name="name">
-  
-                          <label for="email">Email:</label>
-                          <input type="text" id="email" name="email">                     
-  
-                              <label for="contact-number">Contact Number:</label>
-                              <input type="number" id="contact-number" name="contact-number" >
-  
-                              <label for="Preferred Class Type">Preferred Class Type:</label>
-                              <select type="" id="class-type" name="class-type">
-                                  <option value=""></option>
-                                  <option value="Yoga" selected>Yoga</option>
-                                  <option value="Zumba">Zumba</option>
-                                  <option value="Kango Jumps">Kango Jumps</option>
-                                  <option value="Pilates">Pilates</option>
-                              </select>
-                              <label for="class-time">Preferred Class Time:</label>
-                              <select type="" id="class-time" name="class-time">
-                                  <option value=""></option>
-                                  <option value="17:00">17:00</option>
-                                  <option value="18:00">18:00</option>
-                                  <option value="19:00">19:00</option>
-                                  <option value="20:00">20:00</option>
-                              </select>
-                              
-                          <button id="next-btn" type="submit">Next</button>
-                      </form>
-                      
-                  </div>
-              </div>
-          </section>
-  
-          <section id="preview-section">
-              <div class="preview-info-container">
-                  <div class="section-container"> 
-                  <h1>Preview</h1>
-                  <ul class="class-info">
-                  </ul>
-              </div>
-              </div>
-          </section>
-  
-          <section id="confirm-section">
-              <div class="confirm-container">
-                  <div class="section-container"> 
-                  <h1>Confirm Class</h1>
-                  <ul class="confirm-class">
-                  </ul>
-              </div>
-              </div>
-          </section>
-          
+      <div class="snowman-container">
+        <form class="snowman">
+          <input type="text" id="snowman-name" placeholder="Snowman Name" />
+          <input type="number" id="snowman-height" placeholder="Height (in centimeters)" />
+          <input type="text" id="location" placeholder="Location" />
+          <input type="text" id="creator-name" placeholder="Creator" />
+          <select id="special-attribute" placeholder="Special Attribute">
+            <option value="" disabled selected>Special Attribute</option>
+            <option value="Carrot Nose">Carrot Nose</option>
+            <option value="Hat/Pot">Hat/Pot</option>
+            <option value="Branches for Arms">Branches for Arms</option>
+            <option value="Button Eyes">Button Eyes</option>
+          </select>
+          <button type="submit" class="add-btn">Add</button>
+        </form>
       </div>
-      
-    </div>
-    
-    <footer>
-      <p>Exam @ SoftUni</p>
-    </footer>
 
+      <div class="snowballs-container">
+        <div class="snowball">
+          <h2>&#10053;Snowman Preview&#10053;</h2>
+          <ul class="snowman-preview"></ul>
+        </div>
+
+        <div class="snow">
+          <h2>&#10053;Your Snowman&#10053;</h2>
+          <ul class="snow-list"></ul>
+        </div>
+
+      </div>
+    </main>
+    <img id="back-img" src="./style/images/back-Snowman.png" alt="" hidden>
     <script>
-      window.addEventListener('load', solve);
-  
-  function solve() {
-      const form = document.querySelector("form");
-      const previewList = document.querySelector(".class-info");
-      const confirmList = document.querySelector(".confirm-class");
-      // console.log(previewList, confirmList);
-  
-      const nameField = document.getElementById("name");
-      const emailField = document.getElementById("email");
-      const contactField = document.getElementById("contact-number");
-      const classField = document.getElementById("class-type");
-      const timeField = document.getElementById("class-time");
-      // console.log(nameField, emailField, contactField, classField, timeField);
-  
-      // nameField.value = "testName";
-      // emailField.value = "test@abv.bg";
-      // contactField.value = "";
-      // classField.value = "";
-      // timeField.value = "";
-  
-      const nextBtn = document.getElementById("next-btn");
-      // console.log(nextBtn);
-  
-      nextBtn.addEventListener("click", (e) => {
-          e.preventDefault();
-  
-          const nameFieldValue = nameField.value;
-          const emailFieldValue = emailField.value;
-          const contactFieldValue = contactField.value;
-          const classFieldValue = classField.value;
-          const timeFieldValue = timeField.value;
-          // console.log(nameFieldValue, emailFieldValue, contactFieldValue, classFieldValue, timeFieldValue);
-          // console.log(contactFieldValue.length);
-  
-          if (nameFieldValue.length == 0) {
-              console.log("name is empty");
-              return;
-          }
-  
-          if (emailFieldValue.length == 0) {
-              console.log("email is empty");
-              return;
-          }
-  
-          if (contactFieldValue.length.toString() == 0) {
-              console.log("number is empty");
-              return;
-          }
-  
-          if (classFieldValue.length == 0) {
-              console.log("class is empty");
-              return;
-          }
-  
-          if (timeFieldValue.length == 0) {
-              console.log("time is empty");
-              return;
-          }
-  
-          form.reset();
-          nextBtn.disabled = true;
-  
-          const selected = document.querySelectorAll("option[selected]");
-          Array.from(selected).forEach(option => option.selected = false);
-  
-          const li = document.createElement("li");
-          li.classList.add("info-item");
-          const html = `<article class="personal-info"><p>${nameFieldValue}</p><p>${emailFieldValue}</p><p>${contactFieldValue}</p><p>${classFieldValue}</p><p>${timeFieldValue}</p></article>`;
-          li.innerHTML = html;
-  
-          const editBtn = document.createElement("button");
-          editBtn.classList.add("edit-btn");
-          editBtn.textContent = "Edit";
-          editBtn.addEventListener("click", () => {
-            // console.log("edit");
-            nextBtn.disabled = false;
-            li.remove();
-          })
-  
-          const contBtn = document.createElement("button");
-          contBtn.classList.add("continue-btn");
-          contBtn.textContent = "Continue";
-          contBtn.addEventListener("click", () => {
-              // console.log("continue");
-              editBtn.remove();
-              contBtn.remove();
-  
-              li.className = "continue-info";
-  
-              const cancelBtn = document.createElement("button");
-              cancelBtn.classList.add("cancel-btn");
-              cancelBtn.textContent = "Cancel";
-              cancelBtn.addEventListener("click", () => {
-                  li.remove();
-                  nextBtn.disabled = false;
-              })
-              li.appendChild(cancelBtn);
-  
-              const confirmBtn = document.createElement("button");
-              confirmBtn.classList.add("confirm-btn");
-              confirmBtn.textContent = "Confirm";
-              confirmBtn.addEventListener("click", () => {
-                // console.log("confirm");
-                const main = document.getElementById("main");
-                main.remove();
-                const h1 = document.createElement("h1");
-                h1.id = "thank-you";
-                h1.textContent = "Thank you for scheduling your appointment, we look forward to seeing you!";
-                const doneBtn = document.createElement("button");
-                doneBtn.id = "done-btn";
-                doneBtn.textContent = "Done";
-                document.body.appendChild(h1);
-                document.body.appendChild(doneBtn);
-              })
-              li.appendChild(confirmBtn);
-              confirmList.appendChild(li);
-            })
-          li.appendChild(editBtn);
-          li.appendChild(contBtn);
-          previewList.appendChild(li);
-      });
-  }
-    </script>
+      window.addEventListener("load", solve);
 
-    <script>
-      const recipeSelection = {
-        isTypeSuitable(type, dietaryRestriction) {
+function solve() {
+  const form = document.querySelector("form");
+  const previewList = document.querySelector(".snowman-preview");
+  const snowList = document.querySelector(".snow-list");
+  // console.log(form, previewList ,snowList);
 
-          if (typeof type !== "string" || typeof dietaryRestriction !== "string"){
-            throw new Error("Invalid input");
-          }
+  const nameInput = document.getElementById("snowman-name");
+  const heightInput = document.getElementById("snowman-height");
+  const locationInput = document.getElementById("location");
+  const creatorInput = document.getElementById("creator-name");
+  const attributeInput = document.getElementById("special-attribute");
+  // console.log(nameInput, heightInput, locationInput, creatorInput, attributeInput);
 
-          if (dietaryRestriction === "Vegetarian" && type === "Meat") {
-            return "This recipe is not suitable for vegetarians";
-          } else if (dietaryRestriction === "Vegan" && (type === "Meat" || type === "Dairy")) {
-            return "This recipe is not suitable for vegans";
-          } else {
-            return "This recipe is suitable for your dietary restriction";
-          }
-        },
-        isItAffordable(price, budget) {
+  const addBtn = document.querySelector(".add-btn");
 
-          if (typeof price !== "number" || typeof budget !== "number") {
-            throw new Error("Invalid input");
-          }
-      
-          let remainingBudget = budget - price;
-      
-          if (remainingBudget < 0) {
-            return "You don't have enough budget to afford this recipe";
-          } else {
-            return `Recipe ingredients bought. You have ${remainingBudget}$ left`;
-          }
-        },
-        getRecipesByCategory(recipes, category) {
+  // nameInput.value = "TestName";
+  // heightInput.value = 8;
+  // locationInput.value = "test place";
+  // creatorInput.value = "test creator";
+  // attributeInput.value = "Hat/Pot";
 
-          if (!Array.isArray(recipes) || typeof category !== "string") {
-            throw new Error("Invalid input");
-          }
-      
-          const filteredRecipes = recipes.filter((recipe) => recipe.category === category);
+  addBtn.addEventListener("click", (e) => {
+      // console.log("get info");
+      e.preventDefault();
 
-          return filteredRecipes.map((recipe) => recipe.title);
-
-        },
-      };
-        
-      // describe('test recipeSelection', function () {
-      //     it('isTypeSuitable functionality', function () {
-      //         expect(recipeSelection.isTypeSuitable("Meat", "Vegetarian")).to.equal("This recipe is not suitable for vegetarians");
-      //         expect(recipeSelection.isTypeSuitable("Meat", "Vegan")).to.equal("This recipe is not suitable for vegans");
-      //         expect(recipeSelection.isTypeSuitable("food", "restriction")).to.equal("This recipe is suitable for your dietary restriction");
-      //         expect(() => recipeSelection.isTypeSuitable("test", 8)).to.throw("Invalid input");
-      //         expect(() => recipeSelection.isTypeSuitable(6, "test")).to.throw("Invalid input");
-      //     })
-      //     it('isItAffordable functionality', function () {
-      //         expect(recipeSelection.isItAffordable(8, 4)).to.equal("You don't have enough budget to afford this recipe");
-      //         expect(recipeSelection.isItAffordable(4, 8)).to.equal("Recipe ingredients bought. You have 4$ left");
-      //         expect(recipeSelection.isItAffordable(8, 8)).to.equal("Recipe ingredients bought. You have 0$ left");
-      //         expect(() => recipeSelection.isItAffordable("test", 8)).to.throw("Invalid input");
-      //         expect(() => recipeSelection.isItAffordable(8, "test")).to.throw("Invalid input");
-      //     })
-      //     it('getRecipesByCategory functionality', function () {
-      //         expect(recipeSelection.getRecipesByCategory([], "Asian")).to.deep.equal([]);
-      //         expect(recipeSelection.getRecipesByCategory([{title: "Food1", category: "Asian"}, {title: "Food2", category: "Asian"}], "Asian")).to.deep.equal(["Food1", "Food2"]);
-      //         expect(recipeSelection.getRecipesByCategory([{title: "Food1", category: "Asian"}, {title: "Food2", category: "Asian"}, {title: "Food3", category: "African"}], "Asian")).to.deep.equal(["Food1", "Food2"]);
-      //         expect(recipeSelection.getRecipesByCategory([{title: "Food3", category: "African"}], "Asian")).to.deep.equal([]);
-      //         expect(() => recipeSelection.getRecipesByCategory({}, "")).to.throw("Invalid input");
-      //         expect(() => recipeSelection.getRecipesByCategory([], 7)).to.throw("Invalid input");
-      //     })
-      // })
-    </script>
-
-    <script>
-      class InventoryManager {
-        constructor(capacity) {
-            this.capacity = capacity;
-            this.items = [];
-            this.outOfStock = [];
-        }
-
-        addItem(itemName, quantity) {
-
-          
-          if (quantity <= 0) {
-              throw new Error("Quantity must be greater than zero.");
-          }
-          
-          if (this.capacity <= this.items.length) {
-              throw new Error("The inventory is already full.");
-          }
-          
-          const itemIndex = this.items.findIndex(item => item.itemName == itemName);
-          
-          if (itemIndex >= 0) {
-          
-              this.items[itemIndex].quantity += quantity;
-          
-          } else {
-          
-              const newItem = {
-                  itemName, 
-                  quantity
-              }
-          
-              this.items.push(newItem);
-          
-          }
-          
-          return `Added ${quantity} ${itemName}(s) to the inventory.`;
-          
-          }
-          
-          sellItem(itemName, quantity) {
-          
-          if (quantity <= 0) {
-              throw new Error("Quantity must be greater than zero.");
-          }
-          
-          const itemIndex = this.items.findIndex(item => item.itemName == itemName);
-          
-          if (itemIndex < 0) {
-              throw new Error(`The item ${itemName} is not available in the inventory.`);
-          }
-          
-          const item = this.items[itemIndex];
-          
-          if (item.quantity < quantity) {
-              throw new Error(`Not enough ${itemName}(s) in stock.`);
-          }
-          
-          item.quantity -= quantity;
-          
-          if (item.quantity == 0) {
-              this.outOfStock.push(item);
-              this.items.splice(itemIndex, 1);
-          }
-          // console.log(this.items);
-          
-          return `Sold ${quantity} ${itemName}(s) from the inventory.`;
-          
-          }
-          
-          restockItem(itemName, quantity) {
-          
-          if (quantity <= 0) {
-              throw new Error("Quantity must be greater than zero.");
-          }
-          
-          // if (this.capacity <= this.items.length) {
-          //     throw new Error("The inventory is already full.");
-          // }
-          
-          const itemIndex = this.items.findIndex(item => item.itemName == itemName);
-          const outOfStockIndex = this.outOfStock.findIndex(item => item.itemName == itemName);
-          
-          if (outOfStockIndex >= 0) {
-              this.outOfStock.splice(outOfStockIndex, 1);
-          }
-          
-          if (itemIndex >= 0) {
-          
-              this.items[itemIndex].quantity += quantity;
-          
-          } else {
-          
-              const newItem = {
-                  itemName, 
-                  quantity
-              }
-          
-              this.items.push(newItem);
-          
-          }
-          
-          return `Restocked ${quantity} ${itemName}(s) in the inventory.`;
-          
-          }
-          
-          getInventorySummary() {
-          
-          const result = ["Current Inventory:"];
-          
-          for (const item of this.items) {
-              // console.log(item);
-              result.push(`${item.itemName}: ${item.quantity}`)
-          }
-          
-          if (this.outOfStock.length > 0) {
-          
-              const outOfStockItems = [];
-          
-              for (const item of this.outOfStock) {
-                  // console.log(item);
-                  outOfStockItems.push(item.itemName);
-              }
-          
-              const outOfStockItemsAsString = `Out of Stock: ${outOfStockItems.join(", ")}`;
-          
-              result.push(outOfStockItemsAsString);
-          
-          }
-          
-          return result.join("\n");
-          
-        }
+      if (nameInput.value.length == 0) {
+        // console.log("name is empty");
+        return;
       }
+      if (heightInput.value.toString().length == 0) {
+        // console.log("height is empty");
+        return;
+      }
+      if (locationInput.value.length == 0) {
+        // console.log("location is empty");
+        return;
+      }
+      if (creatorInput.value.length == 0) {
+        // console.log("creator is empty");
+        return;
+      }
+      if (attributeInput.value.length == 0) {
+        // console.log("attr is empty");
+        return;
+    }
 
-      // const manager = new InventoryManager(2);
-      
-      // console.log(manager.addItem("Drill", 10));
-      // console.log(manager.addItem("Hammer", 5));
-      // console.log(manager.addItem("Level", 3));
-      
-      // const manager = new InventoryManager(3);
-      
-      // console.log(manager.addItem("Drill", 10));
-      // console.log(manager.addItem("Hammer", 5));
-      // console.log(manager.addItem("Chisel", 3));
-      // console.log(manager.sellItem("Drill", 3)); 
-      // console.log(manager.sellItem("Drill", 7));
-      // console.log(manager.sellItem("Drill", 1));
-      // console.log(manager.sellItem("Paintbrush", 2));
-      
-      // const manager = new InventoryManager(3);
-      
-      // console.log(manager.addItem("Drill", 10));
-      // console.log(manager.addItem("Hammer", 5));
-      // console.log(manager.addItem("Chisel", 3));
-      // console.log(manager.sellItem("Drill", 3)); 
-      // console.log(manager.restockItem("Drill", 5));
-      // console.log(manager.restockItem("Paintbrush", 1));
-      
-      // const manager = new InventoryManager(4);
-      
-      // console.log(manager.addItem("Drill", 10));
-      // console.log(manager.addItem("Hammer", 5));
-      // console.log(manager.addItem("Chisel", 3));
-      // console.log(manager.addItem("test", 3));
-      // console.log(manager.sellItem("Drill", 3));
-      // console.log(manager.sellItem("Hammer", 5)); 
-      // console.log(manager.sellItem("test", 3)); 
-      // console.log(manager.restockItem("Drill", 5));
-      // console.log(manager.restockItem("Paintbrush", 1));
-      // console.log(manager.getInventorySummary());
+    const nameInputValue = nameInput.value;
+    const heightInputValue = heightInput.value;
+    const locationInputValue = locationInput.value;
+    const creatorInputValue = creatorInput.value;
+    const attributeInputValue = attributeInput.value;
+    // console.log(nameInputValue, heightInputValue, locationInputValue, creatorInputValue, attributeInputValue);
+
+    form.reset();
+    addBtn.disabled = true;
+
+    const li = document.createElement("li");
+    const html = `<article><p>Name: ${nameInputValue}</p><p>Height: ${heightInputValue}</p><p>Location: ${locationInputValue}</p><p>Creator: ${creatorInputValue}</p><p>Attribute: ${attributeInputValue}</p><div class="btn-container"></div></article>`;
+    li.classList.add("snowman-info");
+    li.innerHTML = html;
+
+    const btnContainer = li.querySelector(".btn-container");
+
+    const editBtn = document.createElement("button");
+    editBtn.textContent = "Edit";
+    editBtn.classList.add("edit-btn");
+    editBtn.addEventListener("click", () => {
+        li.remove();
+        nameInput.value = nameInputValue;
+        heightInput.value = heightInputValue;
+        locationInput.value = locationInputValue;
+        creatorInput.value = creatorInputValue;
+        attributeInput.value = attributeInputValue;
+        btnContainer.remove();
+        addBtn.disabled = false;
+    })
+
+    const nextBtn = document.createElement("button");
+    nextBtn.textContent = "Next";
+    nextBtn.classList.add("next-btn");
+    nextBtn.addEventListener("click", () => {
+      snowList.appendChild(li);
+      li.className = "snowman-content";
+      btnContainer.remove();
+
+      const sendBtn = document.createElement("button");
+      sendBtn.textContent = "Send";
+      sendBtn.classList.add("send-btn");
+      sendBtn.addEventListener("click", () => {
+        // addBtn.disabled = false;
+        const main = document.getElementById("hero");
+        main.remove();
+        const img = document.getElementById("back-img");
+        img.removeAttribute("hidden");
+        const backBtn = document.createElement("button");
+        backBtn.textContent = "Back";
+        backBtn.classList.add("back-btn");
+        backBtn.addEventListener("click", () => {
+          location.reload();
+        })
+        document.body.appendChild(backBtn);
+      })
+      li.firstChild.appendChild(sendBtn);
+  });
+
+    btnContainer.appendChild(editBtn);
+    btnContainer.appendChild(nextBtn);
+    previewList.appendChild(li);
+  })
+}
     </script>
-        <script>
-          const planYourTrip = {
-      choosingDestination(destination, season, year) {
-        if (year != 2024) {
-          throw new Error(`Invalid Year!`);
-        } else {
-          if (destination == "Ski Resort") {
-            if (season === "Winter") {
-              return `Great choice! The ${season} is the perfect time to visit the ${destination}.`;
-            } else {
-              return `Consider visiting during the Winter for the best experience at the ${destination}.`;
-            }
-          } else {
-            throw new Error(`This destination is not what you are looking for.`);
-          }
-        }
-      },
-    
-      exploreOptions(activities, activityIndex) {
-        let result = [];
-    
-        if (
-          !Array.isArray(activities) ||
-          !Number.isInteger(activityIndex) ||
-          activityIndex < 0 ||
-          activityIndex >= activities.length
-        ) {
-          throw new Error("Invalid Information!");
-        }
-        for (let i = 0; i < activities.length; i++) {
-          if (i !== activityIndex) {
-            result.push(activities[i]);
-          }
-        }
-        return result.join(", ");
-      },
-    
-      estimateExpenses(distanceInKilometers, fuelCostPerLiter) {
-        let totalCost = (distanceInKilometers * fuelCostPerLiter).toFixed(2);
-    
-        if (
-          typeof distanceInKilometers !== "number" ||
-          distanceInKilometers <= 0 ||
-          typeof fuelCostPerLiter !== "number" ||
-          fuelCostPerLiter <= 0
-        ) {
-          throw new Error("Invalid Information!");
-        } else if (totalCost <= 500) {
-          return `The trip is budget-friendly, estimated cost is $${totalCost}.`;
-        } else {
-          return `The estimated cost for the trip is $${totalCost}, plan accordingly.`;
-        }
-      },
-    };
-    
-    // describe('test planYourTrip', function () {
-    //     it('choosingDestination(destination, season, year) functionality', function () {
-    //         expect(planYourTrip.choosingDestination("Ski Resort", "Winter", 2024)).to.equal("Great choice! The Winter is the perfect time to visit the Ski Resort.");
-    //         expect(planYourTrip.choosingDestination("Ski Resort", "Summer", 2024)).to.equal("Consider visiting during the Winter for the best experience at the Ski Resort.");
-    //         expect(() => planYourTrip.choosingDestination("Ski Resort", "season", 2023)).to.throw("Invalid Year!");
-    //         expect(() => planYourTrip.choosingDestination("Not Ski Resort", "season", 2024)).to.throw("This destination is not what you are looking for.");
-    //     })
-    //     it('exploreOptions(activities[], activityIndex) functionality', function () {
-    //         expect(planYourTrip.exploreOptions(["1", "2", "3"], 0)).to.equal("2, 3");
-    //         expect(planYourTrip.exploreOptions(["1", "2", "3"], 2)).to.equal("1, 2");
-    //         expect(() => planYourTrip.exploreOptions({}, 6)).to.throw("Invalid Information!");
-    //         expect(() => planYourTrip.exploreOptions([], "")).to.throw("Invalid Information!");
-    //         expect(() => planYourTrip.exploreOptions([1], -1)).to.throw("Invalid Information!");
-    //         expect(() => planYourTrip.exploreOptions([1], 1)).to.throw("Invalid Information!");
-    //         expect(() => planYourTrip.exploreOptions([1], 2)).to.throw("Invalid Information!");
-    //         expect(() => planYourTrip.exploreOptions([1, 2], 1.2)).to.throw("Invalid Information!");
-    //     })
-    //     it('estimateExpenses(distanceInKilometers, fuelCostPerLiter) functionality', function () {
-    //         expect(planYourTrip.estimateExpenses(2, 6)).to.equal("The trip is budget-friendly, estimated cost is $12.00.");
-    //         expect(planYourTrip.estimateExpenses(2.5, 6.5)).to.equal("The trip is budget-friendly, estimated cost is $16.25.");
-    //         expect(planYourTrip.estimateExpenses(2, 3.4)).to.equal("The trip is budget-friendly, estimated cost is $6.80.");
-    //         expect(planYourTrip.estimateExpenses(2, 250)).to.equal("The trip is budget-friendly, estimated cost is $500.00.");
-    //         expect(planYourTrip.estimateExpenses(2, 251)).to.equal("The estimated cost for the trip is $502.00, plan accordingly.");
-    //         expect(planYourTrip.estimateExpenses(2, 251.5)).to.equal("The estimated cost for the trip is $503.00, plan accordingly.");
-    //         expect(planYourTrip.estimateExpenses(2.8, 251)).to.equal("The estimated cost for the trip is $702.80, plan accordingly.");
-    //         expect(() => planYourTrip.estimateExpenses("", 1)).to.throw("Invalid Information!");
-    //         expect(() => planYourTrip.estimateExpenses({}, 1)).to.throw("Invalid Information!");
-    //         expect(() => planYourTrip.estimateExpenses([], 1)).to.throw("Invalid Information!");
-    //         expect(() => planYourTrip.estimateExpenses(2, "")).to.throw("Invalid Information!");
-    //         expect(() => planYourTrip.estimateExpenses(2, {})).to.throw("Invalid Information!");
-    //         expect(() => planYourTrip.estimateExpenses(2, [])).to.throw("Invalid Information!");
-    //         expect(() => planYourTrip.estimateExpenses(0, 1)).to.throw("Invalid Information!");
-    //         expect(() => planYourTrip.estimateExpenses(2, 0)).to.throw("Invalid Information!");
-    //         expect(() => planYourTrip.estimateExpenses(-1, 1)).to.throw("Invalid Information!");
-    //         expect(() => planYourTrip.estimateExpenses(-1.5, 1)).to.throw("Invalid Information!");
-    //         expect(() => planYourTrip.estimateExpenses(2, -2)).to.throw("Invalid Information!");
-    //         expect(() => planYourTrip.estimateExpenses(2, -2.5)).to.throw("Invalid Information!");
-    //     })
-    // })
-        </script>
+
 <script>
   // 10. Contacts Builder✶
   // 11. View Model✶
