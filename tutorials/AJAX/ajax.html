@@ -11,8 +11,14 @@
       fieldset {
         display: none;
       }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
       
-      body {
+      .body {
         margin: 0;
         font-family:'Franklin Gothic Medium', sans-serif;
         display: flex;
@@ -25,7 +31,7 @@
         background-size: cover;
       }
       
-      body > h1 {
+      .body > h1 {
         margin-top: -7px;
         display: flex;
         align-items: center;
@@ -112,7 +118,6 @@
       main {
         display: flex;
         justify-content:space-between;
-        
       }
       
       .snowman-preview li {
@@ -137,15 +142,143 @@
         color: rgb(79, 131, 241);
       }
 
+      .snow-list li article {
+        display: flex;
+        letter-spacing: 2px;
+        margin-top: -25px;
+        justify-content: center;
+        align-items: center;
+      }
+      .snow-list li button {
+        height: 30px;
+      }
+      
+      button {
+        padding: 5px 10px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        background-color: rgb(79, 131, 241);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.719);
+        transition: background-color 1s ease;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #160864;
+      }
+      button:disabled {
+        cursor: not-allowed; 
+        background-color: red;
+      }
+      
+      #back-img {
+        margin-top: -80px;
+        height: 80vh;
+      }
+
+      .back-btn {
+        width: 15vw;
+        height: 5vh;
+        cursor: pointer;
+      }
+
+      #hero {
+        display: none;
+      }
+
       @media (max-width: 700px) {
         #hero {
           flex-direction: column;
         }
       }
+
+      #header {
+        margin: 0;
+        background-color: rgba(17, 16, 16, 0.278);
+      }
+      #header > h1 {
+          text-align: center;
+          font-size: 3rem;
+          letter-spacing: 0.1rem;
+          background: linear-gradient(180deg, rgb(85, 88, 92) 17%, rgb(175, 206, 235) 48%, rgb(255, 255, 255) 57%, rgb(80, 80, 76) 69%, rgb(139, 137, 135) 78%);
+          text-shadow: 1px 1px #1b1a1a49;
+          color: transparent;
+          -webkit-background-clip: text;
+          background-clip: text;
+      }
     </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+
+    <section id="header">
+      <h1>Car Parts</h1>
+      <div class="heading-container">
+          <div class="info">
+              <h1>Ordering System</h1>
+          </div>
+      </div>
+    </section>
+    
+    <div id="wrapper">
+  
+        <section id="append-part">
+            <div class="container">
+
+                <h1>Search Part</h1>
+                
+                <div class="container-text">
+                    <form action="">
+                        <label for="car-model">Car Model:</label>
+                        <input type="text" id="car-model" name="car-model">
+  
+                        <label for="car-year">Car Year:</label>
+                        <input type="number" id="car-year" name="car-year" pattern="\d{4}">
+  
+                        <label for="part-name">Part Name:</label>
+                        <input type="text" id="part-name" name="part-name">
+  
+                        <label for="part-number">Part Number:</label>
+                        <input type="number" id="part-number" name="part-number" >
+  
+                        <label for="condition">Condition:</label>
+                        <select name="condition" id="condition">
+                            <option value=""></option>
+                            <option value="New">New</option>
+                            <option value="Used">Used</option>
+                        </select>
+                        <button id="next-btn" type="submit">Next</button>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+  
+        <section id="part-info">
+            <div class="info-container">
+                <div class="container"> 
+                    <h1>Part info</h1>
+                    <ul class="info-list"></ul>
+                </div>
+            </div>
+        </section>
+  
+        <section id="confirm-order">
+            <div class="confirm-container">
+                <div class="container"> 
+                    <h1>Confirm Order</h1>
+                    <ul class="confirm-list"></ul>
+                </div>
+            </div>
+        </section>
+
+    </div>
+  
+    <section id="complete-order">
+        <img id="complete-img" src="./static/img/done.png" alt="img">
+        <p id="complete-text"></p>
+    </section>
+
     <h1>Snow Showdown</h1>
     <main id="hero">
 
