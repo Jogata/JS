@@ -136,6 +136,12 @@
         text-shadow: 1px 1px black;
         color: rgb(79, 131, 241);
       }
+
+      @media (max-width: 700px) {
+        #hero {
+          flex-direction: column;
+        }
+      }
     </style>
   </head>
   <body>
@@ -288,6 +294,133 @@ function solve() {
   })
 }
     </script>
+
+<script>
+  class BookClub {
+    constructor(library) {
+      this.library = library;
+      this.books = [];
+      this.members = [];
+    }
+
+    addBook (title, author) {
+
+      const index = this.books.findIndex(book => book.title == title);
+
+      if (index >= 0) {
+        return `The book "${title}" by ${author} is already in ${this.library} library.`;
+      }
+
+      const newBook = {
+        title, 
+        author
+      }
+
+      this.books.push(newBook);
+
+      return `The book "${title}" by ${author} has been added to ${this.library} library.`;
+
+    }
+
+    addMember (memberName) {
+
+      // const index = this.members.findIndex(member => member.memberName == memberName);
+      
+      if (this.members.includes(memberName)) {
+        return `Member ${memberName} is already a part of the book club.`;
+      }
+      
+      // const newMember = {
+      //   memberName
+      // }
+      
+      this.members.push(memberName);
+
+      return `Member ${memberName} has been joined to the book club.`;
+
+    }
+
+    assignBookToMember (memberName, bookTitle) {
+
+      if (!this.members.includes(memberName)) {
+        throw new Error(`Member ${memberName} not found.`);
+      }
+
+      const index = this.books.findIndex(book => book.title == bookTitle);
+
+      if (index < 0) {
+        throw new Error(`Book "${bookTitle}" not found.`);
+      }
+
+      const book = this.books[index];
+      this.books.splice(index, 1);
+
+      return `Member ${memberName} has been assigned the book "${book.title}" by ${book.author}.`;
+      
+    }
+
+    generateReadingReport () {
+
+      if (this.members.length == 0) {
+        return "No members in the book club.";
+      }
+
+      if (this.books.length == 0) {
+        return "No available books in the library.";
+      }
+
+      const booksInfo = [`Available Books in ${this.library} library:`];
+
+      for (const book of this.books) {
+        const info = `"${book.title}" by ${book.author}`;
+        booksInfo.push(info);
+      }
+
+      return booksInfo.join("\n");
+
+    }
+
+  }
+
+  // const myBookClub = new BookClub('The Bookaholics');
+  // console.log(myBookClub.addBook("The Great Gatsby", "F. Scott Fitzgerald"));
+  // console.log(myBookClub.addBook("To Kill a Mockingbird", "Harper Lee"));
+  // console.log(myBookClub.addBook("1984", "George Orwell"));
+  //     console.log(myBookClub.books);
+  // console.log(myBookClub.addMember("Alice"));
+  // console.log(myBookClub.addMember("Peter"));
+  // console.log(myBookClub.addMember("Peter"));
+  //     console.log(myBookClub.members);
+  // console.log(myBookClub.assignBookToMember("Mary", "The Great Gatsby"));
+  // console.log(myBookClub.assignBookToMember("Alice", "The Great Gatsby 1"));
+  
+  // const myBookClub = new BookClub('The Bookaholics');
+  // console.log(myBookClub.addBook("The Great Gatsby", "F. Scott Fitzgerald"));
+  // console.log(myBookClub.addBook("To Kill a Mockingbird", "Harper Lee"));
+  // console.log(myBookClub.addBook("1984", "George Orwell"));
+  // console.log(myBookClub.addMember("Alice"));
+  // console.log(myBookClub.addMember("Alice"));
+  // console.log(myBookClub.assignBookToMember("Alice", "The Great Gatsby"));
+  // console.log(myBookClub.generateReadingReport());
+  
+  // const myBookClub = new BookClub('The Bookaholics');
+  // console.log(myBookClub.addBook("The Great Gatsby", "F. Scott Fitzgerald"));
+  // console.log(myBookClub.addBook("To Kill a Mockingbird", "Harper Lee"));
+  // console.log(myBookClub.addBook("1984", "George Orwell"));
+  // console.log(myBookClub.addMember("Alice"));
+  // console.log(myBookClub.addMember("Peter"));
+  // console.log(myBookClub.assignBookToMember("Peter", "The Da Vinci Code"));
+  
+  // const myBookClub = new BookClub('The Bookaholics');
+  // console.log(myBookClub.addBook("To Kill a Mockingbird", "Harper Lee"));
+  // console.log(myBookClub.addBook("1984", "George Orwell"));
+  // console.log(myBookClub.addMember("Alice"));
+  // console.log(myBookClub.addMember("Peter"));
+  // console.log(myBookClub.assignBookToMember("Peter", "1984"));
+  // console.log(myBookClub.assignBookToMember("Alice", "To Kill a Mockingbird"));
+  // console.log(myBookClub.generateReadingReport());
+  
+</script>
 
 <script>
   // 10. Contacts Builder✶
