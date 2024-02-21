@@ -338,7 +338,47 @@
       #next-btn:hover {
         background-color: gray;
       }
-        
+      
+      li {
+        list-style-type: none;
+      }
+
+      li > article {
+          margin-top: 1rem;
+          border: 1px solid rgb(255, 253, 253);
+          padding: 0.3rem;
+          border-radius: 1px;
+          padding: 15px 5px;
+      }
+      
+      article > h3, p {
+          font-size: 1rem;
+          font-weight: 600;
+          padding: 0.1rem 0.6rem;
+          font-family: 'Alkalami', serif;
+      }
+      
+      .edit-btn, 
+      .continue-btn, 
+      .confirm-btn, 
+      .cancel-btn {
+          margin: 2.6rem 1rem ;
+          width: 6.5rem;
+          border-radius: 5px;
+          background-color: rgb(255, 255, 252);
+          font-size:large;
+          font-weight: 700;
+          opacity: 0.9;
+      }
+      .part-content p {
+          color: aliceblue;
+          border-bottom: 1px dashed;
+          text-shadow: 2px 1px black;
+      }
+      
+      #complete-order p {
+          color: white;
+      }
     </style>
   </head>
   <body>
@@ -686,6 +726,100 @@ function solve() {
   // console.log(myBookClub.assignBookToMember("Alice", "To Kill a Mockingbird"));
   // console.log(myBookClub.generateReadingReport());
   
+</script>
+
+<script>
+    // 01. Decrypting Commands
+    function decryptingCommands(params) {
+      // console.log(params);
+      let text = params[0];
+      // console.log(text);
+  
+      let index = 1;
+      let input = params[index];
+  
+      while (input != "Finish") {
+        // console.log(input);
+        const data = input.split(" ");
+        const command = data[0];
+  
+        if (command == "Replace") {
+          // console.log("Replace");
+          const current = data[1];
+          const newChar = data[2];
+          // console.log(current, newChar);
+          text = text.split(current).join(newChar);
+          console.log(text);
+        } else if (command == "Cut") {
+          // console.log("Cut");
+          const start = Number(data[1]);
+          const end = Number(data[2]);
+          if (start >= 0 && start < text.length && end >= 0 && end < text.length) {
+            // console.log(start, end);
+            const left = text.substring(0, start);
+            const right = text.substring(end + 1);
+            console.log(left, right);
+            text = left + right;
+            console.log(text);
+          } else {
+            console.log("Invalid indices!");
+          }
+        } else if (command == "Make") {
+          // console.log("Make");
+          const type = data[1];
+
+          if (type == "Upper") {
+            text = text.toUpperCase();
+          } else if (type == "Lower") {
+            text = text.toLowerCase();
+          }
+
+          console.log(text); 
+        } else if (command == "Check") {
+          // console.log("Check");
+          const substring = data[1];
+          // console.log(substring);
+          if (text.includes(substring)) {
+            console.log(`Message contains ${substring}`);
+          } else {
+            console.log(`Message doesn't contain ${substring}`);
+          }
+        } else if (command == "Sum") {
+          // console.log("Sum");
+          const start = Number(data[1]);
+          const end = Number(data[2]);
+          if (start >= 0 && start < text.length-1 && end >= 0 && end < text.length-1) {
+            // console.log(start, end);
+            let sum = 0;
+            const substring = text.substring(start, end + 1);
+            // console.log(substring);
+            for (const letter of substring) {
+              // console.log(letter);
+              const ascii = letter.charCodeAt(0);
+              // console.log(ascii);
+              sum += ascii;
+            }
+            console.log(sum);
+          } else {
+            console.log("Invalid indices!");
+          }
+        }
+  
+        index++;
+        input = params[index];
+  
+        // if (index > 100) {
+        //   console.log("infinity");
+        //   break;
+        // }
+  
+      }
+  
+    }
+
+    decryptingCommands(["ILikeSoftUni", "Replace I We", "Make Upper", "Check SoftUni", "Sum 1 4", "Cut 1 4", "Finish"]);
+    // decryptingCommands(["ILikeSoftUni", "Replace I We", "Make Upper", "Check SoftUni", "Check S", "Sum 1 4", "Cut 1 4", "Finish"]);
+    // decryptingCommands(["HappyNameDay", "Replace p r", "Make Lower", "Cut 2 23", "Sum -2 2", "Finish"]);
 </script>
 
 <script>
