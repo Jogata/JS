@@ -5,822 +5,160 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Mountains+of+Christmas&display=swap');
-
-      fieldset {
-        display: none;
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      
-      .body {
-        margin: 0;
-        font-family:'Franklin Gothic Medium', sans-serif;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        background-image: url("../images/bg.jpg");
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-        background-size: cover;
-      }
-      
-      .body > h1 {
-        margin-top: -7px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: rgb(79, 131, 241);
-        font-size: 10vh;
-        font-family: 'Mountains of Christmas', serif;
-        text-shadow: 3px 3px black;
-      }
-      
-      .snowman-container {
-        height: 93vh;
-        margin-top: -90px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-image: url(../images/snowman.png);
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-      }
-      
-      .snowman {
-        width: 45vw;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 9.5rem;
-      }
-      
-      .snowman input, 
-      .snowman button, 
-      .snowman select {
-        margin-right: 2rem;
-        width: 10rem;
-        height: 1.6rem;
-      }
-      
-      .snowballs-container {
-        align-items: center;
-        gap: 10vh;
-        display: flex;
-        flex-direction: column;
-        margin-right: 50px;
-        margin-top: -20px;
-      }
-      
-      .snowball {
-        width: 45vw;
-        height: 50vh;
-        background-image: url(../images/snowball.png);
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size:contain;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-      }
-      
-      .snowball h2 {
-        margin-top: 50px;
-      }
-      
-      ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-      }
-      
-      .snow {
-        width: 49vw;
-        height: 22vh;
-        background-image: url(../images/snow.png);
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size:contain;
-        display: flex;
-        justify-content: start;
-        align-items: center;
-        flex-direction: column;
-      }
-      
-      main {
-        display: flex;
-        justify-content:space-between;
-      }
-      
-      .snowman-preview li {
-        display: flex;
-        flex-direction: column;
-        line-height: 9px;
-        justify-content: center;
-        align-items: center;
-        font-weight: 600;
-      }
-      
-      .btn-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-      }
-      
-      h2 {
-        border-bottom: 2px dashed black;
-        text-shadow: 1px 1px black;
-        color: rgb(79, 131, 241);
-      }
-
-      .snow-list li article {
-        display: flex;
-        letter-spacing: 2px;
-        margin-top: -25px;
-        justify-content: center;
-        align-items: center;
-      }
-      .snow-list li button {
-        height: 30px;
-      }
-      
-      button {
-        padding: 5px 10px;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        background-color: rgb(79, 131, 241);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.719);
-        transition: background-color 1s ease;
-        cursor: pointer;
-      }
-      button:hover {
-        background-color: #160864;
-      }
-      button:disabled {
-        cursor: not-allowed; 
-        background-color: red;
-      }
-      
-      #back-img {
-        margin-top: -80px;
-        height: 80vh;
-      }
-
-      .back-btn {
-        width: 15vw;
-        height: 5vh;
-        cursor: pointer;
-      }
-
-      #hero {
-        display: none;
-      }
-
-      @media (max-width: 700px) {
-        #hero {
-          flex-direction: column;
-        }
-      }
-
-      body {
-        height: 100vh;
-        margin: 0;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-        background-image: url("../img/zero.jpg");
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-        background-size: cover;
-        place-items: center;
-      }
-      
-      #wrapper {
-          justify-content: center;
-          margin: 2.35rem 0 0;
-          display: flex;
-          justify-content: center;
-      }
-        
-      #header {
-        margin: 0;
-        background-color: rgba(17, 16, 16, 0.278);
-      }
-      #header > h1 {
-          text-align: center;
-          font-size: 3rem;
-          letter-spacing: 0.1rem;
-          background: linear-gradient(180deg, rgb(85, 88, 92) 17%, rgb(175, 206, 235) 48%, rgb(255, 255, 255) 57%, rgb(80, 80, 76) 69%, rgb(139, 137, 135) 78%);
-          text-shadow: 1px 1px #1b1a1a49;
-          color: transparent;
-          -webkit-background-clip: text;
-          background-clip: text;
-      }
-
-      .heading-container {
-        margin: 0px auto 4px 0;
-        height:1rem;
-        display: flex;
-        top: 0%;
-        left: 50%;
-        text-align: center;
-      }
-        
-      .info {
-          justify-items: legacy;
-          display: flex;
-          flex-direction: column;
-          position: relative;
-          flex: 1;
-          margin-top: 10rem;
-      }
-      
-      .info > h1 {
-        color: rgb(9, 9, 9);
-        font-size: 1.5rem;
-        margin: -10rem 0 0px;
-        position: relative;
-        font-weight: 700;
-        text-transform: uppercase;
-        padding: 0;
-        letter-spacing: 0px;
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
-      }
-      
-      .container {
-          width: 25vw;
-          height: 52vh;
-          margin: 30px;
-          display: flex;
-          grid-template-columns: 1fr 1fr;
-          place-items: center;
-          opacity: 0.95;
-          border-radius: 5px;
-          align-items: center;
-          justify-content: baseline;
-          flex-direction: column;
-          background-image: url("./img/pngwing.com.png");
-          background-repeat: no-repeat;
-          background-size: contain;
-      }
-      
-      .container > h1 {
-        margin: 1rem ;
-        font-size: 1.3rem;
-        font-weight: 600;
-        color: white;
-        border-bottom: 1px solid white;
-      }
-      
-      .container-text {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      form > input, 
-      select {
-        width: 13rem;
-        height: 1.5rem;
-        border-radius: 5px;
-      }
-      
-      form > label {
-        color: aliceblue;
-      }
-      
-      #complete-order {
-        width: 40vw;
-        height: 12vh;
-        margin:auto;
-        display: flex;
-        align-items:center;
-        flex-direction: column;
-        border-radius: 5px;
-        opacity: 0.95;
-      }
-      #complete-order img {
-        width: 150px;
-        height: 150px;
-        margin-top: -30px;
-        visibility: hidden;
-      }
-      
-      label {
-        display: block;
-        width: 100%;
-        padding: 0;
-        border: none;
-        outline: none;
-        box-sizing: border-box;
-        font-size: 0.8rem;
-        font-weight: 600;
-        color: #1A2250;
-      }
-
-      #next-btn {
-        display: block;
-        margin-top: 0.6rem;
-        width: 13rem;
-        border-radius: 5px;
-        background-color: rgb(255, 255, 255);
-        font-size:large;
-        font-weight: 700;
-      }
-      #next-btn:hover {
-        background-color: gray;
-      }
-      
-      li {
-        list-style-type: none;
-      }
-
-      li > article {
-          margin-top: 1rem;
-          border: 1px solid rgb(255, 253, 253);
-          padding: 0.3rem;
-          border-radius: 1px;
-          padding: 15px 5px;
-      }
-      
-      article > h3, p {
-          font-size: 1rem;
-          font-weight: 600;
-          padding: 0.1rem 0.6rem;
-          font-family: 'Alkalami', serif;
-      }
-      
-      .edit-btn, 
-      .continue-btn, 
-      .confirm-btn, 
-      .cancel-btn {
-          margin: 2.6rem 1rem ;
-          width: 6.5rem;
-          border-radius: 5px;
-          background-color: rgb(255, 255, 252);
-          font-size:large;
-          font-weight: 700;
-          opacity: 0.9;
-      }
-      .part-content p {
-          color: aliceblue;
-          border-bottom: 1px dashed;
-          text-shadow: 2px 1px black;
-      }
-      
-      #complete-order p {
-          color: white;
-      }
-    </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
-    <section id="header">
-      <h1>Car Parts</h1>
-      <div class="heading-container">
-          <div class="info">
-              <h1>Ordering System</h1>
-          </div>
-      </div>
-    </section>
-    
-    <div id="wrapper">
-  
-        <section id="append-part">
-            <div class="container">
-
-                <h1>Search Part</h1>
-                
-                <div class="container-text">
-                    <form action="">
-                        <label for="car-model">Car Model:</label>
-                        <input type="text" id="car-model" name="car-model">
-  
-                        <label for="car-year">Car Year:</label>
-                        <input type="number" id="car-year" name="car-year" pattern="\d{4}">
-  
-                        <label for="part-name">Part Name:</label>
-                        <input type="text" id="part-name" name="part-name">
-  
-                        <label for="part-number">Part Number:</label>
-                        <input type="number" id="part-number" name="part-number" >
-  
-                        <label for="condition">Condition:</label>
-                        <select name="condition" id="condition">
-                            <option value=""></option>
-                            <option value="New">New</option>
-                            <option value="Used">Used</option>
-                        </select>
-                        <button id="next-btn" type="submit">Next</button>
-                    </form>
-                </div>
-
-            </div>
-        </section>
-  
-        <section id="part-info">
-            <div class="info-container">
-                <div class="container"> 
-                    <h1>Part info</h1>
-                    <ul class="info-list"></ul>
-                </div>
-            </div>
-        </section>
-  
-        <section id="confirm-order">
-            <div class="confirm-container">
-                <div class="container"> 
-                    <h1>Confirm Order</h1>
-                    <ul class="confirm-list"></ul>
-                </div>
-            </div>
-        </section>
-
-    </div>
-  
-    <section id="complete-order">
-        <img id="complete-img" src="./static/img/done.png" alt="img">
-        <p id="complete-text"></p>
-    </section>
-
-    <h1>Snow Showdown</h1>
-    <main id="hero">
-
-      <div class="snowman-container">
-        <form class="snowman">
-          <input type="text" id="snowman-name" placeholder="Snowman Name" />
-          <input type="number" id="snowman-height" placeholder="Height (in centimeters)" />
-          <input type="text" id="location" placeholder="Location" />
-          <input type="text" id="creator-name" placeholder="Creator" />
-          <select id="special-attribute" placeholder="Special Attribute">
-            <option value="" disabled selected>Special Attribute</option>
-            <option value="Carrot Nose">Carrot Nose</option>
-            <option value="Hat/Pot">Hat/Pot</option>
-            <option value="Branches for Arms">Branches for Arms</option>
-            <option value="Button Eyes">Button Eyes</option>
-          </select>
-          <button type="submit" class="add-btn">Add</button>
-        </form>
-      </div>
-
-      <div class="snowballs-container">
-        <div class="snowball">
-          <h2>&#10053;Snowman Preview&#10053;</h2>
-          <ul class="snowman-preview"></ul>
-        </div>
-
-        <div class="snow">
-          <h2>&#10053;Your Snowman&#10053;</h2>
-          <ul class="snow-list"></ul>
-        </div>
-
-      </div>
-    </main>
-    <img id="back-img" src="./style/images/back-Snowman.png" alt="" hidden>
     <script>
-      window.addEventListener("load", solve);
-
-function solve() {
-  const form = document.querySelector("form");
-  const previewList = document.querySelector(".snowman-preview");
-  const snowList = document.querySelector(".snow-list");
-  // console.log(form, previewList ,snowList);
-
-  const nameInput = document.getElementById("snowman-name");
-  const heightInput = document.getElementById("snowman-height");
-  const locationInput = document.getElementById("location");
-  const creatorInput = document.getElementById("creator-name");
-  const attributeInput = document.getElementById("special-attribute");
-  // console.log(nameInput, heightInput, locationInput, creatorInput, attributeInput);
-
-  const addBtn = document.querySelector(".add-btn");
-
-  // nameInput.value = "TestName";
-  // heightInput.value = 8;
-  // locationInput.value = "test place";
-  // creatorInput.value = "test creator";
-  // attributeInput.value = "Hat/Pot";
-
-  addBtn.addEventListener("click", (e) => {
-      // console.log("get info");
-      e.preventDefault();
-
-      if (nameInput.value.length == 0) {
-        // console.log("name is empty");
-        return;
-      }
-      if (heightInput.value.toString().length == 0) {
-        // console.log("height is empty");
-        return;
-      }
-      if (locationInput.value.length == 0) {
-        // console.log("location is empty");
-        return;
-      }
-      if (creatorInput.value.length == 0) {
-        // console.log("creator is empty");
-        return;
-      }
-      if (attributeInput.value.length == 0) {
-        // console.log("attr is empty");
-        return;
-    }
-
-    const nameInputValue = nameInput.value;
-    const heightInputValue = heightInput.value;
-    const locationInputValue = locationInput.value;
-    const creatorInputValue = creatorInput.value;
-    const attributeInputValue = attributeInput.value;
-    // console.log(nameInputValue, heightInputValue, locationInputValue, creatorInputValue, attributeInputValue);
-
-    form.reset();
-    addBtn.disabled = true;
-
-    const li = document.createElement("li");
-    const html = `<article><p>Name: ${nameInputValue}</p><p>Height: ${heightInputValue}</p><p>Location: ${locationInputValue}</p><p>Creator: ${creatorInputValue}</p><p>Attribute: ${attributeInputValue}</p><div class="btn-container"></div></article>`;
-    li.classList.add("snowman-info");
-    li.innerHTML = html;
-
-    const btnContainer = li.querySelector(".btn-container");
-
-    const editBtn = document.createElement("button");
-    editBtn.textContent = "Edit";
-    editBtn.classList.add("edit-btn");
-    editBtn.addEventListener("click", () => {
-        li.remove();
-        nameInput.value = nameInputValue;
-        heightInput.value = heightInputValue;
-        locationInput.value = locationInputValue;
-        creatorInput.value = creatorInputValue;
-        attributeInput.value = attributeInputValue;
-        btnContainer.remove();
-        addBtn.disabled = false;
-    })
-
-    const nextBtn = document.createElement("button");
-    nextBtn.textContent = "Next";
-    nextBtn.classList.add("next-btn");
-    nextBtn.addEventListener("click", () => {
-      snowList.appendChild(li);
-      li.className = "snowman-content";
-      btnContainer.remove();
-
-      const sendBtn = document.createElement("button");
-      sendBtn.textContent = "Send";
-      sendBtn.classList.add("send-btn");
-      sendBtn.addEventListener("click", () => {
-        // addBtn.disabled = false;
-        const main = document.getElementById("hero");
-        main.remove();
-        const img = document.getElementById("back-img");
-        img.removeAttribute("hidden");
-        const backBtn = document.createElement("button");
-        backBtn.textContent = "Back";
-        backBtn.classList.add("back-btn");
-        backBtn.addEventListener("click", () => {
-          location.reload();
-        })
-        document.body.appendChild(backBtn);
-      })
-      li.firstChild.appendChild(sendBtn);
-  });
-
-    btnContainer.appendChild(editBtn);
-    btnContainer.appendChild(nextBtn);
-    previewList.appendChild(li);
-  })
-}
-    </script>
-
-<script>
-  class BookClub {
-    constructor(library) {
-      this.library = library;
-      this.books = [];
-      this.members = [];
-    }
-
-    addBook (title, author) {
-
-      const index = this.books.findIndex(book => book.title == title);
-
-      if (index >= 0) {
-        return `The book "${title}" by ${author} is already in ${this.library} library.`;
-      }
-
-      const newBook = {
-        title, 
-        author
-      }
-
-      this.books.push(newBook);
-
-      return `The book "${title}" by ${author} has been added to ${this.library} library.`;
-
-    }
-
-    addMember (memberName) {
-
-      // const index = this.members.findIndex(member => member.memberName == memberName);
-      
-      if (this.members.includes(memberName)) {
-        return `Member ${memberName} is already a part of the book club.`;
-      }
-      
-      // const newMember = {
-      //   memberName
-      // }
-      
-      this.members.push(memberName);
-
-      return `Member ${memberName} has been joined to the book club.`;
-
-    }
-
-    assignBookToMember (memberName, bookTitle) {
-
-      if (!this.members.includes(memberName)) {
-        throw new Error(`Member ${memberName} not found.`);
-      }
-
-      const index = this.books.findIndex(book => book.title == bookTitle);
-
-      if (index < 0) {
-        throw new Error(`Book "${bookTitle}" not found.`);
-      }
-
-      const book = this.books[index];
-      this.books.splice(index, 1);
-
-      return `Member ${memberName} has been assigned the book "${book.title}" by ${book.author}.`;
-      
-    }
-
-    generateReadingReport () {
-
-      if (this.members.length == 0) {
-        return "No members in the book club.";
-      }
-
-      if (this.books.length == 0) {
-        return "No available books in the library.";
-      }
-
-      const booksInfo = [`Available Books in ${this.library} library:`];
-
-      for (const book of this.books) {
-        const info = `"${book.title}" by ${book.author}`;
-        booksInfo.push(info);
-      }
-
-      return booksInfo.join("\n");
-
-    }
-
-  }
-
-  // const myBookClub = new BookClub('The Bookaholics');
-  // console.log(myBookClub.addBook("The Great Gatsby", "F. Scott Fitzgerald"));
-  // console.log(myBookClub.addBook("To Kill a Mockingbird", "Harper Lee"));
-  // console.log(myBookClub.addBook("1984", "George Orwell"));
-  //     console.log(myBookClub.books);
-  // console.log(myBookClub.addMember("Alice"));
-  // console.log(myBookClub.addMember("Peter"));
-  // console.log(myBookClub.addMember("Peter"));
-  //     console.log(myBookClub.members);
-  // console.log(myBookClub.assignBookToMember("Mary", "The Great Gatsby"));
-  // console.log(myBookClub.assignBookToMember("Alice", "The Great Gatsby 1"));
-  
-  // const myBookClub = new BookClub('The Bookaholics');
-  // console.log(myBookClub.addBook("The Great Gatsby", "F. Scott Fitzgerald"));
-  // console.log(myBookClub.addBook("To Kill a Mockingbird", "Harper Lee"));
-  // console.log(myBookClub.addBook("1984", "George Orwell"));
-  // console.log(myBookClub.addMember("Alice"));
-  // console.log(myBookClub.addMember("Alice"));
-  // console.log(myBookClub.assignBookToMember("Alice", "The Great Gatsby"));
-  // console.log(myBookClub.generateReadingReport());
-  
-  // const myBookClub = new BookClub('The Bookaholics');
-  // console.log(myBookClub.addBook("The Great Gatsby", "F. Scott Fitzgerald"));
-  // console.log(myBookClub.addBook("To Kill a Mockingbird", "Harper Lee"));
-  // console.log(myBookClub.addBook("1984", "George Orwell"));
-  // console.log(myBookClub.addMember("Alice"));
-  // console.log(myBookClub.addMember("Peter"));
-  // console.log(myBookClub.assignBookToMember("Peter", "The Da Vinci Code"));
-  
-  // const myBookClub = new BookClub('The Bookaholics');
-  // console.log(myBookClub.addBook("To Kill a Mockingbird", "Harper Lee"));
-  // console.log(myBookClub.addBook("1984", "George Orwell"));
-  // console.log(myBookClub.addMember("Alice"));
-  // console.log(myBookClub.addMember("Peter"));
-  // console.log(myBookClub.assignBookToMember("Peter", "1984"));
-  // console.log(myBookClub.assignBookToMember("Alice", "To Kill a Mockingbird"));
-  // console.log(myBookClub.generateReadingReport());
-  
-</script>
-
-<script>
-    // 01. Decrypting Commands
-    function decryptingCommands(params) {
-      // console.log(params);
-      let text = params[0];
-      // console.log(text);
-  
-      let index = 1;
-      let input = params[index];
-  
-      while (input != "Finish") {
-        // console.log(input);
-        const data = input.split(" ");
-        const command = data[0];
-  
-        if (command == "Replace") {
-          // console.log("Replace");
-          const current = data[1];
-          const newChar = data[2];
-          // console.log(current, newChar);
-          text = text.split(current).join(newChar);
-          console.log(text);
-        } else if (command == "Cut") {
-          // console.log("Cut");
-          const start = Number(data[1]);
-          const end = Number(data[2]);
-          if (start >= 0 && start < text.length && end >= 0 && end < text.length) {
-            // console.log(start, end);
-            const left = text.substring(0, start);
-            const right = text.substring(end + 1);
-            console.log(left, right);
-            text = left + right;
-            console.log(text);
-          } else {
-            console.log("Invalid indices!");
-          }
-        } else if (command == "Make") {
-          // console.log("Make");
-          const type = data[1];
-
-          if (type == "Upper") {
-            text = text.toUpperCase();
-          } else if (type == "Lower") {
-            text = text.toLowerCase();
+      class JobOffers {
+          constructor(employer, position) {
+              this.employer = employer;
+              this.position  = position;
+              this.jobCandidates = [];
           }
 
-          console.log(text); 
-        } else if (command == "Check") {
-          // console.log("Check");
-          const substring = data[1];
-          // console.log(substring);
-          if (text.includes(substring)) {
-            console.log(`Message contains ${substring}`);
-          } else {
-            console.log(`Message doesn't contain ${substring}`);
-          }
-        } else if (command == "Sum") {
-          // console.log("Sum");
-          const start = Number(data[1]);
-          const end = Number(data[2]);
-          if (start >= 0 && start < text.length-1 && end >= 0 && end < text.length-1) {
-            // console.log(start, end);
-            let sum = 0;
-            const substring = text.substring(start, end + 1);
-            // console.log(substring);
-            for (const letter of substring) {
-              // console.log(letter);
-              const ascii = letter.charCodeAt(0);
-              // console.log(ascii);
-              sum += ascii;
-            }
-            console.log(sum);
-          } else {
-            console.log("Invalid indices!");
-          }
-        }
-  
-        index++;
-        input = params[index];
-  
-        // if (index > 100) {
-        //   console.log("infinity");
-        //   break;
-        // }
-  
-      }
-  
-    }
+          jobApplication(candidates) {
 
-    decryptingCommands(["ILikeSoftUni", "Replace I We", "Make Upper", "Check SoftUni", "Sum 1 4", "Cut 1 4", "Finish"]);
-    // decryptingCommands(["ILikeSoftUni", "Replace I We", "Make Upper", "Check SoftUni", "Check S", "Sum 1 4", "Cut 1 4", "Finish"]);
-    // decryptingCommands(["HappyNameDay", "Replace p r", "Make Lower", "Cut 2 23", "Sum -2 2", "Finish"]);
-</script>
+              const added = [];
+
+              for (const candidate of candidates) {
+                  const data = candidate.split("-");
+                  const name = data[0];
+                  const education = data[1];
+                  const yearsExperience = Number(data[2]);
+                  // console.log(this.jobCandidates);
+
+                  const index = this.jobCandidates.findIndex(candidate => candidate.name == name);
+                  // console.log(index);
+
+                  if (index >= 0) {
+                      
+                      const candidate = this.jobCandidates[index];
+                      
+                      if (candidate.yearsExperience < yearsExperience) {
+                          candidate.yearsExperience = yearsExperience;
+                      }
+
+                  } else {
+                      
+                      const candidate = {
+                          name, 
+                          education, 
+                          yearsExperience
+                      }
+
+                      this.jobCandidates.push(candidate);
+                      added.push(name);
+                      
+                  }
+
+              }
+
+              return `You successfully added candidates: ${added.join(", ")}.`;
+              
+          }
+
+          jobOffer(chosenPerson) {
+
+              const data = chosenPerson.split("-");
+              const name = data[0];
+              const minimalExperience = Number(data[1]);
+
+              const index = this.jobCandidates.findIndex(candidate => candidate.name == name);
+              
+              if (index < 0) {
+                  throw new Error(`${name} is not in the candidates list!`);
+              }
+
+              const candidate = this.jobCandidates[index];
+
+              if (candidate.yearsExperience < minimalExperience) {
+                  throw new Error(`${name} does not have enough experience as ${this.position}, minimum requirement is ${minimalExperience} years.`);
+              }
+
+              candidate.yearsExperience = "hired";
+
+              return `Welcome aboard, our newest employee is ${name}.`;
+
+          }
+
+          salaryBonus(name) {
+
+              const index = this.jobCandidates.findIndex(candidate => candidate.name == name);
+              
+              if (index < 0) {
+                  throw new Error(`${name} is not in the candidates list!`);
+              }
+
+              const candidate = this.jobCandidates[index];
+              // console.log(candidate);
+
+              const validEducations = {
+                  "Bachelor": "Bachelor", 
+                  "Master": "Master"
+              }
+
+              const messages = {
+                  "Bachelor": `${name} will sign a contract for ${this.employer}, as ${this.position} with a salary of $50,000 per year!`, 
+                  "Master": `${name} will sign a contract for ${this.employer}, as ${this.position} with a salary of $60,000 per year!`, 
+                  "undefined": `${name} will sign a contract for ${this.employer}, as ${this.position} with a salary of $40,000 per year!`
+              }
+
+              const desiredDegree = validEducations[candidate.education];
+              const message = messages[desiredDegree];
+
+              return message;
+
+          }
+
+          candidatesDatabase() {
+
+              if (this.jobCandidates.length == 0) {
+                  throw new Error("Candidate Database is empty!");
+              }
+
+              const result = ["Candidates list:"];
+
+              const sorted = this.jobCandidates.sort((c1, c2) => c1.name.localeCompare(c2.name));
+
+              for (const candidate of sorted) {
+                  // console.log(candidate);
+                  const info = `${candidate.name}-${candidate.yearsExperience}`;
+                  result.push(info);
+              }
+
+              return result.join("\n");
+
+          }
+
+      }
+
+      // let Jobs = new JobOffers ("Google", "Strategy Analyst");
+      // console.log(Jobs.jobApplication(["John Doe-Bachelor-10", "Peter Parker-Master-5", "Daniel Jones- Bachelor-18"]));
+
+      // let Jobs = new JobOffers ("Google", "Strategy Analyst");
+      // console.log(Jobs.jobApplication(["John Doe-Bachelor-10", "Peter Parker-Master-5", "Daniel Jones- Bachelor-18"]));
+      // console.log(Jobs.jobOffer("John Doe-8"));
+      // console.log(Jobs.jobOffer("Peter Parker-4"));
+      // console.log(Jobs.jobOffer("John Jones-8"));
+
+      // let Jobs = new JobOffers ("Google", "Strategy Analyst");
+      // console.log(Jobs.jobApplication(["John Doe-Bachelor-10", "Peter Parker-Master-5", "Daniel Jones- Bachelor-18"]));
+      // console.log(Jobs.jobOffer("John Doe-8"));
+      // console.log(Jobs.jobOffer("Peter Parker-4"));
+      // console.log(Jobs.salaryBonus("John Doe"));
+      // console.log(Jobs.salaryBonus("Peter Parker"));
+
+      let Jobs = new JobOffers ("Google", "Strategy Analyst");
+      console.log(Jobs.jobApplication(["John Doe-Bachelor-10", "Peter Parker-Master-5","Jordan Cole-High School-5", "Daniel Jones- Bachelor-18"]));
+      console.log(Jobs.jobOffer("John Doe-8"));
+      console.log(Jobs.jobOffer("Peter Parker-4"));
+      console.log(Jobs.jobOffer("Jordan Cole-4"));
+      console.log(Jobs.salaryBonus("Jordan Cole"));
+      console.log(Jobs.salaryBonus("John Doe"));
+      console.log(Jobs.candidatesDatabase());
+
+  </script>
 
 <script>
   // 10. Contacts Builder✶
