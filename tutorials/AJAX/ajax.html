@@ -161,6 +161,140 @@
   </script>
 
 <script>
+  window.addEventListener('load', solve);
+  
+  function solve() {
+      const form = document.querySelector("form");
+      const partInfoList = document.querySelector(".info-list");
+      const confirmList = document.querySelector(".confirm-list");
+      // console.log(partInfoList, confirmList);
+      
+      const modelField = document.getElementById("car-model");
+      const yearField = document.getElementById("car-year");
+      const nameField = document.getElementById("part-name");
+      const partNumberField = document.getElementById("part-number");
+      const conditionField = document.getElementById("condition");
+      // console.log(modelField, yearField, nameField, partNumberField, conditionField);
+      
+      modelField.value = "testmodel";
+      yearField.value = 1980;
+      nameField.value = "partNameTest";
+      partNumberField.value = 7;
+      conditionField.value = "New";
+      
+      const nextBtn = document.getElementById("next-btn");
+      // console.log(nextBtn);
+      
+      nextBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          
+          const modelFieldValue = modelField.value;
+          const yearFieldValue = yearField.value;
+          const nameFieldValue = nameField.value;
+          const partNumberFieldValue = partNumberField.value;
+          const conditionFieldValue = conditionField.value;
+          // console.log(modelFieldValue, yearFieldValue, nameFieldValue, partNumberFieldValue, conditionFieldValue);
+          
+          if (modelFieldValue.length == 0) {
+              console.log("model is empty");
+              return;
+          }
+          
+          if (yearFieldValue.toString().length == 0) {
+              console.log("email is empty");
+              return;
+          } else if (yearFieldValue < 1980 || yearFieldValue > 2023) {
+              console.log("wrong year");
+              return;
+          }
+          
+          if (nameFieldValue.length == 0) {
+              console.log("number is empty");
+              return;
+          }
+          
+          if (partNumberFieldValue.toString().length == 0) {
+              console.log("partNumber is empty");
+              return;
+          }
+          
+          if (conditionFieldValue.length == 0) {
+              console.log("condition is empty");
+              return;
+          }
+          
+          form.reset();
+          nextBtn.disabled = true;
+          
+          const selected = document.querySelectorAll("option[selected]");
+          Array.from(selected).forEach(option => option.selected = false);
+
+          const img = document.getElementById("complete-img");
+          img.style.visibility = "hidden";
+
+          const text = document.getElementById("complete-text");
+          text.textContent = "";
+          
+          const li = document.createElement("li");
+          li.classList.add("part-content");
+          const html = `<article>
+              <p>Car Model: ${modelFieldValue}</p>
+              <p>Car Year: ${yearFieldValue}</p>
+              <p>Part Name: ${nameFieldValue}</p>
+              <p>Part Number: ${partNumberFieldValue}</p>
+              <p>Condition: ${conditionFieldValue}</p>
+            </article>`;
+          li.innerHTML = html;
+          
+          const editBtn = document.createElement("button");
+          editBtn.classList.add("edit-btn");
+          editBtn.textContent = "Edit";
+          editBtn.addEventListener("click", () => {
+              // console.log("edit");
+              nextBtn.disabled = false;
+              li.remove();
+          })
+          
+          const contBtn = document.createElement("button");
+          contBtn.classList.add("continue-btn");
+          contBtn.textContent = "Continue";
+          contBtn.addEventListener("click", () => {
+              // console.log("continue");
+              editBtn.remove();
+              contBtn.remove();
+              
+              li.className = "continue-info";
+              
+              const cancelBtn = document.createElement("button");
+              cancelBtn.classList.add("cancel-btn");
+              cancelBtn.textContent = "Cancel";
+              cancelBtn.addEventListener("click", () => {
+                      li.remove();
+                      nextBtn.disabled = false;
+              })
+              li.appendChild(cancelBtn);
+              
+              const confirmBtn = document.createElement("button");
+              confirmBtn.classList.add("confirm-btn");
+              confirmBtn.textContent = "Confirm";
+              confirmBtn.addEventListener("click", () => {
+                      // console.log("confirm");
+                      li.remove();
+                      nextBtn.disabled = false;
+                      img.style.visibility = "visible";
+                      text.textContent = "Part is Ordered!";
+              })
+              li.appendChild(confirmBtn);
+              confirmList.appendChild(li);
+          })
+          li.appendChild(editBtn);
+          li.appendChild(contBtn);
+          partInfoList.appendChild(li);
+      });
+  }
+</script>
+
+<script>
   // 10. Contacts Builder✶
   // 11. View Model✶
   // 12. Payment Package
