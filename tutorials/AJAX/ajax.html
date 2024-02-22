@@ -5,9 +5,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Raleway');
+
+body {
+    width: 20%;
+    margin: 0 auto;
+    padding-top: 20px;
+    font-family: 'Raleway',sans-serif;
+}
+
+#wrapper{
+    background: #DDDDDD;
+    text-align: center;
+    padding: 40px 20px;
+    border-radius: 10px;
+}
+
+input[type="text"] {
+    margin-bottom: 10px;
+    padding: 5px 0;
+    border-radius: 5px;
+    font-weight: 700;
+}
+ #result{
+     font-weight: 700;
+     color: cadetblue;
+ }
+
+ #wrapper input {
+     padding: 4px;
+     border: 2px solid cadetblue;
+ }
+    </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+
+    <div id="wrapper">
+      <input type="text" id="firstNumber" value="13.33" disabled>
+      <input type="text" id="secondNumber" value="22.18" disabled>
+
+      <div id="result"></div>
+  </div>
+  <script src="subtract.js"></script>
+  <script>
+      window.onload = function() {
+          subtract();
+          solve();
+      }
+
+      function subtract() {
+        const firstNumber = document.getElementById("firstNumber");
+        const secondNumber = document.getElementById("secondNumber");
+        // console.log(firstNumber.value);
+        const n1 = Number(firstNumber.value);
+        const n2 = Number(secondNumber.value);
+        const resultPanel = document.getElementById("result");
+        const result = n1 - n2;
+        // console.log(result);
+        resultPanel.textContent = result;
+    }
+  </script>
+
+<form>
+  <div>
+      <label for="text">Text: </label>
+      <input type="text" id="text">
+  </div>
+  <div>
+      <label for="naming-convention">Naming Convention: </label>
+      <input type="text" id="naming-convention">
+  </div>
+
+  <input type="button" onclick="solve()" value="Transform">
+</form>
+<div class="result-container">Result: <span id="result"></span></div>
+<script>
+  function solve() {
+  const resultField = document.getElementById("result");
+  const textField = document.getElementById("text");
+  const conventionField = document.getElementById("naming-convention");
+  const text = textField.value.toLowerCase();
+  // console.log(text);
+  const words = text.split(" ");
+  // console.log(words);
+  const convention = conventionField.value.split(" ")[0];
+  // console.log(convention);
+
+  const callbacks = {
+    Camel: "camel",
+    Pascal: "pascal"
+  }
+
+  const callbacks2 = {
+    camel: convertToCamel,
+    pascal: convertToPascal, 
+    undefined: () => {resultField.textContent = "Error!"}
+  }
+
+  let callback = callbacks[convention];
+  // console.log(callback);
+  callback = callbacks2[callback];
+  // console.log(callback);
+  callback();
+
+  function convertToCamel() {
+    const result = [];
+    result.push(words[0]);
+    
+    for (let index = 1; index < words.length; index++) {
+      let word = words[index];
+      word = word.replace(word[0], word[0].toUpperCase());
+      result.push(word);
+    }
+
+    resultField.textContent = result.join("");
+
+  }
+
+  function convertToPascal() {
+    // console.log("pascal");
+    const result = [];
+    
+    for (let index = 0; index < words.length; index++) {
+      let word = words[index];
+      word = word.replace(word[0], word[0].toUpperCase());
+      result.push(word);
+    }
+
+    resultField.textContent = result.join("");
+  }
+}
+</script>
 
     <script>
       class JobOffers {
