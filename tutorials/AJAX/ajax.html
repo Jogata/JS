@@ -131,10 +131,144 @@ body > h1 {
   margin-top: 10px;
   text-align: right;
 }
+
+#main {
+  display: flex;
+  flex-wrap: wrap;
+ 
+}
+
+form {
+  width: 25vw;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+
+}
+
+#side-wrapper {
+  margin-top: -20px;
+  margin-right: 20px;
+  margin-left: 20px;
+  width: 40%;
+  display: block;
+  align-items: center;
+}
+
+.side {
+  margin: auto;
+  margin-top: 40px;
+  min-height: 20%;
+  height: 38%;
+  background-color: white;
+  box-shadow: 40px 15px 19px -7px rgba(59, 53, 53, 1);
+  -webkit-box-shadow: 40px 15px 19px -7px rgba(59, 53, 53, 1);
+  -moz-box-shadow: 40px 15px 19px -7px rgba(59, 53, 53, 1);
+  border-radius: 0 0 10px 10px;
+  border-radius: 10px;
+  opacity: 0.8;
+}
+
+.side  h3 {
+  background: #ddd3d3;
+  border-radius: 10px 10px 0 0;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+  font-family: 'Tangerine', cursive;
+  font-size: 50px;
+  font-weight: 50;
+  box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+}
+
+.edit-btn,
+.save-btn,
+.cancel-btn {
+  background: #ddd3d3;
+  width: 150px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+  box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+  border: 1px solid #000000;
+  font-size: 15px;
+  margin: 10px 10px 0px 10px;
+
+}
+
+.edit-btn:hover,
+.save-btn:hover,
+.cancel-btn:hover {
+  background: #ffffff;
+  box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+}
+
+.side ul{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  min-width: 60%;
+}
+
+.gem-info {
+  font-size: 16px;
+  margin-top: -40px;
+  margin-bottom: 0;
+}
+
+.collection-item {
+  font-size: 18px;
+  font-style: italic;
+}
+
+.gem-info h4 {
+  margin: 0;
+  font-size: 22px;
+  text-align: center;
+  border-bottom: 5px double #ddd3d3;
+}
+
+.gem-info p {
+  margin: 0;
+  color: #888;
+  font-size: 18px;
+}
+
+.gem-info p:last-child {
+  border-bottom: 1px solid black;
+}
     </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <script>
+      function search() {
+   const searchText = document.getElementById("searchText").value;
+   const lis = document.getElementsByTagName("li");
+   let matches = 0;
+
+   for (const li of lis) {
+      // console.log(li.textContent);
+      if (li.textContent.includes(searchText)) {
+         li.style.textDecoration = "underline";
+         li.style.fontWeight = "bold";
+         matches++;
+         // console.log("ok");
+      } else {
+         li.style.textDecoration = "none";
+         li.style.fontWeight = "initial";
+         // console.log("not ok");
+      }
+   }
+
+   const result = document.getElementById("result");
+   result.textContent = `${matches} matches found`;
+   document.getElementById("searchText").value = "";
+}
+    </script>
 
 <script>
   // 10. Contacts Builder✶
