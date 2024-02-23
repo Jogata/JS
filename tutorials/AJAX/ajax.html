@@ -5,565 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      @import url('https://fonts.googleapis.com/css?family=Raleway');
-      @import url('https://fonts.googleapis.com/css?family=Lato');
-      @import url('https://fonts.googleapis.com/css?family=Poppins');
-
-body {
-    width: 20%;
-    margin: 0 auto;
-    padding-top: 20px;
-    font-family: 'Raleway',sans-serif;
-}
-
-#wrapper{
-    background: #DDDDDD;
-    text-align: center;
-    padding: 40px 20px;
-    border-radius: 10px;
-}
-
-input[type="text"] {
-    margin-bottom: 10px;
-    padding: 5px 0;
-    border-radius: 5px;
-    font-weight: 700;
-}
- #result{
-     font-weight: 700;
-     color: cadetblue;
- }
-
- #wrapper input {
-     padding: 4px;
-     border: 2px solid cadetblue;
- }
-
-html {
-    font-family: "Lato", sans-serif;
-    font-size: 26px;
-    color: #234465;
-}
-
-form {
-    width: 28%;
-    margin: 5% auto;
-}
-
-form div {
-    margin: 15px 0;
-}
-
-form div label, form div, input {
-    display: block;
-    width: 100%;
-}
-
-label {
-    margin: 8px 0;
-}
-
-input {
-    border: 1px solid #234465;
-    outline: none;
-    border-radius: 6px;
-    padding: 7px;
-}
-
-input[type="button"] {
-    background: #234465;
-    width: 61%;
-    margin: 0 auto;
-    color: white;
-    font-size: 22px;
-    text-transform: uppercase;
-}
-
-input[type="button"]:hover {
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.result-container {
-    background: #234465;
-    margin: 0 auto;
-    width: 43%;
-    color: white;
-    padding: 25px 0;
-    text-align: center;
-    border-radius: 2px;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-}
-
-#accordion {
-    border: 2px solid #cdc7c7;
-    display: inline-block;
-    width: 40%;
-    font-size: 1.3rem;
-}
-
-#accordion p {
-    margin: 1em;
-}
-
-.button {
-    float: right;
-    background: #393636;
-    padding: 0.1em 1em 0.1em 1em;
-    color: white;
-    cursor: pointer;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 3px;
-}
-
-#extra {
-    display: none;
-}
-
-.head {
-    background: #ccccff;
-    padding: 1em;
-}
-    </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
-
-    <div id="wrapper">
-      <input type="text" id="firstNumber" value="13.33" disabled>
-      <input type="text" id="secondNumber" value="22.18" disabled>
-
-      <div id="result"></div>
-  </div>
-  <script src="subtract.js"></script>
-  <script>
-      window.onload = function() {
-          subtract();
-          solve();
-          toggle();
-      }
-
-      function subtract() {
-        const firstNumber = document.getElementById("firstNumber");
-        const secondNumber = document.getElementById("secondNumber");
-        // console.log(firstNumber.value);
-        const n1 = Number(firstNumber.value);
-        const n2 = Number(secondNumber.value);
-        const resultPanel = document.getElementById("result");
-        const result = n1 - n2;
-        // console.log(result);
-        resultPanel.textContent = result;
-    }
-  </script>
-
-<div id="accordion">
-  <div class="head">DOM Manipulations Exercise 
-    <span class="button" onclick="toggle()">More</span>
-  </div>
-  <div id="extra">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in 
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
-          culpa qui officia deserunt mollit anim id est laborum.
-      </p>
-  </div>
-</div>
-
-<script>
-  function toggle() {
-    // console.log('TODO:...');
-    const btn = document.querySelector(".button");
-    const text = document.getElementById("extra");
-
-    const content = {
-        More: "Less", 
-        Less: "More"
-    }
-
-    const states = {
-        Less: () => {text.style.display = "none"}, 
-        More: () => {text.style.display = "block"}
-    }
-
-    // console.log("clicked");
-    states[btn.textContent]();
-    btn.textContent = content[btn.textContent];
-
-}
-</script>
-
-<form>
-  <div>
-      <label for="text">Text: </label>
-      <input type="text" id="text">
-  </div>
-  <div>
-      <label for="naming-convention">Naming Convention: </label>
-      <input type="text" id="naming-convention">
-  </div>
-
-  <input type="button" onclick="solve()" value="Transform">
-</form>
-<div class="result-container">Result: <span id="result"></span></div>
-<script>
-  function solve() {
-  const resultField = document.getElementById("result");
-  const textField = document.getElementById("text");
-  const conventionField = document.getElementById("naming-convention");
-  const text = textField.value.toLowerCase();
-  // console.log(text);
-  const words = text.split(" ");
-  // console.log(words);
-  const convention = conventionField.value.split(" ")[0];
-  // console.log(convention);
-
-  const callbacks = {
-    Camel: "camel",
-    Pascal: "pascal"
-  }
-
-  const callbacks2 = {
-    camel: convertToCamel,
-    pascal: convertToPascal, 
-    undefined: () => {resultField.textContent = "Error!"}
-  }
-
-  let callback = callbacks[convention];
-  // console.log(callback);
-  callback = callbacks2[callback];
-  // console.log(callback);
-  callback();
-
-  function convertToCamel() {
-    const result = [];
-    result.push(words[0]);
-    
-    for (let index = 1; index < words.length; index++) {
-      let word = words[index];
-      word = word.replace(word[0], word[0].toUpperCase());
-      result.push(word);
-    }
-
-    resultField.textContent = result.join("");
-
-  }
-
-  function convertToPascal() {
-    // console.log("pascal");
-    const result = [];
-    
-    for (let index = 0; index < words.length; index++) {
-      let word = words[index];
-      word = word.replace(word[0], word[0].toUpperCase());
-      result.push(word);
-    }
-
-    resultField.textContent = result.join("");
-  }
-}
-</script>
-
-<script>
-    // 01. Echo Function
-
-    function print(str) {
-    console.log(str.length);
-    console.log(str);
-  }
-
-  // print("Hello");
-  // print('strings are easy');
-</script>
-
-    <script>
-      class JobOffers {
-          constructor(employer, position) {
-              this.employer = employer;
-              this.position  = position;
-              this.jobCandidates = [];
-          }
-
-          jobApplication(candidates) {
-
-              const added = [];
-
-              for (const candidate of candidates) {
-                  const data = candidate.split("-");
-                  const name = data[0];
-                  const education = data[1];
-                  const yearsExperience = Number(data[2]);
-                  // console.log(this.jobCandidates);
-
-                  const index = this.jobCandidates.findIndex(candidate => candidate.name == name);
-                  // console.log(index);
-
-                  if (index >= 0) {
-                      
-                      const candidate = this.jobCandidates[index];
-                      
-                      if (candidate.yearsExperience < yearsExperience) {
-                          candidate.yearsExperience = yearsExperience;
-                      }
-
-                  } else {
-                      
-                      const candidate = {
-                          name, 
-                          education, 
-                          yearsExperience
-                      }
-
-                      this.jobCandidates.push(candidate);
-                      added.push(name);
-                      
-                  }
-
-              }
-
-              return `You successfully added candidates: ${added.join(", ")}.`;
-              
-          }
-
-          jobOffer(chosenPerson) {
-
-              const data = chosenPerson.split("-");
-              const name = data[0];
-              const minimalExperience = Number(data[1]);
-
-              const index = this.jobCandidates.findIndex(candidate => candidate.name == name);
-              
-              if (index < 0) {
-                  throw new Error(`${name} is not in the candidates list!`);
-              }
-
-              const candidate = this.jobCandidates[index];
-
-              if (candidate.yearsExperience < minimalExperience) {
-                  throw new Error(`${name} does not have enough experience as ${this.position}, minimum requirement is ${minimalExperience} years.`);
-              }
-
-              candidate.yearsExperience = "hired";
-
-              return `Welcome aboard, our newest employee is ${name}.`;
-
-          }
-
-          salaryBonus(name) {
-
-              const index = this.jobCandidates.findIndex(candidate => candidate.name == name);
-              
-              if (index < 0) {
-                  throw new Error(`${name} is not in the candidates list!`);
-              }
-
-              const candidate = this.jobCandidates[index];
-              // console.log(candidate);
-
-              const validEducations = {
-                  "Bachelor": "Bachelor", 
-                  "Master": "Master"
-              }
-
-              const messages = {
-                  "Bachelor": `${name} will sign a contract for ${this.employer}, as ${this.position} with a salary of $50,000 per year!`, 
-                  "Master": `${name} will sign a contract for ${this.employer}, as ${this.position} with a salary of $60,000 per year!`, 
-                  "undefined": `${name} will sign a contract for ${this.employer}, as ${this.position} with a salary of $40,000 per year!`
-              }
-
-              const desiredDegree = validEducations[candidate.education];
-              const message = messages[desiredDegree];
-
-              return message;
-
-          }
-
-          candidatesDatabase() {
-
-              if (this.jobCandidates.length == 0) {
-                  throw new Error("Candidate Database is empty!");
-              }
-
-              const result = ["Candidates list:"];
-
-              const sorted = this.jobCandidates.sort((c1, c2) => c1.name.localeCompare(c2.name));
-
-              for (const candidate of sorted) {
-                  // console.log(candidate);
-                  const info = `${candidate.name}-${candidate.yearsExperience}`;
-                  result.push(info);
-              }
-
-              return result.join("\n");
-
-          }
-
-      }
-
-      // let Jobs = new JobOffers ("Google", "Strategy Analyst");
-      // console.log(Jobs.jobApplication(["John Doe-Bachelor-10", "Peter Parker-Master-5", "Daniel Jones- Bachelor-18"]));
-
-      // let Jobs = new JobOffers ("Google", "Strategy Analyst");
-      // console.log(Jobs.jobApplication(["John Doe-Bachelor-10", "Peter Parker-Master-5", "Daniel Jones- Bachelor-18"]));
-      // console.log(Jobs.jobOffer("John Doe-8"));
-      // console.log(Jobs.jobOffer("Peter Parker-4"));
-      // console.log(Jobs.jobOffer("John Jones-8"));
-
-      // let Jobs = new JobOffers ("Google", "Strategy Analyst");
-      // console.log(Jobs.jobApplication(["John Doe-Bachelor-10", "Peter Parker-Master-5", "Daniel Jones- Bachelor-18"]));
-      // console.log(Jobs.jobOffer("John Doe-8"));
-      // console.log(Jobs.jobOffer("Peter Parker-4"));
-      // console.log(Jobs.salaryBonus("John Doe"));
-      // console.log(Jobs.salaryBonus("Peter Parker"));
-
-      let Jobs = new JobOffers ("Google", "Strategy Analyst");
-      console.log(Jobs.jobApplication(["John Doe-Bachelor-10", "Peter Parker-Master-5","Jordan Cole-High School-5", "Daniel Jones- Bachelor-18"]));
-      console.log(Jobs.jobOffer("John Doe-8"));
-      console.log(Jobs.jobOffer("Peter Parker-4"));
-      console.log(Jobs.jobOffer("Jordan Cole-4"));
-      console.log(Jobs.salaryBonus("Jordan Cole"));
-      console.log(Jobs.salaryBonus("John Doe"));
-      console.log(Jobs.candidatesDatabase());
-
-  </script>
-
-<script>
-  window.addEventListener('load', solve);
-  
-  function solve() {
-      const form = document.querySelector("form");
-      const partInfoList = document.querySelector(".info-list");
-      const confirmList = document.querySelector(".confirm-list");
-      // console.log(partInfoList, confirmList);
-      
-      const modelField = document.getElementById("car-model");
-      const yearField = document.getElementById("car-year");
-      const nameField = document.getElementById("part-name");
-      const partNumberField = document.getElementById("part-number");
-      const conditionField = document.getElementById("condition");
-      // console.log(modelField, yearField, nameField, partNumberField, conditionField);
-      
-      modelField.value = "testmodel";
-      yearField.value = 1980;
-      nameField.value = "partNameTest";
-      partNumberField.value = 7;
-      conditionField.value = "New";
-      
-      const nextBtn = document.getElementById("next-btn");
-      // console.log(nextBtn);
-      
-      nextBtn.addEventListener("click", (e) => {
-          e.preventDefault();
-          
-          const modelFieldValue = modelField.value;
-          const yearFieldValue = yearField.value;
-          const nameFieldValue = nameField.value;
-          const partNumberFieldValue = partNumberField.value;
-          const conditionFieldValue = conditionField.value;
-          // console.log(modelFieldValue, yearFieldValue, nameFieldValue, partNumberFieldValue, conditionFieldValue);
-          
-          if (modelFieldValue.length == 0) {
-              console.log("model is empty");
-              return;
-          }
-          
-          if (yearFieldValue.toString().length == 0) {
-              console.log("email is empty");
-              return;
-          } else if (yearFieldValue < 1980 || yearFieldValue > 2023) {
-              console.log("wrong year");
-              return;
-          }
-          
-          if (nameFieldValue.length == 0) {
-              console.log("number is empty");
-              return;
-          }
-          
-          if (partNumberFieldValue.toString().length == 0) {
-              console.log("partNumber is empty");
-              return;
-          }
-          
-          if (conditionFieldValue.length == 0) {
-              console.log("condition is empty");
-              return;
-          }
-          
-          form.reset();
-          nextBtn.disabled = true;
-          
-          const selected = document.querySelectorAll("option[selected]");
-          Array.from(selected).forEach(option => option.selected = false);
-
-          const img = document.getElementById("complete-img");
-          img.style.visibility = "hidden";
-
-          const text = document.getElementById("complete-text");
-          text.textContent = "";
-          
-          const li = document.createElement("li");
-          li.classList.add("part-content");
-          const html = `<article>
-              <p>Car Model: ${modelFieldValue}</p>
-              <p>Car Year: ${yearFieldValue}</p>
-              <p>Part Name: ${nameFieldValue}</p>
-              <p>Part Number: ${partNumberFieldValue}</p>
-              <p>Condition: ${conditionFieldValue}</p>
-            </article>`;
-          li.innerHTML = html;
-          
-          const editBtn = document.createElement("button");
-          editBtn.classList.add("edit-btn");
-          editBtn.textContent = "Edit";
-          editBtn.addEventListener("click", () => {
-              // console.log("edit");
-              nextBtn.disabled = false;
-              li.remove();
-          })
-          
-          const contBtn = document.createElement("button");
-          contBtn.classList.add("continue-btn");
-          contBtn.textContent = "Continue";
-          contBtn.addEventListener("click", () => {
-              // console.log("continue");
-              editBtn.remove();
-              contBtn.remove();
-              
-              li.className = "continue-info";
-              
-              const cancelBtn = document.createElement("button");
-              cancelBtn.classList.add("cancel-btn");
-              cancelBtn.textContent = "Cancel";
-              cancelBtn.addEventListener("click", () => {
-                      li.remove();
-                      nextBtn.disabled = false;
-              })
-              li.appendChild(cancelBtn);
-              
-              const confirmBtn = document.createElement("button");
-              confirmBtn.classList.add("confirm-btn");
-              confirmBtn.textContent = "Confirm";
-              confirmBtn.addEventListener("click", () => {
-                      // console.log("confirm");
-                      li.remove();
-                      nextBtn.disabled = false;
-                      img.style.visibility = "visible";
-                      text.textContent = "Part is Ordered!";
-              })
-              li.appendChild(confirmBtn);
-              confirmList.appendChild(li);
-          })
-          li.appendChild(editBtn);
-          li.appendChild(contBtn);
-          partInfoList.appendChild(li);
-      });
-  }
-</script>
 
 <script>
   // 10. Contacts Builder✶
@@ -573,6 +17,161 @@ body {
 </script>
 
     <!-- ================= Get data from local JSON file ================= -->
+
+    <h1>My Gem Collection</h1>
+    <div id="main">
+      <div class="form-wrapper">
+        <h1>Add your new Gem
+          <span>Fill the information about your new precious stone!</span>
+        </h1>
+        <form>
+          <div class="inner-wrap">
+            <input type="text" id="gem-name" name="field1" placeholder="Gemstone Name"/>
+            <input type="text" id="color" name="field2" placeholder="Color" />
+            <input type="number" id="carats" name="field3" placeholder="Carats"/>
+            <input type="number" id="price" name="field4" placeholder="Price" />
+            <select name="field5" id="type">
+              <option value="" placeholder="Type"></option>
+              <option value="Precious">Precious</option>
+              <option value="Semi-Precious">Semi-Precious</option>
+            </select>
+          </div>
+          <div class="button-section">
+            <input type="button" id="add-btn" value="Add Gem" />
+          </div>
+        </form>
+      </div>
+      <div id="side-wrapper">
+        <div class="side">
+          <h3>Preview</h3>
+          <ul id="preview-list">
+          </ul>
+        </div>
+       <div class="side">
+        <h3>Collection</h3>
+        <ul id="collection">
+        </ul>
+       </div>
+      </div>
+    </div>
+    <script>
+      window.addEventListener("load", solve);
+
+function solve() {
+    const form = document.querySelector("form");
+    const previewList = document.getElementById("preview-list");
+    const collectionList = document.getElementById("collection");
+    // console.log(form, previewList, collectionList);
+    
+    const gemInput = document.getElementById("gem-name");
+    const colorInput = document.getElementById("color");
+    const caratsInput = document.getElementById("carats");
+    const priceInput = document.getElementById("price");
+    const typeInput = document.getElementById("type");
+    // console.log(gemInput, colorInput, caratsInput, priceInput, typeInput);
+    const addBtn = document.getElementById("add-btn");
+
+    gemInput.value = "ruby";
+    colorInput.value = "red";
+    caratsInput.value = 24;
+    priceInput.value = 300;
+    typeInput.value = "Precious";
+
+    addBtn.addEventListener("click", (e) => {
+        // console.log("get info");
+        // e.preventDefault();
+
+        if (gemInput.value.length == 0) {
+            return;
+        }
+        if (colorInput.value.length == 0) {
+            return;
+        }
+        if (caratsInput.value.toString().length == 0) {
+            return;
+        }
+        if (priceInput.value.toString().length == 0) {
+            return;
+        }
+        if (typeInput.value.length == 0) {
+            return;
+        }
+
+        const gemInputValue = gemInput.value;
+        const colorInputValue = colorInput.value;
+        const caratsInputValue = caratsInput.value;
+        const priceInputValue = priceInput.value;
+        const typeInputValue = typeInput.value;
+        // console.log(gemInputValue, colorInputValue, caratsInputValue, priceInputValue, typeInputValue);
+        addBtn.disabled = true;
+        form.reset();
+
+        const li = document.createElement("li");
+        const html = `<article>
+            <h4>${gemInputValue}</h4>
+            <p>Color: ${colorInputValue}</p>
+            <p>Carats: ${caratsInputValue}</p>
+            <p>Price: ${priceInputValue}$</p>
+            <p>Type: ${typeInputValue}$</p>
+        </article>`;
+        li.innerHTML = html;
+        li.classList.add("gem-info");
+
+        const editBtn = document.createElement("button");
+        editBtn.textContent = "Edit Information";
+        editBtn.classList.add("edit-btn");
+        editBtn.addEventListener("click", () => {
+            li.remove();
+            gemInput.value = gemInputValue;
+            colorInput.value = colorInputValue;
+            caratsInput.value = caratsInputValue;
+            priceInput.value = priceInputValue;
+            typeInput.value = typeInputValue;
+            addBtn.disabled = false;
+        })
+
+        const cancelBtn = document.createElement("button");
+        cancelBtn.textContent = "Cancel";
+        cancelBtn.classList.add("cancel-btn");
+        cancelBtn.addEventListener("click", () => {
+            li.remove();
+            addBtn.disabled = false;
+        })
+
+        const saveBtn = document.createElement("button");
+        saveBtn.textContent = "Save to Collection";
+        saveBtn.classList.add("save-btn");
+        saveBtn.addEventListener("click", () => {
+            // saveBtn.remove();
+            // editBtn.remove();
+            // cancelBtn.remove();
+            li.remove();
+            addBtn.disabled = false;
+            const newLi = document.createElement("li");
+            const html = `<p class="collection-item">
+             ${gemInputValue} - Color: ${colorInputValue}/
+             Carats: ${caratsInputValue}/ 
+             Price: ${priceInputValue}$/ 
+             Type: ${typeInputValue}</p>`;
+            newLi.innerHTML = html;
+            newLi.classList.add("gem-info");
+            collectionList.appendChild(newLi);
+        });
+
+        li.appendChild(editBtn);
+        li.appendChild(saveBtn);
+        li.appendChild(cancelBtn);
+        previewList.appendChild(li);
+
+    })
+
+    // const clearBtn = document.getElementById("clear");
+    // clearBtn.addEventListener("click", () => {
+    //     finishedList.textContent = "";
+    // })
+}
+    </script>
+  
 
     <fieldset>
       <legend>Get all users from local JSON file</legend>
