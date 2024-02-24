@@ -5,242 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Yesteryear&display=swap');
-
-body {
-  background-image: url("../images/pexels-jimmy-chan-13513582.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  margin: 0;
-}
-
-body > h1 {
-  font-family: 'Yesteryear', cursive;
-  text-align: center;
-  font-size: 34px;
-  font-weight: 100;
-  letter-spacing: 10px;
-  margin: 0;
-  background-color: #ddd3d3;
-}
-
-.form-wrapper {
-  clip-path: polygon(20% 0%, 80% 0%, 100% 24%, 50% 100%, 80% 100%, 20% 100%, 49% 100%, 0 25%);
-  width: 55%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-  margin-left: 20px;
-  background-color: #ddd3d3;
-  opacity: 0.8;
-}
-
-.form-wrapper h1 {
-  text-align: center;
-  color: rgb(14, 13, 13);
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
-  font-family: 'Tangerine', cursive;
-  font-weight: 100;
-}
-
-.form-wrapper h1>span {
-  display: block;
-  margin-top: 1px;
-  font-family: 'Tangerine', cursive;
-}
-
-#add-btn {
-  padding: 10px 5px;
-  margin-top: 20px;
-  background-color: rgb(255, 255, 255); 
-
-}
-#add-btn:hover{
-  scale: 1.2;
-  
-}
-
-#add-btn:disabled {
-  background-color: gray;
-  color: white;
-}
-
-.form-wrapper input,
-.form-wrapper select {
-  display: block;
-  box-sizing: border-box;
-  width: 100%;
-  padding: 6px;
-  border-radius: 6px;
-  margin-top: 5px;
-
-  border: 2px solid rgb(142, 139, 139);
-  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
-}
-
-.form-wrapper .section {
-  font: normal 20px "Bitter", serif;
-    background: #ddd3d3;
-  margin-bottom: 5px;
-}
-
-.form-wrapper .section span {
-  background: #ddd3d3;
-  padding: 5px 10px 5px 10px;
-  position: absolute;
-  border-radius: 33%;
-  border: 4px solid #fff;
-  font-size: 14px;
-  margin-left: -45px;
-  color: #fff;
-  margin-top: -3px;
-}
-
-.form-wrapper input[type="button"],
-.form-wrapper input[type="submit"] {
-  background: #ddd3d3;
-  padding: 8px 20px 8px 20px;
-  border-radius: 5px;
-  color: rgb(33, 31, 31);
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
-  border: 2px solid #232323;
-  font-size: 15px;
-}
-
-.form-wrapper input[type="button"]:hover,
-.form-wrapper input[type="submit"]:hover {
-  background: #ddd3d3;
-  box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
-}
-
-.form-wrapper .p {
-  float: right;
-  width: 250px;
-  font: 12px Arial, Helvetica, sans-serif;
-  color: #4d4d4d;
-  margin-top: 10px;
-  text-align: right;
-}
-
-#main {
-  display: flex;
-  flex-wrap: wrap;
- 
-}
-
-form {
-  width: 25vw;
-  height: 70vh;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-
-
-}
-
-#side-wrapper {
-  margin-top: -20px;
-  margin-right: 20px;
-  margin-left: 20px;
-  width: 40%;
-  display: block;
-  align-items: center;
-}
-
-.side {
-  margin: auto;
-  margin-top: 40px;
-  min-height: 20%;
-  height: 38%;
-  background-color: white;
-  box-shadow: 40px 15px 19px -7px rgba(59, 53, 53, 1);
-  -webkit-box-shadow: 40px 15px 19px -7px rgba(59, 53, 53, 1);
-  -moz-box-shadow: 40px 15px 19px -7px rgba(59, 53, 53, 1);
-  border-radius: 0 0 10px 10px;
-  border-radius: 10px;
-  opacity: 0.8;
-}
-
-.side  h3 {
-  background: #ddd3d3;
-  border-radius: 10px 10px 0 0;
-  color: rgb(0, 0, 0);
-  text-align: center;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
-  font-family: 'Tangerine', cursive;
-  font-size: 50px;
-  font-weight: 50;
-  box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
-}
-
-.edit-btn,
-.save-btn,
-.cancel-btn {
-  background: #ddd3d3;
-  width: 150px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: rgb(0, 0, 0);
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
-  box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
-  border: 1px solid #000000;
-  font-size: 15px;
-  margin: 10px 10px 0px 10px;
-
-}
-
-.edit-btn:hover,
-.save-btn:hover,
-.cancel-btn:hover {
-  background: #ffffff;
-  box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
-}
-
-.side ul{
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  min-width: 60%;
-}
-
-.gem-info {
-  font-size: 16px;
-  margin-top: -40px;
-  margin-bottom: 0;
-}
-
-.collection-item {
-  font-size: 18px;
-  font-style: italic;
-}
-
-.gem-info h4 {
-  margin: 0;
-  font-size: 22px;
-  text-align: center;
-  border-bottom: 5px double #ddd3d3;
-}
-
-.gem-info p {
-  margin: 0;
-  color: #888;
-  font-size: 18px;
-}
-
-.gem-info p:last-child {
-  border-bottom: 1px solid black;
-}
-    </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
@@ -270,6 +34,145 @@ form {
 }
     </script>
 
+    <script>
+      const weddingDay = {
+  pickVenue(capacity, pricePerGuest, location) {
+      if (typeof capacity !== 'number' || 
+      typeof pricePerGuest !== 'number' || 
+      typeof location !== 'string' || 
+      location === '') {
+          throw new Error("Invalid Information!");
+        };
+          if (location == "Varna") {
+
+              if (capacity >= 150 && pricePerGuest <= 120) {
+                  return `This venue meets the requirements, with capacity of ${capacity} guests and ${pricePerGuest}$ cover.`;
+              } else {
+                  return `This venue does not meet your requirements!`;
+              }
+          } else {
+                throw new Error(`The location of this venue is not in the correct area!`);
+          };
+  },
+  otherSpendings(weddingDecoration, photography, discount) {
+      if (!Array.isArray(weddingDecoration) || 
+      !Array.isArray(photography) || 
+      typeof discount !== "boolean") {
+        throw new Error("Invalid Information!");
+      }
+      let totalPrice = 0;
+  
+      weddingDecoration.forEach((decoration) => {
+        if (decoration === "flowers") {
+          totalPrice += 500;
+        } else if (decoration === "Fabric drapes and curtains") {
+          totalPrice += 400;
+        }
+      });
+  
+      photography.forEach((service) => {
+        if (service === "pictures") {
+          totalPrice += 700;
+        } else if (service === "video") {
+          totalPrice += 1300;
+        }
+      });
+
+      if (discount) {
+        totalPrice = totalPrice * 0.85;
+        return `You spend ${totalPrice}$ for wedding decoration and photography with 15% discount!`;
+      } else {
+        return `You spend ${totalPrice}$ for wedding decoration and photography!`;
+      }
+  
+    }
+  ,
+  tableDistribution(guests, tables) {
+      if (typeof guests !== "number" || guests <= 0 ||
+          typeof tables !== "number" || tables <= 0) {
+          throw new Error("Invalid Information!");
+      }
+
+      let peopleOnTable = Math.round(guests / tables);
+
+      if (peopleOnTable < 6) {
+          return `There is only ${peopleOnTable} people on every table, you can join some tables.`;
+      } else {
+          return `You have ${tables} tables with ${peopleOnTable} guests on table.`;
+      }
+  }
+}
+
+describe('test weddingDay', function () {
+    it('pickVenue functionality', function () {
+        // capacity, pricePerGuest, location
+        expect(weddingDay.pickVenue(150, 120, "Varna")).to.equal("This venue meets the requirements, with capacity of 150 guests and 120$ cover.");
+        expect(weddingDay.pickVenue(180, 120, "Varna")).to.equal("This venue meets the requirements, with capacity of 180 guests and 120$ cover.");
+        expect(weddingDay.pickVenue(150, 100, "Varna")).to.equal("This venue meets the requirements, with capacity of 150 guests and 100$ cover.");
+        expect(weddingDay.pickVenue(100, 120, "Varna")).to.equal("This venue does not meet your requirements!");
+        expect(weddingDay.pickVenue(150, 200, "Varna")).to.equal("This venue does not meet your requirements!");
+        expect(weddingDay.pickVenue(100, 200, "Varna")).to.equal("This venue does not meet your requirements!");
+        expect(() => weddingDay.pickVenue(6, 6, "")).to.throw("Invalid Information!");
+        expect(() => weddingDay.pickVenue(6, 6, 6)).to.throw("Invalid Information!");
+        expect(() => weddingDay.pickVenue(6, 6, [])).to.throw("Invalid Information!");
+        expect(() => weddingDay.pickVenue(6, 6, {})).to.throw("Invalid Information!");
+        expect(() => weddingDay.pickVenue("6", 6, "Varna")).to.throw("Invalid Information!");
+        expect(() => weddingDay.pickVenue([], 6, "Varna")).to.throw("Invalid Information!");
+        expect(() => weddingDay.pickVenue({}, 6, "Varna")).to.throw("Invalid Information!");
+        expect(() => weddingDay.pickVenue(6, "6", "Varna")).to.throw("Invalid Information!");
+        expect(() => weddingDay.pickVenue(6, [], "Varna")).to.throw("Invalid Information!");
+        expect(() => weddingDay.pickVenue(6, {}, "Varna")).to.throw("Invalid Information!");
+        expect(() => weddingDay.pickVenue(6, 6, "Sofia")).to.throw("The location of this venue is not in the correct area!");
+    })
+    it('otherSpendings functionality', function () {
+        // weddingDecoration, photography, discount
+        expect(() => weddingDay.otherSpendings([], {}, true)).to.throw("Invalid Information!");
+        expect(() => weddingDay.otherSpendings([], "6", true)).to.throw("Invalid Information!");
+        expect(() => weddingDay.otherSpendings([], 6, true)).to.throw("Invalid Information!");
+        expect(() => weddingDay.otherSpendings({}, [], true)).to.throw("Invalid Information!");
+        expect(() => weddingDay.otherSpendings(6, [], true)).to.throw("Invalid Information!");
+        expect(() => weddingDay.otherSpendings("6", [], true)).to.throw("Invalid Information!");
+        expect(() => weddingDay.otherSpendings("6", [], "true")).to.throw("Invalid Information!");
+        expect(() => weddingDay.otherSpendings("6", [], 9)).to.throw("Invalid Information!");
+        expect(() => weddingDay.otherSpendings("6", [], {})).to.throw("Invalid Information!");
+        expect(() => weddingDay.otherSpendings("6", [], [])).to.throw("Invalid Information!");
+        expect(weddingDay.otherSpendings(["flowers", "Fabric drapes and curtains"], ["pictures", "video"], false)).to.equal("You spend 2900$ for wedding decoration and photography!");
+        expect(weddingDay.otherSpendings(["flowers", "Fabric drapes and curtains", "unknown"], ["pictures", "video"], false)).to.equal("You spend 2900$ for wedding decoration and photography!");
+        expect(weddingDay.otherSpendings(["flowers", "Fabric drapes and curtains"], ["pictures", "video", "unknown"], false)).to.equal("You spend 2900$ for wedding decoration and photography!");
+        expect(weddingDay.otherSpendings(["flowers", "Fabric drapes and curtains", "unknown", "flowers"], ["pictures", "video"], false)).to.equal("You spend 3400$ for wedding decoration and photography!");
+        expect(weddingDay.otherSpendings(["flowers", "Fabric drapes and curtains"], ["pictures", "video"], true)).to.equal("You spend 2465$ for wedding decoration and photography with 15% discount!");
+        expect(weddingDay.otherSpendings(["flowers", "Fabric drapes and curtains", "unknown"], ["pictures", "video"], true)).to.equal("You spend 2465$ for wedding decoration and photography with 15% discount!");
+        expect(weddingDay.otherSpendings(["flowers", "Fabric drapes and curtains"], ["pictures", "video", "unknown"], true)).to.equal("You spend 2465$ for wedding decoration and photography with 15% discount!");
+        expect(weddingDay.otherSpendings(["flowers", "Fabric drapes and curtains", "unknown", "flowers"], ["pictures", "video"], true)).to.equal("You spend 2890$ for wedding decoration and photography with 15% discount!");
+    })
+    it('tableDistribution  functionality', function () {
+        // guests, tables
+        expect(() => weddingDay.tableDistribution("6", 6)).to.throw("Invalid Information!");
+        expect(() => weddingDay.tableDistribution({}, 6)).to.throw("Invalid Information!");
+        expect(() => weddingDay.tableDistribution([], 6)).to.throw("Invalid Information!");
+        expect(() => weddingDay.tableDistribution(true, 6)).to.throw("Invalid Information!");
+        expect(() => weddingDay.tableDistribution(-6, 6)).to.throw("Invalid Information!");
+        expect(() => weddingDay.tableDistribution(0, 6)).to.throw("Invalid Information!");
+        expect(() => weddingDay.tableDistribution(6, 0)).to.throw("Invalid Information!");
+        expect(() => weddingDay.tableDistribution(6, -6)).to.throw("Invalid Information!");
+        expect(() => weddingDay.tableDistribution(6, "6")).to.throw("Invalid Information!");
+        expect(() => weddingDay.tableDistribution(6, [])).to.throw("Invalid Information!");
+        expect(() => weddingDay.tableDistribution(6, {})).to.throw("Invalid Information!");
+        expect(() => weddingDay.tableDistribution(6, false)).to.throw("Invalid Information!");
+        expect(weddingDay.tableDistribution(100, 10)).to.equal("You have 10 tables with 10 guests on table.");
+        expect(weddingDay.tableDistribution(1000, 10)).to.equal("You have 10 tables with 100 guests on table.");
+        expect(weddingDay.tableDistribution(342, 12)).to.equal("You have 12 tables with 29 guests on table.");
+        expect(weddingDay.tableDistribution(341, 12)).to.equal("You have 12 tables with 28 guests on table.");
+        expect(weddingDay.tableDistribution(12, 2)).to.equal("You have 2 tables with 6 guests on table.");
+        expect(weddingDay.tableDistribution(11, 2)).to.equal("You have 2 tables with 6 guests on table.");
+        expect(weddingDay.tableDistribution(10, 2)).to.equal("There is only 5 people on every table, you can join some tables.");
+        expect(weddingDay.tableDistribution(9, 2)).to.equal("There is only 5 people on every table, you can join some tables.");
+        expect(weddingDay.tableDistribution(8, 3)).to.equal("There is only 3 people on every table, you can join some tables.");
+        expect(weddingDay.tableDistribution(7, 3)).to.equal("There is only 2 people on every table, you can join some tables.");
+    })
+})
+    </script>
+
 <script>
   // 10. Contacts Builder✶
   // 11. View Model✶
@@ -278,161 +181,6 @@ form {
 </script>
 
     <!-- ================= Get data from local JSON file ================= -->
-
-    <h1>My Gem Collection</h1>
-    <div id="main">
-      <div class="form-wrapper">
-        <h1>Add your new Gem
-          <span>Fill the information about your new precious stone!</span>
-        </h1>
-        <form>
-          <div class="inner-wrap">
-            <input type="text" id="gem-name" name="field1" placeholder="Gemstone Name"/>
-            <input type="text" id="color" name="field2" placeholder="Color" />
-            <input type="number" id="carats" name="field3" placeholder="Carats"/>
-            <input type="number" id="price" name="field4" placeholder="Price" />
-            <select name="field5" id="type">
-              <option value="" placeholder="Type"></option>
-              <option value="Precious">Precious</option>
-              <option value="Semi-Precious">Semi-Precious</option>
-            </select>
-          </div>
-          <div class="button-section">
-            <input type="button" id="add-btn" value="Add Gem" />
-          </div>
-        </form>
-      </div>
-      <div id="side-wrapper">
-        <div class="side">
-          <h3>Preview</h3>
-          <ul id="preview-list">
-          </ul>
-        </div>
-       <div class="side">
-        <h3>Collection</h3>
-        <ul id="collection">
-        </ul>
-       </div>
-      </div>
-    </div>
-    <script>
-      window.addEventListener("load", solve);
-
-function solve() {
-    const form = document.querySelector("form");
-    const previewList = document.getElementById("preview-list");
-    const collectionList = document.getElementById("collection");
-    // console.log(form, previewList, collectionList);
-    
-    const gemInput = document.getElementById("gem-name");
-    const colorInput = document.getElementById("color");
-    const caratsInput = document.getElementById("carats");
-    const priceInput = document.getElementById("price");
-    const typeInput = document.getElementById("type");
-    // console.log(gemInput, colorInput, caratsInput, priceInput, typeInput);
-    const addBtn = document.getElementById("add-btn");
-
-    gemInput.value = "ruby";
-    colorInput.value = "red";
-    caratsInput.value = 24;
-    priceInput.value = 300;
-    typeInput.value = "Precious";
-
-    addBtn.addEventListener("click", (e) => {
-        // console.log("get info");
-        // e.preventDefault();
-
-        if (gemInput.value.length == 0) {
-            return;
-        }
-        if (colorInput.value.length == 0) {
-            return;
-        }
-        if (caratsInput.value.toString().length == 0) {
-            return;
-        }
-        if (priceInput.value.toString().length == 0) {
-            return;
-        }
-        if (typeInput.value.length == 0) {
-            return;
-        }
-
-        const gemInputValue = gemInput.value;
-        const colorInputValue = colorInput.value;
-        const caratsInputValue = caratsInput.value;
-        const priceInputValue = priceInput.value;
-        const typeInputValue = typeInput.value;
-        // console.log(gemInputValue, colorInputValue, caratsInputValue, priceInputValue, typeInputValue);
-        addBtn.disabled = true;
-        form.reset();
-
-        const li = document.createElement("li");
-        const html = `<article>
-            <h4>${gemInputValue}</h4>
-            <p>Color: ${colorInputValue}</p>
-            <p>Carats: ${caratsInputValue}</p>
-            <p>Price: ${priceInputValue}$</p>
-            <p>Type: ${typeInputValue}$</p>
-        </article>`;
-        li.innerHTML = html;
-        li.classList.add("gem-info");
-
-        const editBtn = document.createElement("button");
-        editBtn.textContent = "Edit Information";
-        editBtn.classList.add("edit-btn");
-        editBtn.addEventListener("click", () => {
-            li.remove();
-            gemInput.value = gemInputValue;
-            colorInput.value = colorInputValue;
-            caratsInput.value = caratsInputValue;
-            priceInput.value = priceInputValue;
-            typeInput.value = typeInputValue;
-            addBtn.disabled = false;
-        })
-
-        const cancelBtn = document.createElement("button");
-        cancelBtn.textContent = "Cancel";
-        cancelBtn.classList.add("cancel-btn");
-        cancelBtn.addEventListener("click", () => {
-            li.remove();
-            addBtn.disabled = false;
-        })
-
-        const saveBtn = document.createElement("button");
-        saveBtn.textContent = "Save to Collection";
-        saveBtn.classList.add("save-btn");
-        saveBtn.addEventListener("click", () => {
-            // saveBtn.remove();
-            // editBtn.remove();
-            // cancelBtn.remove();
-            li.remove();
-            addBtn.disabled = false;
-            const newLi = document.createElement("li");
-            const html = `<p class="collection-item">
-             ${gemInputValue} - Color: ${colorInputValue}/
-             Carats: ${caratsInputValue}/ 
-             Price: ${priceInputValue}$/ 
-             Type: ${typeInputValue}</p>`;
-            newLi.innerHTML = html;
-            newLi.classList.add("gem-info");
-            collectionList.appendChild(newLi);
-        });
-
-        li.appendChild(editBtn);
-        li.appendChild(saveBtn);
-        li.appendChild(cancelBtn);
-        previewList.appendChild(li);
-
-    })
-
-    // const clearBtn = document.getElementById("clear");
-    // clearBtn.addEventListener("click", () => {
-    //     finishedList.textContent = "";
-    // })
-}
-    </script>
-  
 
     <fieldset>
       <legend>Get all users from local JSON file</legend>
