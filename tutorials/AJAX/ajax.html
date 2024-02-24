@@ -5,9 +5,140 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Raleway');
+      @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+
+      body {
+    width: 20%;
+    margin: 0 auto;
+    font-family: 'Raleway',sans-serif;
+}
+
+article{
+    background: #34469c;;
+    border-radius: 20px;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+#towns {
+    list-style-type: none;
+    padding: 0;
+}
+
+#towns li {
+    margin: 10px auto;
+    width: 90%;
+    text-align: left;
+    color: white;
+}
+
+#searchText{
+    background: white;
+    text-decoration: none;
+    margin: 15px auto;
+    width: 90%;
+    padding:5px 10px;
+    text-align: left;
+}
+
+button {
+    background: white;
+    margin-left:8px;
+    padding: 8px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    outline: none;
+    color: #34469c;;
+    text-transform: uppercase;
+    border: 2px solid white;
+
+}
+button:hover {
+    color: white;
+    background: #34469c;;
+    border: 2px solid white;
+}
+
+#result {
+    padding: 10px;
+    margin: 10px;
+    color: white;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.42em;
+    color: #A7A1AE;
+    background-color: #1F2739;
+}
+    </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <table class="container">
+      <thead>
+          <tr>
+              <th>Student name</th>
+              <th>Student email</th>
+              <th>Student course</th>
+          </tr>
+      </thead>
+      <tfoot>
+          <tr>
+              <td colspan="3">
+                  <input type="text" id="searchField"/>
+                  <button type="button" id="searchBtn">Search</button>
+              </td>
+          </tr>
+      </tfoot>
+      <tbody>
+          <tr>
+              <td>John Dan</td>
+              <td>john@john-dan.com</td>
+              <td>JS-CORE</td>
+          </tr>
+          <tr>
+              <td>Max Peterson</td>
+              <td>max@softuni.bg</td>
+              <td>JS-WEB</td>
+          </tr>
+          <tr>
+              <td>Philip Anderson</td>
+              <td>philip@softuni.bg</td>
+              <td>FRONT-END</td>
+          </tr>
+          <tr>
+              <td>Sam Lima</td>
+              <td>sam@gmail.com</td>
+              <td>TECH-JS</td>
+          </tr>
+          <tr>
+              <td>Eva Longoria</td>
+              <td>eva@gmail.com</td>
+              <td>All possible courses</td>
+          </tr>
+      </tbody>
+  </table>
+  <div id="result"></div>
+
+<article>
+  <ul id="towns">
+      <li>Sofia</li>
+      <li>Pleven</li>
+      <li>Varna</li>
+      <li>Plovdiv</li>
+      <li>Dolna Bania</li>
+      <li>Gorna Bania</li>
+  </ul>
+  <input type="text" id="searchText" value="Pl"/>
+  <button onclick="search()">Search</button>
+  <div id="result"></div>
+  </article>  
+
     <script>
       function search() {
    const searchText = document.getElementById("searchText").value;
