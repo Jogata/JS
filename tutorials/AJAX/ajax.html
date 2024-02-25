@@ -5,9 +5,145 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Lato:400,300,700|Montserrat:400,700);
+      
+      fieldset {
+        display: none;
+      }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.restaurant-race-class {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 1.5rem;
+  color: #aaa;
+}
+
+body {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  background-color: #222;
+  background-image: url(./softuni-wallpaper-1-1920x1080.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: top;
+  background-size: cover;
+}
+
+h2 {
+  font-size: 22px;
+  color: white;
+  padding: 0.3rem;
+}
+
+span {
+  width: 25%;
+  margin: 0 auto;
+  height: 1px;
+  display: block;
+  border-bottom: 1px solid white;
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+
+textarea {
+  background: #fff;
+  border-radius: 5px; 
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
+  border: 1px solid #00BFFF;
+  margin-right: 1.2rem;
+  outline: none;
+  color: black;
+  font-size: 21px;
+  width: 50%;
+  resize: none;
+  height: 20vh;
+  width: 80%;
+  text-align: center;
+}
+
+#outputs div, 
+#inputs {
+  margin: 20px 0px 20px 20px;
+  width: 1135px;
+  text-align: center;
+  padding-bottom: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  padding-left: 35px;
+  box-shadow: rgba(0, 0, 0, .15) 0 1px 3px;
+  background: radial-gradient(black, transparent);
+  text-shadow: black;
+  color:white;
+  font-size: 22px;
+  border-bottom: 1px solid white;
+  border-left: 1px solid white;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+}
+
+label {
+  font-size: 18px;
+}
+
+button {
+  font-size: 22px;
+  margin-top: 10px;
+  margin-left: 5px;
+  background-color: #03496B;
+  outline: none;
+  border-top-right-radius: 25%;
+  border-bottom-left-radius: 40%;
+  border-top-color: white;
+  border-bottom-color: white;
+  padding: 0.5em 1em;
+  color: #fff;
+  font-family: inherit;
+  transition: all 0.4s ease-in;
+  cursor: pointer;
+}
+button:hover {
+  box-shadow: 0px 1px 7px 4px white;
+}
+button:active {
+  box-shadow: 0px 1px 2px 1px white;
+}
+  </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+
+    <section class="restaurant-race-class">
+
+      <div id="inputs">
+          <h2>Add workers</h2>
+          <textarea></textarea>
+          <br>
+          <button type="submit" id="btnSend">Send</button>
+      </div>
+      
+      <div id="outputs">
+          <div id="bestRestaurant">
+              <h2>Best Restaurant</h2>
+              <span></span>
+              <p></p>
+          </div>
+          <div id="workers">
+              <h2>Best Restaurant's workers</h2>
+              <span></span>
+              <p></p>
+          </div>
+      </div>
+
+  </section>
     <script>
       window.addEventListener("load", () => {
         solve();
@@ -103,7 +239,6 @@
           this.availableSmartphones = [];
           this.soldSmartphones = [];
           this.revenue = 0;
-
       }
 
       addSmartphone (model, storage, price, condition) {
