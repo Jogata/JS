@@ -39,7 +39,7 @@ article{
     text-decoration: none;
     margin: 15px auto;
     width: 90%;
-    padding:5px 10px;
+    padding: 5px 10px;
     text-align: left;
 }
 
@@ -54,7 +54,7 @@ button {
     color: #34469c;;
     text-transform: uppercase;
     border: 2px solid white;
-
+    transition: all 0.4s linear;
 }
 button:hover {
     color: white;
@@ -168,17 +168,154 @@ h2 a {
     background-color: #FFF842;
     color: #403E10;
     font-weight: bold;
-    box-shadow: #7F7C21 -1px 1px, #7F7C21 -2px 2px, #7F7C21 -3px 3px, #7F7C21 -4px 4px, #7F7C21 -5px 5px, #7F7C21 -6px 6px;
+    box-shadow: 
+      #7F7C21 -1px 1px, 
+      #7F7C21 -2px 2px, 
+      #7F7C21 -3px 3px, 
+      #7F7C21 -4px 4px, 
+      #7F7C21 -5px 5px, 
+      #7F7C21 -6px 6px;
     transform: translate3d(6px, -6px, 0);
-    transition-delay: 0s;
+    transition: all 0.4s linear;
+    /* transition-delay: 0s;
     transition-duration: 0.4s;
     transition-property: all;
-    transition-timing-function: line;
+    transition-timing-function: line; */
+}
+
+.select {
+    background-color: #FFF842 !important;
+    color: #403E10;
+    font-weight: bold;
+    box-shadow: 
+      #7F7C21 -1px 1px, 
+      #7F7C21 -2px 2px, 
+      #7F7C21 -3px 3px, 
+      #7F7C21 -4px 4px, 
+      #7F7C21 -5px 5px, 
+      #7F7C21 -6px 6px;
+    transform: translate3d(6px, -6px, 0);
+    transition: all 0.4s linear;
+    /* transition-delay: 0s;
+    transition-duration: 0.4s;
+    transition-property: all; */
+}
+
+.container thead tr:hover {
+    color: #ffffff;
+}
+
+@media (max-width: 800px) {
+    .container td:nth-child(4),
+    .container th:nth-child(4) {
+        display: none;
+    }
+}
+
+#searchField {
+    padding: 8px;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+}
+
+#searchBtn {
+    background: transparent;
+    border: 2px solid darkgray;
+    padding: 7px 22px;
+    text-transform: uppercase;
+    color: darkgray;
+    font-weight: bold;
+    margin: 0 15px;
+    cursor: pointer;
 }
     </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <script>
+      function solve() {
+ document.querySelector('#btnSend').addEventListener('click', onClick);
+
+ function onClick () {
+    //   TODO:
+    const textarea = document.querySelector("textarea");
+    const restaurantsData = JSON.parse(textarea.value);
+    // console.log(restaurantsData);
+    const restaurants = [];
+
+    for (const data of restaurantsData) {
+       // console.log(data);
+       const tokens = data.split(" - ");
+       // console.log(tokens);
+       const restaurantName = tokens[0];
+       const workersDataString = tokens[1];
+       const workersDataArr = workersDataString.split(", ");
+
+       if (!restaurants.some(x => x.name == restaurantName)) {
+          const restaurant = {
+             name: restaurantName, 
+             workers: [], 
+             averageSalary: 0
+          }
+
+          restaurants.push(restaurant);
+
+       }
+
+       const workers = restaurants.find(x => x.name == restaurantName).workers;
+
+       for (const data of workersDataArr) {
+          const tokens = data.split(" ");
+          const name = tokens[0];
+          const salary = Number(tokens[1]);
+
+          const worker = {
+             name, 
+             salary
+          };
+
+          // console.log(worker);
+          workers.push(worker);
+       }
+
+    }
+
+    for (const restaurant of restaurants) {         
+       const sortedWorkers = restaurant.workers.sort((a, b) => b.salary - a.salary);
+       // console.log(sortedWorkers);
+ 
+       let total = 0;
+       
+       for (const worker of sortedWorkers) {
+          total += worker.salary;
+       }
+ 
+       const averageSalary = total / sortedWorkers.length;
+       // console.log(averageSalary);
+       restaurant.averageSalary = averageSalary;
+    }
+
+    const sortedRestaurants = restaurants.sort((a, b) => b.averageSalary - a.averageSalary);
+    // console.log(sortedRestaurants);
+    const theBest = restaurants[0];
+    // console.log(theBest);
+
+    const output1 = document.querySelector("#bestRestaurant p");
+    // console.log(`Name: ${theBest.name} Average Salary: ${theBest.averageSalary.toFixed(2)} Best Salary: ${theBest.sortedWorkers[0].salary.toFixed(2)}`);
+    output1.textContent = `Name: ${theBest.name} Average Salary: ${theBest.averageSalary.toFixed(2)} Best Salary: ${theBest.workers[0].salary.toFixed(2)}`;
+
+    const output2 = document.querySelector("#workers p");
+
+    const theBestRestWorkers = theBest.workers.map(worker => {
+       return `Name: ${worker.name} With Salary: ${worker.salary}`;
+    });
+
+    output2.textContent = theBestRestWorkers.join(" ");
+
+ }
+}
+  </script>
     <table class="container">
       <thead>
           <tr>
@@ -226,9 +363,9 @@ h2 a {
   <div id="result"></div>
 
   <script>
-      solve();
+      solve1();
 
-      function solve() {
+      function solve1() {
    document.querySelector('#searchBtn').addEventListener('click', onClick);
    const searchField = document.getElementById("searchField");
    
