@@ -5,146 +5,162 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-<style>
-@import url('https://fonts.googleapis.com/css?family=Lato');
-  
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    font-family: "Lato", sans-serif;
-    font-size: 24px;
-    color: #234465;
-}
-
-body{
-    background-image: url('./softuni-wallpaper-5-1920x1080.jpg');
-}
-
-h4 {
-    width: 70%;
-    margin: 1% auto;
-    padding: 11px;
-    text-align: center;
-    color: white;
-}
-
-#exercise {
-    width: 78%;
-    margin: 3% auto;
-    padding: 1rem;
-    border: 1px solid lightgrey;
-    text-align: center;
-    background: radial-gradient(rgb(39, 38, 38), transparent);
-    box-shadow: 0px 5px 11px 2px white;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-}
-
-input[type="button"], button {
-    padding: 0.3rem 0.5rem;
-    font-size: 1.1em;
-    min-width: 10%;
-    margin: 1rem 0;
-    border: none;
-    color: white;
-    background: #234465;
-    border-radius: 5px;
-    outline: none;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 0px;
-    border-bottom: 1px solid white;
-    border-left: 1px solid white;
-    cursor: pointer;
-}
-button:hover {
-    box-shadow: 1px 1px 14px 5px green;
-}
-
-textarea {
-    width: 90%;
-    padding: 1%;
-    word-wrap: break-word;
-    resize: none;
-    text-align: center;
-    font-size: 18px;
-    border: none;
-    outline: none;
-    background-color: rgba(255,255,255,0.6);
-    box-shadow: 0px 5px 11px 2px lightslategrey;
-}
-textarea:focus {
-    box-shadow: 1px 1px 14px 5px green;
-}
-
-#output p {
-    color : white;
-    padding: 1%;
-    word-wrap: break-word;
-    border-bottom: 1px solid lightgrey;
-}
-</style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
-    <h4>Create a functionality which formats the given text into paragraphs</h4>
-    <div id="exercise">
-        <textarea id="input" cols="30" rows="12"></textarea>
-        <button type="button" id="formatItBtn" onclick="solve()">Format</button>
-        <div id="output"></div>
-    </div>
-  <script>
-        const text = "JavaScript, often abbreviated as JS, is a high-level, interpreted programming language. It is a language which is also characterized as dynamic, weakly typed, prototype-based and multi-paradigm. Last";
-        // const text = "JavaScript, often abbreviated as JS, is a high-level, interpreted programming language. It is a language which is also characterized as dynamic, weakly typed, prototype-based and multi-paradigm. Alongside HTML and CSS, JavaScript is one of the three core technologies of the World Wide Web. JavaScript enables interactive web pages and thus is an essential part of web applications. The vast majority of websites use it, and all major web browsers have a dedicated JavaScript engine to execute it. As a multi-paradigm language, JavaScript supports event-driven, functional, and imperative (including object-oriented and prototype-based) programming styles. It has an API for working with text, arrays, dates, regular expressions, and basic manipulation of the DOM, but the language itself does not include any I/O, such as networking, storage, or graphics facilities, relying for these upon the host environment in which it is embedded. Pre. Last."
-        document.querySelector("#input").value = text;
+    <header>
+      <a href="#logo" class="logo">
+        <i class="fa fa-forumbee"></i>honey
+      </a>
 
-        function solve() {
-  const textarea = document.querySelector("#input");
-  const text = textarea.value;
-  // console.log(text);
-  const output = document.getElementById("output");
-  
-  const phrases = text.split(".").filter(x => x.length > 0);
-  // const phrases = new Array();
-  // phrases.length = 11;
-  console.log(phrases);
-  const para = Math.floor(phrases.length / 3);
-  console.log(para);
-  const remaining = phrases.length - para * 3;
-  console.log(remaining);
+      <ul class="nav-list">
+        <li><a href="#home" class="active">home</a></li>
+        <li><a href="#about">about us</a></li>
+        <li><a href="#shop">our shop</a></li>
+        <li><a href="#review">our customers</a></li>
+        <li><a href="#contact">contact us</a></li>
+      </ul>
 
-  for (let index = 0; index < para; index++) {
-    let text = "";
-    for (let index2 = index * 3; index2 < index * 3 + 3; index2++) {
-      text += phrases[index2] + ".";
-    }
-    // console.log(text);
-    // const p = document.createElement("p");
-    const p = ` ${text} </p>`;
-    // p.textContent = text;
-  
-    // output.appendChild(p);
-    output.innerHTML += p;
-  }
+      <div class="nav-icons">
+        <a href="#">
+          <i class="fa fa-search"></i>
+        </a>
+        <a href="#">
+          <i class="fa fa-shopping-cart"></i>
+        </a>
+        <button id="menu-btn">menu
+          <i class="fa fa-bars"></i>
+        </button>
+      </div>
+    </header>
+    <script>
+      const header = document.querySelector("header");
 
-  // let lastParaText = "";
-  // for (let index = para * 3; index < para * 3 + remaining; index++) {
-    // lastParaText += phrases[index] + ".";
-  // }
-  // console.log(lastParaText);
-  // const p = document.createElement("p");
-  // const p = `<p> ${lastParaText} </p>`;
-  // p.textContent = lastParaText;
-  
-  // output.appendChild(p);
-  // output.innerHTML += p;
-}
-  </script>
+      window.addEventListener("scroll", () => {
+        header.classList.toggle("sticky", window.scrollY > 80);
+      })
+
+      const menuBtn = document.getElementById("menu-btn");
+      const nav = document.querySelector(".nav-list");
+
+      menuBtn.addEventListener("click", () => {
+        // const icon = document.querySelector("#menu-btn i");
+        // icon.classList.toggle("fa-bars");
+        // icon.classList.toggle("fa-times");
+        nav.classList.toggle("open");
+        window.addEventListener("scroll", () => {
+          nav.classList.remove("open");
+          // console.log("scroll");
+        }, {once: true})
+      });
+
+      const links = document.querySelectorAll(".nav-list a");
+
+      links.forEach(link => {
+        link.addEventListener("click", () => {
+          const activeLink = document.querySelector(".nav-list a.active");
+          activeLink.classList.remove("active");
+          link.classList.add("active");
+        })
+      })
+
+      // window.addEventListener("scroll", () => {
+      //   nav.classList.remove("open");
+      //   console.log("scroll");
+      // })
+    </script>
+
+    <section id="home" data-index="0">
+      <div class="text fade-down paused">
+        <h1>meet, <span class="main-color">eat & </span>enjoy the true taste</h1>
+        <a href="#explore-menu" class="btn">explore menu <span>&#155;</span></a>
+        <a href="#" class="alt-btn">order now</a>
+      </div>
+      <div class="hero fade-down paused">
+        <img src="./images/hero.png" alt="honey products">
+        <!-- <img src="./images/test/hero.png" alt="honey products"> -->
+      </div>
+    </section>
+
+    <section class="contact-info">
+      <div class="info-box fade-down paused">
+        <img src="./images/test/c1.png" alt="">
+        <h3 class="lower">11:00 am - 8:00 pm</h3>
+        <a href="#">working hours</a>
+      </div>
+
+      <div class="info-box fade-down paused">
+        <img src="./images/test/c2.png" alt="">
+        <h3>honey springs 55</h3>
+        <a href="#">get directions</a>
+      </div>
+
+      <div class="info-box fade-down paused">
+        <img src="./images/test/c3.png" alt="">
+        <h3>(555) 111-345345</h3>
+        <a href="#">call us now</a>
+      </div>
+    </section>
+
+    <section id="about" data-index="1">
+      <div class="about-img fade-down paused">
+        <img src="./images/about.png" alt="honey products">
+      </div>
+
+      <div class="text fade-down paused">
+        <h2>Living well begins <span>with eating well.</span></h2>
+        <p>Over its history as a food, the main uses of honey are in cooking, baking, desserts, as a spread on bread, as an addition to various beverages such as tea, and as sweetener in some commercial beverages.</p>
+        <p>Due to its energy density, honey is an important food for virtually all hunter-gatherer cultures in warm climates, with the Hadza people ranking honey as their favorite food.</p>
+        <a href="#explore-menu" class="btn">explore story <span>&#155;</span></a>
+      </div>
+    </section>
+    <script>
+      const optionsHomeSection = {
+        root: null,
+        rootMargin: "0px",
+        // threshold: [0, 0.2, 1],
+        threshold: 0,
+      };
+
+      // const homeSectionIsVisibleObserver = new IntersectionObserver(hideTopBtn, optionsHomeSection);
+      const homeSectionObserver = new IntersectionObserver(showTopBtn, optionsHomeSection);
+      
+      const homeSection = document.getElementById("home");
+      // console.log(sections);
+      // homeSection.style.border = "1px solid red";
+      
+      // homeSectionIsVisibleObserver.observe(homeSection);
+      homeSectionObserver.observe(homeSection);
+      // sections.forEach(section => {
+        // console.log(section);
+      // })
+
+      // console.log(links);
+      
+      function showTopBtn(entries) {
+        const topBtn = document.querySelector(".top");
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) {
+            console.log(entry);
+            topBtn.classList.remove("hidden");
+          } else {
+            console.log(entry);
+            topBtn.classList.add("hidden");
+          }
+        });
+      }
+
+      // function hideTopBtn(entries) {
+      //   entries.forEach(entry => {
+      //     if (entry.isIntersecting) {
+      //       console.log(entry);
+      //       const topBtn = document.querySelector(".top");
+      //       topBtn.classList.add("hidden");
+      //     }
+      //   });
+      // }
+    </script>
 
 <script>
   // 10. Contacts Builder✶
