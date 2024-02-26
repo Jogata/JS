@@ -5,165 +5,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+<style>
+@import url('https://fonts.googleapis.com/css?family=Lato');
+  
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    body {
-      font-family: "Open Sans", serif;
-    }
+html {
+    font-family: "Lato", sans-serif;
+    font-size: 24px;
+    color: #234465;
+}
 
-    button {
-      background-color: #4caf50;
-      color: white;
-      padding: 14px 20px;
-      margin: 8px 0;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #45a049;
-    }
-  </style>
+body{
+    background-image: url('./softuni-wallpaper-5-1920x1080.jpg');
+}
+
+h4 {
+    width: 70%;
+    margin: 1% auto;
+    padding: 11px;
+    text-align: center;
+    color: white;
+}
+
+#exercise {
+    width: 78%;
+    margin: 3% auto;
+    padding: 1rem;
+    border: 1px solid lightgrey;
+    text-align: center;
+    background: radial-gradient(rgb(39, 38, 38), transparent);
+    box-shadow: 0px 5px 11px 2px white;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+
+input[type="button"], button {
+    padding: 0.3rem 0.5rem;
+    font-size: 1.1em;
+    min-width: 10%;
+    margin: 1rem 0;
+    border: none;
+    color: white;
+    background: #234465;
+    border-radius: 5px;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0px;
+    border-bottom: 1px solid white;
+    border-left: 1px solid white;
+    cursor: pointer;
+}
+button:hover {
+    box-shadow: 1px 1px 14px 5px green;
+}
+
+textarea {
+    width: 90%;
+    padding: 1%;
+    word-wrap: break-word;
+    resize: none;
+    text-align: center;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: rgba(255,255,255,0.6);
+    box-shadow: 0px 5px 11px 2px lightslategrey;
+}
+textarea:focus {
+    box-shadow: 1px 1px 14px 5px green;
+}
+
+#output p {
+    color : white;
+    padding: 1%;
+    word-wrap: break-word;
+    border-bottom: 1px solid lightgrey;
+}
+</style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
-    <button id="load">Load Repos</button>
-    <button id="fetch">Fetch Repos</button>
-    <div id="res"></div>
-    <div id="fetch-res"></div>
-    <!-- <script src="./scripts/app.js"></script> -->
-    <script>
-        window.addEventListener("DOMContentLoaded", load);
-
-        function load() {
-   // console.log("TODO...");
-   let button = document.getElementById("load");
-
-   button.addEventListener("click", loadRepos);
-
-   let fetchButton = document.getElementById("fetch");
-
-   fetchButton.addEventListener("click", fetchData);
-
-   function fetchData() {
-    let url = "https://api.github.com/users/testnakov/repos";
-
-    const request = fetch(url);
-
-    request
-      .then(res => {
-
-        if (res.ok == false) {
-          throw new Error("")
-        }
-
-        return res.text();
-      })
-      .then(function (data) {
-        console.log(data);
-        document.getElementById("fetch-res").textContent = data.toString(null, 2);
-      })
-      .catch(err => console.log(err));
-   }
-
-   function loadRepos() {
-      let url = "https://api.github.com/users/testnakov/repos";
-      const httpRequest = new XMLHttpRequest();
-      httpRequest.addEventListener("readystatechange", displayRepos);
-
-      httpRequest.open("GET", url);
-      httpRequest.send();
-
-      function displayRepos() {
-        console.log(httpRequest.readyState);
-         
-         if (httpRequest.readyState == 4 && httpRequest.status == 200) {
-            document.getElementById("res").textContent = httpRequest.responseText.toString(null, 2);
-            // console.log(httpRequest.responseText.toString(null, 2));
-         }
-
-      }
-   }
-}
-    </script>
-
+    <h4>Create a functionality which formats the given text into paragraphs</h4>
+    <div id="exercise">
+        <textarea id="input" cols="30" rows="12"></textarea>
+        <button type="button" id="formatItBtn" onclick="solve()">Format</button>
+        <div id="output"></div>
+    </div>
   <script>
-    const findNewApartment = {
-      isGoodLocation(city, nearPublicTransportation) {
-        if (typeof city !== "string" || typeof nearPublicTransportation !== "boolean"){
-            throw new Error("Invalid input!");
-        }
-        if (city !== "Sofia" && city !== "Plovdiv" && city !== "Varna") {
-            return "This location is not suitable for you.";
-        }else {
-            if (nearPublicTransportation == true) {
-                return "You can go on home tour!";
-            }
-            else {
-                return "There is no public transport in area.";
-            }
-        }
-      },
-      isLargeEnough(apartments, minimalSquareMeters) {
-        let resultArr = [];
-        if (!Array.isArray(apartments) || typeof minimalSquareMeters !== "number" || apartments.length == 0) {
-          throw new Error("Invalid input!");
-        }
-        apartments.map((apartment) => {
-          if (apartment >= minimalSquareMeters) {
-            resultArr.push(apartment);
-          }
-        });
-        return resultArr.join(', ');
-      },
-      isItAffordable(price, budget) {
-        if (typeof price !== "number" || typeof budget !== "number"
-         || price <= 0 || budget <= 0) {
-          throw new Error("Invalid input!");
-        }
-        let result = budget - price;
-        if (result < 0) {
-          return "You don't have enough money for this house!";
-        } else {
-          return "You can afford this home!";
-        }
-      },
-    };
-    
-//   describe('apartment tests', () => {
-//     it('isGoodLocation', () => {
-//         expect(() => { findNewApartment.isGoodLocation('Sofia', 1 ) }).to.throw("Invalid input!");
-//         expect(() => { findNewApartment.isGoodLocation(1, true) }).to.throw("Invalid input!");
-//         expect(findNewApartment.isGoodLocation('Pernik', true)).to.equal("This location is not suitable for you.");
-//         expect(findNewApartment.isGoodLocation('Sofia', true)).to.equal("You can go on home tour!");
-//         expect(findNewApartment.isGoodLocation('Plovdiv', false)).to.equal("There is no public transport in area.");      
-//     });
+        const text = "JavaScript, often abbreviated as JS, is a high-level, interpreted programming language. It is a language which is also characterized as dynamic, weakly typed, prototype-based and multi-paradigm. Last";
+        // const text = "JavaScript, often abbreviated as JS, is a high-level, interpreted programming language. It is a language which is also characterized as dynamic, weakly typed, prototype-based and multi-paradigm. Alongside HTML and CSS, JavaScript is one of the three core technologies of the World Wide Web. JavaScript enables interactive web pages and thus is an essential part of web applications. The vast majority of websites use it, and all major web browsers have a dedicated JavaScript engine to execute it. As a multi-paradigm language, JavaScript supports event-driven, functional, and imperative (including object-oriented and prototype-based) programming styles. It has an API for working with text, arrays, dates, regular expressions, and basic manipulation of the DOM, but the language itself does not include any I/O, such as networking, storage, or graphics facilities, relying for these upon the host environment in which it is embedded. Pre. Last."
+        document.querySelector("#input").value = text;
 
-//     it('isLargeEnough', () => {
-//         expect(() => { findNewApartment.isLargeEnough(50, 40) }).to.throw("Invalid input!");
-//         expect(() => { findNewApartment.isLargeEnough([], 40) }).to.throw("Invalid input!");
-//         expect(() => { findNewApartment.isLargeEnough([], 40), "" }).to.throw("Invalid input!");
-//         expect(() => { findNewApartment.isLargeEnough([40], '40') }).to.throw("Invalid input!");
-//         expect(findNewApartment.isLargeEnough([40,50,60,120], 55)).to.equal('60, 120');
-//         expect(findNewApartment.isLargeEnough([40,50,40,20], 55)).to.equal('');
-//         expect(findNewApartment.isLargeEnough([40,55,40,20], 55)).to.equal('55');
-//     });
+        function solve() {
+  const textarea = document.querySelector("#input");
+  const text = textarea.value;
+  // console.log(text);
+  const output = document.getElementById("output");
+  
+  const phrases = text.split(".").filter(x => x.length > 0);
+  // const phrases = new Array();
+  // phrases.length = 11;
+  console.log(phrases);
+  const para = Math.floor(phrases.length / 3);
+  console.log(para);
+  const remaining = phrases.length - para * 3;
+  console.log(remaining);
 
-//     it('isItAffordable', () => {
-//         expect(() => { findNewApartment.isItAffordable('50000', '50000') }).to.throw("Invalid input!");
-//         expect(() => { findNewApartment.isItAffordable(50000, '50000') }).to.throw("Invalid input!");
-//         expect(() => { findNewApartment.isItAffordable('50000', 50000) }).to.throw("Invalid input!");
-//         expect(() => { findNewApartment.isItAffordable(0, 50000) }).to.throw("Invalid input!");
-//         expect(() => { findNewApartment.isItAffordable(50000, 0) }).to.throw("Invalid input!");
-//         expect(findNewApartment.isItAffordable(55000, 50000)).to.equal("You don't have enough money for this house!");
-//         expect(findNewApartment.isItAffordable(50000, 55000)).to.equal("You can afford this home!");
-      
-//     });
+  for (let index = 0; index < para; index++) {
+    let text = "";
+    for (let index2 = index * 3; index2 < index * 3 + 3; index2++) {
+      text += phrases[index2] + ".";
+    }
+    // console.log(text);
+    // const p = document.createElement("p");
+    const p = ` ${text} </p>`;
+    // p.textContent = text;
+  
+    // output.appendChild(p);
+    output.innerHTML += p;
+  }
 
-//  });
-</script>
+  // let lastParaText = "";
+  // for (let index = para * 3; index < para * 3 + remaining; index++) {
+    // lastParaText += phrases[index] + ".";
+  // }
+  // console.log(lastParaText);
+  // const p = document.createElement("p");
+  // const p = `<p> ${lastParaText} </p>`;
+  // p.textContent = lastParaText;
+  
+  // output.appendChild(p);
+  // output.innerHTML += p;
+}
+  </script>
 
 <script>
   // 10. Contacts Builder✶
