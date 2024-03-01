@@ -931,6 +931,54 @@ h1 span {
 .paused {
   animation-play-state: paused;
 }
+
+@keyframes fade-down {
+  0% {
+    transform: translateY(-10%);
+    opacity: 0;
+  }
+}
+
+@keyframes half-fade-down {
+  0% {
+    transform: translateY(-50%);
+    opacity: 0;
+  }
+}
+
+@keyframes full-fade-down {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slow-full-fade-down {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+input[type=text] {
+    padding: 5px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+button#test {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 14px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
     </style>
   </head>
   <body>
@@ -1270,6 +1318,8 @@ h1 span {
       <!-- </div> -->
     </section>
 
+    <a href="#top" class="top hidden"><i class="fa fa-home"></i></a>
+
     <script>
       const sectionObserver = new IntersectionObserver(changeLinks);
       
@@ -1341,6 +1391,91 @@ h1 span {
       //   });
       // }
     </script>
+    <script>
+      const observer = new IntersectionObserver(animate);
+      
+      const elements = document.querySelectorAll(".paused");
+      // console.log(elements);
+      
+      elements.forEach(element => {
+        observer.observe(element);
+        // console.log(element);
+      })
+      
+      function animate(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove("paused");
+          }
+        });
+      }
+    </script>    
+
+GitHub username:
+<input type="text" id="username" value="nakov" /> <br>
+Repo: <input type="text" id="repo" value="nakov.io.cin" />
+<button onclick="loadCommits()" id="test">Load Commits</button>
+<ul id="commits"></ul>
+
+<script>
+  function loadCommits() {
+    // Try it with Fetch API
+    // console.log("TODO...");
+    const username = document.getElementById("username").value;
+    const repoName = document.getElementById("repo").value;
+    const url = `https://api.github.com/repos/${username}/${repoName}/commits`;
+    
+    const outputField = document.getElementById("commits");
+    outputField.textContent = "";
+    
+    fetch(url)
+        .then(onResponse)
+        // .then(data => {
+        // 	console.log(data);
+        // 	return data;
+        // })
+        .then(onSuccess)
+        .catch(onError);
+    
+        function onResponse(response) {
+            // console.log(response);
+    
+            if (!response.ok) {
+                console.log(response);
+                throw response;
+            }
+    
+            return response.json();
+        }
+    
+        function onSuccess(data) {
+            console.log(data);
+            data.forEach(repo => {
+                // console.log(repo);
+                const li = createLi(repo);
+                // console.log(li);
+                outputField.appendChild(li);			
+            })
+        }
+    
+        function onError(error) {
+            console.log(error);
+            const li = document.createElement("li");
+            li.innerText = error.status;
+            outputField.appendChild(li);
+        }
+    
+    function createLi(repo) {
+        const li = document.createElement("li");
+        // const anchor = document.createElement("a");
+        // anchor.href = repo.html_url;
+        li.textContent = `${repo.commit.author.name}: ${repo.commit.message}`;
+        // li.appendChild(anchor);
+        // console.log(anchor);
+        return li;
+    }
+}
+</script>
 
 <script>
   // 10. Contacts Builder✶
