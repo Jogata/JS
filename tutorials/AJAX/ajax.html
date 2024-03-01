@@ -4,1478 +4,47 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <title>Honey</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <style>
-      fieldset {display: none;}
-            @import url('https://fonts.googleapis.com/css2?family=Redressed&display=swap');
-
-:root {
-  --main-color: #ff9f0d;
-  --text-color: #fff;
-  --other-color: #212121;
-  --second-color: #9e9e9e;
-  --bg-color: #111;
-  /* --big-font: 4.5rem; */
-  --big-font: min(calc(8vw + 4rem), 8rem);
-  ---mid-font: 2.6rem;
-  --small-font: 1.1rem;
-}
-
-/* header {
-  display: none !important;
-} */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-ul {
-  list-style: none;
-}
-
-a {
-  display: inline-block;
-  text-transform: capitalize;
-  text-decoration: none;
-}
-
-button {
-  padding: 0.4em 1em;
-  border: none;
-  font-family: Georgia, serif;
-  text-transform: capitalize;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-button:focus-visible, 
-a:focus-visible {
-  outline: 1px solid #fff8;
-}
-
-a, button, i {
-  white-space: nowrap;
-  transition: color 500ms ease-in-out, 
-          background 500ms ease-in-out;
-}
-
-img {
-  width: 100%;
-}
-
-section {
-  /* padding: 6rem 14% 60px; */
-  /* max-width: 1900px; */
-  max-width: 118.75rem;
-  margin: auto;
-  padding: 6rem min(8.1rem, 4%) 4rem;
-}
-
-.text {
-  text-transform: capitalize;
-}
-.text h2 {
-  /* margin-bottom: 10px; */
-  margin-bottom: 0.6rem;
-  color: var(--main-color);
-  font-size: var(--small-font);
-  font-weight: 700;
-}
-.text h3 {
-  font-size: var(---mid-font);
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  /* padding: 15px 35px; */
-  padding: 0.85em 2em;
-  color: var(--main-color);
-  font-size: var(--small-font);
-  font-weight: 500;
-  letter-spacing: 1px;
-  border-radius: 3rem;
-  background-color: var(--other-color);
-}
-.btn span {
-  /* margin-left: 4px; */
-  display: inline-block;
-  height: 0px;
-  padding-left: 0.2em;
-  padding-bottom: 0.2em;
-  font-size: 2rem;
-  line-height: 0;
-  /* vertical-align: middle; */
-}
-.btn:hover {
-  color: var(--bg-color);
-  background-color: var(--main-color);
-  /* box-shadow: 0px 1px 25px var(--main-color); */
-}
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 3rem;
-}
-
-body {
-  /* width: 100%; */
-  /* height: 100vh; */
-  min-height: 100vh;
-  /* display: flex; */
-  /* align-items: center; */
-  /* justify-content: center; */
-  /* display: grid; */
-  /* place-items: center; */
-  color: var(--text-color);
-  font-family: 'Redressed', cursive;
-  background-color: var(--bg-color);
-}
-
-header {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  width: 100%;
-  max-width: 118.75rem;
-  margin: auto;
-  /* padding: 30px 15%; */
-  padding: 2rem min(8.1rem, 5%);
-  display: flex;
-  gap: 3rem;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  /* background-color: transparent; */
-  border-bottom: 1px solid #fff4;
-  background-color: rgba(0, 0, 0, 0.9);
-  transition: all 500ms ease;
-  z-index: 2;
-}
-header.sticky {
-  /* padding: 12px 14%; */
-  /* padding: 12px min(100px, 3%); */
-  padding: 0.65rem min(6.25rem, 3%);
-  background-color: var(--other-color);
-}
-
-.logo {
-  color: var(--text-color);
-  font-size: 2rem;
-  font-weight: 700;
-}
-.logo i {
-  margin-right: 0.8rem;
-  /* color: var(--main-color); */
-  /* vertical-align: middle; */
-  color: transparent;
-  -webkit-text-stroke: 1px var(--main-color);
-}
-
-.nav-list {
-  display: flex;
-  flex-wrap: wrap;
-}
-.nav-list a {
-  margin: 0 var(--small-font);
-  padding: 0.3em 0.6em;
-  color: var(--text-color);
-  font-size: var(--small-font);
-}
-.nav-list a:hover {
-  color: var(--main-color);
-}
-.nav-list a.active {
-  color: var(--main-color);
-}
-
-.nav-icons {
-  display: flex;
-  gap: 0.6rem;
-  align-items: center;
-  /* padding: 8px 15px; */
-  padding: 0.4em 1em;
-  border: 2px solid var(--bg-color);
-  border-radius: 3rem;
-  /* background-color: var(--main-color); */
-  /* box-shadow: 0px 1px 25px var(--main-color); */
-  /* box-shadow: -1px -1px 1px #fff4, 2px 2px 2px #000; */
-  box-shadow: 1px 1px 1px #000, -1px -1px 1px #fff6,
-  inset 1px 1px 1px #000, inset -1px -1px 1px #fff6;
-}
-.nav-icons a {
-  /* margin: 0.2rem 0.5rem; */
-  /* margin-left: 5px; */
-  /* padding: 0.5em; */
-  padding: 0.2em 0.34em;
-  /* color: var(--bg-color); */
-  color: var(--main-color);
-  /* font-size: 25px; */
-  font-size: 1.6rem;
-  border-radius: 50%;
-  /* vertical-align: middle; */
-}
-.nav-icons a:focus-visible {
-  outline: 1px solid #fff6;
-}
-
-#menu-btn {
-  display: none;
-  margin: 0.2rem 1rem;
-  font-size: 0px;
-}
-.fa-bars {
-  /* display: none; */
-  color: var(--main-color);
-  font-size: 2rem;
-  /* cursor: pointer; */
-  /* z-index: 2; */
-}
-
-#home {
-  position: relative;
-  /* width: 100%; */
-  /* min-height: 100vh; */
-  /* padding-top: 3rem; */
-  /* display: grid; */
-  /* grid-template-columns: 1fr 1fr; */
-  padding-top: 10rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 2rem;
-}
-
-#home .text {
-  /* flex: 0 1 700px; */
-  flex: 0 1 43.75rem;
-  margin: auto;
-}
-.text h1 {
-  /* max-width: 12ch; */
-  margin-bottom: 3rem;
-  font-size: var(--big-font);
-  font-weight: 700;
-  /* text-transform: capitalize; */
-  /* border: 1px solid red; */
-}
-h1 span {
-  color: var(--main-color);
-}
-
-#home .btn {
-  /* display: inline-block; */
-  margin-right: 1rem;
-  margin-bottom: 1rem;
-}
-.alt-btn {
-  display: inline-block;
-  /* margin-left: 1rem; */
-  padding: 0.7em 1.4em;
-  color: var(--main-color);
-  font-size: var(--small-font);
-  font-weight: 500;
-  /* letter-spacing: 1px; */
-  border-radius: 3rem;
-  border-top: 2px solid var(--main-color);
-  border-bottom: 2px solid var(--main-color);
-  transition: transform 500ms ease-in-out;
-  /* transform-origin: left; */
-}
-.alt-btn:hover {
-  transform: scale(1.1) translateX(10%);
-}
-.alt-btn:focus-visible {
-  border-top: 2px solid #fff8;
-  border-bottom: 2px solid #fff8;
-}
-
-.hero {
-  /* flex: 0 1 900px; */
-  flex: 0 56.25rem;
-  margin: auto;
-}
-
-.contact-info {
-  padding: 1.9rem 4% 4.4rem;
-  display: grid;
-  gap: 2rem;
-  /* grid-template-columns: repeat(auto-fit, minmax(300px, auto)); */
-  grid-template-columns: repeat(auto-fit, minmax(18.75rem, auto));
-  justify-content: center;
-  text-align: center;
-}
-
-.info-box {
-  /* max-width: 400px; */
-  max-width: 25rem;
-  /* padding: 43px; */
-  padding: 2.75rem;
-  text-transform: capitalize;
-  border-radius: 1rem;
-  background-color: var(--other-color);
-  box-shadow: 0.1rem 0.1rem 0.3rem #000, 
-            -0.2rem -0.2rem 0.4rem #333;
-}
-.info-box img {
-  /* width: auto; */
-  /* max-width: 50px; */
-  max-width: 3.2rem;
-}
-.info-box h3 {
-  /* margin: 16px 0; */
-  margin: 1rem 0;
-  /* font-size: 21px; */
-  font-size: 1.4rem;
-  font-weight: bold;
-  /* text-transform: capitalize; */
-}
-.info-box h3.lower {
-  text-transform: lowercase;
-}
-.info-box a {
-  color: var(--second-color);
-  font-size: var(--small-font);
-  letter-spacing: 1px;
-  /* transition: all 0.5s ease; */
-  /* text-transform: capitalize; */
-}
-.info-box a:hover {
-  color: var(--main-color);
-}
-
-#about {
-  /* display: grid; */
-  /* grid-template-columns: 1fr 1fr; */
-  /* padding: 6rem min(100px, 4%) 60px; */
-  padding: 6rem min(6.25rem, 4%) 3.75rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 4rem;
-}
-
-.about-img {
-  /* flex: 0 1 900px; */
-  flex: 0 56.25rem;
-}
-
-#about .text {
-  /* flex: 0 1 700px; */
-  flex: 0 1 43.75rem;
-}
-
-#about .text h2 {
-  margin-bottom: 2rem;
-  font-size: var(---mid-font);
-  /* line-height: 1.3; */
-}
-
-#about .text p {
-  margin-bottom: 1rem;
-  color: var(--second-color);
-  font-size: var(--small-font);
-  /* line-height: 30px; */
-  /* line-height: 24px; */
-  line-height: 1.5rem;
-}
-
-#about .btn {
-  margin-top: 1rem;
-}
-
-#shop .text {
-  text-align: center;
-  /* text-transform: capitalize; */
-}
-/* #shop .text h2 {
-  margin-bottom: 10px;
-  color: var(--main-color);
-  font-size: 20px;
-  font-weight: 700;
-  text-transform: capitalize;
-} */
-#shop .text h3 {
-  font-size: var(---mid-font);
-  /* text-transform: capitalize; */
-}
-
-.products {
-  margin-top: 4rem;
-  display: grid;
-  align-items: center;
-  /* grid-template-columns: repeat(auto-fit, minmax(300px, auto)); */
-  grid-template-columns: repeat(auto-fit, minmax(18.75rem, auto));
-  gap: 2rem;
-}
-
-.product {
-  position: relative;
-  /* padding: 10px 35px 40px; */
-  padding: 0.625rem 2.2rem 2.5rem;
-  border-radius: 1rem;
-  background-color: var(--other-color);
-  box-shadow: 0.1rem 0.1rem 0.3rem #000, 
-            -0.2rem -0.2rem 0.4rem #333;
-}
-.product img {
-  transition: transform 500ms ease;
-  cursor: pointer;
-}
-.product:hover img {
-  transform: scale(1.1);
-}
-
-#bigger {
-  aspect-ratio: 1;
-  object-fit: cover;
-  transform: translateY(-8%);
-  /* border: 1px solid red; */
-}
-#bigger:hover {
-  transform: translateY(-10%) scale(1.1);
-}
-
-.product h4 {
-  margin-bottom: 0.3rem;
-  font-size: var(--small-font);
-  font-weight: 700;
-  text-transform: capitalize;
-}
-.product p {
-  margin-bottom: 1.1rem;
-  color: var(--second-color);
-  font-size: var(--small-font);
-  /* line-height: 30px; */
-}
-
-.in-text {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.price h5 {
-  font-size: var(--small-font);
-  color: var(--main-color);
-  font-weight: 600;
-}
-
-.order-btn a {
-  display: inline-block;
-  /* padding: 9px 23px; */
-  padding: 0.6em 1.6em;
-  color: var(--main-color);
-  /* font-size: 14px; */
-  font-size: 0.9rem;
-  font-weight: 500;
-  /* letter-spacing: 1px; */
-  border: 2px solid var(--main-color);
-  border-radius: 3rem;
-  /* background-color: var(--bg-color); */
-  box-shadow: inset 1px 1px 1px #000, 
-          inset -1px -1px 1px #fff8;
-}
-.order-btn a:focus-visible {
-  border: 2px solid #fff8;
-}
-.order-btn a:hover {
-  color: var(--bg-color);
-  background-color: var(--main-color);
-  /* box-shadow: 0px 1px 25px var(--main-color); */
-}
-.order-btn a:active {
-  /* box-shadow: 0px 0px 0px transparent; */
-  box-shadow: inset 1px 2px 1px #000, 
-          inset -2px -2px 1px #fff8;
-}
-
-.like-icon {
-  position: absolute;
-  /* top: 16px; */
-  top: 1rem;
-  /* left: 16px; */
-  left: 1rem;
-  /* color: red; */
-  /* border-radius: 50%; */
-}
-.like-icon a {
-  border-radius: 50%;
-}
-.like-icon i {
-  color: var(--main-color);
-  /* padding: 12px 10px 8px; */
-  padding: 0.56em 0.5em 0.42em;
-  /* font-size: 22px; */
-  font-size: 1.4rem;
-  /* border: 1px solid red; */
-  /* border-radius: 50%; */
-}
-
-.row-btn {
-  margin-top: 6rem;
-  text-align: center;
-}
-
-#review .text {
-  text-align: center;
-  /* text-transform: capitalize; */
-}
-/* #review .text h2 {
-  margin-bottom: 10px;
-  color: var(--main-color);
-  font-size: 20px;
-  font-weight: 700;
-  text-transform: capitalize;
-} */
-/* #review .text h3 {
-  font-size: var(---mid-font);
-  text-transform: capitalize;
-} */
-
-.reviews {
-  margin-top: 4rem;
-  display: grid;
-  /* align-items: start; */
-  /* grid-template-columns: repeat(auto-fit, minmax(300px, auto)); */
-  grid-template-columns: repeat(auto-fit, minmax(18.75rem, auto));
-  justify-content: center;
-  gap: 2rem;
-}
-
-.review {
-  /* max-width: 400px; */
-  max-width: 25rem;
-  /* padding: 35px; */
-  padding: 2.2rem;
-  display: grid;
-  border-radius: 1rem;
-  background-color: var(--other-color);
-  box-shadow: 0.1rem 0.1rem 0.3rem #000, 
-            -0.2rem -0.2rem 0.4rem #333;
-}
-.review p {
-  margin-bottom: 1.5rem;
-  color: var(--second-color);
-  font-size: var(--small-font);
-  /* line-height: 30px; */
-}
-
-.review-content {
-  margin-top: auto;
-  display: flex;
-  /* gap: 30px; */
-  gap: 1.9rem;
-  align-items: center;
-}
-
-.avatar-img img {
-  /* width: 100%; */
-  /* max-width: 100px; */
-  max-width: 6.25rem;
-  /* height: 100px; */
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-.review-info h4 {
-  /* margin: 5px 0; */
-  margin: 0.3rem 0;
-  font-size: var(--small-font);
-  text-transform: capitalize;
-}
-
-.review-info h5 {
-  /* margin-bottom: 10px; */
-  margin-bottom: 0.625rem;
-  color: var(--second-color);
-  /* font-size: 14px; */
-  font-size: 0.9rem;
-  font-weight: 500;
-  /* letter-spacing: 1px; */
-  text-transform: capitalize;
-}
-
-.rating i {
-  /* margin-left: 5px; */
-  margin-left: 0.3rem;
-  color: var(--main-color);
-  font-size: var(--small-font);
-}
-
-#contact {
-  text-align: center;
-  /* display: flex; */
-  /* align-items: center; */
-  /* flex-direction: column; */
-  /* flex-wrap: wrap; */
-}
-
-.contact-imgs {
-  /* margin-bottom: 60px; */
-  margin-bottom: 4rem;
-  /* display: flex; */
-  /* gap: 4rem; */
-  /* align-items: center; */
-  /* justify-content: center; */
-  /* flex-wrap: wrap; */
-  /* text-align: center; */
-}
-.contact-imgs div {
-  display: inline-block;
-  /* max-width: 260px; */
-  max-width: 16.25rem;
-  /* height: auto; */
-  margin: 0 1rem 1rem;
-  cursor: pointer;
-}
-.contact-imgs img {
-  transition: transform 500ms ease-in-out;
-}
-.contact-imgs img:hover {
-  /* transform: scale(1.1); */
-  transform: scale(0.9);
-}
-
-/* #contact .text h2 {
-  margin-bottom: 10px;
-  margin-bottom: 0.6rem;
-  color: var(--main-color);
-  font-size: 20px;
-  font-size: 1.2rem;
-  font-weight: 700;
-  text-transform: capitalize;
-} */
-#contact .text {
-  margin-bottom: 4rem;
-}
-#contact .text h2 {
-  /* margin-bottom: 10px; */
-  margin-bottom: 0.6rem;
-  font-size: var(---mid-font);
-  color: var(--text-color);
-}
-#contact .text p {
-  /* width: 100%; */
-  /* max-width: 950px; */
-  max-width: 59.4rem;
-  margin: 0 auto 3rem;
-  color: var(--second-color);
-  font-size: var(--small-font);
-  /* line-height: 30px; */
-  text-transform: initial;
-  /* border: 1px solid red; */
-}  
-
-.social a {
-  display: inline-block;
-  /* margin: 0 10px; */
-  margin: 0 0.6rem;
-  /* padding: 5px 10px; */
-  padding: 0.16em 0.32em;
-  color: var(--second-color);
-  /* font-size: 32px; */
-  font-size: 2rem;
-  /* transition: all 0.5s ease; */
-}
-.social a:hover {
-  color: var(--main-color);
-}
-
-.details {
-  /* margin: auto; */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 3rem;
-  /* text-align: center; */
-  /* border: 1px solid red; */
-}
-
-.details p {
-  display: flex;
-  align-items: center;
-  color: var(--text-color);
-  /* font-size: 20px; */
-  font-size: 1.24rem;
-  font-weight: 600;
-  font-family: Georgia, serif;
-}
-
-.details i {
-  display: inline-block;
-  /* margin-right: 12px; */
-  margin-right: 0.74rem;
-  color: var(--main-color);
-  /* font-size: 28px; */
-  font-size: 1.75rem;
-  /* vertical-align: middle; */
-}
-
-.top {
-  position: fixed;
-  /* right: 3rem; */
-  right: min(2vw, 3rem);
-  /* bottom: 2rem; */
-  bottom: min(2vw, 2rem);
-  /* border-top: 2rem; */
-  z-index: 3;
-}
-
-.top.hidden {
-  display: none;
-}
-
-.top i {
-  padding: 0.5em 0.54em;
-  color: var(--text-color);
-  /* font-size: 22px; */
-  font-size: 1.4rem;
-  border-radius: 50%;
-  background-color: var(--main-color);
-}
-
-@media screen and (max-width: 93.75rem) {
-  .nav-list {
-    display: none;
-  }
-  .nav-icons {
-    padding: 0.4em;
-  }
-  #menu-btn {
-    display: inline-block;
-  }
-  .nav-list {
-    position: absolute;
-    /* top: -1000px; */
-    top: 100%;
-    /* top: 0; */
-    left: 0;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    /* background-color: var(--other-color); */
-    /* background-color: rgba(0, 0, 0, 0.9); */
-    background-color: inherit;
-    transform: translateY(-100%);
-    transition: all 0.5s ease;
-    opacity: 0;
-    z-index: -1;
-  }
-  .nav-list a {
-    display: block;
-    margin: 1rem;
-    padding: 0.5rem;
-    border-left: 2px solid var(--main-color);
-  }
-  .nav-list.open {
-    /* top: 100%; */
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-/* @media screen and (max-width: 1500px) {
-  header {
-    padding: 22px 4%;
-    transition-duration: 0.2s;
-  }
-
-  header.sticky {
-    padding: 14px 4%;
-    transition-duration: 0.2s;
-  }
-
-  section {
-    padding: 50px 4% 40px;
-    transition-duration: 0.2s;
-  }
-  
-  .contact-info {
-    padding: 30px 4% 50px;
-  }
-}*/
-
-/* @media screen and (max-width: 1180px) {
-  :root {
-    --big-font: 4rem;
-    ---mid-font: 2.2rem;
-    --small-font: 15px;
-  }
-  .home {
-    height: 85vh;
-  }
-}
-
-@media screen and (max-width: 1060px) {
-  #menu-btn {
-    display: initial;
-  }
-  .nav-list {
-    position: absolute;
-    top: -1000px;
-    left: 0;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    background-color: var(--other-color);
-    transition: all 0.5s ease;
-    z-index: -1;
-  }
-  .nav-list a {
-    display: block;
-    margin: 1rem;
-    padding: 0.5rem;
-    border-left: 2px solid var(--main-color);
-  }
-  .nav-list.open {
-    top: 100%;
-  }
-}
-
-@media screen and (max-width: 1045px) {
-  :root {
-    --big-font: 3.3rem;
-    ---mid-font: 2rem;
-  }
-  .hero img {
-    width: 100%;
-    max-width: 490px;
-    height: auto;
-  }
-  .about-img img {
-    width: 100%;
-    max-width: 490px;
-    height: auto;
-  }
-  .home {
-    height: 70vh;
-  }
-}
-
-@media screen and (max-width: 1180px) {
-  #home {
-    height: 118vh;
-    grid-template-columns: 1fr;
-  }
-  .home .text {
-    padding-top: 60px;
-  }
-  .hero {
-    text-align: center;
-  }
-  #about {
-    grid-template-columns: 1fr;
-  }
-  .about-img {
-    text-align: center;
-  }
-}
-
-@media screen and (max-width: 520px) {
-  .contact-imgs {
-    gap: 1.5rem;
-  }
-  .contact-imgs img {
-    width: 100%;
-    max-width: 170px;
-    height: auto;
-  }
-  .social a {
-    margin: 0 5px;
-  }
-  #contact .text p {
-    max-width: 100%;
-  }
-  .details {
-    gap: 1.5rem;
-  }
-}
-
-@media screen and (max-width: 475px) {
-  :root {
-    --big-font: 2.8rem;
-    ---mid-font: 2rem;
-  }
-}
-
-@media screen and (max-width: 440px) {
-  .home {
-    height: 110vh;
-    gap: 0.1rem;
-  }
-} */
-
-.fade-down {
-  animation: fade-down 1s linear;
-}
-.half-fade-down {
-  animation: half-fade-down 1s linear;
-}
-.full-fade-down {
-  animation: full-fade-down 1s linear backwards;
-  animation-delay: calc(0.1s * var(--i));
-}
-.slow-full-fade-down {
-  animation: full-fade-down 1s linear backwards;
-  animation-delay: calc(0.2s * var(--i));
-}
-.paused {
-  animation-play-state: paused;
-}
-
-@keyframes fade-down {
-  0% {
-    transform: translateY(-10%);
-    opacity: 0;
-  }
-}
-
-@keyframes half-fade-down {
-  0% {
-    transform: translateY(-50%);
-    opacity: 0;
-  }
-}
-
-@keyframes full-fade-down {
-  0% {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-}
-
-@keyframes slow-full-fade-down {
-  0% {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  50% {
-    opacity: 0;
-  }
-}
-
+      @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 input[type=text] {
-    padding: 5px 10px;
+    padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box;
 }
-button#test {
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 14px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+input[type=button] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+input[type=button]:hover {
+    background-color: #45a049;
+}
+body {
+    margin: auto;
+    width: 25%;
+    text-align: center;
+    padding: 20px;
+    font-family: 'Open Sans', serif;
+}
+#stopName {
+    font-size: 1.5em;
+    margin: 8px 0;
+    font-weight: 400;
+    padding: 0.25em;
+    border-radius: 4px;
+    background-color: aquamarine;
 }
     </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
-
-    <header>
-      <a href="#logo" class="logo">
-        <i class="fa fa-forumbee"></i>honey
-      </a>
-
-      <ul class="nav-list">
-        <li><a href="#home" class="active">home</a></li>
-        <li><a href="#about">about us</a></li>
-        <li><a href="#shop">our shop</a></li>
-        <li><a href="#review">our customers</a></li>
-        <li><a href="#contact">contact us</a></li>
-      </ul>
-
-      <div class="nav-icons">
-        <a href="#">
-          <i class="fa fa-search"></i>
-        </a>
-        <a href="#">
-          <i class="fa fa-shopping-cart"></i>
-        </a>
-        <button id="menu-btn">menu
-          <i class="fa fa-bars"></i>
-        </button>
-      </div>
-    </header>
-    <script>
-      const header = document.querySelector("header");
-
-      window.addEventListener("scroll", () => {
-        header.classList.toggle("sticky", window.scrollY > 80);
-      })
-
-      const menuBtn = document.getElementById("menu-btn");
-      const nav = document.querySelector(".nav-list");
-
-      menuBtn.addEventListener("click", () => {
-        // const icon = document.querySelector("#menu-btn i");
-        // icon.classList.toggle("fa-bars");
-        // icon.classList.toggle("fa-times");
-        nav.classList.toggle("open");
-        window.addEventListener("scroll", () => {
-          nav.classList.remove("open");
-          // console.log("scroll");
-        }, {once: true})
-      });
-
-      const links = document.querySelectorAll(".nav-list a");
-
-      links.forEach(link => {
-        link.addEventListener("click", () => {
-          const activeLink = document.querySelector(".nav-list a.active");
-          activeLink.classList.remove("active");
-          link.classList.add("active");
-        })
-      })
-
-      // window.addEventListener("scroll", () => {
-      //   nav.classList.remove("open");
-      //   console.log("scroll");
-      // })
-    </script>
-
-    <section id="home" data-index="0">
-      <div class="text fade-down paused">
-        <h1>meet, <span class="main-color">eat & </span>enjoy the true taste</h1>
-        <a href="#explore-menu" class="btn">explore menu <span>&#155;</span></a>
-        <a href="#" class="alt-btn">order now</a>
-      </div>
-      <div class="hero fade-down paused">
-        <img src="./images/hero.png" alt="honey products">
-        <!-- <img src="./images/test/hero.png" alt="honey products"> -->
-      </div>
-    </section>
-
-    <section class="contact-info">
-      <div class="info-box fade-down paused">
-        <img src="./images/test/c1.png" alt="">
-        <h3 class="lower">11:00 am - 8:00 pm</h3>
-        <a href="#">working hours</a>
-      </div>
-
-      <div class="info-box fade-down paused">
-        <img src="./images/test/c2.png" alt="">
-        <h3>honey springs 55</h3>
-        <a href="#">get directions</a>
-      </div>
-
-      <div class="info-box fade-down paused">
-        <img src="./images/test/c3.png" alt="">
-        <h3>(555) 111-345345</h3>
-        <a href="#">call us now</a>
-      </div>
-    </section>
-
-    <section id="about" data-index="1">
-      
-      <div class="about-img fade-down paused">
-        <img src="./images/about.png" alt="honey products">
-      </div>
-
-      <div class="text fade-down paused">
-        <h2>Living well begins <span>with eating well.</span></h2>
-        <p>Over its history as a food, the main uses of honey are in cooking, baking, desserts, as a spread on bread, as an addition to various beverages such as tea, and as sweetener in some commercial beverages.</p>
-        <p>Due to its energy density, honey is an important food for virtually all hunter-gatherer cultures in warm climates, with the Hadza people ranking honey as their favorite food.</p>
-        <a href="#explore-menu" class="btn">explore story <span>&#155;</span></a>
-      </div>
-
-    </section>
-
-    <section id="shop" data-index="2">
-
-      <div class="text full-fade-down paused">
-        <h2>our shop</h2>
-        <h3>lets check popular products</h3>
-      </div>
-
-      <div class="products">
-
-        <div class="product fade-down paused">
-          <img src="./images/p1.png" alt="Jar of Blueberry Honey">
-          <h4>blueberry honey</h4>
-          <p>Its a long established fact that a reader</p>
-          <div class="in-text">
-            <div class="price">
-              <h5>$21.00</h5>
-            </div>
-            <div class="order-btn">
-              <a href="#order">order now</a>
-            </div>
-          </div>
-          <div class="like-icon">
-            <a href="#"><i class="fa fa-heart-o"></i></a>
-          </div>
-        </div>
-
-        <div class="product fade-down paused">
-          <img src="./images/p2.png" alt="Jar of Blueberry Honey">
-          <h4>blueberry honey</h4>
-          <p>Its a long established fact that a reader</p>
-          <div class="in-text">
-            <div class="price">
-              <h5>$21.00</h5>
-            </div>
-            <div class="order-btn">
-              <a href="#order">order now</a>
-            </div>
-          </div>
-          <div class="like-icon">
-            <a href="#"><i class="fa fa-heart-o"></i></a>
-          </div>
-        </div>
-
-        <div class="product fade-down paused">
-          <img src="./images/p3.png" alt="Jar of Blueberry Honey">
-          <h4>blueberry honey</h4>
-          <p>Its a long established fact that a reader</p>
-          <div class="in-text">
-            <div class="price">
-              <h5>$21.00</h5>
-            </div>
-            <div class="order-btn">
-              <a href="#order">order now</a>
-            </div>
-          </div>
-          <div class="like-icon">
-            <a href="#"><i class="fa fa-heart-o"></i></a>
-          </div>
-        </div>
-
-        <div class="product fade-down paused">
-          <img src="./images/p4.png" alt="Jar of Blueberry Honey">
-          <h4>blueberry honey</h4>
-          <p>Its a long established fact that a reader</p>
-          <div class="in-text">
-            <div class="price">
-              <h5>$21.00</h5>
-            </div>
-            <div class="order-btn">
-              <a href="#order">order now</a>
-            </div>
-          </div>
-          <div class="like-icon">
-            <a href="#"><i class="fa fa-heart-o"></i></a>
-          </div>
-        </div>
-
-        <div class="product fade-down paused">
-          <img src="./images/p5.png" alt="Jar of Blueberry Honey" id="bigger">
-          <h4>blueberry honey</h4>
-          <p>Its a long established fact that a reader</p>
-          <div class="in-text">
-            <div class="price">
-              <h5>$21.00</h5>
-            </div>
-            <div class="order-btn">
-              <a href="#order">order now</a>
-            </div>
-          </div>
-          <div class="like-icon">
-            <a href="#"><i class="fa fa-heart-o"></i></a>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="row-btn full-fade-down paused">
-        <a href="#explore-menu" class="btn">all products <span>&#155;</span></a>
-      </div>
-
-    </section>
-
-    <section id="review" data-index="3">
-
-      <div class="text full-fade-down paused">
-        <h2>our customers</h2>
-        <h3>clients reviews about our products</h3>
-      </div>
-    
-      <div class="reviews">
-    
-        <div class="review half-fade-down paused">
-          <p>The taste is still in my mouth and I can feel the depth of the taste of the each ingridient used in the food. I really love Fafo.</p>
-          <div class="review-content">
-            <div class="avatar-img">
-              <!-- <img src="./images/test/r1.jpg" alt="Person"> -->
-              <img src="../infinite-slider/367364636_295684053110451_4078138612283317246_n.jpg" alt="Person">
-            </div>
-            <div class="review-info">
-              <h4>john karahan</h4>
-              <h5>food vlogger</h5>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="review half-fade-down paused">
-          <p>The honey bottle I purchased exceeded my expectations. Its rich golden color and aromatic sweetness made it a delightful addition to my meals.</p>
-          <div class="review-content">
-            <div class="avatar-img">
-              <!-- <img src="./images/test/r2.jpg" alt="Person"> -->
-              <img src="../infinite-slider/373665158_852134616430735_3004769060838009939_n.jpg" alt="Person">
-            </div>
-            <div class="review-info">
-              <h4>john karahan</h4>
-              <h5>food vlogger</h5>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-    
-        <div class="review half-fade-down paused">
-          <p>What can I say - your honey is fantastic. Absolutely delicious. My tea doesn't want any other thing now! Good in coffee too.</p>
-          <div class="review-content">
-            <div class="avatar-img">
-              <!-- <img src="./images/test/r3.jpg" alt="Person"> -->
-              <img src="../infinite-slider/376854814_853596826128611_2150590640895327900_n.jpg" alt="Person">
-            </div>
-            <div class="review-info">
-              <h4>john karahan</h4>
-              <h5>food vlogger</h5>
-              <div class="rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-    
-      </div>
-    </section>
-
-    <section id="contact" data-index="4">
-
-      <!-- <div class="contact-content"> -->
-
-        <div class="contact-imgs">
-          <div class="c-one full-fade-down paused">
-            <img src="./images/test/f1.png" alt="">
-            <!-- <img src="./images/test/appstore.png" alt=""> -->
-          </div>
-          <div class="c-one full-fade-down paused">
-            <img src="./images/test/f2.png" alt="">
-            <!-- <img src="./images/test/playstore.png" alt=""> -->
-          </div>
-        </div>
-
-        <div class="text">
-          <h2 class="full-fade-down paused">contact us</h2>
-          <p class="full-fade-down paused">We are a family honey farm based in Petrinon, a small village in Thessaly, Greece. We produce a variety of high-quality honey as well as other bee products.</p>
-          <div class="social">
-            <a href="#"><i class="fa fa-instagram slow-full-fade-down paused" style="--i: 0"></i></a>
-            <a href="#"><i class="fa fa-facebook slow-full-fade-down paused" style="--i: 1"></i></a>
-            <a href="#"><i class="fa fa-twitter slow-full-fade-down paused" style="--i: 2"></i></a>
-            <a href="#"><i class="fa fa-telegram slow-full-fade-down paused" style="--i: 3"></i></a>
-            <a href="#"><i class="fa fa-whatsapp slow-full-fade-down paused" style="--i: 4"></i></a>
-            <a href="#"><i class="fa fa-reddit slow-full-fade-down paused" style="--i: 5"></i></a>
-            <a href="#"><i class="fa fa-skype slow-full-fade-down paused" style="--i: 6"></i></a>
-            <a href="#"><i class="fa fa-amazon slow-full-fade-down paused" style="--i: 7"></i></a>
-          </div>
-        </div>
-
-        <address class="details">
-          <div class="main-d slow-full-fade-down paused" style="--i: 0">
-            <p href="#loc"><i class="fa fa-map-marker"></i>Main street 65, NY</p>
-          </div>
-          <div class="main-d slow-full-fade-down paused" style="--i: 1">
-            <p href="#mobile"><i class="fa fa-mobile"></i>(555) 111-345345</p>
-          </div>
-          <div class="main-d slow-full-fade-down paused" style="--i: 2">
-            <p href="#mail"><i class="fa fa-envelope-o"></i>email@gmail.bg</p>
-          </div>
-          <div class="main-d slow-full-fade-down paused" style="--i: 3">
-            <p href="#sub"><i class="fa fa-bell-o"></i>Subscribe</p>
-          </div>
-        </address>
-
-      <!-- </div> -->
-    </section>
-
-    <a href="#top" class="top hidden"><i class="fa fa-home"></i></a>
-
-    <script>
-      const sectionObserver = new IntersectionObserver(changeLinks);
-      
-      const sections = document.querySelectorAll("section[data-index]");
-      // console.log(sections);
-      
-      sections.forEach(section => {
-        sectionObserver.observe(section);
-        // console.log(section);
-      })
-
-      // console.log(links);
-      
-      function changeLinks(entries) {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const index = entry.target.dataset.index;
-            // console.log(index);
-            const activeLink = document.querySelector(".nav-list a.active");
-            activeLink.classList.remove("active");
-            links[index].classList.add("active");
-          }
-        });
-      }
-    </script>
-    <script>
-      const optionsHomeSection = {
-        root: null,
-        rootMargin: "0px",
-        // threshold: [0, 0.2, 1],
-        threshold: 0,
-      };
-
-      // const homeSectionIsVisibleObserver = new IntersectionObserver(hideTopBtn, optionsHomeSection);
-      const homeSectionObserver = new IntersectionObserver(showTopBtn, optionsHomeSection);
-      
-      const homeSection = document.getElementById("home");
-      // console.log(sections);
-      // homeSection.style.border = "1px solid red";
-      
-      // homeSectionIsVisibleObserver.observe(homeSection);
-      homeSectionObserver.observe(homeSection);
-      // sections.forEach(section => {
-        // console.log(section);
-      // })
-
-      // console.log(links);
-      
-      function showTopBtn(entries) {
-        const topBtn = document.querySelector(".top");
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) {
-            console.log(entry);
-            topBtn.classList.remove("hidden");
-          } else {
-            console.log(entry);
-            topBtn.classList.add("hidden");
-          }
-        });
-      }
-
-      // function hideTopBtn(entries) {
-      //   entries.forEach(entry => {
-      //     if (entry.isIntersecting) {
-      //       console.log(entry);
-      //       const topBtn = document.querySelector(".top");
-      //       topBtn.classList.add("hidden");
-      //     }
-      //   });
-      // }
-    </script>
-    <script>
-      const observer = new IntersectionObserver(animate);
-      
-      const elements = document.querySelectorAll(".paused");
-      // console.log(elements);
-      
-      elements.forEach(element => {
-        observer.observe(element);
-        // console.log(element);
-      })
-      
-      function animate(entries) {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.remove("paused");
-          }
-        });
-      }
-    </script>    
-
-GitHub username:
-<input type="text" id="username" value="nakov" /> <br>
-Repo: <input type="text" id="repo" value="nakov.io.cin" />
-<button onclick="loadCommits()" id="test">Load Commits</button>
-<ul id="commits"></ul>
-
-<script>
-  function loadCommits() {
-    // Try it with Fetch API
-    // console.log("TODO...");
-    const username = document.getElementById("username").value;
-    const repoName = document.getElementById("repo").value;
-    const url = `https://api.github.com/repos/${username}/${repoName}/commits`;
-    
-    const outputField = document.getElementById("commits");
-    outputField.textContent = "";
-    
-    fetch(url)
-        .then(onResponse)
-        // .then(data => {
-        // 	console.log(data);
-        // 	return data;
-        // })
-        .then(onSuccess)
-        .catch(onError);
-    
-        function onResponse(response) {
-            // console.log(response);
-    
-            if (!response.ok) {
-                console.log(response);
-                throw response;
-            }
-    
-            return response.json();
-        }
-    
-        function onSuccess(data) {
-            console.log(data);
-            data.forEach(repo => {
-                // console.log(repo);
-                const li = createLi(repo);
-                // console.log(li);
-                outputField.appendChild(li);			
-            })
-        }
-    
-        function onError(error) {
-            console.log(error);
-            const li = document.createElement("li");
-            li.innerText = error.status;
-            outputField.appendChild(li);
-        }
-    
-    function createLi(repo) {
-        const li = document.createElement("li");
-        // const anchor = document.createElement("a");
-        // anchor.href = repo.html_url;
-        li.textContent = `${repo.commit.author.name}: ${repo.commit.message}`;
-        // li.appendChild(anchor);
-        // console.log(anchor);
-        return li;
-    }
-}
-</script>
 
 <script>
   // 10. Contacts Builder✶
@@ -1485,6 +54,144 @@ Repo: <input type="text" id="repo" value="nakov.io.cin" />
 </script>
 
     <!-- ================= Get data from local JSON file ================= -->
+
+    <script>
+      console.log("Hello");
+  
+      const p = new Promise(executor);
+      // p.then(onSuccess, onError);
+      p.then(onSuccess).catch(onError);
+  
+      console.log("there");
+  
+      function executor(resolve, reject) {
+          console.log("executing started");
+          // resolve("Bye!");
+          // setTimeout(resolve, 2000, "Bye!");
+          setTimeout(() => {
+              reject("Bye!");
+          }, 2000);
+      }
+  
+      function onSuccess(data) {
+          console.log(data);
+      }
+  
+      function onError(err) {
+          console.log(err);
+      }
+    </script>
+      
+    <script>
+      // start1();
+
+      async function start1() {
+          const r1 = await execute1();
+          const r2 = await execute2();
+          const r3 = await execute3();
+          console.log(r1, r2, r3);
+      }
+
+      start2();
+      async function start2() {
+          const r1 = execute1();
+          const r2 = execute2();
+          const r3 = execute3();
+          console.log(await r1, await r2, await r3);
+      }
+
+      function execute1() {
+          console.log("execute 1");
+          return new Promise(res => {
+              setTimeout(res, 1500, "result 1");
+          })
+      }
+
+      function execute2() {
+          console.log("execute 2");
+          return new Promise(res => {
+              setTimeout(res, 1000, "result 2");
+          })
+      }
+
+      function execute3() {
+          console.log("execute 3");
+          return new Promise(res => {
+              setTimeout(res, 2000, "result 3");
+          })
+      }
+    </script>
+
+<div id="stopInfo" style="width:20em">
+  <div>
+      <label for="stopId">Stop ID: </label>
+      <input id="stopId" type="text">
+      <input id="submit" type="button" value="Check" onclick="getInfo()"></div>
+  <div id="result">
+      <div id="stopName"></div>
+      <ul id="buses"></ul>
+  </div>
+</div>
+
+    <script>
+      function getInfo() {
+    // console.log("TODO...");
+    const busStopInput = document.getElementById("stopId");
+    const ID = busStopInput.value;
+    const url = "http://localhost:3030/jsonstore/bus/businfo/";
+
+    const busesOutput = document.getElementById("buses");
+    busesOutput.textContent = "";
+
+    fetch(`${url}${ID}`)
+        // .then(response => {
+            // console.log(response);
+            // return response;
+        // })
+        .then(response => {
+            if (!response.ok) {
+                return;
+            }
+            const data = response.json();
+            // console.log(data);
+            return data;
+        })
+        .then(data => {
+            // console.log(data);
+            const stopOutput = document.getElementById("stopName");
+            stopOutput.textContent = data.name;
+            // const busesOutput = document.getElementById("buses");
+            // busesOutput.textContent = "";
+            const busesInfo = Object.entries(data.buses);
+            // console.log(busesInfo);
+            for (const bus of busesInfo) {
+                const id = bus[0];
+                const time = bus[1];
+                // console.log(id, time);
+                const li = document.createElement("li");
+                li.textContent = `Bus ${id} arrives in ${time} minutes`;
+                busesOutput.appendChild(li);
+            }
+        })
+        .catch(err => {
+            const stopOutput = document.getElementById("stopName");
+            stopOutput.textContent = "Error";
+        });
+
+
+    // fetch(url)
+    //     .then(response => {
+    //         console.log(response);
+    //         return response;
+    //     })
+    //     .then(response => {
+    //         const data = response.json();
+    //         console.log(data);
+    //         return data;
+    //     })
+    //     .then(data => console.log(data));
+}
+    </script>
 
     <fieldset>
       <legend>Get all users from local JSON file</legend>
