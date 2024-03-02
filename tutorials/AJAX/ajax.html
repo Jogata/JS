@@ -6,180 +6,101 @@
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <style>
-      @import url(https://fonts.googleapis.com/css?family=Open+Sans);
-        input[type=text] {
-            padding: 12px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        input[type=button] {
-            padding: 10px 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        body {
-            margin: auto;
-            width: 25%;
-            text-align: center;
-            padding: 20px;
-            font-family: 'Open Sans', serif;
-        }
-        #schedule {
-            text-align: center;
-            width: 400px;
-        }
-        input {
-            width: 120px;
-        }
-        #info {
-            background-color: aquamarine;
-            border: 1px none black;
-            border-radius: 4px;
-            margin: 0.25em;
-        }
-        .info {
-            font-size: 1.5em;
-            padding: 0.25em;
-        }
+      fieldset {
+        display: none;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 100%;
+        min-height: 100vh;
+        /* display: flex; */
+        /* align-items: center; */
+        /* justify-content: center; */
+      }
+
+      #content {
+    width: 75%;
+    margin: 0 auto;
+}
+
+div.forecasts {
+    display: inline-block;
+    width: 30%;
+    border: 1px solid aquamarine;
+    border-radius: 4px;
+    margin: 2% 2% 0.5% 0.5%;
+}
+
+div.forecast-info {
+    border: 1px solid aquamarine;
+    border-radius: 4px;
+    margin-bottom: 1%;
+}
+
+#request {
+    text-align: center;
+}
+
+.bl {
+    width: 300px;
+}
+
+#current {
+    text-align: center;
+    font-size: 2em;
+}
+
+#upcoming {
+    text-align: center;
+}
+
+.condition {
+    text-align: left;
+    display: inline-block;
+}
+
+.symbol {
+    font-size: 4em;
+    display: inline-block;
+}
+
+.forecast-data {
+    display: block;
+}
+
+.upcoming {
+    display: inline-block;
+    margin: 1.5em;
+}
+
+.label {
+    margin-top: 1em;
+    font-size: 1.5em;
+    background-color: aquamarine;
+    font-weight: 400;
+}
+
+input {
+    padding: 10px 12px;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type=button] {
+    background-color: aquamarine;
+}
     </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
-    <label for="username">GitHub username:</label>
-    <input type="text" id="username" value="k1r1L" />
-    <button onclick="loadRepos()">Load Repos</button>
-    <ul id="repos">
-        <li>
-            <a href="{repo.html_url}">
-                {repo.full_name}
-            </a>
-        </li>
-    </ul>
-
-    <script>
-      function loadRepos() {
-	// console.log("TODO...");
-	const username = document.getElementById("username").value;
-	const url = `https://api.github.com/users/${username}/repos`;
-
-	const outputField = document.getElementById("repos");
-	outputField.textContent = "";
-
-	fetch(url)
-		.then(onResponse)
-		// .then(data => {
-		// 	console.log(data);
-		// 	return data;
-		// })
-		.then(onSuccess)
-		.catch(onError);
-
-		function onResponse(response) {
-
-			if (!response.ok) {
-				throw "Error";
-			}
-
-			return response.json();
-		}
-
-		function onSuccess(data) {
-			// console.log(data);
-			data.forEach(repo => {
-				// console.log(repo);
-				const li = createLi(repo);
-				// console.log(li);
-				outputField.appendChild(li);			
-			})
-		}
-
-		function onError(error) {
-			console.log(error);
-			outputField.innerText = error;
-		}
-
-	function createLi(repo) {
-		const li = document.createElement("li");
-		const anchor = document.createElement("a");
-		anchor.href = repo.html_url;
-		anchor.textContent = repo.full_name;
-		li.appendChild(anchor);
-		// console.log(anchor);
-		return li;
-	}
-}
-    </script>
-
-    <div id="schedule">
-      <div id="info"><span class="info">Not Connected</span></div>
-      <div id="controls">
-          <input id="depart" value="Depart" type="button" onclick="result1.depart()">
-          <input id="arrive" value="Arrive" type="button" onclick="result1.arrive()" disabled="true">
-      </div>
-    </div>
-
-    <script>
-      function solve() {
-    // console.log("solved");
-    const url = "http://localhost:3030/jsonstore/bus/schedule";
-    let id = "depot";
-    let stopName = "";
-    // let nextID = "";
-
-    const stopOutput = document.querySelector(".info");
-
-    const departBtn = document.getElementById("depart");
-    const arriveBtn = document.getElementById("arrive");
-
-    // fetch(url + "/" + id)
-    // .then(response => response.json())
-    // .then(data => console.log(data));
-
-    function depart() {
-        // console.log('Depart TODO...');
-        fetch(url + "/" + id)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Error");
-                }
-                // return;
-                return response.json();
-            })
-            .then(data => {
-                // console.log(data);
-                departBtn.disabled = true;
-                arriveBtn.disabled = false;
-                stopOutput.textContent = `Next stop ${data.name}`;
-                id = data.next;
-                stopName = data.name;
-            })
-            .catch(err => {
-                stopOutput.textContent = `Error`;
-                departBtn.disabled = true;
-                arriveBtn.disabled = true;
-            })
-    }
-
-    function arrive() {
-        // console.log('Arrive TODO...');
-        stopOutput.textContent = `Arriving at ${stopName}`;
-        departBtn.disabled = false;
-        arriveBtn.disabled = true;
-    }
-
-    return {
-        depart,
-        arrive
-    };
-}
-
-let result1 = solve();
-// console.log(result.depart);
-    </script>
 
 <script>
   // 10. Contacts Builder✶
@@ -189,6 +110,73 @@ let result1 = solve();
 </script>
 
     <!-- ================= Get data from local JSON file ================= -->
+
+    <div id="content">
+      <div id="request">
+          <input id="location" class='bl' type="text">
+          <input id="submit" class="bl" type="button" value="Get Weather">
+      </div>
+      <div id="forecast" style="display:none">
+          <div id="current">
+              <div class="label">Current conditions</div>
+              <!-- <div class="forecasts">
+                  <span class="condition symbol"></span>
+                  <span class="condition">
+                      <span class="forecast-data">london, usa</span>
+                      <span class="forecast-data">8deg/19deg</span>
+                      <span class="forecast-data">sunny</span>
+                  </span>
+              </div> -->
+          </div>
+          <div id="upcoming">
+              <div class="label">Three-day forecast</div>
+              <!-- <div class="forecast-info">
+                  <span class="upcoming">
+                      <span class="symbol"></span>
+                      <span class="forecast-data">8deg/19deg</span>
+                      <span class="forecast-data">sunny</span>
+                  </span>
+                  <span class="upcoming">
+                      <span class="symbol"></span>
+                      <span class="forecast-data">8deg/19deg</span>
+                      <span class="forecast-data">sunny</span>
+                  </span>
+                  <span class="upcoming">
+                      <span class="symbol"></span>
+                      <span class="forecast-data">8deg/19deg</span>
+                      <span class="forecast-data">sunny</span>
+                  </span>
+              </div> -->
+          </div>
+      </div>
+  </div>
+
+<script>
+function attachEvents() {
+    // console.log("TODO...");
+    const submitbtn = document.getElementById("submit");
+    const forecastoutput = document.getElementById("forecast");
+    
+    submitbtn.addEventListener("click", async () => {
+        try {
+            const locationInput = document.getElementById("location");
+            const locationvalue = locationInput.value;
+        } catch (error) {
+            forecastoutput.textContent = "Error";
+            forecastoutput.style.display = "block";
+        }
+    });
+
+    // function getLocations(url) {
+    //     fetch(url)
+    //     .then(response => response.json())
+    //     .then(data => console.log(data))
+    //     .catch(err => console.log(err));
+    // }
+}
+
+attachEvents();
+</script>
 
     <fieldset>
       <legend>Get all users from local JSON file</legend>
