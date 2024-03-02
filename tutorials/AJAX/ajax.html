@@ -100,6 +100,41 @@ input[type=button] {
     </style>
   </head>
   <body>
+
+    <div id="container">
+
+      <main id="main">
+  
+        <div class="profile">
+
+          <img src="./iconProfile2.png" class="userIcon" />
+          <label>Lock</label>
+          <input type="radio" name="user1Locked" value="lock" checked>
+          <label>Unlock</label>
+          <input type="radio" name="user1Locked" value="unlock"><br>
+          <hr>
+          <label>Username</label>
+          <input type="text" name="user1Username" value="" disabled readonly />
+
+          <div class="user1Username">
+            <hr>
+            <label>Email:</label>
+            <input type="email" name="user1Email" value="" disabled readonly />
+            <label>Age:</label>
+            <input type="text" name="user1Age" value="" disabled readonly />
+          </div>
+          
+          <button>Show more</button>
+
+        </div>
+  
+      </main>
+
+    </div>
+    <script>
+      window.onload = lockedProfile();
+    </script>
+  
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
 <script>
@@ -161,6 +196,105 @@ function attachEvents() {
         try {
             const locationInput = document.getElementById("location");
             const locationvalue = locationInput.value;
+
+            if (locationvalue.length == 0) {
+                throw new Error();
+            }
+
+            const response = await fetch("http://localhost:3030/jsonstore/forecaster/locations");
+
+            if (!response.ok) {
+                throw new Error();
+            }
+
+            const locationsdata = await response.json();
+            // console.log(locationsdata);
+            const data = Object.entries(locationsdata);
+            // console.log(data);
+
+            const location = data.find(x => x[1].name == locationvalue);
+            // console.log(location);
+
+            if (!location) {
+                throw new Error();
+            }
+
+            const code = location[1].code;
+            // console.log(code);
+
+            const todayInfoURL = `http://localhost:3030/jsonstore/forecaster/today/${code}`;
+            
+            const todayInfoResponse = await fetch(todayInfoURL);
+            
+            const todayInfo = await todayInfoResponse.json();
+            // console.log(todayInfo);
+            
+            const upcomingInfoURL = `http://localhost:3030/jsonstore/forecaster/upcoming/${code}`;
+
+            const upcomingInfoResponse = await fetch(upcomingInfoURL);
+
+            const upcomingInfo = await upcomingInfoResponse.json();
+            // console.log(upcomingInfo);
+
+            forecastoutput.style.display = "block";
+
+            const symbols = {
+                "Sunny": "&#x2600;", // ☀
+                "Partly sunny": "&#x26C5;", // ⛅
+                "Overcast": "&#x2601;", // ☁
+                "Rain": "&#x2614;", // ☂
+                "Degrees": "&#176;" // °
+            }
+            // console.log(symbols);
+
+            const forecastsDiv = document.createElement("div");
+            forecastsDiv.classList.add("forecasts");
+            const forecastsHtml = `<span class="condition symbol">${symbols[todayInfo.forecast.condition]}</span><span class="condition"><span class="forecast-data">${todayInfo.name}</span><span class="forecast-data">${todayInfo.forecast.low}${symbols.Degrees}/${todayInfo.forecast.high}${symbols.Degrees}</span><span class="forecast-data">${todayInfo.forecast.condition}</span></span>`;
+            forecastsDiv.innerHTML = forecastsHtml;
+
+            const todayWeatherView = document.getElementById("current");
+            todayWeatherView.appendChild(forecastsDiv);
+
+            const upcomingDiv = document.createElement("div");
+            upcomingDiv.classList.add("forecast-info");
+
+            for (const day of upcomingInfo.forecast) {
+                // console.log(day);
+                const span = createOneDayInfo(day.condition, day.low, day.high);
+                // console.log(span.children);
+                upcomingDiv.appendChild(span);
+            }
+
+            const upcomingWeatherView = document.getElementById("upcoming");
+            upcomingWeatherView.appendChild(upcomingDiv);
+
+        //     `<div class="forecast-info">
+        //     <span class="upcoming">
+        //         <span class="symbol"></span>
+        //         <span class="forecast-data">8deg/19deg</span>
+        //         <span class="forecast-data">sunny</span>
+        //     </span>
+        //     <span class="upcoming">
+        //         <span class="symbol"></span>
+        //         <span class="forecast-data">8deg/19deg</span>
+        //         <span class="forecast-data">sunny</span>
+        //     </span>
+        //     <span class="upcoming">
+        //         <span class="symbol"></span>
+        //         <span class="forecast-data">8deg/19deg</span>
+        //         <span class="forecast-data">sunny</span>
+        //     </span>
+        // </div>`
+
+        function createOneDayInfo(condition, low, high) {
+            const span = document.createElement("span");
+            span.classList.add("upcoming");
+            const html = `<span class="symbol">${symbols[condition]}</span><span class="forecast-data">${low}${symbols.Degrees}/${high}${symbols.Degrees}</span><span class="forecast-data">${condition}</span>`;
+            // console.log(html);
+            span.innerHTML = html;
+            return span;
+        }
+
         } catch (error) {
             forecastoutput.textContent = "Error";
             forecastoutput.style.display = "block";
