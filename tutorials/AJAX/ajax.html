@@ -6,96 +6,96 @@
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <style>
-      fieldset {
-        display: none;
-      }
+      @import url("https://fonts.googleapis.com/css?family=Lato");
+      @import url("https://fonts.googleapis.com/css?family=PT+Sans");
 
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        width: 100%;
-        min-height: 100vh;
-        /* display: flex; */
-        /* align-items: center; */
-        /* justify-content: center; */
-      }
-
-      #content {
-    width: 75%;
-    margin: 0 auto;
+body fieldset {
+  display: none;
 }
 
-div.forecasts {
-    display: inline-block;
-    width: 30%;
-    border: 1px solid aquamarine;
-    border-radius: 4px;
-    margin: 2% 2% 0.5% 0.5%;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
-div.forecast-info {
-    border: 1px solid aquamarine;
-    border-radius: 4px;
-    margin-bottom: 1%;
+html {
+  font-family: "PT sans", sans-serif;
+  font-size: 24px;
+  color: #234465;
 }
-
-#request {
-    text-align: center;
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: Georgia, Times, serif;
+  margin: 0;
+  min-height: 100vh;
+  flex-wrap: wrap;
 }
-
-.bl {
-    width: 300px;
+#main {
+  background-size: cover;
+  margin-top: 1%;
 }
-
-#current {
-    text-align: center;
-    font-size: 2em;
+#exercise {
+  width: 70%;
+  float: left;
+  padding: 1rem 0 1rem 1rem;
 }
-
-#upcoming {
-    text-align: center;
+main:after {
+  display: block;
+  content: "";
+  clear: both;
 }
-
-.condition {
-    text-align: left;
-    display: inline-block;
+input[type="button"],
+button {
+  padding: 0.3rem 0.5rem;
+  font-size: 0.7em;
+  margin: 1rem 0 1rem 0;
+  border: none;
+  color: white;
+  background: #234465;
+  border-radius: 5px;
+  outline: none;
+  font-family: inherit;
 }
-
-.symbol {
-    font-size: 4em;
-    display: inline-block;
+.profile {
+  border: 3px solid black;
+  display: inline-block;
+  margin-left: 11.7%;
+  width: 13%;
+  vertical-align: top;
+  margin-top: 15px;
+  text-align: center;
 }
-
-.forecast-data {
-    display: block;
+#down {
+  border: 3px solid black;
+  display: inline-block;
+  margin-left: 19.9%;
+  width: 13%;
+  vertical-align: top;
+  margin-top: 15px;
 }
-
-.upcoming {
-    display: inline-block;
-    margin: 1.5em;
+.userIcon {
+  width: 99%;
+  height: auto;
+  margin: 0 auto;
 }
-
-.label {
-    margin-top: 1em;
-    font-size: 1.5em;
-    background-color: aquamarine;
-    font-weight: 400;
+.hiddenInfo input{
+  display: inline-block;
+  width: 100%;
 }
-
-input {
-    padding: 10px 12px;
-    margin: 5px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+.hiddenInfo input {
+  width: 100%;
 }
-
-input[type=button] {
-    background-color: aquamarine;
+.hiddenInfo > input, .hiddenInfo > label {
+  display: none;
+}
+button {
+  border: 1px solid darkblue;
+  /* background-color: cadetblue; */
+  cursor: pointer;
+}
+button:focus-visible {
+  outline: 1px solid gray;
 }
     </style>
   </head>
@@ -134,6 +134,49 @@ input[type=button] {
     <script>
       window.onload = lockedProfile();
     </script>
+    <script>
+      function lockedProfile() {
+    // console.log('TODO...')
+    const url = `http://localhost:3030/jsonstore/advanced/profiles`;
+
+    // const test = {
+    //     _id: "4fccdb3a-59c9-4e45-a28f-870fe5d1d8be", 
+    //     age: 23, 
+    //     email: "peter@users.bg", 
+    //     username: "Peter"
+    // }
+
+    const callbacks = {
+        "Show": show, 
+        "Hide": hide,
+    }
+
+    const mainSec = document.getElementById("main");
+    mainSec.textContent = "";
+    // const userCard = document.querySelector(".profile");
+
+    try {
+        getUsers();
+    } catch (error) {
+        console.log(error);
+    }
+
+    async function getUsers() {
+      const response = await fetch(url);
+      const data = await response.json();
+      // console.log(data);
+      const users = Object.values(data);
+      // console.log(users);
+    }
+
+    getUsers();
+
+    // fetch(url)
+    // .then(response => response.json())
+    // .then(data => console.log(data))
+    // .catch(err => console.log(err));
+}
+    </script>
   
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
@@ -146,7 +189,7 @@ input[type=button] {
 
     <!-- ================= Get data from local JSON file ================= -->
 
-    <div id="content">
+    <div id="content" style="display: none;">
       <div id="request">
           <input id="location" class='bl' type="text">
           <input id="submit" class="bl" type="button" value="Get Weather">
