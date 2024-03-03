@@ -6,323 +6,193 @@
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <style>
-      @import url("https://fonts.googleapis.com/css?family=Poppins");
-      
-      button {
-        border: 1px solid transparent;
-        outline: 1px solid transparent;
-        background-color: transparent;
-      }
-      button:focus-visible {
-        outline: 1px solid gray;
-      }
-
+      @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 body {
-  /* width: 100%; */
-  /* height: 100vh; */
-  min-height: 100vh;
-  font-family: "Poppins", sans-serif;
+    font-family: 'Open Sans', serif;
 }
-
-.accordion {
-  border: 2px solid #cdc7c7;
-  display: inline-block;
-  width: 40%;
-  font-size: 1.3rem;
-  margin: 10px;
-}
-
-.accordion p {
-  margin: 1em;
-}
-
-.button {
-  float: right;
-  background: #393636;
-  padding: 0.1em 1em 0.1em 1em;
-  color: white;
-  cursor: pointer;
-  text-transform: uppercase;
-  font-weight: bold;
-  letter-spacing: 3px;
-}
-
-.extra {
-  display: none;
-}
-
-.head {
-  background: #ccccff;
-  padding: 1em;
-}
-
-      @import url("https://fonts.googleapis.com/css?family=Lato");
-      @import url("https://fonts.googleapis.com/css?family=PT+Sans");
-
-body fieldset {
-  display: none;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-html {
-  font-family: "PT sans", sans-serif;
-  font-size: 24px;
-  color: #234465;
-}
-body {
-  display: flex;
-  flex-direction: column;
-  font-family: Georgia, Times, serif;
-  margin: 0;
-  min-height: 100vh;
-  flex-wrap: wrap;
-}
-#main {
-  background-size: cover;
-  margin-top: 1%;
-}
-#exercise {
-  width: 70%;
-  float: left;
-  padding: 1rem 0 1rem 1rem;
-}
-main:after {
-  display: block;
-  content: "";
-  clear: both;
-}
-input[type="button"],
-button {
-  padding: 0.3rem 0.5rem;
-  font-size: 0.7em;
-  margin: 1rem 0 1rem 0;
-  border: none;
-  color: white;
-  background: #234465;
-  border-radius: 5px;
-  outline: none;
-  font-family: inherit;
-}
-.profile {
-  border: 3px solid black;
-  display: inline-block;
-  margin-left: 11.7%;
-  width: 13%;
-  vertical-align: top;
-  margin-top: 15px;
-  text-align: center;
-}
-#down {
-  border: 3px solid black;
-  display: inline-block;
-  margin-left: 19.9%;
-  width: 13%;
-  vertical-align: top;
-  margin-top: 15px;
-}
-.userIcon {
-  width: 99%;
-  height: auto;
-  margin: 0 auto;
-}
-.hiddenInfo input{
-  display: inline-block;
-  width: 100%;
-}
-.hiddenInfo input {
-  width: 100%;
-}
-.hiddenInfo > input, .hiddenInfo > label {
-  display: none;
+select {
+    padding: 10px 15px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
 button {
-  border: 1px solid darkblue;
-  /* background-color: cadetblue; */
-  cursor: pointer;
-}
-button:focus-visible {
-  outline: 1px solid gray;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
     </style>
   </head>
   <body>
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
-    <div id="container">
+    <h1>All Posts</h1>
+    <button id="btnLoadPosts">Load Posts</button>
+    <select id="posts"></select>
+    <button id="btnViewPost">View</button>
+    <h1 id="post-title">Post Details</h1>
+    <p id="post-body"></p>
+    <h2>Comments</h2>
+    <ul id="post-comments"></ul>
 
-      <main id="main">
-  
-        <div class="profile">
-
-          <img src="./iconProfile2.png" class="userIcon" />
-          <label>Lock</label>
-          <input type="radio" name="user1Locked" value="lock" checked>
-          <label>Unlock</label>
-          <input type="radio" name="user1Locked" value="unlock"><br>
-          <hr>
-          <label>Username</label>
-          <input type="text" name="user1Username" value="" disabled readonly />
-
-          <div class="user1Username">
-            <hr>
-            <label>Email:</label>
-            <input type="email" name="user1Email" value="" disabled readonly />
-            <label>Age:</label>
-            <input type="text" name="user1Age" value="" disabled readonly />
-          </div>
-          
-          <button>Show more</button>
-
-        </div>
-  
-      </main>
-
-    </div>
     <script>
-      window.onload = lockedProfile();
-    </script>
-    <script>
-      function lockedProfile() {
-    // console.log('TODO...')
-    const url = `http://localhost:3030/jsonstore/advanced/profiles`;
+      function attachEvents() {
+    // console.log('TODO...');
 
-    // const test = {
-    //     _id: "4fccdb3a-59c9-4e45-a28f-870fe5d1d8be", 
-    //     age: 23, 
-    //     email: "peter@users.bg", 
-    //     username: "Peter"
-    // }
+    const postsURL = `http://localhost:3030/jsonstore/blog/posts`;
+    const commentsURL = `http://localhost:3030/jsonstore/blog/comments`;
+    const commentURL = `http://localhost:3030/jsonstore/blog/comments/:id`;
 
-    const callbacks = {
-        "Show": show, 
-        "Hide": hide,
-    }
+    let posts = null;
 
-    const profileCardCallbacks = {
-        "Show": showUserInfo, 
-        "Hide": hideUserInfo, 
-        "undefined": doNothing
-    };
+    const loadPostsBtn = document.getElementById("btnLoadPosts");
+    loadPostsBtn.addEventListener("click", async () => {
+        await getPostsData();
+        addOptions();
+    });
 
-    const mainSec = document.getElementById("main");
-    mainSec.textContent = "";
-    // const userCard = document.querySelector(".profile");
+    const loadPostBtn = document.getElementById("btnViewPost");
+    loadPostBtn.addEventListener("click", () => {
+        const select = document.getElementById("posts");
+        const postID = select.value;
+        // console.log(selectedValue);
+        const post = getPost(postID);
+        // console.log(postID);
+        // const post = getPost(postID);
+        // console.log(post);
+        loadPost(post);
+        loadComments(postID);
+    });
 
-    try {
-        getUsers();
-    } catch (error) {
-        console.log(error);
-    }
+    async function getPostsData() {
+        
+        try {
+            const response = await fetch(postsURL);
 
-    async function getUsers() {
-      const response = await fetch(url);
-      const data = await response.json();
-      // console.log(data);
-      const users = Object.values(data);
-      // console.log(users);
+            if (!response.ok) {
+                throw new Error();
+            }
 
-      for (let index = 0; index < users.length; index++) {
-            const user = users[index];
-            // console.log(user);
-            const profileCard = document.createElement("div");
-            profileCard.classList.add("profile");
+            const data = await response.json();
+            // console.log(data);
+            // const postsData = Object.values(data);
+            // console.log(posts);
+            posts = Object.values(data);
+            // console.log(posts);
+            // console.log(postsData);
 
-            const html = `<img src="./iconProfile2.png" class="userIcon" /><label>Lock</label><input type="radio" name="user${index + 1}Locked" value="lock" checked><label>Unlock</label><input type="radio" name="user${index + 1}Locked" value="unlock"><br><hr><label>Username</label><input type="text" name="user${index + 1}Username" value="${user.username}" disabled readonly /><div class="user1HiddenFields" style="display: none;"><hr><label>Email:</label><input type="email" name="user${index + 1}Email" value="${user.email}" disabled readonly /><label>Age:</label><input type="text" name="user${index + 1}Age" value="${user.age}" disabled readonly /></div>`;
-            const btn = document.createElement("button");
-            btn.textContent = "Show more";
-            profileCard.innerHTML = html;
-            btn.addEventListener("click", toggleUserInfo);
-            profileCard.appendChild(btn);
+            // return postsData;
 
-            profileCard.addEventListener("click", callback);
-
-            mainSec.appendChild(profileCard);
-        }
-
-        function toggleUserInfo(e) {
-            // console.log("display");
-            const text = this.textContent;
-            const tokens = text.split(" ");
-            const callbackName = tokens[0];
-            // console.log(callbackName);
-            e.callbackName = callbackName;
-        }
-
-        // for (const user of users) {
-            // console.log(user);
-            // const userCard = document.querySelector(".profile");
-            // const html = 
-            // const clone = userCard.cloneNode(true);
-            // const username = clone.querySelector("input:nth-of-type(3)");
-            // username.value = user.username;
-            // const email = clone.querySelector(".user1Username input:nth-of-type(1)");
-            // email.value = user.email;
-            // const age = clone.querySelector(".user1Username input:nth-of-type(2)");
-            // age.value = user.age;
-            // mainSec.appendChild(clone);    
-        // }
-
-        // mainSec.children[0].remove();
-    
-    }
-
-    // getUsers();
-
-    function show() {
-        // console.log("show");
-        this.textContent = "Hide it";
-    }
-
-    function hide() {
-        // console.log("hide");
-        this.textContent = "Show more";
-    }
-
-    function doNothing() {
-        console.log("doNothing");
-        return;
-    }
-
-    function callback(e) {
-        // console.log(e.target);
-        // console.log(e.callbackName);
-        const checkedInput = this.querySelector("input:checked");
-        // console.log(checkedInput);
-        const checkedInputValue = checkedInput.value;
-        // console.log(checkedInputValue);
-        if (checkedInputValue == "unlock" && e.target.tagName == "BUTTON") {
-            const cardCallback = profileCardCallbacks[e.callbackName];
-            cardCallback.call(this);
-            const btnCallback = btnCallbacks[e.callbackName];
-            // console.log(btnCallback);
-            // console.log(this);
-            btnCallback.call(e.target);
+        } catch (error) {
+            console.log(error);
         }
     }
 
-    function showUserInfo() {
-        // console.log(this);
-        const userinfo = this.querySelector(".user1HiddenFields");
-        userinfo.style.display = "block";
+    function getPost(id) {
+        const post = posts.find(post => post.id == id);
+        return post;
     }
 
-    function hideUserInfo() {
-        // console.log(this);
-        const userinfo = this.querySelector(".user1HiddenFields");
-        userinfo.style.display = "none";
+    function loadPost(post) {
+        const title = post.title;
+        const postTitle = document.getElementById("post-title");
+        postTitle.textContent = title;
+        const body = post.body;
+        const postBody = document.getElementById("post-body");
+        postBody.textContent = body;
     }
 
-    // fetch(url)
+    async function loadComments(id) {
+        const allComments = await getCommentsData();
+        // console.log(comments);
+        const postComments = allComments.filter(comment => comment.postId == id);
+        // console.log(postComments);
+        const commentsUL = document.getElementById("post-comments");
+        commentsUL.textContent = "";
+
+        for (const comment of postComments) {
+            // console.log(comment);
+            createComment(comment, commentsUL);
+        }
+    }
+
+    function createComment(data, parent) {
+        const li = document.createElement("li");
+        li.textContent = data.text;
+        // const commentsUL = document.getElementById("post-comments");
+        parent.appendChild(li);
+    }
+
+    async function getCommentsData() {
+        
+        try {
+            const response = await fetch(commentsURL);
+
+            if (!response.ok) {
+                throw new Error();
+            }
+
+            const data = await response.json();
+            // console.log(data);
+            const commentsData = Object.values(data);
+            // console.log(commentsData);
+
+            return commentsData;
+
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
+    }
+
+    function addOptions() {
+        const select = document.getElementById("posts");
+
+        for (const post of posts) {
+            // console.log(post);
+            const option = createOptionTag(post.id, post.title);
+            select.appendChild(option);
+        }
+    }
+
+    function createOptionTag(value, text) {
+        const option = document.createElement("option");
+        option.text = text;
+        option.value = value;
+        return option;
+    }
+
+    var testPost = {
+        body: "post body", 
+        id: 5, 
+        title: "post title"
+    }
+
+    var testComment = {
+        id: 5, 
+        postId: "comment body", 
+        text: "comment text"
+    }
+
+    // fetch(postsURL)
     // .then(response => response.json())
     // .then(data => console.log(data))
     // .catch(err => console.log(err));
+
+    // fetch(commentsURL)
+    // .then(response => response.json())
+    // .then(data => console.log(data))
+    // .catch(err => console.log(err));
+    
 }
+
+attachEvents();
     </script>
-  
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
 <script>
   // 10. Contacts Builder✶
@@ -332,295 +202,6 @@ button:focus-visible {
 </script>
 
     <!-- ================= Get data from local JSON file ================= -->
-
-    <section id="main">
-      <!-- <div class="accordion">
-          <div class="head">
-              <span>Scalable Vector Graphics</span>
-              <button class="button" id="ee9823ab-c3e8-4a14-b998-8c22ec246bd3">More</button>
-          </div>
-          <div class="extra">
-              <p>Scalable Vector Graphics .....</p>
-          </div>
-      </div> -->
-  </section>
-
-    <script>
-      function solution() {
-    //TODO .....
-    const url = `http://localhost:3030/jsonstore/advanced/articles/list`;
-
-    createAccordions();
-
-    // var test = {
-    //     _id: 5, 
-    //     title: "test"
-    // }
-
-    async function createAccordions() {
-        try {
-            const data = await getAccordions();
-            // console.log(data);
-
-            const main = document.getElementById("main");
-
-            for (const accordionData of data) {
-                // console.log(accordionData);
-                // const id = accordionData._id;
-                // const title = accordionData.title;
-
-                const accordion = createAccordion(accordionData);
-                const btn = accordion.querySelector("button");
-                // console.log(btn);
-                btn.addEventListener("click", async function() {
-                    // console.log(this);
-                    // console.log(this.id);
-                    
-                    try {
-                        const url = `http://localhost:3030/jsonstore/advanced/articles/details/${this.id}`;
-
-                        // var test = {
-                        //     id: 5, 
-                        //     title: "test", 
-                        //     content: "tets content"
-                        // }
-
-                        const response = await fetch(url);
-
-                        if (!response.ok) {
-                          throw new Error();
-                        }
-
-                        const data = await response.json();
-                        // console.log(data);
-                        const para = accordion.querySelector(".extra p");
-                        para.textContent = data.content;
-                        
-                    } catch (error) {
-                        console.log(error);
-                    }
-                })
-
-                btn.addEventListener("click", () => {
-                    // console.log(btn);
-                    const content = accordion.querySelector(".extra");
-                    if (btn.textContent == "More") {
-                        btn.textContent = "Less";
-                        content.style.display = "block";
-                    } else {
-                        btn.textContent = "More";
-                        content.style.display = "none";
-                    }
-                })
-
-                main.appendChild(accordion);
-
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    function createAccordion(data) {
-        const div = document.createElement("div");
-        div.classList.add("accordion");
-        const html = `<div class="head"><span>${data.title}</span><button class="button" id="${data._id}">More</button></div><div class="extra"><p></p></div>`;
-        div.innerHTML = html;
-        return div;
-    }
-
-    async function getAccordions() {
-
-        try {
-            const response = await fetch(url);
-
-            if (!response.ok) {
-                throw new Error();
-            }
-
-            const data = await response.json();
-            // console.log(data);
-            return data;            
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    // fetch(url)
-    // .then(response => response.json())
-    // .then(data => console.log(data))
-    // .catch(err => console.log(err));
-}
-
-solution();
-// window.addEventListener("DOMContentLoaded", solution);
-    </script>
-
-    <div id="content" style="display: none;">
-      <div id="request">
-          <input id="location" class='bl' type="text">
-          <input id="submit" class="bl" type="button" value="Get Weather">
-      </div>
-      <div id="forecast" style="display:none">
-          <div id="current">
-              <div class="label">Current conditions</div>
-              <!-- <div class="forecasts">
-                  <span class="condition symbol"></span>
-                  <span class="condition">
-                      <span class="forecast-data">london, usa</span>
-                      <span class="forecast-data">8deg/19deg</span>
-                      <span class="forecast-data">sunny</span>
-                  </span>
-              </div> -->
-          </div>
-          <div id="upcoming">
-              <div class="label">Three-day forecast</div>
-              <!-- <div class="forecast-info">
-                  <span class="upcoming">
-                      <span class="symbol"></span>
-                      <span class="forecast-data">8deg/19deg</span>
-                      <span class="forecast-data">sunny</span>
-                  </span>
-                  <span class="upcoming">
-                      <span class="symbol"></span>
-                      <span class="forecast-data">8deg/19deg</span>
-                      <span class="forecast-data">sunny</span>
-                  </span>
-                  <span class="upcoming">
-                      <span class="symbol"></span>
-                      <span class="forecast-data">8deg/19deg</span>
-                      <span class="forecast-data">sunny</span>
-                  </span>
-              </div> -->
-          </div>
-      </div>
-  </div>
-
-<script>
-function attachEvents() {
-    // console.log("TODO...");
-    const submitbtn = document.getElementById("submit");
-    const forecastoutput = document.getElementById("forecast");
-    
-    submitbtn.addEventListener("click", async () => {
-        try {
-            const locationInput = document.getElementById("location");
-            const locationvalue = locationInput.value;
-
-            if (locationvalue.length == 0) {
-                throw new Error();
-            }
-
-            const response = await fetch("http://localhost:3030/jsonstore/forecaster/locations");
-
-            if (!response.ok) {
-                throw new Error();
-            }
-
-            const locationsdata = await response.json();
-            // console.log(locationsdata);
-            const data = Object.entries(locationsdata);
-            // console.log(data);
-
-            const location = data.find(x => x[1].name == locationvalue);
-            // console.log(location);
-
-            if (!location) {
-                throw new Error();
-            }
-
-            const code = location[1].code;
-            // console.log(code);
-
-            const todayInfoURL = `http://localhost:3030/jsonstore/forecaster/today/${code}`;
-            
-            const todayInfoResponse = await fetch(todayInfoURL);
-            
-            const todayInfo = await todayInfoResponse.json();
-            // console.log(todayInfo);
-            
-            const upcomingInfoURL = `http://localhost:3030/jsonstore/forecaster/upcoming/${code}`;
-
-            const upcomingInfoResponse = await fetch(upcomingInfoURL);
-
-            const upcomingInfo = await upcomingInfoResponse.json();
-            // console.log(upcomingInfo);
-
-            forecastoutput.style.display = "block";
-
-            const symbols = {
-                "Sunny": "&#x2600;", // ☀
-                "Partly sunny": "&#x26C5;", // ⛅
-                "Overcast": "&#x2601;", // ☁
-                "Rain": "&#x2614;", // ☂
-                "Degrees": "&#176;" // °
-            }
-            // console.log(symbols);
-
-            const forecastsDiv = document.createElement("div");
-            forecastsDiv.classList.add("forecasts");
-            const forecastsHtml = `<span class="condition symbol">${symbols[todayInfo.forecast.condition]}</span><span class="condition"><span class="forecast-data">${todayInfo.name}</span><span class="forecast-data">${todayInfo.forecast.low}${symbols.Degrees}/${todayInfo.forecast.high}${symbols.Degrees}</span><span class="forecast-data">${todayInfo.forecast.condition}</span></span>`;
-            forecastsDiv.innerHTML = forecastsHtml;
-
-            const todayWeatherView = document.getElementById("current");
-            todayWeatherView.appendChild(forecastsDiv);
-
-            const upcomingDiv = document.createElement("div");
-            upcomingDiv.classList.add("forecast-info");
-
-            for (const day of upcomingInfo.forecast) {
-                // console.log(day);
-                const span = createOneDayInfo(day.condition, day.low, day.high);
-                // console.log(span.children);
-                upcomingDiv.appendChild(span);
-            }
-
-            const upcomingWeatherView = document.getElementById("upcoming");
-            upcomingWeatherView.appendChild(upcomingDiv);
-
-        //     `<div class="forecast-info">
-        //     <span class="upcoming">
-        //         <span class="symbol"></span>
-        //         <span class="forecast-data">8deg/19deg</span>
-        //         <span class="forecast-data">sunny</span>
-        //     </span>
-        //     <span class="upcoming">
-        //         <span class="symbol"></span>
-        //         <span class="forecast-data">8deg/19deg</span>
-        //         <span class="forecast-data">sunny</span>
-        //     </span>
-        //     <span class="upcoming">
-        //         <span class="symbol"></span>
-        //         <span class="forecast-data">8deg/19deg</span>
-        //         <span class="forecast-data">sunny</span>
-        //     </span>
-        // </div>`
-
-        function createOneDayInfo(condition, low, high) {
-            const span = document.createElement("span");
-            span.classList.add("upcoming");
-            const html = `<span class="symbol">${symbols[condition]}</span><span class="forecast-data">${low}${symbols.Degrees}/${high}${symbols.Degrees}</span><span class="forecast-data">${condition}</span>`;
-            // console.log(html);
-            span.innerHTML = html;
-            return span;
-        }
-
-        } catch (error) {
-            forecastoutput.textContent = "Error";
-            forecastoutput.style.display = "block";
-        }
-    });
-
-    // function getLocations(url) {
-    //     fetch(url)
-    //     .then(response => response.json())
-    //     .then(data => console.log(data))
-    //     .catch(err => console.log(err));
-    // }
-}
-
-attachEvents();
-</script>
 
     <fieldset>
       <legend>Get all users from local JSON file</legend>
