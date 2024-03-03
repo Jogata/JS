@@ -6,6 +6,44 @@
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <style>
+      @import url("https://fonts.googleapis.com/css?family=Poppins");
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.accordion {
+  border: 2px solid #cdc7c7;
+  display: inline-block;
+  width: 40%;
+  font-size: 1.3rem;
+  margin: 10px;
+}
+
+.accordion p {
+  margin: 1em;
+}
+
+.button {
+  float: right;
+  background: #393636;
+  padding: 0.1em 1em 0.1em 1em;
+  color: white;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+.extra {
+  display: none;
+}
+
+.head {
+  background: #ccccff;
+  padding: 1em;
+}
+
       @import url("https://fonts.googleapis.com/css?family=Lato");
       @import url("https://fonts.googleapis.com/css?family=PT+Sans");
 
@@ -151,6 +189,12 @@ button:focus-visible {
         "Hide": hide,
     }
 
+    const profileCardCallbacks = {
+        "Show": showUserInfo, 
+        "Hide": hideUserInfo, 
+        "undefined": doNothing
+    };
+
     const mainSec = document.getElementById("main");
     mainSec.textContent = "";
     // const userCard = document.querySelector(".profile");
@@ -167,9 +211,97 @@ button:focus-visible {
       // console.log(data);
       const users = Object.values(data);
       // console.log(users);
+
+      for (let index = 0; index < users.length; index++) {
+            const user = users[index];
+            // console.log(user);
+            const profileCard = document.createElement("div");
+            profileCard.classList.add("profile");
+
+            const html = `<img src="./iconProfile2.png" class="userIcon" /><label>Lock</label><input type="radio" name="user${index + 1}Locked" value="lock" checked><label>Unlock</label><input type="radio" name="user${index + 1}Locked" value="unlock"><br><hr><label>Username</label><input type="text" name="user${index + 1}Username" value="${user.username}" disabled readonly /><div class="user1HiddenFields" style="display: none;"><hr><label>Email:</label><input type="email" name="user${index + 1}Email" value="${user.email}" disabled readonly /><label>Age:</label><input type="text" name="user${index + 1}Age" value="${user.age}" disabled readonly /></div>`;
+            const btn = document.createElement("button");
+            btn.textContent = "Show more";
+            profileCard.innerHTML = html;
+            btn.addEventListener("click", toggleUserInfo);
+            profileCard.appendChild(btn);
+
+            profileCard.addEventListener("click", callback);
+
+            mainSec.appendChild(profileCard);
+        }
+
+        function toggleUserInfo(e) {
+            // console.log("display");
+            const text = this.textContent;
+            const tokens = text.split(" ");
+            const callbackName = tokens[0];
+            // console.log(callbackName);
+            e.callbackName = callbackName;
+        }
+
+        // for (const user of users) {
+            // console.log(user);
+            // const userCard = document.querySelector(".profile");
+            // const html = 
+            // const clone = userCard.cloneNode(true);
+            // const username = clone.querySelector("input:nth-of-type(3)");
+            // username.value = user.username;
+            // const email = clone.querySelector(".user1Username input:nth-of-type(1)");
+            // email.value = user.email;
+            // const age = clone.querySelector(".user1Username input:nth-of-type(2)");
+            // age.value = user.age;
+            // mainSec.appendChild(clone);    
+        // }
+
+        // mainSec.children[0].remove();
+    
     }
 
-    getUsers();
+    // getUsers();
+
+    function show() {
+        // console.log("show");
+        this.textContent = "Hide it";
+    }
+
+    function hide() {
+        // console.log("hide");
+        this.textContent = "Show more";
+    }
+
+    function doNothing() {
+        console.log("doNothing");
+        return;
+    }
+
+    function callback(e) {
+        // console.log(e.target);
+        // console.log(e.callbackName);
+        const checkedInput = this.querySelector("input:checked");
+        // console.log(checkedInput);
+        const checkedInputValue = checkedInput.value;
+        // console.log(checkedInputValue);
+        if (checkedInputValue == "unlock" && e.target.tagName == "BUTTON") {
+            const cardCallback = profileCardCallbacks[e.callbackName];
+            cardCallback.call(this);
+            const btnCallback = btnCallbacks[e.callbackName];
+            // console.log(btnCallback);
+            // console.log(this);
+            btnCallback.call(e.target);
+        }
+    }
+
+    function showUserInfo() {
+        // console.log(this);
+        const userinfo = this.querySelector(".user1HiddenFields");
+        userinfo.style.display = "block";
+    }
+
+    function hideUserInfo() {
+        // console.log(this);
+        const userinfo = this.querySelector(".user1HiddenFields");
+        userinfo.style.display = "none";
+    }
 
     // fetch(url)
     // .then(response => response.json())
