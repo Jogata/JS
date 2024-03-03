@@ -7,8 +7,20 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <style>
       @import url("https://fonts.googleapis.com/css?family=Poppins");
+      
+      button {
+        border: 1px solid transparent;
+        outline: 1px solid transparent;
+        background-color: transparent;
+      }
+      button:focus-visible {
+        outline: 1px solid gray;
+      }
 
 body {
+  /* width: 100%; */
+  /* height: 100vh; */
+  min-height: 100vh;
   font-family: "Poppins", sans-serif;
 }
 
@@ -320,6 +332,129 @@ button:focus-visible {
 </script>
 
     <!-- ================= Get data from local JSON file ================= -->
+
+    <section id="main">
+      <!-- <div class="accordion">
+          <div class="head">
+              <span>Scalable Vector Graphics</span>
+              <button class="button" id="ee9823ab-c3e8-4a14-b998-8c22ec246bd3">More</button>
+          </div>
+          <div class="extra">
+              <p>Scalable Vector Graphics .....</p>
+          </div>
+      </div> -->
+  </section>
+
+    <script>
+      function solution() {
+    //TODO .....
+    const url = `http://localhost:3030/jsonstore/advanced/articles/list`;
+
+    createAccordions();
+
+    // var test = {
+    //     _id: 5, 
+    //     title: "test"
+    // }
+
+    async function createAccordions() {
+        try {
+            const data = await getAccordions();
+            // console.log(data);
+
+            const main = document.getElementById("main");
+
+            for (const accordionData of data) {
+                // console.log(accordionData);
+                // const id = accordionData._id;
+                // const title = accordionData.title;
+
+                const accordion = createAccordion(accordionData);
+                const btn = accordion.querySelector("button");
+                // console.log(btn);
+                btn.addEventListener("click", async function() {
+                    // console.log(this);
+                    // console.log(this.id);
+                    
+                    try {
+                        const url = `http://localhost:3030/jsonstore/advanced/articles/details/${this.id}`;
+
+                        // var test = {
+                        //     id: 5, 
+                        //     title: "test", 
+                        //     content: "tets content"
+                        // }
+
+                        const response = await fetch(url);
+
+                        if (!response.ok) {
+                          throw new Error();
+                        }
+
+                        const data = await response.json();
+                        // console.log(data);
+                        const para = accordion.querySelector(".extra p");
+                        para.textContent = data.content;
+                        
+                    } catch (error) {
+                        console.log(error);
+                    }
+                })
+
+                btn.addEventListener("click", () => {
+                    // console.log(btn);
+                    const content = accordion.querySelector(".extra");
+                    if (btn.textContent == "More") {
+                        btn.textContent = "Less";
+                        content.style.display = "block";
+                    } else {
+                        btn.textContent = "More";
+                        content.style.display = "none";
+                    }
+                })
+
+                main.appendChild(accordion);
+
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    function createAccordion(data) {
+        const div = document.createElement("div");
+        div.classList.add("accordion");
+        const html = `<div class="head"><span>${data.title}</span><button class="button" id="${data._id}">More</button></div><div class="extra"><p></p></div>`;
+        div.innerHTML = html;
+        return div;
+    }
+
+    async function getAccordions() {
+
+        try {
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error();
+            }
+
+            const data = await response.json();
+            // console.log(data);
+            return data;            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // fetch(url)
+    // .then(response => response.json())
+    // .then(data => console.log(data))
+    // .catch(err => console.log(err));
+}
+
+solution();
+// window.addEventListener("DOMContentLoaded", solution);
+    </script>
 
     <div id="content" style="display: none;">
       <div id="request">
