@@ -59,6 +59,87 @@ label {
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
+    <div id="main">
+      <textarea id="messages" cols="80" rows="12" disabled="true"></textarea>
+      <div id="controls">
+          <label for="author">Name: </label><input name="author" type="text"><br>
+          <label for="content">Message: </label><input name="content" type="text">
+          <input id="submit" type="button" value="Send">
+          <input id="refresh" type="button" value="Refresh">
+      </div>
+  </div>
+  <script>
+    function attachEvents() {
+    // console.log('TODO...');
+    const url = `http://localhost:3030/jsonstore/messenger`;
+
+    const textarea = document.getElementById("messages");
+    const sendBtn = document.getElementById("submit");
+    const refreshBtn = document.getElementById("refresh");
+
+    sendBtn.addEventListener("click", () => {    
+        sendMessage();
+    })
+
+    async function sendMessage() {
+        const author = document.querySelector('input[name="author"]').value;
+        const content = document.querySelector('input[name="content"]').value;
+    
+        const message = {
+            author, 
+            content
+        }
+
+        // console.log(message);
+
+        try {
+            const res = await fetch(url, {
+                method: "POST", 
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(message),
+            });
+
+            if (!res.ok) {
+                throw new Error();
+            }
+            console.log(res);
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
+    refreshBtn.addEventListener("click", () => {
+        getAllMessages();
+    })
+    async function getAllMessages() {
+        // console.log("get");
+        try {
+            const res = await fetch(url);
+            const data = await res.json();
+            // console.log(data);
+            const messagesData = Object.values(data);
+            // console.log(messagesData);
+            const output = [];
+            for (const record of messagesData) {
+                console.log(record);
+                const message = `${record.author}: ${record.content}`;
+                output.push(message);
+            }
+
+            textarea.textContent = output.join("\n");
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+attachEvents();
+  </script>
+
 <script>
   // 10. Contacts Builder✶
   // 11. View Model✶
@@ -131,7 +212,7 @@ label {
       }
     </script>
 
-    <p>
+    <p style="display: none;">
       Use 5 Divination Cards in the Guild Dungeon
       Take 150,000 magic damage in the Arena
 Level up the Physical attack glyph
@@ -217,6 +298,54 @@ Open 9 chests in Outlands
 Spend 500 Tower Coins
 Let your heroes take 150,000 damage in the Guild Dungeon
 Level up the Physical attack glyph
+18 	
+Win 2 times in the Campaign mode using a Support hero
+Complete 7 daily quests
+Defeat a Tank hero in 1 battle in the Tower mode
+19 	
+Heal your heroes for 80,000 in the Campaign
+Win 2 times in the Campaign mode using a Healer hero
+Level up the Magic attack glyph
+Assemble the Altar of Power 5 times in Adventures
+Use the first skills of heroes 30 times in the Arena
+20 	
+Take 80,000 damage with a Tank hero in the Arena
+Level up a Healer hero's skill
+Defeat Dark Star 2 times in the Campaign
+21 	
+Get 20 Soul Stones of any hero
+Complete 7 daily quests/titan artefact 2 times
+Level up a Healer hero's Gift of the Elements
+22 	
+Deal 80,000 physical damage with a Marksman hero in the Arena
+Deal 150,000 physical damage in Adventures
+Win 1 time in the Arena mode using a Healer hero/500 tower coins
+Destroy the Eye of the Herald 5 times in Adventures
+Spend 500 Energy
+Win 70 Guild Dungeon battles using heroes/100 titan summons
+Complete 150 missions
+23 	
+Use 5 EXP potions
+Open 7 chests in the Tower
+Level up the Physical attack glyph
+24 	
+Spend 300,000 gold
+Heal your heroes for 150,000 in the Tower
+Win 2 times in the Campaign mode using a Support hero
+25 	
+Open 7 chests in the Tower
+Win 2 times in the Campaign mode using a Marksman hero
+Win 5 times in the Tower mode using a Tank hero
+Win 25 Guild Dungeon battles using heroes
+Win 8 times in the Arena mode/9 outland chests
+26 	
+Win 1 time in the Arena mode using a Warrior hero/300 energy
+Heal your heroes for 150,000 in the Campaign
+Level up the Magic defense glyph
+27 	
+Spend 500 Tower Coins
+Level up a Warrior hero's skill
+Win 5 times in Campaign Chapter 8
     </p>
 
     <script>
