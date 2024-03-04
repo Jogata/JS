@@ -7,192 +7,57 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <style>
       @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+input[type=text] {
+    padding: 12px 20px;
+    margin: 9px 0;
+    display: inline-block;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+input[type=button] {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+}
+input[type=button]:hover {
+    background-color: #45a049;
+}
 body {
+    margin: auto;
+    text-align: center;
+    padding: 20px;
     font-family: 'Open Sans', serif;
 }
-select {
-    padding: 10px 15px;
-    margin: 8px 0;
+label {
     display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    width: 5em;
 }
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 15px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+#author,
+#content {
+    width: 30em;
+}
+#controls {
+    width: 38em;
+}
+#submit, #refresh {
+    display: inline-block;
+}
+#submit { 
+    margin: 32px;
+}
+#main{
+	width: 50%;
+	margin: 0 auto;
 }
     </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
-
-    <h1>All Posts</h1>
-    <button id="btnLoadPosts">Load Posts</button>
-    <select id="posts"></select>
-    <button id="btnViewPost">View</button>
-    <h1 id="post-title">Post Details</h1>
-    <p id="post-body"></p>
-    <h2>Comments</h2>
-    <ul id="post-comments"></ul>
-
-    <script>
-      function attachEvents() {
-    // console.log('TODO...');
-
-    const postsURL = `http://localhost:3030/jsonstore/blog/posts`;
-    const commentsURL = `http://localhost:3030/jsonstore/blog/comments`;
-    const commentURL = `http://localhost:3030/jsonstore/blog/comments/:id`;
-
-    let posts = null;
-
-    const loadPostsBtn = document.getElementById("btnLoadPosts");
-    loadPostsBtn.addEventListener("click", async () => {
-        await getPostsData();
-        addOptions();
-    });
-
-    const loadPostBtn = document.getElementById("btnViewPost");
-    loadPostBtn.addEventListener("click", () => {
-        const select = document.getElementById("posts");
-        const postID = select.value;
-        // console.log(selectedValue);
-        const post = getPost(postID);
-        // console.log(postID);
-        // const post = getPost(postID);
-        // console.log(post);
-        loadPost(post);
-        loadComments(postID);
-    });
-
-    async function getPostsData() {
-        
-        try {
-            const response = await fetch(postsURL);
-
-            if (!response.ok) {
-                throw new Error();
-            }
-
-            const data = await response.json();
-            // console.log(data);
-            // const postsData = Object.values(data);
-            // console.log(posts);
-            posts = Object.values(data);
-            // console.log(posts);
-            // console.log(postsData);
-
-            // return postsData;
-
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    function getPost(id) {
-        const post = posts.find(post => post.id == id);
-        return post;
-    }
-
-    function loadPost(post) {
-        const title = post.title;
-        const postTitle = document.getElementById("post-title");
-        postTitle.textContent = title;
-        const body = post.body;
-        const postBody = document.getElementById("post-body");
-        postBody.textContent = body;
-    }
-
-    async function loadComments(id) {
-        const allComments = await getCommentsData();
-        // console.log(comments);
-        const postComments = allComments.filter(comment => comment.postId == id);
-        // console.log(postComments);
-        const commentsUL = document.getElementById("post-comments");
-        commentsUL.textContent = "";
-
-        for (const comment of postComments) {
-            // console.log(comment);
-            createComment(comment, commentsUL);
-        }
-    }
-
-    function createComment(data, parent) {
-        const li = document.createElement("li");
-        li.textContent = data.text;
-        // const commentsUL = document.getElementById("post-comments");
-        parent.appendChild(li);
-    }
-
-    async function getCommentsData() {
-        
-        try {
-            const response = await fetch(commentsURL);
-
-            if (!response.ok) {
-                throw new Error();
-            }
-
-            const data = await response.json();
-            // console.log(data);
-            const commentsData = Object.values(data);
-            // console.log(commentsData);
-
-            return commentsData;
-
-        } catch (error) {
-            console.log(error);
-            return null;
-        }
-    }
-
-    function addOptions() {
-        const select = document.getElementById("posts");
-
-        for (const post of posts) {
-            // console.log(post);
-            const option = createOptionTag(post.id, post.title);
-            select.appendChild(option);
-        }
-    }
-
-    function createOptionTag(value, text) {
-        const option = document.createElement("option");
-        option.text = text;
-        option.value = value;
-        return option;
-    }
-
-    var testPost = {
-        body: "post body", 
-        id: 5, 
-        title: "post title"
-    }
-
-    var testComment = {
-        id: 5, 
-        postId: "comment body", 
-        text: "comment text"
-    }
-
-    // fetch(postsURL)
-    // .then(response => response.json())
-    // .then(data => console.log(data))
-    // .catch(err => console.log(err));
-
-    // fetch(commentsURL)
-    // .then(response => response.json())
-    // .then(data => console.log(data))
-    // .catch(err => console.log(err));
-    
-}
-
-attachEvents();
-    </script>
 
 <script>
   // 10. Contacts Builder✶
@@ -265,6 +130,94 @@ attachEvents();
         users.send();
       }
     </script>
+
+    <p>
+      Use 5 Divination Cards in the Guild Dungeon
+      Take 150,000 magic damage in the Arena
+Level up the Physical attack glyph
+Earn 600,000 gold at the Tower
+Win 5 times in the Adventure mode
+Make 65 purchases from the shop
+Complete 100 Tower floors
+2 	
+Complete 1 summon in the Summoning Circle!
+Enter the game chat and create 1 challenge for a battle of heroes or titans
+Win 7 times in the Guild Dungeon mode without losing any heroes
+3 	
+Win 1 time in the Arena mode using a Healer hero/spend 300 energy
+Take 150,000 damage in the Campaign
+Level up a Tank hero's skin
+4 	
+Use 5 EXP potions
+Level up a Support hero's skill (10)
+Level up the Armor glyph
+Defeat a Mage hero in 25 battles in the Tower mode
+Begin 10 Expeditions
+5 	
+Level up a Mage hero's skill
+Complete 7 daily quests
+Defeat Dark Star 2 times in the Campaign
+6 	
+Deal 150,000 damage in the Tower
+Open 7 chests in the Tower
+Level up the Magic attack glyph
+7 	
+Upgrade any titan by 1 level
+Heal your heroes for 150,000 in the Arena
+Level up a Marksman hero's skin
+Assemble the Altar of Power 5 times in Adventures
+Complete 15 summons in the Summoning Circle!
+8 	
+Use Pet Summoning 1 time
+Use the first skills of heroes 5 times in the Campaign
+Level up the Health glyph
+Earn 1,500,000 gold at the Tower
+Obtain 100 hero soul stones
+9 	
+Deal 150,000 magic damage in the Tower
+Deal 150,000 magic damage in the Campaign
+Win 5 times in the Tower mode without losing any heroes
+10 	
+Spend 500 Outland Coins
+Win 2 times in the Campaign mode using a Tank hero
+Win 5 times in the Adventure mode without losing any heroes
+Make 30 purchases from the shop
+Complete 10 quests from the "Nature Season" event
+11 	
+Level up any Titan Artifact
+Use the first skills of heroes 15 times in Adventures
+Level up the Health glyph
+12 	
+Deal 150,000 damage with heroes in the Guild Dungeon
+Deal 150,000 physical damage in the Arena
+Level up a Support hero's skin
+13 	
+Open 7 chests in the Tower
+Level up a Marksman hero's skill
+Level up the Magic defense glyph
+Destroy the Eye of the Herald 5 times in Adventures
+Exchange 200 items for guild activity points
+14 	
+Spend 300,000 gold
+Enter the game chat and create 1 challenge for a battle of heroes or titans
+Win 2 times in the Adventure mode using a Warrior hero
+15 	
+Complete 15 Tower floors
+Level up a Tank hero's skill
+Level up a Tank hero's Gift of the Elements
+Spend 1,000 Energy
+Complete 100 daily quests
+16 	
+Heal your heroes for 80,000 in Adventures
+Win 2 times in the Campaign mode using a Mage hero
+Defeat Phobos 2 times in the Campaign
+Defeat a Tank hero in 5 battles in the Arena mode/15 titan summons
+Open 9 chests in Outlands
+17 	
+Spend 500 Tower Coins
+Let your heroes take 150,000 damage in the Guild Dungeon
+Level up the Physical attack glyph
+    </p>
 
     <script>
       const matches4 = `
