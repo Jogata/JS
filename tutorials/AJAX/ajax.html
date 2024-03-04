@@ -8,137 +8,150 @@
     <style>
       @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 input[type=text] {
-    padding: 12px 20px;
-    margin: 9px 0;
-    display: inline-block;
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-input[type=button] {
-    background-color: #4CAF50;
-    color: #fff;
-    padding: 10px 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    display: block;
-}
-input[type=button]:hover {
-    background-color: #45a049;
-}
-body {
-    margin: auto;
-    text-align: center;
-    padding: 20px;
-    font-family: 'Open Sans', serif;
-}
-label {
-    display: inline-block;
-    width: 5em;
-}
-#author,
-#content {
-    width: 30em;
-}
-#controls {
-    width: 38em;
-}
-#submit, #refresh {
-    display: inline-block;
-}
-#submit { 
-    margin: 32px;
-}
-#main{
-	width: 50%;
-	margin: 0 auto;
-}
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;}
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;}
+button:hover {
+  background-color: #45a049;}
+body{
+   font-family: 'Open Sans',serif;}
     </style>
   </head>
   <body>
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <h1>Phonebook</h1>
+    <ul id="phonebook"></ul>
+    <button id="btnLoad">Load</button>
 
-    <div id="main">
-      <textarea id="messages" cols="80" rows="12" disabled="true"></textarea>
-      <div id="controls">
-          <label for="author">Name: </label><input name="author" type="text"><br>
-          <label for="content">Message: </label><input name="content" type="text">
-          <input id="submit" type="button" value="Send">
-          <input id="refresh" type="button" value="Refresh">
-      </div>
-  </div>
-  <script>
-    function attachEvents() {
+    <h2>Create Contact</h2>
+    Person: <input type="text" id="person" />
+    <br>
+    Phone: <input type="text" id="phone" />
+    <br>
+    <button id="btnCreate">Create</button>
+<script>
+function attachEvents() {
     // console.log('TODO...');
-    const url = `http://localhost:3030/jsonstore/messenger`;
 
-    const textarea = document.getElementById("messages");
-    const sendBtn = document.getElementById("submit");
-    const refreshBtn = document.getElementById("refresh");
+    const url = "http://localhost:3030/jsonstore/phonebook";
 
-    sendBtn.addEventListener("click", () => {    
-        sendMessage();
-    })
+    const btnLoad = document.getElementById("btnLoad");
+    btnLoad.addEventListener("click", loadPhones);
 
-    async function sendMessage() {
-        const author = document.querySelector('input[name="author"]').value;
-        const content = document.querySelector('input[name="content"]').value;
-    
-        const message = {
-            author, 
-            content
+    const btnCreate = document.getElementById("btnCreate");
+    btnCreate.addEventListener("click", createContact);
+
+    async function createContact() {
+        const personNameInput = document.getElementById("person");
+        const personName = personNameInput.value;
+
+        const phoneNumberInput = document.getElementById("phone");
+        const phoneNumber = phoneNumberInput.value;
+
+        const data = {
+            person: personName, 
+            phone: phoneNumber
         }
 
-        // console.log(message);
+        personNameInput.value = "";
+        phoneNumberInput.value = "";
 
         try {
-            const res = await fetch(url, {
+            const response = await fetch(url, {
                 method: "POST", 
                 headers: {
-                    "Content-Type": "application/json"
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                    "Content-Type": "application/json",
                 },
-                body: JSON.stringify(message),
+                body: JSON.stringify(data),
             });
+            loadPhones();
+        } catch (error) {
+            alert(error.message)
+        }
 
-            if (!res.ok) {
+        // console.log(response);
+        // const res = await response.text();
+        // console.log(res);
+    }
+
+    async function loadPhones() {
+        const phonesData = await getPhones();
+        // console.log(phonesData);
+        // console.log(data);
+        createPhonebook(phonesData);
+    }
+
+    async function getPhones() {
+        try {
+            const response = await fetch(url);
+            
+            if (!response.ok) {
                 throw new Error();
             }
-            console.log(res);
-        } catch (error) {
-            console.log(error);
-        }
 
-    }
-
-    refreshBtn.addEventListener("click", () => {
-        getAllMessages();
-    })
-    async function getAllMessages() {
-        // console.log("get");
-        try {
-            const res = await fetch(url);
-            const data = await res.json();
+            const data = await response.json();
             // console.log(data);
-            const messagesData = Object.values(data);
-            // console.log(messagesData);
-            const output = [];
-            for (const record of messagesData) {
-                console.log(record);
-                const message = `${record.author}: ${record.content}`;
-                output.push(message);
-            }
-
-            textarea.textContent = output.join("\n");
-
+            const phones = Object.values(data);
+            // console.log(phones);
+            return phones;
         } catch (error) {
             console.log(error);
+            // return null;
         }
     }
-}
 
+    function createPhonebook(phonesData) {
+        const phonebook = document.getElementById("phonebook");
+        phonebook.textContent = "";
+
+        for (const record of phonesData) {
+            const li = createListItem(record);
+            phonebook.appendChild(li);
+        }
+
+    }
+
+    function createListItem(data) {
+        const li = document.createElement("li");
+        li.textContent = `${data.person}: ${data.phone}`;
+        // li.dataset.id = `${data._id}`;
+        const btn = document.createElement("button");
+        btn.textContent = "Delete";
+        btn.dataset.id = `${data._id}`;
+        btn.addEventListener("click", deleteContact);
+        li.appendChild(btn);
+        return li;
+    }
+
+    async function deleteContact() {
+        const id = this.dataset.id;
+        const deleteRequestURL = `${url}/${id}`;
+
+        await fetch(deleteRequestURL, {
+            method: "DELETE"
+        });
+
+        const li = this.parentElement;
+        li.remove();
+
+    }
+
+}
 attachEvents();
-  </script>
+</script>
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+
 
 <script>
   // 10. Contacts Builder✶
@@ -346,6 +359,20 @@ Level up the Magic defense glyph
 Spend 500 Tower Coins
 Level up a Warrior hero's skill
 Win 5 times in Campaign Chapter 8
+28 	
+Spend 500 Outland Coins
+Open 7 chests in the Tower
+Level up the Magic attack glyph 
+Make 20 purchases from the shop
+Get 20 Soul Stones of any Titan
+29 	
+Get 20 Soul Stones of any hero
+Level up a Mage hero's skill
+Level up a Marksman hero's Gift of the Elements
+30 	
+Spend 500 Tower Coins
+Enter the game chat and create 1 challenge for a battle of heroes or titans
+Level up the Armor glyph
     </p>
 
     <script>
