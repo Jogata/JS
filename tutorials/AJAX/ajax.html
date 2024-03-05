@@ -6,152 +6,172 @@
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <style>
-      @import url(https://fonts.googleapis.com/css?family=Open+Sans);
-input[type=text] {
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;}
+      body{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 20px;
+}
+.container {
+    width: 60%;
+    text-align: center;
+    margin: 0 auto;
+}
+table{
+    border:1px solid #234465;
+    padding: 1%;
+    margin: 0 auto;
+    width: 70%;
+    border-radius: 4px;
+}
+table th{
+    text-decoration: underline;
+    text-align: center;
+}
+table tbody td{
+    text-align: left;
+    border-bottom:1px solid black;
+    padding: 0.5%;
+}
+table tbody tr:nth-child(even){
+    background-color: #234465;
+    color: white
+}
+table tbody tr:nth-child(odd){
+    color: #234465;
+    border-bottom: 1px solid black;
+}
+table tbody tr:nth-child(odd) button{
+    background: #234465;
+    color:white;
+}
+table tbody tr:nth-child(even) button{
+    background: white;
+    color:#234465;
+}
+table tr:hover{
+    text-decoration: underline;
+}
+.button-right {
+    text-align: center;
+}
 button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;}
+    font-size: 25px;
+    background-color: #234465;
+    color: white;
+    border-radius: 5px;
+    width: 20%;
+    height: 35%;
+    margin-top: 10px;
+}
 button:hover {
-  background-color: #45a049;}
-body{
-   font-family: 'Open Sans',serif;}
+    color: red;
+    cursor: pointer;
+}
+.container-form {
+    padding-top: 25px;
+    font-size: 25px;
+    text-align: center;
+}
+.container-form h3{
+    margin: 10px auto;
+    padding: 0;
+}
+.inputs, .labels {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.inputs input {
+    margin: 10px auto;
+}
     </style>
   </head>
   <body>
-    <h1>Phonebook</h1>
-    <ul id="phonebook"></ul>
-    <button id="btnLoad">Load</button>
-
-    <h2>Create Contact</h2>
-    Person: <input type="text" id="person" />
-    <br>
-    Phone: <input type="text" id="phone" />
-    <br>
-    <button id="btnCreate">Create</button>
-<script>
-function attachEvents() {
+    <div class="container">
+      <table id="results">
+          <thead>
+              <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Faculty Number</th>
+                  <th>Grade</th>
+              </tr>
+          </thead>
+          <tbody></tbody>
+      </table>
+      <div class="container-form">
+          <h3>FORM</h3>
+          <form id="form">
+              <div class="labels">
+                  <label>First Name</label>
+                  <label>Last Name</label>
+                  <label>Faculty Number</label>
+                  <label>Grade</label>
+              </div>
+              <div class="inputs">
+                  <input type="text" name="firstName" placeholder="First Name...">
+                  <input type="text" name="lastName" placeholder="Last Name...">
+                  <input type="text" name="facultyNumber" placeholder="Faculty Number...">
+                  <input type="text" name="grade"  placeholder="Grade...">
+              </div>
+              <p class="notification"></p>
+              <button id="submit">Submit</button>
+          </form>
+      </div>
+  </div>
+  <script>
     // console.log('TODO...');
+const url = "http://localhost:3030/jsonstore/collections/students";
 
-    const url = "http://localhost:3030/jsonstore/phonebook";
+// const test = {
+//     _id: "54e6d099-6e00-4613-97b7-bc2b6bdc1db5",
+//     firstName: "Isaac",
+//     lastName: "Netero", 
+//     facultyNumber: "90000587896",
+//     grade: 4.99,
+// }
 
-    const btnLoad = document.getElementById("btnLoad");
-    btnLoad.addEventListener("click", loadPhones);
+loadStudentsInfo();
 
-    const btnCreate = document.getElementById("btnCreate");
-    btnCreate.addEventListener("click", createContact);
+async function loadStudentsInfo() {
+    const table = document.querySelector("#results tbody");
+    table.textContent = "";
 
-    async function createContact() {
-        const personNameInput = document.getElementById("person");
-        const personName = personNameInput.value;
+    const data = await getAllStudents();
 
-        const phoneNumberInput = document.getElementById("phone");
-        const phoneNumber = phoneNumberInput.value;
-
-        const data = {
-            person: personName, 
-            phone: phoneNumber
-        }
-
-        personNameInput.value = "";
-        phoneNumberInput.value = "";
-
-        try {
-            const response = await fetch(url, {
-                method: "POST", 
-                headers: {
-                    // 'Content-Type': 'application/x-www-form-urlencoded',
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-            });
-            loadPhones();
-        } catch (error) {
-            alert(error.message)
-        }
-
-        // console.log(response);
-        // const res = await response.text();
-        // console.log(res);
+    for (const studentData of Object.values(data)) {
+        // console.log(studentData);
+        const row = createTableRow(studentData);
+        table.appendChild(row);
     }
-
-    async function loadPhones() {
-        const phonesData = await getPhones();
-        // console.log(phonesData);
-        // console.log(data);
-        createPhonebook(phonesData);
-    }
-
-    async function getPhones() {
-        try {
-            const response = await fetch(url);
-            
-            if (!response.ok) {
-                throw new Error();
-            }
-
-            const data = await response.json();
-            // console.log(data);
-            const phones = Object.values(data);
-            // console.log(phones);
-            return phones;
-        } catch (error) {
-            console.log(error);
-            // return null;
-        }
-    }
-
-    function createPhonebook(phonesData) {
-        const phonebook = document.getElementById("phonebook");
-        phonebook.textContent = "";
-
-        for (const record of phonesData) {
-            const li = createListItem(record);
-            phonebook.appendChild(li);
-        }
-
-    }
-
-    function createListItem(data) {
-        const li = document.createElement("li");
-        li.textContent = `${data.person}: ${data.phone}`;
-        // li.dataset.id = `${data._id}`;
-        const btn = document.createElement("button");
-        btn.textContent = "Delete";
-        btn.dataset.id = `${data._id}`;
-        btn.addEventListener("click", deleteContact);
-        li.appendChild(btn);
-        return li;
-    }
-
-    async function deleteContact() {
-        const id = this.dataset.id;
-        const deleteRequestURL = `${url}/${id}`;
-
-        await fetch(deleteRequestURL, {
-            method: "DELETE"
-        });
-
-        const li = this.parentElement;
-        li.remove();
-
-    }
-
 }
-attachEvents();
-</script>
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
+    // const data = new FormData(form);
+    // console.log(data);
+    // for (const key of data.entries()) {
+    //     console.log(key);
+    // }
+    // console.log(JSON.stringify(data));
+
+    const response = await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify(student),
+      });
+    const responsedata = await response.json();
+    // console.log(responsedata);
+    loadStudentsInfo();
+    
+
+// fetch(url, {
+//     method: "HEAD"
+// })
+// .then(r => r.json())
+// .then(data => console.log(data))
+// .catch(err => console.log(err));
+  </script>
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
 <script>
   // 10. Contacts Builder✶
