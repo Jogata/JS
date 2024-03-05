@@ -6,6 +6,10 @@
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <style>
+      fieldset {
+        display: none;
+      }
+
       *{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 20px;
@@ -61,6 +65,44 @@ table button{
 
 table button:hover{
     text-decoration: underline;
+}
+
+button#loadBooks{
+    margin: 0 auto;
+    display:block;
+    padding:1%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border-radius: 4px;
+}
+
+label, 
+input {
+    display:block;
+    margin: 0 auto;
+}
+
+form input{
+    margin-bottom: 1%;
+    width: 25%;
+}
+
+form {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+form button {
+    margin: 0 auto;
+    display:block;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border-radius: 4px;
+    background-color: #234465;
+    color:white;
+    border: none;
+    padding: 0.5%;
 }
 
       body{
@@ -142,7 +184,95 @@ button:hover {
     </style>
   </head>
   <body>
-    <div class="container">
+    <button id="loadBooks">LOAD ALL BOOKS</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Harry Poter</td>
+                <td>J. K. Rowling</td>
+                <td>
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Game of Thrones</td>
+                <td>George R. R. Martin</td>
+                <td>
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <form>
+        <h3>FORM</h3>
+        <label>TITLE</label>
+        <input type="text" name="title" placeholder="Title...">
+        <label>AUTHOR</label>
+        <input type="text" name="author" placeholder="Author...">
+        <button>Submit</button>
+    </form>
+    <script>
+      // console.log('My requests...');
+
+const url = " http://localhost:3030/jsonstore/collections/books";
+
+// const test = {
+//     author: "J.K.Rowling", 
+//     title: "Harry Potter and the Philosopher's Stone"
+// }
+
+const loadBooksBtn = document.getElementById("loadBooks");
+
+const form = document.querySelector("form");
+const inputs = document.querySelectorAll("form input");
+const submitBtn = document.querySelector("form button");
+
+loadBooksBtn.addEventListener("click", async function () {
+    // console.log("load all books");
+    try {
+      const response = await fetch(url);
+      
+      if (!response.ok) {
+        throw new Error();
+      }
+      
+      const allBooksData = await response.json();
+      // console.log(allBooksData);
+      
+      const allBooksArray = Object.entries(allBooksData);
+      
+      const parent = document.querySelector("tbody");
+      parent.textContent = "";
+      // console.log(parent);
+      
+      for (const book of allBooksArray) {
+          // console.log(book);
+          createTableRow(book, parent);
+      }
+
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  })
+
+fetch(url)
+.then(r => r.json())
+.then(d => console.log(d))
+.catch(err => console.log(err));
+    </script>
+
+    <div class="container" style="display: none;">
       <table id="results">
           <thead>
               <tr>
@@ -176,7 +306,7 @@ button:hover {
   </div>
   <script>
     // console.log('TODO...');
-const url = "http://localhost:3030/jsonstore/collections/students";
+const url2 = "http://localhost:3030/jsonstore/collections/students";
 
 // const test = {
 //     _id: "54e6d099-6e00-4613-97b7-bc2b6bdc1db5",
@@ -215,7 +345,7 @@ function createTableRow(studentData) {
     return tr;
 }
 
-const form = document.getElementById("form");
+const form2 = document.getElementById("form");
 // console.log(form);
 
 const firstNameInput = document.querySelector('input[name="firstName"]');
@@ -236,7 +366,7 @@ const gradeInput = document.querySelector('input[name="grade"]');
 // facultyNumberInput.value = "98874212";
 // gradeInput.value = 5.00;
 
-const submitBtn = document.getElementById("submit");
+const submitBtn2 = document.getElementById("submit");
 // console.log(submitBtn);
 
 form.addEventListener("submit", createStudent);
