@@ -237,6 +237,56 @@ const form = document.querySelector("form");
 const inputs = document.querySelectorAll("form input");
 const submitBtn = document.querySelector("form button");
 
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const newTitle = inputs[0].value;
+    const newAuthor = inputs[1].value;
+    let url = " http://localhost:3030/jsonstore/collections/books";
+    let method = "POST";
+
+    if (submitBtn.textContent == "Save") {
+        method = "PUT";
+        url = `${url}/${submitBtn.dataset.id}`;
+        // submitBtn.dataset.id = "";
+    }
+
+    if (newTitle.length > 0) {
+        if (newAuthor.length > 0) {
+            const newInfo = {
+                title: newTitle, 
+                author: newAuthor
+            };
+            // console.log(newInfo);
+
+            try {
+
+              const respone = await fetch(url, {
+                  method: method, 
+                  headers: {
+                      "Content-Type": "application/json",
+                      // 'Content-Type': 'application/x-www-form-urlencoded',
+                  },
+                  body: JSON.stringify(newInfo)
+              });
+              // const data = await respone.json();
+              // console.log(data);
+
+              const formTitle = document.querySelector("form h3");
+              formTitle.textContent = "FORM";
+              submitBtn.textContent = "Submit";
+              inputs[0].value = "";
+              inputs[1].value = "";
+              submitBtn.dataset.id = "";
+              loadBooksBtn.click();
+              
+            } catch (error) {
+              console.log(error);
+              return null;
+            }
+        }
+    }
+})
+
 loadBooksBtn.addEventListener("click", async function () {
     // console.log("load all books");
     try {
@@ -264,12 +314,71 @@ loadBooksBtn.addEventListener("click", async function () {
       console.log(error);
       return null;
     }
-  })
 
-fetch(url)
-.then(r => r.json())
-.then(d => console.log(d))
-.catch(err => console.log(err));
+    function createTableRow(book, parentEl) {
+      const bookID = book[0];
+      const bookinfo = book[1];
+
+        const row = document.createElement("tr");
+        const html = `<td>${bookinfo.title}</td>
+        <td>${bookinfo.author}</td>
+        <td>
+            <button id="edit" data-id="${bookID}">Edit</button>
+            <button id="delete" data-id="${bookID}">Delete</button>
+        </td>`;
+        row.innerHTML = html;
+
+        const editBtn = row.querySelector("#edit");
+        editBtn.addEventListener("click", editBook);
+
+        const deleteBtn = row.querySelector("#delete");
+        deleteBtn.addEventListener("click", deleteBook);
+        // console.log(editBtn, deleteBtn);
+
+        parent.appendChild(row);
+
+        function editBook() {
+            // console.log(editBtn.dataset.id);
+            // let url = `http://localhost:3030/jsonstore/collections/books/`;
+            submitBtn.textContent = "Save";
+            submitBtn.dataset.id = bookID;
+            const formTitle = document.querySelector("form h3");
+            formTitle.textContent = "EditFORM";
+            inputs[0].value = bookinfo.title;
+            inputs[1].value = bookinfo.author;
+        }
+
+        async function deleteBook() {
+            // console.log(deleteBtn.dataset.id);
+            const url = `http://localhost:3030/jsonstore/collections/books/${this.dataset.id}`;
+
+            try {
+
+              const response = await fetch(url, {
+                  method: "DELETE"
+              });
+
+              if (!response.ok) {
+                throw new Error();
+              }
+
+              loadBooksBtn.click();
+              
+            } catch (error) {
+              console.log(error);
+              return null;
+            }
+
+        }
+
+    }
+
+})
+
+// fetch(url)
+// .then(r => r.json())
+// .then(d => console.log(d))
+// .catch(err => console.log(err));
     </script>
 
     <div class="container" style="display: none;">
@@ -505,22 +614,34 @@ async function createStudent(e) {
       }
     </script>
 
+    <script>
+        const test = document.getElementById("test");
+        test.addEventListener("click", (e) => {
+            e.preventDefault();
+        })
+
+        const test2 = document.querySelector("#test");
+        test2.addEventListener("click", (e) => {
+            e.preventDefault();
+        })
+    </script>
+
     <p style="display: none;">
-      Use 5 Divination Cards in the Guild Dungeon
-      Take 150,000 magic damage in the Arena
-Level up the Physical attack glyph
+      <!-- Use 5 Divination Cards in the Guild Dungeon -->
+      <!-- Take 150,000 magic damage in the Arena -->
+<!-- Level up the Physical attack glyph -->
 Earn 600,000 gold at the Tower
 Win 5 times in the Adventure mode
 Make 65 purchases from the shop
 Complete 100 Tower floors
-2 	
-Complete 1 summon in the Summoning Circle!
-Enter the game chat and create 1 challenge for a battle of heroes or titans
-Win 7 times in the Guild Dungeon mode without losing any heroes
-3 	
-Win 1 time in the Arena mode using a Healer hero/spend 300 energy
-Take 150,000 damage in the Campaign
-Level up a Tank hero's skin
+<!-- 2 	 -->
+<!-- Complete 1 summon in the Summoning Circle! -->
+<!-- Enter the game chat and create 1 challenge for a battle of heroes or titans -->
+<!-- Win 7 times in the Guild Dungeon mode without losing any heroes -->
+<!-- 3 	 -->
+<!-- Win 1 time in the Arena mode using a Healer hero/spend 300 energy -->
+<!-- Take 150,000 damage in the Campaign -->
+<!-- Level up a Tank hero's skin -->
 4 	
 Use 5 EXP potions
 Level up a Support hero's skill (10)
