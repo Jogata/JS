@@ -3,545 +3,140 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AJAX | XMLHttpRequest</title>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      fieldset {
-        display: none;
-      }
-
-      *{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 20px;
-}
-
-table {
-    border: 1px solid #234465;
-    padding: 1%;
-    margin: 0 auto;
-    width: 70%;
-    border-radius: 4px;
-}
-table th {
-    text-decoration: underline;
-    text-align: center;
-}
-table tbody td {
-    text-align: center;
-    border-bottom:1px solid black;
-    padding: 0.5%;
-}
-
-table tbody tr:nth-child(even){
-    background-color: #234465;
-    color: white
-}
-
-table tbody tr:nth-child(odd){
-    color: #234465;
-    border-bottom: 1px solid black;
-}
-
-table tbody tr:nth-child(odd) button{
-    background: #234465;
-    color:white;
-}
-
-table tbody tr:nth-child(even) button{
-    background: white;
-    color:#234465;
-}
-
-table tr td:not(:last-child):hover{
-    text-decoration: underline;
-}
-
-table button{
-    border: none;
-    padding: 5px;
-    border-radius: 5px;
-    margin-left: 8%;
-}
-
-table button:hover{
-    text-decoration: underline;
-}
-
-button#loadBooks{
-    margin: 0 auto;
-    display:block;
-    padding:1%;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    border-radius: 4px;
-}
-
-label, 
-input {
-    display:block;
-    margin: 0 auto;
-}
-
-form input{
-    margin-bottom: 1%;
-    width: 25%;
-}
-
-form {
-    display: block;
-    margin: 0 auto;
-    text-align: center;
-}
-
-form button {
-    margin: 0 auto;
-    display:block;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    border-radius: 4px;
-    background-color: #234465;
-    color:white;
-    border: none;
-    padding: 0.5%;
-}
-
-      body{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 20px;
-}
-.container {
-    width: 60%;
-    text-align: center;
-    margin: 0 auto;
-}
-table{
-    border:1px solid #234465;
-    padding: 1%;
-    margin: 0 auto;
-    width: 70%;
-    border-radius: 4px;
-}
-table th{
-    text-decoration: underline;
-    text-align: center;
-}
-table tbody td{
-    text-align: left;
-    border-bottom:1px solid black;
-    padding: 0.5%;
-}
-table tbody tr:nth-child(even){
-    background-color: #234465;
-    color: white
-}
-table tbody tr:nth-child(odd){
-    color: #234465;
-    border-bottom: 1px solid black;
-}
-table tbody tr:nth-child(odd) button{
-    background: #234465;
-    color:white;
-}
-table tbody tr:nth-child(even) button{
-    background: white;
-    color:#234465;
-}
-table tr:hover{
-    text-decoration: underline;
-}
-.button-right {
-    text-align: center;
-}
-button {
-    font-size: 25px;
-    background-color: #234465;
-    color: white;
-    border-radius: 5px;
-    width: 20%;
-    height: 35%;
-    margin-top: 10px;
-}
-button:hover {
-    color: red;
-    cursor: pointer;
-}
-.container-form {
-    padding-top: 25px;
-    font-size: 25px;
-    text-align: center;
-}
-.container-form h3{
-    margin: 10px auto;
-    padding: 0;
-}
-.inputs, .labels {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-.inputs input {
-    margin: 10px auto;
-}
-    </style>
+    <!-- <title>AJAX | XMLHttpRequest</title> -->
+    <title>Salads Website</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
-    <button id="loadBooks">LOAD ALL BOOKS</button>
-    <table>
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Harry Poter</td>
-                <td>J. K. Rowling</td>
-                <td>
-                    <button>Edit</button>
-                    <button>Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <td>Game of Thrones</td>
-                <td>George R. R. Martin</td>
-                <td>
-                    <button>Edit</button>
-                    <button>Delete</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <form>
-        <h3>FORM</h3>
-        <label>TITLE</label>
-        <input type="text" name="title" placeholder="Title...">
-        <label>AUTHOR</label>
-        <input type="text" name="author" placeholder="Author...">
-        <button>Submit</button>
-    </form>
-    <script>
-      // console.log('My requests...');
-
-const url = " http://localhost:3030/jsonstore/collections/books";
-
-// const test = {
-//     author: "J.K.Rowling", 
-//     title: "Harry Potter and the Philosopher's Stone"
-// }
-
-const loadBooksBtn = document.getElementById("loadBooks");
-
-const form = document.querySelector("form");
-const inputs = document.querySelectorAll("form input");
-const submitBtn = document.querySelector("form button");
-
-form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const newTitle = inputs[0].value;
-    const newAuthor = inputs[1].value;
-    let url = " http://localhost:3030/jsonstore/collections/books";
-    let method = "POST";
-
-    if (submitBtn.textContent == "Save") {
-        method = "PUT";
-        url = `${url}/${submitBtn.dataset.id}`;
-        // submitBtn.dataset.id = "";
-    }
-
-    if (newTitle.length > 0) {
-        if (newAuthor.length > 0) {
-            const newInfo = {
-                title: newTitle, 
-                author: newAuthor
-            };
-            // console.log(newInfo);
-
-            try {
-
-              const respone = await fetch(url, {
-                  method: method, 
-                  headers: {
-                      "Content-Type": "application/json",
-                      // 'Content-Type': 'application/x-www-form-urlencoded',
-                  },
-                  body: JSON.stringify(newInfo)
-              });
-              // const data = await respone.json();
-              // console.log(data);
-
-              const formTitle = document.querySelector("form h3");
-              formTitle.textContent = "FORM";
-              submitBtn.textContent = "Submit";
-              inputs[0].value = "";
-              inputs[1].value = "";
-              submitBtn.dataset.id = "";
-              loadBooksBtn.click();
-              
-            } catch (error) {
-              console.log(error);
-              return null;
-            }
-        }
-    }
-})
-
-loadBooksBtn.addEventListener("click", async function () {
-    // console.log("load all books");
-    try {
-      const response = await fetch(url);
-      
-      if (!response.ok) {
-        throw new Error();
-      }
-      
-      const allBooksData = await response.json();
-      // console.log(allBooksData);
-      
-      const allBooksArray = Object.entries(allBooksData);
-      
-      const parent = document.querySelector("tbody");
-      parent.textContent = "";
-      // console.log(parent);
-      
-      for (const book of allBooksArray) {
-          // console.log(book);
-          createTableRow(book, parent);
-      }
-
-    } catch (error) {
-      console.log(error);
-      return null;
-    }
-
-    function createTableRow(book, parentEl) {
-      const bookID = book[0];
-      const bookinfo = book[1];
-
-        const row = document.createElement("tr");
-        const html = `<td>${bookinfo.title}</td>
-        <td>${bookinfo.author}</td>
-        <td>
-            <button id="edit" data-id="${bookID}">Edit</button>
-            <button id="delete" data-id="${bookID}">Delete</button>
-        </td>`;
-        row.innerHTML = html;
-
-        const editBtn = row.querySelector("#edit");
-        editBtn.addEventListener("click", editBook);
-
-        const deleteBtn = row.querySelector("#delete");
-        deleteBtn.addEventListener("click", deleteBook);
-        // console.log(editBtn, deleteBtn);
-
-        parent.appendChild(row);
-
-        function editBook() {
-            // console.log(editBtn.dataset.id);
-            // let url = `http://localhost:3030/jsonstore/collections/books/`;
-            submitBtn.textContent = "Save";
-            submitBtn.dataset.id = bookID;
-            const formTitle = document.querySelector("form h3");
-            formTitle.textContent = "EditFORM";
-            inputs[0].value = bookinfo.title;
-            inputs[1].value = bookinfo.author;
-        }
-
-        async function deleteBook() {
-            // console.log(deleteBtn.dataset.id);
-            const url = `http://localhost:3030/jsonstore/collections/books/${this.dataset.id}`;
-
-            try {
-
-              const response = await fetch(url, {
-                  method: "DELETE"
-              });
-
-              if (!response.ok) {
-                throw new Error();
-              }
-
-              loadBooksBtn.click();
-              
-            } catch (error) {
-              console.log(error);
-              return null;
-            }
-
-        }
-
-    }
-
-})
-
-// fetch(url)
-// .then(r => r.json())
-// .then(d => console.log(d))
-// .catch(err => console.log(err));
-    </script>
-
-    <div class="container" style="display: none;">
-      <table id="results">
-          <thead>
-              <tr>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Faculty Number</th>
-                  <th>Grade</th>
-              </tr>
-          </thead>
-          <tbody></tbody>
-      </table>
-      <div class="container-form">
-          <h3>FORM</h3>
-          <form id="form">
-              <div class="labels">
-                  <label>First Name</label>
-                  <label>Last Name</label>
-                  <label>Faculty Number</label>
-                  <label>Grade</label>
-              </div>
-              <div class="inputs">
-                  <input type="text" name="firstName" placeholder="First Name...">
-                  <input type="text" name="lastName" placeholder="Last Name...">
-                  <input type="text" name="facultyNumber" placeholder="Faculty Number...">
-                  <input type="text" name="grade"  placeholder="Grade...">
-              </div>
-              <p class="notification"></p>
-              <button id="submit">Submit</button>
-          </form>
-      </div>
-  </div>
-  <script>
-    // console.log('TODO...');
-const url2 = "http://localhost:3030/jsonstore/collections/students";
-
-// const test = {
-//     _id: "54e6d099-6e00-4613-97b7-bc2b6bdc1db5",
-//     firstName: "Isaac",
-//     lastName: "Netero", 
-//     facultyNumber: "90000587896",
-//     grade: 4.99,
-// }
-
-loadStudentsInfo();
-
-async function loadStudentsInfo() {
-    const table = document.querySelector("#results tbody");
-    table.textContent = "";
-
-    const data = await getAllStudents();
-
-    for (const studentData of Object.values(data)) {
-        // console.log(studentData);
-        const row = createTableRow(studentData);
-        table.appendChild(row);
-    }
-}
-
-async function getAllStudents() {
-    const response = await fetch(url);
-    const data = await response.json();
-    console.log(data);
-    return data;
-}
-
-function createTableRow(studentData) {
-    const tr = document.createElement("tr");
-    const html = `<td>${studentData.firstName}</td><td>${studentData.lastName}</td><td>${studentData.facultyNumber}</td><td>${studentData.grade}</td>`;
-    tr.innerHTML = html;
-    return tr;
-}
-
-const form2 = document.getElementById("form");
-// console.log(form);
-
-const firstNameInput = document.querySelector('input[name="firstName"]');
-// const firstNameInputValue = firstNameInput.value;
-
-const lastNameInput = document.querySelector('input[name="lastName"]');
-// const lastNameInputValue = lastNameInput.value;
-
-const facultyNumberInput = document.querySelector('input[name="facultyNumber"]');
-// const facultyNumberInputValue = facultyNumberInput.value;
-
-const gradeInput = document.querySelector('input[name="grade"]');
-// const gradeInputValue = gradeInput.value;
-// console.log(facultyNumberInput, lastNameInput, facultyNumberInput, gradeInput);
-
-// firstNameInput.value = "jogata";
-// lastNameInput.value = "jogata";
-// facultyNumberInput.value = "98874212";
-// gradeInput.value = 5.00;
-
-const submitBtn2 = document.getElementById("submit");
-// console.log(submitBtn);
-
-form.addEventListener("submit", createStudent);
-
-async function createStudent(e) {
-    e.preventDefault();
-    // console.log("clikc");
-
-    if (firstNameInput.value.length == 0) {
-        return;
-    }
-
-    if (lastNameInput.value.length == 0) {
-        return;
-    }
-
-    if (facultyNumberInput.value.length == 0) {
-        return;
-    }
-
-    if (gradeInput.value.toString().length == 0) {
-        return;
-    }
-
-    const firstNameInputValue = firstNameInput.value;
-    const lastNameInputValue = lastNameInput.value;
-    const facultyNumberInputValue = facultyNumberInput.value;
-    const gradeInputValue = Number(gradeInput.value);
-
-    const student = {
-        firstName: firstNameInputValue, 
-        lastName: lastNameInputValue, 
-        facultyNumber: facultyNumberInputValue, 
-        grade: gradeInputValue
-    }
-
-    // const data = new FormData(form);
-    // console.log(data);
-    // for (const key of data.entries()) {
-    //     console.log(key);
-    // }
-    // console.log(JSON.stringify(data));
-
-    const response = await fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: JSON.stringify(student),
-      });
-    const responsedata = await response.json();
-    // console.log(responsedata);
-    loadStudentsInfo();
-    
-}
-
-// fetch(url, {
-//     method: "HEAD"
-// })
-// .then(r => r.json())
-// .then(data => console.log(data))
-// .catch(err => console.log(err));
-  </script>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
-
+    <section class="landingpage">
+        <nav>
+            <!-- <div class="wrapper"> -->
+    
+            <div class="nav-container">
+                <img src="images/test/logo.png" alt="">
+                <div class="links">
+                    <a href="">Menu</a>
+                    <a href="">Lunch boxed</a>
+                    <a href="">Platters</a>
+                    <a href="">Specials</a>
+                </div>
+                <div class="search">
+                    <input type="search" placeholder="search foods">
+                    <i class="fa fa-search"></i>
+                </div>
+            </div>
+    
+            <!-- </div> -->
+        </nav>
+        <div class="content">
+            <!-- <div class="heading" data-aos="fade-right" data-aos-duration="2000"> -->
+            <div class="heading fade-right paused">
+                <h3>CHEF'S SPECIAL</h3>
+                <h1>Freshness in every bite</h1>
+                <p>Healthy Sashimi Tuna Bites With Sashimi grade Tuna, 110 calories and 13g protein.</p>
+                <!-- <button data-aos="fade-right" data-aos-duration="2000" data-aos-delay="00">Download Recipe</button> -->
+                <button class="fade-right paused">Download Recipe</button>
+            </div>
+            <div class="image">
+                <!-- <img src="images/test/main.png" data-aos="zoom-in" data-aos-duration="2000"> -->
+                <img src="images/test/main.png" class="rotate paused">
+            </div>
+        </div>
+    </section>
+    
+    <section class="aboutus">
+        <div class="container">
+            <!-- <img src="images/test/aboutus.png" data-aos="zoom-in" data-aos-duration="1000"> -->
+            <img src="images/test/aboutus.png" class="zoom-in paused">
+            <div class="aboutus-content">
+                <!-- <h1 data-aos="fade-left" data-aos-duration="1000">About us</h1> -->
+                <h1 class="fade-left paused">About us</h1>
+                <p class="fade-left paused delayed" style="--i: 2">Salad, a vibrant medley of fresh
+                    vegetables, fruits, and herbs, offers a delightful burst of flavors and textures. Its colorful array of
+                    ingredients, tossed with dressing, creates a refreshing and healthy dish. Whether composed of crisp
+                    greens, crunchy cucumbers, juicy tomatoes, or tangy vinaigrette, a well-made salad serves as a versatile
+                    and nutritious addition to any meal, pleasing both the palate and the senses.</p>
+            </div>
+        </div>
+    
+    </section>
+    
+    <section class="details-foods">
+        <div class="title">
+            <!-- <h1 data-aos="fade-left" data-aos-duration="1000">We have a wide Range of Healthy Salads</h1> -->
+            <h1 class="fade-left paused">We have a wide Range of Healthy Salads</h1>
+        </div>
+        <div class="foods">
+            <!-- <div class="card" data-aos="fade-up" data-aos-duration="1000"> -->
+            <div class="card fade-up delayed paused" style="--i: 0">
+                <img src="images/test/salad.png" alt="">
+                <div class="discription">
+                    <h1> Red Spinach with Carrot</h1>
+                    <p>A spinach salad features tender spinach leaves tossed with vibrant toppings like crisp bacon, sliced
+                        mushrooms, and hard-boiled eggs, all drizzled in a zesty vinaigrette, offering a flavorful and
+                        nutritious combination in every bite.</p>
+                    <p class="price">$9.00</p>
+                </div>
+            </div>
+            <!-- <div class="card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"> -->
+            <div class="card fade-up delayed paused" style="--i: 1">
+                <img src="images/test/salad1.png" alt="">
+                <div class="discription">
+                    <h1>Spinach With Carrot</h1>
+                    <p>Combining the leafy goodness of spinach with the vibrant crunch of carrots, this salad offers a
+                        harmonious balance of flavors and textures, making it a refreshing and healthful choice for any meal
+                        and burst of freshness in every mouthful.</p>
+                    <p class="price">$8.00</p>
+                </div>
+            </div>
+            <!-- <div class="card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400"> -->
+            <div class="card fade-up delayed paused" style="--i: 2">
+                <img src="images/test/salad2.png" alt="">
+                <div class="discription">
+                    <h1>Green leave with Tomato</h1>
+                    <p>Green leaf and tomato salad: A simple yet vibrant combination of crisp, leafy greens paired with
+                        juicy, ripe tomatoes, accented with a tangy dressing, offering a refreshing burst of flavors and
+                        creates a delightful salad that's both light and satisfying.</p>
+                    <p class="price">$9.50</p>
+                </div>
+            </div>
+            <!-- <div class="card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600"> -->
+            <div class="card fade-up delayed paused" style="--i: 3">
+                <img src="images/test/salad3.png" alt="">
+                <div class="discription">
+                    <h1>Mixed Salad</h1>
+                    <p>A mixed salad is a delightful ensemble of assorted fresh vegetables, fruits, nuts, and sometimes
+                        cheese, combined with a flavorful dressing.for making it a satisfying and nutritious option for a
+                        wholesome meal or a refreshing side.</p>
+                    <p class="price">$8.50</p>
+                </div>
+            </div>
+        </div>
+    </section>
+        
+    <section class="download">
+        <div class="container">
+            <div class="images">
+                <!-- <img src="images/test/phone2.png" data-aos="zoom-in" data-aos-duration="1000"> -->
+                <img src="images/test/phone2.png" class="zoom-in delayed paused" style="--i: 0">
+                <!-- <img src="images/test/phone1.png" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200"> -->
+                <img src="images/test/phone1.png" class="zoom-in delayed paused" style="--i: 1">
+            </div>
+            <!-- <div class="content" data-aos="fade-left" data-aos-duration="1000"> -->
+            <div class="content fade-left paused">
+                <h1>Available on App Store</h1>
+                <p>Downlaod our App from App store and Playstore for both platform Android and IOS.</p>
+                <div class="icons">
+                    <!-- <img src="images/test/appstore.png" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200"> -->
+                    <img src="images/test/appstore.png" class="fade-left" style="--i: 1">
+                    <!-- <img src="images/test/playstore.png" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300"> -->
+                    <img src="images/test/playstore.png" class="fade-left" style="--i: 1.5">
+                </div>
+            </div>
+        </div>
+    </section>
+    
 <script>
   // 10. Contacts Builder✶
   // 11. View Model✶
@@ -614,34 +209,11 @@ async function createStudent(e) {
       }
     </script>
 
-    <script>
-        const test = document.getElementById("test");
-        test.addEventListener("click", (e) => {
-            e.preventDefault();
-        })
-
-        const test2 = document.querySelector("#test");
-        test2.addEventListener("click", (e) => {
-            e.preventDefault();
-        })
-    </script>
-
     <p style="display: none;">
-      <!-- Use 5 Divination Cards in the Guild Dungeon -->
-      <!-- Take 150,000 magic damage in the Arena -->
-<!-- Level up the Physical attack glyph -->
 Earn 600,000 gold at the Tower
 Win 5 times in the Adventure mode
 Make 65 purchases from the shop
 Complete 100 Tower floors
-<!-- 2 	 -->
-<!-- Complete 1 summon in the Summoning Circle! -->
-<!-- Enter the game chat and create 1 challenge for a battle of heroes or titans -->
-<!-- Win 7 times in the Guild Dungeon mode without losing any heroes -->
-<!-- 3 	 -->
-<!-- Win 1 time in the Arena mode using a Healer hero/spend 300 energy -->
-<!-- Take 150,000 damage in the Campaign -->
-<!-- Level up a Tank hero's skin -->
 4 	
 Use 5 EXP potions
 Level up a Support hero's skill (10)
