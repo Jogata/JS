@@ -3,929 +3,146 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>AJAX | XMLHttpRequest</title> -->
-    <title>Salads Website</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Redressed&display=swap');
-        
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      ul {
-        list-style: none;
-      }
-
-      a {
-        text-transform: capitalize;
-        text-decoration: none;
-      }
-
-      button {
-        padding: 0.4em 1em;
-        border: none;
-        outline: none;
-        font-family: Georgia, serif;
-        text-transform: capitalize;
-        background-color: transparent;
-        cursor: pointer;
-      }
-      button:focus-within {
-        outline: 1px solid #fff8;
-      }
-
-      a, button {
-        transition: color 500ms ease-in-out;
-      }
-
-      img {
-        width: 100%;
-      }
-
-      body {
-        /* width: 100%; */
-        /* height: 100vh; */
-        min-height: 100vh;
-        /* display: flex; */
-        /* align-items: center; */
-        /* justify-content: center; */
-        /* display: grid; */
-        /* place-items: center; */
-        font-family: 'Redressed', cursive;
-        /* background-color: #22559e; */
-      }
-
-      /* @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500;600&family=Lemon&family=Patua+One&family=Poppins:wght@200;400;500;600;700;800;900&display=swap'); */
-/* *{
-    padding: 0;
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    box-sizing: border-box;
-} */
-
-body{
-  /* position: relative; */
-  /* width: 100%; */
-  /* height: auto; */
-  padding: 2%;
-  background-color: white;
-  /* overflow-x: hidden; */
-}
-
-/* nav { */
-    /* position: relative; */
-    /* z-index: 2; */
-    /* position: sticky;
-    top: 0;
-    margin-top: 10px; */
-/* } */
-/* nav .wrapper{ */
-    /* position: absolute; */
-    /* top: 0; */
-    /* height: 10vh; */
-    /* width: 100%; */
-/* } */
-
-nav .nav-container {
-    /* width: 100%; */
-    /* height: 100%; */
-    /* margin: 0 60px; */
-    /* padding: 1rem; */
-    /* position: relative; */
-    display: flex;
-    row-gap: 1.5rem;
-    column-gap: 1rem;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-around;
-}
-
-nav .nav-container img {
-    max-width: 60px;
-}
-
-.links a {
-    margin: 0 20px;
-    color: black;
-    font-size: 1.3rem;
-    /* text-decoration: none; */
-    /* transition: 0.2s linear; */
-}
-
-.links a:hover {
-    color: rgb(124, 123, 123);
-}
-
-nav .nav-container .search {
-    /* width: 320px; */
-    /* height: 5vh; */
-    display: flex;
-    align-items: center;
-    /* border-radius: 20px; */
-    border-radius: 2em;
-    border: 1px solid white;
-    box-shadow: 1px 1px 20px white;
-    mix-blend-mode: difference;
-    /* overflow: hidden; */
-}
-nav .nav-container .search input {
-    /* max-width: 320px; */
-    max-width: 20rem;
-    /* width: 86%; */
-    width: 100%;
-    /* padding-left: 15px; */
-    padding: 1em 0 1em 1.4em;
-    /* padding: 2em; */
-    color: white;
-    font-size: 1rem;
-    font-family: inherit;
-    text-transform: capitalize;
-    /* height: 100%; */
-    border: none;
-    outline: none;
-    background-color: transparent;
-}
-input::placeholder {
-    /* font-family: 'Redressed', cursive; */
-    font-family: inherit;
-}
-
-nav .nav-container .search i {
-    padding: 0 1em;
-    color: white;
-    font-size: 1.4rem;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
-    /* width: 14%; */
-    cursor: pointer;
-    /* height: 100%; */
-    /* border: 1px solid red; */
-}
-
-section {
-    /* width: 100%; */
-    /* max-width: 1600px; */
-    max-width: 100rem;
-    min-width: min-content;
-    margin: 1rem auto;
-    padding: min(5%, 3rem) min(5%, 2rem);
-    border: 4px solid black;
-    border-radius: min(5vw, 3rem, 50px);
-    /* box-shadow: -5px -5px 100px black, 5px 5px 50px black; */
-    box-shadow: -5px -5px 5px #fff5, 5px 5px 10px black;
-    outline: 1px solid #fff6;
-    outline-offset: -5px;
-    /* height: 100vh; */
-    /* overflow: hidden; */
-}
-
-/* landing page */
-.landingpage {
-    background-image: url("./images/test/back.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    /* display: flex; */
-    /* align-items: center; */
-    /* justify-content: center; */
-}
-
-.landingpage .content {
-    /* margin-top: 150px; */
-    padding: 6rem 0 3rem;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.landingpage .content .heading {
-    /* margin-top: -100px; */
-    /* max-width: 460px; */
-    max-width: 28rem;
-    /* width: 100%; */
-}
-
-.landingpage .content .heading h3 {
-    color: red;
-    font-size: 1.6rem;
-}   
-.landingpage .content .heading h1 {
-    color: black;
-    /* line-height: -2rem; */
-    font-size: min(calc(5vw + 2rem), 5.5rem);
-    margin: 1rem 0;
-    line-height: 1;
-    /* border: 1px solid red; */
-}
-.landingpage .content .heading p {
-    color: black;
-    font-size: 1.4rem;
-}
-.landingpage .content .heading button {
-    /* width: 220px; */
-    /* height: 50px; */
-    margin: 20px 0;
-    padding: 0.8em 1.6em;
-    /* cursor: pointer; */
-    font-size: 1.2rem;
-    box-shadow: 2px 2px 10px black;
-    letter-spacing: 1.5px;
-    word-spacing: 5px;
-    background: black;
-    color: white;
-    /* border-radius: 20px; */
-    border-radius: 2em;
-    /* font-family: 'Patua One', serif; */
-    transition: 0.5s linear;
-}
-
-.landingpage .content .heading button:hover{
-    scale: 1.05;
-}
-
-.content .image {
-    /* background-color: red; */
-    width: 100%;
-    max-width: 33rem;
-    overflow: hidden;
-}
-.landingpage .content .image img {
-    /* max-width: 800px; */
-    /* max-width: 510px; */
-    transform: rotate(40deg);
-    /* transform: rotate(0deg); */
-    /* animation: rotate 10s linear infinite; */
-    /* border: 1px solid black; */
-    opacity: 1;
-}
-
-/* @keyframes rotate {
-    100% {
-        transform: rotate(360deg);
-    }
-} */
-
-/* about us */
-.aboutus{
-    /* box-shadow: -5px -5px 100px black; */
-    background-color: black;
-}
-
-.aboutus .container {
-    width: 100%;
-    /* height: 100%; */
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-}
-
-.aboutus .container .aboutus-content {
-    /* width: 30%; */
-    max-width: 450px;
-    color: white;
-}
-.aboutus .container img {
-    max-width: 400px;
-    filter: drop-shadow(0 0 5px white);
-}
-.aboutus .container .aboutus-content h1 {
-    margin-bottom: 20px;
-    color: rgb(156, 46, 6);
-    font-size: min(20vw, 4rem);
-    /* font-family: 'Patua One', serif; */
-    text-align: center;
-    letter-spacing: 1px;
-}
-
-.aboutus .container .aboutus-content p{
-    font-size: 1.4rem;
-    text-align: center;
-}
-
-/* Food Details */
-.details-foods {
-    background-color: black;
-}
-
-.details-foods .title {
-    width: 100%;
-    margin: 30px 0;
-    padding: 5%;
-    /* height: auto; */
-    /* display: flex; */
-    /* justify-content: center; */
-}
-
-.details-foods .title h1 {
-    color: white;
-    font-size: 3rem;
-    text-align: center;
-    /* width: 40%; */
-}
-
-.details-foods .foods {
-    /* margin: 0 40px; */
-    padding-bottom: 2rem;
-    /* display: flex; */
-    /* flex-wrap: wrap; */
-    /* justify-content: space-around; */
-    display: grid;
-    /* grid-template-columns: repeat(auto-fit, minmax(350px, auto)); */
-    grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), auto));
-}
-
-.details-foods .foods .card {
-    /* flex: 0 1 350px; */
-    margin: 5px 10px;
-    padding: 2rem 1rem 1rem;
-    border-radius: 10px;
-    box-shadow: 1px 1px 10px #fff6;
-    /* box-shadow: 0.1rem 0.3rem 0.5rem #333; */
-    transition: 400ms cubic-bezier(0.645, 0.045, 0.355, 1);
-    /* display: flex; */
-    /* justify-content: center; */
-    /* flex-direction: column; */
-    cursor: pointer;
-}
-
-/* .details-foods .foods:hover .card { */
-/* .details-foods .foods .card:hover {
-    scale: 1.04; */
-    /* transition: 0.3s cubic-bezier(0.645, 0.045, 0.355, 1); */
-/* } */
-
-/* .details-foods .foods:hover .card:not(:hover) { */
-/* .details-foods .foods .card:hover ~ .card,  */
-/* .details-foods .foods .card:hover * .card {
-    scale: 0.96;
-    backdrop-filter: blur(10px);
-    opacity: 0.2;
-} */
-.details-foods .foods .card img {
-    width: 70%;
-    margin: 0 15% 1rem;
-    transition: scale 400ms cubic-bezier(0.645, 0.045, 0.355, 1);
-}
-.details-foods .foods .card:hover img {
-    scale: 1.04;
-}
-
-.details-foods .foods .card .discription {
-    color: white;
-    margin: 0 10px;
-}
-.details-foods .foods .card .discription h1{
-    /* font-family: 'Patua One', serif; */
-    letter-spacing: 1px;
-    margin: 8px 0;
-    text-align: center;
-}
-
-.details-foods .foods .card .discription p{
-    /* float: left; */
-    /* margin-left: 2px; */
-    font-size: 1.2rem;
-}
-.details-foods .foods .card .discription .price {
-    /* float: right; */
-    /* font-family: 'Lemon', serif; */
-    margin: 10px 20px 10px 0;
-    text-align: right;
-}
-
-/* download section */
-.download{
-    background-color: black;
-}
-
-.download .container {
-    width: 100%;
-    /* height: 100%; */
-    display: flex;
-    row-gap: 2rem;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.images {
-    text-align: center;
-}
-.images img {
-    /* width: 300px; */
-    width: auto;
-    max-width: 200px;
-    /* transition: opacity 2.6s; */
-    /* pointer-events: none; */
-    /* margin-left: 40px; */
-}
-
-.download .content {
-    color: white;
-    /* width: 40%; */
-    max-width: 500px;
-}
-.download .content h1 {
-    font-size: min(20vw, 5rem);
-}
-.download .content p {
-    font-size: 1.5rem;
-    margin: 10px 0;
-}
-.download .icons {
-    width: 70%;
-    display: flex;
-    margin: 40px 20px;
-    justify-content: space-around;
-}
-.download .icons img {
-    width: 40%;
-    cursor: pointer;
-}
-
-.zoom-in {
-    animation: zoom-in 2s linear backwards;
-}
-.rotate {
-    animation: rotate 1s linear forwards;
-}
-.fade-left {
-    animation: fade-left 1s linear backwards;
-}
-.fade-right {
-    animation: fade-right 1s linear backwards;
-}
-.fade-up {
-    animation: fade-up 1s linear backwards;
-}
-.fade-down {
-    animation: fade-down 1s linear backwards;
-}
-/* .half-fade-down {
-  animation: half-fade-down 1s linear backwards;
-}
-.full-fade-down {
-  animation: full-fade-down 1s linear backwards;
-  animation-delay: calc(0.1s * var(--i));
-}
-.slow-full-fade-down {
-  animation: full-fade-down 1s linear backwards;
-  animation-delay: calc(0.2s * var(--i));
-} */
-.delayed {
-    animation-delay: calc(0.2s * var(--i));
-}
-.paused {
-  animation-play-state: paused;
-}
-
-@keyframes zoom-in {
-  0% {
-    /* transform: rotate(40deg); */
-    opacity: 0;
-  }
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotate(80deg);
-    opacity: 0;
-  }
-}
-
-@keyframes fade-left {
-  0% {
-    transform: translateX(10%);
-    opacity: 0;
-  }
-}
-@keyframes fade-right {
-  0% {
-    transform: translateX(-10%);
-    opacity: 0;
-  }
-}
-
-@keyframes fade-up {
-  0% {
-    transform: translateY(10%);
-    opacity: 0;
-  }
-}
-
-@keyframes fade-down {
-  0% {
-    transform: translateY(-10%);
-    opacity: 0;
-  }
-}
-
-/* @keyframes half-fade-down {
-  0% {
-    transform: translateY(-50%);
-    opacity: 0;
-  }
-}
-
-@keyframes full-fade-down {
-  0% {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-}
-
-@keyframes slow-full-fade-down {
-  0% {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  50% {
-    opacity: 0;
-  }
-} */
-
-body {
-    background-color: black;
-}
-
-.bg {
-    position: fixed;
-    width: 120%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    /* background-image: url("./images/test/pexels-ella-olsson-1640770.jpg"); */
-    /* background-image: url("./images/test/top-close-up-view-tomatoes-tomatoes-with-pedicels-citrus-fruits-with-leaves-bottle-oil.jpg"); */
-    /* background-image: url("./images/test/top-close-up-view-vegetables-colorful-vegetables-sauce-fork-knife-table.jpg"); */
-    /* background-image: url("./images/test/top-view-tasty-eggplant-rolls-with-tomatoes-different-seasonings.jpg"); */
-    /* background-image: url("./images/test/top-view-vegetables-citrus-fruits-onion-garlic-lemon-tomatoes-with-pedicels-oil-pepper.jpg"); */
-    /* background-image: url("./images/test/top-view-yummy-eggplant-rolls-with-greens-tomatoes.jpg"); */
-    /* background-image: url("./images/test/black-pasta-with-vegetables-black-plate-top-view-black-background-free-copy-space_187166-36473.avif"); */
-    /* background-image: url("./images/test/various-vegetables-black-table-with-space-message.jpg"); */
-    /* background-image: url("./images/test/condiments-prepare-italian-pasta.jpg"); */
-    /* background-image: url("./images/test/food-with-ingredients.jpg"); */
-    /* background-image: url("./images/test/vecteezy_food-background-food-menu-backround_14533877.jpg"); */
-    /* background-image: url("./images/test/vecteezy_ai-generated-alleyway-illuminated-hanging-light-flanked_37982142.jpg"); */
-    background-image: url("./images/test/rustic-antique-kitchen.jpg");
-    background-repeat: no-repeat;
-    /* background-position: center; */
-    background-position: center left;
-    background-size: cover;
-    animation: animate 100s ease-in-out infinite;
-    /* animation: move-bg 60s ease-in-out infinite; */
-    /* animation: change-bg 30s ease-in-out infinite; */
-    /* transition: background 400ms ease-in-out; */
-    /* opacity: 0.5; */
-    z-index: -1;
-}
-.bg::after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    content: "";
-    width: 100%;
-    height: 100%;
-    /* background-color: red; */
-    /* background-color: rgba(0, 0, 0, 0.4); */
-    background-image: 
-        linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent, rgba(0, 0, 0, 0.8)), 
-        linear-gradient(to left, rgba(0, 0, 0, 0.8), transparent, transparent);
-    /* background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent, rgba(0, 0, 0, 0.8)); */
-    /* animation: hide 30s ease-in-out infinite; */
-    /* filter: blur(20px); */
-    /* backdrop-filter: blur(10px); */
-    /* transition: opacity 500ms linear; */
-    /* opacity: 0; */
-    /* z-index: -1; */
-}
-
-@keyframes animate {
-    50% {
-        transform: translateX(-20%);
-    }
-}
-/* @keyframes move-bg {
-    50% {
-        background-position: right;
-    }
-} */
-
-/* @keyframes hide {
-    0% {
-        opacity: 0;
-    }
-    15% {
-        opacity: 0;
-    }
-    18% {
-        opacity: 1;
-    }
-    22% {
-        opacity: 1;
-    }
-    25%, 38% {
-        opacity: 0;
-    }
-    42% {
-        opacity: 1;
-    }
-    75% {
-        opacity: 0;
-    }
-    85% {
-        opacity: 0;
-    }
-} */
-
-/* section {
-    display: none;
-} 
-
-*/
-
-@keyframes change-bg {
-    0%, 100% {
-        background-image: url("./images/test/black-pasta-with-vegetables-black-plate-top-view-black-background-free-copy-space_187166-36473.avif");
-        /* background-repeat: no-repeat; */
-        /* background-size: cover; */
-        /* opacity: 1; */
-    }
-    /* 17%, 23% {
-        opacity: 1;
-    }
-    19%, 21% {
-        opacity: 0;
-    } */
-    20% {
-        /* background: url("./images/test/top-close-up-view-vegetables-colorful-vegetables-sauce-fork-knife-table.jpg"); */
-        background-image: url("./images/test/condiments-prepare-italian-pasta.jpg");
-        background-position: bottom;
-        /* opacity: 1; */
-    }
-    40% {
-        background-image: url("./images/test/black-pasta-with-vegetables-black-plate-top-view-black-background-free-copy-space_187166-36473.avif");
-        background-position: center;
-    }
-    60% {
-        /* background: url("./images/test/top-view-yummy-eggplant-rolls-with-greens-tomatoes.jpg"); */
-        background-image: url("./images/test/food-with-ingredients.jpg");
-    }
-    80% {
-        /* background: url("./images/test/black-pasta-with-vegetables-black-plate-top-view-black-background-free-copy-space_187166-36473.avif"); */
-        background-image: url("./images/test/various-vegetables-black-table-with-space-message.jpg");
-    }
-}
-
-.slider-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-}
-.slider-bg::after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    content: "";
-    width: 100%;
-    height: 100%;
-    background-image: 
-        linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent, rgba(0, 0, 0, 0.8)), 
-        linear-gradient(to left, rgba(0, 0, 0, 0.8), transparent, transparent);
-}
-.slider-bg img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: opacity 2s ease-in-out;
-    opacity: 0;
-}
-.slider-bg img.active {
-    transition-delay: 1s;
-    opacity: 1;
-}
-
-.versions {
-    position: absolute;
-    top: 0;
-    left: 0;
-    color: #fff;
-    font-size: 2vw;
-    font-family: Georgia, serif;
-    /* font-family: inherit; */
-    text-transform: lowercase;
-    border: 1px solid #fff;
-    background-color: #000;
-}
-
-.hidden {
-    display: none;
-}
-    </style>
+    <title>AJAX | XMLHttpRequest</title>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
-    <section class="landingpage">
-        <nav>
-            <!-- <div class="wrapper"> -->
-    
-            <div class="nav-container">
-                <img src="images/test/logo.png" alt="">
-                <div class="links">
-                    <a href="">Menu</a>
-                    <a href="">Lunch boxed</a>
-                    <a href="">Platters</a>
-                    <a href="">Specials</a>
-                </div>
-                <div class="search">
-                    <input type="search" placeholder="search foods">
-                    <i class="fa fa-search"></i>
-                </div>
-            </div>
-    
-            <!-- </div> -->
-        </nav>
-        <div class="content">
-            <!-- <div class="heading" data-aos="fade-right" data-aos-duration="2000"> -->
-            <div class="heading fade-right paused">
-                <h3>CHEF'S SPECIAL</h3>
-                <h1>Freshness in every bite</h1>
-                <p>Healthy Sashimi Tuna Bites With Sashimi grade Tuna, 110 calories and 13g protein.</p>
-                <!-- <button data-aos="fade-right" data-aos-duration="2000" data-aos-delay="00">Download Recipe</button> -->
-                <button class="fade-right paused">Download Recipe</button>
-            </div>
-            <div class="image">
-                <!-- <img src="images/test/main.png" data-aos="zoom-in" data-aos-duration="2000"> -->
-                <img src="images/test/main.png" class="rotate paused">
-            </div>
-        </div>
-    </section>
-    
-    <section class="aboutus">
-        <div class="container">
-            <!-- <img src="images/test/aboutus.png" data-aos="zoom-in" data-aos-duration="1000"> -->
-            <img src="images/test/aboutus.png" class="zoom-in paused">
-            <div class="aboutus-content">
-                <!-- <h1 data-aos="fade-left" data-aos-duration="1000">About us</h1> -->
-                <h1 class="fade-left paused">About us</h1>
-                <p class="fade-left paused delayed" style="--i: 2">Salad, a vibrant medley of fresh
-                    vegetables, fruits, and herbs, offers a delightful burst of flavors and textures. Its colorful array of
-                    ingredients, tossed with dressing, creates a refreshing and healthy dish. Whether composed of crisp
-                    greens, crunchy cucumbers, juicy tomatoes, or tangy vinaigrette, a well-made salad serves as a versatile
-                    and nutritious addition to any meal, pleasing both the palate and the senses.</p>
-            </div>
-        </div>
-    
-    </section>
-    
-    <section class="details-foods">
+
+    <div class="container">
         <div class="title">
-            <!-- <h1 data-aos="fade-left" data-aos-duration="1000">We have a wide Range of Healthy Salads</h1> -->
-            <h1 class="fade-left paused">We have a wide Range of Healthy Salads</h1>
+            <h1>Generate a <br>
+                <span>Random Password</span>
+            </h1>
         </div>
-        <div class="foods">
-            <!-- <div class="card" data-aos="fade-up" data-aos-duration="1000"> -->
-            <div class="card fade-up delayed paused" style="--i: 0">
-                <img src="images/test/salad.png" alt="">
-                <div class="discription">
-                    <h1> Red Spinach with Carrot</h1>
-                    <p>A spinach salad features tender spinach leaves tossed with vibrant toppings like crisp bacon, sliced
-                        mushrooms, and hard-boiled eggs, all drizzled in a zesty vinaigrette, offering a flavorful and
-                        nutritious combination in every bite.</p>
-                    <p class="price">$9.00</p>
-                </div>
-            </div>
-            <!-- <div class="card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200"> -->
-            <div class="card fade-up delayed paused" style="--i: 1">
-                <img src="images/test/salad1.png" alt="">
-                <div class="discription">
-                    <h1>Spinach With Carrot</h1>
-                    <p>Combining the leafy goodness of spinach with the vibrant crunch of carrots, this salad offers a
-                        harmonious balance of flavors and textures, making it a refreshing and healthful choice for any meal
-                        and burst of freshness in every mouthful.</p>
-                    <p class="price">$8.00</p>
-                </div>
-            </div>
-            <!-- <div class="card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400"> -->
-            <div class="card fade-up delayed paused" style="--i: 2">
-                <img src="images/test/salad2.png" alt="">
-                <div class="discription">
-                    <h1>Green leave with Tomato</h1>
-                    <p>Green leaf and tomato salad: A simple yet vibrant combination of crisp, leafy greens paired with
-                        juicy, ripe tomatoes, accented with a tangy dressing, offering a refreshing burst of flavors and
-                        creates a delightful salad that's both light and satisfying.</p>
-                    <p class="price">$9.50</p>
-                </div>
-            </div>
-            <!-- <div class="card" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600"> -->
-            <div class="card fade-up delayed paused" style="--i: 3">
-                <img src="images/test/salad3.png" alt="">
-                <div class="discription">
-                    <h1>Mixed Salad</h1>
-                    <p>A mixed salad is a delightful ensemble of assorted fresh vegetables, fruits, nuts, and sometimes
-                        cheese, combined with a flavorful dressing.for making it a satisfying and nutritious option for a
-                        wholesome meal or a refreshing side.</p>
-                    <p class="price">$8.50</p>
-                </div>
-            </div>
+        <div id="message-box">
+            <img src="images/—Pngtree—color  neon dialog box_4044237.png" alt="message-box">
+            <p>copied</p>
         </div>
-    </section>
-        
-    <section class="download">
-        <div class="container">
-            <div class="images">
-                <!-- <img src="images/test/phone2.png" data-aos="zoom-in" data-aos-duration="1000"> -->
-                <img src="images/test/phone2.png" class="zoom-in delayed paused" style="--i: 0">
-                <!-- <img src="images/test/phone1.png" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200"> -->
-                <img src="images/test/phone1.png" class="zoom-in delayed paused" style="--i: 1">
-            </div>
-            <!-- <div class="content" data-aos="fade-left" data-aos-duration="1000"> -->
-            <div class="content fade-left paused">
-                <h1>Available on App Store</h1>
-                <p>Downlaod our App from App store and Playstore for both platform Android and IOS.</p>
-                <div class="icons">
-                    <!-- <img src="images/test/appstore.png" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200"> -->
-                    <img src="images/test/appstore.png" class="fade-left" style="--i: 1">
-                    <!-- <img src="images/test/playstore.png" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300"> -->
-                    <img src="images/test/playstore.png" class="fade-left" style="--i: 1.5">
-                </div>
-            </div>
+        <div class="password-panel">
+            <input id="password-input" type="text">
+            <button class="copy-btn">
+                <img class="copy" src="images/copy.png" alt="copy">
+            </button>
         </div>
-    </section>
+        <div class="btn">
+            <button>
+                <i class="fa-solid fa-bolt bolt"></i>Generate Password
+            </button>
+        </div>
+    </div>
 
-    <script>
-        const observer = new IntersectionObserver(animate);
+    <div id="quizzie">
+        <h1>JavaScript Quiz</h1>
 
-        const elements = document.querySelectorAll(".paused");
-
-        elements.forEach(element => {
-            observer.observe(element);
-        })
-
-        function animate(entries) {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                entry.target.classList.remove("paused");
-              }
-            });
-        }
-    </script>
-
-    <button class="versions">v.2</button>
-    <script>
-        const versions = {
-            "v.1": "v.2", 
-            "v.2": "v.1"
-        }
-    
-        const changeVersionsBtn = document.querySelector(".versions");
-        changeVersionsBtn.addEventListener("click", () => {
-            const bgDiv = document.querySelector(".bg");
-            bgDiv.classList.toggle("hidden");
-            const sliderBgDiv = document.querySelector(".slider-bg");
-            sliderBgDiv.classList.toggle("hidden");
-            changeVersionsBtn.textContent = versions[changeVersionsBtn.textContent];
-        })
-    </script>
-
-    <div class="bg"></div>
-
-    <div class="slider-bg hidden">
-        <img class="active" src="./images/test/bg-black/beautiful-tasty-appetizing-ingredients-spices-red-chilli-pepper-grocery-cooking-healthy-kitchen.jpg" alt="">
-        <img src="./images/test/bg-black/vegetables-set-left-black-slate-01.jpg" alt="">
-        <img src="./images/test/bg-black/condiments-prepare-italian-pasta.jpg" alt="">
-        <img src="./images/test/bg-black/flat-lay-arrangement-delicious-fresh-vegetables-with-copy-space.jpg" alt="">
-        <img src="./images/test/bg-black/vegetables-set-left-black-slate-02.jpg" alt="">
-        <img src="./images/test/bg-black/food-with-ingredients.jpg" alt="">
-        <img src="./images/test/bg-black/vintage-old-rustic-cutlery-dark-02.jpg" alt="">
-        <img src="./images/test/bg-black/ingredients-making-guakamole.jpg" alt="">
-        <img src="./images/test/bg-black/various-vegetables-black-table-with-space-message.jpg" alt="">
-        <img src="./images/test/bg-black/vintage-old-rustic-cutlery-dark-01.jpg" alt="">
-        <img src="./images/test/bg-black/vegetables-italian-knife-placed-left-black-table.jpg" alt="">
+        <section>
+            <ul class="quiz-step step1 current">
+                <li class="question">
+                    <div class="question-wrap">
+                        <h2>Question #1: Which event occurs when the user clicks on an HTML element?</h2>
+                    </div>
+                </li>
+                <li class="quiz-answer low-value" data-quizIndex="2">
+                    <div class="answer-wrap">
+                        <p class="answer-text">onclick</p>
+                    </div>
+                </li>
+                <li class="quiz-answer high-value" data-quizIndex="4">
+                    <div class="answer-wrap">
+                        <p class="answer-text">onmouseclick</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <section class="hidden">
+            <ul class="quiz-step step1 current">
+                <li class="question">
+                    <div class="question-wrap">
+                        <h2>Question #2: Which function converting JSON to string?</h2>
+                    </div>
+                </li>
+                <li class="quiz-answer low-value" data-quizIndex="2">
+                    <div class="answer-wrap">
+                        <p class="answer-text">JSON.toString()</p>
+                    </div>
+                </li>
+                <li class="quiz-answer high-value" data-quizIndex="4">
+                    <div class="answer-wrap">
+                        <p class="answer-text">JSON.stringify()</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <section class="hidden">
+            <ul class="quiz-step step1 current">
+                <li class="question">
+                    <div class="question-wrap">
+                        <h2>Question #3: What is DOM?</h2>
+                    </div>
+                </li>
+                <li class="quiz-answer low-value" data-quizIndex="2">
+                    <div class="answer-wrap">
+                        <p class="answer-text">A programming API for HTML and XML documents</p>
+                    </div>
+                </li>
+                <li class="quiz-answer high-value" data-quizIndex="4">
+                    <div class="answer-wrap">
+                        <p class="answer-text">The DOM is your source HTML</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <ul id="results">
+            <li class="results-inner">
+                <h1></h1>
+            </li>
+        </ul>
+    </div>
+    </main>
     </div>
     <script>
-        const images = document.querySelectorAll(".slider-bg img");
-        let index = 0;
-    
-        setInterval(() => {
-            const currentSlide = images[index];
-            currentSlide.classList.remove("active");
-            index++;
-            index = index % images.length;
-            const nextSlide = images[index];
-            nextSlide.classList.add("active");
-        }, 10000);
+        solve();
+    </script>
+    <script>
+        function solve() {
+  const sections = document.querySelectorAll("section");
+  const results = document.querySelector("ul#results");
+  const rights = ["onclick", "JSON.stringify()", "A programming API for HTML and XML documents"];
+  let score = 0;
+  let next = 1;
+
+  for (const section of sections) {
+    const answers = section.querySelectorAll(".quiz-answer");
+    // console.log(answers);
+    for (const answer of answers) {
+      answer.addEventListener("click", () => {
+        const response = answer.querySelector("p").textContent;
+        // console.log(response == rights[next - 1]);
+        if (response == rights[next - 1]) {
+          score++;
+          // console.log(score);
+        }
+
+        section.style.display = "none";
+
+        if (next < sections.length) {
+          sections[next].classList.remove("hidden");
+          sections[next].style.display = "block";
+          next++;
+        } else {
+          results.style.display = "block";
+          if (score == 3) {
+            results.querySelector("h1").textContent = "You are recognized as top JavaScript fan!";
+          } else {
+            results.querySelector("h1").textContent = `You have ${score} right answers`;
+          }
+        }
+
+      })
+    }
+  }
+
+}
     </script>
     
 <script>
@@ -1001,24 +218,14 @@ body {
     </script>
 
     <p style="display: none;">
-<!-- Earn 600,000 gold at the Tower -->
-<!-- Win 5 times in the Adventure mode -->
 Make 65 purchases from the shop
 Complete 100 Tower floors
-<!-- 4 	 -->
-<!-- Use 5 EXP potions -->
-<!-- Level up a Support hero's skill (10) -->
-<!-- Level up the Armor glyph -->
-Defeat a Mage hero in 25 battles in the Tower mode
-Begin 10 Expeditions
-<!-- 5 	 -->
-<!-- Level up a Mage hero's skill -->
-<!-- Complete 7 daily quests -->
-<!-- Defeat Dark Star 2 times in the Campaign -->
-6 	
-Deal 150,000 damage in the Tower
-Open 7 chests in the Tower
-Level up the Magic attack glyph
+<!-- Defeat a Mage hero in 25 battles in the Tower mode -->
+<!-- Begin 10 Expeditions -->
+<!-- 6 	 -->
+<!-- Deal 150,000 damage in the Tower -->
+<!-- Open 7 chests in the Tower -->
+<!-- Level up the Magic attack glyph -->
 7 	
 Upgrade any titan by 1 level
 Heal your heroes for 150,000 in the Arena
