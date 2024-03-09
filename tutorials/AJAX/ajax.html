@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
       *{
     padding: 0;
@@ -121,6 +121,20 @@ body {
     font-size: 1rem;
     padding: 0.4em 1em;
     cursor: pointer;
+}
+
+@media (max-width :460px) {
+    .container .btn button{
+        font-size: 0.9rem;
+        margin-right: -20px;
+    }
+
+    .container .btn button i {
+        font-size: 1rem;
+        left: 0;
+        margin-right: 1px;
+    }
+    
 }
 
 .container .btn button:active {
@@ -252,10 +266,82 @@ h1, h2, p {
 #quizzie .answer-wrap:hover {
   background: DarkTurquoise;
 }
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url(2391_fubr_210723.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container-1 {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px white;
+  backdrop-filter: blur(5px);
+}
+
+.container-1 .wrapper {
+    width: 100%;
+    color: white;
+}
     </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+
+    <div class="container-1">
+
+      <div class="wrapper">
+
+          <h1>Login</h1>
+
+          <div class="inputs">
+              <input type="text" placeholder="Username" required>
+              <label for=""><i class="fa-solid fa-user"></i></label>
+          </div>
+
+          <div class="inputs">
+              <input type="password" placeholder="Password" required>
+              <label for=""><i class="fa-solid fa-lock"></i></label>
+          </div>
+
+          <div class="remfor">
+              <div class="remember">
+                  <input type="checkbox">
+                  <label for="">Remember me</label>
+              </div>
+              <div class="forget">
+                  <a href="">Forget Password?</a>
+              </div>
+          </div>
+
+          <button>Login</button>
+
+          <p>---------- <span>Or Sign up</span> ----------</p>
+
+          <div class="social-links">
+              <div class="google"><i class="fa fa-google"></i></div>
+              <div class="twitter"><i class="fa fa-twitter"></i></div>
+              <div class="facebook"><i class="fa fa-facebook-f"></i></div>
+          </div>
+
+      </div>
+
+  </div>
 
     <div class="container">
 
@@ -284,6 +370,52 @@ h1, h2, p {
         </div>
 
     </div>
+    <script>
+      const passwordInput = document.getElementById('password-input');
+const button = document.querySelector('.btn');
+const copyButton = document.querySelector('.copy-btn');
+const messageBox  = document.getElementById('message-box');
+
+const length = 8;
+
+const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+const lowerCase =  upperCase.toLowerCase();
+const numbers  = "0123456789";
+const symbol = "@#*";
+
+const allChar = upperCase + lowerCase +numbers +symbol;
+
+function createPassword(){
+    let password = " ";
+
+    password += upperCase[Math.floor(Math.random()*upperCase.length)];
+    password += lowerCase[Math.floor(Math.random()*lowerCase.length)];
+    password += numbers[Math.floor(Math.random()*numbers.length)];
+    password += symbol[Math.floor(Math.random()*symbol.length)];
+
+    while(length>password.length){
+        password += allChar[Math.floor(Math.random()*allChar.length)];
+    }
+    passwordInput.value= password;
+}
+
+button.addEventListener('click', ()=>{
+   createPassword();
+   messageBox.style.scale = '0';
+
+})
+
+function copyText(){
+    passwordInput.select();
+    document.execCommand("copy"); 
+};
+
+copyButton.addEventListener('click', ()=>{
+        copyText();
+        messageBox.style.scale = '1';
+        
+});
+    </script>
 
     <div id="quizzie" style="display: none;">
 
