@@ -5,670 +5,147 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      *{
-    padding: 0;
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    box-sizing: border-box;
-}
-
-body {
-    background-color: #002339;
-}
-
-.container {
-    width: 90%;
-    max-width: 450px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-}
-
-.container .title {
-    color: #fff;
-    font-size: 1.3rem;
-    word-spacing: 3px;
-}
-
-.container .title span {
-    color: #019f55;
-    display: flex;
-    margin-right: 6rem;
-    margin-top: 10px;
-    font-size: 2.3rem;
-    line-height: 5vh;
-    border-bottom: 4px solid #019f55;
-}
-
-.container .password-panel {
-    width: 90%;
-    height: 6vh;
-    
-    border-radius: 10px;
-    background-color: #fff;
-    border: 1px solid #fff;
-    margin:5% 10% 5% 0;
-}
-
-.container .password-panel input {
-    width:85%;
-    height: 6vh;
-    background-color: transparent ;
-    border: none;
-    outline: none;
-    padding: 5px ;
-    font-size: 1.5rem;
-}
-
-.container .password-panel button {
-    width: 15%;
-    border: none;
-    margin-top: 2px;
-    position: absolute;
-    background-color: transparent;
-}
-
-.container .password-panel button img {
-    width: 30px;
-    height: 40px;
-}
-
-.container .password-panel button img:active {
-    scale: 0.9;
-}
-
-.container #message-box {
-    scale: 0;
-}
-
-.container #message-box img {
-    display: flex;
-    float: right;
-    position: absolute;
-    right: 0;
-    margin-top: -35px;
-    margin-right: 60%;
-    transform: rotate(-5deg);
-    width: 100px;
-    height: 70px;
-    filter:drop-shadow( 5px 5px 100px #000, -5px -5px 100px #000);
-}
-
-.container #message-box p {
-    position: absolute;
-    margin-right: 65%;
-    right: 0;
-    margin-top: -10px;
-    display: flex;
-    color: #fff;
-}
-
-.container .btn {
-    width: 50%;
-    /* height: 5vh; */
-    padding: 10px 20px;
-}
-
-.container .btn button {
-    width: 100%;
-    /* height: 100%; */
-    color: white;
-    background-color: #019f55;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    padding: 0.4em 1em;
-    cursor: pointer;
-}
-
-@media (max-width :460px) {
-    .container .btn button{
-        font-size: 0.9rem;
-        margin-right: -20px;
-    }
-
-    .container .btn button i {
-        font-size: 1rem;
-        left: 0;
-        margin-right: 1px;
-    }
-    
-}
-
-.container .btn button:active {
-    scale: 0.98;
-}
-
-.container .btn button i {
-    position: absolute;
-    left: 5px;
-    font-size: 1.5rem;
-    margin:-3px 0 0 0 ;
-}
-
-        @import url(https://fonts.googleapis.com/css?family=Satisfy|Pathway+Gothic+One);
-/* Defaults */
-html, 
-body, 
-#quizzie {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.hidden {
-  display: none;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  /* background: #677c8a; */
-  /* color: #fff; */
-}
-
-h1 {
-  font-family: 'Satisfy', 'cursive';
-  font-size: 2.5em;
-}
-
-h2, p {
-  font-family: 'Pathway Gothic One', 'sans-serif';
-  font-size: 2em;
-}
-
-h1, h2, p {
-  text-align: center;
-  display: block;
-  width: auto;
-  margin: 1%;
-}
-
-#quizzie {
-  padding: 5% 0;
-  /* Individual Steps/Sections */
-  /* Content */
-}
-
-#quizzie ul {
-  list-style: none;
-  display: block;
-  width: auto;
-  margin: 2% 2%;
-  padding: 2%;
-  overflow: auto;
-  display: none;
-  /* Step Questions and Answer Options */
-}
-
-#quizzie ul.current {
-  display: block;
-}
-
-#quizzie ul li {
-  display: inline-block;
-  float: left;
-  width: 49%;
-  margin-right: 2%;
-  overflow: auto;
-  text-align: center;
-}
-
-#quizzie ul li.quiz-answer {
-  cursor: pointer;
-}
-
-#quizzie ul li.question, 
-#quizzie ul li.results-inner {
-  display: block;
-  float: none;
-  width: 100%;
-  text-align: center;
-  margin: 0;
-  margin-bottom: 2%;
-}
-
-#quizzie ul li.results-inner {
-  padding: 5% 2%;
-}
-
-#quizzie ul li.results-inner img {
-  width: 250px;
-}
-
-#quizzie ul li:last-child {
-  margin-right: 0;
-}
-
-#quizzie .question-wrap, 
-#quizzie .answer-wrap {
-  display: block;
-  padding: 1%;
-  margin: 1em 10%;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-}
-
-#quizzie .answer-wrap {
-  background: Turquoise;
-  -moz-transition: background-color 0.5s ease;
-  -o-transition: background-color 0.5s ease;
-  -webkit-transition: background-color 0.5s ease;
-  transition: background-color 0.5s ease;
-}
-
-#quizzie .answer-wrap:hover {
-  background: DarkTurquoise;
-}
-
-* {
-    padding: 0;
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    box-sizing: border-box;
-}
-
-body {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url(2391_fubr_210723.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.container-1 {
-  width: 100%;
-  max-width: 400px;
-  border-radius: 15px;
-  box-shadow: 0 0 10px white;
-  backdrop-filter: blur(5px);
-}
-
-.container-1 .wrapper {
-    width: 100%;
-    color: white;
-}
-
-.wrapper h1 {
-  margin: 10px 0;
-  font-size: 3rem;
-  text-align: center;
-}
-
-.wrapper .inputs {
-  width: 80%;
-  /* height: 5vh; */
-  margin: 8% 10%;
-  display: flex;
-  justify-content: space-between;
-  border-radius: 10px;
-  border: 1px solid white;
-}
-
-.inputs input {
-    width: 90%;
-    padding-left: 10px;
-    color: white;
-    border: none;
-    outline: none;
-    background-color: transparent;
-}
-
-::placeholder {
-    color: white;
-}
-
-.inputs label {
-    width: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.remfor {
-    display: flex;
-    width: 80%;
-    margin: 0 10%;
-    justify-content: space-between;
-}
-
-.remfor .forget a {
-    color: white;
-    text-decoration: none;
-}
-
-.forget a:hover {
-    color: red;
-}
-
-button {
-  width: 80%;
-  /* height: 6vh; */
-  margin: 7% 10%;
-  color: white;
-  font-size: 1.7rem;
-  font-weight: 700;
-  outline: none;
-  border: none;
-  background-color: #194388;
-  border-radius: 10px;
-}
-
-button:hover {
-    scale: 0.95;
-}
-
-p {
-    margin: 20px 0;
-    text-align: center;
-}
-
-p span {
-    font-size: 1.2rem;
-}
-
-.social-links {
-    margin: 30px 0;
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.social-links div i {
-    width: 55px;
-    height: 55px;
-    font-size: 1.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    transition: 0.2s linear;
-}
-
-.social-links .google i {
-  color: white;
-  background-color: red;
-  box-shadow: 0 0 50px red;
-}
-
-.google i:hover {
-  color: red;
-  background-color: transparent;
-  box-shadow:  0 0 20px red;
-}
-
-.social-links .twitter i {
-  color: white;
-  background-color: black;
-  box-shadow: 0 0 50px black;
-}
-
-.twitter i:hover{
-    box-shadow:  0 0 20px black;
-    color: black;
-    background-color: transparent;
-}
-
-.social-links .facebook i{
-    background-color: #0866ff;
-    box-shadow: 0 0 50px #0866ff;
-    color: white;
-}
-
-.facebook i:hover{
-    box-shadow:  0 0 20px #0866ff;
-    color: #0866ff;
-    background-color: transparent;
-}
-    </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
-    <div class="container-1">
-
-      <div class="wrapper">
-
-          <h1>Login</h1>
-
-          <div class="inputs">
-              <input type="text" placeholder="Username" required>
-              <label for=""><i class="fa-solid fa-user"></i></label>
+    <header>
+      <h1>Biggest Catch</h1>
+      <nav>
+          <a id="home" class="active">Home</a>
+          <div id="user">
+              <a id="logout" href="javascript:void(0)">Logout</a>
           </div>
-
-          <div class="inputs">
-              <input type="password" placeholder="Password" required>
-              <label for=""><i class="fa-solid fa-lock"></i></label>
+          <div id="guest">
+              <a id="login" href="login.html">Login</a>
+              <a id="register" href="register.html">Register</a>
           </div>
-
-          <div class="remfor">
-              <div class="remember">
-                  <input type="checkbox">
-                  <label for="">Remember me</label>
+          <p class="email">Welcome, <span>guest</span></p>
+      </nav>
+  </header>
+  <main>
+      <section id="home-view">
+          <fieldset id="main">
+              <legend>Catches</legend>
+              <div id="catches">
+                  <!-- <div class="">
+                      <label>Angler</label>
+                      <input type="text" class="angler" value="Paulo Admorim">
+                      <label>Weight</label>
+                      <input type="text" class="weight" value="636">
+                      <label>Species</label>
+                      <input type="text" class="species" value="Atlantic Blue Marlin">
+                      <label>Location</label>
+                      <input type="text" class="location" value="Vitoria, Brazil">
+                      <label>Bait</label>
+                      <input type="text" class="bait" value="trolled pink">
+                      <label>Capture Time</label>
+                      <input type="number" class="captureTime" value="80">
+                      <button class="update" data-id="07f260f4-466c-4607-9a33-f7273b24f1b4">Update</button>
+                      <button class="delete" data-id="07f260f4-466c-4607-9a33-f7273b24f1b4">Delete</button>
+                  </div> -->
+                  <!-- <div class="">
+                      <label>Angler</label>
+                      <input type="text" class="angler" value="John Does" disabled>
+                      <label>Weight</label>
+                      <input type="text" class="weight" value="554" disabled>
+                      <label>Species</label>
+                      <input type="text" class="species" value="Atlantic Blue Marlin" disabled>
+                      <label>Location</label>
+                      <input type="text" class="location" value="Buenos Aires, Argentina" disabled>
+                      <label>Bait</label>
+                      <input type="text" class="bait" value="trolled pink" disabled>
+                      <label>Capture Time</label>
+                      <input type="number" class="captureTime" value="120" disabled>
+                      <button class="update" data-id="bdabf5e9-23be-40a1-9f14-9117b6702a9d" disabled>Update</button>
+                      <button class="delete" data-id="bdabf5e9-23be-40a1-9f14-9117b6702a9d" disabled>Delete</button>
+                  </div> -->
               </div>
-              <div class="forget">
-                  <a href="">Forget Password?</a>
-              </div>
-          </div>
+          </fieldset>
+          <aside>
+              <button class="load">Load</button>
+              <form id="addForm">
+                  <fieldset>
+                      <legend>Add Catch</legend>
+                      <label>Angler</label>
+                      <input type="text" name="angler" class="angler" />
+                      <label>Weight</label>
+                      <input type="number" name="weight" class="weight" />
+                      <label>Species</label>
+                      <input type="text" name="species" class="species" />
+                      <label>Location</label>
+                      <input type="text" name="location" class="location" />
+                      <label>Bait</label>
+                      <input type="text" name="bait" class="bait" />
+                      <label>Capture Time</label>
+                      <input type="number" name="captureTime" class="captureTime" />
+                      <button disabled class="add">Add</button>
+                  </fieldset>
+              </form>
+          </aside>
+      </section>
 
-          <button>Login</button>
+      <!-- <a href="" id="test">
+          <button>test</button>
+      </a> -->
 
-          <p>---------- <span>Or Sign up</span> ----------</p>
+      <!-- <section id="register-view">
+          <h2>Register</h2>
+          <form id="register">
+              <label>Email: <input type="text" name="email"></label>
+              <label>Password: <input type="password" name="password"></label>
+              <label>Repeat: <input type="password" name="rePass"></label>
+              <p class="notification"></p>
+              <button>Register</button>
+          </form>
+      </section>
+          
+      <section id="login-view">
+          <h2>Login</h2>
+          <form id="login">
+              <label>Email: <input type="text" name="email"></label>
+              <label>Password: <input type="password" name="password"></label>
+              <p class="notification"></p>
+              <button>Login</button>
+          </form>
+      </section> -->
+  </main>
 
-          <div class="social-links">
-              <div class="google"><i class="fa fa-google"></i></div>
-              <div class="twitter"><i class="fa fa-twitter"></i></div>
-              <div class="facebook"><i class="fa fa-facebook-f"></i></div>
-          </div>
+  <script>
+    // console.log('TODO:// Implement Home functionality');
+// import { log as reglog } from "./register.js";
+// import { log as loglog } from "./login.js";
 
-      </div>
+// const sections = document.querySelectorAll("section");
+// sections.forEach(section => section.style.display = "none");
 
-  </div>
+// const homeSection = document.getElementById("home-view");
+// homeSection.style.display = "block";
 
-    <div class="container">
+const mainPanel = document.getElementById("main");
+mainPanel.style.display = "none";
+// mainPanel.hidden;
 
-        <div class="title">
-            <h1>Generate a <br>
-                <span>Random Password</span>
-            </h1>
-        </div>
+const user = JSON.parse(sessionStorage.getItem("user"));
+// console.log(user);
+// const token = user.accessToken;
+// console.log(token);
 
-        <div id="message-box">
-            <img src="images/—Pngtree—color  neon dialog box_4044237.png" alt="message-box">
-            <p>copied</p>
-        </div>
-
-        <div class="password-panel">
-            <input id="password-input" type="text">
-            <button class="copy-btn">
-                <img class="copy" src="images/copy.png" alt="copy">
-            </button>
-        </div>
-
-        <div class="btn">
-            <button>
-                <i class="fa-solid fa-bolt bolt"></i>Generate Password
-            </button>
-        </div>
-
-    </div>
-    <script>
-      const passwordInput = document.getElementById('password-input');
-const button = document.querySelector('.btn');
-const copyButton = document.querySelector('.copy-btn');
-const messageBox  = document.getElementById('message-box');
-
-const length = 8;
-
-const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-const lowerCase =  upperCase.toLowerCase();
-const numbers  = "0123456789";
-const symbol = "@#*";
-
-const allChar = upperCase + lowerCase +numbers +symbol;
-
-function createPassword(){
-    let password = " ";
-
-    password += upperCase[Math.floor(Math.random()*upperCase.length)];
-    password += lowerCase[Math.floor(Math.random()*lowerCase.length)];
-    password += numbers[Math.floor(Math.random()*numbers.length)];
-    password += symbol[Math.floor(Math.random()*symbol.length)];
-
-    while(length>password.length){
-        password += allChar[Math.floor(Math.random()*allChar.length)];
-    }
-    passwordInput.value= password;
+if (user) {
+    const guestNav = document.getElementById('guest');
+    guestNav.style.display = "none";
+    // guestNav.hidden;
+    const welcomePanel = document.querySelector(".email span");
+    welcomePanel.textContent = user.email;
+    const addCatchBtn = document.querySelector("#addForm button.add");
+    // console.log(addCatchBtn);
+    addCatchBtn.disabled = false;
+} else {
+    const userNav = document.getElementById("user");
+    userNav.style.display = "none";
+    // userNav.hidden;
 }
-
-button.addEventListener('click', ()=>{
-   createPassword();
-   messageBox.style.scale = '0';
-
-})
-
-function copyText(){
-    passwordInput.select();
-    document.execCommand("copy"); 
-};
-
-copyButton.addEventListener('click', ()=>{
-        copyText();
-        messageBox.style.scale = '1';
-        
-});
-    </script>
-
-    <div id="quizzie" style="display: none;">
-
-        <h1>JavaScript Quiz</h1>
-
-        <section>
-            <ul class="quiz-step step1 current">
-                <li class="question">
-                    <div class="question-wrap">
-                        <h2>Question #1: Which event occurs when the user clicks on an HTML element?</h2>
-                    </div>
-                </li>
-                <li class="quiz-answer low-value" data-quizIndex="2">
-                    <div class="answer-wrap">
-                        <p class="answer-text">onclick</p>
-                    </div>
-                </li>
-                <li class="quiz-answer high-value" data-quizIndex="4">
-                    <div class="answer-wrap">
-                        <p class="answer-text">onmouseclick</p>
-                    </div>
-                </li>
-            </ul>
-        </section>
-
-        <section class="hidden">
-
-            <ul class="quiz-step step1 current">
-                <li class="question">
-                    <div class="question-wrap">
-                        <h2>Question #2: Which function converting JSON to string?</h2>
-                    </div>
-                </li>
-                <li class="quiz-answer low-value" data-quizIndex="2">
-                    <div class="answer-wrap">
-                        <p class="answer-text">JSON.toString()</p>
-                    </div>
-                </li>
-                <li class="quiz-answer high-value" data-quizIndex="4">
-                    <div class="answer-wrap">
-                        <p class="answer-text">JSON.stringify()</p>
-                    </div>
-                </li>
-            </ul>
-
-        </section>
-
-        <section class="hidden">
-
-            <ul class="quiz-step step1 current">
-                <li class="question">
-                    <div class="question-wrap">
-                        <h2>Question #3: What is DOM?</h2>
-                    </div>
-                </li>
-                <li class="quiz-answer low-value" data-quizIndex="2">
-                    <div class="answer-wrap">
-                        <p class="answer-text">A programming API for HTML and XML documents</p>
-                    </div>
-                </li>
-                <li class="quiz-answer high-value" data-quizIndex="4">
-                    <div class="answer-wrap">
-                        <p class="answer-text">The DOM is your source HTML</p>
-                    </div>
-                </li>
-            </ul>
-
-        </section>
-
-        <ul id="results">
-            <li class="results-inner">
-                <h1></h1>
-            </li>
-        </ul>
-        
-    </div>
-    </main>
-    </div>
-    <script>
-        solve();
-    </script>
-    <script>
-        function solve() {
-  const sections = document.querySelectorAll("section");
-  const results = document.querySelector("ul#results");
-  const rights = ["onclick", "JSON.stringify()", "A programming API for HTML and XML documents"];
-  let score = 0;
-  let next = 1;
-
-  for (const section of sections) {
-    const answers = section.querySelectorAll(".quiz-answer");
-    // console.log(answers);
-    for (const answer of answers) {
-      answer.addEventListener("click", () => {
-        const response = answer.querySelector("p").textContent;
-        // console.log(response == rights[next - 1]);
-        if (response == rights[next - 1]) {
-          score++;
-          // console.log(score);
-        }
-
-        section.style.display = "none";
-
-        if (next < sections.length) {
-          sections[next].classList.remove("hidden");
-          sections[next].style.display = "block";
-          next++;
-        } else {
-          results.style.display = "block";
-          if (score == 3) {
-            results.querySelector("h1").textContent = "You are recognized as top JavaScript fan!";
-          } else {
-            results.querySelector("h1").textContent = `You have ${score} right answers`;
-          }
-        }
-
-      })
-    }
-  }
-
-}
-    </script>
+  </script>
     
 <script>
   // 10. Contacts Builder✶
