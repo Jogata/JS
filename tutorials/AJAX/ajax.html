@@ -368,6 +368,17 @@ if (user) {
     // userNav.hidden;
 }
 
+const homeLink = document.querySelector("a#home");
+homeLink.addEventListener("click", (e) => {
+    // e.preventDefault();
+    // const sections = document.querySelectorAll("section");
+    // sections.forEach(section => section.style.display = "none");
+    // homeSection.style.display = "block";
+    const activeLink = document.querySelector("a.active");
+    activeLink.classList.remove("active");
+    homeLink.classList.add("active");
+})
+
 const logoutButton = document.getElementById("logout");
 logoutButton.addEventListener("click", async (e) => {
     e.preventDefault();
@@ -394,6 +405,133 @@ logoutButton.addEventListener("click", async (e) => {
     }
 
 })
+
+const loadButton = document.querySelector(".load");
+// console.log(loadButton);
+loadButton.addEventListener("click", async () => {
+    // e.preventDefault();
+
+    const url = "http://localhost:3030/data/catches";
+
+    // const options = createOptions(user);
+    // console.log(options);
+
+    const response = await fetch(url);
+    // console.log(response);
+
+    // const test = {
+    //     _createdOn: 1614760782277, 
+    //     _id: "bdabf5e9-23be-40a1-9f14-9117b6702a9d", 
+    //     _ownerId: "847ec027-f659-4086-8032-5173e2f9c93a", 
+    //     angler: "John Does", 
+    //     bait: "trolled pink", 
+    //     captureTime: 120, 
+    //     location: "Buenos Aires, Argentina", 
+    //     species: "Atlantic Blue Marlin", 
+    //     weight: 554
+    // }
+
+    if (!response.ok) {
+        throw new Error("wrong something");
+    }
+
+    // mainPanel.style.display = "inline-table";
+    // mainPanel.style.display = "revert";
+
+    // try {
+        const data = await response.json();
+        console.log(data);
+    // } catch (error) {
+    //     console.log(error);
+    // }
+    
+    // mainPanel.style.display = "inline-table";
+    mainPanel.hidden = false;
+    
+    const parent = document.getElementById("catches");
+    parent.textContent = "";
+
+    for (const catchInfo of data) {
+
+        const userPanel = document.createElement("div");
+        userPanel.classList.add("catch");
+    
+        const html = `<label>Angler</label>
+        <input type="text" class="angler" value="${catchInfo.angler}" disabled>
+        <label>Weight</label>
+        <input type="text" class="weight" value="${catchInfo.weight}" disabled>
+        <label>Species</label>
+        <input type="text" class="species" value="${catchInfo.species}" disabled>
+        <label>Location</label>
+        <input type="text" class="location" value="${catchInfo.location}" disabled>
+        <label>Bait</label>
+        <input type="text" class="bait" value="${catchInfo.bait}" disabled>
+        <label>Capture Time</label>
+        <input type="number" class="captureTime" value="${catchInfo.captureTime}" disabled>
+        <button class="update" data-id="${catchInfo._id}" disabled>Update</button>
+        <button class="delete" data-id="${catchInfo._id}" disabled>Delete</button>`;
+
+        // const updateBtn = document.createElement("button");
+        // updateBtn.classList.add("update");
+        // updateBtn.dataset.id = catchInfo._id;
+        // updateBtn.textContent = "Update";
+
+        // const deleteBtn = document.createElement("button");
+        // deleteBtn.classList.add("delete");
+        // deleteBtn.dataset.id = catchInfo._id;
+        // deleteBtn.textContent = "Delete";
+    
+        userPanel.innerHTML = html;
+        // userPanel.appendChild(updateBtn);
+        // userPanel.appendChild(deleteBtn);
+
+        // const buttons = userPanel.querySelectorAll("button");
+        // const inputs = userPanel.querySelectorAll("input");
+        const elements = userPanel.querySelectorAll("button, input");
+
+        // if (user._id == catchInfo._ownerId) {
+        //     buttons.forEach(button => button.disabled = false);
+        //     inputs.forEach(input => input.disabled = false);
+        // }
+
+        if (user) {
+
+            if (user._id == catchInfo._ownerId) {
+                elements.forEach(element => element.disabled = false);
+
+                const deleteBtn = elements[7];
+                deleteBtn.addEventListener("click", async () => {
+                    // console.log("delete");
+                    const url = `http://localhost:3030/data/catches/${updateBtn.dataset.id}`;
+        
+                    const options = {
+                        method: "DELETE", 
+                        headers: {
+                            "X-Authorization": user.accessToken, 
+                            // "Content-Type": "application/json", 
+                            // 'Content-Type': 'application/x-www-form-urlencoded',
+                        }, 
+                        // body: JSON.stringify(catchDataObject)
+                    };
+        
+                    try {
+                        const response = await fetch(url, options);
+                        console.log(response);
+                    } catch (error) {
+                        console.log(error);
+                    }
+                });
+                // console.log(updateBtn, deleteBtn);
+
+            }
+
+        }
+
+        parent.appendChild(userPanel);
+
+    }
+
+});
   </script>
     
 <script>
