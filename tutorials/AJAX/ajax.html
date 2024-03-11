@@ -8,6 +8,10 @@
     <style>
       @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
+      body > fieldset {
+        display: none;
+      }
+
 * {
     margin: 0;
     padding: 0;
@@ -16,11 +20,14 @@
 
 body {
     /* font-family: 'Open Sans', serif; */
+    font-family: Georgia, serif;
     background: #eaeaea;
     text-align: center;
     font-size: 20px;
-    width: 980px;
+    /* width: 980px; */
+    max-width: 980px;
     margin: auto;
+    min-height: 100vh;
 }
 
 header {
@@ -28,12 +35,16 @@ header {
     background-color: #cccccc;
     position: relative;
     display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* align-items: center; */
 }
 
 nav {
     display: inline-block;
-    position: absolute;
-    right: 16px;
+    /* position: absolute; */
+    /* right: 16px; */
     text-align: right;
 }
 
@@ -499,6 +510,47 @@ loadButton.addEventListener("click", async () => {
             if (user._id == catchInfo._ownerId) {
                 elements.forEach(element => element.disabled = false);
 
+                const updateBtn = elements[6];
+                updateBtn.addEventListener("click", async () => {
+                    console.log("update");
+        
+                    const url = `http://localhost:3030/data/catches/${updateBtn.dataset.id}`;
+        
+                    const angler = userPanel.querySelector(".angler").value;
+                    const weight = userPanel.querySelector(".weight").value;
+                    const species = userPanel.querySelector(".species").value;
+                    const location = userPanel.querySelector(".location").value;
+                    const bait = userPanel.querySelector(".bait").value;
+                    const captureTime = userPanel.querySelector(".captureTime").value;
+        
+                    const newData = {
+                        angler, 
+                        weight, 
+                        species, 
+                        location, 
+                        bait, 
+                        captureTime
+                    };
+                    // console.log(newData);
+        
+                    const options = {
+                        method: "PUT", 
+                        headers: {
+                            "X-Authorization": user.accessToken, 
+                            "Content-Type": "application/json", 
+                            // 'Content-Type': 'application/x-www-form-urlencoded',
+                        }, 
+                        body: JSON.stringify(newData)
+                    };
+        
+                    try {
+                        const response = await fetch(url, options);
+                        console.log(response);
+                    } catch (error) {
+                        console.log(error);
+                    }
+                });
+        
                 const deleteBtn = elements[7];
                 deleteBtn.addEventListener("click", async () => {
                     // console.log("delete");
@@ -532,6 +584,64 @@ loadButton.addEventListener("click", async () => {
     }
 
 });
+
+const addCatchForm = document.getElementById("addForm");
+addCatchForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    // console.log(addCatchForm);
+    const url = "http://localhost:3030/data/catches";
+
+    const catchData = new FormData(addCatchForm);
+    // console.log(catchData);
+    // console.log(JSON.stringify(catchData));
+    const entries = catchData.entries();
+    // console.log(entries);
+    const catchDataObject = Object.fromEntries(entries);
+    // console.log(catchDataObject);
+    const options = {
+        method: "POST", 
+        headers: {
+            "X-Authorization": user.accessToken, 
+            "Content-Type": "application/json", 
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        }, 
+        body: JSON.stringify(catchDataObject)
+    };
+
+    const response = await fetch(url, options);
+    console.log(response);
+})
+
+
+function createOptions(data) {
+    // console.log(data);
+    return {
+       method: "GET", 
+       headers: {
+           "X-Authorization": data.accessToken, 
+           //    "Content-Type": "application/json", 
+           // 'Content-Type': 'application/x-www-form-urlencoded',
+       }, 
+    //    body: JSON.stringify(data)
+   }
+}
+
+// const test = document.getElementById("test");
+// test.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     console.log(e.target);
+//     console.log(e.currentTarget);
+// })
+
+// const url = "http://localhost:3030/data/catches";
+
+// reglog();
+// loglog();
+
+// fetch(url)
+// .then(r => r.json())
+// .then(d => console.log(d))
+// .catch(e => alert(e));
   </script>
     
 <script>
@@ -607,34 +717,34 @@ loadButton.addEventListener("click", async () => {
     </script>
 
     <p style="display: none;">
-Make 65 purchases from the shop
-Complete 100 Tower floors
+<!-- Make 65 purchases from the shop -->
+<!-- Complete 100 Tower floors -->
 <!-- Defeat a Mage hero in 25 battles in the Tower mode -->
 <!-- Begin 10 Expeditions -->
 <!-- 6 	 -->
 <!-- Deal 150,000 damage in the Tower -->
 <!-- Open 7 chests in the Tower -->
 <!-- Level up the Magic attack glyph -->
-7 	
-Upgrade any titan by 1 level
-Heal your heroes for 150,000 in the Arena
-Level up a Marksman hero's skin
-Assemble the Altar of Power 5 times in Adventures
-Complete 15 summons in the Summoning Circle!
-8 	
-Use Pet Summoning 1 time
-Use the first skills of heroes 5 times in the Campaign
-Level up the Health glyph
+<!-- 7 	 -->
+<!-- Upgrade any titan by 1 level -->
+<!-- Heal your heroes for 150,000 in the Arena -->
+<!-- Level up a Marksman hero's skin -->
+<!-- Assemble the Altar of Power 5 times in Adventures -->
+<!-- Complete 15 summons in the Summoning Circle! -->
+<!-- 8 	 -->
+<!-- Use Pet Summoning 1 time -->
+<!-- Use the first skills of heroes 5 times in the Campaign -->
+<!-- Level up the Health glyph -->
 Earn 1,500,000 gold at the Tower
 Obtain 100 hero soul stones
-9 	
-Deal 150,000 magic damage in the Tower
-Deal 150,000 magic damage in the Campaign
-Win 5 times in the Tower mode without losing any heroes
-10 	
-Spend 500 Outland Coins
-Win 2 times in the Campaign mode using a Tank hero
-Win 5 times in the Adventure mode without losing any heroes
+<!-- 9 	 -->
+<!-- Deal 150,000 magic damage in the Tower -->
+<!-- Deal 150,000 magic damage in the Campaign -->
+<!-- Win 5 times in the Tower mode without losing any heroes -->
+<!-- 10 	 -->
+<!-- Spend 500 Outland Coins -->
+<!-- Win 2 times in the Campaign mode using a Tank hero -->
+<!-- Win 5 times in the Adventure mode without losing any heroes -->
 Make 30 purchases from the shop
 Complete 10 quests from the "Nature Season" event
 11 	
