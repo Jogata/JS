@@ -135,6 +135,97 @@ fieldset#main {
     margin: 0 50px 0 0;
     padding-bottom: 14px;
 }
+
+
+input {
+    padding: 5px 6px;
+    margin: 5px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 87%;
+}
+
+label {
+    display: block;
+    margin: 5px;
+    font-weight: bold;
+}
+
+legend {
+    font-weight: bold;
+    padding: 5px 10px;
+}
+
+#main, input {
+    text-align: center;
+}
+
+.catch {
+    border: 1px solid black;
+    margin: 5px 15px;
+    width: 250px;
+}
+
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.col-md-12 {
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+main {
+    min-height: 80vh;
+}
+
+#register-view, #login-view {
+    display: flex;
+    justify-content: flex-end;
+    align-content: stretch;
+    align-items: center;
+    flex-direction: column;
+}
+#register-view h2, #login-view h2 {
+    margin-bottom: 50px;
+    margin-top: 20px;
+}
+
+#home-view {
+    text-align: end;
+}
+
+#home-view aside {
+    text-align: center;
+}
+
+.notification {
+    color: red;
+    margin-top: 0.5%;
+    height: 30px;
+}
+
+.email {
+    padding-top: 10px;
+}
+
+.email span {
+    color: teal;
+}
+
+.email span:hover {
+    color: white;
+    cursor: pointer;
+}
     </style>
   </head>
   <body>
@@ -276,6 +367,33 @@ if (user) {
     userNav.style.display = "none";
     // userNav.hidden;
 }
+
+const logoutButton = document.getElementById("logout");
+logoutButton.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    const url = "http://localhost:3030/users/logout";
+
+    const options = createOptions(user);
+    // console.log(options);
+
+    const response = await fetch(url, options);
+    console.log(response);
+
+    if (response.ok) {        
+        sessionStorage.clear();
+    
+        // const guestNav = document.getElementById('guest');
+        // guestNav.style.display = "initial";
+        // const welcomePanel = document.querySelector(".email span");
+        // welcomePanel.textContent = "guest";
+        // const userNav = document.getElementById("user");
+        // userNav.style.display = "none";
+
+        window.location = "index.html";
+    }
+
+})
   </script>
     
 <script>
