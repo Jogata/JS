@@ -774,6 +774,137 @@ function createOptions(method, data) {
 //     log
 // }
   </script>
+
+  <script>
+    // const sections = document.querySelectorAll("section");
+// sections.forEach(section => section.style.display = "none");
+
+const userNav = document.getElementById("user");
+userNav.style.display = "none";
+// userNav.hidden = true;
+
+const loginLink = document.querySelector("a#login");
+loginLink.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     const sections = document.querySelectorAll("section");
+//     sections.forEach(section => section.style.display = "none");
+//     const loginSection = document.getElementById("login-view");
+//     loginSection.style.display = "flex";
+    const activeLink = document.querySelector("a.active");
+    activeLink.classList.remove("active");
+    loginLink.classList.add("active");
+})
+
+const loginForm = document.querySelector("form#login");
+loginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    // console.log("login");
+
+    const formData = new FormData(loginForm);
+
+    const email = formData.get("email");
+    const password = formData.get("password");
+    // const rePassword = formData.get("rePass");
+    // console.log(email, password);
+
+    try {
+
+        if (!email) {
+            // console.log("missing email");
+            throw new Error("missing email");
+            // return;
+        }
+    
+        if (!password) {
+            // console.log("missing pass");
+            throw new Error("missing pass");
+            // return;
+        }
+    
+        // if (!rePassword) {
+        //     // console.log("missing repass");
+        //     throw new Error("missing repass");
+        //     // return;
+        // }
+    
+        // if (password != rePassword) {
+        //     // console.log("pass # repass");
+        //     throw new Error("pass # repass");
+        //     // return;
+        // }
+
+    } catch (error) {
+        alert(error.message);
+        return;
+    }
+
+    const userData = {
+        email,
+        password
+    }
+
+    const response = await login(userData);
+    console.log(response);
+
+    if (response.ok) {
+        loginForm.reset();
+        window.location = "index.html";
+    }
+
+});
+
+async function login(formData) {
+    const url = "http://localhost:3030/users/login";
+    
+    try {
+
+        // console.log(formData);
+        const options = createOptions(formData);
+        console.log(options);
+        // console.log("1");
+    
+        const response = await fetch(url, options);
+        console.log(response);
+        // console.log("2");
+    
+        if (!response.ok) {
+            alert("Try again");
+            return response;
+        }
+    
+        const data = await response.json();
+        // console.log(data);
+    
+        sessionStorage.setItem("user", JSON.stringify(data));
+    
+        return response;
+    
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+
+function createOptions(data) {
+    // console.log(data);
+    return {
+        method: "POST",  
+        heahers: {
+            "Content-Type": "application/json", 
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        }, 
+        body: JSON.stringify(data)
+    }
+}
+
+// function log() {
+//     console.log('TODO:// Implement Login functionality');
+// }
+
+// export {
+//     log
+// }
+  </script>
     
 <script>
   // 10. Contacts Builder✶
