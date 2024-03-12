@@ -4,907 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      @import url(https://fonts.googleapis.com/css?family=Open+Sans);
-
-      body > fieldset {
-        display: none;
-      }
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    /* font-family: 'Open Sans', serif; */
-    font-family: Georgia, serif;
-    background: #eaeaea;
-    text-align: center;
-    font-size: 20px;
-    /* width: 980px; */
-    max-width: 980px;
-    margin: auto;
-    min-height: 100vh;
-}
-
-header {
-    padding: 32px;
-    background-color: #cccccc;
-    position: relative;
-    display: flex;
-    gap: 30px;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    /* align-items: center; */
-}
-
-nav {
-    display: inline-block;
-    /* position: absolute; */
-    /* right: 16px; */
-    text-align: right;
-}
-
-nav div {
-    display: inline-block;
-}
-
-nav a {
-    display: inline-block;
-    background: #234465;
-    color: white;
-    padding: 8px 16px;
-    margin: 0 8px;
-    text-decoration: none;
-}
-
-nav a:hover {
-    background-color: #6c8b47;
-    color: white;
-    cursor: pointer;
-}
-
-a.active {
-    background-color: #6c8b47;
-    color: white;
-}
-
-main {
-    background-color: #fff;
-    padding: 32px;
-}
-
-h1 {
-    text-align: center;
-}
-
-div {
-    display: inline-block;
-    /* width: 45%; */
-}
-
-aside {
-    width: 20%;
-    display: inline-block;
-}
-
-.update:disabled, .delete:disabled, .add:disabled {
-    background-color: rgba(66, 66, 66, 0.38);
-    color: rgba(66, 66, 66, 0.7);
-}
-
-.update:disabled:hover, .delete:disabled:hover, .add:disabled:hover {
-    cursor: no-drop;
-}
-
-.update {
-    background-color: rgb(209, 167, 62);
-}
-
-.delete {
-    background-color: rgb(207, 83, 52);
-}
-
-.add, .load {
-    background-color: rgb(95, 207, 105);
-}
-
-button:hover {
-    cursor: pointer;
-    color: white;
-}
-
-button {
-    background-color: rgba(66, 66, 66, 0.32);
-    border: none;
-    outline: none;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 19px;
-    width: 90%;
-    margin: 5px 0;
-    padding: 9px 0;
-    border-radius: 4px;
-    color: black;
-}
-
-#login button:hover, #register button:hover {
-    background-color: rgb(95, 207, 105);
-}
-
-fieldset {
-    display: inline-table;
-    vertical-align: top;
-    border: 2px solid black;
-}
-
-fieldset#main {
-    width: 70%;
-    margin: 0 50px 0 0;
-    padding-bottom: 14px;
-}
-
-
-input {
-    padding: 5px 6px;
-    margin: 5px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 87%;
-}
-
-label {
-    display: block;
-    margin: 5px;
-    font-weight: bold;
-}
-
-legend {
-    font-weight: bold;
-    padding: 5px 10px;
-}
-
-#main, input {
-    text-align: center;
-}
-
-.catch {
-    border: 1px solid black;
-    margin: 5px 15px;
-    width: 250px;
-}
-
-.row {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
-}
-
-.col-md-12 {
-    position: relative;
-    width: 100%;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
-}
-
-main {
-    min-height: 80vh;
-}
-
-#register-view, #login-view {
-    display: flex;
-    justify-content: flex-end;
-    align-content: stretch;
-    align-items: center;
-    flex-direction: column;
-}
-#register-view h2, #login-view h2 {
-    margin-bottom: 50px;
-    margin-top: 20px;
-}
-
-#home-view {
-    text-align: end;
-}
-
-#home-view aside {
-    text-align: center;
-}
-
-.notification {
-    color: red;
-    margin-top: 0.5%;
-    height: 30px;
-}
-
-.email {
-    padding-top: 10px;
-}
-
-.email span {
-    color: teal;
-}
-
-.email span:hover {
-    color: white;
-    cursor: pointer;
-}
-    </style>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
-
-    <header>
-      <h1>Biggest Catch</h1>
-      <nav>
-          <a id="home" class="active">Home</a>
-          <div id="user">
-              <a id="logout" href="javascript:void(0)">Logout</a>
-          </div>
-          <div id="guest">
-              <a id="login" href="login.html">Login</a>
-              <a id="register" href="register.html">Register</a>
-          </div>
-          <p class="email">Welcome, <span>guest</span></p>
-      </nav>
-  </header>
-  <main>
-      <section id="home-view">
-          <fieldset id="main">
-              <legend>Catches</legend>
-              <div id="catches">
-                  <!-- <div class="">
-                      <label>Angler</label>
-                      <input type="text" class="angler" value="Paulo Admorim">
-                      <label>Weight</label>
-                      <input type="text" class="weight" value="636">
-                      <label>Species</label>
-                      <input type="text" class="species" value="Atlantic Blue Marlin">
-                      <label>Location</label>
-                      <input type="text" class="location" value="Vitoria, Brazil">
-                      <label>Bait</label>
-                      <input type="text" class="bait" value="trolled pink">
-                      <label>Capture Time</label>
-                      <input type="number" class="captureTime" value="80">
-                      <button class="update" data-id="07f260f4-466c-4607-9a33-f7273b24f1b4">Update</button>
-                      <button class="delete" data-id="07f260f4-466c-4607-9a33-f7273b24f1b4">Delete</button>
-                  </div> -->
-                  <!-- <div class="">
-                      <label>Angler</label>
-                      <input type="text" class="angler" value="John Does" disabled>
-                      <label>Weight</label>
-                      <input type="text" class="weight" value="554" disabled>
-                      <label>Species</label>
-                      <input type="text" class="species" value="Atlantic Blue Marlin" disabled>
-                      <label>Location</label>
-                      <input type="text" class="location" value="Buenos Aires, Argentina" disabled>
-                      <label>Bait</label>
-                      <input type="text" class="bait" value="trolled pink" disabled>
-                      <label>Capture Time</label>
-                      <input type="number" class="captureTime" value="120" disabled>
-                      <button class="update" data-id="bdabf5e9-23be-40a1-9f14-9117b6702a9d" disabled>Update</button>
-                      <button class="delete" data-id="bdabf5e9-23be-40a1-9f14-9117b6702a9d" disabled>Delete</button>
-                  </div> -->
-              </div>
-          </fieldset>
-          <aside>
-              <button class="load">Load</button>
-              <form id="addForm">
-                  <fieldset>
-                      <legend>Add Catch</legend>
-                      <label>Angler</label>
-                      <input type="text" name="angler" class="angler" />
-                      <label>Weight</label>
-                      <input type="number" name="weight" class="weight" />
-                      <label>Species</label>
-                      <input type="text" name="species" class="species" />
-                      <label>Location</label>
-                      <input type="text" name="location" class="location" />
-                      <label>Bait</label>
-                      <input type="text" name="bait" class="bait" />
-                      <label>Capture Time</label>
-                      <input type="number" name="captureTime" class="captureTime" />
-                      <button disabled class="add">Add</button>
-                  </fieldset>
-              </form>
-          </aside>
-      </section>
-
-      <!-- <a href="" id="test">
-          <button>test</button>
-      </a> -->
-
-      <!-- <section id="register-view">
-          <h2>Register</h2>
-          <form id="register">
-              <label>Email: <input type="text" name="email"></label>
-              <label>Password: <input type="password" name="password"></label>
-              <label>Repeat: <input type="password" name="rePass"></label>
-              <p class="notification"></p>
-              <button>Register</button>
-          </form>
-      </section>
-          
-      <section id="login-view">
-          <h2>Login</h2>
-          <form id="login">
-              <label>Email: <input type="text" name="email"></label>
-              <label>Password: <input type="password" name="password"></label>
-              <p class="notification"></p>
-              <button>Login</button>
-          </form>
-      </section> -->
-  </main>
-
-  <script>
-    // console.log('TODO:// Implement Home functionality');
-// import { log as reglog } from "./register.js";
-// import { log as loglog } from "./login.js";
-
-// const sections = document.querySelectorAll("section");
-// sections.forEach(section => section.style.display = "none");
-
-// const homeSection = document.getElementById("home-view");
-// homeSection.style.display = "block";
-
-const mainPanel = document.getElementById("main");
-mainPanel.style.display = "none";
-// mainPanel.hidden;
-
-const user = JSON.parse(sessionStorage.getItem("user"));
-// console.log(user);
-// const token = user.accessToken;
-// console.log(token);
-
-if (user) {
-    const guestNav = document.getElementById('guest');
-    guestNav.style.display = "none";
-    // guestNav.hidden;
-    const welcomePanel = document.querySelector(".email span");
-    welcomePanel.textContent = user.email;
-    const addCatchBtn = document.querySelector("#addForm button.add");
-    // console.log(addCatchBtn);
-    addCatchBtn.disabled = false;
-} else {
-    const userNav = document.getElementById("user");
-    userNav.style.display = "none";
-    // userNav.hidden;
-}
-
-const homeLink = document.querySelector("a#home");
-homeLink.addEventListener("click", (e) => {
-    // e.preventDefault();
-    // const sections = document.querySelectorAll("section");
-    // sections.forEach(section => section.style.display = "none");
-    // homeSection.style.display = "block";
-    const activeLink = document.querySelector("a.active");
-    activeLink.classList.remove("active");
-    homeLink.classList.add("active");
-})
-
-const logoutButton = document.getElementById("logout");
-logoutButton.addEventListener("click", async (e) => {
-    e.preventDefault();
-
-    const url = "http://localhost:3030/users/logout";
-
-    const options = createOptions(user);
-    // console.log(options);
-
-    const response = await fetch(url, options);
-    console.log(response);
-
-    if (response.ok) {        
-        sessionStorage.clear();
-    
-        // const guestNav = document.getElementById('guest');
-        // guestNav.style.display = "initial";
-        // const welcomePanel = document.querySelector(".email span");
-        // welcomePanel.textContent = "guest";
-        // const userNav = document.getElementById("user");
-        // userNav.style.display = "none";
-
-        window.location = "index.html";
-    }
-
-})
-
-const loadButton = document.querySelector(".load");
-// console.log(loadButton);
-loadButton.addEventListener("click", async () => {
-    // e.preventDefault();
-
-    const url = "http://localhost:3030/data/catches";
-
-    // const options = createOptions(user);
-    // console.log(options);
-
-    const response = await fetch(url);
-    // console.log(response);
-
-    // const test = {
-    //     _createdOn: 1614760782277, 
-    //     _id: "bdabf5e9-23be-40a1-9f14-9117b6702a9d", 
-    //     _ownerId: "847ec027-f659-4086-8032-5173e2f9c93a", 
-    //     angler: "John Does", 
-    //     bait: "trolled pink", 
-    //     captureTime: 120, 
-    //     location: "Buenos Aires, Argentina", 
-    //     species: "Atlantic Blue Marlin", 
-    //     weight: 554
-    // }
-
-    if (!response.ok) {
-        throw new Error("wrong something");
-    }
-
-    // mainPanel.style.display = "inline-table";
-    // mainPanel.style.display = "revert";
-
-    // try {
-        const data = await response.json();
-        console.log(data);
-    // } catch (error) {
-    //     console.log(error);
-    // }
-    
-    // mainPanel.style.display = "inline-table";
-    mainPanel.hidden = false;
-    
-    const parent = document.getElementById("catches");
-    parent.textContent = "";
-
-    for (const catchInfo of data) {
-
-        const userPanel = document.createElement("div");
-        userPanel.classList.add("catch");
-    
-        const html = `<label>Angler</label>
-        <input type="text" class="angler" value="${catchInfo.angler}" disabled>
-        <label>Weight</label>
-        <input type="text" class="weight" value="${catchInfo.weight}" disabled>
-        <label>Species</label>
-        <input type="text" class="species" value="${catchInfo.species}" disabled>
-        <label>Location</label>
-        <input type="text" class="location" value="${catchInfo.location}" disabled>
-        <label>Bait</label>
-        <input type="text" class="bait" value="${catchInfo.bait}" disabled>
-        <label>Capture Time</label>
-        <input type="number" class="captureTime" value="${catchInfo.captureTime}" disabled>
-        <button class="update" data-id="${catchInfo._id}" disabled>Update</button>
-        <button class="delete" data-id="${catchInfo._id}" disabled>Delete</button>`;
-
-        // const updateBtn = document.createElement("button");
-        // updateBtn.classList.add("update");
-        // updateBtn.dataset.id = catchInfo._id;
-        // updateBtn.textContent = "Update";
-
-        // const deleteBtn = document.createElement("button");
-        // deleteBtn.classList.add("delete");
-        // deleteBtn.dataset.id = catchInfo._id;
-        // deleteBtn.textContent = "Delete";
-    
-        userPanel.innerHTML = html;
-        // userPanel.appendChild(updateBtn);
-        // userPanel.appendChild(deleteBtn);
-
-        // const buttons = userPanel.querySelectorAll("button");
-        // const inputs = userPanel.querySelectorAll("input");
-        const elements = userPanel.querySelectorAll("button, input");
-
-        // if (user._id == catchInfo._ownerId) {
-        //     buttons.forEach(button => button.disabled = false);
-        //     inputs.forEach(input => input.disabled = false);
-        // }
-
-        if (user) {
-
-            if (user._id == catchInfo._ownerId) {
-                elements.forEach(element => element.disabled = false);
-
-                const updateBtn = elements[6];
-                updateBtn.addEventListener("click", async () => {
-                    console.log("update");
-        
-                    const url = `http://localhost:3030/data/catches/${updateBtn.dataset.id}`;
-        
-                    const angler = userPanel.querySelector(".angler").value;
-                    const weight = userPanel.querySelector(".weight").value;
-                    const species = userPanel.querySelector(".species").value;
-                    const location = userPanel.querySelector(".location").value;
-                    const bait = userPanel.querySelector(".bait").value;
-                    const captureTime = userPanel.querySelector(".captureTime").value;
-        
-                    const newData = {
-                        angler, 
-                        weight, 
-                        species, 
-                        location, 
-                        bait, 
-                        captureTime
-                    };
-                    // console.log(newData);
-        
-                    const options = {
-                        method: "PUT", 
-                        headers: {
-                            "X-Authorization": user.accessToken, 
-                            "Content-Type": "application/json", 
-                            // 'Content-Type': 'application/x-www-form-urlencoded',
-                        }, 
-                        body: JSON.stringify(newData)
-                    };
-        
-                    try {
-                        const response = await fetch(url, options);
-                        console.log(response);
-                    } catch (error) {
-                        console.log(error);
-                    }
-                });
-        
-                const deleteBtn = elements[7];
-                deleteBtn.addEventListener("click", async () => {
-                    // console.log("delete");
-                    const url = `http://localhost:3030/data/catches/${updateBtn.dataset.id}`;
-        
-                    const options = {
-                        method: "DELETE", 
-                        headers: {
-                            "X-Authorization": user.accessToken, 
-                            // "Content-Type": "application/json", 
-                            // 'Content-Type': 'application/x-www-form-urlencoded',
-                        }, 
-                        // body: JSON.stringify(catchDataObject)
-                    };
-        
-                    try {
-                        const response = await fetch(url, options);
-                        console.log(response);
-                    } catch (error) {
-                        console.log(error);
-                    }
-                });
-                // console.log(updateBtn, deleteBtn);
-
-            }
-
-        }
-
-        parent.appendChild(userPanel);
-
-    }
-
-});
-
-const addCatchForm = document.getElementById("addForm");
-addCatchForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    // console.log(addCatchForm);
-    const url = "http://localhost:3030/data/catches";
-
-    const catchData = new FormData(addCatchForm);
-    // console.log(catchData);
-    // console.log(JSON.stringify(catchData));
-    const entries = catchData.entries();
-    // console.log(entries);
-    const catchDataObject = Object.fromEntries(entries);
-    // console.log(catchDataObject);
-    const options = {
-        method: "POST", 
-        headers: {
-            "X-Authorization": user.accessToken, 
-            "Content-Type": "application/json", 
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-        }, 
-        body: JSON.stringify(catchDataObject)
-    };
-
-    const response = await fetch(url, options);
-    console.log(response);
-})
-
-
-function createOptions(data) {
-    // console.log(data);
-    return {
-       method: "GET", 
-       headers: {
-           "X-Authorization": data.accessToken, 
-           //    "Content-Type": "application/json", 
-           // 'Content-Type': 'application/x-www-form-urlencoded',
-       }, 
-    //    body: JSON.stringify(data)
-   }
-}
-
-// const test = document.getElementById("test");
-// test.addEventListener("click", (e) => {
-//     e.preventDefault();
-//     console.log(e.target);
-//     console.log(e.currentTarget);
-// })
-
-// const url = "http://localhost:3030/data/catches";
-
-// reglog();
-// loglog();
-
-// fetch(url)
-// .then(r => r.json())
-// .then(d => console.log(d))
-// .catch(e => alert(e));
-  </script>
-  <script>
-    // const sections = document.querySelectorAll("section");
-// sections.forEach(section => section.style.display = "none");
-
-const userNav = document.getElementById("user");
-userNav.style.display = "none";
-// userNav.hidden = true;
-
-const regLink = document.querySelector("a#register");
-// regLink.addEventListener("click", (e) => {
-    // e.preventDefault();
-    // const sections = document.querySelectorAll("section");
-    // sections.forEach(section => section.style.display = "none");
-    // const registerSection = document.getElementById("register-view");
-    // registerSection.style.display = "flex";
-    const activeLink = document.querySelector("a.active");
-    activeLink.classList.remove("active");
-    regLink.classList.add("active");
-// })
-
-// const regButton = document.querySelector("#register button");
-// regButton.addEventListener("click", (e) => {
-//     e.preventDefault();
-//         console.log(e.target);
-//     console.log(e.currentTarget);
-//     submit();
-// });
-const registerForm = document.querySelector("form#register");
-registerForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    // console.log(e.target);
-    // console.log(e.currentTarget);
-    submit();
-});
-
-async function submit() {
-    // const registerForm = document.querySelector("form#register");
-    const formData = new FormData(registerForm);
-
-    const email = formData.get("email");
-    const password = formData.get("password");
-    const rePassword = formData.get("rePass");
-
-    try {
-        if (!email) {
-            // console.log("missing email");
-            throw new Error("missing email");
-            // return;
-        }
-    
-        if (!password) {
-            // console.log("missing pass");
-            throw new Error("missing pass");
-            // return;
-        }
-    
-        if (!rePassword) {
-            // console.log("missing repass");
-            throw new Error("missing repass");
-            // return;
-        }
-    
-        if (password != rePassword) {
-            // console.log("pass # repass");
-            throw new Error("pass # repass");
-            // return;
-        }    
-    } catch (error) {
-        alert(error.message);
-        return;
-    }
-
-    const userData = {
-        email,
-        password
-    }
-
-    await createUser(userData);
-    registerForm.reset();
-}
-
-async function createUser(formData) {
-    const url = "http://localhost:3030/users/register";
-
-    const options = createOptions("POST", formData);
-    const response = await fetch(url, options);
-    // console.log(response.status);
-
-    if (!response.ok) {
-        alert("Try again");
-        // console.log(response);
-        return;
-    }
-
-    const data = await response.json();
-    // console.log(data);
-
-    sessionStorage.setItem("user", JSON.stringify(data));
-
-    window.location = "index.html";
-
-    // const testres = {
-    //     _createdOn: 1709735982768, 
-    //     _id: "18b33dfb-54ad-4b5c-b3cd-c69813c59ced", 
-    //     accessToken: "4091b266270fffc00892e8017be0d57d0b136903c8b1b5b2a11d2cb45ce01dee", 
-    //     email: "jogata@abv.bg", 
-    //     password: "abvparola1"
-    // }
-    
-    // sessionStorage.setItem("user", JSON.stringify(testres));
-}
-
-function createOptions(method, data) {
-     return {
-        method, 
-        heahers: {
-            "Content-Type": "application/json", 
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-        }, 
-        body: JSON.stringify(data)
-    }
-}
-
-// function log() {
-//     console.log('TODO:// Implement Register functionality');
-// }
-// log();
-// export {
-//     log
-// }
-  </script>
-
-  <script>
-    // const sections = document.querySelectorAll("section");
-// sections.forEach(section => section.style.display = "none");
-
-const userNav = document.getElementById("user");
-userNav.style.display = "none";
-// userNav.hidden = true;
-
-const loginLink = document.querySelector("a#login");
-loginLink.addEventListener("click", (e) => {
-//     e.preventDefault();
-//     const sections = document.querySelectorAll("section");
-//     sections.forEach(section => section.style.display = "none");
-//     const loginSection = document.getElementById("login-view");
-//     loginSection.style.display = "flex";
-    const activeLink = document.querySelector("a.active");
-    activeLink.classList.remove("active");
-    loginLink.classList.add("active");
-})
-
-const loginForm = document.querySelector("form#login");
-loginForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    // console.log("login");
-
-    const formData = new FormData(loginForm);
-
-    const email = formData.get("email");
-    const password = formData.get("password");
-    // const rePassword = formData.get("rePass");
-    // console.log(email, password);
-
-    try {
-
-        if (!email) {
-            // console.log("missing email");
-            throw new Error("missing email");
-            // return;
-        }
-    
-        if (!password) {
-            // console.log("missing pass");
-            throw new Error("missing pass");
-            // return;
-        }
-    
-        // if (!rePassword) {
-        //     // console.log("missing repass");
-        //     throw new Error("missing repass");
-        //     // return;
-        // }
-    
-        // if (password != rePassword) {
-        //     // console.log("pass # repass");
-        //     throw new Error("pass # repass");
-        //     // return;
-        // }
-
-    } catch (error) {
-        alert(error.message);
-        return;
-    }
-
-    const userData = {
-        email,
-        password
-    }
-
-    const response = await login(userData);
-    console.log(response);
-
-    if (response.ok) {
-        loginForm.reset();
-        window.location = "index.html";
-    }
-
-});
-
-async function login(formData) {
-    const url = "http://localhost:3030/users/login";
-    
-    try {
-
-        // console.log(formData);
-        const options = createOptions(formData);
-        console.log(options);
-        // console.log("1");
-    
-        const response = await fetch(url, options);
-        console.log(response);
-        // console.log("2");
-    
-        if (!response.ok) {
-            alert("Try again");
-            return response;
-        }
-    
-        const data = await response.json();
-        // console.log(data);
-    
-        sessionStorage.setItem("user", JSON.stringify(data));
-    
-        return response;
-    
-    } catch (error) {
-        console.log(error);
-    }
-
-}
-
-function createOptions(data) {
-    // console.log(data);
-    return {
-        method: "POST",  
-        heahers: {
-            "Content-Type": "application/json", 
-            // 'Content-Type': 'application/x-www-form-urlencoded',
-        }, 
-        body: JSON.stringify(data)
-    }
-}
-
-// function log() {
-//     console.log('TODO:// Implement Login functionality');
-// }
-
-// export {
-//     log
-// }
-  </script>
     
 <script>
   // 10. Contacts Builder✶
@@ -914,6 +17,143 @@ function createOptions(data) {
 </script>
 
     <!-- ================= Get data from local JSON file ================= -->
+
+    <section class="home">
+      <nav>
+        <a id="home-link" href="/">Home</a>
+        <a id="create-link" href="/create.html">Create</a>
+        <a id="login-link" href="/login.html">Login</a>
+    </nav>
+
+    <div id="loading">
+        <span>Loading &hellip;</span>
+    </div>
+
+    <section id="home-view">
+        <h1>Welcome to Movies!</h1>
+        <p>Here you can find information about popular titles.</p>
+        <ul id="list"></ul>
+    </section>
+
+    <section id="login-view">
+        <h1>Log in to Movies</h1>
+        <form id="login-form">
+            <label>
+                Email:
+                <input type="text" name="email">
+            </label>
+            <label>
+                Password:
+                <input type="password" name="password">
+            </label>
+            <input type="submit" value="Login">
+        </form>
+    </section>
+
+    <section id="details-view">
+        <h1>Movie Title</h1>
+        <img src="">
+        <p>Movie description</p>
+    </section>
+
+    <section id="create-view">
+        <h1>Create Movie</h1>
+        <form id="create-form">
+            <label>
+                Title:
+                <input type="text" name="title">
+            </label>
+            <label>
+                Image URL:
+                <input type="text" name="img">
+            </label>
+            <label>
+                Description:
+                <input type="text" name="description">
+            </label>
+            <input type="submit" value="Publish">
+        </form>
+    </section>
+
+    <!-- <section id="home">
+      <h1>Welcome to Movies!</h1>
+      <p>Here you can find information about popular titles.</p>
+      <ul id="list"></ul>
+    </section>
+
+    <section id="login">
+      <h1>Log in to Movies</h1>
+      <form id="login-form">
+          <label>
+              Email:
+              <input type="text" name="email">
+          </label>
+          <label>
+              Password:
+              <input type="password" name="password">
+          </label>
+          <input type="submit" value="Login">
+      </form>  
+    </section> -->
+
+    <!-- app -->
+    <script>
+      // import { showHomeView } from './home.js';
+      // import { showView } from './nav.js';
+      // import './create.js';
+      // import './login.js';
+      
+      const views = {
+          'home-link': ['home-view', showHomeView],
+          'login-link': ['login-view'],
+          'create-link': ['create-view']
+      };
+      
+      for (const linkId in views) {
+        const [sectionId, callback] = views[linkId];
+        document.getElementById(linkId).addEventListener('click', event => showView(sectionId, callback, event));
+      }
+      
+      document.getElementById('loading').remove();
+      showView('home-view', showHomeView);
+    </script>
+    <!-- request -->
+    <script>
+      async function request(url, options) {
+
+        try {
+
+          const res = await fetch(url, options);
+  
+          if (!res.ok) {
+              const err = await res.json();
+              throw new Error(err.message);
+          }
+  
+          const data = await res.json();
+  
+          return data;
+          
+        } catch (err) {
+          alert(err.message);
+          throw err;
+        }
+        
+      }
+    </script>
+    <!-- nav -->
+    <script>
+      function showView(sectionId, callback, event, param) {
+        event?.preventDefault();
+    
+        document.querySelectorAll('section').forEach(s => s.style.display = 'none');
+        document.getElementById(sectionId).style.display = 'block';
+    
+        if (typeof callback == 'function') {
+            callback(param);
+        }
+      }
+    </script>
 
     <fieldset>
       <legend>Get all users from local JSON file</legend>
@@ -979,34 +219,8 @@ function createOptions(data) {
     </script>
 
     <p style="display: none;">
-<!-- Make 65 purchases from the shop -->
-<!-- Complete 100 Tower floors -->
-<!-- Defeat a Mage hero in 25 battles in the Tower mode -->
-<!-- Begin 10 Expeditions -->
-<!-- 6 	 -->
-<!-- Deal 150,000 damage in the Tower -->
-<!-- Open 7 chests in the Tower -->
-<!-- Level up the Magic attack glyph -->
-<!-- 7 	 -->
-<!-- Upgrade any titan by 1 level -->
-<!-- Heal your heroes for 150,000 in the Arena -->
-<!-- Level up a Marksman hero's skin -->
-<!-- Assemble the Altar of Power 5 times in Adventures -->
-<!-- Complete 15 summons in the Summoning Circle! -->
-<!-- 8 	 -->
-<!-- Use Pet Summoning 1 time -->
-<!-- Use the first skills of heroes 5 times in the Campaign -->
-<!-- Level up the Health glyph -->
 Earn 1,500,000 gold at the Tower
 Obtain 100 hero soul stones
-<!-- 9 	 -->
-<!-- Deal 150,000 magic damage in the Tower -->
-<!-- Deal 150,000 magic damage in the Campaign -->
-<!-- Win 5 times in the Tower mode without losing any heroes -->
-<!-- 10 	 -->
-<!-- Spend 500 Outland Coins -->
-<!-- Win 2 times in the Campaign mode using a Tank hero -->
-<!-- Win 5 times in the Adventure mode without losing any heroes -->
 Make 30 purchases from the shop
 Complete 10 quests from the "Nature Season" event
 11 	
