@@ -643,6 +643,137 @@ function createOptions(data) {
 // .then(d => console.log(d))
 // .catch(e => alert(e));
   </script>
+  <script>
+    // const sections = document.querySelectorAll("section");
+// sections.forEach(section => section.style.display = "none");
+
+const userNav = document.getElementById("user");
+userNav.style.display = "none";
+// userNav.hidden = true;
+
+const regLink = document.querySelector("a#register");
+// regLink.addEventListener("click", (e) => {
+    // e.preventDefault();
+    // const sections = document.querySelectorAll("section");
+    // sections.forEach(section => section.style.display = "none");
+    // const registerSection = document.getElementById("register-view");
+    // registerSection.style.display = "flex";
+    const activeLink = document.querySelector("a.active");
+    activeLink.classList.remove("active");
+    regLink.classList.add("active");
+// })
+
+// const regButton = document.querySelector("#register button");
+// regButton.addEventListener("click", (e) => {
+//     e.preventDefault();
+//         console.log(e.target);
+//     console.log(e.currentTarget);
+//     submit();
+// });
+const registerForm = document.querySelector("form#register");
+registerForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    // console.log(e.target);
+    // console.log(e.currentTarget);
+    submit();
+});
+
+async function submit() {
+    // const registerForm = document.querySelector("form#register");
+    const formData = new FormData(registerForm);
+
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const rePassword = formData.get("rePass");
+
+    try {
+        if (!email) {
+            // console.log("missing email");
+            throw new Error("missing email");
+            // return;
+        }
+    
+        if (!password) {
+            // console.log("missing pass");
+            throw new Error("missing pass");
+            // return;
+        }
+    
+        if (!rePassword) {
+            // console.log("missing repass");
+            throw new Error("missing repass");
+            // return;
+        }
+    
+        if (password != rePassword) {
+            // console.log("pass # repass");
+            throw new Error("pass # repass");
+            // return;
+        }    
+    } catch (error) {
+        alert(error.message);
+        return;
+    }
+
+    const userData = {
+        email,
+        password
+    }
+
+    await createUser(userData);
+    registerForm.reset();
+}
+
+async function createUser(formData) {
+    const url = "http://localhost:3030/users/register";
+
+    const options = createOptions("POST", formData);
+    const response = await fetch(url, options);
+    // console.log(response.status);
+
+    if (!response.ok) {
+        alert("Try again");
+        // console.log(response);
+        return;
+    }
+
+    const data = await response.json();
+    // console.log(data);
+
+    sessionStorage.setItem("user", JSON.stringify(data));
+
+    window.location = "index.html";
+
+    // const testres = {
+    //     _createdOn: 1709735982768, 
+    //     _id: "18b33dfb-54ad-4b5c-b3cd-c69813c59ced", 
+    //     accessToken: "4091b266270fffc00892e8017be0d57d0b136903c8b1b5b2a11d2cb45ce01dee", 
+    //     email: "jogata@abv.bg", 
+    //     password: "abvparola1"
+    // }
+    
+    // sessionStorage.setItem("user", JSON.stringify(testres));
+}
+
+function createOptions(method, data) {
+     return {
+        method, 
+        heahers: {
+            "Content-Type": "application/json", 
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+        }, 
+        body: JSON.stringify(data)
+    }
+}
+
+// function log() {
+//     console.log('TODO:// Implement Register functionality');
+// }
+// log();
+// export {
+//     log
+// }
+  </script>
     
 <script>
   // 10. Contacts Builder✶
