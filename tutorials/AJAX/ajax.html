@@ -43,10 +43,106 @@
       label {
         display: block;
       }
+
+      body {
+        padding-top: 10vh;
+        text-align: center;
+        font-family: Georgia, serif;
+        /* filter: invert(1); */
+        /* background-color: black; */
+      }
+  
+      button {
+          /* margin-bottom: 5vh; */
+          padding: 0.4em 1em;
+          color: white;
+          font-size: 2rem;
+          text-transform: capitalize;
+          font-family: inherit;
+          border-radius: 2em;
+          background-color: cadetblue;
+          cursor: pointer;
+      }
+  
+      h1 {
+          font-size: 10rem;
+      }
+  
+      .color {
+          color: transparent;
+          -webkit-text-stroke: 3px white;
+          filter: drop-shadow(2px 2px 1px black);
+          transition: all 500ms ease-in-out;
+      }
+  
+      p {
+          font-size: 3rem;
+      }
+  
+      .frame {
+          padding: 1em;
+          border: 5px solid white;
+          box-shadow: 5px 5px 5px #0004, 
+              inset 5px 5px 5px #0004;
+      }
+      
+      .hidden {
+          display: none;
+      }
     </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+
+    <button>update</button>
+    <main></main>
+    <script>
+      import { html, render } from "./node_modules/lit-html/lit-html.js";
+      import { classMap } from "./node_modules/lit-html/directives/class-map.js";
+      import { styleMap } from "./node_modules/lit-html/directives/style-map.js";
+
+const root = document.querySelector("main");
+
+const classes = {
+    frame: true, 
+    hidden: false
+}
+
+const styles = {
+    background: "red", 
+    padding: "1rem", 
+    fontSize: "1.4rem", 
+    display: "none"
+}
+
+const template = (name, clock, color, value) => html`
+    <h1 class=${color}>Hello, ${name}</h1>
+    <p class=${classMap(classes)}>This part should not update.</p>
+    <input style=${styleMap(styles)} .value=${value}>
+    ${clock}
+`;
+
+const clock = (time) => html`
+<div>
+    <h2>Clock</h2>
+    <p>The time is ${time}</p>
+</div>
+`;
+
+// render(template("Lit"), root);
+// render(clock(new Date()), root);
+
+const button = document.querySelector("button")
+button.addEventListener("click", () => {
+    render(template("Lit again"), root);
+
+    setTimeout(() => {
+        render(template("Lit"), root);
+    }, 2000);
+});
+
+setInterval(() => render(template("Lit", clock(new Date()), "color", 5), root), 1000);
+    </script>
     
 <script>
   // 10. Contacts Builder✶
@@ -193,6 +289,40 @@
         }
       }
     </script>
+    <!-- home -->
+    <script>
+      // import { showDetailsView } from './details.js';
+      // import { showView } from './nav.js';
+      // import { request } from './request.js';
+      
+      function showHomeView() {
+          start();
+      }
+      
+      async function start() {
+          const list = document.getElementById('list');
+      
+          const movies = await getMovies();
+      
+          list.replaceChildren(...movies.map(createMoviePreview));
+      }
+      
+      async function getMovies() {
+          const url = 'http://localhost:3030/data/movies?select=_id%2Ctitle%2Cimg';
+          return request(url);
+      }
+      
+      function createMoviePreview(movie) {
+          const element = document.createElement('li');
+          element.innerHTML = `
+          <a href="/details/${movie._id}">${movie.title}</a>
+          `;
+      
+          element.querySelector('a').addEventListener('click', event => showView('details-view', showDetailsView, event, movie._id))
+      
+          return element;
+      }
+    </script>
     <!-- login -->
     <script>
       start();
@@ -283,6 +413,31 @@
           }
       }
     </script>
+    <script>
+      // import { request } from './request.js';
+
+      async function showDetailsView(movieId) {
+          displayDetails({
+              title: '',
+              img: '',
+              description: ''
+          })
+          const movie = await getMovieById(movieId);
+          displayDetails(movie);
+      }
+      
+      async function getMovieById(id) {
+          const url = `http://localhost:3030/data/movies/${id}`;
+          return request(url);
+      }
+      
+      function displayDetails(movie) {
+          const section = document.getElementById('details-view');
+          section.querySelector('h1').textContent = movie.title;
+          section.querySelector('img').src = movie.img;
+          section.querySelector('p').textContent = movie.description;
+      }
+    </script>
 
     <fieldset>
       <legend>Get all users from local JSON file</legend>
@@ -352,10 +507,6 @@ Earn 1,500,000 gold at the Tower
 Obtain 100 hero soul stones
 Make 30 purchases from the shop
 Complete 10 quests from the "Nature Season" event
-<!-- 11 	 -->
-<!-- Level up any Titan Artifact -->
-<!-- Use the first skills of heroes 15 times in Adventures -->
-<!-- Level up the Health glyph -->
 12 	
 Deal 150,000 damage with heroes in the Guild Dungeon
 Deal 150,000 physical damage in the Arena
