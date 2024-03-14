@@ -5,163 +5,140 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      body {
-  /* font-family: "Raleway", arial, sans-serif; */
-  /* display: grid; */
-  font-family: Georgia, serif;
-  text-align: center;
-  color: rgba(0, 0, 0, 0.5);
-  background: linear-gradient(45deg, #3b3b7a, #91617e);
-  background-size: cover;
-  /* padding: 0; */
-}
-
-main {
-  min-height: 100vh;
-  /* display: grid; */
-  /* grid-template-rows: auto auto auto; */
-  /* grid-auto-rows: auto; */
-  display: flex;
-  flex-direction: column;
-}
-
-h1 {
-  font-size: 5rem;
-  text-transform: capitalize;
-}
-
-nav {
-  padding: 2rem;
-  text-align: right;
-}
-
-a {
-  color: white;
-  font-size: 1.4rem;
-  text-decoration: none;
-  text-transform: capitalize;
-  padding: 0.6em 1.2em;
-  margin: 1rem;
-  border-radius: 2em;
-  transition: box-shadow 400ms ease-out;
-}
-a:hover {
-  /* opacity: 0.8; */
-  /* filter: drop-shadow(1px 1px 1px #000); */
-  box-shadow: 1px 1px 1px #000, 
-            -1px -1px 1px #fff4;
-}
-
-p {
-  margin: auto;
-  color: white;
-  font-size: 2rem;
-}
-
-#contacts {
-  margin: 0 auto;
-  text-align: center;
-}
-
-button {
-  color: rgba(0, 0, 0, 0.45);
-  outline: none;
-  border: none;
-  box-shadow: 
-    3px 5px 10px 2px rgba(0, 0, 0, 0.2), 
-    0 -10px 15px -1px rgba(255, 255, 255, 0.6), 
-    inset 0 -5px 4px -1px rgba(0, 0, 0, 0.1), 
-    inset 0 3px 4px -1px rgba(255, 255, 255, 0.2), 
-    inset 0 0 5px 1px rgba(255, 255, 253, 0.8), 
-    inset 0 20px 30px 0 rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  margin: 0 2px;
-  text-align: center;
-  font-size: 1rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  padding: 16px;
-  cursor: pointer;
-}
-
-button:hover {
-  cursor: pointer;
-  background: #F0F0F0;
-}
-
-.details {
-  text-align: left;
-  padding: 1.3em 0 0 1.3em;
-}
-
-.card {
-  margin: 2rem;
-  width: 21%;
-  display: inline-block;
-  text-align: center;
-  background: linear-gradient(10deg, #ccc, #fff 50%);
-  box-shadow: 0 1.25rem 2.625rem 0.375rem rgba(0, 0, 0, 0.18);
-  border-radius: 0.5rem;
-  padding: 29px 0px;
-}
-
-.gravatar {
-  font-size: 6rem;
-}
-
-h1 {
-  margin: 3rem;
-  color: white;
-  /* font-weight: 200; */
-  /* text-align: center; */
-  /* text-transform: uppercase; */
-}
-
-div.details{
-	display: none;
-}
-    </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
-
-    <h1>My contacts</h1>
-    <div id="contacts"></div>
-
-    <script>
-      import { html, render } from "./node_modules/lit-html/lit-html.js";
-      // import { contacts } from "./contacts.js";
-
-const root = document.getElementById("contacts");
-root.addEventListener("click", toggleDetails);
-
-const template = () => html`
-${contacts.map(user => html`<div class="contact card">
-<div>
-    <i class="far fa-user-circle gravatar"></i>
-</div>
-<div class="info">
-    <h2>Name: ${user.name}</h2>
-    <button class="detailsBtn">Details</button>
-    <div class="details" id=${user.id}>
-        <p>Phone number: ${user.number}</p>
-        <p>Email: ${user.email}</p>
-    </div>
-</div>
-</div>`)}
-`;
-
-render(template(), root);
-
-function toggleDetails(e) {
-    if (e.target.className == "detailsBtn") {
-        // console.log("detailsBtn");
-        // console.log(e.target.nextElementSibling);
-        e.target.nextElementSibling.classList.toggle("details");
-    }
-}
-    </script>
+    <main>
+      <table>
+          <thead>
+              <tr>
+                  <th>Employee <input type="checkbox" name="employee"></th>
+                  <th>Department <input type="checkbox" name="deparment"></th>
+                  <th>Status <input type="checkbox" name="status"></th>
+                  <th>Date Hired <input type="checkbox" name="dateHired"></th>
+                  <th>Benefits <input type="checkbox" name="benefits"></th>
+                  <th>Compensation <input type="checkbox" name="salary"></th>
+                  <th>Rating <input type="checkbox" name="rating"></th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>Poole, Tracy</td>
+                  <td>Facilities/Engineering</td>
+                  <td>Full Time</td>
+                  <td>15.7.2019</td>
+                  <td>R</td>
+                  <td>71 670</td>
+                  <td>4</td>
+              </tr>
+              <tr>
+                  <td>Ramos, Jan</td>
+                  <td>Human Resources</td>
+                  <td>Full Time</td>
+                  <td>17.6.2017</td>
+                  <td>DMR</td>
+                  <td>66 740</td>
+                  <td>2</td>
+              </tr>
+              <tr>
+                  <td>Jennings, Gary</td>
+                  <td>Account Management</td>
+                  <td>Full Time</td>
+                  <td>4.8.2009</td>
+                  <td>DM</td>
+                  <td>45 100</td>
+                  <td>2</td>
+              </tr>
+              <tr>
+                  <td>Ortega, Jeffrey</td>
+                  <td>Quality Control</td>
+                  <td>Contract</td>
+                  <td>20.3.2018</td>
+                  <td></td>
+                  <td>26 020</td>
+                  <td>5</td>
+              </tr>
+              <tr>
+                  <td>Shields, Robert</td>
+                  <td>Product Development</td>
+                  <td>Contract</td>
+                  <td>23.11.2016</td>
+                  <td></td>
+                  <td>45 830</td>
+                  <td>4</td>
+              </tr>
+              <tr>
+                  <td>Gregory, Jon</td>
+                  <td>Human Resources</td>
+                  <td>Full Time</td>
+                  <td>6.5.2017</td>
+                  <td>R</td>
+                  <td>79 150</td>
+                  <td>2</td>
+              </tr>
+              <tr>
+                  <td>Sheppard, Curtis</td>
+                  <td>Quality Control</td>
+                  <td>Full Time</td>
+                  <td>15.3.2006</td>
+                  <td>D</td>
+                  <td>61 850</td>
+                  <td>2</td>
+              </tr>
+              <tr>
+                  <td>Williamson, Sumed</td>
+                  <td>Manufacturing</td>
+                  <td>Contract</td>
+                  <td>10.2.2018</td>
+                  <td></td>
+                  <td>57 110</td>
+                  <td>3</td>
+              </tr>
+              <tr>
+                  <td>Moreno, Chris</td>
+                  <td>Quality Assurance</td>
+                  <td>Full Time</td>
+                  <td>29.9.2015</td>
+                  <td>R</td>
+                  <td>72 060</td>
+                  <td>2</td>
+              </tr>
+              <tr>
+                  <td>Munoz, Michael</td>
+                  <td>Quality Assurance</td>
+                  <td>Full Time</td>
+                  <td>17.3.2010</td>
+                  <td>DMR</td>
+                  <td>29 210</td>
+                  <td>5</td>
+              </tr>
+              <tr>
+                  <td>Kirby, Michael</td>
+                  <td>Account Management</td>
+                  <td>Half-Time</td>
+                  <td>22.11.2005</td>
+                  <td>R</td>
+                  <td>22 475</td>
+                  <td>4</td>
+              </tr>
+              <tr>
+                  <td>Jenkins, Scott</td>
+                  <td>Account Management</td>
+                  <td>Full Time</td>
+                  <td>16.8.2016</td>
+                  <td>DMR</td>
+                  <td>54 190</td>
+                  <td>4</td>
+              </tr>
+          </tbody>
+      </table>
+      <div>
+          <button onclick="generateReport()">Generate Report</button>
+      </div>
+      <div>
+          <textarea id="output"></textarea>
+      </div>
+  </main>
 
     <fieldset>
       <legend>Get all users from local JSON file</legend>
