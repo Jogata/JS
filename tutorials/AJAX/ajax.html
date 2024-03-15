@@ -5,411 +5,137 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      table {
-    margin: auto;
-    font-style: italic;
-}
-
-table, tbody, thead, tr, th, td {
-    border-collapse: collapse;
-    border: 1px solid black;
-    text-align: center;
-}
-
-th, td {
-    padding: 4px 8px;
-}
-
-div {
-    text-align: center;
-    margin: auto;
-    margin-top: 16px;
-}
-
-textarea {
-    width: 450px;
-    height: 150px;
-    text-align: left;
-}
-
-button {
-    font-size: larger;
-    border: 0;
-    background-color: #60a1b1;
-    border-radius: 8px;
-    padding: 8px 16px;
-}
-
-button:hover {
-    background-color: #78c6da;
-    cursor: pointer;
-}
-
-@import url('https://fonts.googleapis.com/css?family=Lato');
-
-html {
-    font-family: "Lato", sans-serif;
-    color: #234465;
-}
-
-input[type="button"], button {
-    padding: 0.3rem 0.5rem;
-    font-size: 22px;
-    margin: 1rem 0 1rem 0;
-    color: #444444;
-    background: transparent;
-    border-radius: 5px;
-    outline: none;
-    text-transform: uppercase;
-    font-weight: 300;
-    letter-spacing: 0px;
-    border: 2px solid #444444;
-    cursor: pointer;
-}
-
-input[type="button"]:hover, button:hover {
-    color: white;
-    background: #444444;
-}
-
-input, select {
-    font-size: 1.0em;
-}
-
-#container, footer {
-    width: 30%;
-    margin: 15px auto;
-    text-align: left;
-    border: 1px solid lightgrey;
-    border-radius: 4px;
-    padding: 15px;
-}
-
-label, input {
-    display: block;
-    width: 100%;
-    margin: 5px 0;
-}
-
-input, select {
-    border: 1px solid lightgrey;
-    outline: none;
-    border-radius: 4px;
-    padding: 5px;
-    width: 95%;
-}
-    </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
-    <div id="container">
-      <label for="input">Number</label>
-      <input type="number" id="input" /><br>
-      <label for="selectMenuFrom">From</label>
-      <select id="selectMenuFrom">
-          <option selected value="decimal">Decimal</option>
-      </select>
-      <label for="selectMenuTo">To</label>
-      <select id="selectMenuTo">
-          <option selected value=""></option>
-      </select>
-      <button>Convert it</button>
 
-  </div>
-  <footer>
-      <label for="result">Result</label>
-      <input type="text" name="output" id="result" disabled readonly />
-  </footer>
-    <script>
-      solve();
-      
-      function solve() {
-
-const menu = document.getElementById("selectMenuTo");
-const child = menu.children[0];
-const clone1 = child.cloneNode();
-clone1.value = "binary";
-clone1.textContent = "Binary";
-clone1.selected = false;
-menu.appendChild(clone1);
-const clone2 = child.cloneNode();
-clone2.value = "hexadecimal";
-clone2.textContent = "Hexadecimal";
-clone2.selected = false;
-menu.appendChild(clone2);
-
-const operations = {
-    binary: (x) => x.toString(2),
-    hexadecimal: (x) => x.toString(16),
-}
-
-const button = document.querySelector("button");
-
-button.addEventListener("click", () => {
-    const options = Array.from(menu.children);
-    let selected = options.find(x => x.selected == true);
-    // console.log(selected);
-    const operation = operations[selected.value];
-    // console.log(operation);
-    const input = document.getElementById("input");
-    const num = Number(input.value);
-    // console.log(num);
-    const result = operation(num);
-    // console.log(result);
-    const resultField = document.getElementById("result");
-    resultField.value = result.toUpperCase();
-})
-}
-    </script>
-    <main>
-      <table>
-          <thead>
-              <tr>
-                  <th>Employee <input type="checkbox" name="employee"></th>
-                  <th>Department <input type="checkbox" name="deparment"></th>
-                  <th>Status <input type="checkbox" name="status"></th>
-                  <th>Date Hired <input type="checkbox" name="dateHired"></th>
-                  <th>Benefits <input type="checkbox" name="benefits"></th>
-                  <th>Compensation <input type="checkbox" name="salary"></th>
-                  <th>Rating <input type="checkbox" name="rating"></th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr>
-                  <td>Poole, Tracy</td>
-                  <td>Facilities/Engineering</td>
-                  <td>Full Time</td>
-                  <td>15.7.2019</td>
-                  <td>R</td>
-                  <td>71 670</td>
-                  <td>4</td>
-              </tr>
-              <tr>
-                  <td>Ramos, Jan</td>
-                  <td>Human Resources</td>
-                  <td>Full Time</td>
-                  <td>17.6.2017</td>
-                  <td>DMR</td>
-                  <td>66 740</td>
-                  <td>2</td>
-              </tr>
-              <tr>
-                  <td>Jennings, Gary</td>
-                  <td>Account Management</td>
-                  <td>Full Time</td>
-                  <td>4.8.2009</td>
-                  <td>DM</td>
-                  <td>45 100</td>
-                  <td>2</td>
-              </tr>
-              <tr>
-                  <td>Ortega, Jeffrey</td>
-                  <td>Quality Control</td>
-                  <td>Contract</td>
-                  <td>20.3.2018</td>
-                  <td></td>
-                  <td>26 020</td>
-                  <td>5</td>
-              </tr>
-              <tr>
-                  <td>Shields, Robert</td>
-                  <td>Product Development</td>
-                  <td>Contract</td>
-                  <td>23.11.2016</td>
-                  <td></td>
-                  <td>45 830</td>
-                  <td>4</td>
-              </tr>
-              <tr>
-                  <td>Gregory, Jon</td>
-                  <td>Human Resources</td>
-                  <td>Full Time</td>
-                  <td>6.5.2017</td>
-                  <td>R</td>
-                  <td>79 150</td>
-                  <td>2</td>
-              </tr>
-              <tr>
-                  <td>Sheppard, Curtis</td>
-                  <td>Quality Control</td>
-                  <td>Full Time</td>
-                  <td>15.3.2006</td>
-                  <td>D</td>
-                  <td>61 850</td>
-                  <td>2</td>
-              </tr>
-              <tr>
-                  <td>Williamson, Sumed</td>
-                  <td>Manufacturing</td>
-                  <td>Contract</td>
-                  <td>10.2.2018</td>
-                  <td></td>
-                  <td>57 110</td>
-                  <td>3</td>
-              </tr>
-              <tr>
-                  <td>Moreno, Chris</td>
-                  <td>Quality Assurance</td>
-                  <td>Full Time</td>
-                  <td>29.9.2015</td>
-                  <td>R</td>
-                  <td>72 060</td>
-                  <td>2</td>
-              </tr>
-              <tr>
-                  <td>Munoz, Michael</td>
-                  <td>Quality Assurance</td>
-                  <td>Full Time</td>
-                  <td>17.3.2010</td>
-                  <td>DMR</td>
-                  <td>29 210</td>
-                  <td>5</td>
-              </tr>
-              <tr>
-                  <td>Kirby, Michael</td>
-                  <td>Account Management</td>
-                  <td>Half-Time</td>
-                  <td>22.11.2005</td>
-                  <td>R</td>
-                  <td>22 475</td>
-                  <td>4</td>
-              </tr>
-              <tr>
-                  <td>Jenkins, Scott</td>
-                  <td>Account Management</td>
-                  <td>Full Time</td>
-                  <td>16.8.2016</td>
-                  <td>DMR</td>
-                  <td>54 190</td>
-                  <td>4</td>
-              </tr>
-              <tr>
-                  <td>Ross, Janice</td>
-                  <td>Marketing</td>
-                  <td>Half-Time</td>
-                  <td>25.4.2006</td>
-                  <td>R</td>
-                  <td>26 790</td>
-                  <td>2</td>
-              </tr>
-              <tr>
-                  <td>Kelley, Nancy</td>
-                  <td>Quality Control</td>
-                  <td>Contract</td>
-                  <td>20.10.2013</td>
-                  <td></td>
-                  <td>64 263</td>
-                  <td>3</td>
-              </tr>
-              <tr>
-                  <td>Blackwell, Brandon</td>
-                  <td>Quality Control</td>
-                  <td>Contract</td>
-                  <td>29.10.2005</td>
-                  <td></td>
-                  <td>58 250</td>
-                  <td>2</td>
-              </tr>
-              <tr>
-                  <td>Bowers, Tammy</td>
-                  <td>Sales</td>
-                  <td>Half-Time</td>
-                  <td>20.12.2016</td>
-                  <td>DMR</td>
-                  <td>49 405</td>
-                  <td>4</td>
-              </tr>
-              <tr>
-                  <td>Fleming, Irv</td>
-                  <td>Environmental Compliance</td>
-                  <td>Half-Time</td>
-                  <td>7.2.2013</td>
-                  <td>DMR</td>
-                  <td>11 025</td>
-                  <td>1</td>
-              </tr>
-              <tr>
-                  <td>Skinner, Jason</td>
-                  <td>IT</td>
-                  <td>Full Time</td>
-                  <td>15.2.2014</td>
-                  <td>R</td>
-                  <td>73 030</td>
-                  <td>5</td>
-              </tr>
-              <tr>
-                  <td>Wade, Kevin</td>
-                  <td>Green Building</td>
-                  <td>Full Time</td>
-                  <td>29.7.2014</td>
-                  <td>DMR</td>
-                  <td>71 120</td>
-                  <td>4</td>
-              </tr>
-              <tr>
-                  <td>Barrett, John</td>
-                  <td>Quality Control</td>
-                  <td>Full Time</td>
-                  <td>20.10.2006</td>
-                  <td>R</td>
-                  <td>35 460</td>
-                  <td>1</td>
-              </tr>
-          </tbody>
-      </table>
-      <div>
-          <button onclick="generateReport()">Generate Report</button>
-      </div>
-      <div>
-          <textarea id="output"></textarea>
-      </div>
-      <script>
-        function generateReport() {
-    const checkboxes = document.querySelectorAll("input");
-    const checked = [];
-
-    const checkboxesArr = Array.from(checkboxes);
+    <div class="container" id="container">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand text-light" href="/">Movies</a>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item user">
+            <a class="nav-link" id="welcome-msg">Welcome, email</a>
+          </li>
+          <li class="nav-item user">
+            <a class="nav-link" href="#">Logout</a>
+          </li>
+          <li class="nav-item guest">
+            <a class="nav-link" href="#">Login</a>
+          </li>
+          <li class="nav-item guest">
+            <a class="nav-link" href="#">Register</a>
+          </li>
+        </ul>
+      </nav>
+      <section id="home-page" class="view-section">
+        <div
+          class="jumbotron jumbotron-fluid text-light"
+          style="background-color: #343a40"
+        >
+          <img
+            src="https://slicksmovieblog.files.wordpress.com/2014/08/cropped-movie-banner-e1408372575210.jpg"
+            class="img-fluid"
+            alt="Responsive image"
+            style="width: 150%; height: 200px"
+          />
+          <h1 class="display-4">Movies</h1>
+          <p class="lead">
+            Unlimited movies, TV shows, and more. Watch anywhere. Cancel
+            anytime.
+          </p>
+        </div>
+        <h1 class="text-center">Movies</h1>
+        <section id="add-movie-button" class="user">
+          <a href="#" class="btn btn-warning">Add Movie</a>
+        </section>
+        <section id="movie">
+          <div class="mt-3">
+            <div class="row d-flex d-wrap">
+              <ul id="movies-list" class="card-deck d-flex justify-content-center">
+                <!-- list item example -->
+                <li class="card mb-4">
+                  <img class="card-img-top" src="https://miro.medium.com/max/735/1*akkAa2CcbKqHsvqVusF3-w.jpeg" alt="Card image cap" width="400"/>
+                  <div class="card-body">
+                    <h4 class="card-title">Movie Title</h4>
+                    <a href="#"></a>
+                  </div>
+                  <div class="card-footer">
+                  <button type="button" class="btn btn-info">Details</button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </section>
+      <section id="add-movie" class="view-section">
+        <form
+          id="add-movie-form"
+          class="text-center border border-light p-5"
+          action="#"
+          method=""
+        >
+          <h1>Add Movie</h1>
+          <div class="form-group">
+            <label for="title">Movie Title</label>
+            <input
+              id="title"
+              type="text"
+              class="form-control"
+              placeholder="Title"
+              name="title"
+              value=""
+            />
+          </div>
+          <div class="form-group">
+            <label for="description">Movie Description</label>
+            <textarea
+              class="form-control"
+              placeholder="Description"
+              name="description"
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="imageUrl">Image url</label>
+            <input
+              id="imageUrl"
+              type="text"
+              class="form-control"
+              placeholder="Image Url"
+              name="img"
+              value=""
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </section>
+      <section id="movie-example" class="view-section">
+        <div class="container">
+          <div class="row bg-light text-dark">
+            <h1>Movie title: Black Widow</h1>
+            <div class="col-md-8">
+              <img
+                class="img-thumbnail"
+                src="https://miro.medium.com/max/735/1*akkAa2CcbKqHsvqVusF3-w.jpeg"
+                alt="Movie"
+              />
+            </div>
+            <div class="col-md-4 text-center">
+              <h3 class="my-3">Movie Description</h3>
+              <p>
+                Natasha Romanoff aka Black Widow confronts the darker parts of
+                her ledger when a dangerous conspiracy with ties to her past
+                arises. Comes on the screens 2020.
+              </p>
+              <a class="btn btn-danger" href="#">Delete</a>
+              <a class="btn btn-warning" href="#">Edit</a>
+              <a class="btn btn-primary" href="#">Like</a>
+              <span class="enrolled-span">Liked 1</span>
+            </div>
+          </div>
+        </div>
+      </section>
     
-    checkboxesArr.forEach((checkbox, index) => {
-        // console.log("clicked");
-        if (checkbox.checked) {
-            const checkboxInfo = {
-                name: checkbox.name, 
-                index
-            }
-            
-            checked.push(checkboxInfo);
-            
-        }
-    })
-    
-    // console.log(checked);
-    
-    if (checked.length > 0) {
-        const trs = document.querySelectorAll("tbody tr");
-        const employees = [];
-        
-        for (const tr of trs) {
-            const employee = {};
-            // console.log(tr.children[index]);
-            for (const checkbox of checked) {
-                // console.log(checkbox);
-                employee[checkbox.name] = tr.children[checkbox.index].textContent;
-            }
-            // console.log(employee);
-            employees.push(employee);
-        }
-        // console.log(employees);
-
-        const output = document.getElementById("output");
-        // const test = document.createElement("textarea");
-        output.value = JSON.stringify(employees, null, 2);
-    }
-}
-      </script>
-  </main>
-
     <fieldset>
       <legend>Get all users from local JSON file</legend>
       <button id="local">Send Request</button>
@@ -479,9 +205,9 @@ Obtain 100 hero soul stones
 Make 30 purchases from the shop
 Complete 10 quests from the "Nature Season" event
 12 	
-Deal 150,000 damage with heroes in the Guild Dungeon
-Deal 150,000 physical damage in the Arena
-Level up a Support hero's skin
+<!-- Deal 150,000 damage with heroes in the Guild Dungeon -->
+<!-- Deal 150,000 physical damage in the Arena -->
+<!-- Level up a Support hero's skin -->
 13 	
 Open 7 chests in the Tower
 Level up a Marksman hero's skill
