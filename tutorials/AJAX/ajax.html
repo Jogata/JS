@@ -3,7 +3,105 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AJAX | XMLHttpRequest</title>
+    <!-- <title>AJAX | XMLHttpRequest</title> -->
+    <title>Movies</title>
+    <link rel="icon" type="image/png" href="/static/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <style>
+      fieldset {
+        display: none;
+      }
+
+      body {
+        min-height: 100vh;
+        font-family: Georgia, serif;
+      }
+
+      a {
+        display: inline-block;
+        margin: 0 1rem;
+        padding: 0.4em 1.2em;
+        font-size: 1.4rem;
+        text-decoration: none;
+        transition: color 400ms;
+      }
+
+      a.btn {
+        display: inline-block;
+        padding: 0.4em 1.2em;
+        font-size: 1.4rem;
+        font-family: inherit;
+        border-radius: 2em;
+        transition: color 400ms;
+      }
+
+      button.btn {
+        display: inline-block;
+        padding: 0.4em 1.2em;
+        font-size: 1.4rem;
+        font-family: inherit;
+        border-radius: 2em;
+        transition: color 400ms;
+      }
+
+      #home-page > h1 {
+        color: transparent;
+        font-size: 8rem;
+        font-weight: bold;
+        -webkit-text-stroke: 2px #fff;
+        filter: drop-shadow(1px 1px 1px #000);
+      }
+
+      .card {
+          min-width: 18rem;
+          max-width: 18rem;
+      }
+      
+      .card-img-top {
+          width: 100%;
+          height: 15vw;
+          object-fit: cover;
+      }
+      
+      .btn-group {
+          margin-right: 20px;
+      }
+      
+      .badge {
+          margin-left: 10px;
+      }
+      
+      .enrolled-span {
+          text-decoration: underline;
+          background-color: green;
+          color: white;
+          padding: 2%;
+          border-radius: 4px;
+      }
+      
+      .notifications {
+          background-color: rgba(238, 74, 74, 0.699);
+          margin: 0 auto;
+          text-align: center;
+          padding: 1%;
+          margin-top: 2%;
+          margin-bottom: 2%;
+          border-radius: 6px;
+          color: white;
+          font-style: italic;
+          text-decoration: underline;
+          box-shadow: 0 5px 10px #cccccc;
+      }
+
+      a.navbar-brand.text-light {
+        font-size: 2rem;
+      }
+    </style>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   </head>
   <body>
@@ -12,19 +110,19 @@
     <div class="container" id="container">
 
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand text-light" href="/">Movies</a>
+        <a class="navbar-brand text-light" href="/home">Movies</a>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item user">
             <a class="nav-link" id="welcome-msg">Welcome, email</a>
           </li>
           <li class="nav-item user">
-            <a class="nav-link" href="#">Logout</a>
+            <a class="nav-link" href="/logout">Logout</a>
           </li>
           <li class="nav-item guest">
-            <a class="nav-link" href="#">Login</a>
+            <a class="nav-link" href="/login">Login</a>
           </li>
           <li class="nav-item guest">
-            <a class="nav-link" href="#">Register</a>
+            <a class="nav-link" href="/register">Register</a>
           </li>
         </ul>
       </nav>
@@ -51,7 +149,7 @@
         <section id="add-movie-button" class="user">
           <a href="#" class="btn btn-warning">Add Movie</a>
         </section>
-        
+
         <section id="movie">
           <div class="mt-3">
             <div class="row d-flex d-wrap">
@@ -266,6 +364,38 @@
         </div>
       </footer>
     </div>
+    <script>
+      showHomeView();
+
+const userNav = document.querySelectorAll("li.user");
+const guestNav = document.querySelectorAll("li.guest");
+const welcomeMsg = document.getElementById("welcome-msg");
+
+const userData = JSON.parse(sessionStorage.getItem("userData"));
+// const userData = true;
+
+updateNav(userData);
+
+function updateNav(user) {
+    if (user) {
+        userNav.forEach(link => {
+            link.style.display = "inline-block";
+        });
+        guestNav.forEach(link => {
+            link.style.display = "none";
+        });
+        welcomeMsg.textContent = "Welcome, <user>";
+    } else {
+        userNav.forEach(link => {
+            link.style.display = "none";}
+            );
+        guestNav.forEach(link => {
+            link.style.display = "inline-block";
+        });
+        welcomeMsg.textContent = "guest";
+    }    
+}
+    </script>
     
     <fieldset>
       <legend>Get all users from local JSON file</legend>
