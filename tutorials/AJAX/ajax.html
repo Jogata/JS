@@ -3,136 +3,145 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AJAX | XMLHttpRequest</title>
+    <!-- <title>AJAX | XMLHttpRequest</title> -->
+    <title>Travel.Io</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap");
+
+      fieldset {
+        display: none;
+      }
+      
+      :root {
+        --primary-color: #fead53;
+        --text-dark: #333333;
+        --text-light: #ffffff33;
+        --extra-light: #f3f4f6;
+       
+        --max-width: 1300px;
+      }
+      
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      
+      a {
+        text-decoration: none;
+      }
+      
+      input::placeholder {
+        color: var(--extra-light);
+      }
+      
+      body {
+        min-height: 100vh;
+        font-family: "Open Sans", sans-serif;
+        font-family: Georgia, serif;
+        background-image: 
+          linear-gradient(
+            rgba(0, 0, 0, 0.25), 
+            rgba(0, 0, 0, 0.25)),
+            url("assets/bg.jpg");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+      
+      nav {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: var(--max-width);
+        padding: 2rem;
+        display: flex;
+        row-gap: 1rem;
+        column-gap: 2rem;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 1;
+      }
+      
+      .nav-logo a {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--extra-light);
+      }
+    </style>
   </head>
   <body>
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
-    
-    <script>
-      // 04. Star Enigma✶
-    
-      function decrEnigma(params) {
-      // console.log(params);
-      const n = Number(params[0]);
-      // console.log(n);
-    
-      const patternKey = /[star]/gi;
-    
-      let attacks = 0;
-      let destructions = 0;
-    
-      const atPlanets = [];
-      const desPlanets = [];
-    
-      for (let index = 1; index <= n; index++) {
-        const message = params[index]
-        // console.log(message);
-        let length = 0;
-        const key = message.match(patternKey);
-        // console.log(key);
-    
-        if (key) {
-          length = key.length;
-          // console.log(length);
-        } 
-    
-        let dectMessage = "";
-      
-        for (const letter of message) {
-          const ascii = letter.charCodeAt(0);
-          // console.log(ascii);
-          const newAscii = ascii - length;
-          const newLetter = String.fromCharCode(newAscii);
-          // console.log(newLetter);
-          dectMessage += newLetter;
-        }
-        // console.log(dectMessage);
-    
-        const pattern = /[^-@!:]*?@(?<planet>[A-Za-z]+)[^-@!:]*?:(?<population>\d+)[^-@!:]*?!(?<attack>[AD])![^-@!:]*?->(?<soldiers>\d+)/;
-        const match = dectMessage.match(pattern);
-        // console.log(match);
-        if (match) {
-          const {planet, population, attack, soldiers} = match.groups;
-          // console.log(planet, population, attack, soldiers);
-    
-          if (attack == "A") {
-            attacks++;
-            atPlanets.push(planet);
-          } else if (attack == "D") {
-            destructions++;
-            desPlanets.push(planet);
-          }
-        }
-        // console.log(attacks, destructions);
-        // console.log(atPlanets, desPlanets);
-        
-      } 
-    
-      const sortedAtPlanets = atPlanets.sort((a, b) => a.localeCompare(b));
-      const sortedDesPlanets = desPlanets.sort((a, b) => a.localeCompare(b));
-    
-      console.log(`Attacked planets: ${attacks}`);
-      for (const planet of sortedAtPlanets) {
-        console.log(`-> ${planet}`);
-      } 
-      console.log(`Destroyed planets: ${destructions}`);
-      for (const planet of sortedDesPlanets) {
-        console.log(`-> ${planet}`);
-      } 
-    
-      } 
-    
-      // decrEnigma(['2', 'STCDoghudd4=63333$D$0A53333', 'EHfsytsnhf?8555&I&2C9555SR']);
-      // decrEnigma(['3', "tt(''DGsvywgerx>6444444444%H%1B9444", 'GQhrr|A977777(H(TTTT', 'EHfsytsnhf?8555&I&2C9555SR']);
-      // decrEnigma(['0','GQhrr|A977777(H(TTTT']);
-      // decrEnigma(['1','55555555']);
-      </script>      
-      <script>
-        // 05. School Grades
+    <nav>
+      <div class="nav-logo">
+        <a href="#">Travel.Io</a>
+      </div>
+      <ul class="nav-links">
+        <li class="link">home</li>
+        <li class="link">features</li>
+        <li class="link">about us</li>
+        <li class="link">contact us</li>
+      </ul>
+      <div class="search-box">
+        <input type="text" placeholder="Search" />
+        <i class="fa fa-search"></i>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="container-left">
+        <div class="content">
+          <h1>discovering<br />the world.</h1>
+          <p>
+            Through travel, individuals have the opportunity to immerse
+            themselves in different cultures, try new foods, and witness the
+            beauty of nature. Exploring new places can also challenge one's
+            comfort zone and help to develop important life skills.
+          </p>
+          <div class="btns">
+            <button class="read-more">read more</button>
+            <button class="our-blogs">our blogs</button>
+          </div>
+          <div class="chevrons">
+            <span class="chev-left">
+              <i class="fa fa-chevron-left"></i>
+            </span>
+            <span class="chev-right">
+              <i class="fa fa-chevron-right"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="container-right">
+        <form>
+          <h4>Where you want to go?</h4>
+          <div class="form-group">
+            <label for="destination">destination</label>
+            <input
+              type="text"
+              name="destination"
+              id="destination"
+              placeholder="Enter destination"
+            />
+          </div>
+          <div class="form-group">
+            <label for="date">date</label>
+            <input type="text" name="date" id="date" placeholder="dd/mm/yyyy" />
+          </div>
+          <button type="submit">Check travel package</button>
+        </form>
+      </div>
+      <div class="bottom-tracker">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
 
-function menageSchoolGrades(params) {
-// console.log(params);
-const students = {};
-
-for (const input of params) {
-  const data = input.split(" ");
-  // console.log(data);
-  const name = data.shift();
-  // console.log(name);
-  const grades = data;
-  // console.log(grades);
-
-  if (!students[name]) {
-    students[name] = [];
-  }
-
-  students[name] = students[name].concat(grades);
-}
-
-// console.log(students);
-const keys = Object.keys(students);
-// console.log(keys);
-const sorted = keys.sort();
-// console.log(sorted);
-
-for (const name of keys) {
-  const studentDegrees = students[name];
-  // console.log(name, studentDegrees);
-  const totatl = studentDegrees.reduce((acc, degree) => {
-    return acc + Number(degree);
-  }, 0);
-  let average = totatl / studentDegrees.length;
-  // console.log(average.toFixed(2));
-  console.log(`${name}: ${average.toFixed(2)}`);
-}
-
-}
-
-// menageSchoolGrades(['Lilly 4 6 6 5', 'Tim 5 6', 'Tammy 2 4 3', 'Tim 6 6']);
-// menageSchoolGrades(['Steven 3 5 6 4', 'George 4 6', 'Tammy 2 5 3', 'Steven 6 3']);
-      </script>
-    
     <fieldset>
       <legend>Get all users from local JSON file</legend>
       <button id="local">Send Request</button>
@@ -197,10 +206,6 @@ for (const name of keys) {
     </script>
 
     <p style="display: none;">
-<!-- Earn 1,500,000 gold at the Tower -->
-<!-- Obtain 100 hero soul stones -->
-<!-- Make 30 purchases from the shop -->
-<!-- Complete 10 quests from the "Nature Season" event -->
 <!-- 13 	 -->
 Destroy the Eye of the Herald 5 times in Adventures
 Exchange 200 items for guild activity points
