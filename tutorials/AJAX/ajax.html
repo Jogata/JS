@@ -95,7 +95,7 @@
         color: var(--extra-light);
         cursor: pointer;
         transition: 0.3s;
-        border: 1px solid red;
+        /* border: 1px solid red; */
       }
       
       .nav-links .link:hover {
@@ -185,6 +185,109 @@
       button.our-blogs:hover {
         background-color: var(--text-light);
       }
+      
+      .chevrons {
+        display: flex;
+        gap: 1rem;
+      }
+      
+      .chevrons span {
+        /* height: 40px; */
+        /* width: 40px; */
+        padding: 0.5em 0.62em;
+        font-size: 1.5rem;
+        color: var(--extra-light);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 2px solid var(--extra-light);
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      
+      .chevrons span:hover {
+        background-color: var(--text-light);
+      }
+
+      .fa-chevron-left {
+        transform: translateX(-10%);
+      }
+      .fa-chevron-right {
+        transform: translateX(10%);
+      }
+      
+      .container-right {
+        justify-content: flex-end;
+      }
+      
+      form {
+        width: 350px;
+        display: grid;
+        border-radius: 5px;
+        background-color: var(--text-light);
+        color: var(--extra-light);
+      }
+      
+      label {
+        font-size: 1rem;
+        text-transform: capitalize;
+      }
+      
+      form h4 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        padding: 2rem;
+      }
+      
+      .form-group {
+        display: grid;
+        padding: 0 2rem;
+        margin-bottom: 1rem;
+      }
+      
+      .form-group input {
+        padding: 0.5rem;
+        font-size: 1rem;
+        color: var(--extra-light);
+        background-color: transparent;
+        outline: none;
+        border: none;
+        border-bottom: 2px solid var(--extra-light);
+      }
+      
+      form button {
+        margin-top: 1rem;
+        padding: 1rem;
+        font-size: 1rem;
+        font-weight: 600;
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        background-color: var(--primary-color);
+        color: var(--extra-light);
+        cursor: pointer;
+      }
+      
+      .bottom-tracker {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 1rem;
+      }
+      
+      .bottom-tracker span {
+        display: inline-block;
+        height: 4px;
+        width: 100px;
+        background-color: var(--text-light);
+      }
+      
+      .bottom-tracker span:nth-child(2) {
+        background-color: var(--extra-light);
+      }
     </style>
   </head>
   <body>
@@ -269,6 +372,33 @@
       
     </div>
 
+    <h1 id="title">Loading...</h1>
+    <p id="summary">Loading...</p>
+
+    <script>
+      const DEFAULT_STATE = {
+        title: "Example Title", 
+        summary: "This is the page summary"
+      };
+
+      // const state = {
+      //   title: "Example Title", 
+      //   summary: "This is the page summary"
+      // }
+
+      const state = new Proxy({ ...DEFAULT_STATE }, {
+        set(obj, prop, value) {
+          console.log(`Property ${prop} is wanting to change to ${value}`);
+
+          obj[prop] = value;
+
+          return true;
+        }
+      });
+
+      state.title = "New Title";
+    </script>
+
     <fieldset>
       <legend>Get all users from local JSON file</legend>
       <button id="local">Send Request</button>
@@ -340,10 +470,10 @@ Exchange 200 items for guild activity points
 <!-- Spend 300,000 gold -->
 <!-- Enter the game chat and create 1 challenge for a battle of heroes or titans -->
 <!-- Win 2 times in the Adventure mode using a Warrior hero -->
-15 	
-Complete 15 Tower floors
-Level up a Tank hero's skill
-Level up a Tank hero's Gift of the Elements
+<!-- 15 	 -->
+<!-- Complete 15 Tower floors -->
+<!-- Level up a Tank hero's skill -->
+<!-- Level up a Tank hero's Gift of the Elements -->
 Spend 1,000 Energy
 Complete 100 daily quests
 16 	
