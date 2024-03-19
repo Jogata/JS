@@ -3,375 +3,144 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>AJAX | XMLHttpRequest</title> -->
-    <title>Travel.Io</title>
+    <title>AJAX | XMLHttpRequest</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap");
-
-      fieldset {
-        display: none;
-      }
-      
-      :root {
-        --primary-color: #fead53;
-        --text-dark: #333333;
-        --text-light: #ffffff33;
-        --extra-light: #f3f4f6;
-        
-        --max-width: 1300px;
-      }
-      
-      * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-      }
-      
-      a {
-        padding: 0.4em 1em;
-        text-decoration: none;
-        /* border: 1px solid red; */
-      }
-
-      button {
-        font-family: inherit;
-        background-color: transparent;
-      }
-      
-      input::placeholder {
-        color: var(--extra-light);
-      }
-      
-      body {
-        min-height: 100vh;
-        font-family: "Open Sans", sans-serif;
-        font-family: Georgia, serif;
-        background-image: 
-          linear-gradient(
-            rgba(0, 0, 0, 0.25), 
-            rgba(0, 0, 0, 0.25)),
-            url("assets/bg.jpg");
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-      }
-      
-      nav {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        max-width: var(--max-width);
-        padding: 1.4rem 2rem;
-        display: flex;
-        row-gap: 1rem;
-        column-gap: 2rem;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        z-index: 1;
-      }
-      
-      .nav-logo a {
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: var(--extra-light);
-      }
-      
-      .nav-links {
-        list-style: none;
-        display: flex;
-        align-items: center;
-        gap: 3rem;
-      }
-      
-      .nav-links .link {
-        padding: 0.4em 1em;
-        font-size: 1.2rem;
-        font-weight: 500;
-        text-transform: capitalize;
-        color: var(--extra-light);
-        cursor: pointer;
-        transition: 0.3s;
-        /* border: 1px solid red; */
-      }
-      
-      .nav-links .link:hover {
-        color: var(--primary-color);
-      }
-      
-      .search-box {
-        padding: 0.5rem 0;
-        border-bottom: 2px solid var(--extra-light);
-      }
-      
-      .search-box input {
-        color: var(--extra-light);
-        background-color: transparent;
-        outline: none;
-        border: none;
-      }
-      
-      .search-box i {
-        color: var(--extra-light);
-        font-size: 1.2rem;
-        cursor: pointer;
-      }
-      
-      .container {
-        display: flex;
-        gap: 5rem;
-        flex-wrap: wrap;
-        min-height: 100vh;
-        max-width: var(--max-width);
-        margin: auto;
-        padding: 2rem;
-        padding-top: 100px;
-        position: relative;
-      }
-      
-      .container-left,
-      .container-right {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        /* justify-content: flex-start; */
-      }
-      
-      .container-left .content {
-        max-width: 400px;
-        display: grid;
-        gap: 1rem;
-      }
-      
-      .content h1 {
-        font-size: 4rem;
-        line-height: 4rem;
-        color: var(--extra-light);
-        font-weight: 700;
-        text-transform: capitalize;
-      }
-      
-      .content p {
-        color: var(--extra-light);
-      }
-      
-      .btns {
-        display: flex;
-        gap: 1rem;
-      }
-      
-      .btns button {
-        padding: 0.5rem 2rem;
-        color: var(--extra-light);
-        font-size: 1rem;
-        font-family: inherit;
-        text-transform: capitalize;
-        background-color: transparent;
-        outline: none;
-        border: 2px solid var(--extra-light);
-        border-radius: 2rem;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-      
-      button.read-more {
-        background-color: var(--extra-light);
-        color: var(--text-dark);
-      }
-      
-      button.our-blogs:hover {
-        background-color: var(--text-light);
-      }
-      
-      .chevrons {
-        display: flex;
-        gap: 1rem;
-      }
-      
-      .chevrons span {
-        /* height: 40px; */
-        /* width: 40px; */
-        padding: 0.5em 0.62em;
-        font-size: 1.5rem;
-        color: var(--extra-light);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        border: 2px solid var(--extra-light);
-        cursor: pointer;
-        transition: 0.3s;
-      }
-      
-      .chevrons span:hover {
-        background-color: var(--text-light);
-      }
-
-      .fa-chevron-left {
-        transform: translateX(-10%);
-      }
-      .fa-chevron-right {
-        transform: translateX(10%);
-      }
-      
-      .container-right {
-        justify-content: flex-end;
-      }
-      
-      form {
-        width: 350px;
-        display: grid;
-        border-radius: 5px;
-        background-color: var(--text-light);
-        color: var(--extra-light);
-      }
-      
-      label {
-        font-size: 1rem;
-        text-transform: capitalize;
-      }
-      
-      form h4 {
-        font-size: 1.2rem;
-        font-weight: 600;
-        padding: 2rem;
-      }
-      
-      .form-group {
-        display: grid;
-        padding: 0 2rem;
-        margin-bottom: 1rem;
-      }
-      
-      .form-group input {
-        padding: 0.5rem;
-        font-size: 1rem;
-        color: var(--extra-light);
-        background-color: transparent;
-        outline: none;
-        border: none;
-        border-bottom: 2px solid var(--extra-light);
-      }
-      
-      form button {
-        margin-top: 1rem;
-        padding: 1rem;
-        font-size: 1rem;
-        font-weight: 600;
-        outline: none;
-        border: none;
-        border-radius: 5px;
-        background-color: var(--primary-color);
-        color: var(--extra-light);
-        cursor: pointer;
-      }
-      
-      .bottom-tracker {
-        position: absolute;
-        bottom: 2rem;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 1rem;
-      }
-      
-      .bottom-tracker span {
-        display: inline-block;
-        height: 4px;
-        width: 100px;
-        background-color: var(--text-light);
-      }
-      
-      .bottom-tracker span:nth-child(2) {
-        background-color: var(--extra-light);
-      }
-    </style>
   </head>
   <body>
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
-    <nav>
-      <div class="nav-logo">
-        <a href="#">Travel.Io</a>
-      </div>
-      <ul class="nav-links">
-        <li class="link">home</li>
-        <li class="link">features</li>
-        <li class="link">about us</li>
-        <li class="link">contact us</li>
-      </ul>
-      <div class="search-box">
-        <input type="text" placeholder="Search" />
-        <i class="fa fa-search"></i>
-      </div>
-    </nav>
 
-    <div class="container">
 
-      <div class="container-left">
-
-        <div class="content">
-          <h1>discovering<br />the world.</h1>
+    <section class="section-container process-container">
+      <div class="process-content">
+        <h2 class="section-header">We provide the best process experience</h2>
+        <div class="process-grid">
+          <div class="number">01</div>
+          <h4>Briefing</h4>
+          <span></span>
           <p>
-            Through travel, individuals have the opportunity to immerse
-            themselves in different cultures, try new foods, and witness the
-            beauty of nature. Exploring new places can also challenge one's
-            comfort zone and help to develop important life skills.
+            First thing you determine the concept and model you want, then
+            choose what colors and materials you want to use in your furniture.
           </p>
-
-          <div class="btns">
-            <button class="read-more">read more</button>
-            <button class="our-blogs">our blogs</button>
-          </div>
-
-          <div class="chevrons">
-            <span class="chev-left">
-              <i class="fa fa-chevron-left"></i>
-            </span>
-            <span class="chev-right">
-              <i class="fa fa-chevron-right"></i>
-            </span>
-          </div>
-
+          <div class="number">02</div>
+          <h4>Processing</h4>
+          <span></span>
+          <p>
+            When the briefing process is complete and what the client wants has
+            been achieved. Then we carry out the execution of the desired
+            concept.
+          </p>
+          <div class="number">03</div>
+          <h4>Finishing</h4>
+          <span class="last-child"></span>
+          <p>
+            After the process is complete, we will immediately carry out the
+            finishing stage and we do it carefully and make sure there are no
+            mistakes.
+          </p>
         </div>
-
       </div>
-
-      <div class="container-right">
-        <form>
-          <h4>Where you want to go?</h4>
-
-          <div class="form-group">
-            <label for="destination">destination</label>
-            <input
-              type="text"
-              name="destination"
-              id="destination"
-              placeholder="Enter destination"
-            />
+      <div class="process-image">
+        <img src="assets/image-2.jpg" alt="process" />
+      </div>
+    </section>
+    <section class="section-container customer-container">
+      <div class="customer-nav">
+        <h2 class="section-header">What our customers are saying</h2>
+        <div class="customer-nav-icons">
+          <span><i class="fa fa-chevron-left"></i></span>
+          <span><i class="fa fa-chevron-right"></i></span>
+        </div>
+      </div>
+      <div class="customer-grid">
+        <div class="customer-card">
+          <span><i class="fa fa-double-quotes"></i></span>
+          <h4 class="customer-title">The result given are very satisfying</h4>
+          <p class="customer-description">
+            Being able to work with the Luxterioris an extraordinary thing thry
+            provide excellent service and the results given are also very
+            satisfying by giving elegent impression.
+          </p>
+          <div class="customer-content">
+            <span><img src="assets/pic-1.jpeg" alt="user" /></span>
+            <div class="customer-details">
+              <h4>Ralph Edward</h4>
+              <p>Product Designer</p>
+            </div>
           </div>
-
-          <div class="form-group">
-            <label for="date">date</label>
-            <input type="text" name="date" id="date" placeholder="dd/mm/yyyy" />
+        </div>
+        <div class="customer-card">
+          <span><i class="ri-double-quotes-l"></i></span>
+          <h4 class="customer-title">
+            The service provided is very good and friendly
+          </h4>
+          <p class="customer-description">
+            At that time I wanted to make a chair, I went to Luxterior and after
+            it was finished the results were unexpected. The results given are
+            in accordance with what I want.
+          </p>
+          <div class="customer-content">
+            <span><img src="assets/pic-2.jpg" alt="user" /></span>
+            <div class="customer-details">
+              <h4>Leslie Aleksander</h4>
+              <p>Housewife</p>
+            </div>
           </div>
-
-          <button type="submit">Check travel package</button>
-
-        </form>
+        </div>
       </div>
-
-      <div class="bottom-tracker">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+    </section>
+    <section class="section-container subscribe-container">
+      <h2 class="section-header">Subscribe to get the latest news about us</h2>
+      <p class="subscribe-description">
+        We recommend you to subscribe to our newspaper, enter your email below
+        to get our daily update about us.
+      </p>
+      <form>
+        <input type="text" placeholder="Enter your email address" />
+        <button>Subscribe</button>
+      </form>
+    </section>
+    <footer>
+      <div class="section-container footer-container">
+        <div class="footer-col">
+          <div class="footer-logo">luxterior</div>
+          <p>
+            Find a wide range of high-quality furniture pieces that will elevate
+            the style and functionality of your home.
+          </p>
+          <p><i class="fa fa-phone"></i> +919876543210</p>
+          <p>
+            <i class="fa fa-map"></i> Manipur, House-01, Mirpur-11.5 Bhaka-1258
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <p>Site Map</p>
+          <p>Search Terms</p>
+          <p>Advance Search</p>
+          <p>Suppliers</p>
+          <p>Our Stores</p>
+          <p>Privacy Policy</p>
+        </div>
+        <div class="footer-col">
+          <h4>About</h4>
+          <p>Login</p>
+          <p>About Us</p>
+          <p>Wishlist</p>
+          <p>Checkout</p>
+          <p>FAQ's</p>
+          <p>Contact Us</p>
+        </div>
+        <div class="footer-col">
+          <h4>Get in touch</h4>
+          <p>Questions or feedback?</p>
+          <p>We'd love to hear from you.</p>
+        </div>
       </div>
-      
-    </div>
+      <div class="footer-bar">
+        Copyright &#169; 2023 Company. All rights reserved.
+      </div>
+    </footer>
 
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
     <h1 id="title">Loading...</h1>
     <p id="summary">Loading...</p>
 
@@ -380,11 +149,6 @@
         title: "Example Title", 
         summary: "This is the page summary"
       };
-
-      // const state = {
-      //   title: "Example Title", 
-      //   summary: "This is the page summary"
-      // }
 
       const state = new Proxy({ ...DEFAULT_STATE }, {
         set(obj, prop, value) {
@@ -464,28 +228,21 @@
 
     <p style="display: none;">
 <!-- 13 	 -->
-Destroy the Eye of the Herald 5 times in Adventures
-Exchange 200 items for guild activity points
-<!-- 14 	 -->
-<!-- Spend 300,000 gold -->
-<!-- Enter the game chat and create 1 challenge for a battle of heroes or titans -->
-<!-- Win 2 times in the Adventure mode using a Warrior hero -->
+<!-- Destroy the Eye of the Herald 5 times in Adventures -->
+<!-- Exchange 200 items for guild activity points -->
 <!-- 15 	 -->
-<!-- Complete 15 Tower floors -->
-<!-- Level up a Tank hero's skill -->
-<!-- Level up a Tank hero's Gift of the Elements -->
 Spend 1,000 Energy
 Complete 100 daily quests
 16 	
-Heal your heroes for 80,000 in Adventures
-Win 2 times in the Campaign mode using a Mage hero
-Defeat Phobos 2 times in the Campaign
+<!-- Heal your heroes for 80,000 in Adventures -->
+<!-- Win 2 times in the Campaign mode using a Mage hero -->
+<!-- Defeat Phobos 2 times in the Campaign -->
 Defeat a Tank hero in 5 battles in the Arena mode/15 titan summons
 Open 9 chests in Outlands
-17 	
-Spend 500 Tower Coins
-Let your heroes take 150,000 damage in the Guild Dungeon
-Level up the Physical attack glyph
+<!-- 17 	 -->
+<!-- Spend 500 Tower Coins -->
+<!-- Let your heroes take 150,000 damage in the Guild Dungeon -->
+<!-- Level up the Physical attack glyph -->
 18 	
 Win 2 times in the Campaign mode using a Support hero
 Complete 7 daily quests
@@ -544,7 +301,7 @@ Get 20 Soul Stones of any Titan
 Get 20 Soul Stones of any hero
 Level up a Mage hero's skill
 Level up a Marksman hero's Gift of the Elements
-30 	
+30  
 Spend 500 Tower Coins
 Enter the game chat and create 1 challenge for a battle of heroes or titans
 Level up the Armor glyph
