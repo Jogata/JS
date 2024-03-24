@@ -3,937 +3,164 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>AJAX | XMLHttpRequest</title> -->
-    <title>Personal Portfolio</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
+    <title>AJAX | XMLHttpRequest</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
-
-:root {
-  --primary-color: #763ae0;
-  --primary-color-dark: #6345fb;
-  --secondary-color: #a0d333;
-  --bg-color: #fafafb;
-  --text-dark: #333333;
-  --text-light: #767268;
-  --white: #ffffff;
-  --max-width: 1200px;
-}
-
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-.section-container {
-  max-width: var(--max-width);
-  margin: auto;
-  padding: 10rem 1rem;
-}
-
-.section-title {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--text-dark);
-  text-align: center;
-}
-
-.section-subtitle {
-  max-width: calc(var(--max-width) / 2);
-  font-size: 1rem;
-  margin: auto;
-  margin-bottom: 1rem;
-  color: var(--text-light);
-  text-align: center;
-}
-
-.btn {
-  padding: 0.75rem 2rem;
-  outline: none;
-  border: none;
-  font-size: 1rem;
-  color: var(--white);
-  background-color: var(--secondary-color);
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-img {
-  width: 100%;
-}
-
-a {
-  text-decoration: none;
-}
-
-body {
-  font-family: "Poppins", sans-serif;
-}
-
-header {
-  position: relative;
-  min-height: 100vh;
-  isolation: isolate;
-}
-
-header::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  content: "";
-  background: 
-      linear-gradient(to right,
-      rgba(118, 58, 224, 0.5),
-      rgba(99, 69, 251, 0.5)
-    ),
-    url("assets/header.jpg");
-  background-repeat: no-repeat;
-  background-position: top left;
-  background-size: cover;
-  clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
-  z-index: -1;
-}
-
-.nav-container {
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.nav-logo h2 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--secondary-color);
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.link a {
-  padding: 0.5rem;
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--white);
-  transition: 0.3s;
-}
-
-.link a:hover {
-  color: var(--secondary-color);
-}
-
-.contact-me-btn {
-  padding: 1rem 2rem;
-  outline: none;
-  border: 1px solid var(--white);
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--white);
-  background-color: transparent;
-  cursor: pointer;
-}
-
-.header-container {
-  min-height: calc(100vh - 100px);
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.header-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  grid-area: 1/2/2/2;
-}
-
-.header-content p {
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: var(--white);
-}
-
-.header-content h1 {
-  font-size: 4rem;
-  font-weight: 600;
-  line-height: 4rem;
-  color: var(--white);
-}
-
-.header-content .btn {
-  width: max-content;
-  margin-top: 2rem;
-}
-
-.services-container {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 5rem;
-}
-
-.services-content .section-title {
-  text-align: left;
-}
-
-.services-content .section-subtitle {
-  text-align: left;
-  margin-left: 0;
-}
-
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: 1fr;
-  gap: 2rem;
-}
-
-.services-card {
-  padding: 1rem;
-  display: flex;
-  gap: 1rem;
-  background-color: var(--white);
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.services-card-content h4 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--text-dark);
-}
-
-.services-card-content p {
-  font-size: 0.9rem;
-  color: var(--text-light);
-}
-
-.story {
-  position: relative;
-  isolation: isolate;
-}
-
-.story::before {
-  position: absolute;
-  content: "";
-  background: linear-gradient(
-      to right,
-      rgba(118, 58, 224, 0.5),
-      rgba(99, 69, 251, 0.5)
-    ),
-    url("assets/story.jpg");
-  background-position: top center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  inset: 0;
-  transform: skewY(-5deg);
-  z-index: -1;
-}
-
-.story-container {
-  text-align: center;
-}
-
-.story-container .play {
-  height: 60px;
-  width: 60px;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 100%;
-  font-size: 1.5rem;
-  color: var(--secondary-color);
-  background-color: var(--white);
-  cursor: pointer;
-}
-
-.story-container .section-title {
-  color: var(--white);
-  margin-top: 1rem;
-}
-
-.skills-container .section-subtitle {
-  margin-bottom: 4rem;
-}
-
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 2rem;
-}
-
-.skill-card {
-  text-align: center;
-  display: grid;
-  gap: 0.5rem;
-}
-
-.skill-card img {
-  max-width: 75px;
-  margin: auto;
-}
-
-.skill-card p {
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.rating {
-  color: goldenrod;
-  font-size: 1rem;
-}
-
-.portfolio {
-  position: relative;
-  isolation: isolate;
-}
-
-.portfolio::before {
-  position: absolute;
-  content: "";
-  background-color: var(--bg-color);
-  inset: 0;
-  transform: skewY(-5deg);
-  z-index: -1;
-}
-
-.portfolio-nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-bottom: 3rem;
-}
-
-.portfolio-nav a {
-  padding: 0.5rem;
-  color: var(--text-dark);
-  font-size: 1rem;
-  font-weight: 500;
-  transition: 0.3s;
-}
-
-.portfolio-nav a:hover {
-  color: var(--secondary-color);
-}
-
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-}
-
-.portfolio-card {
-  position: relative;
-  isolation: isolate;
-  cursor: pointer;
-}
-
-.portfolio-card::before {
-  position: absolute;
-  content: "";
-  background: linear-gradient(
-    to right,
-    rgba(118, 58, 224, 0.5),
-    rgba(99, 69, 251, 0.5)
-  );
-  inset: 0;
-  z-index: 1;
-}
-
-.portfolio-card img {
-  display: block;
-}
-
-.clients-container .section-subtitle {
-  margin-bottom: 4rem;
-}
-
-.clients-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-}
-
-.client-card {
-  padding: 2rem;
-  display: grid;
-  gap: 2rem;
-  border-radius: 5px;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-}
-
-.client-card p {
-  font-size: 0.9rem;
-  color: var(--text-light);
-}
-
-.client-card-footer {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 1rem;
-}
-
-.client-card-footer h4 {
-  font-size: 1rem;
-  font-weight: 500;
-  margin-bottom: 0;
-}
-
-.client-card-footer img {
-  max-width: 50px;
-  border-radius: 100%;
-}
-
-.contact {
-  background-color: var(--bg-color);
-}
-
-.contact-container {
-  padding: 5rem 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-}
-
-.contact-container .section-title {
-  margin-bottom: 0;
-}
-
-footer {
-  background: 
-    linear-gradient(
-      to right, 
-      rgb(118, 58, 224), 
-      rgb(99, 69, 251));
-}
-
-.footer-container {
-  padding: 5rem 1rem;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-}
-
-.footer-col h2 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--secondary-color);
-  margin-bottom: 2rem;
-}
-
-.footer-col form {
-  display: flex;
-}
-
-.footer-col input {
-  width: 100%;
-  max-width: 200px;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  outline: none;
-  border: none;
-}
-
-.footer-col button {
-  padding: 0.5rem;
-  font-size: 1rem;
-  color: var(--white);
-  outline: none;
-  border: none;
-  background-color: var(--secondary-color);
-  cursor: pointer;
-}
-
-.footer-col h4 {
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: var(--white);
-  margin-bottom: 2rem;
-}
-
-.footer-col p {
-  font-size: 1rem;
-  color: var(--white);
-  margin-bottom: 1rem;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.social-icons {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.social-icons span {
-  font-size: 1.5rem;
-  color: var(--white);
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.footer-col :is(p:hover, span:hover) {
-  color: var(--secondary-color);
-}
-
-@media (width < 900px) {
-  .nav-links {
-    display: none;
-  }
-
-  .services-container {
-    grid-template-columns: 1fr;
-  }
-
-  .services-content {
-    text-align: center;
-  }
-
-  .services-content .section-title {
-    text-align: center;
-  }
-
-  .services-content .section-subtitle {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .services-content .btn {
-    margin: auto;
-  }
-
-  .skills-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .portfolio-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-
-  .clients-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-
-  .contact-container {
-    flex-direction: column;
-  }
-
-  .footer-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (width < 600px) {
-  .header-content {
-    grid-area: 1/1/2/2;
-  }
-
-  .services-grid {
-    grid-template-columns: repeat(1, 1fr);
-    gap: 1rem;
-  }
-
-  .skills-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .portfolio-grid {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-  .clients-grid {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
+      body {
+        margin: 0;
+      }
+      .top-container {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background-image: url("https://images.unsplash.com/photo-1547394765-185e1e68f34e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80");
+        background-size: cover;
+      }
+      .top-container h1 {
+        color: white;
+        font-size: 50px;
+        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+        letter-spacing: 2px;
+      }
+      .text {
+        margin: 50px 5%;
+        font-family: sans-serif;
+      }
+      .navbar {
+        display: flex;
+        position: fixed;
+        background-color: white;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        transition: background-color 0.4s;
+      }
+      .navbar ul {
+        display: flex;
+        list-style-type: none;
+      }
+      .navbar ul li a {
+        text-decoration: none;
+        margin: 0 10px;
+        color: black;
+        font-family: cursive;
+      }
+      .navbar ul li a:hover {
+        color: red;
+      }
+      .navbar.active {
+        background-color: black;
+      }
+      .navbar.active ul li a {
+        color: white;
+      }
     </style>
   </head>
   <body>
-    <header>
-
-      <nav class="section - container nav-container">
-
-        <div class="nav-logo">
-          <h2>MARK ANTONY</h2>
-        </div>
-
-        <ul class="nav-links">
-          <li class="link"><a href="#">Home</a></li>
-          <li class="link"><a href="#">Services</a></li>
-          <li class="link"><a href="#">My Skills</a></li>
-          <li class="link"><a href="#">Portfolio</a></li>
-          <li class="link"><a href="#">Reviews</a></li>
-        </ul>
-
-        <button class="contact-me-btn">Contact Me</button>
-      </nav>
-
-      <div class="section-container header-container">
-        <div class="header-content">
-          <p>Hello, I am</p>
-          <h1>Mark Antony</h1>
-          <p>UX Designer and Developer</p>
-          <button class="btn">Get Started</button>
-        </div>
-      </div>
-
-    </header>
-    
-    <section class="services">
-      <div class="section-container services-container">
-
-        <div class="services-content">
-          <h2 class="section-title">My Services</h2>
-          <p class="section-subtitle">
-            I am a highly experienced Web designer and developer. I also provide
-            Photography and Videography services. I have done lots of design
-            projects for big organisation as well as various smaller startups. I
-            love to help those people who want a creative and modern looking
-            website designs. I made 200 videos and 600 different types
-            photography.
-          </p>
-          <button class="btn">Hire Me</button>
-        </div>
-
-        <div class="services-grid">
-
-          <div class="services-card">
-            <div class="icon">
-              <img src="assets/service-1.png" alt="service" />
-            </div>
-            <div class="services-card-content">
-              <h4>Web Design</h4>
-              <p>
-                All of my designs are modern and completely unique. I am up to
-                date with the latest web design trends.
-              </p>
-            </div>
-          </div>
-
-          <div class="services-card">
-            <div class="icon">
-              <img src="assets/service-2.png" alt="service" />
-            </div>
-            <div class="services-card-content">
-              <h4>Photography</h4>
-              <p>
-                Professional photography for event birthday parties or any other
-                small private celebration.
-              </p>
-            </div>
-          </div>
-
-          <div class="services-card">
-            <div class="icon">
-              <img src="assets/service-3.png" alt="service" />
-            </div>
-            <div class="services-card-content">
-              <h4>Videography</h4>
-              <p>
-                Standard video projects are usually between 5 to 30 minutes in
-                length, although can sometimes be longer.
-              </p>
-            </div>
-          </div>
-
-          <div class="services-card">
-            <div class="icon">
-              <img src="assets/service-4.png" alt="service" />
-            </div>
-            <div class="services-card-content">
-              <h4>Web Development</h4>
-              <p>
-                Website development service gives you a single, quick and secure
-                way of getting your dream website.
-              </p>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-
-    <section class="story">
-      <div class="section-container story-container">
-        <div class="play">
-          <i class="ri-play-fill"></i>
-        </div>
-        <h2 class="section-title">Watch My Story</h2>
-      </div>
-    </section>
-
-    <section class="skills">
-
-      <div class="section-container skills-container">
-        <h2 class="section-title">My Skills</h2>
-        <p class="section-subtitle">
-          I am using various digital tools for my services. Most are adobe
-          products. Check out my skill level from below ratings.
-        </p>
-
-        <div class="skills-grid">
-
-          <div class="skill-card">
-            <img src="assets/skill-1.png" alt="skill" />
-            <p>Adobe xd</p>
-            <div class="rating">
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-half-fill"></i>
-              <i class="ri-star-line"></i>
-            </div>
-          </div>
-
-          <div class="skill-card">
-            <img src="assets/skill-2.png" alt="skill" />
-            <p>Adobe Aftereffects</p>
-            <div class="rating">
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-half-fill"></i>
-              <i class="ri-star-line"></i>
-            </div>
-          </div>
-
-          <div class="skill-card">
-            <img src="assets/skill-3.png" alt="skill" />
-            <p>Adobe Illustrator</p>
-            <div class="rating">
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-half-fill"></i>
-              <i class="ri-star-line"></i>
-            </div>
-          </div>
-
-          <div class="skill-card">
-            <img src="assets/skill-4.png" alt="skill" />
-            <p>Adobe Photoshop</p>
-            <div class="rating">
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-half-fill"></i>
-              <i class="ri-star-line"></i>
-            </div>
-          </div>
-
-          <div class="skill-card">
-            <img src="assets/skill-5.png" alt="skill" />
-            <p>Adobe Indesign</p>
-            <div class="rating">
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-half-fill"></i>
-              <i class="ri-star-line"></i>
-            </div>
-          </div>
-
-          <div class="skill-card">
-            <img src="assets/skill-6.png" alt="skill" />
-            <p>Adobe Premier Pro</p>
-            <div class="rating">
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-fill"></i>
-              <i class="ri-star-half-fill"></i>
-              <i class="ri-star-line"></i>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </section>
-    
-    <section class="portfolio">
-      <div class="section-container portfolio-container">
-        <h2 class="section-title">My Portfolio</h2>
-        <p class="section-subtitle">
-          The portfolio is conveying quality and experience of my services. See
-          my Portfolio to understand how qualified and experience I am.
-        </p>
-
-        <div class="portfolio-nav">
-          <a href="#">Web Design</a>
-          <a href="#">App Design</a>
-          <a href="#">Photography</a>
-          <a href="#">Videography</a>
-          <a href="#">Web Development</a>
-        </div>
-
-        <div class="portfolio-grid">
-          <div class="portfolio-card">
-            <img src="assets/portfolio-1.jpg" alt="portfolio" />
-          </div>
-          <div class="portfolio-card">
-            <img src="assets/portfolio-2.jpg" alt="portfolio" />
-          </div>
-          <div class="portfolio-card">
-            <img src="assets/portfolio-3.jpg" alt="portfolio" />
-          </div>
-          <div class="portfolio-card">
-            <img src="assets/portfolio-4.jpg" alt="portfolio" />
-          </div>
-          <div class="portfolio-card">
-            <img src="assets/portfolio-5.jpg" alt="portfolio" />
-          </div>
-          <div class="portfolio-card">
-            <img src="assets/portfolio-6.jpg" alt="portfolio" />
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <section class="clients">
-      <div class="section-container clients-container">
-        <h2 class="section-title">What My Clients Say</h2>
-        <p class="section-subtitle">
-          Check out what clients say about my services. Happy clients all over
-          the world. Share ypur experience with me by submitting your reviews.
-        </p>
-
-        <div class="clients-grid">
-
-          <div class="client-card">
-            <p>
-              What a Service! Antony is one of the top Classy designer in the
-              world. Exceeded expectation and designed my website to my
-              requirements. will be using for onging work.
-            </p>
-            <div class="client-card-footer">
-              <img src="assets/pic-1.jpg" alt="client" />
-              <div class="client-details">
-                <h4>David Beckham</h4>
-                <p>Managing Director</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="client-card">
-            <p>
-              Mark Antony is amazing designer to work with. Excellent design
-              skills and very patient with me. Made several changes with no
-              problem and made new ideas when asked.
-            </p>
-            <div class="client-card-footer">
-              <img src="assets/pic-2.jpeg" alt="client" />
-              <div class="client-details">
-                <h4>David Luiz</h4>
-                <p>Ceo & Founder</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="client-card">
-            <p>
-              Mark has delivered what was promised and was absolutely amazing to
-              work with. I can't rate this guy high enough, his work is
-              fantastic and I will definitely use him again.
-            </p>
-            <div class="client-card-footer">
-              <img src="assets/pic-3.jpg" alt="client" />
-              <div class="client-details">
-                <h4>Donna Karan</h4>
-                <p>Fashion Designer</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <section class="contact">
-      <div class="section-container contact-container">
-        <h2 class="section-title">
-          I am available for new projects. Want to work with me?
-        </h2>
-        <button class="btn">Hire Me</button>
-      </div>
-    </section>
-
-    <footer>
-      <div class="section-container footer-container">
-
-        <div class="footer-col">
-          <h2>MARK ANTONY</h2>
-          <p>Subscribe Newsletter</p>
-          <form>
-            <input type="text" placeholder="Email Address" />
-            <button>
-              <i class="ri-send-plane-fill"></i>
-            </button>
-          </form>
-        </div>
-
-        <div class="footer-col">
-          <h4>Services</h4>
-          <p>Web Design</p>
-          <p>App Design</p>
-          <p>Photography</p>
-          <p>Videography</p>
-          <p>Web Development</p>
-        </div>
-
-        <div class="footer-col">
-          <h4>Support</h4>
-          <p>Get Support</p>
-          <p>Contact</p>
-          <p>My Blog</p>
-          <p>Privacy Policy</p>
-          <p>Pricing</p>
-        </div>
-
-        <div class="footer-col">
-          <h4>Follow Me</h4>
-          <div class="social-icons">
-            <span>
-              <i class="ri-dribbble-line"></i>
-            </span>
-            <span>
-              <i class="ri-behance-line"></i>
-            </span>
-            <span>
-              <i class="ri-facebook-fill"></i>
-            </span>
-            <span>
-              <i class="ri-twitter-fill"></i>
-            </span>
-            <span>
-              <i class="ri-pinterest-line"></i>
-            </span>
-          </div>
-
-        </div>
-        
-      </div>
-    </footer>
+    <div class="navbar">
+      <a href="#"><img src="logo.svg" alt="logo" /></a>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="top-container">
+      <h1>Welcome to our website</h1>
+    </div>
+    <div class="bottom-container">
+      <p class="text">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla tempore
+        explicabo veritatis dignissimos accusantium nostrum voluptatum qui
+        labore, natus mollitia voluptatem. Ipsa ducimus eos saepe expedita ex
+        laboriosam optio omnis amet, qui veritatis unde aut tempora. Fuga et
+        sint autem amet, modi, veniam dolorum placeat blanditiis rerum doloribus
+        aliquid voluptas. Alias voluptatum id vel minima voluptates assumenda
+        accusantium consectetur culpa necessitatibus sint cum perspiciatis
+        laboriosam sequi praesentium, eos numquam! Eum, officia fugiat
+        reprehenderit eligendi itaque similique! Harum, quod vitae explicabo
+        sint ad illum expedita quisquam earum? Necessitatibus illo tempore
+        sapiente commodi quae, qui quasi odit fugiat impedit mollitia eveniet
+        maiores?
+      </p>
+      <p class="text">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla tempore
+        explicabo veritatis dignissimos accusantium nostrum voluptatum qui
+        labore, natus mollitia voluptatem. Ipsa ducimus eos saepe expedita ex
+        laboriosam optio omnis amet, qui veritatis unde aut tempora. Fuga et
+        sint autem amet, modi, veniam dolorum placeat blanditiis rerum doloribus
+        aliquid voluptas. Alias voluptatum id vel minima voluptates assumenda
+        accusantium consectetur culpa necessitatibus sint cum perspiciatis
+        laboriosam sequi praesentium, eos numquam! Eum, officia fugiat
+        reprehenderit eligendi itaque similique! Harum, quod vitae explicabo
+        sint ad illum expedita quisquam earum? Necessitatibus illo tempore
+        sapiente commodi quae, qui quasi odit fugiat impedit mollitia eveniet
+        maiores?
+      </p>
+      <p class="text">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla tempore
+        explicabo veritatis dignissimos accusantium nostrum voluptatum qui
+        labore, natus mollitia voluptatem. Ipsa ducimus eos saepe expedita ex
+        laboriosam optio omnis amet, qui veritatis unde aut tempora. Fuga et
+        sint autem amet, modi, veniam dolorum placeat blanditiis rerum doloribus
+        aliquid voluptas. Alias voluptatum id vel minima voluptates assumenda
+        accusantium consectetur culpa necessitatibus sint cum perspiciatis
+        laboriosam sequi praesentium, eos numquam! Eum, officia fugiat
+        reprehenderit eligendi itaque similique! Harum, quod vitae explicabo
+        sint ad illum expedita quisquam earum? Necessitatibus illo tempore
+        sapiente commodi quae, qui quasi odit fugiat impedit mollitia eveniet
+        maiores?
+      </p>
+      <p class="text">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla tempore
+        explicabo veritatis dignissimos accusantium nostrum voluptatum qui
+        labore, natus mollitia voluptatem. Ipsa ducimus eos saepe expedita ex
+        laboriosam optio omnis amet, qui veritatis unde aut tempora. Fuga et
+        sint autem amet, modi, veniam dolorum placeat blanditiis rerum doloribus
+        aliquid voluptas. Alias voluptatum id vel minima voluptates assumenda
+        accusantium consectetur culpa necessitatibus sint cum perspiciatis
+        laboriosam sequi praesentium, eos numquam! Eum, officia fugiat
+        reprehenderit eligendi itaque similique! Harum, quod vitae explicabo
+        sint ad illum expedita quisquam earum? Necessitatibus illo tempore
+        sapiente commodi quae, qui quasi odit fugiat impedit mollitia eveniet
+        maiores?
+      </p>
+      <p class="text">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla tempore
+        explicabo veritatis dignissimos accusantium nostrum voluptatum qui
+        labore, natus mollitia voluptatem. Ipsa ducimus eos saepe expedita ex
+        laboriosam optio omnis amet, qui veritatis unde aut tempora. Fuga et
+        sint autem amet, modi, veniam dolorum placeat blanditiis rerum doloribus
+        aliquid voluptas. Alias voluptatum id vel minima voluptates assumenda
+        accusantium consectetur culpa necessitatibus sint cum perspiciatis
+        laboriosam sequi praesentium, eos numquam! Eum, officia fugiat
+        reprehenderit eligendi itaque similique! Harum, quod vitae explicabo
+        sint ad illum expedita quisquam earum? Necessitatibus illo tempore
+        sapiente commodi quae, qui quasi odit fugiat impedit mollitia eveniet
+        maiores?
+      </p>
+      <script>
+        const navbarEl = document.querySelector(".navbar");
+        const bottomContainerEl = document.querySelector(".bottom-container");
+        console.log(navbarEl.offsetHeight);
+        console.log(bottomContainerEl.offsetTop);
+        window.addEventListener("scroll", () => {
+          if (
+            window.scrollY >
+            bottomContainerEl.offsetTop - navbarEl.offsetHeight - 50
+            ) {
+              navbarEl.classList.add("active");
+            } else {
+              navbarEl.classList.remove("active");
+            }
+          });
+      </script>
+    </div>
 
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
-    <!-- 7+75+52+7+50 -->
 
     <h1 id="title" style="display: none;">Loading...</h1>
     <p id="summary" style="display: none;">Loading...</p>
@@ -1032,13 +259,7 @@ footer {
     <p style="display: none;">
 Spend 1,000 Energy
 Complete 100 daily quests
-<!-- 16 	 -->
-<!-- 15 titan summons -->
-<!-- Open 9 chests in Outlands -->
 19 	
-<!-- Heal your heroes for 80,000 in the Campaign -->
-<!-- Win 2 times in the Campaign mode using a Healer hero -->
-<!-- Level up the Magic attack glyph -->
 Assemble the Altar of Power 5 times in Adventures
 Use the first skills of heroes 30 times in the Arena
 20 	
