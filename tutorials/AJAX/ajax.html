@@ -3,1062 +3,147 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>AJAX | XMLHttpRequest</title> -->
-    <title>Web Design Mastery | Holux</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"/>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap");
-      
-      :root {
-        --primary-color: #5d5fef;
-        --primary-color-dark: #4b4dbf;
-        --secondary-color: #131516;
-        --text-dark: #333333;
-        --text-light: #767268;
-        --extra-light: #f8f8f8;
-        --white: #ffffff;
-        --max-width: 1200px;
-      }
+    <title>AJAX | XMLHttpRequest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {
+  padding: 0;
+  margin: 0;
+}
+fieldset {
+  display: none;
+}
+h1 {
+  display: none;
+}
+.test {
+  min-height: 100vh;
+  overflow: hidden;
+}
+.test2 {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  /* height: 100vh; */
+  align-items: center;
+  background-color: black;
+}
 
-      * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-      }
-      
-      .section-container {
-        max-width: var(--max-width);
-        padding: 5rem 1rem;
-        margin: auto;
-      }
-      
-      .section-header {
-        margin-bottom: 5px;
-        font-size: 2.5rem;
-        font-weight: 600;
-        color: var(--text-dark);
-      }
-      
-      .section-subheader {
-        color: var(--text-light);
-      }
-      
-      .btn {
-        padding: 0.75rem 1.5rem;
-        font-size: 1rem;
-        outline: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-      
-      .btn-primary {
-        color: var(--text-dark);
-        border: 2px solid var(--text-light);
-        background-color: transparent;
-      }
-      
-      .btn-secondary {
-        color: var(--white);
-        border: 2px solid var(--primary-color);
-        background-color: var(--primary-color);
-      }
-      
-      .btn-primary:hover {
-        background-color: var(--extra-light);
-      }
-      
-      .btn-secondary:hover {
-        background-color: var(--primary-color-dark);
-        border-color: var(--primary-color-dark);
-      }
-      
-      img {
-        width: 100%;
-        display: flex;
-      }
+.main-container {
+  max-width: 550px;
+  padding: 10px;
+}
 
-      a {
-        text-decoration: none;
-      }
-      
-      html,
-      body {
-        scroll-behavior: smooth;
-      }
-      
-      body {
-        font-family: "Open Sans", sans-serif;
-      }
-      
-      .nav-bar {
-        max-width: var(--max-width);
-        margin: auto;
-        padding: 2rem 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      
-      .nav-logo {
-        flex: 1;
-      }
-      
-      .nav-logo a {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: var(--primary-color);
-      }
-      
-      .nav-links {
-        list-style: none;
-        display: flex;
-        align-items: center;
-        gap: 2rem;
-      }
-      
-      .link a {
-        padding: 5px;
-        font-weight: 600;
-        color: var(--text-dark);
-      }
-      
-      .link a:hover {
-        color: var(--primary-color);
-      }
-      
-      .nav-btns {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 1rem;
-      }
-      
-      .header {
-        background-color: var(--extra-light);
-      }
-      
-      .header-container {
-        display: grid;
-        grid-template-columns:
-          minmax(0, 1fr)
-          minmax(0, calc(var(--max-width) / 2))
-          minmax(0, calc(var(--max-width) / 2))
-          minmax(0, 1fr);
-      }
-      
-      .header-content {
-        padding: 5rem 1rem;
-        grid-column: 2/3;
-      }
-      
-      .header-content h1 {
-        margin-bottom: 1rem;
-        font-size: 4rem;
-        font-weight: 600;
-        line-height: 5rem;
-        color: var(--text-dark);
-      }
-      .header-content p {
-        margin-bottom: 2rem;
-        color: var(--text-light);
-      }
-      
-      .header-btns {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-      }
-      
-      .header-image {
-        grid-column: 3/5;
-      }
-      
-      .header-image img {
-        height: 100%;
-        object-fit: cover;
-      }
-      
-      .about-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-        align-items: center;
-      }
-      
-      .about-image img {
-        max-width: 450px;
-        margin: auto;
-      }
-      
-      .about-content h3 {
-        margin-bottom: 1rem;
-        font-size: 2rem;
-        font-weight: 400;
-        color: var(--primary-color);
-      }
-      
-      .about-grid {
-        margin-top: 2rem;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-      }
+.main-container img {
+  max-width: 100%;
+  margin-bottom: 15px;
+  border-radius: 10px;
+}
 
-      .about-card h4 {
-        margin-bottom: 10px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        white-space: nowrap;
-        color: var(--primary-color);
-      }
-      
-      .about-card p {
-        font-size: 2.5rem;
-        color: var(--text-dark);
-      }
-      
-      .project-container {
-        padding: 5rem 0;
-      }
-      
-      .project-header {
-        max-width: var(--max-width);
-        margin-inline: auto;
-        margin-bottom: 4rem;
-        padding: 0 1rem;
-        display: flex;
-        align-items: center;
-        gap: 2rem;
-        justify-content: space-between;
-      }
-      
-      .project-nav {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-      }
-      
-      .project-nav span {
-        font-size: 1.5rem;
-        color: var(--primary-color);
-        cursor: pointer;
-        transition: 0.3s;
-      }
-      
-      .project-nav span:hover {
-        color: var(--primary-color-dark);
-      }
-      
-      /* swiper css */
-      .swiper {
-        width: 100%;
-      }
-      
-      .swiper-slide {
-        width: 420px;
-      }
-      
-      .project-card {
-        position: relative;
-        padding-bottom: 3rem;
-      }
-      
-      .project-content {
-        position: absolute;
-        left: 50%;
-        bottom: 1rem;
-        transform: translateX(-50%);
-        width: calc(100% - 4rem);
-        padding: 1rem;
-        display: flex;
-        justify-content: space-between;
-        gap: 2rem;
-        background-color: var(--white);
-        border-radius: 5px;
-        box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
-      }
-      
-      .project-details h4 {
-        margin-bottom: 5px;
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: var(--text-dark);
-      }
-      
-      .project-details p {
-        margin-bottom: 1rem;
-        font-size: 0.9rem;
-        color: var(--text-dark);
-      }
-      
-      .project-details button {
-        padding: 0.75rem 1.25rem;
-        outline: none;
-        border: none;
-        color: var(--white);
-        background-color: var(--primary-color);
-        border-radius: 5px;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-      
-      .project-details button:hover {
-        background-color: var(--primary-color-dark);
-      }
-      
-      .stars {
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        flex-wrap: nowrap;
-        font-size: 0.9rem;
-        color: goldenrod;
-      }
-      
-      .price {
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: var(--text-dark);
-        text-align: right;
-      }
-      
-      .contact-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-        align-items: center;
-      }
-      
-      .contact-image img {
-        max-width: 450px;
-        margin: auto;
-      }
+.main-container h1 {
+  color: white;
+  font-weight: 500;
+}
 
-      .contact-content form {
-        width: 100%;
-        margin-top: 2rem;
-        display: grid;
-        gap: 1rem;
-      }
-      
-      .contact-content .form-group {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-      }
-      
-      .contact-content :is(input, textarea) {
-        width: 100%;
-        padding: 1rem;
-        outline: none;
-        border: none;
-        font-size: 1rem;
-        background-color: var(--extra-light);
-        border-radius: 5px;
-      }
-      
-      .contact-content textarea {
-        font-family: "Open Sans", sans-serif;
-      }
-      
-      .contact-content input::placeholder {
-        color: var(--text-light);
-      }
-      
-      .contact-content button {
-        max-width: fit-content;
-        padding: 1rem 1.5rem;
-        outline: none;
-        border: none;
-        color: var(--white);
-        background-color: var(--primary-color);
-        cursor: pointer;
-        transition: 0.3s;
-      }
-      
-      .contact-container button:hover {
-        background-color: var(--primary-color-dark);
-      }
-      
-      .footer {
-        background-color: var(--secondary-color);
-      }
-      
-      .footer-container {
-        display: grid;
-        grid-template-columns: 2fr repeat(3, 1fr);
-        gap: 2rem;
-      }
-      
-      .footer-col h4 {
-        margin-bottom: 1.5rem;
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: var(--white);
-      }
-      
-      .footer-col p {
-        margin-bottom: 1rem;
-        color: var(--white);
-      }
-      
-      .footer-col a {
-        display: block;
-        margin-bottom: 1rem;
-        color: var(--extra-light);
-        transition: 0.3s;
-      }
-      
-      .footer-col a span {
-        margin-right: 5px;
-      }
-      
-      .footer-col a:hover {
-        color: var(--primary-color);
-      }
+.main-container p {
+  color: white;
+  margin: 15px 0;
+}
 
-      .footer-socials {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-      }
-      
-      .footer-socials span {
-        font-size: 1.5rem;
-        color: var(--white);
-        cursor: pointer;
-      }
-      
-      .footer-bar {
-        padding: 1rem;
-        font-size: 0.9rem;
-        color: var(--white);
-        text-align: center;
-      }
-      
-      @media (width < 1200px) {
-        .nav-btns {
-          display: none;
-        }
-      }
-      
-      @media (width < 900px) {
-        .header-container {
-          grid-template-columns: repeat(1, 1fr);
-        }
-      
-        .header-content {
-          grid-column: unset;
-        }
-      
-        .header-image {
-          grid-column: unset;
-          grid-area: 1/1/2/2;
-        }
-      
-        .about-container {
-          grid-template-columns: repeat(1, 1fr);
-        }
-      
-        .contact-container {
-          grid-template-columns: repeat(1, 1fr);
-        }
-      
-        .footer-container {
-          grid-template-columns: 2fr 1fr;
-        }
-      
-        .footer-col:nth-child(4) {
-          grid-area: 2/1/3/2;
-        }
-      }
-      
-      @media (width < 600px) {
-        .nav-links {
-          display: none;
-        }
-      
-        .contact-content .form-group {
-          gap: 1rem;
-        }
-      
-        .footer-container {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-      
-      @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
-      
-      :root {
-        --primary-color: #0891b2;
-        --primary-color-dark: #0e7490;
-        --text-dark: #1f2937;
-        --text-light: #6b7280;
-        --extra-light: #f3f4f6;
-      }
-      
-      body {
-        font-family: "Lato", sans-serif;
-      }
-      
-      .form-container {
-        display: flex;
-        min-height: 100vh;
-        min-height: 100svh;
-        font-family: Georgia, serif;
-      }
-      
-      .container-left {
-        flex: 1;
-      }
-      
-      .content {
-        max-width: 450px;
-        padding: 1rem;
-        margin: auto;
-      }
-      
-      .header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        color: var(--text-light);
-        margin: 1rem 0;
-      }
-      
-      .header .register {
-        font-size: 1rem;
-        font-weight: 700;
-        cursor: pointer;
-      }
-      
-      .header .back-btn {
-        font-size: 1.2rem;
-        cursor: pointer;
-      }
-      
-      .form-content {
-        max-width: 350px;
-        margin: 4rem auto 0;
-      }
-      
-      .form-content .form-title {
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        color: var(--text-dark);
-      }
+.btn {
+  background-color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
 
-      .form-content .form-subtitle {
-        font-size: 1rem;
-        margin-bottom: 2.5rem;
-        color: var(--text-light);
-      }
-      
-      .form-content input {
-        display: block;
-        width: 100%;
-        margin-bottom: 1rem;
-        outline: none;
-        border: none;
-        border-radius: 2px;
-        padding: 0.75rem;
-        font-size: 1rem;
-        background-color: var(--extra-light);
-      }
-      
-      .form-content .forgot-password {
-        text-align: right;
-        font-weight: 700;
-        margin-bottom: 1.5rem;
-        cursor: pointer;
-        color: var(--text-light);
-      }
-      
-      .form-content .submit-btn {
-        width: 100%;
-        padding: 1rem;
-        background-color: var(--primary-color);
-        color: #ffffff;
-        font-size: 1rem;
-        border: none;
-        border-radius: 5rem;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-      .form-content .submit-btn:hover {
-        background-color: var(--primary-color-dark);
-      }
-      
-      .form-content .bottom-line {
-        display: block;
-        height: 3px;
-        width: 100%;
-        background-color: var(--extra-light);
-        margin: 2rem 0;
-      }
-      
-      .footer-title {
-        text-align: center;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        color: var(--text-light);
-      }
-      
-      .social-icons {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 1.5rem;
-      }
-      
-      .social-icons i {
-        font-size: 1.5rem;
-        color: var(--primary-color);
-        cursor: pointer;
-        transition: 0.3s;
-      }
-      .social-icons i:hover {
-        color: var(--primary-color-dark);
-      }
-      
-      .container-right {
-        display: flex;
-        flex: 1.5;
-        background: url(./assets/bg.jpg);
-        background-position: center center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        position: relative;
-      }
-      
-      .container-right::before {
-        content: "";
-        position: absolute;
-        height: 75%;
-        width: 100%;
-        left: 0;
-        bottom: 0;
-        background: linear-gradient(to top, #000000, #00000000);
-      }
-      
-      .image {
-        position: absolute;
-        top: 75%;
-        left: 50%;
-        transform: translateX(-50%);
-        display: grid;
-        gap: 1rem;
-        width: 80%;
-        max-width: 30rem;
-        color: #ffffff;
-      }
-      
-      .image h3 {
-        font-size: 2rem;
-        position: relative;
-      }
-      
-      .image h3::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: -4rem;
-        height: 2px;
-        width: 3rem;
-        background-color: #ffffff;
-      }
-      
-      .image p {
-        font-size: 1rem;
-      }
-      
-      @media screen and (width < 750px) {
-        .container-right {
-          display: none;
-        }
-      }
-    </style>
+.btn:hover {
+  background-color: orange;
+}
+
+.trailer-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.7s;
+}
+
+.active.trailer-container {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.trailer-container video {
+  position: relative;
+  max-width: 900px;
+  outline: none;
+}
+
+@media (max-width: 991px) {
+  .trailer-container video {
+    max-width: 90%;
+  }
+}
+
+.close-icon {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  color: white;
+  cursor: pointer;
+}
+</style>
   </head>
   <body>
-    <nav>
-      <div class="nav-bar">
-        <div class="nav-logo"><a href="#">HOLUX</a></div>
-        <ul class="nav-links">
-          <li class="link"><a href="#home">HOME</a></li>
-          <li class="link"><a href="#about">ABOUT</a></li>
-          <li class="link"><a href="#project">PROJECT</a></li>
-          <li class="link"><a href="#contact">CONTACT</a></li>
-        </ul>
-        <div class="nav-btns">
-          <button class="btn btn-primary">Log In</button>
-          <button class="btn btn-secondary">Register Now</button>
-        </div>
-      </div>
-    </nav>
-
-    <header class="header">
-      <div class="header-container">
-        <div class="header-content">
-          <h1>A home built and unique with love and dreams</h1>
-          <p>
-            Discover a curated selection of homes, apartments, and commercial
-            properties, along with expert tips, market insights, and valuable
-            resources to help you make the best real estate decisions. Join us
-            today and let's unlock the doors to your dream property!
-          </p>
-          <div class="header-btns">
-            <button class="btn btn-secondary">Buy Now</button>
-            <button class="btn btn-primary">Learn More</button>
-          </div>
-        </div>
-        <div class="header-image">
-          <img src="assets/header.png" alt="header" />
-        </div>
-      </div>
-    </header>
-
-    <section class="section-container about-container" id="about">
-      <div class="about-image">
-        <img src="assets/about.jpg" alt="about" />
-      </div>
-      <div class="about-content">
-        <h3>ABOUT US</h3>
-        <h2 class="section-header">
-          Award winning real estate company in Dubai
-        </h2>
-        <p class="section-subheader">
-          Whether you're a first-time homebuyer, a seasoned investor, or simply
-          looking for a change, we're here to guide you every step of the way.
-          Our mission is to make your real estate journey smooth and successful.
+    <div class="test test2">
+      <h1>Video Trailer Popup</h1>
+      <div class="main-container">
+        <img
+          src="https://images.pexels.com/photos/3062545/pexels-photo-3062545.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+          alt="movie-image"
+        />
+        <h1>Movie Title</h1>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum iste
+          necessitatibus porro explicabo illo dolorum dolores cupiditate non modi
+          quasi nobis, earum ab, autem esse vero sapiente minus vel! Provident?
         </p>
-        <div class="about-grid">
-          <div class="about-card">
-            <h4>PREVIOUS PROJECTS</h4>
-            <p>34+</p>
-          </div>
-          <div class="about-card">
-            <h4>YEARS EXPERIENCE</h4>
-            <p>20+</p>
-          </div>
-          <div class="about-card">
-            <h4>ONGOING PROJECTS</h4>
-            <p>12</p>
-          </div>
-        </div>
+        <button class="btn">Watch now</button>
       </div>
-    </section>
-    
-    <section class="project-container" id="project">
-
-      <div class="project-header">
-        <div>
-          <h2 class="section-header">Ongoing Projects</h2>
-          <p class="section-subheader">
-            We are dedicated to helping you find your dream property with ease
-            and confidence.
-          </p>
-        </div>
-        <div class="project-nav">
-          <span><i class="ri-arrow-left-line"></i></span>
-          <span><i class="ri-arrow-right-line"></i></span>
-        </div>
+      <div class="trailer-container active">
+        <video src="trailer.mp4" controls="true"></video>
+        <i class="fa fa-times close-icon"></i>
       </div>
-
-      <!-- Slider main container -->
-      <div class="swiper">
-        <!-- Additional required wrapper -->
-        <div class="swiper-wrapper">
-          <!-- Slides -->
-
-          <div class="swiper-slide">
-            <div class="project-card">
-              <img src="assets/project-1.jpg" alt="project" />
-              <div class="project-content">
-                <div class="project-details">
-                  <h4>Palm View Apartments</h4>
-                  <p>
-                    <span><i class="ri-map-pin-line"></i></span>
-                    Palm Jumeirah, Dubai
-                  </p>
-                  <button>Book Now</button>
-                </div>
-                <div class="project-ratings">
-                  <div class="stars">
-                    <span><i class="ri-star-fill"></i></span>
-                    <span><i class="ri-star-fill"></i></span>
-                    <span><i class="ri-star-fill"></i></span>
-                    <span><i class="ri-star-half-fill"></i></span>
-                    <span><i class="ri-star-line"></i></span>
-                  </div>
-                  <div class="price">1200$</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="swiper-slide">
-            <div class="project-card">
-              <img src="assets/project-2.jpg" alt="project" />
-              <div class="project-content">
-                <div class="project-details">
-                  <h4>Cityscape Residences</h4>
-                  <p>
-                    <span><i class="ri-map-pin-line"></i></span>
-                    Downtown Dubai
-                  </p>
-                  <button>Book Now</button>
-                </div>
-                <div class="project-ratings">
-                  <div class="stars">
-                    <span><i class="ri-star-fill"></i></span>
-                    <span><i class="ri-star-fill"></i></span>
-                    <span><i class="ri-star-fill"></i></span>
-                    <span><i class="ri-star-fill"></i></span>
-                    <span><i class="ri-star-half-fill"></i></span>
-                  </div>
-                  <div class="price">1000$</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="swiper-slide">
-            <div class="project-card">
-              <img src="assets/project-3.jpg" alt="project" />
-              <div class="project-content">
-                <div class="project-details">
-                  <h4>Marina Heights</h4>
-                  <p>
-                    <span><i class="ri-map-pin-line"></i></span>
-                    Dubai Marina
-                  </p>
-                  <button>Book Now</button>
-                </div>
-                <div class="project-ratings">
-                  <div class="stars">
-                    <span><i class="ri-star-fill"></i></span>
-                    <span><i class="ri-star-fill"></i></span>
-                    <span><i class="ri-star-fill"></i></span>
-                    <span><i class="ri-star-fill"></i></span>
-                    <span><i class="ri-star-fill"></i></span>
-                  </div>
-                  <div class="price">1100$</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="swiper-slide">
-            <div class="project-card">
-              <img src="assets/project-4.jpg" alt="project" />
-              <div class="project-content">
-                <div class="project-details">
-                  <h4>Desert Rose Flats</h4>
-                  <p>
-                    <span><i class="ri-map-pin-line"></i></span>
-                    Al Barsha, Dubai
-                  </p>
-                  <button>Book Now</button>
-                </div>
-                <div class="project-ratings">
-                  <div class="stars">
-                    <span><i class="ri-star-fill"></i></span>
-                    <span><i class="ri-star-fill"></i></span>
-                    <span><i class="ri-star-fill"></i></span>
-                    <span><i class="ri-star-fill"></i></span>
-                    <span><i class="ri-star-half-fill"></i></span>
-                  </div>
-                  <div class="price">1500$</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="swiper-slide">
-            <div class="project-card">
-              <img src="assets/project-5.jpg" alt="project" />
-              <div class="project-content">
-                <div class="project-details">
-                  <h4>Golden Sands Suites</h4>
-                  <p>
-                    <span><i class="ri-map-pin-line"></i></span>
-                    Bur Dubai
-                  </p>
-                  <button>Book Now</button>
-                </div>
-                <div class="project-ratings">
-                  <div class="stars">
-                    <span><i class="ri-star-fill"></i></span>
-                    <span><i class="ri-star-fill"></i></span>
-                    <span><i class="ri-star-fill"></i></span>
-                    <span><i class="ri-star-half-fill"></i></span>
-                    <span><i class="ri-star-line"></i></span>
-                  </div>
-                  <div class="price">1300$</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="swiper-slide">
-            <div class="project-card">
-              <img src="assets/project-6.jpg" alt="project" />
-              <div class="project-content">
-                <div class="project-details">
-                  <h4>Bliss Residences</h4>
-                  <p>
-                    <span><i class="ri-map-pin-line"></i></span>
-                    Jumeirah Beach, Dubai
-                  </p>
-                  <button>Book Now</button>
-                </div>
-                <div class="project-ratings">
-                  <div class="stars">
-                    <span><i class="ri-star-fill"></i></span>
-                    <span><i class="ri-star-fill"></i></span>
-                    <span><i class="ri-star-fill"></i></span>
-                    <span><i class="ri-star-fill"></i></span>
-                    <span><i class="ri-star-line"></i></span>
-                  </div>
-                  <div class="price">1400$</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </section>
-    
-    <section class="section-container contact-container" id="contact">
-      <div class="contact-image">
-        <img src="assets/contact.jpg" alt="contact" />
-      </div>
-      <div class="contact-content">
-        <h2 class="section-header">Contact Us</h2>
-        <p class="section-subheader">
-          Discover the difference, where expertise meets excellence in real
-          estate. Let's embark on this exciting journey together.
-        </p>
-        <form action="#">
-          <div class="form-group">
-            <input type="text" placeholder="First Name" />
-            <input type="text" placeholder="Last Name" />
-          </div>
-          <div class="form-group">
-            <input type="text" placeholder="Email Address" />
-            <input type="text" placeholder="Phone Number" />
-          </div>
-          <textarea cols="30" rows="5" placeholder="Description"></textarea>
-          <button>SEND MESSAGE</button>
-        </form>
-      </div>
-    </section>
-
-    <div class="form-container">
-
-      <div class="container-left">
-        <div class="content">
-
-          <div class="header">
-            <span class="back-btn">
-              <i class="ri-arrow-left-line"></i>
-            </span>
-            <span class="register"> Register </span>
-          </div>
-
-          <div class="form-content">
-            <h3 class="form-title">Login</h3>
-            <p class="form-subtitle">
-              Welcome! Please fill your username and password to sign in to your
-              account.
-            </p>
-
-            <form action="">
-              <input type="text" placeholder="Username" />
-              <input type="password" placeholder="Password" />
-              <p class="forgot-password">Forgot your password</p>
-              <button class="submit-btn" type="submit">Login Now</button>
-            </form>
-
-            <span class="bottom-line"></span>
-            <p class="footer-title">You can also login with:</p>
-            <div class="social-icons">
-              <i class="ri-facebook-box-fill"></i>
-              <i class="ri-google-fill"></i>
-              <i class="ri-twitter-fill"></i>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="container-right">
-        <div class="image">
-          <h3>Start your journey</h3>
-          <p>
-            Start create your amazing website with us! Login into your account
-          </p>
-        </div>
-      </div>
+      <script>
+        const btnEl = document.querySelector(".btn");
+        const closeIconEl = document.querySelector(".close-icon");
+        const trailerContainerEl = document.querySelector(".trailer-container");
+        const videoEl = document.querySelector("video");
+        
+        btnEl.addEventListener("click", () => {
+          trailerContainerEl.classList.remove("active");
+        });
+        
+        closeIconEl.addEventListener("click", () => {
+          trailerContainerEl.classList.add("active");
+          videoEl.pause();
+          videoEl.currentTime = 0;
+        });
+      </script>
     </div>
 
-    <footer class="footer">
-      <div class="section-container footer-container">
-        <div class="footer-col">
-          <h4>HOLUX</h4>
-          <p>
-            Our team of seasoned professionals is committed to providing you
-            with exceptional service, in-depth market knowledge, and
-            personalized solutions tailored to your unique needs.
-          </p>
-          <div class="footer-socials">
-            <span>
-              <a href="#"><i class="ri-facebook-circle-fill"></i></a>
-            </span>
-            <span>
-              <a href="#"><i class="ri-instagram-line"></i></a>
-            </span>
-            <span>
-              <a href="#"><i class="ri-twitter-fill"></i></a>
-            </span>
-          </div>
-        </div>
-        <div class="footer-col">
-          <h4>Company Info</h4>
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#project">Project</a>
-          <a href="#contact">Contact</a>
-        </div>
-        <div class="footer-col">
-          <h4>Resources</h4>
-          <a href="#">Terms</a>
-          <a href="#">Conditions</a>
-          <a href="#">Policy</a>
-        </div>
-        <div class="footer-col">
-          <h4>Contact</h4>
-          <a href="#">
-            <span><i class="ri-mail-line"></i></span> holux@gmail.com
-          </a>
-          <a href="#">
-            <span><i class="ri-phone-line"></i></span> +91 9876543210
-          </a>
-        </div>
-      </div>
-      <div class="footer-bar">
-        Copyright © 2023 Web Company. All rights reserved.
-      </div>
-    </footer>
-    <!-- 14+19+29+170+23+48 -->
-
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <h1 id="title" style="display: none;">Loading...</h1>
     <p id="summary" style="display: none;">Loading...</p>
@@ -1091,7 +176,7 @@
       // console.log(state);
     </script>
 
-    <fieldset style="display: none;">
+    <fieldset>
       <legend>Get all users from local JSON file</legend>
       <button id="local">Send Request</button>
     </fieldset>
@@ -1121,7 +206,7 @@
     </script>
 
     <!-- ================= Get data from GitHub API ================= -->
-    <fieldset style="display: none;">
+    <fieldset>
       <legend>Get users from GitHub API</legend>
       <button id="github">Send Request</button>
       <span id="userGithub"></span>
@@ -1157,29 +242,11 @@
     <p style="display: none;">
 Spend 1,000 Energy
 Complete 100 daily quests
-<!-- 19 	 -->
-<!-- Assemble the Altar of Power 5 times in Adventures -->
-<!-- Use the first skills of heroes 30 times in the Arena -->
-<!-- 20 	 -->
-<!-- Take 80,000 damage with a Tank hero in the Arena -->
-<!-- Level up a Healer hero's skill -->
-<!-- Defeat Dark Star 2 times in the Campaign -->
-<!-- 21 	 -->
-<!-- Get 20 Soul Stones of any hero -->
-<!-- Complete 7 daily quests/titan artefact 2 times -->
-<!-- Level up a Healer hero's Gift of the Elements -->
 22 	
-<!-- Deal 80,000 physical damage with a Marksman hero in the Arena -->
-<!-- Deal 150,000 physical damage in Adventures -->
-<!-- Win 1 time in the Arena mode using a Healer hero/500 tower coins -->
 Destroy the Eye of the Herald 5 times in Adventures
 Spend 500 Energy
 100 titan summons
 Complete 150 missions
-<!-- 23 	 -->
-<!-- Use 5 EXP potions -->
-<!-- Open 7 chests in the Tower -->
-<!-- Level up the Physical attack glyph -->
 24 	
 Spend 300,000 gold
 Heal your heroes for 150,000 in the Tower
