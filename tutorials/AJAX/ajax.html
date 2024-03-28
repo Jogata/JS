@@ -3,541 +3,146 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>AJAX | XMLHttpRequest</title> -->
-    <title>Web Design Mastery | Quick Travel</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Alkatra&family=Roboto:wght@400;500&family=Sedgwick+Ave+Display&display=swap");
-      :root {
-        --primary-color: #0ea5e9;
-        --primary-color-dark: #0284c7;
-        --text-light: #f3f4f6;
-      }
-      * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-      }
-      body {
-        /* font-family: "Roboto", sans-serif; */
-        font-family: Georgia;
-      }
-      .main {
-        position: relative;
-        width: 100%;
-        /* height: 100vh; */
-        min-height: 100vh;
-        padding: 0 5rem;
-        background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-      }
-      nav {
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        padding: 2rem 5rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      nav .logo {
-        color: var(--text-light);
-        font-size: 1.2rem;
-        font-weight: 500;
-        text-transform: uppercase;
-      }      
-      nav ul {
-        display: flex;
-        gap: 3rem;
-        list-style: none;
-      }      
-      nav ul li a {
-        text-decoration: none;
-        color: var(--text-light);
-        font-size: 1.2rem;
-        font-weight: 500;
-        text-transform: uppercase;
-        border-bottom: 1px solid transparent;
-        transition: 0.3s;
-      }      
-      nav ul li a:hover {
-        /* color: var(--primary-color-dark); */
-        border-bottom: 1px solid var(--text-light);
-      }      
-      .content {
-        text-align: center;
-        color: var(--text-light);
-      }      
-      .content h1 {
-        font-family: "Sedgwick Ave Display", cursive;
-        font-size: 7rem;
-      }      
-      .content h1 span {
-        font-size: 5rem;
-      }      
-      .content p {
-        font-family: "Alkatra", cursive;
-        font-size: 1.5rem;
-        margin-bottom: 2rem;
-      }      
-      .content .promo {
-        padding: 0.5rem;
-        width: 300px;
-        margin: auto;
-        border-radius: 2rem;
-        font-size: 1.2rem;
-        font-family: "Alkatra", cursive;
-        background-color: var(--primary-color);
-        transition: 0.3s;
-        cursor: pointer;
-      }      
-      .content .promo:hover {
-        background-color: var(--primary-color-dark);
-      }      
-      .bg-video {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-      }      
-      @media (min-aspect-ratio: 16/9) {
-        .bg-video {
-          width: 100%;
-          height: auto;
-        }
-      }      
-      @media (max-aspect-ratio: 16/9) {
-        .bg-video {
-          width: auto;
-          height: 100%;
-        }
-      }
-
-      @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
-
-      :root {
-        --primary-color: #1397d7;
-        --primary-color-dark: #24397c;
-        --text-dark: #475569;
-        --text-grey: #64748b;
-        --extra-light: #e2e8f0;
-      }
-      
-      * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-      }
-      
-      body {
-        font-family: "Lato", sans-serif;
-      }
-      
-      .container {
-        max-width: 700px;
-        /* min-height: 100vh; */
-        margin: 5rem auto;
-        padding: 3rem 5rem;
-        border: 2px solid var(--extra-light);
-        border-radius: 5px;
-      }
-      
-      .content,
-      form {
-        display: grid;
-        gap: 1.5rem;
-      }
-      
-      .content {
-        margin-bottom: 5rem;
-      }
-      
-      .logo {
-        width: 12rem;
-        margin: auto;
-      }
-      
-      .input {
-        font-size: 1rem;
-        padding: 1rem;
-        outline: none;
-        border: 2px solid var(--text-light);
-        color: var(--text-grey);
-        border-radius: 5px;
-      }
-      
-      .next-btn,
-      .signup-btn {
-        font-size: 1rem;
-        font-weight: 700;
-        font-family: Georgia;
-        padding: 1rem;
-        outline: none;
-        border: none;
-        border-radius: 5px;
-        transition: 0.3s;
-        cursor: pointer;
-      }
-      
-      .next-btn {
-        color: #ffffff;
-        background-color: var(--primary-color);
-      }
-      
-      .next-btn:hover {
-        background-color: var(--primary-color-dark);
-      }
-      
-      .signup-btn {
-        color: var(--text-grey);
-        background-color: var(--extra-light);
-      }
-      
-      .signup-btn:hover {
-        color: #ffffff;
-        background-color: var(--text-light);
-      }
-      
-      .divider {
-        text-align: center;
-        position: relative;
-      }
-      
-      .divider span {
-        padding: 0 0.5rem;
-        font-size: 1.2rem;
-        color: var(--text-light);
-        background-color: #ffffff;
-      }
-      
-      .divider::before {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 2px;
-        background-color: var(--extra-light);
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: -1;
-      }
-      
-      .footer {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-      }
-      
-      .country {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        cursor: pointer;
-      }
-      
-      .country .flag {
-        width: 2rem;
-      }
-      
-      .country i {
-        font-size: 1.5rem;
-        color: var(--text-light);
-      }
-      
-      .language > span {
-        padding: 0 0.5rem;
-        color: var(--text-grey);
-        border-right: 2px solid var(--extra-light);
-      }
-      
-      .language span:first-child {
-        font-weight: 700;
-      }
-      
-      .language span:last-child {
-        border: none;
-      }
-      
-      @media screen and (width < 700px) {
-        .container {
-          margin: 2rem auto 0;
-          padding: 3rem 2rem;
-          border: none;
-        }
-      }      
-
-      @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
-
-      :root {
-        --primary-color: #eee6d2;
-        --secondary-color: #e81564;
-        --extra-light: #f5f5f4;
-      }
-      
-      * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-      }
-      
-      /* body {
-        font-family: "Poppins", sans-serif;
-        background-color: var(--primary-color);
-      } */
-      
-      .container-2 {
-        /* width: 100%; */
-        /* height: 100vh; */
-        min-height: 100vh;
-        display: flex;
-        gap: 2.5rem;
-        align-items: center;
-        justify-content: center;
-        font-family: "Poppins", sans-serif;
-        background-color: var(--primary-color);
-      }
-      
-      .profile-card {
-        position: relative;
-        width: 17.5rem;
-        height: 24rem;
-        text-align: center;
-        border-radius: 5px;
-        background-color: var(--extra-light);
-        overflow: hidden;
-      }
-      
-      .header {
-        position: relative;
-        padding: 1rem 0;
-      }
-      
-      .header::before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 50%;
-      }
-      
-      .image {
-        width: 12rem;
-        height: 15rem;
-        margin: auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        border: 0.5rem solid var(--extra-light);
-        transition: 0.5s;
-        overflow: hidden;
-      }
-      
-      .image img {
-        height: 100%;
-      }
-      
-      .footer {
-        position: absolute;
-        bottom: -45px;
-        width: 100%;
-        padding: 0.5rem;
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--secondary-color);
-        transition: 0.5s;
-      }
-      
-      .footer span {
-        color: var(--extra-light);
-        width: 2rem;
-        height: 2rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.25rem;
-        transition: 0.3s;
-        cursor: pointer;
-        /* border: 1px solid black; */
-      }
-      
-      .footer span:hover {
-        scale: 1.1;
-      }
-      
-      .profile-card:hover .header::before {
-        background-color: var(--secondary-color);
-      }
-      
-      .profile-card:hover .image {
-        scale: 0.75;
-      }
-      
-      .profile-card:hover .footer {
-        bottom: 0;
-      }
-
-      .microsoft {
-        width: 350px;
-        margin: 25px auto;
-      }
-
-      .square {
-        width: 150px;
-        height: 150px;
-        margin: 0 10px 10px 0;
-        float: left;
-      }
-
-      .red {
-        background-color: #f35322;
-      }
-
-      .green {
-        background-color: #81dc05;
-      }
-
-      .blue {
-        background-color: #05a6f1;
-      }
-
-      .yellow {
-        background-color: #ffba05;
-      }
-    </style>
+    <title>AJAX | XMLHttpRequest</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.0.0/fonts/remixicon.css"/>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   </head>
   <body>
-    <div class="microsoft">
-      <div class="square red"></div>
-      <div class="square green"></div>
-      <div class="square blue"></div>
-      <div class="square yellow"></div>
-    </div>
-    <div class="main">
-      <!-- Video -->
-      <video autoplay loop muted plays-inline class="bg-video">
-        <source src="assets/bg-video.mp4" type="video/mp4" />
-      </video>
-      <nav>
-        <div class="logo">quick travel</div>
-        <ul>
-          <li><a href="#">home</a></li>
-          <li><a href="#">beaches</a></li>
-          <li><a href="#">trips</a></li>
-          <li><a href="#">contact</a></li>
-        </ul>
-      </nav>
-      <div class="content">
-        <h1>f<span>iji</span> i<span>sland</span></h1>
-        <p>You'll always have fascinating places to be and friendly people to see.</p>
-        <div class="promo">Starting from just <strong>$199</strong></div>
-      </div>  
-    </div>  
-
-    <div class="container">
-      <div class="content">
-        <img src="assets/paypal.png" alt="paypal" class="logo" />
-        <form action="">
-          <input
-            type="text"
-            class="input"
-            placeholder="Email or mobile number"
-          />
-          <button class="next-btn" type="submit">Next</button>
-        </form>
-        <div class="divider"><span>or</span></div>
-        <button class="signup-btn">Sign Up</button>
-      </div>
-      <div class="footer">
-        <div class="country">
-          <img src="assets/flag.png" alt="flag" class="flag" />
-          <i class="fa fa-arrow-down"></i>
-        </div>
-        <div class="language">
-          <span>English</span>
-          <span>Français</span>
-          <span>Español</span>
-          <span>中国人</span>
-        </div>
-      </div>
-    </div>
-
-    <section class="container-2">
-
-      <div class="profile-card">
-        <div class="header">
-          <div class="image">
-            <img src="assets/profile-pic-1.jpg" alt="profile 1" />
-          </div>
-        </div>
-        <h1>William</h1>
-        <p>Software Engineer</p>
-        <div class="footer">
-          <span><i class="fa fa-facebook"></i></span>
-          <span><i class="fa fa-twitter"></i></span>
-          <span><i class="fa fa-google"></i></span>
-          <span><i class="fa fa-linkedin"></i></span>
-        </div>
-      </div>
-
-      <div class="profile-card">
-        <div class="header">
-          <div class="image">
-            <img src="assets/profile-pic-2.jpg" alt="profile 2" />
-          </div>
-        </div>
-        <h1>Charlotte</h1>
-        <p>Network Engineer</p>
-        <div class="footer">
-          <span><i class="fa fa-facebook"></i></span>
-          <span><i class="fa fa-twitter"></i></span>
-          <span><i class="fa fa-google"></i></span>
-          <span><i class="fa fa-linkedin"></i></span>
-        </div>
-      </div>
-
-      <div class="profile-card">
-        <div class="header">
-          <div class="image">
-            <img src="assets/profile-pic-3.jpg" alt="profile 3" />
-          </div>
-        </div>
-        <h1>George</h1>
-        <p>Data Engineer</p>
-        <div class="footer">
-          <span><i class="fa fa-facebook"></i></span>
-          <span><i class="fa fa-twitter"></i></span>
-          <span><i class="fa fa-google"></i></span>
-          <span><i class="fa fa-linkedin"></i></span>
-        </div>
-      </div>
-
-      <div class="profile-card">
-        <div class="header">
-          <div class="image">
-            <img src="assets/profile-pic-4.jpg" alt="profile 4" />
-          </div>
-        </div>
-        <h1>Harry</h1>
-        <p>Cybersecurity Engineer</p>
-        <div class="footer">
-          <span><i class="fa fa-facebook"></i></span>
-          <span><i class="fa fa-twitter"></i></span>
-          <span><i class="fa fa-google"></i></span>
-          <span><i class="fa fa-linkedin"></i></span>
-        </div>
-      </div>
-
-    </section>
-
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+
+    <nav>
+      <div class="nav-logo"><a href="#">Travel.co</a></div>
+      <ul class="nav-links">
+        <li class="link">Home</li>
+        <li class="link">Blog</li>
+        <li class="link">Offers</li>
+        <li class="link">Services</li>
+        <li class="link">Contacts</li>
+      </ul>
+    </nav>
+    <header>
+      <div class="section-container">
+        <div class="header-content">
+          <h1>Travel</h1>
+          <p>
+            Embark on a journey of a lifetime and explore the world's most
+            breathtaking destinations with our expert travel advice. From exotic
+            beaches to cultural wonders, we've got you covered with our
+            comprehensive travel guides and insider tips.
+          </p>
+          <button>Read more</button>
+        </div>
+      </div>
+    </header>
+    <section class="journey-container">
+      <div class="section-container">
+        <h2 class="section-title">Start Your Journey</h2>
+        <p class="section-subtitle">The most searched countries in March</p>
+        <div class="journey-grid">
+          <div class="country-card">
+            <img src="assets/country-1.jpg" alt="country" />
+            <div class="country-name">
+              <i class="ri-map-pin-2-fill"></i>
+              <span>Santorini, Greece</span>
+            </div>
+          </div>
+          <div class="country-card">
+            <img src="assets/country-2.jpg" alt="country" />
+            <div class="country-name">
+              <i class="ri-map-pin-2-fill"></i>
+              <span>Vernazza, Italy</span>
+            </div>
+          </div>
+          <div class="country-card">
+            <img src="assets/country-3.jpg" alt="country" />
+            <div class="country-name">
+              <i class="ri-map-pin-2-fill"></i>
+              <span>San Francisco</span>
+            </div>
+          </div>
+          <div class="country-card">
+            <img src="assets/country-4.jpg" alt="country" />
+            <div class="country-name">
+              <i class="ri-map-pin-2-fill"></i>
+              <span>navagio, Greece</span>
+            </div>
+          </div>  
+          <div class="country-card">
+            <img src="assets/country-5.jpg" alt="country" />
+            <div class="country-name">
+              <i class="ri-map-pin-2-fill"></i>
+              <span>Ao Nang, Thailand</span>
+            </div>
+          </div>
+          <div class="country-card">
+            <img src="assets/country-6.jpg" alt="country" />
+            <div class="country-name">
+              <i class="ri-map-pin-2-fill"></i>
+              <span>Phi Phi Island, Thailand</span>
+            </div>
+          </div>  
+        </div>  
+      </div>
+    </section>
+    <section class="banner-container">
+      <div class="section-container">
+        <div class="banner-content">
+          <h2>Discount 10-30% Off</h2>
+          <p>
+            Travel the world on a budget with our unbeatable discounted travel
+            deals. Whether you're looking for a last-minute escape or planning
+            ahead, we've got you covered with incredible discounts on flights,
+            hotels, and packages. Don't wait, book now and experience the
+            adventure of a lifetime without breaking the bank.
+          </p>
+          <button>See Tours</button>
+        </div>
+      </div>
+    </section>
+    <section class="display-container">
+      <div class="section-container">
+        <h2 class="section-title">Why Choose Us</h2>
+        <p class="section-subtitle">
+          The gladdest moment in human life, is a departure into unknown lands.
+        </p>
+        <div class="display-grid">
+          <div class="display-card grid-1">
+            <img src="assets/grid-1.jpg" alt="grid" />
+          </div>
+          <div class="display-card">
+            <i class="ri-earth-line"></i>
+            <h4>Passionate Travel</h4>
+            <p>Fuel your passion for adventure and discover new horizons</p>
+          </div>
+          <div class="display-card">
+            <img src="assets/grid-2.jpg" alt="grid" />
+          </div>
+          <div class="display-card">
+            <img src="assets/grid-3.jpg" alt="grid" />
+          </div>  
+          <div class="display-card">
+            <i class="ri-road-map-line"></i>
+            <h4>Beautiful Places</h4>
+            <p>Uncover the world's most breathtakingly beautiful places</p>
+          </div>
+        </div>  
+      </div>  
+    </section>  
+    <footer>
+      <div class="section-container">
+        <h4>Travel.co</h4>
+        <div class="social-icons">
+          <span><i class="ri-facebook-fill"></i></span>
+          <span><i class="ri-twitter-fill"></i></span>
+          <span><i class="ri-instagram-line"></i></span>
+          <span><i class="ri-linkedin-fill"></i></span>
+        </div>
+        <p>
+          Travel makes one modest. You see what a tiny place you occupy in the
+          world.
+        </p>
+      </div>
+    </footer>
 
     <h1 id="title" style="display: none;">Loading...</h1>
     <p id="summary" style="display: none;">Loading...</p>
@@ -570,7 +175,7 @@
       // console.log(state);
     </script>
 
-    <fieldset style="display: none;">
+    <fieldset>
       <legend>Get all users from local JSON file</legend>
       <button id="local">Send Request</button>
     </fieldset>
@@ -600,7 +205,7 @@
     </script>
 
     <!-- ================= Get data from GitHub API ================= -->
-    <fieldset style="display: none;">
+    <fieldset>
       <legend>Get users from GitHub API</legend>
       <button id="github">Send Request</button>
       <span id="userGithub"></span>
@@ -637,24 +242,13 @@
 Spend 1,000 Energy
 Complete 100 daily quests
 22 	
-<!-- Destroy the Eye of the Herald 5 times in Adventures -->
-<!-- Spend 500 Energy -->
 100 titan summons
 Complete 150 missions
-<!-- 24 	 -->
-<!-- Spend 300,000 gold -->
-<!-- Heal your heroes for 150,000 in the Tower -->
-<!-- Win 2 times in the Campaign mode using a Support hero -->
 25 	
-<!-- Open 7 chests in the Tower -->
-<!-- Win 2 times in the Campaign mode using a Marksman hero -->
-<!-- Win 5 times in the Tower mode using a Tank hero -->
 Win 25 Guild Dungeon battles using heroes
 9 outland chests
 <!-- 26 	 -->
 300 energy
-<!-- Heal your heroes for 150,000 in the Campaign -->
-<!-- Level up the Magic defense glyph -->
 27 	
 Spend 500 Tower Coins
 Level up a Warrior hero's skill
