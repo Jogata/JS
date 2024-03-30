@@ -6,142 +6,147 @@
     <title>AJAX | XMLHttpRequest</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
+      fieldset {
+        display: none;
+      }
+
+      @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
+
+      :root {
+        --text-dark: #1f2937;
+        --text-light: #6b7280;
+        --extra-light: #f3f4f6;
+      }
+      
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      
       body {
-        margin: 0; 
-      } 
-      .container {
-        display: flex; 
-        flex-direction: column;
-        align-items: center; 
-        height: 100vh; 
-        justify-content: center; 
-        background-image: 
-        url("https://images.unsplash.com/photo-1560762484-813fc97650a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80");
-        background-size: cover; 
-        text-align: center; 
-        transition: filter 0.7s;
-      } 
-      h1 {
-        font-size: 60px;
-        color: white;
-        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-        letter-spacing: 4px;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-      } 
-      .btn {
-        padding: 10px 20px;
-        width: 200px;
-        cursor: pointer; 
-        background-color: orangered;
-        border: none;
-        border-radius: 6px;
-        font-size: 20px;
-      } 
-      .btn:hover {
-        filter: brightness(0.8);
-      } 
-      .active.container {
-        filter: blur(5px) brightness(0.7);
-      } 
-      .popup-container {
-        position: fixed;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: white;
+        font-family: "Lato", sans-serif;
+        font-family: Georgia;
+      }
+      
+      .background {
+        height: 400px;
+        background-color: var(--extra-light);
+        position: relative;
+        margin-bottom: 5rem;
+      }
+      
+      .background .image {
+        height: 400px;
         width: 400px;
-        height: 200px;
-        top: 30%;
-        display: flex; 
-        flex-direction: column; 
-        padding: 20px;
-        background-image: 
-        url("https://images.unsplash.com/uploads/141103282695035fa1380/95cdfeef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1730&q=80");
-        background-size: cover; 
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        opacity: 1;
-        transition: all 0.7s;
-      } 
-      h4 {
-        font-size: 30px;
-        margin: 10px 0;
-        font-family: sans-serif;
-        color: blueviolet;
-      } 
-      label {
-        color: blueviolet;
-        font-family: sans-serif;
-      } 
-      .popup-btn {
-        background-color: orangered;
-        padding: 10px;
-        font-size: 20px;
-        cursor: pointer; 
-        border: 2px solid;
-      } 
-      .input {
-        border: 2px solid;
-        padding: 10px;
-        margin: 10px 0;
-        font-size: 20px;
-        text-align: center; 
-      } 
-      .input::placeholder {
-        color: lightgray;
-      } 
-      .close-icon {
+        border-radius: 50%;
+        border: 8px solid #ffffff;
         position: absolute;
-        right: 20px;
-        cursor: pointer; 
-      } 
-      .close-icon:hover {
-        color: orangered;
-      } 
-      .active.popup-container {
-        visibility: hidden;
-        opacity: 0;
-        top: 10%;
-      } 
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -30%);
+        overflow: hidden;
+      }
+      
+      .background img {
+        width: 100%;
+      }
+      
+      .content {
+        max-width: 600px;
+        padding: 1rem;
+        margin: auto;
+        text-align: center;
+      }
+      
+      .title {
+        font-size: 3.5rem;
+        font-weight: 700;
+        letter-spacing: 5px;
+        margin-bottom: 1rem;
+        color: var(--text-dark);
+      }
+      
+      .title span {
+        font-weight: 300;
+      }
+      
+      .subtitle {
+        margin-bottom: 2rem;
+        color: var(--text-light);
+      }
+      
+      .read-more {
+        letter-spacing: 1px;
+        font-weight: 600;
+        color: var(--text-dark);
+      }
+      
+      @media screen and (width < 500px) {
+        .background {
+          height: 300px;
+          margin-bottom: 3rem;
+        }
+      
+        .background .image {
+          height: 300px;
+          width: 300px;
+        }
+      
+        .title {
+          font-size: 2.5rem;
+        }
+      }
     </style>
   </head>
   <body>
 
-    <div class="container">
-      <h1>Welcome to our website</h1>
-      <button class="btn">Click to join</button>
-    </div>
-    <div class="popup-container active">
-      <h4>20% OFF Offer</h4>
-      <label for="email">Your Email</label>
-      <input
-        type="email"
-        name="email"
-        class="input"
-        placeholder="Enter Your Email"
-      />
-      <button class="popup-btn">Join</button>
-      <div class="close-icon">
-        <i class="fas fa-times fa-2x"></i>
+    <section>
+      <div class="form-box">
+        <div class="form-value">
+          <form>
+            <h2>login</h2>
+            <div class="inpitbox">
+              <i class="fa fa-envelope-o"></i>
+              <input type="email" name="email" id="email" required>
+              <label for="email">email</label>
+            </div>
+            <div class="inpitbox">
+              <i class="fa fa-key"></i>
+              <input type="password" name="password" id="password" required>
+              <label for="password">password</label>
+            </div>
+            <div class="forgot">
+              <input type="checkbox" name="forgot" id="forgot">
+              remember me
+              <a href="#">forgot password?</a>
+            </div>
+            <button>login</button>
+            <div class="register">
+              <p>dont have an account? <a href="#">sign up</a></p>
+            </div>
+          </form>
+        </div>
       </div>
-      <script>
-        const containerEl = document.querySelector(".container");
-        const btnEl = document.querySelector(".btn");
-        const popupContainerEl = document.querySelector(".popup-container");
-        const closeIconEl = document.querySelector(".close-icon");
-        
-        btnEl.addEventListener("click", () => {
-          containerEl.classList.add("active");
-          popupContainerEl.classList.remove("active");
-        });
-        
-        closeIconEl.addEventListener("click", () => {
-          containerEl.classList.remove("active");
-          popupContainerEl.classList.add("active");
-        });
-      </script>
+    </section>
+
+    <div class="background">
+      <div class="image">
+        <img src="assets/profile.jpg" alt="profile" />
+      </div>
+    </div>
+    <div class="content">
+      <h1 class="title"><span>David</span> Smith</h1>
+      <p class="subtitle">
+        Welcome to my web developer portfolio! I'm David, a skilled and creative
+        web developer with a passion for creating beautiful, responsive, and
+        user-friendly websites. I've worked on a variety of web projects,
+        ranging from personal blogs to e-commerce platforms.
+      </p>
+      <a href="#" class="read-more">Read More</a>
     </div>
 
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <h1 style="display: none;"><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <h1 id="title" style="display: none;">Loading...</h1>
     <p id="summary" style="display: none;">Loading...</p>
@@ -253,7 +258,7 @@ Get 20 Soul Stones of any Titan
     </p>
 
     <script>
-      const matches4 = ``;
+      const matches4 = `4`;
       const matches3 = `740/120/100      640/320/150`;
 
 const patern = /[0-9]+/g;
