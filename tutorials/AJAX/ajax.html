@@ -3,531 +3,145 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>AJAX | XMLHttpRequest</title> -->
-    <title>Travel.co</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.0.0/fonts/remixicon.css"/>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <title>AJAX | XMLHttpRequest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,500&display=swap");
-
-      fieldset {
-        display: none;
-      }
-
-      :root {
-        --primary-color: #669ccb;
-        --primary-color-dark: #5681a7;
-        --secondary-color: #e8f1fa;
-        --text-dark: #282d31;
-        --text-light: #767268;
-        --extra-light: #f3f4f6;
-      
-        --max-width: 1200px;
-      }
-      
-      * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-      }
-      
-      .section-container {
-        padding: 5rem 1rem;
-        max-width: var(--max-width);
-        margin: auto;
-      }
-      
-      .section-title {
-        font-size: 2rem;
-        font-weight: 500;
-        color: var(--primary-color);
-        margin-bottom: 1rem;
-        text-align: center;
-      }
-      
-      .section-subtitle {
-        font-size: 1rem;
-        font-style: italic;
-        color: var(--primary-color);
-        margin-bottom: 5rem;
-        text-align: center;
-      }
-      
-      img {
-        width: 100%;
-      }
-      
       body {
-        font-family: "Roboto", sans-serif;
-      }
-      
-      nav {
-        position: absolute;
-        top: 0;
+        margin: 0; 
+      } 
+      .container {
+        display: flex; 
+        flex-direction: column;
+        align-items: center; 
+        height: 100vh; 
+        justify-content: center; 
+        background-image: 
+        url("https://images.unsplash.com/photo-1560762484-813fc97650a0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1074&q=80");
+        background-size: cover; 
+        text-align: center; 
+        transition: filter 0.7s;
+      } 
+      h1 {
+        font-size: 60px;
+        color: white;
+        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+        letter-spacing: 4px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      } 
+      .btn {
+        padding: 10px 20px;
+        width: 200px;
+        cursor: pointer; 
+        background-color: orangered;
+        border: none;
+        border-radius: 6px;
+        font-size: 20px;
+      } 
+      .btn:hover {
+        filter: brightness(0.8);
+      } 
+      .active.container {
+        filter: blur(5px) brightness(0.7);
+      } 
+      .popup-container {
+        position: fixed;
         left: 50%;
         transform: translateX(-50%);
-        padding: 2rem 1rem;
-        width: 100%;
-        max-width: var(--max-width);
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      
-      .nav-logo a {
-        text-decoration: none;
-        color: var(--extra-light);
-        font-size: 1.5rem;
-      }
-      
-      .nav-links {
-        /* display: none; */
-        list-style: none;
-        align-items: center;
-        gap: 2rem;
-      }
-      
-      .link {
-        color: var(--extra-light);
-        text-transform: uppercase;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-      
-      .link:hover {
-        color: var(--primary-color);
-      }
-      
-      header {
-        height: 100vh;
-        background-image: linear-gradient(
-            rgba(45, 92, 132, 0.5),
-            rgba(45, 92, 132, 0.5)
-          ),
-          url("assets/bg-1.jpg");
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-      }
-      
-      header .section-container {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      .header-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 2rem;
-        color: var(--extra-light);
-      }
-      
-      .header-content h1 {
-        font-size: 5rem;
-        font-weight: 400;
-        line-height: 5rem;
-      }
-      
-      .header-content p {
-        text-align: center;
-      }
-
-      .header-content button {
-        padding: 1rem 2rem;
-        color: var(--extra-light);
-        font-size: 1rem;
-        outline: none;
-        border: none;
-        border-radius: 5px;
-        background-color: var(--primary-color);
-        transition: 0.3s;
-        cursor: pointer;
-      }
-      
-      .header-content button:hover {
-        background-color: var(--primary-color-dark);
-      }
-      
-      .journey-container {
-        background-color: var(--secondary-color);
-      }
-      
-      .journey-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-      }
-      
-      .country-card {
-        background-color: var(--extra-light);
-      }
-      
-      .country-name {
-        padding: 1rem;
-        color: var(--text-light);
-        text-align: left;
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-        cursor: pointer;
-      }
-      
-      .country-name i {
-        font-size: 1.2rem;
-      }
-      
-      .country-name span {
-        font-style: italic;
-      }
-      
-      .banner-container {
-        background-image: linear-gradient(
-            rgba(35, 71, 103, 0.5),
-            rgba(35, 71, 103, 0.5)
-          ),
-          url("assets/bg-2.jpg");
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-      }
-      
-      .banner-container .section-container {
-        padding: 10rem 1rem;
-        display: flex;
-        justify-content: center;
-      }
-      
-      .banner-content {
-        color: var(--extra-light);
-        text-align: center;
-        display: flex;
-        gap: 1.5rem;
-        align-items: center;
-        flex-direction: column;
-      }
-      
-      .banner-content h2 {
-        font-size: 2rem;
-        font-weight: 400;
-      }
-      
-      .banner-content button {
-        padding: 0.5rem 2rem;
-        outline: none;
-        border: 2px solid var(--secondary-color);
-        background-color: transparent;
-        color: var(--secondary-color);
-        font-size: 1rem;
-        cursor: pointer;
-      }
-      
-      .display-container {
-        background-color: var(--secondary-color);
-      }
-      
-      .display-container :is(.section-title, .section-subtitle) {
-        color: var(--text-dark);
-      }
-      
-      .display-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-      }
-      
-      .display-card {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        gap: 0.5rem;
-        background-color: var(--extra-light);
-        text-align: center;
-      }
-      
-      .display-card i {
-        font-size: 2rem;
-        color: var(--primary-color);
-      }
-      
-      .display-card h4 {
-        font-size: 1rem;
-        font-weight: 500;
-        padding: 0 1rem;
-        color: var(--text-dark);
-      }
-      
-      .display-card p {
-        font-size: 0.8rem;
-        padding: 0 1rem;
-        color: var(--text-dark);
-      }
-      
-      .display-grid .grid-1 {
-        grid-area: 1/1/3/3;
-      }
-      
-      footer {
-        background-color: var(--text-dark);
-        color: var(--secondary-color);
-      }
-      
-      footer .section-container {
-        display: grid;
-        gap: 1.5rem;
-        text-align: center;
-      }
-      
-      footer h4 {
-        font-size: 1.5rem;
-        font-weight: 500;
-      }
-      
-      .social-icons {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
-      }
-      
-      .social-icons i {
-        padding: 5px;
-        font-size: 1.2rem;
-        cursor: pointer;
-      }
-      
-      footer p {
-        font-style: italic;
-      }
-      
-      @media (min-width: 640px) {
-        .nav-links {
-          display: flex;
-        }
-      
-        header .section-container {
-          justify-content: flex-start;
-        }
-      
-        .header-content {
-          max-width: 400px;
-          align-items: flex-start;
-        }
-      
-        .header-content p {
-          text-align: left;
-        }
-      
-        .journey-grid {
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1rem;
-        }
-      
-        .display-grid {
-          grid-template-columns: repeat(4, 1fr);
-        }
-      
-        .display-card {
-          gap: 0;
-        }
-      
-        .display-card i {
-          font-size: 1.75rem;
-        }
-      
-        .display-card h4 {
-          font-size: 1rem;
-        }
-      
-        .display-card p {
-          font-size: 0.7rem;
-        }
-      }
-      
-      @media (min-width: 786px) {
-        .banner-container .section-container {
-          justify-content: flex-end;
-        }
-      
-        .banner-content {
-          align-items: flex-end;
-          text-align: right;
-          max-width: 800px;
-        }
-      
-        .display-card {
-          gap: 0.5rem;
-        }
-      
-        .display-card i {
-          font-size: 2.5rem;
-        }
-      
-        .display-card p {
-          font-size: 0.8rem;
-        }
-      }
-      
-      @media (min-width: 1024px) {
-        .display-card {
-          gap: 1rem;
-        }
-      
-        .display-card i {
-          font-size: 3rem;
-        }
-      
-        .display-card h4 {
-          font-size: 1.5rem;
-        }
-      
-        .display-card p {
-          font-size: 1rem;
-        }
-      }
+        background-color: white;
+        width: 400px;
+        height: 200px;
+        top: 30%;
+        display: flex; 
+        flex-direction: column; 
+        padding: 20px;
+        background-image: 
+        url("https://images.unsplash.com/uploads/141103282695035fa1380/95cdfeef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1730&q=80");
+        background-size: cover; 
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        opacity: 1;
+        transition: all 0.7s;
+      } 
+      h4 {
+        font-size: 30px;
+        margin: 10px 0;
+        font-family: sans-serif;
+        color: blueviolet;
+      } 
+      label {
+        color: blueviolet;
+        font-family: sans-serif;
+      } 
+      .popup-btn {
+        background-color: orangered;
+        padding: 10px;
+        font-size: 20px;
+        cursor: pointer; 
+        border: 2px solid;
+      } 
+      .input {
+        border: 2px solid;
+        padding: 10px;
+        margin: 10px 0;
+        font-size: 20px;
+        text-align: center; 
+      } 
+      .input::placeholder {
+        color: lightgray;
+      } 
+      .close-icon {
+        position: absolute;
+        right: 20px;
+        cursor: pointer; 
+      } 
+      .close-icon:hover {
+        color: orangered;
+      } 
+      .active.popup-container {
+        visibility: hidden;
+        opacity: 0;
+        top: 10%;
+      } 
     </style>
   </head>
   <body>
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
-    <nav>
-      <div class="nav-logo">
-        <a href="#">Travel.co</a>
+    <div class="container">
+      <h1>Welcome to our website</h1>
+      <button class="btn">Click to join</button>
+    </div>
+    <div class="popup-container active">
+      <h4>20% OFF Offer</h4>
+      <label for="email">Your Email</label>
+      <input
+        type="email"
+        name="email"
+        class="input"
+        placeholder="Enter Your Email"
+      />
+      <button class="popup-btn">Join</button>
+      <div class="close-icon">
+        <i class="fas fa-times fa-2x"></i>
       </div>
-      <ul class="nav-links">
-        <li class="link">Home</li>
-        <li class="link">Blog</li>
-        <li class="link">Offers</li>
-        <li class="link">Services</li>
-        <li class="link">Contacts</li>
-      </ul>
-    </nav>
-    <header>
-      <div class="section-container">
-        <div class="header-content">
-          <h1>Travel</h1>
-          <p>
-            Embark on a journey of a lifetime and explore the world's most
-            breathtaking destinations with our expert travel advice. From exotic
-            beaches to cultural wonders, we've got you covered with our
-            comprehensive travel guides and insider tips.
-          </p>
-          <button>Read more</button>
-        </div>
-      </div>
-    </header>
-    <section class="journey-container">
-      <div class="section-container">
-        <h2 class="section-title">Start Your Journey</h2>
-        <p class="section-subtitle">The most searched countries in March</p>
-        <div class="journey-grid">
-          <div class="country-card">
-            <img src="assets/country-1.jpg" alt="country" />
-            <div class="country-name">
-              <i class="ri-map-pin-2-fill"></i>
-              <span>Santorini, Greece</span>
-            </div>
-          </div>
-          <div class="country-card">
-            <img src="assets/country-2.jpg" alt="country" />
-            <div class="country-name">
-              <i class="ri-map-pin-2-fill"></i>
-              <span>Vernazza, Italy</span>
-            </div>
-          </div>
-          <div class="country-card">
-            <img src="assets/country-3.jpg" alt="country" />
-            <div class="country-name">
-              <i class="ri-map-pin-2-fill"></i>
-              <span>San Francisco</span>
-            </div>
-          </div>
-          <div class="country-card">
-            <img src="assets/country-4.jpg" alt="country" />
-            <div class="country-name">
-              <i class="ri-map-pin-2-fill"></i>
-              <span>navagio, Greece</span>
-            </div>
-          </div>  
-          <div class="country-card">
-            <img src="assets/country-5.jpg" alt="country" />
-            <div class="country-name">
-              <i class="ri-map-pin-2-fill"></i>
-              <span>Ao Nang, Thailand</span>
-            </div>
-          </div>
-          <div class="country-card">
-            <img src="assets/country-6.jpg" alt="country" />
-            <div class="country-name">
-              <i class="ri-map-pin-2-fill"></i>
-              <span>Phi Phi Island, Thailand</span>
-            </div>
-          </div>  
-        </div>  
-      </div>
-    </section>
-    <section class="banner-container">
-      <div class="section-container">
-        <div class="banner-content">
-          <h2>Discount 10-30% Off</h2>
-          <p>
-            Travel the world on a budget with our unbeatable discounted travel
-            deals. Whether you're looking for a last-minute escape or planning
-            ahead, we've got you covered with incredible discounts on flights,
-            hotels, and packages. Don't wait, book now and experience the
-            adventure of a lifetime without breaking the bank.
-          </p>
-          <button>See Tours</button>
-        </div>
-      </div>
-    </section>
-    <section class="display-container">
-      <div class="section-container">
-        <h2 class="section-title">Why Choose Us</h2>
-        <p class="section-subtitle">
-          The gladdest moment in human life, is a departure into unknown lands.
-        </p>
-        <div class="display-grid">
-          <div class="display-card grid-1">
-            <img src="assets/grid-1.jpg" alt="grid" />
-          </div>
-          <div class="display-card">
-            <i class="ri-earth-line"></i>
-            <h4>Passionate Travel</h4>
-            <p>Fuel your passion for adventure and discover new horizons</p>
-          </div>
-          <div class="display-card">
-            <img src="assets/grid-2.jpg" alt="grid" />
-          </div>
-          <div class="display-card">
-            <img src="assets/grid-3.jpg" alt="grid" />
-          </div>  
-          <div class="display-card">
-            <i class="ri-road-map-line"></i>
-            <h4>Beautiful Places</h4>
-            <p>Uncover the world's most breathtakingly beautiful places</p>
-          </div>
-        </div>  
-      </div>  
-    </section>  
-    <footer>
-      <div class="section-container">
-        <h4>Travel.co</h4>
-        <div class="social-icons">
-          <span><i class="ri-facebook-fill"></i></span>
-          <span><i class="ri-twitter-fill"></i></span>
-          <span><i class="ri-instagram-line"></i></span>
-          <span><i class="ri-linkedin-fill"></i></span>
-        </div>
-        <p>
-          Travel makes one modest. You see what a tiny place you occupy in the
-          world.
-        </p>
-      </div>
-    </footer>
+      <script>
+        const containerEl = document.querySelector(".container");
+        const btnEl = document.querySelector(".btn");
+        const popupContainerEl = document.querySelector(".popup-container");
+        const closeIconEl = document.querySelector(".close-icon");
+        
+        btnEl.addEventListener("click", () => {
+          containerEl.classList.add("active");
+          popupContainerEl.classList.remove("active");
+        });
+        
+        closeIconEl.addEventListener("click", () => {
+          containerEl.classList.remove("active");
+          popupContainerEl.classList.add("active");
+        });
+      </script>
+    </div>
+
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <h1 id="title" style="display: none;">Loading...</h1>
     <p id="summary" style="display: none;">Loading...</p>
@@ -624,56 +238,27 @@
     </script>
 
     <p style="display: none;">
-<!-- Spend 1,000 Energy -->
-<!-- Complete 100 daily quests -->
 22 	
 100 titan summons
 Complete 150 missions
 25 	
 Win 25 Guild Dungeon battles using heroes
 9 outland chests
-<!-- 26 	 -->
-<!-- 300 energy -->
-<!-- 27 	 -->
-<!-- Spend 500 Tower Coins -->
-<!-- Level up a Warrior hero's skill -->
-<!-- Win 5 times in Campaign Chapter 8 -->
 28 	
 Spend 500 Outland Coins
 Open 7 chests in the Tower
 Level up the Magic attack glyph 
 Make 20 purchases from the shop
 Get 20 Soul Stones of any Titan
-<!-- 29 	 -->
-<!-- Get 20 Soul Stones of any hero -->
-<!-- Level up a Mage hero's skill -->
-<!-- Level up a Marksman hero's Gift of the Elements -->
-<!-- 30   -->
-<!-- Spend 500 Tower Coins -->
-<!-- Enter the game chat and create 1 challenge for a battle of heroes or titans -->
-<!-- Level up the Armor glyph -->
     </p>
 
     <script>
-      const matches4 = `
-      40 Desert Blade (Fragment)
-40 Minotaur's Head (Fragment)
-40 Diviner's Orb - Recipe (Fragment)
-50 Panoptic Orb - Recipe (Fragment)
-80 Hand of Glory (Fragment)
-
-40 Book of Prophecies - Recipe (Fragment)
-50 Book of Fate - Recipe (Fragment)
-80 Flaming Heart (Fragment)
-160 Pastor's Seal (Fragment)
-
-80 Riversar's Tiara (Fragment)
-`;
+      const matches4 = ``;
       const matches3 = `740/120/100      640/320/150`;
 
 const patern = /[0-9]+/g;
 
-const result = matches3.match(patern).reduce((acc, n) => acc + Number(n), 0);
+const result = matches4.match(patern).reduce((acc, n) => acc + Number(n), 0);
 console.log(result);
     </script>
   </body>
