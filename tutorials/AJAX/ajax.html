@@ -3,298 +3,141 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>AJAX | XMLHttpRequest</title> -->
-    <title>Digital Agency</title>
+    <title>AJAX | XMLHttpRequest</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap");
-
-:root {
-  --primary-color: #b45309;
-  --extra-light: #f3f4f6;
-  --max-width: 1200px;
-}
-
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Poppins", sans-serif;
-}
-
-nav {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: var(--max-width);
-  padding: 2rem 1rem;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 1;
-  overflow: hidden;
-}
-.nav-logo {
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: var(--extra-light); 
-} 
-.nav-links { 
-  list-style: none; 
-  gap: 2rem;
-  display: none; 
-} 
-.nav-links a {
-  padding: 1rem;
-  text-decoration: none;
-  color: var(--extra-light); 
-  font-size: 1rem; 
-  font-weight: 500;
-  cursor: pointer; 
-} 
-a.contact-btn {
-  padding: 0.5rem 2rem;
-  border: 2px solid var(--extra-light);
-  position: relative; 
-} 
-.contact-btn::before {
-  content: "";
-  position: absolute; 
-  top: calc(50% - 2px); 
-  right: -40%;
-  /* transform: translateY(-50%); */
-  height: 4px;
-  width: 50%;
-  border-radius: 6px;
-  background-image: 
-    linear-gradient(to right,
-    var(--primary-color),
-    rgba(0, 0, 0, 0)
-  );
-} 
-header {
-  background-image: url("assets/bg.jpg");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  overflow: hidden;
-}
-
-.header-container {
-  position: relative;
-  min-height: 175vh;
-  max-width: var(--max-width);
-  margin: auto;
-  padding: 0 1rem;
-}
-
-.header-content {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-}
-
-.header-content h1 {
-  font-size: 3rem;
-  line-height: 4rem;
-  font-weight: 300;
-  color: var(--extra-light);
-}
-
-.header-content h1 span {
-  color: var(--primary-color);
-}
-
-.header-content .start-project {
-  text-decoration: none;
-  margin-top: 2rem;
-  color: var(--extra-light);
-  font-weight: 600;
-  position: relative;
-}
-
-.header-content .start-project::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: -120%;
-  height: 5px;
-  width: 100%;
-  border-radius: 5px;
-  background-image: linear-gradient(
-    to right,
-    var(--primary-color),
-    rgba(0, 0, 0, 0)
-  );
-}
-
-.footer-cards {
-  position: absolute;
-  bottom: 0;
-  width: calc(100% - 2rem);
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  align-items: end;
-}
-
-.card {
-  padding: 1rem;
-  border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: var(--extra-light);
-  height: max-content;
-  cursor: pointer;
-  transition: 0.5s;
-}
-
-.card h4 {
-  font-size: 1.5rem;
-  font-weight: 300;
-}
-
-.card h5 {
-  font-size: 1rem;
-  font-weight: 500;
-}
-
-.card p {
-  margin-top: 1.2rem;
-  font-size: 0.9rem;
-  transition: 0.3s;
-}
-
-@media (min-width: 640px) {
-  .header-container {
-    min-height: 150vh;
+  fieldset {
+    display: none;
   }
-
-  .header-content {
-    align-items: flex-start;
-    text-align: left;
+  body { 
+    margin: 0;
+    display: flex;  
+    align-items: center;  
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    transition: .4s;
+  } 
+  .input {
+    visibility: hidden;
   }
-
-  .header-content h1 {
-    font-size: 4rem;
-    line-height: 5rem;
+  .label {
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    background-color: lightgray;
+    border-radius: 20px;
+    cursor: pointer;
   }
-
-  .footer-cards {
-    grid-template-columns: repeat(3, 1fr);
+  .circle {
+    width: 34px;
+    background-color: white;
+    height: 34px;
+    border-radius: 50%;
+    top: 3px;
+    position: absolute;
+    left: 3px;
+    animation: toggleOff 0.4s linear forwards;
   }
-}
-
-@media (min-width: 780px) {
-  .nav-links {
-    display: flex;
+  .input:checked + .label {
+    background-color: white;
+  } 
+  .input:checked + .label .circle {
+    animation: toggleOn 0.4s linear forwards;
+    background-color: black;
+  } 
+  @keyframes toggleOn {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(40px);
+    }
+  } 
+  @keyframes toggleOff {
+    0% {
+      transform: translateX(40px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  } 
+    
+  button {
+    display: inline-block;
+    padding: 15px 35px;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    font-family: Georgia;
+    text-transform: capitalize;
+    border-radius: 40px;
+    background-image:  
+    linear-gradient(
+      135deg, 
+      #6247aa, 
+      #b8b8f3,
+      #d7b8f3,
+      #f42272
+    ); 
+    background-size: 400%;
+    box-shadow: transparent;
+    color: white;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0);
+    cursor: pointer; 
   }
-
-  .header-container {
-    min-height: 100vh;
+  button:hover {
+    animation: btn 8s linear infinite;
   }
-
-  .header-content h1 {
-    font-size: 5rem;
-    line-height: 6rem;
-  }
-
-  .footer-cards {
-    grid-template-columns: repeat(6, 1fr);
-  }
-
-  .card {
-    height: 100px;
-  }
-
-  .card:hover {
-    height: 250px;
-  }
-}
+  @keyframes btn {
+    0% {
+      background-position: 0 50%;
+    } 
+    50% {
+      background-position: 100% 50%;
+    } 
+    100% {
+      background-position: 0 50%;
+    } 
+  } 
     </style>
   </head>
   <body>
-    <nav>
-      <div class="nav-logo">Meccem</div>
-      <ul class="nav-links">
-        <li class="link"><a href="#">About</a></li>
-        <li class="link"><a href="#">Case Studies</a></li>
-        <li class="link"><a href="#">News</a></li>
-        <li class="link">
-          <a href="#" class="contact-btn">Contact</a>
-        </li>
-      </ul>
-    </nav>
-    <header>
-      <div class="header-container">
-        <div class="header-content">
-          <h1>
-            We are a fully <br/> integrated <span>digital <br/> agency.</span>
-          </h1>
-          <a href="#" class="start-project">Start a project</a>
-        </div>
-        <div class="footer-cards">
-          <div class="card">
-            <h4>01</h4>
-            <h5>User Research</h5>
-            <p>
-              The process of gathering feedback from users to inform the design
-              and development of products.
-            </p>
-          </div>
-          <div class="card">
-            <h4>02</h4>
-            <h5>User Experience</h5>
-            <p>
-              It refers to the overall experience and satisfaction that a person
-              has while interacting with a product.
-            </p>
-          </div>
-          <div class="card">
-            <h4>03</h4>
-            <h5>User Interface</h5>
-            <p>
-              It refers to the design of software products to enable users to
-              interact with them in an intuitive manner.
-            </p>
-          </div>
-          <div class="card">
-            <h4>04</h4>
-            <h5>Usability Testing</h5>
-            <p>
-              A process of evaluating a product or service by testing it with
-              representative users.
-            </p>
-          </div>
-          <div class="card">
-            <h4>05</h4>
-            <h5>Interaction Design</h5>
-            <p>
-              The process of creating digital products that are user-friendly,
-              intuitive, and enjoyable to use.
-            </p>
-          </div> 
-          <div class="card">
-            <h4>06</h4>
-            <h5>Front-end Dev</h5>
-            <p>
-              Involves designing the visual and interactive elements of a
-              website that users interact with.
-            </p>
-          </div> 
-        </div> 
-      </div> 
-    </header>
 
-    <h1 style="display: none;"><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+    <input type="checkbox" id="dark-mode" class="input" />
+    <label for="dark-mode" class="label">
+      <div class="circle"></div>
+    </label>
+    <script>
+      const inputEl = document.querySelector(".input");
+      
+      const bodyEl = document.querySelector("body");
+      
+      inputEl.checked = JSON.parse(localStorage.getItem("mode"));
+      
+      updateBody();
+      
+      function updateBody() {
+        if (inputEl.checked) {
+          bodyEl.style.background = "black";
+        } else {
+          bodyEl.style.background = "white";
+        }
+      }
+      
+      inputEl.addEventListener("input", () => {
+        updateBody();
+        updateLocalStorage();
+      });
+      
+      function updateLocalStorage() {
+        localStorage.setItem("mode", JSON.stringify(inputEl.checked));
+      }
+    </script>
+
+    <button>button animation</button>
+
+    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <h1 id="title" style="display: none;">Loading...</h1>
     <p id="summary" style="display: none;">Loading...</p>
@@ -327,7 +170,7 @@ header {
       // console.log(state);
     </script>
 
-    <fieldset style="display: none;">
+    <fieldset>
       <legend>Get all users from local JSON file</legend>
       <button id="local">Send Request</button>
     </fieldset>
@@ -357,7 +200,7 @@ header {
     </script>
 
     <!-- ================= Get data from GitHub API ================= -->
-    <fieldset style="display: none;">
+    <fieldset>
       <legend>Get users from GitHub API</legend>
       <button id="github">Send Request</button>
       <span id="userGithub"></span>
@@ -390,14 +233,39 @@ header {
       }
     </script>
 
-    <p style="display: none;">
-25 	
-Win 25 Guild Dungeon battles using heroes
-9 outland chests
-28 	
-Make 20 purchases from the shop
-Get 20 Soul Stones of any Titan
-    </p>
+<p style="display: none;">
+  pet season
+1
+chat
+win 2 times with support hero in Camp
+upgrade titan 3 level
+buy 15 items
+altar of power 5 times
+1000 energy
+100 tower floors
+2
+pet summon
+take 200k damage Camp
+1 titan summon
+3
+MP glyph
+deal 150k magic damege tower
+5 exp potions
+4
+40 monsters Camp ch.8
+chat
+pet summon
+earn 300k gold tower
+500 energy
+</p>
+    <!-- <p style="display: none;"> -->
+<!-- 25 	 -->
+<!-- Win 25 Guild Dungeon battles using heroes -->
+<!-- 9 outland chests -->
+<!-- 28 	 -->
+<!-- Make 20 purchases from the shop -->
+<!-- Get 20 Soul Stones of any Titan -->
+    <!-- </p> -->
 
     <script>
       const matches4 = `4`;
