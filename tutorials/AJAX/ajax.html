@@ -19,7 +19,7 @@
         --extra-light: #f3f4f6;
       
         /* --max-width: 1200px; */
-        --max-width: 1200px75rem;
+        --max-width: 75rem;
       }
       
       * {
@@ -151,6 +151,7 @@
       
       .subtitle {
         font-size: 1.5rem;
+        text-transform: uppercase;
       }
       
       .subtitle span {
@@ -169,6 +170,7 @@
         font-size: 2.75rem;
         font-weight: 900;
         font-family: "Merriweather", serif;
+        text-transform: uppercase;
       }
       
       .title span {
@@ -198,6 +200,107 @@
         color: var(--text-light);
       }
       
+      .show-nav span {
+        padding: 0.5rem 0;
+        border-bottom: 2px solid transparent;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      
+      .show-nav span:hover {
+        color: var(--extra-light);
+        border-bottom: 2px solid var(--primary-color);
+      }
+      
+      .show-about {
+        font-size: 0.9rem;
+        line-height: 1.75rem;
+      }
+      
+      .show-details {
+        margin: 1.5rem 0;
+        display: grid;
+        grid-template-columns: 150px auto;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+      }
+      
+      .show-details span:nth-child(odd) {
+        color: var(--text-light);
+      }
+      
+      .next-episodes {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1rem;
+      }
+      
+      .episode-card {
+        padding: 0.5rem;
+        flex: 1;
+        aspect-ratio: 1.5;
+        display: grid;
+        place-content: flex-end;
+        justify-content: flex-start;
+        font-size: 0.8rem;
+        font-weight: 600;
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        cursor: pointer;
+      }
+      
+      .episode-card:nth-child(1) {
+        background-image: url("assets/episode-1.jpg");
+      }
+      
+      .episode-card:nth-child(2) {
+        background-image: url("assets/episode-2.jpg");
+      }
+      
+      .episode-card:nth-child(3) {
+        background-image: url("assets/episode-3.jpg");
+      }
+      
+      @media (width < 900px) {
+        header {
+          flex-direction: column;
+        }
+      
+        .cover {
+          height: 600px;
+        }
+      }
+      
+      @media (width < 500px) {
+        .next-episodes {
+          flex-direction: column;
+        }
+      
+        .episode-card {
+          width: 100%;
+        }
+      }
+            
+      .container {
+        width: 100%;
+        height: 100vh;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-image: 
+          linear-gradient(
+            rgba(0, 0, 0, 0.5), 
+            rgba(0, 0, 0, 0.5)
+          ), url("img/netflix-bg.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+        
     </style>
   </head>
   <body>
@@ -217,11 +320,41 @@
         <img src="assets/user.jpg" alt="User" class="nav-user" />
       </div>
     </nav>
+    <div class="container" id="netflix-form">
+      <div class="content">
+        <h1>sign in</h1>
+        <form>
+          <input type="text" name="email" id="email" placeholder="Email or Phone Number">
+          <input type="password" name="password" id="password" placeholder="Password">
+          <button>sign in</button>
+          <div class="form-footer">
+            <label for="">
+              <input type="checkbox" name="remember" id="remember">
+              remember me
+            </label>
+            <span>need help?</span>
+          </div>
+        </form>
+        <div class="footer">
+          <p class="face">
+            <i class="fa fa-facebook-f"></i>
+            <span>Login with Facebook</span>
+          </p>
+          <p class="new">New to Netflix?
+            <span>sign up now</span>
+          </p>
+          <p class="more">
+            this page is protected by Google reCAPTCHA to ensure you're not a bot.
+            <span>learn more</span>
+          </p>
+        </div>
+      </div>
+    </div>
     <header>
       <div class="container-left">
         <div class="cover">
           <p>Resume</p>
-          <p>S2E2: "Trick ot Treat, Freak"</p>
+          <p>S2E2: "Trick or Treat, Freak"</p>
           <div class="progress-bar"></div>
           <div class="cover-details">
             After Will sees something terrible on trick-or-treat night, Mike
