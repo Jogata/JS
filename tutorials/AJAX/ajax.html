@@ -3,561 +3,163 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>AJAX | XMLHttpRequest</title> -->
-    <title>Web Design Mastery | Netflix Content Page</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@900&family=Poppins:wght@400;600;700;800&display=swap");
+    <title>AJAX | XMLHttpRequest</title>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+fieldset {
+  display: none;
+}
 
-      :root {
-        --primary-color: #e50914;
-        --primary-color-dark: #bb0811;
-        --secondary-color: #000000;
-        --text-dark: #333333;
-        --text-light: #767268;
-        --extra-light: #f3f4f6;
-      
-        /* --max-width: 1200px; */
-        --max-width: 75rem;
-      }
-      
-      * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-      }
-      
-      a {
-        text-decoration: none;
-      }
-      
-      img {
-        width: 100%;
-      }
-      
-      body {
-        /* font-family: 'Merriweather', serif; */
-        color: var(--extra-light);
-        font-family: "Poppins", sans-serif;
-        background-color: var(--secondary-color);
-      }
-      
-      nav {
-        max-width: var(--max-width);
-        height: 75px;
-        margin: auto;
-        padding: 0 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      
-      .nav-left,
-      .nav-right {
-        display: flex;
-        align-items: center;
-        gap: 2rem;
-      }
-      
-      .nav-logo {
-        width: 100px;
-      }
-      
-      .nav-left span a,
-      .nav-right i {
-        color: var(--text-light);
-        font-size: 1rem;
-        text-transform: capitalize;
-        transition: 0.3s;
-      }
-      
-      .nav-left span a:hover,
-      .nav-right i:hover {
-        color: var(--extra-light);
-        cursor: pointer;
-      }
-      
-      .nav-user {
-        width: 2rem;
-        border-radius: 100%;
-      }
-      
-      header {
-        padding: 1rem;
-        min-height: calc(100vh - 75px);
-        max-width: var(--max-width);
-        margin: auto;
-        display: flex;
-        gap: 1rem;
-      }
-      
-      .container-left,
-      .container-right {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      .cover {
-        padding: 2rem;
-        max-width: 450px;
-        height: 90%;
-        background-image: linear-gradient(
-            to bottom,
-            rgba(0, 0, 0, 0),
-            rgba(0, 0, 0, 1)
-          ),
-          url("assets/cover.jpg");
-        display: grid;
-        place-content: flex-end;
-        gap: 0.5rem;
-        background-position: center center;
-        background-size: cover;
-        background-repeat: no-repeat;
-      }
-      
-      .cover p {
-        font-weight: 600;
-        font-size: 1rem;
-      }
-      
-      .progress-bar {
-        margin: 0.5rem 0;
-        height: 2px;
-        background-color: var(--text-light);
-        position: relative;
-      }
-      
-      .progress-bar::after {
-        position: absolute;
-        content: "";
-        height: 2px;
-        width: 20%;
-        background-color: var(--primary-color);
-      }
-      
-      .cover-details {
-        font-size: 0.8rem;
-        line-height: 1.2rem;
-        color: var(--text-light);
-      }
-      
-      .container-right {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      
-      .subtitle {
-        font-size: 1.5rem;
-        text-transform: uppercase;
-      }
-      
-      .subtitle span {
-        font-weight: 700;
-      }
-      
-      .title {
-        width: 100%;
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        gap: 1rem;
-      }
-      
-      .title h1 {
-        font-size: 2.75rem;
-        font-weight: 900;
-        font-family: "Merriweather", serif;
-        text-transform: uppercase;
-      }
-      
-      .title span {
-        font-size: 1.5rem;
-      }
-      
-      .title span i {
-        color: yellow;
-      }
-      
-      .title-details {
-        color: var(--text-light);
-      }
-      
-      .title-details span {
-        padding: 0 1rem;
-      }
-      
-      .show-nav {
-        width: 100%;
-        margin: 1.5rem 0;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        flex-wrap: wrap;
-        color: var(--text-light);
-      }
-      
-      .show-nav span {
-        padding: 0.5rem 0;
-        text-transform: uppercase;
-        border-bottom: 2px solid transparent;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-      
-      .show-nav span:hover {
-        color: var(--extra-light);
-        border-bottom: 2px solid var(--primary-color);
-      }
-      
-      .show-about {
-        font-size: 0.9rem;
-        line-height: 1.75rem;
-      }
-      
-      .show-details {
-        margin: 1.5rem 0;
-        display: grid;
-        grid-template-columns: 150px auto;
-        gap: 0.5rem;
-        font-size: 0.9rem;
-      }
-      
-      .show-details span:nth-child(odd) {
-        color: var(--text-light);
-      }
-      
-      .next-episodes {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 1rem;
-      }
-      
-      .episode-card {
-        padding: 0.5rem;
-        flex: 1;
-        aspect-ratio: 1.5;
-        display: grid;
-        place-content: flex-end;
-        justify-content: flex-start;
-        font-size: 0.8rem;
-        font-weight: 600;
-        background-position: center center;
-        background-size: cover;
-        background-repeat: no-repeat;
-        cursor: pointer;
-      }
-      
-      .episode-card:nth-child(1) {
-        background-image: url("assets/episode-1.jpg");
-      }
-      
-      .episode-card:nth-child(2) {
-        background-image: url("assets/episode-2.jpg");
-      }
-      
-      .episode-card:nth-child(3) {
-        background-image: url("assets/episode-3.jpg");
-      }
-      
-      @media (width < 900px) {
-        header {
-          flex-direction: column;
-        }
-      
-        .cover {
-          height: 600px;
-        }
-      }
-      
-      @media (width < 500px) {
-        .next-episodes {
-          flex-direction: column;
-        }
-      
-        .episode-card {
-          width: 100%;
-        }
-      }
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-      #netflix-form {
-        --primary-color: #e50914;
-        --primary-color-dark: #bb0811;
-        --text-dark: #333333;
-        --text-light: #767268;
-        --extra-light: #f3f4f6;
-        --white: #ffffff;
+body {
+  min-height: 100vh;
+  padding-bottom: 3rem;
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 
-        font-family: Georgia;
-      }
-            
-      .container {
-        width: 100%;
-        height: 100vh;
-        padding: 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-image: 
-          linear-gradient(
-            rgba(0, 0, 0, 0.5), 
-            rgba(0, 0, 0, 0.5)
-          ), url("img/netflix-bg.png");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-      }
-        
-      .content {
-        max-width: 450px;
-        padding: 3rem;
-        border-radius: 9px;
-        background-image: 
-          linear-gradient(
-            rgba(0, 0, 0, 0.7), 
-            rgba(0, 0, 0, 0.7)
-          );
-      }
-      
-      .content h1 {
-        color: var(--extra-light);
-        text-transform: capitalize;
-      }
-      
-      form {
-        padding: 2rem 0;
-        display: grid;
-        gap: 1rem;
-      }
-      
-      form input {
-        padding: 1rem;
-        color: var(--extra-light);
-        font-size: 1rem;
-        outline: none;
-        border: none;
-        border-radius: 9px;
-        background-color: var(--text-dark);
-      }
-      
-      form button {
-        margin-top: 2rem;
-        padding: 1rem;
-        color: var(--extra-light);
-        font-size: 1rem;
-        font-weight: 700;
-        font-family: inherit;
-        text-transform: capitalize;
-        outline: none;
-        border: none;
-        border-radius: 9px;
-        background-color: var(--primary-color);
-        transition: 0.3s;
-        cursor: pointer;
-      }
-      form button:hover {
-        background-origin: var(--primary-color-dark);
-      }
-      
-      .form-footer {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        color: var(--text-light);
-        text-transform: capitalize;
-      }
-      .form-footer label, 
-      .form-footer span {
-        transition: 0.3s;
-        cursor: pointer;
-      }
-      .form-footer label:hover, 
-      .form-footer span:hover {
-        color: var(--extra-light);
-      }
-      
-      .footer {
-        padding: 3rem 0;
-        display: grid;
-        gap: 1rem;
-      }
-      
-      .face {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        color: var(--text-light);
-        font-size: 1rem;
-        transition: 0.3s;
-        cursor: pointer;
-      }
-      .face:hover {
-        color: var(--extra-light);
-      }
-      
-      .new {
-        color: var(--text-light);
-        font-size: 1.25rem;
-      }
-      .new span {
-        color: var(--extra-light);
-        text-transform: capitalize;
-      }
-      
-      .more {
-        color: var(--text-light);
-        font-size: 1rem;
-      }
-      .more span {
-        color: dodgerblue;
-        text-transform: capitalize;
-      }
-    </style>
+.main-container {
+  position: relative;
+  width: 90%;
+  max-width: 600px;
+  padding: 2rem;
+  border-radius: 1rem;
+  border: 1px solid #f0f0ff8c;
+  box-shadow: 0 2.5rem 1.5rem -1.2rem #f0f0ff;
+  transition: 0.5s;
+}
+
+.icon-tabler-x {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  padding: 0.25rem;
+  border-radius: 50%;
+  border: 1px solid #e3e3e3;
+  cursor: pointer;
+}
+
+.collections {
+  margin-top: 2rem;
+}
+
+.collection {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.collection:hover {
+  border-color: #f0f0ff;
+  border-radius: 0.5rem;
+}
+
+h2 {
+  font-size: 1.2rem;
+}
+
+</style>
   </head>
   <body>
-  </head>
-  <body>
-    <nav>
-      <div class="nav-left">
-        <div class="nav-logo">
-          <a href="#logo">
-            <img src="assets/logo.png" alt="logo" />
-          </a>
-        </div>
-        <span><a href="#">Browse</a></span>
-      </div>
-      <div class="nav-right">
-        <a href="#"><i class="ri-notification-3-fill"></i></a>
-        <img src="assets/user.jpg" alt="User" class="nav-user" />
-      </div>
-    </nav>
-    <div class="container" id="netflix-form">
-      <div class="content">
-        <h1>sign in</h1>
-        <form>
-          <input type="text" name="email" id="email" placeholder="Email or Phone Number">
-          <input type="password" name="password" id="password" placeholder="Password">
-          <button>sign in</button>
-          <div class="form-footer">
-            <label for="">
-              <input type="checkbox" name="remember" id="remember">
-              remember me
-            </label>
-            <span>need help?</span>
+    <section class="main-container">
+      <h1>Add to <br>collection</h1>
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="30" height="30" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
+      <div class="collections">
+        <div class="collection">
+          <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSTMrkt54pr_ENnXJOarLHAq5m1063lVCwx2QSADzMULqUd4i2A" alt="" width="120" height="80">
+          <div class="collection-info">
+            <h2>Dashboards</h2>
+            <div> 
+              <p>24 items</p> 
+              <div class="dot"></div>
+              <p>Updated yesterday</p>
+            </div>
           </div>
-        </form>
-        <div class="footer">
-          <p class="face">
-            <i class="fa fa-facebook-f"></i>
-            <span>Login with Facebook</span>
-          </p>
-          <p class="new">New to Netflix?
-            <span>sign up now</span>
-          </p>
-          <p class="more">
-            this page is protected by Google reCAPTCHA to ensure you're not a bot.
-            <span>learn more</span>
-          </p>
         </div>
-      </div>
-    </div>
-    <header>
-      <div class="container-left">
-        <div class="cover">
-          <p>Resume</p>
-          <p>S2E2: "Trick or Treat, Freak"</p>
-          <div class="progress-bar"></div>
-          <div class="cover-details">
-            After Will sees something terrible on trick-or-treat night, Mike
-            wonders wether Eleven is still out there. Nancy wrestles with the
-            truth about Barb.
+        <div class="collection">
+          <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRz0kb68z2Lwk4epC9WSW4NIUJ-FgdCwjffAWoVv3-5VuGgk-ah" alt="" width="120" height="80">
+          <div class="collection-info">
+            <h2>Authentication</h2>
+            <div>
+              <p>7 items</p>
+              <div class="dot"></div> 
+              <p>Updated May 9, 2021</p>
+            </div>
+          </div>
+        </div>
+        <div class="collection">
+          <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTUEzb2yfwcR-5_Ws_L5ZIzb2y8PoXgRlNuWPQBydArn3Whvntp" alt="" width="120" height="80">
+          <div class="collection-info">
+            <h2>UI Kit</h2>
+            <div>
+              <p>9 items</p>
+              <div class="dot"></div>
+              <p>Updated May 3, 2021</p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="container-right">
-        <div class="subtitle"><span>NETFLIX</span> ORIGINAL</div>
-        <div class="title">
-          <h1>STRANGER THINGS</h1>
-          <span>9.0 <i class="ri-star-fill"></i></span>
-        </div>
-        <div class="title-details">
-          <span>2018</span>|<span>2 Seasons</span>|<span>16+</span>
-        </div>
-        <div class="show-nav">
-          <span>OVERVIEW</span>
-          <span>EPISODES</span>
-          <span>TRAILERS & MORE</span>
-          <span>MORE LIKE THIS</span>
-        </div>
-        <div class="show-about">
-          When a young boy dissapears, his mother, a police officer, and his
-          friends must confront terrifying forces in order to get him back.
-        </div>
-        <div class="show-details">
-          <span>Starring</span>
-          <span>Millie Bobby Brown, Finn Wolfhard, Winona Ryder</span>
-          <span>Created By</span>
-          <span>The Duffer Brothers</span>
-          <span>Genre</span>
-          <span>Drama, Fantasy, Horror</span>
-        </div>
-        <div class="next-episodes">
-          <div class="episode-card">
-            <p>S2E2</p>
-            <p>Trick or Treat, Freak</p>
-          </div>
-          <div class="episode-card">
-            <p>S2E3</p>
-            <p>The Pollywog</p>
-          </div>
-          <div class="episode-card">
-            <p>S2E4</p>
-            <p>Will The Wise</p>
-          </div>
-        </div>
-       </div>
-    </header>
-    <script>
-      const loginForm = document.getElementById("netflix-form");
-      // console.log(loginForm);
-      // loginForm.setAttribute("hidden", true);
-      loginForm.style.display = "none";
+      <div class="buttons-container">
+        <button class="create-new">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+          Create new</button>
+        <button class="save">Save</button>
+      </div>
+    </section>
+<script>
+  // Close the section
+  const closeBtn = document.querySelector('.icon-tabler-x');
+  const mainContainer = document.querySelector('.main-container');
+  
+  closeBtn.addEventListener('click', () => {
+    mainContainer.style.transform = "scale(0)";
+  });
+  
+  // Add checkmark when collection is clicked
+  const collections = [...document.querySelectorAll('.collection')];
+  
+  collections.forEach(collection => {
+    collection.addEventListener('click', (e) => {
+  
+      [...document.querySelectorAll('.check')].forEach(check => check.remove());
+      collections.forEach(c => {
+        c.style.borderColor = "transparent";
+    })
+     
+      const checkmark = document.createElement('div');
+      checkmark.setAttribute("class", "check");
+      checkmark.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="40" height="40" viewBox="0 0 24 24" stroke-width="2.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>`;
+  
+      collection.appendChild(checkmark);
+      collection.style.borderColor = "#f0f0ff";
+    })
+  });
+  
+  // Remove checkmarks when it's clicked outside of the collection item
+  document.body.addEventListener('click', (e) => {
+    if (!e.target.closest('.collection')) {
+      [...document.querySelectorAll('.check')].forEach(check => check.remove());
+      collections.forEach(c => {
+        c.style.borderColor = "transparent";
+    })
+    }
+  })
+</script>
 
-      const userIcon = document.querySelector(".nav-user");
-      // console.log(userIcon);
-      userIcon.addEventListener("click", () => {
-        if (loginForm.style.display == "none") {
-          loginForm.style.display = "flex";
-        }
-      })
-
-      const loginBtn = document.querySelector("form button");
-      loginBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        const emailValue = document.getElementById("email").value;
-        const passwordValue = document.getElementById("password").value;
-
-        if (emailValue.length == 0) {
-          console.log("email is empty");
-          return;
-        }
-
-        if (passwordValue.length == 0) {
-          console.log("password is empty");
-          return;
-        }
-
-        loginForm.style.display = "none";
-
-      })
-    </script>
-
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <h1 style="display: none;"><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <h1 id="title" style="display: none;">Loading...</h1>
     <p id="summary" style="display: none;">Loading...</p>
@@ -590,7 +192,7 @@
       // console.log(state);
     </script>
 
-    <fieldset style="display: none;">
+    <fieldset>
       <legend>Get all users from local JSON file</legend>
       <button id="local">Send Request</button>
     </fieldset>
@@ -620,7 +222,7 @@
     </script>
 
     <!-- ================= Get data from GitHub API ================= -->
-    <fieldset style="display: none;">
+    <fieldset>
       <legend>Get users from GitHub API</legend>
       <button id="github">Send Request</button>
       <span id="userGithub"></span>
@@ -659,18 +261,18 @@
 <!-- chat -->
 <!-- win 2 times with support hero in Camp -->
 <!-- upgrade titan 3 level -->
-buy 15 items
-altar of power 5 times
+<!-- buy 15 items -->
+<!-- altar of power 5 times -->
 1000 energy
 100 tower floors
 <!-- 2 -->
 <!-- pet summon -->
 <!-- take 200k damage Camp -->
 <!-- 1 titan summon -->
-3
-MP glyph
-deal 150k magic damege tower
-5 exp potions
+<!-- 3 -->
+<!-- MP glyph -->
+<!-- deal 150k magic damege tower -->
+<!-- 5 exp potions -->
 4
 40 monsters Camp ch.8
 chat
@@ -697,7 +299,10 @@ chat
 defeat marksman Adventures 2 times
 20 chests outland
 100 hero soul stones
-
+9
+300 energy
+5 exp potions
+win tower 5 times
 </p>
 
     <script>
