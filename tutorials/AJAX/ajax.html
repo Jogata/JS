@@ -3,292 +3,188 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AJAX | XMLHttpRequest</title>
+    <!-- <title>AJAX | XMLHttpRequest</title> -->
+    <title>Creative Agency Page</title>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-fieldset {
-  display: none;
-}
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap");
+      
+      :root {
+        --primary-color: #000000;
+        --secondary-color: #1b1d1a;
+        --text-light: #767268;
+        --extra-light: #f3f4f6;
+      }
+      
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      
+      img {
+        width: 100%;
+      }
+      
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--primary-color);
+      }
 
-*, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  min-height: 100vh;
-  padding-bottom: 3rem;
-  display: flex;
-  gap: 3rem;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.main-container {
-  position: relative;
-  width: 90%;
-  max-width: 600px;
-  padding: 2rem;
-  border-radius: 1rem;
-  border: 1px solid #f0f0ff8c;
-  box-shadow: 0 2.5rem 1.5rem -1.2rem #f0f0ff;
-  transition: 0.5s;
-}
-
-.icon-tabler-x {
-  position: absolute;
-  top: 2rem;
-  right: 2rem;
-  padding: 0.25rem;
-  border-radius: 50%;
-  border: 1px solid #e3e3e3;
-  cursor: pointer;
-}
-
-.collections {
-  margin-top: 2rem;
-}
-
-.collection {
-  margin-bottom: 1.5rem;
-  padding: 1rem;
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  border: 1px solid transparent;
-  cursor: pointer;
-}
-
-.collection:hover {
-  border-color: #f0f0ff;
-  border-radius: 0.5rem;
-}
-
-h2 {
-  font-size: 1.2rem;
-}
-
-img {
-  object-fit: cover;
-  border-radius: 0.5rem;
-  border: 1px solid #f0f0ff;
-  box-shadow: 0 1rem 1rem -0.8rem #bdbdfa;
-}
-
-.collection-info > div {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  font-size: 0.9rem;
-}
-
-.dot {
-  width: 0.25rem;
-  height: 0.25rem;
-  border-radius: 50%;
-  background-color: #000;
-}
-
-.buttons-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-button {
-  border: none;
-  transition: 0.5s;
-  cursor: pointer;
-}
-
-button.create-new {
-  padding: 0.5rem;
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  color: #d24964;
-  font-weight: 700;
-  border-radius: 0.25rem;
-  background-color: transparent;
-}
-
-button.create-new:hover {
-  background: #fabde227;
-}
-
-.icon-tabler-plus {
-  padding: 0.25rem;
-  border-radius: 50%;
-  background-color: #d2496515;
-}
-
-button.save {
-  width: 50%;
-  max-width: 150px;
-  padding: 1rem;
-  color: #fff;
-  font-weight: 700;
-  border-radius: 0.25rem;
-  background: linear-gradient(90deg, #c584f0, #fb6d9e);
-}
-
-button.save:hover {
-  box-shadow: 0 0 1.2rem #e492fb;
-  transform: scale(1.1);
-}
-
-.icon-tabler-check {
-  padding: 0.25rem;
-  border-radius: 50%;
-  border: 5px solid #dcdcff;
-  background-clip: #000;
-}
-
-.check {
-  margin-left: auto;
-}
-
-@media (max-width: 500px) {
-  .collection {
-    flex-direction: column;
-    text-align: center;
-  }
-  .check {
-    margin-left: unset;
- }
-}
-
-#test2 {
-  position: relative;
-  width: 120px;
-  height: 120px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  appearance: none;
-  color: rgba(0, 0, 0, 0.3);
-  font-weight: 800;
-  text-align: center;
-  border-radius: 50%;
-  background-color: #cfebdf;
-  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.5);
-  cursor: pointer;
-}
-#test2::before {
-  position: absolute;
-  content: "OFF";
-  width: 100px;
-  height: 100px;
-  font-size: 30px;
-  line-height: 100px;
-  appearance: none;
-  border: 3px solid #fff;
-  border-radius: 50%;
-  background-color: #cfebdf;
-  box-shadow: 0 1px 3px 0 #000, 
-          inset 0 0 3px 0 #000;
-  transition: background-color 1s;
-}
-#test2:checked {
-  background-color: #cfebdf;
-}
-#test2:checked::before {
-  content: "ON";
-  background-color:#74f7b3;
-}
-</style>
+      .page {
+        position: relative;
+        padding: 2rem 1%;
+        display: flex;
+        min-height: 100vh;
+      }
+      .page::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 50%;
+        height: 100%;
+        background-color: var(--secondary-color);
+        z-index: -1;
+      }
+      
+      header {
+        display: flex;
+        /* min-height: 100vh; */
+        /* align-items: center; */
+        margin: auto;
+        /* box-shadow: 2px 2px 2px #000, -2px -2px 2px #fff5; */
+        box-shadow: 0.1rem 0.3rem 0.5rem #111, 
+                  -0.1rem -0.3rem 0.5rem #888;
+        border-radius: 1rem;
+      }
+      
+      .container-left,
+      .container-right {
+        /* flex: 1; */
+        /* position: relative; */
+        /* display: flex; */
+        /* align-items: center; */
+        border-radius: inherit;
+      }
+      
+      .container-left {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--secondary-color);
+        /* justify-content: flex-end; */
+      }
+      
+      .nav-logo {
+        /* position: absolute; */
+        /* top: 0; */
+        /* width: 100%; */
+        /* max-width: 600px; */
+        padding: 2rem;
+        /* margin-left: auto; */
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--extra-light);
+      }
+      
+      .content {
+        /* flex: 1; */
+        /* max-width: 600px; */
+        margin: auto;
+        /* padding: 2rem; */
+        padding: 2rem min(5%, 2rem);
+        /* padding-top: 5rem; */
+        color: var(--extra-light);
+        display: grid;
+        gap: 2rem;
+        z-index: 2;
+      }
+      
+      .title {
+        font-size: 3.5rem;
+        font-size: min(calc(3vw + 1.5rem), 3.5rem);
+        font-weight: 800;
+        line-height: 4rem;
+      }
+      .title .block {
+        display: block;
+      }
+      .title span {
+        color: transparent;
+        -webkit-text-stroke: 1px var(--extra-light);
+      }
+      /* .title span {
+        color: transparent;
+        -webkit-text-stroke: 2px var(--secondary-color);
+        filter: drop-shadow(1px 1px 1px #fff6);
+      } */
+      
+      .subtitle {
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+      
+      .description {
+        max-width: 31.25rem;
+      }
+      
+      .action-btns {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      
+      .btn {
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+        background-color: transparent;
+        outline: none;
+        border: none;
+        border-radius: 2em;
+        cursor: pointer;
+      }
+      
+    </style>
   </head>
   <body>
-    <section class="main-container">
-      <h1>Add to <br>collection</h1>
-      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="30" height="30" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
-      <div class="collections">
-        <div class="collection">
-          <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSTMrkt54pr_ENnXJOarLHAq5m1063lVCwx2QSADzMULqUd4i2A" alt="" width="120" height="80">
-          <div class="collection-info">
-            <h2>Dashboards</h2>
-            <div> 
-              <p>24 items</p> 
-              <div class="dot"></div>
-              <p>Updated yesterday</p>
+    <div class="page">
+      <header>
+        <div class="container-left">
+          <div class="nav-logo">Brandon Watson</div>
+          <div class="content">
+            <h1 class="title"><span>Be</span> Creative, <span class="block">Be Impresive</span></h1>
+            <p class="subtitle">Creative Designer and Social Media Officer</p>
+            <p class="description">
+              I have to be able to communicate ideas to a wide range of
+              stackholders in both my own voice and in Sprout's.<br />Communicating
+              on social.
+            </p>
+            <div class="action-btns">
+              <button class="btn portfolio">Portfolio</button>
+              <button class="btn cv">Curriculum Vitae</button>
             </div>
           </div>
         </div>
-        <div class="collection">
-          <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRz0kb68z2Lwk4epC9WSW4NIUJ-FgdCwjffAWoVv3-5VuGgk-ah" alt="" width="120" height="80">
-          <div class="collection-info">
-            <h2>Authentication</h2>
-            <div>
-              <p>7 items</p>
-              <div class="dot"></div> 
-              <p>Updated May 9, 2021</p>
+        <div class="container-right">
+          <ul class="nav-links">
+            <li class="link">Home</li>
+            <li class="link">About</li>
+            <li class="link">Projects</li>
+            <li class="link">Contact</li>
+          </ul>
+          <div class="image">
+            <img src="assets/bg.png" alt="profile" />
+            <div class="image-content">
+              <h4>Brandon Watson</h4>
+              <p>Founder of PT.CryptoCoin Price Control</p>
             </div>
           </div>
         </div>
-        <div class="collection">
-          <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTUEzb2yfwcR-5_Ws_L5ZIzb2y8PoXgRlNuWPQBydArn3Whvntp" alt="" width="120" height="80">
-          <div class="collection-info">
-            <h2>UI Kit</h2>
-            <div>
-              <p>9 items</p>
-              <div class="dot"></div>
-              <p>Updated May 3, 2021</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="buttons-container">
-        <button class="create-new">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
-          Create new</button>
-        <button class="save">Save</button>
-      </div>
-    </section>
-<script>
-  // Close the section
-  const closeBtn = document.querySelector('.icon-tabler-x');
-  const mainContainer = document.querySelector('.main-container');
-  
-  closeBtn.addEventListener('click', () => {
-    mainContainer.style.transform = "scale(0)";
-  });
-  
-  // Add checkmark when collection is clicked
-  const collections = [...document.querySelectorAll('.collection')];
-  
-  collections.forEach(collection => {
-    collection.addEventListener('click', (e) => {
-  
-      [...document.querySelectorAll('.check')].forEach(check => check.remove());
-      collections.forEach(c => {
-        c.style.borderColor = "transparent";
-    })
-     
-      const checkmark = document.createElement('div');
-      checkmark.setAttribute("class", "check");
-      checkmark.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="40" height="40" viewBox="0 0 24 24" stroke-width="2.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>`;
-  
-      collection.appendChild(checkmark);
-      collection.style.borderColor = "#f0f0ff";
-    })
-  });
-  
-  // Remove checkmarks when it's clicked outside of the collection item
-  document.body.addEventListener('click', (e) => {
-    if (!e.target.closest('.collection')) {
-      [...document.querySelectorAll('.check')].forEach(check => check.remove());
-      collections.forEach(c => {
-        c.style.borderColor = "transparent";
-    })
-    }
-  })
-</script>
-
-<input type="checkbox" name="test" id="test2">
-
-    <h1 style="display: none;"><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+      </header>
+    </div>
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <h1 id="title" style="display: none;">Loading...</h1>
     <p id="summary" style="display: none;">Loading...</p>
@@ -321,7 +217,7 @@ button.save:hover {
       // console.log(state);
     </script>
 
-    <fieldset>
+    <fieldset hidden>
       <legend>Get all users from local JSON file</legend>
       <button id="local">Send Request</button>
     </fieldset>
@@ -351,7 +247,7 @@ button.save:hover {
     </script>
 
     <!-- ================= Get data from GitHub API ================= -->
-    <fieldset>
+    <fieldset hidden>
       <legend>Get users from GitHub API</legend>
       <button id="github">Send Request</button>
       <span id="userGithub"></span>
