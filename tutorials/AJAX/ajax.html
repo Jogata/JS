@@ -20,6 +20,7 @@
 body {
   min-height: 100vh;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   background: #f8f6ff;
@@ -96,6 +97,128 @@ button:hover {
 .message-profile:hover {
   background: #f8f6ff;
 }
+
+
+.dot {
+  border-radius: 50%;
+  border: 2px solid #fff;
+  width: 1rem;
+  height: 1rem;
+  background: #3edfa7;
+  position: absolute;
+  left: 2.8rem;
+  top: 0.6rem;
+}
+
+.busy {
+  background: #dd7842;
+}
+
+.not-available {
+  background: #d3d3d3;
+}
+
+.icon-tabler-user {
+  border-radius: 50%;
+  padding: 0.25rem;
+  background: #fff;
+  filter: drop-shadow(0 0 0.25rem #1f255548);
+}
+
+h3 {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.message {
+  font-size: 0.8rem;
+}
+
+.days-ago {
+  font-size: 0.7rem;
+  color: #7d7d7dbf;
+  /* position: absolute; */
+  /* right: 0.8rem; */
+  /* top: 1rem; */
+  margin-left: auto;
+  margin-bottom: auto;
+}
+
+@media (max-width: 600px) {
+  .green-background {
+    width: 100%;
+    left: unset;
+  }
+
+  .content {
+    width: 90%;
+    padding: 1.5rem;
+  }
+
+  h3 {
+    font-size: 0.8rem;
+  }
+
+  .message {
+    font-size: 0.7rem;
+  }
+
+  .days-ago {
+    font-size: 0.6rem;
+  }
+}
+
+.drums {
+  width: 100%; 
+  height: 100vh;  
+  margin: 0;
+  display: flex;  
+  flex-wrap: wrap;
+  /* flex-direction: column; */
+  align-items: center; 
+  align-content: center;
+  justify-content: center;  
+  background-color: pink;
+} 
+h1 {
+  width: 100%;
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+  color: white;
+  font-size: 50px;
+  font-family: Impact, sans-serif;
+  letter-spacing: 4px;
+  text-align: center;
+  white-space: nowrap;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+} 
+.drums {
+  text-align: center;
+} 
+.btn {
+  min-width: 200px;
+  max-width: 250px;
+  padding: 30px 50px;
+  border: none;
+  margin: 10px;
+  color: white;
+  font-size: 30px;
+  font-family: Georgia;
+  text-transform: capitalize;
+  border-radius: 10px;
+  background-color: white;
+  background-image: url("images/tom.png");
+  background-size: cover;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;  
+}
+.btn:hover {
+  color: pink;
+}
+.btn:active {
+  background-size: 105%;
+}
 </style>
   </head>
   <body>
@@ -147,6 +270,40 @@ button:hover {
         </div>
       </div>
     </section>
+
+    <h1>Drum Kits <i class="fa fa-music"></i></h1>
+    <div class="drums">
+      <script>
+        const kits = ["crash", "kick", "snare", "tom"];
+        
+        const containerEl = document.querySelector(".drums");
+        
+        kits.forEach((kit) => {
+          const btnEl = document.createElement("button");
+          btnEl.classList.add("btn");
+          btnEl.innerText = kit;
+          btnEl.style.backgroundImage = "url(images/" + kit + ".png)";
+          containerEl.appendChild(btnEl);
+          const audioEl = document.createElement("audio");
+          audioEl.src = "sounds/" + kit + ".mp3";
+          containerEl.appendChild(audioEl);
+          btnEl.addEventListener("click", () => {
+            audioEl.play();
+            console.log(btnEl.textContent);
+          });
+          window.addEventListener("keydown", (event) => {
+            if (event.key === kit.slice(0, 1)) {
+              audioEl.play();
+              btnEl.style.transform = "scale(.9)";
+              setTimeout(() => {
+                btnEl.style.transform = "scale(1)";
+              }, 100);
+            }
+          });
+        });
+      </script>
+    </div>  
+
     <h1 hidden><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <h1 id="title" style="display: none;">Loading...</h1>
