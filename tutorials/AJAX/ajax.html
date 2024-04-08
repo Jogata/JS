@@ -3,308 +3,153 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AJAX | XMLHttpRequest</title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"> -->
+    <!-- <title>AJAX | XMLHttpRequest</title> -->
+    <title>Fashion Photography</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-  fieldset {
-    display: none;
-  }
+    <style>
+      /* @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap"); */
+      @import url('https://fonts.googleapis.com/css2?family=Redressed&display=swap');
 
-  *, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+      :root {
+        --primary-color: #b32557;
+        --white: #ffffff;
+        /* --max-width: 1200px; */
+        --max-width: 75rem;
+      }
+      
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
 
-body {
-  min-height: 100vh;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  background: #f8f6ff;
-  color: #1f2555;
-  font-family: Arial, Helvetica, sans-serif ;
-}
+      a {
+        color: var(--white);
+        display: inline-block;
+        text-transform: uppercase;
+        text-decoration: none;
+      }
 
-.main-container {
-  width: 90%;
-  max-width: 600px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+      button {
+        /* padding: 0.4em 1em; */
+        border: none;
+        outline: none;
+        /* font-family: Georgia, serif; */
+        text-transform: uppercase;
+        background-color: transparent;
+        cursor: pointer;
+      }
+      button:focus-within {
+        outline: 1px solid #fff8;
+      }
 
-.green-background {
-  background: linear-gradient(45deg, #40ded3, #3edfa7);
-  border-radius: 2rem;
-  width: 70%;
-  height: 550px;
-  position: absolute;
-  left: 2rem;
-  top: -4rem;
-}
+      a, button {
+        font-family: Georgia, serif;
+        transition: all 500ms ease-in-out;
+      }
 
-.content {
-  width: 70%;
-  border-radius: 2rem;
-  background: #fff;
-  position: relative;
-  box-shadow: 0 2rem 2rem #d3f2f7;
-  padding: 3rem;
-}
+      /* .delay {
+        animation-delay: calc(0.3s * var(--delay));
+      } */
+      
+      body {
+        min-height: 100vh;
+        padding: 1rem;
+        display: flex;
+        /* font-family: "Fredoka", sans-serif; */
+        font-family: 'Redressed', cursive;
+        background-image: url("./img/header.jpg");
+        background-image: url("./img/tets.avif");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        /* background: var(--primary-color), #b53a69; */
+        /* background: linear-gradient(-45deg, #b53a69, #b32557); */
+      }
+      body::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(55px);
+        z-index: -1;
+      }
+      
+      .container {
+        width: 100%;
+        max-width: var(--max-width);
+        /* min-height: 100vh; */
+        margin: auto;
+        padding: 0 2rem;
+        /* display: flex; */
+        /* flex-direction: column; */
+        border-radius: 1rem;
+        background-image: url("./img/header.jpg");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.4);
+        /* overflow: hidden; */
+      }
+      
+      nav {
+        padding: 2rem 1rem;
+        /* overflow: hidden; */
+        display: flex;
+        align-items: center;
+        /* justify-content: space-between; */
+        gap: 2rem;
+      }
 
-h2 {
-  font-family: 'Times New Roman', Times, serif;
-  margin-bottom: 1.5rem;
-}
-
-button {
-  width: 100%;
-  background: #1f2555;
-  color: #fff;
-  border: none;
-  border-radius: 0.8rem;
-  padding: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: 0.5s;
-  margin-bottom: 1.5rem;
-}
-
-button:hover {
-  background: #434760;
-}
-
-.message-profile {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  position: relative;
-  margin-bottom: 1rem;
-  padding: 0.8rem;
-  cursor: pointer;
-  border-radius: 0.5rem;
-  transition: 0.5s;
-}
-
-.message-profile:hover {
-  background: #f8f6ff;
-}
-
-
-.dot {
-  border-radius: 50%;
-  border: 2px solid #fff;
-  width: 1rem;
-  height: 1rem;
-  background: #3edfa7;
-  position: absolute;
-  left: 2.8rem;
-  top: 0.6rem;
-}
-
-.busy {
-  background: #dd7842;
-}
-
-.not-available {
-  background: #d3d3d3;
-}
-
-.icon-tabler-user {
-  border-radius: 50%;
-  padding: 0.25rem;
-  background: #fff;
-  filter: drop-shadow(0 0 0.25rem #1f255548);
-}
-
-h3 {
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-}
-
-.message {
-  font-size: 0.8rem;
-}
-
-.days-ago {
-  font-size: 0.7rem;
-  color: #7d7d7dbf;
-  /* position: absolute; */
-  /* right: 0.8rem; */
-  /* top: 1rem; */
-  margin-left: auto;
-  margin-bottom: auto;
-}
-
-@media (max-width: 600px) {
-  .green-background {
-    width: 100%;
-    left: unset;
-  }
-
-  .content {
-    width: 90%;
-    padding: 1.5rem;
-  }
-
-  h3 {
-    font-size: 0.8rem;
-  }
-
-  .message {
-    font-size: 0.7rem;
-  }
-
-  .days-ago {
-    font-size: 0.6rem;
-  }
-}
-
-.drums {
-  width: 100%; 
-  height: 100vh;  
-  margin: 0;
-  display: flex;  
-  flex-wrap: wrap;
-  /* flex-direction: column; */
-  align-items: center; 
-  align-content: center;
-  justify-content: center;  
-  background-color: pink;
-} 
-h1 {
-  width: 100%;
-  margin-top: 5rem;
-  margin-bottom: 2rem;
-  color: white;
-  font-size: 50px;
-  font-family: Impact, sans-serif;
-  letter-spacing: 4px;
-  text-align: center;
-  white-space: nowrap;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-} 
-.drums {
-  text-align: center;
-} 
-.btn {
-  min-width: 200px;
-  max-width: 250px;
-  padding: 30px 50px;
-  border: none;
-  margin: 10px;
-  color: white;
-  font-size: 30px;
-  font-family: Georgia;
-  text-transform: capitalize;
-  border-radius: 10px;
-  background-color: white;
-  background-image: url("images/tom.png");
-  background-size: cover;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  cursor: pointer;  
-}
-.btn:hover {
-  color: pink;
-}
-.btn:active {
-  background-size: 105%;
-}
-</style>
+    </style>
   </head>
   <body>
-    <!-- <h1>Inbox UI</h1> -->
-    <section class="main-container">
-      <div class="green-background"></div>
-      <div class="content">
-        <h2>Your messages</h2>
-        <button>Compose <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></svg></button>
-        <div class="messages">
-          <div class="message-profile">
-            <div class="image-container">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="50" height="50" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
-              <div class="dot available"></div>
+    <!-- <div class="page"> -->
+      <div class="container">
+        <nav>
+          <a>
+            <i class="fa fa-camera-retro"></i>
+            <!-- <img src="./img/logo.png" alt="logo" /> -->
+          </a>
+          <ul class="nav-links">
+            <!-- <div> -->
+              <li><a href="#">ABOUT</a></li>
+              <li><a href="#">WEDDING</a></li>
+              <li><a href="#">FAMILY</a></li>
+              <li><a href="#">BUSINESS</a></li>
+            <!-- </div> -->
+            <li><a href="#">CONTACT</a></li>
+          </ul>
+        </nav>
+        <section class="section-container">
+          <h3>Jeremy Hutson</h3>
+          <h1>Fashion</h1>
+          <h2>Photography</h2>
+          <button>
+            OUR OFFER
+            <span><i class="fa fa-location-arrow"></i></span>
+          </button>
+          <div class="footer">
+            <div class="scroll-bottom">
+              <a href="#">
+                <span><i class="ri-mouse-fill"></i></span>
+                SCROLL
+              </a>
             </div>
-            <div class="text">
-              <h3>Pam Beesly</h3>
-              <p class="message">Hi there, how are you?</p>
+            <div class="socials">
+              <a href="#"><i class="ri-dribbble-fill"></i></a>
+              <a href="#"><i class="ri-instagram-line"></i></a>
+              <a href="#"><i class="ri-youtube-fill"></i></a>
             </div>
-            <p class="days-ago">4 days ago</p>
           </div>
-          <div class="message-profile">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="50" height="50" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
-              <div class="dot busy"></div>
-              <div class="text">
-                <h3>Jim Halpert</h3>
-                <p class="message">How was the trip?</p>
-              </div>
-              <p class="days-ago">5 days ago</p>
-          </div>
-          <div class="message-profile">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="50" height="50" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
-              <div class="dot available"></div>
-              <div class="text">
-                <h3>Dwight Schrute</h3>
-                <p class="message">I hope you are well.</p>
-              </div>
-              <p class="days-ago">Mar 12, 2022</p>
-          </div>
-          <div class="message-profile">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="50" height="50" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
-              <div class="dot not-available"></div>
-              <div class="text">
-                <h3>Michael Scott</h3>
-                <p class="message">Thank you for answering.</p>
-              </div>
-              <p class="days-ago">Feb 3, 2022</p>
-          </div>
-        </div>
+        </section>
       </div>
-    </section>
+    <!-- </div> -->
 
-    <h1>Drum Kits <i class="fa fa-music"></i></h1>
-    <div class="drums">
-      <script>
-        const kits = ["crash", "kick", "snare", "tom"];
-        
-        const containerEl = document.querySelector(".drums");
-        
-        kits.forEach((kit) => {
-          const btnEl = document.createElement("button");
-          btnEl.classList.add("btn");
-          btnEl.innerText = kit;
-          btnEl.style.backgroundImage = "url(images/" + kit + ".png)";
-          containerEl.appendChild(btnEl);
-          const audioEl = document.createElement("audio");
-          audioEl.src = "sounds/" + kit + ".mp3";
-          containerEl.appendChild(audioEl);
-          btnEl.addEventListener("click", () => {
-            audioEl.play();
-            console.log(btnEl.textContent);
-          });
-          window.addEventListener("keydown", (event) => {
-            if (event.key === kit.slice(0, 1)) {
-              audioEl.play();
-              btnEl.style.transform = "scale(.9)";
-              setTimeout(() => {
-                btnEl.style.transform = "scale(1)";
-              }, 100);
-            }
-          });
-        });
-      </script>
-    </div>  
-
-    <h1 hidden><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
     <h1 id="title" style="display: none;">Loading...</h1>
     <p id="summary" style="display: none;">Loading...</p>
@@ -337,7 +182,7 @@ h1 {
       // console.log(state);
     </script>
 
-    <fieldset>
+    <fieldset hidden>
       <legend>Get all users from local JSON file</legend>
       <button id="local">Send Request</button>
     </fieldset>
@@ -367,7 +212,7 @@ h1 {
     </script>
 
     <!-- ================= Get data from GitHub API ================= -->
-    <fieldset>
+    <fieldset hidden>
       <legend>Get users from GitHub API</legend>
       <button id="github">Send Request</button>
       <span id="userGithub"></span>
@@ -407,10 +252,6 @@ h1 {
 100 tower floors
 earn 300k gold tower
 500 energy
-<!-- 5 -->
-<!-- 5 exp potions -->
-<!-- first skills 15 times Adventures -->
-<!-- 1 titan summon -->
 6
 3 daily quests
 500 tower coins
