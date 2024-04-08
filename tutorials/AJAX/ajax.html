@@ -3,326 +3,151 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>AJAX | XMLHttpRequest</title> -->
-    <title>Creative Agency Page</title>
+    <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap");
-      
-      :root {
-        --primary-color: #000000;
-        --secondary-color: #1b1d1a;
-        --text-light: #767268;
-        --extra-light: #f3f4f6;
-      }
-      
-      * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-      }
-      
-      img {
-        width: 100%;
-      }
-      
-      body {
-        font-family: "Poppins", sans-serif;
-        background-color: var(--primary-color);
-      }
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+  fieldset {
+    display: none;
+  }
 
-      .page {
-        position: relative;
-        padding: 2rem 1%;
-        display: flex;
-        min-height: 100vh;
-      }
-      .page::before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 50%;
-        height: 100%;
-        background-color: var(--secondary-color);
-        z-index: -1;
-      }
-      
-      header {
-        display: flex;
-        /* min-height: 100vh; */
-        /* align-items: center; */
-        margin: auto;
-        /* box-shadow: 2px 2px 2px #000, -2px -2px 2px #fff5; */
-        box-shadow: 0.1rem 0.3rem 0.5rem #111, 
-                  -0.1rem -0.3rem 0.5rem #888;
-        border-radius: 1rem;
-      }
-      
-      .container-left,
-      .container-right {
-        /* flex: 1; */
-        /* position: relative; */
-        /* display: flex; */
-        /* align-items: center; */
-        border-radius: inherit;
-      }
-      
-      .container-left {
-        display: flex;
-        flex-direction: column;
-        background-color: var(--secondary-color);
-        /* justify-content: flex-end; */
-      }
-      
-      .nav-logo {
-        /* position: absolute; */
-        /* top: 0; */
-        /* width: 100%; */
-        /* max-width: 600px; */
-        padding: 2rem;
-        /* margin-left: auto; */
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: var(--extra-light);
-      }
-      
-      .content {
-        /* flex: 1; */
-        /* max-width: 600px; */
-        margin: auto;
-        /* padding: 2rem; */
-        padding: 2rem min(5%, 2rem);
-        /* padding-top: 5rem; */
-        color: var(--extra-light);
-        display: grid;
-        gap: 2rem;
-        z-index: 2;
-      }
-      
-      .title {
-        font-size: 3.5rem;
-        font-size: min(calc(3vw + 1.5rem), 3.5rem);
-        font-weight: 800;
-        line-height: 4rem;
-      }
-      .title .block {
-        display: block;
-      }
-      .title span {
-        color: transparent;
-        -webkit-text-stroke: 1px var(--extra-light);
-      }
-      /* .title span {
-        color: transparent;
-        -webkit-text-stroke: 2px var(--secondary-color);
-        filter: drop-shadow(1px 1px 1px #fff6);
-      } */
-      
-      .subtitle {
-        font-size: 1.2rem;
-        font-weight: 600;
-      }
-      
-      .description {
-        max-width: 31.25rem;
-      }
-      
-      .action-btns {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 1rem;
-      }
-      
-      .btn {
-        padding: 1rem 2rem;
-        font-size: 1.2rem;
-        background-color: transparent;
-        outline: none;
-        border: none;
-        border-radius: 2em;
-        cursor: pointer;
-      }
-      
-      .portfolio {
-        background-color: var(--extra-light);
-      }
-      
-      .cv {
-        color: var(--text-light);
-        /* border: 1px solid currentColor; */
-        text-decoration: underline;
-        transition: 0.3s;
-      }
-      .cv:hover {
-        color: var(--extra-light);
-      }
+  *, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-      /* .container-right {
-        max-width: 42rem;
-      } */
-      
-      .nav-links {
-        /* position: absolute; */
-        /* top: 0; */
-        list-style: none;
-        width: 100%;
-        max-width: 37.5rem;
-        /* padding: 2rem; */
-        padding: 2rem min(3%, 2rem);
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-around;
-        z-index: 1;
-      }
-      
-      .link {
-        padding: 0 0.5rem;
-        color: var(--text-light);
-        transition: 0.3s;
-        cursor: pointer;
-      }
-      .link:hover {
-        color: var(--extra-light);
-      }
-      
-      .image {
-        position: relative;
-        max-width: 37.5rem;
-        margin: auto;
-        padding: 2rem;
-        /* padding-top: 5rem; */
-        /* flex: 1; */
-        /* display: grid; */
-        /* place-content: center; */
-      }
-      
-      .image img {
-        max-width: 25rem;
-        /* border: 1px solid red; */
-      }
-      
-      .image-content {
-        position: absolute;
-        bottom: 1rem;
-        right: 1rem;
-        color: var(--extra-light);
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 1rem;
-      }
-      
-      .image-content h4 {
-        padding: 0.5rem;
-        color: var(--primary-color);
-        border-radius: 5px;
-        background-color: var(--extra-light);
-      }
-      
-      .image-content p {
-        font-size: 0.9rem;
-        font-weight: 600;
-      }
-      
-      @media (max-width: 1100px) {
-        .page {
-          padding: 0;
-        }
-        header {
-          width: 100%;
-          border-radius: 0;
-          box-shadow: unset;
-          flex-direction: column-reverse;
-        }
-        .container-left {
-          position: relative;
-          padding: 2rem 0;
-        }
-        .container-left::after {
-          position: absolute;
-          top: 0;
-          right: 0;
-          content: "";
-          width: 50%;
-          height: 100%;
-          background-color: var(--primary-color);
-          z-index: 1;
-        }
-        .cv {
-          border: 1px solid currentColor;
-        }
-        .nav-logo {
-          display: none;
-        }
-        .image img {
-          max-width: unset;
-        }
-        .nav-links {
-          margin: auto;
-        }
-      }
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f8f6ff;
+  color: #1f2555;
+  font-family: Arial, Helvetica, sans-serif ;
+}
 
-      /* @media (width < 900px) {
-        header {
-          flex-direction: column-reverse;
-        }
-      
-        .container-left,
-        .container-right {
-          justify-content: center;
-        }
-      
-        .content {
-          text-align: center;
-        }
-      
-        .action-btns {
-          justify-content: center;
-        }
-      } */
-    </style>
+.main-container {
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.green-background {
+  background: linear-gradient(45deg, #40ded3, #3edfa7);
+  border-radius: 2rem;
+  width: 70%;
+  height: 550px;
+  position: absolute;
+  left: 2rem;
+  top: -4rem;
+}
+
+.content {
+  width: 70%;
+  border-radius: 2rem;
+  background: #fff;
+  position: relative;
+  box-shadow: 0 2rem 2rem #d3f2f7;
+  padding: 3rem;
+}
+
+h2 {
+  font-family: 'Times New Roman', Times, serif;
+  margin-bottom: 1.5rem;
+}
+
+button {
+  width: 100%;
+  background: #1f2555;
+  color: #fff;
+  border: none;
+  border-radius: 0.8rem;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: 0.5s;
+  margin-bottom: 1.5rem;
+}
+
+button:hover {
+  background: #434760;
+}
+
+.message-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  transition: 0.5s;
+}
+
+.message-profile:hover {
+  background: #f8f6ff;
+}
+</style>
   </head>
   <body>
-    <div class="page">
-      <header>
-        <div class="container-left">
-          <div class="nav-logo">Brandon Watson</div>
-          <div class="content">
-            <h1 class="title"><span>Be</span> Creative, <span class="block">Be Impresive</span></h1>
-            <p class="subtitle">Creative Designer and Social Media Officer</p>
-            <p class="description">
-              I have to be able to communicate ideas to a wide range of
-              stackholders in both my own voice and in Sprout's.<br />Communicating
-              on social.
-            </p>
-            <div class="action-btns">
-              <button class="btn portfolio">Portfolio</button>
-              <button class="btn cv">Curriculum Vitae</button>
+    <!-- <h1>Inbox UI</h1> -->
+    <section class="main-container">
+      <div class="green-background"></div>
+      <div class="content">
+        <h2>Your messages</h2>
+        <button>Compose <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" /><path d="M13.5 6.5l4 4" /></svg></button>
+        <div class="messages">
+          <div class="message-profile">
+            <div class="image-container">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="50" height="50" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
+              <div class="dot available"></div>
             </div>
+            <div class="text">
+              <h3>Pam Beesly</h3>
+              <p class="message">Hi there, how are you?</p>
+            </div>
+            <p class="days-ago">4 days ago</p>
+          </div>
+          <div class="message-profile">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="50" height="50" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
+              <div class="dot busy"></div>
+              <div class="text">
+                <h3>Jim Halpert</h3>
+                <p class="message">How was the trip?</p>
+              </div>
+              <p class="days-ago">5 days ago</p>
+          </div>
+          <div class="message-profile">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="50" height="50" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
+              <div class="dot available"></div>
+              <div class="text">
+                <h3>Dwight Schrute</h3>
+                <p class="message">I hope you are well.</p>
+              </div>
+              <p class="days-ago">Mar 12, 2022</p>
+          </div>
+          <div class="message-profile">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="50" height="50" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
+              <div class="dot not-available"></div>
+              <div class="text">
+                <h3>Michael Scott</h3>
+                <p class="message">Thank you for answering.</p>
+              </div>
+              <p class="days-ago">Feb 3, 2022</p>
           </div>
         </div>
-        <div class="container-right">
-          <ul class="nav-links">
-            <li class="link">Home</li>
-            <li class="link">About</li>
-            <li class="link">Projects</li>
-            <li class="link">Contact</li>
-          </ul>
-          <div class="image">
-            <img src="assets/bg.png" alt="profile" />
-            <div class="image-content">
-              <h4>Brandon Watson</h4>
-              <p>Founder of PT.CryptoCoin Price Control</p>
-            </div>
-          </div>
-        </div>
-      </header>
-    </div>
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+      </div>
+    </section>
+    <h1 hidden><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <h1 id="title" style="display: none;">Loading...</h1>
     <p id="summary" style="display: none;">Loading...</p>
@@ -355,7 +180,7 @@
       // console.log(state);
     </script>
 
-    <fieldset hidden>
+    <fieldset>
       <legend>Get all users from local JSON file</legend>
       <button id="local">Send Request</button>
     </fieldset>
@@ -385,7 +210,7 @@
     </script>
 
     <!-- ================= Get data from GitHub API ================= -->
-    <fieldset hidden>
+    <fieldset>
       <legend>Get users from GitHub API</legend>
       <button id="github">Send Request</button>
       <span id="userGithub"></span>
@@ -421,31 +246,14 @@
 <p style="display: none;">
   pet season
 1
-<!-- chat -->
-<!-- win 2 times with support hero in Camp -->
-<!-- upgrade titan 3 level -->
-<!-- buy 15 items -->
-<!-- altar of power 5 times -->
 1000 energy
 100 tower floors
-<!-- 2 -->
-<!-- pet summon -->
-<!-- take 200k damage Camp -->
-<!-- 1 titan summon -->
-<!-- 3 -->
-<!-- MP glyph -->
-<!-- deal 150k magic damege tower -->
-<!-- 5 exp potions -->
-<!-- 4 -->
-<!-- 40 monsters Camp ch.8 -->
-<!-- chat -->
-<!-- pet summon -->
 earn 300k gold tower
 500 energy
-5
-5 exp potions
-first skills 15 times Adventures
-1 titan summon
+<!-- 5 -->
+<!-- 5 exp potions -->
+<!-- first skills 15 times Adventures -->
+<!-- 1 titan summon -->
 6
 3 daily quests
 500 tower coins
