@@ -3,435 +3,183 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>AJAX | XMLHttpRequest</title> -->
-    <title>Fashion Photography</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      /* @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap"); */
-      @import url('https://fonts.googleapis.com/css2?family=Redressed&display=swap');
-
-      :root {
-        --primary-color: #b32557;
-        --white: #ffffff;
-        /* --max-width: 1200px; */
-        --max-width: 75rem;
-      }
-      
-      * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-      }
-
-      a {
-        color: var(--white);
-        display: inline-block;
-        text-transform: uppercase;
-        text-decoration: none;
-      }
-
-      button {
-        /* padding: 0.4em 1em; */
-        border: none;
-        outline: none;
-        /* font-family: Georgia, serif; */
-        text-transform: uppercase;
-        background-color: transparent;
-        cursor: pointer;
-      }
-      button:focus-within {
-        outline: 1px solid #fff8;
-      }
-
-      a, button {
-        font-family: Georgia, serif;
-        transition: all 500ms ease-in-out;
-      }
-
-      /* .delay {
-        animation-delay: calc(0.3s * var(--delay));
-      } */
-      
-      body {
-        min-height: 100vh;
-        padding: 1rem;
-        display: flex;
-        /* font-family: "Fredoka", sans-serif; */
-        font-family: 'Redressed', cursive;
-        /* background-image: url("./img/header.jpg"); */
-        background-image: url("./img/abstract-hot-pink-background-design.jpg");
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        /* background: var(--primary-color), #b53a69; */
-        /* background: linear-gradient(-45deg, #b53a69, #b32557); */
-      }
-      body::after {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        backdrop-filter: blur(30px);
-        z-index: -1;
-      }
-      
-      .container {
-        width: 100%;
-        max-width: var(--max-width);
-        /* min-height: 100vh; */
-        margin: auto;
-        padding: 0 2rem;
-        /* display: flex; */
-        /* flex-direction: column; */
-        border-radius: 1rem;
-        background-image: url("./img/header.jpg");
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        border: 2px solid var(--white);
-        /* border: 2px solid #000; */
-        box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.4);
-        /* overflow: hidden; */
-      }
-      
-      nav {
-        padding: 2rem 1rem;
-        /* overflow: hidden; */
-        display: flex;
-        align-items: center;
-        /* justify-content: space-between; */
-        gap: 2rem;
-      }
-
-      nav > a {
-        animation: fade-down 500ms linear backwards;
-        animation-delay: calc(0.5s * var(--delay));
-      }
-      
-      .nav-links {
-        list-style: none;
-        flex: 1;
-        display: flex;
-        align-items: center;
-        /* justify-content: space-between; */
-        gap: 2rem;
-      }
-      .nav-links li {
-        display: none;
-        animation: fade-down 500ms linear backwards;
-        animation-delay: calc(0.5s * var(--delay));
-      }
-      .nav-links li:last-child {
-        display: initial;
-        margin-left: auto;
-      }
-      
-      /* .nav-links > div li:not(:first-child) {
-        display: none;
-      } */
-      
-      .fa-camera-retro {
-        font-size: 2.5rem;
-        color: var(--white);
-      }
-      /* .nav-links img {
-        max-width: 50px;
-      } */
-      
-      .nav-links a {
-        position: relative;
-        /* isolation: isolate; */
-        /* padding-bottom: 10px; */
-        /* text-decoration: none; */
-        font-weight: 500;
-        color: var(--white);
-      }
-      .nav-links a::after {
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 2px;
-        background-color: var(--white);
-        transform-origin: left;
-        transform: scale(0);
-        transition: transform 300ms;
-      }
-      .nav-links a:hover::after {
-        /* width: 100%; */
-        transform: scale(1);
-      }
-      
-      .section-container {
-        flex: 1;
-        width: 100%;
-        /* position: relative; */
-        /* isolation: isolate; */
-        padding: 5rem 1rem 3rem;
-        /* display: flex; */
-        /* flex-direction: column; */
-        /* justify-content: center; */
-      }
-      
-      .section-container h3 {
-        margin-bottom: 1rem;
-        font-size: 1.5rem;
-        font-weight: 500;
-        color: var(--white);
-        animation: fade-up 500ms linear;
-      }
-      
-      .section-container h1,
-      .section-container h2 {
-        font-size: 4rem;
-        font-weight: 600;
-        color: var(--white);
-        line-height: 4rem;
-      }
-      
-      .section-container h1 {
-        -webkit-text-fill-color: transparent;
-        -webkit-text-stroke: 2px var(--white);
-        animation: fade-left 500ms linear backwards;
-        animation-delay: calc(0.5s * var(--delay)) ;
-      }
-      .section-container h2 {
-        animation: fade-right 500ms linear backwards;
-        animation-delay: calc(0.5s * var(--delay)) ;
-      }
-      
-      .section-container button {
-        max-width: fit-content;
-        margin-block: 5rem;
-        padding-left: 1rem;
-        color: var(--white);
-        font-size: 1rem;
-        font-weight: 600;
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        /* background-color: transparent; */
-        /* outline: none; */
-        border: 2px solid var(--white);
-        /* border-radius: 2em; */
-        animation: fade-up 500ms linear backwards;
-        animation-delay: calc(0.5s * var(--delay)) ;
-        /* cursor: pointer; */
-      }
-      .section-container button:hover {
-        color: var(--primary-color);
-        background-color: var(--white);
-      }
-      /* .section-container button:active {
-        box-shadow: inset 2px 2px 2px #000;
-      } */
-      .section-container button span {
-        padding: 0.6em 1em;
-        color: var(--primary-color);
-        font-size: 1.5rem;
-        background-color: var(--white);
-        transition: all 500ms ease-in-out;
-      }
-      .fa-location-arrow {
-        transform: rotate(45deg);
-      }
-      /* .section-container button:hover span {
-        color: var(--white);
-        background-color: var(--primary-color);
-      } */
-
-      .footer {
-        display: flex;
-        column-gap: 3rem;
-        align-items: flex-end;
-        justify-content: space-between;
-        flex-wrap: wrap;
-      }
-      
-      .scroll-bottom {
-        /* position: absolute; */
-        /* bottom: 0; */
-        /* transform: translate(-50%, -5rem) rotate(-90deg); */
-        animation: scroll-down 2s linear infinite;
-      }
-      
-      .scroll-bottom a {
-        /* text-decoration: none; */
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        color: var(--white);
-        writing-mode: sideways-lr;
-      }
-      .scroll-bottom:hover {
-        animation-play-state: paused;
-      }
-      
-      .scroll-bottom span {
-        display: block;
-        font-size: 1.2rem;
-        transform: rotate(90deg);
-      }
-      
-      @keyframes scroll-down {
-        /* 0% {
-          translate: 0 0;
-        } */
-        50% {
-          translate: 0 10px;
-        }
-        /* 100% {
-          translate: 0 0;
-        } */
-      }
-      
-      .socials {
-        /* position: absolute; */
-        /* bottom: 2rem; */
-        /* right: 2rem; */
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-      }
-      
-      .socials a {
-        /* text-decoration: none; */
-        padding: 6px 8px;
-        color: var(--primary-color);
-        font-size: 1.5rem;
-        border-radius: 100%;
-        border: 1px solid var(--white);
-        background-color: var(--white);
-        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
-        animation: pop-up 500ms linear backwards;
-        animation-delay: calc(2s + 0.3s * var(--delay)) ;
-      }
-      .socials a:hover {
-        color: var(--white);
-        border: 1px solid var(--white);
-        background-color: var(--primary-color);
-      }
-
-      @media (width < 75rem) {
-        .container {
-          border-radius: 0;
-        }
-      }
-
-      @media (width < 45rem) {
-        body {
-          padding: 0;
-        }
-      }
-      
-      @media (width > 540px) {
-        .section-container h1,
-        .section-container h2 {
-          font-size: 5.5rem;
-          line-height: 5.5rem;
-        }
-      }
-      
-      @media (width > 768px) {
-        /* .nav-links > div li:not(:first-child) {
-          display: block;
-        } */
-        .nav-links li {
-          display: initial;
-        }
-      
-        /* .nav-links > div {
-          display: flex;
-          align-items: center;
-          gap: 2rem;
-        } */
-      
-        .section-container h1,
-        .section-container h2 {
-          font-size: 7rem;
-          line-height: 7rem;
-        }
-      }
-
-      @keyframes fade-up {
-        0% {
-          transform: translateY(100%);
-          opacity: 0;
-        }
-      }
-      @keyframes fade-down {
-        0% {
-          transform: translateY(-100%);
-          opacity: 0;
-        }
-      }
-      @keyframes fade-left {
-        0% {
-          transform: translateX(2rem);
-          opacity: 0;
-        }
-      }
-      @keyframes fade-right {
-        0% {
-          transform: translateX(-2rem);
-          opacity: 0;
-        }
-      }
-      @keyframes pop-up {
-        0% {
-          opacity: 0;
-        }
-      }
-    </style>
+    <title>AJAX | XMLHttpRequest</title>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<style>
+fieldset {
+  display: none;
+}
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: #fffbfb;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.login-container {
+  width: 90%;
+  max-width: 700px;
+  border-radius: 1rem;
+  padding: 1rem;
+  background: #fff;
+  display: flex;
+  gap: 2rem;
+  box-shadow: 0 1rem 1.5rem #fae1f0;
+}
+img {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  object-fit: cover;
+  width: 50%;
+}
+.form-section {
+  width: 100%;
+  padding: 2rem 2rem 0 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+legend {
+  font-weight: 700;
+  font-size: 1.4rem;
+  font-family: 'Times New Roman', Times, serif;
+  margin-bottom: 1.5rem;
+}
+form {
+  margin-bottom: 3rem;
+}
+form p {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+form p label {
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+form p input {
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  background: #fffbfb;
+  border: 1.5px solid #72727232;
+  border-radius: 0.25rem;
+  outline: none;
+}
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.buttons-container p {
+  color: #727272;
+  font-size: 0.8rem;
+}
+button {
+  width: 100%;
+  border-radius: 0.25rem;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  padding: 0.8rem;
+  transition: 0.5s;
+}
+.submit {
+  background: #a04625;
+  box-shadow: 0 0.5rem 1rem #f6e4c8;
+}
+.submit:hover {
+  background: #a04625e2;
+}
+.linkedin-btn {
+  background: #0f64c2;
+  box-shadow: 0 0.5rem 1rem #c9d8ef;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center;
+}
+.linkedin-btn:hover {
+  background: #0f63c2cb;
+}
+::placeholder {
+  color: #727272;
+}
+.links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.dot {
+  border-radius: 50%;
+  width: 0.1rem;
+  height: 0.1rem;
+  background: #000;
+}
+a {
+  text-decoration: none;
+  font-size: 0.7rem;
+  color: #0f64c2;
+}
+@media (max-width: 600px) {
+  .login-container {
+    flex-direction: column;
+    margin: 3rem 0;
+  }
+  img {
+    width: 100%;
+    height: 250px;
+    object-position: 0 30%;
+    border-top-right-radius: 0.5rem;
+    border-bottom-left-radius: unset;
+  }
+  .buttons-container {
+    align-items: center;
+  }
+}
+</style>
   </head>
   <body>
-    <!-- <div class="page"> -->
-      <div class="container">
-        <nav>
-          <a style="--delay: 4">
-            <i class="fa fa-camera-retro"></i>
-            <!-- <img src="./img/logo.png" alt="logo" /> -->
-          </a>
-          <ul class="nav-links">
-            <!-- <div> -->
-              <li style="--delay: 5"><a href="#">ABOUT</a></li>
-              <li style="--delay: 6"><a href="#">WEDDING</a></li>
-              <li style="--delay: 7"><a href="#">FAMILY</a></li>
-              <li style="--delay: 8"><a href="#">BUSINESS</a></li>
-            <!-- </div> -->
-            <li style="--delay: 9"><a href="#">CONTACT</a></li>
-          </ul>
-        </nav>
-        <section class="section-container">
-          <h3>Jeremy Hutson</h3>
-          <h1 style="--delay: 1">Fashion</h1>
-          <h2 style="--delay: 2">Photography</h2>
-          <button style="--delay: 3">
-            OUR OFFER
-            <span><i class="fa fa-location-arrow"></i></span>
-          </button>
-          <div class="footer">
-            <div class="scroll-bottom">
-              <a href="#">
-                <span><i class="ri-mouse-fill"></i></span>
-                SCROLL
-              </a>
-            </div>
-            <div class="socials">
-              <a href="#" style="--delay: 10"><i class="ri-dribbble-fill"></i></a>
-              <a href="#" style="--delay: 11"><i class="ri-instagram-line"></i></a>
-              <a href="#" style="--delay: 12"><i class="ri-youtube-fill"></i></a>
-            </div>
-          </div>
-        </section>
-      </div>
-    <!-- </div> -->
 
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+  <h1>Login screen</h1>
+  <section class="login-container">
+    <img src="./img/435309035_791538432910257_1489602487677436702_n.jpg" alt="" width="300" height="500">
+    <div class="form-section">
+      <form>
+        <legend>Log in</legend>
+        <p>
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" placeholder="Enter your email address" required>
+        </p>
+        <p>
+          <label for="password">Passsword</label>
+          <input type="password" name="password" id="password" placeholder="Enter your password" required>
+        </p>
+        <div class="buttons-container">
+          <button class="submit" type="submit">Log in</button>
+          <p>Or</p>
+          <button class="linkedin-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" /><path d="M8 11l0 5" /><path d="M8 8l0 .01" /><path d="M12 16l0 -5" /><path d="M16 16v-3a2 2 0 0 0 -4 0" /></svg>
+            Continue with Linkedin
+          </button>
+        </div>
+      </form>
+      <div class="links">
+        <a href="#">Can't log in?</a>
+        <div class="dot"></div>
+        <a href="#">Sign up for an account</a>
+      </div>
+    </div>
+  </section>
+
+    <h1 hidden><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
 
     <h1 id="title" style="display: none;">Loading...</h1>
     <p id="summary" style="display: none;">Loading...</p>
@@ -464,7 +212,7 @@
       // console.log(state);
     </script>
 
-    <fieldset hidden>
+    <fieldset>
       <legend>Get all users from local JSON file</legend>
       <button id="local">Send Request</button>
     </fieldset>
@@ -494,7 +242,7 @@
     </script>
 
     <!-- ================= Get data from GitHub API ================= -->
-    <fieldset hidden>
+    <fieldset>
       <legend>Get users from GitHub API</legend>
       <button id="github">Send Request</button>
       <span id="userGithub"></span>
