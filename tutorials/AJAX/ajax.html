@@ -21,8 +21,8 @@
       }
       
       * {
-        padding: 0;
         margin: 0;
+        padding: 0;
         box-sizing: border-box;
       }
 
@@ -42,13 +42,48 @@
         isolation: isolate;
         display: inline-block;
         margin-bottom: 1rem;
-        padding-left: 5rem;
+        /* padding-left: 5rem; */
         color: var(--secondary-color);
         font-size: 0.9rem;
         font-weight: 600;
         letter-spacing: 2px;
+        display: inline-flex;
+        padding-inline: 1rem;
+        align-items: center;
+      }
+      .section-subheader span {
+        order: 2;
+        padding-left: 1rem;
+        transform: translateY(1rem);
+      }
+      .section-subheader::after {
+        /* position: absolute; */
+        /* top: 50%; */
+        /* left: 0; */
+        display: inline-block;
+        content: "";
+        /* transform: translateY(-50%); */
+        transform: translateY(1rem);
+        width: 4rem;
+        height: 2px;
+        background-color: var(--secondary-color);
       }
       .section-subheader::before {
+        display: inline-block;
+        /* position: absolute; */
+        /* top: 0; */
+        /* left: 0; */
+        /* transform: translate(-60%, -50%); */
+        width: 0;
+        color: var(--white);
+        font-size: 8rem;
+        font-weight: 600;
+        /* line-height: 0; */
+        font-family: Georgia, serif;
+        opacity: 0.1;
+        z-index: -1;
+      }
+      /* .section-subheader::before {
         position: absolute;
         top: 50%;
         left: 0;
@@ -69,7 +104,7 @@
         font-family: Georgia, serif;
         opacity: 0.1;
         z-index: -1;
-      }
+      } */
       
       .section-header {
         margin-bottom: 1rem;
@@ -136,27 +171,48 @@
 
       .bg {
         position: fixed;
-        width: 120%;
+        /* width: 120%; */
+        width: 100%;
         height: 100%;
         top: 0;
         left: 0;
-        background-image: url("./img/snow_covered_mountains_4k.jpg");
-        background-repeat: no-repeat;
-        background-position: center left;
-        background-size: cover;
-        animation: animate 100s ease-in-out infinite;
+        /* background-image: url("./img/snow_covered_mountains_4k.jpg"); */
+        /* background-repeat: no-repeat; */
+        /* background-position: center left; */
+        /* background-size: cover; */
+        /* animation: animate 100s ease-in-out infinite; */
         z-index: -1;
       }
-      .bg::after {
+      .bg::before {
             position: absolute;
             top: 0;
             left: 0;
             content: "";
-            width: 100%;
+            /* width: 100%; */
+            width: 120%;
             height: 100%;
             background-image: 
             linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent, rgba(0, 0, 0, 0.8)), 
             linear-gradient(to left, rgba(0, 0, 0, 0.8), transparent, transparent);
+            background-image: url("./img/snow_covered_mountains_4k.jpg");
+            background-repeat: no-repeat;
+            background-position: bottom;
+            background-size: cover;
+            animation: animate 60s ease-in-out infinite;
+            z-index: 1;
+        }
+        .bg::after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: "";
+            /* width: 100%; */
+            width: 100%;
+            height: 100%;
+            background-image: 
+            linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent, rgba(0, 0, 0, 0.8)), 
+            linear-gradient(to left, rgba(0, 0, 0, 0.8), transparent, rgba(0, 0, 0, 0.8));
+            z-index: 2;
         }
         
         @keyframes animate {
@@ -164,7 +220,7 @@
                 transform: translateX(0%);
             }
             50% {
-                transform: translateX(-20%);
+                transform: translateX(-10%);
             }
             100% {
                 transform: translateX(0%);
@@ -173,7 +229,7 @@
       
       .header {
         position: relative;
-        min-height: 45rem;
+        min-height: 40rem;
         z-index: 1;
       }
       .header::before {
@@ -195,6 +251,37 @@
         background-position: center center;
         background-size: cover;
         z-index: -1;
+      }
+      
+      nav {
+        position: relative;
+        max-width: var(--max-width);
+        margin: auto;
+        padding: 1rem;
+        z-index: 9;
+      }
+      
+      .nav-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      
+      .nav-links {
+        position: absolute;
+        right: 1rem;
+        top: 68px;
+        width: calc(100% - 2rem);
+        max-width: 350px;
+        padding: 2rem;
+        list-style: none;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 2rem;
+        background-color: rgba(10, 30, 39, 0.8);
+        border-radius: 10px;
+        display: none;
       }
     </style>
   </head>
@@ -223,11 +310,11 @@
       </nav>
       <div class="section-container header-container">
         <div class="header-content">
-          <h3 class="section-subheader">A HIKING GUIDE</h3>
-          <h1 class="section-header">
+          <h3 class="section-subheader animated paused rel-fade-up"><span>A HIKING GUIDE</span></h3>
+          <h1 class="section-header animated paused abs-fade-up" style="--delay: 1">
             Be Prepared For The Mountains And Beyond!
           </h1>
-          <div class="scroll-btn">
+          <div class="scroll-btn animated paused rel-fade-up" style="--delay: 2">
             <a href="#about">
               Scroll down
               <!-- <span><i class="ri-arrow-down-line"></i></span> -->
@@ -235,7 +322,7 @@
             </a>
           </div>
         </div>
-        <div class="header-socials">
+        <div class="header-socials animated paused abs-fade-down" style="--delay: 3">
           <span>Follow us</span>
           <a href="#"><i class="ri-instagram-line"></i></a>
           <a href="#"><i class="ri-twitter-fill"></i></a>
@@ -245,21 +332,22 @@
 
     <section class="about">
       <div class="section-container about-container">
-        <div class="about-image about-image-1" id="about">
+        <div class="about-image about-image-1 animated paused abs-fade-left" id="about">
           <img src="./img/about-1.jpg" alt="about"/>
           <!-- <img src="./img/mask.png" alt="" class="mask"> -->
         </div>
         <div class="about-content about-content-1">
-          <h3 class="section-subheader">GET STARTED</h3>
-          <h2 class="section-header">What level of hiker are you?</h2>
-          <p>
+          <!-- <h3 class="section-subheader">GET STARTED</h3> -->
+          <h3 class="section-subheader animated paused abs-fade-up" style="--delay: 1"><span>GET STARTED</span></h3>
+          <h2 class="section-header animated paused abs-fade-up" style="--delay: 2">What level of hiker are you?</h2>
+          <p class="animated paused abs-fade-up" style="--delay: 3">
             Whether you're a novice seeking scenic strolls or an experienced
             trekker craving challenging ascents, we've curated a diverse range
             of trails to cater to every adventurer. Uncover your hiking
             identity, explore tailored recommendations, and embrace the great
             outdoors with a newfound understanding of your capabilities.
           </p>
-          <div class="about-btn">
+          <div class="about-btn animated paused abs-fade-up" style="--delay: 4">
             <a href="#">
               Read more
               <!-- <span><i class="ri-arrow-right-line"></i></span> -->
@@ -267,14 +355,15 @@
             </a>
           </div>
         </div>
-        <div class="about-image about-image-2" id="equipment">
+        <div class="about-image about-image-2 animated paused abs-fade-right" id="equipment">
           <img src="./img/about-2.jpg" alt="about"/>
           <!-- <img src="./img/mask.png" alt="" class="mask"> -->
         </div>
         <div class="about-content about-content-2">
-          <h3 class="section-subheader">HIKING ESSENTIALS</h3>
-          <h2 class="section-header">Picking the right hiking gear!</h2>
-          <p>
+          <!-- <h3 class="section-subheader">HIKING ESSENTIALS</h3> -->
+          <h3 class="section-subheader animated paused abs-fade-up" style="--delay: 1"><span>HIKING ESSENTIALS</span></h3>
+          <h2 class="section-header animated paused abs-fade-up" style="--delay: 2">Picking the right hiking gear!</h2>
+          <p class="animated paused abs-fade-up" style="--delay: 3">
             From durable footwear that conquers rugged trails to lightweight
             backpacks that carry your essentials with ease, we navigate the
             intricacies of gear selection to ensure you're geared up for success
@@ -282,7 +371,7 @@
             confidence, knowing you've chosen the right gear for the trail
             ahead!
           </p>
-          <div class="about-btn">
+          <div class="about-btn animated paused abs-fade-up" style="--delay: 4">
             <a href="#">
               Read more
               <!-- <span><i class="ri-arrow-right-line"></i></span> -->
@@ -290,21 +379,22 @@
             </a>
           </div>
         </div>
-        <div class="about-image about-image-3" id="blog">
+        <div class="about-image about-image-3 animated paused abs-fade-left" id="blog">
           <img src="./img/about-3.jpg" alt="about"/>
           <!-- <img src="./img/mask.png" alt="" class="mask"> -->
         </div>
         <div class="about-content about-content-3">
-          <h3 class="section-subheader">WHERE YOU GO IS THE KEY</h3>
-          <h2 class="section-header">Understanding your map & timing</h2>
-          <p>
+          <!-- <h3 class="section-subheader">WHERE YOU GO IS THE KEY</h3> -->
+          <h3 class="section-subheader animated paused abs-fade-up" style="--delay: 1"><span>WHERE YOU GO IS THE KEY</span></h3>
+          <h2 class="section-header animated paused abs-fade-up" style="--delay: 2">Understanding your map & timing</h2>
+          <p class="animated paused abs-fade-up" style="--delay: 3">
             Knowing when to start and anticipating the changing conditions
             ensures a safe and enjoyable journey. So, dive into the details,
             grasp the contours, and synchronize your steps with the rhythm of
             nature. It's not just a hike; it's a journey orchestrated by your
             map and timed to perfection.
           </p>
-          <div class="about-btn">
+          <div class="about-btn animated paused abs-fade-up" style="--delay: 4">
             <a href="#">
               Read more
               <!-- <span><i class="ri-arrow-right-line"></i></span> -->
@@ -375,7 +465,9 @@
       
       menuBtn.addEventListener("click", (e) => {
         const isOpen = navLinks.classList.contains("open");
-        menuBtnIcon.setAttribute("class", isOpen ? "ri-menu-line" : "ri-close-line");
+        // menuBtnIcon.setAttribute("class", isOpen ? "ri-menu-line" : "ri-close-line");
+        menuBtnIcon.classList.toggle("ri-menu-line");
+        menuBtnIcon.classList.toggle("ri-close-line");
         if (isOpen) {
           navLinks.classList.add("close");
           navLinks.addEventListener(
@@ -395,6 +487,23 @@
         navLinks.classList.remove("open");
         menuBtnIcon.setAttribute("class", "ri-menu-line");
       });
+
+      const animatedElements = document.querySelectorAll(".animated");
+      const observer = new IntersectionObserver(reveal);
+
+      animatedElements.forEach(element => {
+        observer.observe(element);
+      })
+
+      function reveal(entries) {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            console.log(entry.target.classList.remove("paused"));
+            console.log(entry.target);
+          }
+        });
+      };
+        
     </script>
 
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
