@@ -80,8 +80,9 @@
         /* top: 0; */
         /* left: 0; */
         /* transform: translate(-60%, -50%); */
-        counter-increment: subheader;
-        content: "0"counter(subheader);
+        /* counter-increment: subheader; */
+        /* content: "0"counter(subheader); */
+        content: "";
         width: 0;
         color: var(--white);
         font-size: 8rem;
@@ -383,9 +384,9 @@
       .header-content .section-subheader {
         padding-inline: 0;
       }
-      .header-content .section-subheader::before {
-        content: none;
-      }
+      /* .header-content .section-subheader::before { */
+        /* content: none; */
+      /* } */
       
       .header-content a {
         color: var(--white);
@@ -440,6 +441,11 @@
       .about-content {
         align-self: start;
         text-align: center;
+      }
+
+      .about .section-subheader::before {
+        counter-increment: subheader;
+        content: "0"counter(subheader);
       }
 
       .about-image {
@@ -591,6 +597,88 @@
         color: var(--text-light);
         font-size: 0.9rem;
         text-align: center;
+      }
+      
+
+      @media (max-width: 31.25rem) {
+        .footer-col {
+          width: 100%;
+          text-align: center;
+        }
+      }
+
+      @media (width > 48rem) {
+        .nav-logo {
+          flex: 1;
+        }
+      
+        .nav-links {
+          position: static;
+          padding: 0;
+          display: flex;
+          gap: 2rem;
+          /* flex-direction: row; */
+          background-color: transparent;
+        }
+      
+        .nav-menu-btn {
+          display: none;
+        }
+      
+        .nav-action-btn {
+          justify-content: flex-end;
+          display: flex;
+          flex: 1;
+        }
+      
+        /* .header-container {
+          height: calc(100% - 10rem);
+        } */
+      
+        .header-socials {
+          display: flex;
+        }
+      
+        .about-container {
+          grid-template-columns: repeat(2, 1fr);
+          align-items: center;
+          gap: 10rem 2rem;
+        }
+      
+        .about-image-1 {
+          grid-area: 1/2/2/3;
+        }
+      
+        .about-image-3 {
+          grid-area: 3/2/4/3;
+        }
+      
+        .about-content {
+          /* margin-left: 6rem; */
+          text-align: initial;
+          /* border: 1px solid red; */
+        }
+
+        .footer-col:first-child {
+          /* flex: 1; */
+          text-align: initial;
+          /* max-width: 350px; */
+          max-width: 22rem;
+        }
+      
+        /* .footer-container {
+          grid-template-columns: 2fr 1fr 1fr;
+        } */
+      }
+
+      @media (min-width: 118.75rem) {
+        .page {
+          max-width: var(--site-max-width);
+          margin: 2rem auto;
+          border-radius: 20px;
+          box-shadow: -5px -5px 5px #fff4, 5px 5px 5px #0005;
+          overflow: hidden;
+        }
       }
 
       .rel-fade-up {
@@ -869,6 +957,52 @@
       };
         
     </script>
+
+    <div class="container">
+      <div class="left">
+        <div class="image-content">
+          <h2>sign up</h2>
+          <p class="title">
+            Please enter your details to sign up and be a part of our great community.
+          </p>
+          <p class="subtitle">
+            Already have an account?
+          </p>
+          <button class="sign-in">sign in</button>
+        </div>
+      </div>
+      <div class="right">
+        <form>
+          <div class="row">
+            <div class="group">
+              <label for="first-name">first name</label>
+              <input type="text" name="first-name" id="first-name" placeholder="First Name">
+            </div>
+            <div class="group">
+              <label for="last-name">last name</label>
+              <input type="text" name="last-name" id="last-name" placeholder="Last Name">
+            </div>
+          </div>
+          <div class="group">
+            <label for="user-name">user name</label>
+            <input type="text" name="user-name" id="user-name" placeholder="User Name">
+          </div>
+          <div class="group">
+            <label for="email">email</label>
+            <input type="text" name="email" id="email" placeholder="Email">
+          </div>
+          <div class="group">
+            <label for="password">password</label>
+            <input type="password" name="password" id="password" placeholder="Password">
+          </div>
+          <div class="group">
+            <label for="confirm-password">confirm password</label>
+            <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm-Password">
+          </div>
+          <button type="submit" class="submit">sign up</button>
+        </form>
+      </div>
+    </div>
 
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
 
