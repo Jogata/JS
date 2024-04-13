@@ -7,277 +7,143 @@
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-fieldset {
-  display: none;
-}
-*, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body {
-  min-height: 100vh;
-  /* display: flex; */
-  /* justify-content: center; */
-  /* align-items: center; */
-  /* flex-direction: column; */
-  background: #f5f6ff;
-  color: #0d0e43;
-  font-family: Arial, Helvetica, sans-serif;
-}
-.notification-container {
-  width: 90%;
-  max-width: 600px;
-  position: relative;
-  display: flex;
-  justify-content: center;
-}
-.notification {
-  border-radius: 1rem;
-  padding: 1.5rem;
-  background: #fff;
-  box-shadow: 0 1rem 1rem #e6e6f2;
-  position: relative;
-  width: 100%;
-  max-width: 500px;
-  transition: 0.5s;
-}
-.blue-section {
-  background: #e9eaff;
-  position: absolute;
-  top: -45%;
-  left: -15%;
-  border-radius: 2rem;
-  width: 300px;
-  height: 200px;
-  z-index: -1;
-}
-.icon-tabler-bell {
-  border-radius: 50%;
-  background: #0d0e43;
-  color: #fff;
-  padding: 0.5rem;
-  position: absolute;
-  right: 0;
-  top: -3.5rem;
-  cursor: pointer;
-  transition: 0.5s;
-  border: 1px solid transparent;
-}
-.icon-tabler-bell:hover {
-  background: #fff;
-  color: #0d0e43;
-  border-color: #0d0e43;
-}
-h2 {
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
-}
-h3 {
-  font-size: 1rem;
-  margin: 0.8rem 0;
-}
-p {
-  font-size: 0.8rem;
-  margin-bottom: 2rem;
-}
-.info {
-  display: flex;
-  gap: 1rem;
-}
-.icon-tabler-mail {
-  background: #ffe8f3;
-  color: #ce4173;
-  padding: 1rem;
-  border-radius: 0.25rem;
-  min-width: 70px;
-}
-.buttons-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.8rem;
-}
-button {
-  background: #fff;
-  border-radius: 2rem;
-  border: 1px solid;
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  padding: 0.35rem 0.8rem;
-  cursor: pointer;
-  transition: 0.5s;
-  font-size: 0.8rem;
-}
-.twitter {
-  border-color: #1287BB;
-  color: #1287BB;
-  margin-left: -5rem;
-}
-.twitter:hover {
-  background: #1287BB;
-  color: #fff;
-}
-.twitter:hover .icon-tabler-brand-twitter, 
-.facebook:hover .icon-tabler-brand-facebook  {
-  color: #fff;
-}
-.facebook {
-  border-color: #3963a3;
-  color: #3963a3;
-}
-.facebook:hover {
-  background: #0d0e43;
-  color: #fff;
-}
-.icon-tabler-brand-twitter {
-  color: #1287BB;
-}
-.icon-tabler-brand-facebook {
-  color: #3963a3;
-}
-@media (max-width: 350px) {
-  .twitter {
-    margin-left: unset;
-  }
-}
-.flex {
-  height: 100vh;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: wheat;
-}
-.slider-container {
-  position: relative;
-  width: 500px;
-  overflow: hidden;
-  height: 300px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-.image-container {
-  display: flex;
-  transition: transform 0.4s ease-in-out;
-}
-.btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  color: white;
-  font-size: 20px;
-  opacity: 0.5;
-  cursor: pointer;
-}
-.btn.prev {
-  left: 10px;
-}
-.btn.next {
-  right: 10px;
-}
-.btn:hover {
-  opacity: 1;
-}
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      a {
+        display: inline-block;
+        text-transform: capitalize;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: color 300ms;
+        /* border: 1px solid red; */
+      }
     </style>
   </head>
   <body>
-  <!-- <h1>Message Notification</h1> -->
-  <div class="flex">
-  <section class="notification-container">
-    <div class="blue-section"></div>
-    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bell" width="45" height="45" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /></svg>
-    <div class="notification">
-      <h2>You have 1 new message</h2>
-      <div class="info">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="70" height="70" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
-        <div class="info-text">
-          <h3>Feb 22</h3>
-          <p>I you like what we do, please tell your friends and share.</p>
+
+    <header>
+      <a href="#" class="logo">crypto.
+        <span class="reveal"></span>
+      </a>
+      <nav>
+        <a href="#" class="active">home</a>
+        <a href="#">about</a>
+        <a href="#">pricing</a>
+        <a href="#">services</a>
+        <a href="#">contact</a>
+        <span class="reveal"></span>
+      </nav>
+      <a href="#" class="btn">sign up
+        <span class="reveal"></span>
+      </a>
+    </header>
+    <section class="home">
+      <span class="reveal bg"></span>
+      <div class="home-content">
+        <h1>
+          <span>the next generation
+            <span class="reveal" style="--delay: 1"></span>
+          </span>
+          <span>decentralized
+            <span class="reveal" style="--delay: 2"></span>
+          </span>
+          <span>cryptocurrency
+            <span class="reveal" style="--delay: 3"></span>
+          </span>
+        </h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas consectetur, eaque qui illum dolorum recusandae autem exercitationem saepe atque quia.
+          <span class="reveal"></span>
+        </p>
+        <div class="btns">
+          <a href="#" class="btn">get started</a>
+          <a href="#" class="btn alt">learn more</a>
+          <span class="reveal"></span>
         </div>
       </div>
-      <div class="buttons-container">
-        <button class="twitter">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c0 -.249 1.51 -2.772 1.818 -4.013z" /></svg>
-          Twitter
-        </button>
-        <button class="facebook">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-facebook" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" /></svg>
-          Facebook
-        </button>
+    </section>
+    <section class="authentication">
+      <div class="wrapper">
+        <div class="form-box login">
+          <form action="">
+            <h2>login</h2>
+            <div class="input-box">
+              <input type="text" name="username" id="username" placeholder="Username">
+              <i class="fa fa-user-o"></i>
+            </div>
+            <div class="input-box">
+              <input type="password" name="password" id="password" placeholder="Password">
+              <i class="fa fa-key"></i>
+            </div>
+            <div class="remember">
+              <label for="remember">
+                <input type="checkbox" name="remember">
+                Remember me
+              </label>
+              <a href="#forgot">forgot password?</a>
+            </div>
+            <button type="submit">login</button>
+            <div class="redirect">
+              <span>Don't have an account?
+                <a href="#register">register</a>
+              </span>
+            </div>
+          </form>
+        </div>
+        <div class="form-box register">
+          <form action="">
+            <h2>registration</h2>
+            <div class="input-box">
+              <input type="text" name="username" id="username" placeholder="Username">
+              <i class="fa fa-user-o"></i>
+            </div>
+            <div class="input-box">
+              <input type="email" name="email" id="email" placeholder="Email">
+              <i class="fa fa-envelope-o"></i>
+            </div>
+            <div class="input-box">
+              <input type="password" name="password" id="password" placeholder="Password">
+              <i class="fa fa-key"></i>
+            </div>
+            <div class="remember">
+              <label for="remember">
+                <input type="checkbox" name="remember">
+                I agree to the terms and conditions
+              </label>
+            </div>
+            <button type="submit">register</button>
+            <div class="redirect">
+              <span>Already have an account?
+                <a href="#register">login</a>
+              </span>
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
-    <script>
-      const bell = document.querySelector('.icon-tabler-bell');
-      const notificationContainer = document.querySelector('.notification');
-      
-      // Toggle notification container
-      bell.addEventListener('click', () => {
-        if (notificationContainer.style.transform === 'scale(0)') {
-          notificationContainer.style.transform = 'scale(1)';
-        } else {
-          notificationContainer.style.transform = 'scale(0)';
-        }
-      });
-    </script>
-  </section>
-  </div>
-  <div class="flex">
-  <div class="slider-container">
-    <div class="image-container">
-      <img src="https://picsum.photos/id/237/500/300" alt="image" />
-      <img src="https://picsum.photos/id/1/500/300" alt="image" />
-      <img src="https://picsum.photos/id/10/500/300" alt="image" />
-      <img src="https://picsum.photos/id/20/500/300" alt="image" />
-      <img src="https://picsum.photos/id/200/500/300" alt="image" />
-    </div>
-    <i class="fa fa-angle-double-left btn prev"></i>
-    <i class="fa fa-angle-double-right btn next"></i>
-  </div>
-  <script>
-    const nextEl = document.querySelector(".next");
-    const prevEl = document.querySelector(".prev");
-    
-    const imgsEl = document.querySelectorAll("img");
-    
-    const imageContainerEl = document.querySelector(".image-container");
-    
-    let currentImg = 1;
-    
-    let timeout;
-    
-    nextEl.addEventListener("click", () => {
-      currentImg++;
-      clearTimeout(timeout);
-      updateImg();
-    });
-    
-    prevEl.addEventListener("click", () => {
-      currentImg--;
-      clearTimeout(timeout);
-      updateImg();
-    });
-    
-    updateImg();
-    
-    function updateImg() {
-      if (currentImg > imgsEl.length) {
-        currentImg = 1;
-      } else if (currentImg < 1) {
-        currentImg = imgsEl.length;
-      }
-      imageContainerEl.style.transform = `translateX(-${(currentImg - 1) * 500}px)`;
-      timeout = setTimeout(() => {
-        currentImg++;
-        updateImg();
-      }, 3000);
-    }
-  </script>
-  </div>
+      <script>
+        const forms = document.querySelector(".authentication");
+        const btn = document.querySelector("header .btn");
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          forms.classList.toggle("visible");
+        })
 
-  <h1 hidden><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+        const links = document.querySelectorAll(".redirect a");
+        const parent = document.querySelector(".wrapper");
+        links.forEach(link => {
+          link.addEventListener("click", (e) => {
+            e.preventDefault();
+            parent.classList.toggle("login-form");
+          })
+        })
+      </script>
+    </section>
 
+    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+    
     <h1 id="title" style="display: none;">Loading...</h1>
     <p id="summary" style="display: none;">Loading...</p>
 
@@ -374,35 +240,18 @@ button {
 
 <p style="display: none;">
   pet season
-1
-1000 energy
-100 tower floors
-<!-- 7 -->
-<!-- HP glyph -->
-<!-- chat -->
-<!-- pet summon -->
-<!-- 300k gold tower -->
-<!-- 500 energy -->
-<!-- 8 -->
-<!-- 12 chest tower -->
-<!-- chat -->
-<!-- defeat marksman Adventures 2 times -->
+<!-- 1 -->
+<!-- 1000 energy -->
+<!-- 100 tower floors -->
 20 chests outland
 100 hero soul stones
-<!-- 9 -->
-<!-- 300 energy -->
-<!-- 5 exp potions -->
-<!-- win tower 5 times -->
 10
-<!-- 20 monsters ch.4 -->
-<!-- 500 outland coins -->
-<!-- pet summon -->
 win 5 times Adventures
 altar of power 5 times
-11
-heal 150k in tower
-5 exp potions
-deal 110k damage with marksman in arena
+<!-- 11 -->
+<!-- heal 150k in tower -->
+<!-- 5 exp potions -->
+<!-- deal 110k damage with marksman in arena -->
 12
 10 times tank skills
 win 2 times in Camp with support hero
