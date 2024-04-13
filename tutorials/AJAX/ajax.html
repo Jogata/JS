@@ -92,6 +92,94 @@ p {
   border-radius: 0.25rem;
   min-width: 70px;
 }
+.buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+}
+button {
+  background: #fff;
+  border-radius: 2rem;
+  border: 1px solid;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.35rem 0.8rem;
+  cursor: pointer;
+  transition: 0.5s;
+  font-size: 0.8rem;
+}
+.twitter {
+  border-color: #1287BB;
+  color: #1287BB;
+  margin-left: -5rem;
+}
+.twitter:hover {
+  background: #1287BB;
+  color: #fff;
+}
+.twitter:hover .icon-tabler-brand-twitter, 
+.facebook:hover .icon-tabler-brand-facebook  {
+  color: #fff;
+}
+.facebook {
+  border-color: #3963a3;
+  color: #3963a3;
+}
+.facebook:hover {
+  background: #0d0e43;
+  color: #fff;
+}
+.icon-tabler-brand-twitter {
+  color: #1287BB;
+}
+.icon-tabler-brand-facebook {
+  color: #3963a3;
+}
+@media (max-width: 350px) {
+  .twitter {
+    margin-left: unset;
+  }
+}
+.flex {
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: wheat;
+}
+.slider-container {
+  position: relative;
+  width: 500px;
+  overflow: hidden;
+  height: 300px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+.image-container {
+  display: flex;
+  transition: transform 0.4s ease-in-out;
+}
+.btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  font-size: 20px;
+  opacity: 0.5;
+  cursor: pointer;
+}
+.btn.prev {
+  left: 10px;
+}
+.btn.next {
+  right: 10px;
+}
+.btn:hover {
+  opacity: 1;
+}
     </style>
   </head>
   <body>
@@ -134,6 +222,58 @@ p {
       });
     </script>
   </section>
+  </div>
+  <div class="flex">
+  <div class="slider-container">
+    <div class="image-container">
+      <img src="https://picsum.photos/id/237/500/300" alt="image" />
+      <img src="https://picsum.photos/id/1/500/300" alt="image" />
+      <img src="https://picsum.photos/id/10/500/300" alt="image" />
+      <img src="https://picsum.photos/id/20/500/300" alt="image" />
+      <img src="https://picsum.photos/id/200/500/300" alt="image" />
+    </div>
+    <i class="fa fa-angle-double-left btn prev"></i>
+    <i class="fa fa-angle-double-right btn next"></i>
+  </div>
+  <script>
+    const nextEl = document.querySelector(".next");
+    const prevEl = document.querySelector(".prev");
+    
+    const imgsEl = document.querySelectorAll("img");
+    
+    const imageContainerEl = document.querySelector(".image-container");
+    
+    let currentImg = 1;
+    
+    let timeout;
+    
+    nextEl.addEventListener("click", () => {
+      currentImg++;
+      clearTimeout(timeout);
+      updateImg();
+    });
+    
+    prevEl.addEventListener("click", () => {
+      currentImg--;
+      clearTimeout(timeout);
+      updateImg();
+    });
+    
+    updateImg();
+    
+    function updateImg() {
+      if (currentImg > imgsEl.length) {
+        currentImg = 1;
+      } else if (currentImg < 1) {
+        currentImg = imgsEl.length;
+      }
+      imageContainerEl.style.transform = `translateX(-${(currentImg - 1) * 500}px)`;
+      timeout = setTimeout(() => {
+        currentImg++;
+        updateImg();
+      }, 3000);
+    }
+  </script>
   </div>
 
   <h1 hidden><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
@@ -249,14 +389,14 @@ p {
 <!-- defeat marksman Adventures 2 times -->
 20 chests outland
 100 hero soul stones
-9
-300 energy
-5 exp potions
-win tower 5 times
+<!-- 9 -->
+<!-- 300 energy -->
+<!-- 5 exp potions -->
+<!-- win tower 5 times -->
 10
-20 monsters ch.4
-500 outland coins
-pet summon
+<!-- 20 monsters ch.4 -->
+<!-- 500 outland coins -->
+<!-- pet summon -->
 win 5 times Adventures
 altar of power 5 times
 11
