@@ -172,6 +172,16 @@
         flex-shrink: 0;
         /* transform: translateX(-100%); */
       }
+      @keyframes world {
+        0% {
+          transform: translateX(-77.1167%);
+          /* background-position: -2254px 0px; */
+        }
+        100% {
+          transform: translateX(-27.1167%);
+          /* background-position: 0px 0px; */
+        }
+      }
       /* @keyframes world2 {
         0% {
           background-position: 0px 0px;
@@ -497,6 +507,95 @@
           transform: translateX(0%) rotate(-10deg) translateZ(-1px);
         }
       }
+
+      :root {
+        --main-color: #89216b;
+        --white: #fff;
+        --title-color: #555;
+        --label-color: #333;
+      }
+
+      body {
+        /* min-height: 100vh; */
+        /* background: linear-gradient(to right, #da4453, var(--main-color)); */
+        /* display: grid; */
+        /* place-content: center; */
+        /* overflow: hidden; */
+      }
+
+      .authentication {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        min-height: 100vh;
+        /* display: grid; */
+        background-color: #01003f;
+      }
+      .authentication.visible {
+        display: grid;
+      }
+
+      .wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 35rem;
+        /* height: 50rem; */
+        margin: auto;
+        transform-style: preserve-3d;
+        /* perspective: 30px; */
+      }
+      @media (min-width: 540px) {
+        .wrapper {
+          width: 40rem;
+        }
+      }
+
+      .form-container {
+        /* position: absolute; */
+        /* top: 0; */
+        /* left: 0; */
+        width: 100%;
+        /* height: 100%; */
+        /* display: flex; */
+        /* align-items: center; */
+        /* justify-content: center; */
+        border-radius: 0.5rem;
+        background-color: var(--white);
+        box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+      }
+      .form-container.login {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        display: flex;
+      }
+      .form-container.login form {
+        width: 100%;
+        margin: auto;
+      }
+
+      form {
+        padding: 3rem 2rem;
+        /* margin: auto; */
+      }
+
+      form h2 {
+        /* margin: 2.5rem 0; */
+        margin-bottom: 3rem;
+        color: var(--title-color);
+        font-size: 3rem;
+        text-align: center;
+        text-transform: capitalize;
+      }
+
+      .input-box {
+        position: relative;
+        /* width: 32rem; */
+        margin-bottom: 3rem;
+      }
     </style>
   </head>
   <body>
@@ -553,6 +652,36 @@
 
     <section class="authentication">
       <div class="wrapper">
+        <div class="form-container login flip-left">
+          <form action="">
+            <h2>login</h2>
+            <div class="input-box">
+              <input type="text" name="username" id="username">
+              <i class="fa fa-user-o"></i>
+              <label for="username">username</label>
+            </div>
+            <div class="input-box">
+              <input type="password" name="password" id="password">
+              <i class="fa fa-key"></i>
+              <label for="password">password</label>
+            </div>
+            <div class="forgot">
+              <!-- <label for="remember">
+                <input type="checkbox" name="remember">
+                Remember me
+              </label> -->
+              <!-- <div class="forgot"> -->
+                <a href="#forgot">forgot password?</a>
+              <!-- </div> -->
+            </div>
+            <button type="submit">login</button>
+            <div class="redirect">
+              <span>Don't have an account?
+                <a href="#register">register</a>
+              </span>
+            </div>
+          </form>
+        </div>
         <div class="form-container register move-forward">
           <form action="">
             <h2>registration</h2>
@@ -580,6 +709,23 @@
           </form>
         </div>
       </div>
+      <script>
+        const redirectLoginBtn = document.querySelector(".register .redirect a");
+        const redirectRegisterBtn = document.querySelector(".login .redirect a");
+        const loginForm = document.querySelector(".login");
+        const registerForm = document.querySelector(".register");
+
+        redirectLoginBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          loginForm.classList.replace("flip-left", "move-forward");
+          registerForm.classList.replace("move-forward", "flip-right");
+        })
+        redirectRegisterBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          registerForm.classList.replace("flip-right", "move-forward");
+          loginForm.classList.replace("move-forward", "flip-left");
+        })
+      </script>
     </section>
 
     <section class="authentication2">
