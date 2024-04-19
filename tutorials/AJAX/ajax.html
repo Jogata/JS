@@ -3,804 +3,148 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>AJAX | XMLHttpRequest</title> -->
-    <title>Personal Portfolio Page</title>
+    <title>AJAX | XMLHttpRequest</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Kaushan+Script&family=Playfair+Display&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Lemon&display=swap');
-/* 
-font-family: 'Abril Fatface', cursive;
-font-family: 'Courgette', cursive;
-font-family: 'Dancing Script', cursive;
-font-family: 'Great Vibes', cursive;
-font-family: 'Josefin Sans', sans-serif;
-font-family: 'Limelight', cursive;
-font-family: 'Lobster', cursive;
-font-family: 'Montserrat', sans-serif;
-font-family: 'Oleo Script Swash Caps', cursive;
-font-family: 'Poppins', sans-serif;
-font-family: 'Raleway', sans-serif;
-font-family: "Herr Von Muellerhoff", cursive;
-font-family: 'Kaushan Script', cursive;
-font-family: 'Fraunces', serif;
-font-family: 'Playfair Display', serif;
-font-family: 'Lemon', cursive;
-*/
+  <style>
+    fieldset {
+      display: none;
+    }
 
-      :root {
-        --primary-color: #000000;
-        --secondary-color: #ff4e05;
-        --secondary-color-dark: #bf3900;
-        --text-dark: #0d1319;
-        --text-light: #9ca3af;
-        --white: #ffffff;
-        --max-width: 75rem;
-      }
-      
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      a {
-        color: var(--white);
-        text-decoration: none;
-      }
-
-      img {
-        width: 100%;
-      }
-
-      svg {
-        position: absolute;
-        width: 0;
-        height: 0;
-      }
-      
-      .section-container {
-        max-width: var(--max-width);
-        margin: auto;
-        padding: 5rem 1rem;
-      }
-      
-      .section-title {
-        font-size: 2rem;
-        font-weight: 600;
-        /* text-align: center; */
-      }
-      
-      .section-title span {
-        color: var(--secondary-color);
-      }
-      
-      .section-subtitle {
-        font-size: 1rem;
-        font-weight: 500;
-        /* text-align: center; */
-      }
-      
-      .btn {
-        /* padding: 1rem; */
-        padding: 1.2em;
-        color: var(--white);
-        font-size: 0.9rem;
-        font-weight: 600;
-        font-family: inherit;
-        outline: none;
-        /* border: none; */
-        /* box-shadow: 2px 2px 2px #000, -2px -2px 2px #fff4; */
-        border: 1px solid var(--white);
-        border-radius: 5px;
-        /* background-color: var(--secondary-color); */
-        background-color: transparent;
-        transition: background-color 300ms ease;
-        cursor: pointer;
-      }
-      .btn:hover {
-        background-color: var(--secondary-color-dark);
-        text-shadow: 2px 2px 2px #000;
-        box-shadow: inset 2px 2px 2px #000, 
-                  inset -2px -2px 2px #fff6;
-        filter: drop-shadow(1px 1px 1px #000);
-      }
-
-      body {
-        color: var(--white);
-        /* 
-font-family: 'Abril Fatface', cursive;
-font-family: 'Courgette', cursive;
-font-family: 'Dancing Script', cursive;
-font-family: 'Great Vibes', cursive;
-font-family: 'Josefin Sans', sans-serif;
-font-family: 'Limelight', cursive;
-font-family: 'Lobster', cursive;
-font-family: 'Montserrat', sans-serif;
-font-family: 'Oleo Script Swash Caps', cursive;
-font-family: 'Poppins', sans-serif;
-font-family: 'Raleway', sans-serif;
-font-family: 'Kaushan Script', cursive;
-font-family: 'Fraunces', serif;
-font-family: 'Playfair Display', serif;
-font-family: 'Lemon', cursive;
-*/
-      }
-
-      nav {
-        position: relative;
-        /* position: absolute; */
-        /* width: 100%; */
-        /* top: 0; */
-        /* left: 50%; */
-        /* transform: translateX(-50%); */
-        max-width: var(--max-width);
-        margin: auto;
-        padding: 1rem;
-        text-align: right;
-        z-index: 4;
-      }
-      
-      .nav-logo a {
-        font-size: 1.5rem;
-        font-weight: 600;
-      }
-      
-      .nav-logo span {
-        color: var(--secondary-color);
-      }
-      
-      header {
-        /* display: flex; */
-        min-height: min(1080px, 100vh);
-        background-color: var(--primary-color);
-        background-image: url("assets/header-bg.png");
-        background-repeat: no-repeat;
-        background-position: 70% top;
-        background-size: auto 70%;
-        /* background-size: cover; */
-      }
-      
-      .header-container {
-        width: 100%;
-        padding-top: min(5rem, 5vw);
-        /* height: 100%; */
-        /* display: flex; */
-        /* flex-direction: column; */
-        /* align-items: flex-start; */
-        /* justify-content: center; */
-        font-family: 'Kaushan Script', cursive;
-      }
-      .header-container p {
-        max-width: 25rem;
-        margin: 1rem 0;
-        color: var(--text-light);
-      }
-      .header-container p span {
-        /* margin-right: 1rem; */
-        margin-right: 0.2rem;
-        /* padding: 0.5rem 1rem; */
-        /* color: var(--white); */
-        color: var(--secondary-color);
-        border-radius: 5px;
-        /* background-color: var(--secondary-color); */
-      }
-      .header-container h1 {
-        font-size: 3rem;
-        line-height: 3rem;
-      }
-      /* .header-container .section-title {
-        text-align-last: left;
-      } */
-
-      .action-btns {
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-        align-items: center;
-      }
-      .action-btns .btn {
-        padding: 1.2em 3em;
-        border-radius: 2em;
-      }      
-
-      .video {
-        padding: 4px 2em 4px 4px;
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        border: 2px solid var(--primary-color);
-        border-radius: 2em;
-        transition: border-color 300ms ease;
-        cursor: pointer;
-      }
-      .video:hover {
-        border: 2px solid var(--secondary-color);
-        /* border: 1px solid var(--white); */
-        box-shadow: -1px -1px 1px #fff9, 
-              inset -1px -1px 1px #fff9;
-      }
-
-      .play {
-        width: 3.2rem;
-        height: 3.2rem;
-        aspect-ratio: 1;
-        color: var(--secondary-color);
-        font-size: 1.5rem;
-        display: grid;
-        place-content: center;
-        border: 2px solid var(--secondary-color);
-        border-radius: 100%;
-        /* background-color: var(--secondary-color); */
-        background-color: transparent;
-        transition: color 300ms ease, 
-          background-color 300ms ease;
-      }
-      .video:hover .play {
-        color: var(--white);
-        /* border: 2px solid var(--white); */
-        background-color: var(--secondary-color-dark);
-        box-shadow: inset 2px 2px 2px #0006, 
-                  inset -2px -2px 2px #fff6;
-      }
-
-      .play i {
-        color: var(--secondary-color);
-      }
-      .video:hover .play i {
-        /* color: var(--white); */
-        /* color: var(--secondary-color); */
-        /* border: 2px solid var(--white); */
-        filter: drop-shadow(1px 1px 1px #000);
-      }
-      
-      .video span {
-        font-size: 1rem;
-        font-weight: 600;
-        transition: color 300ms ease;
-      }
-      .video:hover span {
-        /* color: transparent; */
-        /* -webkit-text-stroke: 1px var(--secondary-color); */
-        color: var(--secondary-color);
-      }
-      
-      .about,
-      .project {
-        background-color: var(--text-dark);
-      }
-      
-      .about-container {
-        display: flex;
-        gap: 1rem;
-        flex-direction: column;
-      }
-      
-      .about-image,
-      .about-content {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-      }
-      
-      .about-image {
-        position: relative;
-      }
-      .about-image img {
-        max-width: 22rem;
-        clip-path: url("#mask");
-      }
-
-      .texture {
-        position: absolute;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        mix-blend-mode: multiply;
-      }
-
-      
-      .about-details {
-        max-width: 25rem;
-        padding: 2rem 0;
-        color: var(--text-light);
-        text-align: center;
-      }
-      
-      .service,
-      footer {
-        background-color: var(--primary-color);
-      }
-
-      .service .section-title, 
-      .project .section-title, 
-      .service .section-subtitle, 
-      .project .section-subtitle {
-        text-align: center;
-      }
-      
-      .service-grid,
-      .project-grid {
-        display: grid;
-        gap: 1rem;
-        /* grid-template-columns: repeat(1, 1fr); */
-        grid-template-columns: 
-          repeat(auto-fit, minmax(min(18.75rem, 100%), 1fr));
-        margin-top: 5rem;
-      }
-      
-      .service-card {
-        max-width: 31.25rem;
-        margin: 0 auto;
-        display: grid;
-        gap: 1rem;
-        align-items: flex-start;
-        padding: 2rem;
-        border-radius: 5px;
-        background-color: var(--text-dark);
-      }
-      
-      .service-card i {
-        font-size: 1.5rem;
-      }
-      
-      .service-card h4 {
-        font-size: 1.2rem;
-        font-weight: 500;
-      }
-      
-      .service-card p {
-        color: var(--text-light);
-      }
-      
-      .service-card .read-more {
-        width: max-content;
-        /* padding: 0.5rem 1rem; */
-        padding: 0.8em 1.4em;
-        color: var(--text-light);
-        font-size: 0.8rem;
-        border-radius: 5px;
-        /* background-color: rgba(255, 255, 255, 0.05); */
-        box-shadow: 
-          1px 1px 1px #000, 
-          -1px -1px 1px #fff5;
-        transition: color 300ms ease;
-        cursor: pointer;
-      }
-      .service-card .read-more:hover {
-        color: var(--white);
-      }
-      
-      .project-card {
-        /* display: grid; */
-        /* place-content: center; */
-        border-radius: 5px;
-        overflow: hidden;
-        cursor: pointer;
-      }
-      
-      .project-card img {
-        height: 100%;
-        object-fit: cover;
-        transition: scale 300ms;
-      }
-      .project-card:hover img {
-        scale: 1.1;
-      }
-      
-      .footer-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        /* grid-template-columns: repeat(1, 1fr); */
-        gap: 2rem;
-      }
-      
-      .footer-content {
-        display: flex;
-        flex-direction: column;
-        /* align-items: flex-start; */
-        justify-content: center;
-      }
-      
-      .footer-details {
-        margin: 2rem 0;
-        color: var(--text-light);
-        font-size: 0.8rem;
-        display: grid;
-        gap: 1rem;
-      }
-      .footer-details p {
-        max-width: 25rem;
-        /* margin: auto; */
-      }
-      
-      .social-icons {
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-        align-items: center;
-      }
-      
-      .social-icons .icon {
-        /* padding: 0.5rem; */
-        padding: 0.5em 0.6em;
-        color: var(--white);
-        border: 1px solid var(--white);
-        border-radius: 5px;
-        /* background-color: var(--secondary-color); */
-        background-color: transparent;
-        transition: color 300ms ease, 
-              border-color 300ms ease;
-        cursor: pointer;
-      }
-      .social-icons .icon:hover {
-        color: var(--secondary-color);
-        border: 1px solid var(--secondary-color);
-        /* background-color: var(--secondary-color-dark); */
-        /* background-color: transparent; */
-      }
-      
-      .footer-form {
-        display: grid;
-        gap: 1rem;
-      }
-      
-      .footer-form :is(input, textarea) {
-        width: 100%;
-        padding: 1rem;
-        color: var(--white);
-        font-size: 1rem;
-        font-family: inherit;
-        outline: none;
-        border: none;
-        border-radius: 5px;
-        background-color: var(--text-dark);
-      }
-      
-      .footer-form textarea {
-        resize: none;
-        /* font-size: 3rem; */
-        /* font-family: "Poppins", sans-serif; */
-      }
-      
-      .footer-form button {
-        width: max-content;
-      }
-            
-      @media (min-width: 40rem) {
-      /* @media (min-width: 2880px) { */
-        .section-title {
-          font-size: 2.5rem;
-        }
-      
-        .header-container p {
-          margin: 2rem 0;
-        }
-      
-        .header-container h1 {
-          font-size: 4rem;
-          line-height: 4rem;
-        }
-      
-        .action-btns {
-          gap: 2rem;
-        }
-
-        .about-container {
-          flex-direction: row;
-        }
-      
-        .about-content {
-          align-items: flex-start;
-        }
-      
-        .about-details {
-          text-align: left;
-        }
-      
-        .service-grid,
-        .project-grid {
-          /* grid-template-columns: repeat(2, 1fr); */
-          gap: 2rem;
-        }
-      }
-      
-      @media (min-width: 48rem) {
-        header {
-          background-position: center top;
-          background-size: contain;
-        }
-        .header-container h1 {
-          font-size: 5rem;
-          line-height: 5rem;
-        }
-      
-        /* .service-grid,
-        .project-grid {
-          grid-template-columns: repeat(3, 1fr);
-        } */
-      }
-
-      /* @media (min-width: 901px) {
-        .footer-content .section-title, 
-        .footer-content .section-subtitle {
-          text-align: left;
-        }
-      } */
-
-      @media (max-width: 56.25rem) {
-      /* @media (max-width: 4050px) { */
-        .footer-container {
-          /* grid-template-columns: repeat(2, 1fr); */
-          grid-template-columns: auto;
-          text-align: center;
-        }
-        .footer-content, 
-        .footer-form {
-          width: 100%;
-          max-width: 37.5rem;
-          margin: auto;
-        }
-        .footer-details p {
-          margin: auto;
-        }
-
-        .social-icons {
-          margin: auto;
-        }
-        /* .footer-form {
-          max-width: 600px;
-          margin: auto;
-        } */
-      }
-
-      @media (max-width: 12.5rem) {
-        body {
-          min-width: min-content;
-        }
-      }
-
-      /* Peeled-off Image */
-      header {
-        position: relative;
-      }
-      .peeled-off-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        max-width: var(--max-width);
-        height: 100%;
-        margin: auto;
-        padding: 5rem 1rem;
-        /* border: 1px solid red; */
-        /* display: none; */
-        z-index: 1;
-      }
-      .header-container {
-        position: relative;
-        z-index: 2;
-      }
-      .peeled-off {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 50%;
-        height: 100%;
-        object-fit: contain;
-        object-position: top;
-        transform: translateX(-10%);
-        /* filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.2)) 
-        drop-shadow(15px 15px 15px rgba(0, 0, 0, 0.2))
-        drop-shadow(-3px -3px 2px rgba(255, 255, 255, 0.3)); */
-        /* mix-blend-mode: hard-light; */
-        /* opacity: 0.5; */
-        z-index: 1;
-      }
-
-      /* .service-grid {
-        grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
-      } */
-
-      .nav-logo a {
-        display: inline-block;
-        transition: all 500ms ease;
-      }
-      .nav-logo a:hover {
-        /* color: var(--text-dark); */
-        transform: scale(1.1);
-        /* text-shadow: -1px -1px 0px #fff4; */
-        /* filter: drop-shadow(-1px -1px 1px var(--white)); */
-        /* scale: 1.1; */
-        /* border: 1px solid red; */
-        /* color: transparent; */
-        /* -webkit-text-stroke: 1px var(--white); */
-      }
-      /* .footer-form {
-        background-image: url("./assets/hole-trans-copy.png");
-      } */
-      /* p {
-        max-width: 25rem;
-      } */
-    </style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      min-height: 100vh;
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #25252b;
+    }
+    .container {
+      position: relative;
+      max-width: 50rem;
+      /* width: 750px; */
+      /* height: 450px; */
+      display: flex;
+      border: 2px solid #ff2770;
+      border-radius: 1rem;
+      box-shadow: 0 0 25px #ff2770;
+      overflow: hidden;
+    }
+    
+    .form-box {
+      /* position: absolute; */
+      /* top: 0; */
+      width: 50%;
+      /* height: 100%; */
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      transition: 
+        transform 1s ease, 
+        opacity 1s ease;
+    }
+    .form-box h2 {
+      font-size: 32px;
+      text-align: center;
+      text-transform: capitalize;
+    }
+    .form-box.login {
+      position: absolute;
+      left: 0;
+      padding: 0 2.5rem;
+      align-self: center;
+      transform: translateX(0%);
+      transition-delay: 2.5s;
+      opacity: 1;
+    }
+  </style>
   </head> 
-  <body> 
-    <header>
-      <nav>
-        <div class="nav-logo">
-          <a href="#">Cod<span>e</span>r.</a>
-        </div>
-      </nav>
-      <div class="peeled-off-container">
-        <img src="assets/hole-trans-copy.png" class="peeled-off">
-      </div>
-      <div class="section-container header-container">
-        <!-- <img src="assets/torn-edges-effect-6020235-copy.png" class="hole" alt="Claw marks"> -->
-        <!-- <img src="assets/claw-1-copy.png" class="hole" alt="Claw marks"> -->
-        <p><span>Hello,</span> I'm</p>
-        <h1>Mustakim</h1>
-        <h2 class="section-title">UI/UX <span>Designer.</span></h2>
-        <p>
-          Welcome to my web developer portfolio! I'm Mustakim, a skilled and
-          creative web developer with a passion for creating beautiful,
-          responsive, and user-friendly websites. I've worked on a variety of
-          web projects, ranging from personal blogs to e-commerce platforms.
-        </p>
-        <div class="action-btns">
-          <button class="btn">Say Hello</button>
-          <a href="#" class="video">
-            <div class="play">
-              <i class="ri-play-fill"></i>
-            </div>
-            <span>Watch My Video</span>
-          </a>
-        </div>
-      </div>
-    </header>
+  <body>
 
-    <section class="about">
-      <div class="section-container about-container">
-
-        <div class="about-image">
-          <img src="assets/about-bg.jpg" alt="about" />
-          <img src="assets/cracked-earth-texture.jpg" class="texture" alt="Cracked soil">
-        </div>
-
-        <div class="about-content">
-          <h2 class="section-title">About <span>Me</span></h2>
-          <p class="section-subtitle">Creative UI/UX Designer!</p>
-          <p class="about-details">
-            As a UI/UX designer, I specialize in creating user interfaces and
-            experiences for digital products. I have extensive experience
-            working with product managers, developers, and other stakeholders to
-            gather requirements, create wireframes and prototypes, and conduct
-            user testing to ensure that the final product meets the needs of the
-            users. Throughout my career, I have achieved several milestones,
-            including designing successful digital products that have received
-            positive feedback from users and stakeholders.
-          </p>
-          <button class="btn">More About</button>
-        </div>
-        
-      </div>
-    </section>
-
-    <section class="service">
-      <div class="section-container service-container">
-        <p class="section-subtitle">What I Offer!</p>
-
-        <h2 class="section-title"><span>My</span> Services</h2>
-
-        <div class="service-grid">
-
-          <div class="service-card">
-            <!-- <i class="ri-smartphone-line"></i> -->
-            <!-- <i class="ri-global-fill"></i> -->
-            <i class="fa fa-globe"></i>
-            <h4>Web Design</h4>
-            <p>
-              We are dedicated to providing high-quality web design services
-              that are tailored to meet the specific needs of our clients.
-            </p>
-            <a href="#" class="read-more">Read more...</a>
+    <div class="container">
+      <!-- <div class="shape" hidden></div> -->
+      <!-- <div class="shape2" hidden></div> -->
+      <div class="form-box login">
+        <h2>login</h2>
+        <form action="">
+          <div class="input-box">
+            <input type="text" name="username-log" id="username-log">
+            <label for="username-log">username</label>
+            <i class="fa fa-user-o"></i>
           </div>
-
-          <div class="service-card">
-            <i class="ri-code-s-slash-line"></i>
-            <h4>Web Development</h4>
-            <p>
-              We use the latest web technologies and development tools to create
-              websites that are fast, secure, and scalable.
-            </p>
-            <a href="#" class="read-more">Read more...</a>
+          <div class="input-box">
+            <input type="password" name="password-log" id="password-log">
+            <label for="password-log">password</label>
+            <i class="fa fa-key"></i>
           </div>
-
-          <div class="service-card">
-            <i class="ri-edit-2-line"></i>
-            <h4>Creative Design</h4>
-            <p>
-              Our approach is collaborative, and we encourage your feedback
-              throughout the design process to ensure that we are meeting your
-              expectations.
-            </p>
-            <a href="#" class="read-more">Read more...</a>
+          <div class="input-box">
+            <button type="submit" class="btn">login</button>
           </div>
-
-        </div>
-      </div>
-    </section>
-
-    <section class="project">
-      <div class="section-container project-container">
-
-        <p class="section-subtitle">Portfolio</p>
-        <h2 class="section-title"><span>Latest</span> Project</h2>
-
-        <div class="project-grid">
-          <div class="project-card">
-            <img src="assets/project-1.png" alt="project"/>
+          <div class="redirect">
+            <span>Don't have an account?</span>
+            <a href="#reg" class="link">sign up</a>
           </div>
-          <div class="project-card">
-            <img src="assets/project-2.jpg" alt="project"/>
-          </div>
-          <div class="project-card">
-            <img src="assets/project-3.jpg" alt="project"/>
-          </div>
-          <div class="project-card">
-            <img src="assets/project-4.jpg" alt="project"/>
-          </div>
-          <div class="project-card">
-            <img src="assets/project-5.jpg" alt="project"/>
-          </div>
-          <div class="project-card">
-            <img src="assets/project-6.jpg" alt="project"/>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <footer>
-      <div class="section-container footer-container">
-
-        <div class="footer-content">
-          <h2 class="section-title">Contact <span>Me!</span></h2>
-          <p class="section-subtitle">If you have any project in your mind</p>
-          <div class="footer-details">
-            <p>
-              You can reach me through the contact form provided on this
-              website. Simply fill out the form with your name, email address,
-              and message, and I will get back to you as soon as possible.
-            </p>
-            <p>Digital Agency Network, 20</p>
-            <p>Eastbourne Terrace, London W2 6LG,</p>
-            <p>United Kingdom</p>
-          </div>
-          <div class="social-icons">
-            <a href="#" class="icon"><i class="ri-facebook-fill"></i></a>
-            <a href="#" class="icon"><i class="ri-mail-line"></i></a>
-            <a href="#" class="icon"><i class="ri-twitter-fill"></i></a>
-            <a href="#" class="icon"><i class="ri-linkedin-fill"></i></a>
-          </div>
-        </div>
-
-        <form class="footer-form">
-          <input type="text" placeholder="Your Name"/>
-          <input type="text" placeholder="Your Email Address"/>
-          <input type="text" placeholder="Your Phone Number"/>
-          <textarea cols="30" rows="10" placeholder="Your Idea"></textarea>
-          <button type="submit" class="btn">Send Message</button>
         </form>
-
       </div>
-    </footer>
+      <div class="info-content login">
+        <div class="shaped-container">
+          <div class="shape"></div>
+          <h2>welcome back</h2>
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fuga obcaecati harum suscipit.</p>
+        </div>
+      </div>
+      <div class="info-content register">
+        <div class="shaped-container">
+          <div class="shape"></div>
+          <h2>welcome</h2>
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fuga obcaecati harum suscipit.</p>
+        </div>
+      </div>
+      <div class="form-box register">
+        <h2>register</h2>
+        <form action="">
+          <div class="input-box">
+            <input type="text" name="username-reg" id="username-reg">
+            <label for="username-reg">username</label>
+            <i class="fa fa-user-o"></i>
+          </div>
+          <div class="input-box">
+            <input type="password" name="password-reg" id="password-reg">
+            <label for="password-reg">password</label>
+            <i class="fa fa-key"></i>
+          </div>
+          <div class="input-box">
+            <button type="submit" class="btn">register</button>
+          </div>
+          <div class="redirect">
+            <span>Don't have an account?</span>
+            <a href="#log" class="link">sign in</a>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+      const container = document.querySelector(".container");
+      const loginLink = document.querySelector(".register .link");
+      const registerLink = document.querySelector(".login .link");
 
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+      registerLink.addEventListener("click", () => {
+        console.log(registerLink);
+        // container.classList.replace("active2", "active1");
+        container.classList.toggle("active");
+      })
+      loginLink.addEventListener("click", () => {
+        container.classList.toggle("active");
+      })
+    </script>
+
+    <h1 hidden><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
     
     <h1 id="title" style="display: none;">Loading...</h1>
     <p id="summary" style="display: none;">Loading...</p>
@@ -833,7 +177,7 @@ font-family: 'Lemon', cursive;
       // console.log(state);
     </script>
 
-    <fieldset hidden>
+    <fieldset>
       <legend>Get all users from local JSON file</legend>
       <button id="local">Send Request</button>
     </fieldset>
@@ -863,7 +207,7 @@ font-family: 'Lemon', cursive;
     </script>
 
     <!-- ================= Get data from GitHub API ================= -->
-    <fieldset hidden>
+    <fieldset>
       <legend>Get users from GitHub API</legend>
       <button id="github">Send Request</button>
       <span id="userGithub"></span>
@@ -903,25 +247,16 @@ font-family: 'Lemon', cursive;
 
 <p style="display: none;">
   pet season
-<!-- 20 chests outland -->
-<!-- 100 hero soul stones -->
-<!-- 10 -->
-<!-- win 5 times Adventures -->
-<!-- altar of power 5 times -->
-<!-- 12 -->
-<!-- 10 times tank skills -->
-<!-- win 2 times in Camp with support hero -->
-<!-- 300 energy -->
-13
-deafeat tank in tower
-titan summon
-support hero skin 2 times
-10 expeditions
-10 queasts from pet season
-14
-chat
-150k damage Adv
-60 monsters in ch.7
+<!-- 13 -->
+<!-- deafeat tank in tower -->
+<!-- titan summon -->
+<!-- support hero skin 2 times -->
+<!-- 10 expeditions -->
+<!-- 10 queasts from pet season -->
+<!-- 14 -->
+<!-- chat -->
+<!-- 150k damage Adv -->
+<!-- 60 monsters in ch.7 -->
 15
 HP glyph
 warrior skills 10
