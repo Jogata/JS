@@ -4,542 +4,158 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <style>
-    fieldset {
-      display: none;
-    }
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <style>
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      min-height: 100vh;
-      padding: 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #25252b;
-    }
-    
-    .container {
-      position: relative;
-      max-width: 50rem;
-      /* width: 750px; */
-      /* height: 450px; */
-      display: flex;
-      border: 2px solid #ff2770;
-      border-radius: 1rem;
-      box-shadow: 0 0 25px #ff2770;
-      overflow: hidden;
-    }
-    
-    .form-box {
-      /* position: absolute; */
-      /* top: 0; */
-      width: 50%;
-      /* height: 100%; */
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      transition: 
-        transform 1s ease, 
-        opacity 1s ease;
-    }
-    .form-box h2 {
-      font-size: 2rem;
-      text-align: center;
-      text-transform: capitalize;
-    }
-    .form-box.login {
-      position: absolute;
-      left: 0;
-      padding: 0 2.5rem;
-      align-self: center;
-      transform: translateX(0%);
-      transition-delay: 2.5s;
-      opacity: 1;
-    }
-    .form-box.register {
-      /* right: 0; */
-      padding: 0 3.75rem;
-      transform: translateX(100%);
-      opacity: 0;
-      /* display: none; */
-    }
-    /* .container .form-box.login {
-      display: flex;
-    } */
-    .container.active .form-box.register {
-      transform: translateX(0%);
-      transition-delay: 2.5s;
-      opacity: 1;
-      /* display: none; */
-    }
-    .container.active .form-box.login {
-      transform: translateX(-100%);
-      transition-delay: 0s;
-      opacity: 0;
-      /* display: none; */
-    }
-    /* .container.active .form-box.register {
-      display: flex;
-    } */
-    /* .container.active2 .form-box.login {
-      display: flex;
-    } */
-    /* .container.active1 .form-box.register {
-      display: flex;
-    } */
-    /* .container.active .form-box.register {
-      display: flex;
-      transition-delay: 1s;
-    } */
-
-    .input-box {
-      position: relative;
-      width: 100%;
-      /* height: 50px; */
-      margin-top: 1.5rem;
-    }
-    .input-box input {
-      width: 100%;
-      height: 100%;
-      /* padding-right: 23px; */
-      padding: 0.625rem 1.5rem 0.625rem 0.625rem;
-      color: #fff;
-      /* font-size: 16px; */
-      font-size: 1rem;
-      outline: none;
-      border: none;
-      border-bottom: 2px solid #fff;
-      background-color: transparent;
-      transition: border-color 500ms ease;
-    }
-    .input-box input:focus {
-      border-bottom: 2px solid #ff2770;
-    }
-
-    .input-box label {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      transform: translateY(-50%);
-      color: #fff;
-      /* font-size: 16px; */
-      font-size: 1rem;
-      text-transform: capitalize;
-      /* transition: top 500ms ease; */
-      transition: transform 500ms ease;
-    }
-    .input-box input:focus ~ label {
-      /* top: -5px; */
-      /* font-size: 14px; */
-      transform: translateY(-180%);
-      color: #ff2770;
-    }
-    .input-box i {
-      position: absolute;
-      top: 50%;
-      right: 0;
-      transform: translateY(-50%);
-      /* font-size: 18px; */
-      font-size: 1.22rem;
-      transition: color 500ms ease;
-    }
-    .input-box input:focus ~ i {
-      color: #ff2770;
-    }
-
-    .btn {
-      position: relative;
-      width: 100%;
-      /* height: 45px; */
-      margin: 1.5rem 0 1rem;
-      padding: 0.6em 2em;
-      color: #fff;
-      /* font-size: 16px; */
-      font-size: 1rem;
-      font-weight: 600;
-      font-family: inherit;
-      text-transform: capitalize;
-      border-radius: 2em;
-      border: 2px solid #ff2770;
-      background-color: transparent;
-      overflow: hidden;
-      cursor: pointer;
-      z-index: 1;
-    }
-    .btn::before {
-      position: absolute;
-      top: -100%;
-      left: 0;
-      content: "";
-      width: 100%;
-      height: 300%;
-      background: 
-        linear-gradient(
-          #25252b, #ff2770, 
-          #25252b, #ff2770);
-      transition: top 500ms ease;
-      z-index: -1;
-    }
-    .btn:hover {
-      width: 100%;
-    }
-    .btn:hover::before {
-      top: 0;
-    }
-    
-    .redirect {
-      margin: 1.25rem 0 0.625rem;
-      font-size: 0.9rem;
-      text-align: center;
-    }
-    .redirect a {
-      padding-left: 6px;
-      color: #ff2770;
-      font-weight: 600;
-      text-transform: capitalize;
-      text-decoration: none;
-    }
-    .redirect a:hover {
-      text-decoration: underline;
-    }
-
-    .info-content {
-      /* position: absolute; */
-      /* top: 0; */
-      width: 50%;
-      /* height: 100%; */
-      color: #fff;
-      /* display: none; */
-      /* display: flex; */
-      /* justify-content: center; */
-      /* flex-direction: column; */
-      transition: 
-        transform 1s ease, 
-        opacity 1s ease;
-    }
-    .info-content.login {
-      position: absolute;
-      right: 0;
-      /* padding: 0 40px 60px 150px; */
-      text-align: right;
-    }
-    .info-content.register {
-      /* left: 0; */
-      text-align: left;
-      /* padding: 0 150px 60px 40px; */
-      /* display: none; */
-    }
-
-    .shaped-container {
-      margin: auto;
-      padding-top: 16%;
-      /* padding-left: 15%; */
-    }
-    .login .shaped-container {
-      padding-right: 15%;
-    }
-    .register .shaped-container {
-      padding-left: 15%;
-    }
-
-    .info-content h2 {
-      /* padding-top: 20%; */
-      /* font-size: 36px; */
-      font-size: 2.25rem;
-      line-height: 1.3;
-      text-transform: uppercase;
-    }
-    .info-content p {
-      /* font-size: 16px; */
-      font-size: 1rem;
-    }
-
-    .shape {
-      width: 100%;
-      /* height: 400px; */
-      height: 25rem;
-    }
-    .login .shape {
-      shape-outside: polygon(23% 0%, 0% 100%, 100% 100%);
-      /* width: 100%; */
-      /* height: 400px; */
-      float: left;
-      /* border: 1px solid greenyellow; */
-    }
-    .register .shape {
-      /* shape-outside: ellipse(100px 200px at 50% 50%); */
-      shape-outside: polygon(75% 0%, 0% 100%, 100% 100%);
-      /* width: 100%; */
-      /* height: 400px; */
-      float: right;
-      /* border: 1px solid greenyellow; */
-    }
-
-    /* .shape {
-      position: absolute;
-      top: -5px;
-      right: 0;
-      width: 850px;
-      height: 600px;
-      background: linear-gradient(45deg, #25252b, #ff2770);
-      transform: rotate(10deg) skewY(40deg);
-      transform-origin: bottom right;
-      transition: 1.5s ease;
-    }
-    .container.active .shape {
-      transform: rotate(0deg) skewY(0deg);
-    } */
-
-    /* .shape2 {
-      position: absolute;
-      top: 100%;
-      left: 250px;
-      width: 850px;
-      height: 700px;
-      border-top: 3px solid #ff2770;
-      background-color: #25252b;
-      transform: rotate(0deg) skewY(0deg);
-      transform-origin: bottom left;
-      transition: 1.5s ease;
-    }
-    .container.active .shape2 {
-      transform: rotate(-11deg) skewY(-41deg);
-      transition-delay: 1.2s;
-    } */
-
-    /* .info-content::after {
-      position: absolute;
-      top: 0;
-      left: 0;
-      content: '';
-      width: 100%;
-      height: 100%;
-      background-color: red;
-      transform: rotate(-45deg);
-      transform: skewY(10deg);
-    } */
-
-    /* .container.active {
-      flex-direction: row-reverse;
-    } */
-    .container .info-content.login {
-      /* display: flex; */
-      transform: translateX(0);
-      /* transform: translateX(0%); */
-      transition-delay: 1.5s;
-      opacity: 1;
-    }
-    .container .info-content.register {
-      /* display: none; */
-      transform: translateX(-200%);
-      opacity: 0;
-    }
-    .container.active .info-content.login {
-      /* display: none; */
-      transform: translateX(100%);
-      transition-delay: 0s;
-      opacity: 0;
-    }
-    .container.active .info-content.register {
-      /* display: flex; */
-      transform: translateX(0);
-      transition-delay: 1.5s;
-      opacity: 1;
-    }
-
-    .container::before {
-      position: absolute;
-      /* border: 1px solid red; */
-      top: 0;
-      left: 0;
-      content: "";
-      width: 100%;
-      height: 100%;
-      /* background-color: red; */
-      border-radius: inherit;
-      background: linear-gradient(45deg, #25252b, #ff2770);
-      /* transform: rotate(-35deg); */
-      /* transform: skew(30deg) translateX(57%); */
-      /* clip-path: polygon(0% 0%, 70% 0%, 30% 100%, 0% 100%); */
-      /* transform-origin: top center; */
-      clip-path: polygon(0% 0%, 60% 0%, 20% 100%, 0% 100%);
-      transition: opacity 1s;
-      transition-delay: 0;
-      opacity: 0;
-      z-index: -1;
-    }
-    .container::after {
-      position: absolute;
-      /* border: 1px solid red; */
-      top: 0;
-      right: 0;
-      content: "";
-      width: 100%;
-      height: 100%;
-      border-radius: inherit;
-      /* background-color: red; */
-      background: linear-gradient(45deg, #ff2770, #25252b);
-      /* transform: rotate(-35deg); */
-      /* transform: skew(30deg) translateX(57%); */
-      /* clip-path: polygon(0% 0%, 70% 0%, 30% 100%, 0% 100%); */
-      /* transform-origin: top center; */
-      clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 80% 100%);
-      transition: opacity 1s;
-      transition-delay: 1s;
-      opacity: 1;
-      z-index: -1;
-    }
-    .container.active::after {
-      /* clip-path: polygon(0% 0%, 60% 0%, 20% 100%, 0% 100%); */
-      /* transform: skew(30deg) translateX(57%); */
-      transition-delay: 0s;
-      opacity: 0;
-    }
-    .container.active::before {
-      /* clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 80% 100%); */
-      /* transform: skew(-30deg) translateX(-57%); */
-      transition-delay: 1s;
-      opacity: 1;
-    }
-
-    @media (max-width: 50rem) {
-      .container {
-        display: block;
-        padding: 2rem 0;
-      }
-      .container::before, 
-      .container::after {
-        clip-path: none;
-      }
-      .form-box, 
-      .info-content {
-        width: auto;
-      }
-      .info-content {
-        /* max-width: 400px; */
-        max-width: 25rem;
-        padding: 2rem 4rem 2rem 2rem;
-      }
-      .form-box.login {
-        width: 100%;
-      }
-      .form-box.register {
-        margin-top: 2rem;
-        padding: 2rem;
-      }
-      .info-content.login {
-        bottom: 2rem;
-      }
-      .shaped-container {
-        /* padding-left: 2rem; */
-        padding-top: 0;
-      }
-      .login .shaped-container {
-        padding-right: 0;
-      }
-      .register .shaped-container {
-        padding-left: 0;
-      }
-      .shape {
-        height: 0;
-      }
-    }
-  </style>
+:root {
+  --primary-color: #ff226f;
+  --primary-color-dark: #fe6769;
+  --text-dark: #333333;
+  --white: #ffffff;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+header {
+  /* font-family: "Roboto", sans-serif; */
+  font-family: Georgia;
+  background: linear-gradient(145deg, pink, rgb(238, 97, 120));
+  /* background-image: url("assets/bg.png"); */
+  /* background-position: bottom center; */
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
+  min-height: 100vh;
+  display: flex;
+}
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10rem;
+}
+.container-left h1 {
+  margin-bottom: 2rem;
+  color: var(--primary-color);
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+.container-left p {
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+.container-left button {
+  margin-top: 1rem;
+  padding: 1rem 2rem;
+  color: var(--white);
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  background: 
+    linear-gradient(
+      to right,
+      var(--primary-color),
+      var(--primary-color-dark)
+    );
+  cursor: pointer;
+}
+.container-left button:hover {
+  background: var(--primary-color);
+}
+.container-right {
+  display: grid;
+  gap: 2rem;
+}
+.card {
+  padding: 2rem;
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  border-radius: 1rem;
+  background-color: var(--white);
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+.card img {
+  max-width: 75px;
+  border-radius: 100%;
+}
+.card-content {
+  display: flex;
+  gap: 1rem;
+}
+.card-details p {
+  margin-bottom: 0.5rem;
+}
+    </style>
   </head> 
   <body>
-
-    <div class="container">
-      <!-- <div class="shape" hidden></div> -->
-      <!-- <div class="shape2" hidden></div> -->
-
-      <div class="form-box login">
-        <h2>login</h2>
-        <form action="">
-          <div class="input-box">
-            <input type="text" name="username-log" id="username-log">
-            <label for="username-log">username</label>
-            <i class="fa fa-user-o"></i>
+    <header>
+      <div class="container">
+        <div class="container-left">
+          <h1>Read what our customers love about us</h1>
+          <p>
+            Over 200 companies frim diverse sectors consult us to enhance the
+            user experience of their products and services.
+          </p>
+          <p>
+            We have helped companies increase their customer base and generate
+            multifold revenue with our service.
+          </p>
+          <button>Read our success stories</button>
+        </div>
+        <div class="container-right">
+          <div class="card">
+            <img src="assets/pic-1.jpg" alt="user" />
+            <div class="card-content">
+              <span><i class="ri-double-quotes-l"></i></span>
+              <div class="card-details">
+                <p>
+                  We had a great time collaboraring with the Filament team. They
+                  have my high recommendation!
+                </p>
+                <h4>- Marnus Stephen</h4>
+              </div>
+            </div>
           </div>
-          <div class="input-box">
-            <input type="password" name="password-log" id="password-log">
-            <label for="password-log">password</label>
-            <i class="fa fa-key"></i>
-          </div>
-          <div class="input-box">
-            <button type="submit" class="btn">login</button>
-          </div>
-          <div class="redirect">
-            <span>Don't have an account?</span>
-            <a href="#reg" class="link">sign up</a>
-          </div>
-        </form>
-      </div>
-
-      <div class="info-content login">
-        <div class="shaped-container">
-          <div class="shape"></div>
-          <h2>welcome back</h2>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fuga obcaecati harum suscipit.</p>
+          <div class="card">
+            <img src="assets/pic-2.jpeg" alt="user" />
+            <div class="card-content">
+              <span><i class="ri-double-quotes-l"></i></span>
+              <div class="card-details">
+                <p>
+                  The team drastically improved our product's user experience &
+                  increased our business outreach.
+                </p>
+                <h4>- Andrew Jettpace</h4>
+              </div>
+            </div>
+          </div> 
+          <div class="card">
+            <img src="assets/pic-3.jpg" alt="user" />
+            <div class="card-content">
+              <span><i class="ri-double-quotes-l"></i></span>
+              <div class="card-details">
+                <p>
+                  I absolutely loved working with the Filament team. Complete
+                  experts at what they do!
+                </p>
+                <h4>- Stacy Stone</h4>
+              </div>
+            </div>
+          </div> 
         </div>
       </div>
+    </header>
 
-      <div class="info-content register">
-        <div class="shaped-container">
-          <div class="shape"></div>
-          <h2>welcome</h2>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fuga obcaecati harum suscipit.</p>
-        </div>
-      </div>
-
-      <div class="form-box register">
-        <h2>register</h2>
-        <form action="">
-          <div class="input-box">
-            <input type="text" name="username-reg" id="username-reg">
-            <label for="username-reg">username</label>
-            <i class="fa fa-user-o"></i>
-          </div>
-          <div class="input-box">
-            <input type="password" name="password-reg" id="password-reg">
-            <label for="password-reg">password</label>
-            <i class="fa fa-key"></i>
-          </div>
-          <div class="input-box">
-            <button type="submit" class="btn">register</button>
-          </div>
-          <div class="redirect">
-            <span>Don't have an account?</span>
-            <a href="#log" class="link">sign in</a>
-          </div>
-        </form>
-      </div>
-
-    </div>
-    <script>
-      const container = document.querySelector(".container");
-      const loginLink = document.querySelector(".register .link");
-      const registerLink = document.querySelector(".login .link");
-
-      registerLink.addEventListener("click", () => {
-        console.log(registerLink);
-        // container.classList.replace("active2", "active1");
-        container.classList.toggle("active");
-      })
-      loginLink.addEventListener("click", () => {
-        container.classList.toggle("active");
-      })
-    </script>
-
-    <h1 hidden><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
     
     <h1 id="title" style="display: none;">Loading...</h1>
     <p id="summary" style="display: none;">Loading...</p>
@@ -572,7 +188,7 @@
       // console.log(state);
     </script>
 
-    <fieldset>
+    <fieldset hidden>
       <legend>Get all users from local JSON file</legend>
       <button id="local">Send Request</button>
     </fieldset>
@@ -602,7 +218,7 @@
     </script>
 
     <!-- ================= Get data from GitHub API ================= -->
-    <fieldset>
+    <fieldset hidden>
       <legend>Get users from GitHub API</legend>
       <button id="github">Send Request</button>
       <span id="userGithub"></span>
@@ -637,26 +253,10 @@
 
 <p style="display: none;">
   pet season
-<!-- 13 -->
-<!-- deafeat tank in tower -->
-<!-- titan summon -->
-<!-- support hero skin 2 times -->
-<!-- 10 expeditions -->
-<!-- 10 queasts from pet season -->
-<!-- 14 -->
-<!-- chat -->
-<!-- 150k damage Adv -->
-<!-- 60 monsters in ch.7 -->
 15
-<!-- HP glyph -->
-<!-- warrior skills 10 -->
-<!-- pet summon -->
 complete 150 missions
 buy 65 items
 16
-<!-- dark star 2 times Camp -->
-<!-- 12 tower chests -->
-<!-- chat -->
 pet summon
 500 energy
 17
