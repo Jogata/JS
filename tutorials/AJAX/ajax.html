@@ -52,7 +52,7 @@
         opacity 1s ease;
     }
     .form-box h2 {
-      font-size: 32px;
+      font-size: 2rem;
       text-align: center;
       text-transform: capitalize;
     }
@@ -327,6 +327,132 @@
       transform: rotate(-45deg);
       transform: skewY(10deg);
     } */
+
+    /* .container.active {
+      flex-direction: row-reverse;
+    } */
+    .container .info-content.login {
+      /* display: flex; */
+      transform: translateX(0);
+      /* transform: translateX(0%); */
+      transition-delay: 1.5s;
+      opacity: 1;
+    }
+    .container .info-content.register {
+      /* display: none; */
+      transform: translateX(-200%);
+      opacity: 0;
+    }
+    .container.active .info-content.login {
+      /* display: none; */
+      transform: translateX(100%);
+      transition-delay: 0s;
+      opacity: 0;
+    }
+    .container.active .info-content.register {
+      /* display: flex; */
+      transform: translateX(0);
+      transition-delay: 1.5s;
+      opacity: 1;
+    }
+
+    .container::before {
+      position: absolute;
+      /* border: 1px solid red; */
+      top: 0;
+      left: 0;
+      content: "";
+      width: 100%;
+      height: 100%;
+      /* background-color: red; */
+      border-radius: inherit;
+      background: linear-gradient(45deg, #25252b, #ff2770);
+      /* transform: rotate(-35deg); */
+      /* transform: skew(30deg) translateX(57%); */
+      /* clip-path: polygon(0% 0%, 70% 0%, 30% 100%, 0% 100%); */
+      /* transform-origin: top center; */
+      clip-path: polygon(0% 0%, 60% 0%, 20% 100%, 0% 100%);
+      transition: opacity 1s;
+      transition-delay: 0;
+      opacity: 0;
+      z-index: -1;
+    }
+    .container::after {
+      position: absolute;
+      /* border: 1px solid red; */
+      top: 0;
+      right: 0;
+      content: "";
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      /* background-color: red; */
+      background: linear-gradient(45deg, #ff2770, #25252b);
+      /* transform: rotate(-35deg); */
+      /* transform: skew(30deg) translateX(57%); */
+      /* clip-path: polygon(0% 0%, 70% 0%, 30% 100%, 0% 100%); */
+      /* transform-origin: top center; */
+      clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 80% 100%);
+      transition: opacity 1s;
+      transition-delay: 1s;
+      opacity: 1;
+      z-index: -1;
+    }
+    .container.active::after {
+      /* clip-path: polygon(0% 0%, 60% 0%, 20% 100%, 0% 100%); */
+      /* transform: skew(30deg) translateX(57%); */
+      transition-delay: 0s;
+      opacity: 0;
+    }
+    .container.active::before {
+      /* clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 80% 100%); */
+      /* transform: skew(-30deg) translateX(-57%); */
+      transition-delay: 1s;
+      opacity: 1;
+    }
+
+    @media (max-width: 50rem) {
+      .container {
+        display: block;
+        padding: 2rem 0;
+      }
+      .container::before, 
+      .container::after {
+        clip-path: none;
+      }
+      .form-box, 
+      .info-content {
+        width: auto;
+      }
+      .info-content {
+        /* max-width: 400px; */
+        max-width: 25rem;
+        padding: 2rem 4rem 2rem 2rem;
+      }
+      .form-box.login {
+        width: 100%;
+      }
+      .form-box.register {
+        margin-top: 2rem;
+        padding: 2rem;
+      }
+      .info-content.login {
+        bottom: 2rem;
+      }
+      .shaped-container {
+        /* padding-left: 2rem; */
+        padding-top: 0;
+      }
+      .login .shaped-container {
+        padding-right: 0;
+      }
+      .register .shaped-container {
+        padding-left: 0;
+      }
+      .shape {
+        height: 0;
+      }
+    }
   </style>
   </head> 
   <body>
@@ -528,9 +654,9 @@
 complete 150 missions
 buy 65 items
 16
-dark star 2 times Camp
-12 tower chests
-chat
+<!-- dark star 2 times Camp -->
+<!-- 12 tower chests -->
+<!-- chat -->
 pet summon
 500 energy
 17
@@ -541,6 +667,16 @@ deal 200k damage Camp
 win 5 times with tank in tower
 deal 200k damage Camp
 5 times first skills Camp
+19
+500 tower coins
+magic power glyph
+deal 200k ph.damage arena
+exchange 200 items
+first skills 30 times arena
+20
+chat
+1500k damage Camp
+armor glyph
 </p>
 
     <script>
