@@ -4,390 +4,149 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX | XMLHttpRequest</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
-
-:root {
-  --primary-color: #ff226f;
-  --primary-color-dark: #fe6769;
-  --text-dark: #333333;
-  --white: #ffffff;
-}
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-header {
-  /* font-family: "Roboto", sans-serif; */
-  font-family: Georgia;
-  background: linear-gradient(145deg, pink, rgb(238, 97, 120));
-  /* background-image: url("assets/bg.png"); */
-  /* background-position: bottom center; */
-  /* background-repeat: no-repeat; */
-  /* background-size: cover; */
-  min-height: 100vh;
-  display: flex;
-}
-.container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 1rem;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10rem;
-}
-.container-left h1 {
-  margin-bottom: 2rem;
-  color: var(--primary-color);
-  font-size: 2.5rem;
-  font-weight: 500;
-}
-.container-left p {
-  margin-bottom: 1rem;
-  color: var(--text-dark);
-}
-.container-left button {
-  margin-top: 1rem;
-  padding: 1rem 2rem;
-  color: var(--white);
-  font-size: 1rem;
-  font-family: inherit;
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  background: 
-    linear-gradient(
-      to right,
-      var(--primary-color),
-      var(--primary-color-dark)
-    );
-  cursor: pointer;
-}
-.container-left button:hover {
-  background: var(--primary-color);
-}
-.container-right {
-  display: grid;
-  gap: 2rem;
-}
-.card {
-  padding: 2rem;
-  display: flex;
-  gap: 2rem;
-  align-items: flex-start;
-  border-radius: 1rem;
-  background-color: var(--white);
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
-}
-.card img {
-  max-width: 75px;
-  border-radius: 100%;
-}
-.card-content {
-  display: flex;
-  gap: 1rem;
-}
-/* .card-details p {
-  margin-bottom: 0.5rem;
-} */
-.card-content span i {
-  color: var(--primary-color);
-  font-size: 2rem;
-}
-.card-details p {
-  color: var(--text-dark);
-  font-size: 1rem;
-  font-style: italic;
-  margin-bottom: 1rem;
-}
-.card-details h4 {
-  color: var(--primary-color);
-  font-size: 1rem;
-  font-weight: 500;
-  text-align: right;
-}
-@media (width < 1200px) {
-  .container {
-    gap: 3rem;
-  }
-}
-@media (width < 900px) {
-  .container {
-    grid-template-columns: repeat(1, 1fr);
-  }
-  .container-right {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (width < 750px) {
-  .container-right {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-/* *, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-} */
-.body {
-  min-height: 100vh;
-  padding: 5rem 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  font-family: "Lato", sans-serif;
-  background: linear-gradient(to bottom right, #daccc8, #b39c94);
-  isolation: isolate;
-}
-.post {
-  margin: 1.5rem 0;
-  background: #eceae2;
-  border-radius: 2rem;
-  padding: 2rem;
-  position: relative;
-  width: 90%;
-  max-width: 400px;
-}
-.post textarea {
-  background: transparent;
-  border: none;
-  outline: none;
-  margin-top: 1.5rem;
-  width: 100%;
-  height: 60px;
-  font-family: inherit;
-}
-.icon-tabler-x {
-  cursor: pointer;
-  position: absolute;
-  right: 2rem;
-  top: 2rem;
-}
-.shadow-bg {
-  background: #c2aea7;
-  box-shadow: 0 2rem 2rem #a1847f;
-  border-radius: 2rem;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: -3rem;
-  left: -3rem;
-  z-index: -1;
-}
-.main-container {
-  background: #eceae2;
-  border-radius: 2rem;
-  box-shadow: 0 2rem 2rem #a1847f;
-  padding: 3rem;
-  position: relative;
-  width: 90%;
-  max-width: 400px;
-  margin-bottom: 3rem;
-}
-.upper-part {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.25rem;
-  margin-bottom: 1.5rem;
-}
-.upper-part p {
-  font-size: 0.8rem;
-  letter-spacing: 1px;
-}
-.icon-tabler-dots {
-  cursor: pointer;
-}
-.description {
-  font-size: 1.2rem;
-  max-width: 300px;
-  margin: 1rem 0 1.2rem 0;
-}
-.numbers {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-}
-.members, .online {
-  font-size: 0.9rem;
-  line-height: 1.4;
-}
-.members span, .online span {
-  font-weight: 700;
-  font-size: 1.6rem;
-}
-.buttons-container {
-  margin: 1.5rem 0;
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-}
-button {
-  display: block;
-  border: 1px solid transparent;
-  flex: 1;
-  padding: 0.8rem;
-  border-radius: 0.5rem;
-  background: #000;
-  color: #fff;
-  cursor: pointer;
-  transition: 0.5s;
-}
-.join:hover, .joined {
-  background: transparent;
-  border-color: #000;
-  color: #000;
-}
-.date {
-  font-size: 0.8rem;
-  color: #000000a0;
-}
-@media (max-width: 350px) {
-  .main-container {
-    padding: 1.5rem;
-  }
-  .buttons-container {
-    flex-direction: column;
-  }
-}
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+      fieldset {
+        display: none;
+      }
+      :root {
+        --primary-color: #b1a88b;
+        --primary-color-dark: #8f8871;
+        --text-dark: #333333;
+        --text-light: #767278;
+        --extra-light: #ffffff;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        min-height: 100vh;
+        display: flex;
+        /* align-items: center; */
+        /* justify-content: center; */
+        font-family: "Roboto", sans-serif;
+        background-image: linear-gradient(
+          rgba(255, 255, 255, 0.5), 
+          rgba(255, 255, 255, 0.5)
+        ), url("./assets/pexels-nancy-bourque-1209978.jpg");
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+      .profile-card {
+        width: 700px;
+        margin: auto;
+        border-radius: 10px;
+        box-shadow: 3px 3px 5px var(--text-light);
+        overflow: hidden;
+      }
+      .header {
+        position: relative;
+        height: 10rem;
+        background-image: url("./assets/pexels-nancy-bourque-1209978.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+      .header img {
+        position: absolute;top: 2rem;
+        left: 2rem;
+        width: 10rem;
+        height: 10rem;
+        border-radius: 50%;
+        border: 0.2rem solid var(--extra-light);
+        box-shadow: 3px 3px 5px var(--text-light);
+      }
+      .follow {
+        position: absolute;
+        right: 2rem;
+        bottom: 1rem;
+        padding: 0.75em 2em;
+        color: var(--extra-light);
+        font-size: 0.8rem;
+        font-weight: 600;
+        font-family: inherit;
+        text-transform: capitalize;
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        background-color: var(--primary-color);
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+      .follow:hover {
+        background-color: var(--primary-color-dark);
+      }
     </style>
   </head> 
   <body>
-    <header>
-      <div class="container">
-        <div class="container-left">
-          <h1>Read what our customers love about us</h1>
-          <p>
-            Over 200 companies frim diverse sectors consult us to enhance the
-            user experience of their products and services.
-          </p>
-          <p>
-            We have helped companies increase their customer base and generate
-            multifold revenue with our service.
-          </p>
-          <button>Read our success stories</button>
+    <div class="profile-card">
+      <div class="header">
+        <img src="./assets/433719638_968658111290327_8362694328875161291_n.jpg" alt="">
+        <button class="follow">follow</button>
+      </div>
+      <div class="content">
+        <div class="left">
+          <h2>john doe</h2>
+          <p>@DrWatson</p>
+          <hr>
+          <div class="media">
+            <div class="followers">
+              <span class="count">22.6k</span>
+              <span class="text">followers</span>
+            </div>
+            <div class="avatars">
+              <img src="./assets/pic-1.jpg" alt="">
+              <img src="./assets/pic-2.jpeg" alt="">
+              <img src="./assets/pic-3.jpg" alt="">
+              <img src="./assets/user.jpg" alt="">
+              <img src="./assets/profile.jpg" alt="">
+              <span class="more">8+</span>
+            </div>
+          </div>
         </div>
-        <div class="container-right">
-          <div class="card">
-            <img src="assets/pic-1.jpg" alt="user" />
-            <div class="card-content">
-              <span><i class="ri-double-quotes-l"></i></span>
-              <div class="card-details">
-                <p>
-                  We had a great time collaboraring with the Filament team. They
-                  have my high recommendation!
-                </p>
-                <h4>- Marnus Stephen</h4>
+        <div class="right">
+          <div class="feed-card">
+            <div class="feed">
+              <img src="./assets/433719638_968658111290327_8362694328875161291_n.jpg" alt="">
+              <div class="feed-content">
+                <h5>What an amazing day! I love being a doctor!</h5>
+                <div class="social-icons">
+                  <div class="icon">
+                    <i class="fa fa-heart"></i> 12
+                  </div>
+                  <div class="icon">
+                    <i class="fa fa-clock-o"></i> 1h ago
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="feed">
+              <img src="./assets/433719638_968658111290327_8362694328875161291_n.jpg" alt="">
+              <div class="feed-content">
+                <h5>My decision to move from London to NY paid off!</h5>
+                <div class="social-icons">
+                  <div class="icon">
+                    <i class="fa fa-heart"></i> 19
+                  </div>
+                  <div class="icon">
+                    <i class="fa fa-clock-o"></i> 3h ago
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div class="card">
-            <img src="assets/pic-2.jpeg" alt="user" />
-            <div class="card-content">
-              <span><i class="ri-double-quotes-l"></i></span>
-              <div class="card-details">
-                <p>
-                  The team drastically improved our product's user experience &
-                  increased our business outreach.
-                </p>
-                <h4>- Andrew Jettpace</h4>
-              </div>
-            </div>
-          </div> 
-          <div class="card">
-            <img src="assets/pic-3.jpg" alt="user" />
-            <div class="card-content">
-              <span><i class="ri-double-quotes-l"></i></span>
-              <div class="card-details">
-                <p>
-                  I absolutely loved working with the Filament team. Complete
-                  experts at what they do!
-                </p>
-                <h4>- Stacy Stone</h4>
-              </div>
-            </div>
-          </div> 
         </div>
       </div>
-    </header>
-    
-    <!-- <h1>Details Card</h1> -->
-    <div class="body">
-      <section class="main-container">
-        <div class="shadow-bg"></div>
-        <div class="upper-part">
-          <p>ABOUT THE COMMUNITY</p>
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-dots" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></svg>
-        </div>
-        <h2>Blender Renders</h2>
-        <p class="description">A place where beginner Blender artists can post their creations and get feedback on.</p>
-        <div class="numbers">
-          <p class="members"><span>13.5K</span> <br>Members</p>
-          <p class="online"><span>47</span> <br>Online</p>
-        </div>
-        <div class="buttons-container">
-          <button class="join">Join</button>
-          <button class="create-post">Create Post</button>
-        </div>
-        <p class="date">Created Feb 7, 2021</p>
-      </section>
-      <script>
-// Click join button
-const joinBtn = document.querySelector('.join');
-
-joinBtn.addEventListener('click', () => {
-  if (joinBtn.textContent === 'Join') {
-    joinBtn.classList.add('joined');
-    joinBtn.textContent = 'Joined';
-  } else {
-    joinBtn.classList.remove('joined');
-    joinBtn.textContent = 'Join';
-  }
-});
-
-// Create post
-const body = document.querySelector(".body");
-const createPostBtn = document.querySelector('.create-post');
-let postID = 1;
-
-createPostBtn.addEventListener('click', () => {
-    const post = document.createElement('div');
-    post.classList.add('post');
-    post.setAttribute('id', `${postID}`);
-
-    post.innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
-      <h6>Post ${postID}</h6>
-      <textarea></textarea>
-    `;
-
-    postID += 1;
-    body.appendChild(post);
-
-    post.querySelector('textarea').focus();
-
-    // const posts = [...document.querySelectorAll('.post')];
-    // const exitBtn = [...document.querySelectorAll('.icon-tabler-x')];
-    const exitBtn = post.querySelector('.icon-tabler-x');
-
-    // exitBtn.forEach((btn, index) => {
-      exitBtn.addEventListener('click', () => {
-        post.remove();
-      })
-    // })
-});
-      </script>
     </div>
-    
-    <my-button text="Hello"></my-button>
+
+    <!-- <my-button text="Hello"></my-button> -->
     <script>
       class MyButton extends HTMLElement {
         constructor(text) {
@@ -423,7 +182,7 @@ createPostBtn.addEventListener('click', () => {
       window.customElements.define("my-button", MyButton);
     </script>
 
-    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
+    <h1 hidden><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
     
     <h1 id="title" style="display: none;">Loading...</h1>
     <p id="summary" style="display: none;">Loading...</p>
@@ -456,7 +215,7 @@ createPostBtn.addEventListener('click', () => {
       // console.log(state);
     </script>
 
-    <fieldset hidden>
+    <fieldset>
       <legend>Get all users from local JSON file</legend>
       <button id="local">Send Request</button>
     </fieldset>
@@ -486,7 +245,7 @@ createPostBtn.addEventListener('click', () => {
     </script>
 
     <!-- ================= Get data from GitHub API ================= -->
-    <fieldset hidden>
+    <fieldset>
       <legend>Get users from GitHub API</legend>
       <button id="github">Send Request</button>
       <span id="userGithub"></span>
@@ -524,9 +283,6 @@ createPostBtn.addEventListener('click', () => {
 15
 complete 150 missions
 buy 65 items
-<!-- 16 -->
-<!-- pet summon -->
-<!-- 500 energy -->
 17
 magic resist glyph
 chat
