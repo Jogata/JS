@@ -145,6 +145,7 @@ header {
   flex-direction: column;
   font-family: "Lato", sans-serif;
   background: linear-gradient(to bottom right, #daccc8, #b39c94);
+  isolation: isolate;
 }
 .post {
   margin: 1.5rem 0;
@@ -172,6 +173,7 @@ header {
 }
 .shadow-bg {
   background: #c2aea7;
+  box-shadow: 0 2rem 2rem #a1847f;
   border-radius: 2rem;
   width: 100%;
   height: 100%;
@@ -203,6 +205,58 @@ header {
 }
 .icon-tabler-dots {
   cursor: pointer;
+}
+.description {
+  font-size: 1.2rem;
+  max-width: 300px;
+  margin: 1rem 0 1.2rem 0;
+}
+.numbers {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.members, .online {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+.members span, .online span {
+  font-weight: 700;
+  font-size: 1.6rem;
+}
+.buttons-container {
+  margin: 1.5rem 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+button {
+  display: block;
+  border: 1px solid transparent;
+  flex: 1;
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.join:hover, .joined {
+  background: transparent;
+  border-color: #000;
+  color: #000;
+}
+.date {
+  font-size: 0.8rem;
+  color: #000000a0;
+}
+@media (max-width: 350px) {
+  .main-container {
+    padding: 1.5rem;
+  }
+  .buttons-container {
+    flex-direction: column;
+  }
 }
     </style>
   </head> 
@@ -285,7 +339,89 @@ header {
         </div>
         <p class="date">Created Feb 7, 2021</p>
       </section>
+      <script>
+// Click join button
+const joinBtn = document.querySelector('.join');
+
+joinBtn.addEventListener('click', () => {
+  if (joinBtn.textContent === 'Join') {
+    joinBtn.classList.add('joined');
+    joinBtn.textContent = 'Joined';
+  } else {
+    joinBtn.classList.remove('joined');
+    joinBtn.textContent = 'Join';
+  }
+});
+
+// Create post
+const body = document.querySelector(".body");
+const createPostBtn = document.querySelector('.create-post');
+let postID = 1;
+
+createPostBtn.addEventListener('click', () => {
+    const post = document.createElement('div');
+    post.classList.add('post');
+    post.setAttribute('id', `${postID}`);
+
+    post.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
+      <h6>Post ${postID}</h6>
+      <textarea></textarea>
+    `;
+
+    postID += 1;
+    body.appendChild(post);
+
+    post.querySelector('textarea').focus();
+
+    // const posts = [...document.querySelectorAll('.post')];
+    // const exitBtn = [...document.querySelectorAll('.icon-tabler-x')];
+    const exitBtn = post.querySelector('.icon-tabler-x');
+
+    // exitBtn.forEach((btn, index) => {
+      exitBtn.addEventListener('click', () => {
+        post.remove();
+      })
+    // })
+});
+      </script>
     </div>
+    
+    <my-button text="Hello"></my-button>
+    <script>
+      class MyButton extends HTMLElement {
+        constructor(text) {
+          super();
+          // this.createTemplate();
+        }
+
+        connectedCallback() {
+          // console.log("init");
+          this.createTemplate();
+        }
+        disconnectedCallback() {
+          console.log("deleted");
+        }
+
+        createTemplate() {
+          const root = this.attachShadow( {mode: "closed"});
+          const template = document.createElement("template");
+          const container = document.createElement("div");
+          const btn1 = document.createElement("button");
+          const btn2 = document.createElement("button");
+
+          btn1.textContent = "Add";
+          btn2.textContent = "Delete";
+          container.appendChild(btn1);
+          container.appendChild(btn2);
+          template.innerHTML = container.innerHTML;
+
+          root.appendChild(template.content.cloneNode(true));
+        }
+      }
+
+      window.customElements.define("my-button", MyButton);
+    </script>
 
     <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
     
