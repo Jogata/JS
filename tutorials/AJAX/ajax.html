@@ -82,6 +82,116 @@
       .follow:hover {
         background-color: var(--primary-color-dark);
       }
+      .content {
+        padding: 2rem;
+        display: flex;
+        gap: 2rem;
+        background-color: var(--extra-light);
+      }
+      .left {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+      .left h2 {
+        color: var(--text-dark);
+        font-size: 1.5rem;
+        font-weight: 400;
+        text-transform: capitalize;
+      }
+      .left p {
+        color: var(--text-light);
+        font-size: 0.8rem;
+      }
+      .left hr {
+        width: 100%;
+        margin: 1rem 0;
+      }
+      .media {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+      .followers {
+        display: flex;
+        flex-direction: column;
+        color: var(--text-light);
+      }
+      .count {
+        font-size: 1.5rem;
+      }
+      .text {
+        font-size: 0.8rem;
+      }
+      .avatars img {
+        width: 30px;
+        height: 30px;
+        margin-right: -15px;
+        border-radius: 50%;
+      }
+      .avatars .more {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        vertical-align: top;
+        /* margin-right: -15px; */
+        color: var(--extra-light);
+        font-size: 12px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 30px;
+        background-color: var(--text-dark);
+        border-radius: 50%;
+      }
+      .right {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        flex-direction: column;
+      }
+      .feed-card {
+        width: 100%;
+        padding: 1rem;
+        border: 1px solid var(--text-light);
+        border-radius: 5px;
+        box-shadow: 3px 3px 5px var(--text-light);
+      }
+      .feed {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+      }
+      .feed img {
+        width: 30px;
+      }
+      .feed h5 {
+        margin-bottom: 5px;
+        color: var(--text-dark);
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+      .social-icons {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+      .icon {
+        color: var(--text-light);
+        font-size: 0.8rem;
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+      .icon:hover {
+        color: var(--text-dark);
+      }
+      .feed:nth-child(1) {
+        padding-bottom: 1rem;
+      }
+      .feed:nth-child(3) {
+        padding-top: 1rem;
+      }
     </style>
   </head> 
   <body>
@@ -146,7 +256,8 @@
       </div>
     </div>
 
-    <!-- <my-button text="Hello"></my-button> -->
+    <my-button text="Hello"></my-button>
+    <my-button2></my-button2>
     <script>
       class MyButton extends HTMLElement {
         constructor(text) {
@@ -160,6 +271,17 @@
         }
         disconnectedCallback() {
           console.log("deleted");
+        }
+
+        adoptedCallback() {
+          console.log("moved");
+        }
+        
+        attributeChangedCallback(name, newValue, oldValue) {
+          console.log("changed");
+          console.log(name);
+          console.log(newValue);
+          console.log(oldValue);
         }
 
         createTemplate() {
@@ -177,9 +299,22 @@
 
           root.appendChild(template.content.cloneNode(true));
         }
+
+        static get observedAttributes() {
+          return ["text"];
+        }
       }
 
       window.customElements.define("my-button", MyButton);
+
+      class MyCustomButton extends HTMLButtonElement {
+        constructor() {
+          self = super();
+          self.textContent = "My button";
+        }
+      }
+
+      window.customElements.define("my-button2", MyCustomButton, {extends: "button"});
     </script>
 
     <h1 hidden><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
@@ -283,10 +418,10 @@
 15
 complete 150 missions
 buy 65 items
-17
-magic resist glyph
-chat
-deal 200k damage Camp
+<!-- 17 -->
+<!-- magic resist glyph -->
+<!-- chat -->
+<!-- deal 200k damage Camp -->
 18
 win 5 times with tank in tower
 deal 200k damage Camp
@@ -301,6 +436,10 @@ first skills 30 times arena
 chat
 1500k damage Camp
 armor glyph
+21
+tank hero skills 10
+500 tower coins
+20 hero soul stones
 </p>
 
     <script>
