@@ -6,258 +6,152 @@
     <title>AJAX | XMLHttpRequest</title>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
-      fieldset {
-        display: none;
-      }
-      :root {
-        --primary-color: #b1a88b;
-        --primary-color-dark: #8f8871;
-        --text-dark: #333333;
-        --text-light: #767278;
-        --extra-light: #ffffff;
-      }
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body {
-        min-height: 100vh;
-        display: flex;
-        /* align-items: center; */
-        /* justify-content: center; */
-        font-family: "Roboto", sans-serif;
-        background-image: linear-gradient(
-          rgba(255, 255, 255, 0.5), 
-          rgba(255, 255, 255, 0.5)
-        ), url("./assets/pexels-nancy-bourque-1209978.jpg");
-        background-attachment: fixed;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-      }
-      .profile-card {
-        width: 700px;
-        margin: auto;
-        border-radius: 10px;
-        box-shadow: 3px 3px 5px var(--text-light);
-        overflow: hidden;
-      }
-      .header {
-        position: relative;
-        height: 10rem;
-        background-image: url("./assets/pexels-nancy-bourque-1209978.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-      }
-      .header img {
-        position: absolute;top: 2rem;
-        left: 2rem;
-        width: 10rem;
-        height: 10rem;
-        border-radius: 50%;
-        border: 0.2rem solid var(--extra-light);
-        box-shadow: 3px 3px 5px var(--text-light);
-      }
-      .follow {
-        position: absolute;
-        right: 2rem;
-        bottom: 1rem;
-        padding: 0.75em 2em;
-        color: var(--extra-light);
-        font-size: 0.8rem;
-        font-weight: 600;
-        font-family: inherit;
-        text-transform: capitalize;
-        outline: none;
-        border: none;
-        border-radius: 5px;
-        background-color: var(--primary-color);
-        transition: all 0.3s;
-        cursor: pointer;
-      }
-      .follow:hover {
-        background-color: var(--primary-color-dark);
-      }
-      .content {
-        padding: 2rem;
-        display: flex;
-        gap: 2rem;
-        background-color: var(--extra-light);
-      }
-      .left {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-      }
-      .left h2 {
-        color: var(--text-dark);
-        font-size: 1.5rem;
-        font-weight: 400;
-        text-transform: capitalize;
-      }
-      .left p {
-        color: var(--text-light);
-        font-size: 0.8rem;
-      }
-      .left hr {
-        width: 100%;
-        margin: 1rem 0;
-      }
-      .media {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-      }
-      .followers {
-        display: flex;
-        flex-direction: column;
-        color: var(--text-light);
-      }
-      .count {
-        font-size: 1.5rem;
-      }
-      .text {
-        font-size: 0.8rem;
-      }
-      .avatars img {
-        width: 30px;
-        height: 30px;
-        margin-right: -15px;
-        border-radius: 50%;
-      }
-      .avatars .more {
-        display: inline-block;
-        width: 30px;
-        height: 30px;
-        vertical-align: top;
-        /* margin-right: -15px; */
-        color: var(--extra-light);
-        font-size: 12px;
-        font-weight: bold;
-        text-align: center;
-        line-height: 30px;
-        background-color: var(--text-dark);
-        border-radius: 50%;
-      }
-      .right {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        flex-direction: column;
-      }
-      .feed-card {
-        width: 100%;
-        padding: 1rem;
-        border: 1px solid var(--text-light);
-        border-radius: 5px;
-        box-shadow: 3px 3px 5px var(--text-light);
-      }
-      .feed {
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-      }
-      .feed img {
-        width: 30px;
-      }
-      .feed h5 {
-        margin-bottom: 5px;
-        color: var(--text-dark);
-        font-size: 0.9rem;
-        font-weight: 500;
-      }
-      .social-icons {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-      }
-      .icon {
-        color: var(--text-light);
-        font-size: 0.8rem;
-        transition: all 0.3s;
-        cursor: pointer;
-      }
-      .icon:hover {
-        color: var(--text-dark);
-      }
-      .feed:nth-child(1) {
-        padding-bottom: 1rem;
-      }
-      .feed:nth-child(3) {
-        padding-top: 1rem;
-      }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<style>
+  *, 
+  *::before, 
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    position: relative;
+    min-height: 100vh;
+    color: #1f2438;
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    background: #fafafc;
+  }
+  main {
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+    padding: 5rem 1rem;
+    display: flex;
+    gap: 5rem;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+  .gray-background {
+    position: fixed;
+    left: 40%;
+    bottom: 0;
+    width: 350px;
+    height: 70vh;
+    background: #ececf0;
+    z-index: -1;
+  }
+  img {
+    object-fit: cover;
+    border-radius: 0.2rem;
+  }
+  section {
+    width: 90%;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    background: #fff;
+    box-shadow: 0 1.5rem 1.5rem -0.5rem #cbcbcb;
+  }
+  #shadow-host-companion {
+    display: none;
+  }  
+</style>    
   </head> 
   <body>
-    <div class="profile-card">
-      <div class="header">
-        <img src="./assets/433719638_968658111290327_8362694328875161291_n.jpg" alt="">
-        <button class="follow">follow</button>
-      </div>
-      <div class="content">
-        <div class="left">
-          <h2>john doe</h2>
-          <p>@DrWatson</p>
-          <hr>
-          <div class="media">
-            <div class="followers">
-              <span class="count">22.6k</span>
-              <span class="text">followers</span>
-            </div>
-            <div class="avatars">
-              <img src="./assets/pic-1.jpg" alt="">
-              <img src="./assets/pic-2.jpeg" alt="">
-              <img src="./assets/pic-3.jpg" alt="">
-              <img src="./assets/user.jpg" alt="">
-              <img src="./assets/profile.jpg" alt="">
-              <span class="more">8+</span>
-            </div>
+    
+    <!-- <h1>UI Components</h1> -->
+    <div class="gray-background"></div>
+    <main>
+      <section class="headphones">
+        <img src="https://images.unsplash.com/photo-1689357642408-6ce34b5bd271?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGhlYWRwaG9uZXMlMjBncmVlbnxlbnwwfHwwfHx8MA%3D%3D" alt="white headphones in grass" width="280" height="180">
+        <h2>Going Wireless With Your Headphones</h2>
+        <div class="headphones-profile">
+          <img src="https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHNpZGUlMjBwcm9maWxlfGVufDB8fDB8fHww" id="profile-1" alt="a side profile of a man" width="50" height="50">
+          <div class="headphones-profile-info">
+            <h5>Cameron Russell</h5>
+            <p class="date">Feb 15 2021</p>
           </div>
         </div>
-        <div class="right">
-          <div class="feed-card">
-            <div class="feed">
-              <img src="./assets/433719638_968658111290327_8362694328875161291_n.jpg" alt="">
-              <div class="feed-content">
-                <h5>What an amazing day! I love being a doctor!</h5>
-                <div class="social-icons">
-                  <div class="icon">
-                    <i class="fa fa-heart"></i> 12
-                  </div>
-                  <div class="icon">
-                    <i class="fa fa-clock-o"></i> 1h ago
-                  </div>
-                </div>
-              </div>
-            </div>
-            <hr>
-            <div class="feed">
-              <img src="./assets/433719638_968658111290327_8362694328875161291_n.jpg" alt="">
-              <div class="feed-content">
-                <h5>My decision to move from London to NY paid off!</h5>
-                <div class="social-icons">
-                  <div class="icon">
-                    <i class="fa fa-heart"></i> 19
-                  </div>
-                  <div class="icon">
-                    <i class="fa fa-clock-o"></i> 3h ago
-                  </div>
-                </div>
-              </div>
-            </div>
+        <p class="headphones-paragraph">
+          The first category of the free backgrounds has plenty of options, but the number of backgrounds is limited to a few hundreds.
+        </p>
+        <div class="dots">
+          <div class="dot"></div>
+          <div class="dot active"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </section>
+      <section class="location-container">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="28" height="28" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
+        <h2>Choose Location</h2>
+        <div class="locations">
+          <p class="location">
+            DE - Germany
+          </p>
+          <p class="location">
+            NO - Norway
+          </p>
+          <p class="location">
+            FI - Suomi
+          </p>
+          <p class="location">
+            EU - Global
+          </p>
+          <p class="location">
+            DK - Denmark
+          </p>
+          <p class="location">
+            SE - Sweden
+          </p>
+        </div>
+      </section>
+      <section class="profile">
+        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDR8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D" alt="blond haired smiling woman" width="150" height="150">
+        <div class="profile-info">
+          <h3>Lizzie Bennett</h3>
+          <h4>General Manager</h4>
+          <div class="email">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg>
+            <p>Lizzie.bennett@company.com</p>
+          </div>
+          <div class="phone">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-phone" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" /></svg>
+            <p>+ 47 589 55 458</p>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
+    <script>
+// Close the locations section
+const exitBtn = document.querySelector('.icon-tabler-x');
 
-    <my-button text="Hello"></my-button>
-    <my-button2></my-button2>
+exitBtn.addEventListener('click', () => {
+document.querySelector('.location-container').style.display = 'none';
+});
+
+// Select a location 
+const locations = [...document.querySelectorAll('.location')];
+
+locations.forEach(l => {
+l.addEventListener('click', () => {
+  locations.forEach(lo => {
+    lo.classList.remove('selected');
+  })
+  l.classList.add('selected');
+})
+})
+    </script>
+
+    <!-- <my-button text="Hello"></my-button> -->
+    <button is="my-button2"></button>
+    <!-- <my-button2></my-button2> -->
     <script>
       class MyButton extends HTMLElement {
         constructor(text) {
@@ -309,15 +203,16 @@
 
       class MyCustomButton extends HTMLButtonElement {
         constructor() {
-          self = super();
-          self.textContent = "My button";
+          const self = super();
+          // console.log(self);
+          self.textContent = "My custom button";
         }
       }
 
       window.customElements.define("my-button2", MyCustomButton, {extends: "button"});
     </script>
 
-    <h1 hidden><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+    <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
     
     <h1 id="title" style="display: none;">Loading...</h1>
     <p id="summary" style="display: none;">Loading...</p>
@@ -418,10 +313,6 @@
 15
 complete 150 missions
 buy 65 items
-<!-- 17 -->
-<!-- magic resist glyph -->
-<!-- chat -->
-<!-- deal 200k damage Camp -->
 18
 win 5 times with tank in tower
 deal 200k damage Camp
