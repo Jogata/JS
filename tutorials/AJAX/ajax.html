@@ -3,439 +3,145 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AJAX | XMLHttpRequest</title>
+    <!-- <title>AJAX | XMLHttpRequest</title> -->
+    <title>Travel</title>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-<style>
-*, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #ee4a56;
-}
-
-main {
-  width: 90%;
-  margin: 5rem 0;
-  max-width: 380px;
-  padding: 1.5rem;
-  border-radius: 1.5rem;
-  background: #fff;
-}
-
-/* Navbar */
-nav ul {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-nav ul li {
-  list-style: none;
-  cursor: pointer;
-}
-
-nav ul li:hover .icon-tabler {
-  color: #fff;
-  background: #ee4a56;
-}
-
-nav ul li:hover p {
-  visibility: hidden;
-}
-
-.item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 0.7rem;
-  font-weight: 700;
-}
-
-.item .icon-tabler {
-  padding: 0.5rem;
-  border-radius: 50%;
-}
-
-/* Frequent payments section */
-.frequent-payments {
-  margin: 3rem 0;
-  padding: 1rem;
-  color: #fff;
-  border-radius: 1rem;
-  background: 
-    linear-gradient(
-      90deg, #ee4a56, #f34d50d7);
-}
-
-h3 {
-  margin-bottom: 0.5rem;
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.icon-tabler-dots {
-  cursor: pointer;
-}
-
-.profile-images {
-  display: flex;
-  gap: 0.25rem;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-}
-
-img {
-  min-width: 60px;
-  height: 60px;
-  object-fit: cover;
-  object-position: top;
-  border-radius: 50%;
-  border: 3px solid #f48fa2ba;
-}
-
-/* Profiles section */
-.profiles {
-  margin-bottom: 3rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  border-radius: 1rem;
-  box-shadow: 0 0 1rem #c69999;
-}
-
-.profile:first-of-type, 
-.profile:nth-child(3) {
-  border-right: 1px solid #dcdcdc;
-}
-
-.profile:first-of-type, 
-.profile:nth-child(2) {
-  border-bottom: 1px solid #dcdcdc;
-}
-
-.profile {
-  position: relative;
-  padding: 1.5rem;
-  display: flex;
-  gap: 0.3rem;
-  align-items: center;
-  flex-direction: column;
-}
-
-.icon-tabler-dots-vertical {
-  position: absolute;
-  right: 0.5rem;
-  top: 1rem;
-  color: #989898;
-  cursor: pointer;
-}
-
-.name {
-  font-size: 0.7rem;
-  font-weight: 700;
-}
-
-.username {
-  color: #0000007e;
-  font-size: 0.6rem;
-}
-
-.profile button {
-  width: 90px;
-  margin-top: 0.5rem;
-  padding: 0.5rem;
-  color: #fff;
-  font-size: 0.6rem;
-  border-radius: 1rem;
-  border: 1px solid transparent;
-  background: 
-    linear-gradient(
-      90deg, #ee4a56, #e2595be4);
-  cursor: pointer;
-}
-.profile button:hover {
-  color: #ee4a56;
-  border-color: #ee4a56;
-  background: transparent;
-}
-
-.profile button.added {
-  color: #ee4a56;
-  border-color: #ee4a56;
-  background: transparent;
-}
-
-/* Slider section */
-.slider {
-  margin-bottom: 1.5rem;
-}
-
-.slide-track {
-  margin-bottom: 1.5rem;
-  overflow: hidden;
-}
-
-.slider-list {
-  list-style: none;
-  display: flex;
-  border-bottom: 1px solid transparent;
-  transition: transform 300ms linear;
-}
-
-.slider-list li {
-  width: 100%;
-  margin-bottom: 1rem;
-  flex-shrink: 0;
-}
-
-.slider li p {
-  padding: 0 2rem;
-  color: #515151;
-  font-size: 0.8rem;
-  text-align: center;
-  line-height: 1.4;
-}
-
-.slide-arrows {
-  padding: 0 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.slide-arrows button {
-  padding: 0.1rem 0.8rem;
-  color: #ee4a56;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #ee4a553d;
-  border-radius: 1rem;
-  background: transparent;
-  cursor: pointer;
-}
-
-/* .slide-arrow-prev {
-  transform: scaleX(-1);
-} */
-.slide-pagination {
-  display: flex;
-  gap: 0.3rem;
-  align-items: center;
-}
-
-.slide-page {
-  width: 0.3rem;
-  height: 0.3rem;
-  background: #ee4a5589;
-  cursor: pointer;
-}
-
-.slide-page.is-active {
-  width: 0.5rem;
-  height: 0.5rem;
-  border: 2px solid #ffa4a4;
-  background: #ee4a56;
-  pointer-events: none;
-}
-
-@media (max-width: 320px) {
-  .profile:nth-child(3) {
-    border-bottom: 1px solid #dcdcdc;
-    border-right: none;
-  }
-
-  .profile:first-of-type {
-    border-right: none;
-  }
-}
-
-fieldset {
-  display: none;
-}
-</style>
   </head> 
   <body>
-  <!-- <h1>Payment App</h1> -->
-  <main>
-    <nav>
-      <ul>
-        <li>
-          <div class="item">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-category" width="45" height="45" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4h6v6h-6z" /><path d="M14 4h6v6h-6z" /><path d="M4 14h6v6h-6z" /><path d="M17 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /></svg>
-            <p>Home</p>
-          </div>
-        </li>
-        <li>
-          <div class="item">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-credit-card" width="45" height="45" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 5m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z" /><path d="M3 10l18 0" /><path d="M7 15l.01 0" /><path d="M11 15l2 0" /></svg>
-            <p>Cards</p>
-          </div>
-        </li>
-        <li>
-          <div class="item">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-cash" width="45" height="45" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 9m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v6a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" /><path d="M14 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M17 9v-2a2 2 0 0 0 -2 -2h-10a2 2 0 0 0 -2 2v6a2 2 0 0 0 2 2h2" /></svg>
-            <p>Cash</p>
-          </div>
-        </li>
-        <li>
-          <div class="item">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-receipt-tax" width="45" height="45" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 14l6 -6" /><circle cx="9.5" cy="8.5" r=".5" fill="currentColor" /><circle cx="14.5" cy="13.5" r=".5" fill="currentColor" /><path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2" /></svg>
-            <p>Tax</p>
-          </div>
-        </li>
-        <li>
-          <div class="item">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="45" height="45" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" /></svg>
-            <p>Profile</p>
-          </div>
-        </li>
+    <nav class="section-container nav-container">
+      <div class="nav-logo">
+        <img src="assets/logo.png" alt="logo" />
+        <span>Travel</span>
+      </div>
+      <ul class="nav-links">
+        <li class="link"><a href="#">Home</a></li>
+        <li class="link"><a href="#">Tour List</a></li>
+        <li class="link"><a href="#">Destinations</a></li>
+        <li class="link"><a href="#">Discounts</a></li>
+        <li class="link"><a href="#">Our Gallery</a></li>
       </ul>
     </nav>
-    <section class="frequent-payments">
-      <h3>Frequent payments <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-dots" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></svg></h3>
-      <div class="profile-images">
-        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D" alt="a woman in a red sweater with red lipstick smiling" width="50" height="50">
-        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D" alt="a short red haired woman's profile with a lake in the background" width="50" height="50">
-        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjJ8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D" alt="a black haired woman's profile in a black sweater" width="50" height="50">
-        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjN8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D" alt="a dark brown haired middle aged man's profile in a gray sweater" width="50" height="50">
+    <header>
+      <div class="header-content">
+        <p>Let's go now</p>
+        <h1>explore and travel</h1>
+        <button class="btn">VIEW OUR TOURS</button>
       </div>
-    </section>
-    <section class="profiles">
-      <div class="profile">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-dots-vertical" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></svg>
-        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D" alt="a woman in a red sweater with red lipstick smiling" width="50" height="50">
-        <p class="name">Lee Pearson</p>
-        <p class="username">@pears</p>
-        <button>Add contact</button>
-      </div>
-      <div class="profile">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-dots-vertical" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></svg>
-        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D" alt="a short red haired woman's profile with a lake in the background" width="50" height="50">
-        <p class="name">Amy Moss</p>
-        <p class="username">@amy-m</p>
-        <button>Add contact</button>
-      </div>
-      <div class="profile">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-dots-vertical" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></svg>
-        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjJ8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D" alt="a black haired woman's profile in a black sweater" width="50" height="50">
-        <p class="name">Elva Burke</p>
-        <p class="username">@elva-burk</p>
-        <button>Add contact</button>
-      </div>
-      <div class="profile">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-dots-vertical" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></svg>
-        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjN8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D" alt="a dark brown haired middle aged man's profile in a gray sweater" width="50" height="50">
-        <p class="name">Curtis Thornton</p>
-        <p class="username">@c-thornton</p>
-        <button>Add contact</button>
-      </div>
-    </section>
-    <section class="slider">
-      <div class="slide-track">
-        <ul class="slider-list">
-          <li class="slide">
-            <p>
-              Accept payments on your phone with simple payment buttons, or one of our flexible payment solutions, which can be customized to the needs of your business.
-            </p>
-          </li>
-          <li class="slide">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis recusandae, at atque magnam suscipit ad consectetur molestias velit doloremque iste eligendi harum neque, optio beatae unde facere aut dignissimos. Eligendi!</p>
-          </li>
-          <li class="slide">
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique est provident facere eius deserunt fugiat reiciendis! Magnam dignissimos et assumenda delectus accusantium tenetur? Repellendus, eius nulla labore dolore illum nesciunt.
-            </p>
-          </li>
-          <li class="slide">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, iste! Possimus aspernatur fuga libero minus dolorum earum vel necessitatibus dolorem similique sit quae, officia odit pariatur dignissimos sequi deleniti animi?</p>
-          </li>
-        </ul>
-      </div>
-      <div class="slide-arrows">
-        <button class="slide-arrow-prev">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-left" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M5 12l4 4" /><path d="M5 12l4 -4" /></svg>
-        </button>
-        <div class="slide-pagination">
-          <div class="slide-page is-active"></div>
-          <div class="slide-page"></div>
-          <div class="slide-page"></div>
-          <div class="slide-page"></div>
+      <form class="header-form">
+        <input type="text" placeholder="NAME" />
+        <input type="text" placeholder="EMAIL" />
+        <button class="btn" type="submit">SUBSCRIBE</button>
+      </form>
+    </header>
+
+    <section class="section-container tour-container">
+      <div class="tour-card">
+        <div class="tour-card-details">
+          <h4>Turkey</h4>
+          <p>7 Days</p>
         </div>
-        <button class="slide-arrow-next">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-right" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg>
-        </button>
+        <img src="assets/tour-1.jpg" alt="tour" />
+      </div>
+      <div class="tour-card">
+        <div class="tour-card-details">
+          <h4>United Kingdom</h4>
+          <p>10 Days</p>
+        </div>
+        <img src="assets/tour-2.jpg" alt="tour" />
+      </div>
+      <div class="tour-card">
+        <div class="tour-card-details">
+          <h4>Spain</h4>
+          <p>5 Days</p>
+        </div>
+        <img src="assets/tour-3.jpg" alt="tour" />
+      </div>
+      <div class="tour-card">
+        <div class="tour-card-details">
+          <h4>Europe</h4>
+          <p>8 Days</p>
+        </div>
+        <img src="assets/tour-4.jpg" alt="tour" />
       </div>
     </section>
-  </main>
-  <script>
-const addContactBtns = [...document.querySelectorAll('.profile button')];
 
-addContactBtns.forEach(btn => {
-  btn.addEventListener('click', (e) => {
+    <section class="section-container holiday-container">
+      <p class="section-header">Choose Your</p>
+      <h2 class="section-title">Perfect Holiday</h2>
+      <p class="section-subtitle">The most searched holiday destinations.</p>
+      <div class="holiday-grid">
+        <div class="holiday-card">
+          <img src="assets/holiday-1.jpg" alt="holiday" />
+          <h4>Switzerland - 7 Days</h4>
+          <p>$270</p>
+        </div>
+        <div class="holiday-card">
+          <img src="assets/holiday-2.jpg" alt="holiday" />
+          <h4>St. Mortiz Ski Package</h4>
+          <p>$450</p>
+        </div>
+        <div class="holiday-card">
+          <img src="assets/holiday-3.jpg" alt="holiday" />
+          <h4>Big in Japan</h4>
+          <p>$522</p>
+        </div>
+        <div class="holiday-card">
+          <img src="assets/holiday-4.jpg" alt="holiday" />
+          <h4>Japan Subway Ticket</h4>
+          <p>$255</p>
+        </div>
+        <div class="holiday-card">
+          <img src="assets/holiday-5.jpg" alt="holiday" />
+          <h4>Helicopter Flight</h4>
+          <p>$250</p>
+        </div>
+        <div class="holiday-card">
+          <img src="assets/holiday-6.jpg" alt="holiday" />
+          <h4>Snorkeling Adventure</h4>
+          <p>$412</p>
+        </div>
+      </div>
+      <div class="holiday-btn">
+        <button class="btn">VIEW ALL</button>
+      </div>
+    </section>
 
-    if (btn.textContent === 'Added') {
-      btn.classList.remove('added');
-      e.target.textContent = 'Add contact';
-    } else {
-      btn.classList.add('added');
-      e.target.textContent = 'Added';
-    }
-  })
-})
+    <section class="vacation">
+      <div class="section-container vacation-container">
+        <p class="section-header">Find Your Perfect</p>
+        <h2 class="section-title">Vacation</h2>
+        <p class="section-subtitle">Feet are tired, but heart is happy.</p>
+        <div class="vacation-video">
+          <video src="assets/video.mp4" loop autoplay></video>
+        </div>
+      </div>
+    </section>
 
-const slider = document.querySelector(".slider-list");
-const prevBtn = document.querySelector(".slide-arrow-prev");
-const nextBtn = document.querySelector(".slide-arrow-next");
-const pages = document.querySelectorAll(".slide-page");
+    <section class="section-container destination-container">
+      <p class="section-header">Choose Your</p>
+      <h2 class="section-title">Destination</h2>
+      <p class="section-subtitle">
+        The gladdest moment in human life, me thinks, is a departure into
+        unknown lands.
+      </p>
+      <div class="destination-grid">
+        <div class="destination-card">
+          <img src="assets/destination-1.jpg" alt="destination" />
+          <h4>Holland</h4>
+        </div>
+        <div class="destination-card">
+          <img src="assets/destination-2.jpg" alt="destination" />
+          <h4>Greece</h4>
+        </div>
+        <div class="destination-card">
+          <img src="assets/destination-3.jpg" alt="destination" />
+          <h4>Italy</h4>
+        </div>
+      </div>
+    </section>
 
-let index = 0;
-
-pages.forEach((page, i) => {
-  page.addEventListener("click", () => {
-    index = i;
-    slider.style.transform = `translateX(-${index * 100}%)`;
-    const currentPage = document.querySelector(".is-active");
-    currentPage.classList.remove("is-active");
-    page.classList.add("is-active");
-  })
-})
-
-prevBtn.addEventListener("click", () => {
-  index++;
-  index = Math.min(index, 3);
-  // slider.style.transform = `translateX(-${index * 100}%)`;
-  // if (index < 4) {
-    // const currentPage = document.querySelector(".is-active");
-    // currentPage.classList.remove("is-active");
-    // currentPage.nextElementSibling.classList.add("is-active");
-    // pages[index].classList.add("is-active");
-    pages[index].click();
-  // }
-})
-nextBtn.addEventListener("click", () => {
-  index--;
-  index = Math.max(index, 0);
-  // slider.style.transform = `translateX(-${index * 100}%)`;
-  // if (index > 0) {
-    // const currentPage = document.querySelector(".is-active");
-    // currentPage.classList.remove("is-active");
-    // pages[index].classList.add("is-active");
-    // currentPage.previousElementSibling.classList.add("is-active");
-    pages[index].click();
-  // }
-})
-  </script>
-
-  <h1 hidden><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+  <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
     
     <h1 id="title" style="display: none;">Loading...</h1>
     <p id="summary" style="display: none;">Loading...</p>
@@ -468,7 +174,7 @@ nextBtn.addEventListener("click", () => {
       // console.log(state);
     </script>
 
-    <fieldset>
+    <fieldset hidden>
       <legend>Get all users from local JSON file</legend>
       <button id="local">Send Request</button>
     </fieldset>
@@ -498,7 +204,7 @@ nextBtn.addEventListener("click", () => {
     </script>
 
     <!-- ================= Get data from GitHub API ================= -->
-    <fieldset>
+    <fieldset hidden>
       <legend>Get users from GitHub API</legend>
       <button id="github">Send Request</button>
       <span id="userGithub"></span>
@@ -533,15 +239,15 @@ nextBtn.addEventListener("click", () => {
 
 <p style="display: none;">
   pet season
-22
-5 eyes Adv
-defeat 25 mages in tower
-1.5ml gold tower
-1000 energy
-24
-20 monsters ch.4
-defeat tank in tower
-sopport hero gifts
+<!-- 22 -->
+<!-- 5 eyes Adv -->
+<!-- defeat 25 mages in tower -->
+<!-- 1.5ml gold tower -->
+<!-- 1000 energy -->
+<!-- 24 -->
+<!-- 20 monsters ch.4 -->
+<!-- defeat tank in tower -->
+<!-- sopport hero gifts -->
 25
 heal 200k tower
 upgrade titan 1
