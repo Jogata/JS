@@ -5,10 +5,141 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@900&family=Poppins:wght@400;500&display=swap");
+    
+    :root {
+      --primary-color: #00a82d;
+      --primary-color-dark: #008c26;
+      --text-dark: #111827;
+      --text-light: #9ca3af;
+      --white: #ffffff;
+    }
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    
+    img {
+      width: 100%;
+    }
+    
+    body {
+      /* font-family: 'Merriweather', serif; */
+      font-family: "Poppins", sans-serif;
+      min-height: 100vh;
+      background-image: linear-gradient(
+          rgba(255, 255, 255, 0.9),
+          rgba(255, 255, 255, 0.9)
+        ),
+        url("assets/bg.png");
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 500px;
+      padding: 2rem 1rem;
+      background-color: var(--white);
+      border-radius: 5px;
+      box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .content {
+      width: 100%;
+      max-width: 350px;
+      margin: auto;
+      text-align: center;
+    }
+    
+    .logo img {
+      max-width: 100px;
+    }
+    
+    .header {
+      font-family: "Merriweather", serif;
+      font-size: 3rem;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+    
+    .subheader {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+      color: var(--text-dark);
+    }
+    
+    .auth-logins {
+      display: grid;
+      gap: 0.5rem;
+    }
+    
+    .login {
+      padding: 0.75rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      color: var(--text-dark);
+      border: 1px solid var(--text-dark);
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    .login img {
+      max-width: 20px;
+    }
+    
+    .divider {
+      padding: 1rem;
+      position: relative;
+      isolation: isolate;
+    }
+  </style>
   </head>
   <body>
+    <!-- <h1>Evernote Sign Up Page</h1> -->
+    <div class="container">
+      <div class="content">
+        <div class="logo">
+          <img src="assets/logo.png" alt="logo" />
+        </div>
+        <h1 class="header">Evernote</h1>
+        <p class="subheader">Remember everything important.</p>
+        <div class="auth-logins">
+          <div class="login google">
+            <img src="assets/search.png" alt="google" />
+            <span>Continue with Google</span>
+          </div>
+          <div class="login apple">
+            <img src="assets/apple.png" alt="apple" />
+            <span>Continue with Apple</span>
+          </div>
+        </div>
+        <div class="divider"><span>or</span></div>
+        <form>
+          <input type="text" placeholder="Email address or username" />
+          <button type="submit">Continue</button>
+        </form>
+        <div class="remember-me">
+          <input type="checkbox" />
+          <span>Remember me for 30 days</span>
+        </div>
+        <div class="footer">
+          <p>Don't have an account?</p>
+          <h4><a href="#">Create account</a></h4>
+        </div>
+      </div>
+    </div>
 
-    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
@@ -45,150 +176,6 @@
       // Convert URLSearchParams Object to Query String
       console.log(uspFromString.toString());
       console.log(uspFromObject.toString());
-    </script>
-
-    <script>
-        // 03. School Register
-        
-       function createSchoolRegister(params) {
-    const grades = [];
-
-    for (const input of params) {
-      const data = input.split(", ");
-      // console.log(data);
-
-      const nameData = data[0].split(": ");
-      const name = nameData[1];
-      // console.log(name);
-      const gradeData = data[1].split(": ");
-      const grade = Number(gradeData[1]);
-      // console.log(grade);
-      const scoreData = data[2].split(": ");
-      const score = Number(scoreData[1]);
-      // console.log(score);
-
-      if (score >= 3) {
-        const student = {
-          name,
-          grade,
-          score
-        }
-
-        grades[grade] = grades[grade] || [];
-
-        grades[grade].push(student);
-      }
-
-    }
-
-    // console.log(grades);
-
-    for (let index = 0; index < grades.length; index++) {
-      // console.log(grades[index]);
-      if (grades[index]) {
-        // const filtered = grades[index].filter(x => x.score >= 3);
-        // console.log(filtered);
-        // if (filtered.length > 0) {
-        const sum = grades[index].reduce((acc, x) => {
-          return acc + x.score;
-        }, 0)
-
-        // console.log(sum);
-
-        const average = sum / grades[index].length;
-        // console.log(average);
-        const students = [];
-
-        for (const student of grades[index]) {
-          students.push(student.name);
-        }
-        // console.log(students);
-
-        console.log(`${index + 1} Grade`);
-        console.log(`List of students: ${students.join(", ")}`);
-        console.log(`Average annual score from last year: ${average.toFixed(2)}`);
-        console.log();
-      }
-      // }
-    }
-  
-  }
-  
-  // createSchoolRegister([
-  //   "Student name: Mark, Grade: 8, Graduated with an average score: 4.75",
-  //   "Student name: Ethan, Grade: 9, Graduated with an average score: 5.66",
-  //   "Student name: George, Grade: 8, Graduated with an average score: 2.83",
-  //   "Student name: Steven, Grade: 10, Graduated with an average score: 4.20",
-  //   "Student name: Joey, Grade: 9, Graduated with an average score: 4.90",  
-  //   "Student name: Angus, Grade: 11, Graduated with an average score: 2.90", 
-  //   "Student name: Bob, Grade: 11, Graduated with an average score: 5.15", 
-  //   "Student name: Daryl, Grade: 8, Graduated with an average score: 5.95", 
-  //   "Student name: Bill, Grade: 9, Graduated with an average score: 6.00", 
-  //   "Student name: Philip, Grade: 10, Graduated with an average score: 5.05", 
-  //   "Student name: Peter, Grade: 11, Graduated with an average score: 4.88", 
-  //   "Student name: Gavin, Grade: 10, Graduated with an average score: 4.00"
-  // ]);
-  // createSchoolRegister([
-  //   'Student name: George, Grade: 5, Graduated with an average score: 2.75', 
-  //   'Student name: Alex, Grade: 9, Graduated with an average score: 3.66',
-  //   'Student name: Peter, Grade: 8, Graduated with an average score: 2.83',
-  //   'Student name: Boby, Grade: 5, Graduated with an average score: 4.20',
-  //   'Student name: John, Grade: 9, Graduated with an average score: 2.90',
-  //   'Student name: Steven, Grade: 2, Graduated with an average score: 4.90',
-  //   'Student name: Darsy, Grade: 1, Graduated with an average score: 5.15'
-  // ]);
-
-// 09. Catalogue
-
-function createCatalog(params) {
-const products = [];
-
-for (const input of params) {
-// console.log(input);
-const tokens = input.split(" : ");
-// console.log(tokens);
-const productName = tokens[0];
-const price = tokens[1];
-// console.log(product, price);
-
-const product = {
-  name: productName, 
-  price: price
-}
-
-// console.log(product);
-products.push(product);
-}
-
-// console.log(products);
-// console.log(products.sort());
-const sorted = products.sort((x, y) => x.name.localeCompare(y.name));
-// console.log(sorted);
-
-let index = 0;
-
-while (index < sorted.length) {
-// for (let index = 0; index < sorted.length; index++) {
-const first = sorted[index].name[0];
-console.log(first);
-// console.log(index);
-
-while (sorted[index].name[0].toLowerCase() == first.toLowerCase()) {
-  console.log(`  ${sorted[index].name}: ${sorted[index].price}`);
-  index++;
-
-  if (index == sorted.length) {
-    break;
-  }
-
-  // console.log(index, products.length);
-}
-
-}
-}
-
-// createCatalog(['Appricot : 20.4', 'Fridge : 1500', 'TV : 1499', 'Deodorant : 10', 'Boiler : 300', 'Apple : 1.25', 'Anti-Bug Spray : 15', 'T-Shirt : 10']);
-// createCatalog(['Omlet : 5.4', 'Shirt : 15', 'Cake : 59', "sa : 13"]);
     </script>
   </body>
 </html>
