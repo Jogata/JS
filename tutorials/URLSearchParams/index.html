@@ -5,283 +5,150 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@900&family=Poppins:wght@400;500&display=swap");
-    
-    :root {
-      --primary-color: #00a82d;
-      --primary-color-dark: #008c26;
-      --text-dark: #111827;
-      --text-light: #9ca3af;
-      --white: #ffffff;
-    }
-    
-    * {
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
-    }
-    
-    img {
-      width: 100%;
-    }
-    
-    body {
-      /* font-family: 'Merriweather', serif; */
-      font-family: "Poppins", sans-serif;
-      min-height: 100vh;
-      background-image: linear-gradient(
-          rgba(255, 255, 255, 0.9),
-          rgba(255, 255, 255, 0.9)
-        ),
-        url("assets/bg.png");
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      padding-top: 3rem;
-    }
-    
-    .container {
-      width: 100%;
-      max-width: 500px;
-      /* padding: 3rem; */
-      /* min-height: 100vh; */
-      padding: 2rem 1rem;
-      background-color: var(--white);
-      border-radius: 5px;
-      box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
-    }
-    
-    .content {
-      width: 100%;
-      max-width: 350px;
-      margin: auto;
-      text-align: center;
-    }
-    
-    .logo img {
-      max-width: 100px;
-    }
-    
-    .header {
-      font-family: "Merriweather", serif;
-      font-size: 3rem;
-      color: var(--text-dark);
-      margin-bottom: 0.5rem;
-    }
-    
-    .subheader {
-      font-size: 1rem;
-      margin-bottom: 2rem;
-      color: var(--text-dark);
-    }
-    
-    .auth-logins {
-      display: grid;
-      gap: 0.5rem;
-    }
-    
-    .login {
-      padding: 0.75rem 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      color: var(--text-dark);
-      border: 1px solid var(--text-dark);
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    
-    .login img {
-      max-width: 20px;
-    }
-    
-    .divider {
-      padding: 1rem;
-      position: relative;
-      isolation: isolate;
-    }
-    
-    .divider::before {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: var(--text-light);
-      z-index: -1;
-    }
-    
-    .divider span {
-      display: inline-block;
-      padding: 0.5rem;
-      color: var(--text-light);
-      background-color: var(--white);
-    }
-    
-    form {
-      display: grid;
-      gap: 0.5rem;
-    }
-    
-    form input {
-      padding: 1rem;
-      font-size: 1rem;
-      color: var(--text-dark);
-      outline: none;
-      border: 1px solid var(--text-light);
-      border-radius: 5px;
-    }
-    
-    form button {
-      padding: 1rem;
-      font-size: 1rem;
-      color: var(--white);
-      background-color: var(--primary-color);
-      outline: none;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    
-    form button:hover {
-      background-color: var(--primary-color-dark);
-    }
-    
-    .remember-me {
-      margin: 2rem 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--text-light);
-      cursor: pointer;
-    }
-    
-    .footer p {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--text-light);
-      margin-bottom: 0.5rem;
-    }
-    
-    .footer h4 a {
-      text-decoration: none;
-      color: var(--primary-color);
-      font-size: 1rem;
-      font-weight: 500;
-    }
-    
-    .footer h4 a:hover {
-      color: var(--primary-color-dark);
-    }
-
-    .body {
-      position: relative;
-      margin: 0;
-      width: 100%;
-      height: 100vh;
-      background-color: black;
-      overflow: hidden;
-    }
-    
-    span {
-      background: url("https://cdn4.iconfinder.com/data/icons/general-office/91/General_Office_54-512.png");
-      width: 100px;
-      height: 100px;
-      position: absolute;
-      pointer-events: none;
-      background-size: cover;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      animation: animate 6s linear;
-    }
-    
-    @keyframes animate {
-      0% {
-        transform: translate(-50%, -50%);
-        opacity: 1;
-        filter: hue-rotate(0);
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        background: #f5abc9;
+        color: grey;
       }
-      100% {
-        transform: translate(-50%, -5000%);
-        opacity: 0;
-        filter: hue-rotate(720deg);
+      
+      img {
+        display: block;
+        width: 100%;
       }
-    }
-  </style>
+      
+      .section-center {
+        width: 90vw;
+        margin: 0 auto;
+        max-width: 1170px;
+        min-width: 340px;
+        padding: 5rem 0;
+      }
+      
+      .image {
+        margin-bottom: 2rem;
+      }
+      img {
+        border-radius: 0.5rem;
+        object-fit: cover;
+        height: 30rem;
+      }
+      .tabs {
+        background: #ffe5e2;
+        border-radius: 0.5rem;
+        grid-template-rows: auto 1fr;
+      }
+      .btn-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+      .button:nth-child(1) {
+        border-top-left-radius: 0.5rem;
+      }
+      .button:nth-child(3) {
+        border-top-right-radius: 0.5rem;
+      }
+      .button {
+        padding: 1rem 0;
+        border: none;
+        font-size: 1rem;
+        background: #b6c9f0;
+        cursor: pointer;
+        transition: all 0.3s linear;
+        letter-spacing: 0.25rem;
+      }
+      .button:hover:not(.live) {
+        background: #e93b81;
+        color: white;
+      }
+      .tabs-content {
+        padding: 2rem 1.5rem;
+      }
+      /* hide content */
+      .content {
+        display: none;
+      }
+      .button.live {
+        background: #ffe5e2;
+      }
+      .content.live {
+        display: block;
+      }
+      
+      @media (min-width: 992px) {
+        .image {
+          margin-bottom: 0;
+        }
+      
+        .section-center {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          column-gap: 2rem;
+        }
+      }
+    </style>
   </head>
   <body>
-    <!-- <h1>Evernote Sign Up Page</h1> -->
-    <div class="container">
-      <div class="content">
-        <div class="logo">
-          <img src="assets/logo.png" alt="logo" />
+    <div class="section-center">
+      <div class="image">
+        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.hdnicewallpapers.com%2FWalls%2FBig%2FNature%2520and%2520Landscape%2FBeautiful_Sunrising_Nature_Image.jpg&f=1&nofb=1" alt="" />
+      </div>
+      <div class="tabs">
+        <!-- btn container -->
+        <div class="btn-container">
+          <button class="button live" data-id="step1">Step 1</button>
+          <button class="button" data-id="step2">Step 2</button>
+          <button class="button" data-id="step3">Step 3</button>
         </div>
-        <h1 class="header">Evernote</h1>
-        <p class="subheader">Remember everything important.</p>
-        <div class="auth-logins">
-          <div class="login google">
-            <img src="assets/search.png" alt="google" />
-            <span>Continue with Google</span>
+        <div class="tabs-content">
+          <!-- single item -->
+          <div class="content live" id="step1">
+            <h3>Step 1</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum sint cumque quasi, amet impedit tempore necessitatibus iste. Ratione possimus perspiciatis sapiente, ex alias, ipsam sint beatae vel repellat aperiam corrupti porro et molestiae nobis itaque recusandae vitae atque! Reiciendis voluptatum molestiae autem consectetur corporis libero itaque quo mollitia quod! Corrupti doloribus veniam iusto soluta laborum saepe debitis reiciendis atque nihil eaque ducimus quo ullam ipsum, laboriosam velit vitae sint, eius molestiae unde, tempora hic ipsam? Cupiditate, beatae. Nostrum eos, id velit nisi libero exercitationem, et fugiat assumenda mollitia debitis deleniti, illum iusto. Officiis, ratione ex? Magni, impedit vel. Quam, eaque.</p>
           </div>
-          <div class="login apple">
-            <img src="assets/apple.png" alt="apple" />
-            <span>Continue with Apple</span>
+          <!-- end of single item -->
+          <!-- single item -->
+          <div class="content" id="step2">
+            <h3>Step 2</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci molestiae doloremque enim deleniti voluptatum necessitatibus, facilis et quas, quasi magni obcaecati iusto ipsam ipsum amet autem labore dignissimos accusantium dolorem perspiciatis non harum, alias vel a asperiores? Qui amet tempora mollitia quos, facilis debitis nemo praesentium, optio facere nostrum, eum totam magnam quasi laborum sint repellendus quibusdam vero? Ipsum explicabo officiis culpa delectus quasi cumque saepe voluptates accusantium voluptatem omnis iste, sequi beatae quae dolor vero nostrum at amet eum dolores ut. Autem velit eius, libero adipisci dolore harum accusantium ipsum, voluptate ad recusandae vitae blanditiis? Harum nihil molestiae cum!</p>
           </div>
-        </div>
-        <div class="divider"><span>or</span></div>
-        <form>
-          <input type="text" placeholder="Email address or username" />
-          <button type="submit">Continue</button>
-        </form>
-        <div class="remember-me">
-          <input type="checkbox" />
-          <span>Remember me for 30 days</span>
-        </div>
-        <div class="footer">
-          <p>Don't have an account?</p>
-          <h4><a href="#">Create account</a></h4>
+          <!-- end of single item -->
+          <!-- single item -->
+          <div class="content" id="step3">
+            <h3>Step 3</h3>
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quaerat, asperiores magnam? In expedita laudantium magnam ratione alias minus nemo incidunt, dignissimos architecto placeat corporis molestiae labore vitae ullam laborum ut culpa eaque officiis, blanditiis sunt fugit ex? Neque quod mollitia delectus ipsa? Dolore veritatis, tenetur laudantium possimus unde debitis enim est illum, ea distinctio quod itaque quaerat ex sint eum optio in saepe labore sunt odit? Dolore, iusto! Ducimus sint laudantium consectetur. Velit facere culpa excepturi ad, quae distinctio iure incidunt. Odio alias laboriosam unde quo repudiandae corporis laborum quaerat asperiores minima quis in nam maxime recusandae iure, provident a?
+              </p>
+          </div>
+          <!-- end of single item -->
         </div>
       </div>
+      <script>
+        const tabs = document.querySelector(".tabs");
+        const btns = document.querySelectorAll(".button");
+        const articles = document.querySelectorAll(".content");
+        tabs.addEventListener("click", function (e) {
+          const id = e.target.dataset.id;
+          if (id) {
+            // remove selected from other buttons
+            btns.forEach(function (btn) {
+              btn.classList.remove("live");
+            });
+            e.target.classList.add("live");
+            // hide other articles
+            articles.forEach(function (article) {
+              article.classList.remove("live");
+            });
+            const element = document.getElementById(id);
+            element.classList.add("live");
+          }
+        });
+      </script>
     </div>
 
-    <div class="body">
-      <div class="hearts">
-        <h1>Heart Trail Animation</h1>
-        <script>
-          const bodyEl = document.querySelector(".body");
-          
-          bodyEl.addEventListener("mousemove", (event) => {
-            const xPos = event.offsetX;
-            const yPos = event.offsetY;
-            const spanEl = document.createElement("span");
-            spanEl.style.left = xPos + "px";
-            spanEl.style.top = yPos + "px";
-            const size = Math.random() * 100;
-            spanEl.style.width = size + "px";
-            spanEl.style.height = size + "px";
-            bodyEl.appendChild(spanEl);
-            setTimeout(() => {
-              spanEl.remove();
-            }, 3000);
-          });
-        </script>
-      </div>
-    </div>
-
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+    <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
