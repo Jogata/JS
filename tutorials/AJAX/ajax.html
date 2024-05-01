@@ -23,9 +23,12 @@
 }
 body {
   min-height: 100vh;
+  padding-bottom: 3rem;
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
+  flex-direction: column-reverse;
   color: #2b327d;
   font-family: Arial, Helvetica, sans-serif;
   background: #dfe0f2;
@@ -114,6 +117,58 @@ input {
   outline: 1px solid #2b327d;
   cursor: pointer;
 }
+.selected {
+  outline-width: 5px;
+}
+p {
+  font-size: 0.8rem;
+}
+.type + p {
+  margin-left: 2.5rem;
+}
+button {
+  width: 100%;
+  margin-top: 2rem;
+  padding: 1.5rem 0;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+  background: #2b327d;
+  transition: 0.5s;
+  cursor: pointer;
+}
+button:hover {
+  background: #2b327dcc;
+}
+.body {
+  min-width: 100%;
+  min-height: 100vh;
+  font-family: Georgia;
+}
+.bg-image {
+  width: 100%;
+  height: 100vh;
+  background: url("https://images.unsplash.com/photo-1540206395-68808572332f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=626&q=80");
+  background-attachment: fixed;
+  background-position: center;
+  background-size: 160%;
+}
+.container {
+  padding: 100px;
+}
+h1 {
+  font-size: 50px;
+  padding-bottom: 1em;
+}
+p {
+  color: grey;
+  padding: 0.4rem 0;
+}
+@media (max-width: 500px) {
+  .container {
+    padding: 10px;
+  }
+}
 </style>
   </head> 
   <body>
@@ -157,6 +212,90 @@ input {
         </section>
         <button>CONTINUE</button>
       </section>
+      <script>
+        // Click circles
+        const circles = [...document.querySelectorAll('.circle')];
+        
+        circles.forEach(circle => {
+          circle.addEventListener('click', () => {
+            circles.forEach(c => {
+              c.classList.remove('selected')
+            });
+        
+            circle.classList.add('selected')
+          })
+        });
+        
+        // Click the checkbox
+        const checkbox = document.querySelector('.checkbox');
+        
+        checkbox.addEventListener('click', () => {
+          if (checkbox.classList.contains('checked')) {
+            checkbox.innerHTML = '';
+            checkbox.classList.remove('checked');
+          } else {
+          checkbox.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
+          `;
+        
+          checkbox.classList.add('checked');
+          }
+        });
+      </script>
+      <div class="body">
+          <div class="bg-image" id="bg-image"></div>
+          <div class="container">
+            <h1>Welcome to our website</h1>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae suscipit,
+              provident veritatis quos dolorum repellendus officia voluptate veniam id
+              pariatur, maiores dolore libero nemo repudiandae facere reiciendis
+              quisquam? Deleniti, eius.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae suscipit,
+              provident veritatis quos dolorum repellendus officia voluptate veniam id
+              pariatur, maiores dolore libero nemo repudiandae facere reiciendis
+              quisquam? Deleniti, eius.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae suscipit,
+              provident veritatis quos dolorum repellendus officia voluptate veniam id
+              pariatur, maiores dolore libero nemo repudiandae facere reiciendis
+              quisquam? Deleniti, eius.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae suscipit,
+              provident veritatis quos dolorum repellendus officia voluptate veniam id
+              pariatur, maiores dolore libero nemo repudiandae facere reiciendis
+              quisquam? Deleniti, eius.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae suscipit,
+              provident veritatis quos dolorum repellendus officia voluptate veniam id
+              pariatur, maiores dolore libero nemo repudiandae facere reiciendis
+              quisquam? Deleniti, eius.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae suscipit,
+              provident veritatis quos dolorum repellendus officia voluptate veniam id
+              pariatur, maiores dolore libero nemo repudiandae facere reiciendis
+              quisquam? Deleniti, eius.
+            </p>
+            <script>
+              const bgImageEl = document.getElementById("bg-image");
+              
+              window.addEventListener("scroll", () => {
+                updateImage();
+              });
+              
+              function updateImage() {
+                bgImageEl.style.opacity = 1 - window.pageYOffset / 900;
+                bgImageEl.style.backgroundSize = 160 - window.pageYOffset / 12 + "%";
+              }
+            </script>
+          </div>
+      </div>     
       
     <h1 hidden><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
     
