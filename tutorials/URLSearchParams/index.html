@@ -41,9 +41,9 @@
         margin-bottom: 4rem;
         padding-bottom: 0.5rem;
         color: var(--text-dark);
-        text-align: center;
         font-size: 2rem;
         font-weight: 600;
+        text-align: center;
       }
       
       .section-title::after {
@@ -64,8 +64,10 @@
         outline: none;
         border: none;
         cursor: pointer;
-        transition: color 0.3s, 
-          background-color 0.3s;
+        /* transition: color 0.3s,  */
+          /* background-color 0.3s; */
+        transition: color 300ms, 
+          background-color 300ms;
       }
       
       a {
@@ -115,7 +117,8 @@
         font-weight: 600;
         color: var(--text-light);
         text-transform: uppercase;
-        transition: color 0.3s;
+        /* transition: color 0.3s; */
+        transition: color 300ms;
       }
 
       .link a:hover {
@@ -134,16 +137,43 @@
 
       header {
         /* margin-top: 10rem; */
-        background-color: var(--primary-color);
+        /* background-color: var(--primary-color); */
+        overflow: hidden;
       }
       
       .header-container {
-        padding-bottom: 0;
+        /* padding-bottom: 0; */
+        padding: 1rem;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 2rem;
       }
       
+      .header-content {
+        position: relative;
+        margin-top: auto;
+        padding: 4rem 0;
+        background-color: var(--primary-color);
+      }
+      .header-content::before {
+        position: absolute;
+        top: 0;
+        right: 100%;
+        content: "";
+        width: 100vw;
+        height: 100%;
+        background-color: var(--primary-color);
+      }
+      .header-content::after {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        content: "";
+        width: 100vw;
+        height: 100%;
+        background-color: var(--primary-color);
+      }
+
       .header-content p {
         margin-bottom: 0.5rem;
         color: var(--text-light);
@@ -168,7 +198,7 @@
       }
       
       .header-image img {
-        position: absolute;
+        /* position: absolute; */
         /* bottom: -5rem; */
         /* max-width: 400px; */
         max-width: 25rem;
@@ -269,7 +299,8 @@
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
-        transition: top 0.5s;
+        /* transition: top 0.5s; */
+        transition: top 500ms;
       }
 
       .sale-card:hover::before {
@@ -295,7 +326,8 @@
         font-size: 1rem;
         font-weight: 600;
         text-transform: uppercase;
-        transition: color 0.3s;
+        /* transition: color 0.3s; */
+        transition: color 300ms;
       }
       
       .musthave-nav a:hover {
@@ -371,7 +403,8 @@
       .news-details a i {
         color: var(--text-light);
         font-size: 1.2rem;
-        transition: color 0.3s;
+        /* transition: color 0.3s; */
+        transition: color 300ms;
       }
       
       .news-details a:hover i {
@@ -388,7 +421,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: opacity 0.3s;
+        /* transition: opacity 0.3s; */
+        transition: opacity 300ms;
         opacity: 0.5;
         cursor: pointer;
       }
@@ -422,7 +456,8 @@
         left: 0;
         bottom: 0;
         content: "";
-        width: 50px;
+        /* width: 50px; */
+        width: 3.1rem;
         height: 2px;
         background-color: var(--text-light);
       }
@@ -432,7 +467,8 @@
         color: var(--text-light);
         font-size: 0.9rem;
         font-weight: 500;
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: color 300ms;
         cursor: pointer;
       }
       
@@ -473,7 +509,8 @@
       
       .footer-form form {
         width: 100%;
-        max-width: 400px;
+        /* max-width: 400px; */
+        max-width: 25rem;
         display: flex;
         align-items: center;
       }
@@ -495,6 +532,77 @@
       @media (width < 900px) {
         header {
           margin-top: 5rem;
+        }
+
+        .sale-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      
+        .musthave-grid {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1rem;
+        }
+      
+        .news-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      
+        .brands-container {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      
+        .instagram-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      
+        .footer-bar {
+          grid-template-columns: repeat(1, 1fr);
+        }
+      
+        .copyright {
+          text-align: center;
+        }
+      
+        .footer-form {
+          justify-content: center;
+        }
+      }
+
+      @media (width < 600px) {
+        .nav-links {
+          display: none;
+        }
+      
+        header {
+          margin-top: 0;
+        }
+      
+        .header-container {
+          grid-template-columns: repeat(1, 1fr);
+        }
+      
+        .header-image {
+          display: none;
+        }
+      
+        .sale-grid {
+          grid-template-columns: repeat(1, 1fr);
+        }
+      
+        .musthave-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      
+        .news-grid {
+          grid-template-columns: repeat(1, 1fr);
+        }
+      
+        .brands-container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      
+        .footer-container {
+          grid-template-columns: repeat(2, 1fr);
         }
       }
     </style>
@@ -546,8 +654,11 @@
     </section>
 
     <section class="section-container sale-container">
+
       <h2 class="section-title">On Sale</h2>
+
       <div class="sale-grid">
+
         <div class="sale-card">
           <img src="assets/sale-1.jpg" alt="sale" />
           <div class="sale-content">
@@ -557,6 +668,7 @@
             <button class="btn sale-btn">SHOP NOW</button>
           </div>
         </div>
+
         <div class="sale-card">
           <img src="assets/sale-2.jpg" alt="sale" />
           <div class="sale-content">
@@ -566,6 +678,7 @@
             <button class="btn sale-btn">SHOP NOW</button>
           </div>
         </div>
+
         <div class="sale-card">
           <img src="assets/sale-3.jpg" alt="sale" />
           <div class="sale-content">
@@ -575,11 +688,15 @@
             <button class="btn sale-btn">SHOP NOW</button>
           </div>
         </div>
+
       </div>
+
     </section>
 
     <section class="section-container musthave-container">
+
       <h2 class="section-title">Must Have</h2>
+
       <div class="musthave-nav">
         <a href="#">ALL</a>
         <a href="#">MAN</a>
@@ -587,6 +704,7 @@
         <a href="#">BAG</a>
         <a href="#">SHOES</a>
       </div>
+
       <div class="musthave-grid">
         <div class="musthave-card">
           <img src="assets/musthave-1.png" alt="must have" />
@@ -649,12 +767,16 @@
           <p><del>$45.00</del> $75.00</p>
         </div>
       </div>
+
     </section>
 
     <section class="news">
       <div class="section-container news-container">
+
         <h2 class="section-title">Latest News</h2>
+
         <div class="news-grid">
+
           <div class="news-card">
             <img src="assets/news-1.jpg" alt="news" />
             <div class="news-details">
@@ -673,6 +795,7 @@
               <a href="#"><i class="ri-arrow-right-line"></i></a>
             </div>
           </div>
+
           <div class="news-card">
             <img src="assets/news-2.jpg" alt="news" />
             <div class="news-details">
@@ -690,6 +813,7 @@
               <a href="#"><i class="ri-arrow-right-line"></i></a>
             </div>
           </div>
+
           <div class="news-card">
             <img src="assets/news-3.jpg" alt="news" />
             <div class="news-details">
@@ -707,7 +831,9 @@
               <a href="#"><i class="ri-arrow-right-line"></i></a>
             </div>
           </div>
+
         </div>
+
       </div>
     </section>
     
@@ -735,6 +861,7 @@
     <hr/>
 
     <footer class="section-container footer-container">
+
       <div class="footer-col">
         <h4 class="footer-heading">CONTACT INFO</h4>
         <p>
@@ -743,6 +870,7 @@
         <p><i class="ri-mail-fill"></i> support@monsa.com</p>
         <p><i class="ri-phone-fill"></i> (+012) 3456 789</p>
       </div>
+
       <div class="footer-col">
         <h4 class="footer-heading">COMPANY</h4>
         <p>Home</p>
@@ -751,6 +879,7 @@
         <p>Our Blog</p>
         <p>Terms & Conditions</p>
       </div>
+
       <div class="footer-col">
         <h4 class="footer-heading">USEFUL LINK</h4>
         <p>Help</p>
@@ -759,6 +888,7 @@
         <p>Women</p>
         <p>Shoes</p>
       </div>
+
       <div class="footer-col">
         <h4 class="footer-heading">INSTAGRAM</h4>
         <div class="instagram-grid">
@@ -770,6 +900,7 @@
           <img src="assets/instagram-6.jpg" alt="instagram" />
         </div>
       </div>
+      
     </footer>
 
     <hr/>
