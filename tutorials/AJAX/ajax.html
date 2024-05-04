@@ -3,294 +3,154 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AJAX | XMLHttpRequest</title>
+    <!-- <title>AJAX | XMLHttpRequest</title> -->
+    <title>Adventure Parallax</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-<style>
-  /* @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap'); */
-  /* @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Kaushan+Script&family=Playfair+Display&display=swap'); */
-  /* @import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap'); */
-  /* @import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Brawler:wght@400;700&family=Croissant+One&family=Ephesis&family=Gloock&family=Hurricane&family=Imbue:opsz,wght@10..100,100..900&family=Modak&family=Montez&family=Prosto+One&family=Rye&family=Shojumaru&family=Young+Serif&family=ZCOOL+XiaoWei&display=swap'); */
-  fieldset {
-    display: none;
-  } 
-*, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #5847bc;
-  background: #f2f8ff;
-  font-family: Arial, Helvetica, sans-serif;
-}
-section {
-  width: 90%;
-  max-width: 450px;
-  padding: 5rem 2.5rem;
-  border-radius: 2rem;
-  background: #fff;
-}
-.promote, 
-.theme-options, 
-.protocol-options, 
-#shadow-host-companion {
-  display: none;
-}
-h2 {
-  margin-bottom: 0.5rem;
-  font-family: 'Times New Roman';
-}
-p {
-  font-size: 0.8rem;
-  line-height: 1.5;
-}
-input, 
-.current-theme, 
-.selected-protocol, 
-.selected-theme {
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  border: 1.5px solid #5947bc44;
-}
-.current-theme {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 1rem 0 0.5rem 0;
-  cursor: pointer;
-}
-.theme-options, .protocol-options {
-  margin-bottom: 0.5rem;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  background: #5947bc26;
-}
-li {
-  list-style: none;
-  padding: 0.5rem;
-  font-size: 0.8rem;
-  border-radius: 0.25rem;
-  transition: 0.5s;
-  cursor: pointer;
-}
-li:hover {
-  color: #fff;
-  background: #5847bc;
-}
-input {
-  width: 100%;
-  /* height: 43px; */
-  margin-bottom: 0.8rem;
-  /* padding: 20px 0; */
-  outline: none;
-}
-input:focus-visible {
-  outline: 1px solid #5847bc;
-}
-::placeholder {
-  color: #5947bc76;
-}
-.buttons-container {
-  display: flex;
-  gap: 1rem;
-}
-button {
-  width: 100%;
-  padding: 0.8rem;
-  border: 1px solid transparent;
-  border-radius: 0.25rem;
-  transition: 0.5s;
-  cursor: pointer;
-}
-.create {
-  color: #fff;
-  background: #5847bc;
-}
-.create:hover {
-  color: #5847bc;
-  border-color: #5847bc;
-  background: transparent;
-}
-.advanced {
-  color: #5847bc;
-  background: transparent;
-}
-.advanced:hover {
-  border-color: #5847bc;
-}
-.icon-tabler {
-  cursor: pointer;
-}
-.selected-container {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-.selected-protocol {
-  width: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-}
-.protocol-options {
-  width: 100px;
-  margin: 0.5rem 0;
-}
-.selected-theme {
-  width: 100%;
-}
-.social-links-container {
-  margin-top: 2rem;
-}
-.icon-tabler-brand-facebook, 
-.icon-tabler-brand-twitter {
-  margin-top: 0.2rem;
-  padding: 0.25rem;
-  color: #fff;
-  border-radius: 0.25rem;
-}
-.icon-tabler-brand-facebook {
-  background: #3d5d96;
-}
-.icon-tabler-brand-twitter {
-  background: #29a4ef;
-}
-</style>
+    <style>
+      /* @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap'); */
+      /* @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Kaushan+Script&family=Playfair+Display&display=swap'); */
+      /* @import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap'); */
+      /* @import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Brawler:wght@400;700&family=Croissant+One&family=Ephesis&family=Gloock&family=Hurricane&family=Imbue:opsz,wght@10..100,100..900&family=Modak&family=Montez&family=Prosto+One&family=Rye&family=Shojumaru&family=Young+Serif&family=ZCOOL+XiaoWei&display=swap'); */
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;900&display=swap");
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    img {
+      width: 100%;
+      display: block;
+    }
+    
+    body {
+      color: #ffffff;
+      font-family: "Poppins", sans-serif;
+    }
+    
+    .parallax-container {
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+      background-color: #000000;
+    }
+    
+    .parallax-container::after {
+      position: absolute;
+      bottom: 0;
+      content: "";
+      width: 100%;
+      height: 5rem;
+      background: 
+        linear-gradient(
+          to bottom, 
+          rgba(0, 0, 0, 0), 
+          rgba(0, 0, 0, 1)
+        );
+    }
+    
+    .parallax-container img {
+      position: absolute;
+    }
+    
+    .parallax-container h1 {
+      position: absolute;
+      top: 50%;
+      /* left: 50%; */
+      /* transform: translate(-50%, -50%); */
+      transform: translateY(-50%);
+      width: 100%;
+      font-size: 100px;
+      font-weight: 900;
+      text-align: center;
+    }
+    
+    .about {
+      min-height: 125vh;
+      display: grid;
+      place-content: center;
+      background-color: #000000;
+    }
+    
+    .image-gallary {
+      max-width: 1200px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3rem;
+    }
+    
+    .image-card {
+      opacity: 0;
+    }
+    
+    .image-card img {
+      /* border-radius: 1rem; */
+      border-radius: 16px;
+    }
+    
+    .details {
+      max-width: 800px;
+      margin: auto;
+      margin-top: 8rem;
+      font-size: 1.2rem;
+      line-height: 2rem;
+      text-align: center;
+    }
+    
+    .footer-btn {
+      max-width: 800px;
+      margin: 2rem auto;
+      text-align: center;
+    }
+    
+    .learn-more {
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      outline: none;
+      border: none;
+      border-radius: 5px;
+    }
+    </style>
   </head> 
   <body>
-    <!-- <h1>Promote Link</h1> -->
-    <section class="create-link-container">
-      <h2>Create a Link</h2>
-      <p>Promote any brand with a simple link</p>
-      <div class="themes">
-        <p class="current-theme">Premium Themes
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg>
-        </p>
-        <ul class="theme-options">
-          <li>Cyberpunk Theme</li>
-          <li>Minimalist Theme</li>
-          <li>Pastel Theme</li>
-          <li>Lofi Theme</li>
-          <li>Neon Theme</li>
-        </ul>
+      <h1></h1>
+      <div class="parallax-container">
+        <img src="assets/bg-1.jpg" alt="parallax" />
+        <img id="bg-2" src="assets/bg-2.png" alt="parallax" />
+        <h1 id="title">Adventure</h1>
+        <img id="bg-3" src="assets/bg-3.png" alt="parallax" />
       </div>
-      <form id="url-form">
-        <input type="text" name="url" id="url" placeholder="Enter a website URL" required>
-      </form>
-      <div class="buttons-container">
-        <button type="submit" form="url-form" class="create">Create</button>
-        <button class="advanced">Advanced</button>
-      </div>
-    </section>
-    <section class="promote">
-      <h2>Promote</h2>
-      <p>Use this link to promote.</p>
-      <p>Link updates may take up to 5 minutes to propagate.</p>
-      <div class="selected-container">
-        <div class="protocol">
-          <p class="selected-protocol">https://
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg>
-          </p>
+      <section class="about">
+        <div class="image-gallary">
+          <div class="image-card" id="image-card-1">
+            <img src="assets/grid-1.jpg" alt="grid" />
+          </div>
+          <div class="image-card" id="image-card-2">
+            <img src="assets/grid-2.jpg" alt="grid" />
+          </div>
+          <div class="image-card" id="image-card-3">
+            <img src="assets/grid-3.jpg" alt="grid" />
+          </div>
+          <div class="image-card" id="image-card-4">
+            <img src="assets/grid-4.jpg" alt="grid" />
+          </div>
         </div>
-        <p class="selected-theme"></p>
-      </div>
-      <ul class="protocol-options">
-        <li>https://</li>
-        <li>http://</li>
-      </ul>
-      <div class="social-links-container">
-        <p>Share</p>
-        <div class="social-links">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-facebook" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" /></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c0 -.249 1.51 -2.772 1.818 -4.013z" /></svg>
+        <div class="details">
+          Snowboarding is a winter sport that involves riding a snowboard down a
+          snow-covered slope or terrain. The rider stands on the snowboard with
+          both feet attached to bindings and slides down the slope, making turns
+          and performing tricks along the way.
         </div>
-      </div>
-    </section>
-    <script>
-    // Open the themes options
-const PREMIUM_THEMES = document.querySelector('.current-theme');
-const CURRENT_THEME_CHEVRON_DOWN = PREMIUM_THEMES.querySelector('.icon-tabler-chevron-down');
-const THEME_OPTIONS_CONTAINER = document.querySelector('.theme-options');
-
-PREMIUM_THEMES.addEventListener('click', () => {
-  CURRENT_THEME_CHEVRON_DOWN.style.transition = "0.5s";
-
-  if (THEME_OPTIONS_CONTAINER.style.display === "block") {
-    CURRENT_THEME_CHEVRON_DOWN.style.transform = "scaleY(1)";
-    THEME_OPTIONS_CONTAINER.style.display = "none";
-  } else {
-    CURRENT_THEME_CHEVRON_DOWN.style.transform = "scaleY(-1)";
-    THEME_OPTIONS_CONTAINER.style.display = "block";
-  }
-});
-
-// Select a theme
-const THEME_OPTIONS = [...THEME_OPTIONS_CONTAINER.querySelectorAll('li')];
-let currentTheme = "Cyberpunk Theme";
-
-THEME_OPTIONS.forEach(theme => {
-  theme.addEventListener("click", () => {
-    CURRENT_THEME_CHEVRON_DOWN.style.transform = "scaleY(1)";
-    THEME_OPTIONS_CONTAINER.style.display = "none";
-    currentTheme = theme.textContent;
-  })
-});
-
-// Open the promote section / Click create
-const FORM = document.querySelector('form');
-const PROMOTE_SECTION = document.querySelector('.promote');
-const CREATE_A_LINK_CONTAINER = document.querySelector('.create-link-container');
-const INPUT_URL = document.querySelector('input');
-const SELECTED_THEME = document.querySelector('.selected-theme');
-
-FORM.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  if (INPUT_URL.value !== "") {
-    CREATE_A_LINK_CONTAINER.style.display = "none";
-    PROMOTE_SECTION.style.display = "block";
-    SELECTED_THEME.textContent = currentTheme;
-  }
-});
-
-// Select protocol
-const PROTOCOL = document.querySelector('.selected-protocol');
-const PROTOCOL_CHEVRON_DOWN = PROTOCOL.querySelector('.icon-tabler-chevron-down');
-const PROTOCOL_OPTIONS_CONTAINER = document.querySelector('.protocol-options');
-let currentProtocol = "https://";
-
-PROTOCOL.addEventListener("click", () => {
-  PROTOCOL_CHEVRON_DOWN.style.transition = "0.5s";
-
-  if (PROTOCOL_OPTIONS_CONTAINER.style.display === "block") {
-    PROTOCOL_CHEVRON_DOWN.style.transform = "scaleY(1)";
-    PROTOCOL_OPTIONS_CONTAINER.style.display = "none";
-  } else {
-    PROTOCOL_CHEVRON_DOWN.style.transform = "scaleY(-1)";
-    PROTOCOL_OPTIONS_CONTAINER.style.display = "block";
-  }
-});
-
-// Select a protocol 
-const PROTOCOLS = PROTOCOL_OPTIONS_CONTAINER.querySelectorAll('li');
-
-PROTOCOLS.forEach(p => {
-  p.addEventListener("click", () => {
-    PROTOCOL_OPTIONS_CONTAINER.style.display = "none";
-    currentProtocol = p.textContent;
-    PROTOCOL.textContent = currentProtocol;
-  })
-});
-</script>  
-
-    <h1 hidden><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1>
+        <div class="footer-btn">
+          <button class="learn-more">Learn More</button>
+        </div>
+      </section>
+  
+    <!-- <h1><span>AJAX</span> XMLHttpRequest(HTTPMethod, url, )</h1> -->
     
     <h1 id="title" style="display: none;">Loading...</h1>
     <p id="summary" style="display: none;">Loading...</p>
@@ -315,7 +175,7 @@ PROTOCOLS.forEach(p => {
 
       // state.title = "New Title";
       const render = (state) => {
-        document.getElementById("title").textContent = state.title;
+        document.getElementById("ttitle").textContent = state.title;
         document.getElementById("summary").textContent = state.summary;
       }
 
@@ -323,7 +183,7 @@ PROTOCOLS.forEach(p => {
       // console.log(state);
     </script>
 
-    <fieldset>
+    <fieldset hidden>
       <legend>Get all users from local JSON file</legend>
       <button id="local">Send Request</button>
     </fieldset>
@@ -353,7 +213,7 @@ PROTOCOLS.forEach(p => {
     </script>
 
     <!-- ================= Get data from GitHub API ================= -->
-    <fieldset>
+    <fieldset hidden>
       <legend>Get users from GitHub API</legend>
       <button id="github">Send Request</button>
       <span id="userGithub"></span>
