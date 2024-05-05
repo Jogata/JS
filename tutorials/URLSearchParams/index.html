@@ -3,921 +3,154 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>URLSearchParams in JS</title> -->
-    <title>Mon'sa</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
+    <title>URLSearchParams in JS</title>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
-      
-      /* h1 {
-        display: none;
-      } */
-      
-      :root {
-        --primary-color: #f1faff;
-        --text-dark: #030712;
-        --text-light: #6b7280;
-        --extra-light: #fbfbfb;
-        --white: #ffffff;
-        /* --max-width: 1200px; */
-        --max-width: 75rem;
-      }
-      
-      * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-      }
-      
-      .section-container {
-        max-width: var(--max-width);
-        margin: auto;
-        padding: 5rem 1rem;
-      }
-      
-      .section-title {
-        position: relative;
-        margin-bottom: 4rem;
-        padding-bottom: 0.5rem;
-        color: var(--text-dark);
-        font-size: 2rem;
-        font-weight: 600;
-        text-align: center;
-      }
-      
-      .section-title::after {
-        content: "";
-        position: absolute;
-        left: 50%;
-        bottom: 0;
-        transform: translateX(-50%);
-        height: 3px;
-        /* width: 70px; */
-        width: 4.7rem;
-        background-color: var(--text-dark);
-      }
-      
-      .btn {
-        padding: 0.75rem 2rem;
-        font-size: 0.8rem;
-        outline: none;
-        border: none;
-        cursor: pointer;
-        /* transition: color 0.3s,  */
-          /* background-color 0.3s; */
-        transition: color 300ms, 
-          background-color 300ms;
-      }
-      
-      a {
-        text-decoration: none;
-      }
-      
-      img {
-        width: 100%;
-        display: block;
-      }
-      
-      body {
-        font-family: "Montserrat", sans-serif;
-      }
-      
-      .header-bar {
-        padding: 0.5rem;
-        font-size: 0.8rem;
-        text-align: center;
-        background-color: var(--text-dark);
-        color: var(--white);
-      }
-      
-      .nav-container {
-        padding: 2rem 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      
-      .nav-logo {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: var(--text-dark);
-      }
-      
-      .nav-links {
-        list-style: none;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-      }
-      
-      .link a {
-        padding: 0 0.5rem;
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: var(--text-light);
-        text-transform: uppercase;
-        /* transition: color 0.3s; */
-        transition: color 300ms;
-      }
-
-      .link a:hover {
-        color: var(--text-dark);
-      }
-      
-      .nav-icons {
-        display: flex;
-        gap: 1rem;
-      }
-      
-      .nav-icons span {
-        font-size: 1.25rem;
-        cursor: pointer;
-      }
-
-      header {
-        /* margin-top: 10rem; */
-        /* background-color: var(--primary-color); */
-        overflow: hidden;
-      }
-      
-      .header-container {
-        /* padding-bottom: 0; */
-        padding: 1rem;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
-      }
-      
-      .header-content {
-        position: relative;
-        margin-top: auto;
-        padding: 4rem 0;
-        background-color: var(--primary-color);
-      }
-      .header-content::before {
-        position: absolute;
-        top: 0;
-        right: 100%;
-        content: "";
-        width: 100vw;
-        height: 100%;
-        background-color: var(--primary-color);
-      }
-      .header-content::after {
-        position: absolute;
-        top: 0;
-        left: 100%;
-        content: "";
-        width: 100vw;
-        height: 100%;
-        background-color: var(--primary-color);
-      }
-
-      .header-content p {
-        margin-bottom: 0.5rem;
-        color: var(--text-light);
-        font-size: 0.8rem;
-        font-weight: 600;
-      }
-      
-      .header-content h1 {
-        margin-bottom: 2rem;
-        color: var(--text-dark);
-        font-size: 3rem;
-        font-weight: 400;
-      }
-      
-      .header-content .btn {
-        color: var(--white);
-        background-color: var(--text-dark);
-      }
-      
-      .header-image {
-        position: relative;
-      }
-      
-      .header-image img {
-        /* position: absolute; */
-        /* bottom: -5rem; */
-        /* max-width: 400px; */
-        max-width: 25rem;
-      }
-      
-      .collection-container {
-        position: relative;
-      }
-      
-      .collection-container img {
-        /* max-width: 400px; */
-        max-width: 25rem;
-        margin: auto;
-      }
-      
-      .collection-content {
-        position: absolute;
-        top: 50%;
-        left: 2rem;
-        transform: translateY(-50%);
-      }
-      
-      .collection-content .section-title {
-        margin-bottom: 2rem;
-      }
-      
-      .collection-content p {
-        margin-bottom: 0.5rem;
-        color: var(--text-light);
-        font-size: 0.9rem;
-      }
-      
-      .collection-content h4 {
-        margin-bottom: 1rem;
-        font-size: 1.2rem;
-        font-weight: 600;
-      }
-      
-      .collection-content .btn {
-        color: var(--text-dark);
-        text-transform: uppercase;
-        border: 1px solid var(--text-dark);
-        background-color: var(--white);
-      }
-      
-      .collection-content .btn:hover {
-        color: var(--white);
-        background-color: var(--text-dark);
-      }
-      
-      .sale-grid {
-        display: grid;
-        gap: 2rem;
-        grid-template-columns: repeat(3, 1fr);
-      }
-      
-      .sale-card {
-        position: relative;
-        overflow: hidden;
-      }
-      
-      .sale-content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        color: var(--white);
-        text-align: center;
-      }
-      
-      .sale-title {
-        font-size: 2rem;
-        font-weight: 600;
-      }
-      
-      .sale-title span {
-        font-size: 2.5rem;
-      }
-      
-      .sale-subtitle {
-        font-size: 1rem;
-        text-transform: uppercase;
-      }
-      
-      .sale-btn {
-        margin-top: 2rem;
-        color: var(--white);
-        text-transform: uppercase;
-        background-color: var(--text-dark);
-      }
-      
-      .sale-card::before {
-        position: absolute;
-        top: -100%;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        /* transition: top 0.5s; */
-        transition: top 500ms;
-      }
-
-      .sale-card:hover::before {
-        top: 0;
-      }
-      
-      .sale-card:hover .sale-btn {
-        color: var(--text-dark);
-        background-color: var(--white);
-      }
-      
-      .musthave-nav {
-        margin-bottom: 2rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 2rem;
-        flex-wrap: wrap;
-      }
-      
-      .musthave-nav a {
-        color: var(--text-light);
-        font-size: 1rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        /* transition: color 0.3s; */
-        transition: color 300ms;
-      }
-      
-      .musthave-nav a:hover {
-        color: var(--text-dark);
-      }
-      
-      .musthave-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 2rem;
-      }
-      
-      .musthave-card {
-        display: grid;
-        gap: 0.5rem;
-        color: var(--text-dark);
-      }
-      
-      .musthave-card h4 {
-        font-size: 1rem;
-        font-weight: 600;
-      }
-      
-      .musthave-card p {
-        margin-bottom: 1rem;
-        font-size: 0.9rem;
-        font-weight: 500;
-      }
-      
-      .musthave-card p del {
-        color: var(--text-light);
-        font-weight: 400;
-      }
-      
-      .news {
-        background-color: var(--extra-light);
-      }
-      
-      .news-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-      }
-      
-      .news-details {
-        padding: 1rem;
-        display: grid;
-        gap: 1rem;
-        text-align: center;
-      }
-      
-      .news-details p {
-        color: var(--text-light);
-        font-size: 0.8rem;
-      }
-      
-      .news-details p i {
-        padding: 0.5rem;
-        color: var(--text-light);
-        font-size: 0.5rem;
-      }
-      
-      .news-details p span {
-        font-weight: 600;
-      }
-      
-      .news-details h4 {
-        color: var(--text-dark);
-        font-size: 1.2rem;
-        font-weight: 600;
-      }
-      
-      .news-details a i {
-        color: var(--text-light);
-        font-size: 1.2rem;
-        /* transition: color 0.3s; */
-        transition: color 300ms;
-      }
-      
-      .news-details a:hover i {
-        color: var(--text-dark);
-      }
-      
-      .brands-container {
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        gap: 2rem;
-      }
-      
-      .brand-image {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        /* transition: opacity 0.3s; */
-        transition: opacity 300ms;
-        opacity: 0.5;
-        cursor: pointer;
-      }
-      
-      .brand-image img {
-        /* max-width: 120px; */
-        max-width: 7.5rem;
-      }
-      
-      .brand-image:hover {
-        opacity: 1;
-      }
-
-      .footer-container {
-        display: grid;
-        gap: 2rem;
-        grid-template-columns: repeat(4, 1fr);
-      }
-      
-      .footer-heading {
-        position: relative;
-        margin-bottom: 2rem;
-        padding-bottom: 1rem;
-        color: var(--text-light);
-        font-size: 1rem;
-        font-weight: 600;
-      }
-      
-      .footer-heading::after {
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        content: "";
-        /* width: 50px; */
-        width: 3.1rem;
-        height: 2px;
-        background-color: var(--text-light);
-      }
-      
-      .footer-col p {
-        margin-bottom: 1rem;
-        color: var(--text-light);
-        font-size: 0.9rem;
-        font-weight: 500;
-        /* transition: 0.3s; */
-        transition: color 300ms;
-        cursor: pointer;
-      }
-      
-      .footer-col p:hover {
-        color: var(--text-dark);
-      }
-      
-      .footer-col p i {
-        margin-right: 0.5rem;
-        font-size: 1rem;
-      }
-      
-      .instagram-grid {
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: repeat(3, 1fr);
-      }
-      
-      .footer-bar {
-        padding: 2rem 1rem;
-        display: grid;
-        gap: 2rem;
-        align-items: center;
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .copyright {
-        color: var(--text-light);
-        font-size: 0.9rem;
-        font-weight: 500;
-      }
-      
-      .footer-form {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-      }
-      
-      .footer-form form {
-        width: 100%;
-        /* max-width: 400px; */
-        max-width: 25rem;
-        display: flex;
-        align-items: center;
-      }
-      
-      .footer-form input {
-        width: 100%;
-        padding: 0.75rem 1rem;
-        font-size: 0.8rem;
-        outline: none;
-        border: none;
-        border-bottom: 1px solid var(--text-dark);
-      }
-      
-      .footer-form .btn {
-        color: var(--white);
-        background-color: var(--text-dark);
-      }
-      
-      @media (width < 900px) {
-        header {
-          margin-top: 5rem;
-        }
-
-        .sale-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      
-        .musthave-grid {
-          grid-template-columns: repeat(3, 1fr);
-          gap: 1rem;
-        }
-      
-        .news-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      
-        .brands-container {
-          grid-template-columns: repeat(3, 1fr);
-        }
-      
-        .instagram-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      
-        .footer-bar {
-          grid-template-columns: repeat(1, 1fr);
-        }
-      
-        .copyright {
-          text-align: center;
-        }
-      
-        .footer-form {
-          justify-content: center;
-        }
-      }
-
-      @media (width < 600px) {
-        .nav-links {
-          display: none;
-        }
-      
-        header {
-          margin-top: 0;
-        }
-      
-        .header-container {
-          grid-template-columns: repeat(1, 1fr);
-        }
-      
-        .header-image {
-          display: none;
-        }
-      
-        .sale-grid {
-          grid-template-columns: repeat(1, 1fr);
-        }
-      
-        .musthave-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      
-        .news-grid {
-          grid-template-columns: repeat(1, 1fr);
-        }
-      
-        .brands-container {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      
-        .footer-container {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-    </style>
+  <style>
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3c322a;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f6f4f0;
+}
+.widget-container {
+  position: relative;
+  width: 90%;
+  max-width: 400px;
+  padding: 3rem 2rem;
+  border-radius: 0.25rem;
+  background: #fff;
+  box-shadow: 
+    0 1rem 1rem -0.5rem #e5d3c3;
+  z-index: 1;
+}
+h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  padding-right: 2rem;
+}
+p,
+li {
+  font-size: 0.8rem;
+}
+li {
+  list-style: none;
+}
+.menu-container {
+  position: absolute;
+  top: 3rem;
+  right: 2rem;
+  width: 130px;
+  z-index: 2;
+}
+.icon-tabler-dots {
+  display: block;
+  margin: 0 0 0.5rem auto;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0.5rem #e5d3c3;
+  cursor: pointer;
+}
+.menu-list {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  background: #fff;
+  box-shadow: 0 0 0.5rem #e5d3c3;
+}
+.menu-list.hidden {
+  display: none;
+}
+.menu-list li {
+  padding: 0.8rem;
+  font-size: 0.7rem;
+}
+.menu-list li:hover {
+  cursor: pointer;
+  background: #f6f4f0;
+  border-radius: 0.25rem;
+}
+.radio-btn-selection {
+  position: relative;
+  width: max-content;
+  margin-bottom: 2rem;
+}
+  </style>
   </head>
   <body>
-    <div class="header-bar">Free Shipping on Orders Over $50</div>
-
-    <nav class="section-container nav-container">
-
-      <a href="#" class="nav-logo">Mon'sa</a>
-
-      <ul class="nav-links">
-        <li class="link"><a href="#">HOME</a></li>
-        <li class="link"><a href="#">SHOP</a></li>
-        <li class="link"><a href="#">PAGES</a></li>
-        <li class="link"><a href="#">BLOG</a></li>
-        <li class="link"><a href="#">LOOKBOOK</a></li>
+  <!-- <h1>Settings Widget</h1> -->
+  <section class="widget-container">
+    <div class="menu-container">
+      <svg xmlns="http://www.w3.org/2000/svg" 
+        class="icon icon-tabler icon-tabler-dots" 
+        width="30" height="30" viewBox="0 0 24 24" 
+        stroke-width="1.5" stroke="currentColor" fill="none" 
+        stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+        <path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+      </svg>
+      <ul class="menu-list hidden">
+        <li class="menu-list-item">Edit your list</li>
+        <li class="menu-list-item">Account settings</li>
+        <li class="menu-list-item">View your profile</li>
       </ul>
-
-      <div class="nav-icons">
-        <span><i class="ri-shield-user-line"></i></span>
-        <span><i class="ri-search-line"></i></span>
-        <span><i class="ri-shopping-bag-2-line"></i></span>
-      </div>
-
-    </nav>
-
-    <header>
-      <div class="section-container header-container">
-        <div class="header-content">
-          <p>EXTRA 55% OFF IN SPRING SALE</p>
-          <h1>Discover & Shop<br />The Trend Ss19</h1>
-          <button class="btn">SHOP NOW</button>
-        </div>
-        <div class="header-image">
-          <img src="assets/header.png" alt="header" />
-        </div>
-      </div>
-    </header>
-
-    <section class="section-container collection-container">
-      <img src="assets/collection.jpg" alt="collection" />
-      <div class="collection-content">
-        <h2 class="section-title">New Collection</h2>
-        <p>#35 ITEMS</p>
-        <h4>Available on Store</h4>
-        <button class="btn">SHOP NOW</button>
-      </div>
-    </section>
-
-    <section class="section-container sale-container">
-
-      <h2 class="section-title">On Sale</h2>
-
-      <div class="sale-grid">
-
-        <div class="sale-card">
-          <img src="assets/sale-1.jpg" alt="sale" />
-          <div class="sale-content">
-            <p class="sale-subtitle">MAN OUTERWEAR</p>
-            <h4 class="sale-title">sale <span>40%</span> off</h4>
-            <p class="sale-subtitle">- DON'T MISS -</p>
-            <button class="btn sale-btn">SHOP NOW</button>
-          </div>
-        </div>
-
-        <div class="sale-card">
-          <img src="assets/sale-2.jpg" alt="sale" />
-          <div class="sale-content">
-            <p class="sale-subtitle">WOMAN T-SHIRT</p>
-            <h4 class="sale-title">sale <span>25%</span> off</h4>
-            <p class="sale-subtitle">- DON'T MISS -</p>
-            <button class="btn sale-btn">SHOP NOW</button>
-          </div>
-        </div>
-
-        <div class="sale-card">
-          <img src="assets/sale-3.jpg" alt="sale" />
-          <div class="sale-content">
-            <p class="sale-subtitle">JACKETS</p>
-            <h4 class="sale-title">sale <span>20%</span> off</h4>
-            <p class="sale-subtitle">- DON'T MISS -</p>
-            <button class="btn sale-btn">SHOP NOW</button>
-          </div>
-        </div>
-
-      </div>
-
-    </section>
-
-    <section class="section-container musthave-container">
-
-      <h2 class="section-title">Must Have</h2>
-
-      <div class="musthave-nav">
-        <a href="#">ALL</a>
-        <a href="#">MAN</a>
-        <a href="#">WOMEN</a>
-        <a href="#">BAG</a>
-        <a href="#">SHOES</a>
-      </div>
-
-      <div class="musthave-grid">
-        <div class="musthave-card">
-          <img src="assets/musthave-1.png" alt="must have" />
-          <h4>Basic long sleeve T-shirt</h4>
-          <p><del>$45.00</del> $75.00</p>
-        </div>
-        <div class="musthave-card">
-          <img src="assets/musthave-2.png" alt="must have" />
-          <h4>Ribbed T-shirt with buttons</h4>
-          <p><del>$45.00</del> $75.00</p>
-        </div>
-        <div class="musthave-card">
-          <img src="assets/musthave-3.png" alt="must have" />
-          <h4>Jacket withside strips</h4>
-          <p><del>$45.00</del> $75.00</p>
-        </div>
-        <div class="musthave-card">
-          <img src="assets/musthave-4.png" alt="must have" />
-          <h4>High-heel tubular sandals</h4>
-          <p><del>$45.00</del> $75.00</p>
-        </div>
-        <div class="musthave-card">
-          <img src="assets/musthave-5.png" alt="must have" />
-          <h4>Coral fabric belt bag</h4>
-          <p><del>$45.00</del> $75.00</p>
-        </div>
-        <div class="musthave-card">
-          <img src="assets/musthave-6.png" alt="must have" />
-          <h4>Piggy skater slogan T-shirt</h4>
-          <p><del>$45.00</del> $75.00</p>
-        </div>
-        <div class="musthave-card">
-          <img src="assets/musthave-7.png" alt="must have" />
-          <h4>White platform boots</h4>
-          <p><del>$45.00</del> $75.00</p>
-        </div>
-        <div class="musthave-card">
-          <img src="assets/musthave-8.png" alt="must have" />
-          <h4>Sweater vest with sleeves</h4>
-          <p><del>$45.00</del> $75.00</p>
-        </div>
-        <div class="musthave-card">
-          <img src="assets/musthave-9.png" alt="must have" />
-          <h4>Slim fit pants</h4>
-          <p><del>$45.00</del> $75.00</p>
-        </div>
-        <div class="musthave-card">
-          <img src="assets/musthave-10.png" alt="must have" />
-          <h4>Gray backpack</h4>
-          <p><del>$45.00</del> $75.00</p>
-        </div>
-        <div class="musthave-card">
-          <img src="assets/musthave-11.png" alt="must have" />
-          <h4>Neon sweatshirt</h4>
-          <p><del>$45.00</del> $75.00</p>
-        </div>
-        <div class="musthave-card">
-          <img src="assets/musthave-12.png" alt="must have" />
-          <h4>Hooded nautical jacket</h4>
-          <p><del>$45.00</del> $75.00</p>
-        </div>
-      </div>
-
-    </section>
-
-    <section class="news">
-      <div class="section-container news-container">
-
-        <h2 class="section-title">Latest News</h2>
-
-        <div class="news-grid">
-
-          <div class="news-card">
-            <img src="assets/news-1.jpg" alt="news" />
-            <div class="news-details">
-              <p>
-                FASHION <i class="ri-checkbox-blank-circle-fill"></i>
-                <span>JAMES SIMSON</span>
-                <i class="ri-checkbox-blank-circle-fill"></i> FEB 2, 2019
-              </p>
-              <h4>Seasonal Trends</h4>
-              <hr />
-              <p>
-                Discuss the latest fashion trends for the current season and
-                offer tips and ideas on how to incorporate these trends into
-                your wardrobe.
-              </p>
-              <a href="#"><i class="ri-arrow-right-line"></i></a>
-            </div>
-          </div>
-
-          <div class="news-card">
-            <img src="assets/news-2.jpg" alt="news" />
-            <div class="news-details">
-              <p>
-                TRENDS <i class="ri-checkbox-blank-circle-fill"></i>
-                <span>JAMES SIMSON</span>
-                <i class="ri-checkbox-blank-circle-fill"></i> APR 15, 2019
-              </p>
-              <h4>Fashion Tips and Advice</h4>
-              <hr />
-              <p>
-                Provide your readers with practical tips and advice on how to
-                dress for different occasions, body types, or style preferences.
-              </p>
-              <a href="#"><i class="ri-arrow-right-line"></i></a>
-            </div>
-          </div>
-
-          <div class="news-card">
-            <img src="assets/news-3.jpg" alt="news" />
-            <div class="news-details">
-              <p>
-                STYLE <i class="ri-checkbox-blank-circle-fill"></i>
-                <span>JAMES SIMSON</span>
-                <i class="ri-checkbox-blank-circle-fill"></i> JUL 22, 2019
-              </p>
-              <h4>Sustainable Fashion</h4>
-              <hr />
-              <p>
-                Cover the growing trend of eco-conscious fashion and explore the
-                various ways to be sustainable in your fashion choices.
-              </p>
-              <a href="#"><i class="ri-arrow-right-line"></i></a>
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </section>
-    
-    <section class="section-container brands-container">
-      <div class="brand-image">
-        <img src="assets/brand-1.png" alt="brand" />
-      </div>
-      <div class="brand-image">
-        <img src="assets/brand-2.png" alt="brand" />
-      </div>
-      <div class="brand-image">
-        <img src="assets/brand-3.png" alt="brand" />
-      </div>
-      <div class="brand-image">
-        <img src="assets/brand-4.png" alt="brand" />
-      </div>
-      <div class="brand-image">
-        <img src="assets/brand-5.png" alt="brand" />
-      </div>
-      <div class="brand-image">
-        <img src="assets/brand-6.png" alt="brand" />
-      </div>
-    </section>
-
-    <hr/>
-
-    <footer class="section-container footer-container">
-
-      <div class="footer-col">
-        <h4 class="footer-heading">CONTACT INFO</h4>
-        <p>
-          <i class="ri-map-pin-2-fill"></i> 123, London Bridge Street, London
-        </p>
-        <p><i class="ri-mail-fill"></i> support@monsa.com</p>
-        <p><i class="ri-phone-fill"></i> (+012) 3456 789</p>
-      </div>
-
-      <div class="footer-col">
-        <h4 class="footer-heading">COMPANY</h4>
-        <p>Home</p>
-        <p>About Us</p>
-        <p>Work With Us</p>
-        <p>Our Blog</p>
-        <p>Terms & Conditions</p>
-      </div>
-
-      <div class="footer-col">
-        <h4 class="footer-heading">USEFUL LINK</h4>
-        <p>Help</p>
-        <p>Track My Order</p>
-        <p>Men</p>
-        <p>Women</p>
-        <p>Shoes</p>
-      </div>
-
-      <div class="footer-col">
-        <h4 class="footer-heading">INSTAGRAM</h4>
-        <div class="instagram-grid">
-          <img src="assets/instagram-1.jpg" alt="instagram" />
-          <img src="assets/instagram-2.jpg" alt="instagram" />
-          <img src="assets/instagram-3.jpg" alt="instagram" />
-          <img src="assets/instagram-4.jpg" alt="instagram" />
-          <img src="assets/instagram-5.jpg" alt="instagram" />
-          <img src="assets/instagram-6.jpg" alt="instagram" />
-        </div>
-      </div>
-      
-    </footer>
-
-    <hr/>
-
-    <div class="section-container footer-bar">
-      <div class="copyright">
-        Copyright © 2023 Company. All rights reserved.
-      </div>
-      <div class="footer-form">
-        <form>
-          <input type="text" placeholder="ENTER YOUR EMAIL" />
-          <button class="btn" type="submit">SUBSCRIBE</button>
-        </form>
-      </div>
     </div>
+    <h2>Customize your widget</h2>
+    <ul class="radio-btn-selection">
+      <li class="radio-btn-item">
+        <div class="radio-btn">
+          <div class="btn selected"></div>
+        </div>
+        <p>Display Contact button</p>
+      </li>
+      <li class="radio-btn-item">
+        <div class="radio-btn">
+          <div class="btn"></div>
+        </div>
+        <p>Hide email address</p>
+      </li>
+      <li class="radio-btn-item">
+        <div class="radio-btn">
+          <div class="btn"></div>
+        </div>
+        <p>Display Publish button</p>
+      </li>
+    </ul>
+    <h2>Other</h2>
+    <ul class="checkbox-selection">
+      <li class="checkbox-item">
+        <div class="checkbox">
+          <div class="check"></div>
+        </div>
+        <p>Turn on in-app notifications.</p>
+      </li>
+      <li class="checkbox-item">
+        <div class="checkbox">
+          <div class="check"></div>
+        </div>
+        <p>Receive weekly newsletters and other offers.</p>
+      </li>
+    </ul>
+    <div class="buttons-container">
+      <button class="cancel">Cancel</button>
+      <button class="save">Save</button>
+    </div>
+  </section>
 
-    <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+  <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
