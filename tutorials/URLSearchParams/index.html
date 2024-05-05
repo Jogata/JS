@@ -86,6 +86,67 @@ li {
   width: max-content;
   margin-bottom: 2rem;
 }
+.radio-btn-selection li,
+.checkbox-selection li {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+.radio-btn,
+.checkbox {
+  min-width: 1.4rem;
+  height: 1.4rem;
+  padding: 0.1rem;
+  outline: 1px solid #c9c6c0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.btn,
+.check {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+}
+.checkbox {
+  border-radius: 0.25rem;
+}
+.check {
+  border-radius: 0.1rem;
+}
+.selected, 
+.checked {
+  background: #a9602f;
+}
+.buttons-container {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+button {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 0.7rem;
+  border: none;
+  border-radius: 0.5rem;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.cancel {
+  background: #f6f4f0;
+}
+.cancel:hover {
+  background: #fff3dc;
+}
+.save {
+  background: #eeab2f;
+}
+.save:hover {
+  background: #eeab2fab;
+}
   </style>
   </head>
   <body>
@@ -149,6 +210,75 @@ li {
       <button class="save">Save</button>
     </div>
   </section>
+  <script>
+    // Open menu
+const MENU_BTN = document.querySelector(".icon-tabler-dots");
+const MENU_LIST = document.querySelector(".menu-list");
+
+MENU_BTN.addEventListener("click", () => {
+  // if (MENU_LIST.style.display === "none") {
+  //   MENU_LIST.style.display = "block";
+  // } else {
+  //   MENU_LIST.style.display = "none";
+  // }
+  MENU_LIST.classList.toggle("hidden");
+});
+
+// Select menu list item
+const MENU_LIST_ITEMS = MENU_LIST.querySelectorAll("li");
+
+MENU_LIST_ITEMS.forEach((item) => {
+  item.addEventListener("click", () => {
+    MENU_LIST.style.display = "none";
+  });
+});
+
+// Select radio buttons
+const RADIO_BTNS = document.querySelectorAll(".radio-btn");
+
+RADIO_BTNS.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    RADIO_BTNS.forEach((b) => {
+      b.querySelector(".btn").classList.remove("selected");
+    });
+
+    btn.querySelector(".btn").classList.add("selected");
+  });
+});
+
+// Select checkbox
+const CHECKBOXES = document.querySelectorAll(".checkbox");
+
+CHECKBOXES.forEach((box) => {
+  box.addEventListener("click", () => {
+    if (box.querySelector(".check").classList.contains("checked")) {
+      box.querySelector(".check").classList.remove("checked");
+    } else {
+      box.querySelector(".check").classList.add("checked");
+    }
+  });
+});
+  </script>
+  <script>
+  // 04. Rotate Array
+    
+  function rotateArr(params, n) {
+    const rotations = n % params.length;
+    // console.log(rotations);
+    
+    for (let index = 0; index < rotations; index++) {
+      // console.log(index);
+      params.unshift(params.pop());
+    }
+
+    console.log(params.join(" "));
+    // return params;
+
+  }
+
+  // rotateArr(['1', '2', '3', '4'], 2);
+  // rotateArr(['Banana', 'Orange', 'Coconut', 'Apple'], 15);
+  </script>
 
   <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
