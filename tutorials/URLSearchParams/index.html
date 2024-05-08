@@ -16,6 +16,7 @@
 
       :root {
         --primary-color: #2563eb;
+        --primary-color-light: #6495ed;
         --primary-color-dark: #1e40af;
         --text-dark: #1f1f1f;
         --text-light: #4b5563;
@@ -43,6 +44,12 @@
       
       img {
         width: 100%;
+      }
+
+      svg {
+        position: absolute;
+        width: 0;
+        height: 0;
       }
       
       body {
@@ -77,13 +84,23 @@
         pointer-events: none;
         /* background-color: red; */
       }
+
+      .nav {
+        position: relative;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 2;
+      }
       
       nav {
-        padding: 1rem 5rem;
+        width: 96%;
+        max-width: var(--max-width);
+        margin: auto;
+        /* padding: 1rem 5rem; */
+        padding: 1rem 0;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background-color: rgba(0, 0, 0, 0.5);
+        /* background-color: rgba(0, 0, 0, 0.5); */
       }
       
       .nav-links {
@@ -96,8 +113,9 @@
       .link a {
         color: var(--white);
         font-size: 0.9rem;
-        transition: 0.3s;
-        cursor: pointer;
+        /* transition: 0.3s; */
+        transition: color 300ms ease;
+        /* cursor: pointer; */
       }
       
       .link.logo a {
@@ -113,14 +131,16 @@
       .social-icons span {
         color: var(--white);
         font-size: 1rem;
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: color 300ms ease;
         cursor: pointer;
       }
       
-      .link:hover,
+      .link:hover a,
       .social-icons span:hover {
         /* color: var(--primary-color); */
-        color: cornflowerblue;
+        /* color: cornflowerblue; */
+        color: var(--primary-color-light);
       }
       
       .header-container {
@@ -142,9 +162,11 @@
       }
       
       .header-content h1 {
-        font-size: 10rem;
+        /* font-size: 10rem; */
+        font-size: calc(3rem + 7vw);
         /* line-height: 8rem; */
-        line-height: 10rem;
+        /* line-height: 10rem; */
+        line-height: 1;
         font-family: 'Abril Fatface', cursive;
 font-family: 'Fraunces', serif;
 font-family: 'Lemon', cursive;
@@ -193,6 +215,7 @@ font-family: "Young Serif", serif;
       }
       
       .service-container {
+        padding-bottom: 5px;
         display: grid;
         gap: 5px;
         grid-template-columns: repeat(4, 1fr);
@@ -227,10 +250,17 @@ font-family: "Young Serif", serif;
       }
       
       .service-card a {
+        color: var(--primary-color-dark);
         font-size: 0.9rem;
         font-weight: 500;
+        transition: color 300ms ease;
       }
       
+      .service-card a:hover {
+        /* color: cornflowerblue; */
+        color: var(--primary-color-light);
+      }
+
       .banner {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -248,11 +278,11 @@ font-family: "Young Serif", serif;
         /* background-image: url("./assets/wallpaperflare.com_wallpaper.jpg"); */
         /* background-image: url("./assets/wallpaperflare.com_wallpaper\(1\).jpg"); */
         /* background-image: url("./assets/wallpaperflare.com_wallpaper\(3\).jpg"); */
-        background-image: url("./assets/wallpaperflare.com_wallpaper\(4\).jpg");
+        /* background-image: url("./assets/wallpaperflare.com_wallpaper\(4\).jpg"); */
         /* background-image: url("./assets/wallpaperflare.com_wallpaper\(6\).jpg"); */
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
+        /* background-repeat: no-repeat; */
+        /* background-position: center; */
+        /* background-size: cover; */
         isolation: isolate;
       }
       .banner-content::before {
@@ -262,7 +292,25 @@ font-family: "Young Serif", serif;
         content: "";
         width: 100%;
         height: 100%;
+        background-image: url("./assets/wallpaperflare.com_wallpaper\(4\).jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        /* clip-path: url("#mask"); */
+        clip-path: url("#mask-2");
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
+        z-index: -2;
+      }
+      .banner-content::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
         background-color: rgba(255, 255, 255, 0.7);
+        clip-path: url("#mask-2");
         z-index: -1;
       }
       
@@ -280,7 +328,8 @@ font-family: "Young Serif", serif;
       }
       
       .banner-content .description {
-        max-width: 400px;
+        /* max-width: 400px; */
+        max-width: 25rem;
         margin: auto;
         margin-bottom: 1rem;
         color: var(--text-light);
@@ -291,6 +340,7 @@ font-family: "Young Serif", serif;
         color: var(--text-dark);
         font-size: 1.2rem;
         font-weight: 600;
+        font-family: Georgia, serif;
       }
       
       .banner-content .price span {
@@ -308,7 +358,8 @@ font-family: "Young Serif", serif;
       }
       
       .square {
-        width: 100px;
+        /* width: 100px; */
+        width: 6.25rem;
         padding: 1rem;
         text-align: center;
         border-radius: 10px;
@@ -332,7 +383,8 @@ font-family: "Young Serif", serif;
         border: none;
         border-radius: 5rem;
         background-color: var(--primary-color);
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: background-color 300ms ease;
         cursor: pointer;
       }
       
@@ -345,9 +397,14 @@ font-family: "Young Serif", serif;
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
+        clip-path: url("#mask");
+        clip-path: url("#mask-2");
+        clip-path: url("#mask-3");
+        clip-path: url("#mask-4");
       }
       
       .collection-container {
+        padding-top: 5px;
         display: grid;
         gap: 5px;
         grid-template-columns: repeat(4, 1fr);
@@ -374,8 +431,10 @@ font-family: "Young Serif", serif;
       .collection-image p {
         padding: 0 2rem;
         color: var(--primary-color);
-        font-size: 0.9rem;
+        /* font-size: 0.9rem; */
+        font-size: 1.2rem;
         font-weight: 600;
+        font-family: Georgia, serif;
       }
       
       .collection-image p del {
@@ -414,7 +473,7 @@ font-family: "Young Serif", serif;
         /* background-image: url("assets/image-2.jpg"); */
         /* background-image: url("assets/wallpaperflare.com_wallpaper.jpg"); */
         /* background-image: url("assets/txp4uxojfkszszqdcmin.jpg"); */
-        background-image: url("./assets/running-black-man-professional-basketball-player-with-ball-his-hands-isolated-background_118086-10185.avif");
+        background-image: url("./assets/running-black-man-professional-basketball-player-with-ball-his-hands-isolated-background_118086-10185.jpg");
         /* background-image: url("assets/wallpaperflare.com_wallpaper\(3\).jpg"); */
         /* background-image: url("assets/wallpaperflare.com_wallpaper\(4\).jpg"); */
         /* background-image: url("assets/nike-running-ad4-1332x800.jpg"); */
@@ -468,7 +527,8 @@ font-family: "Young Serif", serif;
         inset: 0;
         content: "";
         background-color: var(--text-dark);
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: opacity 300ms ease;
         opacity: 0.5;
         cursor: pointer;
         z-index: 1;
@@ -500,9 +560,11 @@ font-family: "Young Serif", serif;
       }
       
       .brand-image img {
-        max-width: 120px;
+        /* max-width: 120px; */
+        max-width: 7.5rem;
         opacity: 0.5;
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: opacity 300ms ease;
       }
       
       .brand-image:hover img {
@@ -519,12 +581,14 @@ font-family: "Young Serif", serif;
         display: grid;
         gap: 2rem;
         grid-template-columns: repeat(3, 1fr);
+        justify-items: center;
       }
 
       .footer-col h4 {
         margin-bottom: 2rem;
         /* color: var(--primary-color); */
-        color: cornflowerblue;
+        /* color: cornflowerblue; */
+        color: var(--primary-color-light);
         font-size: 1.2rem;
         font-weight: 500;
       }
@@ -532,13 +596,15 @@ font-family: "Young Serif", serif;
       .footer-col p {
         margin-bottom: 1rem;
         color: var(--white);
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: color 300ms ease;
         cursor: pointer;
       }
       
       .footer-col p:hover {
         /* color: var(--primary-color); */
-        color: cornflowerblue;
+        /* color: cornflowerblue; */
+        color: var(--primary-color-light);
       }
       
       .footer-socials {
@@ -548,8 +614,10 @@ font-family: "Young Serif", serif;
       }
       
       .footer-socials span {
-        width: 40px;
-        height: 40px;
+        /* width: 40px; */
+        width: 2.5rem;
+        /* height: 40px; */
+        height: 2.5rem;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -557,14 +625,17 @@ font-family: "Young Serif", serif;
         font-size: 1.2rem;
         border-radius: 100%;
         background-color: var(--white);
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: color 300ms ease, 
+          background-color 300ms ease;
         cursor: pointer;
       }
       
       .footer-socials span:hover {
         color: var(--white);
         /* background-color: var(--primary-color); */
-        background-color: cornflowerblue;
+        /* background-color: cornflowerblue; */
+        background-color: var(--primary-color-light);
       }
       
       .footer-bar {
@@ -622,6 +693,50 @@ font-family: "Young Serif", serif;
         }
       }
 
+      @media (width < 600px) {
+        .header-container {
+          grid-template-columns: repeat(1, 1fr);
+        }
+      
+        /* .header-container h1 {
+          font-size: 6rem;
+          line-height: 5.5rem;
+        } */
+      
+        .service-card {
+          padding: 1rem;
+        }
+      
+        .collection-container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      
+        .collection-banner {
+          grid-area: 5/1/6/3;
+        }
+      
+        .gallery {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      
+        .gallery-image:last-child {
+          display: none;
+        }
+      
+        .brands-container {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      
+        .footer-container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .footer-sci {
+          grid-column: 1 / -1;
+          text-align: center;
+        }
+      }
+
       h1 span {
         position: relative;
         display: block;
@@ -631,6 +746,7 @@ font-family: "Young Serif", serif;
   </head>
   <body>
     <header>
+      <div class="nav">
       <nav>
         <ul class="nav-links">
           <li class="link logo">
@@ -662,6 +778,7 @@ font-family: "Young Serif", serif;
           <span><i class="ri-instagram-line"></i></span>
         </div>
       </nav>
+      </div>
       <div class="section-container header-container">
         <div class="header-content">
           <!-- <h1>NIKE <br/> SHOES</h1> -->
@@ -886,7 +1003,7 @@ font-family: "Young Serif", serif;
           <p>Privacy Policy</p>
           <p>Blog</p>
         </div>
-        <div class="footer-col">
+        <div class="footer-col footer-sci">
           <h4>STAY CONNECTED</h4>
           <div class="footer-socials">
             <span><i class="ri-facebook-fill"></i></span>
