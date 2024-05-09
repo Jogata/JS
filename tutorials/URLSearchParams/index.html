@@ -116,6 +116,55 @@ button:hover {
   color: #000;
   border-color: #000
 }
+.sold-out-btn {
+  background: #ffa1ad;
+  color: #fff;
+  border-radius: 0.25rem;
+  width: 80px;
+  padding: 0.5rem;
+  position: absolute;
+  right: 1.2rem;
+  top: 1.2rem;
+}
+@media (max-width: 700px) {
+  .sold-out, .add-to-cart {
+    margin-top: 0;
+  }
+  .main-container {
+    gap: 3rem;
+    padding: 5rem 0;
+    align-items: center;
+  }
+}
+@media (max-width: 600px) {
+  .main-card {
+    flex-direction: column;
+    margin-left: unset;
+  }
+  .main-card img {
+    align-self: center;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0.8rem;
+    width: 100%;
+  }
+  .page-info {
+    border-right: unset;
+    border-bottom: 5px solid #ffa1ad;
+  }
+  .sold-out {
+    flex-direction: column;
+    align-self: center;
+    text-align: center;
+  }
+  .sold-out img {
+    width: 100%;
+    border-top-left-radius: 0.8rem;
+    border-bottom-right-radius: 0;
+  }
+  .sold-out-info h2 {
+    margin-top: 1rem;
+  }
+}
   </style>
   </head>
   <body>
@@ -143,6 +192,94 @@ button:hover {
     <button>Add to cart</button>
   </section>
 </div>
+
+<script>
+    // 01. Password Reset
+    function resetPassword(params) {
+    // console.log(params);
+    let text = params[0];
+    // console.log(text);
+    let index = 1;
+    let input = params[index];
+    while (input != "Done") {
+      // console.log(input);
+      const data = input.split(" ");
+      const command = data[0];
+
+      if (command == "TakeOdd") {
+        // console.log("TakeOdd");
+        let newRawPass = "";
+        for (let i = 1; i < text.length; i+=2) {
+          newRawPass += text[i];
+        }
+        text = newRawPass;
+        console.log(text);
+      } else if (command == "Cut") {
+        // console.log("Cut");
+        const index = Number(data[1]);
+        const length = Number(data[2]);
+        // console.log(index, length);
+        const sub = text.substring(index, index + length);
+        // console.log(sub);
+        text = text.replace(sub, "");
+        console.log(text);
+      } else if (command == "Substitute") {
+        // console.log("Substitute");
+        const substring = data[1];
+        const substitute = data[2];
+        // console.log(substring, substitute);
+        if (text.includes(substring)) {
+          text = text.split(substring).join(substitute);
+          console.log(text);
+        } else {
+          console.log("Nothing to replace!");
+        }
+      }
+      index++;
+      input = params[index];
+      // if (index > 100) {
+      //   console.log("infinity");
+      //   break;
+      // } 
+    }
+    console.log(`Your password is: ${text} `);
+  }
+  // resetPassword(
+  //   [
+  //     "Siiceercaroetavm!:?:ahsott.:i:nstupmomceqr", 
+  //     "TakeOdd",
+  //     "Cut 15 3",
+  //     "Substitute :: -",
+  //     "Substitute | ^",
+  //     "Done"
+  //   ]
+  // );
+  // resetPassword(
+  //   [
+  //     "up8rgoyg3r1atmlmpiunagt!-irs7!1fgulnnnqy",
+  //     "TakeOdd",
+  //     "Cut 18 2",
+  //     "Substitute ! ***",
+  //     "Substitute ? .!.",
+  //     "Done"
+  //   ]
+  // )
+</script>
+<script>
+    // 06. Sum of Numbers N…M
+    function calcSum(n1, n2) {
+    let sum = 0;
+    const start = Number(n1);
+    const end = Number(n2);
+    for (let index = start; index <= end; index++) {
+      // console.log(index);
+      sum += index;
+    }
+    console.log(sum);
+  }
+  // calcSum('1', '5' );
+  // calcSum('-8', '20');
+</script>
 
 <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
