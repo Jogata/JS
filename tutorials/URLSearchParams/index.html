@@ -4,285 +4,143 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">  
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-  <style>
-*, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: #d8e1e8;
-  font-family: "Inter", sans-serif;
-}
-section {
-  box-shadow: 0 0.5rem 1rem #c3d4e1;
-  background: #ecf0f3;
-  border-radius: 0.8rem;
-  width: max-content;
-}
-.main-container {
-  width: 90%;
-  max-width: 1000px;
-  display: flex;
-  flex-direction: column;
-}
-.main-card {
-  display: flex;
-  margin-left: auto;
-  width: 90%;
-  max-width: 700px;
-  z-index: 1;
-}
-.main-card img {
-  border-top-right-radius: 0.8rem;
-  border-bottom-right-radius: 0.8rem;
-  height: auto;
-  flex: 1;
-  object-fit: cover;
-}
-.page-info {
-  padding: 4rem 2.5rem;
-  border-right: 5px solid #ffa1ad;
-}
-h1 {
-  margin-bottom: 1rem;
-  letter-spacing: 0.5px;
-  font-size: 2.1rem;
-}
-h2 {
-  font-size: 1.1rem;
-  font-weight: 400;
-  margin-bottom: 0.5rem;
-}
-p {
-  font-size: 0.9rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
-}
-.price {
-  font-size: 1.6rem;
-}
-.sold-out {
-  display: flex;
-  align-self: flex-start;
-  margin-top: -3rem;
-  z-index: 2;
-}
-.sold-out img {
-  border-top-right-radius: 0.8rem;
-  border-bottom-right-radius: 0.8rem;
-  transform: scaleX(-1);
-  object-fit: cover;
-}
-.sold-out-info {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 3rem 2rem;
-  width: 300px;
-}
-.sold-out-info p {
-  margin-bottom: 0;
-}
-.add-to-cart {
-  padding: 4rem;
-  text-align: center;
-  margin-top: -4rem;
-  z-index: 3;
-  align-self: center;
-}
-button {
-  background: #000;
-  color: #ffa1ad;
-  border: 1px solid transparent;
-  padding: 0.8rem;
-  cursor: pointer;
-  width: 150px;
-  transition: 0.5s;
-}
-button:hover {
-  background: transparent;
-  color: #000;
-  border-color: #000
-}
-.sold-out-btn {
-  background: #ffa1ad;
-  color: #fff;
-  border-radius: 0.25rem;
-  width: 80px;
-  padding: 0.5rem;
-  position: absolute;
-  right: 1.2rem;
-  top: 1.2rem;
-}
-@media (max-width: 700px) {
-  .sold-out, .add-to-cart {
-    margin-top: 0;
-  }
-  .main-container {
-    gap: 3rem;
-    padding: 5rem 0;
-    align-items: center;
-  }
-}
-@media (max-width: 600px) {
-  .main-card {
-    flex-direction: column;
-    margin-left: unset;
-  }
-  .main-card img {
-    align-self: center;
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 0.8rem;
-    width: 100%;
-  }
-  .page-info {
-    border-right: unset;
-    border-bottom: 5px solid #ffa1ad;
-  }
-  .sold-out {
-    flex-direction: column;
-    align-self: center;
-    text-align: center;
-  }
-  .sold-out img {
-    width: 100%;
-    border-top-left-radius: 0.8rem;
-    border-bottom-right-radius: 0;
-  }
-  .sold-out-info h2 {
-    margin-top: 1rem;
-  }
-}
-  </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      body {
+        /* position: relative; */
+        /* width: 100%; */
+        min-height: 100vh;
+        background-image: url("./assets/image-link-file/slider5.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 18px 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 2;
+      }
+
+      /* .logo img {
+        width: 150px;
+        height: auto;
+      } */
+
+      .navlist {
+        display: flex;
+      }
+
+      .logo {
+        color: #fff;
+        font-size: 32px;
+        font-weight: bold;
+        text-transform: capitalize;
+      }
+
+      .navlist a {
+        margin: 0 22px;
+        padding: 4px 5px;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: uppercase;
+        border-bottom: 2px solid transparent;
+        transition: color 400ms ease, 
+              border-color 400ms ease;
+      }
+
+      .navlist a:hover {
+        color: #d3d3d3;
+        border-bottom: 2px solid #fff;
+      }
+
+      #menu-icon {
+        display: none;
+        color: #fff;
+        font-size: 36px;
+        cursor: pointer;
+        z-index: 3;
+      }
+
+      .home-btn {
+        display: inline-block;
+        padding: 10px 25px;
+        color: #fff;
+        font-size: 1rem;
+        text-transform: uppercase;
+        border-radius: 30px;
+        border: 2px solid #ce1b41;
+        background-color: #ce1b41;
+        transition: border-color 400ms ease, 
+                background-color 400ms ease;
+      }
+    </style>
   </head>
   <body>
-  <!-- <h1>Sport Webshop</h1> -->
-  <div class="main-container">
-  <section class="main-card">
-    <div class="page-info">
-      <h1>Keep it sporty.</h1>
-      <p>Our mission is to change the world through <br> sport. Browse sportswear and shoes.</p>
-      <button>View Collection</button>
+    <header>
+
+      <a href="#" class="logo">
+        <!-- <img src="" alt=""> -->
+        braga<span>.</span>
+      </a>
+
+      <i id="menu-icon" class="fa fa-th-large"></i>
+      
+      <ul class="navlist">
+        <li><a href="#">home</a></li>
+        <li><a href="#">shop</a></li>
+        <li><a href="#">blog</a></li>
+        <li><a href="#">about</a></li>
+        <li><a href="#">contact</a></li>
+        <li><a href="#">page</a></li>
+      </ul>
+      <a href="#" class="home-btn">shop now</a>
+    </header>
+
+    <section class="home">
+      <div class="home-text">
+        <h4>Big sale up to 20% off</h4>
+        <h1>This Black Nike <br> Black</h1>
+        <p>An Exclusive selection this season's trends <span>exclusively online</span></p>
+        <div class="home-inp">
+          <form>
+            <input type="search" name="search" id="search" placeholder="Search for products" required>
+            <input type="submit" value="Search">
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <div class="right">
+      <a href="#">Facebook</a>
+      <a href="#">Upwork</a>
+      <a href="#">Fiverr</a>
     </div>
-    <img src="https://woocommerce.codetron.co.in/wp-content/uploads/2021/11/pexels-photo-2529147.jpeg" alt="front of a sport shoe" width="300" height="350">
-  </section>
-  <section class="sold-out">
-    <img src="https://www.omahabees.com/wp-content/uploads/2019/12/shoes-e1576250489507.jpg" alt="back of a sport shoe" width="200" height="200">
-    <div class="sold-out-info">
-      <button class="sold-out-btn">Sold out</button>
-      <h2>Air monarch</h2>
-      <p class="price">$345</p>
-    </div>
-  </section>
-  <section class="add-to-cart">
-    <h2>Legend essential</h2>
-    <p class="price">$345</p>
-    <button>Add to cart</button>
-  </section>
-</div>
 
-<script>
-    // 01. Password Reset
-    function resetPassword(params) {
-    // console.log(params);
-    let text = params[0];
-    // console.log(text);
-    let index = 1;
-    let input = params[index];
-    while (input != "Done") {
-      // console.log(input);
-      const data = input.split(" ");
-      const command = data[0];
-
-      if (command == "TakeOdd") {
-        // console.log("TakeOdd");
-        let newRawPass = "";
-        for (let i = 1; i < text.length; i+=2) {
-          newRawPass += text[i];
-        }
-        text = newRawPass;
-        console.log(text);
-      } else if (command == "Cut") {
-        // console.log("Cut");
-        const index = Number(data[1]);
-        const length = Number(data[2]);
-        // console.log(index, length);
-        const sub = text.substring(index, index + length);
-        // console.log(sub);
-        text = text.replace(sub, "");
-        console.log(text);
-      } else if (command == "Substitute") {
-        // console.log("Substitute");
-        const substring = data[1];
-        const substitute = data[2];
-        // console.log(substring, substitute);
-        if (text.includes(substring)) {
-          text = text.split(substring).join(substitute);
-          console.log(text);
-        } else {
-          console.log("Nothing to replace!");
-        }
-      }
-      index++;
-      input = params[index];
-      // if (index > 100) {
-      //   console.log("infinity");
-      //   break;
-      // } 
-    }
-    console.log(`Your password is: ${text} `);
-  }
-  // resetPassword(
-  //   [
-  //     "Siiceercaroetavm!:?:ahsott.:i:nstupmomceqr", 
-  //     "TakeOdd",
-  //     "Cut 15 3",
-  //     "Substitute :: -",
-  //     "Substitute | ^",
-  //     "Done"
-  //   ]
-  // );
-  // resetPassword(
-  //   [
-  //     "up8rgoyg3r1atmlmpiunagt!-irs7!1fgulnnnqy",
-  //     "TakeOdd",
-  //     "Cut 18 2",
-  //     "Substitute ! ***",
-  //     "Substitute ? .!.",
-  //     "Done"
-  //   ]
-  // )
-</script>
-<script>
-    // 06. Sum of Numbers N…M
-    function calcSum(n1, n2) {
-    let sum = 0;
-    const start = Number(n1);
-    const end = Number(n2);
-    for (let index = start; index <= end; index++) {
-      // console.log(index);
-      sum += index;
-    }
-    console.log(sum);
-  }
-  // calcSum('1', '5' );
-  // calcSum('-8', '20');
-</script>
-
-<h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
-
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+    
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
       // Create Query String as String
