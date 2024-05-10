@@ -49,7 +49,9 @@
       } */
 
       .navlist {
+        /* opacity: 0; */
         display: flex;
+        z-index: -1;
       }
 
       .logo {
@@ -81,7 +83,7 @@
       }
 
       .navlist a:hover {
-        color: #d3d3d3;
+        /* color: #d3d3d3; */
         border-bottom: 2px solid #fff;
       }
 
@@ -93,11 +95,12 @@
         -webkit-text-stroke: 1px #fff;
         transition: color 400ms ease;
         cursor: pointer;
-        z-index: 3;
+        /* z-index: 3; */
       }
 
       #menu-icon:hover {
-        color: #fff;
+        /* color: #fff; */
+        color: #152f5d;
       }
 
       .home-btn {
@@ -118,16 +121,25 @@
         background-color: transparent;
       }
 
-      section {
-        padding: 0 10%;
+      /* section { */
+        /* padding: 0 10%; */
+      /* } */
+
+      main {
+        /* width: 90%; */
+        width: 96%;
+        /* margin: auto; */
+        margin-left: auto;
+        display: flex;
       }
 
       .home {
         width: 100%;
-        height: 100vh;
+        /* height: 100vh; */
+        min-height: 100vh;
         display: grid;
         align-items: center;
-        grid-template-columns: repeat(1, 1fr);
+        /* grid-template-columns: repeat(1, 1fr); */
       }
 
       .home-text h4 {
@@ -166,11 +178,13 @@
       .home-inp input:first-child {
         display: inline-block;
         width: 85%;
-        padding: 16px 140px 16px 15px;
+        /* padding: 16px 140px 16px 15px; */
+        padding: 16px 140px 16px 24px;
         /* font-size: 16px; */
         outline: none;
         border: 2px solid #ce1b41;
-        border-radius: 30px;
+        /* border-radius: 30px; */
+        border-radius: 2em;
       }
 
       .home-inp input:last-child {
@@ -184,30 +198,54 @@
         font-size: 16px;
         /* text-transform: capitalize; */
         outline: none;
-        border: none;
-        border-radius: 30px;
+        /* border: none; */
+        /* border-radius: 30px; */
+        border-radius: 2em;
+        border: 2px solid transparent;
+        /* border: 2px solid #fff; */
         background-color: #152f5d;
+        transition: all 400ms ease;
         cursor: pointer;
       }
-
-      .right {
-        position: absolute;
-        top: 70%;
-        right: -150px;
-        padding: 0 5%;
-        transform: rotate(90deg);
+      .home-inp input:last-child:hover {
+        color: #fff;
+        border: 2px solid #fff;
+        background-color: #ce1b41;
       }
 
-      .right a {
-        margin: 0 16px;
+      .right-nav {
+        /* position: absolute; */
+        /* top: 70%; */
+        /* top: 0; */
+        /* right: -150px; */
+        /* right: 0; */
+        /* padding: 0 5%; */
+        /* height: 100%; */
+        padding: 0 16px;
+        display: flex;
+        /* text-align: center; */
+        /* transform: rotate(90deg); */
+        border: 1px solid wheat;
+      }
+
+      .right-nav ul {
+        /* list-style: none; */
+        margin: auto;
+      }
+
+      .right-nav a {
+        display: block;
+        margin: 16px 0;
+        padding: 4px 8px;
         color: #fff;
         font-size: 16px;
         font-weight: 500;
         text-transform: capitalize;
+        writing-mode: sideways-rl;
         transition: color 400ms ease;
       }
 
-      .right a:hover {
+      .right-nav a:hover {
         color: #ce1b41;
       }
 
@@ -221,6 +259,87 @@
       @media (max-width: 925px) {
         #menu-icon {
           display: block;
+        }
+
+        .navlist {
+          position: absolute;
+          /* top: -100%; */
+          /* top: 100%; */
+          top: 0;
+          right: 0;
+          left: 0;
+          padding: 20px 0 2rem;
+          flex-direction: column;
+          text-align: center;
+          background-color: #152f5d;
+          transform: translateY(-100%);
+          transition: all 400ms ease;
+        }
+        .navlist::before {
+          position: absolute;
+          left: 0;
+          bottom: 100%;
+          content: "";
+          width: 100%;
+          height: 100%;
+          border-bottom: 1px solid #fff4;
+          background-color: #152f5d;
+        }
+
+        .navlist.open {
+          /* top: 0; */
+          top: 100%;
+          transform: translateY(0);
+        }
+
+        .navlist li {
+          margin: 8px 0;
+        }
+
+        .navlist a {
+          /* display: block; */
+          display: inline-block;
+          margin: 8px;
+          padding: 4px;
+        }
+      }
+
+      @media (max-width: 825px) {
+        .home-btn {
+          border: 2px solid #152f5d;
+          background-color: #152f5d;
+        }
+      }
+
+      @media (max-width: 685px) {
+        .home-text h4 {
+          font-size: 16px;
+          transition: 300ms;
+        }
+
+        .home-text h1 {
+          font-size: 40px;
+          transition: 300ms;
+        }
+
+        .home-text p {
+          font-size: 14px;
+          transition: 300ms;
+        }
+      }
+
+      /* @media (max-width: 580px) { */
+        /* .right-nav { */
+          /* top: 50%; */
+          /* right: -120px; */
+          /* transition: 300ms; */
+        /* } */
+      /* } */
+
+      @media (max-width: 425px) {
+        .home-text h1 {
+          font-size: 35px;
+          transition: 300ms;
         }
       }
     </style>
@@ -248,6 +367,7 @@
 
     </header>
 
+    <main>
     <section class="home">
       <div class="home-text">
         <h4>Big sale up to 20% off</h4>
@@ -262,11 +382,24 @@
       </div>
     </section>
 
-    <div class="right">
-      <a href="#">Facebook</a>
-      <a href="#">Upwork</a>
-      <a href="#">Fiverr</a>
+    <div class="right-nav">
+      <ul>
+        <!-- <li></li> -->
+        <a href="#">Facebook</a>
+        <a href="#">Upwork</a>
+        <a href="#">Fiverr</a>
+      </ul>
     </div>
+    </main>
+
+    <script>
+      const menuBtn = document.getElementById("menu-icon");
+      const menu = document.querySelector(".navlist");
+
+      menuBtn.addEventListener("click", () => {
+        menu.classList.toggle("open");
+      })
+    </script>
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
     
