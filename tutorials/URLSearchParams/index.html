@@ -3,10 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URLSearchParams in JS</title>
+    <!-- <title>URLSearchParams in JS</title> -->
+    <title>Braga</title>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Brawler:wght@400;700&family=Croissant+One&family=Ephesis&family=Gloock&family=Hurricane&family=Imbue:opsz,wght@10..100,100..900&family=Modak&family=Montez&family=Prosto+One&family=Rye&family=Shojumaru&family=Young+Serif&family=ZCOOL+XiaoWei&display=swap');
+
       * {
         margin: 0;
         padding: 0;
@@ -32,12 +35,15 @@
       }
 
       header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        padding: 18px 50px;
+        position: relative;
+        /* position: fixed; */
+        /* top: 0; */
+        /* left: 0; */
+        /* width: 92%; */
+        /* margin: auto; */
+        padding: 1.12rem 4vw;
         display: flex;
+        gap: 2rem;
         align-items: center;
         justify-content: space-between;
         z-index: 2;
@@ -49,28 +55,37 @@
       } */
 
       .navlist {
+        position: relative;
         /* opacity: 0; */
         display: flex;
-        z-index: -1;
+        /* z-index: -1; */
       }
 
       .logo {
         color: #fff;
         /* font-size: 32px; */
-        font-size: 2rem;
+        font-size: 2.2rem;
         font-weight: bold;
+        font-family: "Croissant One", serif;
         text-transform: capitalize;
       }
 
       .logo span {
-        color: tomato;
-        font-size: 70px;
+        padding-left: 0.04em;
+        /* color: tomato; */
+        color: transparent;
+        font-size: 4.4rem;
         line-height: 0;
+        -webkit-text-stroke: 1px #fff;
         /* vertical-align: baseline; */
       }
 
+      .navlist li {
+        margin: 0 1.4rem;
+      }
+
       .navlist a {
-        margin: 0 22px;
+        /* margin: 0 1.4rem; */
         padding: 4px 5px;
         color: #fff;
         /* font-size: 16px; */
@@ -87,29 +102,33 @@
         border-bottom: 2px solid #fff;
       }
 
-      #menu-icon {
+      #menu-btn {
         display: none;
         /* color: #fff; */
         color: transparent;
-        font-size: 36px;
+        font-size: 2.25rem;
         -webkit-text-stroke: 1px #fff;
         transition: color 400ms ease;
         cursor: pointer;
         /* z-index: 3; */
       }
 
-      #menu-icon:hover {
+      #menu-btn:hover {
         /* color: #fff; */
         color: #152f5d;
       }
 
+      #menu-btn.open:hover {
+        color: #ce1b41;
+      }
+
       .home-btn {
         display: inline-block;
-        padding: 10px 25px;
+        padding: 0.66em 1.52em;
         color: #fff;
         font-size: 1rem;
         text-transform: uppercase;
-        border-radius: 30px;
+        border-radius: 2em;
         border: 2px solid #ce1b41;
         background-color: #ce1b41;
         transition: border-color 400ms ease, 
@@ -128,15 +147,17 @@
       main {
         /* width: 90%; */
         width: 96%;
+        min-height: 100vh;
         /* margin: auto; */
         margin-left: auto;
+        padding: 6vw 0;
         display: flex;
       }
 
       .home {
         width: 100%;
         /* height: 100vh; */
-        min-height: 100vh;
+        /* min-height: 100vh; */
         display: grid;
         align-items: center;
         /* grid-template-columns: repeat(1, 1fr); */
@@ -144,24 +165,31 @@
 
       .home-text h4 {
         color: #fff;
-        font-size: 18px;
+        /* font-size: 18px; */
+        font-size: 1rem;
         font-weight: 500;
       }
 
       .home-text h1 {
-        margin-bottom: 10px;
+        /* margin-bottom: 10px; */
+        margin: 0.7rem 0;
         color: #fff;
-        font-size: 48px;
+        /* font-size: 48px; */
+        font-size: 3rem;
         font-weight: 700;
+        font-family: "Gloock", serif;
         text-transform: uppercase;
       }
 
       .home-text p {
-        max-width: 460px;
-        margin-bottom: 20px;
+        /* max-width: 460px; */
+        max-width: 28.75rem;
+        /* margin-bottom: 20px; */
+        margin-bottom: 1.4rem;
         color: #fff;
-        font-size: 16px;
-        line-height: 28px;
+        font-size: 1rem;
+        /* line-height: 28px; */
+        line-height: 1.6;
         text-transform: uppercase;
       }
 
@@ -169,45 +197,60 @@
         font-weight: bold;
       }
 
-      .home-inp {
+      .searchbar {
         position: relative;
         width: 100%;
-        max-width: 460px;
+        max-width: 28.75rem;
       }
 
-      .home-inp input:first-child {
+      .searchbar input {
+        font-family: initial;
+        border-radius: 2em;
+      }
+
+      #search-field {
         display: inline-block;
         width: 85%;
         /* padding: 16px 140px 16px 15px; */
-        padding: 16px 140px 16px 24px;
+        padding: 1em 6rem 1em 1.5em;
         /* font-size: 16px; */
         outline: none;
         border: 2px solid #ce1b41;
         /* border-radius: 30px; */
-        border-radius: 2em;
+        /* border-radius: 2em; */
+        box-shadow: 1px 1px 1px #0008, 
+                  -1px -1px 1px #fff4, 
+              inset 1px 1px 1px #000, 
+            inset -1px -1px 1px #fff4; 
+      }
+      #search-field:focus-visible {
+        box-shadow: 1px 1px 1px #0008, 
+                  -1px -1px 1px #fff4, 
+              inset 2px 2px 2px #000, 
+            inset -2px -2px 2px #fff4; 
       }
 
-      .home-inp input:last-child {
+      #search-btn {
         position: absolute;
         top: 0;
         right: 10px;
         /* display: inline-block; */
         height: 100%;
-        padding: 0 40px;
+        padding: 0 2.5rem;
         color: #fff;
-        font-size: 16px;
+        font-size: 1rem;
         /* text-transform: capitalize; */
         outline: none;
         /* border: none; */
         /* border-radius: 30px; */
-        border-radius: 2em;
+        /* border-radius: 2em; */
         border: 2px solid transparent;
         /* border: 2px solid #fff; */
         background-color: #152f5d;
         transition: all 400ms ease;
         cursor: pointer;
       }
-      .home-inp input:last-child:hover {
+      #search-btn:hover {
         color: #fff;
         border: 2px solid #fff;
         background-color: #ce1b41;
@@ -221,26 +264,36 @@
         /* right: 0; */
         /* padding: 0 5%; */
         /* height: 100%; */
-        padding: 0 16px;
+        /* padding: 0 16px; */
+        padding: 0 1rem;
         display: flex;
         /* text-align: center; */
         /* transform: rotate(90deg); */
-        border: 1px solid wheat;
+        /* border: 1px solid wheat; */
       }
 
       .right-nav ul {
         /* list-style: none; */
         margin: auto;
+        /* writing-mode: sideways-rl; */
+      }
+      
+      .right-nav ul li {
+        width: 2rem;
+        display: block;
+        /* margin: 16px 0; */
+        margin: 1rem 0;
       }
 
       .right-nav a {
-        display: block;
-        margin: 16px 0;
-        padding: 4px 8px;
+        display: inline-block;
+        /* margin: 16px 0; */
+        padding: 0.25em 0.5em;
         color: #fff;
-        font-size: 16px;
+        /* font-size: 16px; */
+        font-size: 1rem;
         font-weight: 500;
-        text-transform: capitalize;
+        /* text-transform: capitalize; */
         writing-mode: sideways-rl;
         transition: color 400ms ease;
       }
@@ -249,15 +302,15 @@
         color: #ce1b41;
       }
 
-      @media (max-width: 995px) {
+      /* @media (max-width: 995px) {
         header {
           padding: 18px 20px;
           transition: 300ms;
         }
-      }
+      } */
 
-      @media (max-width: 925px) {
-        #menu-icon {
+      @media (max-width: 58rem) {
+        #menu-btn {
           display: block;
         }
 
@@ -268,12 +321,14 @@
           top: 0;
           right: 0;
           left: 0;
-          padding: 20px 0 2rem;
+          /* padding: 20px 0 2rem; */
+          padding: 1.24rem 0 2rem;
           flex-direction: column;
           text-align: center;
           background-color: #152f5d;
           transform: translateY(-100%);
           transition: all 400ms ease;
+          z-index: -1;
         }
         .navlist::before {
           position: absolute;
@@ -293,24 +348,51 @@
         }
 
         .navlist li {
-          margin: 8px 0;
+          /* margin: 8px 0; */
+          margin: 0.5rem 0;
         }
 
         .navlist a {
           /* display: block; */
           display: inline-block;
-          margin: 8px;
-          padding: 4px;
+          /* margin: 8px; */
+          margin: 0.5rem;
+          /* padding: 4px; */
+          padding: 0.25rem;
         }
       }
 
-      @media (max-width: 825px) {
+      @media (max-aspect-ratio: 1.57/1) {
         .home-btn {
           border: 2px solid #152f5d;
           background-color: #152f5d;
         }
       }
 
+      @media (max-width: 39.5rem) {
+        .home-btn {
+          border: 2px solid #152f5d;
+          background-color: #152f5d;
+        }
+      }
+
+      @media (max-width: 25rem) {
+        .searchbar {
+          text-align: center;
+        }
+        #search-field {
+          width: 100%;
+          padding: 1em 1.5em;
+        }
+        #search-btn {
+          position: initial;
+          display: inline-block;
+          margin-top: 0.5rem;
+          padding: 0.6rem 2.5rem;
+        }
+      }
+
+      /* 
       @media (max-width: 685px) {
         .home-text h4 {
           font-size: 16px;
@@ -326,7 +408,7 @@
           font-size: 14px;
           transition: 300ms;
         }
-      }
+      } */
 
       /* @media (max-width: 580px) { */
         /* .right-nav { */
@@ -336,12 +418,12 @@
         /* } */
       /* } */
 
-      @media (max-width: 425px) {
+      /* @media (max-width: 425px) {
         .home-text h1 {
           font-size: 35px;
           transition: 300ms;
         }
-      }
+      } */
     </style>
   </head>
   <body>
@@ -352,7 +434,7 @@
         braga<span>.</span>
       </a>
 
-      <i id="menu-icon" class="fa fa-th-large"></i>
+      <i id="menu-btn" class="fa fa-th-large"></i>
 
       <ul class="navlist">
         <li><a href="#">home</a></li>
@@ -368,35 +450,41 @@
     </header>
 
     <main>
-    <section class="home">
-      <div class="home-text">
-        <h4>Big sale up to 20% off</h4>
-        <h1>This Black Nike <br> Black</h1>
-        <p>An Exclusive selection this season's trends <span>exclusively online</span></p>
-        <div class="home-inp">
-          <form>
-            <input type="search" name="search" id="search" placeholder="Search for products" required>
-            <input type="submit" value="Search">
-          </form>
+      <section class="home">
+        <div class="home-text">
+          <h4>Big sale up to 20% off</h4>
+          <h1>This Black Nike <br> Black</h1>
+          <p>An Exclusive selection this season's trends <span>exclusively online</span></p>
+          <div class="searchbar">
+            <form>
+              <input type="search" name="search" id="search-field" placeholder="Search for products" required>
+              <input type="submit" value="Search" id="search-btn">
+            </form>
+          </div>
         </div>
+      </section>
+      
+      <div class="right-nav">
+        <ul>
+          <li>
+            <a href="#">Facebook</a>
+          </li>
+          <li>
+            <a href="#">Upwork</a>
+          </li>
+          <li>
+            <a href="#">Fiverr</a>
+          </li>
+        </ul>
       </div>
-    </section>
-
-    <div class="right-nav">
-      <ul>
-        <!-- <li></li> -->
-        <a href="#">Facebook</a>
-        <a href="#">Upwork</a>
-        <a href="#">Fiverr</a>
-      </ul>
-    </div>
     </main>
 
     <script>
-      const menuBtn = document.getElementById("menu-icon");
+      const menuBtn = document.getElementById("menu-btn");
       const menu = document.querySelector(".navlist");
 
       menuBtn.addEventListener("click", () => {
+        menuBtn.classList.toggle("open");
         menu.classList.toggle("open");
       })
     </script>
