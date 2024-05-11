@@ -14,6 +14,8 @@
   --text-dark: #1f2937;
   --text-light: #6b7280;
   --extra-light: #efefef;
+  /* --max-width: 1200px; */
+  --max-width: 75rem;
 }
 * {
   margin: 0;
@@ -21,11 +23,25 @@
   box-sizing: border-box;
 }
 body {
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  /* align-items: center; */
+  /* justify-content: center; */
   font-family: "Roboto", sans-serif;
 }
 .container {
   display: flex;
-  min-height: 100vh;
+  width: 100%;
+  max-width: var(--max-width);
+  /* min-height: 100vh; */
+  /* min-height: 700px; */
+  min-height: 44rem;
+  margin: auto;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px #0005;
+  overflow: hidden;
 }
 .container-left {
   flex: 1;
@@ -46,12 +62,15 @@ body {
 }
 .container-left img {
   position: absolute;
-  bottom: 50px;
-  width: 100px;
+  /* bottom: 50px; */
+  bottom: 3rem;
+  /* width: 100px; */
+  width: 6.25rem;
 }
 .container-right {
   flex: 1;
-  padding: 20px;
+  /* padding: 20px; */
+  padding: 1.3rem;
   display: flex;
   flex-direction: column;
 }
@@ -64,7 +83,8 @@ body {
 }
 .social-logins {
   display: grid;
-  gap: 20px;
+  /* gap: 20px; */
+  gap: 1.2rem;
 }
 .social-logins .login {
   display: flex;
@@ -75,7 +95,8 @@ body {
   cursor: pointer;
 }
 .login-logo {
-  width: 50px;
+  /* width: 50px; */
+  width: 3rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,6 +105,120 @@ body {
 }
 .apple-login .login-logo {
   background-color: #000000;
+}
+.google-login .login-logo {
+  background-color: #4384f7;
+}
+.facebook-login .login-logo {
+  background-color: #3b5799;
+}
+.social-logins span {
+  /* padding: 10px 50px; */
+  padding: 0.625em 3.125em;
+  /* font-size: 16px; */
+  font-size: 1rem;
+  font-weight: 500;
+}
+.divider {
+  position: relative;
+  color: var(--text-light);
+  text-align: center;
+}
+.divider::after {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  content: "";
+  height: 1px;
+  width: 100%;
+  background-color: var(--text-light);
+  transform: translateY(-50%);
+  z-index: -1;
+}
+.divider span {
+  padding: 10px;
+  font-size: 1.5rem;
+  font-weight: 300;
+  background-color: #ffffff;
+}
+.signup-form {
+  width: 100%;
+  /* max-width: 350px; */
+  max-width: 22rem;
+  margin: auto;
+  display: grid;
+  gap: 1.5rem;
+  color: var(--text-dark);
+}
+.signup-form h1 {
+  font-weight: 300;
+  text-align: center;
+}
+.form-group {
+  display: grid;
+  gap: 0.5rem;
+}
+.signup-form label {
+  font-size: 0.8rem;
+}
+.signup-form input {
+  display: block;
+  padding: 1.5rem 1rem;
+  font-size: 1rem;
+  outline: none;
+  border: 1px solid var(--text-light);
+  border-radius: 5px;
+  background: transparent;
+}
+.signup-form .submit-btn {
+  margin-top: 2rem;
+  padding: 1rem;
+  font-size: 1rem;
+  color: var(--extra-light);
+  border: none;
+  border-radius: 5px;
+  background-color: var(--primary-color);
+  transition: 0.3s;
+  cursor: pointer;
+}
+.signup-form .submit-btn:hover {
+  background-color: var(--primary-color-dark);
+}
+@media screen and (width < 47rem) {
+  .container-left {
+    display: none;
+  }
+}
+#test {
+  position: relative;
+  margin: 3rem auto;
+  padding: 10px 30px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: initial;
+  text-transform: capitalize;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  background: linear-gradient(#cb3741 40%, 
+                    #630c12, #d4111e 80%);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.8), 
+        inset 0 0 10px 0 rgba(0, 0, 0, 0.7);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+  cursor: pointer;
+}
+#test::before {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  content: "";
+  width: 80%;
+  height: 50%;
+  border-radius: inherit;
+  background: linear-gradient(to top, 
+  transparent, rgba(255, 255, 255, 0.4));
 }
   </style>
   </head>
@@ -137,6 +272,8 @@ body {
         </div>
       </div>
     </div>
+
+    <button id="test">click me</button>
 
     <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
     
