@@ -3,279 +3,142 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URLSearchParams in JS</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
-:root {
-  --primary-color: #e52c1a;
-  --primary-color-dark: #d02819;
-  --text-dark: #1f2937;
-  --text-light: #6b7280;
-  --extra-light: #efefef;
-  /* --max-width: 1200px; */
-  --max-width: 75rem;
-}
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body {
-  min-height: 100vh;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  /* align-items: center; */
-  /* justify-content: center; */
-  font-family: "Roboto", sans-serif;
-}
-.container {
-  display: flex;
-  width: 100%;
-  max-width: var(--max-width);
-  /* min-height: 100vh; */
-  /* min-height: 700px; */
-  min-height: 44rem;
-  margin: auto;
-  border-radius: 10px;
-  box-shadow: 5px 5px 5px #0005;
-  overflow: hidden;
-}
-.container-left {
-  flex: 1;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: url("./assets/bg.jpg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
-.container-left .title {
-  color: var(--extra-light);
-  font-size: 3.5rem;
-  font-weight: 300;
-  text-align: center;
-}
-.container-left img {
-  position: absolute;
-  /* bottom: 50px; */
-  bottom: 3rem;
-  /* width: 100px; */
-  width: 6.25rem;
-}
-.container-right {
-  flex: 1;
-  /* padding: 20px; */
-  padding: 1.3rem;
-  display: flex;
-  flex-direction: column;
-}
-.content-top,
-.content-bottom {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.social-logins {
-  display: grid;
-  /* gap: 20px; */
-  gap: 1.2rem;
-}
-.social-logins .login {
-  display: flex;
-  color: var(--text-dark);
-  border-radius: 5px;
-  background-color: var(--extra-light);
-  overflow: hidden;
-  cursor: pointer;
-}
-.login-logo {
-  /* width: 50px; */
-  width: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--extra-light);
-  font-size: 1.5rem;
-}
-.apple-login .login-logo {
-  background-color: #000000;
-}
-.google-login .login-logo {
-  background-color: #4384f7;
-}
-.facebook-login .login-logo {
-  background-color: #3b5799;
-}
-.social-logins span {
-  /* padding: 10px 50px; */
-  padding: 0.625em 3.125em;
-  /* font-size: 16px; */
-  font-size: 1rem;
-  font-weight: 500;
-}
-.divider {
-  position: relative;
-  color: var(--text-light);
-  text-align: center;
-}
-.divider::after {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  content: "";
-  height: 1px;
-  width: 100%;
-  background-color: var(--text-light);
-  transform: translateY(-50%);
-  z-index: -1;
-}
-.divider span {
-  padding: 10px;
-  font-size: 1.5rem;
-  font-weight: 300;
-  background-color: #ffffff;
-}
-.signup-form {
-  width: 100%;
-  /* max-width: 350px; */
-  max-width: 22rem;
-  margin: auto;
-  display: grid;
-  gap: 1.5rem;
-  color: var(--text-dark);
-}
-.signup-form h1 {
-  font-weight: 300;
-  text-align: center;
-}
-.form-group {
-  display: grid;
-  gap: 0.5rem;
-}
-.signup-form label {
-  font-size: 0.8rem;
-}
-.signup-form input {
-  display: block;
-  padding: 1.5rem 1rem;
-  font-size: 1rem;
-  outline: none;
-  border: 1px solid var(--text-light);
-  border-radius: 5px;
-  background: transparent;
-}
-.signup-form .submit-btn {
-  margin-top: 2rem;
-  padding: 1rem;
-  font-size: 1rem;
-  color: var(--extra-light);
-  border: none;
-  border-radius: 5px;
-  background-color: var(--primary-color);
-  transition: 0.3s;
-  cursor: pointer;
-}
-.signup-form .submit-btn:hover {
-  background-color: var(--primary-color-dark);
-}
-@media screen and (width < 47rem) {
-  .container-left {
-    display: none;
-  }
-}
-#test {
-  position: relative;
-  margin: 3rem auto;
-  padding: 10px 30px;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: bold;
-  font-family: initial;
-  text-transform: capitalize;
-  border-radius: 50px;
-  border: none;
-  outline: none;
-  background: linear-gradient(#cb3741 40%, 
-                    #630c12, #d4111e 80%);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.8), 
-        inset 0 0 10px 0 rgba(0, 0, 0, 0.7);
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
-  cursor: pointer;
-}
-#test::before {
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  content: "";
-  width: 80%;
-  height: 50%;
-  border-radius: inherit;
-  background: linear-gradient(to top, 
-  transparent, rgba(255, 255, 255, 0.4));
-}
-  </style>
+    <!-- <title>URLSearchParams in JS</title> -->
+    <title>Nike</title>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      :root {
+        --main-color: #333333;
+        --second-color: #1d1d1d;
+        --other-color: #8e8e8e;
+        --text-color: #ffffff;
+        --bg-color: #111111;
+
+        /* --h1-font: 6rem; */
+        --h1-font: min(6rem, calc(3rem + 6vw));
+        --p-font: 1.1rem;
+
+        /* --max-width: 1600px; */
+        --max-width: 100rem;
+      }
+
+      a {
+        display: inline-block;
+        text-decoration: none;
+      }
+
+      img {
+        width: 100%;
+      }
+
+      /* body > div {
+        color: var(--text-color);
+        background-color: var(--bg-color);
+      } */
+
+      body {
+        /* width: 100%; */
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        color: var(--text-color);
+        background-color: var(--bg-color);
+      }
+    </style>
   </head>
   <body>
-    <!-- <h1>Ted Sign Up Page</h1> -->
-    <div class="container">
-      <div class="container-left">
-        <p class="title">To Continue, <br/> sign in to TED</p>
-        <img src="assets/TED_logo.png" alt="TED logo" />
-      </div>
-      <div class="container-right">
-        <div class="content-top">
-          <div class="social-logins">
-            <div class="apple-login login">
-              <div class="login-logo">
-                <i class="ri-apple-fill"></i>
-              </div>
-              <span>Continue with Apple</span>
-            </div>
-            <div class="google-login login">
-              <div class="login-logo">
-                <i class="ri-google-fill"></i>
-              </div>
-              <span>Continue with Google</span>
-            </div>
-            <div class="facebook-login login">
-              <div class="login-logo">
-                <i class="ri-facebook-fill"></i>
-              </div>
-              <span>Continue with Facebook</span>
+    <div class="page">
+      
+      <div>
+
+        <header>
+          <div class="header">
+            <a href="#logo" class="logo">
+              <img src="./img/logo.png" alt="Nike Logo">
+            </a>
+            <ul class="navbar">
+              <li><a href="#">men</a></li>
+              <li><a href="#">women</a></li>
+              <li><a href="#">kids</a></li>
+              <li><a href="#">sale</a></li>
+              <li><a href="#">snkrs</a></li>
+            </ul>
+            <div class="nav-right">
+              <a href="#search"><i class="fa fa-search"></i></a>
+              <a href="#cart"><i class="fa fa-shopping-cart"></i></a>
+              <button id="menu-btn"><i class="fa fa-bars"></i></button>
             </div>
           </div>
-        </div>
-        <div class="divider">
-          <span>or</span>
-        </div>
-        <div class="content-bottom">
-          <div class="signup-form">
-            <h1>Enter your email</h1>
-            <form class="form-group">
-              <label for="email">Email address</label>
-              <input
-                type="email"
-                id="email"
-                placeholder="Email address"
-                autocomplete="off"
-              />
-              <button type="submit" class="submit-btn">Continue</button>
-            </form>
-          </div>
-        </div>
+        </header>
+
       </div>
+      
+      <main>
+
+        <section class="hero">
+
+          <ul class="thumbs">
+            <li class="thumb fade-right" style="--delay: 1">
+              <a href="#"><img src="./img/thumb-1.png" alt=""></a>
+            </li>
+            <li class="thumb fade-right" style="--delay: 2">
+              <a href="#"><img src="./img/thumb-2.png" alt=""></a>
+            </li>
+            <li class="thumb fade-right" style="--delay: 3">
+              <a href="#"><img src="./img/thumb-3.png" alt=""></a>
+            </li>
+          </ul>
+
+          <div class="hero-img">
+            <!-- <img src="./img/test1 (1).png" alt="" class="zoom-in"> -->
+            <!-- <img src="./img/test1 (2).png" alt="" class="zoom-in"> -->
+            <!-- <img src="./img/test1 (3).png" alt="" class="zoom-in"> -->
+            <img src="./img/hero-1.png" alt="" class="zoom-in">
+            <!-- <img src="./img/air-zoom-long-jump-elite-athletics-jumping-spikes-gvPvGl.webp" alt="" class="zoom-in"> -->
+          </div>
+
+          <div class="hero-text">
+            <h1 class="show-right">Nike Air Dunk-270</h1>
+            <p class="scale">
+              Nike's 1st Lifestyle Air Max returns with a vibrant color gradient that's sure to turn heads.
+            </p>
+            <h5 class="zoom-left">$240.00</h5>
+            <div class="hero-btn">
+              <a href="#" class="btn fade-up" style="--delay: 1">add to bag</a>
+              <a href="#" class="btn-alt fade-up" style="--delay: 2">view details</a>
+            </div>
+          </div>
+
+        </section>
+
+      </main>
+      
+      <!-- <ul class="thumbs">
+        <li class="thumb fade-right" style="--delay: 1">
+          <a href="#"><img src="./img/thumb-1.png" alt=""></a>
+        </li>
+        <li class="thumb fade-right" style="--delay: 2">
+          <a href="#"><img src="./img/thumb-2.png" alt=""></a>
+        </li>
+        <li class="thumb fade-right" style="--delay: 3">
+          <a href="#"><img src="./img/thumb-3.png" alt=""></a>
+        </li>
+      </ul> -->
+      
+      <a href="#top" class="scroll">
+        <i class="fa fa-home"></i>
+      </a>
+        
     </div>
-
-    <button id="test">click me</button>
-
-    <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+  
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
     
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
