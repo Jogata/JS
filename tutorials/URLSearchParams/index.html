@@ -67,6 +67,9 @@ input {
   border: none;
   outline: none;
 }
+.icon-tabler-search {
+  cursor: pointer;
+}
 .statistics-container {
   width: 100%;
   margin: 0 auto;
@@ -87,6 +90,48 @@ input {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+.statistics p,
+.info p {
+  margin-bottom: 1.5rem;
+}
+.statistics:first-child {
+  background: #e4e7f6;
+}
+.statistics:first-child:hover {
+  box-shadow: 0 0.5rem 1rem #e5e9ff;
+}
+.statistics:nth-child(2) {
+  background: #f6e4f5;
+}
+.statistics:nth-child(2):hover {
+  box-shadow: 0 0.5rem 1rem #ffe3fe;
+}
+.statistics:nth-child(3) {
+  background: #f9e5e5;
+}
+.statistics:nth-child(3):hover {
+  box-shadow: 0 0.5rem 1rem #ffdcdc;
+}
+button {
+  width: max-content;
+  padding: 0.25rem 0.5rem;
+  display: flex;
+  align-items: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 2rem;
+  border: 1.5px solid #cecece92;
+  background: transparent;
+  transition: 0.5s;
+  cursor: pointer;
+}
+button:hover {
+  background: #fff;
+}
+a {
+  font-size: 0.8rem;
+  font-weight: 700;
 }
     </style>
     </head>
@@ -137,6 +182,92 @@ input {
       </section>
     </div>
   </main>
+  <script>
+    // Search with keyword
+const STATISTICS = [...document.querySelectorAll('.statistics')];
+
+const INPUT_CONTAINER = document.querySelector('input');
+function searchKeyword () {
+  STATISTICS.forEach(s => {
+    s.style.display = "none";
+  });
+
+  STATISTICS.filter(n => n.querySelector('h2').textContent.toLowerCase().includes(INPUT_CONTAINER.value.toLowerCase())).forEach(stat => stat.style.display = "flex");
+}
+
+INPUT_CONTAINER.addEventListener("keydown", (e) => {
+  if (e.key === "Backspace") {
+    if (e.target.value.length === 1) {
+      STATISTICS.forEach(stat => {
+        stat.style.display = "flex";
+      });
+    }
+  };
+
+  if (e.key === "Enter") {
+    e.preventDefault();
+    searchKeyword();
+  }
+});
+
+// Click the search icon
+const SEARCH_ICON = document.querySelector('.icon-tabler-search');
+
+SEARCH_ICON.addEventListener("click", () => {
+  INPUT_CONTAINER.value !== "" ? searchKeyword() : "";
+});
+  </script>
+  <script>
+  // 04. Circle Area
+
+  function calcCirclearea(input) {
+    let area = 0;
+
+    if (typeof input == "number") {
+      const r = Number(input);
+      area = Math.PI * r * r;
+      console.log(area.toFixed(2));
+    } else {
+      console.log(`We can not calculate the circle area, because we receive a ${typeof input}.`);
+    }
+  }
+
+  // calcCirclearea(5);
+  // calcCirclearea('name');
+
+  // 10. Aggregate Elements
+
+  function agregate(arr) {
+    const sum = arr.reduce((num, sum) => sum + num);
+    console.log(sum);
+    // console.log(arr);
+
+    let invers = 0;
+    // arr.reduce((num, sum) => {
+      // console.log(num);
+      // num = 1 / num;
+      // console.log(num);
+      // return sum + num;
+    // });
+
+    for (const num of arr) {
+      // console.log(num);
+      invers = invers + 1/num;
+    }
+
+    console.log(invers);
+
+    // console.log(arr);
+
+    const concat = arr.reduce((str, acc) => str.toString() + acc);
+
+    console.log(concat);
+
+  }
+
+  // agregate([1, 2, 3]);
+  // agregate([2, 4, 8, 16]);
+  </script>
 
   <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
     
