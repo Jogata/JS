@@ -792,6 +792,136 @@
       </a>
         
     </div>
+
+    <script>
+      const products = [
+        {
+          src: "./img/hero-1.png"
+        }, 
+        {
+          src: "./img/hero-2.png"
+        }, 
+        {
+          src: "./img/hero-3.png"
+        }
+      ]
+
+      const heroImage = document.querySelector(".hero-img img");
+
+      const thumbs = document.querySelectorAll(".thumb");
+
+      thumbs.forEach((thumb, index) => {
+        thumb.addEventListener("click", () => {
+          // console.log(thumb);
+          changeImage(products[index].src);
+        })
+      })
+
+      thumbs[0].addEventListener("click", () => {
+        heroImage.classList.remove("scaled")
+      });
+
+      thumbs[1].addEventListener("click", () => {
+        heroImage.classList.remove("scaled");
+      });
+
+      thumbs[2].addEventListener("click", () => {
+        heroImage.classList.add("scaled");
+      });
+
+      function changeImage(url) {
+        heroImage.src = url;
+      }
+
+      const menuBtn = document.getElementById("menu-btn");
+      const nav = document.querySelector(".navbar");
+
+      menuBtn.addEventListener("click", () => {
+        const icon = menuBtn.querySelector("i");
+        // console.log(icon);
+        icon.classList.toggle("fa-bars");
+        icon.classList.toggle("fa-times");
+        nav.classList.toggle("active");
+      })
+    </script>
+    <script>
+      // 02. Construction Crew
+    
+      const worker = {
+        weight: 9,
+        experience: 9,
+        levelOfHydrated: 9,
+        dizziness: true
+      }
+    
+      function crew(worker) {
+        if (worker.dizziness) {
+          worker.levelOfHydrated += worker.weight * worker.experience * 0.1;
+          worker.dizziness = false;
+        }
+    
+        // console.log(worker);
+        return worker;
+    
+      }
+    
+      // crew({ weight: 95, experience: 3, levelOfHydrated: 0, dizziness: false });
+      // crew({ weight: 80, experience: 1, levelOfHydrated: 0, dizziness: true });
+      // crew({ weight: 120, experience: 20, levelOfHydrated: 200, dizziness: true });
+    
+      // 08. Rectangle
+    
+      function createRect(width, height, color) {
+        const rectangle = {
+          width, 
+          height, 
+          color: color.replace(color[0], color[0].toUpperCase()),
+          calcArea: function() {
+            return width * height;
+          }
+        }
+    
+        return rectangle;
+    
+      }
+    
+      // let rect = createRect(4, 5, 'red');
+      // console.log(rect.width);
+      // console.log(rect.height);
+      // console.log(rect.color);
+      // console.log(rect.calcArea());
+    </script>
+    
+    <script>
+    // 04. Odd And Even Sum
+    
+    function printOddEvenSums(input) {
+    const inputAsString = String(input);
+    
+    let odd = 0;
+    let even = 0;
+    
+    for (let index = 0; index < inputAsString.length; index++) {
+      const num = Number(inputAsString[index]);
+    
+      if (num % 2 == 0) {
+        even += num;
+      } else {
+        odd += num;
+      }
+    
+    }
+    
+    console.log(`Odd sum = ${odd}, Even sum = ${even}`);
+    
+    }
+    
+    // printOddEvenSums(0000);
+    // printOddEvenSums(10345);
+    // printOddEvenSums(222555);
+    // printOddEvenSums(1000435);
+    // printOddEvenSums(3495892137259234);
+    </script>    
   
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
     
