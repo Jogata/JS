@@ -105,6 +105,25 @@ span {
 .download-num {
   font-size: 1.2rem;
 }
+.downloads-container + p {
+  margin-top: 0.5rem;
+}
+button {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.8rem;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+  background: #1b245a;
+  box-shadow: 0 0.5rem 1rem #1b245a5e;
+  transition: 0.5s;
+  cursor: pointer;
+}
+button:hover {
+  background: #1b245acd;
+  box-shadow: none;
+}
 </style>
   </head>
   <body>
@@ -136,6 +155,120 @@ span {
   </section>
   <section class="subscribed">
   </section>
+  <script>
+    // Select the download number
+const DOWNLOAD_NUMS = [...document.querySelectorAll(".download")];
+const PLAN = document.querySelector('h2');
+const PRICE = document.querySelector('span');
+let selectedNum = "10";
+
+DOWNLOAD_NUMS.forEach((d) => {
+  d.addEventListener("click", (e) => {
+    DOWNLOAD_NUMS.forEach((num) => {
+      num.classList.remove("selected");
+    });
+
+    d.classList.add("selected");
+
+    selectedNum = d.querySelector('.download-num').textContent;
+
+    // Update the plan (icon container) and price
+    switch(selectedNum) {
+      case "10":
+        PLAN.textContent = "BASIC";
+        PRICE.textContent = "$25";
+        break;
+      case "25":
+        PLAN.textContent = "BRONZE";
+        PRICE.textContent = "$30";
+        break;
+      case "50":
+        PLAN.textContent = "SILVER";
+        PRICE.textContent = "$40";
+        break;
+      case "100":
+        PLAN.textContent = "GOLD";
+        PRICE.textContent = "$50";
+        break;
+      default:
+        PLAN.textContent = "BASIC";
+        PRICE.textContent = "$25";
+    }
+  });
+});
+
+// Click subscribe
+const SUBSCRIBE_BTN = document.querySelector('button');
+const SUBSCRIPTION_CONTAINER = document.querySelector('.subscription-container');
+const SUBSCRIBED_SECTION = document.querySelector('.subscribed');
+
+SUBSCRIBE_BTN.addEventListener("click", () => {
+  SUBSCRIPTION_CONTAINER.style.display = "none";
+
+  SUBSCRIBED_SECTION.innerHTML = `
+  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+    <path d="M18 6l-12 12" />
+    <path d="M6 6l12 12" />
+  </svg>
+  <p>You have successfully subscribed to the <span>${PLAN.textContent}</span> plan!</p>
+  <p>You will get <span>${selectedNum}</span> downloads per month.</p>
+  `;
+
+  SUBSCRIBED_SECTION.style.display = "flex";
+
+  // Close the message - go back to the main section
+  const CLOSE_BTN = document.querySelector('.icon-tabler-x');
+
+  CLOSE_BTN.addEventListener("click", () => {
+    SUBSCRIBED_SECTION.style.display = "none";
+    SUBSCRIPTION_CONTAINER.style.display = "flex";
+  })
+})
+  </script>
+
+  <script>
+    // 3. Post Office
+
+function findWordsBypattern(params) {
+// console.log(params);
+const parts = params[0].split("|");
+// console.log(parts[0]);
+// console.log(parts[1]);
+// console.log(parts[2]);
+
+const capsPattern = /([#$%*&])[A-Z]+\1/;
+
+const capsMatch = parts[0].match(capsPattern);
+const caps = capsMatch[0];
+// console.log(caps);
+
+for (let index = 1; index < caps.length - 1; index++) {
+  const capLetter = caps[index];
+  // console.log(capLetter);
+  const ascii = capLetter.charCodeAt(0);
+  // console.log(ascii);
+  // const lengthPatternTemplate = `(${ascii}):[0-9]+`;
+  const lengthPatternTemplate = `(?<=${ascii}:)[0-9][0-9]+`;
+  // console.log(lengthPatternTemplate);
+  const lengthPattern = new RegExp(lengthPatternTemplate);
+  // console.log(lengthPattern);
+  const lengthMatch = parts[1].match(lengthPattern);
+  // console.log(lengthMatch);
+  const length = Number(lengthMatch[0]);
+  // console.log(length);
+  const wordPatternTemplate = `(?<= |^)${capLetter}[^|]{${length}}(?= |$)`;
+  // console.log(wordPatternTemplate);
+  const wordPattern = new RegExp(wordPatternTemplate);
+  const wordMatch = parts[2].match(wordPattern);
+  console.log(wordMatch[0]);
+}
+
+}
+
+// findWordsBypattern(["sdsGGasAOTPWEEEdas$AOTP$|a65:1.2s65:03d79:01ds 84:02! -80:07++ABs90:1.1|adsaArmyd Gara So La Arm Armyw21 Argo O daOfa Or Ti Sar saTheww The Parahaos"]);
+// findWordsBypattern(['Urgent"Message.TO$#POAML#|readData79:05:79:0!2reme80:03--23:11{79:05}tak{65:11ar}!77:!23--)77:05ACCSS76:05ad|Remedy Por Ostream :Istream Post sOffices Office Of Ankh-Morpork MR.LIPWIG Mister Lipwig']);
+  </script>
 
   <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
     
