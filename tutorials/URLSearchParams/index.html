@@ -439,11 +439,14 @@
       /* } */
 
       .right-side .header a {
-        margin: 0 5px;
-        padding: 5px 10px;
+        /* margin: 0 5px; */
+        margin: 0 0.3rem;
+        /* padding: 5px 10px; */
+        padding: 0.35em 0.9em;
         color: #a7a7a7;
         /* font-size: 10px; */
-        font-size: 12px;
+        /* font-size: 12px; */
+        font-size: 0.75rem;
         font-weight: 500;
         text-transform: uppercase;
         text-decoration: none;
@@ -499,9 +502,12 @@
 
       .right-side .slider-container {
         position: relative;
-        width: 100px;
-        height: 100px;
-        margin-bottom: 48px;
+        /* width: 100px; */
+        width: 6.25rem;
+        height: 6.25rem;
+        /* height: 100px; */
+        /* margin-bottom: 48px; */
+        margin-bottom: 3rem;
         border-radius: 20px;
         outline: 1px solid #a7a7a7;
         outline-offset: 2px;
@@ -513,8 +519,10 @@
       }
 
       .right-side .slider {
-        width: 100px;
-        height: 100px;
+        /* width: 100px; */
+        width: 6.25rem;
+        height: 6.25rem;
+        /* height: 100px; */
         /* margin-top: 45px; */
         /* margin-bottom: 48px; */
         display: flex;
@@ -601,7 +609,8 @@
         /* margin: auto; */
         margin: 0 auto;
         /* padding-bottom: 15px; */
-        padding-bottom: 32px;
+        /* padding-bottom: 32px; */
+        padding-bottom: 2rem;
         display: flex;
         align-items: flex-end;
         justify-content: flex-end;
@@ -623,9 +632,11 @@
 
       .right-side footer p span {
         /* margin: 0 2px; */
-        margin: 0 6px;
+        /* margin: 0 6px; */
+        margin: 0 0.32rem;
         /* font-size: 8px; */
-        font-size: 16px;
+        /* font-size: 16px; */
+        font-size: 1rem;
       }
 
       .add-btn {
@@ -634,7 +645,8 @@
         /* bottom: 4%; */
         right: 0;
         bottom: 0;
-        width: 250px;
+        /* width: 250px; */
+        width: 15.625rem;
         text-align: center;
         transform: translateX(45%);
       }
@@ -642,7 +654,8 @@
       .add-btn button {
         padding: 0.6em 1em;
         color: #fff;
-        font-size: 16px;
+        /* font-size: 16px; */
+        font-size: 1rem;
         font-weight: bold;
         font-family: Georgia, serif;
         border: 2px solid #fff;
@@ -650,7 +663,8 @@
         background-color: #1e1e1e;
         /* transform: translate(42%, -24%); */
         /* transform: translateX(35%); */
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: 300ms;
         cursor: pointer;
       }
 
@@ -715,12 +729,13 @@
       .header .menu-btn i {
         color: #a7a7a7;
         color: transparent;
-        font-size: 18px;
+        /* font-size: 18px; */
+        font-size: 1.12rem;
         -webkit-text-stroke: 1px #a7a7a7;
         transition: color 0.5s linear;
       }
       .header .menu-btn:hover i {
-        color: var(--bg-color);
+        /* color: var(--bg-color); */
         color: #fff;
       }
 
@@ -885,6 +900,123 @@ const data = [
 // subtitle.innerHTML = `<text x="0%" y="90%">Gen ${data[initialSlide].gen}</text>`;
 // price.textContent = data[initialSlide].price;
 // img.src = data[initialSlide].footer;
+
+const buttonNextSlide = document.getElementById("next");
+const buttonPrevSlide = document.getElementById("prev");
+
+buttonNextSlide.addEventListener("click", () => {
+  // console.log("left");
+  slider.scrollLeft -= 100;
+})
+buttonPrevSlide.addEventListener("click", () => {
+  // console.log("right");
+  slider.scrollLeft += 100;
+})
+
+const scrollwatch = document.querySelectorAll(".scroll-watch");
+
+scrollwatch.forEach((watch, index) => {
+  watch.addEventListener("click", () => {
+    // console.log(watch);
+    // console.log(index);
+    const activeSlide = document.querySelector(".scroll-watch.active");
+    activeSlide.classList.remove("active");
+    watch.classList.add("active");
+    // mainwatch.src = data[index].src;
+    number.textContent = index + 1;
+    subtitle.innerHTML = `<text x="0%" y="90%">Gen ${data[index].gen}</text>`;
+    // price.textContent = data[index].price;
+    // setTimeout(() => {
+      // img.style.transform = "translateY(120%)";
+    // }, 50);
+    leftImageBox.classList.add("hidden");
+    price.classList.add("visible", "hidden");
+    mainwatch.classList.add("visible");
+    setTimeout(() => {
+      leftImage.src = data[index].footer;
+      // img.style.transform = "translateY(0)";
+      leftImageBox.classList.remove("hidden");
+      price.textContent = data[index].price;
+      price.classList.remove("visible", "hidden");
+      mainwatch.src = data[index].src;
+      mainwatch.id = data[index].id;
+      mainwatch.classList.remove("visible");
+    }, 2000);
+  })
+})
+
+// const initialSlide = document.querySelector(".scroll-watch.active");
+const initialSlide = Math.floor(slider.scrollLeft / 100);
+// console.log(initialSlide);
+// scrollwatch[initialSlide].click();
+mainwatch.src = data[initialSlide].src;
+mainwatch.id = data[initialSlide].id;
+number.textContent = initialSlide + 1;
+subtitle.innerHTML = `<text x="0%" y="90%">Gen ${data[initialSlide].gen}</text>`;
+price.textContent = data[initialSlide].price;
+leftImage.src = data[initialSlide].footer;
+
+scrollwatch[0].addEventListener("scroll", () => {
+  mainwatch.src = data[0].src;
+  number.textContent = "1";
+  subtitle.innerHTML = `<text x="0%" y="90%">Gen 5</text>`;
+  price.textContent = data[0].price;
+  setTimeout(() => {
+    leftImageBox.style.transform = "translateY(120%)";
+  }, 50);
+  // setTimeout(() => {
+  //   img.style.bottom = "-230px";
+  // }, 1000);
+  setTimeout(() => {
+    leftImage.src = data[0].footer;
+    leftImageBox.style.transform = "translateY(0)";
+  }, 2000);
+  // setTimeout(() => {
+  //   img.style.transform = "translateY(0)";
+  // }, 2000);
+})
+scrollwatch[1].addEventListener("scroll", () => {
+  mainwatch.src = data[1].src;
+  number.textContent = "2";
+  subtitle.innerHTML = `<text x="0%" y="90%">Gen 6</text>`;
+  price.textContent = data[1].price;
+  // setTimeout(() => {
+    // img.style.bottom = "-100px";
+    img.style.transform = "translateY(120%)";
+  // }, 50);
+  // setTimeout(() => {
+  //   img.style.bottom = "-230px";
+  // }, 1000);
+  setTimeout(() => {
+    img.src = data[1].footer;
+    img.style.transform = "translateY(0)";
+  }, 2000);
+  // setTimeout(() => {
+  //   img.style.bottom = "0";
+  //   img.style.transform = "translateY(0)";
+  // }, 2000);
+})
+scrollwatch[2].addEventListener("scroll", () => {
+  mainwatch.src = data[2].src;
+  number.textContent = "3";
+  subtitle.innerHTML = `<text x="0%" y="90%">Gen 8</text>`;
+  price.textContent = data[2].price;
+  setTimeout(() => {
+    // img.style.bottom = "-100px";
+    img.style.transform = "translateY(120%)";
+  }, 50);
+  // setTimeout(() => {
+  //   img.style.bottom = "-230px";
+  // }, 1000);
+  setTimeout(() => {
+    img.src = data[2].footer;
+    img.style.transform = "translateY(0)";
+  }, 2000);
+  // setTimeout(() => {
+  //   img.style.bottom = "0";
+  //   img.style.transform = "translateY(0)";
+  // }, 2000);
+})
     </script>
 
     <svg class="svg">
