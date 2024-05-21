@@ -4,405 +4,142 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  color: #3b3b6f;
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #f1f1fe;
-}
-main {
-  position: relative;
-  width: 90%;
-  max-width: 300px;
-  margin: 5rem auto;
-  padding: 2.5rem 2rem;
-  border-radius: 2rem;
-  background-color: #fff;
-  box-shadow: 0 0.5rem 1rem #3b3b6f35;
-}
-.shadow {
-  position: absolute;
-  top: 10%;
-  right: -1rem;
-  width: 100%;
-  height: 85%;
-  border-radius: 1rem;
-  background-color: #f7f7fd;
-  z-index: -1;
-}
-.icon-tabler,
-.circle {
-  cursor: pointer;
-}
-.menu {
-  position: absolute;
-  right: 2rem;
-  top: 2.5rem;
-  color: #8684a9;
-}
-.icon-tabler-dots {
-  display: block;
-  margin-left: auto;
-}
-.menu-list {
-  padding: 0.5rem;
-  background-color: #fff;
-  border-radius: 0.25rem;
-  box-shadow: 0 0 0.5rem #8684a9;
-  /* display: flex; */
-  display: none;
-  gap: 0.8rem;
-  justify-content: center;
-  flex-direction: column;
-}
-.icon-tabler-plus {
-  position: absolute;
-  right: 2rem;
-  bottom: 2rem;
-  padding: 0.5rem;
-  color: #fff;
-  border-radius: 0.5rem;
-  background-color: #3b3b6f;
-}
-h1 {
-  margin-bottom: 0.5rem;
-  font-size: 1.8rem;
-}
-h2 {
-  margin-bottom: 0.5rem;
-  color: #8684a9;
-  font-size: 0.8rem;
-  letter-spacing: 0.5px;
-}
-p {
-  font-size: 0.8rem;
-}
-a, 
-p, 
-.completed li {
-  color: #8684a9;
-}
-.to-do {
-  margin: 1.5rem 0;
-}
-li {
-  list-style: none;
-  margin-bottom: 1rem;
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  font-size: 0.9rem;
-}
-textarea {
-  color: #3b3b6f;
-  font-size: 0.9rem;
-  font-family: inherit;
-  resize: none;
-}
-.menu-list li {
-  margin-bottom: 0;
-  font-size: 0.75rem;
-  cursor: pointer;
-}
-.menu-list li:hover {
-  color: #3b3b6f;
-}
-.circle {
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 50%;
-  border: 1px solid #3b3b6f;
-}
-.completed {
-  margin-bottom: 5rem;
-}
-.icon-tabler-check {
-  padding: 0.25rem;
-  border-radius: 50%;
-  border: 1px solid #8684a9;
-}
-.body {
-  height: 100vh;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Courier New", Courier, monospace;
-}
-.password-container {
-  width: 500px;
-  margin: 10px;
-  padding: 20px;
-  border-radius: 10px;
-  background-color: pink;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-.input-container {
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-radius: 10px;
-  border: solid 2px black;
-}
-.input {
-  font-size: 24px;
-  letter-spacing: 4px;
-  border: none;
-  outline: none;
-  background-color: transparent;
-}
-.input::placeholder {
-  letter-spacing: 0px;
-}
-.fa-copy {
-  opacity: 0.3;
-  cursor: pointer;
-}
-.fa-copy:hover {
-  opacity: 0.7;
-}
-.btn {
-  margin: 10px 0;
-  padding: 10px 20px;
-  color: white;
-  font-size: 20px;
-  border: none;
-  border-radius: 5px;
-  background: black;
-  cursor: pointer;
-}
-.btn:hover {
-  background-color: green;
-}
-.btn:active {
-  transform: scale(0.95);
-}
-.alert-container {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  width: 300px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  background-color: lightgreen;
-  transition: 0.4s;
-}
-.active.alert-container {
-  right: -300px;
-}
-</style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&display=swap");
+      :root {
+        --primary-color: #31b6bf;
+        --secondary-color: #e7e7f1;
+        --text-dark: #333333;
+        --text-light: #767268;
+        --extra-light: #f3f4f6;
+      }
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+    </style>
   </head>
   <body>
-  <!-- <h1>To-Do List</h1> -->
-  <main>
-    <div class="shadow"></div>
-    <div class="menu">
-      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-dots" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /><path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" /></svg>
-      <ul class="menu-list">
-        <li class="delete-all">Delete all</li>
-        <li class="delete-completed">Delete completed</li>
-      </ul>
+    <div class="profile-card">
+      <div class="more">
+        <i class="ri-more-2-fill"></i>
+      </div>
+      <img src="assets/user.jpg" alt="user" />
+      <h1 class="name">Brandon Watson</h1>
+      <p class="designation">UI/UX Mobile Designer</p>
+      <div class="profile-details">
+        <div class="col">
+          <p>Projects</p>
+          <h4>17</h4>
+        </div>
+        <div class="col">
+          <p>Following</p>
+          <h4>159</h4>
+        </div>
+        <div class="col">
+          <p>Followers</p>
+          <h4>205</h4>
+        </div>
+      </div>
+      <div class="about">
+        I'm Brandon, a web developer with a passion for creating beautiful and
+        user-friendly websites. I've worked on personal blogs to e-commerce
+        platforms.
+      </div>
+      <div class="social-icons">
+        <a href="#" class="icon twitter">
+          <i class="ri-twitter-fill"></i>
+        </a>
+        <a href="#" class="icon facebook">
+          <i class="ri-facebook-fill"></i>
+        </a>
+        <a href="#" class="icon google">
+          <i class="ri-google-fill"></i>
+        </a>
+        <a href="#" class="icon behance">
+          <i class="ri-behance-fill"></i>
+        </a>
+      </div>
+      <a href="#" class="view-profile">View Profile</a>
     </div>
-    <h1>Groceries</h1>
-    <p>Shared with <a href="#">1 person</a></p>
-    <ul class="to-do">
-      <li>
-        <div class="circle"></div>
-        <p>Eggs</p>
-      </li>
-      <li>
-        <div class="circle"></div>
-        <p>Tomatoes</p>
-      </li>
-      <li>
-        <div class="circle"></div>
-        <p>Avocado</p>
-      </li>
-    </ul>
-    <h2>COMPLETED (<span>0</span>)</h2>
-    <ul class="completed">
-    </ul>
-    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="55" height="45" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
-  </main>
-  <script>
-// Open menu
-const MENU_BUTTON = document.querySelector(".icon-tabler-dots");
-const MENU_LIST = document.querySelector(".menu-list");
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+    <script>
+      // 4. Santa's Secret Helper
 
-MENU_BUTTON.addEventListener("click", () => {
-  if (MENU_LIST.style.display === "flex") {
-    MENU_LIST.style.display = "none";
-  } else {
-    MENU_LIST.style.display = "flex";
-  }
-});
-
-// Delete all
-const DELETE_ALL = document.querySelector(".delete-all");
-const TO_DO = document.querySelector(".to-do");
-const COMPLETED = document.querySelector(".completed");
-const COMPLETED_COUNT = document.querySelector("h2 span");
-let count = 0;
-
-DELETE_ALL.addEventListener("click", () => {
-  if (TO_DO.innerHTML === "" && COMPLETED.innerHTML === "") {
-    return;
-  } else {
-    [...TO_DO.querySelectorAll("li")].forEach((todo) => {
-      // todo.style.display = "none";
-      todo.remove();
-    });
-
-    [...COMPLETED.querySelectorAll("li")].forEach((comp) => {
-      // comp.style.display = "none";
-      comp.remove();
-    });
-
-    count = 0;
-    COMPLETED_COUNT.textContent = count;
-    MENU_LIST.style.display = "none";
-  }
-});
-
-// Delete completed
-const DELETE_COMPLETED = document.querySelector(".delete-completed");
-
-DELETE_COMPLETED.addEventListener("click", () => {
-  // [...COMPLETED.querySelectorAll("li")].forEach((comp) => {
-    // comp.style.display = "none";
-    // comp.remove();
-  // });
-  COMPLETED.textContent = "";
-
-  count = 0;
-  COMPLETED_COUNT.textContent = count;
-  MENU_LIST.style.display = "none";
-});
-
-function clickCircles (e) {
-  const NEW_COMPLETED_ITEM = document.createElement("li");
-  NEW_COMPLETED_ITEM.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" width="28" height="28" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l5 5l10 -10" /></svg>
-  <p>${e.target.nextElementSibling.textContent}</p>`;
-
-  COMPLETED.appendChild(NEW_COMPLETED_ITEM);
-  count += 1;
-  COMPLETED_COUNT.textContent = count;
-
-  // e.target.parentElement.style.display = "none";
-  e.target.parentElement.remove();
-}
-
-// Add new item
-const ADD_NEW = document.querySelector('.icon-tabler-plus');
-
-ADD_NEW.addEventListener("click", () => {
-  const NEW_ITEM = document.createElement('li');
-
-  NEW_ITEM.innerHTML = `
-    <div class="circle"></div>
-    <textarea rows="1"></textarea>
-    <p></p>`;
-
-  TO_DO.appendChild(NEW_ITEM);
-  const TEXTAREA = NEW_ITEM.querySelector('textarea');
-  TEXTAREA.focus();
-
-  TEXTAREA.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      NEW_ITEM.querySelector('p').textContent = TEXTAREA.value;
-      NEW_ITEM.removeChild(TEXTAREA);
-    }
-  })
-
-  NEW_ITEM.querySelector('.circle').addEventListener("click", clickCircles);
-});
-
-// Add completed
-const CIRCLES = [...TO_DO.querySelectorAll(".circle")];
-
-CIRCLES.forEach((circle) => {
-  circle.addEventListener("click", clickCircles);
-});
-  </script>
-
-<!-- <h1>Random Password Generator</h1> -->
-<div class="body">
-  <div class="password-container">
-    <h2>Random Password Generator</h2>
-    <div class="input-container">
-      <input
-        type="text"
-        id="input"
-        class="input"
-        placeholder="Create Password"
-        readonly
-      />
-      <i class="fa fa-copy fa-2x"></i>
-    </div>
-    <button class="btn">Generate</button>
-  </div>
-  <div class="alert-container active">Password Copied</div>
-</div>
-<script>
-  const btnEl = document.querySelector(".btn");
-const inputEl = document.getElementById("input");
-const copyIconEl = document.querySelector(".fa-copy");
-const alertContainerEl = document.querySelector(".alert-container");
-
-btnEl.addEventListener("click", () => {
-createPassword();
-});
-
-copyIconEl.addEventListener("click", () => {
-copyPassword();
-if (inputEl.value) {
-alertContainerEl.classList.remove("active");
-setTimeout(() => {
-  alertContainerEl.classList.add("active");
-}, 2000);
-}
-});
-
-function createPassword() {
-const chars = "0123456789abcdefghijklmnopqrstuvwxtz!@#$%^&*()_+?:{}[]ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const passwordLength = 14;
-let password = "";
-for (let index = 0; index < passwordLength; index++) {
-const randomNum = Math.floor(Math.random() * chars.length);
-password += chars.substring(randomNum, randomNum + 1);
-}
-inputEl.value = password;
-alertContainerEl.innerText = password + " copied!";
-}
-
-function copyPassword() {
-inputEl.select();
-inputEl.setSelectionRange(0, 9999);
-navigator.clipboard.writeText(inputEl.value);
-}
-</script>
-
-  <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+      function solve(params) {
+        // console.log(params);
+        const key = Number(params[0]);
+        // console.log(key);
+        
+        let index = 1;
+        let input = params[index];
+        
+        while (input != "end") {
+          // console.log(input);
+          const encrLetters = input.split("");
+          // console.log(encrLetters);
+          let decrword = "";
+        
+          for (const letter of encrLetters) {
+            // console.log(letter);
+            let ascii = letter.charCodeAt(0);
+            // console.log(ascii);
+            ascii = ascii - key;
+            // console.log(ascii);
+            const decrLetter = String.fromCharCode(ascii);
+            // console.log(decrLetter);
+            decrword += decrLetter;
+          }
+          // console.log(decrword);
+          const pattern = /@(?<name>[A-Za-z]+)([^@\-!:>]*)!(?<behavior>[GN])!/;
+        
+          const match = decrword.match(pattern);
+          // console.log(match);
+        
+          if (match) {
+            const { name, behavior} = match.groups;
+        
+            if (behavior == "G") {
+              console.log(name);
+            }
+        
+          }
+        
+          index++;
+          input = params[index];
+          
+          // if (index > 100) {
+          //   console.log("infinity");
+          //   break;
+          // }
+        
+        }
+        
+      }
+      
+      // solve(
+      //   [
+      //     '3',
+      //     'CNdwhamigyenumje$J$',
+      //     'CEreelh-nmguuejnW$J$',
+      //     'CVwdq&gnmjkvng$Q$',
+      //     'end'
+      //   ]
+      // );
+      solve(
+      [
+        '3',
+        "N}eideidmk$'(mnyenmCNlpamnin$J$",
+        'ddddkkkkmvkvmCFrqqru-nvevek$J$nmgievnge',
+        'ppqmkkkmnolmnnCEhq/vkievk$Q$',
+        'yyegiivoguCYdohqwlqh/kguimhk$J$',
+        'end'
+      ]      
+      );
+    </script>
     
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
