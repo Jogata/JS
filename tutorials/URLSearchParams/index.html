@@ -4,283 +4,145 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&display=swap");
-
-      :root {
-        --primary-color: #31b6bf;
-        --secondary-color: #e7e7f1;
-        --text-dark: #333333;
-        --text-light: #767268;
-        --extra-light: #f3f4f6;
-      }
-
-      * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: "Open Sans", sans-serif;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--secondary-color);
-      }
-      
-      .profile-card {
-        position: relative;
-        max-width: 400px;
-        padding: 2rem;
-        text-align: center;
-        border-radius: 5px;
-        background-color: var(--extra-light);
-        box-shadow: 10px 10px 50px #9ca3af;
-      }
-      
-      .more {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        font-size: 2rem;
-        color: var(--text-light);
-        cursor: pointer;
-      }
-      
-      .profile-card img {
-        max-width: 100px;
-        border-radius: 100%;
-        padding: 1rem 0;
-      }
-      
-      .name {
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: var(--text-dark);
-      }
-      
-      .designation {
-        font-size: 0.8rem;
-        color: var(--text-light);
-      }
-      
-      .profile-details {
-        padding: 2rem 0;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      
-      .profile-details p {
-        font-size: 0.8rem;
-        color: var(--text-light);
-      }
-      
-      .profile-details h4 {
-        font-size: 1rem;
-        font-weight: 500;
-        color: var(--text-dark);
-      }
-      
-      .about {
-        font-size: 0.8rem;
-        color: var(--text-light);
-      }
-      
-      .social-icons {
-        padding: 2rem 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
-      }
-      
-      .icon {
-        height: 30px;
-        width: 30px;
-        text-decoration: none;
-        font-size: 1rem;
-        display: grid;
-        place-content: center;
-        color: var(--extra-light);
-        border-radius: 100%;
-        transition: 0.3s;
-        cursor: pointer;
-      }
-      
-      .twitter {
-        background-color: #40b1f7;
-      }
-      
-      .twitter:hover {
-        box-shadow: 0px 2px 5px #40b1f7;
-      }
-      
-      .facebook {
-        background-color: #3c5a9b;
-      }
-      
-      .facebook:hover {
-        box-shadow: 0px 2px 5px #3c5a9b;
-      }
-      
-      .google {
-        background-color: #ff775d;
-      }
-      
-      .google:hover {
-        box-shadow: 0px 2px 5px #ff775d;
-      }
-      
-      .behance {
-        background-color: #1669fd;
-      }
-      
-      .behance:hover {
-        box-shadow: 0px 2px 5px #1669fd;
-      }
-      
-      .view-profile {
-        text-decoration: none;
-        padding: 0.5rem 3rem;
-        font-size: 0.9rem;
-        color: var(--text-light);
-        border-radius: 8rem;
-        border: 1px solid var(--text-light);
-        font-weight: 500;
-        transition: 0.3s;
-      }
-      
-      .view-profile:hover {
-        color: var(--extra-light);
-        background-color: var(--primary-color);
-        border-color: var(--primary-color);
-        box-shadow: 0px 2px 10px #9ca3af;
-      }
-    </style>
+<style>
+*, 
+*::before, 
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, Helvetica, sans-serif;
+  background: 
+    linear-gradient(
+      to bottom right, 
+      #5d3f99, 
+      #140033
+    );
+}
+.invite-card {
+  width: 90%;
+  max-width: 400px;
+  padding: 3rem;
+  color: #fff;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: #140033;
+  filter: drop-shadow(0 0 3rem #601ad0);
+}
+img {
+  border-radius: 50%;
+  border: 5px solid #5d3f99af;
+}
+img + p {
+  margin: 1rem 0;
+  font-size: 0.7rem;
+}
+h2 {
+  text-align: center;
+}
+.stats {
+  margin: 1rem 0;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+  border-radius: 0.25rem;
+  background: #9387ff2d;
+}
+.dot {
+  width: 0.25rem;
+  height: 0.25rem;
+  border-radius: 50%;
+  background: #fff;
+}
+form {
+  width: 100%;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+}
+input[type="text"] {
+  display: block;
+  width: 100%;
+  margin: 0.25rem 0 1rem 0;
+  padding: 0.5rem;
+  outline: none;
+  border: none;
+  border-radius: 0.25rem;
+}
+.checkbox {
+  display: flex;
+  gap: 0.5rem;
+}
+.checkbox label {
+  margin-top: 0.25rem;
+}
+input[type="checkbox"] {
+  width: 1.8rem;
+  height: 1.8rem;
+  border: none;
+  border-radius: 0.25rem;
+}
+::placeholder {
+  color: #140033;
+}
+button {
+  width: 100%;
+  color: #fff;
+  margin: 1.5rem 0;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 0.25rem;
+  background: #6d12ff;
+  transition: 0.5s;
+  cursor: pointer;
+}
+button:hover {
+  filter: drop-shadow(0 0 1rem #6d12ff);
+}
+a {
+  color: #6d12ff;
+}
+a:last-of-type {
+  font-size: 0.7rem;
+}
+</style>
   </head>
   <body>
-    <div class="profile-card">
-      <div class="more">
-        <i class="ri-more-2-fill"></i>
-      </div>
-      <img src="./images/test/profile.jpg" alt="user" />
-      <h1 class="name">Brandon Watson</h1>
-      <p class="designation">UI/UX Mobile Designer</p>
-      <div class="profile-details">
-        <div class="col">
-          <p>Projects</p>
-          <h4>17</h4>
-        </div>
-        <div class="col">
-          <p>Following</p>
-          <h4>159</h4>
-        </div>
-        <div class="col">
-          <p>Followers</p>
-          <h4>205</h4>
-        </div>
-      </div>
-      <div class="about">
-        I'm Brandon, a web developer with a passion for creating beautiful and
-        user-friendly websites. I've worked on personal blogs to e-commerce
-        platforms.
-      </div>
-      <div class="social-icons">
-        <a href="#" class="icon twitter">
-          <i class="ri-twitter-fill"></i>
-        </a>
-        <a href="#" class="icon facebook">
-          <i class="ri-facebook-fill"></i>
-        </a>
-        <a href="#" class="icon google">
-          <i class="ri-google-fill"></i>
-        </a>
-        <a href="#" class="icon behance">
-          <i class="ri-behance-fill"></i>
-        </a>
-      </div>
-      <a href="#" class="view-profile">View Profile</a>
+  <!-- <h1>Social Invite</h1> -->
+  <section class="invite-card">
+    <img src="./images/test/profile.jpg" alt="profile of Renet" width="80" height="80">
+    <p>Renet K. invited you to join</p>
+    <h2>Code with Renet ⭐</h2>
+    <div class="stats">
+      301 Subscribers 
+      <div class="dot"></div>
+      26 Videos
     </div>
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
-    <script>
-      // 4. Santa's Secret Helper
-
-      function solve(params) {
-        // console.log(params);
-        const key = Number(params[0]);
-        // console.log(key);
-        
-        let index = 1;
-        let input = params[index];
-        
-        while (input != "end") {
-          // console.log(input);
-          const encrLetters = input.split("");
-          // console.log(encrLetters);
-          let decrword = "";
-        
-          for (const letter of encrLetters) {
-            // console.log(letter);
-            let ascii = letter.charCodeAt(0);
-            // console.log(ascii);
-            ascii = ascii - key;
-            // console.log(ascii);
-            const decrLetter = String.fromCharCode(ascii);
-            // console.log(decrLetter);
-            decrword += decrLetter;
-          }
-          // console.log(decrword);
-          const pattern = /@(?<name>[A-Za-z]+)([^@\-!:>]*)!(?<behavior>[GN])!/;
-        
-          const match = decrword.match(pattern);
-          // console.log(match);
-        
-          if (match) {
-            const { name, behavior} = match.groups;
-        
-            if (behavior == "G") {
-              console.log(name);
-            }
-        
-          }
-        
-          index++;
-          input = params[index];
-          
-          // if (index > 100) {
-          //   console.log("infinity");
-          //   break;
-          // }
-        
-        }
-        
-      }
-      
-      // solve(
-      //   [
-      //     '3',
-      //     'CNdwhamigyenumje$J$',
-      //     'CEreelh-nmguuejnW$J$',
-      //     'CVwdq&gnmjkvng$Q$',
-      //     'end'
-      //   ]
-      // );
-      solve(
-      [
-        '3',
-        "N}eideidmk$'(mnyenmCNlpamnin$J$",
-        'ddddkkkkmvkvmCFrqqru-nvevek$J$nmgievnge',
-        'ppqmkkkmnolmnnCEhq/vkievk$Q$',
-        'yyegiivoguCYdohqwlqh/kguimhk$J$',
-        'end'
-      ]      
-      );
-    </script>
+    <form>
+      <p>
+        <label for="username">Username</label>
+        <input type="text" name="username" id="usrename" placeholder="How do you like people to call you?" required>
+      </p>
+      <p class="checkbox">
+        <input type="checkbox" name="terms" id="terms">
+        <label for="terms">I have read and agree to the <a href="#">Terms of service</a> and <a href="#">Privacy policy</a>.</p>
+        </label>
+      <button type="submit">Continue</button>
+    </form>
+    <a href="#">Already have an account?</a>
+  </section>
+    <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
     
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
