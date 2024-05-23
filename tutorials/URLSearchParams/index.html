@@ -287,7 +287,8 @@ font-family: Georgia, serif;
         border-radius: 50%;
         /* border: 1px solid var(--primary-text-color); */
         border: 1px solid var(--accent-color);
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: background-color 300ms;
         cursor: pointer;
       }
       .play-btn:hover {
@@ -391,7 +392,7 @@ font-family: Georgia, serif;
         }
       }
 
-      @media screen and (min-width: 1000px) {
+      @media screen and (min-width: 62.5rem) {
         /* .main-img {
           position: absolute;
           top: 50%;
@@ -447,6 +448,87 @@ font-family: Georgia, serif;
           left: 10%;
           width: 100%;
           background-color: var(--secondary-color);
+        }
+
+        .main-link::before, 
+        .main-link::after {
+          position: absolute;
+          /* top: 0; */
+          /* top: 50%; */
+          top: -30%;
+          left: -25%;
+          /* right: 50%; */
+          /* transform: translateY(-50%); */
+          transform: translateX(-25%);
+          content: "";
+          /* width: 25rem; */
+          width: 150%;
+          /* height: 2rem; */
+          height: 160%;
+          background-color: var(--accent-color);
+          /* transition: all 0.4s; */
+          transition: transform 400ms;
+          z-index: -1;
+        }
+
+        /* .main-link::before {
+          clip-path: url("#mask");
+        } */
+
+        .main-link:hover::before {
+          /* right: -1rem; */
+          transform: translateX(0);
+        }
+
+        .main-link::after {
+          /* content: none; */
+          left: -100%;
+        }
+
+        .background-text {
+          position: absolute;
+          top: 10%;
+          left: 50%;
+          /* margin: 0; */
+          display: block;
+          color: var(--text-bg-color);
+          /* font-size: 13vw; */
+          font-size: min(10vw, 8rem);
+          line-height: 0.8;
+          text-shadow: 
+            -1px -1px 1px #000, 
+            1px 1px 1px #fff4;
+          opacity: 0.5;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        /* .background-text span {
+          display: block;
+        } */
+      }
+
+      /* 1400px */
+      @media (max-width: 80rem) {
+        /* body {
+          padding: 0;
+        } */
+
+        .page {
+          /* width: 100%; */
+          min-height: 100vh;
+          padding: 0;
+          border-radius: 0;
+        }
+      }
+      @media (min-width: 80rem) {
+        .page {
+          padding: 3rem;
+        }
+        
+        header {
+          min-height: auto;
+          border-radius: 16px;
         }
       }
     </style>
@@ -515,6 +597,54 @@ font-family: Georgia, serif;
           Tumbler
         </h1>
       </header>
+      <script>
+      const img = document.querySelector(".main-img img");
+      const toggleBtn = document.querySelector(".toggle");
+      const toggleText = document.querySelectorAll(".toggle-text");
+
+      // let bool = true;
+
+      let themes = {
+        dark: {
+          src: "./img/cup-dark.png", 
+          text: "Blvck", 
+          new: "light"
+        }, 
+        light: {
+          src: "./img/cup-light.png", 
+          text: "White", 
+          new: "dark"
+        }
+      }
+
+      let theme = "dark";
+
+      toggleBtn.addEventListener("click", () => {
+        document.body.classList.toggle("light-theme");
+        toggleBtn.firstElementChild.classList.toggle("fa-moon-o");
+        toggleBtn.firstElementChild.classList.toggle("fa-sun-o");
+
+        // if (bool) {
+        //   img.src = "./img/cup-light.png";
+        //   toggleText.forEach(text => {
+        //     text.textContent = "White";
+        //   })
+        //   bool = false;
+        // } else {
+        //   img.src = "./img/cup-dark.png";
+        //   toggleText.forEach(text => {
+        //     text.textContent = "Blvck";
+        //   })
+        //   bool = true;
+        // }
+
+        theme = themes[theme].new;
+        img.src = themes[theme].src;
+        toggleText.forEach(text => {
+          text.textContent = "White";
+        })
+      })
+    </script>
     </div>
 
     <svg class="svg">
