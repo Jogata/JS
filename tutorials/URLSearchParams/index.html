@@ -6,273 +6,139 @@
     <title>URLSearchParams in JS</title>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-<style>
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #2a4267;
-  background: #446392;
-  font-family: Arial, Helvetica, sans-serif;
-}
-main {
-  width: 90%;
-  max-width: 600px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-main section {
-  padding: 2rem 3rem;
-  border-radius: 1rem;
-  background: #fff;
-}
-p {
-  font-size: 0.7rem;
-  display: flex;
-  gap: 0.25rem;
-  align-items: center;
-}
-.dot {
-  width: 0.25rem;
-  height: 0.25rem;
-  display: inline-block;
-  border-radius: 50%;
-  background: #2a4267;
-}
-.number {
-  font-size: 1.2rem;
-  font-weight: 700;
-}
-.first-part {
-  width: 100%;
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-.views-section {
-  width: 100%;
-  margin-top: 3rem;
-}
-.info-section {
-  display: flex;
-  gap: 1.5rem;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.app-running,
-.errors {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-.icon-tabler-category-plus, 
-.icon-tabler-exclamation-mark {
-  padding: 0.5rem;
-  border-radius: 50%;
-  border: 5px solid #e6eff6;
-}
-.icon-tabler-category-plus {
-  transform: scaleY(-1);
-}
-button {
-  padding: 0.8rem;
-  color: #fff;
-  font-size: 1rem;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 0.25rem;
-  background: #2a4267;
-  transition: 0.5s;
-  cursor: pointer;
-}
-button:hover {
-  background: #2a4267c1;
-}
-img {
-  border-radius: 50%;
-  object-fit: cover;
-}
-.profile-section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-}
-.profile-section img {
-  border: 5px solid #e6eff69f;
-}
-.label {
-  margin-top: -1.5rem;
-  padding: 0.25rem;
-  color: #fff;
-  font-size: 0.7rem;
-  border-radius: 0.5rem;
-  background: #2a4267;
-}
-h2 {
-  font-size: 1rem;
-}
-.username {
-  margin-bottom: 2rem;
-  font-size: 0.7rem;
-}
-.views-section {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-}
-.views {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-.total-views {
-  font-size: 1.5rem;
-  font-weight: 700;
-}
-.profiles{
-  display: flex;
-  align-items: center;
-}
-.profiles img {
-  display: block;
-  border: 2px solid #fff;
-}
-.profiles img.first {
-  margin-right: -0.8rem;
-  z-index: 3;
-}
-.profiles img.second {
-  margin-right: -0.8rem;
-  z-index: 2;
-}
-.profiles img.third {
-  z-index: 1;
-}
-@media (max-width: 600px) {
-  .first-part section {
-    width: 100%;
-  }
-  .views-section {
-    justify-content: center;
-  }
-}
-</style>
   </head>
   <body>
-  <!-- <h1>User Profile UI Kit</h1> -->
-  <main>
-    <div class="first-part">
-      <section class="info-section">
-        <div class="app-running">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-category-plus" width="55" height="55" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4h6v6h-6zm10 0h6v6h-6zm-10 10h6v6h-6zm10 3h6m-3 -3v6" /></svg>
-          <div class="app-running-info">
-            <p>App running <span class="dot"></span>last 7 days</p>
-            <p class="number">78</p>
-          </div>
-        </div>
-        <div class="errors">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-exclamation-mark" width="55" height="55" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 19v.01" /><path d="M12 15v-10" /></svg>
-          <div class="errors-info">
-            <p>Errors <span class="dot"></span>past 24 hours</p>
-            <p class="number">32</p>
-          </div>
-        </div>
-        <button>Customize</button>
-      </section>
-      <section class="profile-section">
-        <img src="./img/profile.jpg" alt="profile picture of Virag" width="80" height="80">
-        <span class="label">PRO</span>
-        <h2>Virag Kormoczy</h2>
-        <p class="username">@virag-ky</p>
-        <p class="stats">140 followers <span class="dot"></span>207 following</p>
-      </section>
-    </div>
-    <section class="views-section">
-      <div class="views">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="45" height="45" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" /></svg>
-        <p class="total-views">509 K</p>
-      </div>
-      <div class="profiles">
-        <img class="first" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZSUyMHBpY3R1cmV8ZW58MHx8MHx8fDA%3D" alt="profile 1" width="50" height="50">
-        <img class="second" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cHJvZmlsZSUyMHBpY3R1cmV8ZW58MHx8MHx8fDA%3D" alt="profile 2" width="50" height="50">
-        <img class="third" src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHByb2ZpbGUlMjBwaWN0dXJlfGVufDB8fDB8fHww" alt="profile 3" width="50" height="50">
-      </div>
-    </section>
-  </main>
-  <script> 
-      // 01. World Tour
-  function makeWorldTour(params) {
-    // console.log(params);
-    let stops = params[0];
-    // console.log(stops);
-    let index = 1;
-    let input = params[index];
-    while (input != "Travel") {
-      // console.log(input);
-      const data = input.split(":");
-      // console.log(data);
-      const command = data[0];
-      // console.log(command);
-      if (command == "Add Stop") {
-        // console.log("Add Stop");
-        const index = Number(data[1]);
-        const newStop = data[2];
-        // console.log(index);
-        // console.log(newStop);
-        if (stops.length > index) {
-          const newString = stops.substring(0, index) + newStop + stops.substring(index);
-          stops = newString;
-        } 
-        console.log(stops);
-      } else if (command == "Remove Stop") {
-        // console.log("Remove Stop");
-        const start = Number(data[1]);
-        const end = Number(data[2]);
-        // console.log(start);
-        // console.log(end);
-        if (start < stops.length && end < stops.length) {
-          const left = stops.substring(0, start);
-          const right = stops.substring(end + 1);
-          const newString = left + right;
-          stops = newString;
-        } 
-        console.log(stops);
-      } else if (command == "Switch") {
-        // console.log("Switch");
-        const stop = data[1];
-        const newStop = data[2];
-        if (stops.includes(stop)) {
-          stops = stops.split(stop).join(newStop);
-        } 
-        console.log(stops);
-      } 
-      index++;
-      input = params[index];
-      // if (index > 100) {
-      //   console.log('infinity');
-      //   break;
-      // }
-    } 
-    // console.log(stops);
-    console.log(`Ready for world tour! Planned stops: ${stops}`);
-  } 
-  // makeWorldTour(["Hawai::Cyprys-Greece", "Add Stop:7:Rome", "Remove Stop:11:16", "Switch:Hawai:Bulgaria", "Travel"]);
-  // makeWorldTour((["Albania:Bulgaria:Cyprus:Deuchland", "Add Stop:3:Nigeria", "Remove Stop:4:8", "Switch:Albania: Azərbaycan", "Travel"]));
-  </script> 
+      <!-- <h1>Webshop Components</h1> -->
+      <main>
 
-  <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+        <nav>
+          <ul class="nav-list">
+            <li class="active">Woman</li>
+            <li>Man</li>
+            <li>Kids</li>
+          </ul>
+        </nav>
+
+        <section class="categories">
+          <div class="category">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-ball-basketball" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M5.65 5.65l12.7 12.7" /><path d="M5.65 18.35l12.7 -12.7" /><path d="M12 3a9 9 0 0 0 9 9" /><path d="M3 12a9 9 0 0 1 9 9" /></svg>
+            <div class="category-info">
+              <h3>Sportswear</h3>
+              <p>167 items</p>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-right" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg>
+          </div>
+          <div class="category">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-wallet" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12" /><path d="M20 12v4h-4a2 2 0 0 1 0 -4h4" /></svg>
+            <div class="category-info">
+              <h3>Accessories</h3>
+              <p>52 items</p>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-right" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg>
+          </div>
+          <div class="category">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mug" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4.083 5h10.834a1.08 1.08 0 0 1 1.083 1.077v8.615c0 2.38 -1.94 4.308 -4.333 4.308h-4.334c-2.393 0 -4.333 -1.929 -4.333 -4.308v-8.615a1.08 1.08 0 0 1 1.083 -1.077" /><path d="M16 8h2.5c1.38 0 2.5 1.045 2.5 2.333v2.334c0 1.288 -1.12 2.333 -2.5 2.333h-2.5" /></svg>
+            <div class="category-info">
+              <h3>Kitchenware</h3>
+              <p>112 items</p>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-right" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg>
+          </div>
+        </section>
+
+        <section class="images">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" /></svg>
+          <img id="1" src="https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmFnc3xlbnwwfHwwfHx8MA%3D%3D" alt="green woman's handbag" width="200" height="200">
+          <div class="pagination">
+            <div class="pagination-part selected"></div>
+            <div class="pagination-part"></div>
+            <div class="pagination-part"></div>
+            <div class="pagination-part"></div>
+          </div>
+        </section>
+
+        <section class="sales">
+          <div class="sales-info">
+            <h2>Check our sales</h2>
+            <p>Up to <span>70% discount</span> on the season end products.</p>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+        </section>
+
+        <script>
+          const IMAGE_SOURCES = [
+            {
+              source: "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmFnc3xlbnwwfHwwfHx8MA%3D%3D",
+              alternative_text: "green woman's handbag",
+              liked: false,
+              id: 1,
+            },
+            {
+              source: "https://images.unsplash.com/photo-1577733975197-3b950ca5cabe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YmFja3BhY2t8ZW58MHx8MHx8fDA%3D",
+              alternative_text: "green backpack",
+              liked: false,
+              id: 2,
+            },
+            {
+              source: "https://images.unsplash.com/photo-1606522754091-a3bbf9ad4cb3?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fGJhZ3N8ZW58MHx8MHx8fDA%3D",
+              alternative_text: "beige woman's handbag",
+              liked: false,
+              id: 3,
+            },
+            {
+              source: "https://images.unsplash.com/photo-1622560480654-d96214fdc887?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGJhY2twYWNrfGVufDB8fDB8fHww",
+              alternative_text: "reddish leather backpack",
+              liked: false,
+              id: 4,
+            },
+          ];
+            
+          // Click the heart 
+          const HEART_ICON = document.querySelector('.icon-tabler-heart');
+          const IMAGE = document.querySelector('img');
+          const PAGINATION_PARTS = [...document.querySelectorAll('.pagination-part')];
+          let imgID = IMAGE.id;
+          let currentImg = 0;
+          
+          HEART_ICON.addEventListener("click", () => {
+            
+            if (IMAGE_SOURCES[currentImg].liked === true){
+              HEART_ICON.style.fill = "none";
+              HEART_ICON.style.stroke = "#000";
+              IMAGE_SOURCES[currentImg].liked = false;
+            } else {
+              HEART_ICON.style.fill = "#fb625b";
+              HEART_ICON.style.stroke = "none";
+              IMAGE_SOURCES[currentImg].liked = true;
+            }
+          });
+          
+          // Click the pagination parts
+          PAGINATION_PARTS.forEach((p, index) => {
+            p.addEventListener("click", () => {
+              PAGINATION_PARTS.forEach(part => {
+                part.classList.remove('selected');
+              });
+          
+              IMAGE.src = IMAGE_SOURCES[index].source;
+              imgID = IMAGE_SOURCES[index].id;
+              PAGINATION_PARTS[index].classList.add('selected');
+              currentImg = index;
+        
+              if (IMAGE_SOURCES[index].liked === true) {
+                HEART_ICON.style.fill = "#fb625b";
+                HEART_ICON.style.stroke = "none";
+              } else {
+                HEART_ICON.style.fill = "none";
+                HEART_ICON.style.stroke = "#000";
+              }
+            });
+          })
+        </script>
+
+      </main>
+      
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
     
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
