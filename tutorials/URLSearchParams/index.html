@@ -95,7 +95,79 @@ button {
   transition: 0.5s;
   cursor: pointer;
 }
-
+button:hover {
+  background: #2a4267c1;
+}
+img {
+  border-radius: 50%;
+  object-fit: cover;
+}
+.profile-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.profile-section img {
+  border: 5px solid #e6eff69f;
+}
+.label {
+  margin-top: -1.5rem;
+  padding: 0.25rem;
+  color: #fff;
+  font-size: 0.7rem;
+  border-radius: 0.5rem;
+  background: #2a4267;
+}
+h2 {
+  font-size: 1rem;
+}
+.username {
+  margin-bottom: 2rem;
+  font-size: 0.7rem;
+}
+.views-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.views {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.total-views {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.profiles{
+  display: flex;
+  align-items: center;
+}
+.profiles img {
+  display: block;
+  border: 2px solid #fff;
+}
+.profiles img.first {
+  margin-right: -0.8rem;
+  z-index: 3;
+}
+.profiles img.second {
+  margin-right: -0.8rem;
+  z-index: 2;
+}
+.profiles img.third {
+  z-index: 1;
+}
+@media (max-width: 600px) {
+  .first-part section {
+    width: 100%;
+  }
+  .views-section {
+    justify-content: center;
+  }
+}
 </style>
   </head>
   <body>
@@ -120,7 +192,7 @@ button {
         <button>Customize</button>
       </section>
       <section class="profile-section">
-        <img src="profile.png" alt="profile picture of Virag" width="80" height="80">
+        <img src="./img/profile.jpg" alt="profile picture of Virag" width="80" height="80">
         <span class="label">PRO</span>
         <h2>Virag Kormoczy</h2>
         <p class="username">@virag-ky</p>
@@ -139,6 +211,66 @@ button {
       </div>
     </section>
   </main>
+  <script> 
+      // 01. World Tour
+  function makeWorldTour(params) {
+    // console.log(params);
+    let stops = params[0];
+    // console.log(stops);
+    let index = 1;
+    let input = params[index];
+    while (input != "Travel") {
+      // console.log(input);
+      const data = input.split(":");
+      // console.log(data);
+      const command = data[0];
+      // console.log(command);
+      if (command == "Add Stop") {
+        // console.log("Add Stop");
+        const index = Number(data[1]);
+        const newStop = data[2];
+        // console.log(index);
+        // console.log(newStop);
+        if (stops.length > index) {
+          const newString = stops.substring(0, index) + newStop + stops.substring(index);
+          stops = newString;
+        } 
+        console.log(stops);
+      } else if (command == "Remove Stop") {
+        // console.log("Remove Stop");
+        const start = Number(data[1]);
+        const end = Number(data[2]);
+        // console.log(start);
+        // console.log(end);
+        if (start < stops.length && end < stops.length) {
+          const left = stops.substring(0, start);
+          const right = stops.substring(end + 1);
+          const newString = left + right;
+          stops = newString;
+        } 
+        console.log(stops);
+      } else if (command == "Switch") {
+        // console.log("Switch");
+        const stop = data[1];
+        const newStop = data[2];
+        if (stops.includes(stop)) {
+          stops = stops.split(stop).join(newStop);
+        } 
+        console.log(stops);
+      } 
+      index++;
+      input = params[index];
+      // if (index > 100) {
+      //   console.log('infinity');
+      //   break;
+      // }
+    } 
+    // console.log(stops);
+    console.log(`Ready for world tour! Planned stops: ${stops}`);
+  } 
+  // makeWorldTour(["Hawai::Cyprys-Greece", "Add Stop:7:Rome", "Remove Stop:11:16", "Switch:Hawai:Bulgaria", "Travel"]);
+  // makeWorldTour((["Albania:Bulgaria:Cyprus:Deuchland", "Add Stop:3:Nigeria", "Remove Stop:4:8", "Switch:Albania: Azərbaycan", "Travel"]));
+  </script> 
 
   <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
     
