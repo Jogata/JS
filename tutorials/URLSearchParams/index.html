@@ -4,401 +4,153 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      *,
-      *::before,
-      *::after {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Kaushan+Script&family=Playfair+Display&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Brawler:wght@400;700&family=Croissant+One&family=Ephesis&family=Gloock&family=Hurricane&family=Imbue:opsz,wght@10..100,100..900&family=Modak&family=Montez&family=Prosto+One&family=Rye&family=Shojumaru&family=Young+Serif&family=ZCOOL+XiaoWei&display=swap');
 
-      a {
-        display: inline-block;
-        padding: 0.4em 1em;
-        font-size: 1rem;
-        font-weight: 500;
-        text-decoration: none;
-      }
-
-      img {
-        width: 100%;
-      }
-      
-      body {
-        min-height: 100vh;
-        padding: 5rem 0;
-        color: #363636;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #e2f6f4;
-        font-family: Arial, Helvetica, sans-serif;
-      }
-      
-      main {
-        width: 90%;
-        /* max-width: 350px; */
-        max-width: 21.875rem;
-        padding: 1.5rem;
-        border-radius: 0.5rem;
-        background-color: #fff;
-        filter: drop-shadow(0 0 2rem #2d688d4d);
-      }
-      
-      .nav-list {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      li {
-        list-style: none;
-        /* width: 80px; */
-        width: 5rem;
-        padding: 0.8rem 1rem;
-        font-size: 0.8rem;
-        text-align: center;
-        border-radius: 0.35rem;
-        cursor: pointer;
-      }
-      
-      .active {
-        color: #fff;
-        background-color: #2d698d;
-      }
-      
-      .categories {
-        margin: 2rem 0;
-        border-radius: 0.5rem;
-        border: 1.5px solid #3636360b;
-        box-shadow: 0 0.5rem 1rem #36363625;
-      }
-      
-      .category {
-        padding: 1.5rem;
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-        /* transition: 0.5s; */
-        transition: color 0.5s, 
-          background-color 0.5s;
-        cursor: pointer;
-      }
-      
-      h3 {
-        margin-bottom: 0.25rem;
-        color: #363636e1;
-        font-size: 0.9rem;
-        /* transition: 0.5s; */
-        transition: color 0.5s;
-      }
-      
-      p {
-        color: #363636e1;
-        font-size: 0.7rem;
-        /* transition: 0.5s; */
-        transition: color 0.5s;
-      }
-      
-      .category:hover {
-        color: #fff;
-        background-color: #2d698d;
-      }
-      
-      .category:hover h3,
-      .category:hover p {
-        color: #fff;
-      }
-      
-      h2 {
-        margin-bottom: 0.5rem;
-        font-size: 1rem;
-      }
-      
-      .icon-tabler-arrow-narrow-right {
-        margin-left: auto;
-        padding: 0.25rem;
-        color: #2d698d;
-        border-radius: 50%;
-        background-color: #e2f6f4;
-        transition: 0.5s;
-        cursor: pointer;
-      }
-      
-      .category:hover .icon-tabler-arrow-narrow-right {
-        background-color: #fff;
-      }
-      
-      .category:nth-child(1) {
-        border-bottom: 1.5px solid #36363613;
-        border-top-left-radius: 0.5rem;
-        border-top-right-radius: 0.5rem;
-      }
-      
-      .category:nth-child(2) {
-        border-bottom: 1.5px solid #36363613;
-      }
-      
-      .category:nth-child(3) {
-        border-bottom-left-radius: 0.5rem;
-        border-bottom-right-radius: 0.5rem;
-      }
-      
-      .images {
-        position: relative;
-        width: 100%;
-        /* height: 200px; */
-        height: 12.5rem;
-        margin: 2rem 0;
-        border-radius: 0.5rem;
-        box-shadow: 0 0.5rem 1rem #2d688d50;
-      }
-      
-      img {
-        width: 100%;
-        object-fit: cover;
-        border-radius: 0.5rem;
-      }
-      
-      .pagination {
-        width: max-content;
-        margin: 0 auto;
-        display: flex;
-        gap: 0.2rem;
-      }
-      
-      .pagination-part {
-        width: 0.8rem;
-        height: 0.2rem;
-        border-radius: 0.25rem;
-        background-color: #fff;
-        cursor: pointer;
-      }
-      
-      .selected {
-        width: 1.2rem;
-        background-color: #194d6d;
-      }
-      
-      .icon-tabler-heart {
-        position: absolute;
-        right: 1rem;
-        top: 1rem;
-        padding: 0.25rem;
-        border-radius: 50%;
-        background-color: #fff;
-        filter: drop-shadow(0 0 0.5rem #2d688d7a);
-        cursor: pointer;
-      }
-      
-      .sales {
-        padding: 1.5rem;
-        color: #fff;
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        justify-content: space-between;
-        border-radius: 0.5rem;
-        background-color: #2d698d;
-      }
-      
-      .sales p {
-        font-size: 1rem;
-        color: #ffffffc5;
-      }
-      
-      span {
-        color: #fff;
-        font-size: 1rem;
-        font-weight: 700;
-      }
-      
-      .icon-tabler-chevron-right {
-        /* min-width: 28px; */
-        min-width: 1.75rem;
-        padding: 0.25rem;
-        color: #e2f6f4a3;
-        border-radius: 50%;
-        background-color: #194d6d;
-        cursor: pointer;
-      }
-    </style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* font-family: Arial, Helvetica, sans-serif; */
+}
+body {
+  min-height: 100vh;
+  padding-top: 5rem;
+  display: flex;
+  row-gap: 5rem;
+  flex-wrap: wrap;
+  flex-direction: column;
+  /* align-items: center; */
+  /* justify-content: center; */
+  background-image: url("./img/back.jpg");
+  background-position: center;
+  background-size: cover;
+  backdrop-filter: blur(3px);
+  font-family: 'Abril Fatface', cursive;
+font-family: 'Courgette', cursive;
+font-family: 'Dancing Script', cursive;
+font-family: 'Great Vibes', cursive;
+font-family: 'Josefin Sans', sans-serif;
+font-family: 'Limelight', cursive;
+font-family: 'Lobster', cursive;
+font-family: 'Montserrat', sans-serif;
+font-family: 'Oleo Script Swash Caps', cursive;
+font-family: 'Poppins', sans-serif;
+font-family: 'Raleway', sans-serif;
+font-family: 'Fraunces', serif;
+font-family: 'Playfair Display', serif;
+font-family: 'Lemon', cursive;
+font-family: "Croissant One", serif;
+font-family: "Shojumaru", system-ui;
+font-family: "Montez", cursive;
+font-family: "Modak", system-ui;
+font-family: "Imbue", serif;
+font-family: "Hurricane", cursive;
+font-family: "Prosto One", sans-serif;
+font-family: "Young Serif", serif;
+font-family: "ZCOOL XiaoWei", sans-serif;
+font-family: "Brawler", serif;
+font-family: "Rye", serif;
+font-family: "Gloock", serif;
+font-family: "Ephesis", cursive;
+font-family: "Platypi", serif;
+font-family: "Patua One", serif;
+font-family: "Arizonia", cursive;
+font-family: 'Kaushan Script', cursive;
+}
+.bg {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+.bg::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(3px);
+  /* background-color: 
+    rgba(9, 24, 29, 0.8); */
+}
+.bg img {
+  position: absolute;
+  width: 120%;
+  min-width: 1000px;
+  height: 100%;
+  object-fit: cover;
+  transform: translateX(-10%);
+  animation: bg 60s linear infinite;
+}
+@keyframes bg {
+  50% {
+    transform: translateX(0%);
+  }
+}
+.glass {
+  width: 100%;
+  max-width: 58rem;
+  min-height: 32.5rem;
+  margin: auto;
+  border-radius: 16px;
+  background-image: url("./img/front.jpg");
+  background-position: center;
+  background-size: cover;
+  box-shadow: 0 0 8px #fff;
+}
+.body {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+}
+</style>
   </head>
   <body>
-      <!-- <h1>Webshop Components</h1> -->
-      <main>
-
-        <nav>
-          <ul class="nav-list">
-            <li class="active">Woman</li>
-            <li>Man</li>
-            <li>Kids</li>
-          </ul>
-        </nav>
-
-        <section class="categories">
-          <div class="category">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-ball-basketball" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M5.65 5.65l12.7 12.7" /><path d="M5.65 18.35l12.7 -12.7" /><path d="M12 3a9 9 0 0 0 9 9" /><path d="M3 12a9 9 0 0 1 9 9" /></svg>
-            <div class="category-info">
-              <h3>Sportswear</h3>
-              <p>167 items</p>
-            </div>
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-right" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg>
-          </div>
-          <div class="category">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-wallet" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M17 8v-3a1 1 0 0 0 -1 -1h-10a2 2 0 0 0 0 4h12a1 1 0 0 1 1 1v3m0 4v3a1 1 0 0 1 -1 1h-12a2 2 0 0 1 -2 -2v-12" /><path d="M20 12v4h-4a2 2 0 0 1 0 -4h4" /></svg>
-            <div class="category-info">
-              <h3>Accessories</h3>
-              <p>52 items</p>
-            </div>
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-right" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg>
-          </div>
-          <div class="category">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mug" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4.083 5h10.834a1.08 1.08 0 0 1 1.083 1.077v8.615c0 2.38 -1.94 4.308 -4.333 4.308h-4.334c-2.393 0 -4.333 -1.929 -4.333 -4.308v-8.615a1.08 1.08 0 0 1 1.083 -1.077" /><path d="M16 8h2.5c1.38 0 2.5 1.045 2.5 2.333v2.334c0 1.288 -1.12 2.333 -2.5 2.333h-2.5" /></svg>
-            <div class="category-info">
-              <h3>Kitchenware</h3>
-              <p>112 items</p>
-            </div>
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-right" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg>
-          </div>
-        </section>
-
-        <section class="images">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" /></svg>
-          <img id="1" src="https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmFnc3xlbnwwfHwwfHx8MA%3D%3D" alt="green woman's handbag" width="200" height="200">
-          <div class="pagination">
-            <div class="pagination-part selected"></div>
-            <div class="pagination-part"></div>
-            <div class="pagination-part"></div>
-            <div class="pagination-part"></div>
-          </div>
-        </section>
-
-        <section class="sales">
-          <div class="sales-info">
-            <h2>Check our sales</h2>
-            <p>Up to <span>70% discount</span> on the season end products.</p>
-          </div>
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="28" height="28" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
-        </section>
-
-        <script>
-          const IMAGE_SOURCES = [
-            {
-              source: "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmFnc3xlbnwwfHwwfHx8MA%3D%3D",
-              alternative_text: "green woman's handbag",
-              liked: false,
-              id: 1,
-            },
-            {
-              source: "https://images.unsplash.com/photo-1577733975197-3b950ca5cabe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YmFja3BhY2t8ZW58MHx8MHx8fDA%3D",
-              alternative_text: "green backpack",
-              liked: false,
-              id: 2,
-            },
-            {
-              source: "https://images.unsplash.com/photo-1606522754091-a3bbf9ad4cb3?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fGJhZ3N8ZW58MHx8MHx8fDA%3D",
-              alternative_text: "beige woman's handbag",
-              liked: false,
-              id: 3,
-            },
-            {
-              source: "https://images.unsplash.com/photo-1622560480654-d96214fdc887?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGJhY2twYWNrfGVufDB8fDB8fHww",
-              alternative_text: "reddish leather backpack",
-              liked: false,
-              id: 4,
-            },
-          ];
-            
-          // Set nav list items active
-          const NAV_LIST_ITEMS = [...document.querySelectorAll('.nav-list li')];
-          
-          NAV_LIST_ITEMS.forEach(item => {
-            item.addEventListener("click", (e) => {
-              NAV_LIST_ITEMS.forEach(i => {
-                i.classList.remove('active');
-              });
-          
-              e.target.classList.add('active');
-            });
-          });
-          
-          // Click the heart 
-          const HEART_ICON = document.querySelector('.icon-tabler-heart');
-          const IMAGE = document.querySelector('img');
-          const PAGINATION_PARTS = [...document.querySelectorAll('.pagination-part')];
-          let imgID = IMAGE.id;
-          let currentImg = 0;
-          
-          HEART_ICON.addEventListener("click", () => {
-            
-            if (IMAGE_SOURCES[currentImg].liked === true){
-              HEART_ICON.style.fill = "none";
-              HEART_ICON.style.stroke = "#000";
-              IMAGE_SOURCES[currentImg].liked = false;
-            } else {
-              HEART_ICON.style.fill = "#fb625b";
-              HEART_ICON.style.stroke = "none";
-              IMAGE_SOURCES[currentImg].liked = true;
-            }
-          });
-          
-          // Click the images
-          IMAGE.addEventListener("click", () => {
-            PAGINATION_PARTS.forEach(part => {
-              part.classList.remove('selected');
-            });
-          
-            if (currentImg === 3) {
-              currentImg = 0;
-              IMAGE.src = IMAGE_SOURCES[currentImg].source;
-              imgID = IMAGE_SOURCES[currentImg].id;
-              PAGINATION_PARTS[currentImg].classList.add('selected');
-            } else {
-              IMAGE.src = IMAGE_SOURCES[currentImg + 1].source;
-              imgID = IMAGE_SOURCES[currentImg + 1].id;
-              PAGINATION_PARTS[currentImg + 1].classList.add('selected');
-              currentImg += 1;
-            }
-          
-            if (IMAGE_SOURCES[currentImg].liked === true) {
-              HEART_ICON.style.fill = "#fb625b";
-              HEART_ICON.style.stroke = "none";
-            } else {
-              HEART_ICON.style.fill = "none";
-              HEART_ICON.style.stroke = "#000";
-            }
-          });
-          
-          // Click the pagination parts
-          PAGINATION_PARTS.forEach((p, index) => {
-            p.addEventListener("click", () => {
-              PAGINATION_PARTS.forEach(part => {
-                part.classList.remove('selected');
-              });
-          
-              IMAGE.src = IMAGE_SOURCES[index].source;
-              imgID = IMAGE_SOURCES[index].id;
-              PAGINATION_PARTS[index].classList.add('selected');
-              currentImg = index;
-        
-              if (IMAGE_SOURCES[index].liked === true) {
-                HEART_ICON.style.fill = "#fb625b";
-                HEART_ICON.style.stroke = "none";
-              } else {
-                HEART_ICON.style.fill = "none";
-                HEART_ICON.style.stroke = "#000";
-              }
-            });
-          })
-        </script>
-        
-      </main>
-      
+    <div class="bg">
+      <img src="./img/back.jpg" alt="">
+    </div>
+    <div class="glass">
+      <nav>
+        <h2 class="logo">T||A</h2>
+        <ul>
+          <li><a href="#">HOME</a></li>
+          <li><a href="#">ABOUT</a></li>
+          <li><a href="#">SERVICE</a></li>
+          <li><a href="#">CONTACT</a></li>
+        </ul> 
+        <img src="img/profile.jpg" alt="profile">
+      </nav>
+      <div>
+        <h3>it's time to</h3>
+        <h1>TRAVEL</h1>
+      </div>
+      <div class="icons">
+        <ul>
+          <li><i class="fa fa-twitter"></i></li>
+          <li><i class="fa fa-whatsapp"></i></li>
+          <li><i class="fa fa-instagram"></i></li>
+        </ul>
+      </div>
+    </div>
+    <div class="body">
+      <h1 class="transparent">
+        <span class="title">transparent <span class="block">text</span></span>
+      </h1>
+    </div>
+    
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
     
     <script src="./in-fetch-api.js"></script>
