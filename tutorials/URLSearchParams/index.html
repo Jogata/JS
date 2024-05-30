@@ -233,6 +233,123 @@ background:
         justify-content: center;
         /* overflow: hidden; */
       }
+
+      @media screen and (min-width: 700px) {
+        .bottle-img {
+          position: absolute;
+        }
+      }
+
+      .main-img {
+        /* width: 450px; */
+        max-width: 450px;
+        /* transform: rotate(10deg); */
+        transform: scale(1) rotate(10deg);
+        /* border: 1px solid red; */
+      }
+
+      .button-container {
+        /* width: 40%; */
+        width: 100%;
+        max-width: 80rem;
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        /* align-items: center; */
+        justify-content: space-evenly;
+        /* border: 1px solid red; */
+      }
+
+      button {
+        /* padding: 15px 20px; */
+        padding: 0.75em 1em;
+        color: #fff;
+        /* font-size: 20px; */
+        /* font-size: min(calc(16px + 1vw), 20px); */
+        font-size: min(calc(16px + 1vw), 1.25rem);
+        font-weight: 400;
+        /* font-family: "DoppioOne-Regular"; */
+        font-family: "ZCOOL XiaoWei", sans-serif;
+        text-transform: uppercase;
+        border: 1px solid #fff;
+        background-color: #0007;
+        cursor: pointer;
+      }
+
+      .button {
+        position: relative;
+        transform: translateY(-50%);
+        opacity: 0;
+      }
+
+      .button::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        /* color: black; */
+        background-color:#fff;
+        transform-origin: left;
+        transform: scaleX(0);
+        transition: 0.5s;
+        z-index: -1;
+      }
+
+      .button:hover::before {
+        /* width: 100%; */
+        transform: scaleX(1);
+      }
+
+      .button:hover button {
+        color: black;
+        background-color: transparent;
+      }
+
+      .bottle-container {
+        position: relative;
+        /* padding-top: 5px; */
+        padding: 40px 0;
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        /* column-gap: 30px; */
+        /* background: linear-gradient(transparent, #0005); */
+        z-index: 2;
+      }
+
+      .thumb img {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+      }
+
+      .thumb img {
+        /* transition: .3s linear; */
+        transition: opacity 300ms linear, 
+                 transform 300ms linear;
+        /* opacity: .3; */
+        opacity: 0.6;
+        cursor: pointer;
+      }
+
+      .thumb:hover img {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+
+      /* .thumb:nth-child(4) {
+        opacity: 1;
+        transform: scale(1.1);
+      } */
+
+      .thumb.active img {
+        transform: scale(1.1);
+        opacity: 1;
+      }
     </style>
   </head>
   <body>
@@ -364,7 +481,26 @@ background:
         'linear-gradient(#5a5858, #000000)'
       ]
 
-      const backgrounds = ["none", "none", "none", "black"]
+      const backgrounds = ["none", "none", "none", "black"];
+      
+      thumbs.forEach((thumb, index) => {
+        thumb.addEventListener("click", () => {
+          const activeThumb = document.querySelector(".thumb.active");
+          activeThumb.classList.remove("active");
+          thumb.classList.add("active");
+          const activeSlide = document.querySelector(".coffee-section.active");
+          activeSlide.classList.remove("active");
+          slides[index].classList.add("active");
+          // heroSection.classList.add("vanilla");
+          // console.log(thumb.firstElementChild.src);
+          // mainimg.src = thumb.firstChild.src;
+          // console.log(mainimg.src);
+          // document.getElementById("title").textContent = "cafe choco";
+          document.body.style.background = bgColors[index];
+          // heroSection.removeAttribute("style");
+          heroSection.className = `hero-section ${backgrounds[index]}`;
+        })
+      })
 
       // thumbsWitoutBg.forEach(thumb => (
       //   thumb.addEventListener("click", () => {
@@ -372,14 +508,14 @@ background:
       //   })
       // ))
 
-      thumbs[0].onclick = function() {
-        const activeThumb = document.querySelector(".thumb.active");
-        activeThumb.classList.remove("active");
-        this.parentElement.classList.add("active");
-        mainimg.src = thumbs[0].src;
-        document.getElementById("title").textContent = "cafe choco";
-        document.body.style.background = 'linear-gradient(rgb(64 32 21), rgb(124 82 55))';
-      }
+      // thumbs[0].onclick = function() {
+      //   const activeThumb = document.querySelector(".thumb.active");
+      //   activeThumb.classList.remove("active");
+      //   this.parentElement.classList.add("active");
+      //   mainimg.src = thumbs[0].src;
+      //   document.getElementById("title").textContent = "cafe choco";
+      //   document.body.style.background = 'linear-gradient(rgb(64 32 21), rgb(124 82 55))';
+      // }
 
       thumbs[1].onclick = function() {
         const activeThumb = document.querySelector(".thumb.active");
