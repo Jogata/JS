@@ -92,6 +92,70 @@ li {
 .messages-section {
   display: none;
 }
+.active {
+  position: absolute;
+  right: 1rem;
+  top: 3.5rem;
+  display: block;
+  border-radius: 0.5rem;
+  background: #fff;
+  box-shadow: 0 0.5rem 1rem #145faa31;
+}
+.profile {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 2rem;
+}
+button {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.view-profile {
+  color: #fff;
+  background-color: #1a77d4;
+}
+.view-profile:hover {
+  background-color: #1a77d4c0;
+}
+.add-account {
+  color: #1a77d4;
+  background-color: transparent;
+}
+.add-account:hover {
+  border-color: #1a77d4;
+}
+.account-list {
+  padding: 1rem 2rem;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  background-color: #efefef;
+}
+.account-list li {
+  padding: 1rem 0;
+}
+.account-list li:hover {
+  color: #126db8;
+}
+img {
+  border-radius: 50%;
+}
+.notifications-section, .messages-section {
+  padding: 1rem;
+}
+.notifications-list li {
+  padding: 0.5rem 0;
+}
+.clear-all-notifications {
+  display: block;
+  width: max-content;
+  margin-left: auto;
+  margin-bottom: 1rem;
+}
 </style>
   </head>
   <body>
@@ -148,6 +212,83 @@ li {
         </ul>
       </section>
     </nav>
+    <script>
+      // Open account menu
+const ACCOUNT_BTN = document.querySelector(".account");
+const SECTIONS = [...document.querySelectorAll("section")];
+const CHEVRON_DOWN = document.querySelector(".icon-tabler-chevron-down");
+const ACCOUNT_SECTION = SECTIONS[2];
+
+ACCOUNT_BTN.addEventListener("click", () => {
+if (ACCOUNT_SECTION.classList.contains("active")) {
+  ACCOUNT_SECTION.classList.remove("active");
+  CHEVRON_DOWN.style.transform = "scaleY(1)";
+} else {
+  SECTIONS.forEach((s) => {
+    s.classList.remove("active");
+  });
+  ACCOUNT_SECTION.classList.add("active");
+  CHEVRON_DOWN.style.transform = "scaleY(-1)";
+}
+});
+
+// Open notifications
+const NOTIFICATION_ICON = document.querySelector(".icon-tabler-bell");
+const NOTIFICATION_DOT = document.querySelector(".dot");
+const NOTIFICATIONS = SECTIONS[1];
+
+NOTIFICATION_ICON.addEventListener("click", () => {
+if (NOTIFICATIONS.classList.contains("active")) {
+  NOTIFICATIONS.classList.remove("active");
+} else {
+  SECTIONS.forEach((section) => {
+    section.classList.remove("active");
+  });
+
+  NOTIFICATIONS.classList.add("active");
+  CHEVRON_DOWN.style.transform = "scaleY(1)";
+}
+});
+
+// Open messages
+const MESSAGE_ICON = document.querySelector(".icon-tabler-mail");
+const MESSAGES = SECTIONS[0];
+
+MESSAGE_ICON.addEventListener("click", () => {
+if (MESSAGES.classList.contains("active")) {
+  MESSAGES.classList.remove("active");
+} else {
+  SECTIONS.forEach((s) => {
+    s.classList.remove("active");
+  });
+
+  MESSAGES.classList.add("active");
+  CHEVRON_DOWN.style.transform = "scaleY(1)";
+}
+});
+
+// Clear all notifications
+const CLEAR_ALL_BTN = document.querySelector(".clear-all-notifications");
+const NOTIFICATIONS_LIST = document.querySelector(".notifications-list");
+const NOTIFICATION_MESSAGE = NOTIFICATIONS.querySelector("p");
+
+CLEAR_ALL_BTN.addEventListener("click", (e) => {
+NOTIFICATIONS_LIST.style.display = "none";
+NOTIFICATION_MESSAGE.textContent = "No new notifications";
+NOTIFICATION_DOT.style.display = "none";
+e.target.style.display = "none";
+});
+
+document.body.addEventListener("click", (e) => {
+if (!e.target.closest('.icon-tabler-mail') && !e.target.closest('.icon-tabler-bell') && !e.target.closest('.account')) {
+  SECTIONS.forEach((s) => {
+    s.classList.remove("active");
+    CHEVRON_DOWN.style.transform = "scaleY(1)";
+  });
+}
+});
+    </script>
+
     <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
     
     <script src="./in-fetch-api.js"></script>
