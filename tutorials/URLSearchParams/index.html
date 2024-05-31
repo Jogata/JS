@@ -3,818 +3,152 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>URLSearchParams in JS</title> -->
-    <title>Nescafe Xpress</title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      /* @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap'); */
-      /* @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Kaushan+Script&family=Playfair+Display&display=swap'); */
-      /* @import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap'); */
-      @import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Brawler:wght@400;700&family=Croissant+One&family=Ephesis&family=Gloock&family=Hurricane&family=Imbue:opsz,wght@10..100,100..900&family=Modak&family=Montez&family=Prosto+One&family=Rye&family=Shojumaru&family=Young+Serif&family=ZCOOL+XiaoWei&display=swap');
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      :root {
-        --primary-color: #2b3138;
-        --secondary-color: #202329;
-        --accent-color: #fe662a;
-        --primary-text-color: #fff;
-        --secondary-text-color: #ccc;
-        --text-bg-color: #252932;
-      }
-
-      a {
-        display: inline-block;
-        /* color: var(--primary-text-color); */
-        text-decoration: none;
-      }
-
-      body {
-        /* width: 100%; */
-        min-height: 100vh;
-        /* padding: 3rem; */
-        /* display: flex; */
-        /* align-items: center; */
-        /* justify-content: center; */
-        /* font-family: 'Poppins', sans-serif; */
-        font-family: 'Abril Fatface', cursive;
-font-family: 'Courgette', cursive;
-font-family: 'Dancing Script', cursive;
-font-family: 'Great Vibes', cursive;
-font-family: 'Josefin Sans', sans-serif;
-font-family: 'Limelight', cursive;
-font-family: 'Lobster', cursive;
-font-family: 'Montserrat', sans-serif;
-font-family: 'Oleo Script Swash Caps', cursive;
-font-family: 'Poppins', sans-serif;
-font-family: 'Raleway', sans-serif;
-font-family: 'Kaushan Script', cursive;
-font-family: 'Fraunces', serif;
-font-family: 'Playfair Display', serif;
-font-family: 'Lemon', cursive;
-font-family: "Croissant One", serif;
-font-family: "Shojumaru", system-ui;
-font-family: "Montez", cursive;
-font-family: "Modak", system-ui;
-font-family: "Hurricane", cursive;
-font-family: "Prosto One", sans-serif;
-font-family: "Young Serif", serif;
-font-family: "ZCOOL XiaoWei", sans-serif;
-font-family: "Brawler", serif;
-font-family: "Gloock", serif;
-font-family: "Ephesis", cursive;
-font-family: "Platypi", serif;
-font-family: "Patua One", serif;
-font-family: "Rye", serif;
-font-family: "Arizonia", cursive;
-font-family: Georgia, serif;
-font-family: "Imbue", serif;
-background: 
-    linear-gradient(
-      #5a5858,#000000);
-      }
-
-      header {
-        position: relative;
-        width: 100%;
-        /* max-width: 1280px; */
-        max-width: 80rem;
-        margin: auto;
-        /* padding-bottom: 2rem; */
-        /* min-height: 100vh; */
-        /* border-radius: 16px; */
-        /* box-shadow: 3px 3px 6px #0005, 
-                -3px -3px 6px #fff2; */
-        /* overflow: hidden; */
-        /* border: 1px solid red; */
-      }
-
-      nav {
-        /* position: absolute; */
-        /* top: 0; */
-        /* left: 0; */
-        /* width: 100%; */
-        width: 90%;
-        margin: auto;
-        /* padding: 2rem 2.5rem; */
-        padding: min(4vw, 2rem) 0;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        /* z-index: 3; */
-      }
-
-      .page {
-        /* border: 1px solid wheat; */
-        overflow: hidden;
-      }
-      
-      header {
-        /* padding: 40px 100px; */
-        /* padding: 40px; */
-        padding: min(5vw, 40px);
-        padding: min(5vw, 2.5rem);
-        display: flex;
-        align-items: center;
-        /* background-image: linear-gradient(#000, transparent); */
-        z-index: 2;
-      }
-
-      header ul {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-evenly;
-        list-style: none;
-      }
-
-      header li {
-        position: relative;
-        /* padding-bottom: 20px; */
-        /* padding: 12px; */
-        padding: 0.5em;
-        /* font-family:"DoppioOne-Regular"; */
-        font-family: "ZCOOL XiaoWei", sans-serif;
-        color: #fff;
-        /* font-size: 20px; */
-        font-size: 1.25rem;
-        font-weight: 400;
-        text-transform: capitalize;
-        cursor: pointer;
-      }
-
-      .logo {
-        /* width: 150px; */
-        /* max-width: 160px; */
-        max-width: 10rem;
-        /* object-fit: contain; */
-      }
-
-      .logo img {
-        width: 100%;
-        /* transition: all .0.5s; */
-        transition: transform 500ms;
-      }
-
-      .logo:hover img {
-        transform: scale(1.1);
-      }
-
-      @media screen and (max-width: 43.75rem) {
-        .logo {
-          order: -1;
-        }
-      }
-
-      header li::after {
-        position: absolute;
-        /* bottom: 9px; */
-        left: 0;
-        right: 0;
-        bottom: 4px;
-        /* left: 50%; */
-        /* transform: translateX(-50%); */
-        content: '';
-        /* width: 50px; */
-        width: 3.125rem;
-        height: 2px;
-        margin: auto;
-        /* transform-origin: left; */
-        transform: scale(0);
-        background-color: #fff;
-        transition: transform 500ms;
-      }
-
-      header ul li:hover::after {
-        /* width: 50px; */
-        transform: scale(1);
-      }
-
-      header .logo::after {
-        content: none;
-      }
-
-      .coffee-section {
-        width: 100%;
-        /* height: 75vh; */
-        min-height: 75vh;
-        /* padding: 50px 0; */
-        padding: 3.125rem 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        /* background-image: url("img/background.png");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain; */
-        /* overflow: hidden; */
-      }
-
-      .title {
-        /* font-family:"LeagueGothic-Regular"; */
-        color: #fff;
-        /* font-size: 270px; */
-        /* font-size: min(calc(20vw + 30px), 270px); */
-        font-size: min(calc(20vw + 2rem), 16.9rem);
-        font-weight: 400;
-        text-align: center;
-        text-transform: uppercase;
-        letter-spacing: 10px;
-        /* text-shadow: 1px 1px 1px #000, 
-                  -1px -1px 1px #fff5; */
-        filter: drop-shadow(1px 1px 1px #000);
-      }
-
-      .bottle-img {
-        /* position: absolute; */
-        max-width: 100%;
-        display: flex;
-        justify-content: center;
-        /* overflow: hidden; */
-      }
-
-      @media screen and (min-width: 43.75rem) {
-        .bottle-img {
-          position: absolute;
-        }
-      }
-
-      .main-img {
-        /* width: 450px; */
-        /* max-width: 450px; */
-        max-width: 28rem;
-        /* transform: rotate(10deg); */
-        transform: scale(1) rotate(10deg);
-        /* border: 1px solid red; */
-      }
-
-      .button-container {
-        /* width: 40%; */
-        width: 100%;
-        max-width: 80rem;
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-        /* align-items: center; */
-        justify-content: space-evenly;
-        /* border: 1px solid red; */
-      }
-
-      button {
-        /* padding: 15px 20px; */
-        padding: 0.75em 1em;
-        color: #fff;
-        /* font-size: 20px; */
-        /* font-size: min(calc(16px + 1vw), 20px); */
-        font-size: min(calc(16px + 1vw), 1.25rem);
-        font-weight: 400;
-        /* font-family: "DoppioOne-Regular"; */
-        font-family: "ZCOOL XiaoWei", sans-serif;
-        text-transform: uppercase;
-        border: 1px solid #fff;
-        background-color: #0007;
-        cursor: pointer;
-      }
-
-      .button {
-        position: relative;
-        transform: translateY(-50%);
-        opacity: 0;
-      }
-
-      .button::before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        /* color: black; */
-        background-color:#fff;
-        transform-origin: left;
-        transform: scaleX(0);
-        transition: 0.5s;
-        z-index: -1;
-      }
-
-      .button:hover::before {
-        /* width: 100%; */
-        transform: scaleX(1);
-      }
-
-      .button:hover button {
-        color: black;
-        background-color: transparent;
-      }
-
-      .bottle-container {
-        position: relative;
-        /* padding-top: 5px; */
-        /* padding: 40px 0; */
-        padding: 2.5rem 0;
-        display: flex;
-        gap: 2rem;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        /* column-gap: 30px; */
-        /* background: linear-gradient(transparent, #0005); */
-        z-index: 2;
-      }
-
-      .thumb img {
-        /* width: 80px; */
-        width: 5rem;
-        /* height: 80px; */
-        height: 5rem;
-        object-fit: contain;
-      }
-
-      .thumb img {
-        /* transition: .3s linear; */
-        transition: opacity 300ms linear, 
-                 transform 300ms linear;
-        /* opacity: .3; */
-        opacity: 0.6;
-        cursor: pointer;
-      }
-
-      .thumb:hover img {
-        opacity: 1;
-        transform: scale(1.1);
-      }
-
-      /* .thumb:nth-child(4) {
-        opacity: 1;
-        transform: scale(1.1);
-      } */
-
-      .thumb.active img {
-        transform: scale(1.1);
-        opacity: 1;
-      }
-
-      .hero-section {
-        position: relative;
-        /* width: 100%; */
-        /* padding-bottom: 2.5rem; */
-        /* background-image: url("img/coffee-bean.png"); */
-        /* background-image: url("img/milk-splash-with-almonds-41858018.png"); */
-        /* background-image: url("img/milk-splash-with-almonds-41858025.png"); */
-        /* background-image: url("img/milk-splash-with-almonds-41858071.png"); */
-        /* background-image: url("img/milk-splash-with-almonds-41858007.png"); */
-        /* background-image: url("img/coffee-splash-with-coffee-beans-27291641.png"); */
-        /* background-image: url("img/vecteezy_ai-generated-milk-splash-isolated-on-transparent-background_35589687.png"); */
-        /* background-image: url("img/vecteezy_ai-generated-realistic-water-splash-isolated-transparency_36009980.png"); */
-        /* background-image: url("img/pngegg\(13\).png"); */
-        /* background-image: url("img/Coffee-Splash-With-Flying-Beans.png"); */
-        /* background-image: none; */
-        background-repeat: no-repeat;
-        background-position: center;
-        /* background-size: contain; */
-        background-size: auto 100%;
-        /* background-size: 500px auto; */
-      }
-
-      .hero-section::after {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: auto 100%;
-        transition: opacity 1s ease-out;
-        opacity: 0;
-      }
-
-      /* .hero-section.black { */
-      .hero-section.black::after {
-      /* .hero-section { */
-        background-image: url("img/pngegg\(11\).png");
-        opacity: 1;
-      }
-
-      /* .hero-section.choco { */
-      .hero-section.choco::after {
-        /* .hero-section { */
-        /* background-image: url("img/coffee-splash-27182268.png"); */
-        /* background-image: url("img/CITYPNG-HD\ Dark\ Beans\ With\ Coffee\ Splash\ Effect\ Transparent\ PNG\ -\ 1500x1500.png"); */
-        /* opacity: 1; */
-      }
-
-      /* .hero-section.original { */
-        /* .hero-section { */
-          /* background-image: url("img/milk-splash-with-almonds-41858071.png"); */
-          /* background-image: url("img/file\(3\).png"); */
-          /* background-image: url("img/milk-splash-with-almonds-41858018.png"); */
-          /* background-image: url("img/coffee-bean.png"); */
-          /* background-image: url("img/milk-splash-with-almonds-41858007.png"); */
-        /* } */
-
-        /* .hero-section.none { */
-        .hero-section.none::after {
-          background: none;
-        }
-
-      /* .coffee-section {
-        overflow: visible;
-      } */
-
-      /* .bottle-img.vanilla {
-        overflow: visible;
-      } */
-
-      .coffee-section.black .title {
-        /* color: #383737; */
-        /* color: #111; */
-        color: transparent;
-        background-image: linear-gradient(45deg, #000, #fff, #000, #fff, #000);
-        background-size: 100%;
-        -webkit-background-clip: text;
-        /* -moz-background-clip: text; */
-        background-clip: text;
-        /* -webkit-text-fill-color: transparent; */
-        /* -webkit-text-fill-color: transparent; */
-        /* text-shadow: 1px 1px 1px #000; */
-      }
-
-      .coffee-section.choco .title {
-        /* color: #502d1e; */
-        color: transparent;
-        background-image: linear-gradient(45deg, #502d1e, #fff, #502d1e);
-        /* background-image: linear-gradient(45deg, #fff, #502d1e, #fff, #502d1e, #fff); */
-        background-size: 100%;
-        -webkit-background-clip: text;
-        /* -moz-background-clip: text; */
-        background-clip: text;
-      
-        /* text-shadow: 1px 1px 1px #000; */
-      }
-
-      .coffee-section.vanilla .title {
-        /* color: #3f769f; */
-        color: transparent;
-        background-image: linear-gradient(45deg, #3f769f, #fff, #3f769f, #fff, #3f769f);
-        background-size: 100%;
-        -webkit-background-clip: text;
-        /* -moz-background-clip: text; */
-        background-clip: text;
-        /* text-shadow: 1px 1px 1px #000; */
-      }
-
-      .bottle-img.vanilla::after {
-        position: absolute;
-        top: -70%;
-        left: -70%;
-        content: "";
-        width: 240%;
-        height: 240%;
-        background-image: url("img/vanilla-bg.png");
-        filter: saturate(0);
-        filter: grayscale(1);
-        /* background-image: url("img/Pngtree-milk\ splash\ splash_9058971.png"); */
-        /* v.2 */
-        /* top: -30%;
-        left: -20%;
-        width: 140%;
-        height: 140%;
-        background-image: url("img/vecteezy_ai-generated-realistic-water-splash-isolated-transparency_36009980.png"); */
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-        /* transition: opacity 3000ms ease-out; */
-        opacity: 0;
-        z-index: -1;
-      }
-
-      #original .title {
-        /* color: #cd5923; */
-        color: transparent;
-        background-image: linear-gradient(45deg, #cd5923, #fff, #cd5923);
-        background-size: 100%;
-        -webkit-background-clip: text;
-        /* -moz-background-clip: text; */
-        background-clip: text;
-        /* text-shadow: 1px 1px 1px #000; */
-      }
-
-      .bottle-img.original::after {
-        position: absolute;
-        top: -100%;
-        left: -100%;
-        content: "";
-        width: 300%;
-        height: 300%;
-        /* background-image: url("img/orange-paint-splash.png"); */
-        /* background-image: url("img/milk-splash-with-almonds-41858007.png"); */
-        background-image: url("img/file\(3\).png");
-        background-image: url("img/Pngtree-coffee\ splash\ with\ beans\ isolated_14799758.png");
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-        /* filter: hue-rotate(330deg); */
-        filter: saturate(2);
-        /* opacity: 0.6; */
-        /* transition: opacity 3000ms ease-out; */
-        opacity: 0;
-        z-index: -1;
-      }
-
-      .bottle-img.choco::after {
-        position: absolute;
-        top: -100%;
-        left: -100%;
-        content: "";
-        width: 300%;
-        height: 300%;
-        background-image: url("./img/CITYPNG-HD\ Dark\ Beans\ With\ Coffee\ Splash\ Effect\ Transparent\ PNG\ -\ 1500x1500.png");
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-        /* filter: saturate(2); */
-        /* transition: opacity 3000ms ease-out; */
-        opacity: 0;
-        z-index: -1;
-      }
-      
-      .active .title {
-        animation: fade-down 1s ease-out backwards;
-        animation-delay: 1s;
-      }
-
-      .active .main-img {
-        animation: zoom-in 1s ease-out backwards;
-        animation-delay: 1.5s;
-      }
-
-      .active .bottle-img::after {
-        transition: opacity 2s ease-out;
-        transition-delay: 500ms;
-        opacity: 1;
-      }
-      
-      @keyframes fade-down {
-        0% {
-          transform: translateY(-10%);
-          opacity: 0;
-        }
-      }
-      @keyframes zoom-in {
-        0% {
-          transform: scale(0.8) rotate(0deg);
-          opacity: 0;
-        }
-      }
-      
-      .active .button {
-        transition: opacity 1s ease-in, 
-                  transform 1s ease-in;
-        transition-delay: 1.2s, 1.2s;
-        transform: translateY(0);
-        opacity: 1;
-      }
-      
-      .slider {
-        position: relative;
-        /* background-image: url("img/vecteezy_ai-generated-realistic-water-splash-isolated-transparency_36009980.png");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain; */
-      }
-      
-      .coffee-section {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        transition: opacity 500ms;
-        opacity: 0;
-      }
-
-      .coffee-section.active {
-        /* transition-delay: 500ms; */
-        opacity: 1;
-        z-index: 1;
-      }
-
-      #original {
-        position: relative;
-      }
-    </style>
+    <title>URLSearchParams in JS</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+<style>
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  min-height: 100vh;
+  padding: 5rem 0;
+  color: #50707a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Montserrat", sans-serif;
+  background-color: #efefef;
+}
+h2,
+h3,
+.account {
+  font-family: "Open Sans", sans-serif;
+}
+h2 {
+  font-size: 1.2rem;
+}
+h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+}
+p {
+  font-size: 0.8rem;
+}
+nav {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: #1a77d4;
+}
+.nav-list {
+  width: max-content;
+  margin-left: auto;
+  color: #fff;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+li {
+  list-style: none;
+  cursor: pointer;
+}
+.notifications {
+  position: relative;
+}
+.dot {
+  position: absolute;
+  top: 0.1rem;
+  right: 0.3rem;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  outline: 2px solid #ffafd383;
+  background-color: #fc7eb7;
+  z-index: 1;
+}
+.icon-tabler-bell {
+  z-index: -1;
+}
+.account {
+  padding: 0.25rem 0.8rem;
+  display: flex;
+  align-items: center;
+  border-radius: 0.5rem;
+  background-color: #126db8;
+}
+.account-section,
+.notifications-section,
+.messages-section {
+  display: none;
+}
+</style>
   </head>
   <body>
-    <div class="page">
-
-      <header>
-        <ul>
-          <li>about</li>
-          <li>products</li>
-          <li class="logo">
-            <img src="img/logo.png" alt="">
-          </li>
-          <li>stores</li>
-          <li>contact</li>
+    <!-- <h1>Account Dropdown</h1> -->
+    <nav>
+      <ul class="nav-list">
+        <li class="messages">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" />
+          </svg>
+        </li>
+        <li class="notifications">
+          <div class="dot"></div>
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bell" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" />
+          </svg></li>
+        <li class="account">
+          John
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" />
+          </svg>
+        </li>
+      </ul>
+      <section class="messages-section">
+        <p>No new messages</p>
+      </section>
+      <section class="notifications-section">
+        <button class="clear-all-notifications">Clear all</button>
+        <ul class="notifications-list">
+          <li>Notification 1</li>
+          <li>Notification 2</li>
+          <li>Notification 3</li>
         </ul>
-      </header>
-
-      <div class="hero-section black">
-
-        <div class="slider">
-
-          <div class="coffee-section choco">
-            <h1 class="title">cafe choco</h1>
-            
-            <div class="bottle-img choco">
-              <img src="img/bg/coffee.png" alt="" class="main-img">
-            </div>
-            
-            <div class="button-container">
-              <div class="button">
-                <!-- <span></span> -->
-                <button>find in store</button>
-              </div>
-              <div class="button">
-                <!-- <span></span> -->
-                <button>more details</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="coffee-section vanilla">
-            <h1 class="title">cafe vanilla</h1>
-            
-            <div class="bottle-img vanilla">
-              <img src="img/bg/blue.png" alt="" class="main-img">
-            </div>
-            
-            <div class="button-container">
-              <div class="button">
-                <!-- <span></span> -->
-                <button>find in store</button>
-              </div>
-              <div class="button">
-                <!-- <span></span> -->
-                <button>more details</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="coffee-section" id="original">
-            <h1 class="title">the original</h1>
-            
-            <div class="bottle-img original">
-              <img src="img/bg/orange.png" alt="" class="main-img">
-            </div>
-            
-            <div class="button-container">
-              <div class="button">
-                <!-- <span></span> -->
-                <button>find in store</button>
-              </div>
-              <div class="button">
-                <!-- <span></span> -->
-                <button>more details</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="coffee-section black active">
-            <h1 class="title">black roast</h1>
-            
-            <div class="bottle-img">
-              <img src="img/bg/black1.png" alt="" class="main-img">
-            </div>
-            
-            <div class="button-container">
-              <div class="button">
-                <!-- <span></span> -->
-                <button>find in store</button>
-              </div>
-              <div class="button">
-                <!-- <span></span> -->
-                <button>more details</button>
-              </div>
+        <p></p>
+      </section>
+      <section class="account-section">
+        <div class="profile">
+          <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRT_ulFye0VE3Pn_98XpPKYHvlQBAprI0zQdWx3PRfKuxGr7Lfx" alt="" width="100" height="100">
+          <div class="profile-info">
+            <h2>John Smith</h2>
+            <h3>Manager</h3>
+            <div class="buttons-container">
+              <button class="view-profile">View Profile</button>
+              <button class="add-account">Add Account</button>
             </div>
           </div>
         </div>
-
-        <div class="bottle-container">
-          <div class="thumb">
-            <img src="img/bg/coffee.png" alt="Nescafe Xpress">
-          </div>
-          <div class="thumb">
-            <img src="img/bg/blue.png" alt="Nescafe Xpress">
-          </div>
-          <div class="thumb">
-            <img src="img/bg/orange.png" alt="Nescafe Xpress">
-          </div>
-          <div class="thumb active">
-            <img src="img/bg/black1.png" alt="Nescafe Xpress">
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <script>
-      const heroSection = document.querySelector(".hero-section");
-      const mainimg = document.getElementById("main-img");
-      const slides = document.querySelectorAll(".coffee-section");
-      const thumbs = document.querySelectorAll(".thumb");
-      // const thumbsWitoutBg = document.querySelectorAll(".alt-bg");
-      // console.log(heroSection.classList[heroSection.classList.length - 1]);
-
-      const bgColors = [
-        'linear-gradient(rgb(64 32 21), rgb(124 82 55))', 
-        'linear-gradient(rgb(81 157 212 / 75%), rgb(23 77 117))', 
-        'linear-gradient(#f09159, #cc5721)', 
-        'linear-gradient(#5a5858, #000000)'
-      ]
-
-      const backgrounds = ["none", "none", "none", "black"];
-      
-      thumbs.forEach((thumb, index) => {
-        thumb.addEventListener("click", () => {
-          const activeThumb = document.querySelector(".thumb.active");
-          activeThumb.classList.remove("active");
-          thumb.classList.add("active");
-          const activeSlide = document.querySelector(".coffee-section.active");
-          activeSlide.classList.remove("active");
-          slides[index].classList.add("active");
-          // heroSection.classList.add("vanilla");
-          // console.log(thumb.firstElementChild.src);
-          // mainimg.src = thumb.firstChild.src;
-          // console.log(mainimg.src);
-          // document.getElementById("title").textContent = "cafe choco";
-          document.body.style.background = bgColors[index];
-          // heroSection.removeAttribute("style");
-          heroSection.className = `hero-section ${backgrounds[index]}`;
-        })
-      })
-
-      // thumbsWitoutBg.forEach(thumb => (
-      //   thumb.addEventListener("click", () => {
-      //     heroSection.style.background = "none";
-      //   })
-      // ))
-
-      // thumbs[0].onclick = function() {
-      //   const activeThumb = document.querySelector(".thumb.active");
-      //   activeThumb.classList.remove("active");
-      //   this.parentElement.classList.add("active");
-      //   mainimg.src = thumbs[0].src;
-      //   document.getElementById("title").textContent = "cafe choco";
-      //   document.body.style.background = 'linear-gradient(rgb(64 32 21), rgb(124 82 55))';
-      // }
-
-      // thumbs[1].onclick = function() {
-      //   const activeThumb = document.querySelector(".thumb.active");
-      //   activeThumb.classList.remove("active");
-      //   this.parentElement.classList.add("active");
-      //   mainimg.src = thumbs[1].src;
-      //   document.getElementById("title").textContent = "cafe vanilla";
-      //   document.body.style.background = 'linear-gradient(rgb(81 157 212 / 75%), rgb(23 77 117))';
-      // }
-
-      // thumbs[2].onclick = function() {
-      //   const activeThumb = document.querySelector(".thumb.active");
-      //   activeThumb.classList.remove("active");
-      //   this.parentElement.classList.add("active");
-      //   mainimg.src = thumbs[2].src;
-      //   document.getElementById("title").textContent = "the original";
-      //   document.body.style.background = 'linear-gradient(#f09159, #cc5721)';
-      // }
-
-      // thumbs[3].onclick = function() {
-      //   const activeThumb = document.querySelector(".thumb.active");
-      //   activeThumb.classList.remove("active");
-      //   this.parentElement.classList.add("active");
-      //   mainimg.src = thumbs[3].src;
-      //   document.getElementById("title").textContent = "black roast";
-      //   document.body.style.background = 'linear-gradient(#5a5858, #000000)';
-      // }
-    </script>
-
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+        <ul class="account-list">
+          <li>Upgrade to <span>PRO</span></li>
+          <li>Invite team member</li>
+          <li>Feedback</li>
+          <li>Help</li>
+          <li>Sign Out</li>
+        </ul>
+      </section>
+    </nav>
+    <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
     
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
