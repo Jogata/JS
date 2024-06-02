@@ -232,7 +232,7 @@
         right: 0;
         /* width: 100%; */
         /* max-width: 700px; */
-        max-width: 25rem;
+        max-width: 43.75rem;
         display: block;
         margin: auto;
         /* z-index: 1; */
@@ -412,7 +412,8 @@
         flex-wrap: wrap;
         align-items: center;
         color: #777777;
-        font-size: 30px;
+        /* font-size: 30px; */
+        font-size: 1.9rem;
         line-height: normal;
         /* font-family: "SFPRODISPLAYMEDIUM"; */
       }
@@ -468,7 +469,7 @@
         .title-text {
           position: static;
           width: 100%;
-          font-size: calc(5rem + 5vw);
+          font-size: calc(3rem + 10vw);
         }
       
         footer {
@@ -727,6 +728,44 @@
         text-align: center;
         /* border: 1px solid red; */
       }
+
+      .dot {
+        display: block;
+        width: 2rem;
+        height: 2rem;
+        margin: 1rem;
+        border-radius: 50%;
+        border: 0px solid transparent;
+        outline: 2px solid transparent;
+        /* outline-offset: 1px; */
+        background-color: currentColor;
+        box-shadow: 
+          inset 1px 1px 1px #0008, 
+          inset -1px -1px 1px #fff6;
+        transition: outline-color 400ms;
+        cursor: pointer;
+      }
+
+      .dot:hover {
+        outline-color: #fff;
+        outline-color: currentColor;
+      }
+
+      .dot.black {
+        color: #1e1d20;
+      }
+
+      .dot.green {
+        color: #485145;
+      }
+
+      .dot.red {
+        color: #de4e47;
+      }
+      
+      .dot.blue {
+        color: #2e4c67;
+      }
     </style>
   </head>
   <body class="black">
@@ -791,6 +830,97 @@
         </button>
       </footer>
     </div>
+
+    <script>
+      // const images = ["img/black.png", "img/blue.png", "img/green.png", "img/red.png"];
+      const images = document.querySelectorAll(".hero-img");
+      // console.log(images);
+      const colors = ["black", "blue", "green", "red"];
+      let currentColor = "black";
+      let currentIndex = 0;
+
+      // const imageElement = document.getElementById('airpod-img');
+
+      function changeImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        // console.log(currentIndex);
+        // imageElement.src = images[currentIndex];
+        document.body.classList.remove(currentColor);
+        currentColor = colors[currentIndex];
+        document.body.classList.add(currentColor);
+      }
+
+      let interval = setInterval(changeImage, 5000);
+
+      const dots = document.querySelectorAll(".dot");
+
+      dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+          // console.log(dot, index);
+          currentIndex = index;
+          document.body.classList.remove(currentColor);
+          currentColor = colors[currentIndex];
+          document.body.classList.add(currentColor);
+          clearInterval(interval);
+          interval = setInterval(changeImage, 5000);
+        })
+      })
+    </script>
+
+    <script>
+        // 02. Mirror Words
+
+  function findMirrorWords(params) {
+    // console.log(params);
+    const text = params[0];
+    const pairs = [];
+
+    const pairsPattern = /([#@])([A-Za-z]{3,})\1\1([A-Za-z]{3,})\1/g;
+    const wordPattern = /[A-Za-z]+/g;
+
+    const matches = text.match(pairsPattern);
+    // console.log(matches);
+
+    if (matches) {
+      for (const string of matches) {
+        // console.log(string);
+        const words = string.match(wordPattern);
+        // console.log(words);
+        const word1 = words[0];
+        const word2 = words[1];
+        const reversed = word2.split("").reverse().join("");
+        // console.log(word1);
+        // console.log(word2);
+        // console.log(reversed);
+
+        if (word1 == reversed) {
+          const pair = `${word1} <=> ${word2}`;
+          pairs.push(pair);
+        }
+      }
+    }
+
+    // console.log(pairs);
+    if (matches) {
+      console.log(`${matches.length} word pairs found!`);
+
+      if (pairs.length) {
+        console.log("The mirror words are:");
+        console.log(pairs.join(", "));
+      } else {
+        console.log("No mirror words!");
+      }
+    } else {
+      console.log("No word pairs found!");
+      console.log("No mirror words!");
+    }
+
+  }
+
+  // findMirrorWords(['@mix#tix3dj#poOl##loOp#wl@@bong&song%4very$long@thong#Part##traP##@@leveL@@Level@##car#rac##tu@pack@@ckap@#rr#sAw##wAs#r#@w1r']);
+  // findMirrorWords(['#po0l##l0op# @bAc##cAB@ @LM@ML@ #xxxXxx##xxxXxx# @aba@@ababa@']);
+  // findMirrorWords(['#lol#lol# @#God@@doG@# #abC@@Cba# @Xyu@#uyX#']);
+    </script>
   
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
     
