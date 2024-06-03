@@ -3,295 +3,158 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URLSearchParams in JS</title>
+    <!-- <title>URLSearchParams in JS</title> -->
+    <title>Learning Landing Page</title>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-  <style>
-*, 
-*::before, 
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body {
-  /* width: 100%; */
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #052745;
-}
-.alarm-container {
-  width: 90%;
-  /* max-width: 300px; */
-  max-width: 18.75rem;
-  border-radius: 0.2rem;
-  background-color: #062d50;
-  box-shadow: 0 2rem 2rem #021c32;
-}
-nav {
-  padding: 1rem 1.5rem;
-  display: flex;
-  justify-content: space-between;
-}
-.icon-tabler {
-  cursor: pointer;
-}
-.display {
-  position: relative;
-  padding: 3rem 0;
-  text-align: center;
-}
-.display time {
-  font-size: 2rem;
-}
-.date {
-  color: #ffffff9c;
-  font-size: 0.9rem;
-}
-.icon-tabler-plus {
-  position: absolute;
-  right: 1.5rem;
-  bottom: -1.2rem;
-  padding: 0.5rem;
-  border-radius: 50%;
-  background-color: #38c4fe;
-}
-.saved-alarms-container {
-  padding: 2rem 1.5rem;
-  border-bottom-left-radius: 0.2rem;
-  border-bottom-right-radius: 0.2rem;
-  background-color: #023662;
-}
-.saved-alarm-time {
-  display: flex;
-  justify-content: space-between;
-}
-.saved-alarm-time time {
-  color: #fff3;
-  font-size: 1.5rem;
-}
-.toggle-container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-.toggle-track {
-  width: 2.5rem;
-  height: 0.5rem;
-  border-radius: 1rem;
-  background-color: #021c32a3;
-}
-.toggle-button {
-  position: absolute;
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 50%;
-  background-color: #021c32fd;
-  transition: 1s;
-  cursor: pointer;
-}
-.saved-alarm-time .active-alarm {
-  color: #fff;
-}
-.active {
-  right: 0;
-  background-color: #38c4fe;
-}
-.week {
-  margin: 0.8rem 0;
-  display: flex;
-  justify-content: space-between;
-}
-.day {
-  color: #ffffff0a;
-}
-.active-day {
-  color: #fff3;
-}
-  </style>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+      :root {
+        --primary-color: #5c48ee;
+        --primary-color-dark: #0f1e6a;
+        --secondary-color: #f9fafe;
+        --text-color: #333333;
+        --white: #ffffff;
+        --max-width: 1200px;
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--secondary-color);
+      }
+      
+      nav {
+        max-width: var(--max-width);
+        height: 100px;
+        margin: auto;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      
+      .nav-logo a {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+      
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+      
+      .link a {
+        padding: 0.5rem 1rem;
+        color: var(--text-color);
+        font-size: 1rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+      
+      .link a:hover {
+        color: var(--primary-color);
+      }
+      
+      .link .nav-btn {
+        padding: 0.5rem 2rem;
+        color: var(--white) !important;
+        border-radius: 5px;
+        background-color: var(--primary-color);
+      }
+      
+      .link .nav-btn:hover {
+        background-color: var(--primary-color-dark);
+      }
+      
+      .container {
+        max-width: var(--max-width);
+        min-height: calc(100vh - 100px);
+        margin: auto;
+        padding: 1rem;
+        display: grid;
+        gap: 5rem;
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .content-container {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body>        
   </head>
   <body>
-        <!-- <h1>Alarm</h1> -->
-        <section class="alarm-container">
-          <nav>
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-              <path d="M15 6l-6 6l6 6" />
-            </svg>
-            <h3>Alarm</h3>
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-              <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
-              <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
-            </svg>
-          </nav>
-          <div class="display">
-            <time>4:59 PM</time>
-            <p class="date">3RD JANUARY</p>
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-              <path d="M12 5l0 14" />
-              <path d="M5 12l14 0" />
-            </svg>
-          </div>
-          <div class="saved-alarms-container">
-            <div class="saved-alarm">
-              <div class="saved-alarm-time">
-                <time>7:30 pm</time>
-                <div class="toggle-container">
-                  <div class="toggle-track"></div>
-                  <div class="toggle-button"></div>
-                </div>
-              </div>
-              <div class="week">
-                <p class="day">Su</p>
-                <p class="day">Mo</p>
-                <p class="day">Tu</p>
-                <p class="day">We</p>
-                <p class="day">Th</p>
-                <p class="day">Fr</p>
-                <p class="day">Sa</p>
-              </div>
-            </div>
-            <div class="saved-alarm">
-              <div class="saved-alarm-time">
-                <time>10:30 am</time>
-                <div class="toggle-container">
-                  <div class="toggle-track"></div>
-                  <div class="toggle-button"></div>
-                </div>
-              </div>
-              <div class="week">
-                <p class="day">Su</p>
-                <p class="day">Mo</p>
-                <p class="day">Tu</p>
-                <p class="day">We</p>
-                <p class="day">Th</p>
-                <p class="day">Fr</p>
-                <p class="day">Sa</p>
-              </div>
-            </div>
-          </div>
-        </section>
+    <nav>
+      <div class="nav-logo">
+        <a href="#">Learning</a>
+      </div>
+      <ul class="nav-links">
+        <li class="link">
+          <a href="#">Home</a>
+        </li>
+        <li class="link">
+          <a href="#">About Us</a>
+        </li>
+        <li class="link">
+          <a href="#">Services</a>
+        </li>
+        <li class="link">
+          <a href="#">Courses</a>
+        </li>
+        <li class="link">
+          <a href="#">Blog</a>
+        </li>
+        <li class="link">
+          <a href="#" class="nav-btn">Register</a>
+        </li>
+      </ul>
+    </nav>
+    <section class="container">
+      <div class="content-container">
+        <h1>
+          Best Learning <br/>
+          <span class="heading-1">Education Platform</span> <br/>
+          <span class="heading-2">in The World</span>
+        </h1>
+        <p>
+          Unlock your full learning potential with our intuitive education
+          platform. Seamlessly blending technology and education, we provide an
+          immersive learning environment that combines interactive lessons,
+          virtual classrooms, and intelligent feedback.
+        </p>
+        <form>
+          <input type="text" placeholder="What do you want to learn" />
+          <button type="submit">Search Course</button>
+        </form>
+      </div>
+      <div class="image-container">
+        <img src="assets/header-1.jpg" alt="header"/>
+        <img src="assets/header-2.jpg" alt="header"/>
+        <div class="image-content">
+          <ul>
+            <li>Get 30% off on every 1st month</li>
+            <li>Expert teachers</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-    <script>
-      // Get current time and date
-      const DISPLAYED_TIME = document.querySelector(".display time");
-
-      const MONTHS = [
-        "JANUARY",
-        "FEBRUARY",
-        "MARCH",
-        "APRIL",
-        "MAY",
-        "JUNE",
-        "JULY",
-        "AUGUST",
-        "SEPTEMBER",
-        "OCTOBER",
-        "NOVEMBER",
-        "DECEMBER",
-      ];
-
-      const CURRENT_DATE = document.querySelector(".date");
-      
-      setInterval(() => {
-        const CURRENT_HOUR = new Date().toLocaleTimeString().split(":")[0];
-        const CURRENT_MINUTES = new Date().toLocaleTimeString().split(":")[1];
-        const DAY = new Date().toLocaleDateString().split("/")[0];
-        const MONTH = parseInt(new Date().toLocaleDateString().split("/")[1]);
-        DISPLAYED_TIME.textContent = `${CURRENT_HOUR}:${CURRENT_MINUTES} ${
-          CURRENT_HOUR >= 12 ? "PM" : "AM"
-        }`;
-        CURRENT_DATE.textContent = `${DAY} ${MONTHS[MONTH - 1]}`;
-      }, 1000);
-      
-      // Toggle alarm
-      const SAVED_ALARMS = [...document.querySelectorAll(".saved-alarm")];
-      
-      SAVED_ALARMS.forEach((alarm, index) => {
-        alarm.querySelector(".toggle-button").addEventListener("click", (e) => {
-          e.target.classList.toggle("active");
-
-          SAVED_ALARMS[index]
-            .querySelector(".saved-alarm-time time")
-            .classList.toggle("active-alarm");
-
-          SAVED_ALARMS[index].querySelectorAll(".week .day").forEach((day) => {
-           
-            if (day.classList.contains('active-alarm') && SAVED_ALARMS[index]
-            .querySelector(".saved-alarm-time time")
-            .classList.contains("active-alarm")) {
-              day.style.color = '#fff';
-            } else if (day.classList.contains('active-alarm') && !SAVED_ALARMS[index]
-            .querySelector(".saved-alarm-time time")
-            .classList.contains("active-alarm")) {
-              day.style.color = '#fff3';
-            } else if (!SAVED_ALARMS[index]
-              .querySelector(".saved-alarm-time time")
-              .classList.contains("active-alarm") && !day.classList.contains('active-alarm')) {
-               day.style.color = '#ffffff0a'
-            }
-            
-            day.addEventListener("click", (e) => {
-              if (
-                SAVED_ALARMS[index]
-                  .querySelector(".saved-alarm-time time")
-                  .classList.contains("active-alarm") && !day.classList.contains('active-alarm')
-              ) {
-                day.classList.toggle('active-alarm');
-                day.style.color = '#fff';
-              } else if (
-                SAVED_ALARMS[index]
-                  .querySelector(".saved-alarm-time time")
-                  .classList.contains("active-alarm") && day.classList.contains('active-alarm')
-              ) {
-                day.classList.toggle('active-alarm');
-                day.style.color = '#fff3';
-              } 
-            });
-          });
-        });
-      });
-    </script>      
-    <script>
-      // 03. Address Book
-
-function createAddressBook(params) {
-// console.log(params);
-const book = {};
-
-for (const input of params) {
-  // console.log(input);
-  const data = input.split(':');
-  // console.log(data);
-  const name = data[0];
-  const address = data[1];
-  // console.log(name, address);
-  book[name] = address;
-}
-// console.log(book);
-const keys = Object.keys(book);
-const sorted = keys.sort();
-
-for (const key of sorted) {
-  // console.log(key);
-  const address = book[key];
-  console.log(`${key} -> ${address}`);
-}
-
-}
-
-// createAddressBook(['Tim:Doe Crossing', 'Bill:Nelson Place', 'Peter:Carlyle Ave', 'Bill:Ornery Rd']);
-// createAddressBook(['Bob:Huxley Rd', 'John:Milwaukee Crossing', 'Peter:Fordem Ave', 'Bob:Redwing Ave', 'George:Mesta Crossing', 'Ted:Gateway Way', 'Bill:Gateway Way', 'John:Grover Rd', 'Peter:Huxley Rd', 'Jeff:Gateway Way', 'Jeff:Huxley Rd']);
-    </script>
-        
-    <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
         
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
