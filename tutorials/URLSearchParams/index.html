@@ -26,7 +26,8 @@ body {
 }
 .alarm-container {
   width: 90%;
-  max-width: 300px;
+  /* max-width: 300px; */
+  max-width: 18.75rem;
   border-radius: 0.2rem;
   background-color: #062d50;
   box-shadow: 0 2rem 2rem #021c32;
@@ -72,6 +73,45 @@ nav {
 .saved-alarm-time time {
   color: #fff3;
   font-size: 1.5rem;
+}
+.toggle-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.toggle-track {
+  width: 2.5rem;
+  height: 0.5rem;
+  border-radius: 1rem;
+  background-color: #021c32a3;
+}
+.toggle-button {
+  position: absolute;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: #021c32fd;
+  transition: 1s;
+  cursor: pointer;
+}
+.saved-alarm-time .active-alarm {
+  color: #fff;
+}
+.active {
+  right: 0;
+  background-color: #38c4fe;
+}
+.week {
+  margin: 0.8rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+.day {
+  color: #ffffff0a;
+}
+.active-day {
+  color: #fff3;
 }
   </style>
   </head>
@@ -138,6 +178,118 @@ nav {
             </div>
           </div>
         </section>
+
+    <script>
+      // Get current time and date
+      const DISPLAYED_TIME = document.querySelector(".display time");
+
+      const MONTHS = [
+        "JANUARY",
+        "FEBRUARY",
+        "MARCH",
+        "APRIL",
+        "MAY",
+        "JUNE",
+        "JULY",
+        "AUGUST",
+        "SEPTEMBER",
+        "OCTOBER",
+        "NOVEMBER",
+        "DECEMBER",
+      ];
+
+      const CURRENT_DATE = document.querySelector(".date");
+      
+      setInterval(() => {
+        const CURRENT_HOUR = new Date().toLocaleTimeString().split(":")[0];
+        const CURRENT_MINUTES = new Date().toLocaleTimeString().split(":")[1];
+        const DAY = new Date().toLocaleDateString().split("/")[0];
+        const MONTH = parseInt(new Date().toLocaleDateString().split("/")[1]);
+        DISPLAYED_TIME.textContent = `${CURRENT_HOUR}:${CURRENT_MINUTES} ${
+          CURRENT_HOUR >= 12 ? "PM" : "AM"
+        }`;
+        CURRENT_DATE.textContent = `${DAY} ${MONTHS[MONTH - 1]}`;
+      }, 1000);
+      
+      // Toggle alarm
+      const SAVED_ALARMS = [...document.querySelectorAll(".saved-alarm")];
+      
+      SAVED_ALARMS.forEach((alarm, index) => {
+        alarm.querySelector(".toggle-button").addEventListener("click", (e) => {
+          e.target.classList.toggle("active");
+
+          SAVED_ALARMS[index]
+            .querySelector(".saved-alarm-time time")
+            .classList.toggle("active-alarm");
+
+          SAVED_ALARMS[index].querySelectorAll(".week .day").forEach((day) => {
+           
+            if (day.classList.contains('active-alarm') && SAVED_ALARMS[index]
+            .querySelector(".saved-alarm-time time")
+            .classList.contains("active-alarm")) {
+              day.style.color = '#fff';
+            } else if (day.classList.contains('active-alarm') && !SAVED_ALARMS[index]
+            .querySelector(".saved-alarm-time time")
+            .classList.contains("active-alarm")) {
+              day.style.color = '#fff3';
+            } else if (!SAVED_ALARMS[index]
+              .querySelector(".saved-alarm-time time")
+              .classList.contains("active-alarm") && !day.classList.contains('active-alarm')) {
+               day.style.color = '#ffffff0a'
+            }
+            
+            day.addEventListener("click", (e) => {
+              if (
+                SAVED_ALARMS[index]
+                  .querySelector(".saved-alarm-time time")
+                  .classList.contains("active-alarm") && !day.classList.contains('active-alarm')
+              ) {
+                day.classList.toggle('active-alarm');
+                day.style.color = '#fff';
+              } else if (
+                SAVED_ALARMS[index]
+                  .querySelector(".saved-alarm-time time")
+                  .classList.contains("active-alarm") && day.classList.contains('active-alarm')
+              ) {
+                day.classList.toggle('active-alarm');
+                day.style.color = '#fff3';
+              } 
+            });
+          });
+        });
+      });
+    </script>      
+    <script>
+      // 03. Address Book
+
+function createAddressBook(params) {
+// console.log(params);
+const book = {};
+
+for (const input of params) {
+  // console.log(input);
+  const data = input.split(':');
+  // console.log(data);
+  const name = data[0];
+  const address = data[1];
+  // console.log(name, address);
+  book[name] = address;
+}
+// console.log(book);
+const keys = Object.keys(book);
+const sorted = keys.sort();
+
+for (const key of sorted) {
+  // console.log(key);
+  const address = book[key];
+  console.log(`${key} -> ${address}`);
+}
+
+}
+
+// createAddressBook(['Tim:Doe Crossing', 'Bill:Nelson Place', 'Peter:Carlyle Ave', 'Bill:Ornery Rd']);
+// createAddressBook(['Bob:Huxley Rd', 'John:Milwaukee Crossing', 'Peter:Fordem Ave', 'Bob:Redwing Ave', 'George:Mesta Crossing', 'Ted:Gateway Way', 'Bill:Gateway Way', 'John:Grover Rd', 'Peter:Huxley Rd', 'Jeff:Gateway Way', 'Jeff:Huxley Rd']);
+    </script>
         
     <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
         
