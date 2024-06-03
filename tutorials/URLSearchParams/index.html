@@ -6,924 +6,141 @@
     <title>URLSearchParams in JS</title>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Kaushan+Script&family=Playfair+Display&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Brawler:wght@400;700&family=Croissant+One&family=Ephesis&family=Gloock&family=Hurricane&family=Imbue:opsz,wght@10..100,100..900&family=Modak&family=Montez&family=Prosto+One&family=Rye&family=Shojumaru&family=Young+Serif&family=ZCOOL+XiaoWei&display=swap');
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      
-      a {
-        display: inline-block;
-        /* color: #333; */
-        /* font-size: 1rem; */
-        text-decoration: none;
-      }
-
-      ul {
-        list-style: none;
-      }
-      
-      img {
-        width: 100%;
-        /* max-width: 100%; */
-      }
-
-      body {
-        /* width: 100%; */
-        /* height: 100vh; */
-        min-height: 100vh;
-        padding: 3rem;
-        display: flex;
-        /* align-items: center; */
-        /* justify-content: center; */
-        /* color: #333; */
-        font-family: Georgia, serif;
-        font-family: 'Abril Fatface', cursive;
-        font-family: 'Courgette', cursive;
-        font-family: 'Dancing Script', cursive;
-        font-family: 'Great Vibes', cursive;
-        font-family: 'Josefin Sans', sans-serif;
-        font-family: 'Limelight', cursive;
-        font-family: 'Lobster', cursive;
-        font-family: 'Montserrat', sans-serif;
-        font-family: 'Oleo Script Swash Caps', cursive;
-        font-family: 'Poppins', sans-serif;
-        font-family: 'Raleway', sans-serif;
-        font-family: 'Kaushan Script', cursive;
-        font-family: 'Fraunces', serif;
-        font-family: 'Playfair Display', serif;
-        font-family: 'Lemon', cursive; 
-        font-family: "Patua One", serif;
-        font-family: "Platypi", serif;
-      }
-
-      .page {
-        position: relative;
-        width: 100%;
-        /* max-width: 1600px; */
-        max-width: 100rem;
-        margin: auto;
-        border-radius: 24px;
-        /* box-shadow: 3px 3px 6px #0005, 
-                -3px -3px 6px #fff2; */
-                box-shadow: 3px 3px 6px #0005, 
-                0px 0px 6px #0002;
-        /* overflow: hidden; */
-      }
-
-      header {
-        /* position: fixed; */
-        /* position: absolute; */
-        /* top: 0; */
-        /* left: 0; */
-        /* right: 0; */
-        /* width: 100%; */
-        width: 94%;
-        margin: auto;
-        /* padding: 35px 7%; */
-        padding: 2rem 0;
-        /* display: flex; */
-        /* row-gap: 12px; */
-        /* flex-wrap: wrap; */
-        /* align-items: center; */
-        /* justify-content: space-between; */
-        /* background-color: var(--white-color); */
-        /* transition: all 0.5s ease; */
-        /* border: 1px solid red; */
-        /* transition: all 0.9s ease; */
-        /* z-index: 2; */
-      }
-
-      nav {
-        /* position: fixed; */
-        /* width: 100%; */
-        width: 94%;
-        margin: auto;
-        /* height: 80px; */
-        /* padding: 0 10%; */
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        /* background-color: transparent; */
-        /* z-index: 3; */
-      }
-
-      .navlist li {
-        /* position: relative; */
-        display: inline-block;
-        /* margin: 0 20px; */
-        margin: 0 1.25rem;
-        /* padding: 5px 0; */
-        padding: 0.35em 0;
-        font-size: 1rem;
-      }
-      /* .navlist li::before {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 2px;
-        background-color: var(--white-color);
-        transform-origin: left;
-        transform: scaleX(0);
-        transition: all 0.4s ease-in-out;
-      }
-      .navlist li:hover::before {
-        width: 100%;
-        transform: scale(1);
-      } */
-
-      .navlist a {
-        /* display: inline-block; */
-        /* padding: 6px 16px; */
-        /* padding: 0.4em 1em; */
-        color: var(--white-color);
-        font-size: var(--p-font);
-        font-weight: 600;
-        text-transform: uppercase;
-        /* transition: all 0.6s ease; */
-        transition: color 600ms ease;
-        /* border: 1px solid red; */
-      }
-      .navlist a:hover {
-        color: var(--main-color);
-      }
-
-      /* .main */
-      .hero-section {
-        position: relative;
-        width: 94%;
-        /* min-height: 100vh; */
-        /* padding: 48px 0; */
-        /* padding: 3rem 0; */
-        /* padding: 1rem 1rem 5rem; */
-        padding: 1rem;
-        /* display: grid; */
-        /* display: flex; */
-        /* gap: 32px; */
-        /* gap: 2rem; */
-        /* align-items: center; */
-        /* justify-content: space-between; */
-        /* grid-template-columns: repeat(2, 1fr); */
-        /* grid-template-columns: auto 1fr 1fr auto; */
-        /* background-image: url("./assets/bg.png");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover; */
-        /* z-index: 1; */
-      }
-
-      /* .content  */
-      .hero-text {
-        /* width: 50%; */
-        /* max-width: 650px; */
-        max-width: 41rem;
-        /* margin-top: 50px; */
-        margin-top: 3rem;
-        /* padding-left: 10%; */
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        z-index: 1;
-      }
-
-      .hero-text h1 {
-        /* margin-bottom: 1.6rem; */
-        /* font-size: 5rem; */
-        font-size: min(5rem, calc(2rem + 8vw));
-        font-weight: 600;
-        font-family: "Arizonia", cursive;
-        text-transform: capitalize;
-      }
-
-      .hero-text p {
-        /* width: 80%; */
-        /* max-width: 650px; */
-        /* max-width: 38.75rem; */
-        margin-top: 1.6rem;
-        /* margin-bottom: 40px; */
-        /* margin-bottom: 2.5rem; */
-        /* color: var(--white-color); */
-        /* font-size: var(--p-font); */
-        /* font-weight: 400; */
-      }
-
-      .hero-img-container {
-        position: relative;
-        padding-bottom: 4rem;
-      }
-
-      #relative {
-        position: relative;
-      }
-
-      .hero-img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        /* width: 100%; */
-        /* max-width: 700px; */
-        max-width: 43.75rem;
-        display: block;
-        margin: auto;
-        /* z-index: 1; */
-        transition: opacity 1000ms ease-out;
-        transition-delay: -500ms;
-        opacity: 0;
-      }
-
-      /* 1600px */
-      @media (max-width: 1rem) {
-        body {
-          padding: 0;
-        }
-
-        .page {
-          width: auto;
-          min-height: 100vh;
-          border-radius: 0;
-          box-shadow: none;
-        }
-
-        .hero-section {
-          width: 100%;
-        }
-
-        .hero-text {
-          width: 94%;
-          margin: 3rem auto 5rem;
-          text-align: center;
-        }
-      }
-
-      /* 900px */
-      @media (max-width: 56.25rem) {
-        .navlist {
-          position: absolute;
-          top: 100%;
-          /* top: 0; */
-          right: 0;
-          width: 100%;
-          min-height: 100vh;
-          padding: 3rem 0;
-          /* display: flex; */
-          /* display: none; */
-          /* flex-direction: column; */
-          border-top: 1px solid #2f2d2d;
-          border-bottom: 1px solid #393737;
-          background-color: var(--white-color);
-          transform-origin: top;
-          transform: scaleY(0);
-          /* transition: transform 500ms ease-in-out; */
-          z-index: 1;
-        }
-
-        .navlist.open {
-          transform: scale(1);
-          transition: transform 500ms ease-in-out;
-        }
-
-        .navlist li {
-          display: none;
-          width: 90%;
-          margin: auto;
-          /* padding-left: 30px; */
-        }
-
-        .navlist.open li {
-          display: block;
-        }
-
-        .navlist a {
-          color: #000;
-        }
-      }
-
-
-      .zoom-in {
-        animation: zoom-in 2s linear backwards;
-      }
-
-      @keyframes zoom-in {
-        0% {
-          transform: scale(0) rotate(-15deg);
-        }
-      }
-
-      .zoom-left {
-        animation: zoom-left 1s linear backwards;
-        animation-delay: calc(0.2s * var(--delay));
-      }
-
-      @keyframes zoom-left {
-        0% {
-          transform: scale(0);
-          transform-origin: right;
-          opacity: 0;
-        }
-      }
-
-      .show-up {
-        animation: show-up 1s linear backwards;
-        animation-delay: calc(0.2s * var(--delay));
-      }
-
-      @keyframes show-up {
-        0% {
-          transform: translateY(10px);
-          opacity: 0;
-        }
-      }
-
-      .show-down {
-        animation: show-down 1s linear backwards;
-        animation-delay: calc(0.2s * var(--delay));
-      }
-      @keyframes show-down {
-        0% {
-          transform: translateY(-10px);
-          opacity: 0;
-        }
-      }
-
-      .show-right {
-        animation: show-right 1s linear backwards;
-        animation-delay: calc(0.2s * var(--delay));
-      }
-
-      @keyframes show-right {
-        0% {
-          transform: translateX(-50px);
-          opacity: 0;
-        }
-      }
-
-      .show-left {
-        animation: show-left 1s linear backwards;
-        animation-delay: calc(0.2s * var(--delay));
-      }
-
-      @keyframes show-left {
-        0% {
-          transform: translateX(50px);
-          opacity: 0;
-        }
-      }
-      
-      /* section { */
-        /* width: 100%; */
-        /* height: 100vh; */
-        /* background-color: #fff; */
-        /* position: relative; */
-      /* } */
-      
-      header {
-        /* width: 100%; */
-        /* padding: 40px 80px; */
-        display: flex;
-        column-gap: 6rem;
-        row-gap: 2rem;
-        flex-wrap: wrap;
-        /* align-items: center; */
-        justify-content: space-between;
-        /* position: fixed; */
-        /* top: 0px; */
-        /* left: 0px; */
-      }
-      
-      .logo {
-        flex-shrink: 0;
-      }
-      
-      .menus ul {
-        display: flex;
-        /* gap: 54px; */
-        column-gap: 4.5rem;
-        row-gap: 1rem;
-        flex-wrap: wrap;
-        align-items: center;
-        color: #777777;
-        /* font-size: 30px; */
-        font-size: 1.9rem;
-        line-height: normal;
-        /* font-family: "SFPRODISPLAYMEDIUM"; */
-      }
-      
-      .title-text {
-        position: absolute;
-        top: 0;
-        left: -10%;
-        width: 120%;
-        min-width: min-content;
-        /* height: 100%; */
-        /* display: flex; */
-        /* align-items: center; */
-        /* justify-content: center; */
-        /* font-family: "SFPRODISPLAYBOLD"; */
-        /* top: 50%; */
-        /* left: 50%; */
-        /* transform: translateY(-50%); */
-        color: transparent;
-        /* font-size: 300px; */
-        font-size: 18rem;
-        text-align: center;
-        /* line-height: normal; */
-        font-family: "Croissant One", serif;
-        font-family: "Shojumaru", system-ui;
-        font-family: "Montez", cursive;
-        font-family: "Modak", system-ui;
-        font-family: "Imbue", serif;
-        font-family: "Hurricane", cursive;
-        font-family: "Prosto One", sans-serif;
-        font-family: "Young Serif", serif;
-        font-family: "ZCOOL XiaoWei", sans-serif;
-        font-family: "Brawler", serif;
-        font-family: "Rye", serif;
-        font-family: "Gloock", serif;
-        font-family: "Ephesis", cursive;
-        font-family: "Platypi", serif;
-        font-family: "Patua One", serif;
-        font-family: "Arizonia", cursive;
-        /* background-image: url('Images/text.jfif'); */
-        /* background-repeat: repeat; */
-        /* background-size: contain; */
-        /* background-position: center; */
-        background-clip: text;
-        -webkit-background-clip: text;
-        filter: drop-shadow(1px 1px 1px #000);
-        /* -webkit-text-fill-color: transparent; */
-        pointer-events: none;
-      }
-      
-      /* 1900px */
-      @media screen and (max-width: 118.75rem) {
-        .title-text {
-          position: static;
-          width: 100%;
-          font-size: calc(3rem + 10vw);
-        }
-      
-        footer {
-          position: static !important;
-        }
-      }
-
-      /* 1000px */
-      @media screen and (max-width: 62.5rem) {
-        /* .hero-section {
-          padding: 1rem;
-        } */
-
-        body {
-          min-width: min-content;
-        }
-
-        .dots {
-          position: static !important;
-        }
-
-        .dot {
-          display: inline-block !important;
-        }
-
-        .airpod-details {
-          margin: auto;
-        }
-
-        .add-to-cart {
-          margin: auto;
-        }
-      }
-
-      body.black {
-        background-image: 
-          linear-gradient(
-            -24deg, #000, #fff, #fff);
-        background-image: 
-          linear-gradient(
-            -24deg, #000, #0002);
-      }
-
-      body.black .black {
-        transition-delay: 400ms;
-        opacity: 1;
-        z-index: 1;
-      }
-
-      body.black .title-text {
-        background-image: 
-          linear-gradient(
-            45deg, #000, #fff, #000);
-      }
-
-      body.black .menus ul {
-        color: #fff;
-      }
-
-      body.black .menus img {
-        filter: brightness(0) invert(1);
-      }
-
-      body.black .add-to-cart {
-        background-color: #1e1d20;
-      }
-
-      body.green {
-        background-image: 
-          linear-gradient(
-            -24deg, #545c4e, #fff, #fff);
-        background-image: 
-          linear-gradient(
-            -24deg, #545c4e, #fff);
-      }
-
-      body.green .green {
-        transition-delay: 400ms;
-        opacity: 1;
-        z-index: 1;
-      }
-
-      body.green .title-text {
-        background-image: 
-          linear-gradient(
-            45deg, #7e8c79, #fff, #7e8c79);
-      }
-
-      body.green .add-to-cart {
-        background-color: #485145;
-      }
-
-      body.red .red {
-        transition-delay: 400ms;
-        opacity: 1;
-        z-index: 1;
-      }
-
-      body.red {
-        background-image: 
-          linear-gradient(
-            -24deg, #de4e47, #fff, #fff);
-        background-image: 
-          linear-gradient(
-            -24deg, #de4e47, #fff);
-      }
-
-      body.red .title-text {
-        background-image: 
-          linear-gradient(
-            45deg, #de4e47, #fff, #de4e47);
-      }
-
-      body.red .add-to-cart {
-        background-color: #de4e47;
-      }
-
-      body.blue {
-        background-image: 
-          linear-gradient(
-            -24deg, #2e4d68, #fff, #fff);
-        background-image: 
-          linear-gradient(
-            -24deg, #2e4d68, #fff);
-      }
-
-      body.blue .blue {
-        transition-delay: 400ms;
-        opacity: 1;
-        z-index: 1;
-      }
-
-      body.blue .title-text {
-        background-image: 
-          linear-gradient(
-            45deg, #2e4d68, #fff, #2e4d68);
-      }
-
-      body.blue .add-to-cart {
-        background-color: #2e4c67;
-      }
-
-      .airpod-img {
-        /* position: absolute; */
-        /* z-index: 9; */
-        /* left: 50%; */
-        /* top: 50%; */
-        /* transform: translate(-50%, -50%) scale(.8); */
-      }
-
-      .title-text::before {
-        display: inline-block;
-        position: absolute;
-        left: 25px;
-        top: 50%;
-        transform: translateY(-50%);
-        /* content: ''; */
-        width: 65px;
-        height: 65px;
-        border-radius: 50%;
-        background-color: #777777;
-        background-image: url('images/right.png');
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 20%;
-      }
-
-      .title-text::after {
-        display: inline-block;
-        position: absolute;
-        right: 25px;
-        top: 50%;
-        transform: translateY(-50%);
-        /* content: ''; */
-        width: 65px;
-        height: 65px;
-        border-radius: 50%;
-        background-color: #777777;
-        background-image: url('images/left.png');
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: 20%;
-      }
-
-      footer {
-        position: absolute;
-        left: 0;
-        right: 0;
-        /* bottom: 20px; */
-        bottom: 1.25rem;
-        /* width: 100%; */
-        /* padding: 40px 80px; */
-        width: 94%;
-        margin: auto;
-        /* padding: 40px 0; */
-        padding: 2.5rem 0;
-        /* color: #fff; */
-        display: flex;
-        gap: 2rem;
-        flex-wrap: wrap;
-        align-items: flex-end;
-        justify-content: space-between;
-        z-index: 1;
-      }
-
-      .airpod-details ul {
-        display: flex;
-        /* gap: 53px; */
-        column-gap: 4.5rem;
-        row-gap: 1rem;
-        flex-wrap: wrap;
-        /* text-align: center; */
-        /* align-items: flex-end; */
-        /* font-family: "SFPRODISPLAYMEDIUM"; */
-        /* color: #777777; */
-      }
-
-      .airpod-details ul li {
-        margin: auto;
-      }
-
-      .airpod-details ul a {
-        color: #f1f1f1;
-        /* font-size: 30px; */
-        font-size: 2rem;
-        /* line-height: normal; */
-      }
-
-      .add-to-cart {
-        /* width: 320px; */
-        /* padding: 16px 50px 24px; */
-        padding: 0.52em 1.5em 0.75em;
-        color: #fff;
-        /* font-size: 35px; */
-        /* font-size: 2.2rem; */
-        font-size: min(1.2rem + 2vw, 2.2rem);
-        /* text-align: center; */
-        font-family: inherit;
-        /* line-height: normal; */
-        border: none;
-        /* border-radius: 50px; */
-        border-radius: 2em;
-        /* background-color: #0071e1; */
-        box-shadow: 3px 3px 6px #0005, 
-                  -3px -3px 6px #fff2;
-        /* font-family: "SFPRODISPLAYREGULAR"; */
-        transition: all 400ms ease-out;
-        cursor: pointer;
-      }
-      
-      .dots {
-        position: absolute;
-        left: 1rem;
-        bottom: 0;
-        height: 50%;
-        text-align: center;
-        /* border: 1px solid red; */
-      }
-
-      .dot {
-        display: block;
-        width: 2rem;
-        height: 2rem;
-        margin: 1rem;
-        border-radius: 50%;
-        border: 0px solid transparent;
-        outline: 2px solid transparent;
-        /* outline-offset: 1px; */
-        background-color: currentColor;
-        box-shadow: 
-          inset 1px 1px 1px #0008, 
-          inset -1px -1px 1px #fff6;
-        transition: outline-color 400ms;
-        cursor: pointer;
-      }
-
-      .dot:hover {
-        outline-color: #fff;
-        outline-color: currentColor;
-      }
-
-      .dot.black {
-        color: #1e1d20;
-      }
-
-      .dot.green {
-        color: #485145;
-      }
-
-      .dot.red {
-        color: #de4e47;
-      }
-      
-      .dot.blue {
-        color: #2e4c67;
-      }
-    </style>
+  <style>
+*, 
+*::before, 
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  /* width: 100%; */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #052745;
+}
+.alarm-container {
+  width: 90%;
+  max-width: 300px;
+  border-radius: 0.2rem;
+  background-color: #062d50;
+  box-shadow: 0 2rem 2rem #021c32;
+}
+nav {
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+.icon-tabler {
+  cursor: pointer;
+}
+.display {
+  position: relative;
+  padding: 3rem 0;
+  text-align: center;
+}
+.display time {
+  font-size: 2rem;
+}
+.date {
+  color: #ffffff9c;
+  font-size: 0.9rem;
+}
+.icon-tabler-plus {
+  position: absolute;
+  right: 1.5rem;
+  bottom: -1.2rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  background-color: #38c4fe;
+}
+.saved-alarms-container {
+  padding: 2rem 1.5rem;
+  border-bottom-left-radius: 0.2rem;
+  border-bottom-right-radius: 0.2rem;
+  background-color: #023662;
+}
+.saved-alarm-time {
+  display: flex;
+  justify-content: space-between;
+}
+.saved-alarm-time time {
+  color: #fff3;
+  font-size: 1.5rem;
+}
+  </style>
   </head>
-  <body class="black">
-
-    <div class="page">
-
-      <header>
-
-        <div class="logo">
-          <img src="img/logo.png" alt="logo">
-        </div>
-
-        <div class="menus">
-
-          <ul>
-            <li>Mac</li>
-            <li>ipad</li>
-            <li>iphone</li>
-            <li>watch</li>
-            <li>TV</li>
-            <li>Music</li>
-            <li>Support</li>
-            <li>
-              <img src="img/search.png" alt="search">
-            </li>
-            <li>
-              <img src="img/shopping_bag.png" alt="cart">
-            </li>
-          </ul>
-
-        </div>
-      </header>
-      <div class="hero-section">
-        <h1 class="title-text">
-          <!-- <h1> -->
-            AirPods Max
-          <!-- </h1> -->
-        </h1>
-        <!-- <img src="./img/black.png" alt="Airpod Max" id="airpod-img"> -->
-        <div class="hero-img-container">
-          <img src="./img/black.png" class="hero-img black" alt="Airpod Max" id="relative">
-          <img src="./img/blue.png" class="hero-img blue" alt="Airpod Max">
-          <img src="./img/green.png" class="hero-img green" alt="Airpod Max">
-          <img src="./img/red.png" class="hero-img red" alt="Airpod Max">  
-        </div>
-        <div class="dots">
-          <button class="dot black"></button>
-          <button class="dot blue"></button>
-          <button class="dot green"></button>
-          <button class="dot red"></button>
-        </div >
-      </div >
-      <footer>
-        <div class="airpod-details">
-          <ul>
-            <li><a href="#">Overview</a></li>
-            <li><a href="#">Tech Specs</a></li>
-          </ul>
-        </div >
-        <button class="add-to-cart">
-          Add to basket
-        </button>
-      </footer>
-    </div>
-
-    <script>
-      // const images = ["img/black.png", "img/blue.png", "img/green.png", "img/red.png"];
-      const images = document.querySelectorAll(".hero-img");
-      // console.log(images);
-      const colors = ["black", "blue", "green", "red"];
-      let currentColor = "black";
-      let currentIndex = 0;
-
-      // const imageElement = document.getElementById('airpod-img');
-
-      function changeImage() {
-        currentIndex = (currentIndex + 1) % images.length;
-        // console.log(currentIndex);
-        // imageElement.src = images[currentIndex];
-        document.body.classList.remove(currentColor);
-        currentColor = colors[currentIndex];
-        document.body.classList.add(currentColor);
-      }
-
-      let interval = setInterval(changeImage, 5000);
-
-      const dots = document.querySelectorAll(".dot");
-
-      dots.forEach((dot, index) => {
-        dot.addEventListener("click", () => {
-          // console.log(dot, index);
-          currentIndex = index;
-          document.body.classList.remove(currentColor);
-          currentColor = colors[currentIndex];
-          document.body.classList.add(currentColor);
-          clearInterval(interval);
-          interval = setInterval(changeImage, 5000);
-        })
-      })
-    </script>
-
-    <script>
-        // 02. Mirror Words
-
-  function findMirrorWords(params) {
-    // console.log(params);
-    const text = params[0];
-    const pairs = [];
-
-    const pairsPattern = /([#@])([A-Za-z]{3,})\1\1([A-Za-z]{3,})\1/g;
-    const wordPattern = /[A-Za-z]+/g;
-
-    const matches = text.match(pairsPattern);
-    // console.log(matches);
-
-    if (matches) {
-      for (const string of matches) {
-        // console.log(string);
-        const words = string.match(wordPattern);
-        // console.log(words);
-        const word1 = words[0];
-        const word2 = words[1];
-        const reversed = word2.split("").reverse().join("");
-        // console.log(word1);
-        // console.log(word2);
-        // console.log(reversed);
-
-        if (word1 == reversed) {
-          const pair = `${word1} <=> ${word2}`;
-          pairs.push(pair);
-        }
-      }
-    }
-
-    // console.log(pairs);
-    if (matches) {
-      console.log(`${matches.length} word pairs found!`);
-
-      if (pairs.length) {
-        console.log("The mirror words are:");
-        console.log(pairs.join(", "));
-      } else {
-        console.log("No mirror words!");
-      }
-    } else {
-      console.log("No word pairs found!");
-      console.log("No mirror words!");
-    }
-
-  }
-
-  // findMirrorWords(['@mix#tix3dj#poOl##loOp#wl@@bong&song%4very$long@thong#Part##traP##@@leveL@@Level@##car#rac##tu@pack@@ckap@#rr#sAw##wAs#r#@w1r']);
-  // findMirrorWords(['#po0l##l0op# @bAc##cAB@ @LM@ML@ #xxxXxx##xxxXxx# @aba@@ababa@']);
-  // findMirrorWords(['#lol#lol# @#God@@doG@# #abC@@Cba# @Xyu@#uyX#']);
-    </script>
-  
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
-    
+  <body>
+        <!-- <h1>Alarm</h1> -->
+        <section class="alarm-container">
+          <nav>
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M15 6l-6 6l6 6" />
+            </svg>
+            <h3>Alarm</h3>
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
+              <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+            </svg>
+          </nav>
+          <div class="display">
+            <time>4:59 PM</time>
+            <p class="date">3RD JANUARY</p>
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M12 5l0 14" />
+              <path d="M5 12l14 0" />
+            </svg>
+          </div>
+          <div class="saved-alarms-container">
+            <div class="saved-alarm">
+              <div class="saved-alarm-time">
+                <time>7:30 pm</time>
+                <div class="toggle-container">
+                  <div class="toggle-track"></div>
+                  <div class="toggle-button"></div>
+                </div>
+              </div>
+              <div class="week">
+                <p class="day">Su</p>
+                <p class="day">Mo</p>
+                <p class="day">Tu</p>
+                <p class="day">We</p>
+                <p class="day">Th</p>
+                <p class="day">Fr</p>
+                <p class="day">Sa</p>
+              </div>
+            </div>
+            <div class="saved-alarm">
+              <div class="saved-alarm-time">
+                <time>10:30 am</time>
+                <div class="toggle-container">
+                  <div class="toggle-track"></div>
+                  <div class="toggle-button"></div>
+                </div>
+              </div>
+              <div class="week">
+                <p class="day">Su</p>
+                <p class="day">Mo</p>
+                <p class="day">Tu</p>
+                <p class="day">We</p>
+                <p class="day">Th</p>
+                <p class="day">Fr</p>
+                <p class="day">Sa</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+    <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+        
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
       // Create Query String as String
