@@ -12,6 +12,7 @@
     <style>
       body {
         margin: 0;
+        min-height: 100vh;
         background-image: url("./images/fantasyStories.jpg");
         background-attachment: fixed;
         background-repeat: no-repeat;
@@ -20,7 +21,7 @@
       
       .form-wrapper {
         width: 25%;
-        max-height: 770px;
+        /* max-height: 770px; */
         margin: 40px auto;
         padding: 20px;
         border-radius: 10px;
@@ -112,13 +113,13 @@
       
       .form-wrapper input[type="button"],
       .form-wrapper input[type="submit"] {
-        background: #e71313;
         padding: 8px 20px 8px 20px;
         color: rgb(33, 31, 31);
         font-size: 15px;
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         border-radius: 5px;
         border: 1px solid #257c9e;
+        background: #e71313;
         text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
         box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
       }
@@ -137,6 +138,97 @@
         font-size: 12px;
         font-family: Georgia, 'Times New Roman', Times, serif;
         text-align: right;
+      }
+
+      #main {
+        padding-bottom: 40px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+        
+      #side-wrapper {
+        width: 60%;
+        display: block;
+        align-items: center;
+      }
+      
+      #preview-list {
+        width: 80%;
+        min-height: 20%;
+        margin: auto;
+        margin-top: 40px;
+        /* border-radius: 0 0 10px 10px; */
+        border-radius: 10px;
+        background-color: white;
+        box-shadow: 40px 15px 19px -7px rgba(59, 53, 53, 1);
+        -webkit-box-shadow: 40px 15px 19px -7px rgba(59, 53, 53, 1);
+        -moz-box-shadow: 40px 15px 19px -7px rgba(59, 53, 53, 1);
+      }
+      
+      #preview-list h3 {
+        padding: 20px 10px 15px 10px;
+        color: rgb(0, 0, 0);
+        font-size: 30px;
+        font-weight: 100;
+        font-family: 'Creepster', cursive;
+        border-radius: 10px 10px 0 0;
+        border: 1px solid #e71313;
+        background: #e71313;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+        box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+      }
+      
+      .edit-btn,
+      .save-btn,
+      .delete-btn {
+        /* padding: 4px 3px 4px 13px; */
+        margin: 10px 0px 0px 50px;
+        padding: 10px 50px;
+        color: rgb(0, 0, 0);
+        font-size: 15px;
+        border-radius: 5px;
+        border: 1px solid #000000;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+        background: #e71313;
+      }
+      
+      .edit-btn:hover,
+      .save-btn:hover,
+      .delete-btn:hover {
+        background: #ffffff;
+        box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+      }
+      
+      #preview-list {
+        list-style-type: none;
+        min-width: 60%;
+        padding: 0;
+      }
+      
+      .story-info {
+        padding: 5px;
+        font-size: 20px;
+      }
+      
+      .story-info h4 {
+        margin: 10px 0 10px 0;
+        color: #e71313;
+        font-size: 35px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      }
+      
+      .story-info p {
+        margin: 5px;
+        color: #888;
+        font-size: 22px;
+      }
+      
+      .story-info p:last-child {
+        font-size: 20px;
+        border-top: 1px solid black;
       }
     </style>
   </head>
@@ -185,7 +277,7 @@
     </div>
   
     <script>
-      const chooseYourCar = {
+      const chooseYourCarObj = {
     choosingType(type, color, year) {
         if (year < 1900 || year > 2022) {
             throw new Error(`Invalid Year!`);
@@ -236,44 +328,78 @@
 }
     </script>
     <script>
-      let expect = require('chai').expect;
-let chooseYourCar = require('./chooseYourCar');
+      // let expect = require('chai').expect;
+// let chooseYourCar = require('./chooseYourCar');
 
 
-describe('car tests', () => {
-    it('choosingType', () => {
-        expect(() => { chooseYourCar.choosingType('Sedan', 'black', 1899) }).to.throw('Invalid Year!');
-        expect(() => { chooseYourCar.choosingType('Sedan', 'black', 2023) }).to.throw('Invalid Year!');
-        expect(() => { chooseYourCar.choosingType('SUV', 'black', 2020) }).to.throw('This type of car is not what you are looking for.');
-        expect(chooseYourCar.choosingType('Sedan', 'red', 2010)).to.equal('This red Sedan meets the requirements, that you have.');
-        expect(chooseYourCar.choosingType('Sedan', 'green', 1999)).to.equal('This Sedan is too old for you, especially with that green color.');      
-    });
+// describe('car tests', () => {
+//     it('choosingType', () => {
+//         expect(() => { chooseYourCar.choosingType('Sedan', 'black', 1899) }).to.throw('Invalid Year!');
+//         expect(() => { chooseYourCar.choosingType('Sedan', 'black', 2023) }).to.throw('Invalid Year!');
+//         expect(() => { chooseYourCar.choosingType('SUV', 'black', 2020) }).to.throw('This type of car is not what you are looking for.');
+//         expect(chooseYourCar.choosingType('Sedan', 'red', 2010)).to.equal('This red Sedan meets the requirements, that you have.');
+//         expect(chooseYourCar.choosingType('Sedan', 'green', 1999)).to.equal('This Sedan is too old for you, especially with that green color.');      
+//     });
 
-    it('brandName', () => {
-        expect(() => { chooseYourCar.brandName('Mazda', 1) }).to.throw('Invalid Information!');
-        expect(() => { chooseYourCar.brandName(['Mazda'], 'a') }).to.throw('Invalid Information!');
-        expect(() => { chooseYourCar.brandName(['Mazda'], 3.1) }).to.throw('Invalid Information!');
-        expect(() => { chooseYourCar.brandName(['Mazda'], 1) }).to.throw('Invalid Information!');
-        expect(() => { chooseYourCar.brandName(['Mazda'], -1) }).to.throw('Invalid Information!');
-        expect(chooseYourCar.brandName(['Mazda', 'BMW', 'Mercedes'], 1)).to.equal('Mazda, Mercedes');
+//     it('brandName', () => {
+//         expect(() => { chooseYourCar.brandName('Mazda', 1) }).to.throw('Invalid Information!');
+//         expect(() => { chooseYourCar.brandName(['Mazda'], 'a') }).to.throw('Invalid Information!');
+//         expect(() => { chooseYourCar.brandName(['Mazda'], 3.1) }).to.throw('Invalid Information!');
+//         expect(() => { chooseYourCar.brandName(['Mazda'], 1) }).to.throw('Invalid Information!');
+//         expect(() => { chooseYourCar.brandName(['Mazda'], -1) }).to.throw('Invalid Information!');
+//         expect(chooseYourCar.brandName(['Mazda', 'BMW', 'Mercedes'], 1)).to.equal('Mazda, Mercedes');
 
-    });
+//     });
 
-    it('carFuelConsumption', () => {
-        expect(() => { chooseYourCar.carFuelConsumption('5', '5') }).to.throw('Invalid Information!');
-        expect(() => { chooseYourCar.carFuelConsumption(5, '5') }).to.throw('Invalid Information!');
-        expect(() => { chooseYourCar.carFuelConsumption('5', 5) }).to.throw('Invalid Information!');
-        expect(() => { chooseYourCar.carFuelConsumption(0, 5) }).to.throw('Invalid Information!');
-        expect(() => { chooseYourCar.carFuelConsumption(5, -1) }).to.throw('Invalid Information!');
-        expect(chooseYourCar.carFuelConsumption(50, 5)).to.equal('The car burns too much fuel - 10.00 liters!'); 
-        expect(chooseYourCar.carFuelConsumption(50, 3)).to.equal('The car is efficient enough, it burns 6.00 liters/100 km.'); 
-        expect(chooseYourCar.carFuelConsumption(50, 10)).to.equal('The car burns too much fuel - 20.00 liters!'); 
-        expect(chooseYourCar.carFuelConsumption(100, 7)).to.equal('The car is efficient enough, it burns 7.00 liters/100 km.');      
+//     it('carFuelConsumption', () => {
+//         expect(() => { chooseYourCar.carFuelConsumption('5', '5') }).to.throw('Invalid Information!');
+//         expect(() => { chooseYourCar.carFuelConsumption(5, '5') }).to.throw('Invalid Information!');
+//         expect(() => { chooseYourCar.carFuelConsumption('5', 5) }).to.throw('Invalid Information!');
+//         expect(() => { chooseYourCar.carFuelConsumption(0, 5) }).to.throw('Invalid Information!');
+//         expect(() => { chooseYourCar.carFuelConsumption(5, -1) }).to.throw('Invalid Information!');
+//         expect(chooseYourCar.carFuelConsumption(50, 5)).to.equal('The car burns too much fuel - 10.00 liters!'); 
+//         expect(chooseYourCar.carFuelConsumption(50, 3)).to.equal('The car is efficient enough, it burns 6.00 liters/100 km.'); 
+//         expect(chooseYourCar.carFuelConsumption(50, 10)).to.equal('The car burns too much fuel - 20.00 liters!'); 
+//         expect(chooseYourCar.carFuelConsumption(100, 7)).to.equal('The car is efficient enough, it burns 7.00 liters/100 km.');      
 
-    });
+//     });
 
-});
+// });
     </script>
+          <script>
+            // 04. Storage
+      
+      function createStorage(params) {
+      // console.log(params);
+      const storage = new Map();
+      
+      for (const input of params) {
+        // console.log(input);
+        const data = input.split(" ");
+        // console.log(data);
+        const product = data[0];
+        // console.log(product);
+        const q = Number(data[1]);
+        // console.log(q);
+      
+        if (!storage.has(product)) {
+          storage.set(product, 0);
+        }
+      
+        const newQ = storage.get(product) + q;
+        // console.log(newQ);
+        storage.set(product, newQ);
+      }
+      // console.log(storage);
+      for (const [product, q] of storage) {
+        console.log(`${product} -> ${q}`);
+      }
+      }
+      
+      // createStorage(['tomatoes 10', 'coffee 5', 'olives 100', 'coffee 40']);
+      // createStorage(['apple 50', 'apple 61', 'coffee 115', 'coffee 40']);
+    </script>
+
     <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
         
     <script src="./in-fetch-api.js"></script>
