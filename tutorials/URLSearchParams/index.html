@@ -3,196 +3,151 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URLSearchParams in JS</title>
+    <!-- <title>URLSearchParams in JS</title> -->
+    <title>Personal Portfolio</title>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-  <style>
-    h1 {
-      display: none;
-    }
-    *,
-    *::before,
-    *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    a {
-      display: inline-block;
-      color: #fff;
-      padding: 0.4em 1.2em;
-      text-decoration: none;
-    }
-    body {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      background-color: #1d1f33;
-      font-family: Georgia;
-    }
-    .pink-bg {
-      position: absolute;
-      bottom: -2rem;
-      width: 300px;
-      height: 150px;
-      background-color: #e94173;
-      z-index: -1;
-    }
-    main {
-      position: relative;
-      width: 90%;
-      max-width: 800px;
-      display: flex;
-      gap: 2rem;
-      align-items: center;
-      justify-content: center;
-    }
-    main section {
-      padding: 2rem;
-      border-radius: 0.35rem;
-      background-color: #2f2f50;
-    }
-    .plan-container {
-      width: 100%;
-      max-width: 300px;
-    }
-    h2 {
-      margin-bottom: 1.5rem;
-      font-size: 1rem;
-    }
-    .plan-type {
-      margin-bottom: 1.5rem;
-      font-size: 1.5rem;
-    }
-    a {
-      font-size: 0.75rem;
-    }
-    .plan-container a {
-      color: #ffffff8c;
-      transition: 0.5s;
-    }
-    .plan-container a:hover {
-      color: #e94173;
-    }
-    .buttons-container {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-    }
-    button {
-      padding: 0.6rem 1.2rem;
-      font-size: 0.7rem;
-      border-radius: 0.25rem;
-      transition: 0.5s;
-      cursor: pointer;
-    }
-    .buttons-container button {
-      color: #fff;
-      border: none;
-      background-color: #e94173;
-    }
-    .buttons-container button:hover {
-      background-color: #e94173ad;
-    }
-    .invoices {
-      margin-bottom: 1.5rem;
-    }
-    .invoices li {
-      list-style: none;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      column-gap: 1rem;
-      padding: 0.5rem;
-      font-size: 0.8rem;
-      text-align: right;
-      border-radius: 0.25rem;
-      transition: 0.5s;
-      cursor: pointer;
-    }
-    .invoices li:hover {
-      background-color: #1d1f33;
-    }
-    .download {
-      color: transparent;
-      text-decoration: none;
-      transition: 0.5s;
-    }
-    .invoices li:hover .download {
-      color: #e94173;
-    }
-    .invoice-history-container button {
-      color: #fff;
-      border: 1.5px solid #43438b;
-      background-color: transparent;
-    }
-    .invoice-history-container button:hover {
-      color: #e94173;
-      border-color: #e94173;
-    }
-    @media (max-width: 750px) {
-      main {
-        flex-direction: column;
-      }
-    }
-  </style>
   </head>
   <body>
-  <!-- <h1>Billing Cards</h1> -->
-    <main>
-      <section class="plan-container">
-        <h2>Your plan</h2>
-        <p class="plan-type">Professional</p>
-        <div class="buttons-container">
-          <button>Upgrade Plan</button>
-          <a href="#">Cancel Plan</a>
+    <header>
+      <div class="section-container header-container">
+        <nav>
+          <div class="nav-logo">E.</div>
+          <ul class="nav-links">
+            <li class="link">Home</li>
+            <li class="link">About</li>
+            <li class="link">Portfolio</li>
+            <li class="link">Blog</li>
+            <li class="link">Contact</li>
+          </ul>
+          <div class="nav-socials">
+            <span><i class="ri-github-fill"></i></span>
+            <span><i class="ri-linkedin-fill"></i></span>
+            <span><i class="ri-twitter-fill"></i></span>
+          </div>
+        </nav>
+        <div class="header-content">
+          <div class="header-details">
+            <h1>Hello,<br />I am Enamul a pro WP developer from Bangladesh</h1>
+            <button>Hire Me</button>
+          </div>
+          <div class="header-image">
+            <img src="assets/header.png" alt="header" />
+          </div>
         </div>
-      </section>
-      <section class="invoice-history-container">
-        <h2>Invoice history</h2>
-        <ul class="invoices">
-          <li class="invoice">
-            <p class="date">
-              Jun 26, 2021
-            </p>
-            <p class="price">$25.00</p>
-            <a href="#" class="download">Download PDF</a>
-          </li>
-          <li class="invoice">
-            <p class="date">
-              Jun 29, 2021
-            </p>
-            <p class="price">$35.00</p>
-            <a href="#" class="download">Download PDF</a>
-          </li>
-          <li class="invoice">
-            <p class="date">
-              Aug 12, 2021
-            </p>
-            <p class="price">$20.00</p>
-            <a href="#" class="download">Download PDF</a>
-          </li>
-          <li class="invoice">
-            <p class="date">
-              Oct 30, 2021
-            </p>
-            <p class="price">$125.00</p>
-            <a href="#" class="download">Download PDF</a>
-          </li>
-          <li class="invoice">
-            <p class="date">
-              Nov 05, 2021
-            </p>
-            <p class="price">$25.00</p>
-            <a href="#" class="download">Download PDF</a>
-          </li>
-        </ul> 
-        <button>Show all invoices</button>
-      </section>
-      <div class="pink-bg"></div>
-    </main>
-  
+      </div>
+    </header>
+    <section class="section-container about-container">
+      <p class="section-subheader">ABOUT ME</p>
+      <h2 class="section-header">A little about me and my passion</h2>
+      <div class="about-grid">
+        <div class="about-image">
+          <img src="assets/about.jpg" alt="about" />
+        </div>
+        <div class="about-content">
+          <p>
+            As a UI/UX designer, I specialize in creating user interfaces and
+            experiences for digital products. I have extensive experience
+            working with product managers, developers, and other stakeholders to
+            gather requirements, create wireframes and prototypes, and conduct
+            user testing to ensure that the final product meets the needs of the
+            users.<br />Throughout my career, I have achieved several
+            milestones, including designing successful digital products that
+            have received positive feedback from users and stakeholders.
+          </p>
+          <div class="about-btns">
+            <button>Download CV</button>
+            <button>My Work</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section-container service-container">
+      <p class="section-subheader">MY SERVICES</p>
+      <h2 class="section-header">Various type of tech and digital services</h2>
+      <div class="service-grid">
+        <div class="service-card">
+          <p class="service-card-subtitle">Pro</p>
+          <h4 class="service-card-title">Web<br />Development</h4>
+          <p class="service-card-description">
+            We are dedicated to providing high-quality web design services that
+            are tailored to meet the specific needs of our clients.
+          </p>
+          <span class="service-card-icon"><i class="ri-add-line"></i></span>
+        </div>
+        <div class="service-card">
+          <p class="service-card-subtitle">Intermediate</p>
+          <h4 class="service-card-title">Product<br />Design</h4>
+          <p class="service-card-description">
+            We use the latest web technologies and development tools to create
+            websites that are fast, secure, and scalable.
+          </p>
+          <span class="service-card-icon"><i class="ri-add-line"></i></span>
+        </div>
+        <div class="service-card">
+          <p class="service-card-subtitle">Pro</p>
+          <h4 class="service-card-title">Graphics<br />Design</h4>
+          <p class="service-card-description">
+            Our approach is collaborative, and we encourage your feedback
+            throughout the process to ensure your expectations.
+          </p>
+          <span class="service-card-icon"><i class="ri-add-line"></i></span>
+        </div>
+        <div class="service-card">
+          <p class="service-card-subtitle">Intermediate</p>
+          <h4 class="service-card-title">Software<br />Development</h4>
+          <p class="service-card-description">
+            We use the latest web technologies and development tools to create
+            websites that are fast, secure, and scalable.
+          </p>
+          <span class="service-card-icon"><i class="ri-add-line"></i></span>
+        </div>
+        <div class="service-card">
+          <p class="service-card-subtitle">Pro</p>
+          <h4 class="service-card-title">Project<br />Management</h4>
+          <p class="service-card-description">
+            Our approach is collaborative, and we encourage your feedback
+            throughout the process to ensure your expectations.
+          </p>
+          <span class="service-card-icon"><i class="ri-add-line"></i></span>
+        </div>
+        <div class="service-card">
+          <p class="service-card-subtitle">Intermediate</p>
+          <h4 class="service-card-title">Web<br />Designing</h4>
+          <p class="service-card-description">
+            We are dedicated to providing high-quality web design services that
+            are tailored to meet the specific needs of our clients.
+          </p>
+          <span class="service-card-icon"><i class="ri-add-line"></i></span>
+        </div>
+      </div>
+    </section>
+    <section class="section-container client-container">
+      <p class="section-subheader">TESTIMONIALS</p>
+      <h2 class="section-header">What my client saying about me</h2>
+      <div class="client-grid">
+        <div class="client-content">
+          <h4>Mohammad Ali</h4>
+          <h5>Ceo & Founder</h5>
+          <p>
+            What a Service! Enamul is one of the top Classy designer in the
+            world. Exceeded expectation and designed my website to my
+            requirements. will be using for onging work.<br />Enamul has
+            delivered what was promised and was absolutely amazing to work with.
+            I can't rate this guy high enough, his work is fantastic and I will
+            definitely use him again.
+          </p>
+          <div class="client-nav">
+            <span><i class="ri-arrow-left-line"></i></span>
+            <span><i class="ri-arrow-right-line"></i></span>
+          </div>
+        </div>
+        <div class="client-image">
+          <img src="assets/clients.jpg" alt="client" />
+        </div>
+      </div>
+    </section>
+
     <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
         
     <script src="./in-fetch-api.js"></script>
