@@ -3,147 +3,140 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URLSearchParams in JS</title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-  <style>
-    button {
-      border: 1px solid transparent;
-      outline: 1px solid transparent;
-      background-color: transparent;
-    }
-    body {
-      min-height: 100vh;
-      /* height: 100vh; */
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-      background-color: black;
-      overflow: hidden;
-    }
-    .image-container {
-      position: relative;
-      width: 200px;
-      height: 200px;
-      transform-style: preserve-3d;
-      transform: perspective(1000px) rotateY(0deg);
-      transition: transform 0.7s;
-    }
-    .image-container span {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      transform: rotateY(calc(var(--i) * 45deg)) translateZ(400px);
-      backface-visibility: hidden;
-    }
-    .image-container span img {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      border-radius: 5px;
-    }
-    .btn-container {
-      position: relative;
-      width: 80%;
-    }
-    .btn {
-      position: absolute;
-      bottom: -80px;
-      padding: 10px 20px;
-      color: white;
-      font-size: 0px;
-      border: none;
-      border-radius: 5px;
-      background-color: slateblue;
-      cursor: pointer;
-    }
-    .btn:hover {
-      filter: brightness(1.5);
-    }
-    .btn:focus-visible {
-      outline: 2px solid #fff;
-    }
-    .btn span {
-      font-size: 20px;
-    }
-    #prev {
-      left: 20%;
-    }
-    #next {
-      right: 20%;
-    }
-  </style>    
+    <!-- <title>URLSearchParams in JS</title> -->
+    <title>Responsive Steak Website</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bitter&family=Cookie&family=Ephesis&family=Lateef&family=Lato&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+        /* Google Fonts */
+        @import url("https://fonts.googleapis.com/css2?family=Bitter&family=Cookie&family=Ephesis&family=Lateef&family=Lato&display=swap");
+        /* @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap'); */
+        /* @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Kaushan+Script&family=Playfair+Display&display=swap'); */
+        /* @import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap'); */
+        /* @import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Brawler:wght@400;700&family=Croissant+One&family=Ephesis&family=Gloock&family=Hurricane&family=Imbue:opsz,wght@10..100,100..900&family=Modak&family=Montez&family=Prosto+One&family=Rye&family=Shojumaru&family=Young+Serif&family=ZCOOL+XiaoWei&display=swap'); */
+    </style>
   </head>
   <body>
-    <div class="image-container">
-      <span style="--i: 1">
-        <img src="https://picsum.photos/id/237/300/200" />
-      </span>
-      <span style="--i: 2">
-        <img src="https://picsum.photos/id/23/300/200" />
-      </span>
-      <span style="--i: 3">
-        <img src="https://picsum.photos/id/48/300/200" />
-      </span>
-      <span style="--i: 4">
-        <img src="https://picsum.photos/id/12/300/200" />
-      </span>
-      <span style="--i: 5">
-        <img src="https://picsum.photos/id/59/300/200" />
-      </span>
-      <span style="--i: 6">
-        <img src="https://picsum.photos/id/160/300/200" />
-      </span>
-      <span style="--i: 7">
-        <img src="https://picsum.photos/id/370/300/200" />
-      </span>
-      <span style="--i: 8">
-        <img src="https://picsum.photos/id/478/300/200" />
-      </span>
-    </div>
-    <div class="btn-container">
-      <button class="btn" id="prev">
-        Prev <span>&#139;</span>
-      </button>
-      <button class="btn" id="next">
-        Next <span>&#155;</span>
-      </button>
-    </div>
-<script>
-  const imageContainerEl = document.querySelector(".image-container");
+    <!-- Header -->
+    <header class="header" id="header">
+      <nav class="nav flex-container container">
+        <div class="nav-logo">Steakhouse</div>
+        <div class="nav-open" id="nav-open">
+          <!-- <i class="ri-apps-2-line"></i> -->
+          <i class="fa fa-th-large"></i>
+        </div>
+        <div class="nav-menu" id="nav-menu">
+          <ul class="nav-list flex-container">
+            <li class="nav-items">
+              <a href="#home" class="nav-links">Home</a>
+            </li>
+            <li class="nav-items">
+              <a href="#about-us" class="nav-links">About Us</a>
+            </li>
+            <li class="nav-items">
+              <a href="#special" class="nav-links">Special</a>
+            </li>
+            <li class="nav-items">
+              <a href="#recently" class="nav-links">Recently</a>
+            </li>
+          </ul>
+          <div class="nav-close" id="nav-close">
+            <i class="ri-close-line"></i>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <!-- Home -->
+      <section class="home" id="home">
+        <div class="home-img-container">
+          <img
+            class="home-background"
+            src="./assets/images/Hero-3.jpg"
+            alt=""
+          />
+          <img
+            class="home-pepper"
+            src="./assets/images/Pepper.png"
+            alt="pepper"
+          />
+          <img
+            class="home-rosemary-1 hidden-left"
+            src="./assets/images/Rosemary.png"
+            alt="Rosemary-1"
+          />
+          <img
+            class="home-rosemary-2 hidden-right"
+            src="./assets/images/Rosemary.png"
+            alt="Rosemary-2"
+          />
+        </div>
+        <div class="home-container grid-container">
+          <img
+            class="home-background-1"
+            src="./assets/images/Hero-2.jpg"
+            alt="hero-2"
+          />
+          <img
+            class="home-background-2"
+            src="./assets/images/Hero-1.jpg"
+            alt="hero-1"
+          />
+          <div class="home-context hidden-bottom">
+            <h1>An Exceptional and Authentic Steakhouse</h1>
+            <div class="home-logo">Steakhouse</div>
+            <div class="underline"></div>
+            <button class="home-button">
+              <p>Book A Table</p>
+            </button>
+          </div>
+        </div>
+      </section>
+      <!-- About Us -->
+      <section class="about-us container flex-container" id="about-us">
+        <div class="about-us-img-container">
+          <img
+            class="about-us-spices hidden-left"
+            src="./assets/images/Spices.png"
+            alt="spices"
+          />
+          <img
+            class="about-us-salt hidden-right"
+            src="./assets/images/Salt.png"
+            alt="salt"
+          />
+          <img
+            class="about-us-garlic hidden-left"
+            src="./assets/images/Garlic.png"
+            alt="garlic"
+          />
+          <img
+            class="about-us-knife hidden-right"
+            src="./assets/images/Knife.png"
+            alt="knife"
+          />
+        </div>
+        <div class="about-us-content flex-container hidden-bottom">
+          <h2><span>Discover</span><br />Our Story</h2>
+          <p>
+            Starting from a small cafe owned by Mr. Bond and Mrs. Jane in 1968
+            serving snacks and ice cream, now Steakhouse Steak & Ice Cream has
+            become a legendary steak restaurant.
+          </p>
+          <button>
+            <p>More About Us</p>
+          </button>
+        </div>
+      </section>
+    </main>
 
-const prevEl = document.getElementById("prev");
-const nextEl = document.getElementById("next");
-let x = 0;
-let timer;
-prevEl.addEventListener("click", () => {
-  x = x + 45;
-  clearTimeout(timer);
-  updateGallery();
-});
-nextEl.addEventListener("click", () => {
-  x = x - 45;
-  clearTimeout(timer);
-  updateGallery();
-});
-
-function updateGallery() {
-  imageContainerEl.style.transform = `perspective(1000px) rotateY(${x}deg)`;
-  timer = setTimeout(() => {
-    x = x - 45;
-    updateGallery();
-  }, 3000);
-}
-
-updateGallery();
-</script>
-
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+    <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
         
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
