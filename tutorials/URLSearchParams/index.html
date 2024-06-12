@@ -308,14 +308,18 @@
       }
       
       .home-background-1 {
-        width: 230px;
-        height: 240px;
+        /* width: 230px; */
+        width: 14.375rem;
+        /* height: 240px; */
+        height: 15rem;
         object-fit: cover;
       }
       
       .home-background-2 {
-        width: 230px;
-        height: 240px;
+        /* width: 230px; */
+        width: 14.375rem;
+        /* height: 240px; */
+        height: 15rem;
         object-fit: cover;
         filter: brightness(25%);
       }
@@ -554,10 +558,14 @@
 }
 
 .special-items img {
-  min-width: 200px;
-  max-width: 400px;
-  min-height: 155px;
-  max-height: 200px;
+  /* min-width: 200px; */
+  min-width: 12.5rem;
+  /* max-width: 400px; */
+  max-width: 25rem;
+  /* min-height: 155px; */
+  min-height: 10rem;
+  /* max-height: 200px; */
+  max-height: 12.5rem;
 }
 
 .special-items .prices {
@@ -591,10 +599,14 @@
 .recently img {
   position: relative;
   left: 8%;
-  min-width: 200px;
-  max-width: 400px;
-  min-height: 155px;
-  max-height: 200px;
+  /* min-width: 200px; */
+  min-width: 12.5rem;
+  /* max-width: 400px; */
+  max-width: 25rem;
+  /* min-height: 155px; */
+  min-height: 10rem;
+  /* max-height: 200px; */
+  max-height: 12.5rem;
   margin-block: 2rem;
 }
 
@@ -737,7 +749,8 @@ html {
   }
   
   .home-background {
-    max-width: 240px;
+    /* max-width: 240px; */
+    max-width: 15rem;
   }
   
   .home-pepper {
@@ -746,13 +759,17 @@ html {
   }
   
   .home-background-1 {
-    width: 200px;
-    height: 240px;
+    /* width: 200px; */
+    width: 12.5rem;
+    /* height: 240px; */
+    height: 15rem;
   }
   
   .home-background-2 {
-    width: 200px;
-    height: 240px;
+    /* width: 200px; */
+    width: 12.5rem;
+    /* height: 240px; */
+    height: 15rem;
   }
   
   .about-us {
@@ -793,7 +810,8 @@ html {
   }
   
   .recently img {
-    max-width: 200px;
+    /* max-width: 200px; */
+    max-width: 12.5rem;
   }
   
   .recently-content p {
@@ -1102,9 +1120,72 @@ html {
   .recently-content h3 {
     max-width: 15ch;
   }
+
+  .recently-content p {
+    max-width: 70ch;
+    font-size: 1.5rem;
+  }
+  
+  .recently img {
+    place-self: start;
+    min-width: 420px;
+    min-height: 320px;
+  }
+  
+  .reservation img {
+    height: 450px;
+  }
+  
+  .reservation-content h2 {
+    font-size: var(--h1-font-size);
+  }
+  
+  .reservation-content button {
+    font-size: 1.5rem;
+  }
+  
+  .footer {
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+  }
+  
+  .footer-p {
+    gap: 2rem;
+  }
 }
-</style>
-</head>
+
+/* animation */
+
+.hidden-left {
+  transform: translateX(-100%);
+  filter: blur(5px);
+  opacity: 0;
+  transition: all 1s;
+}
+
+.hidden-right {
+  transform: translateX(100%);
+  filter: blur(5px);
+  opacity: 0;
+  transition: all 1s;
+}
+
+.hidden-bottom {
+  transform: translateY(50%);
+  filter: blur(5px);
+  opacity: 0;
+  transition: all 1s;
+}
+
+.show {
+  transform: translateX(0);
+  filter: blur(0);
+  opacity: 1;
+}
+    </style>
+  </head>
   <body>
     <!-- Header -->
     <header class="header" id="header">
@@ -1311,6 +1392,59 @@ html {
         <p>info@kitchen.com</p>
       </div>
     </footer>
+
+    <script>
+      // open-close toggel button
+      const navMenu = document.getElementById("nav-menu");
+      const navOpen = document.getElementById("nav-open");
+      const navClose = document.getElementById("nav-close");
+
+      navOpen.addEventListener("click", () => {
+        navMenu.classList.add("show-menu");
+      });
+      
+      navClose.addEventListener("click", () => {
+        navMenu.classList.remove("show-menu");
+      });
+      
+      // Remove link mobile
+      
+      const navLinks = document.querySelectorAll(".nav-items");
+      
+      const linkClick = () => {
+        const navMenu = document.getElementById("nav-menu");
+      
+        navMenu.classList.remove("show-menu");
+      };
+
+      navLinks.forEach((e) => e.addEventListener("click", linkClick));
+
+      // Animation On Scroll
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          //console.log(entry);
+          if (
+            (entry.isIntersecting &&
+              entry.target.classList.contains("hidden-left")) ||
+            entry.target.classList.contains("hidden-right") ||
+            entry.target.classList.contains("hidden-bottom")
+          ) {
+            entry.target.classList.add("show");
+          }
+          if (!entry.isIntersecting) {
+            entry.target.classList.remove("show");
+          }
+        });
+      });
+
+      const hiddenElementsLeft = document.querySelectorAll(".hidden-left");
+      const hiddenElementsRight = document.querySelectorAll(".hidden-right");
+      const hiddenElementsBottom = document.querySelectorAll(".hidden-bottom");
+      hiddenElementsLeft.forEach((el) => observer.observe(el));
+      hiddenElementsRight.forEach((el) => observer.observe(el));
+      hiddenElementsBottom.forEach((el) => observer.observe(el));
+    </script>
 
     <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
         
