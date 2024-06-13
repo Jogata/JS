@@ -14,6 +14,7 @@
           display: flex;
           align-items: center;
           justify-content: center;
+          flex-direction: column;
           background-color: darkseagreen;
           box-sizing: border-box;
         }
@@ -109,6 +110,57 @@
             width: 90vw;
           }
         }
+
+        /* *,
+        *::before,
+        *::after {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        } */
+        .body {
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .body * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        .body-container {
+          width: 200px;
+          height: 80px;
+          padding: 0.4rem;
+          display: flex;
+          align-items: center;
+          border-radius: 3rem;
+          background-color: #d7d7d7;
+          cursor: pointer;
+        }
+        .colored-circle {
+          width: 70px;
+          height: 70px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          background-color: #e02a5e;
+        }
+        .white-circle {
+          width: 45px;
+          height: 45px;
+          border-radius: 50%;
+          background-color: #fff;
+        }
+        .active {
+          margin-left: auto;
+          background-color: #505050;
+        }
+        .colored-bg {
+          background-color: #e02a5e;
+        }
       </style>
   </head>
   <body>
@@ -140,6 +192,88 @@
       <button class="btn" id="next"><i class="fa fa-angle-double-right"></i></button>
     </div>
 
+    <script>
+      const nextEl = document.getElementById("next");
+      const prevEl = document.getElementById("prev");
+      
+      const progressEl = document.querySelector(".progress-bar-front");
+      
+      const stepsEl = document.querySelectorAll(".step");
+      
+      let currentChecked = 1;
+      
+      nextEl.addEventListener("click", () => {
+        currentChecked++;
+        if (currentChecked > stepsEl.length) {
+          currentChecked = stepsEl.length;
+        }
+        updateStepProgress();
+      });
+      
+      prevEl.addEventListener("click", () => {
+        currentChecked--;
+        if (currentChecked < 1) {
+          currentChecked = 1;
+        }
+        updateStepProgress();
+      });
+      
+      function updateStepProgress() {
+        stepsEl.forEach((stepEl, idx) => {
+          if (idx < currentChecked) {
+            stepEl.classList.add("checked");
+          stepEl.innerHTML = `
+          <i class="fa fa-check"></i>
+          <span>${
+            idx === 0
+              ? "Start"
+              : idx === stepsEl.length - 1
+              ? "Final"
+              : "Step " + idx
+          }</span>
+          `;
+        } else {
+          stepEl.classList.remove("checked");
+          stepEl.innerHTML = `
+          <i class="fa fa-times"></i>
+          `;
+        }
+      });
+    
+      const checkedNumber = document.querySelectorAll(".checked");
+    
+      progressEl.style.width =
+        ((checkedNumber.length - 1) / (stepsEl.length - 1)) * 100 + "%";
+    
+      if (currentChecked === 1) {
+        prevEl.disabled = true;
+      } else if (currentChecked === stepsEl.length) {
+        nextEl.disabled = true;
+      } else {
+        prevEl.disabled = false;
+        nextEl.disabled = false;
+      }
+    }
+    </script>    
+
+    <!-- <h1>Toggle button</h1> -->
+    <div class="body">
+      <div class="body-container">
+        <div class="colored-circle">
+          <div class="white-circle"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const BUTTON_CONTAINER = document.querySelector('.body-container');
+      const COLORED_CIRCLE = document.querySelector('.colored-circle');
+      
+      BUTTON_CONTAINER.addEventListener("click", () => {
+        document.body.classList.toggle('colored-bg');
+        COLORED_CIRCLE.classList.toggle('active');
+      })
+    </script>
+    
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
         
     <script src="./in-fetch-api.js"></script>
