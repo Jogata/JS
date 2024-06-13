@@ -4,277 +4,143 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <style>
-        body {
-          min-height: 100vh;
-          margin: 0;
-          padding: 3rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-direction: column;
-          background-color: darkseagreen;
-          box-sizing: border-box;
-        }
-        .container {
-          padding: 1rem;
-          text-align: center;
-          border-radius: 12px;
-          /* box-shadow: 
-            -1px -1px 3px #fff4, 
-            3px 3px 3px #0005; */
-        }
-        .progress-container {
-          position: relative;
-          width: 500px;
-          display: flex;
-          justify-content: space-between;
-          filter: drop-shadow(1px 1px 3px #000);
-        }
-        .progress-bar-back {
-          position: absolute;
-          top: 50%;
-          width: 100%;
-          height: 4px;
-          margin: 0;
-          border: none;
-          background-color: lightgray;
-          transform: translateY(-50%);
-          z-index: -1;
-        }
-        .progress-bar-front {
-          position: absolute;
-          top: 50%;
-          width: 0%;
-          height: 4px;
-          margin: 0;
-          border: none;
-          background-color: green;
-          transform: translateY(-50%);
-          transition: width 0.4s linear;
-          z-index: -1;
-        }
-        .step {
-          width: 30px;
-          height: 30px;
-          color: lightgray;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border: 4px solid lightgray;
-          box-shadow: inset 1px 1px 2px #0008;
-          background-color: white;
-        }
-        .step i {
-          filter: drop-shadow(1px 1px 1px #000);
-        }
-        .step.checked {
-          color: green;
-          /* color: beige; */
-          border-color: green;
-          transition: all 0.4s linear;
-          transition-delay: 0.3s;
-        }
-        .step.checked span {
-          position: absolute;
-          bottom: -20px;
-          color: beige;
-          font-size: 14px;
-          font-family: cursive;
-        }
-        .btn {
-          border: none;
-          margin: 70px 10px 0;
-          padding: 10px 20px;
-          color: white;
-          font-size: 20px;
-          border-radius: 5px;
-          background-color: slateblue;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-          cursor: pointer;
-        }
-        .btn:hover {
-          opacity: 0.9;
-        }
-        .btn:active {
-          transform: scale(0.97);
-        }
-        .btn:disabled {
-          background-color: lightgray;
-        }
-        @media (max-width: 500px) {
-          .progress-container {
-            width: 90vw;
-          }
-        }
-
-        /* *,
-        *::before,
-        *::after {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-        } */
-        .body {
-          min-height: 100vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-        .body * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-        }
-        .body-container {
-          width: 200px;
-          height: 80px;
-          padding: 0.4rem;
-          display: flex;
-          align-items: center;
-          border-radius: 3rem;
-          background-color: #d7d7d7;
-          cursor: pointer;
-        }
-        .colored-circle {
-          width: 70px;
-          height: 70px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 50%;
-          background-color: #e02a5e;
-        }
-        .white-circle {
-          width: 45px;
-          height: 45px;
-          border-radius: 50%;
-          background-color: #fff;
-        }
-        .active {
-          margin-left: auto;
-          background-color: #505050;
-        }
-        .colored-bg {
-          background-color: #e02a5e;
-        }
-      </style>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Kaushan+Script&family=Playfair+Display&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Brawler:wght@400;700&family=Croissant+One&family=Ephesis&family=Gloock&family=Hurricane&family=Imbue:opsz,wght@10..100,100..900&family=Modak&family=Montez&family=Prosto+One&family=Rye&family=Shojumaru&family=Young+Serif&family=ZCOOL+XiaoWei&display=swap');
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --main-color: #ae8957;
+        --white-color: #fff;
+        --bg-color: #0c0c0c;
+        /* --big-font: 6.6rem; */
+        --p-font: 1rem;
+      }
+      ul {
+        list-style: none;
+      }
+      a {
+        display: inline-block;
+        text-decoration: none;
+      }
+      body {
+        min-height: 100vh;
+        color: var(--white-color);
+        font-family: "Platypi", serif;
+        background-color: var(--bg-color);
+        background-image: url("./assets/bg.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+      body {
+        font-family: Georgia, serif;
+        font-family: 'Abril Fatface', cursive;
+        font-family: 'Dancing Script', cursive;
+        font-family: 'Courgette', cursive;
+        font-family: 'Great Vibes', cursive;
+        font-family: 'Josefin Sans', sans-serif;
+        font-family: 'Limelight', cursive;
+        font-family: 'Lobster', cursive;
+        font-family: 'Montserrat', sans-serif;
+        font-family: 'Oleo Script Swash Caps', cursive;
+        font-family: 'Poppins', sans-serif;
+        font-family: 'Raleway', sans-serif;
+        font-family: 'Kaushan Script', cursive;
+        font-family: 'Fraunces', serif;
+        font-family: 'Playfair Display', serif;
+        font-family: 'Lemon', cursive; 
+        font-family: "Patua One", serif;
+        font-family: "Platypi", serif;
+      }
+      header {
+        /* position: fixed; */
+        /* top: 0; */
+        /* right: 0; */
+        /* width: 100%; */
+        width: 94%;
+        margin: auto;
+        /* padding: 35px 7%; */
+        padding: 2rem 0;
+        display: flex;
+        row-gap: 12px;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        /* transition: all 0.5s ease; */
+        /* z-index: 1000; */
+        /* border: 1px solid red; */
+      }
+    </style>
   </head>
   <body>
-    <!-- <h1>Step Progress Bar</h1> -->
-    <div class="container">
-      <div class="progress-container">
-        <hr class="progress-bar-back" />
-        <hr class="progress-bar-front" />
-        <div class="step checked">
-          <i class="fa fa-check"></i>
-          <span>Start</span>
+    <div class="page">
+      <header>
+        <a href="#" class="logo"><img src="./images/logo.png" alt="logo"></a>
+        <ul class="navlist">
+          <li><a href="#">about</a></li>
+          <li><a href="#">membership</a></li>
+          <li><a href="#">events</a></li>
+          <li><a href="#">contact</a></li>
+        </ul>
+        <div class="right-content">
+          <div class="login-btn-placeholder">
+            <a href="#">sign in</a>
+          </div>
+          <button id="menu-btn"><i class="fa fa-bars"></i></button>
         </div>
-        <div class="step">
-          <i class="fa fa-times"></i>
+      </header>
+      <section class="hero">
+        <div class="hero-text">
+          <h5 class="show-right" style="--delay: 3">#Coffee for hot days</h5>
+          <h1 class="show-left" style="--delay: 3">- Cold <span>Brew</span></h1>
+          <p class="show-right" style="--delay: 3">
+            Increase your productivity and boost your mood with a cup of coffee in the morning. Coffee has a stimulating effect.
+          </p>
+          <div class="main-hero">
+            <a href="#" class="btn show-up" style="--delay: 8">order now</a>
+            <span class="price show-up" style="--delay: 9">
+              $16.00 / <span>regular price</span>
+            </span>
+          </div>
         </div>
-        <div class="step">
-          <i class="fa fa-times"></i>
+        <div class="hero-img zoom-in">
+          <img src="./images/hero.png" alt="">
         </div>
-        <div class="step">
-          <i class="fa fa-times"></i>
+        <div class="sci-icons">
+          <!-- <div class="icon-box"> -->
+            <a href="#" class="show-down" style="--delay: 4">
+              <i class="fa fa-facebook"></i>
+            </a>
+          <!-- </div> -->
+          <!-- <div class="icon-box"> -->
+            <a href="#" class="show-down" style="--delay: 5">
+              <i class="fa fa-youtube-play"></i>
+            </a>
+          <!-- </div> -->
+          <!-- <div class="icon-box"> -->
+            <a href="#" class="show-down" style="--delay: 6">
+              <i class="fa fa-twitter"></i>
+            </a>
+          <!-- </div> -->
         </div>
-        <div class="step">
-          <i class="fa fa-times"></i>
+        <div class="scroll">
+          <a href="#" class="show-down" style="--delay: 5">
+            scroll down
+            <i class="ri-mouse-fill"></i>
+          </a>
         </div>
-      </div>
-      <button class="btn" id="prev" disabled>
-        <i class="fa fa-angle-double-left"></i>
-      </button>
-      <button class="btn" id="next"><i class="fa fa-angle-double-right"></i></button>
+      </section>
     </div>
 
-    <script>
-      const nextEl = document.getElementById("next");
-      const prevEl = document.getElementById("prev");
-      
-      const progressEl = document.querySelector(".progress-bar-front");
-      
-      const stepsEl = document.querySelectorAll(".step");
-      
-      let currentChecked = 1;
-      
-      nextEl.addEventListener("click", () => {
-        currentChecked++;
-        if (currentChecked > stepsEl.length) {
-          currentChecked = stepsEl.length;
-        }
-        updateStepProgress();
-      });
-      
-      prevEl.addEventListener("click", () => {
-        currentChecked--;
-        if (currentChecked < 1) {
-          currentChecked = 1;
-        }
-        updateStepProgress();
-      });
-      
-      function updateStepProgress() {
-        stepsEl.forEach((stepEl, idx) => {
-          if (idx < currentChecked) {
-            stepEl.classList.add("checked");
-          stepEl.innerHTML = `
-          <i class="fa fa-check"></i>
-          <span>${
-            idx === 0
-              ? "Start"
-              : idx === stepsEl.length - 1
-              ? "Final"
-              : "Step " + idx
-          }</span>
-          `;
-        } else {
-          stepEl.classList.remove("checked");
-          stepEl.innerHTML = `
-          <i class="fa fa-times"></i>
-          `;
-        }
-      });
-    
-      const checkedNumber = document.querySelectorAll(".checked");
-    
-      progressEl.style.width =
-        ((checkedNumber.length - 1) / (stepsEl.length - 1)) * 100 + "%";
-    
-      if (currentChecked === 1) {
-        prevEl.disabled = true;
-      } else if (currentChecked === stepsEl.length) {
-        nextEl.disabled = true;
-      } else {
-        prevEl.disabled = false;
-        nextEl.disabled = false;
-      }
-    }
-    </script>    
-
-    <!-- <h1>Toggle button</h1> -->
-    <div class="body">
-      <div class="body-container">
-        <div class="colored-circle">
-          <div class="white-circle"></div>
-        </div>
-      </div>
-    </div>
-    <script>
-      const BUTTON_CONTAINER = document.querySelector('.body-container');
-      const COLORED_CIRCLE = document.querySelector('.colored-circle');
-      
-      BUTTON_CONTAINER.addEventListener("click", () => {
-        document.body.classList.toggle('colored-bg');
-        COLORED_CIRCLE.classList.toggle('active');
-      })
-    </script>
-    
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+    <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
         
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
