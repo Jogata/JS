@@ -6,6 +6,7 @@
     <title>URLSearchParams in JS</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://unpkg.com/jsbarcode@latest/dist/JsBarcode.all.min.js"></script>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap');
       @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Kaushan+Script&family=Playfair+Display&display=swap');
@@ -82,7 +83,8 @@
         width: 94%;
         margin: auto;
         /* padding: 35px 7%; */
-        padding: 2rem 0;
+        /* padding: 2rem 0; */
+        padding: min(1vw, 2rem) 0;
         display: flex;
         /* row-gap: 12px; */
         row-gap: 0.75rem;
@@ -96,14 +98,15 @@
 
       .logo img {
         width: 100%;
-        max-width: 96px;
+        /* max-width: 96px; */
+        max-width: 6rem;
         height: auto;
         /* filter: brightness(3) saturate(0.4); */
         filter: brightness(0) invert(1);
       }
       /* .logo {
         color: var(--white-color);
-        font-size: 40px;
+        font-size: 2.5rem;
         font-family: "Arizonia", cursive;
         text-transform: capitalize;
         transform: skewX(-18deg) rotate(-21deg) scaleX(0.7)
@@ -461,7 +464,7 @@ line-height: 1;
         } */
       }
 
-      @media (max-width: 950px) {
+      @media (max-width: 59.38rem) {
         .hero {
           text-align: center;
         }
@@ -512,7 +515,7 @@ line-height: 1;
         }
       }
 
-      @media (max-width: 560px) {
+      @media (max-width: 35rem) {
         .hero {
           grid-template-columns: 1fr auto;
         }
@@ -589,6 +592,62 @@ line-height: 1;
           transform: scale(0) rotate(-15deg);
         }
       }
+
+      .zoom-left {
+        animation: zoom-left 1s linear backwards;
+        animation-delay: calc(0.2s * var(--delay));
+      }
+      @keyframes zoom-left {
+        0% {
+          transform: scale(0);
+          transform-origin: right;
+          opacity: 0;
+        }
+      }
+
+      .show-up {
+        animation: show-up 1s linear backwards;
+        animation-delay: calc(0.2s * var(--delay));
+      }
+      @keyframes show-up {
+        0% {
+          transform: translateY(10px);
+          opacity: 0;
+        }
+      }
+
+      .show-down {
+        animation: show-down 1s linear backwards;
+        animation-delay: calc(0.2s * var(--delay));
+      }
+      @keyframes show-down {
+        0% {
+          transform: translateY(-10px);
+          opacity: 0;
+        }
+      }
+
+      .show-right {
+        animation: show-right 1s linear backwards;
+        animation-delay: calc(0.2s * var(--delay));
+      }
+      @keyframes show-right {
+        0% {
+          transform: translateX(-50px);
+          opacity: 0;
+        }
+      }
+
+      .show-left {
+        animation: show-left 1s linear backwards;
+        animation-delay: calc(0.2s * var(--delay));
+      }
+      @keyframes show-left {
+        0% {
+          transform: translateX(50px);
+          opacity: 0;
+        }
+      }
     </style>
   </head>
   <body>
@@ -656,6 +715,84 @@ line-height: 1;
         </div>
       </section>
     </div>
+
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const menuBtnIcon = document.querySelector("#menu-btn i");
+      const nav = document.querySelector(".navlist");
+
+      menuBtn.addEventListener("click", () => {
+        menuBtnIcon.classList.toggle("fa-bars");
+        menuBtnIcon.classList.toggle("fa-times");
+        nav.classList.toggle("open");
+      })
+    </script>
+
+<main>
+  <nav class="upper-nav">
+    <div class="wifi-status">
+      <p>iPhone</p>
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-wifi" width="15" height="15" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 18l.01 0" /><path d="M9.172 15.172a4 4 0 0 1 5.656 0" /><path d="M6.343 12.343a8 8 0 0 1 11.314 0" /><path d="M3.515 9.515c4.686 -4.687 12.284 -4.687 17 0" /></svg>
+    </div>
+    <p class="time"></p>
+    <div class="battery-status">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bluetooth" width="15" height="15" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 8l10 8l-5 4l0 -16l5 4l-10 8" /></svg>
+      <p>90%</p>
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-battery-3" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 7h11a2 2 0 0 1 2 2v.5a.5 .5 0 0 0 .5 .5a.5 .5 0 0 1 .5 .5v3a.5 .5 0 0 1 -.5 .5a.5 .5 0 0 0 -.5 .5v.5a2 2 0 0 1 -2 2h-11a2 2 0 0 1 -2 -2v-6a2 2 0 0 1 2 -2" /><path d="M7 10l0 4" /><path d="M10 10l0 4" /><path d="M13 10l0 4" /></svg>
+    </div>
+  </nav>
+  <h1>MY TICKETS</h1>
+  <section class="ticket">
+    <div class="top-border"></div>
+    <h2>THE LEGEND OF<br>TARZAN</h2>
+    <p class="booking-number">BOOKING NR: <span>#25668</span></p>
+    <div class="room-seat">
+      <p>ROOM<br><span>14</span></p>
+      <p>ROW<br><span>7</span></p>
+      <p>SEAT<br><span>18</span></p>
+    </div>
+    <div class="price-date">
+      <p>PRICE <span>$5</span></p>
+      <p>DATE <span>09.05.2016</span></p>
+    </div>
+  </section>
+  <div class="tear-line">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <section class="barcode">
+    <img src="" alt="" id="barcode">
+  </section>
+  <p class="instructions">
+    Use the booking number to pick up your tickets before the show
+  </p>
+  <nav class="bottom-nav">
+    <div class="nav-icons">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-category" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4h6v6h-6z" /><path d="M14 4h6v6h-6z" /><path d="M4 14h6v6h-6z" /><path d="M17 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /></svg>
+      <p>Home</p>
+    </div>
+    <div class="nav-icons">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-movie" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" /><path d="M8 4l0 16" /><path d="M16 4l0 16" /><path d="M4 8l4 0" /><path d="M4 16l4 0" /><path d="M4 12l16 0" /><path d="M16 8l4 0" /><path d="M16 16l4 0" /></svg>
+      <p>Movies</p>
+    </div>
+    <div class="nav-icons">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-star" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" /></svg>
+      <p>Favorites</p>
+    </div>
+    <div class="nav-icons">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-ticket" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 5l0 2" /><path d="M15 11l0 2" /><path d="M15 17l0 2" /><path d="M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2" /></svg>
+      <p>My Tickets</p>
+    </div>
+  </nav>
+</main>
 
     <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
         
