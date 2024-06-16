@@ -6,226 +6,139 @@
     <title>URLSearchParams in JS</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://unpkg.com/jsbarcode@latest/dist/JsBarcode.all.min.js"></script>
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  body {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(
-          to top right, #d03456, #f68b4a);
-  }
-  main {
-    width: 90%;
-    max-width: 300px;
-    background-color: #ECECEC;
-  }
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .upper-nav {
-    padding: 0.1rem 0.2rem;
-    font-size: 0.65rem;
-  }
-  .upper-nav div {
-    display: flex;
-    gap: 0.25rem;
-    align-items: center;
-    color: #555555;
-  }
-  .battery-status p {
-    margin-right: -0.25rem;
-  }
-  h1 {
-    margin: 1rem 0;
-    color: #5555559a;
-    font-size: 1.1rem;
-  }
-  h2 {
-    margin-top: 2rem;
-    color: transparent;
-    line-height: 0.9;
-    background: linear-gradient(to bottom right, #d87131, #d03456);
-    background-clip: text;
-  }
-  h2 span {
-    display: block;
-  }
-  section {
-    width: 90%;
-    margin: 0 auto;
-    background-color: #fff;
-    box-shadow: 0 0 0.5rem #55555586;
-  }
-  .ticket {
-    border-bottom-left-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
-  }
-  .top-border {
-    width: 100%;
-    height: 5px;
-    background: linear-gradient( to right, #ec894c, #d03456);
-  }
-  .booking-number {
-    margin: 1.5rem 0;
-    color: #555555;
-    font-size: 0.7rem;
-  }
-  .booking-number span {
-    color: #2d2d2dc9;
-    font-size: 1rem;
-    font-weight: 700;
-  }
-  .room-seat {
-    padding: 1rem;
-    display: flex;
-    gap: 1.2rem;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 0.8rem;
-    background: linear-gradient( to right, #ec894c, #d03456);
-  }
-  .room-seat span {
-    font-size: 1.2rem;
-    font-weight: 700;
-  }
-  .price-date {
-    padding: 1.5rem;
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    justify-content: center;
-    color: #555555bd;
-    font-size: 0.8rem;
-  }
-  .price-date span {
-    font-size: 1rem;
-  }
-  .tear-line {
-    width: 85%;
-    margin: 0 auto;
-    display: flex;
-    gap: 0.5rem;
-    justify-content: space-between;
-    background-color: #fff;
-  }
-  .tear-line div {
-    width: 0.8rem;
-    height: 2px;
-    background-color: #55555592;
-  }
-  #shadow-host-companion {
-    display: none;
-  }
-  .barcode {
-    padding: 1rem;
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
-    box-shadow: 0 0.4rem 0.5rem #55555586;
-  }
-  .instructions {
-    width: 70%;
-    margin: 1.5rem auto;
-    color: #555555;
-    font-size: 0.8rem;
-  }
-  .bottom-nav {
-    padding: 0.8rem;
-    color: #555555;
-    background-color: #fff;
-  }
-  .bottom-nav p {
-    color: #d87131;
-    font-size: 0.8rem;
-  }
-</style>
+    <style>
+      :root {
+        --primary-color: #5484dd;
+        --primary-color-dark: #112b5a;
+        --text-dark: #333333;
+        --text-light: #767268;
+        --extra-light: #f5f6f8;
+        --white: #ffffff;
+        --max-width: 1200px;
+      }
+    </style>
   </head>
   <body>
-<main>
-  <nav class="upper-nav">
-    <div class="wifi-status">
-      <p>iPhone</p>
-      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-wifi" width="15" height="15" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 18l.01 0" /><path d="M9.172 15.172a4 4 0 0 1 5.656 0" /><path d="M6.343 12.343a8 8 0 0 1 11.314 0" /><path d="M3.515 9.515c4.686 -4.687 12.284 -4.687 17 0" /></svg>
-    </div>
-    <p class="time"></p>
-    <div class="battery-status">
-      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bluetooth" width="15" height="15" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 8l10 8l-5 4l0 -16l5 4l-10 8" /></svg>
-      <p>90%</p>
-      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-battery-3" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 7h11a2 2 0 0 1 2 2v.5a.5 .5 0 0 0 .5 .5a.5 .5 0 0 1 .5 .5v3a.5 .5 0 0 1 -.5 .5a.5 .5 0 0 0 -.5 .5v.5a2 2 0 0 1 -2 2h-11a2 2 0 0 1 -2 -2v-6a2 2 0 0 1 2 -2" /><path d="M7 10l0 4" /><path d="M10 10l0 4" /><path d="M13 10l0 4" /></svg>
-    </div>
-  </nav>
-  <!-- <h1>E-ticket</h1> -->
-  <h1>MY TICKETS</h1>
-  <section class="ticket">
-    <div class="top-border"></div>
-    <h2>THE LEGEND OF <span>TARZAN</span></h2>
-    <p class="booking-number">BOOKING NR: <span>#25668</span></p>
-    <div class="room-seat">
-      <p>ROOM<br><span>14</span></p>
-      <p>ROW<br><span>7</span></p>
-      <p>SEAT<br><span>18</span></p>
-    </div>
-    <div class="price-date">
-      <p>PRICE <span>$5</span></p>
-      <p>DATE <span>09.05.2016</span></p>
-    </div>
-  </section>
-  <div class="tear-line">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-  <section class="barcode">
-    <img src="" alt="" id="barcode">
-  </section>
-  <p class="instructions">
-    Use the booking number to pick up your tickets before the show
-  </p>
-  <nav class="bottom-nav">
-    <div class="nav-icons">
-      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-category" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4h6v6h-6z" /><path d="M14 4h6v6h-6z" /><path d="M4 14h6v6h-6z" /><path d="M17 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /></svg>
-      <p>Home</p>
-    </div>
-    <div class="nav-icons">
-      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-movie" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" /><path d="M8 4l0 16" /><path d="M16 4l0 16" /><path d="M4 8l4 0" /><path d="M4 16l4 0" /><path d="M4 12l16 0" /><path d="M16 8l4 0" /><path d="M16 16l4 0" /></svg>
-      <p>Movies</p>
-    </div>
-    <div class="nav-icons">
-      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-star" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" /></svg>
-      <p>Favorites</p>
-    </div>
-    <div class="nav-icons">
-      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-ticket" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 5l0 2" /><path d="M15 11l0 2" /><path d="M15 17l0 2" /><path d="M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2" /></svg>
-      <p>My Tickets</p>
-    </div>
-  </nav>
-</main>
-<script>
-  JsBarcode("#barcode", "12343678946", {
-    displayValue: false,
-    height: 60,
-  })
-</script>
-
-    <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+    <header class="header">
+      <nav>
+        <div class="nav-bar">
+          <div class="logo">
+            <a href="#"><img src="assets/logo.png" alt="logo" /></a>
+          </div>
+          <div class="nav-menu-btn" id="menu-btn">
+            <i class="ri-menu-line"></i>
+          </div>
+        </div>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#service">Service</a></li>
+          <li><a href="#offer">Offer</a></li>
+          <li><a href="#client">Client</a></li>
+          <li><button class="btn">Sign Up</button></li>
+        </ul>
+      </nav>
+      <div class="section-container header-container" id="home">
+        <h1>No Matter Where You Are Going From, We Take You There</h1>
+        <p>
+          You do not have the right to remain silent. Let us know what it takes
+          to challenge you
+        </p>
+        <div class="booking">
+          <div class="booking-type" id="booking-type">
+            <div class="active">One Way</div>
+            <div>Round Trip</div>
+            <div>Multi City</div>
+          </div>
+          <form action="/" class="booking-form">
+            <div class="booking-input">
+              <label for="arrival">To</label>
+              <input type="text" placeholder="Arrival" />
+            </div>
+            <div class="booking-input">
+              <label for="departure">From</label>
+              <input type="text" placeholder="Departure" />
+            </div>
+            <div class="booking-input">
+              <label for="date">Date</label>
+              <input type="text" placeholder="Date" />
+            </div>
+          </form>
+          <div class="booking-btn">
+            <button class="btn">Book Now</button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section class="section-container service-container" id="service">
+      <h2 class="section-header">Our Services</h2>
+      <p class="section-description">
+        Embark on unforgettable journeys with our travel and tourism platform,
+        where wanderlust meets convenience.
+      </p>
+      <div class="service-grid">
+        <div class="service-card">
+          <img src="assets/service-1.jpg" alt="service" />
+          <div>
+            <div>
+              <h4>Cruise Ticket</h4>
+              <p>
+                Immerse yourself in the allure of the open sea as you set sail
+                on a meticulously crafted cruise experience.
+              </p>
+            </div>
+            <div class="service-btn">
+              <button class="btn">See All</button>
+            </div>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="assets/service-2.jpg" alt="service" />
+          <div>
+            <div>
+              <h4>Car Booking</h4>
+              <p>
+                Experience unparalleled convenience with our Car Booking
+                service, designed to elevate your travel journey.
+              </p>
+            </div>
+            <div class="service-btn">
+              <button class="btn">See All</button>
+            </div>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="assets/service-3.jpg" alt="service" />
+          <div>
+            <div>
+              <h4>Air Ticket</h4>
+              <p>
+                Secure your wings to the world with our Air Ticket service, your
+                gateway to seamless travel.
+              </p>
+            </div>
+            <div class="service-btn">
+              <button class="btn">See All</button>
+            </div>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="assets/service-4.jpg" alt="service" />
+          <div>
+            <div>
+              <h4>Hotel Booking</h4>
+              <p>
+                Browse through a curated selection of handpicked hotels, each
+                chosen for its quality, amenities, and prime locations.
+              </p>
+            </div>
+            <div class="service-btn">
+              <button class="btn">See All</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
         
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
