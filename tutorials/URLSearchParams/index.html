@@ -588,13 +588,14 @@ font-family: 'Kaushan Script', cursive;
         text-align: center;
       }
       
-      @media (width > 576px) {
+      @media (width > 36rem) {
         .service-card {
           flex-direction: row;
         }
       
         .service-card img {
-          max-width: 200px;
+          /* max-width: 200px; */
+          max-width: 12.5rem;
         }
       
         .offer-grid {
@@ -616,7 +617,7 @@ font-family: 'Kaushan Script', cursive;
         }
       }
       
-      @media (width > 768px) {
+      @media (width > 48rem) {
         nav {
           position: static;
           padding: 2rem 1rem;
@@ -678,6 +679,115 @@ font-family: 'Kaushan Script', cursive;
           grid-area: unset;
         }
       }
+
+      .slider {
+        position: relative;
+        /* background-color: #efedee; */
+        overflow: hidden;
+      }
+
+      .slider-wrapper {
+        display: flex;
+        /* column-gap: 3rem; */
+        padding: 3rem 0rem;
+        /* background-color: #efedee; */
+        transition: transform 500ms ease-in-out;
+      }
+
+      .slide {
+        min-width: 23%;
+        margin: 1%;
+      }
+
+      @media screen and (max-width: 93.75rem) {
+        .slide {
+          min-width: 31.333%;
+        }
+      }
+
+      @media screen and (max-width: 65.625rem) {
+        .slide {
+          min-width: 48%;
+        }
+      }
+
+      @media screen and (max-width: 41.875rem) {
+        .slide {
+          min-width: 98%;
+        }
+      }
+
+      .slider .buttons {
+        position: absolute;
+        inset: 65% auto auto 0;
+        width: 100%;
+        padding: 0 1%;
+      }
+
+      .slider .buttons button {
+          padding: 11px 13px;
+          color: #000;
+          border: 1px solid #000;
+          border-radius: 50%;
+          background-color: rgba(255, 255, 255, 0.6);
+          transition: all 0.4s ease-in-out;
+          cursor: pointer;
+      }
+
+      .slider .buttons button:hover {
+          color: #333;
+          background-color: #fff;
+      }
+
+      .slider .buttons button i {
+          color: inherit;
+      }
+      
+      .slider .buttons #prev-slide {
+        display: none;
+      }
+
+      .slider .buttons #next-slide {
+        float: right;
+      }
+      
+      /* .zoom-in {
+        animation: zoom-in 2s linear backwards;
+      } */
+
+      /* .rotate {
+        animation: rotate 1s linear forwards;
+      } */
+
+      /* .fade-left {
+        animation: fade-left 1s linear backwards;
+      } */
+
+      .fade-right {
+        animation: fade-right 1s linear backwards;
+      }
+
+      .fade-up {
+        animation: fade-up 1s linear backwards;
+      }
+
+      /* .fade-down {
+        animation: fade-down 1s linear backwards;
+      } */
+
+      .delayed {
+        animation-delay: calc(0.2s * var(--i));
+      }
+
+      .paused {
+        animation-play-state: paused;
+      }
+      
+      /* @keyframes zoom-in {
+        0% {
+          opacity: 0;
+        }
+      } */
     </style>
   </head>
   <body>
@@ -1133,6 +1243,23 @@ font-family: 'Kaushan Script', cursive;
           slider.style.transform = `translateX(${x}%)`;
         });
       }());
+    </script>
+    <script>
+      const observer = new IntersectionObserver(animate);
+      
+      const elements = document.querySelectorAll(".paused");
+      
+      elements.forEach(element => {
+          observer.observe(element);
+      })
+      
+      function animate(entries) {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.remove("paused");
+            }
+          });
+      }
     </script>
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
