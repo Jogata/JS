@@ -12,7 +12,7 @@
       /* @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap"); */
       @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Kaushan+Script&family=Playfair+Display&display=swap');
       /* @import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Brawler:wght@400;700&family=Croissant+One&family=Ephesis&family=Gloock&family=Hurricane&family=Imbue:opsz,wght@10..100,100..900&family=Modak&family=Montez&family=Prosto+One&family=Rye&family=Shojumaru&family=Young+Serif&family=ZCOOL+XiaoWei&display=swap'); */
-      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+      /* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"); */
       
       :root {
         --primary-color: #5484dd;
@@ -87,7 +87,7 @@
       input {
         font-family: Georgia, serif;
       }
-      
+
       .logo {
         /* max-width: 150px; */
         max-width: 9.375rem;
@@ -132,6 +132,7 @@ font-family: "Imbue", serif;
 font-family: Georgia, serif;
 font-family: "Arizonia", cursive;
 font-family: 'Kaushan Script', cursive;
+background-color: #eaeef5;
       }
       
       .header {
@@ -309,6 +310,7 @@ font-family: 'Kaushan Script', cursive;
         gap: 1rem;
         flex-direction: column;
         border-radius: 8px;
+        background-color: whitesmoke;
         box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
         transition: 0.3s;
       }
@@ -322,6 +324,10 @@ font-family: 'Kaushan Script', cursive;
         max-width: 18.75rem;
         margin: auto;
         border-radius: 8px;
+        /* clip-path: url("#mask"); */
+        /* clip-path: url("#mask-2"); */
+        clip-path: url("#mask-3");
+        /* clip-path: url("#mask-4"); */
       }
       
       .service-card > div {
@@ -371,6 +377,7 @@ font-family: 'Kaushan Script', cursive;
       .offer-card {
         padding: 1rem;
         border-radius: 8px;
+        background-color: whitesmoke;
         box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
         transition: 0.3s;
       }
@@ -382,6 +389,10 @@ font-family: 'Kaushan Script', cursive;
       .offer-card img {
         margin-bottom: 1rem;
         border-radius: 8px;
+        clip-path: url("#mask");
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
       }
       
       .offer-card h4 {
@@ -854,6 +865,122 @@ font-family: 'Kaushan Script', cursive;
         background-position: center;
         background-size: cover;
       }
+
+      .test-container {
+        position: relative;
+        width: 100%;
+        max-width: 1400px;
+        margin: 100px auto 20px;
+        padding: 5rem 4rem;
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(4, 1fr);
+        isolation: isolate;
+      }
+      
+      .test-container::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 90%;
+        height: 100%;
+        background-color: var(--primary-color);
+        z-index: -1;
+      }
+
+      .test-logo {
+        position: absolute;
+        left: 50px;
+        top: -80px;
+        width: 150px;
+        height: 150px;
+        display: grid;
+        place-content: center;
+        color: var(--white);
+        font-size: 6rem;
+        border-radius: 50%;
+        background-color: var(--primary-color-dark);
+      }
+      
+      .content {
+        display: grid;
+        align-self: center;
+      }
+      
+      .content h1 {
+        margin-bottom: 1rem;
+        color: var(--white);
+        font-size: 2rem;
+        font-weight: 600;
+      }
+      
+      .content p {
+        margin-bottom: 2rem;
+        color: var(--white);
+      }
+        
+      .card {
+        border-radius: 5px;
+        background-color: var(--white);
+        overflow: hidden;
+      }
+      
+      .card-details {
+        position: relative;
+        padding: 1rem;
+        border-top: 1rem solid var(--extra-light);
+      }
+      
+      .card-details span {
+        position: absolute;
+        top: -2.5rem;
+        width: 50px;
+        height: 50px;
+        display: grid;
+        place-content: center;
+        color: var(--white);
+        font-size: 1.5rem;
+        border-radius: 50%;
+        background-color: var(--primary-color-dark);
+      }
+      
+      .content div {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        text-decoration-skip-ink: 0.9rem;
+        color: var(--white);
+        font-weight: 600;
+      }
+      
+      .content div span {
+        padding: 2px 5px;
+        color: red;
+        border-radius: 0%;
+        background-color: var(--white);
+        cursor: pointer;
+      }
+      
+      .nav {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+      }
+            
+      @media (width < 1080px) {
+        .container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      
+      @media (width < 720px) {
+        .container {
+          grid-template-columns: repeat(1, 1fr);
+        }
+      }
     </style>
   </head>
   <body>
@@ -1175,7 +1302,9 @@ font-family: 'Kaushan Script', cursive;
 
     <div id="test">      
       <div class="test-container">
-        <span class="logo"><i class="ri-double-quotes-l"></i></span>
+        <span class="test-logo">
+          <i class="ri-double-quotes-l"></i>
+        </span>
         <div class="content">
           <h1>Connect with other members</h1>
           <p>
