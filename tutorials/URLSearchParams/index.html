@@ -3,401 +3,144 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URLSearchParams in JS</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">  
+    <!-- <title>URLSearchParams in JS</title> -->
+    <title>MEDIBuddy</title>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-<style>
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  /* position: relative; */
-  min-height: 100vh;
-  padding: 5rem 0;
-  display: flex;
-  gap: 2rem;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  color: #232e4d;
-  font-family: "Montserrat", sans-serif;
-  background-color: #232e4d;
-  overflow-x: hidden;
-}
-
-.pink-bg {
-  position: fixed;
-  top: 0;
-  right: 50%;
-  width: 150%;
-  height: 100%;
-  background-color: #fee4ea;
-  transform: skew(-30deg);
-  z-index: 1;
-}
-
-#shadow-host-companion {
-  display: none;
-}
-
-section {
-  width: 90%;
-  /* max-width: 550px; */
-  max-width: 34.4rem;
-  padding: 2rem;
-  border-radius: 0.5rem;
-  background-color: #fff;
-  box-shadow: 0 0 1rem #232e4d38;
-  z-index: 2;
-}
-
-.job-post {
-  position: relative;
-}
-
-.icon-tabler-dots {
-  position: absolute;
-  top: 1rem;
-  right: 2rem;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.title-container {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-.logo {
-  border-radius: 50%;
-  outline: 2px solid #74819f32;
-}
-
-.icon-tabler-brush {
-  padding: 0.8rem;
-  color: #de3c3c;
-}
-
-h1 {
-  margin-bottom: 0.25rem;
-  font-size: 1rem;
-}
-
-.location {
-  margin-bottom: 1rem;
-  display: flex;
-  gap: 0.25rem;
-  align-items: center;
-  color: #74819f;
-  font-size: 0.8rem;
-}
-
-button {
-  /* width: 85px; */
-  min-width: 5.35rem;
-  padding: 0.4em 1em;
-  color: inherit;
-  font-size: 1rem;
-  border: 1px solid transparent;
-  border-radius: 0.2rem;
-  background-color: transparent;
-  transition: 0.5s;
-  cursor: pointer;
-}
-
-.save {
-  border-color: #232e4d;
-}
-
-.save:hover {
-  color: #fff;
-  background-color: #232e4d;
-}
-
-.apply {
-  color: #fff;
-  background-color: #232e4d;
-}
-
-.apply:hover {
-  background-color: #232e4dc5;
-}
-
-.company-info {
-  margin-top: 2.5rem;
-  padding: 1.5rem;
-  display: flex;
-  gap: 1rem;
-  border-radius: 0.2rem;
-  border: 1px solid #74819f37;
-  background-color: #74819f08;
-}
-
-h3 {
-  margin-bottom: 0.35rem;
-  color: #74819f;
-  font-size: 0.8rem;
-  font-weight: 500;
-}
-
-.company-info ul, 
-.company-info p {
-  font-size: 0.7rem;
-  font-weight: 500;
-}
-
-.company-info p {
-  color: #74819f;
-  font-size: 1rem;
-}
-
-.company-info ul {
-  padding: 0 0.6rem;
-}
-
-.company-info ul li {
-  width: max-content;
-  padding-bottom: 0.5rem;
-}
-
-.view-job-post {
-  display: block;
-  width: max-content;
-  margin: 1.5rem auto 0 auto;
-  padding: 0.6em 1.2em;
-  border-radius: 5px;
-  box-shadow: 1px 1px 1px #0009, 
-            -1px -1px 1px #0001;
-}
-
-.view-job-post:hover {
-  box-shadow: 2px 2px 2px #0005, 
-            -1px -1px 1px #0001;
-}
-
-.job-description {
-  display: none;
-}
-
-.icon-tabler-x {
-  display: block;
-  margin-left: auto;
-  cursor: pointer;
-}
-
-h2 {
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-}
-
-.job-description ul, 
-.job-description p {
-  margin-bottom: 1.5rem;
-  font-size: 0.8rem;
-  line-height: 1.5;
-}
-
-.job-description ul {
-  padding: 0 0.6rem;
-}
-
-@media (max-width: 520px) {
-  .company-info {
-    flex-wrap: wrap;
-  }
-
-  .title-container {
-    margin-top: 1rem;
-  }
-}
-
-@media (max-width: 380px) {
-  .title-container {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .title-info {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-}
-</style>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+      :root {
+        --primary-color: #28bf96;
+        --primary-color-dark: #209677;
+        --text-dark: #111827;
+        --text-light: #6b7280;
+        --white: #ffffff;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .btn {
+        padding: 1rem 2rem;
+        color: var(--white);
+        font-size: 1rem;
+        /* font-family: Georgia; */
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        background-color: var(--primary-color);
+        transition: 0.3s;
+        cursor: pointer;
+      }
+      .btn:hover {
+        background-color: var(--primary-color-dark);
+      }
+      body {
+        font-family: "Roboto", sans-serif;
+      }
+      .container {
+        max-width: 1200px;
+        min-height: 100vh;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+      }
+      nav {
+        padding: 2rem 1rem;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .nav-logo {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        font-weight: 600;
+        font-family: Georgia;
+      }
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+      }
+      .link a {
+        color: var(--text-light);
+        text-decoration: none;
+        transition: 0.3s;
+        cursor: pointer;
+      }
+      .link a:hover {
+        color: var(--primary-color);
+      }
+    </style>
   </head>
   <body>
-    <!-- <h1>Job Post</h1> -->
-    <div class="pink-bg"></div>
-    <section class="job-post">
-      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-dots" 
-      width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" 
-      stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-        <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-        <path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-      </svg>
-      <div class="title-container">
-        <div class="logo">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brush" width="80" height="80" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 21v-4a4 4 0 1 1 4 4h-4" /><path d="M21 3a16 16 0 0 0 -12.8 10.2" /><path d="M21 3a16 16 0 0 1 -10.2 12.8" /><path d="M10.6 9a9 9 0 0 1 4.4 4.4" /></svg>
-      </div>
-        <div class="title-info">
-        <h1>Product Designer at Wisely</h1>
-        <div class="location">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-map-pin" width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" /><path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" /></svg>
-          <p>Austin, TX or Remote</p>
+    <div class="container">
+      <nav>
+        <div class="nav-logo">MEDIBuddy</div>
+        <ul class="nav-links">
+          <li class="link">
+            <a href="#">Home</a>
+          </li>
+          <li class="link">
+            <a href="#">About Us</a>
+          </li>
+          <li class="link">
+            <a href="#">Courses</a>
+          </li>
+          <li class="link">
+            <a href="#">Pages</a>
+          </li>
+          <li class="link">
+            <a href="#">Blog</a>
+          </li>
+          <li class="link">
+            <a href="#">Contact</a>
+          </li>
+        </ul>
+        <button class="btn">Register Now</button>
+      </nav>
+      <header class="header">
+        <div class="content">
+          <h1><span>Get Quick</span><br />Medical Services</h1>
+          <p>
+            In today's fast-paced world, access to prompt and efficient medical
+            services is of paramount importance. When faced with a medical
+            emergency or seeking immediate medical attention, the ability to
+            receive quick medical services can significantly impact the outcome
+            of a situation.
+          </p>
+          <button class="btn">Get Services</button>
         </div>
-        <div class="buttons-container">
-        <button class="save">Save</button>
-        <button class="apply">Apply</button>
+        <div class="image">
+          <span class="image-bg"></span>
+          <img src="assets/header-bg.png" alt="header image" />
+          <div class="image-content image-content-1">
+            <span><i class="ri-user-3-line"></i></span>
+            <div class="details">
+              <h4>1520+</h4>
+              <p>Active Clients</p>
+            </div>
+          </div>
+          <div class="image-content image-content-2">
+            <ul>
+              <li>
+                <span><i class="ri-check-line"></i></span>
+                Get 20% off on every 1st month
+              </li>
+              <li>
+                <span><i class="ri-check-line"></i></span>
+                Expert Doctors
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-      </div>
-      <div class="company-info">
-        <div class="job">
-          <h3>JOB</h3>
-          <ul>
-            <li>7/9 skills match</li>
-            <li>32 applicants</li>
-          </ul>
-        </div>
-        <div class="company">
-          <h3>COMPANY</h3>
-          <ul>
-            <li>51-200 employees</li>
-            <li>Computer software</li>
-          </ul>
-        </div>
-        <div class="connections">
-          <h3>CONNECTIONS</h3>
-          <P>You don't have connections working at Wisely</P>
-        </div>
-      </div>
-      <button class="view-job-post">View Job Post</button>
-    </section>
-    <section class="job-description">
-      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" 
-        width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" 
-        stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <path d="M18 6l-12 12" /><path d="M6 6l12 12"/>
-      </svg>
-      <h2>About Wisely:</h2>
-      <p>Wisely is a rapidly growing technology company focused on revolutionizing the way businesses
-         engage with their customers. Our innovative suite of products helps businesses build stronger 
-         relationships, increase customer loyalty, and drive revenue growth. With a passionate team and 
-         cutting-edge technology, Wisely is poised to redefine customer experience in industries ranging 
-         from hospitality to retail.
-        </p>
-      <h2>Position Overview:</h2>
-      <p>We are seeking a talented and creative Product Designer to join our team. As a Product Designer
-         at Wisely, you will play a pivotal role in shaping the user experience and visual identity of 
-         our products. You will work closely with cross-functional teams including product managers, engineers, 
-         and marketers to create intuitive and visually stunning solutions that delight our customers.
-        </p>
-      <h2>Responsibilities:</h2>
-      <ul>
-        <li>Collaborate with product managers and engineers to define product requirements and develop user-centric design solutions.</li>
-        <li>Create wireframes, prototypes, and mockups to effectively communicate design ideas and concepts.</li>
-        <li>Develop user interface designs that are intuitive, user-friendly, and visually appealing.</li>
-        <li>Conduct user research and gather feedback to iteratively improve product designs.</li>
-        <li>Ensure consistency and coherence across all product touchpoints by maintaining design systems and style guides.</li>
-        <li>Stay updated on industry trends and best practices to continuously enhance design processes and methodologies.</li>
-      </ul>
-      <h2>Requirements:</h2>
-      <ul>
-        <li>Proven experience as a Product Designer or similar role, with a strong portfolio showcasing your design expertise.</li>
-        <li>Proficiency in design tools such as Sketch, Figma, Adobe Creative Suite, etc.</li>
-        <li>Solid understanding of user-centered design principles and methodologies.</li>
-        <li>Excellent communication and collaboration skills with the ability to articulate and defend design decisions.</li>
-        <li>Strong attention to detail and a passion for creating exceptional user experiences.</li>
-        <li>Experience working in an Agile development environment is a plus.</li>
-      </ul>
-      <h2>Benefits:</h2>
-      <ul>
-        <li>Competitive salary and equity options.</li>
-        <li>Comprehensive health, dental, and vision insurance.</li>
-        <li>Flexible work hours and remote work opportunities.</li>
-        <li>Professional development and training programs.</li>
-        <li>Dynamic and inclusive company culture with opportunities for growth and advancement.</li>
-      </ul>
-      <h2>How to apply:</h2>
-      <p>If you are passionate about design and eager to make an impact in a fast-paced and dynamic 
-        environment, we'd love to hear from you! Please submit your resume, portfolio, and a brief cover letter 
-        outlining your relevant experience and why you are interested in joining Wisely.
-      </p>
-      <p>Wisely is an equal opportunity employer and we value diversity at our company. We do not discriminate on 
-        the basis of race, religion, color, national origin, gender, sexual orientation, age, marital status, 
-        veteran status, or disability status.
-      </p>
-    </section>
-    <script>
-      // Open job description
-      const VIEW_JOB_POST_BTN = document.querySelector(".view-job-post");
-      const JOB_DESCRIPTION = document.querySelector(".job-description");
-      
-      VIEW_JOB_POST_BTN.addEventListener("click", () => {
-        JOB_DESCRIPTION.style.display = "block";
-      });
-      
-      // Close job decsription
-      const CLOSE_JOB_DESCRIPTION_BTN = document.querySelector(".icon-tabler-x");
-      
-      CLOSE_JOB_DESCRIPTION_BTN.addEventListener("click", () => {
-        JOB_DESCRIPTION.style.display = "none";
-      });
-    </script>
+      </header>
+    </div>
 
-    <script>
-      // 2. Rage Quit
-
-      function printRageMessage(params) {
-        // console.log(params);
-        let result = "";
-        
-        const pattern = /[^0-9]+[0-9]+/g;
-        
-        const matches = params[0].match(pattern);
-        // console.log(matches);
-        
-        for (const string of matches) {
-          const digitalPart = string.match(/[0-9]+/);
-          // console.log(digitalPart);
-          const digit = Number(digitalPart[0]);
-          const index = string.indexOf(digit);
-          // console.log(index);
-          const nondigitalPart = string.substring(0, index).toUpperCase();
-          // console.log(nondigitalPart);
-          const newString = nondigitalPart.repeat(digit);
-          // console.log(newString);
-          result += newString;
-        }
-        // console.log(result);
-        
-        const symbols = result.split("");
-        // console.log(symbols);
-        const unique = new Set(symbols);
-        // console.log(unique);
-        console.log(`Unique symbols used: ${unique.size}`);
-        console.log(result);
-        
-      }
-      
-      // printRageMessage(["a3"]);
-      // printRageMessage(["aSd2&5s@1"]);
-    </script>
-    
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+    <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
         
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
