@@ -50,7 +50,8 @@ body {
 
 section {
   width: 90%;
-  max-width: 550px;
+  /* max-width: 550px; */
+  max-width: 34.4rem;
   padding: 2rem;
   border-radius: 0.5rem;
   background-color: #fff;
@@ -101,9 +102,11 @@ h1 {
 }
 
 button {
-  width: 85px;
-  padding: 0.35rem;
+  /* width: 85px; */
+  min-width: 5.35rem;
+  padding: 0.4em 1em;
   color: inherit;
+  font-size: 1rem;
   border: 1px solid transparent;
   border-radius: 0.2rem;
   background-color: transparent;
@@ -137,6 +140,98 @@ button {
   border-radius: 0.2rem;
   border: 1px solid #74819f37;
   background-color: #74819f08;
+}
+
+h3 {
+  margin-bottom: 0.35rem;
+  color: #74819f;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.company-info ul, 
+.company-info p {
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.company-info p {
+  color: #74819f;
+  font-size: 1rem;
+}
+
+.company-info ul {
+  padding: 0 0.6rem;
+}
+
+.company-info ul li {
+  width: max-content;
+  padding-bottom: 0.5rem;
+}
+
+.view-job-post {
+  display: block;
+  width: max-content;
+  margin: 1.5rem auto 0 auto;
+  padding: 0.6em 1.2em;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px #0009, 
+            -1px -1px 1px #0001;
+}
+
+.view-job-post:hover {
+  box-shadow: 2px 2px 2px #0005, 
+            -1px -1px 1px #0001;
+}
+
+.job-description {
+  display: none;
+}
+
+.icon-tabler-x {
+  display: block;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.job-description ul, 
+.job-description p {
+  margin-bottom: 1.5rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.job-description ul {
+  padding: 0 0.6rem;
+}
+
+@media (max-width: 520px) {
+  .company-info {
+    flex-wrap: wrap;
+  }
+
+  .title-container {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .title-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .title-info {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
 }
 </style>
   </head>
@@ -262,7 +357,45 @@ button {
         JOB_DESCRIPTION.style.display = "none";
       });
     </script>
-  
+
+    <script>
+      // 2. Rage Quit
+
+      function printRageMessage(params) {
+        // console.log(params);
+        let result = "";
+        
+        const pattern = /[^0-9]+[0-9]+/g;
+        
+        const matches = params[0].match(pattern);
+        // console.log(matches);
+        
+        for (const string of matches) {
+          const digitalPart = string.match(/[0-9]+/);
+          // console.log(digitalPart);
+          const digit = Number(digitalPart[0]);
+          const index = string.indexOf(digit);
+          // console.log(index);
+          const nondigitalPart = string.substring(0, index).toUpperCase();
+          // console.log(nondigitalPart);
+          const newString = nondigitalPart.repeat(digit);
+          // console.log(newString);
+          result += newString;
+        }
+        // console.log(result);
+        
+        const symbols = result.split("");
+        // console.log(symbols);
+        const unique = new Set(symbols);
+        // console.log(unique);
+        console.log(`Unique symbols used: ${unique.size}`);
+        console.log(result);
+        
+      }
+      
+      // printRageMessage(["a3"]);
+      // printRageMessage(["aSd2&5s@1"]);
+    </script>
     
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
         
