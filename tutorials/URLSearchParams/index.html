@@ -7,6 +7,113 @@
     <title>Board</title>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      header {
+        position: relative;
+        min-height: 45vh;
+        color: #f0f0f0;
+        background-color: #213555;
+      }
+
+      nav {
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo {
+        padding: 0.5rem 1rem;
+        color: #213555;
+        font-weight: 700;
+        background-color: #e5d183;
+      }
+
+      .nav-items,
+      .profile {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+
+      .add-board {
+        height: 60px;
+        margin-top: -1.5rem;
+        padding: 0.5rem;
+        display: flex;
+        align-items: flex-end;
+        color: #213555;
+        border: none;
+        border-radius: 0.5rem;
+        background-color: #e5d183;
+        transition: 0.5s;
+        cursor: pointer;
+      }
+
+      .add-board:hover {
+        background-color: #e5d183ce;
+      }
+
+      .profile {
+        gap: 0.25rem;
+        font-size: 0.8rem;
+      }
+
+      .open-profile-menu {
+        color: #f0f0f0;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+      }
+
+      .icon-tabler-user {
+        padding: 0.25rem;
+        border-radius: 0.25rem;
+        background-color: #385076;
+      }
+
+      .boards-stats {
+        margin: 0.25rem 3rem;
+      }
+
+      .stats {
+        margin-top: 0.25rem;
+        display: flex;
+        gap: 0.35rem;
+        align-items: center;
+        font-size: 0.8rem;
+        opacity: 0.7;
+      }
+      
+      .dot {
+        width: 0.25rem;
+        height: 0.25rem;
+        border-radius: 50%;
+        background-color: #f0f0f0;
+      }
+
+      .tools {
+        position: absolute;
+        right: 3rem;
+        top: 5rem;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -92,6 +199,7 @@
           <path d="M4 18l16 0"/>
         </svg>
       </div>
+      
     </header>
 
     <main>
@@ -122,6 +230,27 @@
           <label for="tasks">Tasks</label>
           <p>
             <input type="number" name="tasks" id="tasks" value="1" min="1" max="5">
+            <button class="increment">
+              <svg xmlns="http://www.w3.org/2000/svg" 
+                class="icon icon-tabler icon-tabler-plus" 
+                width="24" height="24" viewBox="0 0 24 24" 
+                stroke-width="1.5" stroke="currentColor" fill="none" 
+                stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M12 5l0 14"/>
+                <path d="M5 12l14 0"/>
+              </svg>
+            </button>
+            <button class="decrement">
+              <svg xmlns="http://www.w3.org/2000/svg" 
+                class="icon icon-tabler icon-tabler-minus" 
+                width="24" height="24" viewBox="0 0 24 24" 
+                stroke-width="1.5" stroke="currentColor" fill="none" 
+                stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M5 12l14 0"/>
+              </svg>
+            </button>          
           </p>
           <button id="reset" type="reset">Reset</button>
           <div>
