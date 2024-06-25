@@ -4,271 +4,142 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <title>URLSearchParams in JS</title> -->
-    <title>MEDIBuddy</title>
+    <title>Board</title>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
-      :root {
-        --primary-color: #28bf96;
-        --primary-color-dark: #209677;
-        --text-dark: #111827;
-        --text-light: #6b7280;
-        --white: #ffffff;
-      }
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      .btn {
-        padding: 1rem 2rem;
-        color: var(--white);
-        font-size: 1rem;
-        /* font-family: Georgia; */
-        outline: none;
-        border: none;
-        border-radius: 5px;
-        background-color: var(--primary-color);
-        transition: 0.3s;
-        cursor: pointer;
-      }
-      .btn:hover {
-        background-color: var(--primary-color-dark);
-      }
-      body {
-        font-family: "Roboto", sans-serif;
-      }
-      .container {
-        max-width: 1200px;
-        min-height: 100vh;
-        margin: auto;
-        display: flex;
-        flex-direction: column;
-      }
-      nav {
-        padding: 2rem 1rem;
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        justify-content: space-between;
-      }
-      .nav-logo {
-        color: var(--primary-color);
-        font-size: 1.5rem;
-        font-weight: 600;
-        font-family: Georgia;
-      }
-      .nav-links {
-        list-style: none;
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-      }
-      .link a {
-        color: var(--text-light);
-        text-decoration: none;
-        transition: 0.3s;
-        cursor: pointer;
-      }
-      .link a:hover {
-        color: var(--primary-color);
-      }
-      .header {
-        flex: 1;
-        padding: 0 1rem;
-        display: grid;
-        gap: 2rem;
-        align-items: center;
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .content h1 {
-        margin-bottom: 1rem;
-        color: var(--text-dark);
-        font-size: 3rem;
-        font-weight: 700;
-      }
-      .content h1 span {
-        display: block;
-        font-weight: 400;
-      }
-      .content p {
-        margin-bottom: 2rem;
-        color: var(--text-light);
-        line-height: 1.75rem;
-      }
-      .image {
-        position: relative;
-        text-align: center;
-        isolation: isolate;
-      }
-      .image-bg {
-        position: absolute;
-        /* top: 50%; */
-        /* left: 50%; */
-        /* transform: translate(-50%, -50%); */
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        margin: auto;
-        width: 450px;
-        height: 450px;
-        border-radius: 50%;
-        background-color: var(--primary-color);
-        z-index: -1;
-      }
-      .image img {
-        width: 100%;
-        max-width: 475px;
-      }
-      .image-content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        padding: 1rem 2rem;
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        text-align: left;
-        border-radius: 5px;
-        background-color: var(--white);
-        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
-      }
-      .image-content-1 {
-        transform: translate(calc(-50% - 12rem), calc(-50% - 8rem));
-      }
-      .image-content-1 span {
-        padding: 10px 12px;
-        color: var(--primary-color);
-        font-size: 1.5rem;
-        background-color: #defcf4;
-        border-radius: 100%;
-      }
-      .image-content-1 h4 {
-        color: var(--text-dark);
-        font-size: 1.5rem;
-        font-weight: 600;
-      }
-      .image-content-1 p {
-        color: var(--text-light);
-      }
-      .image-content-2 {
-        transform: translate(calc(-50% + 8rem), calc(-50% + 10rem));
-      }
-      .image-content-2 ul {
-        list-style: none;
-        display: grid;
-        gap: 1rem;
-      }
-      .image-content-2 li {
-        display: flex;
-        gap: 0.5rem;
-        align-items: flex-start;
-        color: var(--text-light);
-      }
-      .image-content-2 span {
-        color: var(--primary-color);
-        font-size: 1.5rem;
-      }
-      @media (width < 900px) {
-        .nav-links {
-          display: none;
-        }
-        .header {
-          padding: 1rem;
-          grid-template-columns: repeat(1, 1fr);
-        }
-        .content {
-          text-align: center;
-        }
-        .image {
-          grid-area: 1/1/2/2;
-        }
-      }
-    </style>
   </head>
   <body>
-    <div class="container">
-      <nav>
-        <div class="nav-logo">MEDIBuddy</div>
-        <ul class="nav-links">
-          <li class="link">
-            <a href="#">Home</a>
-          </li>
-          <li class="link">
-            <a href="#">About Us</a>
-          </li>
-          <li class="link">
-            <a href="#">Courses</a>
-          </li>
-          <li class="link">
-            <a href="#">Pages</a>
-          </li>
-          <li class="link">
-            <a href="#">Blog</a>
-          </li>
-          <li class="link">
-            <a href="#">Contact</a>
-          </li>
-        </ul>
-        <button class="btn">Register Now</button>
+    <header>
+      <nav class="nav">
+        <p class="logo">LOGO</p>
+  
+        <div class="nav-items">
+          <button class="add-board">
+            <svg xmlns="http://www.w3.org/2000/svg" 
+              class="icon icon-tabler icon-tabler-plus" 
+              width="24" height="24" viewBox="0 0 24 24" 
+              stroke-width="1.5" stroke="currentColor" 
+              fill="none" stroke-linecap="round" 
+              stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M12 5l0 14" /><path d="M5 12l14 0"/>
+            </svg>
+          </button>
+          <div class="profile">
+            <svg xmlns="http://www.w3.org/2000/svg" 
+              class="icon icon-tabler icon-tabler-user" 
+              width="30" height="30" viewBox="0 0 24 24" 
+              stroke-width="1.5" stroke="currentColor" fill="none" 
+              stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"/>
+              <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/>
+            </svg>
+            <p class="username">John Doe</p>
+            <button class="open-profile-menu">
+              <svg xmlns="http://www.w3.org/2000/svg" 
+                class="icon icon-tabler icon-tabler-chevron-down" 
+                width="24" height="24" viewBox="0 0 24 24" 
+                stroke-width="1.5" stroke="currentColor" fill="none" 
+                stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M6 9l6 6l6 -6"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
       </nav>
-      <header class="header">
-        <div class="content">
-          <h1><span>Get Quick</span><br />Medical Services</h1>
+
+      <div class="boards-stats">
+        <h1>My Boards</h1>
+        <div class="stats">
+          <p><span class="total-boards">0</span> Boards</p>
+          <div class="dot"></div>
+          <p><span class="total-tasks">0</span> Tasks</p>
+        </div>
+      </div>
+
+      <div class="tools">
+        <svg xmlns="http://www.w3.org/2000/svg" 
+          class="icon icon-tabler icon-tabler-search" 
+          width="24" height="24" viewBox="0 0 24 24" 
+          stroke-width="1.5" stroke="currentColor" fill="none" 
+          stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/>
+          <path d="M21 21l-6 -6"/>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" 
+          class="icon icon-tabler icon-tabler-category" 
+          width="24" height="24" viewBox="0 0 24 24" 
+          stroke-width="1.5" stroke="currentColor" fill="none" 
+          stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M4 4h6v6h-6z"/>
+          <path d="M14 4h6v6h-6z"/>
+          <path d="M4 14h6v6h-6z"/>
+          <path d="M17 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" 
+          class="icon icon-tabler icon-tabler-menu-2" 
+          width="24" height="24" viewBox="0 0 24 24" 
+          stroke-width="1.5" stroke="currentColor" fill="none" 
+          stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M4 6l16 0"/>
+          <path d="M4 12l16 0"/>
+          <path d="M4 18l16 0"/>
+        </svg>
+      </div>
+    </header>
+
+    <main>
+      <div class="page-status">
+        <img src="./assets/full-moon_6419434.png" alt="pixelated night sky image" width="120" height="120">
+        <p class="status">No Boards Created Yet.</p>
+      </div>
+
+      <p class="instructions">
+        Every board you create will appear here.<br>
+        <span>To get started click on the 
+          <svg xmlns="http://www.w3.org/2000/svg" 
+            class="icon icon-tabler icon-tabler-plus" 
+            width="18" height="18" viewBox="0 0 24 24" 
+            stroke-width="1.5" stroke="currentColor" fill="none" 
+            stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M12 5l0 14"/><path d="M5 12l14 0"/>
+          </svg>
+          button from above and create a board.
+        </span>
+      </p>
+
+      <dialog>
+        <form method="dialog">
+          <label for="board-title">Board Title</label>
+          <input type="text" name="board-title" id="board-title" placeholder="Enter a board title">
+          <label for="tasks">Tasks</label>
           <p>
-            In today's fast-paced world, access to prompt and efficient medical
-            services is of paramount importance. When faced with a medical
-            emergency or seeking immediate medical attention, the ability to
-            receive quick medical services can significantly impact the outcome
-            of a situation.
+            <input type="number" name="tasks" id="tasks" value="1" min="1" max="5">
           </p>
-          <button class="btn">Get Services</button>
-        </div>
-        <div class="image">
-          <span class="image-bg"></span>
-          <img src="assets/header-bg.png" alt="header image" />
-          <div class="image-content image-content-1">
-            <span><i class="ri-user-3-line"></i></span>
-            <div class="details">
-              <h4>1520+</h4>
-              <p>Active Clients</p>
-            </div>
+          <button id="reset" type="reset">Reset</button>
+          <div>
+            <button id="cancel" value="cancel" formmethod="dialog">Cancel</button>
+            <button id="save" value="default">Save</button>
           </div>
-          <div class="image-content image-content-2">
-            <ul>
-              <li>
-                <span><i class="ri-check-line"></i></span>
-                Get 20% off on every 1st month
-              </li>
-              <li>
-                <span><i class="ri-check-line"></i></span>
-                Expert Doctors
-              </li>
-            </ul>
-          </div>
-        </div>
-      </header>
-    </div>
+        </form>
+      </dialog>    
 
-    <script>
-        // 02. Print every N-th Element from an Array
-        function printNElement(arr, n) {
-          const result = [];
-          for (let index = 0; index < arr.length; index+=n) {
-             result.push(arr[index]);
-            //  console.log(arr[index]);
-          }
-          // console.log(result);
-          return result;
-        }
-        // printNElement(['5', '20', '31', '4', '20'], 2);
-        // printNElement(['dsa', 'asd', 'test', 'tset'], 2 );
-        // printNElement(['1', '2', '3', '4', '5'], 6);
-    </script>
+      <div class="boards"></div>
 
-    <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+    </main>
+
+    <footer>
+      <a href="https://www.freepik.com/icon/full-moon_6419434#fromView=search&page=1&position=0&uuid=41d9357a-cddb-4af7-88ec-bdb7cb95e809">Icon by Freepik</a>
+    </footer>
+        
+    <!-- <h1 >URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
         
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
