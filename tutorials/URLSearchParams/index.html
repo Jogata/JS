@@ -4,544 +4,141 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <title>URLSearchParams in JS</title> -->
-    <title>Board</title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      *,
-      *::before,
-      *::after {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      
-      body {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        font-family: Arial, Helvetica, sans-serif;
-      }
-
-      header {
-        position: relative;
-        min-height: 45vh;
-        color: #f0f0f0;
-        background-color: #213555;
-      }
-
-      nav {
-        padding: 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      .logo {
-        padding: 0.5rem 1rem;
-        color: #213555;
-        font-weight: 700;
-        background-color: #e5d183;
-      }
-
-      .nav-items,
-      .profile {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-      }
-
-      .add-board {
-        height: 60px;
-        margin-top: -1.5rem;
-        padding: 0.5rem;
-        display: flex;
-        align-items: flex-end;
-        color: #213555;
-        border: none;
-        border-radius: 0.5rem;
-        background-color: #e5d183;
-        transition: 0.5s;
-        cursor: pointer;
-      }
-
-      .add-board:hover {
-        background-color: #e5d183ce;
-      }
-
-      .profile {
-        gap: 0.25rem;
-        font-size: 0.8rem;
-      }
-
-      .open-profile-menu {
-        color: #f0f0f0;
-        border: none;
-        background: transparent;
-        cursor: pointer;
-      }
-
-      .icon-tabler-user {
-        padding: 0.25rem;
-        border-radius: 0.25rem;
-        background-color: #385076;
-      }
-
-      .boards-stats {
-        margin: 0.25rem 3rem;
-      }
-
-      .stats {
-        margin-top: 0.25rem;
-        display: flex;
-        gap: 0.35rem;
-        align-items: center;
-        font-size: 0.8rem;
-        opacity: 0.7;
-      }
-      
-      .dot {
-        width: 0.25rem;
-        height: 0.25rem;
-        border-radius: 50%;
-        background-color: #f0f0f0;
-      }
-
-      .tools {
-        position: absolute;
-        right: 3rem;
-        top: 5rem;
-      }
-
-      .tools .icon-tabler {
-        margin-left: 1rem;
-        opacity: 0.7;
-        transition: 0.5s;
-        cursor: pointer;
-      }
-        
-      .tools .icon-tabler:hover {
-        color: #e5d283;
-      }
-
-      main {
-        position: relative;
-        flex: 1;
-        background-color: #f0f0f0;
-      }
-      
-      .page-status {
-        position: relative;
-        width: 500px;
-        height: 500px;
-        margin: -8rem auto 0 auto;
-        padding: 4rem;
-        color: #213555;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        text-align: center;
-        border-radius: 50%;
-        background-color: #f0f0f0;
-      }
-      
-      .status {
-        margin: 1rem 0;
-        font-size: 0.9rem;
-        font-weight: 700;
-      }
-      
-      .instructions {
-        position: absolute;
-        top: 30%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: max-content;
-        font-size: 0.7rem;
-        line-height: 1.5;
-        text-align: center;
-        opacity: 0.7;
-      }
-      
-      .instructions span {
-        display: flex;
-        gap: 0.25rem;
-        align-items: center;
-      }
-      
-      .boards {
-        padding: 2rem;
-        display: flex;
-        gap: 2rem;
-        flex-wrap: wrap;
-      }
-      
-      .board {
-        width: 100%;
-        max-width: 300px;
-        padding: 2rem;
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-        flex-direction: column;
-        color: #f0f0f0;
-        border-radius: 0.5rem;
-        background-color: #4f709c;
-        box-shadow: 0 0 1rem #213555;
-        transition: 0.5s;
-        cursor: pointer;
-      }
-
-      .board:hover {
-        box-shadow: none;
-      }
-      
-      .board .icon-tabler {
-        color: #e5d183;
-      }
-      
-      h2 {
-        font-size: 1.2rem;
-        word-break: break-all;
-      }
-      
-      h3 {
-        font-size: 1rem;
-      }
-      
-      dialog {
-        position: absolute;
-        /* top: 50%; */
-        /* left: 50%; */
-        /* transform: translate(-50%, -50%); */
-        top: 0;
-        left: 0;
-        right: 0;
-        width: 80%;
-        max-width: 300px;
-        padding: 1.5rem;
-        color: #8a8886;
-        border: none;
-        border-radius: 0.25rem;
-        box-shadow: 0 0.5rem 1rem #21355585;
-      }
-
-      button {
-        border: none;
-        cursor: pointer;
-      }
-      
-      #reset {
-        width: max-content;
-        display: block;
-        margin: 1rem auto;
-        color: #213555;
-        background-color: transparent;
-      }
-
-      label {
-        color: #213555;
-      }
-
-      input {
-        width: 100%;
-        margin: 0.25rem 0 1rem 0;
-        padding: 0.5rem;
-        color: #213555;
-      }
-
-      input[type='number'] {
-        margin-bottom: 0;
-        -moz-appearance: textfield;
-        appearance: textfield;
-      }
-
-      form div {
-        display: flex;
-        gap: 1rem;
-      }
-
-      form div button {
-        width: 100%;
-        padding: 0.8rem;
-        border-radius: 0.25rem;
-      }
-      
-      #cancel {
-        color: #213555;
-        background-color: #4f709c23;
-      }
-      
-      #save {
-        color: #f0f0f0;
-        background-color: #213555;
-      }
-      
-      footer {
-        padding: 1rem;
-        text-align: center;
-        background-color: #213555;
-      }
-      
-      a {
-        color: #f0f0f0;
-        font-size: 0.9rem;
-      }
-      
-      @media (max-width: 500px) {
-        .page-status {
-          width: 300px;
-          height: 300px;
-        }
-        
-        img {
-          width: 80px;
-          height: 80px;
-        }
-        
-        .boards-stats {
-          margin-left: 1rem;
-        }
-        
-        .tools {
-          right: 1rem;
-        }
-        
-        .tools .icon-tabler {
-          margin-left: 0.5rem;
-        }
-        
-        .instructions {
-          font-size: 0.55rem;
-        }
-      }
-    </style>
+    <title>JAWA</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
-    <header>
-      <nav class="nav">
-        <p class="logo">LOGO</p>
-  
-        <div class="nav-items">
-          <button class="add-board">
-            <svg xmlns="http://www.w3.org/2000/svg" 
-              class="icon icon-tabler icon-tabler-plus" 
-              width="24" height="24" viewBox="0 0 24 24" 
-              stroke-width="1.5" stroke="currentColor" 
-              fill="none" stroke-linecap="round" 
-              stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-              <path d="M12 5l0 14" /><path d="M5 12l14 0"/>
-            </svg>
-          </button>
-          <div class="profile">
-            <svg xmlns="http://www.w3.org/2000/svg" 
-              class="icon icon-tabler icon-tabler-user" 
-              width="30" height="30" viewBox="0 0 24 24" 
-              stroke-width="1.5" stroke="currentColor" fill="none" 
-              stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-              <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"/>
-              <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/>
-            </svg>
-            <p class="username">John Doe</p>
-            <button class="open-profile-menu">
-              <svg xmlns="http://www.w3.org/2000/svg" 
-                class="icon icon-tabler icon-tabler-chevron-down" 
-                width="24" height="24" viewBox="0 0 24 24" 
-                stroke-width="1.5" stroke="currentColor" fill="none" 
-                stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                <path d="M6 9l6 6l6 -6"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-
-      </nav>
-
-      <div class="boards-stats">
-        <h1>My Boards</h1>
-        <div class="stats">
-          <p><span class="total-boards">0</span> Boards</p>
-          <div class="dot"></div>
-          <p><span class="total-tasks">0</span> Tasks</p>
-        </div>
+    <nav>
+      <div class="nav-logo">
+        <img src="./assets/logo-white.png" alt="logo" />
       </div>
-
-      <div class="tools">
-        <svg xmlns="http://www.w3.org/2000/svg" 
-          class="icon icon-tabler icon-tabler-search" 
-          width="24" height="24" viewBox="0 0 24 24" 
-          stroke-width="1.5" stroke="currentColor" fill="none" 
-          stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-          <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"/>
-          <path d="M21 21l-6 -6"/>
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" 
-          class="icon icon-tabler icon-tabler-category" 
-          width="24" height="24" viewBox="0 0 24 24" 
-          stroke-width="1.5" stroke="currentColor" fill="none" 
-          stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-          <path d="M4 4h6v6h-6z"/>
-          <path d="M14 4h6v6h-6z"/>
-          <path d="M4 14h6v6h-6z"/>
-          <path d="M17 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"/>
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" 
-          class="icon icon-tabler icon-tabler-menu-2" 
-          width="24" height="24" viewBox="0 0 24 24" 
-          stroke-width="1.5" stroke="currentColor" fill="none" 
-          stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-          <path d="M4 6l16 0"/>
-          <path d="M4 12l16 0"/>
-          <path d="M4 18l16 0"/>
-        </svg>
-      </div>
-
+      <ul class="nav-links">
+        <li class="link">
+          <a href="#">SERVICES</a>
+        </li>
+        <li class="link">
+          <a href="#">STORES</a>
+        </li>
+        <li class="link">
+          <a href="#">CONTACT</a>
+        </li>
+      </ul>
+    </nav>
+    <header class="section-container header-container">
+      <img src="./assets/header.jpg" alt="header" />
     </header>
-
-    <main>
-      <div class="page-status">
-        <img src="./assets/full-moon_6419434.png" alt="pixelated night sky image" width="120" height="120">
-        <p class="status">No Boards Created Yet.</p>
-      </div>
-
-      <p class="instructions">
-        Every board you create will appear here.<br>
-        <span>To get started click on the 
-          <svg xmlns="http://www.w3.org/2000/svg" 
-            class="icon icon-tabler icon-tabler-plus" 
-            width="18" height="18" viewBox="0 0 24 24" 
-            stroke-width="1.5" stroke="currentColor" fill="none" 
-            stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path d="M12 5l0 14"/><path d="M5 12l14 0"/>
-          </svg>
-          button from above and create a board.
-        </span>
-      </p>
-
-      <dialog>
-        <form method="dialog">
-          <label for="board-title">Board Title</label>
-          <input type="text" name="board-title" id="board-title" placeholder="Enter a board title">
-          <label for="tasks">Tasks</label>
-          <p>
-            <input type="number" name="tasks" id="tasks" value="1" min="1" max="5">
-            <button class="increment">
-              <svg xmlns="http://www.w3.org/2000/svg" 
-                class="icon icon-tabler icon-tabler-plus" 
-                width="24" height="24" viewBox="0 0 24 24" 
-                stroke-width="1.5" stroke="currentColor" fill="none" 
-                stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                <path d="M12 5l0 14"/>
-                <path d="M5 12l14 0"/>
-              </svg>
-            </button>
-            <button class="decrement">
-              <svg xmlns="http://www.w3.org/2000/svg" 
-                class="icon icon-tabler icon-tabler-minus" 
-                width="24" height="24" viewBox="0 0 24 24" 
-                stroke-width="1.5" stroke="currentColor" fill="none" 
-                stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                <path d="M5 12l14 0"/>
-              </svg>
-            </button>          
-          </p>
-          <button id="reset" type="reset">Reset</button>
-          <div>
-            <button id="cancel" value="cancel" formmethod="dialog">Cancel</button>
-            <button id="save" value="default">Save</button>
+    <section class="section-container story-container">
+      <h2 class="section-header">01 THE PERAK STORY</h2>
+      <p>The Jawa Perak is a powerful and iconic motorcycle that traces its roots
+        back to the 1940s when the original Jawa brand was established in
+        Czechoslovakia. With a rich heritage of craftsmanship and innovation,
+        Jawa motorcycles quickly gained recognition for their exceptional
+        performance, reliability, and distinctive design.</p>
+      <p>The Perak model holds a special place in Jawa's history. It was first
+        introduced in the late 1940s as a flagship motorcycle, renowned for its
+        superior engineering and extraordinary capabilities. The name "Perak" is
+        derived from the Malay word for "silver," signifying its exceptional
+        quality and status. Over the years, the Jawa Perak has evolved and
+        continued to captivate riders with its timeless appeal.</p>
+      <p>Underneath its striking exterior, the Jawa Perak packs a punch with its
+        robust engine performance. It is equipped with a powerful and refined
+        liquid-cooled 334cc engine, delivering an exhilarating riding experience
+        that effortlessly combines power, agility, and smoothness. Beyond its
+        exceptional performance, the Jawa Perak exudes craftsmanship and
+        attention to detail. Every component, from the finely-tuned exhaust to
+        the meticulously crafted bodywork, showcases the brand's commitment to
+        excellence and dedication to creating motorcycles that are both
+        aesthetically pleasing and built to last.</p>
+    </section>
+    <section class="section-container evolution-container">
+      <h2 class="section-header">02 EVOLUTION OF JAWA PERAK</h2>
+      <div class="evolution-grid">
+        <div class="evolution-image">
+          <img src="./assets/evolution.jpg" alt="evolution" />
+        </div>
+        <div class="evolution-content">
+          <div class="evolution-nav">
+            <a href="#" class="active">1946</a>
+            <a href="#">2005</a>
+            <a href="#">2019</a>
+            <a href="#">2023</a>
           </div>
-        </form>
-      </dialog>    
-
-      <div class="boards"></div>
-
-    </main>
-
-    <footer>
-      <a href="https://www.freepik.com/icon/full-moon_6419434#fromView=search&page=1&position=0&uuid=41d9357a-cddb-4af7-88ec-bdb7cb95e809">Icon by Freepik</a>
-    </footer>
-
-    <script>
-    // Add new board
-    const ADD_BOARD = document.querySelector(".add-board");
-    const PAGE_STATUS = document.querySelector(".page-status");
-    const INSTRUCTIONS = document.querySelector(".instructions");
-    const DIALOG = document.querySelector("dialog");
-    const SAVE_BUTTON = document.getElementById("save");
-    const INCREMENT_BUTTON = document.querySelector(".increment");
-    const DECREMENT_BUTTON = document.querySelector(".decrement");
-    const TASKS = document.getElementById("tasks");
-    const BOARD_TITLE = document.getElementById("board-title");
-    const BOARDS_SECTION = document.querySelector(".boards");
-    const TOTAL_BOARDS = document.querySelector(".total-boards");
-    const TOTAL_TASKS = document.querySelector(".total-tasks");
-    
-    ADD_BOARD.addEventListener("click", () => {
-      DIALOG.showModal();
-    });
-    
-    DIALOG.addEventListener("close", () => {
-      if (DIALOG.returnValue === "cancel") {
-        return;
-      } else {
-        PAGE_STATUS.style.display = "none";
-        INSTRUCTIONS.style.display = "none";
-        const TITLE = BOARD_TITLE.value !== "" ? BOARD_TITLE.value : "No Title";
-        const NEW_BOARD = document.createElement("div");
-        NEW_BOARD.classList.add('board');
-        NEW_BOARD.innerHTML = `<h2>${TITLE}</h2>
-          <h3>Tasks: <span>${TASKS.value}</span></h3>
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-checklist" width="50" height="50" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9.615 20h-2.615a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8" /><path d="M14 19l2 2l4 -4" /><path d="M9 8h4" /><path d="M9 12h2" /></svg>
-        `;
-    
-        BOARDS_SECTION.appendChild(NEW_BOARD);
-    
-        // Sum the tasks number
-        const NUM_OF_TASKS = [...document.querySelectorAll("h3 span")].map(sp => parseInt(sp.textContent)).reduce((prev, num) => num + prev, 0 );
-        TOTAL_TASKS.textContent = NUM_OF_TASKS;
-    
-        // Sum the boards number
-        TOTAL_BOARDS.textContent = [...document.querySelectorAll('.board')].length;
-      }
-    });
-    
-    SAVE_BUTTON.addEventListener("click", (e) => {
-      e.preventDefault();
-      DIALOG.close(`${BOARD_TITLE.value} ${TASKS.value}`);
-    });
-    
-    // Increment tasks
-    INCREMENT_BUTTON.addEventListener("click", (e) => {
-      e.preventDefault();
-      if (TASKS.value === "5") {
-        return;
-      } else {
-        TASKS.value = parseInt(TASKS.value) + 1;
-      }
-    });
-    
-    // Decrement tasks
-    DECREMENT_BUTTON.addEventListener("click", (e) => {
-      e.preventDefault();
-      if (TASKS.value === "1") {
-        return;
-      } else {
-        TASKS.value = parseInt(TASKS.value) - 1;
-      }
-    });
-    </script>
-        
-    <!-- <h1 >URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+          <p>Whether you are a seasoned rider or a motorcycle enthusiast looking
+            for a distinctive and powerful machine, the Jawa Perak offers a
+            captivating story and an unparalleled riding experience that will
+            leave an indelible mark on your journey.</p>
+        </div>
+      </div>
+    </section>
+    <section class="feature">
+      <div class="section-container feature-container">
+        <div class="feature-image">
+          <img src="./assets/features.jpg" alt="feature" />
+        </div>
+        <div class="feature-content">
+          <h2 class="section-header">03 FEATURES</h2>
+          <ul>
+            <li>
+              SINGLE CYLINDER, FOUR STROKE, LIQUID COOLED, 
+              SI ENGINE, DOHC BSVVI COMPLIANT
+            </li>
+            <li>CONSTANT MESH 6 SPPEED</li>
+            <li>MONO SHOCK ABSORBER, 7 STEP ADJUSTABLE</li>
+            <li>DISC WITH FLOATING CALIPER AND ABS</li>
+            <li>DOUBLE CRADLE TUBULAR FRAME</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="section-container gallery-container">
+      <h2 class="section-header">04 GALLERY</h2>
+      <div class="gallery-grid">
+        <div class="gallery-col">
+          <img src="./assets/gallery-1.jpg" alt="gallery" />
+        </div>
+        <div class="gallery-col">
+          <img src="./assets/gallery-2.jpg" alt="gallery" />
+          <img src="./assets/gallery-3.jpg" alt="gallery" />
+          <img src="./assets/gallery-4.jpg" alt="gallery" />
+          <img src="./assets/gallery-5.jpg" alt="gallery" />
+        </div>
+        <div class="gallery-col">
+          <img src="./assets/gallery-6.jpg" alt="gallery" />
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="section-container footer-container">
+        <div class="footer-col">
+          <img src="./assets/logo-black.jpg" alt="footer logo" />
+        </div>
+        <div class="footer-col">
+          <ul>
+            <li>BOOK A TEST RIDE</li>
+            <li>DEALER LOCATOR</li>
+            <li>FINANCE OFFER</li>
+            <li>EXCHANGE YOUR BIKE</li>
+            <li>CONTACT US</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>FOLLOW US</h4>
+          <div class="socials">
+            <span><i class="ri-linkedin-fill"></i></span>
+            <span><i class="ri-pinterest-line"></i></span>
+            <span><i class="ri-twitter-fill"></i></span>
+            <span><i class="ri-facebook-fill"></i></span>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>GET IN TOUCH</h4>
+          <input type="text" placeholder="EMAIL"/>
+          <p>DESIGNED BY Company</p>
+        </div>
+      </div>
+  </footer>
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
         
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
