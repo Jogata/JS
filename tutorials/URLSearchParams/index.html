@@ -31,9 +31,84 @@
   a {
     font-size: 0.5rem;
   }
+
+  @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap');
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  nav {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    /* position: relative; */
+    min-height: 100vh;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 20rem 1fr;
+    /* font-size: 16px; */
+    color: #444;
+    background-color: white;
+  }
 </style>
   </head>
   <body>
+    <nav class="nav-side">
+      <ul class="nav-list">
+        <li class="active">
+          <a href="#home"><span>home</span></a>
+        </li>
+        <li>
+          <a href="#about"><span>about</span></a>
+        </li>
+        <li>
+          <a href="#blog"><span>blog</span></a>
+        </li>
+        <li>
+          <a href="#contact"><span>contact</span></a>
+        </li>
+        <li>
+          <a href="#services"><span>services</span></a>
+        </li>
+        <li>
+          <a href="#community"><span>community</span></a>
+        </li>
+      </ul>
+    </nav>
+
+    <main class="main">
+      <section class="section home" id="home">
+        <h1 class="title">home section</h1>
+      </section>
+
+      <section class="section about" id="about">
+        <h1 class="title">about section</h1>
+      </section>
+
+      <section class="section blog" id="blog">
+        <h1 class="title">blog section</h1>
+      </section>
+
+      <section class="section contact" id="contact">
+        <h1 class="title">contact section</h1>
+      </section>
+
+      <section class="section services" id="services">
+        <h1 class="title">services section</h1>
+      </section>
+      
+      <section class="section community" id="community">
+        <h1 class="title">community section</h1>
+      </section>
+    </main>
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
 <header>
@@ -267,6 +342,31 @@ describe("movie theater", () => {
     }
   }
 
+  completeness(participant, condition) {
+    if (!this.participants[participant]) {
+      return `${participant} is not in the current participants list`;
+    }
+
+    if (condition < 30) {
+      throw new Error(
+        `${participant} is not well prepared and cannot finish any discipline`
+      );
+    }
+
+    let finishedDisciplinesCount = Math.floor(condition / 30);
+
+    if (finishedDisciplinesCount > 0 && finishedDisciplinesCount < 3) {
+      return `${participant} could only complete ${finishedDisciplinesCount} of the disciplines`;
+    } else if (finishedDisciplinesCount === 3) {
+      let participantGender = this.participants[participant];
+      this.listOfFinalists.push({
+        name: participant,
+        gender: participantGender,
+      });
+      return `Congratulations, ${participant} finished the whole competition`;
+    }
+  }
+
   rewarding(participant) {
     let completed = this.listOfFinalists.some(
       (finalist) => finalist.name === participant
@@ -278,7 +378,37 @@ describe("movie theater", () => {
     }
   }
 
+  showRecord(criteria) {
+    if (this.listOfFinalists.length === 0) {
+      return `There are no finalists in this competition`;
+    }
+
+    if (criteria === "male" || criteria === "female") {
+      let finalistsByGender = this.listOfFinalists.filter(
+        (finalist) => finalist.gender === criteria
+      );
+      if (finalistsByGender.length === 0) {
+        return `There are no ${gender} finalists`;
+      } else {
+        return `${finalistsByGender[0].name} is the first ${criteria} that finished the ${this.name} triathlon`;
+      }
+    } else if (criteria === "all") {
+      let sortedFinalists = this.listOfFinalists.sort((a, b) =>
+        a.name.localeCompare(b.name)
+      );
+      let result = [`List of all ${this.name} finalists:`];
+      sortedFinalists.forEach((finalist) => {
+        result.push(`${finalist.name}`);
+      });
+
+      return result.join("\n");
+    }
+  }
 }
+
+let test = new Triathlon();
+console.log(test.addParticipant("Pete", 20, "male"));
+console.log(test.completeness("Pete", 100));
 </script>
         
     <script src="./in-fetch-api.js"></script>
