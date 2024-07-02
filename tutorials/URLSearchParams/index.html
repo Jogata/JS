@@ -13,6 +13,9 @@
     flex-direction: column-reverse;
     text-align: center;
   }
+  h1 {
+    text-align: center;
+  }
   h1 span {
     color: brown;
     font-style: italic;
@@ -25,13 +28,18 @@
     font-size: 0.5rem;
     font-family: Georgia;
   }
+  a {
+    font-size: 0.5rem;
+  }
 </style>
   </head>
   <body>
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+
 <header>
   <h1>03. Movie Theater - <span>Unit tests</span> </h1>
   <h2>JS Advanced Retake Exam - 10 August 2022</h2>
+  <a href="../../00exams/JS Advanced Retake Exam - 10 August 2022">Open folder</a>
 </header>
 
 <script>
@@ -148,7 +156,129 @@ describe("movie theater", () => {
       );
     });
   });
+
+  describe("moneySpent", () => {
+    it("should sth", () => {
+      assert.equal(
+        movieTheater.moneySpent(5, ["Nachos"], ["Soda", "Water"]),
+        "The total cost for the purchase with applied discount is 68.00"
+      );
+    });
+
+    it("should sth", () => {
+      assert.equal(
+        movieTheater.moneySpent(3, ["Popcorn"], ["Soda", "Water"]),
+        "The total cost for the purchase with applied discount is 42.80"
+      );
+    });
+
+    it("should sth", () => {
+      assert.equal(
+        movieTheater.moneySpent(3, ["Popcorn"], ["Soda"]),
+        "The total cost for the purchase with applied discount is 41.60"
+      );
+    });
+
+    it("should sth", () => {
+      assert.equal(
+        movieTheater.moneySpent(3, ["Popcorn", "Nachos"], ["Water"]),
+        "The total cost for the purchase with applied discount is 45.60"
+      );
+    });
+
+    it("should sth", () => {
+      assert.equal(
+        movieTheater.moneySpent(3, ["Popcorn", "Nachos"], ["Soda"]),
+        "The total cost for the purchase with applied discount is 46.40"
+      );
+    });
+
+    it("should sth", () => {
+      assert.equal(
+        movieTheater.moneySpent(1, ["Popcorn"], ["Soda", "Water"]),
+        "The total cost for the purchase is 23.50"
+      );
+    });
+
+    it("should sth", () => {
+      assert.throw(
+        () => movieTheater.moneySpent(["adsf"], ["Popcorn"], ["Soda", "Water"]),
+        "Invalid input"
+      );
+      assert.throw(
+        () => movieTheater.moneySpent(1, "sdfadf", ["Soda", "Water"]),
+        "Invalid input"
+      );
+      assert.throw(
+        () => movieTheater.moneySpent(1, ["Popcorn"], 3),
+        "Invalid input"
+      );
+    });
+  });
+
+  describe("reservation", () => {
+    it("should sth", () => {
+      assert.equal(
+        movieTheater.reservation(
+          [
+            { rowNumber: 1, freeSeats: 2 },
+            { rowNumber: 2, freeSeats: 2 },
+          ],
+          1
+        ),
+        2
+      );
+    });
+
+    it("should sth", () => {
+      assert.throw(
+        () => movieTheater.reservation("string", 4),
+        "Invalid input"
+      );
+      assert.throw(
+        () =>
+          movieTheater.reservation(
+            [{ rowNumber: 1, freeSeats: 2 }],
+            "ahsdkfafd"
+          ),
+        "Invalid input"
+      );
+    });
+  });
 })
+</script>
+
+<h1>02. Triathlon - <span>Class</span></h1>
+
+<script>
+  class Triathlon {
+  constructor(name) {
+    this.name = name;
+    this.participants = {};
+    this.listOfFinalists = [];
+  }
+
+  addParticipant(participant, gender) {
+    if (this.participants[participant] === undefined) {
+      this.participants[participant] = gender;
+      return `A new participant has been added - ${participant}`;
+    } else {
+      return `${participant} has already been added to the list`;
+    }
+  }
+
+  rewarding(participant) {
+    let completed = this.listOfFinalists.some(
+      (finalist) => finalist.name === participant
+    );
+    if (!completed) {
+      return `${participant} is not in the current finalists list`;
+    } else {
+      return `${participant} was rewarded with a trophy for his performance`;
+    }
+  }
+
+}
 </script>
         
     <script src="./in-fetch-api.js"></script>
