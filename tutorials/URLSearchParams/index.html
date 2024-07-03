@@ -3,547 +3,148 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URLSearchParams in JS</title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
+    <!-- <title>URLSearchParams in JS</title> -->
+    <title>Simply Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-  header {
-    margin-top: 3rem;
-    display: flex;
-    flex-direction: column-reverse;
-    text-align: center;
-  }
-  h1 {
-    text-align: center;
-  }
-  h1 span {
-    color: brown;
-    font-style: italic;
-    text-decoration-color: brown;
-    text-decoration-thickness: 2px;
-    /* text-underline-offset: 8px; */
-    text-decoration: underline;
-  }
-  h2 {
-    font-size: 0.5rem;
-    font-family: Georgia;
-  }
-  a {
-    font-size: 0.5rem;
-  }
-
-  @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap');
-
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  nav {
-    font-family: 'Poppins', sans-serif;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    /* position: relative; */
-    min-height: 100vh;
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: 20rem 1fr;
-    /* font-size: 16px; */
-    color: #444;
-    background-color: white;
-  }
-
-  .nav-side {
-    /* position: absolute; */
-    /* top: 0; */
-    /* left: 0; */
-    width: 100%;
-    min-width: 200px;
-    max-width: 350px;
-    /* height: 100vh; */
-    height: 100%;
-    background-color: rgb(0, 17, 29);
-  }
-
-  .nav-side ul {
-    position: fixed;
-    top: 0;
-    left: 0;
-    list-style: none;
-    width: 100%;
-    max-width: 350px;
-    display: grid;
-    gap: 2rem;
-    /* padding-block: 2rem; */
-    padding-top: 4rem;
-    font-size: 22px;
-  }
-
-  nav li {
-    margin-left: 1rem;
-    padding: 1rem 2rem;
-    border-radius: 100vh 0 0 100vh;
-    transition: all 1s;
-  }
-
-  nav li:hover {
-    /* color: rgb(0, 17, 29); */
-    background-color: white;
-  }
-
-  nav li.active {
-    /* color: rgb(0, 17, 29); */
-    background-color: white;
-  }
-
-  nav li:hover a {
-    color: rgb(0, 17, 29);
-  }
-
-  nav li.active a {
-    color: rgb(0, 17, 29);
-  }
-  
-  nav a {
-    color: #fafafa;
-    font-size: 22px;
-    font-weight: 400;
-    line-height: 1;
-    text-transform: capitalize;
-    text-decoration: none;
-  }
-
-  main {
-    width: 100%;
-    grid-column: 2 / 3;
-  }
-
-  .section {
-    width: 100%;
-    min-height: 100vh;
-    /* grid-column: span 3; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    border-bottom: 4px solid black;
-  }
-
-  .title {
-    width: 100%;
-    text-align: center;
-    color: black;
-    font-size: 3rem;
-    font-weight: 500;
-    text-transform: capitalize;
-  }
-
-  .apple-logo {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 200px;
-    background-color: black;
-}
-.fa {
-  text-shadow: 
-    -40px -40px 80px magenta,
-      40px 40px 80px magenta;
-  animation: color 2s infinite;
-}
-@keyframes color{
-    0%{
-        text-shadow: 
-          -40px -40px 80px red,
-            40px 40px 80px red;
-    }
-    20%{
-        text-shadow: 
-        -40px -40px 80px orange,
-        40px 40px 80px orange;
-    }
-    50%{
-        text-shadow: 
-          -40px -40px 80px yellow,
-          40px 40px 80px yellow;
-    }
-    70%{
-        text-shadow: 
-          -40px -40px 80px blue,
-          40px 40px 80px blue;
-    }
-    100%{
-        text-shadow: 
-          -40px -40px 80px green,
-          40px 40px 80px green;
-    }
-}
-</style>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Kaushan+Script&family=Playfair+Display&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Brawler:wght@400;700&family=Croissant+One&family=Ephesis&family=Gloock&family=Hurricane&family=Imbue:opsz,wght@10..100,100..900&family=Modak&family=Montez&family=Prosto+One&family=Rye&family=Shojumaru&family=Young+Serif&family=ZCOOL+XiaoWei&display=swap');
+      @import url("https://fonts.googleapis.com/css2?family=Lora:ital@0;1&family=Poppins:wght@400;500;600&display=swap");
+      :root {
+        --primary-color: #f5f4f2;
+        --text-dark: #57534e;
+        --text-light: #78716c;
+        --white: #ffffff;
+        --header-font: "Lora", serif;
+        --max-width: 1200px;
+      }
+      body {
+font-family: "Croissant One", serif;
+font-family: "Shojumaru", system-ui;
+font-family: "Montez", cursive;
+font-family: "Modak", system-ui;
+font-family: "Hurricane", cursive;
+font-family: "Prosto One", sans-serif;
+font-family: "Young Serif", serif;
+font-family: "ZCOOL XiaoWei", sans-serif;
+font-family: "Brawler", serif;
+font-family: "Gloock", serif;
+font-family: "Ephesis", cursive;
+font-family: "Platypi", serif;
+font-family: "Patua One", serif;
+font-family: "Rye", serif;
+font-family: "Arizonia", cursive;
+font-family: "Imbue", serif;
+font-family: Georgia, serif;
+      }
+    </style>
   </head>
   <body>
-    <nav class="nav-side">
-      <ul class="nav-list">
-        <li class="active">
-          <a href="#home"><span>home</span></a>
+    <nav>
+      <ul class="nav-links">
+        <li class="link"><a href="#">ABOUT US</a></li>
+        <li class="link"><a href="#">PROJECTS</a></li>
+        <li class="nav-logo">
+          <img src="assets/logo.png" alt="logo" />
+          <h4>SIMPLY HOME</h4>
+          <p>DECORATORS</p>
         </li>
-        <li>
-          <a href="#about"><span>about</span></a>
-        </li>
-        <li>
-          <a href="#blog"><span>blog</span></a>
-        </li>
-        <li>
-          <a href="#contact"><span>contact</span></a>
-        </li>
-        <li>
-          <a href="#services"><span>services</span></a>
-        </li>
-        <li>
-          <a href="#community"><span>community</span></a>
-        </li>
+        <li class="link"><a href="#">SERVICES</a></li>
+        <li class="link"><a href="#">CONTACT</a></li>
       </ul>
     </nav>
-
-    <main class="main">
-      <section class="section home" id="home">
-        <h1 class="title">home section</h1>
-      </section>
-
-      <section class="section about" id="about">
-        <h1 class="title">about section</h1>
-      </section>
-
-      <section class="section blog" id="blog">
-        <h1 class="title">blog section</h1>
-      </section>
-
-      <section class="section contact" id="contact">
-        <h1 class="title">contact section</h1>
-      </section>
-
-      <section class="section services" id="services">
-        <h1 class="title">services section</h1>
-      </section>
-
-      <section class="section community" id="community">
-        <h1 class="title">community section</h1>
-      </section>
-    </main>
-
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
-
-<header>
-  <h1>03. Movie Theater - <span>Unit tests</span> </h1>
+    <header class="header">
+      <div class="section-container header-container">
+        <div class="header-content">
+          <h4>LIVE BEAUTIFULLY</h4>
+          <h1>Design that makes you feel <span>at home.</span></h1>
+        </div>
+      </div>
+    </header>
+    <section class="section-container about-container">
+      <div class="about-content">
+        <p>
+          At Simply Home Decorators, we are passionate about transforming houses
+          into dream homes. With our expertise in interior design, we strive to
+          create spaces that reflect your unique style and personality, while
+          ensuring functionality and comfort.
+        </p>
+        <h4>
+          Our dedicated team works closely with clients to understand vision,
+          preferences, and lifestyle. Whether you're seeking a modern,
+          minimalist, rustic atmosphere, we bring your ideas to life.
+        </h4>
+        <p>
+          From concept to completion, we meticulously curate every aspect of the
+          design process. We carefully select colors, textures, furniture,
+          lighting, and decor elements to achieve the desired ambiance and
+          create a harmonious living environment.
+        </p>
+      </div>
+      <div class="about-image">
+        <img src="assets/about.jpg" alt="about" />
+      </div>
+    </section>
+    <section class="banner">
+      <div class="section-container banner-container">
+        <h4>Interior Design Studio</h4>
+        <p>Based in North Vancouver. B.C.</p>
+      </div>
+    </section>
+    <section class="section-container display-container">
+      <div class="display-col">
+        <img src="assets/display-1.jpg" alt="display" />
+        <div class="display-content">
+          <p>view our</p>
+          <h4>PORTFOLIO</h4>
+        </div>
+        <img src="assets/display-2.jpg" alt="display" />
+      </div>
+      <div class="display-col">
+        <div class="display-content">
+          <h4>ABOUT US</h4>
+          <p>who are we</p>
+        </div>
+        <img src="assets/display-3.jpg" alt="display" />
+        <div class="display-content">
+          <h4>SERVICES</h4>
+          <p>what we do</p>
+        </div>
+      </div>
+      <div class="display-col">
+        <img src="assets/display-4.jpg" alt="display" />
+        <div class="display-content">
+          <p>send us a</p>
+          <h4>MESSAGE</h4>
+        </div>
+        <img src="assets/display-5.jpg" alt="display" />
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="section-container footer-container">
+        <img src="assets/logo.png" alt="logo" />
+        <h4>Ready to start your home decorating project?</h4>
+        <p>
+          Take the first step towards transforming your home by reaching out to
+          us for a consultation. Let us embark on this exciting journey together
+          to create a space that truly represents your style, personality, and
+          aspirations.
+        </p>
+        <button>SCHEDULE YOUR CALL</button>
+      </div>
+    </footer>
+    <div class="footer-bar">
+      <p>Copyright © 2023 Company. All rights reserved.</p>
+    </div>
+    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+<header style="display: none;">
   <h2>JS Advanced Retake Exam - 10 August 2022</h2>
   <a href="../../00exams/JS Advanced Retake Exam - 10 August 2022">Open folder</a>
 </header>
 
-<div class="apple-logo">
-  <i class="fa fa-apple"></i>
-</div>
-
-<script>
-const movieTheater = {
-  ageRestrictions(movieRating) {
-    switch (movieRating) {
-      case "G":
-        return "All ages admitted to watch the movie";
-      case "PG":
-        return "Parental guidance suggested! Some material may not be suitable for pre-teenagers";
-      case "R":
-        return "Restricted! Under 17 requires accompanying parent or adult guardian";
-      case "NC-17":
-        return "No one under 17 admitted to watch the movie";
-      default:
-        return "There are no age restrictions for this movie";
-    }
-  },
-  moneySpent(tickets, food, drinks) {
-    if (
-      typeof tickets !== "number" ||
-      !Array.isArray(food) ||
-      !Array.isArray(drinks)
-    ) {
-      throw new Error("Invalid input");
-    }
-
-    let bill = 0;
-
-    bill += tickets * 15;
-
-    food.forEach((element) => {
-      switch (element) {
-        case "Nachos":
-          bill += 6;
-          break;
-        case "Popcorn":
-          bill += 4.5;
-          break;
-      }
-    });
-
-    drinks.forEach((element) => {
-      switch (element) {
-        case "Soda":
-          bill += 2.5;
-          break;
-        case "Water":
-          bill += 1.5;
-          break;
-      }
-    });
-
-    if (bill > 50) {
-      bill -= bill * 0.2;
-      return `The total cost for the purchase with applied discount is ${bill.toFixed(
-        2
-      )}`;
-    } else {
-      return `The total cost for the purchase is ${bill.toFixed(2)}`;
-    }
-  },
-  reservation(rowsArray, neededSeatsCount) {
-    if (!Array.isArray(rowsArray) || typeof neededSeatsCount !== "number") {
-      throw new Error("Invalid input");
-    }
-
-    let availableRows = [];
-    rowsArray.forEach((row) => {
-      if (row.freeSeats >= neededSeatsCount) {
-        availableRows.push(row.rowNumber);
-      }
-    });
-
-    return Math.max(...availableRows);
-  },
-};
-
-describe("movie theater", () => {
-  describe("ageRestrictions", () => {
-    it("should sth", () => {
-      assert.equal(
-        movieTheater.ageRestrictions("G"),
-        `All ages admitted to watch the movie`
-      );
-    });
-
-    
-    it("should sth", () => {
-      assert.equal(
-        movieTheater.ageRestrictions("PG"),
-        `Parental guidance suggested! Some material may not be suitable for pre-teenagers`
-      );
-    });
-
-    it("should sth", () => {
-      assert.equal(
-        movieTheater.ageRestrictions("R"),
-        `Restricted! Under 17 requires accompanying parent or adult guardian`
-      );
-    });
-
-    it("should sth", () => {
-      assert.equal(
-        movieTheater.ageRestrictions("NC-17"),
-        `No one under 17 admitted to watch the movie`
-      );
-    });
-
-    it("should sth", () => {
-      assert.equal(
-        movieTheater.ageRestrictions("NASDF"),
-        `There are no age restrictions for this movie`
-      );
-    });
-  });
-
-  describe("moneySpent", () => {
-    it("should sth", () => {
-      assert.equal(
-        movieTheater.moneySpent(5, ["Nachos"], ["Soda", "Water"]),
-        "The total cost for the purchase with applied discount is 68.00"
-      );
-    });
-
-    it("should sth", () => {
-      assert.equal(
-        movieTheater.moneySpent(3, ["Popcorn"], ["Soda", "Water"]),
-        "The total cost for the purchase with applied discount is 42.80"
-      );
-    });
-
-    it("should sth", () => {
-      assert.equal(
-        movieTheater.moneySpent(3, ["Popcorn"], ["Soda"]),
-        "The total cost for the purchase with applied discount is 41.60"
-      );
-    });
-
-    it("should sth", () => {
-      assert.equal(
-        movieTheater.moneySpent(3, ["Popcorn", "Nachos"], ["Water"]),
-        "The total cost for the purchase with applied discount is 45.60"
-      );
-    });
-
-    it("should sth", () => {
-      assert.equal(
-        movieTheater.moneySpent(3, ["Popcorn", "Nachos"], ["Soda"]),
-        "The total cost for the purchase with applied discount is 46.40"
-      );
-    });
-
-    it("should sth", () => {
-      assert.equal(
-        movieTheater.moneySpent(1, ["Popcorn"], ["Soda", "Water"]),
-        "The total cost for the purchase is 23.50"
-      );
-    });
-
-    it("should sth", () => {
-      assert.throw(
-        () => movieTheater.moneySpent(["adsf"], ["Popcorn"], ["Soda", "Water"]),
-        "Invalid input"
-      );
-      assert.throw(
-        () => movieTheater.moneySpent(1, "sdfadf", ["Soda", "Water"]),
-        "Invalid input"
-      );
-      assert.throw(
-        () => movieTheater.moneySpent(1, ["Popcorn"], 3),
-        "Invalid input"
-      );
-    });
-  });
-
-  describe("reservation", () => {
-    it("should sth", () => {
-      assert.equal(
-        movieTheater.reservation(
-          [
-            { rowNumber: 1, freeSeats: 2 },
-            { rowNumber: 2, freeSeats: 2 },
-          ],
-          1
-        ),
-        2
-      );
-    });
-
-    it("should sth", () => {
-      assert.throw(
-        () => movieTheater.reservation("string", 4),
-        "Invalid input"
-      );
-      assert.throw(
-        () =>
-          movieTheater.reservation(
-            [{ rowNumber: 1, freeSeats: 2 }],
-            "ahsdkfafd"
-          ),
-        "Invalid input"
-      );
-    });
-  });
-})
-</script>
-
-<h1>02. Triathlon - <span>Class</span></h1>
-
-<script>
-  class Triathlon {
-  constructor(name) {
-    this.name = name;
-    this.participants = {};
-    this.listOfFinalists = [];
-  }
-
-  addParticipant(participant, gender) {
-    if (this.participants[participant] === undefined) {
-      this.participants[participant] = gender;
-      return `A new participant has been added - ${participant}`;
-    } else {
-      return `${participant} has already been added to the list`;
-    }
-  }
-
-  completeness(participant, condition) {
-    if (!this.participants[participant]) {
-      return `${participant} is not in the current participants list`;
-    }
-
-    if (condition < 30) {
-      throw new Error(
-        `${participant} is not well prepared and cannot finish any discipline`
-      );
-    }
-
-    let finishedDisciplinesCount = Math.floor(condition / 30);
-
-    if (finishedDisciplinesCount > 0 && finishedDisciplinesCount < 3) {
-      return `${participant} could only complete ${finishedDisciplinesCount} of the disciplines`;
-    } else if (finishedDisciplinesCount === 3) {
-      let participantGender = this.participants[participant];
-      this.listOfFinalists.push({
-        name: participant,
-        gender: participantGender,
-      });
-      return `Congratulations, ${participant} finished the whole competition`;
-    }
-  }
-
-  rewarding(participant) {
-    let completed = this.listOfFinalists.some(
-      (finalist) => finalist.name === participant
-    );
-    if (!completed) {
-      return `${participant} is not in the current finalists list`;
-    } else {
-      return `${participant} was rewarded with a trophy for his performance`;
-    }
-  }
-
-  showRecord(criteria) {
-    if (this.listOfFinalists.length === 0) {
-      return `There are no finalists in this competition`;
-    }
-
-    if (criteria === "male" || criteria === "female") {
-      let finalistsByGender = this.listOfFinalists.filter(
-        (finalist) => finalist.gender === criteria
-      );
-      if (finalistsByGender.length === 0) {
-        return `There are no ${gender} finalists`;
-      } else {
-        return `${finalistsByGender[0].name} is the first ${criteria} that finished the ${this.name} triathlon`;
-      }
-    } else if (criteria === "all") {
-      let sortedFinalists = this.listOfFinalists.sort((a, b) =>
-        a.name.localeCompare(b.name)
-      );
-      let result = [`List of all ${this.name} finalists:`];
-      sortedFinalists.forEach((finalist) => {
-        result.push(`${finalist.name}`);
-      });
-
-      return result.join("\n");
-    }
-  }
-}
-
-let test = new Triathlon();
-console.log(test.addParticipant("Pete", 20, "male"));
-console.log(test.completeness("Pete", 100));
-</script>
-        
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
       // Create Query String as String
