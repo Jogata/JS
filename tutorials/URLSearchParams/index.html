@@ -45,6 +45,13 @@
         display: inline-block;
         text-decoration: none;
       }
+
+      .svg {
+        /* display: none; */
+        position: absolute;
+        width: 0;
+        height: 0;
+      }
         
       body {
         font-family: 'Abril Fatface', cursive;
@@ -239,19 +246,60 @@ font-family: Georgia, serif;
       }
       
       .about-image img {
-        margin: auto;
+        display: block;
         /* max-width: 400px; */
         max-width: 25rem;
+        margin: auto;
         outline: 2px solid var(--text-light);
         outline-offset: 1rem;
+        /* clip-path: url("#mask-1"); */
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
       }
       
       .banner {
+        position: relative;
         padding: 10rem 0;
-        background-image: url("assets/banner.jpg");
+        /* background-image: url("assets/banner.jpg"); */
+        /* background-repeat: no-repeat; */
+        /* background-position: center; */
+        /* background-size: cover; */
+      }
+
+      .banner::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        /* background-image: url("assets/banner.jpg"); */
+        background-image: url("assets/banner-2.jpg");
+        /* background-image: url("assets/banner-3.jpg"); */
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
+        /* clip-path: url("#mask-1"); */
+        /* clip-path: url("#mask-2"); */
+        clip-path: url("#mask-3");
+        /* clip-path: url("#mask-4"); */
+        z-index: -2;
+      }
+
+      .banner::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.2);
+        /* clip-path: url("#mask-1"); */
+        /* clip-path: url("#mask-2"); */
+        clip-path: url("#mask-3");
+        /* clip-path: url("#mask-4"); */
+        z-index: -1;
       }
       
       .banner-container {
@@ -279,6 +327,13 @@ font-family: Georgia, serif;
         display: flex;
         gap: 2rem;
         flex-direction: column;
+      }
+
+      .display-col img {
+        clip-path: url("#mask-1");
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
       }
       
       .display-content {
@@ -316,21 +371,29 @@ font-family: Georgia, serif;
       }
       
       .footer-container {
+        padding-top: 0;
         text-align: center;
       }
       
       .footer-container img {
-        position: absolute;
-        top: -2rem;
-        left: 50%;
-        transform: translateX(-50%);
+        /* position: absolute; */
+        /* top: -2rem; */
+        /* left: 50%; */
+        /* transform: translateX(-50%); */
         /* max-width: 150px; */
         max-width: 9.4rem;
+        padding: 0.5rem 0;
+        border-radius: 2em;
+        background-color: var(--white);
+        transform: translateY(-50%);
+        box-shadow: 2px 2px 2px #0003, -1px -1px 3px #0001;
       }
 
       .footer-container h4 {
-        max-width: 600px;
+        /* max-width: 600px; */
+        max-width: 37.5rem;
         margin: auto;
+        margin-top: 2rem;
         margin-bottom: 3rem;
         color: var(--text-dark);
         font-size: 3rem;
@@ -339,7 +402,8 @@ font-family: Georgia, serif;
       }
       
       .footer-container p {
-        max-width: 1000px;
+        /* max-width: 1000px; */
+        max-width: 62.5rem;
         margin: auto;
         margin-bottom: 2rem;
         color: var(--text-light);
@@ -352,9 +416,22 @@ font-family: Georgia, serif;
         color: var(--text-light);
         font-size: 1rem;
         font-weight: 500;
-        background-color: var(--white);
-        transition: 0.3s;
+        font-family: inherit;
+        border-radius: 2em;
+        /* background-color: var(--white); */
+        background-color: transparent;
+        box-shadow: 2px 2px 4px #0005, 
+                  -3px -3px 2px #fff;
+        /* filter: drop-shadow(2px 2px 2px #000); */
+        /* transition: 0.3s; */
+        transition: color 300ms;
+        /* transition: all 300ms; */
         cursor: pointer;
+      }
+
+      .footer-container button:active {
+        box-shadow: 2px 2px 1px #0005, 
+                  -1px -1px 1px #fff;
       }
         
       .footer-container button:hover {
@@ -368,7 +445,8 @@ font-family: Georgia, serif;
         text-align: center;
       }
       
-      @media (width < 900px) {
+      /* 900px */
+      @media (width < 56rem) {
         .about-container {
           grid-template-columns: repeat(1, 1fr);
           gap: 5rem;
@@ -434,7 +512,9 @@ font-family: Georgia, serif;
         </p>
       </div>
       <div class="about-image">
-        <img src="assets/about.jpg" alt="about" />
+        <!-- <img src="assets/about.jpg" alt="about" /> -->
+        <img src="assets/about-2.jpg" alt="about" />
+        <!-- <img src="assets/about-3.jpg" alt="about"/> -->
       </div>
     </section>
 
@@ -507,6 +587,44 @@ font-family: Georgia, serif;
     </svg>
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+
+    <main>
+      <nav>
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-back-up" width="35" height="35" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 14l-4 -4l4 -4" /><path d="M5 10h11a4 4 0 1 1 0 8h-1" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="30" height="30" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
+      </nav>
+      <h1>YOUR HOURS</h1>
+      <dialog>
+        <form method="dialog">
+          <label for="hour-type">Select hour type</label>
+          <select name="hour-type" id="hour-type">
+            <option value="overworked">Overworked hours</option>
+            <option value="regular">Regular hours</option>
+          </select>
+          <p>
+            <input type="number" name="hours" id="hours" value="1" min="1">
+            <button class="increment">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+            </button>
+            <button class="decrement">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /></svg>
+            </button>
+          </p>
+          <button id="reset" type="reset">Reset</button>
+          <div>
+            <button id="cancel" value="cancel" formmethod="dialog">Cancel</button>
+            <button id="save" value="default" >Save</button>
+          </div>
+        </form>
+      </dialog>
+      <div class="status">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock-question" width="100" height="100" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20.975 11.33a9 9 0 1 0 -5.717 9.06" /><path d="M12 7v5l2 2" /><path d="M19 22v.01" /><path d="M19 19a2.003 2.003 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" /></svg>
+        <p>You haven't logged any hours yet.</p>
+      </div>
+      <button class="add-hours">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="45" height="45" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+      </button>
+    </main>  
 
 <header style="display: none;">
   <h2>JS Advanced Retake Exam - 10 August 2022</h2>
