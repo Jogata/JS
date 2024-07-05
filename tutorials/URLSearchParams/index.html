@@ -72,6 +72,7 @@ font-family: 'Kaushan Script', cursive;
 font-family: 'Fraunces', serif;
 font-family: 'Playfair Display', serif;
 font-family: 'Lemon', cursive;
+font-family: "Lora", serif;
 font-family: "Croissant One", serif;
 font-family: "Shojumaru", system-ui;
 font-family: "Montez", cursive;
@@ -493,6 +494,7 @@ font-family: Georgia, serif;
       }
       
       .body {
+        position: relative;
         width: 100%;
         min-height: 100vh;
         display: flex;
@@ -591,6 +593,89 @@ font-family: Georgia, serif;
         outline: none;
         border-radius: 0.25rem;
         border: 1.5px solid #8a88865e;
+      }
+
+      input[type="number"] {
+        padding-left: 2.8rem;
+        width: 100px;
+        font-size: 1.2rem;
+      }
+      
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+      
+      form p {
+        display: flex;
+        gap: 0.25rem;
+        margin: 0.25rem 0 1rem 0;
+      }
+      
+      button {
+        transition: 0.5s;
+        cursor: pointer;
+      }
+      
+      form p button {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #8a8886;
+        font-size: 1rem;
+        border: none;
+        border-radius: 0.25rem;
+      }
+      
+      #reset {
+        width: max-content;
+        margin: 0.5rem auto 1rem auto;
+        color: #8a8886;
+        border: none;
+        background: transparent;
+      }
+      
+      #reset:hover {
+        color: #ef5d4b;
+      }
+      
+      form div {
+        display: flex;
+        gap: 0.5rem;
+      }
+      
+      form div button {
+        width: 100%;
+        padding: 0.5rem;
+        border-radius: 0.25rem;
+      }
+      
+      #cancel {
+        color: #8a8886;
+        border: 1px solid #8a8886;
+        background: transparent;
+      }
+      
+      #cancel:hover {
+        color: #ef5d4b;
+        border-color: transparent;
+      }
+      
+      #save {
+        color: #fff;
+        font-size: 1rem;
+        border: none;
+        background: #ef5d4b;
+      }
+      
+      #save:hover {
+        background: #ef5e4bbe;
+      }
+      
+      .logged-hours {
+        padding: 0.5rem;
+        color: #8a8886;
       }
     </style>
   </head>
@@ -755,6 +840,68 @@ font-family: Georgia, serif;
         </button>
       </main>  
     </div>
+    <script>
+      const ADD_HOURS_BUTTON = document.querySelector(".add-hours");
+      const DIALOG = document.querySelector("dialog");
+      const SAVE_BUTTON = document.getElementById("save");
+      const SELECT = document.querySelector("select");
+      const HOURS = document.getElementById("hours");
+      const STATUS_SECTION = document.querySelector(".status");
+      const MAIN = document.querySelector("main");
+      const INCREMENT_BUTTON = document.querySelector(".increment");
+      const DECREMENT_BUTTON = document.querySelector(".decrement");
+      
+      // Open modal
+      ADD_HOURS_BUTTON.addEventListener("click", () => {
+        DIALOG.showModal();
+      });
+      
+      // Set the values on close
+      DIALOG.addEventListener("close", () => {
+        if (DIALOG.returnValue === "cancel") {
+          return;
+        } else {
+          STATUS_SECTION.style.display = "none";
+          SAVE_BUTTON.value = `${SELECT.value} hours: ${HOURS.value}`;
+          const LOGGED_HOURS = document.createElement("p");
+          LOGGED_HOURS.textContent = SAVE_BUTTON.value;
+          LOGGED_HOURS.classList.add('logged-hours');
+      
+          MAIN.appendChild(LOGGED_HOURS);
+        }
+      });
+      
+      // Save hours + close modal
+      SAVE_BUTTON.addEventListener("click", (e) => {
+        e.preventDefault();
+        DIALOG.close(`${SELECT.value} hours: ${HOURS.value}`);
+      });
+      
+      // Increment hours
+      INCREMENT_BUTTON.addEventListener("click", (e) => {
+        e.preventDefault();
+        HOURS.value = parseInt(HOURS.value) + 1;
+      });
+      
+      // Decrement hours
+      DECREMENT_BUTTON.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (HOURS.value === "1") {
+          return;
+        } else {
+          HOURS.value = parseInt(HOURS.value) - 1;
+        }
+      });
+      
+      // Set back page
+      const SET_BACK_ARROW = document.querySelector('.icon-tabler-arrow-back-up');
+      
+      SET_BACK_ARROW.addEventListener("click", () => {
+        [...document.querySelectorAll('.logged-hours')].forEach(hour => hour.remove());
+      
+        STATUS_SECTION.style.display = "block";
+      })
+    </script>  
 
 <header style="display: none;">
   <h2>JS Advanced Retake Exam - 10 August 2022</h2>
