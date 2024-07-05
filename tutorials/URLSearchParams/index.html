@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <title>URLSearchParams in JS</title> -->
     <title>Simply Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">  
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
@@ -465,6 +468,130 @@ font-family: Georgia, serif;
           display: none;
         }
       }
+
+      /* 600px */
+      @media (width < 37.5rem) {
+        .link {
+          display: none;
+        }
+      
+        /* .header {
+          margin-bottom: 20rem;
+        } */
+      
+        /* .header-content {
+          bottom: -20rem;
+        } */
+      
+        .display-container {
+          grid-template-columns: repeat(1, 1fr);
+        }
+      
+        .display-col:nth-child(3) {
+          display: flex;
+        }
+      }
+      
+      .body {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Open Sans", sans-serif;
+      }
+      
+      main {
+        position: relative;
+        width: 90%;
+        max-width: 300px;
+        min-height: 500px;
+        margin: auto;
+        border-radius: 0.5rem;
+        box-shadow: 0 0.5rem 1rem #8c382d47;
+        overflow: hidden;
+      }
+      
+      nav {
+        padding: 0.5rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top-left-radius: 0.5rem;
+        border-top-right-radius: 0.5rem;
+        background-color: #ef5d4b;
+      }
+
+      .icon-tabler-arrow-back-up,
+      .icon-tabler-search {
+        color: #fff;
+        cursor: pointer;
+      }
+      
+      h1 {
+        margin: 1.5rem 0;
+        color: #8a8886;
+        font-size: 1rem;
+        text-align: center;
+        text-decoration: underline;
+      }
+      
+      p {
+        font-size: 0.8rem;
+      }
+      
+      .status {
+        color: #8a88868d;
+        text-align: center;
+      }
+      
+      .status p {
+        width: 120px;
+        margin: 0 auto;
+      }
+      
+      .add-hours {
+        position: absolute;
+        right: 1rem;
+        bottom: 1rem;
+        width: 50px;
+        height: 50px;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        background-color: #ef5d4b;
+        cursor: pointer;
+      }
+
+      dialog {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        max-width: 250px;
+        padding: 0.5rem;
+        color: #8a8886;
+        border: none;
+        border-radius: 0.25rem;
+        box-shadow: 0 0.5rem 1rem #8c382d53;
+      }
+      
+      label {
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+        font-weight: 700;
+      }        
+
+      input,
+      select {
+        padding: 0.5rem;
+        color: #8a8886;
+        font-size: 1rem;
+        outline: none;
+        border-radius: 0.25rem;
+        border: 1.5px solid #8a88865e;
+      }
     </style>
   </head>
   <body>
@@ -588,43 +715,46 @@ font-family: Georgia, serif;
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
-    <main>
-      <nav>
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-back-up" width="35" height="35" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 14l-4 -4l4 -4" /><path d="M5 10h11a4 4 0 1 1 0 8h-1" /></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="30" height="30" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
-      </nav>
-      <h1>YOUR HOURS</h1>
-      <dialog>
-        <form method="dialog">
-          <label for="hour-type">Select hour type</label>
-          <select name="hour-type" id="hour-type">
-            <option value="overworked">Overworked hours</option>
-            <option value="regular">Regular hours</option>
-          </select>
-          <p>
-            <input type="number" name="hours" id="hours" value="1" min="1">
-            <button class="increment">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
-            </button>
-            <button class="decrement">
-              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /></svg>
-            </button>
-          </p>
-          <button id="reset" type="reset">Reset</button>
-          <div>
-            <button id="cancel" value="cancel" formmethod="dialog">Cancel</button>
-            <button id="save" value="default" >Save</button>
-          </div>
-        </form>
-      </dialog>
-      <div class="status">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock-question" width="100" height="100" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20.975 11.33a9 9 0 1 0 -5.717 9.06" /><path d="M12 7v5l2 2" /><path d="M19 22v.01" /><path d="M19 19a2.003 2.003 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" /></svg>
-        <p>You haven't logged any hours yet.</p>
-      </div>
-      <button class="add-hours">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="45" height="45" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
-      </button>
-    </main>  
+    <!-- <h1>Clock In App</h1> -->
+    <div class="body">
+      <main> 
+        <nav> 
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-back-up" width="35" height="35" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 14l-4 -4l4 -4" /><path d="M5 10h11a4 4 0 1 1 0 8h-1" /></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="30" height="30" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
+        </nav>
+        <h1>YOUR HOURS</h1>
+        <dialog>
+          <form method="dialog">
+            <label for="hour-type">Select hour type</label>
+            <select name="hour-type" id="hour-type">
+              <option value="overworked">Overworked hours</option>
+              <option value="regular">Regular hours</option>
+            </select>
+            <p>
+              <input type="number" name="hours" id="hours" value="1" min="1">
+              <button class="increment">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+              </button>
+              <button class="decrement">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-minus" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /></svg>
+              </button>
+            </p>
+            <button id="reset" type="reset">Reset</button>
+            <div>
+              <button id="cancel" value="cancel" formmethod="dialog">Cancel</button>
+              <button id="save" value="default" >Save</button>
+            </div>
+          </form>
+        </dialog>
+        <div class="status">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock-question" width="100" height="100" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20.975 11.33a9 9 0 1 0 -5.717 9.06" /><path d="M12 7v5l2 2" /><path d="M19 22v.01" /><path d="M19 19a2.003 2.003 0 0 0 .914 -3.782a1.98 1.98 0 0 0 -2.414 .483" /></svg>
+          <p>You haven't logged any hours yet.</p>
+        </div>
+        <button class="add-hours">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-plus" width="45" height="45" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+        </button>
+      </main>  
+    </div>
 
 <header style="display: none;">
   <h2>JS Advanced Retake Exam - 10 August 2022</h2>
