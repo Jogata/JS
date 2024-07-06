@@ -213,6 +213,87 @@ body {
   padding: 5px;
   border-bottom: 1px solid rgb(196, 194, 194);
 }
+
+.each-line h4 {
+  margin: 10px 0 10px 0;
+  color: #2a88ad;
+  font-size: 15px;
+  font-weight: normal;
+  font-family: "Bitter", serif;
+}
+
+.each-line p {
+  margin: 5px;
+  color: #888;
+}
+
+h3 {
+  margin: 0px;
+}
+
+#finished-wrapper {
+  width: 60%;
+  min-height: 20%;
+  margin: auto;
+  margin-top: 40px;
+  border-radius: 0 0 10px 10px;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgb(0 0 0 / 13%);
+}
+
+#finished-wrapper h3 {
+  padding: 20px 10px 15px;
+  color: #fff;
+  font-size: 30px;
+  font-weight: normal;
+  font-family: "Bitter", serif;
+  border-radius: 10px 10px 0 0;
+  border: 1px solid #257c9e;
+  background: #2a88ad;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+  box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+}
+
+#finished {
+  list-style-type: none;
+  min-width: 60%;
+  padding: 0;
+}
+
+#clear-btn {
+  display: block;
+  margin: auto;
+}
+
+#message {
+  margin-top: 40px;
+  color: #2a88ad;
+  font-size: 25px;
+  font-weight: normal;
+  font-family: "Bitter", serif;
+  text-align: center;
+}
+
+@media only screen and (max-width: 1000px) {
+  #main {
+    display: block;
+  }
+
+  .form-wrapper {
+    min-width: 50%;
+    max-width: 65%;
+  }
+
+  #side-wrapper {
+    width: 100%;
+  }
+
+  #in-progress,
+  #finished {
+    min-width: 60%;
+    max-width: 75%;
+  }
+}
 </style>
   </head>
   <body>
@@ -253,7 +334,9 @@ body {
           <option value="Female">Female</option>
         </select>
       </div>  
-      <div class="section"><span>2</span>Dish Information</div>
+      <div class="section">
+        <span>2</span>Dish Information
+      </div>
       <div class="inner-wrap">
         <label for="task">Dish description</label>
         <textarea id="task" name="task" rows="4" cols="50"></textarea>
@@ -278,6 +361,54 @@ body {
     </p>
   </div>  
 </div>
+
+<script>
+  window.addEventListener("load", solve);
+
+function solve() {
+  const firstNameInputEl = document.getElementById('first-name')
+  const lastNameInputEl = document.getElementById('last-name')
+  const ageInputEl = document.getElementById('age');
+  const genderInputEl = document.getElementById('genderSelect');
+  const descTextareaEl = document.getElementById('task');
+  const submitBtnEl = document.getElementById('form-btn');
+  const inProgressEl = document.getElementById('in-progress');
+  const finishedEl = document.getElementById('finished');
+  const clearBtnEl = document.getElementById('clear-btn');
+  const inProgressDishesEl = document.getElementById('progress-count');
+
+  submitBtnEl.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      let firstName = firstNameInputEl.value;
+      let lastName = lastNameInputEl.value;
+      let age = ageInputEl.value;
+      let gender = genderInputEl.value;
+      let desc = descTextareaEl.value;
+
+      if (!firstName || !lastName || !age || !gender || !desc) {
+          return;
+      }
+      
+      const liEl = document.createElement('li');
+      liEl.classList.add('each-line');
+
+      const articleEl = document.createElement('article');
+
+      const h4NameEl = document.createElement('h4');
+      h4NameEl.textContent = `${firstName} ${lastName}`;
+
+      const pGenderAgeEl = document.createElement('p');
+      pGenderAgeEl.textContent = `${gender}, ${age}`;
+  });
+
+  clearBtnEl.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      finishedEl.textContent = '';
+  });
+}
+</script>
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
