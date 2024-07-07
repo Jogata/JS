@@ -3,547 +3,146 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>URLSearchParams in JS</title> -->
-    <title>Dish Manager</title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-<style>
-body {
-  background-color: rgb(234, 247, 247);
-}
-
-.form-wrapper {
-  width: 25%;
-  max-height: 700px;
-  margin: 40px auto;
-  padding: 30px;
-  border-radius: 10px;
-  background-color: #fff;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
-}
-
-.form-wrapper .inner-wrap {
-  margin-bottom: 15px;
-  padding: 30px;
-  border-radius: 6px;
-  background-color: #ecebeb;
-}
-
-.form-wrapper h1 {
-  margin: -30px -30px 30px -30px;
-  padding: 20px 30px 15px 30px;
-  color: #fff;
-  font-size: 30px;
-  font-weight: normal;
-  font-family: "Bitter", serif;
-  border-radius: 10px 10px 0 0;
-  border: 1px solid #257c9e;
-  background-color: #2a88ad;
-  box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
-}
-
-.form-wrapper h1 > span {
-  display: block;
-  margin-top: 2px;
-  font-size: 13px;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.form-wrapper label {
-  display: block;
-  margin-bottom: 15px;
-  color: #888;
-  font-size: 13px;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-#gender {
-  color: #888;
-  text-align: center;
-}
-
-#gender-wrapper {
-  display: flex;
-  justify-content: center;
-}
-
-#gender-wrapper div {
-  display: flex;
-  height: 13px;
-  margin-left: 30px;
-  margin-right: 30px;
-}
-
-.form-wrapper input[type="text"],
-.form-wrapper input[type="date"],
-.form-wrapper input[type="datetime"],
-.form-wrapper input[type="email"],
-.form-wrapper input[type="number"],
-.form-wrapper input[type="search"],
-.form-wrapper input[type="time"],
-.form-wrapper input[type="url"],
-.form-wrapper input[type="password"],
-.form-wrapper textarea,
-.form-wrapper select {
-  box-sizing: border-box;
-  display: block;
-  width: 100%;
-  padding: 8px;
-  border-radius: 6px;
-  border: 2px solid #fff;
-  box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
-}
-
-.form-wrapper .section {
-  margin-bottom: 5px;
-  color: #2a88ad;
-  font-size: 20px;
-  font-weight: normal;
-  font-family: "Bitter", serif;
-}
-
-.form-wrapper .section span {
-  position: absolute;
-  margin-left: -45px;
-  margin-top: -3px;
-  padding: 5px 10px;  
-  color: #fff;
-  font-size: 14px;
-  border-radius: 50%;
-  border: 4px solid #fff;
-  background-color: #2a88ad;
-}
-
-.form-wrapper input[type="button"],
-.form-wrapper input[type="submit"] {
-  padding: 8px 20px 8px 20px;
-  color: #fff;
-  font-size: 15px;
-  font-weight: normal;
-  font-family: "Bitter", serif;
-  border-radius: 5px;
-  border: 1px solid #257c9e;
-  background-color: #2a88ad;
-  box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
-  cursor: pointer;
-}
-
-.form-wrapper input[type="button"]:hover,
-.form-wrapper input[type="submit"]:hover {
-  background-color: #2a6881;
-  box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
-}
-
-.form-wrapper .privacy-policy {
-  float: right;
-  width: 250px;
-  margin-top: 10px;
-  color: #4d4d4d;
-  font-size: 12px;
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: right;
-}
-
-#main {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-#side-wrapper {
-  width: 65%;
-  display: block;
-  align-items: center;
-}
-
-#in-progress {
-  width: 50%;
-  min-height: 20%;
-  margin: auto;
-  margin-top: 40px;
-  border-radius: 0 0 10px 10px;
-  background-color: white;
-  box-shadow: 0px 0px 10px rgb(0 0 0 / 13%);
-}
-
-#in-progress h3 {
-  padding: 20px 10px 15px 10px;
-  color: #fff;
-  font-size: 30px;
-  font-weight: normal;
-  font-family: "Bitter", serif;
-  border-radius: 10px 10px 0 0;
-  border: 1px solid #257c9e;
-  background-color: #2a88ad;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
-  box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
-}
-
-.edit-btn,
-.complete-btn,
-#clear-btn {
-  margin-bottom: 5px;
-  margin-right: 5px;
-  padding: 4px 13px;
-  color: #fff;
-  font-size: 15px;
-  font-weight: normal;
-  font-family: "Bitter", serif;
-  border-radius: 5px;
-  border: 1px solid #257c9e;
-  background: #2a88ad;
-  box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
-  cursor: pointer;
-}
-
-.edit-btn:hover,
-.complete-btn:hover {
-  background-color: #2a6881;
-  box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
-}
-
-#in-progress {
-  list-style-type: none;
-  min-width: 60%;
-  padding: 0;
-}
-
-.each-line {
-  padding: 5px;
-  border-bottom: 1px solid rgb(196, 194, 194);
-}
-
-.each-line h4 {
-  margin: 10px 0 10px 0;
-  color: #2a88ad;
-  font-size: 15px;
-  font-weight: normal;
-  font-family: "Bitter", serif;
-}
-
-.each-line p {
-  margin: 5px;
-  color: #888;
-}
-
-h3 {
-  margin: 0px;
-}
-
-#finished-wrapper {
-  width: 60%;
-  min-height: 20%;
-  margin: auto;
-  margin-top: 40px;
-  border-radius: 0 0 10px 10px;
-  background-color: white;
-  box-shadow: 0px 0px 10px rgb(0 0 0 / 13%);
-}
-
-#finished-wrapper h3 {
-  padding: 20px 10px 15px;
-  color: #fff;
-  font-size: 30px;
-  font-weight: normal;
-  font-family: "Bitter", serif;
-  border-radius: 10px 10px 0 0;
-  border: 1px solid #257c9e;
-  background: #2a88ad;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
-  box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
-}
-
-#finished {
-  list-style-type: none;
-  min-width: 60%;
-  padding: 0;
-}
-
-#clear-btn {
-  display: block;
-  margin: auto;
-}
-
-#message {
-  margin-top: 40px;
-  color: #2a88ad;
-  font-size: 25px;
-  font-weight: normal;
-  font-family: "Bitter", serif;
-  text-align: center;
-}
-
-@media only screen and (max-width: 1000px) {
-  #main {
-    display: block;
-  }
-
-  .form-wrapper {
-    min-width: 50%;
-    max-width: 65%;
-  }
-
-  #side-wrapper {
-    width: 100%;
-  }
-
-  #in-progress,
-  #finished {
-    min-width: 60%;
-    max-width: 75%;
-  }
-}
-</style>
+    <title>URLSearchParams in JS</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
-    <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+    <nav>
+      <div class="nav-logo">
+        <a href="#"><img src="assets/logo.png" alt="logo" /></a>
+      </div>
+      <ul class="nav-links">
+        <li class="link"><a href="#">Home</a></li>
+        <li class="link"><a href="#">Program</a></li>
+        <li class="link"><a href="#">Service</a></li>
+        <li class="link"><a href="#">About</a></li>
+        <li class="link"><a href="#">Community</a></li>
+      </ul>
+      <button class="btn">Join Now</button>
+    </nav>
+    <header class="section-container header-container">
+      <div class="header-content">
+        <span class="bg-blur"></span>
+        <span class="bg-blur header-blur"></span>
+        <h4>BEST FITNESS IN THE TOWN</h4>
+        <h1><span>MAKE</span> YOUR BODY SHAPE</h1>
+        <p>
+          Unleash your potential and embark on a journey towards a stronger,
+          fitter, and more confident you. Sign up for 'Make Your Body Shape' now
+          and witness the incredible transformation your body is capable of!
+        </p>
+        <button class="btn">Get Started</button>
+      </div>
+      <div class="header-image">
+        <img src="assets/header.png" alt="header" />
+      </div>
+    </header>
+    <section class="section-container explore-container">
+      <div class="explore-header">
+        <h2 class="section-header">EXPLORE OUR PROGRAM</h2>
+        <div class="explore-nav">
+          <span><i class="ri-arrow-left-line"></i></span>
+          <span><i class="ri-arrow-right-line"></i></span>
+        </div>
+      </div>
+      <div class="explore-grid">
+        <div class="explore-card">
+          <span><i class="ri-boxing-fill"></i></span>
+          <h4>Strength</h4>
+          <p>
+            Embrace the essence of strength as we delve into its various
+            dimensions physical, mental, and emotional.
+          </p>
+          <a href="#">Join Now <i class="ri-arrow-right-line"></i></a>
+        </div>
+        <div class="explore-card">
+          <span><i class="ri-heart-pulse-fill"></i></span>
+          <h4>Physical Fitness</h4>
+          <p>
+            It encompasses a range of activities that improve health, strength,
+            flexibility, and overall well-being.
+          </p>
+          <a href="#">Join Now <i class="ri-arrow-right-line"></i></a>
+        </div>
+        <div class="explore-card">
+          <span><i class="ri-run-line"></i></span>
+          <h4>Fat Lose</h4>
+          <p>
+            Through a combination of workout routines and expert guidance, we'll
+            empower you to reach your goals.
+          </p>
+          <a href="#">Join Now <i class="ri-arrow-right-line"></i></a>
+        </div>
+        <div class="explore-card">
+          <span><i class="ri-shopping-basket-fill"></i></span>
+          <h4>Weight Gain</h4>
+          <p>
+            Designed for individuals, our program offers an effective approach
+            to gaining weight in a sustainable manner.
+          </p>
+          <a href="#">Join Now <i class="ri-arrow-right-line"></i></a>
+        </div>
+      </div>
+    </section>
+    <section class="section-container class-container">
+      <div class="class-image">
+        <span class="bg-blur"></span>
+        <img src="assets/class-1.jpg" alt="class" class="class-img-1" />
+        <img src="assets/class-2.jpg" alt="class" class="class-img-2" />
+      </div>
+      <div class="class-content">
+        <h2 class="section-header">THE CLASS YOU WILL GET HERE</h2>
+        <p>
+          Led by our team of expert and motivational instructors, "The Class You
+          Will Get Here" is a high-energy, results-driven session that combines
+          a perfect blend of cardio, strength training, and functional
+          exercises. Each class is carefully curated to keep you engaged and
+          challenged, ensuring you never hit a plateau in your fitness
+          endeavors.
+        </p>
+        <button class="btn">Book A Class</button>
+      </div>
+    </section>
+    <section class="section-container join-container">
+      <h2 class="section-header">WHY JOIN US ?</h2>
+      <p class="section-subheader">
+        Our diverse membership base creates a friendly and supportive
+        atmosphere, where you can make friends and stay motivated.
+      </p>
+      <div class="join-image">
+        <img src="assets/join.jpg" alt="Join" />
+        <div class="join-grid">
+          <div class="join-card">
+            <span><i class="ri-user-star-fill"></i></span>
+            <div class="join-card-content">
+              <h4>Personal Trainer</h4>
+              <p>Unlock your potential with our expert Personal Trainers.</p>
+            </div>
+          </div>
+          <div class="join-card">
+            <span><i class="ri-vidicon-fill"></i></span>
+            <div class="join-card-content">
+              <h4>Practice Sessions</h4>
+              <p>Elevate your fitness with practice sessions.</p>
+            </div>
+          </div>
+          <div class="join-card">
+            <span><i class="ri-building-line"></i></span>
+            <div class="join-card-content">
+              <h4>Good Management</h4>
+              <p>Supportive management, for your fitness success.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
-<header>
-  <h2>JS Advanced Retake Exam - 10 August 2022</h2>
-  <a href="../../00exams/JS Advanced Retake Exam - 10 August 2022">Open folder</a>
+<header style="display: none;">
+  <h2>JS Advanced Regular Exam - 25 June 2022</h2>
+  <a href="../../00exams/JS Advanced Regular Exam - 25 June 2022">Open folder</a>
 </header>
-
-<div id="main">
-  <div class="form-wrapper">
-    <h1>
-      Dish Manager
-      <span>
-        Fill the form with the chef and his dish information!
-      </span>
-    </h1>
-    <form>
-      <div class="section">
-        <span>1</span>Chef Information
-      </div>
-      <div class="inner-wrap">
-        <label>
-          First Name 
-          <input type="text" id="first-name" name="field1"/>
-        </label>
-        <label>
-          Last Name 
-          <input type="text" id="last-name" name="field2"/>
-        </label>
-        <label>Age 
-          <input type="number" id="age" name="field3"/>
-        </label>
-        <p id="gender">Gender</p>
-        <select id="genderSelect">
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-        </select>
-      </div>  
-      <div class="section">
-        <span>2</span>Dish Information
-      </div>
-      <div class="inner-wrap">
-        <label for="task">Dish description</label>
-        <textarea id="task" name="task" rows="4" cols="50"></textarea>
-      </div>  
-      <div class="button-section">
-        <input type="button" id="form-btn" value="Submit" />
-      </div>  
-    </form>
-  </div>  
-  <div id="side-wrapper">
-    <ul id="in-progress">
-      <h3>In progress</h3>
-    </ul>
-    <div id="finished-wrapper">
-      <h3>Finished cooking</h3>
-      <ul id="finished"></ul>
-      <button id="clear-btn">Clear</button>
-    </div>  
-    <p id="message">
-      Dishes still in progress: 
-      <span id="progress-count">0</span>
-    </p>
-  </div>  
-</div>
-
-<script>
-  window.addEventListener("load", solve);
-
-function solve() {
-  const firstNameInputEl = document.getElementById('first-name')
-  const lastNameInputEl = document.getElementById('last-name')
-  const ageInputEl = document.getElementById('age');
-  const genderInputEl = document.getElementById('genderSelect');
-  const descTextareaEl = document.getElementById('task');
-  const submitBtnEl = document.getElementById('form-btn');
-  const inProgressEl = document.getElementById('in-progress');
-  const finishedEl = document.getElementById('finished');
-  const clearBtnEl = document.getElementById('clear-btn');
-  const inProgressDishesEl = document.getElementById('progress-count');
-
-  submitBtnEl.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      let firstName = firstNameInputEl.value;
-      let lastName = lastNameInputEl.value;
-      let age = ageInputEl.value;
-      let gender = genderInputEl.value;
-      let desc = descTextareaEl.value;
-
-      if (!firstName || !lastName || !age || !gender || !desc) {
-          return;
-      }
-      
-      const liEl = document.createElement('li');
-      liEl.classList.add('each-line');
-
-      const articleEl = document.createElement('article');
-
-      const h4NameEl = document.createElement('h4');
-      h4NameEl.textContent = `${firstName} ${lastName}`;
-
-      const pGenderAgeEl = document.createElement('p');
-      pGenderAgeEl.textContent = `${gender}, ${age}`;
-
-      const pDescEl = document.createElement('p');
-      pDescEl.textContent = `Dish description: ${desc}`;
-
-      articleEl.appendChild(h4NameEl);
-      articleEl.appendChild(pGenderAgeEl);
-      articleEl.appendChild(pDescEl);
-
-      const editBtnEl = document.createElement('button');
-      editBtnEl.classList.add('edit-btn');
-      editBtnEl.textContent = 'Edit';
-
-      const completeBtnEl = document.createElement('button');
-      completeBtnEl.classList.add('complete-btn');
-      completeBtnEl.textContent = 'Mark as complete';
-
-      liEl.appendChild(articleEl);
-      liEl.appendChild(editBtnEl);
-      liEl.appendChild(completeBtnEl);
-
-      inProgressEl.appendChild(liEl);
-      
-      inProgressDishesEl.textContent = Number(inProgressDishesEl.textContent) + 1;
-
-      firstNameInputEl.value = '';
-      lastNameInputEl.value = '';
-      ageInputEl.value = '';
-      genderInputEl.value = '';
-      descTextareaEl.value = '';
-
-      editBtnEl.addEventListener('click', (e) => {
-          e.preventDefault();
-          inProgressDishesEl.textContent = Number(inProgressDishesEl.textContent) - 1;
-
-          firstNameInputEl.value = firstName;
-          lastNameInputEl.value = lastName;
-          ageInputEl.value = age;
-          genderInputEl.value = gender;
-          descTextareaEl.value = desc;
-
-          liEl.remove();
-      });
-
-      completeBtnEl.addEventListener('click', (e) => {
-          e.preventDefault();
-          inProgressDishesEl.textContent = Number(inProgressDishesEl.textContent) - 1;
-
-          editBtnEl.remove();
-          completeBtnEl.remove();
-
-          finishedEl.appendChild(liEl);
-      });
-  });
-
-  clearBtnEl.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      finishedEl.textContent = '';
-  });
-}
-</script>
-<script>
-  class SmartHike {
-  constructor(username) {
-    this.username = username;
-    this.goals = {};
-    this.listOfHikes = [];
-    this.resources = 100;
-  }
-
-  addGoal(peak, altitude) {
-    if (this.goals[peak] == undefined) {
-      this.goals[peak] = Number(altitude);
-      return `You have successfully added a new goal - ${peak}`;
-    } else {
-      return `${peak} has already been added to your goals`;
-    }
-  }
-
-  hike(peak, time, difficultyLevel) {
-    if (this.resources === 0) {
-      return "You don't have enough resources to start the hike";
-    }
-
-    if (this.goals[peak] != undefined) {
-      let usedResourses = time * 10;
-      let difference = this.resources - usedResourses;
-
-      if (difference < 0) {
-        return "You don't have enough resources to complete the hike";
-      } else {
-        this.resources -= usedResourses;
-        this.listOfHikes.push({ peak, time, difficultyLevel });
-        return `You hiked ${peak} peak for ${time} hours and you have ${this.resources}% resources left`;
-      }
-    } else {
-      throw new Error(`${peak} is not in your current goals`);
-    }
-  }
-
-  rest(time) {
-    this.resources += time * 10;
-    if (this.resources >= 100) {
-      this.resources = 100;
-      return `Your resources are fully recharged. Time for hiking!`;
-    } else {
-      return `You have rested for ${time} hours and gained ${
-        time * 10
-      }% resources`;
-    }
-  }
-
-  showRecord(criteria) {
-    if (this.listOfHikes.length == 0) {
-      return `${this.username} has not done any hiking yet`;
-    }
-
-    if (criteria === "hard" || criteria === "easy") {
-      let allHikes = this.listOfHikes.filter(
-        (hike) => hike.difficultyLevel === criteria
-      );
-      let sortedHikes = allHikes.sort((a, b) => a.time - b.time);
-      let bestHike = sortedHikes[0];
-
-      if (bestHike === undefined) {
-        return `${this.username} has not done any ${criteria} hiking yet`;
-      }
-
-      return `${this.username}'s best ${criteria} hike is ${bestHike.peak} peak, for ${bestHike.time} hours`;
-    } else if (criteria === "all") {
-      let result = ["All hiking records:"];
-      this.listOfHikes.forEach((hike) => {
-        result.push(
-          `${this.username} hiked ${hike.peak} for ${hike.time} hours`
-        );
-      });
-
-      return result.join("\n");
-    }
-  }
-}
-</script>
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
