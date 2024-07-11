@@ -3,679 +3,142 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URLSearchParams in JS</title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
+    <!-- <title>URLSearchParams in JS</title> -->
+    <title>Explore Destinations</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-<style>
-*,  
-*:before, 
-*:after {   
-  box-sizing: border-box; 
-  -moz-box-sizing: border-box;  
-  -webkit-box-sizing: border-box; 
-} 
-
-body { 
-  color: #384047; 
-  /* font-family: "Nunito", sans-serif;   */
-  font-family: Georgia, serif; 
-  background-color: rgb(202, 214, 191); 
-} 
-
-form { 
-  max-width: 500px; 
-  margin: 10px auto;  
-  padding: 10px 20px; 
-  border-radius: 8px; 
-  background-color: #f4f7f8;  
-} 
-
-h1 { 
-  margin: 0 0 30px 0; 
-  text-align: center; 
-} 
-
-input[type="text"],
-input[type="password"],
-input[type="date"],
-input[type="datetime"],
-input[type="email"],
-input[type="number"],
-input[type="search"],
-input[type="tel"],
-input[type="time"],
-input[type="url"],
-textarea,
-select {
-  width: 100%;
-  height: 40px;
-  margin: 0;
-  margin-bottom: 30px;
-  padding: 15px;
-  color: #242525;
-  font-size: 16px;
-  border: none;
-  outline: none;
-  background: rgba(255, 255, 255, 0.1);
-  background-color: #e8eeef;
-  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.03);
-} 
-
-input[type="radio"],
-input[type="checkbox"] {
-  margin: 0 4px 8px 0;
-} 
-
-select {
-  height: 40px;
-  padding: 6px;
-  border-radius: 2px;
-} 
-
-#publish {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 19px 39px 18px 39px;
-  color: #fff;
-  font-size: 18px;
-  font-style: normal;
-  font-family: inherit;
-  /* text-align: center; */
-  border: 1px solid #3ac162;
-  border-width: 1px 1px 3px;
-  border-radius: 5px;
-  background-color: #4bc970;
-  /* box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.1); */
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-} 
-
-#publish:active {
-  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3);
-} 
-
-fieldset {
-  margin-bottom: 30px;
-  border: none;
-} 
-
-legend {
-  margin-top: 20px;
-  margin-bottom: 10px;
-  font-size: 1.4em;
-} 
-
-label {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 1rem;
-} 
-
-label.light {
-  display: inline-block;
-  margin-top: 10px;
-  margin-right: 30px;
-  font-weight: 300;
-} 
-
-.number {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  margin-right: 4px;
-  color: #fff;
-  font-size: 0.8em;
-  font-family: initial;
-  text-align: center;
-  line-height: 30px;
-  border-radius: 50%;
-  background-color: #5fcf80;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
-} 
-
-.container {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
-} 
-
-.form-wrapper {
-  max-width: 35%;
-} 
-
-.table-wrapper {
-  width: 50%;
-  max-width: 60%;
-  margin-left: 50px;
-} 
-
-table {
-  width: 100%;
-  table-layout: fixed;
-} 
-
-.tbl-header {
-  height: 70px;
-  margin-top: 10px;
-  color: black;
-  border-radius: 10px 10px 0px 0px;
-  background-color: #f4f7f8;
-} 
-
-.tbl-content {
-  margin-top: 0px;
-  border-radius: 0 0 10px 10px;
-  border: 3px solid #f4f7f8;
-  overflow-x: auto;
-} 
-
-th {
-  padding-top: 15px;
-  color: black;
-  font-size: 17px;
-  font-weight: bold;
-  font-style: italic;
-  text-align: center;
-  text-transform: uppercase;
-} 
-
-td {
-  padding: 15px;
-  color: rgb(78, 75, 75);
-  font-size: 15px;
-  font-weight: 700;
-  font-style: italic;
-  text-align: center;
-  vertical-align: middle;
-  border-bottom: solid 1px rgba(255, 255, 255, 0.1);
-} 
-
-tr {
-  height: 70px;
-  border-bottom: 2px solid #f4f7f8;
-}
-
-.action-btn {
-  width: 80px;
-  height: 25px;
-  margin-top: 5px;
-  color: white;
-  font-size: 16px;
-  font-family: inherit;
-  border-radius: 5px;
-  border: none;
-  background-color: #5fcf80;
-} 
-
-p {
-  margin-top: 35px;
-  color: rgb(78, 75, 75);
-  font-size: 23px;
-  font-weight: 700;
-  font-style: italic;
-  text-align: center;
-} 
-
-#sold-wrapper {
-  width: 100%;
-  margin: auto;
-  margin-top: 50px;
-  border-radius: 10px;
-  border: 3px solid #f4f7f8;
-  overflow-x: auto;
-} 
-
-#title-bar {
-  height: 40px;
-  padding-top: 7px;
-  color: black;
-  font-size: 21px;
-  font-weight: 700;
-  font-style: italic;
-  text-align: center;
-  background-color: #f4f7f8;
-} 
-
-#nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  background-color: rgb(193, 204, 183);
-} 
-
-#nav > span {
-  width: 30%;
-  max-width: 33%;
-  margin: 10px;
-  font-size: 18px;
-  font-weight: 900;
-  text-align: center;
-} 
-
-.each-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-} 
-
-.each-list > span {
-  width: 30%;
-  max-width: 33%;
-  margin: 10px;
-  margin-right: 10px;
-  color: rgb(78, 75, 75);
-  font-size: 16px;
-  font-weight: 550;
-  text-align: center;
-} 
-
-ul {
-  padding: 0;
-} 
- 
-@media screen and (max-width: 1200px) {
-  .container {
-    display: block;
-  } 
-
-  form {
-    max-width: 500px;
-  } 
-
-  .form-wrapper {
-    max-width: 100%;
-    width: 90%;
-  } 
-
-  .table-wrapper {
-    max-width: 100%;
-    width: 90%;
-  } 
-}
-
-.test {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#login-form {
-  max-width: 300px;
-  padding: 16px;
-}
-
-label {
-  text-transform: capitalize;
-}
-
-.form-container {
-  margin: auto;
-}
-
-#submit {
-  padding: 6px 12px;
-  text-transform: capitalize;
-  cursor: pointer;
-}
-</style>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
+      @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Kaushan+Script&family=Playfair+Display&display=swap');
+      @import url("https://fonts.googleapis.com/css2?family=Lora:ital@0;1&family=Poppins:wght@400;500;600&display=swap");
+      @import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Brawler:wght@400;700&family=Croissant+One&family=Ephesis&family=Gloock&family=Hurricane&family=Imbue:opsz,wght@10..100,100..900&family=Modak&family=Montez&family=Prosto+One&family=Rye&family=Shojumaru&family=Young+Serif&family=ZCOOL+XiaoWei&display=swap');
+      body {
+        min-height: 100vh;
+        padding: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Abril Fatface', cursive;
+font-family: 'Courgette', cursive;
+font-family: 'Dancing Script', cursive;
+font-family: 'Great Vibes', cursive;
+font-family: 'Josefin Sans', sans-serif;
+font-family: 'Limelight', cursive;
+font-family: 'Lobster', cursive;
+font-family: 'Montserrat', sans-serif;
+font-family: 'Oleo Script Swash Caps', cursive;
+font-family: 'Poppins', sans-serif;
+font-family: 'Raleway', sans-serif;
+font-family: 'Kaushan Script', cursive;
+font-family: 'Fraunces', serif;
+font-family: 'Playfair Display', serif;
+font-family: 'Lemon', cursive;
+font-family: "Lora", serif;
+font-family: "Croissant One", serif;
+font-family: "Shojumaru", system-ui;
+font-family: "Montez", cursive;
+font-family: "Modak", system-ui;
+font-family: "Hurricane", cursive;
+font-family: "Prosto One", sans-serif;
+font-family: "Young Serif", serif;
+font-family: "ZCOOL XiaoWei", sans-serif;
+font-family: "Brawler", serif;
+font-family: "Gloock", serif;
+font-family: "Ephesis", cursive;
+font-family: "Patua One", serif;
+font-family: "Rye", serif;
+font-family: "Arizonia", cursive;
+font-family: "Imbue", serif;
+font-family: "Platypi", serif;
+      }
+    </style>
   </head>
   <body>
-    <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+    <div class="container">
+      <nav>
+        <div class="nav-logo">
+          <img src="assets/logo.png" alt="logo"/>
+        </div>
+        <ul class="nav-links">
+          <li class="link"><a href="#">Home</a></li>
+          <li class="link"><a href="#">Destinations</a></li>
+          <li class="link"><a href="#">Contact Us</a></li>
+          <li class="link"><a href="#">Blog</a></li>
+        </ul>
+        <div class="search">
+          <input type="text" placeholder="Search" />
+          <span><i class="ri-search-line"></i></span>
+        </div>
+        <div class="login">
+          <span><i class="ri-user-3-fill"></i></span>
+          Log In
+        </div>
+      </nav>
+      <div class="destination-container">
+        <img class="bg-img-1" src="assets/bg-dots-2.png" alt="bg"/>
+        <img class="bg-img-2" src="assets/bg-arrow.png" alt="bg"/>
+        <div class="socials">
+          <span><i class="ri-twitter-fill"></i></span>
+          <span><i class="ri-facebook-fill"></i></span>
+          <span><i class="ri-instagram-line"></i></span>
+          <span><i class="ri-youtube-fill"></i></span>
+        </div>
+        <div class="content">
+          <h1>EXPLORE<br />DREAM<br /><span>DESTINATION</span></h1>
+          <p>
+            It encourages exploration of unfamiliar territories, embracing
+            diverse cultures and landscapes, while pursuing the desired
+            destination that captivates the heart and ignites a sense of wonder.
+          </p>
+          <button class="btn">BOOK NOW</button>
+        </div>
+        <div class="destination-grid">
+          <div class="destination-card">
+            <img src="assets/destination-1.jpg" alt="destination"/>
+            <div class="card-content">
+              <h4>10 Must-Visit Hidden Gems</h4>
+              <p>
+                Discover off-the-beaten-path locations and hidden gems within
+                dream destinations, taking you beyond the typical tourist spots.
+              </p>
+              <button class="btn">Read More</button>
+            </div>
+          </div>
+          <div class="destination-card">
+            <img src="assets/destination-2.jpg" alt="destination"/>
+            <div class="card-content">
+              <h4>Immersive Cultural Experiences</h4>
+              <p>
+                Dive deep into the vibrant cultures of dream destinations,
+                showcasing the rituals, traditions, and local customs that make
+                these places truly unique.
+              </p>
+              <button class="btn">Read More</button>
+            </div>
+          </div>
+          <div class="destination-card">
+            <img src="assets/destination-3.jpg" alt="destination"/>
+            <div class="card-content">
+              <h4>From Dreams to Reality</h4>
+              <p>
+                Explore expert tips, and hidden gems, ensuring every moment of
+                your trip is optimized, and make the most of time in your
+                long-awaited dream location.
+              </p>
+              <button class="btn">Read More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
 <header>
-  <h2>JS Advanced Regular Exam - 25 June 2022</h2>
-  <a href="../../00exams/JS Advanced Regular Exam - 25 June 2022">Open folder</a>
+  <h2>JS Advanced Regular Exam - 22 October 2022</h2>
+  <a href="../../00exams/JS Advanced Regular Exam - 22 October 2022">Open folder</a>
 </header>
-<h1>Online Car Magazine</h1> 
-
-<div class="container"> 
-  <div class="form-wrapper"> 
-    <form> 
-      <h1>Create offer</h1> 
-
-      <fieldset> 
-        <legend><span class="number">1</span> Car Details</legend> 
-        <label for="make">Make:</label> 
-        <input type="text" id="make" name="make" /> 
-        <label for="model">Model:</label> 
-        <input type="text" id="model" name="model" /> 
-        <label for="year">Production year:</label> 
-        <input type="number" id="year" min="1990" max="2022" step="1" value="2017" /> 
-        <label for="fuel">Fuel type:</label> 
-        <select id="fuel" name="fuel"> 
-          <option value="petrol">Petrol</option> 
-          <option value="diesel">Diesel</option> 
-          <option value="hybrid">Hybrid</option> 
-          <option value="electric">Electric</option> 
-        </select> 
-
-        <legend><span class="number">2</span> Price</legend> 
-        <label for="original-cost">Original cost:</label> 
-        <input type="number" id="original-cost" step="10" /> 
-        <label for="selling-price">Selling price:</label> 
-        <input type="number" id="selling-price" step="10" /> 
-
-        <button id="publish" type="submit">Publish</button> 
-    </form> 
-  </div> 
-
-  <div class="table-wrapper"> 
-    <section> 
-      <div class="tbl-header"> 
-        <table> 
-          <thead> 
-            <tr> 
-              <th>Make</th> 
-              <th>Model</th> 
-              <th>Year</th> 
-              <th>Fuel</th> 
-              <th>Price</th> 
-              <th>New Price</th> 
-              <th>-</th> 
-            </tr> 
-          </thead> 
-        </table> 
-      </div> 
-      <div class="tbl-content"> 
-        <table> 
-          <tbody id="table-body"> 
-
-          </tbody> 
-        </table> 
-      </div> 
-    </section> 
-
-    <section id="sold-wrapper"> 
-
-      <div id="title-bar"> 
-        Sold cars:
-      </div> 
-      <div id="nav"> 
-        <span>Make and model</span> 
-        <span>Production year</span> 
-        <span>Profit made</span> 
-      </div> 
-      <ul id="cars-list"> 
-
-      </ul> 
-    </section> 
-    <p>Profit made: <strong id="profit">0.00</strong>$</p> 
-  </div> 
-</div> 
-
-<script> 
-window.addEventListener("load", solve);
-
-function solve() {
-  const makeInputEl = document.getElementById('make');
-  const modelInputEl = document.getElementById('model');
-  const yearInputEl = document.getElementById('year');
-  const fuelInputEl = document.getElementById('fuel');
-  const originalInputEl = document.getElementById('original-cost');
-  const sellingInputEl = document.getElementById('selling-price');
-  const submitBtnEl = document.getElementById('publish');
-  const tbodyEl = document.getElementById('table-body');
-  const ulEl = document.getElementById('cars-list');
-  const profitEl = document.getElementById('profit');
-
-  submitBtnEl.addEventListener('click', e => {
-    e.preventDefault();
-
-    const make = makeInputEl.value;
-    const model = modelInputEl.value;
-    const year = yearInputEl.value;
-    const fuel = fuelInputEl.value;
-    const original = Number(originalInputEl.value);
-    const selling = Number(sellingInputEl.value);
-
-    if (!make || !model || !year || !fuel || !original || !selling || selling <= original) {
-      return;
-    }
-
-    const trEl = document.createElement('tr');
-    trEl.classList.add('row');
-
-    const makeTdEl = document.createElement('td');
-    makeTdEl.textContent = make;
-    
-    const modelTdEl = document.createElement('td');
-    modelTdEl.textContent = model;
-
-    const yearTdEl = document.createElement('td');
-    yearTdEl.textContent = year;
-
-    const fuelTdEl = document.createElement('td');
-    fuelTdEl.textContent = fuel;
-
-    const originalTdEl = document.createElement('td');
-    originalTdEl.textContent = original;
-
-    const sellingTdEl = document.createElement('td');
-    sellingTdEl.textContent = selling;
-
-    const btnsTdEl = document.createElement('td');
-
-    const editBtnEl = document.createElement('button');
-    editBtnEl.classList.add('action-btn', 'edit');
-    editBtnEl.textContent = 'Edit';
-
-    const sellBtnEl = document.createElement('button');
-    sellBtnEl.classList.add('action-btn', 'sell');
-    sellBtnEl.textContent = 'Sell';
-
-    btnsTdEl.appendChild(editBtnEl);
-    btnsTdEl.appendChild(sellBtnEl);
-
-    trEl.appendChild(makeTdEl);
-    trEl.appendChild(modelTdEl);
-    trEl.appendChild(yearTdEl);
-    trEl.appendChild(fuelTdEl);
-    trEl.appendChild(originalTdEl);
-    trEl.appendChild(sellingTdEl);
-    trEl.appendChild(btnsTdEl);
-
-    tbodyEl.appendChild(trEl);
-
-    makeInputEl.value = '';
-    modelInputEl.value = '';
-    yearInputEl.value = '';
-    fuelInputEl.value = '';
-    originalInputEl.value = '';
-    sellingInputEl.value = '';
-
-    editBtnEl.addEventListener('click', e => {
-      e.preventDefault();
-
-      makeInputEl.value = make;
-      modelInputEl.value = model;
-      yearInputEl.value = year;
-      fuelInputEl.value = fuel;
-      originalInputEl.value = original;
-      sellingInputEl.value = selling;
-
-      trEl.remove();
-    });
-
-    sellBtnEl.addEventListener('click', e => {
-      e.preventDefault();
-
-      const liEl = document.createElement('li');
-      liEl.classList.add('each-list');
-
-      const makeModelSpanEl = document.createElement('span');
-      makeModelSpanEl.textContent = `${make} ${model}`;
-
-      const yearSpanEl = document.createElement('span');
-      yearSpanEl.textContent = year;
-
-      const priceSpanEl = document.createElement('span');
-      priceSpanEl.textContent = selling - original;
-
-      liEl.appendChild(makeModelSpanEl);
-      liEl.appendChild(yearSpanEl);
-      liEl.appendChild(priceSpanEl);
-
-      ulEl.appendChild(liEl);
-
-      trEl.remove();
-
-      profitEl.textContent = (Number(profitEl.textContent) + (selling - original)).toFixed(2);
-    });
-
-  });
-
-}
-</script> 
-
-<div class="test">
-  <div class="form-container">
-    <form id="login-form">
-      <h2>Login</h2>
-      <label for="username">username</label>
-      <input type="text" name="username" id="username" value="test">
-  
-      <label for="password">password</label>
-      <input type="password" name="password" id="password" value="123456">
-    </form>
-  
-    <input type="submit" value="Login" form="login-form" id="submit">
-  </div>
-</div>
-
-<script>
-  const carService = {
-  isItExpensive(issue) {
-    if (issue === "Engine" || issue === "Transmission") {
-      return `The issue with the car is more severe and it will cost more money`;
-    } else {
-      return `The overall price will be a bit cheaper`;
-    }
-  },
-  discount(numberOfParts, totalPrice) {
-    if (typeof numberOfParts !== "number" || typeof totalPrice !== "number") {
-      throw new Error("Invalid input");
-    }
-    let discountPercentage = 0;
-    if (numberOfParts > 2 && numberOfParts <= 7) {
-      discountPercentage = 15;
-    } else if (numberOfParts > 7) {
-      discountPercentage = 30;
-    }
-    let result = (discountPercentage / 100) * totalPrice;
-
-    if (numberOfParts <= 2) {
-      return "You cannot apply a discount";
-    } else {
-      return `Discount applied! You saved ${result}$`;
-    }
-  },
-  partsToBuy(partsCatalog, neededParts) {
-    let totalSum = 0;
-    if (!Array.isArray(partsCatalog) || !Array.isArray(neededParts)) {
-      throw new Error("Invalid input");
-    }
-    neededParts.forEach((neededPart) => {
-      partsCatalog.map((obj) => {
-        if (obj.part === neededPart) {
-          totalSum += obj.price;
-        }
-      });
-    });
-    return totalSum;
-  },
-};
-</script>
-<script>
-  describe("Tests car service", () => {
-  describe("isItExpensive", () => {
-    it("should sth", () => {
-      assert.equal(
-        carService.isItExpensive("Engine"),
-        "The issue with the car is more severe and it will cost more money"
-      );
-      assert.equal(
-        carService.isItExpensive("Transmission"),
-        "The issue with the car is more severe and it will cost more money"
-      );
-    });
-    it("should sth", () => {
-      assert.equal(
-        carService.isItExpensive("Test"),
-        "The overall price will be a bit cheaper"
-      );
-    });
-  });
-  describe("discount", () => {
-    it("should sth", () => {
-      assert.equal(carService.discount(1, 100), "You cannot apply a discount");
-      assert.equal(carService.discount(2, 100), "You cannot apply a discount");
-      assert.equal(
-        carService.discount(3, 100),
-        `Discount applied! You saved 15$`
-      );
-      assert.equal(
-        carService.discount(7, 100),
-        `Discount applied! You saved 15$`
-      );
-      assert.equal(
-        carService.discount(8, 100),
-        `Discount applied! You saved 30$`
-      );
-      assert.equal(
-        carService.discount(10, 100),
-        `Discount applied! You saved 30$`
-      );
-    });
-    it("should sth", () => {
-      assert.throw(() => carService.discount("test", 100), "Invalid input");
-      assert.throw(() => carService.discount(20, "test"), "Invalid input");
-    });
-  });
-  describe("partsToBuy", () => {
-    it("should", () => {
-      assert.throw(
-        () => carService.partsToBuy("test", ["asdfa", "asdfafda"]),
-        "Invalid input"
-      );
-      assert.throw(() => carService.partsToBuy(["test"], 1), "Invalid input");
-    });
-    it("should", () => {
-      assert.equal(
-        carService.partsToBuy(
-          [
-            { part: "blowoff valve", price: 145 },
-            { part: "coil springs", price: 230 },
-          ],
-          ["blowoff valve", "injectors"]
-        ),
-        145
-      );
-      assert.equal(
-        carService.partsToBuy([], ["blowoff valve", "injectors"]),
-        0
-      );
-    });
-  });
-});
-</script>
-<script>
-    // 03. Largest Number
-    function findLargestNumber(n1, n2, n3) {
-    let largest = n1;
-
-    if (n2 > largest) {
-      largest = n2;
-    }
-    if (n3 > largest) {
-      largest = n3;
-    }
-    console.log(`The largest number is ${largest}.`);
-  }
-  // findLargestNumber(5, -3, 16);
-  // findLargestNumber(-3, -5, -22.5);
-</script>
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
