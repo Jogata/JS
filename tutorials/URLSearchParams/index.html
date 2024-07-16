@@ -24,9 +24,11 @@
 body {
   position: relative;
   min-height: 100vh;
+  padding-top: 10rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   color: #cdd4fd;
   font-family: "Montserrat", sans-serif;
   background-color: #2d3250;
@@ -112,6 +114,13 @@ button {
 
 button:hover {
   box-shadow: 0 0 1rem #f6b17a;
+}
+
+header {
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 10rem;
+  text-align: center;
 }
 </style>
   </head>
@@ -276,7 +285,146 @@ CLOSE_BTN.addEventListener("click", () => {
         return `${findBook.bookName} has been successfully paid.`;
       }
     }
+
+    removeBook(bookName) {
+        const findBook = this.books.find(b => b.bookName == bookName);
+
+        if (!findBook) {
+          throw new Error("The book, you're looking for, is not found.");
+        };
+
+        if (!findBook.payed) {
+          throw new Error(`${bookName} need to be paid before removing from the collection.`);
+        } else {
+          const index = this.books.indexOf(findBook);
+
+          this.books.splice(index, 1);
+
+          return `${bookName} remove from the collection.`
+
+        }
+    }
+
+    getStatistics(bookAuthor) {
+      if (!bookAuthor) {
+        let sortedBook = this.books.sort((a, b) => a.bookName.localeCompare(b.bookName));
+        let result = [];
+
+        result.push(`The book collection has ${this.capacity - this.books.length} empty spots left.`);
+
+        sortedBook.map((b) => {
+          let paid = b.payed ? 'Has Paid' : 'Not Paid';
+          result.push(`${b.bookName} == ${b.bookAuthor} - ${paid}.`);
+        });
+
+        return result.join('\n').trim();
+  
+      } else {
+        let findBook = this.books.find(b => b.bookAuthor == bookAuthor);
+        
+        if (findBook) {
+          let result = [];
+          let paid = findBook.payed ? 'Has Paid' : 'Not Paid';
+
+          result.push(`${findBook.bookName} == ${findBook.bookAuthor} - ${paid}.`);
+
+          return result.join('\n').trim();
+
+        } else {
+          throw new Error(`${bookAuthor} is not in the collection.`)
+        }
+      }
+    }
 }
+</script>
+<script>
+  const flowerShop = {
+    calcPriceOfFlowers(flower, price, quantity) {
+      if (typeof flower != 'string' || !Number.isInteger(price) || !Number.isInteger(quantity)) {
+          throw new Error('Invalid input!');
+      } else {
+          let result = price * quantity;
+          return `You need $${result.toFixed(2)} to buy ${flower}!`;
+      }
+    },
+
+    checkFlowersAvailable(flower, gardenArr) {
+      if (gardenArr.indexOf(flower) >= 0) {
+          return `The ${flower} are available!`;
+      } else {
+          return `The ${flower} are sold! You need to purchase more!`;
+      }
+    },
+
+    sellFlowers(gardenArr, space) {
+      let shop = [];
+      let i = 0;
+      
+      if (!Array.isArray(gardenArr) || !Number.isInteger(space) || space < 0 || space >= gardenArr.length) {
+        throw new Error('Invalid input!');
+      } else {
+        while (gardenArr.length > i) {
+          if (i != space) {
+              shop.push(gardenArr[i]);
+          }
+          
+          i++;
+          
+        }
+      }
+  
+      return shop.join(' / ');
+
+    }
+  }
+  
+</script>
+<script>
+  const { expect } = require('chai');
+const flowerShop = require('./flowerShop.js');
+
+describe('Flower Shop', () => {
+
+    describe('Test for calcPriceOfFlowers', () => {
+        it('Check for invalid parameters', () => {
+            expect(() => flowerShop.calcPriceOfFlowers('string', 'string', 'string').to.throw('Invalid input!'));
+            expect(() => flowerShop.calcPriceOfFlowers(3, 3, 3).to.throw('Invalid input!'));
+            expect(() => flowerShop.calcPriceOfFlowers(3, 'string', 3).to.throw('Invalid input!'));
+            expect(() => flowerShop.calcPriceOfFlowers(3, 3, 'string').to.throw('Invalid input!'));
+        });
+
+        it('Check valid parameters', () => {
+            expect(flowerShop.calcPriceOfFlowers('string', 3, 3)).to.equal(`You need $9.00 to buy string!`);
+            expect(flowerShop.calcPriceOfFlowers('string', 4, 3)).to.equal(`You need $12.00 to buy string!`);
+            expect(flowerShop.calcPriceOfFlowers('string', 0, 3)).to.equal(`You need $0.00 to buy string!`);
+
+        });
+    });
+
+    describe('Test for checkFlowersAvailable', () => {
+        it('Check valid parameters', () => {
+            expect(flowerShop.checkFlowersAvailable('Rose', ['Rose', 'Orch', 'Lily'])).to.equal(`The Rose are available!`);
+            expect(flowerShop.checkFlowersAvailable('Rose', ['Orch', 'Lily'])).to.equal(`The Rose are sold! You need to purchase more!`);
+        });
+    });
+
+    describe('Test for sellFlowers', () => {
+        it('Check for valid parameters', () => {
+            expect(() => flowerShop.sellFlowers('string', 'string').to.throw('Invalid input!'));
+            expect(() => flowerShop.sellFlowers(['Rose', 'Orch', 'Lily'], 'string').to.throw('Invalid input!'));
+            expect(() => flowerShop.sellFlowers('string', 2).to.throw('Invalid input!'));
+            expect(() => flowerShop.sellFlowers('string', ['Rose', 'Orch', 'Lily']).to.throw('Invalid input!'));
+            expect(() => flowerShop.sellFlowers(2, 2).to.throw('Invalid input!'));
+        });
+
+        it('Check for valid parameters', () => {
+            expect(flowerShop.sellFlowers(['Rose', 'Orch', 'Lily'], 0)).to.equal(`Orch / Lily`);
+            expect(flowerShop.sellFlowers(['Rose', 'Orch', 'Lily'], 1)).to.equal(`Rose / Lily`);
+            expect(flowerShop.sellFlowers(['Rose', 'Orch', 'Lily'], 2)).to.equal(`Rose / Orch`);
+
+        });
+    });
+});
 </script>
 
     <script src="./in-fetch-api.js"></script>
