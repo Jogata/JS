@@ -4,408 +4,139 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
-      body {
-        background-color: rgba(19, 35, 47, 0.9);
-        background-image: url("./images/background.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-      } 
-      *,
-      *:before,
-      *:after {
-        box-sizing: border-box;
-      } 
-      header {
-        text-align: center;
-      } 
-      header a {
-        color: #FFFFFF;
-        font-size: 24px;
-        /* text-decoration: none; */
-      }
-      h1{
-        /* margin-bottom: 15px; */
-        margin-bottom: 48px;
-        color: #25b7c4;
-        font-size: 50px;
-        font-weight: 400;
-        text-align: center;
-        text-transform: uppercase;
-        text-shadow: 2px 2px rgba(19, 35, 47, 0.3);
-      } 
-      section {
-        /* float: left; */
-        /* display: inline-table; */
-        display: inline-block;
-        width: 45%; 
-      } 
-      .form {
-        max-width: 400px;
-        margin-left: 150px;
-        padding: 20px;
-        /* border-radius: 4px; */
-        border-radius: 10px;
-        background-color: rgba(19, 35, 47, 0.9);
-        box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
-      } 
-      .tab-group {
-        list-style: none;
-        margin: 0 0 20px 0;
-        padding: 0;
-      } 
-      h2 {
-        margin: 0 0 20px;
-        color: #ffffff;
-        font-size: 32px;
-        font-weight: 100;
-        text-align: center;
-      } 
-      label {
-        position: absolute;
-        left: 13px;
-        transform: translateY(6px);
-        color: rgba(255, 255, 255, 0.5);
-        font-size: 18px; 
-      } 
-      input,
-      textarea {
-        display: block;
-        width: 100%;
-        height: 100%;
-        /* padding: 5px; */
-        padding: 9px 18px;
-        color: #ffffff;
-        font-size: 18px;
-        border-radius: 10px;
-        border: 1px solid #a0b3b0;
-        background: none;
-        background-image: none;
-      } 
-      input[type=number] {
-        -moz-appearance: textfield;
-        appearance: textfield;
-      } 
-      input::-webkit-outer-spin-button,
-      input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-      input:focus,
-      textarea:focus {
-        outline: 0;
-        border-color: #1ab188;
-      }
-      .fname, .lname, .email, .birth, .salary, .position {
-        position: relative;
-        margin-bottom: 40px;
-      }
-      .top-row:after {
-        display: table;
-        content: "";
-        clear: both;
-      }
-      .top-row > div {
-        float: left;
-        width: 48%;
-        margin-right: 4%;
-      }
-      .top-row > div:last-child {
-        margin: 0;
-      }
-      .button {
-        padding: 10px 0;
-        color: #FFFFFF;
-        font-size: 16px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        border-radius: 10px;
-        background-color: #1ab188;
-      }
-      .button-block {
-        display: block;
-        width: 100%;
-      }
-      table{
-        width: 100%;
-      }
-      .tbl-header {
-        box-shadow: 
-          rgba(0, 0, 0, 0.25) 0px 54px 55px, 
-          rgba(0, 0, 0, 0.12) 0px -12px 30px, 
-          rgba(0, 0, 0, 0.12) 0px 4px 6px, 
-          rgba(0, 0, 0, 0.17) 0px 12px 13px, 
-          rgba(0, 0, 0, 0.09) 0px -3px 5px;
-      }
-      .tbl-content{
-        height: auto;
-        margin-top: 0px;
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-        overflow-x: auto;
-      }
-      th{
-        padding: 20px;
-        color: #FFFFFF;
-        font-size: 16px;
-        font-weight: 1000;
-        text-align: center;
-        text-transform: uppercase;
-      }
-      td{
-        padding: 20px;
-        color: #FFFFFF;
-        font-size: 14px;
-        font-weight: 300;
-        text-align: center;
-        border-bottom: solid 1px rgba(255,255,255,0.1);
-        vertical-align: middle;
-      }
-      table{
-        font-family: 'Roboto', sans-serif;
-        border-radius: 10px;
-        background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-        background: linear-gradient(to right, #25c481, #25b7c4);
-      }
-      ::-webkit-scrollbar {
-        width: 6px;
-      } 
-      ::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-      } 
-      ::-webkit-scrollbar-thumb {
-        box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-      }
-      button {
-        display: inline-block;
-        margin-top: 10px;
-        padding: 0 1rem;
-        color: #FFFFFF;
-        font-size: 14px;
-        font-weight: 500;
-        font-family: -apple-system, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        text-align: center;
-        text-decoration: none;
-        white-space: nowrap;
-        line-height: 2.5;
-        outline: 0;
-        border: 0;
-        border-radius: 12px;
-        background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
-        transition: box-shadow .2s ease-in-out;
-        -webkit-user-select: none;
-        user-select: none;
-        touch-action: manipulation;
-        cursor: pointer;
-      }
-      button:hover {
-        box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.5), 
-        -0.125rem -0.125rem 1rem rgba(239, 71, 101, 0.5), 
-        0.125rem 0.125rem 1rem rgba(255, 154, 90, 0.5);
-      }
-      p {
-        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        font-size: 26px;
-        font-weight: 500;
-        font-style: italic;
-        text-align: center;
-      }      
-      .google-logo {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color:rgb(187,202,250);
-      } 
-      .Google {
-        width:120px;
-        height: 120px;
-        display: flex;
-        align-items: center;
-        justify-content:center;
-        font-size: 100px;
-        border-radius: 120px;
-        box-shadow: 10px 10px 15px rgba(0,0,0,0.3), 
-            -10px -10px 15px rgba(255,255,255,0.3);
-      } 
-      .G {
-        color:rgb(66,133,244);
-      } 
-      .o, .e {
-        color:rgb(219,68,55);
-      } 
-      .oo {
-        color:rgb(244,180,0);
-      } 
-      .l {
-        color:rgb(15,157,88);
-      } 
-    </style>
   </head>
   <body>
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+    <nav>
+      <div class="nav-logo">Flivan</div>
+      <ul class="nav-links">
+        <li class="link"><a href="#">Home</a></li>
+        <li class="link"><a href="#">About</a></li>
+        <li class="link"><a href="#">Offers</a></li>
+        <li class="link"><a href="#">Seats</a></li>
+        <li class="link"><a href="#">Destinations</a></li>
+      </ul> 
+      <button class="btn">Contact</button>
+    </nav>
 
-<header style="display: block;">
-  <h2>JS Advanced Regular Exam - 19 February 2022</h2>
+    <header class="section-container header-container">
+      <h1 class="section-header">Find And Book <br/> A Great Experience</h1>
+      <img src="./assets/images/header.jpg" alt="header"/>
+    </header>
+
+    <section class="section-container booking-container">
+
+      <div class="booking-nav">
+        <span>Economy Class</span>
+        <span>Business Class</span>
+        <span>First Class</span>
+      </div>  
+
+      <form>
+
+        <div class="form-group">
+          <span><i class="ri-map-pin-line"></i></span>
+          <div class="input-content">
+            <div class="input-group">
+              <input type="text"/>
+              <label>Location</label>
+            </div>  
+            <p>Where are you goung?</p>
+          </div>  
+        </div>  
+
+        <div class="form-group">
+          <span><i class="ri-user-3-line"></i></span>
+          <div class="input-content">
+            <div class="input-group">
+              <input type="number"/>
+              <label>Travellers</label>
+            </div>  
+            <p>Add guests</p>
+          </div>  
+        </div>  
+
+        <div class="form-group">
+          <span><i class="ri-calendar-line"></i></span>
+          <div class="input-content">
+            <div class="input-group">
+              <input type="text"/>
+              <label>Departure</label>
+            </div>  
+            <p>Add date</p>
+          </div>  
+        </div>  
+
+        <div class="form-group">
+          <span><i class="ri-calendar-line"></i></span>
+          <div class="input-content">
+            <div class="input-group">
+              <input type="text"/>
+              <label>Return</label>
+            </div>  
+            <p>Add date</p>
+          </div>  
+        </div>  
+
+        <button class="btn"><i class="ri-search-line"></i></button>
+
+      </form>
+    </section>  
+
+    <section class="section-container plan-container">
+
+      <p class="subheader">TRAVEL SUPPORT</p>
+      <h2 class="section-header">Plan your travel with confidence</h2>
+      <p class="description">
+        Find help with your bookings and travel plans, and seee what to expect
+        along your journey.
+      </p>
+
+      <div class="plan-grid">
+
+        <div class="plan-content">
+
+          <span class="number">01</span>
+          <h4>Travel Requirements for Dubai</h4>
+          <p>
+            Stay informed and prepared for your trip to Dubai with essential
+            travel requirements, ensuring a smooth and hassle-free experience in
+            this vibrant and captivating city.
+          </p>
+
+          <span class="number">02</span>
+          <h4>Multi-risk travel insurance</h4>
+          <p>
+            Comprehensive protection for your peace of mind, covering a range of
+            potential travel risks and unexpected situations.
+          </p>
+
+          <span class="number">03</span>
+          <h4>Travel Requirements by destinations</h4>
+          <p>
+            Stay informed and plan your trip with ease, as we provide up-to-date
+            information on travel requirements specific to your desired
+            destinations.
+          </p>
+        </div>  
+
+        <div class="plan-image">
+          <img src="./assets/images/plan-1.jpg" alt="plan"/>
+          <img src="./assets/images/plan-2.jpg" alt="plan"/>
+          <img src="./assets/images/plan-3.jpg" alt="plan"/>
+        </div>
+
+      </div>  
+    </section>  
+
+    <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+
+<header style="display: none;">
+  <h2>JS Advanced Regular Exam - 13 March 2022</h2>
   <a href="../../00exams/JS Advanced Regular Exam - 19 February 2022">Open folder</a>
 </header>
-    <h1>Work Process</h1>
-    <section id="hireForm">
-      <div class="form">
-        <div id="signup">
-          <h2>Hire people for work</h2>
-          <form>
-            <div class="top-row">
-              <div class="fname">
-                <label></label>
-                <input id="fname" type="text" placeholder="First Name">
-              </div>
-              <div class="lname">
-                <label></label>
-                <input id="lname" type="text" placeholder="Last Name">
-              </div>
-            </div>
-            <div class="email">
-              <label></label>
-              <input id="email" type="email" placeholder="Email">
-            </div>
-            <div class="birth">
-              <label></label>
-              <input id="birth" type="text" placeholder="Date of Birth">
-            </div>
-            <div class="position">
-              <label></label>
-              <input id="position" type="text" placeholder="Position">
-            </div>
-            <div class="salary">
-              <label></label>
-              <input id="salary" type="number" placeholder="Salary">
-            </div>
-            <button id="add-worker" type="submit" class="button button-block">Hire Worker</button>
-          </form>
-        </div>
-    </section>
-    <section id="table">
-      <div class="tbl-header">
-        <table>
-          <thead>
-            <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Email</th>
-              <th>Date of Birth</th>
-              <th>Position</th>
-              <th>Salary</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
-      <div class="tbl-content">
-        <table>
-          <tbody id="tbody">
-          </tbody>
-        </table>
-      </div>
-      <p id='message'>Your budget for salary must be: $<span id="sum">0.00</span></p>
-    </section>
-    <script>
-      function solve() {
-const fname = document.getElementById("fname");
-const lname = document.getElementById("lname");
-const email = document.getElementById("email");
-const birth = document.getElementById("birth");
-const position = document.getElementById("position");
-const salary = document.getElementById("salary");
-const tbody = document.getElementById("tbody");
-const addSalary = document.getElementById("sum");
-document.getElementById("add-worker").addEventListener("click", (ev) => {
-  if (
-    fname.value !== "" && 
-    lname.value !== "" && 
-    email.value !== "" && 
-    birth.value !== "" && 
-    position.value !== "" && 
-    salary.value !== ""
-    ) {
-    console.log("tyk")
-    addWorker(ev, fname.value, lname.value, email.value, birth.value, position.value, salary.value);
-    clearInputFileds();
-  } 
-}); 
-function addWorker(ev, fname, lname, email, birth, position, salary) {
-  ev.preventDefault();
-  const tr = e("tr");
-  e("td", `${fname}`, tr);
-  e("td", `${lname}`, tr);
-  e("td", `${email}`, tr);
-  e("td", `${birth}`, tr);
-  e("td", `${position}`, tr);
-  e("td", `${salary}`, tr);
-  const td = e("td", "", tr);
-  let firedBtn = e("button", "Fired", td);
-  firedBtn.setAttribute("class", "fired");
-  let editBtn = e("button", "Edit", td);
-  editBtn.setAttribute("class", "edit")
-  tbody.appendChild(tr);
-  const currentSalary = Number(addSalary.textContent);
-  addSalary.textContent = (Number(salary) + currentSalary).toFixed(2);
-  editBtn.addEventListener("click", (ev) => editWorker(ev, fname, lname, email, birth, position, salary));
-  firedBtn.addEventListener("click", (ev) => firedWorker(ev, salary));
-} 
-function firedWorker(ev, salary) {
-  ev.preventDefault();
-  ev.target.parentNode.parentNode.remove();
-  reduceSalary(salary);
-} 
-function editWorker(ev, _fname, _lname, _email, _birth, _position, _salary) {
-  ev.preventDefault();
-  ev.target.parentNode.parentNode.remove();
-  fname.value = _fname;
-  lname.value = _lname;
-  email.value = _email;
-  birth.value = _birth;
-  position.value = _position;
-  salary.value = _salary;
-  reduceSalary(_salary);
-} 
-function reduceSalary(salary) {
-  const currentSalary = Number(addSalary.textContent);
-  addSalary.textContent = Math.abs((Number(salary) - currentSalary)).toFixed(2);
-} 
-function clearInputFileds() {
-  fname.value = "";
-  lname.value = "";
-  email.value = "";
-  birth.value = "";
-  position.value = "";
-  salary.value = "";
-} 
-function e(type, content, parent) {
-  const element = document.createElement(type);
-  element.textContent = content;
-  if (parent) {
-    parent.appendChild(element);
-  } 
-  return element;
-} 
-} 
-solve();
-    </script>
 
-    <h1>Google logo neumorphism</h1>
-    <div class="google-logo">
-      <div class="Google G">G</div>
-      <div class="Google o">o</div>
-      <div class="Google oo">o</div>
-      <div class="Google g">g</div>
-      <div class="Google l">l</div>
-      <div class="Google e">e</div>
-    </div>
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
       // Create Query String as String
