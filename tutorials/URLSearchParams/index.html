@@ -6,167 +6,139 @@
     <title>URLSearchParams in JS</title>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">  
-    <style> 
-*,
-*::before,
-*::after {
-  margin: 0;    
-  padding: 0;   
-  box-sizing: border-box;   
-}   
-body {
-  min-height: 100vh;    
-  padding: 5rem 0;    
-  display: flex;    
-  align-items: center;    
-  justify-content: center;    
-  color: #282828;   
-  font-family: "Montserrat", sans-serif;    
-  background-color: #282828;    
-}   
-.stats-container {
-  width: 90%;   
-  max-width: 200px;   
-  padding: 1.5rem 0.8rem;   
-  border-radius: 0.25rem;   
-  background-color: #f00;    
-  box-shadow: 0 0 1rem #f00;   
-}   
-.stats-container .stats {
-  position: relative;   
-  height: 150px;    
-  margin-top: 0.8rem;   
-  padding: 1.5rem 2rem;   
-  display: flex;    
-  gap: 0.25rem;   
-  align-items: center;    
-  justify-content: center;    
-  flex-direction: column;   
-  border-radius: 0.25rem;   
-  background-color: #fff;   
-  /* transition: 0.5s; */
-  transition: color 500ms, 
-  background-color 500ms, 
-      text-shadow 500ms, 
-        transform 500ms;
-  cursor: pointer;    
-}   
-.stats-container .stats:hover {
-  color: #f00;   
-  background-color: #282828;    
-  text-shadow: 0 0 1rem #f00;    
-  transform: scale(1.05);   
-}   
-.title {
-  position: absolute;   
-  visibility: hidden;   
-}   
-.stats-container .stats:hover .title {
-  position: relative;   
-  visibility: visible;    
-}   
-.stats-container .stats:hover .num {
-  position: absolute;       
-  visibility: hidden;       
-}   
-h3 {  
-  margin-bottom: 1.2rem;    
-  color: #fff;        
-  font-size: 1rem;        
-  text-align: center;       
-  text-transform: uppercase;    
-  letter-spacing: 1px;    
-}   
-h3 span {
-  display: block;   
-}
-.num {
-  font-size: 1.2rem;        
-  font-weight: 700;   
-} 
-button {
-  width: 100%;    
-  margin-top: 0.8rem;   
-  padding: 0.5rem;    
-  display: flex;        
-  align-items: center;        
-  justify-content: center;    
-  color: #282828;   
-  font-size: 1rem;    
-  border: none;       
-  border-radius: 0.25rem;   
-  background-color: #fff;   
-  /* transition: 0.5s */
-  transition: color 500ms, 
-    background-color 500ms;
-  cursor: pointer;        
-}   
-button:hover {
-  color: #fff;    
-  background-color: transparent;    
-}   
-    </style>  
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Kalnia:wght@400;500;600;700&family=Roboto:wght@300;400;500&display=swap");
+      :root {
+        --color-primary: #030a0f;
+        --color-sec: #fbd784;
+      }
+      * {
+        padding: 0px;
+        margin: 0px;
+        box-sizing: border-box;
+      }
+      html {
+        font-size: 10px;
+      }
+      body {
+        min-height: 100vh;
+        font-size: 1.6rem;
+        font-family: "Roboto", sans-serif;
+        background-color: var(--color-primary);
+      }
+      
+    </style>
   </head>
   <body>
-    <section class="stats-container">
-      <h3>YouTube <span>Stats</span></h3>
-      <div class="stats">
-        <svg xmlns="http://www.w3.org/2000/svg" 
-          class="icon icon-tabler icon-tabler-users" 
-          width="40" height="40" viewBox="0 0 24 24" 
-          stroke-width="1.5" stroke="currentColor" fill="none" 
-          stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/>
-            <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"/>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-            <path d="M21 21v-2a4 4 0 0 0 -3 -3.85"/>
-          </svg>
-        <p class="num">546</p>
-        <p class="title">Subscribers</p>
-      </div>      
-      <div class="stats">
-        <svg xmlns="http://www.w3.org/2000/svg" 
-          class="icon icon-tabler icon-tabler-video" 
-          width="40" height="40" viewBox="0 0 24 24" 
-          stroke-width="1.5" stroke="currentColor" fill="none" 
-          stroke-linecap="round" stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z"/>
-            <path d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z"/>
-          </svg>
-        <p class="num">45</p>
-        <p class="title">Videos</p>
-      </div>    
-      <div class="stats">
-        <svg xmlns="http://www.w3.org/2000/svg" 
-          class="icon icon-tabler icon-tabler-eye" 
-            width="40" height="40" viewBox="0 0 24 24" 
-            stroke-width="1.5" stroke="currentColor" fill="none" 
-            stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-              <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/>
-              <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"/>
-            </svg>
-        <p class="num">10940</p>
-        <p class="title">Views</p>
-      </div>    
-      <button>    
-        <svg xmlns="http://www.w3.org/2000/svg" 
-          class="icon icon-tabler icon-tabler-brand-youtube-filled" 
-            width="35" height="35" viewBox="0 0 24 24" 
-            stroke-width="1.5" stroke="currentColor" fill="none" 
-            stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-              <path d="M18 3a5 5 0 0 1 5 5v8a5 5 0 0 1 -5 5h-12a5 5 0 0 1 -5 -5v-8a5 5 0 0 1 5 -5zm-9 6v6a1 1 0 0 0 1.514 .857l5 -3a1 1 0 0 0 0 -1.714l-5 -3a1 1 0 0 0 -1.514 .857z" stroke-width="0" fill="currentColor"/>
-            </svg>
-      </button>   
-    </section>    
-  
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+    <header class="header">
+      <nav class="nav">
+        <div class="container nav-container">
+          <a href="#" class="logo">MNTN</a>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="#" class="nav-link">Equipments</a>
+            </li>
+            <li class="nav-item"><a href="#" class="nav-link">About Us</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
+          </ul>
+          <div class="user">
+            <img src="./images/user.png" alt="" class="nav-user" />
+            <p class="nav-user-name">Account Name</p>
+          </div>
+        </div>
+      </nav>
+      <div class="container">
+        <div class="header-content">
+          <div class="header-wrapper">
+            <p class="header-title-2">&mdash; A HIKING GUIDE</p>
+            <h1 class="header-main-title">
+              Be prepared for the<br />
+              Mountains and beyond!
+            </h1>
+            <a href="#" class="header-CTA">
+              Scroll Down
+              <img
+                src="./images/arrow-downward-24px.png"
+                alt=""
+                class="CTA-icon"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section>
+      <div class="container blogs-container">
+        <div class="blog">
+          <div class="blog-content">
+            <h1 class="blog-number">01</h1>
+            <div class="blog-details">
+              <p class="blog-title-2">&mdash;GET STARTED</p>
+              <h1 class="blog-title">What level of hiker are you?</h1>
+              <p class="blog-text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi
+                aspernatur nam dolore laudantium officiis voluptates sunt
+                numquam. Eius deserunt rem, quibusdam, consectetur omnis
+                molestias, quas fuga ducimus quasi quaerat aliquam.
+              </p>
+              <a href="#" class="blog-cta">
+                read more
+                <img src="./images/arrow.png" alt="" class="blog-cta-icon"/>
+              </a>
+            </div>
+          </div>
+          <div class="blog-image">
+            <img src="./images/01.png" alt="" class="blog-img" />
+          </div>
+        </div>
+        <div class="blog blog-2">
+          <div class="blog-image">
+            <img src="./images/02.png" alt="" class="blog-img" />
+          </div>
+          <div class="blog-content">
+            <h1 class="blog-number">02</h1>
+            <div class="blog-details">
+              <p class="blog-title-2">&mdash;GET STARTED</p>
+              <h1 class="blog-title">What level of hiker are you?</h1>
+              <p class="blog-text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi
+                aspernatur nam dolore laudantium officiis voluptates sunt
+                numquam. Eius deserunt rem, quibusdam, consectetur omnis
+                molestias, quas fuga ducimus quasi quaerat aliquam.
+              </p>
+              <a href="#" class="blog-cta">
+                read more
+                <img src="./images/arrow.png" alt="" class="blog-cta-icon"/>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="blog blog-3">
+          <div class="blog-content">
+            <h1 class="blog-number">03</h1>
+            <div class="blog-details">
+              <p class="blog-title-2">&mdash;GET STARTED</p>
+              <h1 class="blog-title">What level of hiker are you?</h1>
+              <p class="blog-text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi
+                aspernatur nam dolore laudantium officiis voluptates sunt
+                numquam. Eius deserunt rem, quibusdam, consectetur omnis
+                molestias, quas fuga ducimus quasi quaerat aliquam.
+              </p>
+              <a href="#" class="blog-cta">
+                read more
+                <img src="./images/arrow.png" alt="" class="blog-cta-icon"/>
+              </a>
+            </div>
+          </div>
+          <div class="blog-image">
+            <img src="./images/03.png" alt="" class="blog-img" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
 <header style="display: none;">
   <h2>JS Advanced Regular Exam - 13 March 2022</h2>
