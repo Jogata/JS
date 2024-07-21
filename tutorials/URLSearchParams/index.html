@@ -3,154 +3,144 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URLSearchParams in JS</title>
+    <!-- <title>URLSearchParams in JS</title> -->
+    <title>Animated SignIn-SignUp</title>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>   
-        * {   
-          margin: 0;  
-          padding: 0; 
-          box-sizing: border-box; 
-        }   
-        #test-1 {   
-          /* display: none; */  
-          font-family: Georgia, serif;  
-          background-color: #050716;  
-        }   
-        .main {   
-          width: 100%;  
-          min-height: 100vh;  
-          padding: 5vh;    
-          display: flex;  
-          align-items: center;  
-          justify-content: center;  
-        }   
-        .container {    
-          /* height: 400px; */  
-          min-height: 90vh;  
-          display: flex;  
-          /* justify-content: start; */ 
-          /* flex-wrap: nowrap; */  
-        }   
-        input {   
-          display: none;  
-        }   
-        input:checked + label {   
-          /* width: 600px; */ 
-          width: 55vh;  
-          /* opacity: 1 !important; */  
-          /* transform: translateY(0) !important; */  
-        }   
-        .card {   
-          width: 100px; 
-          margin: 0 10px; 
-          display: flex;  
-          /* align-items: flex-end; */  
-          border-radius: 0.75rem; 
-          border-radius: 2rem;  
-          background-size: cover; 
-          box-shadow: 0px 10px 30px -5px rgba(243, 243, 242, 0.8);  
-          transition: 600ms cubic-bezier(0.28, -0.03, 0, 0.99); 
-          overflow: hidden; 
-          cursor: pointer;  
-        }   
-        .row {    
-          position: relative; 
-          color: #fff;  
-          display: flex;  
-          /* flex-wrap: nowrap; */  
-        }   
-        .row img {    
-          /* width: 100%; */  
-          /* height: 100%; */ 
-          object-fit: cover;  
-        }   
-        .icon {   
-          position: absolute; 
-          bottom: 0;  
-          width: 50px;  
-          height: 50px; 
-          margin: 15px; 
-          display: flex;  
-          align-items: center;  
-          justify-content: center;  
-          /* color: #fff; */  
-          border-radius: 50%; 
-          background-color: #223; 
-        }   
-        .bg-1 {   
-          background-image: url("./img/00test/sliders/4.jpeg"); 
-          background-position: bottom right;  
-        }   
-        .bg-2 {   
-          background-image: url("./img/00test/sliders/1.png");  
-          background-position: right; 
-        }   
-        .bg-3 {   
-          background-image: url("./img/00test/sliders/2.jpeg"); 
-          background-position: right; 
-        }   
-        .bg-4 {   
-          background-image: url("./img/00test/sliders/3.png");  
-          background-position: right; 
-        }   
-        header {    
-          min-height: 100vh;  
-          display: flex;  
-          align-items: center;  
-          justify-content: center;  
-          flex-direction: column; 
-        }   
-        h1 {  
-          font-size: 3rem;    
-          color: #fff;    
-          text-align: center;   
-        }   
-        img {   
-          width: 100%;    
-        }   
-    </style>    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+      :root {
+        --primary-color: #27b397;
+        --text-dark: #0f172a;
+        --text-light: #94a3b8;
+        --extra-light: #f8fafc;
+        --white: #fff;
+        --max-width: 1200px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        /* min-height: 100vh; */
+        font-family: "Poppins", sans-serif;
+      }
+
+      .container {
+        position: relative;
+        min-height: 100vh;
+        background-color: var(--white);
+        overflow: hidden;
+      }
+
+      .form-container {
+        position: absolute;
+        width: 60%;
+        height: 100%;
+        padding: 2rem;
+        transition: 0.6s ease-in-out;
+      }
+
+      .signup-container {
+        opacity: 0;
+        z-index: 1;
+      }
+
+      .signin-container {
+        z-index: 2;
+      }
+
+      form {
+        max-width: 400px;
+        height: 100%;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      form h1 {
+        color: var(--primary-color);
+        font-size: 2.5rem;
+      }        
+    </style>
   </head>
   <body>
-    <div id="test-1">
-      <!-- <h1>Slider</h1> -->
-      <div class="main">
-        <div class="container">
-          <input type="radio" name="slider" id="c1" checked>
-          <label for="c1" class="card bg-1">
-            <div class="row">
-              <img src="./img/00test/sliders/1.png" alt="">
-              <div class="icon">1</div>
-            </div>  
-          </label>  
-          <input type="radio" name="slider" id="c2" checked>
-          <label for="c2" class="card bg-2">
-            <div class="row">
-              <img src="./img/00test/sliders/2.png" alt="">
-              <div class="icon">2</div>
-            </div>  
-          </label>  
-          <input type="radio" name="slider" id="c3" checked>
-          <label for="c3" class="card bg-3">
-            <div class="row">
-              <img src="./img/00test/sliders/3.png" alt="">
-              <div class="icon">3</div>
-            </div>  
-          </label>  
-          <input type="radio" name="slider" id="c4" checked>
-          <label for="c4" class="card bg-4">
-            <div class="row">
-              <img src="./img/00test/sliders/4.jpeg" alt="">
-              <div class="icon">4</div>
-            </div>  
-          </label>  
-        </div>  
-      </div>  
-    </div>  
+    <div class="container" id="container">
+      <div class="form-container signup-container">
+
+        <form>
+          <h1>Create Account</h1>
+          <div class="socials">
+            <a href="#"><i class="ri-facebook-fill"></i></a>
+            <a href="#"><i class="ri-google-fill"></i></a>
+            <a href="#"><i class="ri-linkedin-fill"></i></a>
+          </div>
+          <span>or use your email for registration</span>
+          <div class="form-group">
+            <input type="text" placeholder="Name"/>
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Email"/>
+          </div>
+          <div class="form-group">
+            <input type="password" placeholder="Password"/>
+          </div>
+          <button>SIGN UP</button>
+        </form>
+
+      </div>
+
+      <div class="form-container signin-container">
+
+        <form>
+          <h1>Sign in</h1>
+          <div class="socials">
+            <a href="#"><i class="fa fa-facebook"></i></a>
+            <a href="#"><i class="fa fa-google"></i></a>
+            <a href="#"><i class="fa fa-linkedin"></i></a>
+          </div>
+          <span>or use your account</span>
+          <div class="form-group">
+            <input type="email" placeholder="Email" />
+          </div>
+          <div class="form-group">
+            <input type="password" placeholder="Password" />
+          </div>
+          <a href="#" class="forgot-password">Forgot your password?</a>
+          <button>SIGN IN</button>
+        </form>
+
+      </div>
+
+      <div class="overlay-container" id="overlayContainer">
+        <div class="overlay-wrapper">
+          <div class="overlay-panel overlay-panel-left">
+            <h1>Welcome Back!</h1>
+            <p>
+              To keep connected with us please login with your personal info
+            </p>
+            <button>SIGN IN</button>
+          </div>
+          <div class="overlay-panel overlay-panel-right">
+            <h1>Hello, Friend!</h1>
+            <p>Enter your personal details and start journey with us</p>
+            <button>SIGN UP</button>
+          </div>
+        </div>
+        <button id="overlayBtn"></button>
+      </div>
+
+    </div>
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
-<header style="display: flex;">
+<header style="display: none;">
   <h2>JS Advanced Regular Exam - 13 March 2022</h2>
   <a href="../../00exams/JS Advanced Regular Exam - 19 February 2022">Open folder</a>
 </header>
