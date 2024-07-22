@@ -16,7 +16,8 @@
         --text-light: #94a3b8;
         --extra-light: #f8fafc;
         --white: #fff;
-        --max-width: 1200px;
+        /* --max-width: 1200px; */
+        --max-width: 75rem;
       }
 
       * {
@@ -55,7 +56,8 @@
       }
 
       form {
-        max-width: 400px;
+        /* max-width: 400px; */
+        max-width: 25rem;
         height: 100%;
         margin: auto;
         display: flex;
@@ -184,7 +186,8 @@
       } 
       
       .overlay-panel p {
-        max-width: 350px;
+        /* max-width: 350px; */
+        max-width: 21.9rem;
         margin: 0 auto;
         line-height: 2rem;
       } 
@@ -198,6 +201,76 @@
         border: none;
         border-radius: 2rem;
         background-color: transparent;
+      } 
+
+      #overlayBtn {
+        position: absolute; 
+        left: 50%;
+        top: 443px;
+        transform: translateX(-50%);
+        width: 10rem;
+        height: 3rem;
+        border-radius: 2rem;
+        border: 1px solid var(--white);
+        background-color: transparent;
+        cursor: pointer;  
+      } 
+
+      .right-panel-active .overlay-container {
+        transform: translateX(-150%);
+      } 
+
+      .right-panel-active .overlay-wrapper {
+        transform: translateX(50%);
+      } 
+
+      .right-panel-active .overlay-panel-left {
+        transform: translateX(25%);
+      } 
+
+      .right-panel-active .overlay-panel-right {
+        transform: translateX(35%);
+      } 
+
+      .right-panel-active .signin-container {
+        transform: translateX(20%);
+        opacity: 0;
+      } 
+
+      .right-panel-active .signup-container {
+        transform: translateX(65%);
+        animation: show 0.6s;
+        opacity: 1;
+        z-index: 5;
+      } 
+
+      @keyframes show {
+        0%,
+        50% {
+          opacity: 0; 
+          z-index: 1; 
+        } 
+        51%,
+        100% {
+          opacity: 1; 
+          z-index: 5; 
+        } 
+      } 
+
+      .scale-btn-animation {
+        animation: scale-animation 0.6s;
+      } 
+
+      @keyframes scale-animation {
+        0% {
+          width: 10rem;
+        } 
+        50% {
+          width: 20rem;
+        } 
+        100% {
+          width: 10rem;
+        } 
       } 
     </style>
   </head>
@@ -268,6 +341,63 @@
       </div>
 
     </div>
+
+    <script>
+      const container = document.getElementById("container");
+      const overlayBtn = document.getElementById("overlayBtn");
+
+      overlayBtn.addEventListener("click", () => {
+        container.classList.toggle("right-panel-active");
+
+        overlayBtn.classList.remove("scale-btn-animation");
+        window.requestAnimationFrame(() => {
+          overlayBtn.classList.add("scale-btn-animation");
+        });
+      });
+    </script>
+
+    <main>
+      <section class="form-container">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
+        <p class="welcome">
+          Hi!
+          <br>
+          <br>
+          One of our consultants will assist you as soon as they can!
+        </p>
+        <form class="chat-form">
+          <label for="name">Name</label>
+          <input type="text" name="name" id="name" placeholder="Enter your name">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" placeholder="Enter your email">
+          <label for="phone-number">Phone Number (optional)</label>
+          <input type="text" name="phone-number" id="phone-number" placeholder="Enter your phone number">
+          <label for="message">Message</label>
+          <textarea name="message" id="message"></textarea>
+          <button type="submit">Start chat</button>
+        </form>
+      </section>
+      <div class="sub-sections-container">
+        <section class="safety">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shield-check" width="80" height="80" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06" /><path d="M15 19l2 2l4 -4" /></svg>
+          <div class="safety-info">
+            <h3>Show others that you are safe</h3>
+            <p class="safety-description">
+              If you approve your profile with BankID, you are perceived as a safer person to trade with.
+            </p>
+            <button class="get-started">Get started</button>
+          </div>
+        </section>
+        <section class="subscribe">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail-opened" width="40" height="40" viewBox="0 0 24 24" stroke-width="0.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 9l9 6l9 -6l-9 -6l-9 6" /><path d="M21 9v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10" /><path d="M3 19l6 -6" /><path d="M15 13l6 6" /></svg>
+          <h2>Subscribe to the newsletter</h2>
+          <form class="sub-form">
+            <input type="email" name="sub-email" id="sub-email" placeholder="Enter email address">
+            <button type="submit">OK</button>
+          </form>
+        </section>
+      </div>
+    </main>
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
