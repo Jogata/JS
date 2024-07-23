@@ -3,672 +3,148 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>URLSearchParams in JS</title> -->
-    <title>Animated SignIn-SignUp</title>
+    <title>URLSearchParams in JS</title>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
-
-      :root {
-        --primary-color: #27b397;
-        --text-dark: #0f172a;
-        --text-light: #94a3b8;
-        --extra-light: #f8fafc;
-        --white: #fff;
-        /* --max-width: 1200px; */
-        --max-width: 75rem;
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        /* min-height: 100vh; */
-        font-family: "Poppins", sans-serif;
-      }
-
-      .container {
-        position: relative;
-        min-height: 100vh;
-        background-color: var(--white);
-        overflow: hidden;
-      }
-
-      .form-container {
-        position: absolute;
-        width: 60%;
-        height: 100%;
-        padding: 2rem;
-        transition: 0.6s ease-in-out;
-      }
-
-      .signup-container {
-        opacity: 0;
-        z-index: 1;
-      }
-
-      .signin-container {
-        z-index: 2;
-      }
-
-      form {
-        /* max-width: 400px; */
-        max-width: 25rem;
-        height: 100%;
-        margin: auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-      }
-
-      form h1 {
-        color: var(--primary-color);
-        font-size: 2.5rem;
-      }        
-
-      .socials {
-        margin: 2rem 0; 
-        display: flex;  
-        gap: 1rem;  
-        align-items: center;  
-      } 
-      
-      .socials a {
-        padding: 5px 12px;
-        color: var(--text-dark);
-        font-size: 1.5rem;
-        text-decoration: none;
-        border-radius: 50%;
-        border: 1px solid var(--text-light);
-      } 
-      .fa-facebook {
-        /* width: 24px; */
-        width: 1.5rem;
-      }
-      
-      form span {
-        margin-bottom: 1rem;
-        color: var(--text-light);
-        font-size: 0.9rem;
-      } 
-      
-      .form-group {
-        position: relative;
-        width: 100%;
-        margin: 0.5rem 0;
-      } 
-      
-      input { 
-        width: 100%;
-        padding: 0.75rem 1rem;
-        font-size: 1rem;
-        border: none;
-        outline: none;
-        border-bottom: 1px solid var(--primary-color);
-        background-color: var(--extra-light);
-      } 
-      
-      .forgot-password {
-        color: var(--text-light);
-        font-size: 0.9rem;
-        text-decoration: none;
-        border-bottom: 1px solid var(--text-light);
-      } 
-      
-      .form-container button {
-        margin-top: 2rem;
-        padding: 0.75rem 4rem;
-        color: var(--white);
-        font-size: 1rem;
-        border: none;
-        outline: none;
-        border-radius: 2rem;
-        background-color: var(--primary-color);
-        cursor: pointer;
-      } 
-      
-      /* Overlay Container */
-      
-      .overlay-container {
-        position: absolute;
-        top: 0;
-        left: 60%;
-        width: 40%;
-        height: 100%;
-        transition: transform 0.6s ease-in-out;
-        overflow: hidden;
-        z-index: 10;
-      } 
-      
-      .overlay-wrapper {
-        position: relative;
-        left: -150%;
-        width: 250%;
-        height: 100%;
-        color: var(--white);
-        background: url("assets/57-bg.png");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        transition: transform 0.6s ease-in-out;
-      }
-      
-      .overlay-panel {
-        position: absolute;
-        width: 40%;
-        height: 100%;
-        padding: 4rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        text-align: center;
-        transition: transform 0.6s ease-in-out;
-      }
-      
-      .overlay-panel-left {
-        right: 60%;
-        transform: translateX(-12%);
-      } 
-      
-      .overlay-panel-right {
-        right: 0;
-        transform: translateX(0);
-      }
-      
-      .overlay-panel h1 {
-        margin-bottom: 1rem;
-        font-size: 2.5rem;
-      } 
-      
-      .overlay-panel p {
-        /* max-width: 350px; */
-        max-width: 21.9rem;
-        margin: 0 auto;
-        line-height: 2rem;
-      } 
-      
-      .overlay-panel button {
-        margin-top: 2rem;
-        padding: 0.75rem 4rem;
-        color: var(--white);
-        font-size: 1rem;
-        outline: none;
-        border: none;
-        border-radius: 2rem;
-        background-color: transparent;
-      } 
-
-      #overlayBtn {
-        position: absolute; 
-        left: 50%;
-        top: 443px;
-        transform: translateX(-50%);
-        width: 10rem;
-        height: 3rem;
-        border-radius: 2rem;
-        border: 1px solid var(--white);
-        background-color: transparent;
-        cursor: pointer;  
-      } 
-
-      .right-panel-active .overlay-container {
-        transform: translateX(-150%);
-      } 
-
-      .right-panel-active .overlay-wrapper {
-        transform: translateX(50%);
-      } 
-
-      .right-panel-active .overlay-panel-left {
-        transform: translateX(25%);
-      } 
-
-      .right-panel-active .overlay-panel-right {
-        transform: translateX(35%);
-      } 
-
-      .right-panel-active .signin-container {
-        transform: translateX(20%);
-        opacity: 0;
-      } 
-
-      .right-panel-active .signup-container {
-        transform: translateX(65%);
-        animation: show 0.6s;
-        opacity: 1;
-        z-index: 5;
-      } 
-
-      @keyframes show {
-        0%,
-        50% {
-          opacity: 0; 
-          z-index: 1; 
-        } 
-        51%,
-        100% {
-          opacity: 1; 
-          z-index: 5; 
-        } 
-      } 
-
-      .scale-btn-animation {
-        animation: scale-animation 0.6s;
-      } 
-
-      @keyframes scale-animation {
-        0% {
-          width: 10rem;
-        } 
-        50% {
-          width: 20rem;
-        } 
-        100% {
-          width: 10rem;
-        } 
-      } 
-
-      .body {
-        min-height: 100vh;
-        padding: 5rem 0;
-        color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        font-family: Arial, Helvetica, sans-serif;
-        background-color: #171717;
-      } 
-
-      main {
-        width: 90%;
-        /* max-width: 650px; */
-        max-width: 40.625rem;
-        display: flex;
-        gap: 2rem;
-      } 
-
-      section {
-        padding: 2rem 1.5rem;
-        border-radius: 1rem;
-        background-color: #222;
-      } 
-
-      #shadow-host-companion {
-        display: none;
-      } 
-
-      .form-container {
-        position: relative;
-        width: 100%;
-        /* max-width: 250px; */
-        max-width: 15.625rem;
-      } 
-      
-      .icon-tabler-x {
-        position: absolute;
-        top: 1rem;
-        right: 1.5rem;
-        color: #c3ceff;
-        cursor: pointer;
-      } 
-
-      .welcome {
-        margin: 0.5rem 0 1rem 0;
-      } 
-
-      button {  
-        padding: 0.8rem;
-        font-size: 0.7rem;
-        border-radius: 0.25rem;
-        border: 1px solid transparent;
-        background-color: #5b73d9;
-        transition: 0.5s;
-        cursor: pointer;
-      } 
-
-      .chat-form button {
-        width: 100%;
-        margin-top: 0.5rem;
-        color: #fff;
-      } 
-
-      .chat-form button:hover,
-      .sub-form button:hover {
-        color: #5b73d9;
-        border-color: #5b73d9;
-        background-color: transparent;
-      } 
-      
-      input,    
-      textarea {    
-        width: 100%;  
-        padding: 0.5rem;
-        color: inherit;
-        outline: none;
-        border-radius: 0.25rem;
-        border: 1px solid #c3ceff48;
-        background-color: transparent;
-      } 
-
-      label { 
-        display: block;
-        margin: 1rem 0 0.25rem 0;
-        color: #c3ceff;
-        font-size: 0.8rem;
-      }   
-
-      textarea {
-        /* height: 80px; */
-        height: 5rem;
-        resize: none;
-      }   
-
-      p { 
-        font-size: 0.7rem;
-      }   
-
-      .sub-sections-container {
-        /* max-width: 350px; */
-        max-width: 21.875rem;
-      } 
-
-      .safety {
-        margin-bottom: 2rem;
-        padding: 1rem 1.5rem;
-        display: flex;
-        gap: 1rem;
-      } 
-
-      .icon-tabler-shield-check {
-        color: #5b73d9;
-      } 
-
-      h3 {  
-        margin-bottom: 0.5rem;
-        font-size: 0.9rem;
-      } 
-
-      .get-started {
-        width: 100px;
-        width: 100px;
-        margin-top: 0.5rem;
-        padding: 0.35rem;
-        border-radius: 0.5rem;
-        background-color: #fff;
-      } 
-      
-      .get-started:hover {
-        color: #fff;
-        background-color: #5b73d9;
-      } 
-
-      h2 {  
-        margin-bottom: 1rem;
-        font-size: 1rem;
-      } 
-
-      .sub-form {
-        display: flex;
-        gap: 0.25rem;
-        align-items: center;
-      } 
-
-      .sub-form button {
-        width: 50px;
-        padding: 0.6rem;
-        color: #fff;
-      } 
-
-      @media (max-width: 600px) {
-        main {  
-          align-items: center;
-          flex-direction: column;
-        } 
-      } 
-
-      .body-2 {        
-        height: 100vh;
-        margin: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: aliceblue;
-      } 
-
-      .search-bar-container {
-        position: relative;
-        width: 300px;
-        height: 50px;
-        margin: 10px;
-        padding: 5px;
-        display: flex;
-        align-items: center;
-        border-radius: 50px;
-        background-color: aliceblue;
-        box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.2),
-          -6px -6px 10px rgba(255, 255, 255, 0.7);
-        transition: width 1.5s;
-      } 
-      .magnifier {
-        position: absolute;
-        left: 20px;
-        width: 25px;
-        cursor: pointer;
-      } 
-
-      .mic-icon {
-        position: absolute;
-        right: 10px;
-        width: 30px;
-        transition: width 0.4s;
-        transition-delay: 1s;
-      } 
-
-      .input {
-        margin: 10px 50px;
-        width: 100%;
-        color: rgb(100, 100, 100);
-        border: none;
-        outline: none;
-        background-color: transparent;
-        transition: width 1s;
-        transition-delay: 0.5s;
-      } 
-
-      .active.search-bar-container {
-        width: 50px;
-      } 
-
-      .active .input {
-        width: 0;
-      } 
-
-      .active .mic-icon {
-        width: 0;
-      } 
-    </style>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   </head>
   <body>
-    <div class="body-2">
-      <div class="search-bar-container active">
-        <img
-          src="https://cdn4.iconfinder.com/data/icons/evil-icons-user-interface/64/magnifier-512.png"
-          alt="magnifier"
-          class="magnifier"
-        />
-        <input type="text" class="input" placeholder="Search ..." />
-        <img
-          src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-25-512.png"
-          alt="mic-icon"
-          class="mic-icon"
-        />
+    <nav>
+      <div class="nav-logo">WDM&Co</div>
+      <ul class="nav-links">
+        <li class="link"><a href="#">Home</a></li>
+        <li class="link"><a href="#">Book</a></li>
+        <li class="link"><a href="#">Blog</a></li>
+        <li class="link"><a href="#">Contact Us</a></li>
+      </ul>
+    </nav>
+    <header class="section-container header-container">
+      <div class="header-image-container">
+        <div class="header-content">
+          <h1>Enjoy Your Dream Vacation</h1>
+          <p>Book Hotels, Flights and stay packages at lowest price.</p>
+        </div>
+        <div class="booking-container">
+          <form>
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" />
+                <label>Location</label>
+              </div>
+              <p>Where are you going?</p>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" />
+                <label>Check In</label>
+              </div>
+              <p>Add date</p>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" />
+                <label>Check Out</label>
+              </div>
+              <p>Add date</p>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" />
+                <label>Guests</label>
+              </div>
+              <p>Add guests</p>
+            </div>
+          </form>
+          <button class="btn"><i class="ri-search-line"></i></button>
+        </div>
       </div>
-      <script>
-        const searchBarContainerEl = document.querySelector(".search-bar-container");
-        const magnifierEl = document.querySelector(".magnifier");
-        magnifierEl.addEventListener("click", () => {
-          searchBarContainerEl.classList.toggle("active");
-        });
-      </script>
-    </div>  
-
-    <div class="container" id="container">
-      <div class="form-container signup-container">
-
-        <form>
-          <h1>Create Account</h1>
-          <div class="socials">
-            <a href="#"><i class="ri-facebook-fill"></i></a>
-            <a href="#"><i class="ri-google-fill"></i></a>
-            <a href="#"><i class="ri-linkedin-fill"></i></a>
-          </div>
-          <span>or use your email for registration</span>
-          <div class="form-group">
-            <input type="text" placeholder="Name"/>
-          </div>
-          <div class="form-group">
-            <input type="email" placeholder="Email"/>
-          </div>
-          <div class="form-group">
-            <input type="password" placeholder="Password"/>
-          </div>
-          <button>SIGN UP</button>
-        </form>
-
-      </div>
-
-      <div class="form-container signin-container">
-
-        <form>
-          <h1>Sign in</h1>
-          <div class="socials">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-google"></i></a>
-            <a href="#"><i class="fa fa-linkedin"></i></a>
-          </div>
-          <span>or use your account</span>
-          <div class="form-group">
-            <input type="email" placeholder="Email" />
-          </div>
-          <div class="form-group">
-            <input type="password" placeholder="Password" />
-          </div>
-          <a href="#" class="forgot-password">Forgot your password?</a>
-          <button>SIGN IN</button>
-        </form>
-
-      </div>
-
-      <div class="overlay-container" id="overlayContainer">
-        <div class="overlay-wrapper">
-          <div class="overlay-panel overlay-panel-left">
-            <h1>Welcome Back!</h1>
-            <p>
-              To keep connected with us please login with your personal info
-            </p>
-            <button>SIGN IN</button>
-          </div>
-          <div class="overlay-panel overlay-panel-right">
-            <h1>Hello, Friend!</h1>
-            <p>Enter your personal details and start journey with us</p>
-            <button>SIGN UP</button>
+    </header>
+    <section class="section-container popular-container">
+      <h2 class="section-header">Popular Hotels</h2>
+      <div class="popular-grid">
+        <div class="popular-card">
+          <img src="assets/hotel-1.jpg" alt="popular hotel" />
+          <div class="popular-content">
+            <div class="popular-card-header">
+              <h4>The Plaza Hotel</h4>
+              <h4>$499</h4>
+            </div>
+            <p>New York City, USA</p>
           </div>
         </div>
-        <button id="overlayBtn"></button>
-      </div>
-
-    </div>
-
-    <script>
-      const container = document.getElementById("container");
-      const overlayBtn = document.getElementById("overlayBtn");
-
-      overlayBtn.addEventListener("click", () => {
-        container.classList.toggle("right-panel-active");
-
-        overlayBtn.classList.remove("scale-btn-animation");
-        window.requestAnimationFrame(() => {
-          overlayBtn.classList.add("scale-btn-animation");
-        });
-      });
-    </script>
-
-<div class="body">
-    <main>
-      <!-- <h1>Dark Theme Form</h1> -->
-      <section class="form-container">
-        <svg xmlns="http://www.w3.org/2000/svg" 
-          class="icon icon-tabler icon-tabler-x" 
-          width="20" height="20" viewBox="0 0 24 24" 
-          stroke-width="1.5" stroke="currentColor" fill="none" 
-          stroke-linecap="round" stroke-linejoin="round">
-          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-          <path d="M18 6l-12 12"/><path d="M6 6l12 12"/>
-        </svg>
-        <p class="welcome">
-          Hi!
-          <br>
-          <br>
-          One of our consultants will assist you as soon as they can!
-        </p>
-        <form class="chat-form">
-          <label for="name">Name</label>
-          <input type="text" name="name" id="name" placeholder="Enter your name">
-          <label for="email">Email</label>
-          <input type="email" name="email" id="email" placeholder="Enter your email">
-          <label for="phone-number">Phone Number (optional)</label>
-          <input type="text" name="phone-number" id="phone-number" placeholder="Enter your phone number">
-          <label for="message">Message</label>
-          <textarea name="message" id="message"></textarea>
-          <button type="submit">Start chat</button>
-        </form>
-      </section>
-      <div class="sub-sections-container">
-        <section class="safety">
-          <svg xmlns="http://www.w3.org/2000/svg" 
-            class="icon icon-tabler icon-tabler-shield-check" 
-            width="80" height="80" viewBox="0 0 24 24" 
-            stroke-width="1.5" stroke="currentColor" fill="none" 
-            stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-              <path d="M11.46 20.846a12 12 0 0 1 -7.96 -14.846a12 12 0 0 0 8.5 -3a12 12 0 0 0 8.5 3a12 12 0 0 1 -.09 7.06"/>
-              <path d="M15 19l2 2l4 -4" />
-            </svg>
-          <div class="safety-info">
-            <h3>Show others that you are safe</h3>
-            <p class="safety-description">
-              If you approve your profile with BankID, you are perceived as a safer person to trade with.
-            </p>
-            <button class="get-started">Get started</button>
+        <div class="popular-card">
+          <img src="assets/hotel-2.jpg" alt="popular hotel" />
+          <div class="popular-content">
+            <div class="popular-card-header">
+              <h4>Ritz Paris</h4>
+              <h4>$549</h4>
+            </div>
+            <p>Paris, France</p>
           </div>
-        </section>
-        <section class="subscribe">
-          <svg xmlns="http://www.w3.org/2000/svg" 
-            class="icon icon-tabler icon-tabler-mail-opened" 
-            width="40" height="40" viewBox="0 0 24 24" 
-            stroke-width="0.5" stroke="currentColor" fill="none" 
-            stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-              <path d="M3 9l9 6l9 -6l-9 -6l-9 6"/>
-              <path d="M21 9v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10"/>
-              <path d="M3 19l6 -6" /><path d="M15 13l6 6"/>
-            </svg>
-          <h2>Subscribe to the newsletter</h2>
-          <form class="sub-form">
-            <input type="email" name="sub-email" id="sub-email" placeholder="Enter email address">
-            <button type="submit">OK</button>
-          </form>
-        </section>
+        </div>
+        <div class="popular-card">
+          <img src="assets/hotel-3.jpg" alt="popular hotel" />
+          <div class="popular-content">
+            <div class="popular-card-header">
+              <h4>The Peninsula</h4>
+              <h4>$599</h4>
+            </div>
+            <p>Hong Kong</p>
+          </div>
+        </div>
+        <div class="popular-card">
+          <img src="assets/hotel-4.jpg" alt="popular hotel" />
+          <div class="popular-content">
+            <div class="popular-card-header">
+              <h4>Atlantis The Palm</h4>
+              <h4>$449</h4>
+            </div>
+            <p>Dubai, United Arab Emirates</p>
+          </div>
+        </div>
+        <div class="popular-card">
+          <img src="assets/hotel-5.jpg" alt="popular hotel" />
+          <div class="popular-content">
+            <div class="popular-card-header">
+              <h4>The Ritz-Carlton</h4>
+              <h4>$649</h4>
+            </div>
+            <p>Tokyo, Japan</p>
+          </div>
+        </div>
+        <div class="popular-card">
+          <img src="assets/hotel-6.jpg" alt="popular hotel" />
+          <div class="popular-content">
+            <div class="popular-card-header">
+              <h4>Marina Bay Sands</h4>
+              <h4>$549</h4>
+            </div>
+            <p>Singapore</p>
+          </div>
+        </div>
       </div>
-    </main>
-</div>
+    </section>
+    <section class="client">
+      <div class="section-container client-container">
+        <h2 class="section-header">What our client say</h2>
+        <div class="client-grid">
+          <div class="client-card">
+            <img src="assets/client-1.jpg" alt="client" />
+            <p>The booking process was seamless, and the confirmation was
+              instant. I highly recommend WDM&Co for hassle-free hotel bookings.</p>
+          </div>
+          <div class="client-card">
+            <img src="assets/client-2.jpg" alt="client" />
+            <p>The website provided detailed information about hotel, including
+              amenities, photos, which helped me make an informed decision.</p>
+          </div>
+          <div class="client-card">
+            <img src="assets/client-3.jpg" alt="client" />
+            <p>I was able to book a room within minutes, and the hotel exceeded
+              my expectations. I appreciate WDM&Co's efficiency and reliability.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
