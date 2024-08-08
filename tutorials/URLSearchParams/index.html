@@ -3,295 +3,150 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>URLSearchParams in JS</title> -->
-    <title>Gymnastic</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
+    <title>URLSearchParams in JS</title>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
-      @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Kaushan+Script&family=Playfair+Display&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Brawler:wght@400;700&family=Croissant+One&family=Ephesis&family=Gloock&family=Hurricane&family=Imbue:opsz,wght@10..100,100..900&family=Modak&family=Montez&family=Prosto+One&family=Rye&family=Shojumaru&family=Young+Serif&family=ZCOOL+XiaoWei&display=swap');
-      @import url("https://fonts.googleapis.com/css2?family=Lora:ital@0;1&family=Poppins:wght@400;500;600&display=swap");
-      
-      :root {
-        --primary-color: #334456;
-        --primary-color-dark: #141420;
-        --secondary-color: #ff97ba;
-        --white: #ffffff;
-      }
-      
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      
-      a {
-        text-decoration: none;
-      }
-      
-      body {
-        font-family: 'Abril Fatface', cursive;
-  font-family: 'Courgette', cursive;
-  font-family: 'Dancing Script', cursive;
-  font-family: 'Great Vibes', cursive;
-  font-family: 'Josefin Sans', sans-serif;
-  font-family: 'Limelight', cursive;
-  font-family: 'Lobster', cursive;
-  font-family: 'Montserrat', sans-serif;
-  font-family: 'Oleo Script Swash Caps', cursive;
-  font-family: 'Poppins', sans-serif;
-  font-family: 'Raleway', sans-serif;
-  font-family: 'Fraunces', serif;
-  font-family: 'Playfair Display', serif;
-  font-family: 'Lemon', cursive;
-  font-family: "Lora", serif;
-  font-family: "Croissant One", serif;
-  font-family: "Shojumaru", system-ui;
-  font-family: "Montez", cursive;
-  font-family: "Modak", system-ui;
-  font-family: "Prosto One", sans-serif;
-  font-family: "Young Serif", serif;
-  font-family: "ZCOOL XiaoWei", sans-serif;
-  font-family: "Brawler", serif;
-  font-family: "Gloock", serif;
-  font-family: "Ephesis", cursive;
-  font-family: "Platypi", serif;
-  font-family: "Patua One", serif;
-  font-family: "Rye", serif;
-  font-family: "Arizonia", cursive;
-  font-family: "Imbue", serif;  
-  font-family: 'Kaushan Script', cursive;
-  font-family: "Hurricane", cursive;
-  font-family: Georgia, serif;
-        background-color: var(--primary-color);
-        overflow-x: hidden;
-      }
-      
-      .header-container {
-        position: relative;
-        max-width: 1200px;
-        margin: auto;
-        padding: 1rem;
-      }
-      
-      nav {
-        padding: 1rem 0;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      
-      .nav-logo a {
-        color: var(--secondary-color);
-        font-size: 1.75rem;
-        font-weight: 700;
-      }
-      
-      .nav-links {
-        list-style: none;
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-      }
-      
-      .link a {
-        position: relative;
-        padding-bottom: 5px;
-        color: var(--primary-color-dark);
-        font-size: 1.2rem;
-        font-weight: 600;
-      }
-
-      .link a::after {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        content: "";
-        width: 0;
-        height: 2px;
-        background-color: var(--secondary-color);
-        transition: 0.3s;
-      }
-      
-      .link a:hover::after {
-        width: 100%;
-      }
-      
-      .header-content {
-        padding: 5rem 0;
-      }
-      
-      h1 {
-        color: var(--white);
-        font-size: 8rem;
-        font-weight: 700;
-      }
-      
-      h2 {
-        margin-bottom: 2rem;
-        color: var(--white);
-        font-size: 3.5rem;
-        font-weight: 700;
-      }
-      
-      .banner-1 {
-        max-width: 400px;
-        margin-left: 5rem;
-        padding: 2rem;
-        color: var(--primary-color-dark);
-        font-size: 1.5rem;
-        font-weight: 700;
-        background-color: var(--white);
-      }
-      
-      .btn {
-        display: inline-block;
-        padding: 1rem 3rem;
-        color: var(--white);
-        font-size: 2rem;
-        font-weight: 700;
-        font-family: inherit;
-        outline: none;
-        border: none;
-        background-color: var(--secondary-color);
-        cursor: pointer;
-      }
-      
-      .header-image {
-        position: absolute;
-        top: 0;
-        left: calc(50% - 5rem);
-        width: 100%;
-        height: 100%;
-        padding-top: 6rem;
-        background-color: var(--white);
-        overflow: hidden;
-        z-index: -1;
-      }
-      
-      .header-image img {
-        width: 100%;
-        max-width: 600px;
-        display: flex;
-      }
-      
-      .header-socials {
-        position: absolute;
-        right: 0;
-        top: 50%;
-        display: flex;
-        gap: 5px;
-        flex-direction: column;
-      }
-      
-      .header-socials span a {
-        color: var(--primary-color);
-        font-size: 2rem;
-        transition: 0.3s;
-      }
-      
-      .header-socials span:hover a {
-        color: var(--secondary-color);
-      }
-      
-      .types-container {
-        background-color: var(--primary-color-dark);
-      }
-      
-      .types-grid {
-        max-width: 1200px;
-        margin: auto;
-        padding: 2rem 1rem;
-        display: grid;
-        gap: 2rem;
-        grid-template-columns: repeat(3, 1fr);
-      }
-      
-      .types-card {
-        padding: 1rem;
-        display: flex;
-        gap: 1rem;
-        align-items: flex-start;
-      }
-      
-      .types-card h4 {
-        color: var(--white);
-        font-size: 3rem;
-      }
-      
-      .types-card p {
-        color: var(--white);
-        padding-bottom: 1rem;
-        border-bottom: 5px solid var(--primary-color);
-      }
-    </style>
   </head>
   <body>
-    <header class="header-container">
-
-      <nav>
-        <div class="nav-logo"><a href="#">Cult.Fit</a></div>
-        <ul class="nav-links">
-          <li class="link"><a href="#">Home</a></li>
-          <li class="link"><a href="#">Explore</a></li>
-          <li class="link"><a href="#">Pricing</a></li>
-          <li class="link"><a href="#">About Us</a></li>
-          <li class="link"><a href="#">Contact Us</a></li>
-        </ul>
-      </nav>
-
-      <div class="header-content">
-        <h1>Gymnastic</h1>
-        <h2>classes everywhere</h2>
-        <div class="banner-1">
-          Popular for promoting physical fitness and body coordination
-        </div>
-        <button class="btn">Start Now</button>
-      </div>
-      <div class="header-image">
-        <img src="assets/56-header.png" alt="header" />
-      </div>
-      <div class="header-socials">
-        <span>
-          <a href="#"><i class="ri-facebook-box-fill"></i></a>
-        </span>
-        <span>
-          <a href="#"><i class="ri-instagram-line"></i></a>
-        </span>
-        <span>
-          <a href="#"><i class="ri-twitter-fill"></i></a>
-        </span>
-      </div>
-    </header>
-    <section class="types-container">
-      <div class="types-grid">
-        <div class="types-card">
-          <h4>1.</h4>
-          <p>
-            Gymnastics is a full-body workout that improves strength,
-            flexibility, balance, and coordination.
-          </p>
-        </div>
-        <div class="types-card">
-          <h4>2.</h4>
-          <p>
-            Athletes must learn movements and techniques, which promote
-            cognitive development.
-          </p>
-        </div>
-        <div class="types-card">
-          <h4>3.</h4>
-          <p>
-            Gymnastics is often practiced in a group, encouraging social
-            interaction and teamwork.
-          </p>
-        </div>
-      </div>
-    </section>
-
+    <div class="page">
+      <nav> 
+      <a href="#" class="logo">Logo</a>
+      <ul class="nav-list">
+        <li><a href="./index.html" class="nav-link">main</a></li>
+        <li><a href="./skyrim.html" class="nav-link">home</a></li>
+        <li class="sub-nav">
+          <a href="./skyrim-overview.html" class="nav-link">info</a>
+          <ul>  
+            <li><a href="./skyrim-overview.html">overview</a></li>
+            <li><a href="./skyrim-overview.html">locations</a></li>
+            <li><a href="./skyrim-overview.html">equipment</a></li>
+            <li><a href="./skyrim-overview.html">races</a></li>
+            <li><a href="./skyrim-overview.html">skills</a></li>
+            <li><a href="./skyrim-overview.html">spells</a></li>
+            <li><a href="./skyrim-overview.html">overview</a></li>
+          </ul> 
+        </li> 
+        <li><a href="#" class="nav-link">contact</a></li>
+        <li><a href="./skyrim-auth.html" class="nav-link">login</a></li>
+        <li><a href="./skyrim-auth.html" class="nav-link">register</a></li>
+        <li><a href="#" class="nav-link">logout</a></li>
+      </ul> 
+      </nav>        
+      <main>  
+      <div class="test-2">
+        <div class="container-2">
+          <div class="panel active bg-1">
+            <h2>card 1</h2>
+          </div>  
+          <div class="panel bg-2">
+            <h2>card 2</h2>
+          </div>  
+          <div class="panel bg-3">
+            <h2>card 3</h2>
+          </div>  
+          <div class="panel bg-4">
+            <h2>card 4</h2>
+          </div>  
+          <div class="panel bg-5">
+            <h2>card 5</h2>
+          </div>  
+        </div>  
+        <script>
+          const panels = document.querySelectorAll(".panel");
+          panels.forEach(panel => {
+            panel.addEventListener("click", () => {
+              removeClass("active");
+              panel.classList.add("active");
+            })  
+          })  
+          function removeClass(className) {
+            panels.forEach(panel => {
+              panel.classList.remove(className);
+            })  
+          }   
+        </script> 
+      </div>        
+      <div class="test-3">
+        <div class="container-3">
+          <div class="slide-3">
+            <div class="item bg-1">
+              <div class="content-3">
+                <h2 class="name">title 1</h2>
+                <p class="details">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo corrupti, tempore soluta debitis at explicabo.
+                </p>  
+                <button>see more</button>
+              </div>  
+            </div>  
+            <div class="item bg-2">
+              <div class="content-3">
+                <h2 class="name">title 2</h2>
+                <p class="details">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo corrupti, tempore soluta debitis at explicabo.
+                </p>  
+                <button>see more</button>
+              </div>  
+            </div>  
+            <div class="item bg-3">
+              <div class="content-3">
+                <h2 class="name">title 3</h2>
+                <p class="details">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo corrupti, tempore soluta debitis at explicabo.
+                </p>  
+                <button>see more</button>
+              </div>  
+            </div>  
+            <div class="item bg-4">
+              <div class="content-3">
+                <h2 class="name">title 4</h2>
+                <p class="details">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo corrupti, tempore soluta debitis at explicabo.
+                </p>  
+                <button>see more</button>
+              </div>  
+            </div>  
+            <div class="item bg-5">
+              <div class="content-3">
+                <h2 class="name">title 5</h2>
+                <p class="details">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo corrupti, tempore soluta debitis at explicabo.
+                </p>  
+                <button>see more</button>
+              </div>  
+            </div>  
+            <div class="item bg-6">
+              <div class="content-3">
+                <h2 class="name">title 6</h2>
+                <p class="details">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo corrupti, tempore soluta debitis at explicabo.
+                </p>  
+                <button>see more</button>
+              </div>  
+            </div>  
+          </div>  
+          <div class="btns">
+            <button class="prev">
+              <i class="fa fa-angle-double-left"></i>
+            </button> 
+            <button class="next">
+              <i class="fa fa-angle-double-right"></i>
+            </button> 
+          </div>  
+        </div>  
+        <script>  
+          let next = document.querySelector(".next");
+          let prev = document.querySelector(".prev");
+          next.addEventListener("click", () => {
+            const items = document.querySelectorAll(".item");
+            document.querySelector(".slide-3").appendChild(items[0]);
+          })  
+          prev.addEventListener("click", () => {
+            const items = document.querySelectorAll(".item");
+            document.querySelector(".slide-3").prepend(items[items.length - 1]);
+          })  
+        </script> 
+      </div>  
+      
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
 <header style="display: none;">
