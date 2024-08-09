@@ -3,265 +3,142 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URLSearchParams in JS</title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>   
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }   
-  .test-3 {
-    /* display: none; */
-    background-color: #eaeaea;
-    overflow: hidden;
-  }   
-  .test-3 .container-3 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100vh;
-    background-color: #f5f5f5;
-    box-shadow: 0px 30px 50px #dbdbdb;
-  }   
-  .test-3 .slide-3 .item {
-    display: inline-block;
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-    width: 200px;
-    height: 300px;
-    border-radius: 20px;
-    background-position: 50% 50%;
-    background-size: cover;
-    box-shadow: 0px 30px 50px #505050;
-    transition: 500ms;
-  }   
-  .test-3 .slide-3 .item:nth-child(1), 
-  .test-3 .slide-3 .item:nth-child(2) {
-    top: 0;
-    left: 0;
-    transform: translate(0, 0);
-    width: 100%;
-    height: 100%;
-  }   
-  .test-3 .slide-3 .item:nth-child(3) {
-    left: 50%;
-  }   
-  .test-3 .slide-3 .item:nth-child(4) {
-    left: calc(50% + 220px);
-  }   
-  .test-3 .slide-3 .item:nth-child(5) {
-    left: calc(50% + 440px);
-  }   
-  .test-3 .slide-3 .item:nth-child(6) {
-    left: calc(50% + 660px);
-    opacity: 0;
-  }   
-  .test-3 .item .content-3 {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 100px;
-    transform: translate(0, -50%);
-    width: 300px;
-    color: #eee;
-    text-align: left;
-  }   
-  .test-3 .slide-3 .item:nth-child(2) .content-3 {
-    display: block;
-  }   
-  .test-3 .content-3 .name {
-    font-size: 80px;
-    font-weight: bold;
-    text-transform: uppercase;
-    animation: test 1s ease-in-out forwards;
-    opacity: 0;
-  }   
-  .test-3 .content-3 .details {
-    margin-top: 10px;
-    margin-bottom: 20px;
-    animation: test 1s ease-in-out 300ms forwards;
-    opacity: 0;
-  }   
-  .test-3 .content-3 button {
-    padding: 10px 20px;
-    border: none;
-    font-size: 16px;
-    font-family: inherit;
-    text-transform: capitalize;
-    animation: test 1s ease-in-out 600ms forwards;
-    opacity: 0;
-    cursor: pointer;
-  }   
-  @keyframes test {
-    from {
-      transform: translate(0, 100px);
-      filter: blur(33px);
-      opacity: 0;
-    }   
-    to {
-      transform: translate(0);
-      filter: blur(0);
-      opacity: 1;
-    }   
-  }   
-  .test-3 .btns {
-    position: absolute;
-    bottom: 20px;
-    width: 100%;
-    text-align: center;
-  }   
-  .test-3 .btns button {
-    width: 40px;
-    height: 35px;
-    margin: 0 5px;
-    border-radius: 8px;
-    border: 1px solid #000;
-    transition: 300ms;
-    cursor: pointer;
-  }   
-  .test-3 .btns button:hover {
-    color: #fff;  
-    background-color: #ababab;
-  }   
-  .bg-1 {
-    background-image: url("./img/00test/sliders/4.jpg");
-    /* background-position: bottom right; */
-  }   
-  .bg-2 {
-    background-image: url("./img/00test/sliders/1.png");
-    /* background-position: right; */
-  }   
-  .bg-3 {
-    background-image: url("./img/00test/sliders/2.jpg");
-    /* background-position: right; */
-  }   
-  .bg-4 {
-    background-image: url("./img/00test/sliders/3.png");
-    /* background-position: right; */
-  }   
-  .bg-5 {
-    background-image: url("./img/00test/sliders/5.png");
-    /* background-position: right; */
-  }   
-  .bg-6 {
-    background-image: url("./img/00test/sliders/6.png");
-    /* background-position: right; */
-  }   
-    </style>
+    <!-- <title>URLSearchParams in JS</title> -->
+    <title>Smart Space</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   </head>
   <body>
-    <div class="page">
-      <nav> 
-      <a href="#" class="logo">Logo</a>
-      <ul class="nav-list">
-        <li><a href="./index.html" class="nav-link">main</a></li>
-        <li><a href="./skyrim.html" class="nav-link">home</a></li>
-        <li class="sub-nav">
-          <a href="./skyrim-overview.html" class="nav-link">info</a>
-          <ul>  
-            <li><a href="./skyrim-overview.html">overview</a></li>
-            <li><a href="./skyrim-overview.html">locations</a></li>
-            <li><a href="./skyrim-overview.html">equipment</a></li>
-            <li><a href="./skyrim-overview.html">races</a></li>
-            <li><a href="./skyrim-overview.html">skills</a></li>
-            <li><a href="./skyrim-overview.html">spells</a></li>
-            <li><a href="./skyrim-overview.html">overview</a></li>
-          </ul> 
-        </li> 
-        <li><a href="#" class="nav-link">contact</a></li>
-        <li><a href="./skyrim-auth.html" class="nav-link">login</a></li>
-        <li><a href="./skyrim-auth.html" class="nav-link">register</a></li>
-        <li><a href="#" class="nav-link">logout</a></li>
-      </ul> 
-      </nav>        
-      <main>  
-      <div class="test-3">
-        <div class="container-3">
-          <div class="slide-3">
-            <div class="item bg-1">
-              <div class="content-3">
-                <h2 class="name">title 1</h2>
-                <p class="details">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo corrupti, tempore soluta debitis at explicabo.
-                </p>  
-                <button>see more</button>
-              </div>  
-            </div>  
-            <div class="item bg-2">
-              <div class="content-3">
-                <h2 class="name">title 2</h2>
-                <p class="details">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo corrupti, tempore soluta debitis at explicabo.
-                </p>  
-                <button>see more</button>
-              </div>  
-            </div>  
-            <div class="item bg-3">
-              <div class="content-3">
-                <h2 class="name">title 3</h2>
-                <p class="details">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo corrupti, tempore soluta debitis at explicabo.
-                </p>  
-                <button>see more</button>
-              </div>  
-            </div>  
-            <div class="item bg-4">
-              <div class="content-3">
-                <h2 class="name">title 4</h2>
-                <p class="details">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo corrupti, tempore soluta debitis at explicabo.
-                </p>  
-                <button>see more</button>
-              </div>  
-            </div>  
-            <div class="item bg-5">
-              <div class="content-3">
-                <h2 class="name">title 5</h2>
-                <p class="details">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo corrupti, tempore soluta debitis at explicabo.
-                </p>  
-                <button>see more</button>
-              </div>  
-            </div>  
-            <div class="item bg-6">
-              <div class="content-3">
-                <h2 class="name">title 6</h2>
-                <p class="details">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo corrupti, tempore soluta debitis at explicabo.
-                </p>  
-                <button>see more</button>
-              </div>  
-            </div>  
-          </div>  
-          <div class="btns">
-            <button class="prev">
-              <i class="fa fa-angle-double-left"></i>
-            </button> 
-            <button class="next">
-              <i class="fa fa-angle-double-right"></i>
-            </button> 
-          </div>  
-        </div>  
-        <script>  
-          let next = document.querySelector(".next");
-          let prev = document.querySelector(".prev");
-          next.addEventListener("click", () => {
-            const items = document.querySelectorAll(".item");
-            document.querySelector(".slide-3").appendChild(items[0]);
-          })  
-          prev.addEventListener("click", () => {
-            const items = document.querySelectorAll(".item");
-            document.querySelector(".slide-3").prepend(items[items.length - 1]);
-          })  
-        </script> 
-      </div>  
-      
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+    <header>
+      <nav>
+        <div class="nav-logo">
+          <a href="#">SmartSpace</a>
+        </div>
+        <ul class="nav-links">
+          <li class="link"><a href="#">Home</a></li>
+          <li class="link"><a href="#">About</a></li>
+          <li class="link"><a href="#">Services</a></li>
+          <li class="link"><a href="#">Portfolio</a></li>
+          <li class="link"><a href="#">Blog</a></li>
+          <li class="link"><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="section-container header-container">
+        <div class="header-content">
+          <h4>RESIDENTIAL & OFFICE SPACES</h4>
+          <h1>Smart Living Style For Smart People</h1>
+          <p>
+            This lifestyle encompasses the integration of smart devices,
+            automation, and data-driven solutions into various aspects of daily
+            life, including homes, transportation, energy consumption, and
+            healthcare.
+          </p>
+          <form>
+            <input type="text" placeholder="Enter Zipcode to search property" />
+            <button class="btn">Send Now</button>
+          </form>
+        </div>
+        <div class="header-image">
+          <img src="assets/header.jpg" alt="header" />
+          <div class="header-socials">
+            <a href="#"><i class="ri-facebook-fill"></i></a>
+            <a href="#"><i class="ri-twitter-fill"></i></a>
+            <a href="#"><i class="ri-instagram-line"></i></a>
+            <a href="#"><i class="ri-youtube-fill"></i></a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section class="section-container work-container">
+      <h2 class="section-header">How It Works?</h2>
+      <div class="work-grid">
+        <div class="work-card">
+          <span><i class="ri-search-line"></i></span>
+          <h4>Research Suburbs</h4>
+          <p>
+            By evaluating different suburbs, one can identify the most suitable
+            location that aligns with their preferences, needs, and objectives.
+          </p>
+        </div>
+        <div class="work-card">
+          <span><i class="ri-hand-coin-fill"></i></span>
+          <h4>Instant Valuation</h4>
+          <p>
+            This process typically utilizes technology, and algorithms to
+            determine an estimated value without the need for lengthy manual
+            appraisals.
+          </p>
+        </div>
+        <div class="work-card">
+          <span><i class="ri-building-fill"></i></span>
+          <h4>Track Property</h4>
+          <p>
+            Utilizing modern technology and software, track property systems
+            streamline data management and enhance efficiency in the real estate
+            industry.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="section-container deals-container">
+      <div class="deals-header">
+        <div class="deals-header-content">
+          <h2 class="section-header">Best Real Estate Deals</h2>
+          <p>
+            Finding the best real estate deals requires careful research,
+            negotiation skills, and a keen understanding of market trends.
+          </p>
+        </div>
+        <button class="btn">View All Property</button>
+      </div>
+      <div class="deals-nav">
+        <a href="#" class="active">Residential Property</a>
+        <a href="#">Commercial Property</a>
+        <a href="#">Agricultural Property</a>
+        <a href="#">Industrial Property</a>
+      </div>
+      <div class="deals-grid">
+        <div class="deals-card">
+          <img src="assets/deals-1.jpg" alt="deals" />
+          <span>Featured</span>
+        </div>
+        <div class="deals-card">
+          <img src="assets/deals-2.jpg" alt="deals" />
+          <span>Featured</span>
+        </div>
+        <div class="deals-card">
+          <img src="assets/deals-3.jpg" alt="deals" />
+          <span>Featured</span>
+        </div>
+      </div>
+    </section>
+    <section class="section-container featured-container">
+      <h2 class="section-header">Featured Listing Of The Week</h2>
+      <div class="featured-grid">
+        <div class="featured-image">
+          <img src="assets/featured-1.jpg" alt="feature" />
+          <img src="assets/featured-2.jpg" alt="feature" />
+        </div>
+        <div class="featured-content">
+          <h4>Product Spotlight of the Week & Best Seller Highlight</h4>
+          <p>
+            The purpose of featuring a particular item is to create a sense of
+            urgency, exclusivity, and increased interest among the target
+            audience, ultimately driving more engagement and potential sales for
+            the highlighted offering.
+          </p>
+          <div class="featured-content-grid">
+            <div class="featured-card">
+              <h4>Budget</h4>
+              <p>Confidential</p>
+            </div>
+          </div>
+          <button class="btn">Yes I Want To Book Office Package</button>
+        </div>
+      </div>
+    </section>
+
+    <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
 <header style="display: none;">
   <h2>JS Advanced Regular Exam - 13 March 2022</h2>
