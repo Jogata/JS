@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 *,
 *::before,
@@ -19,6 +19,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   color: #fff;
   font-family: monospace;
   background-color: #122b62;
@@ -89,7 +90,110 @@ li::before {
 .icon-tabler-check {
   margin-left: auto;
 } 
-  </style>
+.body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Georgia;
+  text-align: center;
+  background-color: #0b1e46;
+} 
+.stats-container {
+  position: relative;
+  min-width: 200px;
+  height: 100px;
+  margin: 20px;
+  padding: 20px;
+  border: 1px dotted #0094d4;
+} 
+.stats-container h4 {
+  position: absolute;
+  bottom: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+} 
+.icon {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+} 
+.counter {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #0094d4;
+  font-size: 50px;
+} 
+@media (max-width: 600px) {
+  body {
+    flex-direction: column;
+  } 
+} 
+.card-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: 
+    linear-gradient(
+      to right, 
+      #307af0, 
+      #4630f0
+    );  
+} 
+.card{
+  width: 500px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3093f0;
+  box-shadow: 
+      10px 10px 15px rgba(0,0,0,0.2), 
+    -10px -10px 15px rgba(0,0,0,0.2);
+} 
+.fa {
+  margin: 20px;
+  padding: 10px;
+  color: white;
+  font-size: 25px;
+} 
+.fa-facebook {
+    background-color: #3b5998;
+} 
+.fa-twitter {
+    background-color: #1da1f2;
+} 
+.fa-whatsapp {
+    background-color: #25d366;
+} 
+.sci {
+  display: none;
+  width: 400px;
+  height: 200px;
+  background-color: rgba(255,255,255,0.5);
+} 
+.card:hover .sci {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: open 2s ease;
+} 
+@keyframes open{
+  from {
+    height: 0;
+  } 
+  to {
+    height: 200px;
+  } 
+} 
+</style>
   </head>
   <body>
     <!-- <h1>Course Progress</h1> -->
@@ -119,7 +223,7 @@ li::before {
         <li class="upcoming">Maps&amp;Lists</li>
       </ol> 
     </section>  
-    <section style="display: none;"> 
+    <section class="body"> 
       <div class="stats-container">
         <i class="fa fa-briefcase fa-3x icon"></i>
         <div class="counter" data-ceil="15">15</div>
@@ -135,7 +239,37 @@ li::before {
         <div class="counter" data-ceil="27">27</div>
         <h4>Apps Made</h4>
       </div>  
+      <script>
+      const countersEl = document.querySelectorAll(".counter");
+      
+      countersEl.forEach((counterEl) => {
+        counterEl.innerText = "0";
+        incrementCounter();
+        function incrementCounter() {
+          let currentNum = +counterEl.innerText;
+          const dataCeil = counterEl.getAttribute("data-ceil");
+          const increment = dataCeil / 15;
+          currentNum = Math.ceil(currentNum + increment);
+
+          if (currentNum < dataCeil) {
+            counterEl.innerText = currentNum;
+            setTimeout(incrementCounter, 50);
+          } else {
+            counterEl.innerText = dataCeil;
+          } 
+        } 
+      }); 
+      </script>       
     </section> 
+    <div class="card-container">
+      <div class="card">
+        <div class="sci">
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-whatsapp"></i>
+        </div>  
+      </div>  
+    </div>  
   
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
