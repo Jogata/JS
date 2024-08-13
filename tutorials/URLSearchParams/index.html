@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <title>URLSearchParams in JS</title> -->
     <title>Travel Moments</title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+      /* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"); */
+      @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Kaushan+Script&family=Playfair+Display&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Brawler:wght@400;700&family=Croissant+One&family=Ephesis&family=Gloock&family=Hurricane&family=Imbue:opsz,wght@10..100,100..900&family=Modak&family=Montez&family=Prosto+One&family=Rye&family=Shojumaru&family=Young+Serif&family=ZCOOL+XiaoWei&display=swap');
+      @import url("https://fonts.googleapis.com/css2?family=Lora:ital@0;1&family=Poppins:wght@400;500;600&display=swap");
       
       :root {
         --primary-color: #00292b;
@@ -24,7 +29,8 @@
       }
 
       body {
-        min-height: 100vh;
+        /* display: flex; */
+        /* min-height: 100vh; */
         font-family: "Poppins", sans-serif;
         font-family: "Roboto", sans-serif;
   font-family: 'Abril Fatface', cursive;
@@ -67,13 +73,38 @@
         );
       }
       
-      nav {
+      .page {
+        position: relative;
+        /* width: 100%; */
+        min-height: 100vh;
+        /* margin: auto; */
+        display: flex;
+        flex-direction: column;
+      }
+
+      .page::before {
         position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
+        top: 0;
+        left: 0;
+        content: "";
+        width: 40%;
+        height: 100%;
+        background-image: url("./assets/bg.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        z-index: -1;
+      }
+
+      nav {
+        /* position: absolute; */
+        /* left: 50%; */
+        /* transform: translateX(-50%); */
         width: 100%;
-        max-width: 1200px;
-        min-height: 85px;
+        /* max-width: 1200px; */
+        max-width: 75rem;
+        margin: auto;
+        /* min-height: 85px; */
         padding: 2rem 1rem;
         display: flex;
         align-items: center;
@@ -105,24 +136,35 @@
         background-color: var(--secondary-color);
       }
       
-      .container {
-        min-height: 100vh;
+      .main-container {
+        /* min-height: 100vh; */
+        flex: 1;
         display: flex;
+        overflow: hidden;
       }
       
       .container-left {
         flex: 1;
-        background-image: url("assets/bg.jpg");
+        /* background-image: url("assets/bg.jpg");
         background-repeat: no-repeat;
         background-position: center;
-        background-size: cover;
+        background-size: cover; */
       }
         
       .left-content {
         margin: 5rem 3rem 0 auto;
         padding: 1rem;
-        max-width: 400px;
+        /* max-width: 400px; */
+        max-width: 25rem;
         text-align: right;
+        animation: show-left 1s linear;
+      }
+
+      @keyframes show-left {
+        0% {
+          transform: translateX(-100px);
+          opacity: 0;
+        }
       }
       
       .left-content h4 {
@@ -148,15 +190,35 @@
         left: 0;
         transform: translateX(-50%);
         width: 100%;
-        max-width: 450px;
+        /* max-width: 450px; */
+        max-width: 28.15rem;
+        animation: fade-in 1s linear backwards;
+        animation-delay: 500ms;
+        z-index: -1;
+      }
+
+      @keyframes fade-in {
+        0% {
+          transform: translateX(-20%);
+          opacity: 0;
+        }
       }
       
       .right-content {
-        max-width: 600px;
+        /* max-width: 600px; */
+        max-width: 37.5rem;
         margin-left: 8rem;
         margin-top: 8rem;
         padding: 2rem;
         text-align: right;
+        animation: show-right 1s linear;
+      }
+
+      @keyframes show-right {
+        0% {
+          transform: translateX(100px);
+          opacity: 0;
+        }
       }
       
       .right-content h1 {
@@ -177,26 +239,46 @@
         margin-bottom: 3rem;
         color: var(--white);
       }
+
+      .action-btns {
+        margin-bottom: 3rem;
+      }
       
       .btn {
         min-width: 120px;
-        margin-bottom: 3rem;
+        margin: 0.5rem;
+        /* margin-bottom: 3rem; */
         padding: 0.75rem 1rem;
         font-size: 1rem;
+        font-family: inherit;
         outline: none;
         border: 1px solid var(--secondary-color);
+        transition: color 300ms, 
+          background-color 300ms;
         cursor: pointer;
       }
       
       .primary-btn {
-        margin-right: 1rem;
+        /* margin-right: 1rem; */
         color: var(--primary-color);
         background-color: var(--secondary-color);
+        /* transition: color 300ms, 
+          background-color 300ms; */
+      }
+
+      .primary-btn:hover {
+        color: var(--secondary-color);
+        background-color: var(--primary-color);
       }
       
       .secondary-btn {
         color: var(--secondary-color);
-        background-color: transparent;
+        /* background-color: transparent; */
+        background-color: var(--primary-color);
+      }
+      .secondary-btn:hover {
+        color: var(--primary-color);
+        background-color: var(--secondary-color);
       }
       
       .socials {
@@ -209,7 +291,8 @@
       .socials span {
         color: var(--white);
         font-size: 1.5rem;
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: color 300ms;
         cursor: pointer;
       }
       
@@ -217,9 +300,54 @@
         color: var(--secondary-color);
       }
 
+      /* 780зй */
+      @media (width < 48.75rem) {
+        nav {
+          justify-content: center;
+        }
+      
+        .nav-links {
+          gap: 1rem;
+        }
+      
+        .main-container {
+          flex-direction: column;
+        }
+      
+        .container-left {
+          /* min-height: 700px; */
+          min-height: 43.75rem;
+        }
+      
+        .left-content {
+          /* max-width: none; */
+          margin: 6rem auto;
+          text-align: center;
+        }
+      
+        .container-right {
+          /* min-height: 700px; */
+        }
+      
+        .container-right img {
+          left: 50%;
+          top: 0;
+          transform: translate(-50%, -100%);
+        }
+      
+        .right-content {
+          text-align: center;
+          margin: 0 auto 3rem;
+        }
+      
+        .socials {
+          justify-content: center;
+        }
+      }
     </style>
   </head>
   <body>
+    <div class="page">
     <nav>
       <ul class="nav-links">
         <li class="link"><a href="#">HOME</a></li>
@@ -230,7 +358,7 @@
       </ul>
     </nav>
 
-    <div class="container">
+    <div class="main-container">
 
       <div class="container-left">
         <div class="left-content">
@@ -266,6 +394,7 @@
         </div>
       </div>
 
+    </div>
     </div>
 
     <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
