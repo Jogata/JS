@@ -398,10 +398,143 @@ button:hover .text {
       title.value = "";
       message.value = "";
       
+      function sendText(e) {
+        let li = document.createElement("li");
+        
+        let span1 = document.createElement("span");
+        span1.textContent = `To: ${textValue}`;
+        
+        let span2 = document.createElement("span");
+        span2.textContent = `Title: ${titleValue}`;
+        
+        let div = document.createElement("div");
+        div.classList.add("btn")
+        
+        let btnDelete = document.createElement("button");
+        btnDelete.setAttribute("type", "submit");	//change
+        btnDelete.setAttribute("class", "delete");	//change
+        btnDelete.textContent = "Delete";
+        btnDelete.addEventListener("click", deleteList)
+        
+        let currentMail = e.target.parentNode.parentNode;
+        currentMail.remove();
+        e.preventDefault();
+        
+        li.appendChild(span1);
+        li.appendChild(span2);
+        li.appendChild(div);
+        div.appendChild(btnDelete);
+        
+        ulSendList.appendChild(li);
+      }
+
+      function deleteList(e) {
+        let currentMail = e.target.parentNode.parentNode;
+        currentMail.remove();
+        e.preventDefault();
+
+        let li = document.createElement("li");
+
+        let span1 = document.createElement("span");
+        span1.textContent = `To: ${textValue}`;
+
+        let span2 = document.createElement("span");
+        span2.textContent = `Title: ${titleValue}`;
+
+        li.appendChild(span1);
+        li.appendChild(span2);
+
+        deleteeList.appendChild(li);
+
+        div.appendChild(sendBtn);
+        div.appendChild(deleteBtn);
+      }
+    }
+    
+    function clearInput(e) {
+      text.value = "";
+      title.value = "";
+      message.value = "";
     }
   }
   
   solve();
+</script>
+<script>
+    class CarDealership {
+      constructor(name) {
+        this.name = name;
+        this.availableCars = [];
+        this.soldCars = [];
+        this.totalIncome = 0;
+      }
+
+      addCar(model, horsePower, price, mileage) {
+        if (model == '' || horsePower < 0 || price < 0 || mileage < 0) {
+          throw new Error('Invalid input!');
+        }
+
+        this.availableCars.push({ model, horsePower, price, mileage });
+
+        return `New car added: ${model} - ${horsePower} HP - ${mileage.toFixed(2)} km - ${price.toFixed(2)}$`;
+      }
+
+      sellCar(model, desiredMileage) {
+        let curr = this.availableCars.find(x => x.model === model);
+
+        if (!curr) {
+          throw new Error(`${model} was not found!`);
+        } else {
+          if (curr.mileage <= desiredMileage) {
+            curr.price = curr.price
+          } else if ((curr.mileage - desiredMileage) <= 40000) {
+            curr.price *= 0.9;
+          } else {
+            curr.price *= 0.9;
+          }
+          this.totalIncome += curr.price;
+        }
+
+        this.availableCars = this.availableCars.filter(x => x !== curr);
+        this.soldCars.push(curr);
+
+        return `${model} was sold for ${curr.price.toFixed(2)}$`;
+      }
+
+      currentCar() {
+        if (this.availableCars.length === 0) {
+          return `There are no available cars`;
+        } else {
+          let result = [];
+          result.push(`-Available cars:`);
+          this.availableCars.map(x => {
+            result.push(`---${x.model} - ${x.horsePower} HP - ${x.mileage.toFixed(2)} km - ${x.price.toFixed(2)}$`);
+          })
+          return result.join('\n');
+        }
+      }
+
+      salesReport(criteria) {
+        if (criteria != 'horsepower' && criteria != 'model') {
+          throw new Error('Invalid criteria!');
+        }
+
+        if (criteria === 'horsepower') {
+          this.soldCars.sort((a, b) => b.horsePower - a.horsePower);
+        }
+
+        if (criteria === 'model') {
+          this.soldCars.sort((a, b) => a.model.localeCompare(b.model));
+        }
+
+        let result = [];
+        this.soldCars.forEach(x => {
+          result.push(`---${x.model} - ${x.horsePower} HP - ${(x.price).toFixed(2)}$`);
+        })
+        
+        return `-${this.name} has a total income of ${this.totalIncome.toFixed(2)}$\n-${this.soldCars.length} cars sold:\n${result.join('\n')}`;
+      }
+    }
 </script>
 
     <script src="./in-fetch-api.js"></script>
