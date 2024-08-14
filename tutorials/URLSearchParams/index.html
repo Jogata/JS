@@ -104,9 +104,12 @@ button {
   outline: none;
   border: 5em;
   border-radius: 65px;
-  background-image: linear-gradient(45deg, #4568dc, #b06ab3);
+  background-image: 
+    linear-gradient(45deg, #4568dc, #b06ab3);
   /* box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.438); */
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  box-shadow: 
+    rgba(0, 0, 0, 0.3) 0px 19px 38px, 
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
   -webkit-transform: translate(0);
   transform: translate(0);
   -webkit-transition: box-shadow 0.25s;
@@ -117,7 +120,8 @@ button.text {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-image: linear-gradient(45deg, #4568dc, #b06ab3);
+  background-image: 
+    linear-gradient(45deg, #4568dc, #b06ab3);
 } 
 button:after {
   position: absolute;
@@ -132,11 +136,14 @@ button:after {
   z-index: -1;
 } 
 button:hover {
-  background-image: linear-gradient(-45deg, #4568dc, #b06ab3);
-  box-shadow: 0 12px 24px rgba(128, 128, 128, 0.1);
+  background-image: 
+    linear-gradient(-45deg, #4568dc, #b06ab3);
+  box-shadow: 
+    0 12px 24px rgba(128, 128, 128, 0.1);
 } 
 button:hover .text {
-  background-image: linear-gradient(-45deg, #4568dc, #b06ab3);
+  background-image: 
+    linear-gradient(-45deg, #4568dc, #b06ab3);
 }
 .list-mails {
   position: relative;
@@ -209,6 +216,56 @@ button:hover .text {
 .sent-list::-webkit-scrollbar {
   width: 10px;
 }
+.sent-list > li{ 
+  display: block;
+  width: 300px;
+  padding: 5px;
+  margin: 10px;
+  color: black;
+  font-size: 16px;
+  list-style-type: none;
+  border-radius: 20px;
+  background-color: 
+    rgba(245, 245, 245, 0.575);
+  box-shadow: 
+    rgba(0, 0, 0, 0.25) 0px 54px 55px, 
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, 
+    rgba(0, 0, 0, 0.12) 0px 4px 6px, 
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, 
+    rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.delete-list {
+  max-height: 250px;
+  padding-left: 0px;
+  overflow-y: scroll;
+}
+.delete-list::-webkit-scrollbar {
+  width: 10px;
+}
+.delete-list > li {
+  display: inline-block;
+  width: 300px;
+  margin: 5px;
+  padding: 5px;
+  color: black;
+  font-size: 16px;
+  list-style-type: none;
+  border-radius: 20px;
+  background-color: 
+    rgba(245, 245, 245, 0.575);
+  box-shadow: 
+    rgba(0, 0, 0, 0.25) 0px 54px 55px, 
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, 
+    rgba(0, 0, 0, 0.12) 0px 4px 6px, 
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, 
+    rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.sent {
+  padding-top: 10px;
+}
+.btn {
+  margin: 15px;
+}
   </style>
   </head>
   <body>
@@ -274,6 +331,78 @@ button:hover .text {
         </div>  
     </article>  
 </section>  
+<script>
+  function solve() {
+    document.getElementById("add").addEventListener("click", addList);
+    document.getElementById("reset").addEventListener("click", clearInput);
+ 
+    let text = document.getElementById("recipientName");
+    let title = document.getElementById("title");
+    let message = document.getElementById("message");
+    let listMails = document.getElementById("list");
+    let ulSendList = document.getElementsByClassName('sent-list')[0];
+    let deleteeList = document.getElementsByClassName('delete-list')[0];
+ 
+    function addList(e) {
+      e.preventDefault();
+      let textValue = text.value;
+      let titleValue = title.value;
+      let messageValue = message.value;
+      
+      if (!textValue || !titleValue || !messageValue) {
+        return;
+      }
+
+      createElement(textValue, titleValue, messageValue);
+      clearInput();
+    }
+    
+    function createElement(textValue, titleValue, messageValue) {
+      let li = document.createElement("li");
+      
+      let h1 = document.createElement("h4");
+      h1.textContent = `Title: ${titleValue}`;
+      
+      let h2 = document.createElement("h4");
+      h2.textContent = `Recipient Name: ${textValue}`;
+      
+      let span = document.createElement("span");
+      span.textContent = `${messageValue}`;
+      
+      let div = document.createElement("div");
+      div.setAttribute("id", "list-action");
+      
+      let sendBtn = document.createElement("button");
+      sendBtn.setAttribute("type", "submit");	//change
+      sendBtn.setAttribute("id", "send");	//change
+      sendBtn.textContent = "Send";
+      sendBtn.addEventListener("click", sendText);
+      
+      let deleteBtn = document.createElement("button");
+      deleteBtn.setAttribute("type", "submit");	//change
+      deleteBtn.setAttribute("id", "delete");	//change
+      deleteBtn.textContent = "Delete";
+      deleteBtn.addEventListener("click", deleteList);
+      
+      li.appendChild(h1);
+      li.appendChild(h2);
+      li.appendChild(span);
+      li.appendChild(div);
+
+      div.appendChild(sendBtn);
+      div.appendChild(deleteBtn);
+
+      listMails.appendChild(li);
+      
+      text.value = "";
+      title.value = "";
+      message.value = "";
+      
+    }
+  }
+  
+  solve();
+</script>
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
