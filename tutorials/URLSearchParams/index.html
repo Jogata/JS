@@ -3,539 +3,146 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URLSearchParams in JS</title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-  <style>
-body {
-  /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
-  font-family: Georgia;
-  background-image:url(./background.jpg) ;
-  background-repeat: no-repeat;
-  background-size: cover;
-} 
-h1 {
-  display: block;
-  margin: auto;
-  padding: 10px;
-  color: white;
-  font-size: 40px;
-  text-align: center;
-  text-shadow: 2px 4px 6px black;
-} 
-h2 {
-  padding: 0;
-  color: #fff;
-  font-size: 20px;
-  text-align: center;
-  text-shadow: 2px 2px 10px black;
-} 
-.add {
-  font-size: 24px;
-} 
-.message{
-  position: absolute;
-  width: 420px;
-  margin-left: 60px;
-  display: flex;
-} 
-.addMails {
-  position: relative;
-  width: 400px;
-  margin: auto;
-  padding: 10px 50px 50px 50px;
-  color: white;
-  text-align: center;
-  background-color: white;
-  border-radius: 20px;
-  box-shadow: 
-    rgba(0, 0, 0, 0.25) 0px 54px 55px, 
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, 
-    rgba(0, 0, 0, 0.12) 0px 4px 6px, 
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, 
-    rgba(0, 0, 0, 0.09) 0px -3px 5px;
-} 
-form {  
-  position: relative;
-  font-size: 24px;
-} 
-input { 
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 30px;
-  padding: 10px;
-  color: black;
-  font-size: 16px;
-  border-radius: 10px;
-} 
-textarea {
-  resize: none;
-  width: 300px;
-  height: 150px; 
-  margin-top: 10px;
-  margin-left: 2px;
-  margin-right: 10px;
-  padding: 10px;
-  align-items: center;
-  border-radius: 10px;
-} 
-textarea::placeholder {
-  font-family: 'Gill Sans',  sans-serif;
-} 
-.list, 
-.sent, 
-.delete {
-  display: inline;
-  margin: -100px;
-} 
-label {
-  display: block;
-  width: 100%;
-  padding: 0;
-  font-size: 18px;
-  box-sizing: border-box;
-}
-button {
-  margin-top: 20px;
-  padding: 0.7em 2em;
-  color: white;
-  font-size: 16px;
-  outline: none;
-  border: 5em;
-  border-radius: 65px;
-  background-image: 
-    linear-gradient(45deg, #4568dc, #b06ab3);
-  /* box-shadow: 1px 1px 10px rgba(255, 255, 255, 0.438); */
-  box-shadow: 
-    rgba(0, 0, 0, 0.3) 0px 19px 38px, 
-    rgba(0, 0, 0, 0.22) 0px 15px 12px;
-  -webkit-transform: translate(0);
-  transform: translate(0);
-  -webkit-transition: box-shadow 0.25s;
-  transition: box-shadow 0.25s;
-  cursor: pointer;
-} 
-button.text {
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-image: 
-    linear-gradient(45deg, #4568dc, #b06ab3);
-} 
-button:after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  content: "";
-  margin: 4px;
-  border-radius: 18px;
-  background-color: #0e0e10;
-  z-index: -1;
-} 
-button:hover {
-  background-image: 
-    linear-gradient(-45deg, #4568dc, #b06ab3);
-  box-shadow: 
-    0 12px 24px rgba(128, 128, 128, 0.1);
-} 
-button:hover .text {
-  background-image: 
-    linear-gradient(-45deg, #4568dc, #b06ab3);
-}
-.list-mails {
-  position: relative;
-  min-width: 300px;
-  max-width: auto;
-  height: auto;
-  max-height: 400px;
-  margin: 50px;
-  padding: 10px 100px 100px 100px;
-  color: white;
-  text-align: center;
-  border-radius: 20px;
-  background-color:white 100%;
-  box-shadow: 
-    rgba(0, 0, 0, 0.25) 0px 54px 55px, 
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, 
-    rgba(0, 0, 0, 0.12) 0px 4px 6px, 
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, 
-    rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  overflow-y: scroll;
-}
-.list-mails::-webkit-scrollbar {
-  width: 10px;
-}
-.sent-mails, .trash {
-  display: table;
-  width: 350px;
-  height: 250px;
-  margin: 20px;
-  margin-top: 20px;
-  padding-left: 10px;
-  padding-right: 10px;
-  color: white;
-  text-align: center;
-  border-radius: 20px;
-  background-color:white 100%;
-  box-shadow: 
-    rgba(0, 0, 0, 0.25) 0px 54px 55px, 
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, 
-    rgba(0, 0, 0, 0.12) 0px 4px 6px, 
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, 
-    rgba(0, 0, 0, 0.09) 0px -3px 5px;
-}
-#list {
-  display: block;
-  padding-left: 0px;
-}
-#list > li {
-  list-style-type: none;
-  display: block;
-  margin: 20px 0px 0px;
-  padding: 5px;
-  color: black;
-  font-size: 16px;
-  text-align: center;
-  border-radius: 20px;
-  background-color: rgba(245, 245, 245, 0.575);
-  box-shadow: 
-    rgba(0, 0, 0, 0.25) 0px 54px 55px, 
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, 
-    rgba(0, 0, 0, 0.12) 0px 4px 6px, 
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, 
-    rgba(0, 0, 0, 0.09) 0px -3px 5px;
-}
-.sent-list {
-  max-height: 250px;
-  padding-left: 0px;
-  overflow-y: scroll;
-}
-.sent-list::-webkit-scrollbar {
-  width: 10px;
-}
-.sent-list > li{ 
-  display: block;
-  width: 300px;
-  padding: 5px;
-  margin: 10px;
-  color: black;
-  font-size: 16px;
-  list-style-type: none;
-  border-radius: 20px;
-  background-color: 
-    rgba(245, 245, 245, 0.575);
-  box-shadow: 
-    rgba(0, 0, 0, 0.25) 0px 54px 55px, 
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, 
-    rgba(0, 0, 0, 0.12) 0px 4px 6px, 
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, 
-    rgba(0, 0, 0, 0.09) 0px -3px 5px;
-}
-.delete-list {
-  max-height: 250px;
-  padding-left: 0px;
-  overflow-y: scroll;
-}
-.delete-list::-webkit-scrollbar {
-  width: 10px;
-}
-.delete-list > li {
-  display: inline-block;
-  width: 300px;
-  margin: 5px;
-  padding: 5px;
-  color: black;
-  font-size: 16px;
-  list-style-type: none;
-  border-radius: 20px;
-  background-color: 
-    rgba(245, 245, 245, 0.575);
-  box-shadow: 
-    rgba(0, 0, 0, 0.25) 0px 54px 55px, 
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, 
-    rgba(0, 0, 0, 0.12) 0px 4px 6px, 
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, 
-    rgba(0, 0, 0, 0.09) 0px -3px 5px;
-}
-.sent {
-  padding-top: 10px;
-}
-.btn {
-  margin: 15px;
-}
-  </style>
+    <!-- <title>URLSearchParams in JS</title> -->
+    <title>Crypto</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+      :root {
+        --primary-color: #100e17;
+        --primary-color-dark: #0c0b12;
+        --white: #ffffff;
+        --max-width: 1200px;
+        --background-gradient-1: linear-gradient(to right, #1a5fee, #10bae1);
+        --background-gradient-2: linear-gradient(to right, #0d1732, #0f2835);
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+    </style>
   </head>
   <body>
+    <header class="header">
+      <nav>
+        <div class="nav-logo">
+          <a href="#" class="gradient-header">Crypto</a>
+        </div>
+        <ul class="nav-links">
+          <li class="link"><a href="#">Governance</a></li>
+          <li class="link"><a href="#">Security</a></li>
+          <li class="link"><a href="#">Documentation</a></li>
+          <li class="link"><a href="#">FAQ</a></li>
+        </ul>
+        <button class="btn">Launch App</button>
+      </nav>
+      <div class="section-container header-container">
+        <h1>Multi-Blockchain DeFi Earn And Borrow Across Networks</h1>
+        <p>
+          Whether it's earning interest on their digital assets or taking out
+          loans, individuals can now explore opportunities beyond the
+          limitations of a single blockchain.
+        </p>
+        <button class="btn">Launch App</button>
+        <div class="header-banner">
+          <div class="header-banner-grid">
+            <div class="col">
+              <p>Total Market Size</p>
+              <h4>$605.04M</h4>
+            </div>
+            <div class="col">
+              <p>Platform fees paid to RDNT lockers</p>
+              <h4>$11.91M</h4>
+            </div>
+            <div class="col">
+              <p>Looping APR on BNB</p>
+              <h4>~0%</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section class="rewards">
+      <div class="section-container rewards-container">
+        <div class="rewards-content">
+          <h2 class="section-header">
+            0%<sup>APR</sup><br />Industry Leading Rewards
+          </h2>
+          <p class="section-subheader">
+            Dynamic liquidity providers share platform fees captured in
+            blue-chip assets
+          </p>
+        </div>
+        <div class="rewards-grid">
+          <div class="rewards-card">
+            <img src="assets/usd.png" alt="rewards"/>
+            <div class="rewards-details">
+              <p>USDC</p>
+              <h4>0%</h4>
+            </div>
+          </div>
+          <div class="rewards-card">
+            <img src="assets/usd-circle.png" alt="rewards"/>
+            <div class="rewards-details">
+              <p>USDT</p>
+              <h4>0%</h4>
+            </div>
+          </div>
+          <div class="rewards-card">
+            <img src="assets/ethereum.png" alt="rewards"/>
+            <div class="rewards-details">
+              <p>ETH</p>
+              <h4>0%</h4>
+            </div>
+          </div>
+          <div class="rewards-card">
+            <img src="assets/token.png" alt="rewards"/>
+            <div class="rewards-details">
+              <p>BNB</p>
+              <h4>0%</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="holders">
+      <div class="section-container holders-container">
+        <h2 class="section-header">Trusted by 32,000+ holders</h2>
+        <p class="section-subheader">
+          Battle-tested and audited by multiple leading security firms.
+          Radiant's security is of the highest priority.
+        </p>
+        <div class="holders-grid">
+          <div class="holders-card">
+            <span><img src="assets/security.png" alt="holder"/></span>
+            <h4>Better Security</h4>
+          </div>
+          <div class="holders-card">
+            <span><img src="assets/blockchain.png" alt="holder"/></span>
+            <h4>BlockSec</h4>
+          </div>
+          <div class="holders-card">
+            <span><img src="assets/time.png" alt="holder"/></span>
+            <h4>Better Uptime</h4>
+          </div>
+        </div>
+        <div class="holders-content">
+          BlockSec focuses on the security of the whole life cycle of smart
+          contracts, specializing in rigorous testing of economic attacks.
+        </div>
+      </div>
+    </section>
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
 <header>
   <h2>JS Advanced Regular Exam - 13 March 2022</h2>
-  <a href="../../00exams/JS Advanced Regular Exam - 19 February 2022">Open folder</a>
+  <a href="../../00exams/JS Advanced Regular Exam - 13 March 2022">Open folder</a>
+  <!-- 03. Rent Car -->
 </header>
-
-<h1>Mails Delivery</h1>
-<section class="message">
-    <div class="addMails">
-        <h2 class="add">Add Mails</h2>
-        <form>  
-            <label>Recipient</label>
-            <input id="recipientName" type="text" placeholder="Recipient Name" />
-            <label>Title</label>
-            <input id="title" type="text" placeholder="Title" />
-            <label>Message</label>
-            <textarea id="message" placeholder="Message..."></textarea>
-            <div class="action">
-                <button type="submit" id="add">Add to the List</button>
-                <button type="submit" id="reset">Reset</button>
-            </div>  
-        </form> 
-    </div>  
-    <div class="list-mails">
-        <h2 class="list">List of Mails</h2>
-        <ul id="list">
-            <!-- <li>
-                <h4>Title: For Work</h4>
-                <h4>Recipient Name: John@abv.bg</h4>
-                <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem ut recusandae deserunt, debitis perspiciatis praesentium facilis, suscipit adipisci provident, tempora repellat ratione voluptate sit vel animi totam. Quia, qui enim.</span>
-                <div id="list-action">
-                    <button type="submit" id="send">Send</button>
-                    <button type="submit" id="delete">Delete</button>
-                </div>
-            </li> -->
-        </ul> 
-    </div>  
-    <article> 
-        <div class="sent-mails">
-            <h2 class="sent">Sent Mails</h2>
-            <ul class="sent-list">
-                <!-- <li>
-                    <span>To: John@abv.bg</span>
-                    <span>Title: For Work</span>
-                    <div class="btn">
-                        <button type="submit" class="delete">Delete</button>
-                    </div>
-                </li> -->
-            </ul> 
-        </div>  
-        <div class="trash">
-            <h2 class="delete">Deleted Mails</h2>
-            <ul class="delete-list">
-                <!-- <li>
-                    <span>To: John@abv.bg</span>
-                    <span>Title: For Work</span>
-                </li> -->
-            </ul> 
-        </div>  
-    </article>  
-</section>  
-<script>
-  function solve() {
-    document.getElementById("add").addEventListener("click", addList);
-    document.getElementById("reset").addEventListener("click", clearInput);
- 
-    let text = document.getElementById("recipientName");
-    let title = document.getElementById("title");
-    let message = document.getElementById("message");
-    let listMails = document.getElementById("list");
-    let ulSendList = document.getElementsByClassName('sent-list')[0];
-    let deleteeList = document.getElementsByClassName('delete-list')[0];
- 
-    function addList(e) {
-      e.preventDefault();
-      let textValue = text.value;
-      let titleValue = title.value;
-      let messageValue = message.value;
-      
-      if (!textValue || !titleValue || !messageValue) {
-        return;
-      }
-
-      createElement(textValue, titleValue, messageValue);
-      clearInput();
-    }
-    
-    function createElement(textValue, titleValue, messageValue) {
-      let li = document.createElement("li");
-      
-      let h1 = document.createElement("h4");
-      h1.textContent = `Title: ${titleValue}`;
-      
-      let h2 = document.createElement("h4");
-      h2.textContent = `Recipient Name: ${textValue}`;
-      
-      let span = document.createElement("span");
-      span.textContent = `${messageValue}`;
-      
-      let div = document.createElement("div");
-      div.setAttribute("id", "list-action");
-      
-      let sendBtn = document.createElement("button");
-      sendBtn.setAttribute("type", "submit");	//change
-      sendBtn.setAttribute("id", "send");	//change
-      sendBtn.textContent = "Send";
-      sendBtn.addEventListener("click", sendText);
-      
-      let deleteBtn = document.createElement("button");
-      deleteBtn.setAttribute("type", "submit");	//change
-      deleteBtn.setAttribute("id", "delete");	//change
-      deleteBtn.textContent = "Delete";
-      deleteBtn.addEventListener("click", deleteList);
-      
-      li.appendChild(h1);
-      li.appendChild(h2);
-      li.appendChild(span);
-      li.appendChild(div);
-
-      div.appendChild(sendBtn);
-      div.appendChild(deleteBtn);
-
-      listMails.appendChild(li);
-      
-      text.value = "";
-      title.value = "";
-      message.value = "";
-      
-      function sendText(e) {
-        let li = document.createElement("li");
-        
-        let span1 = document.createElement("span");
-        span1.textContent = `To: ${textValue}`;
-        
-        let span2 = document.createElement("span");
-        span2.textContent = `Title: ${titleValue}`;
-        
-        let div = document.createElement("div");
-        div.classList.add("btn")
-        
-        let btnDelete = document.createElement("button");
-        btnDelete.setAttribute("type", "submit");	//change
-        btnDelete.setAttribute("class", "delete");	//change
-        btnDelete.textContent = "Delete";
-        btnDelete.addEventListener("click", deleteList)
-        
-        let currentMail = e.target.parentNode.parentNode;
-        currentMail.remove();
-        e.preventDefault();
-        
-        li.appendChild(span1);
-        li.appendChild(span2);
-        li.appendChild(div);
-        div.appendChild(btnDelete);
-        
-        ulSendList.appendChild(li);
-      }
-
-      function deleteList(e) {
-        let currentMail = e.target.parentNode.parentNode;
-        currentMail.remove();
-        e.preventDefault();
-
-        let li = document.createElement("li");
-
-        let span1 = document.createElement("span");
-        span1.textContent = `To: ${textValue}`;
-
-        let span2 = document.createElement("span");
-        span2.textContent = `Title: ${titleValue}`;
-
-        li.appendChild(span1);
-        li.appendChild(span2);
-
-        deleteeList.appendChild(li);
-
-        div.appendChild(sendBtn);
-        div.appendChild(deleteBtn);
-      }
-    }
-    
-    function clearInput(e) {
-      text.value = "";
-      title.value = "";
-      message.value = "";
-    }
-  }
-  
-  solve();
-</script>
-<script>
-    class CarDealership {
-      constructor(name) {
-        this.name = name;
-        this.availableCars = [];
-        this.soldCars = [];
-        this.totalIncome = 0;
-      }
-
-      addCar(model, horsePower, price, mileage) {
-        if (model == '' || horsePower < 0 || price < 0 || mileage < 0) {
-          throw new Error('Invalid input!');
-        }
-
-        this.availableCars.push({ model, horsePower, price, mileage });
-
-        return `New car added: ${model} - ${horsePower} HP - ${mileage.toFixed(2)} km - ${price.toFixed(2)}$`;
-      }
-
-      sellCar(model, desiredMileage) {
-        let curr = this.availableCars.find(x => x.model === model);
-
-        if (!curr) {
-          throw new Error(`${model} was not found!`);
-        } else {
-          if (curr.mileage <= desiredMileage) {
-            curr.price = curr.price
-          } else if ((curr.mileage - desiredMileage) <= 40000) {
-            curr.price *= 0.9;
-          } else {
-            curr.price *= 0.9;
-          }
-          this.totalIncome += curr.price;
-        }
-
-        this.availableCars = this.availableCars.filter(x => x !== curr);
-        this.soldCars.push(curr);
-
-        return `${model} was sold for ${curr.price.toFixed(2)}$`;
-      }
-
-      currentCar() {
-        if (this.availableCars.length === 0) {
-          return `There are no available cars`;
-        } else {
-          let result = [];
-          result.push(`-Available cars:`);
-          this.availableCars.map(x => {
-            result.push(`---${x.model} - ${x.horsePower} HP - ${x.mileage.toFixed(2)} km - ${x.price.toFixed(2)}$`);
-          })
-          return result.join('\n');
-        }
-      }
-
-      salesReport(criteria) {
-        if (criteria != 'horsepower' && criteria != 'model') {
-          throw new Error('Invalid criteria!');
-        }
-
-        if (criteria === 'horsepower') {
-          this.soldCars.sort((a, b) => b.horsePower - a.horsePower);
-        }
-
-        if (criteria === 'model') {
-          this.soldCars.sort((a, b) => a.model.localeCompare(b.model));
-        }
-
-        let result = [];
-        this.soldCars.forEach(x => {
-          result.push(`---${x.model} - ${x.horsePower} HP - ${(x.price).toFixed(2)}$`);
-        })
-        
-        return `-${this.name} has a total income of ${this.totalIncome.toFixed(2)}$\n-${this.soldCars.length} cars sold:\n${result.join('\n')}`;
-      }
-    }
-</script>
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
