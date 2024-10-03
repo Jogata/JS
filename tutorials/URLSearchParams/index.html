@@ -46,7 +46,8 @@
       }
         
       .section-subheader {
-        max-width: 600px;
+        /* max-width: 600px; */
+        max-width: 37.5rem;
         margin: auto;
         text-align: center;
       }
@@ -163,7 +164,8 @@
       }
 
       .header-container p {
-        max-width: 850px;
+        /* max-width: 850px; */
+        max-width: 53.2rem;
         margin: auto;
         margin-bottom: 4rem;
       }
@@ -233,7 +235,8 @@
       }
       
       .rewards-card img {
-        max-width: 40px;
+        /* max-width: 40px; */
+        max-width: 2.5rem;
       }
       
       .rewards-card:hover {
@@ -278,7 +281,8 @@
       }
       
       .holders-card span img {
-        max-width: 50px;
+        /* max-width: 50px; */
+        max-width: 3.1rem;
       }
       
       .holders-card h4 {
@@ -287,7 +291,8 @@
       }
 
       .holders-content {
-        max-width: 700px;
+        /* max-width: 700px; */
+        max-width: 43.75rem;
         margin: auto;
         margin-top: 2rem;
         padding: 2rem;
@@ -330,7 +335,8 @@
       }
       
       .work-card span img {
-        max-width: 50px;
+        /* max-width: 50px; */
+        max-width: 3.1rem;
       }
       
       .work-card h4 {
@@ -380,7 +386,8 @@
       }
       
       .mission-content img {
-        max-width: 150px;
+        /* max-width: 150px; */
+        max-width: 9.4rem;
       }
       
       .faq {
@@ -389,7 +396,8 @@
       
       .question-accordian {
         position: relative;
-        max-width: 900px;
+        /* max-width: 900px; */
+        max-width: 56.25rem;
         margin: 4rem auto 0;
         display: grid;
         gap: 2px;
@@ -448,7 +456,8 @@
       }
       
       .question-box.active .content {
-        height: 130px;
+        /* height: 130px; */
+        height: 8.125rem;
         padding: 2rem;
       }
       
@@ -523,7 +532,8 @@
       
       .footer-col form {
         width: 100%;
-        max-width: 350px;
+        /* max-width: 350px; */
+        max-width: 21.9rem;
         padding: 5px;
         display: flex;
         align-items: center;
@@ -552,7 +562,8 @@
         font-size: 1.5rem;
       }
       
-      @media (width < 900px) {
+      /* 900px */
+      @media (width < 56.25rem) {
         .nav-links {
           display: none;
         }
@@ -582,7 +593,8 @@
         }
       }
 
-      @media (width < 750px) {
+      /* 750px */
+      @media (width < 46.9rem) {
         .holders-grid {
           grid-template-columns: repeat(1, 1fr);
         }
@@ -596,7 +608,8 @@
         }
       }
       
-      @media (width < 600px) {
+      /* 600px  */
+      @media (width < 37.5rem) {
         .header-banner-grid {
           grid-template-columns: repeat(1, 1fr);
         }
@@ -610,8 +623,71 @@
         }
       
         .question-box.active .content {
-          height: 250px;
+          /* height: 250px; */
+          height: 15.625rem;
         }
+      }
+
+      .test {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        justify-content: center;
+        font-family: sans-serif;
+        background: linear-gradient(135deg, purple 20%, orange 80%);
+      }
+
+      .menu {
+        background: lightgrey;
+        width: 300px;
+        opacity: 0.3;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        cursor: pointer;
+      }
+      .menu .fa {
+          transition: transform .2s;
+      }
+      .menu p {
+        margin: 0 10px;
+        display: flex;
+        align-items: center;
+      }
+
+      .social-lists {
+        background: lightgray;
+        width: 300px;
+        padding: 10px;
+        opacity: 0.3;
+        list-style-type: none;
+        border-radius: 5px;
+      }
+      .social-lists li {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: padding 0.2s linear;
+      }
+      .social-lists li:hover {
+        background: darkgray;
+        border-radius: 5px;
+        padding-left: 10px;
+      }
+      .social-lists li .fa {
+        margin: 0 10px;
+      }
+
+      .rotate .fa {
+        transform: rotate(180deg);
+      }
+
+      .hide {
+        visibility: hidden;
       }
     </style>
   </head>
@@ -762,6 +838,50 @@
         </div>
       </div>
     </section>
+
+    <div class="test">
+      <div class="menu">
+        <p>Social Media</p>
+        <i class="fa fa-angle-down"></i>
+      </div>
+      <ul class="social-lists hide">
+        <li>
+          <i class="fa fa-facebook" style="color: blue"></i>
+          <p>Facebook</p>
+        </li>
+        <li>
+          <i class="fa fa-youtube" style="color: red"></i>
+          <p>YouTube</p>
+        </li>
+        <li>
+          <i class="fa fa-twitter" style="color: blue"></i>
+          <p>Twitter</p>
+        </li>
+        <li>
+          <i class="fa fa-linkedin" style="color: blue"></i>
+          <p>Linkedin</p>
+        </li>
+      </ul>
+      <script>
+          const menuEl = document.querySelector(".menu");
+          const menuTextEl = document.querySelector(".menu p");
+          const socialListsEl = document.querySelector(".social-lists");
+          const liEls = document.querySelectorAll(".social-lists li");
+
+          menuEl.addEventListener("click", () => {
+            socialListsEl.classList.toggle("hide");
+            menuEl.classList.toggle("rotate");
+          });
+
+          liEls.forEach((liEl) => {
+            liEl.addEventListener("click", () => {
+              menuTextEl.innerHTML = liEl.innerHTML;
+              socialListsEl.classList.add("hide");
+              menuEl.classList.toggle("rotate");
+            });
+          });
+      </script>
+    </div>
 
     <section class="mission">
       <div class="section-container mission-container">
@@ -916,6 +1036,16 @@
         </div>
       </div>
     </footer>
+
+    <script>
+      const questionBox = document.getElementsByClassName("question-box");
+  
+      for (let i = 0; i < questionBox.length; i++) {
+        questionBox[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+        });
+      }
+    </script>
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
