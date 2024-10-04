@@ -7,141 +7,152 @@
     <title>URLSearchParams in JS</title>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<style>
+  *, 
+  *:before, 
+  *:after {
+  margin:0;
+  padding: 0;
+  box-sizing: inherit;
+}
+html {
+  box-sizing: border-box;
+  color: #234465;
+  font-size: 20px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+ol li {
+  list-style-type: square;
+  list-style-position: inside;
+}
+.site {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  display: flex;
+  flex-wrap: wrap;
+  color: white;
+  border-bottom:0.2rem solid #234465;
+  background-color: #234465;
+}
+header h1 {
+  flex: 1 1 auto;
+  margin: 0.2em 0.2em 0em 0.5em;
+  border:none;
+}
+header section {
+  flex: 1 1 auto;
+  margin:0.5em 0.5em;
+  text-align: right;
+}
+.site-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+p {
+  margin: 0.2em 0;
+}
+h2 {
+  margin: 0.5rem;
+  border-bottom: 0.1em solid #234465;
+}
+main, 
+aside {
+  margin: 1rem 1rem;
+  padding: 0.5em;
+  border: dashed 0.1rem #234465;
+  box-shadow: 0.5em 1em 0.5em 0em rgba(64, 73, 59, 0.281) ;
+}
+main {
+  flex: 1 1 65vw;
+  min-height: 50vh;
+}
+main article {
+  margin: 0.5rem;
+}
+.buttons {
+  text-align: right;
+}
+.btn {
+  padding: 0.5em 1em;
+  font-size: 0.8rem;
+  color:white;
+  border-radius: 0.5em;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  border: none;
+  transition: color 0.3s, 
+    background-color 0.3s;
+}
+.btn:hover {
+  color: white;
+  background-color: #4d657e;
+}
+aside{
+  flex: 1 1 25vw;
+}
+form > p, 
+button {
+  margin: 0.5rem;
+}
+</style>
   </head>
   <body>
-    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
 <header>
-  <h2>JS Advanced Regular Exam - 13 March 2022</h2>
-  <a href="../../00exams/JS Advanced Regular Exam - 13 March 2022">Open folder</a>
-  03. Rent Car
+  <h2>JS Advanced Regular Exam - 20 February 2021</h2>
+  <a href="../../00exams/JS Advanced Regular Exam - 20 February 2021">Open folder</a>
 </header>
 
-<script>
-  const rentCar = {
-    searchCar(shop, model) {
-        let findModel = [];
-
-        if (Array.isArray(shop) && typeof model == 'string') {
-            for (let i = 0; i < shop.length; i++) {
-                if (model == shop[i]) {
-                    findModel.push(shop[i]);
-                }
-            }
-
-            if (findModel.length !== 0) {
-                return `There is ${findModel.length} car of model ${model} in the catalog!`;
-            } else {
-                throw new Error('There are no such models in the catalog!');
-            }
-        } else {
-            throw new Error('Invalid input!');
-        }
-    },
-    calculatePriceOfCar(model, days) {
-        let catalogue = {
-            Volkswagen: 20,
-            Audi: 36,
-            Toyota: 40,
-            BMW: 45,
-            Mercedes: 50
-        };
-
-        if (typeof model == 'string' && Number.isInteger(days)) {
-            if (catalogue.hasOwnProperty(model)) {
-                let cost = catalogue[model] * days;
-                return `You choose ${model} and it will cost $${cost}!`;
-            } else {
-                throw new Error('No such model in the catalog!');
-            }
-        } else {
-            throw new Error('Invalid input!');
-        }
-    },
-    checkBudget(costPerDay, days, budget) {
-        if (
-            !Number.isInteger(costPerDay) || 
-            !Number.isInteger(days) || 
-            !Number.isInteger(budget)
-        ) {
-            throw new Error('Invalid input!');
-        } else {
-            let cost = costPerDay * days;
-
-            if (cost <= budget) {
-                return `You rent a car!`;
-            } else {
-                return 'You need a bigger budget!';
-            }
-        }
-    }
-}
-
-describe("rentCar test suit", function () {
-
-    describe("searchCar", function () {
-        it("When there are matching elements return count", function () {
-            assert(rentCar.searchCar(["Volkswagen", "BMW", "Audi", "BMW"], 'BMW'),
-                'There is 2 car of model BMW in the catalog!');
-            assert(rentCar.searchCar(["Volkswagen", "BMW", "Audi", "BMW"], 'Audi'),
-                'There is 1 car of model Audi in the catalog!');
-        });
-
-        it('In case of submitted invalid parameters, throw an error "Invalid input!"', () => {
-            assert.throws(() => rentCar.searchCar(), Error, 'Invalid input!');
-            assert.throws(() => rentCar.searchCar(1, 2), Error, 'Invalid input!');
-            assert.throws(() => rentCar.searchCar('["A","B"]', null), Error, 'Invalid input!');
-        })
-
-        it('If there are no matching elements, the function throw an error', () => {
-            assert.throws(() => rentCar.searchCar(["Volkswagen", "BMW", "Audi", "BMW"], 'Moskvich'),
-                Error, 'There are no such models in the catalog!');
-            assert.throws(() => rentCar.searchCar(["Volkswagen", "BMW", "Audi", "BMW"], 'Ford'),
-                Error, 'There are no such models in the catalog!');
-        })
-    });
-
-    describe('calculatePriceOfCar', () => {
-        it('In case of submitted invalid parameters, throw an error "Invalid input!"', () => {
-            assert.throws(() => rentCar.calculatePriceOfCar(), Error, 'Invalid input!');
-            assert.throws(() => rentCar.calculatePriceOfCar('Ford', 2.2), Error, 'Invalid input!');
-            assert.throws(() => rentCar.calculatePriceOfCar(null, 2), Error, 'Invalid input!');
-        });
-
-        it('returns the model and the price it will cost ', () => {
-            assert.equal(rentCar.calculatePriceOfCar('BMW', 2),
-                'You choose BMW and it will cost $90!');
-            assert.equal(rentCar.calculatePriceOfCar('Mercedes', 3),
-                'You choose Mercedes and it will cost $150!');
-        });
-
-        it('if there is no such model, the function throw an error: No such model in the catalog!',()=>{
-            assert.throws(()=>rentCar.calculatePriceOfCar('Lada', 10), Error, 'No such model in the catalog!');
-        });
-    });
-
-    describe('checkBudget', ()=>{
-        it('Validates input', ()=>{
-            assert.throws(()=>rentCar.checkBudget(), Error, 'Invalid input!');
-            assert.throws(()=>rentCar.checkBudget('1', 2, 3), Error, 'Invalid input!');
-            assert.throws(()=>rentCar.checkBudget(1,'2',3), Error, 'Invalid input!');
-            assert.throws(()=>rentCar.checkBudget(1,2,'3'), Error, 'Invalid input!');
-        }); 
-
-        it('If the budget is bigger or equal to cost, function return: You rent a car!',()=>{
-            assert.equal(rentCar.checkBudget(10,10,150), 'You rent a car!');
-            assert.equal(rentCar.checkBudget(10,10,100), 'You rent a car!');
-        });
-
-
-        it('If the budget is less than cost, the function returns the message: You need a bigger budget!',()=>{
-            assert.equal(rentCar.checkBudget(10,10,95), 'You need a bigger budget!');
-        });
-
-    })
-
-});
-</script>
+<!-- 01. SoftBlog -->
+<div class="site">
+  <header>
+    <h1>SoftBlog</h1>
+    <section>
+    </section>
+  </header>
+  <div class="site-content">
+    <main>
+      <section>
+        <h2>Posts</h2>
+      </section>
+    </main>
+    <aside>
+      <section>
+        <h2>Create New Post</h2>
+        <form>
+          <p>
+            <label for="creator">Author</label>
+            <input type="text" id="creator">
+          </p>
+          <p>
+            <label for="title">Title</label>
+            <input type="text" id="title">
+          </p>
+          <p>
+            <label for="category">Category</label>
+            <input type="text" id="category">
+          </p>
+          <p>
+            <label for="content">Content</label>
+            <textarea name="content" id="content"></textarea>
+          </p>
+          <button class="btn create">Create</button>
+        </form>
+      </section>
+      <section class="archive-section">
+        <h2>Archive</h2>
+        <ol></ol>
+      </section>
+    </aside>
+  </div>
+  <footer>
+    <p>SoftBlog &copy; This is the best blog ever!</p>
+  </footer>
+</div>
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
