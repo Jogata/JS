@@ -4,1056 +4,144 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>URLSearchParams in JS</title> -->
-    <title>Crypto</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      /* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"); */
-      @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Kaushan+Script&family=Playfair+Display&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Brawler:wght@400;700&family=Croissant+One&family=Ephesis&family=Gloock&family=Hurricane&family=Imbue:opsz,wght@10..100,100..900&family=Modak&family=Montez&family=Prosto+One&family=Rye&family=Shojumaru&family=Young+Serif&family=ZCOOL+XiaoWei&display=swap');
-      @import url("https://fonts.googleapis.com/css2?family=Lora:ital@0;1&family=Poppins:wght@400;500;600&display=swap");
-
-      :root {
-        --primary-color: #100e17;
-        --primary-color-dark: #0c0b12;
-        --white: #ffffff;
-        /* --max-width: 1200px; */
-        --max-width: 75rem;
-        --background-gradient-1: linear-gradient(to right, #1a5fee, #10bae1);
-        --background-gradient-2: linear-gradient(to right, #0d1732, #0f2835);
-      }
-      
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      .section-container {
-        max-width: var(--max-width);
-        margin: auto;
-        padding: 5rem 1rem;
-      }
-      
-      .section-header {
-        margin-bottom: 1rem;
-        font-size: 2.5rem;
-        font-weight: 600;
-        text-align: center;
-      }
-        
-      .section-subheader {
-        /* max-width: 600px; */
-        max-width: 37.5rem;
-        margin: auto;
-        text-align: center;
-      }
-      
-      .gradient-header {
-        background: var(--background-gradient-1);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      
-      .btn {
-        padding: 1rem 2rem;
-        color: var(--white);
-        font-size: 1rem;
-        font-family: inherit;
-        outline: none;
-        border: none;
-        border-radius: 5px;
-        background: var(--background-gradient-1);
-        cursor: pointer;
-      }
-      
-      img {
-        width: 100%;
-        display: flex;
-      }
-      
-      a {
-        text-decoration: none;
-      }
-      
-      body {
-        color: var(--white);
-        font-family: "Roboto", sans-serif;
-  font-family: 'Abril Fatface', cursive;
-  font-family: 'Courgette', cursive;
-  font-family: 'Dancing Script', cursive;
-  font-family: 'Great Vibes', cursive;
-  font-family: 'Josefin Sans', sans-serif;
-  font-family: 'Limelight', cursive;
-  font-family: 'Lobster', cursive;
-  font-family: 'Montserrat', sans-serif;
-  font-family: 'Oleo Script Swash Caps', cursive;
-  font-family: 'Poppins', sans-serif;
-  font-family: 'Raleway', sans-serif;
-  font-family: 'Fraunces', serif;
-  font-family: 'Playfair Display', serif;
-  font-family: 'Lemon', cursive;
-  font-family: "Lora", serif;
-  font-family: "Shojumaru", system-ui;
-  font-family: "Montez", cursive;
-  font-family: "Modak", system-ui;
-  font-family: "Prosto One", sans-serif;
-  font-family: "Young Serif", serif;
-  font-family: "ZCOOL XiaoWei", sans-serif;
-  font-family: "Brawler", serif;
-  font-family: "Gloock", serif;
-  font-family: "Ephesis", cursive;
-  font-family: "Platypi", serif;
-  font-family: "Patua One", serif;
-  font-family: "Rye", serif;
-  font-family: "Arizonia", cursive;
-  font-family: "Imbue", serif;  
-  font-family: 'Kaushan Script', cursive;
-  font-family: "Hurricane", cursive;
-  font-family: Georgia, serif;
-  font-family: "Croissant One", serif;
-      }
-      
-      header {
-        background-image: url("assets/header.png");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-      }
-
-      nav {
-        max-width: var(--max-width);
-        margin: auto;
-        padding: 2rem 1rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      
-      .nav-logo {
-        font-size: 2rem;
-        font-weight: 600;
-      }
-      
-      .nav-links {
-        list-style: none;
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-      }
-        
-      .link a {
-        color: var(--white);
-      }
-      
-      .header-container {
-        padding-top: 4rem;
-        text-align: center;
-      }
-      
-      .header-container h1 {
-        /* max-width: 950px; */
-        max-width: 59.4rem;
-        margin: auto;
-        margin-bottom: 1rem;
-        font-size: 3.5rem;
-      }
-
-      .header-container p {
-        /* max-width: 850px; */
-        max-width: 53.2rem;
-        margin: auto;
-        margin-bottom: 4rem;
-      }
-      
-      .header-banner {
-        margin: 5rem 2rem 0;
-        padding: 2px;
-        border-radius: 5px;
-        background: var(--background-gradient-1);
-        transform: skewX(-10deg);
-      }
-      
-      .header-banner-grid {
-        padding: 2rem;
-        display: grid;
-        gap: 2rem;
-        grid-template-columns: repeat(3, 1fr);
-        border-radius: 5px;
-        background: var(--background-gradient-2);
-      }
-      
-      .header-banner p {
-        margin-bottom: 0;
-        font-size: 0.9rem;
-      }
-      
-      .header-banner h4 {
-        font-size: 2rem;
-        font-weight: 600;
-      }
-      
-      .rewards {
-        background-color: var(--primary-color);
-      }
-      
-      .rewards-container {
-        display: grid;
-        gap: 2rem;
-        align-items: center;
-        grid-template-columns: repeat(2, 1fr);
-      }
-      
-      .rewards-container :is(.section-header, .section-subheader) {
-        max-width: 100%;
-        text-align: left;
-      }
-      
-      .rewards-container .section-header sup {
-        font-size: 1rem;
-        font-weight: 500;
-      }
-      
-      .rewards-grid {
-        padding: 2px;
-        display: grid;
-        gap: 2px;
-        grid-template-columns: repeat(2, 1fr);
-        background: var(--background-gradient-2);
-      }
-
-      .rewards-card {
-        padding: 2rem;
-        display: flex;
-        gap: 1rem;
-        align-items: flex-start;
-        background-color: var(--primary-color);
-      }
-      
-      .rewards-card img {
-        /* max-width: 40px; */
-        max-width: 2.5rem;
-      }
-      
-      .rewards-card:hover {
-        background: var(--background-gradient-2);
-      }
-      
-      .rewards-details p {
-        margin-bottom: 5px;
-        font-size: 1.2rem;
-        font-weight: 500;
-      }
-      
-      .rewards-details h4 {
-        font-size: 2rem;
-        font-weight: 500;
-      }
-      
-      .holders {
-        background-color: var(--primary-color-dark);
-      }
-      
-      .holders-grid {
-        margin-top: 4rem;
-        display: grid;
-        gap: 2px;
-        grid-template-columns: repeat(3, 1fr);
-        background: var(--background-gradient-2);
-      }
-      
-      .holders-card {
-        padding: 2rem;
-        text-align: center;
-        background-color: var(--primary-color-dark);
-      }
-      
-      .holders-card span {
-        display: inline-block;
-        margin-bottom: 1rem;
-        padding: 1.5rem;
-        background-color: rgba(255, 255, 255, 0.05);
-        border-radius: 100%;
-      }
-      
-      .holders-card span img {
-        /* max-width: 50px; */
-        max-width: 3.1rem;
-      }
-      
-      .holders-card h4 {
-        font-size: 1.5rem;
-        font-weight: 400;
-      }
-
-      .holders-content {
-        /* max-width: 700px; */
-        max-width: 43.75rem;
-        margin: auto;
-        margin-top: 2rem;
-        padding: 2rem;
-        text-align: center;
-        border-radius: 10px;
-        background: var(--background-gradient-2);
-      }
-      
-      .work {
-        background-color: var(--primary-color);
-      }
-      
-      .work-subheader {
-        font-size: 1.2rem;
-        text-align: center;
-      }
-
-      .work-subheader span {
-        margin: 2rem;
-      }
-      
-      .work-grid {
-        margin-top: 4rem;
-        padding-bottom: 2px;
-        display: grid;
-        gap: 2px;
-        grid-template-columns: repeat(3, 1fr);
-        background: var(--background-gradient-2);
-      }
-      
-      .work-card {
-        padding: 2rem;
-        text-align: center;
-        background-color: var(--primary-color);
-      }
-      
-      .work-card span {
-        display: inline-block;
-        margin-bottom: 1rem;
-      }
-      
-      .work-card span img {
-        /* max-width: 50px; */
-        max-width: 3.1rem;
-      }
-      
-      .work-card h4 {
-        margin-bottom: 1rem;
-        font-size: 1.25rem;
-        font-weight: 500;
-      }
-      
-      .work-card p {
-        font-size: 0.9rem;
-      }
-      
-      .mission {
-        background-color: var(--primary-color);
-      }
-      
-      .mission-grid {
-        margin-top: 4rem;
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-      }
-      
-      .mission-list {
-        padding: 2px;
-        display: grid;
-        gap: 2px;
-        background: var(--background-gradient-2);
-      }
-      
-      .mission-list h4 {
-        padding: 1.5rem 1rem;
-        font-size: 1.2rem;
-        font-weight: 500;
-        background-color: var(--primary-color);
-      }
-      
-      .mission-list h4:hover {
-        background: var(--background-gradient-2);
-      }
-      
-      .mission-content {
-        padding: 2rem;
-        display: flex;
-        gap: 4rem;
-        align-items: center;
-        background: var(--background-gradient-2);
-      }
-      
-      .mission-content img {
-        /* max-width: 150px; */
-        max-width: 9.4rem;
-      }
-      
-      .faq {
-        background-color: var(--primary-color-dark);
-      }
-      
-      .question-accordian {
-        position: relative;
-        /* max-width: 900px; */
-        max-width: 56.25rem;
-        margin: 4rem auto 0;
-        display: grid;
-        gap: 2px;
-        isolation: isolate;
-      }
-      
-      .question-accordian::after {
-        position: absolute;
-        top: 2px;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background: var(--background-gradient-2);
-        z-index: -1;
-      }
-      
-      .question-box {
-        background-color: var(--primary-color-dark);
-      }
-      
-      .question-box .title {
-        padding: 2rem;
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        justify-content: space-between;
-      }
-      
-      .question-box .title p span {
-        display: inline-block;
-        margin-right: 1rem;
-        padding: 5px 10px;
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        border-radius: 100%;
-        background: var(--background-gradient-2);
-      }
-      
-      .question-box .title p {
-        font-size: 1.1rem;
-        font-weight: 500;
-      }
-
-      .question-box .title .icon {
-        padding: 5px 10px;
-        font-size: 1.2rem;
-        cursor: pointer;
-      }
-      
-      .question-box .content {
-        height: 0;
-        padding: 0 2rem;
-        background: var(--background-gradient-2);
-        transition: 0.5s;
-        overflow: hidden;
-      }
-      
-      .question-box.active .content {
-        /* height: 130px; */
-        height: 8.125rem;
-        padding: 2rem;
-      }
-      
-      .footer {
-        position: relative;
-        background: var(--background-gradient-2);
-        isolation: isolate;
-      }
-      
-      .footer::before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        height: 100%;
-        width: 100%;
-        background-image: linear-gradient(
-          to bottom,
-          var(--primary-color-dark),
-          rgba(0, 0, 0, 0)
-        );
-        z-index: -1;
-      }
-      
-      .footer-container {
-        display: grid;
-        grid-template-columns: 2fr repeat(2, 1fr) 2fr;
-        gap: 2rem;
-      }
-
-      .footer-col h3 {
-        margin-bottom: 2rem;
-        font-size: 1.5rem;
-        font-weight: 600;
-      }
-      
-      .footer-col p {
-        margin-bottom: 2rem;
-      }
-      
-      .footer-socials {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-      }
-      
-      .footer-socials span {
-        padding: 6px 11px;
-        font-size: 1.25rem;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 5px;
-        background: var(--background-gradient-2);
-        transition: 0.3s;
-        cursor: pointer;
-      }
-      
-      .footer-socials span:hover {
-        background: var(--background-gradient-1);
-      }
-      
-      .footer-col h4 {
-        margin-bottom: 2rem;
-        font-size: 1.25rem;
-        font-weight: 500;
-      }
-
-      .footer-col a {
-        display: block;
-        margin-bottom: 1rem;
-        color: var(--white);
-      }
-      
-      .footer-col form {
-        width: 100%;
-        /* max-width: 350px; */
-        max-width: 21.9rem;
-        padding: 5px;
-        display: flex;
-        align-items: center;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 5px;
-        background: var(--background-gradient-2);
-      }
-      
-      .footer-col input {
-        width: 100%;
-        padding: 0 1rem;
-        color: var(--white);
-        font-size: 1rem;
-        font-family: inherit;
-        outline: none;
-        border: none;
-        background-color: transparent;
-      }
-      
-      .footer-col input::placeholder {
-        color: var(--white);
-      }
-      
-      .footer-col .submit-btn {
-        padding: 10px 12px;
-        font-size: 1.5rem;
-      }
-      
-      /* 900px */
-      @media (width < 56.25rem) {
-        .nav-links {
-          display: none;
-        }
-      
-        .header-banner-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      
-        .header-banner-grid .col:nth-child(3) {
-          grid-area: 2/1/2/3;
-        }
-      
-        .rewards-container {
-          grid-template-columns: repeat(1, 1fr);
-        }
-      
-        .question-box.active .content {
-          height: 175px;
-        }
-      
-        .footer-container {
-          grid-template-columns: 2fr 1fr;
-        }
-      
-        .footer-col:nth-child(4) {
-          grid-area: 2/1/2/2;
-        }
-      }
-
-      /* 750px */
-      @media (width < 46.9rem) {
-        .holders-grid {
-          grid-template-columns: repeat(1, 1fr);
-        }
-      
-        .work-grid {
-          grid-template-columns: repeat(1, 1fr);
-        }
-      
-        .mission-grid {
-          grid-template-columns: repeat(1, 1fr);
-        }
-      }
-      
-      /* 600px  */
-      @media (width < 37.5rem) {
-        .header-banner-grid {
-          grid-template-columns: repeat(1, 1fr);
-        }
-      
-        .header-banner-grid .col:nth-child(3) {
-          grid-area: unset;
-        }
-      
-        .mission-content {
-          gap: 2rem;
-        }
-      
-        .question-box.active .content {
-          /* height: 250px; */
-          height: 15.625rem;
-        }
-      }
-
-      .test {
-        margin: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: 100vh;
-        justify-content: center;
-        font-family: sans-serif;
-        background: linear-gradient(135deg, purple 20%, orange 80%);
-      }
-
-      .menu {
-        background: lightgrey;
-        width: 300px;
-        opacity: 0.3;
-        border-radius: 5px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px;
-        cursor: pointer;
-      }
-      .menu .fa {
-          transition: transform .2s;
-      }
-      .menu p {
-        margin: 0 10px;
-        display: flex;
-        align-items: center;
-      }
-
-      .social-lists {
-        background: lightgray;
-        width: 300px;
-        padding: 10px;
-        opacity: 0.3;
-        list-style-type: none;
-        border-radius: 5px;
-      }
-      .social-lists li {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        transition: padding 0.2s linear;
-      }
-      .social-lists li:hover {
-        background: darkgray;
-        border-radius: 5px;
-        padding-left: 10px;
-      }
-      .social-lists li .fa {
-        margin: 0 10px;
-      }
-
-      .rotate .fa {
-        transform: rotate(180deg);
-      }
-
-      .hide {
-        visibility: hidden;
-      }
-    </style>
+    <title>URLSearchParams in JS</title>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
   </head>
   <body>
-    <header class="header">
-      
-      <nav>
-        <div class="nav-logo">
-          <a href="#" class="gradient-header">Crypto</a>
-        </div>
-        <ul class="nav-links">
-          <li class="link"><a href="#">Governance</a></li>
-          <li class="link"><a href="#">Security</a></li>
-          <li class="link"><a href="#">Documentation</a></li>
-          <li class="link"><a href="#">FAQ</a></li>
-        </ul>
-        <button class="btn">Launch App</button>
-      </nav>
+    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
-      <div class="section-container header-container">
-        <h1>Multi-Blockchain DeFi Earn And Borrow Across Networks</h1>
-        <p>
-          Whether it's earning interest on their digital assets or taking out
-          loans, individuals can now explore opportunities beyond the
-          limitations of a single blockchain.
-        </p>
-        <button class="btn">Launch App</button>
+<header>
+  <h2>JS Advanced Regular Exam - 13 March 2022</h2>
+  <a href="../../00exams/JS Advanced Regular Exam - 13 March 2022">Open folder</a>
+  03. Rent Car
+</header>
 
-        <div class="header-banner">
-          <div class="header-banner-grid">
-            <div class="col">
-              <p>Total Market Size</p>
-              <h4>$605.04M</h4>
-            </div>
-            <div class="col">
-              <p>Platform fees paid to RDNT lockers</p>
-              <h4>$11.91M</h4>
-            </div>
-            <div class="col">
-              <p>Looping APR on BNB</p>
-              <h4>~0%</h4>
-            </div>
-          </div>
-        </div>
+<script>
+  const rentCar = {
+    searchCar(shop, model) {
+        let findModel = [];
 
-      </div>
+        if (Array.isArray(shop) && typeof model == 'string') {
+            for (let i = 0; i < shop.length; i++) {
+                if (model == shop[i]) {
+                    findModel.push(shop[i]);
+                }
+            }
 
-    </header>
-    
-    <section class="rewards">
-      <div class="section-container rewards-container">
-        <div class="rewards-content">
-          <h2 class="section-header">
-            0%<sup>APR</sup><br />Industry Leading Rewards
-          </h2>
-          <p class="section-subheader">
-            Dynamic liquidity providers share platform fees captured in
-            blue-chip assets
-          </p>
-        </div>
-        <div class="rewards-grid">
-          <div class="rewards-card">
-            <img src="assets/usd.png" alt="rewards"/>
-            <div class="rewards-details">
-              <p>USDC</p>
-              <h4>0%</h4>
-            </div>
-          </div>
-          <div class="rewards-card">
-            <img src="assets/usd-circle.png" alt="rewards"/>
-            <div class="rewards-details">
-              <p>USDT</p>
-              <h4>0%</h4>
-            </div>
-          </div>
-          <div class="rewards-card">
-            <img src="assets/ethereum.png" alt="rewards"/>
-            <div class="rewards-details">
-              <p>ETH</p>
-              <h4>0%</h4>
-            </div>
-          </div>
-          <div class="rewards-card">
-            <img src="assets/token.png" alt="rewards"/>
-            <div class="rewards-details">
-              <p>BNB</p>
-              <h4>0%</h4>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+            if (findModel.length !== 0) {
+                return `There is ${findModel.length} car of model ${model} in the catalog!`;
+            } else {
+                throw new Error('There are no such models in the catalog!');
+            }
+        } else {
+            throw new Error('Invalid input!');
+        }
+    },
+    calculatePriceOfCar(model, days) {
+        let catalogue = {
+            Volkswagen: 20,
+            Audi: 36,
+            Toyota: 40,
+            BMW: 45,
+            Mercedes: 50
+        };
 
-    <section class="holders">
-      <div class="section-container holders-container">
-        <h2 class="section-header">Trusted by 32,000+ holders</h2>
-        <p class="section-subheader">
-          Battle-tested and audited by multiple leading security firms.
-          Radiant's security is of the highest priority.
-        </p>
-        <div class="holders-grid">
-          <div class="holders-card">
-            <span><img src="assets/security.png" alt="holder"/></span>
-            <h4>Better Security</h4>
-          </div>
-          <div class="holders-card">
-            <span><img src="assets/blockchain.png" alt="holder"/></span>
-            <h4>BlockSec</h4>
-          </div>
-          <div class="holders-card">
-            <span><img src="assets/time.png" alt="holder"/></span>
-            <h4>Better Uptime</h4>
-          </div>
-        </div>
-        <div class="holders-content">
-          BlockSec focuses on the security of the whole life cycle of smart
-          contracts, specializing in rigorous testing of economic attacks.
-        </div>
-      </div>
-    </section>
+        if (typeof model == 'string' && Number.isInteger(days)) {
+            if (catalogue.hasOwnProperty(model)) {
+                let cost = catalogue[model] * days;
+                return `You choose ${model} and it will cost $${cost}!`;
+            } else {
+                throw new Error('No such model in the catalog!');
+            }
+        } else {
+            throw new Error('Invalid input!');
+        }
+    },
+    checkBudget(costPerDay, days, budget) {
+        if (
+            !Number.isInteger(costPerDay) || 
+            !Number.isInteger(days) || 
+            !Number.isInteger(budget)
+        ) {
+            throw new Error('Invalid input!');
+        } else {
+            let cost = costPerDay * days;
 
-    <section class="work">
-      <div class="section-container work-container">
-        <h2 class="section-header">How It Works</h2>
-        <p class="work-subheader">
-          <span class="gradient-header">RDNT Lockers</span> Lenders & Borrowers
-        </p>
-        <div class="work-grid">
-          <div class="work-card">
-            <span><img src="assets/padlock.png" alt="work" /></span>
-            <h4>Lock $RDNT</h4>
-            <p>
-              Receive high revenue from interest and revenue flash loan fees
-            </p>
-          </div>
-          <div class="work-card">
-            <span><img src="assets/settings.png" alt="work" /></span>
-            <h4>Access Boosted Emissions</h4>
-            <p>
-              Locked liquidity activates lending and borrowing RNDT emissions
-            </p>
-          </div>
-          <div class="work-card">
-            <span><img src="assets/water-drops.png" alt="work" /></span>
-            <h4>$RDNT Liquidity</h4>
-            <p>Generate substantial income from interest and fees earned</p>
-          </div>
-        </div>
-      </div>
-    </section>
+            if (cost <= budget) {
+                return `You rent a car!`;
+            } else {
+                return 'You need a bigger budget!';
+            }
+        }
+    }
+}
 
-    <div class="test">
-      <div class="menu">
-        <p>Social Media</p>
-        <i class="fa fa-angle-down"></i>
-      </div>
-      <ul class="social-lists hide">
-        <li>
-          <i class="fa fa-facebook" style="color: blue"></i>
-          <p>Facebook</p>
-        </li>
-        <li>
-          <i class="fa fa-youtube" style="color: red"></i>
-          <p>YouTube</p>
-        </li>
-        <li>
-          <i class="fa fa-twitter" style="color: blue"></i>
-          <p>Twitter</p>
-        </li>
-        <li>
-          <i class="fa fa-linkedin" style="color: blue"></i>
-          <p>Linkedin</p>
-        </li>
-      </ul>
-      <script>
-          const menuEl = document.querySelector(".menu");
-          const menuTextEl = document.querySelector(".menu p");
-          const socialListsEl = document.querySelector(".social-lists");
-          const liEls = document.querySelectorAll(".social-lists li");
+describe("rentCar test suit", function () {
 
-          menuEl.addEventListener("click", () => {
-            socialListsEl.classList.toggle("hide");
-            menuEl.classList.toggle("rotate");
-          });
-
-          liEls.forEach((liEl) => {
-            liEl.addEventListener("click", () => {
-              menuTextEl.innerHTML = liEl.innerHTML;
-              socialListsEl.classList.add("hide");
-              menuEl.classList.toggle("rotate");
-            });
-          });
-      </script>
-    </div>
-
-    <section class="mission">
-      <div class="section-container mission-container">
-        <h2 class="section-header">Our Mission</h2>
-        <p class="section-subheader">
-          Multi-Blockchain DeFi allows user to seamlessly earn and borrow across
-          different blockchain networks. With the rise of decentralized finance
-        </p>
-        <div class="mission-grid">
-          <div class="mission-list">
-            <h4>Unify</h4>
-            <h4>Simplify</h4>
-            <h4>Innovate</h4>
-          </div>
-          <div class="mission-content">
-            <p>
-              The Radiant DAO's mission is to unify the billions in fragmented
-              liquidity across bitcoin money markets under one safe,
-              user-friendly, capital-efficient omnichain protocol.
-            </p>
-            <img src="assets/goal.png" alt="mission" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="faq">
-      <div class="section-container faq-container">
-        <h2 class="section-header">Frequently Asked Question</h2>
-        <p class="section-subheader">
-          Question and Answers. are listed questions and answers, all supposed
-          to be comonly asked in some context.
-        </p>
-        <div class="question-accordian">
-          <div class="question-box">
-            <div class="title">
-              <p>
-                <span>
-                  <i class="ri-question-mark"></i>
-                </span>
-                What is a crypto capital?
-              </p>
-              <span class="icon"><i class="ri-arrow-down-line"></i></span>
-            </div>
-            <div class="content">
-              In the past, there was a company called "Crypto Capital" that
-              claimed to be a payment processor for various cryptocurrency
-              exchanges. However, this company was later involved in legal
-              issues, and its operators were accused of money laundering and
-              other financial crimes.
-            </div>
-          </div>
-          <div class="question-box">
-            <div class="title">
-              <p>
-                <span>
-                  <i class="ri-question-mark"></i>
-                </span>
-                Where are the verified contracts?
-              </p>
-              <span class="icon"><i class="ri-arrow-down-line"></i></span>
-            </div>
-            <div class="content">
-              Verified contracts can often be found on blockchain explorers like
-              Etherscan or Etherchain. These explorers provide tools to verify
-              the source code of smart contracts deployed on the Ethereum
-              network, allowing users to review the code and ensure its
-              authenticity and safety.
-            </div>
-          </div>
-          <div class="question-box">
-            <div class="title">
-              <p>
-                <span>
-                  <i class="ri-question-mark"></i>
-                </span>
-                How is daily revenue distributed?
-              </p>
-              <span class="icon"><i class="ri-arrow-down-line"></i></span>
-            </div>
-            <div class="content">
-              In the ever-evolving landscape of the crypto market, revenue
-              distribution takes various forms, driven by the diversity of
-              cryptocurrencies and blockchain-based projects. Daily revenue is
-              primarily sourced from trading fees on cryptocurrency exchanges,
-              and transactions as fees.
-            </div>
-          </div>
-          <div class="question-box">
-            <div class="title">
-              <p>
-                <span>
-                  <i class="ri-question-mark"></i>
-                </span>
-                Why does the website occasionally not display certain data?
-              </p>
-              <span class="icon"><i class="ri-arrow-down-line"></i></span>
-            </div>
-            <div class="content">
-              In the dynamic world of cryptocurrencies, crypto websites
-              occasionally face challenges in displaying certain data, resulting
-              from various factors. Technical issues, such as server downtime or
-              high traffic during periods of intense market activity, can lead
-              to data unavailability.
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer class="footer">
-      <div class="section-container footer-container">
-        <div class="footer-col">
-          <h3><span class="gradient-header">Crypto</span></h3>
-          <p>
-            BlockSec focuses on the security of the whole life cycle of smart
-            contarcts, specializing in rigorous testing
-          </p>
-          <div class="footer-socials">
-            <span><i class="ri-facebook-fill"></i></span>
-            <span><i class="ri-linkedin-fill"></i></span>
-            <span><i class="ri-instagram-line"></i></span>
-            <span><i class="ri-twitter-fill"></i></span>
-          </div>
-        </div>
-        <div class="footer-col">
-          <h4>Useful Links</h4>
-          <a href="#">Governance</a>
-          <a href="#">Security</a>
-          <a href="#">Documentation</a>
-          <a href="#">FAQ</a>
-        </div>
-        <div class="footer-col">
-          <h4>Community</h4>
-          <a href="#">Help Center</a>
-          <a href="#">Partners</a>
-          <a href="#">Suggestion</a>
-          <a href="#">Blog</a>
-        </div>
-        <div class="footer-col">
-          <h4>Join Our Community</h4>
-          <p>
-            Joining a community is a wonderful way to connect with like-minded
-            individuals, share common interests.
-          </p>
-          <form action="#">
-            <input type="text" placeholder="Enter Email" />
-            <button class="btn submit-btn">
-              <i class="ri-send-plane-fill"></i>
-            </button>
-          </form>
-        </div>
-      </div>
-    </footer>
-
-    <script>
-      const questionBox = document.getElementsByClassName("question-box");
-  
-      for (let i = 0; i < questionBox.length; i++) {
-        questionBox[i].addEventListener("click", function () {
-          this.classList.toggle("active");
+    describe("searchCar", function () {
+        it("When there are matching elements return count", function () {
+            assert(rentCar.searchCar(["Volkswagen", "BMW", "Audi", "BMW"], 'BMW'),
+                'There is 2 car of model BMW in the catalog!');
+            assert(rentCar.searchCar(["Volkswagen", "BMW", "Audi", "BMW"], 'Audi'),
+                'There is 1 car of model Audi in the catalog!');
         });
-      }
-    </script>
 
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+        it('In case of submitted invalid parameters, throw an error "Invalid input!"', () => {
+            assert.throws(() => rentCar.searchCar(), Error, 'Invalid input!');
+            assert.throws(() => rentCar.searchCar(1, 2), Error, 'Invalid input!');
+            assert.throws(() => rentCar.searchCar('["A","B"]', null), Error, 'Invalid input!');
+        })
 
-<!-- <header> -->
-  <!-- <h2>JS Advanced Regular Exam - 13 March 2022</h2> -->
-  <!-- <a href="../../00exams/JS Advanced Regular Exam - 13 March 2022">Open folder</a> -->
-  <!-- 03. Rent Car -->
-<!-- </header> -->
+        it('If there are no matching elements, the function throw an error', () => {
+            assert.throws(() => rentCar.searchCar(["Volkswagen", "BMW", "Audi", "BMW"], 'Moskvich'),
+                Error, 'There are no such models in the catalog!');
+            assert.throws(() => rentCar.searchCar(["Volkswagen", "BMW", "Audi", "BMW"], 'Ford'),
+                Error, 'There are no such models in the catalog!');
+        })
+    });
+
+    describe('calculatePriceOfCar', () => {
+        it('In case of submitted invalid parameters, throw an error "Invalid input!"', () => {
+            assert.throws(() => rentCar.calculatePriceOfCar(), Error, 'Invalid input!');
+            assert.throws(() => rentCar.calculatePriceOfCar('Ford', 2.2), Error, 'Invalid input!');
+            assert.throws(() => rentCar.calculatePriceOfCar(null, 2), Error, 'Invalid input!');
+        });
+
+        it('returns the model and the price it will cost ', () => {
+            assert.equal(rentCar.calculatePriceOfCar('BMW', 2),
+                'You choose BMW and it will cost $90!');
+            assert.equal(rentCar.calculatePriceOfCar('Mercedes', 3),
+                'You choose Mercedes and it will cost $150!');
+        });
+
+        it('if there is no such model, the function throw an error: No such model in the catalog!',()=>{
+            assert.throws(()=>rentCar.calculatePriceOfCar('Lada', 10), Error, 'No such model in the catalog!');
+        });
+    });
+
+    describe('checkBudget', ()=>{
+        it('Validates input', ()=>{
+            assert.throws(()=>rentCar.checkBudget(), Error, 'Invalid input!');
+            assert.throws(()=>rentCar.checkBudget('1', 2, 3), Error, 'Invalid input!');
+            assert.throws(()=>rentCar.checkBudget(1,'2',3), Error, 'Invalid input!');
+            assert.throws(()=>rentCar.checkBudget(1,2,'3'), Error, 'Invalid input!');
+        }); 
+
+        it('If the budget is bigger or equal to cost, function return: You rent a car!',()=>{
+            assert.equal(rentCar.checkBudget(10,10,150), 'You rent a car!');
+            assert.equal(rentCar.checkBudget(10,10,100), 'You rent a car!');
+        });
+
+
+        it('If the budget is less than cost, the function returns the message: You need a bigger budget!',()=>{
+            assert.equal(rentCar.checkBudget(10,10,95), 'You need a bigger budget!');
+        });
+
+    })
+
+});
+</script>
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
