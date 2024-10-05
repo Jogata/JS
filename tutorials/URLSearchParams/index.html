@@ -4,425 +4,158 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URLSearchParams in JS</title>
+    <!-- <title>URLSearchParams in JS</title> -->
+    <title>Breadcrumbs</title>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-<style>
-  *, 
-  *:before, 
-  *:after {
-  margin:0;
-  padding: 0;
-  box-sizing: inherit;
-}
-html {
-  box-sizing: border-box;
-  color: #234465;
-  font-size: 20px;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-ol li {
-  list-style-type: square;
-  list-style-position: inside;
-}
-.site {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-header {
-  display: flex;
-  flex-wrap: wrap;
-  color: white;
-  border-bottom:0.2rem solid #234465;
-  background-color: #234465;
-}
-header h1 {
-  flex: 1 1 auto;
-  margin: 0.2em 0.2em 0em 0.5em;
-  border:none;
-}
-header section {
-  flex: 1 1 auto;
-  margin:0.5em 0.5em;
-  text-align: right;
-}
-.site-content {
-  display: flex;
-  flex-wrap: wrap;
-}
-p {
-  margin: 0.2em 0;
-}
-h2 {
-  margin: 0.5rem;
-  border-bottom: 0.1em solid #234465;
-}
-main, 
-aside {
-  margin: 1rem 1rem;
-  padding: 0.5em;
-  border: dashed 0.1rem #234465;
-  box-shadow: 0.5em 1em 0.5em 0em rgba(64, 73, 59, 0.281) ;
-}
-main {
-  flex: 1 1 65vw;
-  min-height: 50vh;
-}
-main article {
-  margin: 0.5rem;
-}
-.buttons {
-  text-align: right;
-}
-.btn {
-  padding: 0.5em 1em;
-  font-size: 0.8rem;
-  color:white;
-  border-radius: 0.5em;
-  font-weight: bold;
-  letter-spacing: 0.04em;
-  border: none;
-  transition: color 0.3s, 
-    background-color 0.3s;
-}
-.btn:hover {
-  color: white;
-  background-color: #4d657e;
-}
-aside{
-  flex: 1 1 25vw;
-}
-form > p, 
-button {
-  margin: 0.5rem;
-}
-input {
-   padding: 0.5em;
-   border: none;
-   border-bottom: solid 0.1rem #40493B;
- }
- form input {
-   width: 100%;
- }
- form textarea {
-   width: 100%;
-   height: 10rem;
-   border: solid 0.1rem #40493B
- }
- .archive-section > ol {
-   margin:1em;
- }
- footer {
-   padding: 0.8em ;
-   margin-top: auto;
-   border-top: solid #40493B;
- }
- .delete {
-   background-color: rgb(207, 58, 21);
- }
- .archive {
-   background-color: #A3AE9E;
- }
- .create {
-   background-color: #78C25E;
- }
- cite {
-   display: block;
-   font-size: 0.6em;
- }
- blockquote {
-   font-style: italic;
-   margin-right: 1em;
- }
-</style>
   </head>
   <body>
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
-
-<header>
-  <h2>JS Advanced Regular Exam - 20 February 2021</h2>
-  <a href="../../00exams/JS Advanced Regular Exam - 20 February 2021">Open folder</a>
-</header>
-
-<!-- 01. SoftBlog -->
-<div class="site" style="display: none;">
-  <header>
-    <h1>SoftBlog</h1>
-    <section>
-    </section>
-  </header>
-  <div class="site-content">
+    <nav class="breadcrumbs">
+      <ul>
+        <li>
+          <svg xmlns="http://www.w3.org/2000/svg" 
+            class="icon icon-tabler icon-tabler-grid-dots" 
+            width="30" height="30" viewBox="0 0 24 24" 
+            stroke-width="2" stroke="currentColor" 
+            stroke-linecap="round" stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M5 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M19 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M5 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+            <path d="M19 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+          </svg>
+        </li>
+        <li>
+          <p class="section-name-account active">My Account</p>
+        </li>
+        <li>
+          <svg xmlns="http://www.w3.org/2000/svg" 
+            class="icon icon-tabler icon-tabler-chevron-right" 
+            width="24" height="24" viewBox="0 0 24 24" 
+            stroke-width="1.5" stroke="currentColor" fill="none" 
+            stroke-linecap="round" stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M9 6l6 6l-6 6" />
+          </svg>
+          <p class="section-name-billing">Billing</p>
+        </li>
+        <li>
+          <svg xmlns="http://www.w3.org/2000/svg" 
+            class="icon icon-tabler icon-tabler-chevron-right" 
+            width="24" height="24" viewBox="0 0 24 24" 
+            stroke-width="1.5" stroke="currentColor" fill="none" 
+            stroke-linecap="round" stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M9 6l6 6l-6 6" />
+          </svg>
+          <p class="section-name-invoices">Invoices</p>
+        </li>
+      </ul>
+    </nav>
     <main>
-      <section>
-        <h2>Posts</h2>
+      <section class="account">
+          <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRT_ulFye0VE3Pn_98XpPKYHvlQBAprI0zQdWx3PRfKuxGr7Lfx" alt="" width="100" height="100">
+          <div class="profile-info">
+            <h2>John Smith</h2>
+            <h3>Manager</h3>
+            <div class="buttons-container">
+              <button class="view-profile">View Profile</button>
+              <button class="add-account">Add Account</button>
+            </div>
+          </div>
+      </section>
+      <section class="billing">
+        <h2>Billing 
+          <svg xmlns="http://www.w3.org/2000/svg" 
+            class="icon icon-tabler icon-tabler-chevron-right" 
+            width="24" height="24" viewBox="0 0 24 24" 
+            stroke-width="1.5" stroke="currentColor" fill="none" 
+            stroke-linecap="round" stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M9 6l6 6l-6 6" />
+          </svg>
+        </h2>
+        <div class="billing-info">
+          <div>
+          <h3>Your plan</h3>
+          <p class="plan-type">Professional</p>
+          <div class="buttons-container">
+           <button class="upgrade-plan">Upgrade Plan</button>
+            <a class="cancel-plan" href="#">Cancel Plan</a>
+          </div>
+        </div>
+        <section class="invoices">
+          <h2>Invoices 
+            <svg xmlns="http://www.w3.org/2000/svg" 
+              class="icon icon-tabler icon-tabler-chevron-right" 
+              width="24" height="24" viewBox="0 0 24 24" 
+              stroke-width="1.5" stroke="currentColor" fill="none" 
+              stroke-linecap="round" stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M9 6l6 6l-6 6" />
+            </svg>
+          </h2>
+          <ul class="invoices-list">
+            <li class="invoice">
+              <p class="date">
+                Jun 26, 2021
+              </p>
+              <p class="price">$25.00</p>
+              <a href="#" class="download">Download PDF</a>
+            </li>
+            <li class="invoice">
+              <p class="date">
+                Jun 29, 2021
+              </p>
+              <p class="price">$35.00</p>
+              <a href="#" class="download">Download PDF</a>
+            </li>
+            <li class="invoice">
+              <p class="date">
+                Aug 12, 2021
+              </p>
+              <p class="price">$20.00</p>
+              <a href="#" class="download">Download PDF</a>
+            </li>
+            <li class="invoice">
+              <p class="date">
+                Oct 30, 2021
+              </p>
+              <p class="price">$125.00</p>
+              <a href="#" class="download">Download PDF</a>
+            </li>
+            <li class="invoice">
+              <p class="date">
+                Nov 05, 2021
+              </p>
+              <p class="price">$25.00</p>
+              <a href="#" class="download">Download PDF</a>
+            </li>
+            <li>
+              <button class="show-all">Show all invoices</button>
+            </li>
+          </ul>
+        </section>
+      </div>
       </section>
     </main>
-    <aside>
-      <section>
-        <h2>Create New Post</h2>
-        <form>
-          <p>
-            <label for="creator">Author</label>
-            <input type="text" id="creator">
-          </p>
-          <p>
-            <label for="title">Title</label>
-            <input type="text" id="title">
-          </p>
-          <p>
-            <label for="category">Category</label>
-            <input type="text" id="category">
-          </p>
-          <p>
-            <label for="content">Content</label>
-            <textarea name="content" id="content"></textarea>
-          </p>
-          <button class="btn create">Create</button>
-        </form>
-      </section>
-      <section class="archive-section">
-        <h2>Archive</h2>
-        <ol></ol>
-      </section>
-    </aside>
-  </div>
-  <footer>
-    <p>SoftBlog &copy; This is the best blog ever!</p>
-  </footer>
-</div>
-<script>
-  function solve() {
-   const buttonCreate = document.querySelector('button.create');
-   const posts = document.querySelector('.site-content section');
-   const archive =document.querySelector('ol') ;
- 
-   buttonCreate.addEventListener('click', createPost);
- 
-   function createPost(e) {
-     e.preventDefault();
-     
-     let authorEl = document.querySelector('#creator');
-     let titleEl = document.querySelector('#title');
-     let categoryEl = document.querySelector('#category');
-     let contentEl = document.querySelector('#content');
- 
-     let titleValue = titleEl.value;
- 
-     if (
-      authorEl.value === '' || 
-      titleEl.value === '' || 
-      categoryEl.value === '' || 
-      contentEl.value === ''
-      ) {
-       return;
-     }
-     
-     const deleteBtn = el('button', 'Delete', {
-       className: 'btn delete'
-     });
- 
-     const archiveBtn = el('button', 'Archive', {
-       className: 'btn archive'
-     });
-     
-     archiveBtn.addEventListener('click', () =>{
-       let olEl = el('li',titleValue);
-       archive.appendChild(olEl);
-            
-       const items = [...archive.querySelectorAll('li')];
-       archive.innerHTML = '';
- 
-       items.sort((a, b) => a.textContent.localeCompare(b.textContent))
-          .forEach(e => archive.appendChild(e));
-       
-       posts.removeChild(article);
-     });
- 
-     deleteBtn.addEventListener('click', () => {
-       posts.removeChild(article);
-     });
- 
-     const article =
-       el('article', [
-         el('h1', titleEl.value),
-         el('p', ['Category: ', el('strong', categoryEl.value)]),
-         el('p', ['Creator: ', el('strong', authorEl.value)]),
-         el('p', contentEl.value),
-         el('div', [deleteBtn, archiveBtn], {
-           className: 'buttons'
-         })
-       ]);
-    
-     titleEl.value = '';
-     categoryEl.value = '';
-     authorEl.value = '';
-     contentEl.value = '';
-     
-     posts.appendChild(article);
-   }
   
-   function el(type, content, attributes) {
-     const result = document.createElement(type);
- 
-     if (attributes !== undefined) {
-       Object.assign(result, attributes);
-     }
- 
-     if (Array.isArray(content)) {
-       content.forEach(append);
-     } else {
-       append(content);
-     }
- 
-     function append(node) {
-       if (node === null) { node = ' '; }
-       if (typeof node === 'string' || typeof node === 'number') {
-         node = document.createTextNode(node);
-       }
-       result.appendChild(node);
-     }
-     return result;
-   }
- }
+    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
- document.addEventListener("load", solve);
-</script>
-
-<!-- 02. Story Problem -->
-<script>
-  class Story {
-    constructor(title, creator) {
-        this.title = title;
-        this.creator = creator;
-        this._comments = [];
-        this._likes = [];
-    }
- 
-    get likes() {
-        if (this._likes.length === 0) {
-            return `${this.title} has 0 likes`;
-        } else if (this._likes.length === 1) {
-            return `${this._likes[0]} likes this story!`;
-        }
- 
-        return `${this._likes[0]} and ${this._likes.slice(1).length} others like this story!`;
-    }
- 
-    like(username) {
-        if (this._likes.includes(username)) {
-            throw new Error("You can't like the same story twice!");
-        }
- 
-        if (username === this.creator) {
-            throw new Error("You can't like your own story!");
-        }
- 
-        this._likes.push(username);
-        return `${username} liked ${this.title}!`;
-    }
- 
-    dislike(username) {
-        if (!this._likes.includes(username)) {
-            throw new Error("You can't dislike this story!");
-        }
- 
-        this._likes = this._likes.filter(user => user !== username);
- 
-        return `${username} disliked ${this.title}`;
-    }
- 
-    comment(username, content, id) {
-        let comment = {
-            Id: id,
-            Username: username,
-            Content: content,
-            Replies: [],
-        };
- 
-        let commentWithId = this._comments.find(c => c.Id === id);
- 
-        if (commentWithId) {
-            let replyID = Number(commentWithId.Id + '.' + (commentWithId.Replies.length + 1));
-            let reply = {
-                Id: replyID,
-                Username: username,
-                Content: content,
-            };
- 
-            commentWithId.Replies.push(reply);
- 
-            return 'You replied successfully';
-        }
- 
-        comment.Id = this._comments.length + 1;
-        this._comments.push(comment);
- 
-        return `${username} commented on ${this.title}`;
-    }
- 
-    toString(sortingType) {
-        let result = [];
-        result.push(`Title: ${this.title}`);
-        result.push(`Creator: ${this.creator}`);
-        result.push(`Likes: ${this._likes.length}`);
-        result.push('Comments:');
- 
-        if (this._comments.length > 0) {
-            let sortedComments = this._sortCriteria(this._comments, sortingType);
-            result.push(this._sortThem(sortedComments, sortingType));
-        }
-
-      return result.join('\n');
-    }
- 
-    _sortCriteria(commentsOrReplies, criteria) {
-        let copyCommentsOrReplies = commentsOrReplies.slice();
-        let sortedCommentsOrReplies = null;
- 
-        if (criteria === 'asc') {
-            sortedCommentsOrReplies = copyCommentsOrReplies.sort((a, b) => a.Id - b.Id);
-        } else if (criteria === 'desc') {
-            sortedCommentsOrReplies = copyCommentsOrReplies.sort((a, b) => b.Id - a.Id);
-        } else if (criteria === 'username') {
-            sortedCommentsOrReplies = copyCommentsOrReplies.sort((a, b) => a.Username.localeCompare(b.Username));
-        }
- 
-        return sortedCommentsOrReplies;
-    }
- 
-    _sortThem(sortedComments, criteria) {
-        let commentAndReplies = [];
- 
-        for (let comment of sortedComments) {
-            commentAndReplies.push(`-- ${comment.Id}. ${comment.Username}: ${comment.Content}`);
- 
-            if (comment.Replies.length > 0) {
-                let sortedReplies = this._sortCriteria(comment.Replies, criteria);
-                sortedReplies.forEach(r => commentAndReplies.push(`--- ${r.Id}. ${r.Username}: ${r.Content}`));
-            }
-        }
- 
-        return commentAndReplies.join('\n');
-    }
- }
-
- let art = new Story("My Story", "Anny");
- art.like("John");
- console.log(art.likes);
- art.dislike("John");
- console.log(art.likes);
- art.comment("Sammy", "Some Content");
- console.log(art.comment("Ammy", "New Content"));
- art.comment("Zane", "Reply", 1);
- art.comment("Jessy", "Nice :)");
- console.log(art.comment("SAmmy", "Reply@", 1));
- console.log()
- console.log(art.toString('username'));
- console.log()
- art.like("Zane");
- console.log(art.toString('desc')); 
-</script>
+<!-- <header> -->
+  <!-- <h2>JS Advanced Exam Prep - 15 February 2021</h2> -->
+  <!-- <a href="../../00exams/JS Advanced Exam Prep - 15 February 2021">Open folder</a> -->
+<!-- </header> -->
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
@@ -431,7 +164,6 @@ input {
       // Create URLSearchParams Object from String
       const uspFromString = new URLSearchParams(queryStringSample);
       console.log(uspFromString);
-
 
       // Create Query String as Object
       const queryStringSampleAsObject = {
