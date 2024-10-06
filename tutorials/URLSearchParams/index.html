@@ -30,7 +30,7 @@
         font-family: "Mulish", sans-serif;
         background: linear-gradient(#3fa1f4, #7ed7ff);
       }
-
+    
       p {
         font-size: 1rem;
       }
@@ -147,6 +147,91 @@
       .upgrade-plan:hover,
       .show-all:hover {
         background-color: #b14264;
+      }
+    
+      .add-account {
+        color: #f0618c;
+        background-color: transparent;
+      }
+    
+      .add-account:hover {
+        border-color: #f0618c;
+      }
+    
+      .billing {
+        margin-top: 1.5rem
+      }
+    
+      .billing-info {
+        margin-top: 1rem;
+      }
+    
+      .billing h2,
+      .invoices h2 {
+        margin-bottom: 1rem;
+        padding: 0.5rem 1rem;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        font-size: 1.1rem;
+        border-radius: 1.5rem;
+        background-color: #f4f4f49b;
+        cursor: pointer;
+      }
+    
+      .billing h2 {
+        margin-bottom: unset;
+      }
+    
+      .billing-info div:not(.buttons-container) {
+        padding: 0 1rem;
+      }
+    
+      .plan-type {
+        margin-top: 0.5rem;
+        font-size: 1.3rem;
+      }
+    
+      .cancel-plan {
+        margin-left: 1rem;
+        color: #f0618c;
+      }
+    
+      a {
+        font-size: 0.8rem;
+      }
+    
+      .invoices-list {
+        list-style: none;
+        padding: 1rem;
+      }
+    
+      .invoices li {
+        padding: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.8rem;
+      }
+    
+      .invoices li a {
+        color: #f0618c;
+      }
+    
+      @media (max-width: 400px) {
+        .breadcrumbs {
+          padding: 0.8rem;
+        }
+    
+        main {
+          padding: 1rem;
+        }
+    
+        .account {
+          align-items: center;
+          flex-direction: column;
+          text-align: center;
+        }
       }
     </style>
   </head>
@@ -289,6 +374,79 @@
         </section>
       </div>
       </section>
+      <script>
+        const BILLING_DROPDOWN = document.querySelector(".billing h2");
+        const BILLING_INFO = document.querySelector(".billing-info");
+        const BILLING_CHEVRON = BILLING_DROPDOWN.querySelector(".icon-tabler");
+        const INVOICES_DROPDOWN = document.querySelector(".invoices h2");
+        const INVOICES_LIST = document.querySelector(".invoices-list");
+        const INVOICES_CHEVRON = INVOICES_DROPDOWN.querySelector(".icon-tabler");
+        const BREADCRUMBS = [...document.querySelectorAll(".breadcrumbs ul li p")];
+
+        function openSection(section, chevron, crumb) {
+          BREADCRUMBS.forEach((crumb) => {
+            crumb.classList.remove("active");
+          });
+
+          if (crumb === "billing" && section.classList.contains("open")) {
+            section.classList.toggle("open");
+            chevron.classList.toggle("open-chevron");
+            document.querySelector(
+              `.section-name-${crumb}`
+            ).parentElement.style.visibility = "hidden";
+            document.querySelector(
+              `.section-name-invoices`
+            ).parentElement.style.visibility = "hidden";
+            document.querySelector(`.section-name-${crumb}`).classList.remove("active");
+            document.querySelector(`.section-name-account`).classList.add("active");
+
+            if (INVOICES_LIST.classList.contains('open')) {
+              INVOICES_CHEVRON.classList.toggle('open-chevron');
+              INVOICES_LIST.classList.toggle('open');
+            }
+          } else if (crumb === "billing" && !section.classList.contains("open")) {
+            section.classList.toggle("open");
+            chevron.classList.toggle("open-chevron");
+            document.querySelector(`.section-name-${crumb}`).classList.add("active");
+            document.querySelector(
+              `.section-name-${crumb}`
+            ).parentElement.style.visibility = "visible";
+            INVOICES_LIST.parentElement.classList.toggle("open");
+          }
+
+          if (crumb === "invoices" && section.classList.contains("open")) {
+            section.classList.toggle("open");
+            chevron.classList.toggle("open-chevron");
+            document.querySelector(
+              `.section-name-${crumb}`
+            ).parentElement.style.visibility = "hidden";
+            document.querySelector(
+              `.section-name-billing`
+            ).parentElement.classList.add('active');
+          } else if (crumb === "invoices" && !section.classList.contains("open")) {
+            section.classList.toggle("open");
+            chevron.classList.toggle("open-chevron");
+            document.querySelector(`.section-name-${crumb}`).classList.add("active");
+            document.querySelector(
+              `.section-name-billing`
+            ).parentElement.classList.remove('active');
+            document.querySelector(
+              `.section-name-${crumb}`
+            ).parentElement.style.visibility = "visible";
+          }
+        }
+
+        // Open billing section
+        BILLING_DROPDOWN.addEventListener("click", () =>
+          openSection(BILLING_INFO, BILLING_CHEVRON, "billing")
+        );
+
+        // Open invoices section
+        INVOICES_DROPDOWN.addEventListener("click", () =>
+          openSection(INVOICES_LIST, INVOICES_CHEVRON, "invoices")
+        );
+      </script>
+    
     </main>
   
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
