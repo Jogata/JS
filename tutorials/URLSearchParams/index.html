@@ -4,452 +4,148 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>URLSearchParams in JS</title> -->
-    <title>Breadcrumbs</title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
+    <title>URLSearchParams in JS</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
-    <style>
-      *,
-      *::before,
-      *::after {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-    
-      body {
-        min-height: 100vh;
-        padding: 5rem 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        font-family: "Mulish", sans-serif;
-        background: linear-gradient(#3fa1f4, #7ed7ff);
-      }
-    
-      p {
-        font-size: 1rem;
-      }
-    
-      .breadcrumbs,
-      main {
-        width: 90%;
-        max-width: 500px;
-        padding: 1rem 2rem;
-        border-radius: 2rem;
-        background-color: #fff;
-        box-shadow: 0 1rem 1rem #1b69ae8a;
-      }
-    
-      .billing-info,
-      .invoices-list {
-        display: none;
-      }
-    
-      .open {
-        display: block;
-      }
-    
-      .open-chevron {
-        transform: rotate(90deg);
-      }
-    
-      .breadcrumbs {
-        margin-bottom: 2rem;
-        color: #adadad;
-      }
-    
-      .icon-tabler-grid-dots {
-        color: #f0618c;
-        cursor: pointer;
-      }
-    
-      .breadcrumbs ul {
-        list-style: none;
-        display: flex;
-        gap: 0.8rem;
-        align-items: center;
-      }
-    
-      .breadcrumbs ul li {
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-        font-size: 0.8rem;
-        text-align: center;
-      }
-    
-      .breadcrumbs ul li:has(.section-name-billing),
-      .breadcrumbs ul li:has(.section-name-invoices) {
-        visibility: hidden;
-      }
-    
-      .active {
-        color: #f0618c;
-        font-weight: 700;
-      }
-    
-      main {
-        padding: 2rem;
-      }
-    
-      .account {
-        padding: 2.5rem 1rem;
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        justify-content: center;
-        border-radius: 1.2rem;
-        background-color: #f4f4f49b;
-      }
-    
-      img {
-        border-radius: 50%;
-        filter: drop-shadow(0 0 0.25rem #506e8b);
-      }
-    
-      h2 {
-        font-size: 1.4rem;
-      }
-    
-      h3 {
-        font-size: 1rem;
-      }
-    
-      .buttons-container {
-        margin: 1rem 0;
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-      }
-    
-      button {
-        padding: 0.6rem 0.8rem;
-        font-size: 0.7rem;
-        border-radius: 0.25rem;
-        border: 1px solid transparent;
-        transition: 0.5s;
-        cursor: pointer;
-      }
-    
-      .view-profile,
-      .upgrade-plan,
-      .show-all {
-        color: #fff;
-        background-color: #f0618c;
-      }
-    
-      .view-profile:hover,
-      .upgrade-plan:hover,
-      .show-all:hover {
-        background-color: #b14264;
-      }
-    
-      .add-account {
-        color: #f0618c;
-        background-color: transparent;
-      }
-    
-      .add-account:hover {
-        border-color: #f0618c;
-      }
-    
-      .billing {
-        margin-top: 1.5rem
-      }
-    
-      .billing-info {
-        margin-top: 1rem;
-      }
-    
-      .billing h2,
-      .invoices h2 {
-        margin-bottom: 1rem;
-        padding: 0.5rem 1rem;
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        font-size: 1.1rem;
-        border-radius: 1.5rem;
-        background-color: #f4f4f49b;
-        cursor: pointer;
-      }
-    
-      .billing h2 {
-        margin-bottom: unset;
-      }
-    
-      .billing-info div:not(.buttons-container) {
-        padding: 0 1rem;
-      }
-    
-      .plan-type {
-        margin-top: 0.5rem;
-        font-size: 1.3rem;
-      }
-    
-      .cancel-plan {
-        margin-left: 1rem;
-        color: #f0618c;
-      }
-    
-      a {
-        font-size: 0.8rem;
-      }
-    
-      .invoices-list {
-        list-style: none;
-        padding: 1rem;
-      }
-    
-      .invoices li {
-        padding: 0.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        font-size: 0.8rem;
-      }
-    
-      .invoices li a {
-        color: #f0618c;
-      }
-    
-      @media (max-width: 400px) {
-        .breadcrumbs {
-          padding: 0.8rem;
-        }
-    
-        main {
-          padding: 1rem;
-        }
-    
-        .account {
-          align-items: center;
-          flex-direction: column;
-          text-align: center;
-        }
-      }
-    </style>
   </head>
   <body>
-    <nav class="breadcrumbs">
-      <ul>
-        <li>
-          <svg xmlns="http://www.w3.org/2000/svg" 
-            class="icon icon-tabler icon-tabler-grid-dots" 
-            width="30" height="30" viewBox="0 0 24 24" 
-            stroke-width="2" stroke="currentColor" 
-            stroke-linecap="round" stroke-linejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path d="M5 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-            <path d="M12 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-            <path d="M19 5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-            <path d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-            <path d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-            <path d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-            <path d="M5 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-            <path d="M12 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-            <path d="M19 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-          </svg>
-        </li>
-        <li>
-          <p class="section-name-account active">My Account</p>
-        </li>
-        <li>
-          <svg xmlns="http://www.w3.org/2000/svg" 
-            class="icon icon-tabler icon-tabler-chevron-right" 
-            width="24" height="24" viewBox="0 0 24 24" 
-            stroke-width="1.5" stroke="currentColor" fill="none" 
-            stroke-linecap="round" stroke-linejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path d="M9 6l6 6l-6 6" />
-          </svg>
-          <p class="section-name-billing">Billing</p>
-        </li>
-        <li>
-          <svg xmlns="http://www.w3.org/2000/svg" 
-            class="icon icon-tabler icon-tabler-chevron-right" 
-            width="24" height="24" viewBox="0 0 24 24" 
-            stroke-width="1.5" stroke="currentColor" fill="none" 
-            stroke-linecap="round" stroke-linejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path d="M9 6l6 6l-6 6" />
-          </svg>
-          <p class="section-name-invoices">Invoices</p>
-        </li>
-      </ul>
-    </nav>
-    <main>
-      <section class="account">
-          <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRT_ulFye0VE3Pn_98XpPKYHvlQBAprI0zQdWx3PRfKuxGr7Lfx" alt="" width="100" height="100">
-          <div class="profile-info">
-            <h2>John Smith</h2>
-            <h3>Manager</h3>
-            <div class="buttons-container">
-              <button class="view-profile">View Profile</button>
-              <button class="add-account">Add Account</button>
-            </div>
+    <header id="home">
+      <nav>
+        <div class="nav-bar">
+          <div class="nav-logo">
+            <a href="#">Raido.</a>
           </div>
-      </section>
-      <section class="billing">
-        <h2>Billing 
-          <svg xmlns="http://www.w3.org/2000/svg" 
-            class="icon icon-tabler icon-tabler-chevron-right" 
-            width="24" height="24" viewBox="0 0 24 24" 
-            stroke-width="1.5" stroke="currentColor" fill="none" 
-            stroke-linecap="round" stroke-linejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path d="M9 6l6 6l-6 6" />
-          </svg>
-        </h2>
-        <div class="billing-info">
-          <div>
-          <h3>Your plan</h3>
-          <p class="plan-type">Professional</p>
-          <div class="buttons-container">
-           <button class="upgrade-plan">Upgrade Plan</button>
-            <a class="cancel-plan" href="#">Cancel Plan</a>
-          </div>
-        </div>
-        <section class="invoices">
-          <h2>Invoices 
-            <svg xmlns="http://www.w3.org/2000/svg" 
-              class="icon icon-tabler icon-tabler-chevron-right" 
-              width="24" height="24" viewBox="0 0 24 24" 
-              stroke-width="1.5" stroke="currentColor" fill="none" 
-              stroke-linecap="round" stroke-linejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-              <path d="M9 6l6 6l-6 6" />
-            </svg>
-          </h2>
-          <ul class="invoices-list">
-            <li class="invoice">
-              <p class="date">
-                Jun 26, 2021
-              </p>
-              <p class="price">$25.00</p>
-              <a href="#" class="download">Download PDF</a>
+          <ul class="nav-links">
+            <li class="link">
+              <a href="#home">Home</a>
             </li>
-            <li class="invoice">
-              <p class="date">
-                Jun 29, 2021
-              </p>
-              <p class="price">$35.00</p>
-              <a href="#" class="download">Download PDF</a>
+            <li class="link">
+              <a href="#about">About Us</a>
             </li>
-            <li class="invoice">
-              <p class="date">
-                Aug 12, 2021
-              </p>
-              <p class="price">$20.00</p>
-              <a href="#" class="download">Download PDF</a>
+            <li class="link">
+              <a href="#discover">Discover</a>
             </li>
-            <li class="invoice">
-              <p class="date">
-                Oct 30, 2021
-              </p>
-              <p class="price">$125.00</p>
-              <a href="#" class="download">Download PDF</a>
+            <li class="link">
+              <a href="#blog">Blog</a>
             </li>
-            <li class="invoice">
-              <p class="date">
-                Nov 05, 2021
-              </p>
-              <p class="price">$25.00</p>
-              <a href="#" class="download">Download PDF</a>
+            <li class="link">
+              <a href="#journals">Journals</a>
             </li>
-            <li>
-              <button class="show-all">Show all invoices</button>
+            <li class="link">
+              <a href="#gallery">Gallery</a>
+            </li>
+            <li class="link">
+              <a href="#contact">Contact</a>
+            </li>
+            <li class="link search">
+              <span><i class="ri-search-line"></i></span>
             </li>
           </ul>
-        </section>
+        </div>
+      </nav>
+      <div class="section-container header-container">
+        <h1>The new way to plan your next adventure</h1>
+        <h2>Explore the colourful world</h2>
+        <button class="btn">
+          Explore More <i class="ri-arrow-right-line"></i>
+        </button>
       </div>
-      </section>
-      <script>
-        const BILLING_DROPDOWN = document.querySelector(".billing h2");
-        const BILLING_INFO = document.querySelector(".billing-info");
-        const BILLING_CHEVRON = BILLING_DROPDOWN.querySelector(".icon-tabler");
-        const INVOICES_DROPDOWN = document.querySelector(".invoices h2");
-        const INVOICES_LIST = document.querySelector(".invoices-list");
-        const INVOICES_CHEVRON = INVOICES_DROPDOWN.querySelector(".icon-tabler");
-        const BREADCRUMBS = [...document.querySelectorAll(".breadcrumbs ul li p")];
+    </header>
+    <section class="about" id="about">
+      <div class="section-container about-container">
+        <div class="about-content">
+          <h2 class="section-header">About us</h2>
+          <p class="section-subheader">
+            Our mission is to ignite the spirit of discovery in every traveler's
+            heart, offering meticulously crafted itineraries that blend
+            adrenaline-pumping activities with awe-inspiring landscapes. With a
+            team of seasoned globetrotters, we ensure that every expedition is
+            infused with excitement, grace our planet. Embark on a voyage of a
+            lifetime with us, as we redefine the art of exploration.
+          </p>
+          <div class="about-flex">
+            <div class="about-card">
+              <h4>268</h4>
+              <p>Completed Trips</p>
+            </div>
+            <div class="about-card">
+              <h4>176</h4>
+              <p>Tour Guides</p>
+            </div>
+            <div class="about-card">
+              <h4>153</h4>
+              <p>Destinations</p>
+            </div>
+          </div>
+          <button class="btn">
+            Read More <i class="ri-arrow-right-line"></i>
+          </button>
+        </div>
+        <div class="about-image">
+          <img src="./images/assets/about.jpg" alt="about" />
+        </div>
+      </div>
+    </section>
+    <section class="discover" id="discover">
+      <div class="section-container discover-container">
+        <h2 class="section-header">Discover the most engaging places</h2>
+        <p class="section-subheader">
+          Let's see the world with us with you and your family.
+        </p>
+        <div class="discover-grid">
+          <div class="discover-card">
+            <div class="discover-image">
+              <img src="./images/assets/discover-1.jpg" alt="discover" />
+            </div>
+            <div class="discover-card-content">
+              <h4>Norway</h4>
+              <p>
+                Discover the untamed beauty of Norway, a land where rugged
+                mountains, and enchanting northern lights paint a surreal
+                backdrop.
+              </p>
+              <button class="discover-btn">
+                Discover More <i class="ri-arrow-right-line"></i>
+              </button>
+            </div>
+          </div>
+          <div class="discover-card">
+            <div class="discover-image">
+              <img src="./images/assets/discover-2.jpg" alt="discover" />
+            </div>
+            <div class="discover-card-content">
+              <h4>London</h4>
+              <p>
+                From urban rock climbing to twilight cycling through royal
+                parks, London beckons adventure enthusiasts to embrace
+                opportunities.
+              </p>
+              <button class="discover-btn">
+                Discover More <i class="ri-arrow-right-line"></i>
+              </button>
+            </div>
+          </div>
+          <div class="discover-card">
+            <div class="discover-image">
+              <img src="./images/assets/discover-3.jpg" alt="discover" />
+            </div>
+            <div class="discover-card-content">
+              <h4>Japan</h4>
+              <p>
+                From scaling the iconic peaks of Mount Fuji to immersing in the
+                serenity, Japan offers adventurers a captivating cultural
+                treasures.
+              </p>
+              <button class="discover-btn">
+                Discover More <i class="ri-arrow-right-line"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        function openSection(section, chevron, crumb) {
-          BREADCRUMBS.forEach((crumb) => {
-            crumb.classList.remove("active");
-          });
-
-          if (crumb === "billing" && section.classList.contains("open")) {
-            section.classList.toggle("open");
-            chevron.classList.toggle("open-chevron");
-            document.querySelector(
-              `.section-name-${crumb}`
-            ).parentElement.style.visibility = "hidden";
-            document.querySelector(
-              `.section-name-invoices`
-            ).parentElement.style.visibility = "hidden";
-            document.querySelector(`.section-name-${crumb}`).classList.remove("active");
-            document.querySelector(`.section-name-account`).classList.add("active");
-
-            if (INVOICES_LIST.classList.contains('open')) {
-              INVOICES_CHEVRON.classList.toggle('open-chevron');
-              INVOICES_LIST.classList.toggle('open');
-            }
-          } else if (crumb === "billing" && !section.classList.contains("open")) {
-            section.classList.toggle("open");
-            chevron.classList.toggle("open-chevron");
-            document.querySelector(`.section-name-${crumb}`).classList.add("active");
-            document.querySelector(
-              `.section-name-${crumb}`
-            ).parentElement.style.visibility = "visible";
-            INVOICES_LIST.parentElement.classList.toggle("open");
-          }
-
-          if (crumb === "invoices" && section.classList.contains("open")) {
-            section.classList.toggle("open");
-            chevron.classList.toggle("open-chevron");
-            document.querySelector(
-              `.section-name-${crumb}`
-            ).parentElement.style.visibility = "hidden";
-            document.querySelector(
-              `.section-name-billing`
-            ).parentElement.classList.add('active');
-          } else if (crumb === "invoices" && !section.classList.contains("open")) {
-            section.classList.toggle("open");
-            chevron.classList.toggle("open-chevron");
-            document.querySelector(`.section-name-${crumb}`).classList.add("active");
-            document.querySelector(
-              `.section-name-billing`
-            ).parentElement.classList.remove('active');
-            document.querySelector(
-              `.section-name-${crumb}`
-            ).parentElement.style.visibility = "visible";
-          }
-        }
-
-        // Open billing section
-        BILLING_DROPDOWN.addEventListener("click", () =>
-          openSection(BILLING_INFO, BILLING_CHEVRON, "billing")
-        );
-
-        // Open invoices section
-        INVOICES_DROPDOWN.addEventListener("click", () =>
-          openSection(INVOICES_LIST, INVOICES_CHEVRON, "invoices")
-        );
-      </script>
-    
-    </main>
-  
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
 
 <!-- <header> -->
   <!-- <h2>JS Advanced Exam Prep - 15 February 2021</h2> -->
