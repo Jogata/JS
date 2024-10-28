@@ -4,315 +4,143 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-<style>
-  body {
-    background-position: center;
-    background-image: url("./images/login/homeImage.jpeg");
-    font-family: Georgia, 'Times New Roman', Times, serif;
-  }
-
-  h1 {
-    display: block;
-    margin: auto;
-    padding: 10px;
-    color: red;
-    font-size: 50px;
-    text-align: center;
-  }
-
-  h2 {
-    color: white;
-    font-size: 30px;
-  }
-
-  li {
-    list-style-type: square;
-    color: white;
-    font-size: 19px;
-    text-align: left;
-  }
-
-  .giftsInput {
-    position: relative;
-    display: block;
-    width: 100%;
-    margin-left: 3.5%;
-  }
-
-  .giftText {
-    font-size: 17px;
-  }
-
-  section {
-    position: relative;
-    width: 25%;
-    margin: auto;
-    padding: 10px;
-    color: white;
-    text-align: center;
-    border-radius: 20px;
-    background-color: rgb(255, 0, 0, 0.777);
-  }
-
-  .container {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .card {
-    float: left;
-    min-height: 150px;
-    margin-top: 30px;
-    margin-right: 30px;
-    margin-left: 150px;
-  }
-
-  .addGifts {
-    float: left;
-    min-height: 150px;
-    margin-top: 30px;
-    margin-right: 30px;
-    margin-left: 150px;
-  }
-
-  .giftsList {
-    float: right;
-    min-height: 150px;
-    margin-top: 30px;
-    margin-left: 30px;
-    margin-right: 150px;
-  }
-
-  .sentGifts {
-    float: left;
-    min-height: 150px;
-    margin-top: 30px;
-    margin-right: 30px;
-    margin-left: 150px;
-  }
-
-  .discardedGifts {
-    float: right;
-    min-height: 150px;
-    margin-top: 30px;
-    margin-left: 30px;
-    margin-right: 150px;
-  }
-
-  .addButton {
-    color: white;
-    font-size: 17px;
-    border-radius: 10px;
-    border-color: white;
-    /* background-color: transparent; */
-    background-color: rgb(255, 0, 0);
-  }
-
-  .sendButton {
-    color: white;
-    font-size: 15px;
-    border-color: white;
-    border-radius: 10px;
-    /* background-color: transparent; */
-    background-color: green;
-  }
-
-  .discardButton {
-    color: black;
-    font-size: 15px;
-    border-color: white;
-    border-radius: 10px;
-    /* background-color: transparent; */
-    background-color: darkgrey;
-  }
-
-  .test {
-    width: 300px;
-    margin: 5rem auto;
-    /* display: flex; */
-    /* flex-direction: column; */
-    border-top: 5px solid #009578;
-    border-bottom: 5px solid #009578;
-    background-color: white;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.15);
-  }
-  
-  .todo {
-    padding: 1em;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .todo-value {
-    flex-grow: 1;
-    font-size: 1em;
-    font-family: 'Quicksand', sans-serif;
-    font-weight: bold;
-    border: none;
-    outline: none;
-    background-color: transparent;
-  }
-  
-  .todo:has(.todo-checkbox:checked) {
-    order: 1;
-    color: #555555;
-    text-decoration: line-through;
-    background-color: #eeeeee;
-  }
-
-  header {
-    display: none;
-  }
-
-  h1:first-child {
-    display: none;
-  }
-</style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
-    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+    <header id="header">
+      <nav id="nav">
+        <ul>
+          <!-- "fade-up" duration="1000"> -->
+          <li class="fade-up">
+            <a href="#home">Home</a>
+          </li>
+          <!-- "fade-up" duration="1100"> -->
+          <li class="fade-up">
+            <a href="#about">About</a>
+          </li>
+          <!-- "fade-up" duration="1200"> -->
+          <li class="fade-up">
+            <a href="#product">Product</a>
+          </li>
+          <!-- "fade-up" duration="1300"> -->
+          <li class="fade-up">
+            <a href="#contact">Contact</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="logo">
+        <img src="./images/leaf.png" alt="Logo">
+        Skin<span>Care</span>
+      </div>
+      <div class="cart">
+        <!-- "fade-up" duration="1000"  -->
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <i class="fa-solid fa-bag-shopping"></i>
+      </div>
+      <div class="bars" id="bars">
+        <i class="fa-solid fa-bars-staggered"></i>
+      </div>
+    </header>
+    <section class="wrapper" id="home">
+      <div class="hero" id="hero">
+        <img src="./images/leaf2.png" alt="" class="leaf leaf1">
+        <img src="./images/leaf2.png" alt="" class="leaf leaf2">
+        <div class="hero-info">
+          <!-- "fade-right" duration="1000" -->
+          <h1 class="fade-right">Mack your Skin , Shine & Glowing</h1>
+          <!-- "fade-right" duration="1100" -->
+          <p class="fade-right">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
+            optio consectetur adipisicing elit. Esse, optio.
+          </p>
+          <!-- "fade-right" duration="1200" -->
+          <button class="btn fade-right">Shop Now</button>
+        </div>
+        <!-- duration="1000" -->
+        <div class="hero-img fade-left">
+          <img src="./images/combo.png" alt="">
+        </div>
+      </div>
+    </section>
+    <section class="wrapper about-wrapper" id="product">
+      <div class="about">
+        <div class="about-img">
+          <img src="./images/cosmetic2.png" alt="">
+        </div>
+        <div class="about-info">
+          <!-- "fade-right" duration="800" -->
+          <h1 class="fade-right">Skin Shine Cream</h1>
+          <!-- "fade-right" duration=900"" -->
+          <p class="fade-right">By <span>Dr. Smith</span></p>
+          <div class="rating">
+            <!-- "fade-up" duration="800" -->
+            <i class="fa fa-star fade-up"></i>
+            <!-- "fade-up" duration="900" -->
+            <i class="fa fa-star fade-up"></i>
+            <!-- "fade-up" duration="1000" -->
+            <i class="fa fa-star fade-up"></i>
+            <!-- "fade-up" duration="1100" -->
+            <i class="fa fa-star fade-up"></i>
+            <!-- "fade-up" duration="1200" -->
+            <i class="fa fa-star fade-up"></i>
+          </div>
+          <!-- "fade-right" duration="1000" -->
+          <h2 class="fade-right">$ 119.99 <span>$199</span></h2>
+          <!-- "fade-right" duration="1100" -->
+          <p class="fade-right">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Dignissimos adipisci sed consequatur tenetur officia suscipit, 
+            sequi voluptatem vero amet. Vero veritatis in necessitatibus.
+          </p>
+          <!-- "fade-right" duration="1200"  -->
+          <button class="btn fade-right">Buy Now</button>
+        </div>
+      </div>
+    </section>
+    <section class="wrapper about-wrapper">
+      <div class="about about2">
+        <div class="about-info">
+          <!-- "fade-right" duration="800" -->
+          <h1 class="fade-right">Skin Shine Lotion</h1>
+          <!-- "fade-right" duration="1000" -->
+          <p class="fade-right">By <span>Dr. Smith</span></p>          
+          <div class="rating">
+            <!-- "fade-up" duration="800" -->
+            <i class="fa fa-star fade-up"></i>
+            <!-- "fade-up" duration="900" -->
+            <i class="fa fa-star fade-up"></i>
+            <!-- "fade-up" duration="1000" -->
+            <i class="fa fa-star fade-up"></i>
+            <!-- "fade-up" duration="1100" -->
+            <i class="fa fa-star fade-up"></i>
+            <!-- "fade-up" duration="1200" -->
+            <i class="fa fa-star fade-up"></i>
+          </div>
+          <!-- "fade-right" duration="1100" -->
+          <h2 class="fade-right">$ 89.99 <span>$100</span></h2>
+          <!-- "fade-right" duration="1200" -->
+          <p class="fade-right">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Dignissimos adipisci sed consequatur tenetur officia suscipit, 
+            sequi voluptatem vero amet. Vero veritatis in necessitatibus.
+          </p>
+          <!-- "fade-right" duration="1200"  -->
+          <button class="btn fade-right">Buy Now</button>
+        </div>
+        <div class="about-img">
+          <!-- "fade-left" duration="1200" -->
+          <img class="fade-left" src="./images/cosmetic1.png" alt="">
+        </div>
+      </div>
+    </section>
 
-<header>
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+
+<header style="display: none;">
   <h2>JS Advanced Exam Prep - 15 February 2021</h2>
   <a href="../../00exams/JS Advanced Exam Prep - 15 February 2021">Open folder</a>
 </header>
-
-<h1>Christmas Gifts Delivery</h1>
-<div class="container">
-  <section class="card">
-    <h2>Add gifts</h2>
-    <div>
-      <input type="text" placeholder="Gift name" />
-      <button>Add gift</button>
-    </div>
-  </section>
-  <section class="card">
-    <h2>List of gifts</h2>
-    <ul></ul>
-  </section>
-  <section class="card">
-    <h2>Sent gifts</h2>
-    <ul></ul>
-  </section>
-  <section class="card">
-    <h2>Discarded gifts</h2>
-    <ul></ul>
-  </section>
-</div>
-<script>
-  document.addEventListener("load", solve);
-</script>
-<script>
-  function solve() {
-    let input = document.querySelector('.card input');
-    let button = document.querySelector('.card button');
-    let ulElement = document.querySelector('.card ul');
-
-    button.addEventListener('click', e => {
-      e.preventDefault();
-      let liElement = document.createElement('li');
-      liElement.setAttribute('class', 'gift');
-      liElement.textContent = input.value;
-
-      let btnSendElement = document.createElement('button');
-      btnSendElement.setAttribute('id', 'sendButton');
-      btnSendElement.textContent = 'Send';
-      let btnDiscardElement = document.createElement('button');
-      btnDiscardElement.setAttribute('id', 'discardButton');
-      btnDiscardElement.textContent = 'Discard';
-
-      liElement.appendChild(btnSendElement);
-      liElement.appendChild(btnDiscardElement);
-      ulElement.appendChild(liElement);
-
-      input.value = "";
-
-      let allLiElements = Array.from(ulElement.querySelectorAll('li'));
-      let sortedLiElements = allLiElements.sort((a, b) => a.innerText.localeCompare(b.innerText));
-
-      while (ulElement.firstChild) {
-        ulElement.firstChild.remove();
-      }
-
-      for (const element of sortedLiElements) {
-        ulElement.appendChild(element);
-      }
-
-      btnSendElement.addEventListener('click', e => {
-        e.preventDefault;
-
-        let ulSentElement = document.querySelector('.container > section:nth-of-type(3) > ul');
-        e.target.remove();
-        btnDiscardElement.remove();
-        ulSentElement.appendChild(liElement);
-      })
-
-      btnDiscardElement.addEventListener('click', e => {
-        e.preventDefault;
-
-        let ulDiscardElement = document.querySelector('.container > section:nth-of-type(4) > ul');
-        e.target.remove();
-        btnSendElement.remove();
-        ulDiscardElement.appendChild(liElement);
-      })
-
-    })
-
-  }
-</script>
-
-<div class="test">
-  <div class="todo">
-    <input class="todo-value" type="text" placeholder="(empty)" value="Take the bins out">
-    <input class="todo-checkbox" type="checkbox">
-  </div>
-  <div class="todo">
-    <input class="todo-value" type="text" placeholder="(empty)">
-    <input class="todo-checkbox" type="checkbox">
-  </div>
-  <div class="todo">
-    <input class="todo-value" type="text" placeholder="(empty)">
-    <input class="todo-checkbox" type="checkbox">
-  </div>
-  <div class="todo">
-    <input class="todo-value" type="text" placeholder="(empty)" value="Take the bins out">
-    <input class="todo-checkbox" type="checkbox">
-  </div>
-  <div class="todo">
-    <input class="todo-value" type="text" placeholder="(empty)">
-    <input class="todo-checkbox" type="checkbox">
-  </div>
-  <div class="todo">
-    <input class="todo-value" type="text" placeholder="(empty)">
-    <input class="todo-checkbox" type="checkbox">
-  </div>
-  <div class="todo">
-    <input class="todo-value" type="text" placeholder="(empty)" value="Take the bins out">
-    <input class="todo-checkbox" type="checkbox">
-  </div>
-  <div class="todo">
-    <input class="todo-value" type="text" placeholder="(empty)">
-    <input class="todo-checkbox" type="checkbox">
-  </div>
-  <div class="todo">
-    <input class="todo-value" type="text" placeholder="(empty)">
-    <input class="todo-checkbox" type="checkbox">
-  </div>
-  <div class="todo">
-    <input class="todo-value" type="text" placeholder="(empty)" value="Take the bins out">
-    <input class="todo-checkbox" type="checkbox">
-  </div>
-  <div class="todo">
-    <input class="todo-value" type="text" placeholder="(empty)">
-    <input class="todo-checkbox" type="checkbox">
-  </div>
-  <div class="todo">
-    <input class="todo-value" type="text" placeholder="(empty)">
-    <input class="todo-checkbox" type="checkbox">
-  </div>
-</div>
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
