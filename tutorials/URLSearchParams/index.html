@@ -3,9 +3,158 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URLSearchParams in JS</title>
+    <link rel="icon" href="./images/leaf.png">
+    <!-- <title>URLSearchParams in JS</title> -->
+    <title>Cosmetics</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cookie&family=Prata&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Kaushan+Script&family=Playfair+Display&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Brawler:wght@400;700&family=Croissant+One&family=Ephesis&family=Gloock&family=Hurricane&family=Imbue:opsz,wght@10..100,100..900&family=Modak&family=Montez&family=Prosto+One&family=Rye&family=Shojumaru&family=Young+Serif&family=ZCOOL+XiaoWei&display=swap');
+      @import url("https://fonts.googleapis.com/css2?family=Lora:ital@0;1&family=Poppins:wght@400;500;600&display=swap");
+      
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+    
+      ul {
+        list-style: none;
+      }
+    
+      a {
+        text-decoration: none;
+      }
+    
+      body {
+        font-family: "Prata", serif;
+  font-family: 'Abril Fatface', cursive;
+  font-family: 'Courgette', cursive;
+  font-family: 'Dancing Script', cursive;
+  font-family: 'Great Vibes', cursive;
+  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Limelight', cursive;
+  font-family: 'Lobster', cursive;
+  font-family: 'Montserrat', sans-serif;
+  font-family: 'Oleo Script Swash Caps', cursive;
+  font-family: 'Poppins', sans-serif;
+  font-family: 'Raleway', sans-serif;
+  font-family: 'Fraunces', serif;
+  font-family: 'Playfair Display', serif;
+  font-family: 'Lemon', cursive;
+  font-family: "Lora", serif;
+  font-family: "Croissant One", serif;
+  font-family: "Shojumaru", system-ui;
+  font-family: "Montez", cursive;
+  font-family: "Modak", system-ui;
+  font-family: "Prosto One", sans-serif;
+  font-family: "Young Serif", serif;
+  font-family: "ZCOOL XiaoWei", sans-serif;
+  font-family: "Brawler", serif;
+  font-family: "Gloock", serif;
+  font-family: "Ephesis", cursive;
+  font-family: "Platypi", serif;
+  font-family: "Patua One", serif;
+  font-family: "Rye", serif;
+  font-family: "Arizonia", cursive;
+  font-family: "Imbue", serif;  
+  font-family: 'Kaushan Script', cursive;
+  font-family: "Hurricane", cursive;
+  font-family: Georgia, serif;
+        overflow-x: hidden;
+      }
+    
+      section {
+        overflow-x: hidden;
+      }
+    
+      header {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* height: 80px; */
+        padding: 10px 5%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: all .5s ease-in-out;
+        z-index: 1;
+      }
+    
+      header nav,
+      header .cart {
+        flex: 1;
+        /* border: 1px solid red; */
+      }
+
+      .logo {
+        /* position: absolute; */
+        /* left: 50%; */
+        /* top: 50%; */
+        /* transform: translate(-50%, -50%); */
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        /* justify-content: center; */
+        font-size: 25px;
+      }
+    
+      .logo span {
+        color: #279C29;
+      }
+    
+      nav ul {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        /* justify-content: center; */
+      }
+    
+      nav li a {
+        color: #000;
+        font-size: 18px;
+      }
+    
+      nav li a:hover {
+        color: #279C29;
+      }
+        
+      .cart {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        /* justify-content: center; */
+        justify-content: end;
+      }
+    
+      .cart i {
+        font-size: 20px;
+      }
+    
+      .bars {
+        display: none;
+        font-size: 20px;
+      }
+    
+      .btn {
+        width: 120px;
+        height: 40px;
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background-color: #279C29;
+      }
+    
+      .btn:hover {
+        background-color: #000;
+      }
+    </style>
   </head>
   <body>
     <header id="header">
@@ -35,11 +184,14 @@
       </div>
       <div class="cart">
         <!-- "fade-up" duration="1000"  -->
-        <i class="fa-solid fa-magnifying-glass"></i>
-        <i class="fa-solid fa-bag-shopping"></i>
+        <i class="ri-search-line"></i>
+        <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+        <i class="ri-shopping-bag-line"></i>
+        <!-- <i class="fa-solid fa-bag-shopping"></i> -->
       </div>
       <div class="bars" id="bars">
-        <i class="fa-solid fa-bars-staggered"></i>
+        <i class="fa fa-th-large" aria-hidden="true"></i>
+        <!-- <i class="fa-solid fa-bars-staggered"></i> -->
       </div>
     </header>
     <section class="wrapper" id="home">
@@ -51,8 +203,8 @@
           <h1 class="fade-right">Mack your Skin , Shine & Glowing</h1>
           <!-- "fade-right" duration="1100" -->
           <p class="fade-right">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse,
-            optio consectetur adipisicing elit. Esse, optio.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus dolorum 
+            quaerat ducimus a delectus ad harum repudiandae maiores quae sequi.
           </p>
           <!-- "fade-right" duration="1200" -->
           <button class="btn fade-right">Shop Now</button>
