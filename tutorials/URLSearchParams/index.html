@@ -145,6 +145,153 @@
     }
   }
 </script>
+<script>
+  class ChristmasDinner {
+    constructor(budget) {
+      if (+budget < 0) {
+        throw new Error('The budget cannot be a negative number');
+      }
+
+      this.budget = +budget;
+      this.dishes = [];
+      this.products = [];
+      this.guests = {};
+    }
+
+    shopping(product) {
+      let [name, price] = product;
+
+      if (+price > this.budget) {
+        throw new Error('Not enough money to buy this product');
+      }
+
+      this.budget -= price;
+      this.products.push(name);
+
+      return `You have successfully bought ${name}!`;
+
+    }
+
+    recipes(recipe) {
+      let isPresent = true;
+      let { recipeName, productsList } = recipe;
+
+      productsList.forEach((product) => {
+        if (!this.products.includes(product)) {
+          isPresent = false;
+        }
+      });
+
+      if (isPresent) {
+        this.dishes.push({ recipeName, productsList });
+        return `${recipeName} has been successfully cooked!`;
+      }
+
+      throw new Error('We do not have this product');
+    }
+
+    inviteGuests(name, dish) {
+      let isPresent = false;
+
+      this.dishes.forEach((obj) => {
+        if (obj.recipeName === dish) {
+          isPresent = true;
+        }
+      });
+
+      if (!isPresent) {
+        throw new Error('We do not have this dish');
+      }
+
+      if (name in this.guests) {
+        throw new Error('This guest has already been invited');
+      }
+
+      this.guests[name] = dish;
+
+      return `You have successfully invited ${name}!`;
+
+    }
+
+    showAttendance() {
+      let output = '';
+      Object.keys(this.guests).forEach(name => {
+        let dish = this.guests[name];
+        let products = [];
+        this.dishes.forEach((curDish) => {
+          if (curDish.recipeName === dish) {
+            products = curDish.productsList;
+          }
+        });
+        output += `${name} will eat ${dish}, which consists of ${products.join(', ')}\n`;
+      });
+
+      return output.trim();
+
+    }
+
+  }
+
+  let dinner = new ChristmasDinner(300);
+  dinner.shopping(['Salt', 1]);
+  dinner.shopping(['Beans', 3]);
+  dinner.shopping(['Cabbage', 4]);
+  dinner.shopping(['Rice', 2]);
+  dinner.shopping(['Savory', 1]);
+  dinner.shopping(['Peppers', 1]);
+  dinner.shopping(['Fruits', 40]);
+  dinner.shopping(['Honey', 10]);
+  dinner.recipes({
+    recipeName: 'Oshav',
+    productsList: ['Fruits', 'Honey']
+  });
+  dinner.recipes({
+    recipeName: 'Folded cabbage leaves filled with rice',
+    productsList: ['Cabbage', 'Rice', 'Salt', 'Savory']
+  });
+  dinner.recipes({
+    recipeName: 'Peppers filled with beans',
+    productsList: ['Beans', 'Peppers', 'Salt']
+  });
+  dinner.inviteGuests('Ivan', 'Oshav');
+  dinner.inviteGuests('Petar', 'Folded cabbage leaves filled with rice');
+  dinner.inviteGuests('Georgi', 'Peppers filled with beans');
+  console.log(dinner.showAttendance());
+
+  let dealership = {
+    newCarCost: function (oldCarModel, newCarPrice) {
+      let discountForOldCar = {
+        'Audi A4 B8': 15000,
+        'Audi A6 4K': 20000,
+        'Audi A8 D5': 25000,
+        'Audi TT 8J': 14000,
+      }
+      if (discountForOldCar.hasOwnProperty(oldCarModel)) {
+        let discount = discountForOldCar[oldCarModel];
+        let finalPrice = newCarPrice - discount;
+        return finalPrice;
+      } else {
+        return newCarPrice;
+      }
+    },
+    carEquipment: function (extrasArr, indexArr) {
+      let selectedExtras = [];
+      indexArr.forEach(i => {
+        selectedExtras.push(extrasArr[i]);
+      });
+      return selectedExtras;
+    },
+    euroCategory: function (category) {
+      if (category >= 4) {
+        let price = this.newCarCost('Audi A4 B8', 30000);
+        let total = price - (price * 0.05);
+        return `We have added 5% discount to the final price: ${total}.`;
+      } else {
+        return 'Your euro category is low, so there is no discount from the final price!';
+      }
+    }
+  }
+</script>
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
