@@ -3,295 +3,144 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URLSearchParams in JS</title>
+    <title>Lebaba</title>
+    <!-- <title>URLSearchParams in JS</title> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Poppins:wght@400;500;600;700&display=swap");
+      
+      :root {
+        --primary-color: #ed3849;
+        --primary-color-dark: #d23141;
+        --primary-color-light: #f4e5ec;
+        --text-dark: #0f172a;
+        --text-light: #64748b;
+        --extra-light: #f8fafc;
+        --white: #ffffff;
+        --max-width-1400: 1400px;
+        --max-width-1200: 1200px;
+        --max-width-900: 900px;
+        --header-font: "Playfair Display", serif;
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+    </style>
   </head>
   <body>
-    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+    <nav>
+      <ul class="nav-links">
+        <li class="link">
+          <a href="#">Home</a>
+        </li>
+        <li class="link">
+          <a href="#">Shop</a>
+        </li>
+        <li class="link">
+          <a href="#">Pages</a>
+        </li>
+        <li class="link">
+          <a href="#">Contact</a>
+        </li>
+      </ul>
+      <div class="nav-logo">
+        <a href="#">Lebaba<span>.</span></a>
+      </div>
+      <div class="nav-icons">
+        <span>
+          <a href="#">
+            <i class="ri-search-line"></i>
+          </a>
+        </span>
+        <span>
+          <a href="#">
+            <i class="ri-user-line"></i>
+          </a>
+        </span>
+        <span>
+          <a href="#">
+            <i class="ri-shopping-bag-line"></i>
+          </a>
+        </span>
+      </div>
+    </nav>
+    <header class="section-container header-container">
+      <div class="header-content">
+        <h4>UP TO 20% DISCOUNT ON</h4>
+        <h1>Girl's Fashion</h1>
+        <p>
+          Discover the latest trends and express your unique style with our
+          Women's Fashion website. Explore a curated collection of clothing,
+          accessories, and footwear that caters to every taste and occasion.
+        </p>
+        <button class="btn">EXPLORE NOW</button>
+      </div>
+      <div class="header-image">
+        <img src="./assets/images/header.png" alt="header" />
+      </div>
+    </header>
+    <section class="section-container categories-container">
+      <h2 class="section-header">Top Categories</h2>
+      <p class="section-subheader">
+        Browse a diverse range of categories, from chic dresses to versatile
+        accessories. Elevate your style today!
+      </p>
+      <div class="categories-grid">
+        <div class="categories-card">
+          <img src="./assets/images/category-1.jpg" alt="categories" />
+          <h4>Accessories</h4>
+        </div>
+        <div class="categories-card">
+          <img src="./assets/images/category-2.jpg" alt="categories" />
+          <h4>Dress Collection</h4>
+        </div>
+        <div class="categories-card">
+          <img src="./assets/images/category-3.jpg" alt="categories" />
+          <h4>Jewellery</h4>
+        </div>
+        <div class="categories-card">
+          <img src="./assets/images/category-4.jpg" alt="categories" />
+          <h4>Cosmetics</h4>
+        </div>
+      </div>
+    </section>
+    <section class="section-container hero-container">
+      <div class="hero-card">
+        <img src="./assets/images/card-1.png" alt="hero" />
+        <div class="hero-content">
+          <p>2023 Trend</p>
+          <h4>Womens Shirt</h4>
+          <a href="#">Discover More +</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <img src="./assets/images/card-2.png" alt="hero" />
+        <div class="hero-content">
+          <p>2023 Trend</p>
+          <h4>Womens Dresses</h4>
+          <a href="#">Discover More +</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <img src="./assets/images/card-3.png" alt="hero" />
+        <div class="hero-content">
+          <p>2023 Trend</p>
+          <h4>Womens Casuals</h4>
+          <a href="#">Discover More +</a>
+        </div>
+      </div>
+    </section>
 
-<header style="display: block;">
-  <h2>JS Advanced Exam Prep - 15 February 2021</h2>
-  <a href="../../00exams/JS Advanced Exam Prep - 15 February 2021">Open folder</a>
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
+
+<header style="display: none;">
+  <h2>JS Advanced Exam Prep - 20 February 2021</h2>
+  <a href="../../00exams/JS Advanced Regular Exam - 20 February 2021">Open folder</a>
 </header>
-
-<script>
-  function solve() {
-    let makeEl = document.getElementById("make");
-    let modelEl = document.getElementById("model");
-    let yearEl = document.getElementById("year");
-    let fuelEl = document.getElementById("fuel");
-    let priceEl = document.getElementById("original-cost");
-    let sellEl = document.getElementById("selling-price");
-    
-    let publishBtn = document.getElementById("publish");
-    let currDif = 0;
-  
-    publishBtn.addEventListener("click", publish);
-    function publish(e) {
-      e.preventDefault();
-  
-      if (makeEl.value === ""
-      || modelEl.value === ""
-      || yearEl.value === ""
-      || priceEl.value === ""
-      || sellEl.value === ""
-      || fuelEl.value === "") {
-        return
-      };
-  
-      if (priceEl.value < 0 || sellEl.value < 0 || priceEl.value >= sellEl.value) {
-        return;
-      }
-  
-      let make = makeEl.value;
-      let model = modelEl.value;
-      let year = yearEl.value;
-      let fuel = fuelEl.value;
-      let price = priceEl.value;
-      let sell = sellEl.value;
-  
-      let tBody = document.getElementById("table-body");
-      let row = document.createElement("tr");
-     // row.setAttribute("class", "row");
-      //row.classList.add("row")
-      row.className = "row";
-  
-      let tdMake = document.createElement("td");
-      tdMake.textContent = make;
-  
-      let tdModel = document.createElement("td");
-      tdModel.textContent = model;
-  
-      let tdYear = document.createElement("td");
-      tdYear.textContent = year;
-  
-      let tdFuel = document.createElement("td");
-      tdFuel.textContent = fuel;
-  
-      let tdPrice = document.createElement("td");
-      tdPrice.textContent = price;
-  
-      let tdSell = document.createElement("td");
-      tdSell.textContent = sell;
-  
-      let tdBtns = document.createElement("td");
-      let editBtn = document.createElement("button");
-      editBtn.textContent = "Edit";
-      editBtn.className = "action-btn edit"
-  
-      let sellBtn = document.createElement("button");
-      sellBtn.textContent = "Sell";
-      sellBtn.className = "action-btn sell";
-  
-      row.appendChild(tdMake);
-      row.appendChild(tdModel);
-      row.appendChild(tdYear);
-      row.appendChild(tdFuel);
-      row.appendChild(tdPrice);
-      row.appendChild(tdSell);
-      tdBtns.appendChild(editBtn);
-      tdBtns.appendChild(sellBtn);
-      row.appendChild(tdBtns);
-  
-      tBody.appendChild(row);
-  
-      makeEl.value = "";
-      modelEl.value = "";
-      yearEl.value = "";
-      fuelEl.value = "";
-      priceEl.value = "";
-      sellEl.value = "";
-  
-      editBtn.addEventListener("click", edit);
-  
-      function edit(e) {
-  
-        document.getElementsByClassName("action-btn edit").disabled = true;
-        makeEl.value = make;
-        modelEl.value = model;
-        yearEl.value = year;
-        fuelEl.value = fuel;
-        priceEl.value = price;
-        sellEl.value = sell;
-        row.parentNode.removeChild(row);
-      }
-  
-      sellBtn.addEventListener("click", sellComm);
-  
-      function sellComm(e) {
-        let ul = document.getElementById("cars-list");
-        let li = document.createElement("li");
-        li.className = "each-list";
-        let span1 = document.createElement("span");
-        span1.textContent = `${make} ${model}`;
-  
-        let span2 = document.createElement("span");
-        span2.textContent = year;
-  
-        let span3 = document.createElement("span");
-        span3.textContent = Number(sell) - Number(price);
-  
-        li.appendChild(span1);
-        li.appendChild(span2);
-        li.appendChild(span3);
-        ul.appendChild(li);
-        let profitField = document.getElementById("profit")
-        let difference = Number(sell) - Number(price);
-        currDif += difference;
-        profitField.textContent = currDif.toFixed(2);
-        row.parentNode.removeChild(row);
-      }
-    }
-  }
-</script>
-<script>
-  class ChristmasDinner {
-    constructor(budget) {
-      if (+budget < 0) {
-        throw new Error('The budget cannot be a negative number');
-      }
-
-      this.budget = +budget;
-      this.dishes = [];
-      this.products = [];
-      this.guests = {};
-    }
-
-    shopping(product) {
-      let [name, price] = product;
-
-      if (+price > this.budget) {
-        throw new Error('Not enough money to buy this product');
-      }
-
-      this.budget -= price;
-      this.products.push(name);
-
-      return `You have successfully bought ${name}!`;
-
-    }
-
-    recipes(recipe) {
-      let isPresent = true;
-      let { recipeName, productsList } = recipe;
-
-      productsList.forEach((product) => {
-        if (!this.products.includes(product)) {
-          isPresent = false;
-        }
-      });
-
-      if (isPresent) {
-        this.dishes.push({ recipeName, productsList });
-        return `${recipeName} has been successfully cooked!`;
-      }
-
-      throw new Error('We do not have this product');
-    }
-
-    inviteGuests(name, dish) {
-      let isPresent = false;
-
-      this.dishes.forEach((obj) => {
-        if (obj.recipeName === dish) {
-          isPresent = true;
-        }
-      });
-
-      if (!isPresent) {
-        throw new Error('We do not have this dish');
-      }
-
-      if (name in this.guests) {
-        throw new Error('This guest has already been invited');
-      }
-
-      this.guests[name] = dish;
-
-      return `You have successfully invited ${name}!`;
-
-    }
-
-    showAttendance() {
-      let output = '';
-      Object.keys(this.guests).forEach(name => {
-        let dish = this.guests[name];
-        let products = [];
-        this.dishes.forEach((curDish) => {
-          if (curDish.recipeName === dish) {
-            products = curDish.productsList;
-          }
-        });
-        output += `${name} will eat ${dish}, which consists of ${products.join(', ')}\n`;
-      });
-
-      return output.trim();
-
-    }
-
-  }
-
-  let dinner = new ChristmasDinner(300);
-  dinner.shopping(['Salt', 1]);
-  dinner.shopping(['Beans', 3]);
-  dinner.shopping(['Cabbage', 4]);
-  dinner.shopping(['Rice', 2]);
-  dinner.shopping(['Savory', 1]);
-  dinner.shopping(['Peppers', 1]);
-  dinner.shopping(['Fruits', 40]);
-  dinner.shopping(['Honey', 10]);
-  dinner.recipes({
-    recipeName: 'Oshav',
-    productsList: ['Fruits', 'Honey']
-  });
-  dinner.recipes({
-    recipeName: 'Folded cabbage leaves filled with rice',
-    productsList: ['Cabbage', 'Rice', 'Salt', 'Savory']
-  });
-  dinner.recipes({
-    recipeName: 'Peppers filled with beans',
-    productsList: ['Beans', 'Peppers', 'Salt']
-  });
-  dinner.inviteGuests('Ivan', 'Oshav');
-  dinner.inviteGuests('Petar', 'Folded cabbage leaves filled with rice');
-  dinner.inviteGuests('Georgi', 'Peppers filled with beans');
-  console.log(dinner.showAttendance());
-
-  let dealership = {
-    newCarCost: function (oldCarModel, newCarPrice) {
-      let discountForOldCar = {
-        'Audi A4 B8': 15000,
-        'Audi A6 4K': 20000,
-        'Audi A8 D5': 25000,
-        'Audi TT 8J': 14000,
-      }
-      if (discountForOldCar.hasOwnProperty(oldCarModel)) {
-        let discount = discountForOldCar[oldCarModel];
-        let finalPrice = newCarPrice - discount;
-        return finalPrice;
-      } else {
-        return newCarPrice;
-      }
-    },
-    carEquipment: function (extrasArr, indexArr) {
-      let selectedExtras = [];
-      indexArr.forEach(i => {
-        selectedExtras.push(extrasArr[i]);
-      });
-      return selectedExtras;
-    },
-    euroCategory: function (category) {
-      if (category >= 4) {
-        let price = this.newCarCost('Audi A4 B8', 30000);
-        let total = price - (price * 0.05);
-        return `We have added 5% discount to the final price: ${total}.`;
-      } else {
-        return 'Your euro category is low, so there is no discount from the final price!';
-      }
-    }
-  }
-</script>
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
