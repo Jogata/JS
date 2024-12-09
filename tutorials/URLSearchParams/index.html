@@ -2217,7 +2217,7 @@
             .test-2 {
                 min-height: 100vh;
                 display: flex;
-                display: none;
+                /* display: none; */
                 /* align-items: center; */
                 /* justify-content: center; */
                 font-family: Georgia, serif;
@@ -2327,6 +2327,13 @@
                 align-items: center;
                 background-color: var(--charcoal-black);
                 z-index: 100;
+            }
+
+            header nav {
+                position: static;
+                max-width: 96%;
+                margin: auto;
+                justify-content: start;
             }
 
             header a {
@@ -3662,7 +3669,128 @@
         <!-- time running -->
         <div class="time"></div>
     </div>
+    <script>
+        //step 1: get DOM
+        let nextDom = document.getElementById('next');
+        let prevDom = document.getElementById('prev');
         
+        let carouselDom = document.querySelector('.carousel');
+        let SliderDom = carouselDom.querySelector('.carousel .list');
+        let thumbnailBorderDom = document.querySelector('.carousel .thumbnail');
+        let thumbnailItemsDom = thumbnailBorderDom.querySelectorAll('.item');
+        let timeDom = document.querySelector('.carousel .time');
+        
+        // thumbnailBorderDom.appendChild(thumbnailItemsDom[0]);
+        let timeRunning = 3000;
+        let timeAutoNext = 7000;
+        
+        nextDom.onclick = function() {
+            showSlider('next');
+        }
+        
+        prevDom.onclick = function() {
+            showSlider('prev');
+        }
+        
+        let runTimeOut;
+        let runNextAuto = setTimeout(() => {
+            next.click();
+        }, timeAutoNext);
+        
+        function showSlider(type){
+            let  SliderItemsDom = SliderDom.querySelectorAll('.carousel .list .item');
+            let thumbnailItemsDom = document.querySelectorAll('.carousel .thumbnail .item');
+            
+            if (type === 'next'){
+                SliderDom.appendChild(SliderItemsDom[0]);
+                thumbnailBorderDom.appendChild(thumbnailItemsDom[0]);
+                // carouselDom.classList.add('next');
+            } else {
+                SliderDom.prepend(SliderItemsDom[SliderItemsDom.length - 1]);
+                thumbnailBorderDom.prepend(thumbnailItemsDom[thumbnailItemsDom.length - 1]);
+                // carouselDom.classList.add('prev');
+            }
+            
+            clearTimeout(runTimeOut);
+            runTimeOut = setTimeout(() => {
+                carouselDom.classList.remove('next');
+                carouselDom.classList.remove('prev');
+            }, timeRunning);
+            
+            clearTimeout(runNextAuto);
+            runNextAuto = setTimeout(() => {
+                next.click();
+            }, timeAutoNext)
+        }
+    </script>
+
+<div class="page">
+    <nav style="display: none;">
+        <a href="#" class="logo">Logo</a>
+        <ul class="nav-list">
+            <li><a href="./index.html" class="nav-link">main</a></li>
+            <li><a href="./skyrim.html" class="nav-link">home</a></li>
+            <li class="sub-nav">
+                <a href="./skyrim-overview.html" class="nav-link">info</a>
+                <ul>
+                    <li><a href="./skyrim-overview.html">overview</a></li>
+                    <li><a href="./skyrim-overview.html">locations</a></li>
+                    <li><a href="./skyrim-overview.html">equipment</a></li>
+                    <li><a href="./skyrim-overview.html">races</a></li>
+                    <li><a href="./skyrim-overview.html">skills</a></li>
+                    <li><a href="./skyrim-overview.html">spells</a></li>
+                    <li><a href="./skyrim-overview.html">overview</a></li>
+                </ul>
+            </li>
+            <li><a href="#" class="nav-link">contact</a></li>
+            <li><a href="./skyrim-auth.html" class="nav-link">login</a></li>
+            <li><a href="./skyrim-auth.html" class="nav-link">register</a></li>
+            <li><a href="#" class="nav-link">logout</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        
+        <div class="test-2">
+            <div class="container-2">
+                <div class="panel active bg-1">
+                    <h2>card 1</h2>
+                </div>
+                <div class="panel bg-2">
+                    <h2>card 2</h2>
+                </div>
+                <div class="panel bg-3">
+                    <h2>card 3</h2>
+                </div>
+                <div class="panel bg-4">
+                    <h2>card 4</h2>
+                </div>
+                <div class="panel bg-5">
+                    <h2>card 5</h2>
+                </div>
+            </div>
+            <script>
+                const panels = document.querySelectorAll(".panel");
+                
+                panels.forEach(panel => {
+                    panel.addEventListener("click", () => {
+                        removeClass("active");
+                        panel.classList.add("active");
+                    })
+                })
+                
+                function removeClass(className) {
+                    panels.forEach(panel => {
+                        panel.classList.remove(className);
+                    })
+                }
+            </script>
+        </div>
+    
+    </main>
+
+</div>
+
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
 <header style="display: none;">
@@ -3707,4 +3835,6 @@
     </script>
   </body>
 </html>
-<!-- 430-560-640-765-860-995-1120-1235-1325-1440-1570-1675-1765-1890-2010-2120-2245-2365-2485-2600-2705-2770-2890-3010-3060-3195-3320-3450-3580-3710 -->
+<!-- 430-560-640-765-860-995-1120-1235-1325-1440-1570-1675-1765-
+    1890-2010-2120-2245-2365-2485-2600-2705-2770-2890-3010-3060-
+    3195-3320-3450-3580-3710-3840 -->
