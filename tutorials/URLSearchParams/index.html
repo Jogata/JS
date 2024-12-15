@@ -630,6 +630,41 @@
                 grid-template-columns: repeat(1, 1fr);
             }
         }
+
+        #todo-list {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            background-color: greenyellow;
+        }
+
+        #todo-list .form {
+            /* position: absolute; */
+            /* top: 30%; */
+            width: 400px;
+            border-radius: 10px;
+            background-color:yellow;
+            box-shadow: 0 4px 8px rgba(0,0,0,.3);
+        }
+
+        #todo-list .input {
+            width: 100%;
+            padding: 20px;
+            font-size: 20px;
+            font-family: cursive;
+            border-radius: 10px 10px 0 0;
+            border: none;
+            box-sizing: border-box;
+        }
+
+        #todo-list .list {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .input::placeholder {
+            color: lightgray;
+        }
     </style>
   </head>
   <body>
@@ -1009,7 +1044,103 @@
         <div class="section-container footer-bar">
             Copyright © 2023. All rights reserved.
         </div>
-    </footer>  
+    </footer>
+
+    <div class="practice">
+        <!-- To Do List -->
+        <div id="todo-list">
+            <form class="form">
+                <input
+                  type="text"
+                  class="input"
+                  placeholder="Enter your task"
+                  autocomplete="off"
+                />
+                <ul class="list">
+                  <!-- <li>
+                    Buy Milk <i class="fa fa-check-square"></i
+                    ><i class="fa fa-trash"></i>
+                  </li>
+                  <li class="checked">
+                    Call David <i class="fa fa-check-square"></i
+                    ><i class="fa fa-trash"></i>
+                  </li> -->
+                </ul>
+            </form>
+            
+            <script>
+                const formEl = document.querySelector(".form");
+                
+                const inputEl = document.querySelector(".input");
+                
+                const ulEl = document.querySelector(".list");
+                
+                let list = JSON.parse(localStorage.getItem("list"));
+                if (list) {
+                    list.forEach((task) => {
+                        toDoList(task);
+                    });
+                }
+                
+                formEl.addEventListener("submit", (event) => {
+                    event.preventDefault();
+                    toDoList();
+                });
+                
+                function toDoList(task) {
+                    let newTask = inputEl.value;
+                    if (task) {
+                        newTask = task.name;
+                    }
+                    
+                    const liEl = document.createElement("li");
+
+                    if (task && task.checked) {
+                        liEl.classList.add("checked");
+                    }
+
+                    liEl.innerText = newTask;
+                    ulEl.appendChild(liEl);
+                    inputEl.value = "";
+
+                    const checkBtnEl = document.createElement("div");
+                    checkBtnEl.innerHTML = `
+                        <i class="fa fa-check-square">
+                    `;
+
+                    liEl.appendChild(checkBtnEl);
+                    const trashBtnEl = document.createElement("div");
+                    trashBtnEl.innerHTML = `
+                        <i class="fa fa-trash"></i>
+                    `;
+                    liEl.appendChild(trashBtnEl);
+                    
+                    checkBtnEl.addEventListener("click", () => {
+                        liEl.classList.toggle("checked");
+                        updateLocalStorage();
+                    });
+                    
+                    trashBtnEl.addEventListener("click", () => {
+                        liEl.remove();
+                        updateLocalStorage();
+                    });
+                    updateLocalStorage();
+                }
+                
+                function updateLocalStorage() {
+                    const liEls = document.querySelectorAll("li");
+                    list = [];
+                    liEls.forEach((liEl) => {
+                        list.push({
+                            name: liEl.innerText,
+                            checked: liEl.classList.contains("checked"),
+                        });
+                    });
+                    localStorage.setItem("list", JSON.stringify(list));
+                }
+            </script>
+        </div>
+    </div>
     
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
@@ -1055,4 +1186,4 @@
     </script>
   </body>
 </html>
-<!-- 55-185-300-430-560-690-820-915 -->
+<!-- 55-185-300-430-560-690-820-915-1060-1190 -->
