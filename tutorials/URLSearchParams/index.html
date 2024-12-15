@@ -631,7 +631,14 @@
             }
         }
 
+        .practice {
+            min-height: 100vh;
+        }
+
+        /* To Do List */
         #todo-list {
+            min-height: 100vh;
+            padding: 3rem 1rem;
             margin: 0;
             display: flex;
             justify-content: center;
@@ -664,6 +671,120 @@
         
         .input::placeholder {
             color: lightgray;
+        }
+
+        #todo-list .list li {
+            position: relative;
+            padding: 20px;
+            font-family: cursive;
+            border-top: dotted;
+            border-color: darkgray;
+            list-style-type: none;
+        }
+
+        #todo-list .list li .fa-trash {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: red;
+            cursor: pointer;
+        }
+
+        #todo-list .list li .fa-check-square {
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: green;
+            cursor: pointer;
+        }
+
+        #todo-list .list li.checked {
+            color: darkgray;
+            text-decoration: line-through;
+        }
+
+        #todo-list .list li.checked .fa-check-square {
+            color: darkgray;
+        }
+
+        /* Double Landing Page */
+        .double-page-container {
+            position: relative;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+        }
+        
+        h1 {
+            color: aliceblue;
+            font-size: 100px;
+            letter-spacing: 4px;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn {
+            padding: 20px 40px;
+            color: white;
+            font-size: 25px;
+            white-space: nowrap;
+            border: 4px solid;
+            background-color: black;
+            transition: background-color 1s;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: white;
+            color: black;
+        }
+        
+        .split {
+            top: 0;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .split.left {
+            position: absolute;
+            left: 0;
+            background-color: pink;
+            background-image: url("https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-pro-family-hero?wid=940&hei=1112&fmt=png-alpha&.v=1631220221000");
+            background-size: cover;
+        }
+        
+        .split.right {
+            position: absolute;
+            right: 0;
+            background-color: lightblue;
+            background-image: url("https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6465/6465022_sd.jpg;maxHeight=640;maxWidth=550");
+            background-size: cover;
+        }
+        
+        .active-left .left {
+            width: 75%;
+        }
+        
+        .active-left .right {
+            width: 25%;
+        }
+        
+        .active-right .left {
+            width: 25%;
+        }
+        
+        .active-right .right {
+            width: 75%;
+        }
+        
+        .left,
+        .right {
+            transition: width 2s ease-in-out;
         }
     </style>
   </head>
@@ -1140,6 +1261,17 @@
                 }
             </script>
         </div>
+        <!-- Double Landing Page -->
+        <div class="double-page-container">
+            <div class="split left">
+                <h1>Apple</h1>
+                <button class="btn">Buy Now</button>
+            </div>
+            <div class="split right">
+                <h1>Samsung</h1>
+                <button class="btn">Buy Now</button>
+            </div>
+        </div>
     </div>
     
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
@@ -1186,4 +1318,4 @@
     </script>
   </body>
 </html>
-<!-- 55-185-300-430-560-690-820-915-1060-1190 -->
+<!-- 55-185-300-430-560-690-820-915-1060-1190-1320 -->
