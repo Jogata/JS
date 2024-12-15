@@ -786,6 +786,90 @@
         .right {
             transition: width 2s ease-in-out;
         }
+
+        /* Feedback Card */
+        .feedback-card-container {
+            min-height: 100vh;
+            padding: 5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, Helvetica, sans-serif;
+            background: 
+                linear-gradient(
+                    to bottom right, 
+                    #b4ff99, #fff
+                );
+        }
+        
+        .feedback-card {
+            width: 90%;
+            max-width: 500px;
+            padding: 3rem;
+            background-color: #ffffff;
+            box-shadow: 0.5rem 0.5rem;
+        }
+        
+        .feedback-card p {
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .feedback-card textarea {
+            resize: none;
+            width: 100%;
+            height: 100px;
+            padding: 0.5rem;
+            font-size: 0.8rem;
+            outline: none;
+            border-color: rgba(0, 0, 0, 0.222);
+        }
+        
+        .feedback-card form p {
+            display: flex;
+            gap: 0.7rem;
+        }
+        
+        .feedback-card label {
+            font-size: 0.9rem;
+        }
+        
+        .feedback-card input {
+            appearance: none;
+            min-width: 1.4rem;
+            height: 1.4rem;
+            border: 1px solid #000;
+            cursor: pointer;
+        }
+        
+        .feedback-card input:checked {
+            background-color: #b4ff99;
+        }
+        
+        .feedback-card input:checked::after {
+            content: "✔";
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .feedback-card a {
+            color: inherit;
+        }
+        
+        .feedback-card button {
+            width: 100%;
+            margin-top: 2rem;
+            padding: 0.8rem;
+            font-weight: 700;
+            border: none;
+            background-color: #b4ff99;
+            box-shadow: 0.5rem 0.5rem;
+            cursor: pointer;
+        }
     </style>
   </head>
   <body>
@@ -1272,7 +1356,54 @@
                 <button class="btn">Buy Now</button>
             </div>
         </div>
+        <script>
+            const containerEl = document.querySelector(".double-page-container");
+            
+            const leftEl = document.querySelector(".left");
+            const rightEl = document.querySelector(".right");
+            
+            leftEl.addEventListener("mouseenter", () => {
+                containerEl.classList.add("active-left");
+            });
+            
+            leftEl.addEventListener("mouseleave", () => {
+                containerEl.classList.remove("active-left");
+            });
+            
+            rightEl.addEventListener("mouseenter", () => {
+                containerEl.classList.add("active-right");
+            });
+            
+            rightEl.addEventListener("mouseleave", () => {
+                containerEl.classList.remove("active-right");
+            });
+        </script>
+        
+        <!-- Feedback Card -->
+        <div class="feedback-card-container">
+            <section class="feedback-card">
+                <h2>Give feedback</h2>
+                <p>Your thoughts are valuable in helping<br> improve our products.</p>
+                <form>
+                    <textarea name="feedback" id="feedback" cols="30" rows="10" placeholder="Let us know what's on your mind"></textarea>
+                    <p>
+                        <input type="checkbox" name="policy" id="policy">
+                        <label for="policy">I may be contacted about this feedback. See our 
+                            <a href="#">privacy policy</a>.
+                        </label>
+                    </p>
+                    <p>
+                        <input type="checkbox" name="research" id="research">
+                        <label for="research">I'd like to help improve the products by joining the 
+                            <a href="#">Research Group</a>.
+                        </label>
+                    </p>
+                    <button type="submit">Send feedback</button>
+                </form>
+            </section>
+        </div>
     </div>
+
     
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
 
@@ -1318,4 +1449,4 @@
     </script>
   </body>
 </html>
-<!-- 55-185-300-430-560-690-820-915-1060-1190-1320 -->
+<!-- 55-185-300-430-560-690-820-915-1060-1190-1320-1450 -->
