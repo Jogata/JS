@@ -925,6 +925,57 @@
             list-style: none;
             cursor: pointer;
         }
+
+        .account-dropdown .notifications {
+            position: relative;
+        }
+        
+        .account-dropdown .dot {
+            position: absolute;
+            right: 0.3rem;
+            top: 0.1rem;
+            width: 0.4rem;
+            height: 0.4rem;
+            outline: 2px solid #ffafd383;
+            border-radius: 50%;
+            background-color: #fc7eb7;
+            z-index: 1;
+        }
+        
+        .account-dropdown .icon-tabler-bell {
+            z-index: -1;
+        }
+        
+        .account-dropdown .account {
+            padding: 0.25rem 0.8rem;
+            display: flex;
+            align-items: center;
+            border-radius: 0.5rem;
+            background-color: #126db8;
+        }
+        
+        .account-dropdown .account-section,
+        .account-dropdown .notifications-section, 
+        .account-dropdown .messages-section {
+            display: none;
+        }
+        
+        .account-dropdown .active {
+            display: block;
+            position: absolute;
+            right: 1rem;
+            top: 3.5rem;
+            background-color: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.5rem 1rem #145faa31;
+        }
+        
+        .account-dropdown .profile {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            padding: 2rem;
+        }
     </style>
   </head>
   <body>
@@ -1531,7 +1582,86 @@
                         <li>Sign Out</li>
                     </ul>
                 </section>
-            </nav>           
+            </nav>
+            <script>
+                // Open account menu
+                const ACCOUNT_BTN = document.querySelector(".account");
+                const SECTIONS = [...document.querySelectorAll("section")];
+                const CHEVRON_DOWN = document.querySelector(".icon-tabler-chevron-down");
+                const ACCOUNT_SECTION = SECTIONS[2];
+                
+                ACCOUNT_BTN.addEventListener("click", () => {
+                    if (ACCOUNT_SECTION.classList.contains("active")) {
+                        ACCOUNT_SECTION.classList.remove("active");
+                        CHEVRON_DOWN.style.transform = "scaleY(1)";
+                    } else {
+                        SECTIONS.forEach((s) => {
+                            s.classList.remove("active");
+                        });
+                        ACCOUNT_SECTION.classList.add("active");
+                        CHEVRON_DOWN.style.transform = "scaleY(-1)";
+                    }
+                });
+                
+                // Open notifications
+                const NOTIFICATION_ICON = document.querySelector(".icon-tabler-bell");
+                const NOTIFICATION_DOT = document.querySelector(".dot");
+                const NOTIFICATIONS = SECTIONS[1];
+                
+                NOTIFICATION_ICON.addEventListener("click", () => {
+                    if (NOTIFICATIONS.classList.contains("active")) {
+                        NOTIFICATIONS.classList.remove("active");
+                    } else {
+                        SECTIONS.forEach((section) => {
+                            section.classList.remove("active");
+                        });
+                        
+                        NOTIFICATIONS.classList.add("active");
+                        CHEVRON_DOWN.style.transform = "scaleY(1)";
+                    }
+                });
+                
+                // Open messages
+                const MESSAGE_ICON = document.querySelector(".icon-tabler-mail");
+                const MESSAGES = SECTIONS[0];
+                
+                MESSAGE_ICON.addEventListener("click", () => {
+                    if (MESSAGES.classList.contains("active")) {
+                        MESSAGES.classList.remove("active");
+                    } else {
+                        SECTIONS.forEach((s) => {
+                            s.classList.remove("active");
+                        });
+                        
+                        MESSAGES.classList.add("active");
+                        CHEVRON_DOWN.style.transform = "scaleY(1)";
+                    }
+                });
+                
+                // Clear all notifications
+                const CLEAR_ALL_BTN = document.querySelector(".clear-all-notifications");
+                const NOTIFICATIONS_LIST = document.querySelector(".notifications-list");
+                const NOTIFICATION_MESSAGE = NOTIFICATIONS.querySelector("p");
+                
+                CLEAR_ALL_BTN.addEventListener("click", (e) => {
+                    NOTIFICATIONS_LIST.style.display = "none";
+                    NOTIFICATION_MESSAGE.textContent = "No new notifications";
+                    NOTIFICATION_DOT.style.display = "none";
+                    e.target.style.display = "none";
+                });
+                
+                document.body.addEventListener("click", (e) => {
+                    if (!e.target.closest('.icon-tabler-mail') && 
+                        !e.target.closest('.icon-tabler-bell') && 
+                        !e.target.closest('.account')
+                        ) {
+                        SECTIONS.forEach((s) => {
+                            s.classList.remove("active");
+                            CHEVRON_DOWN.style.transform = "scaleY(1)";
+                        });
+                    }
+                });
+            </script> 
         </div>
     </div>
     
@@ -1579,4 +1709,4 @@
     </script>
   </body>
 </html>
-<!-- 55-185-300-430-560-690-820-915-1060-1190-1320-1450-1580 -->
+<!-- 55-185-300-430-560-690-820-915-1060-1190-1320-1450-1580-1710 -->
