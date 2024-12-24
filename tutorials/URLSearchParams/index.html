@@ -59,9 +59,9 @@
         }
         
         img {
-            width: 100%;
             /* display: flex; */
             display: block;
+            width: 100%;
         }
 
         .svg {
@@ -222,11 +222,30 @@
         }
         
         .header {
+            /* position: relative; */
             background-image: url("./assets/images/header.jpg");
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
         }
+
+        /* .header::after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: "";
+            width: 100%;
+            height: 100%;
+            background-image: url("./assets/images/header.jpg");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            clip-path: url("#mask-1");
+            clip-path: url("#mask-2");
+            clip-path: url("#mask-3");
+            clip-path: url("#mask-4");
+            z-index: -1;
+        } */
 
         nav {
             max-width: var(--max-width);
@@ -279,9 +298,11 @@
         }
         
         .header-form {
-            padding: 2rem;
+            /* padding: 2rem; */
+            padding: 1rem;
             border-radius: 10px;
-            background-color: rgba(0, 0, 0, 0.5);
+            /* background-color: rgba(0, 0, 0, 0.5); */
+            backdrop-filter: blur(5px);
         }
         
         .header-form form {
@@ -705,7 +726,8 @@
             padding: 1.5rem;
             border-radius: 10px;
             box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
-            transition: 0.3s;
+            /* transition: 0.3s; */
+            transition: 300ms;
         }
 
         .client-card:hover {
@@ -821,7 +843,8 @@
         .footer-container {
             display: grid;
             gap: 2rem;
-            grid-template-columns: 400px repeat(3, 1fr);
+            /* grid-template-columns: 400px repeat(3, 1fr); */
+            grid-template-columns: 25rem repeat(3, 1fr);
         }
         
         .footer-col h5 {
@@ -832,7 +855,8 @@
         }
         
         .footer-col p {
-            max-width: 300px;
+            /* max-width: 300px; */
+            max-width: 18.75rem;
             color: var(--text-light);
             /* font-size: 1rem; */
         }
@@ -964,7 +988,8 @@
             }
             
             .trending-grid {
-                grid-template-columns: repeat(1, 1fr);
+                /* grid-template-columns: repeat(1, 1fr); */
+                grid-template-columns: 1fr;
             }
             
             .destination-grid {
@@ -972,15 +997,18 @@
             }
             
             .seller-grid {
-                grid-template-columns: repeat(1, 1fr);
+                /* grid-template-columns: repeat(1, 1fr); */
+                grid-template-columns: 1fr;
             }
             
             .guide-grid {
-                grid-template-columns: repeat(1, 1fr);
+                /* grid-template-columns: repeat(1, 1fr); */
+                grid-template-columns: 1fr;
             }
             
             .client-grid {
-                grid-template-columns: repeat(1, 1fr);
+                /* grid-template-columns: repeat(1, 1fr); */
+                grid-template-columns: 1fr;
             }
             
             .subscribe-container input {
@@ -1140,7 +1168,8 @@
             border: 1px solid transparent;
             border-radius: 0.2rem;
             background-color: transparent;
-            transition: 0.5s;
+            /* transition: 0.5s; */
+            transition: 500ms;
             cursor: pointer;
         }
         
@@ -1177,7 +1206,8 @@
         
         .mobile-app-body main {
             width: 90%;
-            max-width: 600px;
+            /* max-width: 600px; */
+            max-width: 900px;
             display: flex;
             gap: 1rem;
             justify-content: center;
@@ -1196,6 +1226,7 @@
         }
         
         .interests {
+            flex: 2;
             position: relative;
             /* height: max-content; */
             margin-bottom: auto;
@@ -1273,7 +1304,10 @@
             border-radius: 1.5rem;
             border: 1px solid transparent;
             background-color: #ff757f;
-            transition: 0.5s;
+            /* transition: 0.5s; */
+            transition: color 500ms, 
+                 border-color 500ms, 
+             background-color 500ms;
             cursor: pointer;
         }
         
@@ -1284,6 +1318,7 @@
         }
         
         .articles {
+            flex: 1;
             position: relative;
             /* top: 5rem; */
             margin-top: 5rem;
@@ -1307,7 +1342,9 @@
         
         .article-info {
             position: relative;
-            margin: 0.8rem 0;
+            max-width: 300px;
+            /* margin: 0.8rem 0; */
+            margin: 0.8rem auto;
         }
         
         .article-info .icon-tabler-bookmark {
@@ -1317,6 +1354,8 @@
         
         .article img {
             width: 100%;
+            max-width: 230px;
+            margin: auto;
             box-shadow: 0 1rem 0.5rem -0.5rem #c5c5c5;
         }
         
@@ -1334,6 +1373,59 @@
         .date {
             font-size: 0.6rem;
             opacity: 0.5;
+        }
+
+        .author img {
+            width: 25px;
+            margin: 0;
+            object-fit: cover;
+            object-position: top;
+            border-radius: 50%;
+        }
+        
+        .mobile-app-body nav {
+            all: unset;
+            box-sizing: border-box;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 0.25rem;
+            color: #fff;
+            border-radius: 0 0 0.5rem 0.5rem;
+            background-color: #1f359d;
+        }
+        
+        .mobile-app-body ul {
+            list-style: none;
+            padding: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .mobile-app-body li {
+            display: flex;
+            gap: 0.2rem;
+            align-items: center;
+            flex-direction: column;
+            font-size: 0.7rem;
+            opacity: 0.5;
+            cursor: pointer;
+        }
+        
+        .mobile-app-body li.active {
+            opacity: 1;
+        }
+        
+        @media (max-width: 650px) {
+            .mobile-app-body main {
+                align-items: center;
+                flex-direction: column;
+            }
+            
+            .articles {
+                top: 0;
+            }
         }
     </style>
   </head>
@@ -2078,7 +2170,7 @@
                       <div class="topic selected">
                         <div class="image-container">
                         <img src="https://cdn-icons-png.flaticon.com/128/1048/1048971.png" 
-                          alt="science icon" width="50" height="50">
+                          alt="science icon" width="50">
                        </div>
                         <p class="topic-name">Science</p>
                       </div>
@@ -2086,7 +2178,7 @@
                       <div class="topic">
                         <div class="image-container">
                         <img src="https://cdn-icons-png.flaticon.com/128/4127/4127193.png" 
-                          alt="culture icon" width="50" height="50">
+                          alt="culture icon" width="50">
                         </div>
                         <p class="topic-name">Culture</p>
                       </div>
@@ -2094,7 +2186,7 @@
                       <div class="topic selected">
                         <div class="image-container">
                         <img src="https://cdn-icons-png.flaticon.com/128/7119/7119415.png" 
-                          alt="creativity icon" width="50" height="50">
+                          alt="creativity icon" width="50">
                         </div>
                         <p class="topic-name">Creativity</p>
                       </div>
@@ -2102,7 +2194,7 @@
                       <div class="topic">
                         <div class="image-container">
                         <img src="https://cdn-icons-png.flaticon.com/128/2652/2652280.png" 
-                          alt="politics icon" width="50" height="50">
+                          alt="politics icon" width="50">
                         </div>
                         <p class="topic-name">Politics</p>
                       </div>
@@ -2110,7 +2202,7 @@
                       <div class="topic">
                         <div class="image-container">
                         <img src="https://cdn-icons-png.flaticon.com/128/2436/2436882.png" 
-                          alt="little girl with book icon" width="50" height="50">
+                          alt="little girl with book icon" width="50">
                         </div>
                         <p class="topic-name">Self</p>
                       </div>
@@ -2118,7 +2210,7 @@
                       <div class="topic">
                         <div class="image-container">
                         <img src="https://cdn-icons-png.flaticon.com/128/3171/3171927.png" 
-                          alt="media icon" width="50" height="50">
+                          alt="media icon" width="50">
                         </div>
                         <p class="topic-name">Media</p>
                       </div>
@@ -2126,7 +2218,7 @@
                       <div class="topic selected">
                         <div class="image-container">
                         <img src="https://cdn-icons-png.flaticon.com/128/2666/2666505.png" 
-                          alt="list icon" width="50" height="50">
+                          alt="list icon" width="50">
                         </div>
                         <p class="topic-name">Productivity</p>
                       </div>
@@ -2134,7 +2226,7 @@
                       <div class="topic">
                         <div class="image-container">
                         <img src="https://cdn-icons-png.flaticon.com/128/9521/9521756.png" 
-                          alt="design icon" width="50" height="50">
+                          alt="design icon" width="50">
                         </div>
                         <p class="topic-name">Design</p>
                       </div>
@@ -2142,7 +2234,7 @@
                       <div class="topic">
                         <div class="image-container">
                         <img src="https://cdn-icons-png.flaticon.com/128/9213/9213810.png" 
-                          alt="magic wand icon" width="50" height="50">
+                          alt="magic wand icon" width="50">
                         </div>
                         <p class="topic-name">More</p>
                       </div>
@@ -2159,7 +2251,7 @@
                     <div class="article">
                       <img src="https://images.unsplash.com/photo-1551845728-6820a30c64e2?
                         w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MH
-                        xzZWFyY2h8MjB8fGhhcHBpbmVzc3xlbnwwfHwwfHx8MA%3D%3D" alt="" width="200" height="130">
+                        xzZWFyY2h8MjB8fGhhcHBpbmVzc3xlbnwwfHwwfHx8MA%3D%3D" alt="" width="200">
                       <div class="article-info">
                         <svg  xmlns="http://www.w3.org/2000/svg"  
                           width="20"  height="20"  viewBox="0 0 24 24"  
@@ -2185,7 +2277,7 @@
                     <div class="article">
                       <img src="https://images.unsplash.com/photo-1612406739906-402a5fe4eb96?
                         w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZ
-                        WFyY2h8M3x8cmFpbmJvdyUyMGluJTIwdGhlJTIwc2t5fGVufDB8fDB8fHww" alt="" width="200" height="130">
+                        WFyY2h8M3x8cmFpbmJvdyUyMGluJTIwdGhlJTIwc2t5fGVufDB8fDB8fHww" alt="" width="200">
                       <div class="article-info">
                         <svg  xmlns="http://www.w3.org/2000/svg" 
                           width="20"  height="20"  viewBox="0 0 24 24" fill="none" 
@@ -2262,6 +2354,31 @@
 
             </main>
 
+            <script>
+                // Select interests
+                const TOPICS = [...document.querySelectorAll('.topic')];
+                const TOPIC_IMAGES = [...document.querySelectorAll('.topic .image-container')];
+                
+                TOPIC_IMAGES.forEach((img, index) => {
+                    img.addEventListener("click", () => {
+                        TOPICS[index].classList.toggle('selected');
+                    });
+                });
+                
+                // Select nav item
+                const NAV_ITEMS = [...document.querySelectorAll('li')];
+                
+                NAV_ITEMS.forEach(li => {
+                    li.addEventListener("click", (e) => {
+                        NAV_ITEMS.forEach(i => {
+                            i.classList.remove('active');
+                        });
+                        
+                        li.classList.add('active');
+                    });
+                });
+            </script>
+
         </div>
             
     </div>
@@ -2311,4 +2428,4 @@
   </body>
 </html>
 <!-- 55-185-315-445-575-705-835-965-1095-1225-1355-1485-1600-
-    1715-1810-1925-2055-2185-2315 -->
+    1715-1810-1925-2055-2185-2315-2430 -->
