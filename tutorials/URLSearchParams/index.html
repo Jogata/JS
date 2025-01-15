@@ -268,6 +268,7 @@
       color: var(--white);
       font-size: 2.5rem;
       font-weight: 600;
+      font-family: "Hurricane", cursive;
       line-height: 3rem;
     }
     
@@ -298,6 +299,7 @@
       max-width: 25rem;
       margin-left: auto;
       padding: 2rem 0;
+      font-family: "Hurricane", cursive;
     }
 
     .banner-content span {
@@ -555,6 +557,10 @@
     .media-footer {
       text-align: center;
     }
+
+    .media-btn {
+      box-shadow: 1px 1px 1px #0005;
+    }
     
     .footer {
       padding: 5rem 0;
@@ -713,10 +719,17 @@
       animation: fade-up 1s linear backwards;
     }
 
+    .full-fade-up {
+      animation: full-fade-up 1s linear backwards;
+    }
     .fade-down {
       animation: fade-down 1s linear backwards;
     }
-
+    
+    .full-fade-down {
+      animation: full-fade-down 1s linear backwards;
+    }    
+    
     .delayed {
       animation-delay: calc(0.2s * var(--i));
     }
@@ -758,6 +771,13 @@
         opacity: 0;
       }
     }
+
+    @keyframes full-fade-up {
+      0% {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+    }
     
     @keyframes fade-down {
       0% {
@@ -765,21 +785,43 @@
         opacity: 0;
       }
     }
+
+    @keyframes full-fade-down {
+      0% {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+    }
+
+    body > p {
+      display: none;
+    }
   </style>
   <body>
     <header class="header">
       <div class="section-container header-container">
         <div class="header-icons">
-          <img src="./assets/images/icon-1.png" alt="icon" />
-          <img src="./assets/images/icon-2.png" alt="icon" />
-          <img src="./assets/images/icon-3.png" alt="icon" />
-          <img src="./assets/images/icon-4.png" alt="icon" />
+          <!-- <img src="./assets/images/icon-1.png" alt="icon" /> -->
+          <img class="fade-down paused delayed" style="--i: 0" 
+            src="./assets/images/icon-1.png" alt="icon" />
+          <!-- <img src="./assets/images/icon-2.png" alt="icon" /> -->
+          <img class="fade-down paused delayed" style="--i: 1" 
+            src="./assets/images/icon-2.png" alt="icon" />
+          <!-- <img src="./assets/images/icon-3.png" alt="icon" /> -->
+          <img class="fade-down paused delayed" style="--i: 2" 
+            src="./assets/images/icon-3.png" alt="icon" />
+          <!-- <img src="./assets/images/icon-4.png" alt="icon" /> -->
+          <img class="fade-down paused delayed" style="--i: 3" 
+            src="./assets/images/icon-4.png" alt="icon" />
         </div>
-        <h1>THE LIGHTS</h1>
-        <a href="#">
+        <!-- <h1>THE LIGHTS</h1> -->
+        <h1 class="fade-up paused delayed" style="--i: 1">THE LIGHTS</h1>
+        <!-- <a href="#"> -->
+        <a class="full-fade-up paused delayed" style="--i: 2" href="#">
           <img src="./assets/images/play.png" alt="play" /> WATCH THE TRAILER
         </a>
-        <div class="crew">
+        <!-- <div class="crew"> -->
+        <div class="crew fade-up paused delayed" style="--i: 3">
           <h4>
             Ava Summers <span>Lead Vocalis</span> 
             Jackson "Axel" Anderson <span>Lead Guitarist</span> 
@@ -799,7 +841,8 @@
     <section class="about">
       <div class="section-container about-container">
         <div class="about-grid">
-          <div class="about-content">
+          <!-- <div class="about-content"> -->
+          <div class="about-content fade-up paused">
             <p>Musicians Bound</p>
             <h4>Meet the Harmonic Collective</h4>
             <p>
@@ -809,12 +852,17 @@
             </p>
           </div>
           <div class="about-image image-1">
-            <img src="./assets/images/about-1.jpg" alt="about" />
+            <!-- <img src="./assets/images/about-1.jpg" alt="about" /> -->
+            <img class="fade-left paused" 
+              src="./assets/images/about-1.jpg" alt="about" />
           </div>
           <div class="about-image">
-            <img src="./assets/images/about-2.jpg" alt="about" />
+            <!-- <img src="./assets/images/about-2.jpg" alt="about" /> -->
+            <img class="fade-right paused" 
+              src="./assets/images/about-2.jpg" alt="about" />
           </div>
-          <div class="about-content">
+          <!-- <div class="about-content"> -->
+          <div class="about-content fade-up paused">
             <p>Seasoned Virtuosos</p>
             <h4>Meet the Melody Makers</h4>
             <p>
@@ -829,7 +877,8 @@
 
     <section class="banner">
       <div class="section-container banner-container">
-        <div class="banner-content">
+        <!-- <div class="banner-content"> -->
+        <div class="banner-content fade-left paused">
           <span><i class="ri-double-quotes-r"></i></span>
           <p>
             With a seamless blend of genres ranging from indie folk to ambient
@@ -845,7 +894,8 @@
       <p class="section-subheader">"THE LIGHTS" CAST</p>
       <h2 class="section-header">CAST & CREW</h2>
       <div class="cast-grid">
-        <div class="cast-card">
+        <!-- <div class="cast-card"> -->
+        <div class="cast-card fade-up paused delayed" style="--i: 0">
           <img src="./assets/images/cast-1.jpg" alt="cast" />
           <div class="cast-details">
             <h4>ROBIN C. WELCH</h4>
@@ -853,7 +903,8 @@
             <a href="#">SEE MORE</a>
           </div>
         </div>
-        <div class="cast-card">
+        <!-- <div class="cast-card"> -->
+        <div class="cast-card fade-up paused delayed" style="--i: 1">
           <img src="./assets/images/cast-2.jpg" alt="cast" />
           <div class="cast-details">
             <h4>SARAH W. BAKER</h4>
@@ -861,7 +912,8 @@
             <a href="#">SEE MORE</a>
           </div>
         </div>
-        <div class="cast-card">
+        <!-- <div class="cast-card"> -->
+        <div class="cast-card fade-up paused delayed" style="--i: 2">
           <img src="./assets/images/cast-3.jpg" alt="cast" />
           <div class="cast-details">
             <h4>RICHARDS M. MEGAN</h4>
@@ -877,14 +929,28 @@
 
     <section class="watch">
       <div class="section-container watch-container">
-        <p>Melodies To Life</p>
-        <h4>WATCH NOW</h4>
-        <a href="#"><img src="./assets/images/play.png" alt="play" /></a>
+        <!-- <p>Melodies To Life</p> -->
+        <p class="fade-down paused delayed" style="--i: 0">Melodies To Life</p>
+        <!-- <h4>WATCH NOW</h4> -->
+        <h4 class="fade-down paused delayed" style="--i: 1">WATCH NOW</h4>
+        <!-- <a href="#"><img src="./assets/images/play.png" alt="play" /></a> -->
+        <a href="#">
+          <img class="zoom-in paused delayed" style="--i: 3" 
+            src="./assets/images/play.png" alt="play" />
+        </a>
         <div class="watch-icons">
-          <img src="./assets/images/icon-1.png" alt="icon" />
-          <img src="./assets/images/icon-2.png" alt="icon" />
-          <img src="./assets/images/icon-3.png" alt="icon" />
-          <img src="./assets/images/icon-4.png" alt="icon" />
+          <!-- <img src="./assets/images/icon-1.png" alt="icon" /> -->
+          <img class="fade-up paused delayed" style="--i: 0" 
+            src="./assets/images/icon-1.png" alt="icon" />
+          <!-- <img src="./assets/images/icon-2.png" alt="icon" /> -->
+          <img class="fade-up paused delayed" style="--i: 1" 
+            src="./assets/images/icon-2.png" alt="icon" />
+          <!-- <img src="./assets/images/icon-3.png" alt="icon" /> -->
+          <img class="fade-up paused delayed" style="--i: 2" 
+            src="./assets/images/icon-3.png" alt="icon" />
+          <!-- <img src="./assets/images/icon-4.png" alt="icon" /> -->
+          <img class="fade-up paused delayed" style="--i: 3" 
+            src="./assets/images/icon-4.png" alt="icon" />
         </div>
       </div>
     </section>
@@ -893,31 +959,72 @@
       <p class="section-subheader">"THE LIGHTS" STILLS</p>
       <h2 class="section-header">GALLERY</h2>
       <div class="gallery-grid">
-        <img src="./assets/images/gallery-1.jpg" alt="gallery" />
-        <img src="./assets/images/gallery-2.jpg" alt="gallery" />
-        <img src="./assets/images/gallery-3.jpg" alt="gallery" />
-        <img src="./assets/images/gallery-4.jpg" alt="gallery" />
-        <img src="./assets/images/gallery-5.jpg" alt="gallery" />
-        <img src="./assets/images/gallery-6.jpg" alt="gallery" />
-        <img src="./assets/images/gallery-7.jpg" alt="gallery" />
-        <img src="./assets/images/gallery-8.jpg" alt="gallery" />
-        <img src="./assets/images/gallery-9.jpg" alt="gallery" />
-        <img src="./assets/images/gallery-10.jpg" alt="gallery" />
-        <img src="./assets/images/gallery-11.jpg" alt="gallery" />
-        <img src="./assets/images/gallery-12.jpg" alt="gallery" />
+        <!-- <img src="./assets/images/gallery-1.jpg" alt="gallery" /> -->
+        <img class="fade-up paused delayed" style="--i: 0" 
+          src="./assets/images/gallery-1.jpg" alt="gallery" />
+        <!-- <img src="./assets/images/gallery-2.jpg" alt="gallery" /> -->
+        <img class="fade-up paused delayed" style="--i: 1" 
+          src="./assets/images/gallery-2.jpg" alt="gallery" />
+        <!-- <img src="./assets/images/gallery-3.jpg" alt="gallery" /> -->
+        <img class="fade-up paused delayed" style="--i: 2" 
+          src="./assets/images/gallery-3.jpg" alt="gallery" />
+        <!-- <img src="./assets/images/gallery-4.jpg" alt="gallery" /> -->
+        <img class="fade-up paused delayed" style="--i: 3" 
+          src="./assets/images/gallery-4.jpg" alt="gallery" />
+        <!-- <img src="./assets/images/gallery-5.jpg" alt="gallery" /> -->
+        <img class="fade-up paused delayed" style="--i: 4" 
+          src="./assets/images/gallery-5.jpg" alt="gallery" />
+        <!-- <img src="./assets/images/gallery-6.jpg" alt="gallery" /> -->
+        <img class="fade-up paused delayed" style="--i: 5" 
+          src="./assets/images/gallery-6.jpg" alt="gallery" />
+        <!-- <img src="./assets/images/gallery-7.jpg" alt="gallery" /> -->
+        <img class="fade-up paused delayed" style="--i: 6" 
+          src="./assets/images/gallery-7.jpg" alt="gallery" />
+        <!-- <img src="./assets/images/gallery-8.jpg" alt="gallery" /> -->
+        <img class="fade-up paused delayed" style="--i: 7" 
+          src="./assets/images/gallery-8.jpg" alt="gallery" />
+        <!-- <img src="./assets/images/gallery-9.jpg" alt="gallery" /> -->
+        <img class="fade-up paused delayed" style="--i: 8" 
+          src="./assets/images/gallery-9.jpg" alt="gallery" />
+        <!-- <img src="./assets/images/gallery-10.jpg" alt="gallery" /> -->
+        <img class="fade-up paused delayed" style="--i: 9" 
+          src="./assets/images/gallery-10.jpg" alt="gallery" />
+        <!-- <img src="./assets/images/gallery-11.jpg" alt="gallery" /> -->
+        <img class="fade-up paused delayed" style="--i: 10"
+           src="./assets/images/gallery-11.jpg" alt="gallery" />
+        <!-- <img src="./assets/images/gallery-12.jpg" alt="gallery" /> -->
+        <img class="fade-up paused delayed" style="--i: 11"
+           src="./assets/images/gallery-12.jpg" alt="gallery" />
       </div>
     </section>
 
     <section class="connect">
       <div class="section-container connect-container">
-        <p>Connect With Us</p>
-        <h4>GET CONNECTED</h4>
+        <!-- <p>Connect With Us</p> -->
+        <p class="full-fade-down paused delayed" style="--i: 0">Connect With Us</p>
+        <!-- <h4>GET CONNECTED</h4> -->
+        <h4 class="fade-down paused delayed" style="--i: 1">GET CONNECTED</h4>
         <div class="connect-socials">
-          <a href="#"><i class="ri-twitter-fill"></i></a>
-          <a href="#"><i class="ri-facebook-fill"></i></a>
-          <a href="#"><i class="ri-instagram-fill"></i></a>
-          <a href="#"><i class="ri-youtube-fill"></i></a>
-          <a href="#"><i class="ri-heart-3-fill"></i></a>
+          <!-- <a href="#"><i class="ri-twitter-fill"></i></a> -->
+          <a class="fade-up paused delayed" style="--i: 0" href="#">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <!-- <a href="#"><i class="ri-facebook-fill"></i></a> -->
+          <a class="fade-up paused delayed" style="--i: 1" href="#">
+            <i class="ri-facebook-fill"></i>
+          </a>
+          <!-- <a href="#"><i class="ri-instagram-fill"></i></a> -->
+          <a class="fade-up paused delayed" style="--i: 2" href="#">
+            <i class="ri-instagram-fill"></i>
+          </a>
+          <!-- <a href="#"><i class="ri-youtube-fill"></i></a> -->
+          <a class="fade-up paused delayed" style="--i: 3" href="#">
+            <i class="ri-youtube-fill"></i>
+          </a>
+          <!-- <a href="#"><i class="ri-heart-3-fill"></i></a> -->
+          <a class="fade-up paused delayed" style="--i: 4" href="#">
+            <i class="ri-heart-3-fill"></i>
+          </a>
         </div>
       </div>
     </section>
@@ -926,7 +1033,8 @@
       <p class="section-subheader">INTERVIEWS & REVIEWS</p>
       <h2 class="section-header">PRESS & MEDIA</h2>
       <div class="media-grid">
-        <div class="media-card">
+        <!-- <div class="media-card"> -->
+        <div class="media-card fade-up paused delayed" style="--i: 0">
           <img src="./assets/images/media-1.jpg" alt="media" />
           <div class="media-details">
             <p>Debut Delights</p>
@@ -934,7 +1042,8 @@
             <a href="#">READ ARTICLE</a>
           </div>
         </div>
-        <div class="media-card">
+        <!-- <div class="media-card"> -->
+        <div class="media-card fade-up paused delayed" style="--i: 1">
           <img src="./assets/images/media-2.jpg" alt="media" />
           <div class="media-details">
             <p>Evolutionary Explorations</p>
@@ -942,7 +1051,8 @@
             <a href="#">READ ARTICLE</a>
           </div>
         </div>
-        <div class="media-card">
+        <!-- <div class="media-card"> -->
+        <div class="media-card fade-up paused delayed" style="--i: 2">
           <img src="./assets/images/media-3.jpg" alt="media" />
           <div class="media-details">
             <p>Concept Chronicles</p>
@@ -950,7 +1060,8 @@
             <a href="#">READ ARTICLE</a>
           </div>
         </div>
-        <div class="media-card">
+        <!-- <div class="media-card"> -->
+        <div class="media-card fade-up paused delayed" style="--i: 3">
           <img src="./assets/images/media-4.jpg" alt="media" />
           <div class="media-details">
             <p>Greatest Hits Gallery</p>
@@ -966,10 +1077,14 @@
 
     <footer class="footer">
       <div class="section-container footer-container">
-        <a href="#">
+        <a class="zoom-in" href="#">
           <img src="./assets/images/play.png" alt="play" /> WATCH THE TRAILER
+          <!-- <img class="fade-down paused" 
+            src="./assets/images/play.png" alt="play" /> 
+          WATCH THE TRAILER -->
         </a>
-        <div class="crew">
+        <!-- <div class="crew"> -->
+        <div class="crew fade-up paused">
           <h4>
             Ava Summers <span>Lead Vocalis</span> 
             Jackson "Axel" Anderson <span>Lead Guitarist</span> 
