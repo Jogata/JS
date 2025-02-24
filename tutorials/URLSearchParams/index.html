@@ -1129,18 +1129,42 @@ body {
   /* width: 100%; */
 /* } */
 
+.projects .slider {
+  margin-top: 40px;
+}
+
 .projects .slide {
   width: 33%;
 }
 
 .project-card {
-  width: 100%;
+  position: relative;
+  /* width: 100%; */
+  /* padding-top: 16px; */
+  padding-top: 1rem;
   /* display: flex; */
   /* gap: 5px; */
   /* align-items: center; */
   /* justify-content: center; */
   /* flex-direction: column; */
   cursor: pointer;
+  z-index: 1;
+}
+
+.project-card::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 100%;
+  /* background-color: red; */
+  background-color: rgb(245, 248, 237);
+  clip-path: url("#mask-1");
+  /* clip-path: url("#mask-2"); */
+  /* clip-path: url("#mask-3"); */
+  /* clip-path: url("#mask-4"); */
+  z-index: -1;
 }
 
 .project-img {
@@ -1148,6 +1172,11 @@ body {
   /* height: 500px; */
   border-radius: 10px;
   overflow: hidden;
+  /* width: 100%; */
+  /* clip-path: url("#mask-1"); */
+  /* clip-path: url("#mask-2"); */
+  /* clip-path: url("#mask-3"); */
+  clip-path: url("#mask-4");
 }
 
 .project-img img {
@@ -1162,7 +1191,8 @@ body {
 }
 
 .project-info {
-  width: 100%;
+  position: relative;
+  /* width: 100%; */
   padding: 10px;
   /* display: flex; */
   /* align-items: center; */
@@ -1170,13 +1200,34 @@ body {
   /* flex-direction: column; */
   text-align: center;
   border-radius: 10px;
-  background-color: rgb(245, 248, 237);
+  /* background-color: rgb(245, 248, 237); */
   /* transition: all 0.3s; */
-  transition: background-color 300ms;
+  /* transition: background-color 300ms; */
+  z-index: 1;
 }
 
-.project-card:hover .project-info {
-  background-color: rgb(121, 185, 0);
+.project-info::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 100%;
+  /* height: 300px; */
+  /* background-color: red; */
+  /* background-color: rgb(245, 248, 237); */
+  /* clip-path: url("#mask-1"); */
+  /* clip-path: url("#mask-2"); */
+  clip-path: url("#mask-3");
+  /* clip-path: url("#mask-4"); */
+  transition: background-color 300ms;
+  z-index: -1;
+}
+
+.project-card:hover .project-info::after {
+  /* background-color: rgb(121, 185, 0); */
+  background-color: rgb(245, 248, 237);
+  /* background-color: red; */
 }
 
 .project-info h2 {
@@ -1196,7 +1247,8 @@ body {
 
 .project-card:hover .project-info h1, 
 .project-card:hover .project-info h2 {
-  color: #fff;
+  /* color: #fff; */
+  color: rgb(0, 128, 0);
 }
 
 @media screen and (max-width: 1100px) {
@@ -1204,57 +1256,90 @@ body {
     font-size: 1.5rem;
   }
 
-  .projects .headings {
+  /* .projects .headings { */
     /* width: 90%; */
-  }
+  /* } */
 }
 
-@media screen and (max-width: 900px) {
-  .projects .headings {
+/* @media screen and (max-width: 900px) { */
+  /* .projects .headings { */
     /* width: 100%; */
-  }
+  /* } */
 
-  .projects .headings h1 {
+  /* .projects .headings h1 { */
     /* width: 100%; */
-  }
-}
+  /* } */
+/* } */
 
 .works {
-  gap: 50px;
-  flex-direction: column;
+  position: relative;
+  /* gap: 50px; */
+  /* flex-direction: column; */
+  z-index: 1;
 }
 
-.works .headings {
+.works::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
   width: 100%;
+  height: 100%;
+  /* background-color: red; */
+  background-color: rgb(245, 248, 237);
+  /* clip-path: url("#mask-1"); */
+  /* clip-path: url("#mask-2"); */
+  clip-path: url("#mask-3");
+  /* clip-path: url("#mask-4"); */
+  z-index: -1;
+}
+
+
+.works .headings {
+  /* width: 100%; */
   /* align-items: center; */
   /* justify-content: center; */
   text-align: center;
 }
 
-.works .headings h1 {
-  width: 100%;
+/* .works .headings h1 { */
+  /* width: 100%; */
   /* text-align: center; */
-}
+/* } */
 
 .work-cards {
-  width: 100%;
-  display: grid;
-  gap: 10px;
-  place-content: center;
-  place-items: center;
-  grid-template-columns: repeat(3, 1fr);
+  /* position: relative; */
+  padding: 60px 0;
+  /* width: 100%; */
+  /* display: grid; */
+  /* gap: 10px; */
+  /* place-items: center; */
+  /* place-content: center; */
+  /* grid-template-columns: repeat(3, 1fr); */
+  display: flex;
+  gap: 3rem 3%;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* z-index: 1; */
 }
 
 .work-card {
-  width: 100%;
-  /* display: flex; */
+  /* width: 100%; */
+  max-width: 260px;
+  display: flex;
   /* align-items: center; */
   /* justify-content: center; */
-  /* flex-direction: column; */
+  flex-direction: column;
   text-align: center;
 }
 
+.work-img img {
+  max-width: 180px;
+  margin: auto;
+}
+
 .work-card h2 {
+  margin: auto 0;
   font-size: 2rem;
   font-weight: 500;
   transition: all 0.3s;
@@ -1266,6 +1351,7 @@ body {
 }
 
 .work-card p {
+  margin-top: auto;
   /* font-size: 1rem; */
   font-weight: 500;
 }
@@ -1283,30 +1369,58 @@ body {
 }
 
 .testimonials {
-  gap: 50px;
-  flex-direction: column;
-  background-color: #f5f8ed;
+  position: relative;
+  /* gap: 50px; */
+  /* flex-direction: column; */
+  /* background-color: #f5f8ed; */
+  z-index: 1;
+}
+
+.testimonials::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 100%;
+  /* background-color: red; */
+  background-color: rgb(245, 248, 237);
+  clip-path: url("#mask-1");
+  /* clip-path: url("#mask-2"); */
+  /* clip-path: url("#mask-3"); */
+  /* clip-path: url("#mask-4"); */
+  z-index: -1;
 }
 
 .testimonials .headings {
-  width: 100%;
-  align-items: center;
-  justify-content: center;
+  /* width: 100%; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  max-width: 800px;
+  margin: auto;
   text-align: center;
 }
 
 .testimonials .headings h1 {
-  width: 100%;
+  /* width: 100%; */
   font-size: 2.5rem;
-  text-align: center;
+  /* text-align: center; */
 }
 
-.testimonialSwiper {
-  width: 100%;
-  padding: 2%;
+/* .testimonialSwiper { */
+  /* width: 100%; */
+  /* padding: 2%; */
+/* } */
+
+.testimonials .slider {
+  margin-top: 60px;
 }
 
-.test-slide {
+.testimonials .slide {
+  width: 33%;
+}
+
+.testimonial {
   width: 100%;
   padding: 2% 5%;
   display: flex;
@@ -1320,11 +1434,11 @@ body {
   cursor: pointer;
 }
 
-.test-slide:hover {
+.testimonial:hover {
   border: 1px solid rgb(121, 185, 0);
 }
 
-.test-head {
+.head {
   display: flex;
   gap: 20px;
   align-items: center;
@@ -1347,13 +1461,13 @@ body {
   background-color: rgb(121, 185, 0);
 }
 
-.test-slide p {
+.testimonial p {
   margin: 10px 0;
   /* font-size: 1rem; */
   font-weight: 600;
 }
 
-.test-bottom {
+.bottom {
   width: 100%;
   margin: 20px 0;
   display: flex;
@@ -1361,7 +1475,7 @@ body {
   justify-content: space-between;
 }
 
-.test-bottom img {
+.bottom img {
   filter: invert(1);
 }
 
@@ -2027,14 +2141,14 @@ footer {
     <div class="testimonials section max-width">
       <div class="headings">
         <span>TESTIMONIALS</span>
-        <h1>Clients Best Feddback About Echofy Provission</h1>
+        <h1>Clients Best Feddback About Echofy Provision</h1>
       </div>
-      <div class="slider testimonialSwiper">
+      <div class="slider">
         <div class="slider-track">
     
-          <div class="swiper-slide">
-            <div class="test-slide">
-              <div class="test-head">
+          <div class="slide">
+            <div class="testimonial">
+              <div class="head">
                 <div class="client-img">
                   <img src="./assets/test/images/testi-profile.png" alt="">
                 </div>
@@ -2047,7 +2161,7 @@ footer {
                 </div>
               </div>
               <p>Appropriately administrate proactive value with to niche markets. Dramatically target market position idea after high quality best practice. Dramatically synergize open source service.</p>
-              <div class="test-bottom">
+              <div class="bottom">
                 <div class="client-info">
                   <h2>Anjelina watson</h2>
                   <p>web Developer</p>
@@ -2057,9 +2171,9 @@ footer {
             </div>
           </div>
     
-          <div class="swiper-slide">
-            <div class="test-slide">
-              <div class="test-head">
+          <div class="slide">
+            <div class="testimonial">
+              <div class="head">
                 <div class="client-img">
                   <img src="./assets/test/images/testi-profile2.png" alt="">
                 </div>
@@ -2072,7 +2186,7 @@ footer {
                 </div>
               </div>
               <p>Appropriately administrate proactive value with to niche markets. Dramatically target market position idea after high quality best practice. Dramatically synergize open source service.</p>
-              <div class="test-bottom">
+              <div class="bottom">
                 <div class="client-info">
                   <h2>Jhon D. Alexon</h2>
                   <p>UI/UX Designer</p>
@@ -2082,9 +2196,9 @@ footer {
             </div>
           </div>
     
-          <div class="swiper-slide">
-            <div class="test-slide">
-              <div class="test-head">
+          <div class="slide">
+            <div class="testimonial">
+              <div class="head">
                 <div class="client-img">
                   <img src="./assets/test/images/testi-profile.png" alt="">
                 </div>
@@ -2097,7 +2211,7 @@ footer {
                 </div>
               </div>
               <p>Appropriately administrate proactive value with to niche markets. Dramatically target market position idea after high quality best practice. Dramatically synergize open source service.</p>
-              <div class="test-bottom">
+              <div class="bottom">
                 <div class="client-info">
                   <h2>Anjelina watson</h2>
                   <p>web Developer</p>
@@ -2344,4 +2458,4 @@ footer {
     </script>
   </body>
 </html>
-<!-- 55-185-315-445-575-705-835-965-1095-1225-1355-1485-1615-1740-1850-2045-2145-2235-2350 -->
+<!-- 55-185-315-445-575-705-835-965-1095-1225-1355-1485-1615-1740-1850-2045-2145-2235-2350-2430 -->
