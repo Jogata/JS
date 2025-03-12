@@ -3,147 +3,144 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URLSearchParams in JS</title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
+    <!-- <title>URLSearchParams in JS</title> -->
+    <title>NovusHaus</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap");
+      
+      :root {
+        --primary-color: #2f2f2f;
+        --text-dark: #18181b;
+        --text-light: #71717a;
+        --white: #ffffff;
+        --max-width: 1200px;
+        --header-font: "Lora", serif;
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      .section-container {
+        max-width: var(--max-width);
+        margin: auto;
+        padding: 5rem 1rem;
+      }
+      
+      .section-header {
+        margin-bottom: 1rem;
+        color: var(--text-dark);
+        font-size: 2.5rem;
+        font-weight: 700;
+        font-family: var(--header-font);
+      }
+    </style>
   </head>
   <body>
-    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
- 
-    <script>
-  // 03. Plant Discovery
- 
-  function plantDisc(params) {
-    // console.log(params);
-    const plants = {};
-    const end = Number(params[0]);
-    // console.log(end);
-    let index = 1;
-    let input = "";
- 
-    for (let i = index; i <= end; i++) {
-      // console.log(input);
-      input = params[index];
-      const data = input.split("<->");
-      const plant = data[0];
-      const rarity = Number(data[1]);
-      // console.log(plant);
-      // console.log(rarity);
-  
-      plants[plant] = {
-        rarity, 
-        ratings: []
-      };
+    <header class="header">
+      <nav>
+        <div class="nav-logo">
+          <a href="#">NovusHaus</a>
+        </div>
+        <ul class="nav-links" id="nav-links">
+          <li class="link">
+            <a href="#home">Home</a>
+          </li>
+          <li class="link">
+            <a href="#choose">About</a>
+          </li>
+          <li class="link">
+            <a href="#craft">Craft</a>
+          </li>
+          <li class="link">
+            <a href="#testimonials">Testimonials</a>
+          </li>
+          <li class="link">
+            <a href="#blog">Blog</a>
+          </li>
+        </ul>
+        <div class="nav-menu-btn" id="menu-btn">
+          <span><i class="ri-menu-line"></i></span>
+        </div>
+        <div class="nav-actions">
+          <span><i class="ri-search-fill"></i></span>
+          <span><i class="ri-user-fill"></i></span>
+        </div>
+      </nav>
+      <div class="section-container header-container" id="home">
+        <h1>Make Your Interior More Minimalistic & Modern</h1>
+        <p>
+          Turn your room with panto into a lot more minimalistic and modern with
+          ease and speed
+        </p>
+        <form action="/">
+          <input type="text" placeholder="Search furniture" />
+          <button><i class="ri-search-line"></i></button>
+        </form>
+        <a href="#choose">
+          <i class="ri-arrow-down-double-line"></i>
+        </a>
+      </div>
+    </header>
 
-      plants[plant].rarity = rarity;
-      index++;
+    <section class="section-container choose-container" id="choose">
+      <img class="choose-bg" src="./assets/nova/images/dot-bg.png" alt="bg" />
+      <div class="choose-content">
+        <h2 class="section-header">Why Choose Us</h2>
+        <p class="section-subheader">
+          Experience Unmatched Creativity and Expertise in Interior Design.
+          Discover Why We're the Right Choice for Your Dream Space
+        </p>
+        <div class="choose-grid">
+          <div class="choose-card">
+            <span><i class="ri-truck-line"></i></span>
+            <h4>Fast & Free Shipping</h4>
+            <p>
+              Elevate your interior design with our Fast & Free Shipping service
+              without delay
+            </p>
+          </div>
+          <div class="choose-card">
+            <span><i class="ri-shopping-bag-3-line"></i></span>
+            <h4>Easy to Shop</h4>
+            <p>
+              Discover Effortless Elegance: Explore Our Easy-to-Shop Interior
+              Design Solutions
+            </p>
+          </div>
+          <div class="choose-card">
+            <span><i class="ri-customer-service-2-line"></i></span>
+            <h4>24/7 Support</h4>
+            <p>
+              Experience peace of mind knowing that our dedicated team is
+              available round the clock
+            </p>
+          </div>
+          <div class="choose-card">
+            <span><i class="ri-loop-right-line"></i></span>
+            <h4>Hassle Free Returns</h4>
+            <p>
+              We believe in the perfect match, and if it doesn't quite fit, we
+              make returning items a breeze
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="choose-image">
+        <img src="./assets/nova/images/choose.jpg" alt="choose" />
+      </div>
+    </section>
 
-    }
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
  
-    input = params[index];
-    // console.log(input);
- 
-    while (input != "Exhibition") {
-      // console.log(input);
-      const data = input.split(": ");
-      const command = data[0];
-      // console.log(command);
- 
-      if (command == "Rate") {
-        // console.log("Rate");
-        const info = data[1].split(" - ");
-        // console.log(info);
-        const name = info[0];
-        const rating = Number(info[1]);
-        // console.log(name);
-        // console.log(rating);
-        if (plants[name]) {
-          plants[name].ratings.push(rating);
-        } else {
-          console.log("error");
-        }
-      } else if (command == "Update") {
-        // console.log("Update");
-        const info = data[1].split(" - ");
-        // console.log(info);
-        const name = info[0];
-        const newRarity = Number(info[1]);
-        // console.log(name);
-        // console.log(rating);
-        if (plants[name]) {
-          plants[name].rarity = newRarity;
-        } else {
-          console.log("error");
-        }
-      } else if (command == "Reset") {
-        // console.log("Reset");
-        const name = data[1];
-        // console.log(name);
-        if (plants[name]) {
-          plants[name].ratings = [];
-        } else {
-          console.log("error");
-        }
-      } 
- 
-      index++;
-      input = params[index];
- 
-      // if (index > 100) {
-      //   console.log("infinity");
-      //   break;
-      // }
- 
-    }
-
-    // console.log(plants);
-    console.log("Plants for the exhibition:");
-    for (const name in plants) {
-      // console.log(name);
-      const plant = plants[name];
-      // console.log(plant.ratings);
-      const sumRatings = plant.ratings.reduce((acc, x) => {
-        // console.log(x);
-        return acc + x;
-      }, 0);
-      const average = sumRatings / plant.ratings.length || 0;
-      // console.log(average);
-      console.log(`- ${name}; Rarity: ${plant.rarity}; Rating: ${average.toFixed(2)}`);
-    }
-    
-  }
- 
-  // plantDisc(
-  //   [
-  //     "3",
-  //     "Arnoldii<->4",
-  //     "Woodii<->7",
-  //     "Welwitschia<->2",
-  //     "Rate: Woodii - 10",
-  //     "Rate: Welwitschia - 7",
-  //     "Rate: Arnoldii - 3",
-  //     "Rate: Woodii - 5",
-  //     "Update: Woodii - 5",
-  //     "Reset: Arnoldii",
-  //     "Exhibition"
-  //   ]
-  // );
-  // plantDisc(
-  //   [
-  //     "2",
-  //     "Candelabra<->10", 
-  //     "Oahu<->10",
-  //     "Rate: Oahu - 7",
-  //     "Rate: Candelabra - 6",
-  //     "Exhibition"
-  //   ]
-  // );
-    </script>
- 
-<header style="display: block;">
-  <h2>JS Advanced Exam Prep - 20 February 2021</h2>
-  <a href="../../00exams/JS Advanced Regular Exam - 20 February 2021">Open folder</a>
-</header>
+<!-- <header style="display: none;"> -->
+  <!-- <h2>JS Advanced Exam Prep - 20 February 2021</h2> -->
+  <!-- <a href="../../00exams/JS Advanced Regular Exam - 20 February 2021">Open folder</a> -->
+<!-- </header> -->
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
