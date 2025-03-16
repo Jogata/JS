@@ -649,6 +649,12 @@
 
       .slider-track {
         display: flex;
+        /* border-radius: 12px; */
+        /* border: 1px solid #000; */
+        /* outline: 2px double black; */
+        /* outline-offset: 4px; */
+        /* box-shadow: inset 3px 3px 5px #0005, 
+                inset -5px -5px 7px #fff5; */
         overflow: hidden;
       }
 
@@ -704,6 +710,19 @@
         }
         100% {
           transform: translateX(-100%);
+        }
+      }
+
+      .slide.fade-out-right {
+        animation: fade-out-right 1s linear forwards;
+      }
+
+      @keyframes fade-out-right {
+        0% {
+          transform: translateX(0%);
+        }
+        100% {
+          transform: translateX(100%);
         }
       }
       
@@ -1039,6 +1058,31 @@
           text-align: center;
         }
       }
+
+      @media (width < 560px) {
+        .craft-container {
+          grid-template-columns: 1fr;
+        }
+
+        .craft-image {
+          width: 100%;
+          max-width: 350px;
+          margin: auto;
+        }
+      }
+
+      /* .slide.active {
+        transform: translateX(0);
+        transition: transform 300ms;
+      }
+      .slide.fade-out-left {
+        transform: translateX(-100%);
+        transition: transform 300ms;
+      }
+      .slide.fade-out-right {
+        transform: translateX(100%);
+        transition: transform 300ms;
+      } */
     </style>
   </head>
   <body>
@@ -1306,7 +1350,93 @@
             </div>
           </div>
         </div>
+        <div class="control">
+          <button id="next">
+            next <i class="ri-arrow-left-double-line"></i>
+          </button>
+          <button id="prev">
+            prev <i class="ri-arrow-right-double-line"></i>
+          </button>
+        </div>
         <!-- <div class="swiper-pagination"></div> -->
+        <script>
+          const slides = document.querySelectorAll(".slide");
+          const next = document.getElementById("next");
+          const prev = document.getElementById("prev");
+          let index = 0;
+          let prevIndex = 0;
+          let penultimateIndex = 0;
+
+          // next.addEventListener("click", () => {
+          //   const activeSlide = slides[index];
+          //   activeSlide.classList.remove("fade-in-left", "fade-in-right");
+          //   activeSlide.classList.add("fade-out-left");
+          //   index++;
+          //   index = index % slides.length;
+          //   slides[index].classList.remove("fade-out-left", "fade-out-right");
+          //   slides[index].classList.add("fade-in-left");
+          // })
+
+          next.addEventListener("click", () => {
+            const activeSlide = slides[index];
+            penultimateIndex = prevIndex;
+            const penultimateSlide = slides[penultimateIndex];
+            const penultimateSlideAnimations = penultimateSlide.getAnimations();
+            // console.log(animations);
+            if (penultimateSlideAnimations.length > 0) {
+              penultimateSlideAnimations[0].finish();
+              // penultimateSlideAnimations[0].playbackRate = 10;
+              // activeSlide.getAnimations()[0].playbackRate = 5;
+              activeSlide.getAnimations()[0].finish();
+              // slides[prevIndex].getAnimations()[0].playbackRate = 5;
+              slides[prevIndex].getAnimations()[0].finish();
+            }
+            prevIndex = index;
+            activeSlide.classList.remove("fade-in-left", "fade-in-right");
+            activeSlide.classList.add("fade-out-left");
+            index++;
+            index = index % slides.length;
+            // console.log(index, prevIndex, finish);
+            slides[index].classList.remove("fade-out-left", "fade-out-right");
+            slides[index].classList.add("fade-in-left");
+          })
+
+          next.addEventListener("click", () => {
+            const activeSlide = slides[index];
+            activeSlide.classList.remove("active");
+          }, {once: true})
+
+          prev.addEventListener("click", () => {
+            const activeSlide = slides[index];
+            activeSlide.classList.remove("active");
+          }, {once: true})
+
+          prev.addEventListener("click", () => {
+            // const activeSlide = document.querySelector(".slide.active");
+            const activeSlide = slides[index];
+            penultimateIndex = prevIndex;
+            const penultimateSlide = slides[penultimateIndex];
+            const penultimateSlideAnimations = penultimateSlide.getAnimations();
+            // console.log(animations);
+            if (penultimateSlideAnimations.length > 0) {
+              penultimateSlideAnimations[0].finish();
+              // penultimateSlideAnimations[0].playbackRate = 10;
+              // activeSlide.getAnimations()[0].playbackRate = 5;
+              activeSlide.getAnimations()[0].finish();
+              // slides[prevIndex].getAnimations()[0].playbackRate = 5;
+              slides[prevIndex].getAnimations()[0].finish();
+            }
+            prevIndex = index;
+            // activeSlide.classList.replace("active", "fade-out-right");
+            activeSlide.classList.remove("fade-in-left", "fade-in-right");
+            activeSlide.classList.add("fade-out-right");
+            index--;
+            index = index + slides.length;
+            index = index % slides.length;
+            slides[index].classList.remove("fade-out-left", "fade-out-right");
+            slides[index].classList.add("fade-in-right");
+          })
+        </script>
       </div>
     </section>
 
@@ -1426,4 +1556,4 @@
     </script>
   </body>
 </html>
-<!-- 55-185-315-445-575-705-835-965-1095-1225-1310-1430 -->
+<!-- 55-185-315-445-575-705-835-965-1095-1225-1310-1430-1560 -->
