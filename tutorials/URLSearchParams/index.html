@@ -4,158 +4,146 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URLSearchParams in JS</title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+      :root {
+        --primary-color: #ff581f;
+        --secondary-color: #111111;
+        --secondary-color-light: #232220;
+        --text-light: #a3a3a3;
+        --white: #ffffff;
+        --black: #000000;
+        --max-width: 1200px;
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      .section-container {
+        max-width: var(--max-width);
+        margin: auto;
+        padding: 5rem 1rem;
+      }
+      
+      .section-header {
+        font-size: 2.5rem;
+        font-weight: 600;
+      }
+    </style>
   </head>
   <body>
-  <script>
-  // 1. Format Grade
-function formatGrade(garde) {
-  let result = "";
-  if (garde < 3) {
-    result = "Fail (2)";
-    // console.log(result);
-  } else if (garde < 3.5) {
-    result = `Poor (${garde.toFixed(2)})`;
-  } else if (garde < 4.5) {
-    result = `Good (${garde.toFixed(2)})`;
-  } else if (garde < 5.5) {
-    result = `Very good (${garde.toFixed(2)})`;
-  } else {
-    result = `Excellent (${garde.toFixed(2)})`;
-  }
-
-  console.log(result);
-
-}
-
-formatGrade(3.33);
-formatGrade(4.5);
-formatGrade(2.99);
-
-const numberOperations = {
-  powNumber: function (num) {
-    return num * num;
-  },
-  numberChecker: function (input) {
-    input = Number(input);
-
-    if (isNaN(input)) {
-      throw new Error('The input is not a number!');
-    }
-
-    if (input < 100) {
-      return 'The number is lower than 100!';
-    } else {
-      return 'The number is greater or equal to 100!';
-    }
-  },
-  sumArrays: function (array1, array2) {
-    const longerArr = array1.length > array2.length ? array1 : array2;
-    const rounds = array1.length < array2.length ? array1.length : array2.length;
-
-    const resultArr = [];
-
-    for (let i = 0; i < rounds; i++) {
-      resultArr.push(array1[i] + array2[i]);
-    }
-
-    resultArr.push(...longerArr.slice(rounds));
-
-    return resultArr;
-
-  }
-};
-
-function solve(){
-  let nameElement = document.getElementById('creator')
-  let titleElement = document.getElementById('title');
-  let categoryElement =document.getElementById('category');
-  let contentElement =document.getElementById('content');
-  const btnCreate= document.querySelector('form > button');
-  const section = document.getElementsByTagName('section')[1];
-  btnCreate.addEventListener('click', function(e){
-e.preventDefault();
-  let artical = document.createElement('article');
-
-  section.appendChild(artical);
-  let title=document.createElement('h1');
-  title.textContent= titleElement.value;
-  artical.appendChild(title);
-  let category = document.createElement('p')
-  let strong =document.createElement('strong');
-  strong.textContent=categoryElement.value;
-  category.appendChild(strong);
-  let categoryLebel =document.createElement('lebel');
-  categoryLebel.textContent="Category:";
- category.prepend(categoryLebel);
-  artical.appendChild(category);
-let name = document.createElement('p');
-let strongName= document.createElement('strong');
-strongName.textContent=nameElement.value;
-name.appendChild(strongName);
-let nameLebel = document.createElement('lebel');
-nameLebel.textContent="Author:";
-name.prepend(nameLebel);
-artical.appendChild(name);
-let content=document.createElement('p');
-content.textContent= contentElement.value;
-artical.appendChild(content);
-
-let btns = document.createElement('div');
-btns.setAttribute('class', 'buttons');
-let deleteBtn = document.createElement('button');
-deleteBtn.setAttribute('class', 'btn delete');
-deleteBtn.textContent="Delete";
-let archiveBtn= document.createElement('button');
-archiveBtn.setAttribute('class', 'btn archive');
-archiveBtn.textContent="Archive";
-btns.appendChild(deleteBtn);
-btns.appendChild(archiveBtn);
-artical.appendChild(btns);
-
-nameElement.value='';
-titleElement.value='';
-categoryElement.value='';
-contentElement.value='';
-
-deleteBtn.addEventListener('click', function(){
-
-section.removeChild(artical);
-
-})
-
-archiveBtn.addEventListener('click', function(e){
-
-  e.preventDefault();
-let archives = document.querySelector('.archive-section');
-let archivesli = document.createElement('ol');
-
-archivesli.appendChild(title);
-section.removeChild(artical);
-archives.appendChild(archivesli);
-
-let allArchivesli = Array.from(archives.querySelectorAll('ol'));
-
-allArchivesli.sort((a,b)=>a.textContent.localeCompare(b.textContent));
-
-for (element of allArchivesli){
-
-archives.appendChild(element);
-}
-
-})
-
-})
-}
-</script>
-
-    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+    <header>
+      <nav>
+        <div class="nav-logo"><a href="#home">Induz.</a></div>
+        <ul class="nav-links" id="nav-links">
+          <li class="link"><a href="#home">Home</a></li>
+          <li class="link"><a href="#about">About</a></li>
+          <li class="link"><a href="#stats">Stats</a></li>
+          <li class="link"><a href="#blog">Blog</a></li>
+          <li class="link"><a href="#subscribe">Subscribe</a></li>
+        </ul>
+        <div class="nav-menu-btn" id="menu-btn">
+          <span><i class="ri-menu-line"></i></span>
+        </div>
+      </nav>
+      <div class="section-container header-container" id="home">
+        <h1>The Reliable Industry Takes Many Forms.</h1>
+        <button class="btn btn-secondary">
+          Read More
+          <span><i class="ri-arrow-right-double-line"></i></span>
+        </button>
+      </div>
+    </header>
+    <section class="about" id="about">
+      <div class="section-container about-container">
+        <div class="about-grid">
+          <div class="about-content">
+            <p class="section-subheader">About Us</p>
+            <h2 class="section-header">Company History</h2>
+            <p class="para">
+              We are your trusted partner in the world of industrial solutions.
+              With a legacy spanning 20+ years, we have established ourselves as
+              a leading force in the industry, committed to delivering
+              excellence in every facet of our operations. Your success is our
+              success.
+            </p>
+            <br />
+            <p class="para">
+              We conduct ourselves with the utmost integrity in all our
+              dealings, ensuring that our clients receive the highest quality
+              products and services.
+            </p>
+          </div>
+          <div class="about-list">
+            <div class="about-item">
+              <span><i class="ri-global-fill"></i></span>
+              <h4>The reliable industry takes many forms</h4>
+            </div>
+            <div class="about-item">
+              <span><i class="ri-bar-chart-fill"></i></span>
+              <h4>Delivering beyond possible solutions</h4>
+            </div>
+            <div class="about-item">
+              <span><i class="ri-thumb-up-fill"></i></span>
+              <h4>Success through human resources</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="stats" id="stats">
+      <div class="section-container stats-container">
+        <div class="stats-content">
+          <p class="section-subheader">Company</p>
+          <h2 class="section-header">Our Stats</h2>
+          <p class="para">
+            With a team of dedicated experts and professionals, we bring a
+            wealth of experience and knowledge to every project. Our deep
+            industry insights and hands-on experience enable us to tackle even
+            the most complex industrial challenges, providing you with tailored
+            solutions that drive results.
+          </p>
+          <div class="stats-grid">
+            <div class="stats-card">
+              <span><i class="ri-building-4-line"></i></span>
+              <h4>1800</h4>
+              <p>Worldwide Branches</p>
+            </div>
+            <div class="stats-card">
+              <span><i class="ri-user-fill"></i></span>
+              <h4>1920</h4>
+              <p>Qualified Engineers</p>
+            </div>
+            <div class="stats-card">
+              <span><i class="ri-user-smile-line"></i></span>
+              <h4>1612</h4>
+              <p>Work Facilities</p>
+            </div>
+            <div class="stats-card">
+              <span><i class="ri-trophy-fill"></i></span>
+              <h4>1980</h4>
+              <p>Completed Projects</p>
+            </div>
+          </div>
+        </div>
+        <div class="stats-image">
+          <img src="./assets/industrial/Induz_20-09-23-main/images/stats-1.jpg" alt="stats" />
+          <img src="./assets/industrial/Induz_20-09-23-main/images/stats-2.jpg" alt="stats" />
+        </div>
+      </div>
+    </section>
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
  
-<header style="display: block;">
-  <h2>JS Advanced Exam Prep - 20 February 2021</h2>
-  <a href="../../00exams/JS Advanced Regular Exam - 20 February 2021">Open folder</a>
-</header>
+<!-- <header style="display: none;"> -->
+  <!-- <h2>JS Advanced Exam Prep - 20 February 2021</h2> -->
+  <!-- <a href="../../00exams/JS Advanced Regular Exam - 20 February 2021">Open folder</a> -->
+<!-- </header> -->
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
@@ -194,4 +182,4 @@ archives.appendChild(element);
     </script>
   </body>
 </html>
-<!-- 55 -->
+<!-- 55-185 -->
