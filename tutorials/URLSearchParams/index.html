@@ -584,7 +584,94 @@
       .subscribe-container .para a {
         color: var(--primary-color);
       }
+      
+      .customers {
+        background-color: var(--secondary-color-light);
+      }
+      
+      .customer-container .para {
+        margin-block: 1rem 4rem;
+        color: var(--text-light);
+      }
+      
+      .slider {
+        width: 100%;
+        padding-bottom: 4rem;
+      }
+
+      .slider-track {
+        display: flex;
+      }
+
+      .slide {
+        position: absolute;
+        width: 100%;
+        flex-shrink: 0;
+      }
+
+      .current {
+        transform: translate(0);
+        transition: transform 300ms;
+      }
+      .next {
+        transform: translate(100%);
+        transition: transform 300ms;
+      }
+      .prev {
+        transform: translate(-100%);
+        transition: transform 300ms;
+      }
+      
+      .customer-review .swiper-pagination-bullet-active {
+        background-color: var(--primary-color);
+      }
+      
+      .customer-review-card {
+        position: relative;
+        isolation: isolate;
+        max-width: 600px;
+        margin-inline: auto;
+        text-align: center;
+      }
+      
+      .customer-review-card span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: var(--primary-color);
+        font-size: 6rem;
+        line-height: 4rem;
+        opacity: 0.1;
+      }
+      
+      .customer-review-card p {
+        margin-bottom: 2rem;
+        color: var(--text-light);
+      }
         
+      .customer-review-details {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .customer-review-details img {
+        max-width: 70px;
+        border-radius: 100%;
+      }
+      
+      .customer-review-details h4 {
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
+      
+      .customer-review-details h5 {
+        color: var(--text-light);
+        font-size: 0.9rem;
+        font-weight: 400;
+      }
+
 /* =============================================================================================================================================================== */
       
       .section-subheader::before {
@@ -822,6 +909,30 @@
         }
       } */
 
+      .subscribe {
+        position: relative;
+        background: none;
+      }
+
+      .subscribe::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        padding-bottom: 10rem;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url("./assets/industrial/images/subscribe.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        clip-path: url("#mask-1");
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
+        z-index: -1;
+      }
+
       .nav-logo {
         position: relative;
         /* z-index: 1; */
@@ -831,13 +942,22 @@
         /* padding-left: 2rem; */
       }
 
-      .fa-cogs, 
+      /* .fa-cogs,  */
       .fa-cog {
         /* position: absolute; */
         color: var(--primary-color);
         font-size: 2.5rem;
         animation: rotate 30s linear infinite;
         /* z-index: -1; */
+      }
+
+      @keyframes rotate {
+        /* 0% {
+          transform: rotate(0deg);
+        } */
+        100% {
+          transform: rotate(360deg);
+        }
       }
     </style>
   </head>
@@ -848,8 +968,8 @@
       <nav>
         <!-- <div class="nav-logo"><a href="#home">Induz.</a></div> -->
         <div class="nav-logo">
-          <!-- <i class="fa fa-cog"></i> -->
-          <i class="fa fa-cogs"></i>
+          <i class="fa fa-cog"></i>
+          <!-- <i class="fa fa-cogs"></i> -->
           <a href="#home">Induz.</a>
         </div>
         <ul class="nav-links" id="nav-links">
@@ -1050,7 +1170,7 @@
       </div>
     </section>
 
-    <section class="customer">
+    <section class="customers">
       <div class="section-container customer-container">
         <p class="section-subheader">Testimonials</p>
         <h2 class="section-header">What Our Customers Say</h2>
@@ -1061,10 +1181,10 @@
           louder than the words of those who have entrusted us with their
           projects.
         </p>
-        <div class="customer-review">
-          <div class="swiper">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide">
+        <div class="customer-reviews">
+          <div class="slider">
+            <div class="slider-track">
+              <div class="slide current">
                 <div class="customer-review-card">
                   <span><i class="ri-double-quotes-r"></i></span>
                   <p>
@@ -1075,7 +1195,7 @@
                     more than a partnership; it's a strategic advantage.
                   </p>
                   <div class="customer-review-details">
-                    <img src="assets/customer-1.jpg" alt="customer" />
+                    <img src="./assets/industrial/images/customer-1.jpg" alt="customer" />
                     <div>
                       <h4>John Smith</h4>
                       <h5>Industrialist</h5>
@@ -1083,7 +1203,7 @@
                   </div>
                 </div>
               </div>
-              <div class="swiper-slide">
+              <div class="slide next">
                 <div class="customer-review-card">
                   <span><i class="ri-double-quotes-r"></i></span>
                   <p>
@@ -1094,7 +1214,7 @@
                     grateful for their expertise.
                   </p>
                   <div class="customer-review-details">
-                    <img src="assets/customer-2.jpg" alt="customer" />
+                    <img src="./assets/industrial/images/customer-2.jpg" alt="customer" />
                     <div>
                       <h4>Laura Rodriguez</h4>
                       <h5>CEO & Founder</h5>
@@ -1102,7 +1222,7 @@
                   </div>
                 </div>
               </div>
-              <div class="swiper-slide">
+              <div class="slide prev">
                 <div class="customer-review-card">
                   <span><i class="ri-double-quotes-r"></i></span>
                   <p>
@@ -1113,7 +1233,7 @@
                     than a vendor; they're a partner in our success.
                   </p>
                   <div class="customer-review-details">
-                    <img src="assets/customer-3.jpg" alt="customer" />
+                    <img src="./assets/industrial/images/customer-3.jpg" alt="customer" />
                     <div>
                       <h4>Mark Thompson</h4>
                       <h5>Architect</h5>
@@ -1187,4 +1307,4 @@
     </script>
   </body>
 </html>
-<!-- 55-185-315-445-575-705-835-940-1055-1190 -->
+<!-- 55-185-315-445-575-705-835-940-1055-1190-1310 -->
