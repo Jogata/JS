@@ -586,7 +586,7 @@
       }
       
       .customers {
-        background-color: var(--secondary-color-light);
+        /* background-color: var(--secondary-color-light); */
       }
       
       .customer-container .para {
@@ -595,11 +595,11 @@
       }
       
       .slider {
-        width: 100%;
-        padding-bottom: 4rem;
+        /* width: 100%; */
       }
 
       .slider-track {
+        position: relative;
         display: flex;
       }
 
@@ -607,6 +607,11 @@
         position: absolute;
         width: 100%;
         flex-shrink: 0;
+        transform: translateX(100%);
+      }
+
+      .relative {
+        position: relative;
       }
 
       .current {
@@ -621,10 +626,39 @@
         transform: translate(-100%);
         transition: transform 300ms;
       }
-      
-      .customer-review .swiper-pagination-bullet-active {
-        background-color: var(--primary-color);
+
+      .slider .control {
+        margin-top: 2rem;
+        text-align: center;
       }
+
+      .slider button {
+        color: var(--white);
+        font-size: 0px;
+        border-radius: 50%;
+        /* border: 1px solid var(--white); */
+        /* background-color: var(--text-dark); */
+        transition: all 300ms;
+      }
+      button#prev {
+        padding: 0.45rem 0.5rem 0.45rem 0.7rem;
+      }
+      button#next {
+        padding: 0.45rem 0.7rem 0.45rem 0.5rem;
+      }
+      .slider button:hover {
+        color: var(--primary-color);
+        /* border-color: var(--black); */
+        /* background-color: var(--primary-color); */
+      }
+
+      .slider button i {
+        font-size: 2rem;
+      }
+      
+      /* .customer-review .swiper-pagination-bullet-active {
+        background-color: var(--primary-color);
+      } */
       
       .customer-review-card {
         position: relative;
@@ -1184,7 +1218,7 @@
         <div class="customer-reviews">
           <div class="slider">
             <div class="slider-track">
-              <div class="slide current">
+              <div class="slide relative current">
                 <div class="customer-review-card">
                   <span><i class="ri-double-quotes-r"></i></span>
                   <p>
@@ -1242,11 +1276,107 @@
                 </div>
               </div>
             </div>
+            <div class="control">
+              <button id="next">
+                next <i class="ri-arrow-left-double-line"></i>
+              </button>
+              <button id="prev">
+                prev <i class="ri-arrow-right-double-line"></i>
+              </button>
+            </div>
             <!-- <div class="swiper-pagination"></div> -->
           </div>
         </div>
       </div>
+      <script>
+        const slides = document.querySelectorAll(".slide");
+        const forwards = document.getElementById("next");
+        const backwards = document.getElementById("prev");
+        const slidesLength = slides.length;
+        let current = 0;
+        let next = 1;
+        let prev = slidesLength - 1;
+
+        forwards.addEventListener("click", () => {
+          slides[current].classList.replace("current", "prev");
+          slides[next].classList.replace("next", "current");
+          slides[prev].classList.remove("prev");
+          next++;
+          next = next % slidesLength;
+          slides[next].classList.add("next");
+          current++;
+          current = current % slidesLength;
+          prev++;
+          prev = prev % slidesLength;
+        });
+
+        backwards.addEventListener("click", () => {
+          slides[current].classList.replace("current", "next");
+          slides[prev].classList.replace("prev", "current");
+          slides[next].classList.remove("next");
+          prev--;
+          prev = prev + slidesLength;
+          prev = prev % slidesLength;
+          slides[prev].classList.add("prev");
+          current--;
+          current = current + slidesLength;
+          current = current % slidesLength;
+          next--;
+          next = next + slidesLength;
+          next = next % slidesLength;
+        });
+      </script>
     </section>
+
+    <footer class="footer">
+      <div class="section-container footer-container">
+        <div class="footer-col">
+          <h5><a href="#">Induz.</a></h5>
+          <p>
+            We strive to be at the forefront of technological advancements and
+            industry best practices, consistently exceeding the expectations of
+            our clients.
+          </p>
+          <div class="footer-socials">
+            <a href="#"><i class="ri-facebook-fill"></i></a>
+            <a href="#"><i class="ri-twitter-fill"></i></a>
+            <a href="#"><i class="ri-instagram-line"></i></a>
+            <a href="#"><i class="ri-linkedin-fill"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <div class="footer-links">
+            <a href="#">Home</a>
+            <a href="#">About Us</a>
+            <a href="#">Services</a>
+            <a href="#">Blog</a>
+            <a href="#">Career</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Our Services</h4>
+          <div class="footer-links">
+            <a href="#">Chemical Research</a>
+            <a href="#">Construction Material</a>
+            <a href="#">Agricultural Engineering</a>
+            <a href="#">Bridge Engineering</a>
+            <a href="#">Automative & Systems</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Help</h4>
+          <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Support</a>
+            <a href="#">Terms & Condition</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bar">
+        Copyright © 2023. All rights reserved.
+      </div>
+    </footer>
 
     </div>
 
@@ -1307,4 +1437,4 @@
     </script>
   </body>
 </html>
-<!-- 55-185-315-445-575-705-835-940-1055-1190-1310 -->
+<!-- 55-185-315-445-575-705-835-940-1055-1190-1310-1440 -->
