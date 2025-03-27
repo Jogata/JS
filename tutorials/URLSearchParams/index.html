@@ -3,157 +3,146 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URLSearchParams in JS</title>
+    <title>URL/SearchParams in JS</title>
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-  <style>
-  *,
-  *::before,
-  *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  body {
-    min-height: 100vh;
-    padding: 5rem 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f6f8ff;
-  }
-  .pricing-table {
-    position: relative;
-    width: 90%;
-    max-width: 800px;
-    display: flex;
-    gap: 2rem;
-    padding: 3rem;
-    text-align: center;
-    border-radius: 1.5rem;
-    border: 10px solid #fff;
-    background-color: #ffffff5b;
-  }
-  .color {
-    position: absolute;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    filter: blur(5rem);
-    z-index: -1;
-  }
-  .purple {
-    top: 80%;
-    left: 0;
-    background-color: #edbbff;
-    box-shadow: 0 0 10rem #edbbff;
-  }
-  .blue {
-    top: -5rem;
-    left: 30%;
-    background-color: #aef1f5;
-    box-shadow: 0 0 10rem #aef1f5;
-  }
-  .orange {
-    top: 20%;
-    right: 0;
-    background-color: #ffddb7;
-    box-shadow: 0 0 10rem #ffddb7;
-  }
-  .get-started {
-    background-color: #edbbff;
-  }
-  .get-started:hover {
-    box-shadow: 0 0 1rem #e59fff;
-  }
-  .upgrade-now {
-    background-color: #aef1f5;
-  }
-  .upgrade-now:hover {
-    box-shadow: 0 0 1rem rgb(138, 249, 255);
-  }
-  .try-for-free {
-    background-color: #ffddb7;
-  }
-  .try-for-free:hover {
-    box-shadow: 0 0 1rem #ffc88a;
-  }
-  
-  h2 {
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-  }
-  .amount {
-    margin-bottom: 0.5rem;
-    font-size: 1.4rem;
-    font-weight: 700;
-  }
-  .amount span {
-    font-size: 2.2rem;
-  }
-  .amount-info {
-    font-size: 0.7rem;
-  }
-  .description {
-    margin: 1rem 0;
-    font-size: 0.8rem;
-    line-height: 1.5;
-  }
-  button {
-    width: max-content;
-    padding: 0.8rem;
-    font-size: 0.8rem;
-    border-radius: 0.5rem;
-    border: none;
-    transition: 0.5s;
-    cursor: pointer;
-  }
-  @media (max-width: 700px) {
-    .pricing-table {
-      gap: 4rem;
-      align-items: center;
-      flex-direction: column;
-      text-align: center;
-    }
-  }
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap");
+      
+      :root {
+        --primary-color: #face59;
+        --secondary-color: #f8f8f8;
+        --text-dark: #111827;
+        --text-light: #6b7280;
+        --white: #ffffff;
+        --max-width: 1200px;
+        --header-font: "Playfair Display", serif;
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      button {
+        font-family: inherit;
+        border: 0px solid transparent;
+        outline: 1px solid transparent;
+        background-color: transparent;
+        cursor: pointer;
+      }
+      
+      button:focus-visible, 
+      a:focus-visible {
+        outline: 1px solid #999;
+      }
     </style>
   </head>
   <body>
-    <!-- <h1>Pricing Table</h1> -->
-    <section class="pricing-table">
-      <div class="price">
-        <h2>Free</h2>
-        <p class="amount">$<span>0</span></p>
-        <p class="amount-info">Free for your whole team</p>
-        <p class="description">For individuals or teams looking to organize anything.</p>
-        <button class="get-started">Get started</button>
-      </div> 
-      <div class="price">
-        <h2>Standard</h2>
-        <p class="amount">$<span>6</span></p>
-        <p class="amount-info">Per user per month</p>
-        <p class="description">For teams that need to manage nore work.</p>
-        <button class="upgrade-now">Upgrade now</button>
-      </div> 
-      <div class="price">
-        <h2>Premium</h2>
-        <p class="amount">$<span>12</span></p>
-        <p class="amount-info">Per user per month</p>
-        <p class="description">Best for teams that need to track multiple projects.</p>
-        <button class="try-for-free">Try for free</button>
-      </div> 
-      <div class="purple color"></div>
-      <div class="blue color"></div>
-      <div class="orange color"></div>
-    </section> 
-
-    <h1 hidden>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+    <nav>
+      <div class="nav-logo">
+        <a href="#">PixelPulse</a>
+      </div>
+      <ul class="nav-links" id="nav-links">
+        <li class="link">
+          <a href="#home">Home</a>
+        </li>
+        <li class="link">
+          <a href="#about">About</a>
+        </li>
+        <li class="link">
+          <a href="#portfolio">Portfolio</a>
+        </li>
+        <li class="link">
+          <a href="#client">Client</a>
+        </li>
+        <li class="link">
+          <a href="#news">News</a>
+        </li>
+        <li class="link">
+          <a href="#contact">Contact</a>
+        </li>
+      </ul>
+      <div class="nav-menu-btn" id="menu-btn">
+        <span><i class="ri-menu-3-line"></i></span>
+      </div>
+    </nav>
+    <header class="section-container header-container" id="home">
+      <div class="header-content">
+        <h1>We Are Digital Creative Agency</h1>
+        <div class="header-content-details">
+          <p>
+            At PixelPulse, we are passionate about crafting digital experiences
+            that captivate, inspire, and drive results. As a digital agency, we
+            specialize in translating your brand's vision into compelling online
+            stories.
+          </p>
+          <button class="btn">Explore</button>
+        </div>
+      </div>
+      <div class="header-image">
+        <img src="assets/header-1.jpg" alt="header" />
+        <img src="assets/header-2.jpg" alt="header" />
+      </div>
+    </header>
+    <section class="section-container about-container" id="about">
+      <div class="about-header">
+        <div class="about-image">
+          <img src="assets/about.jpg" alt="about" />
+        </div>
+        <div class="about-content">
+          <p class="section-subheader">About Us</p>
+          <h2 class="section-header">Design & Develop Better Solution</h2>
+          <p class="paragraph">
+            Our team of creative minds, tech-savvy developers, and digital
+            strategists come together to deliver comprehensive solutions that
+            span web design, mobile app development, digital marketing, and
+            more. We thrive on pushing the boundaries of creativity and
+            technology to help you stand out in the digital landscape.
+          </p>
+          <button class="btn">Learn More</button>
+        </div>
+      </div>
+      <div class="about-grid">
+        <div class="about-card">
+          <span><i class="ri-pen-nib-line"></i></span>
+          <div>
+            <h4>Design</h4>
+            <p>
+              Our designers and content creators are committed to delivering
+              visually stunning and engaging digital content.
+            </p>
+          </div>
+        </div>
+        <div class="about-card">
+          <span><i class="ri-layout-masonry-line"></i></span>
+          <div>
+            <h4>Development</h4>
+            <p>
+              We stay at the forefront of technological advancements, ensuring
+              that your digital presence beautiful and performant.
+            </p>
+          </div>
+        </div>
+        <div class="about-card">
+          <span><i class="ri-checkbox-line"></i></span>
+          <div>
+            <h4>Testing & QA</h4>
+            <p>
+              We understand that your digital presence should not just look
+              good; it should deliver traffic, engagement, and conversions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
  
-<header style="display: none;">
-  <h2>JS Advanced Exam Prep - 20 February 2021</h2>
-  <a href="../../00exams/JS Advanced Regular Exam - 20 February 2021">Open folder</a>
-</header>
+<!-- <header style="display: none;"> -->
+  <!-- <h2>JS Advanced Exam Prep - 20 February 2021</h2> -->
+  <!-- <a href="../../00exams/JS Advanced Regular Exam - 20 February 2021">Open folder</a> -->
+<!-- </header> -->
 
     <script src="./in-fetch-api.js"></script>
     <script src="js.js">
