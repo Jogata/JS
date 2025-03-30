@@ -336,10 +336,11 @@
       display: inline-flex;
       column-gap: 0.5rem;
       align-items: center;
-      justify-content: center;
+      /* justify-content: center; */
       color: var(--white-color);
       font-weight: var(--font-semi-bold);
-      border-radius: 4rem;
+      /* border-radius: 4rem; */
+      border-radius: 2em;
       background: var(--gradient-color);
       transition: box-shadow 0.4s;
     }
@@ -609,10 +610,66 @@
     }
     
     .about-image {
-      width: 280px;
-      justify-self: center;
+      /* width: 280px; */
+      /* justify-self: center; */
     }
 
+    /*=============== FAVORITE ===============*/
+    .favorite-container {
+      padding-top: 2rem;
+    }
+    
+    .favorite-article {
+      width: 220px;
+      display: grid;
+      justify-items: center;
+      transform: scale(0.8);
+      filter: blur(8px);
+      transition: filter 0.3s, 
+              tarnsform 0.3s;
+    }
+
+    .favorite-article.active {
+      transform: scale(1);
+      filter: blur(0);
+    }
+    
+    .favorite-img {
+      width: 220px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .favorite-model {
+      padding: 0.5rem 1.5rem;
+      color: var(--white-color);
+      border-radius: 4rem;
+      background: var(--gradient-color);
+    }
+
+    .control {
+      margin-top: 2rem;
+      text-align: center;
+    }
+  
+    .control button {
+      color: var(--white);
+      font-size: 0px;
+      border-radius: 50%;
+      border: 1px solid black;
+      background-color: var(--text-dark);
+    }
+  
+    button#prev {
+      padding: 0.45rem 0.5rem 0.45rem 0.7rem;
+    }
+  
+    button#next {
+      padding: 0.45rem 0.7rem 0.45rem 0.5rem;
+    }
+  
+    .control button i {
+      font-size: 2rem;
+    }      
   </style>
   <style>
     .home-content {
@@ -888,6 +945,81 @@
        </section>
 
       <!--==================== FAVORITE ====================-->
+      <section class="favorite section" id="favorite">
+        <h2 class="section-title">
+          CHOOSE YOUR FAVORITE
+        </h2>
+        <div class="favorite-container">
+          <div class="favorite-swiper">
+            <div>
+              <article class="favorite-article">
+                <img src="./assets/jbl/images/favorite-1.png" alt="" class="favorite-img">
+                <span class="favorite-model">Black Model</span>
+              </article>
+              <article class="favorite-article">
+                <img src="./assets/jbl/images/favorite-2.png" alt="" class="favorite-img">
+                <span class="favorite-model">White Model</span>
+              </article>
+              <article class="favorite-article">
+                <img src="./assets/jbl/images/favorite-3.png" alt="" class="favorite-img">
+                <span class="favorite-model">Red Model</span>
+              </article>
+              <article class="favorite-article">
+                <img src="./assets/jbl/images/favorite-4.png" alt="" class="favorite-img">
+                <span class="favorite-model">Teal Model</span>
+              </article>
+            </div>
+          </div>
+        </div>
+        <div class="control">
+          <button id="next">
+            next <i class="ri-arrow-left-double-line"></i>
+          </button>
+          <button id="prev">
+            prev <i class="ri-arrow-right-double-line"></i>
+          </button>
+        </div>
+        <!-- <div class="swiper-pagination"></div> -->
+        <script>
+          const slides = document.querySelectorAll(".slide");
+          const forwards = document.getElementById("next");
+          const backwards = document.getElementById("prev");
+          const slidesLength = slides.length;
+          let current = 0;
+          let next = 1;
+          let prev = slidesLength - 1;
+    
+          forwards.addEventListener("click", () => {
+            slides[current].classList.replace("current", "prev");
+            slides[next].classList.replace("next", "current");
+            slides[prev].classList.remove("prev");
+            next++;
+            next = next % slidesLength;
+            slides[next].classList.add("next");
+            current++;
+            current = current % slidesLength;
+            prev++;
+            prev = prev % slidesLength;
+          });
+  
+          backwards.addEventListener("click", () => {
+            slides[current].classList.replace("current", "next");
+            slides[prev].classList.replace("prev", "current");
+            slides[next].classList.remove("next");
+            prev--;
+            prev = prev + slidesLength;
+            prev = prev % slidesLength;
+            slides[prev].classList.add("prev");
+            current--;
+            current = current + slidesLength;
+            current = current % slidesLength;
+            next--;
+            next = next + slidesLength;
+            next = next % slidesLength;
+          });
+        </script>  
+       </section>
+
       <!--==================== MODEL ====================-->
       <!--==================== SPONSOR ====================-->
     </main>
@@ -950,4 +1082,4 @@
     </script>
   </body>
 </html>
-<!-- 55-185-315-445-575-705-835-955 -->
+<!-- 55-185-315-445-575-705-835-955-1085 -->
