@@ -258,7 +258,30 @@
       max-width: 100%;
       height: auto;
     }
-        
+
+    .svg {
+      /* display: none; */
+      position: absolute;
+      width: 0;
+      height: 0;
+    }
+      
+    .mask-1 {
+      clip-path: url("#mask-1");
+    }
+    
+    .mask-2 {
+      clip-path: url("#mask-2");
+    }
+    
+    .mask-3 {
+      clip-path: url("#mask-3");
+    }
+    
+    .mask-4 {
+      clip-path: url("#mask-4");
+    }
+    
     html {
       scroll-behavior: smooth;
     }
@@ -619,30 +642,33 @@
       padding-top: 2rem;
     }
     
-    .favorite-article {
+    /* .favorite-article {
       width: 220px;
       display: grid;
       justify-items: center;
       transform: scale(0.8);
       filter: blur(8px);
       transition: filter 0.3s, 
-              tarnsform 0.3s;
+              transform 0.3s;
     }
 
     .favorite-article.active {
       transform: scale(1);
       filter: blur(0);
-    }
+    } */
     
     .favorite-img {
-      width: 220px;
+      /* width: 220px; */
+      width: 90%;
+      margin: auto;
       margin-bottom: 1.5rem;
     }
     
     .favorite-model {
       padding: 0.5rem 1.5rem;
       color: var(--white-color);
-      border-radius: 4rem;
+      /* border-radius: 4rem; */
+      border-radius: 2em;
       background: var(--gradient-color);
     }
 
@@ -669,7 +695,71 @@
   
     .control button i {
       font-size: 2rem;
-    }      
+    }
+
+    .slider-track {
+      position: relative;
+      max-width: 500px;
+      margin: auto;
+      display: flex;
+      /* overflow: hidden; */
+    }
+  
+    .slide {
+      position: absolute;
+      width: 100%;
+      /* max-width: 500px; */
+      flex-shrink: 0;
+      text-align: center;
+      /* transform: translateX(100%); */
+      transform: translateX(200%) scale(0.8);
+      filter: blur(8px);
+      opacity: 0;
+    }
+  
+    /* .slide.active {
+      transform: translateX(0);
+    } */
+  
+    .relative {
+      position: relative;
+    }
+  
+    .current {
+      /* transform: translate(0); */
+      transform: translateX(0) scale(1);
+      filter: blur(0);
+      opacity: 1;
+      /* transition: transform 300ms; */
+      transition: filter 0.3s, 
+              transform 0.3s;
+    }
+    .next {
+      transform: translateX(100%) scale(0.8);
+      opacity: 1;
+      /* transition: transform 300ms; */
+      transition: filter 0.3s, 
+              transform 0.3s;
+    }
+    .prev {
+      transform: translateX(-100%) scale(0.8);
+      opacity: 1;
+      /* transition: transform 300ms; */
+      transition: filter 0.3s, 
+              transform 0.3s;
+    }
+    
+    /*=============== MODEL ===============*/
+    .model-container {
+      padding-top: 2rem;
+      row-gap: 2.5rem;
+    }
+    
+    .model-content {
+      position: relative;
+      justify-self: center;
+    }
+    
   </style>
   <style>
     .home-content {
@@ -950,21 +1040,21 @@
           CHOOSE YOUR FAVORITE
         </h2>
         <div class="favorite-container">
-          <div class="favorite-swiper">
-            <div>
-              <article class="favorite-article">
+          <div class="favorite-slider">
+            <div class="slider-track">
+              <article class="slide favorite-article prev">
                 <img src="./assets/jbl/images/favorite-1.png" alt="" class="favorite-img">
                 <span class="favorite-model">Black Model</span>
               </article>
-              <article class="favorite-article">
+              <article class="slide relative favorite-article current">
                 <img src="./assets/jbl/images/favorite-2.png" alt="" class="favorite-img">
                 <span class="favorite-model">White Model</span>
               </article>
-              <article class="favorite-article">
+              <article class="slide favorite-article next">
                 <img src="./assets/jbl/images/favorite-3.png" alt="" class="favorite-img">
                 <span class="favorite-model">Red Model</span>
               </article>
-              <article class="favorite-article">
+              <article class="slide favorite-article">
                 <img src="./assets/jbl/images/favorite-4.png" alt="" class="favorite-img">
                 <span class="favorite-model">Teal Model</span>
               </article>
@@ -985,9 +1075,9 @@
           const forwards = document.getElementById("next");
           const backwards = document.getElementById("prev");
           const slidesLength = slides.length;
-          let current = 0;
-          let next = 1;
-          let prev = slidesLength - 1;
+          let current = 1;
+          let next = 2;
+          let prev = 0;
     
           forwards.addEventListener("click", () => {
             slides[current].classList.replace("current", "prev");
@@ -1021,6 +1111,36 @@
        </section>
 
       <!--==================== MODEL ====================-->
+      <section class="model section" id="model">
+        <h2 class="section-title">
+          MODEL SPECIFICATIONS
+        </h2>
+        <div class="container grid model-container">
+          <div class="model-content">
+            <img src="./assets/jbl/images/model-img.png" class="model-img">
+            <div class="model-tooltip model-tooltip-1">
+              <img src="./assets/jbl/images/tooltip-right.svg" class="model-tooltip-img">
+              <span class="model-tooltip-text">Best Comfort</span>
+            </div>
+            <div class="model-tooltip model-tooltip-2">
+              <img src="./assets/jbl/images/tooltip-right.svg" class="model-tooltip-img">
+              <span class="model-tooltip-text">Easy Adjustment</span>
+            </div>
+            <div class="model-tooltip model-tooltip-3">
+              <img src="./assets/jbl/images/tooltip-right.svg" class="model-tooltip-img">
+              <span class="model-tooltip-text">Fast Charge</span>
+            </div>
+            <div class="model-tooltip model-tooltip-4">
+              <img src="./assets/jbl/images/tooltip-right.svg" class="model-tooltip-img">
+              <span class="model-tooltip-text">Custom Audio</span>
+            </div>
+          </div>
+          <a href="#buy" class="btn model-btn">
+            Buy Now <i class="ri-play-circle-fill"></i>
+          </a>
+        </div>
+       </section>
+
       <!--==================== SPONSOR ====================-->
     </main>
     </div>
@@ -1082,4 +1202,4 @@
     </script>
   </body>
 </html>
-<!-- 55-185-315-445-575-705-835-955-1085 -->
+<!-- 55-185-315-445-575-705-835-955-1085-1205 -->
