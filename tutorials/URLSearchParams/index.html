@@ -638,6 +638,10 @@
     }
 
     /*=============== FAVORITE ===============*/
+    .favorite {
+      padding-bottom: 5rem;
+    }
+
     .favorite-container {
       padding-top: 2rem;
     }
@@ -673,7 +677,8 @@
     }
 
     .control {
-      margin-top: 2rem;
+      /* margin-top: 2rem; */
+      margin-top: 4rem;
       text-align: center;
     }
   
@@ -681,8 +686,15 @@
       color: var(--white);
       font-size: 0px;
       border-radius: 50%;
-      border: 1px solid black;
-      background-color: var(--text-dark);
+      /* border: 1px solid black; */
+      /* background-color: var(--text-dark); */
+      box-shadow: 1px 1px 1px #000, 
+              -1px -2px 1px #fff4;
+    }
+
+    .control button:active {
+      box-shadow: inset 1px 1px 1px #000, 
+              inset -1px -2px 1px #fff4;
     }
   
     button#prev {
@@ -748,6 +760,18 @@
       transition: filter 0.3s, 
               transform 0.3s;
     }
+    .left {
+      transform: translateX(-200%) scale(0.6);
+      opacity: 0;
+      transition: opacity 0.3s, 
+              transform 0.3s;
+    }
+    .right {
+      transform: translateX(200%) scale(0.6);
+      opacity: 0;
+      transition: opacity 0.3s, 
+              transform 0.3s;
+    }
     
     /*=============== MODEL ===============*/
     .model-container {
@@ -758,6 +782,78 @@
     .model-content {
       position: relative;
       justify-self: center;
+    }
+
+    .model-img {
+      width: 280px;
+    }
+    
+    .model-tooltip-img {
+      width: 60px;
+    }
+    
+    .model-tooltip-text {
+      position: absolute;
+      padding: 0.25rem 0.75rem;
+      color: var(--white-color);
+      font-size: var(--small-font-size);
+      font-weight: var(--font-medium);
+      white-space: nowrap;
+      border-radius: 4rem;
+      background: var(--gradient-color);
+      transform: translate(60px, -40px);
+    }
+    
+    .model-tooltip-1, 
+    .model-tooltip-2 {
+      transform: scale(-1);
+    }
+    
+    .model-tooltip-1 .model-tooltip-text, 
+    .model-tooltip-2 .model-tooltip-text {
+      transform: translate(60px, -40px) scaleX(-1);
+    }
+    
+    .model-tooltip {
+      position: absolute;
+    }
+    
+    .model-tooltip-1 {
+      top: 5.5rem;
+      left: 5rem;
+    }
+    
+    .model-tooltip-2 {
+      top: 1rem;
+      right: 1.5rem;
+    }
+    
+    .model-tooltip-3 {
+      bottom: 1.8rem;
+      left: 3.5rem;
+    }
+    
+    .model-tooltip-4 {
+      right: 5rem;
+      bottom: 7rem;
+    }
+    
+    .model-btn {
+      justify-self: center;
+    }
+    
+    /*=============== SPONSOR ===============*/
+    .sponsor-container {
+      padding-block: 0.5rem 4.5rem;
+      gap: 5rem 4rem;
+      align-items: center;
+      justify-content: center;
+      grid-template-columns: repeat(2, max-content);
+    }
+
+    .sponsor-img {
+      width: 100px;
+      transition: transform 0.4s;
     }
     
   </style>
@@ -1075,17 +1171,30 @@
           const forwards = document.getElementById("next");
           const backwards = document.getElementById("prev");
           const slidesLength = slides.length;
+          let prev = 0;
           let current = 1;
           let next = 2;
-          let prev = 0;
     
           forwards.addEventListener("click", () => {
+            forwards.style.pointerEvents = "none";
             slides[current].classList.replace("current", "prev");
             slides[next].classList.replace("next", "current");
-            slides[prev].classList.remove("prev");
+            // slides[prev].classList.remove("prev");
+            slides[prev].classList.replace("prev", "left");
+            // const left = prev;
+            // slides[prev].classList.remove("left");
             next++;
             next = next % slidesLength;
+            // slides[next].classList.add("next");
+            slides[next].classList.remove("right", "left");
             slides[next].classList.add("next");
+            setTimeout(() => {
+              let right = next + 1;
+            right = right % slidesLength;
+            slides[right].classList.remove("left");
+            slides[right].classList.add("right");
+            forwards.removeAttribute("style");
+            }, 300);
             current++;
             current = current % slidesLength;
             prev++;
@@ -1093,13 +1202,26 @@
           });
   
           backwards.addEventListener("click", () => {
+            backwards.style.pointerEvents = "none";
             slides[current].classList.replace("current", "next");
             slides[prev].classList.replace("prev", "current");
-            slides[next].classList.remove("next");
+            // slides[next].classList.remove("next");
+            slides[next].classList.replace("next", "right");
+            // slides[next].classList.remove("right");
             prev--;
             prev = prev + slidesLength;
             prev = prev % slidesLength;
+            // slides[prev].classList.add("prev");
+            slides[prev].classList.remove("left", "right");
             slides[prev].classList.add("prev");
+            setTimeout(() => {
+              let left = prev - 1;
+            left = left + slidesLength;
+            left = left % slidesLength;
+            slides[left].classList.remove("right");
+            slides[left].classList.add("left");
+            backwards.removeAttribute("style");
+            }, 300);
             current--;
             current = current + slidesLength;
             current = current % slidesLength;
@@ -1142,6 +1264,14 @@
        </section>
 
       <!--==================== SPONSOR ====================-->
+      <section class="sponsor section">
+        <div class="container grid sponsor-container">
+          <img src="./assets/jbl/images/sponsor-1.png" class="sponsor-img" alt="Apple logo">
+          <img src="./assets/jbl/images/sponsor-2.png" class="sponsor-img" alt="Spotify logo">
+          <img src="./assets/jbl/images/sponsor-3.png" class="sponsor-img" alt="Amazon log">
+          <img src="./assets/jbl/images/sponsor-4.png" class="sponsor-img" alt="Youtube logo">
+        </div>
+       </section>
     </main>
     </div>
 
@@ -1202,4 +1332,4 @@
     </script>
   </body>
 </html>
-<!-- 55-185-315-445-575-705-835-955-1085-1205 -->
+<!-- 55-185-315-445-575-705-835-955-1085-1205-1335 -->
