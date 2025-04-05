@@ -167,6 +167,65 @@
         color: var(--text-dark);
         opacity: 0;
       }
+      
+      .nav-links.open .link a {
+        opacity: 1;
+      }
+      
+      .nav-menu-btn {
+        font-size: 1.5rem;
+        color: var(--text-dark);
+        cursor: pointer;
+      }
+      
+      .header-content {
+        display: grid;
+        gap: 2rem;
+        text-align: center;
+      }
+      
+      .header-content h1 {
+        font-size: 3.5rem;
+        font-weight: 500;
+        font-family: var(--header-font);
+        color: var(--text-dark);
+      }
+      
+      .header-content-details p {
+        margin-bottom: 1rem;
+        color: var(--text-light);
+      }
+      
+      .header-image {
+        margin-top: 4rem;
+        display: grid;
+        grid-auto-rows: 400px;
+        gap: 1rem;
+      }
+      
+      .header-image img {
+        height: 100%;
+        object-fit: cover;
+      }
+      
+      .header-image img:last-child {
+        display: none;
+      }
+      
+      .about-header {
+        display: grid;
+        gap: 2rem;
+      }
+      
+      .about-image img {
+        max-width: 450px;
+        margin: auto;
+      }
+      
+      .about-content .paragraph {
+        margin-block: 2rem;
+        color: var(--text-light);
+      }
         
     </style>
   <style>
@@ -573,6 +632,30 @@
       /* border: 1px solid red; */
       /* z-index: 1; */
     }
+
+    .home-title::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      content: "B";
+      /* content: "JBL"; */
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      /* font-family: inherit; */
+      animation: fade-in 1s linear backwards;
+      z-index: -2;
+    }
+    
+    .home-title.paused::after {
+      animation-play-state: paused;
+    }
+    
+    .home-title .middle-letter {
+      color: transparent;
+      z-index: -1;
+    }
     
     /* .home-title {
       position: absolute;
@@ -585,7 +668,7 @@
     } */
     
     .home-title .middle-letter {
-      z-index: -1;
+      /* z-index: -1; */
       /* position: relative; */
     }
 
@@ -613,6 +696,11 @@
       position: absolute;
       /* top: -0.5rem; */
       /* right: 1.5rem; */
+      /* top: 0; */
+      top: 14%;
+      /* right: 17%; */
+      right: 24%;
+      width: 15%;
     }
     
     /* .home-tooltip-img { */
@@ -621,6 +709,8 @@
     
     .home-tooltip-text {
       position: absolute;
+      top: 0;
+      left: 100%;
       /* padding: 0.25rem 0.75rem; */
       padding: 0.5rem 1rem;
       color: var(--white-color);
@@ -629,8 +719,26 @@
       font-weight: var(--font-medium);
       white-space: nowrap;
       border-radius: 4rem;
+      border: 2px solid #7d7a78;
       background: var(--gradient-color);
       /* transform: translate(60px, -40px); */
+      transform: translateY(-50%);
+    }
+
+    @media screen and (min-width: 470px) {
+      .home-container {
+        flex-direction: row-reverse;
+      }
+    }
+
+    @media screen and (max-width: 470px) {
+      .home-content {
+        margin: auto;
+      }
+
+      .home-social {
+        display: none;
+      }
     }
 
     @media (max-width: 560px) {
@@ -1587,38 +1695,38 @@
       /* z-index: 1; */
     }
 
-    .home-title::after {
+    /* .home-title::after {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      content: "B";
+      content: "B"; */
       /* content: "JBL"; */
-      width: 100%;
-      height: 100%;
-      text-align: center;
+      /* width: 100%;
+      height: 100%; */
+      /* text-align: center; */
       /* font-family: inherit; */
-      animation: fade-in 1s linear backwards;
+      /* animation: fade-in 1s linear backwards;
       z-index: -2;
-    }
+    } */
 
-    .home-title.paused::after {
+    /* .home-title.paused::after {
       animation-play-state: paused;
     }
 
     .home-title .middle-letter {
       color: transparent;
-    }
+    } */
 
     .home-tooltip {
       /* top: 0; */
-      top: 14%;
+      /* top: 14%; */
       /* right: 17%; */
-      right: 24%;
-      width: 15%;
+      /* right: 24%; */
+      /* width: 15%; */
     }
 
-    .home-tooltip-text {
+    /* .home-tooltip-text {
       top: 0;
       left: 100%;
       border: 2px solid #7d7a78;
@@ -1639,7 +1747,7 @@
       .home-social {
         display: none;
       }
-    }
+    } */
   </style>
   <style>
     /* header,  */
@@ -1776,7 +1884,7 @@
   </style>
   </head>
   <body>
-    <div class="agency" style="display: none;">
+    <div class="agency">
     <nav>
       <div class="nav-logo">
         <a href="#">PixelPulse</a>
@@ -1877,7 +1985,7 @@
     </section>
     </div>
 
-    <div class="jbl">
+    <div class="jbl" style="display: none;">
     <header class="header blur" id="header">
       <nav class="nav container">
         <a href="#" class="nav-logo">JBL</a>
@@ -2348,4 +2456,4 @@
   </body>
 </html>
 <!-- 55-185-315-445-575-705-835-955-1085-1205-1335-1470-1600-
-  1730-1860-1910-2035-2150-2260-2350 -->
+  1730-1860-1910-2035-2150-2260-2350-2460 -->
