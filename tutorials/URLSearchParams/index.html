@@ -31,6 +31,10 @@
         list-style: none;
       }
 
+      a {
+        text-decoration: none;
+      }
+
       button {
         font-family: inherit;
         border: 0px solid transparent;
@@ -42,6 +46,10 @@
       button:focus-visible, 
       a:focus-visible {
         outline: 1px solid #999;
+      }
+
+      img {
+        width: 100%;
       }
 
       .section-container {
@@ -68,11 +76,14 @@
         color: var(--text-dark);
         font-size: 1rem;
         white-space: nowrap;
-        outline: none;
-        border: none;
-        border-radius: 2px;
-        background-color: var(--primary-color);
-        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        /* outline: none; */
+        /* border: none; */
+        /* border-radius: 2px; */
+        border-radius: 2em;
+        border: 3px solid var(--primary-color);
+        /* background-color: var(--primary-color); */
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 
+              inset 2px 2px 4px rgba(0, 0, 0, 0.3);
         transition: 0.3s;
         /* cursor: pointer; */
       }
@@ -97,17 +108,17 @@
         transform: translateX(10px);
       }
       
-      img {
+      /* img { */
         /* display: flex; */
-        width: 100%;
-      }
+        /* width: 100%; */
+      /* } */
       
-      a {
+      /* a {
         text-decoration: none;
-      }
+      } */
       
-      html,
-      body {
+      html {
+      /* body { */
         scroll-behavior: smooth;
       }
       
@@ -141,7 +152,8 @@
       
       .nav-links {
         position: absolute;
-        top: 68px;
+        /* top: 68px; */
+        top: 100%;
         left: 0;
         width: 100%;
         padding: 2rem;
@@ -171,7 +183,7 @@
       }
       
       .nav-links .link a {
-        color: var(--text-dark);
+        /* color: var(--text-dark); */
         opacity: 0;
       }
       
@@ -179,7 +191,7 @@
         opacity: 1;
       }
       
-      .nav-menu-btn {
+      .nav-menu-btn button {
         font-size: 1.5rem;
         color: var(--text-dark);
         /* cursor: pointer; */
@@ -474,6 +486,98 @@
           grid-template-columns: repeat(2, 1fr);
         }
       }
+
+      @media (width > 768px) {
+        nav {
+          position: static;
+          padding: 2rem 1rem;
+          box-shadow: none;
+        }
+      
+        .nav-links {
+          position: static;
+          padding: 0;
+          width: fit-content;
+          flex-direction: row;
+          transform: none;
+        }
+      
+        .nav-links .link a {
+          opacity: 1;
+        }
+      
+        .nav-menu-btn {
+          display: none;
+        }
+      
+        .header-content {
+          align-items: center;
+          grid-template-columns: repeat(2, 1fr);
+          text-align: left;
+        }
+      
+        .header-image {
+          grid-template-columns: 2fr 1fr;
+        }
+      
+        .header-image img:last-child {
+          display: flex;
+        }
+      
+        .about-header {
+          align-items: center;
+          grid-template-columns: repeat(2, 1fr);
+        }
+      
+        .about-grid {
+          gap: 2rem;
+          grid-template-columns: repeat(3, 1fr);
+        }
+      
+        .portfolio-header {
+          align-items: center;
+          grid-template-columns: repeat(2, 1fr);
+        }
+      
+        .portfolio-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      
+        .client-header {
+          align-items: center;
+          justify-content: space-between;
+          flex-direction: row;
+        }
+      
+        .news-grid {
+          gap: 2rem;
+          grid-template-columns: repeat(2, 1fr);
+        }
+      
+        .news-card {
+          grid-auto-rows: auto;
+        }
+      
+        .news-card:first-child {
+          grid-area: 1/1/3/2;
+        }
+      
+        .news-card:not(:first-child) {
+          grid-template-columns: repeat(2, 1fr);
+          align-items: center;
+        }
+      
+        .contact-container {
+          align-items: center;
+          justify-content: space-between;
+          flex-direction: row;
+          text-align: left;
+        }
+      
+        .footer-container {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }        
       
       @media (width > 1024px) {
         .header-image {
@@ -522,9 +626,30 @@
         </li>
       </ul>
       <div class="nav-menu-btn" id="menu-btn">
-        <span><i class="ri-menu-3-line"></i></span>
+        <!-- <span><i class="ri-menu-3-line"></i></span> -->
+        <button><i class="ri-menu-3-line"></i></button>
       </div>
     </nav>
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const navLinks = document.getElementById("nav-links");
+      const menuBtnIcon = menuBtn.querySelector("i");
+      
+      menuBtn.addEventListener("click", (e) => {
+        navLinks.classList.toggle("open");
+      
+        const isOpen = navLinks.classList.contains("open");
+        menuBtnIcon.setAttribute(
+          "class",
+          isOpen ? "ri-close-line" : "ri-menu-3-line"
+        );
+      });
+      
+      navLinks.addEventListener("click", (e) => {
+        navLinks.classList.remove("open");
+        menuBtnIcon.setAttribute("class", "ri-menu-3-line");
+      });
+    </script>
 
     <header class="section-container header-container" id="home">
       <div class="header-content">
@@ -892,9 +1017,9 @@
         })
       // }
     
-      const navLinks = document.querySelectorAll(".nav-link");
+      // const navLinks = document.querySelectorAll(".nav-link");
       
-      navLinks.forEach(link => link.addEventListener("click", hideMenu));
+      // navLinks.forEach(link => link.addEventListener("click", hideMenu));
     
       function hideMenu() {
         // const navMenu = document.getElementById("nav-menu");
@@ -1300,4 +1425,4 @@
     </script>
   </body>
 </html>
-<!-- 55-185-315-445-575-705-835-925-1045-1175-1305 -->
+<!-- 55-185-315-445-575-705-835-925-1045-1175-1305-1430 -->
