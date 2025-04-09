@@ -343,13 +343,14 @@
       .slider {
         width: 100%;
         margin-top: 4rem;
+        overflow: hidden;
       }
 
       .slider-track {
-        padding: 10px 0;
+        padding: 0 10px 10px;
         display: flex;
         gap: 2%;
-        overflow: hidden;
+        /* overflow: hidden; */
       }
       
       /* .swiper-slide { */
@@ -731,6 +732,112 @@
           grid-template-columns: auto auto auto 1fr;
         }
       }
+
+      .fade-in {
+        animation: fade-in 2s linear backwards;
+      }
+  
+      .fade-left {
+        animation: fade-left 1s linear backwards;
+      }
+  
+      .fade-left-relative {
+        animation: fade-left-relative 1s linear backwards;
+      }
+  
+      .fade-right {
+        animation: fade-right 1s linear backwards;
+      }
+  
+      .rotated-fade-left-relative {
+        animation: rotated-fade-left-relative 1s linear backwards;
+      }
+  
+      .fade-up {
+        animation: fade-up 1s linear backwards;
+      }
+  
+      .fade-up-relative {
+        animation: fade-up-relative 1s linear backwards;
+      }
+  
+      .fade-down {
+        animation: fade-down 1s linear backwards;
+      }
+
+      .fade-down-relative {
+        animation: fade-down-relative 1s linear backwards;
+      }
+  
+      .delayed {
+        animation-delay: calc(0.2s * var(--delay));
+      }
+  
+      .paused {
+        animation-play-state: paused;
+      }
+  
+      @keyframes fade-in {
+        0% {
+          opacity: 0;
+        }
+      }
+  
+      @keyframes fade-left {
+        0% {
+          transform: translateX(10%);
+          opacity: 0;
+        }
+      }
+  
+      @keyframes fade-left-relative {
+        0% {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+      }
+
+      @keyframes rotated-fade-left-relative {
+        0% {
+          transform: rotateY(180deg) translateX(100%);
+          opacity: 0;
+        }
+      }
+  
+      @keyframes fade-right {
+        0% {
+          transform: translateX(-10%);
+          opacity: 0;
+        }
+      }
+  
+      @keyframes fade-up {
+        0% {
+          transform: translateY(1rem);
+          opacity: 0;
+        }
+      }
+  
+      @keyframes fade-up-relative {
+        0% {
+          transform: translateY(100%);
+          opacity: 0;
+        }
+      }
+
+      @keyframes fade-down {
+        0% {
+          transform: translateY(-10%);
+          opacity: 0;
+        }
+      }
+  
+      @keyframes fade-down-relative {
+        0% {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+      }
     </style>
   </head>
   <body>
@@ -938,7 +1045,7 @@
       </div>
       <!-- Slider main container -->
       <!-- <div class="swiper"> -->
-      <div class="slider">
+      <div class="slider" id="slider">
         <!-- Additional required wrapper -->
         <!-- <div class="swiper-wrapper"> -->
         <div class="slider-track">
@@ -1032,6 +1139,10 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="test-btns">
+        <button>next</button>
+        <button>prev</button>
       </div>
     </section>
 
@@ -1144,6 +1255,23 @@
     <div class="footer-bar">
       Copyright © 2023. All rights reserved.
     </div>
+    <script>
+      const observer = new IntersectionObserver(animate);
+  
+      const elements = document.querySelectorAll(".paused");
+  
+      elements.forEach(element => {
+        observer.observe(element);
+      })
+  
+      function animate(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove("paused");
+          }
+        });
+      }
+    </script>
     </div>
 
     <svg class="svg">
@@ -1333,24 +1461,24 @@
           </div>
         </div>
         <div class="control fade-down-relative delayed paused" style="--delay: 5">
-          <button id="next">
+          <button id="next1">
             next <i class="ri-arrow-left-double-line"></i>
           </button>
-          <button id="prev">
+          <button id="prev1">
             prev <i class="ri-arrow-right-double-line"></i>
           </button>
         </div>
         <!-- <div class="pagination"></div> -->
         <script>
           const slides = document.querySelectorAll(".slide");
-          const forwards = document.getElementById("next");
-          const backwards = document.getElementById("prev");
+          const forwards1 = document.getElementById("next1");
+          const backwards1 = document.getElementById("prev1");
           const slidesLength = slides.length;
           let prev = 0;
           let current = 1;
           let next = 2;
     
-          forwards.addEventListener("click", () => {
+          forwards1.addEventListener("click", () => {
             forwards.style.pointerEvents = "none";
             slides[current].classList.replace("current", "prev");
             slides[next].classList.replace("next", "current");
@@ -1376,7 +1504,7 @@
             prev = prev % slidesLength;
           });
   
-          backwards.addEventListener("click", () => {
+          backwards1.addEventListener("click", () => {
             backwards.style.pointerEvents = "none";
             slides[current].classList.replace("current", "next");
             slides[prev].classList.replace("prev", "current");
@@ -1616,4 +1744,4 @@
     </script>
   </body>
 </html>
-<!-- 55-185-315-445-575-705-835-925-1045-1175-1305-1430-1540-1615 -->
+<!-- 55-185-315-445-575-705-835-925-1045-1175-1305-1430-1540-1620-1750 -->
