@@ -210,19 +210,23 @@
         position: absolute;
         content: "KING";
         top: 0;
-        right: 0;
-        color: var(--white);
-        font-size: 25rem;
+        /* right: 0; */
+        right: 1rem;
+        /* color: var(--white); */
+        color: transparent;
+        /* font-size: 25rem; */
+        font-size: 17rem;
         font-weight: 600;
-        font-family: var(--header-font);
+        /* font-family: var(--header-font); */
         line-height: 25rem;
         background-image: 
           linear-gradient(
-            to top,
-            var(--header-background-color),
+            to top, 
+            var(--header-background-color), 
             var(--white)
         );
-        -webkit-text-fill-color: transparent;
+        -webkit-text-stroke: 1px var(--white);
+        /* -webkit-text-fill-color: transparent; */
         -webkit-background-clip: text;
         background-clip: text;
         opacity: 0.1;
@@ -261,15 +265,23 @@
       }
       
       .header-container a {
-        display: flex;
+        padding: 0.8em 1.6em;
+        /* display: flex; */
+        display: inline-flex;
         gap: 0.75rem;
         align-items: center;
         color: var(--primary-color);
         font-size: 1rem;
+        border-radius: 2em;
+        border: 1px solid var(--primary-color);
       }
       
       .header-container a span {
         color: var(--white);
+      }
+
+      .header-container a span i {
+        transform: rotate(45deg);
       }
       
       .shop {
@@ -306,19 +318,23 @@
             var(--header-background-color),
             rgba(255, 255, 255, 0.1)
         );
+        box-shadow: -1px -1px 1px var(--text-light), 
+          1px 1px 1px var(--header-background-color);
         isolation: isolate;
-        overflow: hidden;
+        /* overflow: hidden; */
       }
       
       .shop-card::before {
         position: absolute;
         top: 50%;
         left: 0;
+        /* left: 2%; */
         transform: translateY(-50%);
-        color: var(--white);
+        /* color: var(--white); */
+        color: transparent;
         font-size: 15rem;
         font-weight: 600;
-        font-family: var(--header-font);
+        /* font-family: var(--header-font); */
         line-height: 15rem;
         background-image: 
           linear-gradient(
@@ -326,10 +342,12 @@
             var(--header-background-color),
             var(--white)
         );
-        -webkit-text-fill-color: transparent;
+        -webkit-text-stroke: 1px var(--white);
+        /* -webkit-text-fill-color: transparent; */
         -webkit-background-clip: text;
         background-clip: text;
         opacity: 0.1;
+        /* opacity: 0.2; */
         z-index: -1;
       }
 
@@ -361,7 +379,8 @@
       .shop-card img {
         max-width: 200px;
         margin-block: 4rem;
-        margin-inline: auto;
+        /* margin-inline: auto; */
+        margin-inline: auto 0;
       }
       
       .shop-card div {
@@ -382,6 +401,9 @@
       
       .shop-card div a span {
         color: var(--white);
+      }
+      .shop-card a span i {
+        transform: rotate(45deg);
       }
       
       .shop-card div > span {
@@ -713,20 +735,20 @@
       }
       
       @media (width > 540px) {
-  .shop-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .banner-container img {
-    opacity: 1;
-  }
-
-  .footer-container {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (width > 768px) {
+        .shop-container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      
+        .banner-container img {
+          opacity: 1;
+        }
+      
+        .footer-container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      
+      @media (width > 768px) {
   nav {
     position: static;
     padding: 2rem 1rem;
@@ -830,8 +852,85 @@
     position: relative;
     isolation: isolate;
   }
-}
+  
+        .banner-container p span::before,
+        .banner-container p span::after {
+          position: absolute;
+          top: 50%;
+          left: 1rem;
+          transform: translateY(-50%);
+          content: "";
+          width: 5rem;
+          height: 2px;
+          background-color: var(--text-light);
+        }
+      
+        .banner-container p:nth-child(1) span::after {
+          left: calc(6rem - 1px);
+          transform: translateY(-50%) rotate(45deg);
+          transform-origin: left;
+          width: 4rem;
+        }
+        
+        .banner-container p:nth-child(3) span::after {
+          left: calc(6rem - 1px);
+          transform: translateY(-50%) rotate(-45deg);
+          transform-origin: left;
+          width: 4rem;
+        }
+      
+        .banner-container p:nth-child(4) span::before,
+        .banner-container p:nth-child(4) span::after,
+        .banner-container p:nth-child(5) span::before,
+        .banner-container p:nth-child(5) span::after,
+        .banner-container p:nth-child(6) span::before,
+        .banner-container p:nth-child(6) span::after {
+          right: 1rem;
+          left: unset;
+        }
+      
+        .banner-container p:nth-child(4) span::after {
+          right: calc(6rem - 1px);
+          transform: translateY(-50%) rotate(-45deg);
+          transform-origin: right;
+          width: 4rem;
+        }
+        
+        .banner-container p:nth-child(6) span::after {
+          right: calc(6rem - 1px);
+          transform: translateY(-50%) rotate(45deg);
+          transform-origin: right;
+          width: 4rem;
+        }
+        
+        .footer-container {
+          grid-template-columns: repeat(5, 1fr);
+        }
+      
+        .footer-col:nth-child(1) {
+          max-width: 350px;
+          grid-column: 1/3;
+        }
+      
+        .footer-bar {
+          flex-direction: row;
+        }
+      }
 
+      @media (width > 1024px) {
+        .nav-links {
+          gap: 3rem;
+        }
+      
+        .shop-container {
+          gap: 1.5rem;
+        }
+      
+        .shop-card {
+          padding: 2rem;
+        }
+      }
+        
     </style>
   <style>
     .test-1 {
@@ -928,15 +1027,33 @@
         </p>
         <div class="header-link">
           <a href="#">
-            <span>
-              <i class="ri-arrow-right-long-line"></i>
-            </span>
             Learn More
+            <span>
+              <!-- <i class="ri-arrow-right-long-line"></i> -->
+              <i class="fa fa-location-arrow"></i>
+            </span>
           </a>
         </div>
         <img src="./assets/steed/images/header.png" alt="header" />
       </div>
     </header>
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const navLinks = document.getElementById("nav-links");
+      const menuBtnIcon = menuBtn.querySelector("i");
+      
+      menuBtn.addEventListener("click", (e) => {
+        navLinks.classList.toggle("open");
+      
+        const isOpen = navLinks.classList.contains("open");
+        menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+      });
+      
+      navLinks.addEventListener("click", (e) => {
+        navLinks.classList.remove("open");
+        menuBtnIcon.setAttribute("class", "ri-menu-line");
+      });
+    </script>
 
     <section class="shop">
       <div class="section-container shop-container">
@@ -946,10 +1063,11 @@
           <img src="./assets/steed/images/shop-1.png" alt="shop" />
           <div>
             <a href="#">
-              <span>
-                <i class="ri-arrow-right-long-line"></i>
-              </span>
               Learn More
+              <span>
+                <!-- <i class="ri-arrow-right-long-line"></i> -->
+                <i class="fa fa-location-arrow"></i>
+              </span>
             </a>
             <span>Exclusive</span>
           </div>
@@ -960,10 +1078,11 @@
           <img src="./assets/steed/images/shop-2.png" alt="shop" />
           <div>
             <a href="#">
-              <span>
-                <i class="ri-arrow-right-long-line"></i>
-              </span>
               Learn More
+              <span>
+                <!-- <i class="ri-arrow-right-long-line"></i> -->
+                <i class="fa fa-location-arrow"></i>
+              </span>
             </a>
             <span>Exclusive</span>
           </div>
@@ -974,10 +1093,11 @@
           <img src="./assets/steed/images/shop-3.png" alt="shop" />
           <div>
             <a href="#">
-              <span>
-                <i class="ri-arrow-right-long-line"></i>
-              </span>
               Learn More
+              <span>
+                <!-- <i class="ri-arrow-right-long-line"></i> -->
+                <i class="fa fa-location-arrow"></i>
+              </span>
             </a>
             <span>Exclusive</span>
           </div>
@@ -1257,4 +1377,4 @@
     </script>
   </body>
 </html>
-<!-- 55-185-230-360-490-620-750-880-1000-1130-1260 -->
+<!-- 55-185-230-360-490-620-750-880-1000-1130-1260-1380 -->
