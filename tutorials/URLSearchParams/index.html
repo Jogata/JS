@@ -438,9 +438,9 @@
         color: var(--text-light);
       }
       
-      .about {
+      /* .about { */
         /* overflow: hidden; */
-      }
+      /* } */
       
       .about-container {
         display: grid;
@@ -882,6 +882,17 @@
         }
       }
 
+      @media (width < 768px) {
+        /* .border.scale-down {
+          animation: none;
+        }
+ */
+        .choose-header .section-header, 
+        .choose-header p {
+          animation-delay: 0s;
+        }
+      }
+
       @media (width > 768px) {
         nav {
           position: static;
@@ -968,15 +979,22 @@
         
         .choose-header {
           align-items: center;
-          grid-template-columns: repeat(2, 1fr);
+          /* grid-template-columns: repeat(2, 1fr); */
+          grid-template-columns: 1fr auto 1fr;
+        }
+
+        .border {
+          height: 100%;
+          border-right: 1px solid var(--text-light);
         }
       
         .choose-header .section-header {
-          max-width: 350px;
+          /* max-width: 350px; */
+          max-width: 320px;
           margin-inline-start: auto;
-          padding-right: 1.75rem;
+          /* padding-right: 1.75rem; */
           text-align: right;
-          border-right: 1px solid var(--text-light);
+          /* border-right: 1px solid var(--text-light); */
         }
       
         .choose-header p {
@@ -1089,7 +1107,8 @@
         }
       }
 
-      .test {
+      /* .test { */
+      .engine {
         position: relative;
         display: inline-block;
         width: 40%;
@@ -1441,18 +1460,38 @@
           width: 8vw;
         }
       }
+
+      @media (width < 680px) {
+        .tooltip-text {
+          font-size: 0.8rem;
+        }
+
+        .tooltip-lines {
+          width: 4vw;
+        }
+      }
+
+      @media (width < 480px) {
+        .tooltip-lines {
+          display: none;
+        }
+      }
     </style>
     <style>
       .fade-in {
         animation: fade-in 2s linear backwards;
       }
+
+      .scale-down {
+        animation: scale-down 1s linear backwards;
+      }
     
       .rotate {
-        animation: rotate 1s linear forwards;
+        /* animation: rotate 1s linear forwards; */
       }
     
       .fade-left {
-        animation: fade-left 1s linear backwards;
+        /* animation: fade-left 1s linear backwards; */
       }
     
       .fade-right {
@@ -1500,6 +1539,12 @@
           opacity: 0;
         }
       }
+
+      @keyframes scale-down {
+        0% {
+          transform: scaleY(0);
+        }
+      }
     
       @keyframes rotate {
         0% {
@@ -1538,14 +1583,14 @@
 
       @keyframes fade-up-pseudo-element {
         0% {
-          transform: translateY(100%);
+          transform: translateY(-25%);
           opacity: 0;
         }
       }
 
       @keyframes fade-down-pseudo-element {
         0% {
-          transform: translateY(-100%);
+          transform: translateY(-75%);
           opacity: 0;
         }
       }
@@ -1832,8 +1877,15 @@
     <section class="choose">
       <div class="section-container choose-container">
         <div class="choose-header">
-          <h2 class="section-header">CHOOSE YOUR FAVORITE MOTORCYCLE</h2>
-          <p>SUFFERED ALTERNATION</p>
+          <!-- <div class="border scale-down paused"> -->
+            <!-- <h2 class="section-header"> -->
+            <h2 class="section-header fade-down delayed paused" style="--delay: 6">
+              CHOOSE YOUR FAVORITE MOTORCYCLE
+            </h2>
+          <span class="border scale-down paused"></span>
+          <!-- </div> -->
+          <!-- <p>SUFFERED ALTERNATION</p> -->
+          <p class="fade-up-absolute delayed paused" style="--delay: 6">SUFFERED ALTERNATION</p>
         </div>
         <div class="slider">
           <div class="slider-track">
@@ -1925,9 +1977,82 @@
       })
     </script>
 
+<section class="section-container testimonial-container" id="testimonials">
+  <div class="choose-header">
+      <h2 class="section-header fade-down delayed paused" style="--delay: 6">
+        CHOOSE YOUR FAVORITE MOTORCYCLE
+      </h2>
+    <span class="border scale-down paused"></span>
+    <p class="fade-up-absolute delayed paused" style="--delay: 6">SUFFERED ALTERNATION</p>
+  </div>
+  <div class="slider">
+    <div class="slide">
+      <div class="choose-card">
+        <div class="choose-card-content">
+          <p>ROADSTER</p>
+          <a href="#">
+            <span><i class="ri-arrow-right-long-line"></i></span>
+            Learn More
+          </a>
+          <h4>R7</h4>
+        </div>
+        <img src="./assets/steed/images/choose-1.jpg" alt="choose" />
+      </div>
+    </div>
+    <div class="slide">
+      <div class="choose-card">
+        <div class="choose-card-content">
+          <p>CRUISER</p>
+          <a href="#">
+            <span><i class="ri-arrow-right-long-line"></i></span>
+            Learn More
+          </a>
+          <h4>X1</h4>
+        </div>
+        <img src="./assets/steed/images/choose-2.jpg" alt="choose" />
+      </div>
+    </div>
+    <div class="slide">
+      <div class="choose-card">
+        <div class="choose-card-content">
+          <p>SPORTSTER</p>
+          <a href="#">
+            <span><i class="ri-arrow-right-long-line"></i></span>
+            Learn More
+          </a>
+          <h4>S9</h4>
+        </div>
+        <img src="./assets/steed/images/choose-3.jpg" alt="choose" />
+      </div>
+    </div>
+    <div class="slide">
+      <div class="choose-card">
+        <div class="choose-card-content">
+          <p>ADVENTURE</p>
+          <a href="#">
+            <span><i class="ri-arrow-right-long-line"></i></span>
+            Learn More
+          </a>
+          <h4>V4</h4>
+        </div>
+        <img src="./assets/steed/images/choose-4.jpg" alt="choose" />
+      </div>
+    </div>
+    <div class="control">
+      <button id="next">
+        next <i class="ri-arrow-left-double-line"></i>
+      </button>
+      <button id="prev">
+        prev <i class="ri-arrow-right-double-line"></i>
+      </button>
+    </div>
+    <!-- <div class="swiper-pagination"></div> -->
+  </div>
+</section>
+
     <section class="banner">
-      <div class="section-container banner-container fade-up-pseudo-element fade-down-pseudo-element paused">
-        <div class="test">
+      <div class="section-container banner-container fade-down-pseudo-element fade-up-pseudo-element paused">
+        <div class="engine">
         <!-- <p class="tooltip left top"> -->
         <p class="tooltip left top fade-in delayed paused" style="--delay: 0">
           <span class="tooltip-text">SUSPENSION</span>
@@ -1972,7 +2097,8 @@
 
     <footer>
       <div class="section-container footer-container">
-        <div class="footer-col">
+        <!-- <div class="footer-col"> -->
+        <div class="footer-col fade-up-absolute delayed paused" style="--delay: 0">
           <h4>ABOUT</h4>
           <p class="section-description">
             Experience the unstoppable power of cutting-edge design and
@@ -1980,7 +2106,8 @@
             thrill of adventure like never before!
           </p>
         </div>
-        <div class="footer-col">
+        <!-- <div class="footer-col"> -->
+        <div class="footer-col fade-up-absolute delayed paused" style="--delay: 1">
           <h4>SERVICES</h4>
           <ul class="footer-links">
             <li><a href="#">Engine Clearing</a></li>
@@ -1989,7 +2116,8 @@
             <li><a href="#">Financing Options</a></li>
           </ul>
         </div>
-        <div class="footer-col">
+        <!-- <div class="footer-col"> -->
+        <div class="footer-col fade-up-absolute delayed paused" style="--delay: 2">
           <h4>OFFICE</h4>
           <ul class="footer-links">
             <li><a href="#">About Us</a></li>
@@ -1998,7 +2126,8 @@
             <li><a href="#">Privacy Policy</a></li>
           </ul>
         </div>
-        <div class="footer-col">
+        <!-- <div class="footer-col"> -->
+        <div class="footer-col fade-up-absolute delayed paused" style="--delay: 3">
           <h4>MODEL</h4>
           <ul class="footer-links">
             <li><a href="#">STEED X1</a></li>
@@ -2009,24 +2138,29 @@
         </div>
       </div>
       <div class="section-container footer-bar">
-        <p>Copyright © 2025 Company. All rights reserved.</p>
+        <!-- <p>Copyright © 2025 Company. All rights reserved.</p> -->
+        <p class="fade-down paused">Copyright © 2025 Company. All rights reserved.</p>
         <ul class="footer-socials">
-          <li>
+          <!-- <li> -->
+          <li class="fade-right delayed paused" style="--delay: 0">
             <a href="#">
               <i class="ri-facebook-fill"></i>
             </a>
           </li>
-          <li>
+          <!-- <li> -->
+          <li class="fade-right delayed paused" style="--delay: 2">
             <a href="#">
               <i class="ri-twitter-fill"></i>
             </a>
           </li>
-          <li>
+          <!-- <li> -->
+          <li class="fade-right delayed paused" style="--delay: 4">
             <a href="#">
               <i class="ri-instagram-line"></i>
             </a>
           </li>
-          <li>
+          <!-- <li> -->
+          <li class="fade-right delayed paused" style="--delay: 6">
             <a href="#">
               <i class="ri-linkedin-fill"></i>
             </a>
@@ -2143,4 +2277,4 @@
   </body>
 </html>
 <!-- 55-185-230-360-490-620-750-880-1000-1130-1260-1380-
-  1470-1570-1675-1800-1915-2030-2150 -->
+  1470-1570-1675-1800-1915-2030-2150-2280 -->
