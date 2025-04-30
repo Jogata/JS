@@ -6,8 +6,18 @@
     <!-- <title>URL SearchParams in JS</title> -->
     <title>Sliders</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
+    :root {
+      --primary-color: #f0a13a;
+      --background-color: #0d0d0d;
+      --header-background-color: #080808;
+      --text-light: #767268;
+      --white: #ffffff;
+      --max-width: 1200px;
+      --header-font: "Roboto Condensed", sans-serif;
+    }
+      
     * {
       margin: 0;
       padding: 0;
@@ -18,19 +28,29 @@
       list-style: none;
     }
 
+    body {
+      font-family: Georgia, serif;
+      background-color: var(--background-color);
+    }
+
     .section-container {
-      max-width: var(--max-section-width);
+      /* max-width: var(--max-section-width); */
+      max-width: var(--max-width);
       margin: auto;
       padding: 5rem 2%;
-      background-color: var(--white);
+      /* background-color: var(--white); */
     }
   
     .section-header {
       margin-bottom: 1rem;
-      color: var(--text-dark);
-      font-size: 2.5rem;
-      font-weight: 700;
+      /* color: var(--text-dark); */
+      color: var(--white);
+      /* font-size: 2.5rem; */
+      font-size: 2rem;
+      /* font-weight: 700; */
+      font-weight: 600;
       font-family: var(--header-font);
+      line-height: 2.75rem;
     }
   
     .section-subheader {
@@ -46,13 +66,14 @@
       background-color: var(--primary-color);
       transition: background-color 300ms;
     }
+
     .btn:hover {
       background-color: var(--text-dark);
     }
   
-    body {
+    /* body {
       font-family: Georgia, serif;
-    }
+    } */
     
     .testimonial-container .section-header {
       text-align: center;
@@ -65,6 +86,111 @@
     .slider .control {
       margin-top: 2rem;
       text-align: center;
+    }
+
+    .slider button {
+      color: var(--white);
+      font-size: 0px;
+      border-radius: 50%;
+      border: 1px solid black;
+      background-color: var(--text-dark);
+    }
+  
+    button#prev {
+      padding: 0.45rem 0.5rem 0.45rem 0.7rem;
+    }
+  
+    button#next {
+      padding: 0.45rem 0.7rem 0.45rem 0.5rem;
+    }
+  
+    .slider button i {
+      font-size: 2rem;
+    }
+    
+    .slider-track {
+      display: flex;
+      overflow: hidden;
+    }
+  
+    .slide {
+      position: absolute;
+      width: 100%;
+      flex-shrink: 0;
+      transform: translateX(100%);
+    }
+  
+    /* .slide.active {
+      transform: translateX(0);
+    } */
+  
+    .relative {
+      position: relative;
+    }
+  
+    .current {
+      transform: translate(0);
+      transition: transform 300ms;
+    }
+    .next {
+      transform: translate(100%);
+      transition: transform 300ms;
+    }
+    .prev {
+      transform: translate(-100%);
+      transition: transform 300ms;
+    }
+  
+    .slide.fade-in-left {
+      animation: fade-in-left 1s linear forwards;
+    }
+  
+    @keyframes fade-in-left {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(0%);
+      }
+    }
+  
+    .slide.fade-in-right {
+      animation: fade-in-right 1s linear forwards;
+    }
+  
+    @keyframes fade-in-right {
+      0% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(0%);
+      }
+    }
+  
+    .slide.fade-out-left {
+      animation: fade-out-left 1s linear forwards;
+    }
+  
+    @keyframes fade-out-left {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+  
+    .slide.fade-out-right {
+      animation: fade-out-right 1s linear forwards;
+    }
+  
+    @keyframes fade-out-right {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(100%);
+      }
     }
   </style>
   <style>
@@ -102,7 +228,8 @@
             <div class="choose-card-content">
               <p>ROADSTER</p>
               <a href="#">
-                <span><i class="ri-arrow-right-long-line"></i></span>
+                <!-- <span><i class="ri-arrow-right-long-line"></i></span> -->
+                <span><i class="fa fa-location-arrow"></i></span>
                 Learn More
               </a>
               <h4>R7</h4>
@@ -127,7 +254,8 @@
             <div class="choose-card-content">
               <p>CRUISER</p>
               <a href="#">
-                <span><i class="ri-arrow-right-long-line"></i></span>
+                <!-- <span><i class="ri-arrow-right-long-line"></i></span> -->
+                <span><i class="fa fa-location-arrow"></i></span>
                 Learn More
               </a>
               <h4>X1</h4>
@@ -152,7 +280,8 @@
             <div class="choose-card-content">
               <p>SPORTSTER</p>
               <a href="#">
-                <span><i class="ri-arrow-right-long-line"></i></span>
+                <!-- <span><i class="ri-arrow-right-long-line"></i></span> -->
+                <span><i class="fa fa-location-arrow"></i></span>
                 Learn More
               </a>
               <h4>S9</h4>
@@ -177,7 +306,8 @@
             <div class="choose-card-content">
               <p>ADVENTURE</p>
               <a href="#">
-                <span><i class="ri-arrow-right-long-line"></i></span>
+                <!-- <span><i class="ri-arrow-right-long-line"></i></span> -->
+                <span><i class="fa fa-location-arrow"></i></span>
                 Learn More
               </a>
               <h4>V4</h4>
@@ -209,8 +339,8 @@
       <!-- <div class="pagination"></div> -->
       <script>
         const slides = document.querySelectorAll(".slide");
-        const nextb = document.getElementById("next1");
-        const prevb = document.getElementById("prev1");
+        const nextb = document.getElementById("next");
+        const prevb = document.getElementById("prev");
         let index = 0;
         let prevIndex = 0;
         let penultimateIndex = 0;
@@ -230,7 +360,7 @@
           penultimateIndex = prevIndex;
           const penultimateSlide = slides[penultimateIndex];
           const penultimateSlideAnimations = penultimateSlide.getAnimations();
-          console.log(animations);
+          // console.log(animations);
           if (penultimateSlideAnimations.length > 0) {
             penultimateSlideAnimations[0].finish();
             // penultimateSlideAnimations[0].playbackRate = 10;
@@ -265,7 +395,7 @@
           penultimateIndex = prevIndex;
           const penultimateSlide = slides[penultimateIndex];
           const penultimateSlideAnimations = penultimateSlide.getAnimations();
-          console.log(animations);
+          // console.log(animations);
           if (penultimateSlideAnimations.length > 0) {
             penultimateSlideAnimations[0].finish();
             // penultimateSlideAnimations[0].playbackRate = 10;
@@ -359,4 +489,4 @@
     </script>
   </body>
 </html>
-<!-- 55-102-232-362 -->
+<!-- 55-102-232-362-492 -->
