@@ -50,6 +50,10 @@
     a:focus-visible {
       outline: 1px solid #999;
     }
+
+    img {
+      width: 100%;
+    }
       
     body {
       font-family: Georgia, serif;
@@ -77,13 +81,13 @@
     }
   
     .section-subheader {
-      max-width: 37.5rem;
-      color: var(--text-light);
+      /* max-width: 37.5rem; */
+      /* color: var(--text-light); */
     }
     
     .btn {
-      padding: 0.75rem 2rem;
-      color: var(--white);
+      /* padding: 0.75rem 2rem; */
+      /* color: var(--white); */
       /* font-size: 1rem; */
       /* border-radius: 5rem; */
       /* background-color: var(--primary-color); */
@@ -98,14 +102,25 @@
       font-family: Georgia, serif;
     } */
     
-    .testimonial-container .section-header {
+    /* .testimonial-container .section-header { */
       /* text-align: center; */
-    }
+    /* } */
 
     .choose-header {
       margin-bottom: 4rem;
       display: grid;
       gap: 1rem 2rem;
+    }
+
+    .choose-header .section-header {
+      max-width: 400px;
+      margin: auto;
+    }
+
+    @media (width < 768px) {
+      .choose-header {
+        text-align: center;
+      }
     }
 
     @media (width > 768px) {
@@ -115,33 +130,39 @@
       }
 
       .border {
-        width: 1px;
+        /* width: 1px; */
+        border: 2px solid var(--text-light);
         height: 100%;
-        background-color: var(--text-light);
+        /* background-color: var(--text-light); */
       }
     
       .choose-header .section-header {
-        max-width: 350px;
-        margin-inline-start: auto;
-        padding-right: 1.75rem;
+        /* max-width: 350px; */
+        /* margin-inline-start: auto; */
+        margin: 0 0 0 auto;
+        /* padding-right: 1.75rem; */
+        /* text-align: right; */
+        /* border-right: 1px solid var(--text-light); */
+      }
+
+      .section-header {
         text-align: right;
-        border-right: 1px solid var(--text-light);
       }
     
       .choose-header p {
-        text-align: left;
+        /* text-align: left; */
       }
     }
     
     .choose-header .section-header {
-      text-align: center;
+      /* text-align: center; */
     }
     
     .choose-header p {
       font-size: 1rem;
       font-weight: 500;
       color: var(--primary-color);
-      text-align: center;
+      /* text-align: center; */
     }
       
     .slider {
@@ -181,6 +202,7 @@
     .slide {
       position: absolute;
       width: 100%;
+      height: 100%;
       flex-shrink: 0;
       transform: translateX(100%);
     }
@@ -260,7 +282,9 @@
 
     .choose-card {
       max-width: 800px;
-      margin: auto;
+      /* margin: auto; */
+      height: 100%;
+      margin: 0 auto;
       display: flex;
       border-radius: 1rem;
       border: 2px solid rgba(255, 255, 255, 0.1);
@@ -268,11 +292,51 @@
     }
     
     .choose-card-content {
-      position: relative;
-      isolation: isolate;
-      min-width: 175px;
+      display: flex;
+      flex-direction: column;
+      /* position: relative; */
+      /* isolation: isolate; */
+      /* min-width: 175px; */
       padding: 1.5rem;
       background-color: var(--primary-color);
+    }
+
+    @media (width < 880px) {
+      .choose-card {
+        /* display: block; */
+        flex-direction: column;
+      }
+
+      .choose-card-content {
+        /* display: block; */
+        gap: 1rem 10%;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: transparent;
+      }
+
+      .card-content-header {
+        margin-bottom: 0;
+      }
+
+      .choose-card-content p {
+        /* color: var(--white); */
+        color: var(--primary-color);
+      }
+
+      .choose-card-content a {
+        color: var(--white);
+      }
+
+      .choose-card-content h4 {
+        margin-top: 0;
+        color: var(--white);
+      }
+    }
+
+    .card-content-header {
+      margin-bottom: 2rem;
     }
     
     .choose-card-content p {
@@ -284,6 +348,7 @@
     }
     
     .choose-card-content a {
+      /* margin-bottom: 2rem; */
       color: var(--background-color);
     }
 
@@ -296,31 +361,39 @@
     }
     
     .choose-card-content h4 {
-      position: absolute;
-      bottom: 2rem;
-      left: 50%;
-      transform: translateX(-50%);
+      /* position: absolute; */
+      /* bottom: 2rem; */
+      /* left: 50%; */
+      /* transform: translateX(-50%); */
+      margin-top: auto;
       font-size: 8rem;
       font-weight: 800;
-      font-family: var(--header-font);
+      /* font-family: var(--header-font); */
       color: var(--background-color);
       opacity: 0.5;
-      z-index: 1;
+      /* z-index: 1; */
+    }
+
+    @media (width < 880px) {
+      .choose-card-content h4 {
+        font-size: 13vw;
+      }
     }
     
     .choose-card img {
-      max-width: 500px;
+      margin-top: auto;
+      /* max-width: 500px; */
     }
     /* ======================================================================= */
     #slider-with-animations .choose-header .section-header {
-      max-width: 400px;
-      padding-right: 0;
-      text-align: right;
-      border-right: 0px solid transparent;
+      /* max-width: 400px; */
+      /* padding-right: 0; */
+      /* text-align: right; */
+      /* border-right: 0px solid transparent; */
     }
 
     .choose-header p {
-      text-align: left;
+      /* text-align: left; */
     }
   </style>
   <style>
@@ -356,12 +429,14 @@
         <div class="slide relative current">
           <div class="choose-card">
             <div class="choose-card-content">
-              <p>ROADSTER</p>
-              <a href="#">
-                <!-- <span><i class="ri-arrow-right-long-line"></i></span> -->
-                Learn More
-                <span><i class="fa fa-location-arrow"></i></span>
-              </a>
+              <div class="card-content-header">
+                <p>ROADSTER</p>
+                <a href="#">
+                  <!-- <span><i class="ri-arrow-right-long-line"></i></span> -->
+                  Learn More
+                  <span><i class="fa fa-location-arrow"></i></span>
+                </a>
+              </div>
               <h4>R7</h4>
             </div>
             <img src="./assets/steed/images/choose-1.jpg" alt="choose" />
@@ -382,13 +457,22 @@
         <div class="slide next">
           <div class="choose-card">
             <div class="choose-card-content">
-              <p>CRUISER</p>
-              <a href="#">
+              <div class="card-content-header">
+                <p>CRUISER</p>
+                <a href="#">
+                  <!-- <span><i class="ri-arrow-right-long-line"></i></span> -->
+                  Learn More
+                  <span><i class="fa fa-location-arrow"></i></span>
+                </a>
+                <h4>X1</h4>
+              </div>
+              <!-- <p>CRUISER</p> -->
+              <!-- <a href="#"> -->
                 <!-- <span><i class="ri-arrow-right-long-line"></i></span> -->
-                Learn More
-                <span><i class="fa fa-location-arrow"></i></span>
-              </a>
-              <h4>X1</h4>
+                <!-- Learn More -->
+                <!-- <span><i class="fa fa-location-arrow"></i></span> -->
+              <!-- </a> -->
+              <!-- <h4>X1</h4> -->
             </div>
             <img src="./assets/steed/images/choose-2.jpg" alt="choose" />
           </div>
@@ -408,13 +492,22 @@
         <div class="slide">
           <div class="choose-card">
             <div class="choose-card-content">
-              <p>SPORTSTER</p>
-              <a href="#">
+              <div class="card-content-header">
+                <p>SPORTSTER</p>
+                <a href="#">
+                  <!-- <span><i class="ri-arrow-right-long-line"></i></span> -->
+                  Learn More
+                  <span><i class="fa fa-location-arrow"></i></span>
+                </a>
+                <h4>S9</h4>
+              </div>
+              <!-- <p>SPORTSTER</p> -->
+              <!-- <a href="#"> -->
                 <!-- <span><i class="ri-arrow-right-long-line"></i></span> -->
-                Learn More
-                <span><i class="fa fa-location-arrow"></i></span>
-              </a>
-              <h4>S9</h4>
+                <!-- Learn More -->
+                <!-- <span><i class="fa fa-location-arrow"></i></span> -->
+              <!-- </a> -->
+              <!-- <h4>S9</h4> -->
             </div>
             <img src="./assets/steed/images/choose-3.jpg" alt="choose" />
           </div>
@@ -434,13 +527,22 @@
         <div class="slide prev">
           <div class="choose-card">
             <div class="choose-card-content">
-              <p>ADVENTURE</p>
-              <a href="#">
+              <div class="card-content-header">
+                <p>ADVENTURE</p>
+                <a href="#">
+                  <!-- <span><i class="ri-arrow-right-long-line"></i></span> -->
+                  Learn More
+                  <span><i class="fa fa-location-arrow"></i></span>
+                </a>
+                <h4>V4</h4>
+              </div>
+              <!-- <p>ADVENTURE</p> -->
+              <!-- <a href="#"> -->
                 <!-- <span><i class="ri-arrow-right-long-line"></i></span> -->
-                Learn More
-                <span><i class="fa fa-location-arrow"></i></span>
-              </a>
-              <h4>V4</h4>
+                <!-- Learn More -->
+                <!-- <span><i class="fa fa-location-arrow"></i></span> -->
+              <!-- </a> -->
+              <!-- <h4>V4</h4> -->
             </div>
             <img src="./assets/steed/images/choose-4.jpg" alt="choose" />
           </div>
@@ -619,4 +721,4 @@
     </script>
   </body>
 </html>
-<!-- 55-102-232-362-492-622 -->
+<!-- 55-102-232-362-492-622-752 -->
