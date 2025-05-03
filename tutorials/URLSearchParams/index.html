@@ -470,30 +470,30 @@
       line-height: 2.75rem;
     }
   
-    .section-subheader {
+    /* .section-subheader { */
       /* max-width: 37.5rem; */
       /* color: var(--text-light); */
-    }
+    /* } */
     
     .btn {
       padding: 0.75rem 2rem;
       color: var(--white);
       font-size: 1rem;
-      border-radius: 5rem;
-      background-color: var(--primary-color);
-      transition: background-color 300ms;
+      /* border-radius: 5rem; */
+      /* background-color: var(--primary-color); */
+      /* transition: background-color 300ms; */
     }
 
     .btn:hover {
-      background-color: var(--text-dark);
+      /* background-color: var(--text-dark); */
     }
   
-    body {
+    /* body { */
       /* font-family: Georgia, serif; */
-    }
+    /* } */
     
     .testimonial-container .section-header {
-      text-align: center;
+      /* text-align: center; */
     }
 
     .slider {
@@ -579,6 +579,7 @@
       /* position: absolute; */
       height: 100vh;
     }
+
     .versions {
       position: absolute;
       top: 0;
@@ -589,6 +590,95 @@
       text-transform: lowercase;
       border: 1px solid #fff;
       background-color: #000;
+    }
+
+    .bg {
+      position: fixed;
+      width: 120%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-image: url("./images/rustic-antique-kitchen.jpg");
+      background-repeat: no-repeat;
+      background-position: center left;
+      background-size: cover;
+      animation: animate 100s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    .bg::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: "";
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(
+          to top, 
+          rgba(0, 0, 0, 0.8), 
+          transparent, 
+          rgba(0, 0, 0, 0.8)
+        ), 
+        linear-gradient(
+          to left, 
+          rgba(0, 0, 0, 0.8), 
+          transparent, 
+          transparent
+        );
+    }
+    
+    @keyframes animate {
+      50% {
+        transform: translateX(-20%);
+      }
+    }
+
+    .slider-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    
+    .slider-bg::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: "";
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(
+          to top, 
+          rgba(0, 0, 0, 0.8), 
+          transparent, 
+          rgba(0, 0, 0, 0.8)
+        ), 
+        linear-gradient(
+          to left, 
+          rgba(0, 0, 0, 0.8), 
+          transparent, 
+          transparent
+        );
+    }
+    
+    .slider-bg img.active {
+      /* animation: zoom-in 15s linear; */
+      transition-delay: 1s;
+      opacity: 1;
+    }
+
+    /* @keyframes zoom-in {
+      50% {
+        transform: scale(1.1);
+      }
+    } */
+
+    .hidden {
+      display: none;
     }
   </style>
   </head>
@@ -1055,7 +1145,56 @@
       <!-- <img src="./assets/digen/tropic-wide.png"> -->
       <!-- <img src="./assets/digen/modern-office-space-with-futuristic-decor-furniture.jpg"> -->
     </div>
- 
+
+    <button class="versions">v.2</button>
+    <script>
+      const versions = {
+        "v.1": "v.2",
+        "v.2": "v.1"
+      }
+
+      const changeVersionsBtn = document.querySelector(".versions");
+      changeVersionsBtn.addEventListener("click", () => {
+        const bgDiv = document.querySelector(".bg");
+        bgDiv.classList.toggle("hidden");
+        const sliderBgDiv = document.querySelector(".slider-bg");
+        sliderBgDiv.classList.toggle("hidden");
+        changeVersionsBtn.textContent = versions[changeVersionsBtn.textContent];
+      })
+    </script>
+    
+    <div class="bg"></div>
+    
+    <div class="slider-bg hidden">
+      <img class="active"
+        src="./images/bg-black/beautiful-tasty-appetizing-ingredients-spices-red-chilli-pepper-grocery-cooking-healthy-kitchen.jpg"
+        alt="">
+      <img src="./images/bg-black/vegetables-set-left-black-slate-01.jpg" alt="">
+      <img src="./images/bg-black/condiments-prepare-italian-pasta.jpg" alt="">
+      <img src="./images/bg-black/flat-lay-arrangement-delicious-fresh-vegetables-with-copy-space.jpg" alt="">
+      <img src="./images/bg-black/vegetables-set-left-black-slate-02.jpg" alt="">
+      <img src="./images/bg-black/food-with-ingredients.jpg" alt="">
+      <img src="./images/bg-black/vintage-old-rustic-cutlery-dark-02.jpg" alt="">
+      <img src="./images/bg-black/ingredients-making-guakamole.jpg" alt="">
+      <img src="./images/bg-black/various-vegetables-black-table-with-space-message.jpg" alt="">
+      <img src="./images/bg-black/vintage-old-rustic-cutlery-dark-01.jpg" alt="">
+      <img src="./images/bg-black/vegetables-italian-knife-placed-left-black-table.jpg" alt="">
+    </div>
+
+    <script>
+      const images = document.querySelectorAll(".slider-bg img");
+      let index = 0;
+  
+      setInterval(() => {
+          const currentSlide = images[index];
+          currentSlide.classList.remove("active");
+          index++;
+          index = index % images.length;
+          const nextSlide = images[index];
+          nextSlide.classList.add("active");
+      }, 10000);
+    </script>
+      
 <!-- <header style="display: block;"> -->
   <!-- <h2>JS Advanced Exam Prep - 20 February 2021</h2> -->
   <!-- <a href="../../00exams/JS Advanced Regular Exam - 20 February 2021">Open folder</a> -->
@@ -1098,4 +1237,4 @@
     </script>
   </body>
 </html>
-<!-- 55-102-232-362-492-622-724-840-970-1100 -->
+<!-- 55-102-232-362-492-622-724-840-970-1100-1230 -->
