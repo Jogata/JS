@@ -134,7 +134,32 @@
         overflow: hidden;
         /* For animation ScrollReveal */
       }
+
+      /*=============== BUTTON ===============*/
+      .button {
+        display: inline-flex;
+        align-items: center;
+        column-gap: 0.5rem;
+        padding: 1.25rem 1.5rem;
+        color: var(--title-color);
+        font-weight: var(--font-semi-bold);
+        font-family: var(--second-font);
+        background-color: hsla(0, 0%, 100%, 0.2);
+        -webkit-backdrop-filter: blur(24px);
+        backdrop-filter: blur(24px);
+      }
       
+      .button i {
+        font-size: 1.25rem;
+        font-weight: initial;
+        transition: transform 0.4s;
+      }
+      
+      .button:hover i {
+        transform: translateX(0.25rem);
+      }      
+      
+      /*=============== SVG Elements ===============*/
       .svg {
         /* display: none; */
         position: absolute;
@@ -275,12 +300,92 @@
         object-position: center;
       }
 
+      .home-shadow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 800px;
+        background-image: 
+          linear-gradient(180deg, 
+            hsla(0, 0%, 0%, 0) 58%, 
+            hsl(0, 0%, 0%) 78%
+        );
+      }      
+
       .home-container {
         position: relative;
         padding-top: 3rem;
         row-gap: 3rem;
       }
+
+      .home-data {
+        text-align: center;
+      }
       
+      .home-subtitle {
+        margin-bottom: 0.5rem;
+        font-size: var(--h3-font-size);
+      }
+      
+      .home-title {
+        margin-bottom: 1rem;
+        font-size: var(--biggest-font-size);
+      }
+      
+      .home-description {
+        margin-bottom: 2rem;
+        color: var(--title-color);
+      }
+      
+      .home-cards {
+        justify-content: center;
+        grid-template-columns: 240px;
+      }
+      
+      .home-card {
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .home-card-img {
+        transition: transform 0.4s;
+      }
+      
+      .home-card:hover .home-card-img {
+        transform: scale(1.2);
+      }
+      
+      .home-card-title {
+        position: absolute;
+        left: 1rem;
+        bottom: 1rem;
+        font-size: var(--h3-font-size);
+        z-index: 1;
+      }
+      
+      .home-card-shadow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+          linear-gradient(180deg, 
+            hsla(0, 0%, 0%, 0) 50%, 
+            hsl(0, 0%, 0%) 125%
+        );
+      }
+      
+      /*=============== ABOUT ===============*/
+      .about-container {
+        row-gap: 3rem;
+      }
+      
+      .about-data {
+        text-align: center;
+      }
+
     </style>
   <style>
     body {
@@ -374,49 +479,74 @@
     <main class="main">
       <!--==================== HOME ====================-->
       <section class="home section" id="home">
-       <img src="./assets/home-bg.jpg" alt="" class="home-bg">
-       <div class="home-shadow"></div>
-       <div class="container grid home-container">
-         <div class="home-data">
-           <h3 class="home-subtitle">
-             Welcome To Travel
-           </h3>
-           <h1 class="home-title">
-             Explore <br> The World
-           </h1>
-           <p class="home-description">
-             Live the trips exploring the world, discover 
-             paradises, islands, mountains and much 
-             more, get your trip now.
-           </p>
-           <a href="#" class="button">
-             Start Your Journey
-             <i class="ri-arrow-right-line"></i>
-           </a>
-         </div>
-         <div class="grid home-cards">
-           <div class="home-card">
-             <img src="./assets/home-trees." alt="" class="home-card-img">
-             <h3 class="home-card-title">Croatia</h3>
-             <div class="home-card-shadow"></div>
-           </div>
-           <div class="home-card">
-             <img src="./assets/home-lake" alt="" class="home-card-img">
-             <h3 class="home-card-title">Iceland</h3>
-             <div class="home-card-shadow"></div>
-           </div>
-           <div class="home-card">
-             <img src="./assets/home-mountain" alt="" class="home-card-img">
-             <h3 class="home-card-title">Italy</h3>
-             <div class="home-card-shadow"></div>
-           </div>
-           <div class="home-card">
-             <img src="./assets/home-beach" alt="" class="home-card-img">
-             <h3 class="home-card-title">Spain</h3>
-             <div class="home-card-shadow"></div>
-           </div>
-         </div>
-       </div>
+        <img src="./assets/home-bg.jpg" alt="" class="home-bg">
+        <div class="home-shadow"></div>
+        <div class="container grid home-container">
+          <div class="home-data">
+            <h3 class="home-subtitle">
+              Welcome To Travel
+            </h3>
+            <h1 class="home-title">
+              Explore <br> The World
+            </h1>
+            <p class="home-description">
+              Live the trips exploring the world, discover
+              paradises, islands, mountains and much
+              more, get your trip now.
+            </p>
+            <a href="#" class="button">
+              Start Your Journey
+              <i class="ri-arrow-right-line"></i>
+            </a>
+          </div>
+          <div class="grid home-cards">
+            <div class="home-card">
+              <img src="./assets/home-trees." alt="" class="home-card-img">
+              <h3 class="home-card-title">Croatia</h3>
+              <div class="home-card-shadow"></div>
+            </div>
+            <div class="home-card">
+              <img src="./assets/home-lake" alt="" class="home-card-img">
+              <h3 class="home-card-title">Iceland</h3>
+              <div class="home-card-shadow"></div>
+            </div>
+            <div class="home-card">
+              <img src="./assets/home-mountain" alt="" class="home-card-img">
+              <h3 class="home-card-title">Italy</h3>
+              <div class="home-card-shadow"></div>
+            </div>
+            <div class="home-card">
+              <img src="./assets/home-beach" alt="" class="home-card-img">
+              <h3 class="home-card-title">Spain</h3>
+              <div class="home-card-shadow"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="about section" id="about">
+        <div class="container grid about-container">
+          <div class="about-data">
+            <h2 class="section-title">
+              Learn More <br> About Travel
+            </h2>
+            <p class="about-description">
+              All the trips around the world are a great
+              pleasure and happiness for anyone, enjoy
+              the sights when you travel the world. Travel
+              safely and without worries, get your trip and
+              explore the paradises of the world.
+            </p>
+            <a href="#" class="button">
+              Explore Travel
+              <i class="ri-arrow-right-line"></i>
+            </a>
+          </div>
+          <div class="about-image">
+            <img src="./images/about-beach" alt="" class="about-img">
+            <div class="about-shadow"></div>
+          </div>
+        </div>
       </section>
     </main>
 
@@ -507,4 +637,4 @@
     </script>
   </body>
 </html>
-<!-- 55-118-250-380-510 -->
+<!-- 55-118-250-380-510-640 -->
