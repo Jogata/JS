@@ -120,11 +120,11 @@
         background-color: var(--body-color);
       }
     
-      button,
+      /* button, 
       input {
         outline: none;
         border: none;
-      }
+      } */
     
       h1,
       h2,
@@ -142,10 +142,29 @@
       a {
         text-decoration: none;
       }
-    
+
+      button {
+        font-family: inherit;
+        border: 0px solid transparent;
+        outline: 1px solid transparent;
+        background-color: transparent;
+        cursor: pointer;
+      }
+      
+      button:focus-visible, 
+      a:focus-visible {
+        outline: 1px solid #999;
+      }
+
+      input {
+        outline: none;
+        border: none;
+      }
+        
       img {
         display: block;
-        max-width: 100%;
+        width: 100%;
+        /* max-width: 100%; */
         /* height: auto; */
       }
     
@@ -273,7 +292,7 @@
         display: flex;
         font-size: 1.25rem;
         color: var(--title-color);
-        cursor: pointer;
+        /* cursor: pointer; */
       }
       
       /* Navigation for mobile devices */
@@ -382,6 +401,7 @@
             hsl(0, 0%, 0%) 78%
         );
       } */
+
       .home::after {
         position: absolute;
         top: 0;
@@ -400,6 +420,7 @@
         position: relative;
         padding-top: 3rem;
         /* row-gap: 3rem; */
+        z-index: 1;
       }
 
       .home-data {
@@ -518,6 +539,9 @@
         position: relative;
         /* justify-self: center; */
         clip-path: url("#mask-1");
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
         overflow: hidden;
       }
       
@@ -548,27 +572,50 @@
       .popular-container {
         padding-top: 1.5rem;
         row-gap: 2.5rem;
-        justify-content: center;
-        grid-template-columns: 240px;
+        /* justify-content: center; */
+        /* grid-template-columns: 240px; */
+        grid-template-columns: 
+          repeat(auto-fit, minmax(240px, 1fr));
       }
       
-      .popular-card {}
+      .popular-card {
+        margin: auto;
+      }
       
       .popular-image {
         position: relative;
         margin-bottom: 1rem;
+        /* clip-path: url("#mask-1"); */
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        clip-path: url("#mask-4");
         overflow: hidden;
+      }
+
+      .popular-image::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-image: 
+          linear-gradient(180deg, 
+            hsla(0, 0%, 0%, 0) 50%, 
+            hsl(0, 0%, 0%) 125%
+        );
       }
       
       .popular-img {
-        transition: transform 0.4s;
+        /* transition: transform 0.4s; */
+        transition: transform 400ms;
       }
       
       .popular-image:hover .popular-img {
         transform: scale(1.2);
       }
       
-      .popular-shadow {
+      /* .popular-shadow {
         position: absolute;
         top: 0;
         left: 0;
@@ -579,7 +626,7 @@
             hsla(0, 0%, 0%, 0) 50%, 
             hsl(0, 0%, 0%) 125%
         );
-      }
+      } */
       
       .popular-title {
         margin-bottom: 0.5rem;
@@ -604,21 +651,51 @@
         position: relative;
       }
       
-      .explore-container {}
+      /* .explore-container {
+        position: relative;
+      } */
       
       .explore-image {
         position: absolute;
-        overflow: hidden;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* overflow: hidden; */
+      }
+
+      .explore-image::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-image: 
+          linear-gradient(180deg, 
+          hsl(0, 0%, 0%) 5%, 
+          hsla(0, 0%, 0%, 0) 40%, 
+          hsla(0, 0%, 0%, 0) 60%, 
+          hsl(0, 0%, 0%) 92%
+        );
       }
       
       .explore-img {
         width: 100%;
-        height: 333px;
+        /* height: 333px; */
+        height: 100%;
         object-fit: cover;
         object-position: center;
+        /* clip-path: url("#mask-3"); */
+      }
+
+      @media screen and (min-width: 500px) {
+        .explore-img {
+          clip-path: url("#mask-3");
+        }
       }
       
-      .explore-shadow {
+      /* .explore-shadow {
         position: absolute;
         top: 0;
         left: 0;
@@ -631,13 +708,21 @@
           hsla(0, 0%, 0%, 0) 60%, 
           hsl(0, 0%, 0%) 92%
         );
-      }
+      } */
       
       .explore-content {
         position: relative;
         padding-top: 16rem;
         row-gap: 2.5rem;
-        text-align: center;
+        /* text-align: center; */
+      }
+      
+      @media screen and (max-width: 1152px) {
+        .explore-content {
+          max-width: 380px;
+          margin: auto;
+          text-align: center;
+        }
       }
       
       .explore-data {}
@@ -689,25 +774,53 @@
       }
       
       .join-button {
-        cursor: pointer;
+        /* cursor: pointer; */
       }
       
       .join-image {
         position: relative;
         justify-self: center;
+        clip-path: url("#mask-1");
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
         overflow: hidden;
+      }
+
+      .join-image::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-image: 
+          linear-gradient(
+            180deg, #0009, 
+            hsla(0, 0%, 0%, 0) 50%, 
+            hsl(0, 0%, 0%) 110%
+        );
+        /* background-image: 
+          linear-gradient(180deg, 
+          hsl(0, 0%, 0%) 5%, 
+          hsla(0, 0%, 0%, 0) 40%, 
+          hsla(0, 0%, 0%, 0) 60%, 
+          hsl(0, 0%, 0%) 92%
+        ); */
       }
       
       .join-img {
-        width: 300px;
-        transition: transform 0.4s;
+        /* width: 300px; */
+        max-width: 420px;
+        /* transition: transform 0.4s; */
+        transition: transform 400ms;
       }
       
       .join-image:hover .join-img {
         transform: scale(1.2);
       }
       
-      .join-shadow {
+      /* .join-shadow {
         position: absolute;
         top: 0;
         left: 0;
@@ -718,7 +831,7 @@
             hsla(0, 0%, 0%, 0) 50%, 
             hsl(0, 0%, 0%) 125%
         );
-      }
+      } */
       
       /*=============== FOOTER ===============*/
       .footer {
@@ -861,10 +974,10 @@
       @media screen and (min-width: 576px) {
         /* .home-container,  */
         /* .about-container,  */
-        .explore-content, 
+        /* .explore-content,  */
         .join-container {
           justify-content: center;
-          grid-template-columns: 380px;
+          /* grid-template-columns: 380px; */
         }
         /* .home-container {
           display: block;
@@ -895,12 +1008,12 @@
         }
       
         .popular-container {
-          grid-template-columns: repeat(2, 240px);
+          /* grid-template-columns: repeat(2, 240px); */
         }
       
-        .explore-image {
-          width: 100vw;
-        }
+        /* .explore-image { */
+          /* width: 100vw; */
+        /* } */
       
         .join-image {
           order: -1;
@@ -934,7 +1047,7 @@
         }
       
         .popular-container {
-          grid-template-columns: repeat(3, 240px);
+          /* grid-template-columns: repeat(3, 240px); */
         }
       
         .footer-data {
@@ -1017,7 +1130,7 @@
         .popular-container {
           padding-top: 4rem;
           column-gap: 3rem;
-          grid-template-columns: repeat(3, 300px);
+          /* grid-template-columns: repeat(3, 300px); */
         }
       
         .popular-title {
@@ -1029,7 +1142,7 @@
         }
       
         .explore-img {
-          height: 600px;
+          /* height: 600px; */
         }
       
         .explore-content {
@@ -1037,7 +1150,7 @@
           grid-template-columns: 670px 1fr;
         }
       
-        .explore-data, 
+        /* .explore-data,  */
         .explore-data .section-title {
           text-align: initial;
         }
@@ -1158,6 +1271,15 @@
           transform: translateY(-10%);
           opacity: 0;
         }
+      }
+
+      /* ====================================================== */
+      .home, 
+      .about, 
+      .popular,
+      .explore, 
+      .join1 {
+        display: none;
       }
     </style>
   <style>
@@ -1339,7 +1461,7 @@
           <article class="popular-card">
             <div class="popular-image">
               <img src="./assets/responsive-travel-website-2-main/images/popular-mountain.jpg" alt="" class="popular-img">
-              <div class="popular-shadow"></div>
+              <!-- <div class="popular-shadow"></div> -->
             </div>
             <h3 class="popular-title">
               Logan Mountain
@@ -1352,7 +1474,7 @@
           <article class="popular-card">
             <div class="popular-image">
               <img src="./assets/responsive-travel-website-2-main/images/popular-forest.jpg" alt="" class="popular-img">
-              <div class="popular-shadow"></div>
+              <!-- <div class="popular-shadow"></div> -->
             </div>
             <h3 class="popular-title">
               Spike Forest
@@ -1365,7 +1487,7 @@
           <article class="popular-card">
             <div class="popular-image">
               <img src="./assets/responsive-travel-website-2-main/images/popular-lake.jpg" alt="" class="popular-img">
-              <div class="popular-shadow"></div>
+              <!-- <div class="popular-shadow"></div> -->
             </div>
             <h3 class="popular-title">
               Garda Lake
@@ -1382,7 +1504,7 @@
         <div class="explore-container">
           <div class="explore-image">
             <img src="./assets/responsive-travel-website-2-main/images/explore-beach.jpg" alt="" class="explore-img">
-            <div class="explore-shadow"></div>
+            <!-- <div class="explore-shadow"></div> -->
           </div>
           <div class="container grid explore-content">
             <div class="explore-data">
@@ -1544,7 +1666,7 @@
               <i class="ri-facebook-line"></i>
             </a>
             <a href="#" class="footer-social-link">
-              <i class="ri-instagram -line"></i>
+              <i class="ri-instagram-line"></i>
             </a>
             <a href="#" class="footer-social-link">
               <i class="ri-twitter-line"></i>
@@ -1677,4 +1799,4 @@
   </body>
 </html>
 <!-- 55-118-250-380-510-640-770-900-1030-1160-1290-1420-1550-
-1680 -->
+1680 -1810-->
