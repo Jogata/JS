@@ -140,6 +140,7 @@
       }
     
       a {
+        display: inline-block;
         text-decoration: none;
       }
 
@@ -190,6 +191,19 @@
         margin-bottom: 1.5rem;
         font-size: var(--h1-font-size);
         text-align: center;
+      }
+
+      .bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        /* width: 100%; */
+        max-width: 1400px;
+        height: 100%;
+        margin: auto;
+        object-fit: cover;
+        object-position: center;
       }
       
       .main {
@@ -378,14 +392,15 @@
       }
       
       .home-bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
+        /* position: absolute; */
+        /* top: 0; */
+        /* left: 0; */
+        /* width: 100%; */
         /* height: 750px; */
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
+        /* height: 100%; */
+        /* object-fit: cover; */
+        /* object-position: center; */
+        clip-path: url("#mask-3");
       }
 
       /* .home-shadow {
@@ -512,6 +527,8 @@
       
       .about-data {
         /* text-align: center; */
+        max-width: 400px;
+        margin: auto;
       }
 
       @media screen and (max-width: 768px) {
@@ -538,6 +555,7 @@
       .about-image {
         position: relative;
         /* justify-self: center; */
+        max-width: 460px;
         clip-path: url("#mask-1");
         /* clip-path: url("#mask-2"); */
         /* clip-path: url("#mask-3"); */
@@ -656,12 +674,13 @@
       } */
       
       .explore-image {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        /* position: absolute; */
+        /* top: 0; */
+        /* left: 0; */
+        /* width: 100%; */
+        /* height: 100%; */
         /* overflow: hidden; */
+        /* clip-path: url("#mask-1"); */
       }
 
       .explore-image::after {
@@ -753,7 +772,14 @@
       }
       
       .join-data {
-        text-align: center;
+        max-width: 400px;
+        /* text-align: center; */
+      }
+
+      @media screen and (max-width: 768px) {
+        .join-data {
+          text-align: center;
+        }
       }
       
       .section-title {}
@@ -779,7 +805,9 @@
       
       .join-image {
         position: relative;
-        justify-self: center;
+        max-width: 420px;
+        margin: auto;
+        /* justify-self: center; */
         clip-path: url("#mask-1");
         /* clip-path: url("#mask-2"); */
         /* clip-path: url("#mask-3"); */
@@ -811,7 +839,7 @@
       
       .join-img {
         /* width: 300px; */
-        max-width: 420px;
+        /* max-width: 420px; */
         /* transition: transform 0.4s; */
         transition: transform 400ms;
       }
@@ -842,7 +870,11 @@
       .footer-container {}
       
       .footer-content {
-        row-gap: 3.5rem;
+        /* row-gap: 3.5rem; */
+        display: flex;
+        gap: 3rem;
+        flex-wrap: wrap;
+        justify-content: space-between;
       }
       
       .footer-logo {
@@ -854,11 +886,18 @@
         font-family: var(--second-font);
       }
       
-      .footer-description {}
+      @media screen and (min-width: 840px) {
+        .footer-description {
+          max-width: 200px;
+        }
+      }
       
       .footer-data {
+        display: flex;
         gap: 2.5rem 3.5rem;
-        grid-template-columns: repeat(2, max-content);
+        flex-wrap: wrap;
+        /* justify-content: space-between; */
+        /* grid-template-columns: repeat(2, max-content); */
       }
       
       .footer-title {
@@ -933,28 +972,56 @@
       }
       
       /*=============== SCROLL UP ===============*/
-      .scroll-up {
+      .scroll-up-box {
         position: fixed;
         right: 1rem;
-        bottom: -50%;
-        display: inline-flex;
-        padding: 6px;
+        bottom: 1rem;
+        /* border: 1px solid red; */
+        overflow: hidden;
+      }
+
+      .scroll-up {
+        /* position: fixed; */
+        /* right: 1rem; */
+        /* bottom: -50%; */
+        /* bottom: 1rem; */
+        /* display: inline-flex; */
+        display: inline-block;
+        /* padding: 6px; */
+        /* padding: 6px 12px; */
+        padding-top: 0.25rem;
+        /* color: var(--title-color); */
+        /* font-size: 1.25rem; */
+        /* background-color: hsla(0, 0%, 100%, 0.1); */
+        transform: translateY(100%);
+        /* -webkit-backdrop-filter: blur(24px); */
+        /* backdrop-filter: blur(24px); */
+        /* transition: bottom 0.4s, transform 0.4s; */
+        /* z-index: var(--z-tooltip); */
+        /* border: 1px solid red; */
+      }
+
+      .scroll-up i {
+        padding: 8px 12px;
         color: var(--title-color);
         font-size: 1.25rem;
         background-color: hsla(0, 0%, 100%, 0.1);
         -webkit-backdrop-filter: blur(24px);
         backdrop-filter: blur(24px);
-        transition: bottom 0.4s, transform 0.4s;
+        /* transition: bottom 0.4s, transform 0.4s; */
+        transition: transform 400ms;
         z-index: var(--z-tooltip);
       }
       
-      .scroll-up:hover {
+      .scroll-up-box:hover .scroll-up i {
         transform: translateY(-0.25rem);
+        /* transform: translateY(0); */
       }
       
       /* Show Scroll Up */
       .scroll-up.show-scroll {
-        bottom: 3rem;
+        /* bottom: 3rem; */
+        transform: translateY(0);
       }
       
       /*=============== BREAKPOINTS ===============*/
@@ -997,12 +1064,13 @@
         .about-container, 
         .join-container {
           align-items: center;
-          grid-template-columns: repeat(2, 350px);
+          /* grid-template-columns: repeat(2, 350px); */
+          grid-template-columns: repeat(2, 1fr);
         }
       
-        .about-data, 
+        /* .about-data,  */
         .about-data .section-title, 
-        .join-data, 
+        /* .join-data,  */
         .join-data .section-title {
           text-align: initial;
         }
@@ -1017,6 +1085,7 @@
       
         .join-image {
           order: -1;
+          margin: auto 0 auto auto;
         }
       
         .footer-content {
@@ -1115,7 +1184,8 @@
       
         .about-container {
           padding-block: 1rem;
-          column-gap: 8.5rem;
+          /* column-gap: 8.5rem; */
+          column-gap: 5%;
           grid-template-columns: 400px 460px;
         }
       
@@ -1124,7 +1194,7 @@
         }
       
         .about-img {
-          width: 460px;
+          /* width: 460px; */
         }
       
         .popular-container {
@@ -1163,8 +1233,9 @@
 
         .join-container {
           padding-block: 1rem 5rem;
-          column-gap: 8.5rem;
-          grid-template-columns: 460px 340px;
+          /* column-gap: 8.5rem; */
+          column-gap: 5%;
+          /* grid-template-columns: 460px 340px; */
         }
       
         .join-img {
@@ -1278,8 +1349,43 @@
       .about, 
       .popular,
       .explore, 
-      .join1 {
+      .join {
         display: none;
+      }
+
+      .test-bg {
+        position: fixed;
+        width: 120%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-image: url("./images/rustic-antique-kitchen.jpg");
+        background-repeat: no-repeat;
+        background-position: center left;
+        background-size: cover;
+        animation: animate 100s ease-in-out infinite;
+        z-index: -1;
+      }
+
+      .test-bg::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-image: 
+          linear-gradient(
+            to top, 
+            rgba(0, 0, 0, 0.8), 
+            transparent, 
+            rgba(0, 0, 0, 0.8)), 
+          linear-gradient(
+            to left, 
+            rgba(0, 0, 0, 0.8), 
+            transparent, 
+            transparent
+        );
       }
     </style>
   <style>
@@ -1374,7 +1480,7 @@
     <main class="main">
       <!--==================== HOME ====================-->
       <section class="home section" id="home">
-        <img src="./assets/responsive-travel-website-2-main/images/home-bg.jpg" alt="" class="home-bg">
+        <img src="./assets/responsive-travel-website-2-main/images/home-bg.jpg" alt="" class="bg home-bg">
         <!-- <div class="home-shadow"></div> -->
         <!-- <div class="container grid home-container"> -->
         <div class="container home-container">
@@ -1448,7 +1554,7 @@
           </div>
           <div class="about-image">
             <img src="./assets/responsive-travel-website-2-main/images/about-beach.jpg" alt="" class="about-img">
-            <div class="about-shadow"></div>
+            <!-- <div class="about-shadow"></div> -->
           </div>
         </div>
       </section>
@@ -1503,7 +1609,7 @@
       <section class="explore section" id="explore">
         <div class="explore-container">
           <div class="explore-image">
-            <img src="./assets/responsive-travel-website-2-main/images/explore-beach.jpg" alt="" class="explore-img">
+            <img src="./assets/responsive-travel-website-2-main/images/explore-beach.jpg" alt="" class="bg explore-img">
             <!-- <div class="explore-shadow"></div> -->
           </div>
           <div class="container grid explore-content">
@@ -1551,22 +1657,23 @@
           </div>
           <div class="join-image">
             <img src="./assets/responsive-travel-website-2-main/images/join-island.jpg" alt="" class="join-img">
-            <div class="join-shadow"></div>
+            <!-- <div class="join-shadow"></div> -->
           </div>
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      <div class="grid container footer-container">
-        <div class="grid footer-content">
+      <!-- <div class="grid container footer-container"> -->
+      <div class="container">
+        <!-- <div class="grid footer-content"> -->
+        <div class="footer-content">
           <div>
             <a href="#" class="footer-logo">
               Travel
             </a>
             <p class="footer-description">
-              Travel with us and explore <br>
-              the world without limits.
+              Travel with us and explore the world without limits.
             </p>
           </div>
           <div class="grid footer-data">
@@ -1682,9 +1789,12 @@
       </div>
     </footer>
 
-    <a href="#" class="scroll-up" id="scroll-up">
-      <i class="ri-arrow-up-line"></i>
-    </a>
+    <div class="scroll-up-box">
+      <a href="#" class="scroll-up" id="scroll-up">
+        <!-- <i class="ri-arrow-up-line"></i> -->
+        <i class="fa fa-angle-double-up"></i>
+      </a>
+    </div>
     <script>
       window.addEventListener("scroll", showScrollUp);
 
@@ -1694,6 +1804,24 @@
         window.scrollY >= 350 ? 
           scrollUpButton.classList.add("show-scroll") : 
           scrollUpButton.classList.remove("show-scroll");
+      }
+    </script>
+
+    <script>
+      const observer = new IntersectionObserver(animate);
+      
+      const elements = document.querySelectorAll(".paused");
+      
+      elements.forEach(element => {
+          observer.observe(element);
+      })
+
+      function animate(entries) {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.remove("paused");
+            }
+          });
       }
     </script>
     
@@ -1799,4 +1927,4 @@
   </body>
 </html>
 <!-- 55-118-250-380-510-640-770-900-1030-1160-1290-1420-1550-
-1680 -1810-->
+1680 -1810-1930-->
