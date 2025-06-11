@@ -451,13 +451,13 @@ nav {
 }
 
 .service-card {
-  position: relative;
-  padding: 2rem;
-  padding-top: 3rem;
+  /* position: relative; */
+  /* padding: 2rem; */
+  /* padding-top: 3rem; */
   text-align: center;
   border-radius: 5px;
   border-bottom: 2px solid transparent;
-  background-color: var(--secondary-color-light);
+  /* background-color: var(--secondary-color-light); */
   /* transition: 0.3s; */
   transition: border-color 300ms;
 }
@@ -467,22 +467,76 @@ nav {
 }
 
 .service-card span {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 4px 10px;
+  display: block;
+  position: relative;
+  /* position: absolute; */
+  /* top: 0; */
+  /* left: 50%; */
+  /* transform: translate(-50%, -50%); */
+  /* padding: 4px 10px; */
   font-size: 2rem;
-  border-radius: 2px;
-  background-color: var(--secondary-color-light);
+  text-align: center;
+  /* border-radius: 2px; */
+  /* background-color: var(--secondary-color-light); */
   /* transition: 0.3s; */
   transition: color 300ms,
   background-image 300ms;
 }
 
-.service-card:hover span {
+.service-card span i {
+  position: relative;
+  padding: 4px 10px;
+}
+
+.service-card:hover span i {
   color: var(--secondary-color);
-  background-image: var(--gradient);
+  /* background-image: var(--gradient); */
+}
+
+.service-card span::after {
+  position: absolute;
+  /* top: 0; */
+  left: 0;
+  bottom: 0;
+  content: "";
+  width: 100%;
+  height: 50%;
+  border-radius: 12px 12px 0 0;
+  background-color: var(--secondary-color-light);
+  z-index: -2;
+}
+
+.service-card span i::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: var(--gradient);
+  transition: opacity 300ms;
+  opacity: 0;
+  z-index: -1;
+}
+
+.service-card:hover span i::after {
+  opacity: 1;
+}
+
+.service-card .card-content {
+  position: relative;
+  padding: 1rem 2rem 2rem;
+}
+
+.service-card .card-content::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: var(--secondary-color-light);
+  z-index: -1;
 }
 
 .service-card h4 {
@@ -588,6 +642,9 @@ button#next {
   }
 }
 
+.slide.fade-out-left {
+  animation: fade-out-left 1s linear forwards;
+}
 
 @keyframes fade-out-left {
   0% {
@@ -1149,52 +1206,76 @@ button#next {
     </p>
     <div class="service-grid">
       <div class="service-card">
-        <span><i class="ri-window-fill"></i></span>
+        <span class="card-icon">
+          <i class="ri-window-fill"></i>
+        </span>
+        <div class="card-content">
         <h4>Website Design</h4>
         <p>
           We craft user-friendly interfaces that engage visitors and help you
           achieve your online goals with minimum efforts.
         </p>
+        </div>
       </div>
       <div class="service-card">
-        <span><i class="ri-store-line"></i></span>
+        <span class="card-icon">
+          <i class="ri-store-line"></i>
+        </span>
+        <div class="card-content">
         <h4>E-commerce Solutions</h4>
         <p>
           We build secure, scalable, and user-centric online stores that
           enhance the shopping experience and drive conversions.
         </p>
+        </div>
       </div>
       <div class="service-card">
-        <span><i class="ri-smartphone-line"></i></span>
+        <span class="card-icon">
+          <i class="ri-smartphone-line"></i>
+        </span>
+        <div class="card-content">
         <h4>Mobile Development</h4>
         <p>
           From iOS to Android, we create apps that deliver seamless
           performance and keep users coming back for more.
         </p>
+        </div>
       </div>
       <div class="service-card">
-        <span><i class="ri-share-fill"></i></span>
+        <span class="card-icon">
+          <i class="ri-share-fill"></i>
+        </span>
+        <div class="card-content">
         <h4>Content Marketing</h4>
         <p>
           Our services include creating blog posts, videos, and social media
           content that drives traffic and engagement.
         </p>
+        </div>
       </div>
       <div class="service-card">
-        <span><i class="ri-seo-line"></i></span>
+        <span class="card-icon">
+          <i class="ri-seo-line"></i>
+        </span>
+        <div class="card-content">
         <h4>SEO</h4>
         <p>
           Our SEO strategies are tailored to your specific goals, helping you
           reach your target audience and grow your online presence.
         </p>
+        </div>
       </div>
       <div class="service-card">
-        <span><i class="ri-share-circle-line"></i></span>
+        <span class="card-icon">
+          <i class="ri-share-circle-line"></i>
+        </span>
+        <div class="card-content">
         <h4>Digital Marketing</h4>
         <p>
           From pay-per-click (PPC) advertising to social media marketing, we
           ensure your brand stands out in the crowded digital landscape.
         </p>
+        </div>
       </div>
     </div>
   </section>
@@ -1304,6 +1385,63 @@ button#next {
   </section>
   <script>
     const slides = document.querySelectorAll(".slide");
+    const nextb = document.getElementById("next");
+    const prevb = document.getElementById("prev");
+    let index = 0;
+    let prevIndex = 0;
+    let penultimateIndex = 0;
+
+    nextb.addEventListener("click", () => {
+      const activeSlide = slides[index];
+      penultimateIndex = prevIndex;
+      const penultimateSlide = slides[penultimateIndex];
+      const penultimateSlideAnimations = penultimateSlide.getAnimations();
+      if (penultimateSlideAnimations.length > 0) {
+        penultimateSlideAnimations[0].finish();
+        activeSlide.getAnimations()[0].finish();
+        slides[prevIndex].getAnimations()[0].finish();
+      }
+      prevIndex = index;
+      activeSlide.classList.remove("fade-in-left", "fade-in-right");
+      activeSlide.classList.add("fade-out-left");
+      index++;
+      index = index % slides.length;
+      slides[index].classList.remove("fade-out-left", "fade-out-right");
+      slides[index].classList.add("fade-in-left");
+    })
+
+    nextb.addEventListener("click", () => {
+      const activeSlide = slides[index];
+      activeSlide.classList.remove("active");
+    }, {once: true})
+
+    prevb.addEventListener("click", () => {
+      const activeSlide = slides[index];
+      activeSlide.classList.remove("active");
+    }, {once: true})
+    
+    prevb.addEventListener("click", () => {
+      const activeSlide = slides[index];
+      penultimateIndex = prevIndex;
+      const penultimateSlide = slides[penultimateIndex];
+      const penultimateSlideAnimations = penultimateSlide.getAnimations();
+      if (penultimateSlideAnimations.length > 0) {
+        penultimateSlideAnimations[0].finish();
+        activeSlide.getAnimations()[0].finish();
+        slides[prevIndex].getAnimations()[0].finish();
+      }
+      prevIndex = index;
+      activeSlide.classList.remove("fade-in-left", "fade-in-right");
+      activeSlide.classList.add("fade-out-right");
+      index--;
+      index = index + slides.length;
+      index = index % slides.length;
+      slides[index].classList.remove("fade-out-left", "fade-out-right");
+      slides[index].classList.add("fade-in-right");
+    })    
+  </script>
+  <!-- <script>
+    const slides = document.querySelectorAll(".slide");
     const forwards = document.getElementById("next");
     const backwards = document.getElementById("prev");
     const slidesLength = slides.length;
@@ -1339,7 +1477,7 @@ button#next {
       next = next + slidesLength;
       next = next % slidesLength;
     });
-  </script>
+  </script> -->
   
   <section class="section-container blog-container" id="blog">
     <p class="section-subheader">Blog Posts</p>
@@ -1460,7 +1598,7 @@ button#next {
     })
   </script>
 
-    <div class="date" style="display: none;">
+    <div class="date" style="display: block;">
       <span></span>
     </div>
     <script>
@@ -1547,4 +1685,4 @@ button#next {
     </script>
   </body>
 </html>
-<!-- 55-118-250-390-520-650-780-910-1040-1170-1305-1435-1550 ->
+<!-- 55-118-250-390-520-650-780-910-1040-1170-1305-1435-1550-1680 ->
