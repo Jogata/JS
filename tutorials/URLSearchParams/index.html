@@ -25,7 +25,8 @@
         /* --text-light: #64748b; */
         --text-light: #64748b;
         --white: #ffffff;
-        --max-width: 1200px;
+        /* --max-width: 1200px; */
+        --max-width: 75rem;
       }
       
       * {
@@ -189,6 +190,9 @@
         isolation: isolate;
         position: fixed;
         width: 100%;
+        /* min-height: 100vh; */
+        /* display: flex; */
+        /* flex-direction: column; */
         z-index: 9;
       }
       
@@ -216,27 +220,45 @@
       }
 
       .nav-links {
+        /* position: relative; */
         position: absolute;
         /* top: 68px; */
         left: 0;
         width: 100%;
-        padding: 2rem;
+        /* padding: 2rem; */
+        bottom: 0;
+        padding: 2rem 2%;
         /* list-style: none; */
         display: flex;
         /* gap: 2rem; */
-        gap: 1rem;
+        /* gap: 1rem; */
+        gap: 2rem 1rem;
         align-items: center;
         justify-content: center;
         flex-direction: column;
         background-color: var(--secondary-color);
-        transform: translateY(-100%);
+        /* transform: translateY(-100%); */
         /* transition: 0.5s; */
         transition: transform 500ms;
         z-index: -1;
       }
 
       .nav-links.open {
-        transform: translateY(0);
+        transform: translateY(100%);
+      }
+
+      @media screen and (max-width: 768px) {
+        nav {
+          /* height: 100vh; */
+          /* display: flex; */
+          /* flex-direction: column; */
+          /* overflow: auto; */
+        }
+
+        .nav-links {
+          /* flex: 1; */
+          text-align: center;
+        }
       }
       
       .link a {
@@ -320,13 +342,22 @@
       .about-grid {
         margin-top: 2rem;
         display: grid;
-        gap: 2rem;
+        /* gap: 2rem; */
+        gap: 3rem 2rem;
       }
       
       .about-card {
         display: flex;
         gap: 1rem;
+        /* gap: 2rem 1rem; */
         align-items: center;
+      }
+
+      @media screen and (max-width: 400px) {
+        .about-card {
+          flex-direction: column;
+          text-align: center;
+        }
       }
       
       .about-card span {
@@ -842,6 +873,9 @@
           background-color: transparent;
           transform: none;
         }
+        .nav-links.open {
+          transform: translateY(0);
+        }
       
         .header-container {
           padding-block: 0;
@@ -892,6 +926,78 @@
         }
       }
 
+      .zoom-in {
+        animation: zoom-in 2s linear backwards;
+      }
+
+      .rotate {
+        animation: rotate 1s linear forwards;
+      }
+      
+      .fade-left {
+        animation: fade-left 1s linear backwards;
+      }
+      
+      .fade-right {
+        animation: fade-right 1s linear backwards;
+      }
+      
+      .fade-up {
+        animation: fade-up 1s linear backwards;
+      }
+      
+      .fade-down {
+        animation: fade-down 1s linear backwards;
+      }
+      
+      .delayed {
+        animation-delay: calc(0.2s * var(--i));
+      }
+      
+      .paused {
+        animation-play-state: paused;
+      }
+
+      @keyframes zoom-in {
+        0% {
+          opacity: 0;
+        }
+      }
+      
+      @keyframes rotate {
+        0% {
+          transform: rotate(80deg);
+          opacity: 0;
+        }
+      }
+        
+      @keyframes fade-left {
+        0% {
+          transform: translateX(10%);
+          opacity: 0;
+        }
+      }
+
+      @keyframes fade-right {
+        0% {
+          transform: translateX(-10%);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fade-up {
+        0% {
+          transform: translateY(10%);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fade-down {
+        0% {
+          transform: translateY(-10%);
+          opacity: 0;
+        }
+      }
     </style>
     <style>
       .header, 
@@ -971,6 +1077,14 @@
         </div>
       </div>
     </header>
+    <script>
+      const menuButton = document.getElementById("menu-btn");
+      const links = document.getElementById("nav-links");
+
+      menuButton.addEventListener("click", () => {
+        links.classList.toggle("open");
+      })
+    </script>
 
     <section class="section-container about-container" id="about">
       <div class="about-image">
@@ -1360,7 +1474,25 @@
         Copyright © 2023. All rights reserved.
       </div>
     </footer>
-    
+
+    <script>
+      const observer = new IntersectionObserver(animate);
+
+      const elements = document.querySelectorAll(".paused");
+
+      elements.forEach(element => {
+        observer.observe(element);
+      })
+      
+      function animate(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.remove("paused");
+          }
+        });
+      }
+    </script>
+      
     <script>
       const test1 = document.querySelectorAll("#test-c > div > div > div > div")
       // const test = document.createElement("div")
@@ -1555,4 +1687,4 @@
     </script>
   </body>
 </html>
-<!-- 55-118-250-380-510-640-770-900-1030-1160-1290-1420-1556 ->
+<!-- 55-118-250-380-510-640-770-900-1030-1160-1290-1420-1560-1690 ->
