@@ -262,6 +262,7 @@
       }
       
       .link a {
+        display: inline-block;
         padding: 0.5em;
         color: var(--text-dark);
         transition: color 300ms;
@@ -297,7 +298,9 @@
         margin: auto;
       }
       
-      .header-content h4 {
+      /* .header-content h4 { */
+      .header-content span {
+        display: block;
         color: var(--text-dark);
         font-size: 2.5rem;
         font-weight: 400;
@@ -333,7 +336,8 @@
         position: absolute;
         top: 3rem;
         right: 2rem;
-        max-width: 250px;
+        /* max-width: 250px; */
+        max-width: 15.75rem;
         filter: brightness(2);
         opacity: 0.5;
         z-index: -1;
@@ -522,14 +526,17 @@
       .price-container .section-header, 
       .price-container .section-description {
         /* width: fit-content; */
-        max-width: 600px;
+        /* max-width: 600px; */
+        max-width: 37.5rem;
         margin-inline: auto;
         text-align: center;
       }
       
       .price-container .section-header::after {
-        left: 50%;
-        transform: translateX(-50%);
+        right: 0;
+        margin: auto;
+        /* left: 50%; */
+        /* transform: translateX(-50%); */
       }
       
       .price-grid {
@@ -540,7 +547,8 @@
       }
       
       .price-card {
-        max-width: 400px;
+        /* max-width: 400px; */
+        max-width: 25rem;
         margin: 0 auto;
         padding: 2rem 1rem;
         display: flex;
@@ -579,7 +587,8 @@
       }
       
       .price-content img {
-        max-width: 70px;
+        /* max-width: 70px; */
+        max-width: 4.5rem;
         margin-inline: auto;
         margin-bottom: 1rem;
         filter: invert(1);
@@ -754,10 +763,13 @@
       }
       
       .footer-logo img {
-        max-width: 40px;
+        /* max-width: 40px; */
+        max-width: 2.5rem;
       }
       
       .footer-col p {
+        /* max-width: 368px; */
+        max-width: 23rem;
         margin-bottom: 2rem;
         color: var(--text-light);
       }
@@ -873,6 +885,7 @@
           background-color: transparent;
           transform: none;
         }
+
         .nav-links.open {
           transform: translateY(0);
         }
@@ -934,24 +947,24 @@
         animation: rotate 1s linear forwards;
       }
       
-      .fade-left {
-        animation: fade-left 1s linear backwards;
+      .fade-left-relative {
+        animation: fade-left-relative 1s linear backwards;
       }
       
-      .fade-right {
-        animation: fade-right 1s linear backwards;
+      .fade-right-relative {
+        animation: fade-right-relative 1s linear backwards;
       }
       
-      .fade-up {
-        animation: fade-up 1s linear backwards;
+      .fade-up-relative {
+        animation: fade-up-relative 1s linear backwards;
       }
       
-      .fade-down {
-        animation: fade-down 1s linear backwards;
+      .fade-down-relative {
+        animation: fade-down-relative 1s linear backwards;
       }
       
       .delayed {
-        animation-delay: calc(0.2s * var(--i));
+        animation-delay: calc(0.2s * var(--delay));
       }
       
       .paused {
@@ -971,28 +984,28 @@
         }
       }
         
-      @keyframes fade-left {
+      @keyframes fade-left-relative {
         0% {
           transform: translateX(10%);
           opacity: 0;
         }
       }
 
-      @keyframes fade-right {
+      @keyframes fade-right-relative {
         0% {
           transform: translateX(-10%);
           opacity: 0;
         }
       }
       
-      @keyframes fade-up {
+      @keyframes fade-up-relative {
         0% {
           transform: translateY(10%);
           opacity: 0;
         }
       }
       
-      @keyframes fade-down {
+      @keyframes fade-down-relative {
         0% {
           transform: translateY(-10%);
           opacity: 0;
@@ -1000,15 +1013,15 @@
       }
     </style>
     <style>
-      .header, 
-      .about-container, 
-      .classes-container, 
-      .trainer-container, 
-      .price-container, 
-      .client-container, 
-      .footer {
+      /* .header,  */
+      /* .about-container,  */
+      /* .classes-container,  */
+      /* .trainer-container,  */
+      /* .price-container,  */
+      /* .client-container,  */
+      /* .footer { */
         /* display: none; */
-      }
+      /* } */
     </style>
   <style>
     body {
@@ -1036,7 +1049,8 @@
       <nav>
         <div class="nav-header">
           <div class="nav-logo">
-            <a href="#">
+            <!-- <a href="#"> -->
+            <a href="#" class="zoom-in paused">
               <img src="./assets/images/logo.png" alt="logo" />
               Power
             </a>
@@ -1050,29 +1064,56 @@
           <!-- </div> -->
         </div>
         <ul class="nav-links" id="nav-links">
-          <li class="link"><a href="#home">Home</a></li>
-          <li class="link"><a href="#about">About</a></li>
-          <li class="link"><a href="#classes">Classes</a></li>
-          <li class="link"><a href="#trainer">Trainers</a></li>
-          <li class="link"><a href="#price">Pricing</a></li>
-          <li class="link"><button class="btn">Contact Us</button></li>
+          <li class="link">
+            <!-- <a href="#home">Home</a> -->
+            <a href="#home" class="fade-right-relative paused delayed" style="--delay: 1">Home</a>
+          </li>
+          <li class="link">
+            <!-- <a href="#about">About</a> -->
+            <a href="#about" class="fade-right-relative paused delayed" style="--delay: 2">About</a>
+          </li>
+          <li class="link">
+            <!-- <a href="#classes">Classes</a> -->
+            <a href="#classes" class="fade-right-relative paused delayed" style="--delay: 3">Classes</a>
+          </li>
+          <li class="link">
+            <!-- <a href="#trainer">Trainers</a> -->
+            <a href="#trainer" class="fade-right-relative paused delayed" style="--delay: 4">Trainers</a>
+          </li>
+          <li class="link">
+            <!-- <a href="#price">Pricing</a> -->
+            <a href="#price" class="fade-right-relative paused delayed" style="--delay: 5">Pricing</a>
+          </li>
+          <li class="link">
+            <!-- <button class="btn">Contact Us</button> -->
+            <button class="btn fade-right-relative paused delayed" style="--delay: 6">Contact Us</button>
+          </li>
         </ul>
       </nav>
       <div class="section-container header-container" id="home">
-        <div class="header-image">
+        <!-- <div class="header-image"> -->
+        <div class="header-image fade-up-relative paused">
           <img src="./assets/images/header.png" alt="header" />
         </div>
         <div class="header-content">
-          <h4>Build Your Body &</h4>
-          <h1 class="section-header">Shape Yourself!</h1>
-          <p>
+          <!-- <h4>Build Your Body &</h4> -->
+          <!-- <h1 class="section-header"> -->
+          <h1 class="section-header fade-up-relative paused delayed" style="--delay: 2">
+            <span>Build Your Body &</span>
+            Shape Yourself!
+          </h1>
+          <!-- <p> -->
+          <p class="fade-up-relative paused delayed" style="--delay: 4">
             Unleash your potential and embark on a journey towards a stronger,
             fitter, and more confident you. Sign up for 'Make Your Body Shape'
             now and witness the incredible transformation your body is capable
             of!
           </p>
           <div class="header-btn">
-            <button class="btn">Join Today</button>
+            <!-- <button class="btn">Join Today</button> -->
+            <button class="btn fade-up-relative paused delayed" style="--delay: 6">
+              Join Today
+            </button>
           </div>
         </div>
       </div>
@@ -1087,20 +1128,26 @@
     </script>
 
     <section class="section-container about-container" id="about">
-      <div class="about-image">
+      <!-- <div class="about-image"> -->
+      <div class="about-image fade-right-relative paused">
         <img class="about-bg" src="./assets/images/dot-bg.png" alt="bg" />
         <img src="./assets/images/about.png" alt="about" />
       </div>
       <div class="about-content">
-        <h2 class="section-header">Our Story</h2>
-        <p class="section-description">
+        <!-- <h2 class="section-header">Our Story</h2> -->
+        <h2 class="section-header fade-up-relative paused delayed" style="--delay: --2">
+          Our Story
+        </h2>
+        <!-- <p class="section-description"> -->
+        <p class="section-description fade-up-relative paused delayed" style="--delay: 4">
           Led by our team of expert and motivational instructors, "The Class You
           Will Get Here" is a high-energy, results-driven session that combines
           a perfect blend of cardio, strength training, and functional
           exercises.
         </p>
         <div class="about-grid">
-          <div class="about-card">
+          <!-- <div class="about-card"> -->
+          <div class="about-card fade-up-relative paused delayed" style="--delay: 6">
             <span><i class="ri-open-arm-line"></i></span>
             <div>
               <h4>Open Door Policy</h4>
@@ -1110,7 +1157,8 @@
               </p>
             </div>
           </div>
-          <div class="about-card">
+          <!-- <div class="about-card"> -->
+          <div class="about-card fade-up-relative paused delayed" style="--delay: 8">
             <span><i class="ri-shield-cross-line"></i></span>
             <div>
               <h4>Fully Insured</h4>
@@ -1120,7 +1168,8 @@
               </p>
             </div>
           </div>
-          <div class="about-card">
+          <!-- <div class="about-card"> -->
+          <div class="about-card fade-up-relative paused delayed" style="--delay: 10">
             <span><i class="ri-p2p-line"></i></span>
             <div>
               <h4>Personal Trainer</h4>
@@ -1135,8 +1184,12 @@
     </section>
 
     <section class="section-container classes-container" id="classes">
-      <h2 class="section-header">Our Classes</h2>
-      <p class="section-description">
+      <!-- <h2 class="section-header">Our Classes</h2> -->
+      <h2 class="section-header fade-up-relative paused">
+        Our Classes
+      </h2>
+      <!-- <p class="section-description"> -->
+      <p class="section-description fade-up-relative paused delayed" style="--delay: 2">
         Discover a diverse range of exhilarating classes at our gym designed to
         cater to all fitness levels and interests. Whether you're a seasoned
         athlete or just starting your fitness journey, our classes offer
@@ -1144,7 +1197,8 @@
       </p>
       <div class="class-grid">
         <div class="card-placeholder">
-          <div class="class-card">
+          <!-- <div class="class-card"> -->
+          <div class="class-card fade-up-relative paused delayed" style="--delay: 4">
             <img src="./assets/images/dot-bg.png" alt="bg" class="class-bg" />
             <img src="./assets/images/class-1.jpg" alt="class" />
             <div class="class-content">
@@ -1154,7 +1208,8 @@
           </div>
         </div>
         <div class="card-placeholder">
-          <div class="class-card">
+          <!-- <div class="class-card"> -->
+          <div class="class-card fade-up-relative paused delayed" style="--delay: 6">
             <img src="./assets/images/dot-bg.png" alt="bg" class="class-bg" />
             <img src="./assets/images/class-2.jpg" alt="class" />
             <div class="class-content">
@@ -1164,7 +1219,8 @@
           </div>
         </div>
         <div class="card-placeholder">
-          <div class="class-card">
+          <!-- <div class="class-card"> -->
+          <div class="class-card fade-up-relative paused delayed" style="--delay: 8">
             <img src="./assets/images/dot-bg.png" alt="bg" class="class-bg" />
             <img src="./assets/images/class-3.jpg" alt="class" />
             <div class="class-content">
@@ -1174,7 +1230,8 @@
           </div>
         </div>
         <div class="card-placeholder">
-          <div class="class-card">
+          <!-- <div class="class-card"> -->
+          <div class="class-card fade-up-relative paused delayed" style="--delay: 10">
             <img src="./assets/images/dot-bg.png" alt="bg" class="class-bg" />
             <img src="./assets/images/class-4.jpg" alt="class" />
             <div class="class-content">
@@ -1187,17 +1244,23 @@
     </section>
 
     <section class="section-container trainer-container" id="trainer">
-      <h2 class="section-header">Our Trainers</h2>
-      <p class="section-description">
+      <!-- <h2 class="section-header">Our Trainers</h2> -->
+      <h2 class="section-header fade-up-relative paused">
+        Our Trainers
+      </h2>
+      <!-- <p class="section-description"> -->
+      <p class="section-description fade-up-relative paused delayed" style="--delay: 2">
         Our trainers are more than just experts in exercise; they are passionate
         about helping you achieve your health and fitness goals. Our trainers
         are equipped to tailor workout programs to meet your unique needs.
       </p>
       <div class="trainer-grid">
-        <div class="trainer-card">
+        <!-- <div class="trainer-card"> -->
+        <div class="trainer-card fade-up-relative paused delayed" style="--delay: 3">
           <img src="./assets/images/trainer-1.jpg" alt="trainer" />
         </div>
-        <div class="trainer-card">
+        <!-- <div class="trainer-card"> -->
+        <div class="trainer-card fade-up-relative paused delayed" style="--delay: 4">
           <div class="trainer-content">
             <h4>James Rodriguez</h4>
             <h5>Strength and Conditioning</h5>
@@ -1214,10 +1277,12 @@
             </div>
           </div>
         </div>
-        <div class="trainer-card">
+        <!-- <div class="trainer-card"> -->
+        <div class="trainer-card fade-up-relative paused delayed" style="--delay: 5">
           <img src="./assets/images/trainer-2.jpg" alt="trainer" />
         </div>
-        <div class="trainer-card">
+        <!-- <div class="trainer-card"> -->
+        <div class="trainer-card fade-up-relative paused delayed" style="--delay: 6">
           <div class="trainer-content">
             <h4>Mark Harris</h4>
             <h5>HIIT and Functional</h5>
@@ -1234,10 +1299,12 @@
             </div>
           </div>
         </div>
-        <div class="trainer-card">
+        <!-- <div class="trainer-card"> -->
+        <div class="trainer-card fade-up-relative paused delayed" style="--delay: 7">
           <img src="./assets/images/trainer-3.jpg" alt="trainer" />
         </div>
-        <div class="trainer-card">
+        <!-- <div class="trainer-card"> -->
+        <div class="trainer-card fade-up-relative paused delayed" style="--delay: 8">
           <div class="trainer-content">
             <h4>Emily Davis</h4>
             <h5>Yoga and Mindfulness</h5>
@@ -1258,13 +1325,18 @@
     </section>
 
     <section class="section-container price-container" id="price">
-      <h2 class="section-header">Our Pricing</h2>
-      <p class="section-description">
+      <!-- <h2 class="section-header">Our Pricing</h2> -->
+      <h2 class="section-header fade-up-relative paused">
+        Our Pricing
+      </h2>
+      <!-- <p class="section-description"> -->
+      <p class="section-description fade-up-relative paused delayed" style="--delay: 2">
         Our pricing plan comes with various membership tiers, each tailored to
         cater to different preferences and fitness aspirations.
       </p>
       <div class="price-grid">
-        <div class="price-card">
+        <!-- <div class="price-card"> -->
+        <div class="price-card fade-up-relative paused delayed" style="--delay: 4">
           <div class="price-content">
             <h4>Basic Plan</h4>
             <img src="./assets/images/price-1.png" alt="price" />
@@ -1280,7 +1352,8 @@
           </div>
           <button class="btn">Join Now</button>
         </div>
-        <div class="price-card">
+        <!-- <div class="price-card"> -->
+        <div class="price-card fade-up-relative paused delayed" style="--delay: 6">
           <div class="price-content">
             <h4>Weekly Plan</h4>
             <img src="./assets/images/price-2.png" alt="price" />
@@ -1296,7 +1369,8 @@
           </div>
           <button class="btn">Join Now</button>
         </div>
-        <div class="price-card">
+        <!-- <div class="price-card"> -->
+        <div class="price-card fade-up-relative paused delayed" style="--delay: 8">
           <div class="price-content">
             <h4>Monthly Plan</h4>
             <img src="./assets/images/price-3.png" alt="price" />
@@ -1320,8 +1394,12 @@
 
     <section class="section-container client-container" id="client">
       <div class="client-header">
-        <h2 class="section-header">What People Says About Us?</h2>
-        <p class="section-description">
+        <!-- <h2 class="section-header">What People Says About Us?</h2> -->
+        <h2 class="section-header fade-up-relative paused">
+          What People Says About Us?
+        </h2>
+        <!-- <p class="section-description"> -->
+        <p class="section-description fade-up-relative paused delayed" style="--delay: 2">
           These testimonials serve as a testament to our commitment to helping
           individuals achieve their fitness goals, and fostering a supportive
           environment for everyone who walks through our doors.
@@ -1329,7 +1407,8 @@
       </div>
 
       <div class="slider">
-        <div class="slider-track">
+        <!-- <div class="slider-track"> -->
+        <div class="slider-track zoom-in paused delayed" style="--delay: 4">
           <div class="slide">
             <div class="client-card">
               <div class="client-image">
@@ -1429,49 +1508,76 @@
     <footer class="footer">
       <div class="section-container footer-container">
         <div class="footer-col">
-          <div class="footer-logo">
+          <!-- <div class="footer-logo"> -->
+          <div class="footer-logo zoom-in paused">
             <a href="#"><img src="./assets/images/logo.png" alt="logo" />Power</a>
           </div>
-          <p>
+          <!-- <p> -->
+          <p class="fade-up-relative paused delayed" style="--delay: 2">
             Take the first step towards a healthier, stronger you with our
             unbeatable pricing plans. Let's sweat, achieve, and conquer
             together!
           </p>
           <div class="footer-socials">
-            <a href="#"><i class="ri-facebook-fill"></i></a>
-            <a href="#"><i class="ri-instagram-line"></i></a>
-            <a href="#"><i class="ri-twitter-fill"></i></a>
+            <!-- <a href="#" > -->
+            <a href="#" class="fade-up-relative paused delayed" style="--delay: 4">
+              <i class="ri-facebook-fill"></i>
+            </a>
+            <!-- <a href="#" > -->
+            <a href="#" class="fade-up-relative paused delayed" style="--delay: 6">
+              <i class="ri-instagram-line"></i>
+            </a>
+            <!-- <a href="#" > -->
+            <a href="#" class="fade-up-relative paused delayed" style="--delay: 8">
+              <i class="ri-twitter-fill"></i>
+            </a>
           </div>
         </div>
         <div class="footer-col">
-          <h4>Company</h4>
+          <!-- <h4>Company</h4> -->
+          <h4 class="zoom-in paused">Company</h4>
           <div class="footer-links">
-            <a href="#">Business</a>
-            <a href="#">Franchise</a>
-            <a href="#">Partnership</a>
-            <a href="#">Network</a>
+            <!-- <a href="#">Business</a> -->
+            <a href="#" class="zoom-in paused delayed" style="--delay: 4">Business</a>
+            <!-- <a href="#">Franchise</a> -->
+            <a href="#" class="zoom-in paused delayed" style="--delay: 6">Franchise</a>
+            <!-- <a href="#">Partnership</a> -->
+            <a href="#" class="zoom-in paused delayed" style="--delay: 8">Partnership</a>
+            <!-- <a href="#">Network</a> -->
+            <a href="#" class="zoom-in paused delayed" style="--delay: 10">Network</a>
           </div>
         </div>
         <div class="footer-col">
-          <h4>About Us</h4>
+          <!-- <h4>About Us</h4> -->
+          <h4 class="zoom-in paused">About Us</h4>
           <div class="footer-links">
-            <a href="#">Blogs</a>
-            <a href="#">Security</a>
-            <a href="#">Careers</a>
+            <!-- <a href="#">Blogs</a> -->
+            <a href="#" class="zoom-in paused delayed" style="--delay: 4">Blogs</a>
+            <!-- <a href="#">Security</a> -->
+            <a href="#" class="zoom-in paused delayed" style="--delay: 6">Security</a>
+            <!-- <a href="#">Careers</a> -->
+            <a href="#" class="zoom-in paused delayed" style="--delay: 8">Careers</a>
           </div>
         </div>
         <div class="footer-col">
-          <h4>Contact</h4>
+          <!-- <h4>Contact</h4> -->
+          <h4 class="zoom-in paused">Contact</h4>
           <div class="footer-links">
-            <a href="#">Contact Us</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms & Conditions</a>
-            <a href="#">BMI Calculator</a>
+            <!-- <a href="#">Contact Us</a> -->
+            <a href="#" class="zoom-in paused delayed" style="--delay: 4">Contact Us</a>
+            <!-- <a href="#">Privacy Policy</a> -->
+            <a href="#" class="zoom-in paused delayed" style="--delay: 6">Privacy Policy</a>
+            <!-- <a href="#">Terms & Conditions</a> -->
+            <a href="#" class="zoom-in paused delayed" style="--delay: 8">Terms & Conditions</a>
+            <!-- <a href="#">BMI Calculator</a> -->
+            <a href="#" class="zoom-in paused delayed" style="--delay: 10">BMI Calculator</a>
           </div>
         </div>
       </div>
       <div class="footer-bar">
-        Copyright © 2023. All rights reserved.
+        <p class="zoom-in paused">
+          Copyright © 2023. All rights reserved.
+        </p>
       </div>
     </footer>
 
@@ -1687,4 +1793,4 @@
     </script>
   </body>
 </html>
-<!-- 55-118-250-380-510-640-770-900-1030-1160-1290-1420-1560-1690 ->
+<!-- 55-118-250-380-510-640-770-900-1030-1160-1290-1420-1560-1690-1820 ->
