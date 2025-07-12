@@ -120,7 +120,9 @@
       /*=============== REUSABLE CSS CLASSES ===============*/
       .container {
         max-width: 1120px;
-        margin-inline: 1.5rem;
+        /* margin-inline: 1.5rem; */
+        margin-inline: auto;
+        padding-inline: 1.5rem;
       }
       
       .grid {
@@ -246,8 +248,16 @@
       
       .home {
         position: relative;
-        height: 730px;
+        /* height: 730px; */
+        min-height: 730px;
+        display: flex;
+        padding-block: 10rem 5rem;
+        flex-direction: column;
+        /* text-align: center; */
         background-color: var(--body-second-color);
+        /* grid-template-rows: auto auto auto; */
+        /* grid-auto-rows: auto; */
+        /* overflow: hidden; */
       }
       
       .home-bg, 
@@ -273,10 +283,15 @@
       }
       
       .home-data {
-        position: absolute;
-        top: 17rem;
-        justify-self: center;
+        /* position: absolute; */
+        /* top: 17rem; */
+        /* justify-self: center; */
+        position: relative;
+        width: 100%;
+        margin-top: auto;
         text-align: center;
+        transform: translateY(50%);
+        z-index: 1;
       }
       
       .home-title {
@@ -289,23 +304,34 @@
       .home-subtitle {}
       
       .home-button {
-        position: absolute;
-        bottom: 5rem;
-        justify-self: center;
-        width: 94px;
-        height: 94px;
-        padding-top: 1rem;
-        display: grid;
-        place-content: center;
+        /* position: absolute; */
+        /* bottom: 5rem; */
+        /* justify-self: center; */
+        /* width: 94px; */
+        width: 100vw;
+        max-width: 96px;
+        /* height: 94px; */
+        height: 100vw;
+        max-height: 96px;
+        margin: auto auto 0;
+        padding: 1rem;
+        /* padding-top: 1rem; */
+        /* display: grid; */
+        /* place-content: center; */
+        display: inline-flex;
+        /* align-items: center; */
+        justify-content: center;
+        flex-direction: column;
         color: var(--white-color);
+        font-weight: var(--font-semi-bold);
         text-align: center;
         border-radius: 50%;
         border: 2px solid var(--white-color);
-        z-index: 5;
+        z-index: 3;
       }
 
-      .home-button {
-        font-weight: var(--font-semi-bold);
+      .home-button span {
+        display: block;
       }
 
       .home-button i {
@@ -314,9 +340,67 @@
 
       .home-slider {
         position: relative;
+        overflow: hidden;
+        z-index: 2;
+      }
+
+      .slider-track {
+        display: flex;
       }
       
-      .home-article {}
+      .home-article {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        flex-shrink: 0;
+        transform: translateX(100%);
+      }
+
+      .relative {
+        position: relative;
+      }
+
+      .current {
+        transform: translate(0);
+        transition: transform 300ms;
+        z-index: 1;
+      }
+
+      .next {
+        transform: translate(100%);
+        transition: transform 300ms;
+      }
+  
+      .prev {
+        transform: translate(-100%);
+        transition: transform 300ms;
+      }
+
+      .home-slider .control {
+        margin-top: 2rem;
+        text-align: center;
+      }
+    
+      .home-slider button {
+        color: var(--white-color);
+        font-size: 0px;
+        border-radius: 50%;
+        border: 1px solid var(--white-color);
+        background-color: var(--text-dark);
+        cursor: pointer;
+      }
+    
+      button#prev {
+        padding: 0.45rem 0.5rem 0.45rem 0.7rem;
+      }
+    
+      button#next {
+        padding: 0.45rem 0.7rem 0.45rem 0.5rem;
+      }
+    
+      .home-slider button i {
+        font-size: 2rem;
+      }
       
       .home-image {
         width: 300px;
@@ -324,9 +408,9 @@
       }
       
       .home-slider {
-        margin-inline: initial;
-        align-self: center;
-        margin-bottom: 1rem;
+        /* margin-inline: initial; */
+        /* align-self: center; */
+        /* margin-bottom: 1rem; */
       }
       
       .page-button {
@@ -631,7 +715,7 @@
     </header>
 
     <main class="main">
-      <section class="home grid section" id="home">
+      <section class="home section" id="home">
         <img src="./assets/aventa/home-bg.png" alt="" class="home-bg">
         <div class="home-gradient"></div>
 
@@ -644,19 +728,30 @@
 
         <div class="home-slider">
           <div class="slider-track">
-            <article class="home-article">
+            <!-- <article class="home-article"> -->
+            <article class="home-article relative current">
               <img src="./assets/aventa/home-car-1.png" alt="" class="home-image">
             </article>
-            <article class="home-article">
+            <!-- <article class="home-article"> -->
+            <article class="home-article next">
               <img src="./assets/aventa/home-car-2.png" alt="" class="home-image">
             </article>
             <article class="home-article">
               <img src="./assets/aventa/home-car-3.png" alt="" class="home-image">
             </article>
-            <article class="home-article">
+            <!-- <article class="home-article"> -->
+            <article class="home-article prev">
               <img src="./assets/aventa/home-car-4.png" alt="" class="home-image">
             </article>
           </div>
+          <div class="control">
+            <button id="next">
+              next <i class="ri-arrow-left-double-line"></i>
+            </button>
+            <button id="prev">
+              prev <i class="ri-arrow-right-double-line"></i>
+            </button>
+          </div>      
         </div>
 
         <a href="#about" class="home-button">
@@ -664,6 +759,49 @@
           <i class="ri-arrow-down-s-line"></i>
         </a>
       </section>
+      <script>
+        const setUpSliderWithTransform = () => {
+        const slides = document.querySelectorAll(".home-article");
+        // console.log(slides);
+        const forwards = document.getElementById("next");
+        const backwards = document.getElementById("prev");
+        const slidesLength = slides.length;
+        let current = 0;
+        let next = 1;
+        let prev = slidesLength - 1;
+  
+        forwards.addEventListener("click", () => {
+          slides[current].classList.replace("current", "prev");
+          slides[next].classList.replace("next", "current");
+          slides[prev].classList.remove("prev");
+          next++;
+          next = next % slidesLength;
+          slides[next].classList.add("next");
+          current++;
+          current = current % slidesLength;
+          prev++;
+          prev = prev % slidesLength;
+        });
+  
+        backwards.addEventListener("click", () => {
+          slides[current].classList.replace("current", "next");
+          slides[prev].classList.replace("prev", "current");
+          slides[next].classList.remove("next");
+          prev--;
+          prev = prev + slidesLength;
+          prev = prev % slidesLength;
+          slides[prev].classList.add("prev");
+          current--;
+          current = current + slidesLength;
+          current = current % slidesLength;
+          next--;
+          next = next + slidesLength;
+          next = next % slidesLength;
+        });
+        }
+  
+        setUpSliderWithTransform();
+      </script>
 
       <section class="about section" id="about">
         <div class="container grid about-container">
@@ -994,4 +1132,4 @@
     </script>
   </body>
 </html>
-<!-- 55-118-213-343-473-603-733-866-996 -->
+<!-- 55-118-213-343-473-603-733-866-996-1135 -->
