@@ -200,12 +200,15 @@
       .mask-1 {
         clip-path: url("#mask-1");
       }
+
       .mask-2 {
         clip-path: url("#mask-2");
       }
+      
       .mask-3 {
         clip-path: url("#mask-3");
       }
+      
       .mask-4 {
         clip-path: url("#mask-4");
       }
@@ -449,10 +452,10 @@
         width: 100%;
         flex-shrink: 0;
         transform: translateX(100%);
-        opacity: 0;
+        /* opacity: 0; */
       }
 
-      .relative {
+      #relative {
         position: relative;
       }
 
@@ -461,8 +464,18 @@
         /* transition: transform 300ms; */
         transition: transform 300ms, 
                       opacity 300ms;
-        opacity: 1;
-        z-index: 1;
+        /* opacity: 1; */
+        /* z-index: 1; */
+      }
+
+      .left {
+        transform: translateX(-100%);
+        transition: transform 300ms;
+      }
+
+      .right {
+        transform: translateX(100%);
+        transition: transform 300ms;
       }
 
       .next {
@@ -481,29 +494,28 @@
 
       .home-slider .control {
         /* margin-top: 2rem; */
-        text-align: center;
+        /* text-align: center; */
       }
     
       .home-slider button {
-        color: var(--white-color);
-        font-size: 0px;
+        /* color: var(--white-color); */
+        /* font-size: 0px; */
         border-radius: 50%;
-        border: 1px solid var(--white-color);
-        background-color: var(--text-dark);
-        filter: drop-shadow(1px 1px #000);
-        /* cursor: pointer; */
+        border: 1px solid transparent;
+        /* background-color: var(--text-dark); */
+        /* filter: drop-shadow(1px 1px #000); */
       }
     
       button#prev {
-        padding: 0.45rem 0.5rem 0.45rem 0.7rem;
+        /* padding: 0.45rem 0.5rem 0.45rem 0.7rem; */
       }
     
       button#next {
-        padding: 0.45rem 0.7rem 0.45rem 0.5rem;
+        /* padding: 0.45rem 0.7rem 0.45rem 0.5rem; */
       }
     
       .home-slider button i {
-        font-size: 2rem;
+        /* font-size: 2rem; */
       }
       
       .home-image {
@@ -517,18 +529,30 @@
         /* align-self: center; */
         /* margin-bottom: 1rem; */
       }
+
+      .pagination {
+        text-align: center;
+      }
       
       .page-button {
+        aspect-ratio: 1;
+        margin: 0.5rem;
+        padding: 0.4em 0.72em;
         color: var(--white-color);
         font-size: var(--normal-font-size);
         font-weight: var(--font-semi-bold);
         /* background-color: transparent; */
-        transition: color 0.4s;
+        filter: drop-shadow(1px 1px #000);
+        /* transition: color 0.4s, background-color 0.4s; */
+        transition: color 0.4s, border-color 0.4s;
+        /* border: 1px solid; */
         /* opacity: 1; */
       }
       
       .page-button.active {
         color: var(--black-color);
+        /* background-color: var(--white-color); */
+        border: 1px solid;
       }
       
       .button {
@@ -754,15 +778,18 @@
       }
 
       .contact-box {
-        position: relative;
-        width: 100%;
+        /* position: relative; */
+        /* width: 100%; */
         /* height: 58px; */
+        margin-bottom: 1rem;
       }
 
       .contact-label {
-        position: absolute;
-        top: -1.5rem;
-        left: 0;
+        display: inline-block;
+        margin-bottom: 0.5rem;
+        /* position: absolute; */
+        /* top: -1.5rem; */
+        /* left: 0; */
         color: var(--white-color);
         font-size: var(--smaller-font-size);
         font-weight: var(--font-semi-bold);
@@ -807,8 +834,12 @@
       .contact-img {
         justify-self: center;
         width: 250px;
-        transform: skew(-12deg);
-        box-shadow: var(--shadow-img);
+        /* transform: skew(-12deg); */
+        /* box-shadow: var(--shadow-img); */
+        /* clip-path: url("#mask-1"); */
+        clip-path: url("#mask-2");
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
       }
       
       .footer {
@@ -854,7 +885,7 @@
       
       .footer-copy {
         display: block;
-        margin-top: 6rem;
+        /* margin-top: 6rem; */
         color: var(--white-color);
         font-size: var(--small-font-size);
         text-align: center;
@@ -904,6 +935,40 @@
         bottom: -50%;
       }
       
+      /*=============== BREAKPOINTS ===============*/
+      /* For small devices */
+      @media screen and (max-width: 320px) {
+        .container {
+          margin-inline: 1rem;
+        }
+        
+        .home-title {
+          font-size: 2rem;
+        }
+        
+        .home-image {
+          width: 270px;
+        }
+        
+        .about-video {
+          width: 200px;
+          height: 250px;
+        }
+        
+        .models-container {
+          grid-template-columns: 200px;
+        }
+        
+        .info-data {
+          row-gap: 1rem;
+          align-items: center;
+          flex-direction: column;
+        }
+        
+        .contact-img {
+          width: 200px;
+        }
+      }
     </style>
   <style>
     body {
@@ -951,16 +1016,24 @@
             </li>
           </ul>
 
-          <button id="nav-close" class="nav-close">
+          <button id="nav-close" class="close-nav-btn">
             <i class="ri-close-large-line"></i>
           </button>
         </div>
 
-        <button id="nav-toggle" class="nav-toggle">
+        <button id="nav-toggle" class="open-nav-btn">
           <i class="ri-menu-line"></i>
         </button>
       </nav>
     </header>
+    <script>
+      const nav = document.getElementById("nav-list");
+      const openMenuButton = document.getElementById("open-nav-btn");
+      const closeMenuButton = document.getElementById("close-nav-btn");
+      openMenuButton.addEventListener("click", () => {
+        nav.classList.add("open");
+      })
+    </script>
 
     <main class="main">
       <section class="home section" id="home">
@@ -977,29 +1050,38 @@
         <div class="home-slider">
           <div class="slider-track">
             <!-- <article class="home-article"> -->
-            <article class="home-article relative current">
+            <!-- <article class="home-article relative current"> -->
+            <article class="home-article current" id="relative">
               <img src="./assets/aventa/home-car-1.png" alt="" class="home-image">
             </article>
             <!-- <article class="home-article"> -->
-            <article class="home-article next">
+            <!-- <article class="home-article next"> -->
+            <article class="home-article right">
               <img src="./assets/aventa/home-car-2.png" alt="" class="home-image">
             </article>
-            <article class="home-article">
+            <article class="home-article right">
               <img src="./assets/aventa/home-car-3.png" alt="" class="home-image">
             </article>
             <!-- <article class="home-article"> -->
-            <article class="home-article prev">
+            <!-- <article class="home-article prev"> -->
+            <article class="home-article right">
               <img src="./assets/aventa/home-car-4.png" alt="" class="home-image">
             </article>
           </div>
-          <div class="control">
+          <!-- <div class="control" style="display: none;">
             <button id="next">
               next <i class="ri-arrow-left-double-line"></i>
             </button>
             <button id="prev">
               prev <i class="ri-arrow-right-double-line"></i>
             </button>
-          </div>      
+          </div> -->
+          <div class="pagination">
+            <button class="page-button active">1</button>
+            <button class="page-button">2</button>
+            <button class="page-button">3</button>
+            <button class="page-button">4</button>
+          </div>
         </div>
 
         <a href="#about" class="home-button">
@@ -1008,47 +1090,95 @@
         </a>
       </section>
       <script>
-        const setUpSliderWithTransform = () => {
+        // const setUpSliderWithTransform = () => {
         const slides = document.querySelectorAll(".home-article");
         // console.log(slides);
         const forwards = document.getElementById("next");
         const backwards = document.getElementById("prev");
         const slidesLength = slides.length;
         let current = 0;
-        let next = 1;
-        let prev = slidesLength - 1;
+        // let next = 0;
+        // let prev = 0;
+        let diff = 0;
+
+        const slidesClasses = new Array(slidesLength);
+        console.log(slidesClasses);
+        // slidesClasses[current] = "home-article current";
+        const pageButtons = document.querySelectorAll(".page-button");
+
+        pageButtons.forEach((button, index) => {
+          button.addEventListener("click", () => {
+            current = index;
+            const currentActiveButton = document.querySelector(".page-button.active");
+            currentActiveButton.classList.remove("active");
+            const newActiveButton = pageButtons[index];
+            newActiveButton.classList.add("active");
+
+            slidesClasses.fill("home-article");
+            slidesClasses[index] = "home-article current";
+            
+            for (let index = 0; index < current; index++) {
+              slidesClasses[index] = "home-article left";
+            }
+            
+            for (let index = current + 1; index < slidesLength; index++) {
+              slidesClasses[index] = "home-article right";
+            }
+
+            // console.log(slidesClasses);
+            slides.forEach((slide, index) => slide.className = slidesClasses[index]);
+          })
+        })
+
+        // function goToPage(page) {
+          // next = page;
+          // document.querySelector("home-article current").className = "home-article";
+          // document.querySelector("home-article next").className = "home-article";
+          // document.querySelector("home-article prev").className = "home-article";
+          // slides[current].className = "home-article current";
+          // slides[next].classList.replace("next", "current");
+          // slides[prev].classList.remove("prev");
+          // next++;
+          // next = next % slidesLength;
+          // slides[next].classList.add("next");
+          // current++;
+          // current = current % slidesLength;
+          // prev++;
+          // prev = prev % slidesLength;
+          // slides[prev].classList.add("next");
+        // }
   
-        forwards.addEventListener("click", () => {
-          slides[current].classList.replace("current", "prev");
-          slides[next].classList.replace("next", "current");
-          slides[prev].classList.remove("prev");
-          next++;
-          next = next % slidesLength;
-          slides[next].classList.add("next");
-          current++;
-          current = current % slidesLength;
-          prev++;
-          prev = prev % slidesLength;
-        });
+        // forwards.addEventListener("click", () => {
+        //   slides[current].classList.replace("current", "prev");
+        //   slides[next].classList.replace("next", "current");
+        //   slides[prev].classList.remove("prev");
+        //   next++;
+        //   next = next % slidesLength;
+        //   slides[next].classList.add("next");
+        //   current++;
+        //   current = current % slidesLength;
+        //   prev++;
+        //   prev = prev % slidesLength;
+        // });
   
-        backwards.addEventListener("click", () => {
-          slides[current].classList.replace("current", "next");
-          slides[prev].classList.replace("prev", "current");
-          slides[next].classList.remove("next");
-          prev--;
-          prev = prev + slidesLength;
-          prev = prev % slidesLength;
-          slides[prev].classList.add("prev");
-          current--;
-          current = current + slidesLength;
-          current = current % slidesLength;
-          next--;
-          next = next + slidesLength;
-          next = next % slidesLength;
-        });
-        }
+        // backwards.addEventListener("click", () => {
+        //   slides[current].classList.replace("current", "next");
+        //   slides[prev].classList.replace("prev", "current");
+        //   slides[next].classList.remove("next");
+        //   prev--;
+        //   prev = prev + slidesLength;
+        //   prev = prev % slidesLength;
+        //   slides[prev].classList.add("prev");
+        //   current--;
+        //   current = current + slidesLength;
+        //   current = current % slidesLength;
+        //   next--;
+        //   next = next + slidesLength;
+        //   next = next % slidesLength;
+        // });
+        // }
   
-        setUpSliderWithTransform();
+        // setUpSliderWithTransform();
       </script>
 
       <section class="about section" id="about">
@@ -1392,4 +1522,4 @@
     </script>
   </body>
 </html>
-<!-- 55-118-213-343-473-603-733-866-996-1135-1265-1395 -->
+<!-- 55-118-213-343-473-603-733-866-996-1135-1265-1395-1525 -->
