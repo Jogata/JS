@@ -266,6 +266,16 @@
                         box-shadow 0.4s;
         z-index: var(--z-fixed);
       }
+
+      .header.white-bg {
+        background-color: var(--white-color);
+        /* background-color: rgba(0, 0, 0, 0.4); */
+        box-shadow: 0px 2px 2px #0009;
+      }
+
+      /* .header.dark-bg a {
+        color: var(--white-color);
+      } */
       
       .nav {
         position: relative;
@@ -428,10 +438,14 @@
       }
       
       .home-title {
-        color: var(--white-color);
+        color: transparent;
+        -webkit-text-stroke: 1px #fff;
+        /* color: var(--white-color); */
         font-size: var(--big-font-size);
         font-weight: var(--font-extra-bold);
         letter-spacing: 2px;
+        /* text-shadow: 1px 1px 1px #0008; */
+        filter: drop-shadow(1px 1px 1px #000);
       }
       
       .home-subtitle {}
@@ -622,7 +636,9 @@
       }
       
       .about {
+        position: relative;
         background-color: var(--body-second-color);
+        z-index: 2;
       }
       
       .about-container {
@@ -807,7 +823,7 @@
         padding-bottom: 2rem;
       }
       
-      .contact-content {}
+      /* .contact-content {} */
       
       .contact-title {
         /* max-width: 300px; */
@@ -879,9 +895,9 @@
       }
     
       .contact-img {
-        justify-self: center;
+        /* justify-self: center; */
         /* width: 250px; */
-        max-width: 400px;
+        /* max-width: 400px; */
         transform: skew(-12deg);
         box-shadow: var(--shadow-img);
         /* clip-path: url("#mask-1"); */
@@ -954,8 +970,10 @@
       html {
         scrollbar-width: thin;
         scrollbar-color: 
-          hsl(0, 0%, 80%) 
-          hsl(0, 0%, 60%);
+          /* hsl(0, 0%, 80%)  */
+          var(--body-second-color) 
+          hsl(28.4, 98.7%, 69.4%);
+          /* hsl(0, 0%, 60%); */
       }
 
       ::-webkit-scrollbar {
@@ -974,7 +992,8 @@
       .scroll-up {
         position: fixed;
         right: 1rem;
-        bottom: 3rem;
+        bottom: -50%;
+        /* bottom: 3rem; */
         /* bottom: -50%; */
         /* box-shadow: 0 4px 16px hsla(0, 0%, 0%, 0.1); */
         z-index: var(--z-tooltip);
@@ -996,8 +1015,9 @@
         transform: translateY(-0.5rem);
       }
       
-      .scroll-up.hidden {
-        bottom: -50%;
+      .scroll-up.visible {
+        /* bottom: -50%; */
+        bottom: 3rem;
       }
       
       /*=============== BREAKPOINTS ===============*/
@@ -1012,12 +1032,12 @@
         }
         
         .home-image {
-          width: 270px;
+          /* width: 270px; */
         }
         
         .about-video {
-          width: 200px;
-          height: 250px;
+          /* width: 200px; */
+          /* height: 250px; */
         }
         
         .models-container {
@@ -1031,7 +1051,7 @@
         }
         
         .contact-img {
-          width: 200px;
+          /* width: 200px; */
         }
       }
 
@@ -1187,9 +1207,11 @@
 
         .about-container {
           padding-bottom: 5rem;
-          column-gap: 12rem;
+          /* column-gap: 12rem; */
+          column-gap: 3rem;
           align-items: center;
-          grid-template-columns: 400px 450px;
+          /* grid-template-columns: 400px 450px; */
+          grid-template-columns: 1fr 1fr;
         }
 
         .about-title, 
@@ -1263,10 +1285,14 @@
           align-items: center;
           grid-template-columns: 450px 500px;
         }
+
+        .contact-content {
+          order: 1;
+        }
         
         .contact-img {
-          order: -1;
-          width: 450px;
+          /* order: -1; */
+          max-width: 450px;
         }
         
         .contact-title {
@@ -1305,20 +1331,111 @@
       .zoom-in {
         animation: zoom-in 2s linear backwards;
       }
-
+      
       .rotate {
         animation: rotate 1s linear forwards;
       }
+      
+      .fade-left {
+        animation: fade-left 1s linear backwards;
+      }
+      
+      .fade-right {
+        animation: fade-right 1s linear backwards;
+      }
+      
+      .fade-up {
+        animation: fade-up 1s linear backwards;
+      }
+      
+      .fade-up-relative {
+        animation: fade-up-relative 1s linear backwards;
+      }
+      
+      .fade-up-absolute {
+        animation: fade-up-absolute 1s linear backwards;
+      }
 
+      .fade-down-relative {
+        animation: fade-down-relative 1s linear backwards;
+      }
+      
+      .fade-down-absolute {
+        animation: fade-down-absolute 1s linear backwards;
+      }
+      
       .delayed {
         /* animation-delay: calc(0.2s * var(--i)); */
         animation-delay: calc(0.2s * var(--delay));
       }
-
+      
       .paused {
         animation-play-state: paused;
       }
+      
+      @keyframes zoom-in {
+        0% {
+          transform: scale(1.2);
+          /* opacity: 0; */
+        }
+      }
+      
+      @keyframes rotate {
+        0% {
+          transform: rotate(80deg);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fade-left {
+        0% {
+          transform: translateX(10%);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fade-right {
+        0% {
+          transform: translateX(-10%);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fade-up {
+        0% {
+          transform: translateY(10%);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fade-up-relative {
+        0% {
+          transform: translateY(10%);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fade-up-absolute {
+        0% {
+          transform: translateY(1rem);
+          opacity: 0;
+        }
+      }
 
+      /* @keyframes fade-down { */
+      @keyframes fade-down-relative {
+        0% {
+          transform: translateY(-10%);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fade-down-absolute {
+        0% {
+          transform: translateY(-1rem);
+          opacity: 0;
+        }
+      }
     </style>
   <style>
     body {
@@ -1393,18 +1510,22 @@
     <main class="main">
 
       <section class="home section" id="home">
-        <img src="./assets/aventa/home-bg.png" alt="" class="home-bg">
+        <!-- <img src="./assets/aventa/home-bg.png" alt="" class="home-bg"> -->
+        <img src="./assets/aventa/home-bg.png" alt="" class="home-bg zoom-in paused">
         <div class="home-gradient"></div>
 
-        <div class="home-data">
-          <h3 class="home-subtitle">
-            CHOOSE YOUR AVENTADOR
-          </h3>
-          <h1 class="home-title">AVENTADOR</h1>
+        <!-- <div class="home-data"> -->
+        <div class="fade-up-relative paused delayed" style="--delay: 4">
+          <div class="home-data">
+            <h3 class="home-subtitle">
+              CHOOSE YOUR AVENTADOR
+            </h3>
+            <h1 class="home-title">AVENTADOR</h1>
+          </div>
         </div>
 
         <div class="home-slider">
-          <div class="slider-track">
+          <div class="slider-track fade-left paused">
             <!-- <article class="home-article"> -->
             <!-- <article class="home-article relative current"> -->
             <article class="home-article current" id="relative">
@@ -1432,7 +1553,8 @@
               prev <i class="ri-arrow-right-double-line"></i>
             </button>
           </div> -->
-          <div class="pagination">
+          <!-- <div class="pagination"> -->
+          <div class="pagination fade-down-absolute paused delayed" style="--delay: 8">
             <button class="page-button active">1</button>
             <button class="page-button">2</button>
             <button class="page-button">3</button>
@@ -1440,7 +1562,8 @@
           </div>
         </div>
 
-        <a href="#about" class="home-button">
+        <!-- <a href="#about" class="home-button"> -->
+        <a href="#about" class="home-button fade-down-absolute paused delayed" style="--delay: 10">
           <span>START</span>
           <i class="ri-arrow-down-s-line"></i>
         </a>
@@ -1539,7 +1662,8 @@
 
       <section class="about section" id="about">
         <div class="container grid about-container">
-          <div class="about-data">
+          <!-- <div class="about-data"> -->
+          <div class="about-data fade-right paused">
             <h2 class="section-title about-title">
               DESIGNED TO <br>
               <span>GO BEYOND</span> <br>
@@ -1557,42 +1681,54 @@
               <i class="ri-arrow-down-s-line"></i>
             </a>
           </div>
-          <div class="about-video">
-            <video src="./assets/aventa/about-vid.mp4" class="about-file" autoplay muted loop></video>
+          <div class="fade-left paused">
+            <div class="about-video">
+              <video src="./assets/aventa/about-vid.mp4" class="about-file" autoplay muted loop></video>
+            </div>
           </div>
         </div>
       </section>
 
       <section class="models section" id="models">
-        <h2 class="section-title">
+        <!-- <h2 class="section-title"> -->
+        <h2 class="section-title fade-down-absolute paused">
           INSPIRED BY <br> 
           COLORS OF NATURE
         </h2>
         <div class="container grid models-container">
-          <article class="model-card">
-            <img src="./assets/aventa/model-car-1.png" alt="" class="model-image">
-            <div class="models-gradient"></div>
-            <div class="models-data">
-              <h3 class="models-name">Silver Aventador</h3>
-              <span class="models-info">355km/s</span>
-            </div>
-          </article>
-          <article class="model-card">
-            <img src="./assets/aventa/model-car-2.png" alt="" class="model-image">
-            <div class="models-gradient"></div>
-            <div class="models-data">
-              <h3 class="models-name">Yellow Aventador</h3>
-              <span class="models-info">355km/s</span>
-            </div>
-          </article>
-          <article class="model-card">
-            <img src="./assets/aventa/model-car-3.png" alt="" class="model-image">
-            <div class="models-gradient"></div>
-            <div class="models-data">
-              <h3 class="models-name">Blue Aventador</h3>
-              <span class="models-info">355km/s</span>
-            </div>
-          </article>
+          <!-- <article class="model-card"> -->
+          <div class="fade-down-absolute paused delayed" style="--delay: 2">
+            <article class="model-card">
+              <img src="./assets/aventa/model-car-1.png" alt="" class="model-image">
+              <div class="models-gradient"></div>
+              <div class="models-data">
+                <h3 class="models-name">Silver Aventador</h3>
+                <span class="models-info">355km/s</span>
+              </div>
+            </article>
+          </div>
+          <!-- <article class="model-card"> -->
+          <div class="fade-down-absolute paused delayed" style="--delay: 4">
+            <article class="model-card">
+              <img src="./assets/aventa/model-car-2.png" alt="" class="model-image">
+              <div class="models-gradient"></div>
+              <div class="models-data">
+                <h3 class="models-name">Yellow Aventador</h3>
+                <span class="models-info">355km/s</span>
+              </div>
+            </article>
+          </div>
+          <!-- <article class="model-card"> -->
+          <div class="fade-down-absolute paused delayed" style="--delay: 6">
+            <article class="model-card">
+              <img src="./assets/aventa/model-car-3.png" alt="" class="model-image">
+              <div class="models-gradient"></div>
+              <div class="models-data">
+                <h3 class="models-name">Blue Aventador</h3>
+                <span class="models-info">355km/s</span>
+              </div>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -1607,20 +1743,25 @@
 
         <div class="container grid info-container">
           <div class="info-content">
-            <h1 class="info-number">780-4</h1>
-            <img src="./assets/aventa/info-car.png" alt="" class="info-img">
+            <!-- <h1 class="info-number">780-4</h1> -->
+            <h1 class="info-number fade-up-relative paused">780-4</h1>
+            <!-- <img src="./assets/aventa/info-car.png" alt="" class="info-img"> -->
+            <img src="./assets/aventa/info-car.png" alt="" class="info-img fade-down-relative paused">
           </div>
 
           <div class="info-data">
-            <div class="info-group">
+            <!-- <div class="info-group"> -->
+            <div class="info-group fade-down-relative paused delayed" style="--delay: 4">
               <h3>POWER (KW)</h3>
               <p>780 CV (574 kW) <br> 8.500 rpm</p>
             </div>
-            <div class="info-group">
+            <!-- <div class="info-group"> -->
+            <div class="info-group fade-down-relative paused delayed" style="--delay: 5">
               <h3>MAX. SPEED</h3>
               <p>355 km/h</p>
             </div>
-            <div class="info-group">
+            <!-- <div class="info-group"> -->
+            <div class="info-group fade-down-relative paused delayed" style="--delay: 6">
               <h3>0-100 KM/H</h3>
               <p>2.8 - 2.9s</p>
             </div>
@@ -1630,7 +1771,8 @@
   
       <section class="contact section" id="contact">
         <div class="container grid contact-container">
-          <div class="contact-content">
+          <!-- <div class="contact-content"> -->
+          <div class="contact-content fade-left paused">
             <h2 class="section-title contact-title">
               SUBSCRIBE TO GET YOUR AVENTADOR
             </h2>
@@ -1651,7 +1793,9 @@
               </button>
             </form>
           </div>
-          <img src="./assets/aventa/contact-car.png" alt="" class="contact-img">
+          <div class="fade-right paused">
+            <img src="./assets/aventa/contact-car.png" alt="" class="contact-img">
+          </div>
         </div>
       </section>
 
@@ -1659,15 +1803,18 @@
 
     <footer class="footer">
       <div class="container grid footer-container">
-        <a href="#" class="footer-logo">AVENTADOR</a>
-        <ul class="footer-links">
+        <!-- <a href="#" class="footer-logo">AVENTADOR</a> -->
+        <a href="#" class="footer-logo fade-down-absolute paused">AVENTADOR</a>
+        <!-- <ul class="footer-links"> -->
+        <ul class="footer-links fade-down-absolute paused delayed" style="--delay: 2">
           <li><a href="#" class="footer-link">Privacy & Legal</a></li>
           <li><a href="#" class="footer-link">Contact</a></li>
           <li><a href="#" class="footer-link">Locations</a></li>
           <li><a href="#" class="footer-link">News</a></li>
           <li><a href="#" class="footer-link">Forums</a></li>
         </ul>
-        <div class="footer-social">
+        <!-- <div class="footer-social"> -->
+        <div class="footer-social fade-down-absolute paused delayed" style="--delay: 4">
           <a href="#f" class="footer-social-link">
             <i class="fa fa-facebook"></i>
           </a>
@@ -1678,24 +1825,30 @@
             <i class="fa fa-twitter"></i>
           </a>
         </div>
-        <span class="footer-copy">
+        <!-- <span class="footer-copy"> -->
+        <span class="footer-copy fade-down-absolute paused">
           &#169; All Rights Reserved By Company
         </span>
       </div>
     </footer>
 
-    <div class="scroll-up hidden" id="scroll-up">
+    <div class="scroll-up" id="scroll-up">
       <a href="#top">
         <i class="ri-arrow-up-s-line"></i>
       </a>
     </div>
     <script>
+      const header = document.getElementById("header");
+      const btn = document.getElementById("scroll-up");
+
       window.addEventListener("scroll", toggleScrollUp);
 
       function toggleScrollUp() {
-        const btn = document.getElementById("scroll-up");
-        window.scrollY >= 350 ? btn.classList.remove("hidden")
-                              : btn.classList.add("hidden");
+        // const btn = document.getElementById("scroll-up");
+        // window.scrollY >= 350 ? btn.classList.remove("hidden")
+        //                       : btn.classList.add("hidden");
+        btn.classList.toggle("visible", window.scrollY >= 350);
+        header.classList.toggle("white-bg", window.scrollY >= 150);
       }
     </script>
 
@@ -1912,4 +2065,4 @@
   </body>
 </html>
 <!-- 55-118-213-343-473-603-733-866-996-1135-1265-1395-1525-1655-
-1785-1915 -->
+1785-1915-2045 -->
