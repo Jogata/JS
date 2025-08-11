@@ -8,7 +8,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+      /* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"); */
+      @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Kaushan+Script&family=Playfair+Display&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Brawler:wght@400;700&family=Croissant+One&family=Ephesis&family=Gloock&family=Hurricane&family=Imbue:opsz,wght@10..100,100..900&family=Modak&family=Montez&family=Prosto+One&family=Rye&family=Shojumaru&family=Young+Serif&family=ZCOOL+XiaoWei&display=swap');
+      @import url("https://fonts.googleapis.com/css2?family=Lora:ital@0;1&family=Poppins:wght@400;500;600&display=swap");
       
       :root {
         --primary-color: #fc6601;
@@ -78,7 +83,44 @@
       }
       
       body {
-        font-family: "Poppins", sans-serif;
+        /* min-height: 100vh; */
+        /* color: #fff; */
+        font-family: "Roboto", sans-serif;
+        font-family: 'Abril Fatface', cursive;
+        font-family: 'Courgette', cursive;
+        font-family: 'Dancing Script', cursive;
+        font-family: 'Great Vibes', cursive;
+        font-family: 'Josefin Sans', sans-serif;
+        font-family: 'Limelight', cursive;
+        font-family: 'Lobster', cursive;
+        font-family: 'Montserrat', sans-serif;
+        font-family: 'Oleo Script Swash Caps', cursive;
+        font-family: 'Raleway', sans-serif;
+        font-family: 'Fraunces', serif;
+        font-family: 'Playfair Display', serif;
+        font-family: 'Lemon', cursive;
+        font-family: "Lora", serif;
+        font-family: "Croissant One", serif;
+        font-family: "Shojumaru", system-ui;
+        font-family: "Montez", cursive;
+        font-family: "Modak", system-ui;
+        font-family: "Prosto One", sans-serif;
+        font-family: "Young Serif", serif;
+        font-family: "ZCOOL XiaoWei", sans-serif;
+        font-family: "Brawler", serif;
+        font-family: "Gloock", serif;
+        font-family: "Ephesis", cursive;
+        font-family: "Platypi", serif;
+        font-family: "Patua One", serif;
+        font-family: "Rye", serif;
+        font-family: "Arizonia", cursive;
+        font-family: "Imbue", serif;  
+        font-family: 'Kaushan Script', cursive;
+        font-family: "Hurricane", cursive;
+        font-family: Georgia, serif;
+        font-family: 'Poppins', sans-serif;
+        /* line-height: 1.6; */
+        /* background-color: #080a0c; */
       }
 
       .svg {
@@ -223,12 +265,19 @@
       }
       
       .nav-bar {
-        padding-right: 2rem;
+        /* padding-right: 2rem; */
         /* width: 100%; */
         display: flex;
         gap: 1rem;
+        flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
+      }
+
+      @media screen and (min-width: 560px) {
+        .nav-bar {
+          padding-right: 2rem;
+        }
       }
       
       .nav-logo {
@@ -405,7 +454,9 @@
       .trending-header .section-header {
         /* position: relative; */
         display: flex;
-        gap: 0.5rem;
+        /* gap: 0.5rem; */
+        gap: 0 0.5rem;
+        flex-wrap: wrap;
         align-items: center;
       }
 
@@ -551,6 +602,7 @@
       .testimonial-slider .slider-track {
         position: relative;
         order: 1;
+        width: 100%;
         display: flex;
       }
 
@@ -562,19 +614,31 @@
         position: absolute;
         width: 100%;
         flex-shrink: 0;
-        transform: translateX(100%);
+        transform: translateX(200%);
+        z-index: -1;
       }
 
-      .current {
+      .testimonial-slide.current {
         transform: translate(0);
         transition: transform 300ms;
+        z-index: 1;
       }
-      .next {
+
+      .testimonial-slide.next {
         transform: translate(100%);
+        /* transition: transform 300ms; */
+      }
+
+      .to-left .testimonial-slide.next {
         transition: transform 300ms;
       }
-      .prev {
+
+      .testimonial-slide.prev {
         transform: translate(-100%);
+        /* transition: transform 300ms; */
+      }
+
+      .to-right .testimonial-slide.prev {
         transition: transform 300ms;
       }
 
@@ -629,12 +693,32 @@
         /* margin-bottom: 15rem; */
         padding-bottom: 0;
         display: grid;
-        gap: 8rem 2rem;
+        /* gap: 8rem 2rem; */
+        gap: 2rem;
+      }
+      
+      @media screen and (min-width: 800px) {
+        .story-container {
+          grid-template-columns: auto 1fr;
+        }
+      }
+
+      .story-content {
+        max-width: 400px;
+      }
+
+      .story-container .slider-track {
+        padding-bottom: 2rem;
+        display: flex;
+        gap: 1rem;
       }
 
       .story-card {
         /* position: relative; */
+        flex-shrink: 0;
         padding-right: 1rem;
+        width: 100%;
+        max-width: 400px;
         display: flex;
         flex-direction: column;
         /* isolation: isolate; */
@@ -751,7 +835,7 @@
         }
 
         .story-container {
-          grid-template-columns: repeat(2, 1fr);
+          /* grid-template-columns: repeat(2, 1fr); */
         }
 
         .footer-container {
@@ -802,25 +886,25 @@
         }
 
         .footer-col:first-child {
-          grid-column: unset;
+          /* grid-column: unset; */
         }
 
         .story-container {
-          grid-template-columns: repeat(3, 1fr);
+          /* grid-template-columns: repeat(3, 1fr); */
         }
 
         .story-card:last-child {
-          display: none;
+          /* display: none; */
         }
       }
       
       @media (width > 1024px) {
         .story-container {
-          grid-template-columns: repeat(4, 1fr);
+          /* grid-template-columns: repeat(4, 1fr); */
         }
 
         .story-card:last-child {
-          display: flex;
+          /* display: flex; */
         }
       }
     </style>
@@ -917,9 +1001,9 @@
       <p class="section-description">The legacy evolves</p>
 
       <div class="slider testimonial-slider">
-        <div class="slider-track">
+        <div class="slider-track to-left">
 
-          <div class="slide testimonial-slide prev" id="relative">
+          <div class="slide testimonial-slide current" id="relative">
             <div class="testimonial-card">
               <p>
                 I'm a Nike fanatic, and this website has become my go-to
@@ -931,7 +1015,7 @@
               <h4>Sarah M. - Los Angeles, CA</h4>
             </div>
           </div>
-          <div class="slide testimonial-slide current">
+          <div class="slide testimonial-slide next">
             <div class="testimonial-card">
               <p>
                 As a sneakerhead, I'm always on the hunt for the latest Nike
@@ -942,7 +1026,7 @@
               <h4>Alex T. - New York, NY</h4>
             </div>
           </div>
-          <div class="slide testimonial-slide next">
+          <div class="slide testimonial-slide prev">
             <div class="testimonial-card">
               <p>
                 I've been buying Nike shoes for years, but this website takes
@@ -966,6 +1050,47 @@
 
       </div>
     </section>
+    <script>
+      const track = document.querySelector(".slider-track");
+      const slides = document.querySelectorAll(".testimonial-slide");
+      const nextb = document.querySelector(".button-next button");
+      const prevb = document.querySelector(".button-prev button");
+      const slidesLength = slides.length;
+      let current = 0;
+      let next = 1;
+      let prev = slidesLength - 1;
+
+      prevb.addEventListener("click", () => {
+        track.classList.replace("to-left", "to-right");
+        slides[current].classList.replace("current", "prev");
+        slides[next].classList.replace("next", "current");
+        slides[prev].classList.remove("prev");
+        next++;
+        next = next % slidesLength;
+        slides[next].classList.add("next");
+        current++;
+        current = current % slidesLength;
+        prev++;
+        prev = prev % slidesLength;
+      });
+
+      nextb.addEventListener("click", () => {
+        track.classList.replace("to-right", "to-left");
+        slides[current].classList.replace("current", "next");
+        slides[prev].classList.replace("prev", "current");
+        slides[next].classList.remove("next");
+        prev--;
+        prev = prev + slidesLength;
+        prev = prev % slidesLength;
+        slides[prev].classList.add("prev");
+        current--;
+        current = current + slidesLength;
+        current = current % slidesLength;
+        next--;
+        next = next + slidesLength;
+        next = next % slidesLength;
+      });
+    </script>
     
     <section class="section-container trending-container">
       <div class="trending-header">
@@ -1103,49 +1228,55 @@
         <p class="section-description">
           Read how she went from being a couch potato to completing her first 5K
           race, all thanks to the comfort and support of her Nike running shoes.
-        </p> 
+        </p>
         <div class="section-nav">
-          <span><i class="ri-arrow-left-s-line"></i></span>
-          <span><i class="ri-arrow-right-s-line"></i></span>
-        </div> 
-      </div> 
-      <div class="story-card">
-        <img src="./assets/images/story-1.jpg" alt="story" />
-        <div class="story-card-content">
-          <p class="section-description">
-            Follow journey as he explores the diverse world of Nike, from
-            classic designs to cutting-edge streetwear.
-          </p> 
-          <button class="btn">
-            <span><i class="ri-add-line"></i></span> Explore More
-          </button> 
-        </div> 
-      </div> 
-      <div class="story-card">
-        <img src="./assets/images/story-2.jpg" alt="story" />
-        <div class="story-card-content">
-          <p class="section-description">
-            These kids prove that dedication, teamwork, and the right gear can
-            make all the difference on the field.
-          </p> 
-          <button class="btn">
-            <span><i class="ri-add-line"></i></span> Explore More
-          </button> 
-        </div> 
-      </div> 
-      <div class="story-card">
-        <img src="./assets/images/story-3.jpg" alt="story" />
-        <div class="story-card-content">
-          <p class="section-description">
-            Whether she's hiking the Andes or exploring bustling city streets,
-            she relies on Nike for comfort and style.
-          </p> 
-          <button class="btn">
-            <span><i class="ri-add-line"></i></span> Explore More
-          </button>
-        </div> 
-      </div> 
-    </section> 
+          <!-- <span><i class="ri-arrow-left-s-line"></i></span> -->
+          <button><i class="ri-arrow-left-s-line"></i></button>
+          <!-- <span><i class="ri-arrow-right-s-line"></i></span> -->
+          <button><i class="ri-arrow-right-s-line"></i></button>
+        </div>
+      </div>
+      <div class="slider">
+        <div class="slider-track">
+          <div class="story-card">
+            <img src="./assets/images/story-1.jpg" alt="story" />
+            <div class="story-card-content">
+              <p class="section-description">
+                Follow journey as he explores the diverse world of Nike, from
+                classic designs to cutting-edge streetwear.
+              </p>
+              <button class="btn">
+                <span><i class="ri-add-line"></i></span> Explore More
+              </button>
+            </div>
+          </div>
+          <div class="story-card">
+            <img src="./assets/images/story-2.jpg" alt="story" />
+            <div class="story-card-content">
+              <p class="section-description">
+                These kids prove that dedication, teamwork, and the right gear can
+                make all the difference on the field.
+              </p>
+              <button class="btn">
+                <span><i class="ri-add-line"></i></span> Explore More
+              </button>
+            </div>
+          </div>
+          <div class="story-card">
+            <img src="./assets/images/story-3.jpg" alt="story" />
+            <div class="story-card-content">
+              <p class="section-description">
+                Whether she's hiking the Andes or exploring bustling city streets,
+                she relies on Nike for comfort and style.
+              </p>
+              <button class="btn">
+                <span><i class="ri-add-line"></i></span> Explore More
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section class="section-container">
       <div class="banner-container">
@@ -1396,4 +1527,4 @@
     </script>
   </body>
 </html>
-<!-- 55-118-315-445-580-710-840-970-1100-1230-1400 -->
+<!-- 55-118-315-445-580-710-840-970-1100-1230-1400-1530 -->
