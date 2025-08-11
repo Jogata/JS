@@ -21,6 +21,7 @@
         --text-light: #767368;
         --white: #ffffff;
         --max-width: 1200px;
+        --cursive-font: 'Kaushan Script', cursive;;
       }
       
       * {
@@ -157,6 +158,7 @@
         color: var(--text-dark);
         font-size: 2.5rem;
         font-weight: 700;
+        font-family: var(--cursive-font);
       }
       
       .section-header span {
@@ -220,7 +222,7 @@
         /* transition: 0.3s; */
         transition: color 300ms ease, 
             border-color 300ms ease;
-        cursor: pointer;
+        /* cursor: pointer; */
       }
       
       .section-nav button:hover {
@@ -342,6 +344,7 @@
         color: var(--text-dark);
         font-size: 5rem;
         font-weight: 700;
+        font-family: var(--cursive-font);
       }
       
       .header-content h1 span {
@@ -514,7 +517,7 @@
         z-index: 1;
       }
       
-      .trending-btns {
+      .trending-card-btns {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -524,7 +527,7 @@
         align-items: center;
       }
       
-      .trending-btns button {
+      .trending-card-btns button {
         /* padding: 8px 10px; */
         padding: 0.4em 0.66em;
         color: var(--text-light);
@@ -540,7 +543,7 @@
         /* cursor: pointer; */
       }
       
-      .trending-btns button:hover {
+      .trending-card-btns button:hover {
         color: var(--white);
         background-color: var(--primary-color);
       }
@@ -697,7 +700,7 @@
         gap: 2rem;
       }
       
-      @media screen and (min-width: 800px) {
+      @media screen and (min-width: 900px) {
         .story-container {
           grid-template-columns: auto 1fr;
         }
@@ -707,18 +710,31 @@
         max-width: 400px;
       }
 
+      @media screen and (max-width: 899px) {
+        .story-content {
+          max-width: 600px;
+        }
+      }
+
       .story-container .slider-track {
         padding-bottom: 2rem;
         display: flex;
         gap: 1rem;
       }
 
-      .story-card {
-        /* position: relative; */
+      .story-slide {
         flex-shrink: 0;
-        padding-right: 1rem;
         width: 100%;
         max-width: 400px;
+      }
+
+      .story-card {
+        /* position: relative; */
+        /* flex-shrink: 0; */
+        /* padding-right: 1rem; */
+        padding-right: 2rem;
+        /* width: 100%; */
+        /* max-width: 400px; */
         display: flex;
         flex-direction: column;
         /* isolation: isolate; */
@@ -741,7 +757,8 @@
         border-radius: 6px;
         background-color: var(--white);
         transform: translate(1rem, -1rem);
-        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+        /* box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2); */
+        box-shadow: 5px 5px 16px rgba(0, 0, 0, 0.2);
         z-index: 1;
       }
 
@@ -785,8 +802,13 @@
       }
 
       .footer-container {
+        padding: 5rem 1rem 3rem;
         display: grid;
         gap: 2rem;
+      }
+
+      .footer-logo {
+        min-width: 160px;
       }
 
       .footer-logo img {
@@ -823,10 +845,31 @@
       }
       
       .footer-bar {
+        max-width: var(--max-width);
+        margin: auto;
         padding: 1rem;
         color: var(--text-light);
         font-size: 0.8rem;
         text-align: center;
+        border-top: 1px solid var(--text-light);
+      }
+
+      @media (min-width: 481px) and (max-width: 767px) {
+        .footer-col:last-child {
+          grid-column: span 2;
+        }
+      }
+
+      @media screen and (min-width: 480px) {
+        .footer-container {
+          grid-template-columns: auto 1fr;
+        }
+      }
+
+      @media screen and (min-width: 768px) {
+        .footer-container {
+          grid-template-columns: auto 1fr 1fr;
+        }
       }
 
       @media (width > 480px) {
@@ -839,12 +882,17 @@
         }
 
         .footer-container {
-          grid-template-columns: repeat(2, 1fr);
+          /* grid-template-columns: repeat(2, 1fr); */
+          /* grid-template-columns: auto 1fr; */
         }
 
         .footer-col:first-child {
-          grid-column: 1/3;
+          /* grid-column: 1/3; */
         }
+
+        /* .footer-col:first-child {
+          grid-column: span 2;
+        } */
       }
 
       @media (width > 768px) {
@@ -882,7 +930,8 @@
         }
         
         .footer-container {
-          grid-template-columns: repeat(3, 1fr);
+          /* grid-template-columns: repeat(3, 1fr); */
+          /* grid-template-columns: auto 1fr 1fr; */
         }
 
         .footer-col:first-child {
@@ -906,6 +955,79 @@
         .story-card:last-child {
           /* display: flex; */
         }
+      }
+
+      .bg {
+        position: fixed;
+        width: 120%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-image: url("./assets/nike-running-ad4-1332x800.jpg");
+        background-repeat: no-repeat;
+        background-position: center left;
+        background-size: cover;
+        animation: animate 100s ease-in-out infinite;
+        z-index: -1;
+      }
+      
+      .bg::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-image: 
+          linear-gradient(
+            to top, 
+            rgba(0, 0, 0, 0.8), 
+            transparent, 
+            rgba(0, 0, 0, 0.8)
+          ), 
+          linear-gradient(
+            to left, 
+            rgba(0, 0, 0, 0.8), 
+            transparent, 
+            transparent
+          );
+      }
+
+      @keyframes animate {
+        50% {
+          transform: translateX(-20%);
+        }
+      }
+
+      .slider-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+      
+      .slider-bg::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-image: 
+          linear-gradient(
+            to top, 
+          rgba(0, 0, 0, 0.8), 
+            transparent, 
+          rgba(0, 0, 0, 0.8)
+          ), 
+          linear-gradient(
+            to left, 
+          rgba(0, 0, 0, 0.8), 
+            transparent, 
+            transparent
+          );
       }
     </style>
   <style>
@@ -931,6 +1053,7 @@
   </head>
   <body>
     <header class="section-container header-container">
+      <div class="bg"></div>
       <nav>
         <div class="nav-bar">
           <div class="nav-logo">
@@ -1108,7 +1231,7 @@
             <div class="trending-card">
               <img src="./assets/images/trending-1.jpg" alt="trending" />
               <div class="trending-card-content">
-                <div class="trending-btns">
+                <div class="trending-card-btns">
                   <button><i class="ri-heart-3-fill"></i></button>
                   <button><i class="ri-shopping-bag-fill"></i></button>
                 </div>
@@ -1124,7 +1247,7 @@
             <div class="trending-card">
               <img src="./assets/images/trending-2.jpg" alt="trending" />
               <div class="trending-card-content">
-                <div class="trending-btns">
+                <div class="trending-card-btns">
                   <button><i class="ri-heart-3-fill"></i></button>
                   <button><i class="ri-shopping-bag-fill"></i></button>
                 </div>
@@ -1140,7 +1263,7 @@
             <div class="trending-card">
               <img src="./assets/images/trending-3.jpg" alt="trending" />
               <div class="trending-card-content">
-                <div class="trending-btns">
+                <div class="trending-card-btns">
                   <button><i class="ri-heart-3-fill"></i></button>
                   <button><i class="ri-shopping-bag-fill"></i></button>
                 </div>
@@ -1156,7 +1279,7 @@
             <div class="trending-card">
               <img src="./assets/images/trending-4.jpg" alt="trending" />
               <div class="trending-card-content">
-                <div class="trending-btns">
+                <div class="trending-card-btns">
                   <button><i class="ri-heart-3-fill"></i></button>
                   <button><i class="ri-shopping-bag-fill"></i></button>
                 </div>
@@ -1172,7 +1295,7 @@
             <div class="trending-card">
               <img src="./assets/images/trending-5.jpg" alt="trending" />
               <div class="trending-card-content">
-                <div class="trending-btns">
+                <div class="trending-card-btns">
                   <button><i class="ri-heart-3-fill"></i></button>
                   <button><i class="ri-shopping-bag-fill"></i></button>
                 </div>
@@ -1188,7 +1311,7 @@
             <div class="trending-card">
               <img src="./assets/images/trending-6.jpg" alt="trending" />
               <div class="trending-card-content">
-                <div class="trending-btns">
+                <div class="trending-card-btns">
                   <button><i class="ri-heart-3-fill"></i></button>
                   <button><i class="ri-shopping-bag-fill"></i></button>
                 </div>
@@ -1210,13 +1333,13 @@
       const trendingSlide = document.querySelector(".trending-slide");
 
       trendingSliderNextButton.addEventListener("click", () => {
-        console.log("left");
+        // console.log("left");
         const width = trendingSlide.clientWidth;
         trendingSliderTrack.scrollLeft += width;
       })
 
       trendingSliderPrevButton.addEventListener("click", () => {
-        console.log("right");
+        // console.log("right");
         const width = trendingSlide.clientWidth;
         trendingSliderTrack.scrollLeft -= width;
       })
@@ -1231,52 +1354,76 @@
         </p>
         <div class="section-nav">
           <!-- <span><i class="ri-arrow-left-s-line"></i></span> -->
-          <button><i class="ri-arrow-left-s-line"></i></button>
+          <button class="prev"><i class="ri-arrow-left-s-line"></i></button>
           <!-- <span><i class="ri-arrow-right-s-line"></i></span> -->
-          <button><i class="ri-arrow-right-s-line"></i></button>
+          <button class="next"><i class="ri-arrow-right-s-line"></i></button>
         </div>
       </div>
-      <div class="slider">
+      <div class="slider story-slider">
         <div class="slider-track">
-          <div class="story-card">
-            <img src="./assets/images/story-1.jpg" alt="story" />
-            <div class="story-card-content">
-              <p class="section-description">
-                Follow journey as he explores the diverse world of Nike, from
-                classic designs to cutting-edge streetwear.
-              </p>
-              <button class="btn">
-                <span><i class="ri-add-line"></i></span> Explore More
-              </button>
+          <div class="slide story-slide">
+            <div class="story-card">
+              <img src="./assets/images/story-1.jpg" alt="story" />
+              <div class="story-card-content">
+                <p class="section-description">
+                  Follow journey as he explores the diverse world of Nike, from
+                  classic designs to cutting-edge streetwear.
+                </p>
+                <button class="btn">
+                  <span><i class="ri-add-line"></i></span> Explore More
+                </button>
+              </div>
             </div>
           </div>
-          <div class="story-card">
-            <img src="./assets/images/story-2.jpg" alt="story" />
-            <div class="story-card-content">
-              <p class="section-description">
-                These kids prove that dedication, teamwork, and the right gear can
-                make all the difference on the field.
-              </p>
-              <button class="btn">
-                <span><i class="ri-add-line"></i></span> Explore More
-              </button>
+          <div class="slide story-slide">
+            <div class="story-card">
+              <img src="./assets/images/story-2.jpg" alt="story" />
+              <div class="story-card-content">
+                <p class="section-description">
+                  These kids prove that dedication, teamwork, and the right gear can
+                  make all the difference on the field.
+                </p>
+                <button class="btn">
+                  <span><i class="ri-add-line"></i></span> Explore More
+                </button>
+              </div>
             </div>
           </div>
-          <div class="story-card">
-            <img src="./assets/images/story-3.jpg" alt="story" />
-            <div class="story-card-content">
-              <p class="section-description">
-                Whether she's hiking the Andes or exploring bustling city streets,
-                she relies on Nike for comfort and style.
-              </p>
-              <button class="btn">
-                <span><i class="ri-add-line"></i></span> Explore More
-              </button>
+          <div class="slide story-slide">
+            <div class="story-card">
+              <img src="./assets/images/story-3.jpg" alt="story" />
+              <div class="story-card-content">
+                <p class="section-description">
+                  Whether she's hiking the Andes or exploring bustling city streets,
+                  she relies on Nike for comfort and style.
+                </p>
+                <button class="btn">
+                  <span><i class="ri-add-line"></i></span> Explore More
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
+    <script>
+      const storySliderPrevButton = document.querySelector(".story-content .prev");
+      const storySliderNextButton = document.querySelector(".story-content .next");
+      const storySliderTrack = document.querySelector(".story-slider .slider-track");
+      const storySlide = document.querySelector(".story-card");
+
+      storySliderPrevButton.addEventListener("click", () => {
+        console.log("left");
+        const width = storySlide.clientWidth;
+        storySliderTrack.scrollLeft += width;
+      })
+
+      storySliderNextButton.addEventListener("click", () => {
+        console.log("right");
+        const width = storySlide.clientWidth;
+        storySliderTrack.scrollLeft -= width;
+      })
+    </script>
 
     <section class="section-container">
       <div class="banner-container">
@@ -1304,29 +1451,29 @@
       <div class="footer-col">
         <div class="footer-logo">
           <a href="#"><img src="./assets/images/logo.png" alt="logo" /></a>
-        </div> 
+        </div>
         <div class="footer-socials">
           <a href="#"><i class="ri-instagram-line"></i></a>
           <a href="#"><i class="ri-pinterest-line"></i></a>
           <a href="#"><i class="ri-facebook-fill"></i></a>
-        </div> 
-      </div> 
+        </div>
+      </div>
       <div class="footer-col">
         <h4>Customer Support</h4>
-        <p> 
+        <p>
           Got questions or need assistance? Our dedicated customer support team
           is here to help! Contact us via phone or email for any inquiries,
           order tracking, or product assistance.
-        </p> 
-      </div> 
+        </p>
+      </div>
       <div class="footer-col">
         <h4>Company Information</h4>
-        <p> 
+        <p>
           Learn more about our mission, values, and commitment to quality.
           Explore our company history and find out how we're making a positive
           impact in the world of athletic and lifestyle footwear.
-        </p> 
-      </div> 
+        </p>
+      </div>
     </footer>
 
     <div class="footer-bar">
@@ -1527,4 +1674,4 @@
     </script>
   </body>
 </html>
-<!-- 55-118-315-445-580-710-840-970-1100-1230-1400-1530 -->
+<!-- 55-118-315-445-580-710-840-970-1100-1230-1400-1530-1660 -->
