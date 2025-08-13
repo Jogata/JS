@@ -8,7 +8,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+      /* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"); */
+      @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Kaushan+Script&family=Playfair+Display&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Brawler:wght@400;700&family=Croissant+One&family=Ephesis&family=Gloock&family=Hurricane&family=Imbue:opsz,wght@10..100,100..900&family=Modak&family=Montez&family=Prosto+One&family=Rye&family=Shojumaru&family=Young+Serif&family=ZCOOL+XiaoWei&display=swap');
+      @import url("https://fonts.googleapis.com/css2?family=Lora:ital@0;1&family=Poppins:wght@400;500;600&display=swap");
       
       :root {
         --primary-color: #da042a;
@@ -21,7 +26,9 @@
         --max-width: 1200px;
       }
       
-      * {
+      *, 
+      *::before, 
+      *::after {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -37,7 +44,8 @@
       }
 
       img {
-        display: flex;
+        /* display: flex; */
+        display: block;
         width: 100%;
       }
 
@@ -47,14 +55,43 @@
         width: 0;
         height: 0;
       }
+
+      .mask-1 {
+        clip-path: url("#mask-1");
+      }
+
+      .mask-2 {
+        clip-path: url("#mask-2");
+      }
+      
+      .mask-3 {
+        clip-path: url("#mask-3");
+      }
+      
+      .mask-4 {
+        clip-path: url("#mask-4");
+      }
     
-      html,
-      body {
+      /* body,  */
+      html {
         scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
       }
   
       body {
+        /* min-height: 100vh; */
+        color: #fff;
         font-family: "Poppins", sans-serif;
+        font-family: Georgia, serif;
+        /* line-height: 1.6; */
+        /* background-color: #080a0c; */
+        background-color: var(--secondary-color-dark);
+      }
+
+      .dark-bg {
+        background-color: #18293d;
       }
       
       .section-container {
@@ -70,7 +107,7 @@
       }
       
       .section-header {
-        color: var(--secondary-color-dark);
+        /* color: var(--secondary-color-dark); */
         font-size: 2.5rem;
         font-weight: 700;
         line-height: 3.5rem;
@@ -226,6 +263,10 @@
       .service-container {
         text-align: center;
       }
+
+      .service-container .section-header {
+        color: var(--secondary-color-dark);
+      }
       
       .service-grid {
         margin-top: 4rem;
@@ -234,7 +275,8 @@
       }
       
       .service-card img {
-        max-width: 150px;
+        /* max-width: 150px; */
+        max-width: 160px;
         margin-inline: auto;
         margin-bottom: 1rem;
         border-radius: 50%;
@@ -257,7 +299,7 @@
           linear-gradient(
             rgba(0, 0, 0, 0.7), 
             rgba(0, 0, 0, 0.7)),
-            url("assets/customisation.jpg");
+            url("./assets/images/customisation.jpg");
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
@@ -265,6 +307,29 @@
         
       .customisation-container {
         text-align: center;
+      }
+
+      .customisation-container .section-header, 
+      .customisation-container .section-description {
+        max-width: 750px;
+        margin: auto;
+        color: var(--white);
+      }
+  
+      .customisation-grid {
+        margin-top: 4rem;
+        display: grid;
+        gap: 4rem 2rem;
+      }
+  
+      .customisation-card h4 {
+        color: var(--white);
+        font-size: 3rem;
+        font-weight: 700;
+      }
+      
+      .customisation-card p {
+        color: var(--white);
       }
     </style>
   <style>
@@ -317,6 +382,7 @@
         </div>
       </div>
     </header>
+
     <section class="banner-container">
       <div class="banner-card">
         <h4>Satisfaction Guaranteed or Your Dent Back.</h4>
@@ -328,6 +394,7 @@
         <img src="./assets/images/banner.jpg" alt="banner" />
       </div>
     </section>
+    
     <section class="section-container experience-container" id="about">
       <div class="experience-image">
         <img src="./assets/images/experience.jpg" alt="experience" />
@@ -346,6 +413,7 @@
         <button class="btn">Read More</button>
       </div>
     </section>
+    
     <section class="service" id="service">
       <div class="section-container service-container">
         <p class="section-subheader">WHY CHOOSE US</p>
@@ -389,6 +457,7 @@
         </div>
       </div>
     </section>
+    
     <section class="customisation">
       <div class="section-container customisation-container">
         <p class="section-subheader">OUR CUSTOMISATION</p>
@@ -415,6 +484,67 @@
           <div class="customisation-card">
             <h4>5063</h4>
             <p>Got Awards</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section-container price-container" id="price">
+      <p class="section-subheader">BEST PACKAGES</p>
+      <h2 class="section-header">Our Pricing Plans</h2>
+      <p class="section-description">
+        We offer a range of affordable and flexible pricing options.
+      </p>
+      <div class="price-grid">
+        <div class="price-card">
+          <h4>SILVER PACKAGE</h4>
+          <h3><sup>$</sup>35</h3>
+          <p>Routine Maintenance</p>
+          <p>Diagnostic Services</p>
+          <p>Wheel Alignment</p>
+          <p>Brake and Suspension</p>
+          <p>Air Conditioning</p>
+          <p>Scheduled Maintenance</p>
+          <button class="btn">Go Basic</button>
+        </div>
+        <div class="price-card">
+          <div class="price-card-ribbon">BESTSELLER</div>
+          <h4>PLATINUM PACKAGE</h4>
+          <h3><sup>$</sup>69</h3>
+          <p>Routine Maintenance</p>
+          <p>Diagnostic Services</p>
+          <p>Engine Tune-Ups</p>
+          <p>Tire Sales and Services</p>
+          <p>Exhaust System Repairs</p>
+          <p>Scheduled Maintenance</p>
+          <button class="btn">Go Premium</button>
+        </div>
+        <div class="price-card">
+          <h4>GOLD PACKAGE</h4>
+          <h3><sup>$</sup>39</h3>
+          <p>Routine Maintenance</p>
+          <p>Diagnostic Services</p>
+          <p>Brake and Suspension</p>
+          <p>Scheduled Maintenance</p>
+          <p>Wheel Alignment</p>
+          <p>Air Conditioning</p>
+          <button class="btn">Go Standard</button>
+        </div>
+      </div>
+    </section>
+    
+    <section class="contact">
+      <div class="section-container contact-container">
+        <div class="contact-content">
+          <p class="section-subheader">CONTACT US</p>
+          <h2 class="section-header">Imagine Your Car Feeling New Again</h2>
+          <p class="section-description">
+            Experience the magic of a rejuvenated ride as we pamper your car
+            with precision care, leaving it feeling as good as new.
+          </p>
+          <div class="contact-btns">
+            <button class="btn">Our Services</button>
+            <button class="btn">Contact Us</button>
           </div>
         </div>
       </div>
@@ -582,4 +712,4 @@
     </script>
   </body>
 </html>
-<!-- 55-193-325-455-585 -->
+<!-- 55-193-325-455-585-715 -->
