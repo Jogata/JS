@@ -4,9 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <title>URL SearchParams in JS</title> -->
-    <title>Porsche</title>
+    <title>Moksha Coffee</title>    
+    <!-- <title>Porsche</title> -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Goldman:wght@400;700&display=swap" rel="stylesheet">    
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap');
@@ -53,9 +55,9 @@ img {
 
 .svg {
   /* display: none; */
-  position: absolute;
-  width: 0;
-  height: 0;
+  /* position: absolute; */
+  /* width: 0; */
+  /* height: 0; */
 }
 
 .btn {
@@ -74,25 +76,30 @@ a {
 }
 
 .dark-bg {
-  background-color: #18293d;
+  /* background-color: #18293d; */
 }
 
 .page {
   position: relative;
+  width: fit-content;
+  min-width: 100%;
   min-height: 100vh;
   padding: 3rem 2%;
   display: flex;
   /* flex-wrap: wrap; */
   /* flex-direction: column; */
   /* background-color: green; */
+  overflow: hidden;
 }
 
 .page::after {
-  position: fixed;
+  /* position: fixed; */
+  position: absolute;
   top: 0;
   right: 0;
   content: "";
   width: 50%;
+  /* width: 50vw; */
   height: 100%;
   background-color: var(--text-dark);
   animation: body-bg 1s ease-in-out forwards;
@@ -142,7 +149,7 @@ body::after {
   /* } */
 }
 
-body::before {
+.page::before {
   position: fixed;
   content: "0";
   top: 0;
@@ -161,6 +168,9 @@ body::before {
   max-width: var(--max-width);
   margin: auto;
   /* margin-inline: auto; */
+  border-radius: 12px;
+  box-shadow: 3px 3px 3px #0005, 
+            -3px -3px 3px #fff5;
   isolation: isolate;
   /* overflow: hidden; */
   /* border: 1px solid gainsboro; */
@@ -233,7 +243,7 @@ main {
   grid-template-rows: auto 1fr auto;
 }
 
-.test {
+.main-img {
   grid-column: 3/4;
   grid-row: 1/-1;
   position: relative;
@@ -267,9 +277,10 @@ main {
   -webkit-text-stroke: 4px var(--primary-color);
   /* border: 1px solid red; */
   filter: drop-shadow(2px 2px 2px #000);
+  animation: fade-in 1s ease-in-out backwards;
 }
 
-.test img {
+.main-img img {
   /* display: inline-block; */
   /* grid-row: 2/3; */
   /* grid-row: 1/4; */
@@ -287,10 +298,13 @@ main {
   margin: auto;
   /* transform: translate(-50%, -50%); */
   filter: drop-shadow(0 0 50px rgba(0, 0, 0, 0.8));
+  animation: fade-in 1s ease-in-out backwards;
+  animation-delay: 1s;
   z-index: 2;
 }
 
-.container h4 {
+/* .container h4 */
+.title {
   /* position: absolute; */
   /* top: 50%; */
   /* left: 50%; */
@@ -300,21 +314,34 @@ main {
   z-index: 1;
 }
 
-.text-left {
+.title-left {
+  position: relative;
   grid-column: 2/3;
   grid-row: 2/3;
   transform: translateX(5rem);
   /* transform: translate(calc(-50% - 250px), -50%); */
+  animation: fade-text-left 300ms ease-in-out backwards;
+  animation: fade-text-left 300ms cubic-bezier(0.68, -0.55, 0.265, 1.55) backwards;
+  animation-delay: 2s;
 }
 
-.text-right {
+.title-left span {
+  position: absolute;
+  width: 0;
+  font-size: 0px;
+}
+
+.title-right {
   grid-column: 4/5;
   grid-row: 2/3;
   transform: translateX(-5rem);
   /* transform: translate(calc(-50% + 250px), -50%); */
+  animation: fade-text-right 300ms ease-in-out backwards;
+  animation: fade-text-right 300ms cubic-bezier(0.68, -0.55, 0.265, 1.55) backwards;
+  animation-delay: 2s;
 }
 
-.container .explore-btn {
+.explore-btn {
   /* grid-column: 1/2; */
   grid-column: 3/4;
   grid-row: 3/4;
@@ -330,17 +357,19 @@ main {
   border: 1px solid var(--white);
   background-color: var(--white);
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
+  animation: fade-in 1s ease-in-out backwards;
+  animation-delay: 2.5s;
   transition: color 300ms, 
   background-color 300ms;
   z-index: 2;
 }
 
-.container .explore-btn:hover {
+.explore-btn:hover {
   color: var(--white);
   background-color: var(--text-dark);
 }
 
-.container .print-btn {
+.print-btn {
   grid-column: 5/6;
   grid-row: 2/3;
   /* top: 50%; */
@@ -351,16 +380,18 @@ main {
   color: var(--white);
   background-color: transparent;
   border: 1px solid var(--white);
+  animation: fade-in 1s ease-in-out backwards;
+  animation-delay: 5s;
   transition: color 300ms, 
     background-color 300ms;
 }
 
-.container .print-btn:hover {
+.print-btn:hover {
   color: var(--primary-color);
   background-color: var(--white);
 }
 
-.container .catalog-btn {
+.catalog-btn {
   margin-bottom: auto;
   /* top: 25%; */
   /* left: 0; */
@@ -370,11 +401,13 @@ main {
   color: var(--text-dark);
   background-color: transparent;
   border: 1px solid var(--text-dark);
+  animation: fade-in 300ms ease-in-out backwards;
+  animation-delay: 7.5s;
   transition: color 300ms, 
     background-color 300ms;
 }
 
-.container .catalog-btn:hover {
+.catalog-btn:hover {
   color: var(--white);
   background-color: var(--text-dark);
 }
@@ -392,6 +425,8 @@ main {
   /* left: 50%; */
   font-size: 1.2rem;
   font-weight: 500;
+  animation: fade-in 300ms ease-in-out backwards;
+  /* animation-delay: 2.3s; */
 }
 
 .feature-1, 
@@ -433,6 +468,8 @@ main {
   grid-row: 2/3;
   color: var(--text-dark);
   /* transform: translate(calc(-50% - 300px), calc(-50% - 200px)); */
+  /* animation: fade-in 1s ease-in-out backwards; */
+  animation-delay: 3s;
 }
 
 .feature-2 {
@@ -441,6 +478,8 @@ main {
   grid-row: 2/3;
   color: var(--white);
   /* transform: translate(calc(-50% + 300px), calc(-50% - 200px)); */
+  /* animation: fade-in 1s ease-in-out backwards; */
+  animation-delay: 3.5s;
 }
 
 .feature-3 {
@@ -449,6 +488,8 @@ main {
   /* margin-bottom: auto; */
   color: var(--text-dark);
   /* transform: translate(calc(-50% - 300px), calc(-50% + 200px)); */
+  /* animation: fade-in 1s ease-in-out backwards; */
+  animation-delay: 4s;
 }
 
 .feature-4 {
@@ -457,6 +498,8 @@ main {
   /* margin-bottom: auto; */
   color: var(--white);
   /* transform: translate(calc(-50% + 300px), calc(-50% + 200px)); */
+  /* animation: fade-in 1s ease-in-out backwards; */
+  animation-delay: 4.5s;
 }
 
 .feature-1::after,
@@ -492,6 +535,8 @@ main {
 .footer p {
   color: var(--text-dark);
   font-size: 0.9rem;
+  animation: fade-in 300ms ease-in-out backwards;
+  animation-delay: 5.5s;
 }
 
 .footer-links {
@@ -503,8 +548,10 @@ main {
 }
 
 .footer-links li {
-  opacity: 0;
-  animation: fade-in 0.3s ease-in-out forwards;
+  /* opacity: 0; */
+  /* animation: fade-in 0.3s ease-in-out forwards; */
+  /* animation: fade-in 0.3s ease-in-out backwards; */
+  animation: fade-in 300ms ease-in-out backwards;
 }
 
 .footer-links li:nth-child(1) {
@@ -517,21 +564,61 @@ main {
   animation-delay: 7s;
 }
 
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
 .footer-links a {
   color: var(--white);
 }
 
 .footer-links a:hover {
   color: var(--primary-color);
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  /* 100% { */
+    /* opacity: 1; */
+  /* } */
+}
+
+@keyframes fade-left {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  /* 100% { */
+    /* opacity: 1; */
+  /* } */
+}
+
+@keyframes fade-right {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  /* 100% { */
+    /* opacity: 1; */
+  /* } */
+}
+
+@keyframes fade-text-right {
+  0% {
+    opacity: 0;
+    transform: translateX(-10rem);
+  }
+  /* 100% { */
+    /* opacity: 1; */
+  /* } */
+}
+
+@keyframes fade-text-left {
+  0% {
+    opacity: 0;
+    transform: translateX(10rem);
+  }
+  /* 100% { */
+    /* opacity: 1; */
+  /* } */
 }
 
 @media (width > 540px) {
@@ -546,7 +633,7 @@ main {
       padding: 0;
     }
 
-    .images img:nth-child(1) {
+    .images img:nth-child(11) {
       position: absolute;
   /* top: 0; */
   width: auto;
@@ -561,9 +648,16 @@ main {
       height: 100vh;
     }
   </style>
+  <style>
+    .moksha {
+      padding: 3rem 2%;
+      min-height: 100vh;
+      background-color: red;
+    }
+  </style>
   </head>
   <body>
-    <div class="page">
+    <div class="page" style="display: none;">
       <div class="container">
         <nav>
           <!-- <ul class="nav-links nav-left"> -->
@@ -585,12 +679,14 @@ main {
         </nav>
         <main>
           <button class="btn catalog-btn">CATALOG</button>
-          <h4 class="text-left">POR</h4>
-          <div class="test">
+          <h4 class="title title-left">
+            POR <span>CHE</span>
+          </h4>
+          <div class="main-img">
             <span class="letter-s">S</span>
             <img src="assets/header.png" alt="header" />
           </div>
-          <h4 class="text-right">CHE</h4>
+          <h4 class="title title-right" aria-hidden="true">CHE</h4>
           <h5 class="feature feature-1">Diesel</h5>
           <h5 class="feature feature-2">Watches</h5>
           <h5 class="feature feature-3">Tough</h5>
@@ -607,7 +703,42 @@ main {
           </div>
         </footer>
       </div>
+    </div>
+
+<div class="moksha">
+  <nav>
+    <ul>
+      <li>Our Story</li>
+      <li><div class="circle"></div></li>
+      <li class="food">Food</li>
+      <li class="logo">moksha</li>
+      <li class="coffee">Coffee</li>
+      <li><div class="circle"></div></li>
+      <li>Find us</li>
+    </ul>
+  </nav>
+  <header>
+    <div class="layer"></div>
+    <h1>OUR COFFEE</h1>
+    <p>
+      When it comes to the important stuff - the coffee - we are committed to 
+      sourcing and serving one of the highest quality and we believe is nothing 
+      short of best coffee possible.
+    </p>
+    <button>Download our menu</button>
+  </header>
+  <main>
+    <section>
+      <h2>Gallery</h2>
+      <div class="images">
+        <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGNhZmV8ZW58MHx8MHx8fDA%3D" alt="" width="150" height="100">
+        <img src="https://images.unsplash.com/photo-1542181961-9590d0c79dab?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGNhZmV8ZW58MHx8MHx8fDA%3D" alt="" width="150" height="100">
+        <img src="https://images.unsplash.com/photo-1497636577773-f1231844b336?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzV8fGNhZmV8ZW58MHx8MHx8fDA%3D" alt="" width="150" height="100">
+        <img src="https://images.unsplash.com/photo-1481833761820-0509d3217039?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Y2FmZXxlbnwwfHwwfHx8MA%3D%3D" alt="" width="150" height="100">
       </div>
+    </section>
+  </main>
+</div>
 
     <div class="date" style="display: none;">
       <span></span>
@@ -771,4 +902,4 @@ main {
     </script>
   </body>
 </html>
-<!-- 55-194-350-480-620-770 -->
+<!-- 55-194-350-480-620-770-905 -->
