@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URL SearchParams in JS</title>
+    <!-- <title>URL SearchParams in JS</title> -->
+    <title>Porsche</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
@@ -45,7 +46,8 @@ a:focus-visible {
 }
 
 img {
-  display: flex;
+  /* display: flex; */
+  display: block;
   width: 100%;
 }
 
@@ -76,12 +78,25 @@ a {
 }
 
 .page {
+  position: relative;
   min-height: 100vh;
   padding: 3rem 2%;
   display: flex;
   /* flex-wrap: wrap; */
   /* flex-direction: column; */
   /* background-color: green; */
+}
+
+.page::after {
+  position: fixed;
+  top: 0;
+  right: 0;
+  content: "";
+  width: 50%;
+  height: 100%;
+  background-color: var(--text-dark);
+  animation: body-bg 1s ease-in-out forwards;
+  z-index: -1;
 }
 
 .full-screen {
@@ -103,7 +118,7 @@ body {
 }
 
 body::after {
-  position: fixed;
+  /* position: fixed;
   content: "";
   height: 100%;
   width: 0;
@@ -112,16 +127,18 @@ body::after {
   background-color: var(--text-dark);
   z-index: -1;
 
-  animation: body-bg 1s ease-in-out forwards;
+  animation: body-bg 1s ease-in-out forwards; */
 }
 
 @keyframes body-bg {
   0% {
-    width: 0vw;
+    /* width: 0vw; */
+    transform: translateX(100%);
   }
-  100% {
-    width: 50vw;
-  }
+  /* 100% { */
+    /* width: 50vw; */
+    /* transform: translateX(0); */
+  /* } */
 }
 
 body::before {
@@ -139,27 +156,32 @@ body::before {
 
 .container {
   position: relative;
-  isolation: isolate;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   max-width: var(--max-width);
-  margin-inline: auto;
+  margin: auto;
+  /* margin-inline: auto; */
+  isolation: isolate;
   overflow: hidden;
+  /* border: 1px solid gainsboro; */
+  outline: 1px solid red;
 }
 
 nav {
-  padding-block: 2rem 0;
-  padding-inline: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  padding: 1rem 2%;
+  /* padding-block: 2rem 0; */
+  /* padding-inline: 1rem; */
+  /* display: flex; */
+  /* gap: 1rem; */
+  /* align-items: center; */
+  /* justify-content: space-between; */
 }
 
 .nav-links {
-  list-style: none;
+  /* list-style: none; */
   display: flex;
-  align-items: center;
   gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .nav-links a {
@@ -171,11 +193,13 @@ nav {
   font-weight: 800;
 }
 
-.nav-left a {
+/* .nav-left a { */
+.subnav.left a {
   color: var(--text-dark);
 }
 
-.nav-right a {
+/* .nav-right a { */
+.subnav.right a {
   color: var(--white);
 }
 
@@ -184,22 +208,37 @@ nav {
 }
 
 .letter-s {
+  /* display: inline-block; */
+  display: block;
   /* position: absolute; */
-  top: 50%;
-  left: 50%;
+  /* top: 50%; */
+  /* left: 50%; */
   /* transform: translate(-50%, -50%); */
-  font-size: 40rem;
-  line-height: 40rem;
-  font-weight: 900;
   color: var(--primary-color);
+  font-size: 40rem;
+  /* line-height: 40rem; */
+  line-height: 1;
+  font-weight: 900;
+  text-align: center;
+  border: 1px solid red;
 }
 
-.container img {
-  /* position: absolute; */
-  width: 100%;
+.test {
+  position: relative;
+  border: 1px solid green;
+}
+
+.test img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* width: 100%; */
   max-width: 200px;
-  top: 50%;
-  left: 50%;
+  /* top: 50%; */
+  /* left: 50%; */
+  margin: auto;
   /* transform: translate(-50%, -50%); */
   filter: drop-shadow(0 0 50px rgba(0, 0, 0, 0.8));
 }
@@ -248,6 +287,114 @@ nav {
   color: var(--text-dark);
   background-color: transparent;
   border: 1px solid var(--text-dark);
+}
+
+.container h5 {
+  /* position: absolute; */
+  top: 50%;
+  left: 50%;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.container h5::after {
+  /* position: absolute; */
+  content: "";
+  height: 1px;
+  width: 100px;
+  top: 50%;
+}
+
+.feature-1 {
+  color: var(--text-dark);
+  /* transform: translate(calc(-50% - 300px), calc(-50% - 200px)); */
+}
+
+.feature-2 {
+  color: var(--white);
+  /* transform: translate(calc(-50% + 300px), calc(-50% - 200px)); */
+}
+
+.feature-3 {
+  color: var(--text-dark);
+  /* transform: translate(calc(-50% - 300px), calc(-50% + 200px)); */
+}
+
+.feature-4 {
+  color: var(--white);
+  /* transform: translate(calc(-50% + 300px), calc(-50% + 200px)); */
+}
+
+.feature-1::after,
+.feature-3::after {
+  right: 0;
+  /* transform: translate(calc(100% + 40px), -50%); */
+  background-color: var(--text-dark);
+}
+
+.feature-2::after,
+.feature-4::after {
+  left: 0;
+  /* transform: translate(calc(-100% - 40px), -50%); */
+  background-color: var(--white);
+}
+
+.footer {
+  /* position: absolute; */
+  left: 50%;
+  /* transform: translateX(-50%); */
+  width: 100%;
+  padding-inline: 1rem;
+  bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.footer p {
+  font-size: 0.9rem;
+  color: var(--text-dark);
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-links li {
+  opacity: 0;
+  animation: fade-in 0.3s ease-in-out forwards;
+}
+
+.footer-links li:nth-child(1) {
+  animation-delay: 6s;
+}
+.footer-links li:nth-child(2) {
+  animation-delay: 6.5s;
+}
+.footer-links li:nth-child(3) {
+  animation-delay: 7s;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.footer-links a {
+  color: var(--white);
+}
+
+.footer-links a:hover {
+  color: var(--primary-color);
 }
 
 @media (width > 540px) {
@@ -299,8 +446,10 @@ nav {
             </div>
           </ul>
         </nav>
-        <span class="letter-s">S</span>
-        <img src="assets/header.png" alt="header" />
+        <div class="test">
+          <span class="letter-s">S</span>
+          <img src="assets/header.png" alt="header" />
+        </div>
         <h4 class="text-left">POR</h4>
         <h4 class="text-right">CHE</h4>
         <button class="btn explore">EXPLORE MORE</button>
@@ -483,4 +632,4 @@ nav {
     </script>
   </body>
 </html>
-<!-- 55-194-350-480 -->
+<!-- 55-194-350-480-620 -->
