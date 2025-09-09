@@ -1126,17 +1126,20 @@
         font-family: var(--second-font);
         font-weight: var(--font-regular);
       }
+
       ul {
         list-style: none;
       }
       
       a {
+        display: inline-block;
         text-decoration: none;
       }
       
       img {
         display: block;
-        max-width: 100%;
+        width: 100%;
+        /* max-width: 100%; */
         height: auto;
       }
       
@@ -1517,6 +1520,33 @@
         background-color: var(--second-color);
         cursor: pointer;
       }
+
+      .delivery-container {
+        row-gap: 2.5rem;
+      }
+
+      .delivery-data {
+        position: relative;
+        text-align: center;
+      }
+
+      .delivery-container .section-title {
+        margin-bottom: 1rem;
+      }
+
+      .delivery-description {
+        margin-bottom: 2rem;
+      }
+
+      .delivery-sticker {
+        position: absolute;
+        right: 1rem;
+        bottom: 1.5rem;
+        width: 30px;
+        rotate: 15deg;
+        opacity: 0.5;
+      }
+
     </style>
   <style>
     img {
@@ -1567,7 +1597,8 @@
         </a>
 
         <div id="nav-menu" class="nav-menu">
-          <ul class="nav-list">
+          <!-- <ul class="nav-list"> -->
+          <ul class="nav-list" role="list">
             <li>
               <a href="#home" class="nav-link">Home </a>
             </li>
@@ -1784,6 +1815,76 @@
             <button class="popular-button">
               <i class="fa fa-shopping-bag"></i>
             </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="delivery section" id="delivery">
+        <div class="delivery-container container grid">
+          <div class="delivery-data">
+            <h2 class="section-title">Fast Delivery</h2>
+            <p class="delivery-description">
+              Place your order for your favorite burger 
+              and we will deliver it to your door in minutes, 
+              get in touch and don't leave hungry.
+            </p>
+            <a href="#contact" class="button">Contact Now</a>
+            <img src="./assets/images/sticker-glass.svg" class="delivery-sticker">
+          </div>
+          <img src="./assets/images/delivery-burger.png" alt="" class="delivery-img">
+        </div>
+      </section>
+
+      <section class="contact section" id="contact">
+        <div class="contact-container container grid">
+          <h2 class="section-title">Contact Now</h2>
+
+          <div class="contact-content grid">
+            <div class="contact-data grid">
+
+              <div>
+                <h3 class="contact-title">Write Us</h3>
+                <div class="contact-social">
+                  <a href="#">
+                    <i class="ri-whatsapp-fill"></i>
+                  </a>
+                  <a href="#">
+                    <i class="ri-facebook-circle-fill"></i>
+                  </a>
+                  <a href="#">
+                    <i class="ri-telegram-fill"></i>
+                  </a>
+                </div>
+              </div>
+
+              <div>
+                <h3 class="contact-title">
+                  Call Us and Order
+                </h3>
+                <address class="contact-info">
+                  +00-987-7654-321 <br>
+                  +11-012345
+                </address>
+              </div>
+
+              <div>
+                <h3 class="contact-title">
+                  Find us here
+                </h3>
+                <address class="contact-info">
+                  Lima - Sun City - Peru <br>
+                  Av. Moon #4321
+                </address>
+              </div>
+            </div>
+
+            <div class="contact-image">
+              <!-- <img src="./assets/images/contact-man.png" alt="" class="contact-img"> -->
+              <img src="./assets/images/pixnova-0b477b19eb58b9a24189a8908b823014.png" alt="" class="contact-img">
+            </div>
+
+            <img src="./assets/images/sticker-burger.svg" class="contact-sticker-1">
+            <img src="./assets/images/sticker-soda.svg" class="contact-sticker-2">
           </div>
         </div>
       </section>
@@ -2271,8 +2372,37 @@
   <img src="./images/bg-black/vegetables-italian-knife-placed-left-black-table.jpg" alt="">
 </div>
 
+<a href="./assets/images/pixnova-0b477b19eb58b9a24189a8908b823014.png" download="">test</a>
+
 <script>
-  console.log(document.images.length);
+  // console.log(document.images.length);
+  const imgs = Array.from(document.images);
+  const atags = new Array(imgs.length).fill(null);
+  // console.log(imgs);
+  imgs.map((img, index) => {
+    const atag = document.createElement("a");
+    atag.setAttribute("download", true);
+    atag.setAttribute("href", img.src);
+    // console.log(atag, index);
+    // return atag;
+    atags[index] = atag;
+  });
+
+  let ind = 0;
+
+  // console.log(atags[0]);
+
+  // document.body.appendChild(atags[200]);
+
+  // const intID = setInterval(() => {
+  //   console.log(imgs[ind]);
+  //   atags[ind].click();
+  //   ind++;
+
+  //   if (ind > 400) {
+  //     clearInterval(intID);
+  //   }
+  // }, 1000);
 </script>
 
     <div class="date" style="display: none;">
@@ -2438,4 +2568,4 @@
   </body>
 </html>
 <!-- 55-193/209-340-470-600-730-860-990-1120-1250-1390-1530-1660
-1790-1920-2055-2185-2310-2440 -->
+1790-1920-2055-2185-2310-2440-2570 -->
