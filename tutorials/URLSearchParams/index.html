@@ -61,25 +61,46 @@
         background-color: var(--primary-color-dark);
         box-shadow: 5px 5xp 20px rgba(0, 0, 0, 0.2);
       }
-    
+
+      ul {
+        list-style: none;
+      }
+      
+      a {
+        display: inline-block;
+        text-decoration: none;
+      }
+      
+      button {
+        font-family: inherit;
+        border: 0px solid transparent;
+        outline: 1px solid transparent;
+        background-color: transparent;
+        cursor: pointer;
+      }
+      
+      button:focus-visible,
+      a:focus-visible {
+        outline: 1px solid #999;
+      }
+          
       img {
         width: 100%;
         /* display: flex; */
         display: block;
       }
     
-      a {
-        display: inline-block;
-        text-decoration: none;
-      }
-    
-      html,
-      body {
+      html {
         scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
       }
     
       body {
+        color: #fff;
         font-family: "Montserrat", sans-serif;
+        background-color: #080a0c;
       }
     
       nav {
@@ -265,6 +286,83 @@
         object-fit: cover;
         box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
       }
+
+      .gallery-image-details {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: grid;
+        gap: 1rem;
+        place-content: center;
+        text-align: center;
+        background-color: rgba(0, 0, 0, 0.5);
+        transition: 0.3s;
+        opacity: 0;
+        cursor: pointer;
+      }
+    
+      .gallery-image-details h4 {
+        color: var(--white);
+        font-size: 1.5rem;
+        font-weight: 500;
+      }
+    
+      .gallery-image-details div {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+      }
+    
+      .gallery-image-details .btn {
+        padding-inline: 1rem;
+      }
+    
+      .gallery-image:hover .gallery-image-details {
+        opacity: 1;
+      }
+
+      .article {
+        background-color: var(--extra-light);
+      }
+    
+      .article-grid {
+        margin-top: 4rem;
+        display: grid;
+        gap: 4rem 1rem;
+      }
+    
+      .article-card img {
+        max-width: 400px;
+        margin-inline: auto;
+        margin-bottom: 1rem;
+        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+      }
+    
+      .article-card h4 {
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: var(--text-dark);
+      }
+    
+      .article-card p {
+        margin-bottom: 2rem;
+        color: var(--text-light);
+      }
+    
+      .article-card a {
+        color: var(--primary-color);
+        text-decoration: underline;
+        transition: 0.3s;
+      }
+    
+      .article-card a:hover {
+        color: var(--primary-color-dark);
+      }
     </style>
   </head>
   <body>
@@ -407,6 +505,41 @@
         </div>
       </div>
     </section>
+
+    <section class="article" id="blog">
+      <div class="section-container article-container">
+        <h2 class="section-header">Latest Article</h2>
+        <div class="article-grid">
+          <div class="article-card">
+            <img src="./assets/drone/article-1.jpg" alt="article" />
+            <h4>Mastering Aerial Photography</h4>
+            <p>
+              Elevate your photography skills with our comprehensive guide on
+              capturing breathtaking aerial images.
+            </p>
+            <a href="#">Read More</a>
+          </div>
+          <div class="article-card">
+            <img src="./assets/drone/article-2.jpg" alt="article" />
+            <h4>Beyond the Horizon</h4>
+            <p>
+              Explore the critical role drones play in search and rescue
+              missions making drones invaluable tools for saving lives.
+            </p>
+            <a href="#">Read More</a>
+          </div>
+          <div class="article-card">
+            <img src="./assets/drone/article-3.jpg" alt="article" />
+            <h4>The Future of Delivery</h4>
+            <p>
+              Uncover the exciting advancements and the potential impact in
+              delivery services as drones take to the skies.
+            </p>
+            <a href="#">Read More</a>
+          </div>
+        </div>
+      </div>
+    </section>
     
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
     
@@ -446,4 +579,4 @@
     </script>
   </body>
 </html>
-<!-- 50-180-310-450 -->
+<!-- 50-180-310-450-580 -->
