@@ -70,12 +70,15 @@
       }
     
       .section-description {
-        margin-bottom: 2rem;
+        max-width: 600px;
+        margin: 0 auto 2rem;
+        /* margin-bottom: 2rem; */
         color: var(--text-light);
       }
     
       .btn {
-        padding: 0.75rem 2rem;
+        /* padding: 0.75rem 2rem; */
+        padding: 0.75em 2em;
         color: var(--white);
         font-size: 1rem;
         white-space: nowrap;
@@ -109,7 +112,15 @@
         cursor: pointer;
       }
       
+      input {
+        font-family: inherit;
+        border: 0px solid transparent;
+        outline: 1px solid transparent;
+        background-color: transparent;
+      }
+
       button:focus-visible,
+      input:focus-visible, 
       a:focus-visible {
         outline: 1px solid #999;
       }
@@ -300,8 +311,10 @@
         box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
       }
     
-      .product-contaainer .section-description {
-        max-width: 600px;
+      .product-container .section-description {
+        margin: 0;
+        /* max-width: 600px; */
+        max-width: 650px;
       }
     
       .product-grid {
@@ -367,9 +380,9 @@
         height: 100%;
         object-fit: cover;
         clip-path: url("#mask-1");
-        clip-path: url("#mask-2");
-        clip-path: url("#mask-3");
-        clip-path: url("#mask-4");
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
         /* box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2); */
       }
 
@@ -380,14 +393,31 @@
         width: 100%;
         height: 100%;
         display: grid;
+        /* display: inline-flex; */
         gap: 1rem;
         place-content: center;
         text-align: center;
-        background-color: rgba(0, 0, 0, 0.5);
+        /* background-color: rgba(0, 0, 0, 0.5); */
         /* transition: 0.3s; */
         transition: opacity 300ms;
         opacity: 0;
         cursor: pointer;
+        z-index: 1;
+      }
+
+      .gallery-image-details::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        clip-path: url("#mask-1");
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
+        z-index: -1;
       }
     
       .gallery-image-details h4 {
@@ -421,12 +451,23 @@
         display: grid;
         gap: 4rem 1rem;
       }
+
+      .article-card {
+        padding: 1rem 2rem 2rem;
+        border-radius: 8px;
+        /* box-shadow: 3px 3px 3px #0005; */
+        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+      }
     
       .article-card img {
-        max-width: 400px;
+        /* max-width: 400px; */
         margin-inline: auto;
         margin-bottom: 1rem;
-        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+        clip-path: url("#mask-1");
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
+        /* box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2); */
       }
     
       .article-card h4 {
@@ -468,7 +509,7 @@
         max-width: 500px;
         margin-inline: auto;
         display: flex;
-        align-items: center;
+        /* align-items: center; */
         background-color: var(--extra-light);
       }
     
@@ -491,10 +532,12 @@
       }
     
       .banner-card {
+        max-width: 400px;
+        margin: auto;
         display: flex;
         gap: 1rem;
         align-items: center;
-        justify-content: center;
+        /* justify-content: center; */
       }
     
       .banner-card img {
@@ -589,7 +632,7 @@
         }
     
         .banner-card {
-          justify-content: flex-start;
+          /* justify-content: flex-start; */
         }
     
         .banner-container {
@@ -598,6 +641,113 @@
     
         .footer-container {
           grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (width > 768px) {
+        nav {
+          position: static;
+          padding: 2rem 1rem;
+          display: flex;
+          gap: 2rem;
+          align-items: center;
+          justify-content: space-between;
+          box-shadow: none;
+        }
+    
+        .nav-bar {
+          padding: 0;
+          background-color: transparent;
+        }
+    
+        .nav-menu-btn {
+          display: none;
+        }
+    
+        .nav-links {
+          padding: 0;
+          width: unset;
+          position: static;
+          transform: none;
+          flex-direction: row;
+          background-color: transparent;
+        }
+    
+        .nav-links a {
+          color: var(--text-dark);
+        }
+    
+        .header-container {
+          padding-top: 5rem;
+          align-items: center;
+          grid-template-columns: 1fr 2fr;
+          text-align: left;
+        }
+    
+        .header-image {
+          grid-area: 1/2/2/3;
+        }
+    
+        .about-container {
+          align-items: center;
+          grid-template-columns: repeat(2, 1fr);
+          text-align: left;
+        }
+    
+        .about-image {
+          grid-area: 1/2/2/3;
+        }
+    
+        .product-grid {
+          gap: 2rem;
+          grid-template-columns: repeat(3, 1fr);
+        }
+    
+        .gallery-container {
+          grid-template-columns: repeat(3, 1fr);
+        }
+    
+        .gallery-image:nth-child(1) {
+          grid-area: 1/1/3/2;
+        }
+    
+        .gallery-image:nth-child(2) {
+          grid-area: 1/2/2/3;
+        }
+    
+        .gallery-image:nth-child(3) {
+          grid-area: 2/2/3/3;
+        }
+    
+        .gallery-image:nth-child(4) {
+          grid-area: 1/3/3/4;
+        }
+    
+        .article-grid {
+          gap: 2rem;
+          grid-template-columns: repeat(3, 1fr);
+        }
+    
+        .subscribe-container {
+          align-items: center;
+          grid-template-columns: repeat(2, 1fr);
+          text-align: left;
+        }
+    
+        .subscribe-content form {
+          margin-inline-start: unset;
+        }
+    
+        .banner-container {
+          grid-template-columns: repeat(3, 1fr);
+        }
+    
+        .footer-container {
+          grid-template-columns: repeat(4, 1fr);
+        }
+    
+        .footer-bar {
+          flex-direction: row;
         }
       }
     </style>
@@ -819,7 +969,7 @@
           news, tips, and opportunities soar with us into the future of drone
           technology!
         </p>
-        <form action="/">
+        <form>
           <input type="text" placeholder="Enter Your Email" />
           <button class="btn">Subscribe</button>
         </form>
@@ -952,4 +1102,4 @@
     </script>
   </body>
 </html>
-<!-- 50-180-310-450-580-710-840-970 -->
+<!-- 50-180-310-450-580-710-840-970-1100 -->
