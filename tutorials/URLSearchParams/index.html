@@ -14,12 +14,12 @@
     padding: 0;
     box-sizing: border-box;
   }
-  body {
+  .cart-item-body {
     min-height: 100vh;
     padding: 5rem 0;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    /* align-items: center; */
+    /* justify-content: center; */
     font-family: Arial, Helvetica, sans-serif;
     background: 
       linear-gradient(
@@ -27,8 +27,18 @@
         pink, 
         rgb(114, 89, 255));
   }
+  .inner-body {
+    margin: auto;
+  }
+  .inner-body h1 {
+    margin-bottom: 2rem;
+    font-size: 3rem;
+    font-weight: bold;
+    text-align: center;
+    font-family: Georgia, serif;
+  }
   .cart-item {
-    width: 90%;
+    /* width: 90%; */
     max-width: 650px;
     padding: 3rem;
     display: flex;
@@ -38,7 +48,8 @@
   }
   .label {
     width: max-content;
-    padding: 0.2rem 0.3rem;
+    /* padding: 0.2rem 0.3rem; */
+    padding: 0.5rem 0.8rem;
     color: #fff;
     font-size: 0.7rem;
     border-radius: 16px;
@@ -89,12 +100,69 @@
     align-items: center;
     font-size: 0.75rem;
   }
+  .dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: #00d78b;
+  }
+  .buttons-container {
+    margin: 1rem 0;
+    display: flex;
+    gap: 0.5rem;
+  }
+  .buttons-container button {
+    min-width: max-content;
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid #00000042;
+    background-color: transparent;
+    transition: color 0.5s,
+        border-color 0.5s, 
+    background-color 0.5s;
+  }
+  .buttons-container button:hover {
+    color: #fff;
+    border-color: transparent;
+    background-color: #4c83e3;
+  }
+  @media (max-width: 600px) {
+    .cart-item {
+      padding: 2rem 1.5rem;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+    }
+    .label, .available {
+      margin: 0 auto;
+    }
+  }
+</style>
+<style>
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .movie-cart-body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1d232a;
+  }
 </style>
   </head>
   <body>
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
  
-    <!-- <h1>Cart Item</h1> -->
+    <div class="cart-item-body">
+      <div class="inner-body">
+    <h1>Cart Item</h1>
  
     <section class="cart-item">
       <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQoWKZ9iz3lL9bZJxPI95GTW6TI21Mbp_0KTtD1x3b6g4rdMwv_" alt="" width="200" height="200">
@@ -139,6 +207,69 @@
         </div> 
       </div> 
     </section> 
+    </div>
+    </div>
+
+    <div class="movie-cart-body">
+      <div class="inner-body">
+        <h1>Movie Card</h1>
+        <section class="card">
+          <h2>The Terminator</h2>
+          <p class="type">Action & Sci-fi</p>
+          <p class="rating"><span>8.5</span> / 10</p>
+          <div class="info">
+            <img src="https://www.belarte.co.uk/cdn/shop/products/terminator.jpg?v=1622469045" alt="" width="200" height="300" />
+            <div class="data">
+              <h2>About the movie</h2>
+              <p class="description">
+                Disguised as a human, a cyborg assassin known as a Terminator (Arnold Schwarzenegger)
+                travels from 2029 to 1984 to kill Sarah Connor (Linda Hamilton). Sent to protect Sarah
+                is Kyle Reese (Michael Biehn), who divulges the coming of Skynet, an artificial
+                intelligence system that will spark a nuclear holocaust.
+              </p>
+              <div class="people">
+                <div class="actors">
+                  <h3>Actors</h3>
+                  <ul>
+                    <li>Arnold Schwarzenegger</li>
+                    <li>Linda Hamilton</li>
+                    <li>Michael Biehn</li>
+                    <li>Franco Columbu</li>
+                    <li>Paul Winfield</li>
+                    <li class="more">
+                      <a href="#">More</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="director">
+                  <h3>Director</h3>
+                  <ul>
+                    <li>James Cameron</li>
+                  </ul>
+                </div>
+                <div class="producers">
+                  <h3>Producers</h3>
+                  <ul>
+                    <li>Gale Anne Hurd</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bottom-part">
+            <p class="price">$19.00</p>
+            <button class="buy">BUY</button>
+            <button class="trailer">
+              WATCH TRAILER
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-player-play">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M7 4v16l13 -8z" />
+              </svg>
+                </button>
+          </div>
+        </section>
+      </div>
+    </div>
     
     <script>
       // Create Query String as String
@@ -176,4 +307,4 @@
     </script>
   </body>
 </html>
-<!-- 49-179 -->
+<!-- 49-179-310 -->
