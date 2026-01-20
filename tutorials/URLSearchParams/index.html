@@ -51,8 +51,16 @@
         background-color: transparent;
         cursor: pointer;
       }
+
+      input {
+        font-family: inherit;
+        border: 0px solid transparent;
+        outline: 1px solid transparent;
+        background-color: transparent;
+      }
       
       button:focus-visible,
+      input:focus-visible,
       a:focus-visible {
         outline: 1px solid #999;
       }
@@ -86,6 +94,8 @@
       }
       
       .section-description {
+        max-width: 700px;
+        margin: auto;
         color: var(--text-light);
         font-weight: 700;
         line-height: 1.75rem;
@@ -128,6 +138,7 @@
         padding: 2rem 1rem;
         display: flex;
         gap: 2rem;
+        flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
       }
@@ -138,6 +149,7 @@
       
       .nav-actions {
         display: flex;
+        flex-wrap: wrap;
         align-items: center;
       }
       
@@ -157,7 +169,7 @@
       
       .header-container {
         position: relative;
-        height: 600px;
+        /* height: 600px; */
         padding-block: 0;
         isolation: isolate;
         overflow-x: hidden;
@@ -166,33 +178,60 @@
       .header-container img {
         max-width: 800px;
         height: 100%;
-        object-fit: cover;
+        min-height: 600px;
+        /* object-fit: cover; */
+        object-fit: contain;
         margin-inline: auto;
       }
       
       .header-content {
         position: absolute;
-        right: 0;
-        bottom: 4rem;
+        left: 0;
+        /* right: 0; */
+        /* right: 1rem; */
+        /* bottom: 4rem; */
+        bottom: 0;
         width: 100%;
-        max-width: 300px;
-        padding: 1rem 2rem;
-        border-radius: 12px;
-        background-color: #00000080;
+        /* max-width: 300px; */
+        min-height: 50%;
+        /* padding: 1rem 2rem; */
+        display: flex;
+        flex-wrap: wrap-reverse;
+        flex-direction: row-reverse;
+        /* color: var(--white); */
+        /* border-radius: 12px; */
+        /* border: 1px solid var(--white); */
+        /* background-color: #00000080; */
         z-index: 1;
       }
 
-      .header-content p {
+      .header-text {
+        max-width: 300px;
+        margin: auto 2% 5% auto;
+        padding: 1rem 2rem;
         color: var(--white);
+        border-radius: 12px;
+        border: 1px solid var(--white);
+        background-color: #00000080;
+      }
+
+      .header-content h4 {
+        margin-bottom: 0.5rem;
+      }
+
+      .header-content p {
+        /* color: var(--white); */
         font-size: 0.9rem;
+        line-height: 1.5;
       }
       
       .header-tag {
         display: none;
-        position: absolute;
-        bottom: 10rem;
-        left: 50%;
-        transform: translateX(-150%);
+        /* position: absolute; */
+        /* bottom: 10rem; */
+        /* left: 50%; */
+        /* transform: translateX(-150%); */
+        margin: 5% auto auto auto;
         padding: 1rem 1.5rem;
         color: var(--text-dark);
         font-size: 1rem;
@@ -250,7 +289,7 @@
       }
       
       .category {
-        margin-top: 5rem;
+        /* margin-top: 5rem; */
         border-radius: 1rem;
         background-color: var(--extra-light);
       }
@@ -261,26 +300,32 @@
       }
       
       .category-bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        transform: translateY(-100%);
-        width: 100%;
+        /* position: absolute; */
+        /* top: 0; */
+        /* left: 0; */
+        /* bottom: 100%; */
+        /* transform: translateY(-100%); */
+        /* width: 100%; */
         max-width: 500px;
         opacity: 0.1;
       }
 
-      .category-flex {
+      .category-grid {
         margin-top: 2rem;
-        display: flex;
+        /* display: flex; */
+        display: grid;
+        grid-template-columns: 
+          repeat(auto-fill, minmax(126px, 1fr));
         gap: 1rem;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-around;
+        /* flex-wrap: wrap; */
+        /* align-items: center; */
+        /* justify-content: space-around; */
       }
       
       .category-card {
-        flex: 1 0 126px;
+        /* flex: 1 0 126px; */
+        max-width: 140px;
+        margin: auto;
         padding: 2rem;
         border-radius: 2rem;
         transition: 0.3s;
@@ -312,6 +357,10 @@
       .shopping-header {
         max-width: var(--max-width);
         margin-inline: auto;
+      }
+
+      .shopping-header .section-description {
+        margin: 0;
       }
         
       .shopping-grid {
@@ -415,7 +464,7 @@
         margin-inline: auto;
         padding: 10px;
         display: flex;
-        align-items: center;
+        /* align-items: center; */
         border-radius: 10rem;
         box-shadow: inset 5px 5px 10px #e5e5e5, 
                 inset -10px -10px 20px #ffffff;
@@ -426,19 +475,22 @@
         padding-inline: 1rem;
         color: var(--text-dark);
         font-size: 1rem;
-        outline: none;
-        border: none;
+        /* outline: none; */
+        /* border: none; */
+        border-radius: 10em;
         background-color: transparent;
       }
       
       .coupon-form .btn {
-        padding: 7px 10px;
+        /* padding: 7px 10px; */
+        padding: 0.3em 0.65em;
         font-size: 1.75rem;
       }
       
       .footer-container {
         display: grid;
         gap: 2rem;
+        padding-bottom: 3rem;
       }
       
       .footer-logo {
@@ -447,8 +499,9 @@
       }
       
       .footer-links {
-        list-style: none;
-        margin-bottom: 4rem;
+        /* list-style: none; */
+        /* margin-bottom: 4rem; */
+        margin-bottom: 3rem;
         display: flex;
         gap: 2rem;
         flex-wrap: wrap;
@@ -464,7 +517,77 @@
       
       .footer-links a:hover {
         color: var(--primary-color);
-      }      
+      }
+
+      .footer-socials {
+        list-style: none;
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .footer-socials a {
+        padding: 9px 12px;
+        color: var(--white);
+        font-size: 1.25rem;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+        transition: 0.3s;
+      }
+      
+      .footer-socials a:hover {
+        background-color: var(--primary-color-dark);
+      }
+      
+      .footer-bar {
+        padding-inline: 1rem;
+        padding-bottom: 1rem;
+        color: var(--text-light);
+        font-size: 0.9rem;
+        text-align: center;
+      }
+      
+      @media (width > 540px) {
+        .nav-logo {
+          max-width: 120px;
+        }
+      
+        .header-tag {
+          display: flex;
+          align-items: center;
+        }
+      
+        .shopping-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      
+      @media (width > 768px) {
+        body {
+          padding: 1rem;
+        }
+      
+        .nav-logo {
+          max-width: 150px;
+        }
+      
+        .festive-container {
+          align-items: center;
+          grid-template-columns: repeat(2, 1fr);
+          text-align: left;
+        }
+      
+        .festive-image {
+          grid-area: 1/2/2/3;
+        }
+      
+        .shopping-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
     </style>
   </head>
   <body>
@@ -482,14 +605,16 @@
       <div class="section-container header-container">
         <img src="./assets/santa/header.png" alt="header" />
         <div class="header-content">
-          <h4>Begin your<br />festival with...</h4>
-          <p>
-            This is an easy to install christmas tree which your kids or office
-            colleagues will have a lot of fun decorating.
-          </p>
-        </div>
-        <div class="header-tag">
-          Buy This Product <span><i class="ri-shopping-basket-line"></i></span>
+          <div class="header-text">
+            <h4>Begin your festival with...</h4>
+            <p>
+              This is an easy to install christmas tree which your kids or office
+              colleagues will have a lot of fun decorating.
+            </p>
+          </div>
+          <div class="header-tag">
+            Buy This Product <span><i class="ri-shopping-basket-line"></i></span>
+          </div>
         </div>
       </div>
     </header>
@@ -512,9 +637,10 @@
       </div>
     </section>
 
+    <img src="./assets/santa/bg-png.png" alt="bg" class="category-bg" />
     <section class="category">
       <div class="section-container category-container">
-        <img src="./assets/santa/bg-png.png" alt="bg" class="category-bg" />
+        <!-- <img src="./assets/santa/bg-png.png" alt="bg" class="category-bg" /> -->
         <h2 class="section-header">
           Shop by our <span>festive</span> Categories
         </h2>
@@ -522,7 +648,7 @@
           Our wide range of categories are created using the best materials to
           create an amazing white christmas effect.
         </p>
-        <div class="category-flex">
+        <div class="category-grid">
           <div class="category-card">
             <img src="./assets/santa/category-1.png" alt="category" />
             <h4>Toys</h4>
@@ -702,4 +828,4 @@
     </script>
   </body>
 </html>
-<!-- 49-179-315-445-575-705 -->
+<!-- 49-179-315-445-575-705-835 -->
