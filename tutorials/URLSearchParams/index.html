@@ -3,720 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>URL SearchParams in JS</title> -->
-    <title>Santa Shop</title>
+    <title>URL SearchParams in JS</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&display=swap");
-
-      :root {
-        --primary-color: #ce282c;
-        --primary-color-dark: #ab2123;
-        --text-dark: #0a0a0a;
-        --text-light: #404040;
-        --extra-light: #f5f5f5;
-        --white: #ffffff;
-        --max-width: 1200px;
-      }
-
-      *, 
-      *::before,
-      *::after {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      ul {
-        list-style: none;
-      }
-
-      /* .bulled {
-        list-style: inside circle;
-        padding-left: 1rem;
-      }
-      
-      .bulled li {
-        margin: 0.5rem 0;
-      } */
-
-      a {
-        display: inline-block;
-        text-decoration: none;
-      }
-      
-      button {
-        font-family: inherit;
-        border: 0px solid transparent;
-        outline: 1px solid transparent;
-        background-color: transparent;
-        cursor: pointer;
-      }
-
-      input {
-        font-family: inherit;
-        border: 0px solid transparent;
-        outline: 1px solid transparent;
-        background-color: transparent;
-      }
-      
-      button:focus-visible,
-      input:focus-visible,
-      a:focus-visible {
-        outline: 1px solid #999;
-      }
-      
-      img {
-        width: 100%;
-        /* display: flex; */
-        display: block;
-      }
-      
-      body {
-        /* padding: 0.5rem; */
-        font-family: "Merriweather", serif;
-      }
-
-      .section-container {
-        max-width: var(--max-width);
-        margin: auto;
-        padding: 5rem 1rem;
-      }
-      
-      .section-header {
-        margin-bottom: 1rem;
-        color: var(--text-dark);
-        font-size: 2.5rem;
-        font-weight: 700;
-      }
-      
-      .section-header span {
-        color: var(--primary-color);
-      }
-      
-      .section-description {
-        max-width: 700px;
-        margin: auto;
-        color: var(--text-light);
-        font-weight: 700;
-        line-height: 1.75rem;
-      }
-      
-      .btn {
-        padding: 0.75rem 1.5rem;
-        color: var(--white);
-        font-size: 1rem;
-        font-family: "Merriweather", serif;
-        /* outline: none; */
-        /* border: none; */
-        border-radius: 5rem;
-        background-color: var(--primary-color);
-        /* transition: 0.3s; */
-        transition: background-color 300ms;
-        /* cursor: pointer; */
-      }
-      
-      .btn:hover {
-        background-color: var(--primary-color-dark);
-      }
-
-      .mask-1 {
-        clip-path: url("#mask-1");
-      }
-      
-      .mask-2 {
-        clip-path: url("#mask-2");
-      }
-      
-      .mask-3 {
-        clip-path: url("#mask-3");
-      }
-      
-      .mask-4 {
-        clip-path: url("#mask-4");
-      }
-
-      .link {
-        display: inline;
-        color: #f1683a;
-      }
-      
-      a.not-active {
-        color: red;
-        font-weight: bold;
-        cursor: not-allowed;
-        pointer-events: none;
-        user-select: none;
-      }
-      
-      a.not-active:hover {
-        color: #fff;
-        background-color: red;
-      }
-        
-      .page {
-        max-width: 1400px;
-        margin: auto;
-        padding: 0.5rem;
-      }
-      
-      .header {
-        background-image: 
-          linear-gradient(
-            rgba(206, 40, 44, 0.8),
-            rgba(206, 40, 44, 0.8)),
-          url("./assets/santa/bg.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        /* border-radius: 1rem; */
-        border-radius: 16px;
-        background-color: var(--primary-color);
-      }
-      
-      nav {
-        max-width: var(--max-width);
-        margin: auto;
-        padding: 2rem 1rem;
-        display: flex;
-        gap: 2rem;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-      }
-      
-      .nav-logo {
-        max-width: 100px;
-      }
-      
-      .nav-actions {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-      }
-      
-      .nav-actions a {
-        padding: 7px 10px;
-        color: var(--white);
-        font-size: 1.5rem;
-        /* border-radius: 1rem; */
-        border-radius: 16px;
-        /* transition: 0.3s; */
-        transition: background-color 300ms;
-      }
-      
-      .nav-actions a:hover {
-        background-color: var(--primary-color-dark);
-      }
-      
-      .header-container {
-        position: relative;
-        /* height: 600px; */
-        padding-block: 0;
-        isolation: isolate;
-        overflow-x: hidden;
-      }
-      
-      .header-container img {
-        max-width: 800px;
-        height: 100%;
-        min-height: 600px;
-        /* object-fit: cover; */
-        object-fit: contain;
-        margin-inline: auto;
-      }
-      
-      .header-content {
-        position: absolute;
-        left: 0;
-        /* right: 0; */
-        /* right: 1rem; */
-        /* bottom: 4rem; */
-        bottom: 0;
-        width: 100%;
-        /* max-width: 300px; */
-        min-height: 50%;
-        /* padding: 1rem 2rem; */
-        display: flex;
-        flex-wrap: wrap-reverse;
-        flex-direction: row-reverse;
-        /* color: var(--white); */
-        /* border-radius: 12px; */
-        /* border: 1px solid var(--white); */
-        /* background-color: #00000080; */
-        z-index: 1;
-      }
-
-      .header-text {
-        max-width: 300px;
-        margin: auto 2% 5% auto;
-        padding: 1rem 2rem;
-        color: var(--white);
-        border-radius: 12px;
-        border: 1px solid var(--white);
-        background-color: #00000080;
-      }
-
-      .header-content h4 {
-        margin-bottom: 0.5rem;
-      }
-
-      .header-content p {
-        /* color: var(--white); */
-        font-size: 0.9rem;
-        line-height: 1.5;
-      }
-      
-      .header-tag {
-        display: none;
-        /* position: absolute; */
-        /* bottom: 10rem; */
-        /* left: 50%; */
-        /* transform: translateX(-150%); */
-        margin: 5% auto auto auto;
-        padding: 1rem 1.5rem;
-        color: var(--text-dark);
-        font-size: 1rem;
-        font-weight: 700;
-        border-radius: 5rem;
-        background-color: var(--white);
-        cursor: pointer;
-      }
-      
-      .header-tag span {
-        margin-left: 6px;
-        font-size: 1.2rem;
-      }
-      
-      .festive-container {
-        display: grid;
-        gap: 2rem;
-        text-align: center;
-      }
-      
-      .festive-image {
-        position: relative;
-        isolation: isolate;
-      }
-
-      .festive-image .bg {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 90%;
-        max-width: 350px;
-        height: 100%;
-        background-image: 
-          linear-gradient(
-            rgba(206, 40, 44, 0.8),
-            rgba(206, 40, 44, 0.8)),
-          url("./assets/santa/bg.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        /* border-radius: 2rem; */
-        border-radius: 32px;
-        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2), 
-            inset 10px 10px 20px rgba(0, 0, 0, 0.5);
-        z-index: -1;
-      }
-      
-      .festive-image img {
-        padding-top: 5rem;
-        max-width: 600px;
-        filter: drop-shadow(10px 10px 20px rgba(0, 0, 0, 0.5));
-      }
-      
-      .festive-btn {
-        margin-top: 2rem;
-      }
-      
-      .category {
-        /* margin-top: 5rem; */
-        /* border-radius: 1rem; */
-        border-radius: 16px;
-        background-color: var(--extra-light);
-      }
-      
-      .category-container {
-        position: relative;
-        text-align: center;
-      }
-      
-      .category-bg {
-        /* position: absolute; */
-        /* top: 0; */
-        /* left: 0; */
-        /* bottom: 100%; */
-        /* transform: translateY(-100%); */
-        /* width: 100%; */
-        max-width: 500px;
-        opacity: 0.1;
-      }
-
-      .category-grid {
-        margin-top: 2rem;
-        /* display: flex; */
-        display: grid;
-        grid-template-columns: 
-          repeat(auto-fill, minmax(126px, 1fr));
-        gap: 1rem;
-        /* flex-wrap: wrap; */
-        /* align-items: center; */
-        /* justify-content: space-around; */
-      }
-      
-      .category-card {
-        position: relative;
-        /* flex: 1 0 126px; */
-        /* max-width: 140px; */
-        /* margin: auto; */
-        padding: 2rem;
-        /* border-radius: 2rem; */
-        border-radius: 32px;
-        /* transition: 0.3s; */
-        /* transition: box-shadow 300ms; */
-        z-index: 1;
-      }
-      
-      /* .category-card:hover {
-        box-shadow: 
-          inset 10px 10px 20px #e5e5e5, 
-        inset -10px -10px 20px #ffffff;
-      } */
-
-      .category-card::before {
-        position: absolute;
-        top: 0; 
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        border-radius: inherit;
-        box-shadow: 
-            inset 10px 10px 20px #e5e5e5, 
-          inset -10px -10px 20px #ffffff;
-        opacity: 0;
-        transition: opacity 300ms;
-        z-index: -1;
-      }
-      
-      .category-card:hover::before {
-        opacity: 1;
-        /* background-color: red; */
-        /* box-shadow: 
-                inset 10px 10px 20px #e5e5e5, 
-              inset -10px -10px 20px #ffffff; */
-      }
-      
-      .category-card img {
-        max-width: 48px;
-        margin-inline: auto;
-        margin-bottom: 1rem;
-      }
-      
-      .category-card h4 {
-        color: var(--text-dark);
-        font-size: 1.1rem;
-      }
-
-      .shopping-container {
-        max-width: 1400px;
-        margin-inline: auto;
-        padding: 5rem 1rem;
-      }
-      
-      .shopping-header {
-        max-width: var(--max-width);
-        margin-inline: auto;
-      }
-
-      .shopping-header .section-description {
-        margin: 0;
-      }
-        
-      .shopping-grid {
-        margin-top: 4rem;
-        display: grid;
-        gap: 1rem;
-      }
-      
-      .shopping-card {
-        position: relative;
-        padding: 1.5rem 1rem;
-        /* border-radius: 1rem; */
-        border-radius: 16px;
-        background-color: var(--extra-light);
-        /* transition: 0.3s; */
-        /* transition: box-shadow 300ms; */
-        z-index: 1;
-        cursor: pointer;
-      }
-      
-      /* .shopping-card:hover {
-        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-      } */
-      
-      .shopping-card::before {
-        position: absolute;
-        top: 0; 
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        border-radius: inherit;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        transition: opacity 300ms;
-        opacity: 0;
-        z-index: -1;
-      }
-      
-      .shopping-card:hover::before {
-        opacity: 1;
-        /* background-color: red; */
-      }
-      
-      .shopping-card h3 {
-        color: var(--primary-color);
-        font-size: 1.2rem;
-        font-weight: 700;
-        text-align: right;
-      }
-      
-      .shopping-card img {
-        max-width: 250px;
-        margin-inline: auto;
-      }
-
-      .shopping-card h4 {
-        color: var(--text-dark);
-        font-size: 1.2rem;
-        font-weight: 700;
-        text-align: center;
-      }
-      
-      .explore-container {
-        display: grid;
-        gap: 2rem;
-        text-align: center;
-      }
-      
-      .explore-image {
-        position: relative;
-        isolation: isolate;
-      }
-      
-      .explore-image .bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 90%;
-        max-width: 350px;
-        height: 100%;
-        background-image: 
-          linear-gradient(
-            rgba(206, 40, 44, 0.8),
-            rgba(206, 40, 44, 0.8)),
-          url("./assets/santa/bg.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        /* border-radius: 2rem; */
-        border-radius: 32px;
-        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2), 
-          inset 10px 10px 20px rgba(0, 0, 0, 0.5);
-        z-index: -1;
-      }
-      
-      .explore-image img {
-        max-width: 500px;
-        margin-left: auto;
-        filter: drop-shadow(10px 10px 20px rgba(0, 0, 0, 0.5));
-      }
-      
-      .explore-btn {
-        margin-top: 2rem;
-      }
-      
-      .coupon {
-        /* border-radius: 1rem; */
-        border-radius: 16px;
-        background-color: var(--extra-light);
-      }
-      
-      .coupon-container {
-        display: grid;
-        gap: 2rem;
-        text-align: center;
-      }
-      
-      .coupon-container .section-header {
-        margin: 0;
-        font-size: 2.75rem;
-      }
-      
-      .coupon-form {
-        width: 100%;
-        max-width: 400px;
-        margin-inline: auto;
-        padding: 10px;
-        display: flex;
-        /* align-items: center; */
-        border-radius: 10rem;
-        box-shadow: inset 5px 5px 10px #e5e5e5, 
-                inset -10px -10px 20px #ffffff;
-      }
-      
-      .coupon-form input {
-        width: 100%;
-        padding-inline: 1rem;
-        color: var(--text-dark);
-        font-size: 1rem;
-        /* outline: none; */
-        /* border: none; */
-        border-radius: 10em;
-        background-color: transparent;
-      }
-      
-      .coupon-form .btn {
-        /* padding: 7px 10px; */
-        padding: 0.3em 0.65em;
-        font-size: 1.75rem;
-      }
-      
-      .footer-container {
-        display: grid;
-        gap: 2rem;
-        padding-bottom: 3rem;
-      }
-      
-      .footer-logo {
-        max-width: 150px;
-        margin-bottom: 2rem;
-      }
-      
-      .footer-links {
-        /* list-style: none; */
-        /* margin-bottom: 4rem; */
-        margin-bottom: 3rem;
-        display: flex;
-        gap: 2rem;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      .footer-links a {
-        color: var(--text-light);
-        font-weight: 600;
-        /* transition: 0.3s; */
-        transition: color 300ms;
-      }
-      
-      .footer-links a:hover {
-        color: var(--primary-color);
-      }
-
-      .footer-socials {
-        /* list-style: none; */
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      .footer-socials a {
-        padding: 9px 12px;
-        color: var(--white);
-        font-size: 1.25rem;
-        border-radius: 50%;
-        background-color: var(--primary-color);
-        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
-        /* transition: 0.3s; */
-        transition: background-color 300ms;
-      }
-      
-      .footer-socials a:hover {
-        background-color: var(--primary-color-dark);
-      }
-      
-      .footer-bar {
-        padding-inline: 1rem;
-        padding-bottom: 1rem;
-        color: var(--text-light);
-        font-size: 0.9rem;
-        text-align: center;
-      }
-      
-      @media (width > 540px) {
-        .nav-logo {
-          max-width: 120px;
-        }
-      
-        .header-tag {
-          display: flex;
-          align-items: center;
-        }
-      
-        .shopping-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-      
-      @media (width > 768px) {
-        .page {
-          padding: 1rem;
-        }
-      
-        .nav-logo {
-          max-width: 150px;
-        }
-      
-        .festive-container {
-          align-items: center;
-          grid-template-columns: repeat(2, 1fr);
-          text-align: left;
-        }
-      
-        .festive-image {
-          grid-area: 1/2/2/3;
-        }
-      
-        .shopping-grid {
-          grid-template-columns: repeat(4, 1fr);
-        }
-      
-        .explore-container {
-          align-items: center;
-          grid-template-columns: repeat(2, 1fr);
-          text-align: left;
-        }
-      
-        .coupon-container {
-          align-items: center;
-          grid-template-columns: 1.5fr 1fr;
-          text-align: left;
-        }
-      
-        .footer-container {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      
-        .footer-links {
-          margin-top: 2rem;
-          justify-content: flex-end;
-        }
-      
-        .footer-socials {
-          justify-content: flex-end;
-        }
-      }
-    </style>
   </head>
   <body>
-    <div class="page">
+    <div class="page" style="display: none;">
     <header class="header">
       <nav>
         <div class="nav-logo">
@@ -916,6 +208,139 @@
       Copyright © 2023 Company. All rights reserved.
     </div>
     </div>
+    <header class="header">
+      <nav>
+        <div class="nav-bar">
+          <div class="logo">
+            <a href="#"><img src="assets/logo.png" alt="logo" /></a>
+          </div>
+          <div class="nav-menu-btn" id="menu-btn">
+            <i class="ri-menu-line"></i>
+          </div>
+        </div>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#service">Services</a></li>
+          <li><a href="#explore">Explore</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="btn nav-btn">Book Now</button>
+      </nav>
+      <div class="section-container header-container" id="home">
+        <p>Simple - Unique - Friendly</p>
+        <h1>Make Yourself At Home<br />In Our <span>Hotel</span>.</h1>
+      </div>
+    </header>
+    <section class="section-container booking-container">
+      <form action="/" class="booking-form">
+        <div class="input-group">
+          <span><i class="ri-calendar-2-fill"></i></span>
+          <div>
+            <label for="check-in">CHECK-IN</label>
+            <input type="text" placeholder="Check In" />
+          </div>
+        </div>
+        <div class="input-group">
+          <span><i class="ri-calendar-2-fill"></i></span>
+          <div>
+            <label for="check-out">CHECK-OUT</label>
+            <input type="text" placeholder="Check Out" />
+          </div>
+        </div>
+        <div class="input-group">
+          <span><i class="ri-user-fill"></i></span>
+          <div>
+            <label for="guest">GUEST</label>
+            <input type="text" placeholder="Guest" />
+          </div>
+        </div>
+        <div class="input-group input-btn">
+          <button class="btn">CHECH OUT</button>
+        </div>
+      </form>
+    </section>
+    <section class="section-container about-container" id="about">
+      <div class="about-image">
+        <img src="assets/about.jpg" alt="about" />
+      </div>
+      <div class="about-content">
+        <p class="section-subheader">ABOUT US</p>
+        <h2 class="section-header">The Best Holidays Start Here!</h2>
+        <p class="section-description">
+          With a focus on quality accommodations, personalized experiences, and
+          seamless booking, our platform is dedicated to ensuring that every
+          traveler embarks on their dream holiday with confidence and
+          excitement.
+        </p>
+        <div class="about-btn">
+          <button class="btn">Read More</button>
+        </div>
+      </div>
+    </section>
+    <section class="section-container room-container">
+      <p class="section-subheader">OUR LIVING ROOM</p>
+      <h2 class="section-header">The Most Memorable Rest Time Starts Here.</h2>
+      <div class="room-grid">
+        <div class="room-card">
+          <div class="room-card-image">
+            <img src="assets/room-1.jpg" alt="room" />
+            <div class="room-card-icons">
+              <span><i class="ri-heart-fill"></i></span>
+              <span><i class="ri-paint-fill"></i></span>
+              <span><i class="ri-shield-star-line"></i></span>
+            </div>
+          </div>
+          <div class="room-card-details">
+            <h4>Deluxe Ocean View</h4>
+            <p>
+              Bask in luxury with breathtaking ocean views from your private
+              suite.
+            </p>
+            <h5>Starting from <span>$299/night</span></h5>
+            <button class="btn">Book Now</button>
+          </div>
+        </div>
+        <div class="room-card">
+          <div class="room-card-image">
+            <img src="assets/room-2.jpg" alt="room" />
+            <div class="room-card-icons">
+              <span><i class="ri-heart-fill"></i></span>
+              <span><i class="ri-paint-fill"></i></span>
+              <span><i class="ri-shield-star-line"></i></span>
+            </div>
+          </div>
+          <div class="room-card-details">
+            <h4>Executive Cityscape Room</h4>
+            <p>
+              Experience urban elegance and modern comfort in the heart of the
+              city.
+            </p>
+            <h5>Starting from <span>$199/night</span></h5>
+            <button class="btn">Book Now</button>
+          </div>
+        </div>
+        <div class="room-card">
+          <div class="room-card-image">
+            <img src="assets/room-3.jpg" alt="room" />
+            <div class="room-card-icons">
+              <span><i class="ri-heart-fill"></i></span>
+              <span><i class="ri-paint-fill"></i></span>
+              <span><i class="ri-shield-star-line"></i></span>
+            </div>
+          </div>
+          <div class="room-card-details">
+            <h4>Family Garden Retreat</h4>
+            <p>
+              Spacious and inviting, perfect for creating cherished memories
+              with loved ones.
+            </p>
+            <h5>Starting from <span>$249/night</span></h5>
+            <button class="btn">Book Now</button>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
     
@@ -955,4 +380,4 @@
     </script>
   </body>
 </html>
-<!-- 49-179-315-445-575-705-831-961 -->
+<!-- 49-179-315-445-575-705-831-961-1090 -->
