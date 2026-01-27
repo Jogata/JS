@@ -224,6 +224,41 @@
         background-position: center bottom;
         background-size: cover;
       }
+
+      /* .header {
+        position: relative;
+        background-image: none;
+        background-color: var(--text-dark);
+      }
+      .header::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-color: var(--text-dark);
+        background-image: 
+          linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.4),
+            rgba(0, 0, 0, 0)
+          ),
+          url("./assets/classic/header.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-position: center bottom;
+        background-size: cover;
+        clip-path: url("#mask-1");
+        clip-path: url("#mask-2");
+        clip-path: url("#mask-3");
+        clip-path: url("#mask-4");
+        z-index: -1;
+      }
+      .header-container {
+        position: relative;
+        z-index: 1;
+      } */
       
       nav {
         isolation: isolate;
@@ -318,24 +353,57 @@
       }
       
       .banner-card {
+        /* position: relative; */
         display: grid;
         place-content: center;
+        /* z-index: 1; */
       }
       
+      /* .banner-card:nth-child(1)::after, 
+      .banner-card:nth-child(3)::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-image: 
+          linear-gradient(
+            rgba(0, 0, 0, 0.5), 
+            rgba(0, 0, 0, 0.5));
+        z-index: -1;
+      } */
+
       .banner-card:nth-child(1) {
-        background-image: url("./assets/classic/banner-1.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
+        /* background-image: url("./assets/classic/banner-1.jpg"); */
+        background-image: 
+          linear-gradient(
+            rgba(0, 0, 0, 0.5), 
+            rgba(0, 0, 0, 0.5)), 
+            url("./assets/classic/banner-1.jpg");
+        /* background-repeat: no-repeat; */
+        /* background-position: center; */
+        /* background-size: cover; */
       }
       
       .banner-card:nth-child(3) {
-        background-image: url("./assets/classic/banner-2.jpg");
+        /* background-image: url("./assets/classic/banner-2.jpg"); */
+        background-image: 
+          linear-gradient(
+            rgba(0, 0, 0, 0.5), 
+            rgba(0, 0, 0, 0.5)), 
+            url("./assets/classic/banner-2.jpg");
+        /* background-repeat: no-repeat; */
+        /* background-position: center; */
+        /* background-size: cover; */
+      }
+      
+      .banner-card:nth-child(odd) {
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
       }
-      
+
       .banner-card:nth-child(even) {
         background-color: var(--text-dark);
       }
@@ -346,6 +414,13 @@
         font-weight: 400;
         font-family: var(--header-font);
         text-align: center;
+        /* z-index: 1; */
+      }
+
+      @media (width < 768px) {
+        .banner-card h4 {
+          font-size: 2rem;
+        }
       }
       
       .banner-grid img {
@@ -358,6 +433,7 @@
         padding: 3rem 1.5rem;
         border: 10px solid var(--text-dark);
         background-color: var(--primary-color);
+        /* z-index: 2; */
       }
       
       .banner-strip {
@@ -367,8 +443,15 @@
       
       .banner-strip-card {
         display: grid;
-        gap: 5px;
-        grid-template-columns: repeat(2, 1fr);
+        gap: 4px;
+        /* grid-template-columns: repeat(2, 1fr); */
+        grid-auto-rows: 1fr;
+      }
+
+      @media (width > 380px) {
+        .banner-strip-card {
+          grid-template-columns: repeat(2, 1fr);
+        }
       }
 
       .banner-strip-card:nth-child(even) {
@@ -376,8 +459,15 @@
         direction: rtl;
       }
 
+      .banner-strip-card img {
+        /* clip-path: url("#mask-1"); */
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        clip-path: url("#mask-4");
+      }
+
       .banner-strip-card div {
-        flex: 1;
+        /* flex: 1; */
         padding: 1rem;
         display: grid;
         place-content: center;
@@ -524,6 +614,13 @@
         overflow: hidden;
         cursor: pointer;
       }
+
+      .blog-card img {
+        clip-path: url("#mask-1");
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
+      }
       
       .blog-header {
         flex: 1;
@@ -574,15 +671,16 @@
         transform: translateY(100%);
         /* transition: 0.5s; */
         transition: transform 500ms;
+        scrollbar-width: thin;
         overflow: auto;
         z-index: 1;
       }
 
-      .blog-content {
-        scrollbar-width: thin;
+      /* .blog-content { */
+        /* scrollbar-width: thin; */
         /* scrollbar-color: 
           var(--text-light) var(--text-dark); */
-      }
+      /* } */
 
       .blog-card:hover .blog-content {
         /* top: 0; */
@@ -628,16 +726,41 @@
       }
 
       .footer {
+        /* padding-top: 3rem; */
         border-bottom: 10px solid var(--white);
         background-color: var(--primary-color);
         overflow: hidden;
       }
       
       .footer-container {
+        /* position: relative; */
         display: grid;
         gap: 4rem;
         text-align: center;
+        /* border-radius: 12px; */
+        /* border: 3px solid var(--primary-color); */
+        /* border: 3px solid #fff2; */
+        /* filter: drop-shadow(-3px -3px 3px #fff5) 
+                drop-shadow(3px 3px 3px #000); */
+        /* box-shadow: 3px 3px 3px #000, 
+                -3px -3px 3px #fff2; */
+        /* z-index: 1; */
       }
+
+      /* .footer-container::after {
+        position: absolute;
+        top: 0;
+        left: -15%;
+        content: "";
+        width: 130%;
+        height: 100%;
+        background-color: var(--primary-color);
+        clip-path: url("#mask-1");
+        clip-path: url("#mask-2");
+        clip-path: url("#mask-3");
+        clip-path: url("#mask-4");
+        z-index: -1;
+      } */
       
       .footer-col img {
         max-width: 225px;
@@ -1020,7 +1143,7 @@
             </div>
           </div>
           <div class="blog-content">
-            <div class="overflow">
+            <!-- <div class="overflow"> -->
               <h4>Spotlight Series: Iconic Bikes and Their Legacy</h4>
               <p>
                 Each blog installment puts a spotlight on a specific classic bike,
@@ -1029,7 +1152,7 @@
                 backstage pass to the stories behind the most iconic rides in
                 history.
               </p>
-            </div>
+            <!-- </div> -->
           </div>
         </div>
         <div class="blog-card">
@@ -1147,13 +1270,16 @@
       menuBtn.addEventListener("click", () => {
         navLinks.classList.toggle("open");
       
-        const isOpen = navLinks.classList.contains("open");
-        menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+        // const isOpen = navLinks.classList.contains("open");
+        // menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+        menuBtnIcon.classList.toggle("ri-close-line");
+        menuBtnIcon.classList.toggle("ri-menu-line");
       });
       
       navLinks.addEventListener("click", () => {
         navLinks.classList.remove("open");
-        menuBtnIcon.setAttribute("class", "ri-menu-line");
+        // menuBtnIcon.setAttribute("class", "ri-menu-line");
+        menuBtnIcon.className = "ri-menu-line";
       });
       
       const instagram = document.querySelector(".instagram-flex");
@@ -1697,4 +1823,4 @@
     </script>
   </body>
 </html>
-<!-- 49-179-385-530-660-790-920-1050-1180-1310-1440-1570-1700 -->
+<!-- 49-179-385-530-660-790-920-1050-1180-1310-1440-1570-1700-1830 -->
