@@ -41,6 +41,7 @@
       }
 
       a {
+        display: inline-block;
         text-decoration: none;
       }
 
@@ -88,20 +89,22 @@
         isolation: isolate;
         position: relative;
         margin-bottom: 1rem;
-        padding-top: 3rem;
+        /* padding-top: 3rem; */
         font-size: 1.5rem;
         font-weight: 500;
-        overflow: hidden;
+        /* overflow: hidden; */
       }
       
       .section-header::before {
-        position: absolute;
-        left: 0;
-        bottom: 0;
+        /* position: absolute; */
+        /* left: 0; */
+        /* bottom: 0; */
+        display: block;
         font-size: 4.5rem;
         font-weight: 600;
-        line-height: 6rem;
+        /* line-height: 6rem; */
         white-space: nowrap;
+        transform: translateY(45%);
         opacity: 0.1;
       }
       
@@ -118,7 +121,8 @@
         /* border: none; */
         border-radius: 6px;
         border: 1px solid;
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: background-color 300ms;
         /* cursor: pointer; */
       }
       
@@ -198,7 +202,8 @@
         flex-direction: column;
         background-color: var(--secondary-color);
         transform: translateY(-100%);
-        transition: 0.5s;
+        /* transition: 0.5s; */
+        transition: transform 500ms;
         z-index: -1;
       }
       
@@ -208,7 +213,8 @@
       
       .link a {
         color: var(--white);
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: color 300ms;
       }
       
       .link a:hover {
@@ -322,6 +328,7 @@
         height: 10px;
         border-radius: 4px;
         background-color: var(--white);
+        /* transition: width 300ms; */
         z-index: 1;
       }
       
@@ -349,7 +356,8 @@
         gap: 1rem;
         align-items: center;
         border-radius: 6px;
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: background-color 300ms;
       }
       
       .service-card:hover {
@@ -384,8 +392,8 @@
       }
       
       .resume-container .section-header::before {
-        left: 50%;
-        transform: translateX(-50%);
+        /* left: 50%; */
+        /* transform: translateX(-50%); */
         content: "Resume";
       }
       
@@ -514,9 +522,9 @@
         <div class="nav-logo">
           <a href="#">C<span>.</span></a>
         </div>
-        <div class="nav-menu-btn" id="menu-btn">
+        <button class="nav-menu-btn" id="menu-btn">
           <i class="ri-menu-line"></i>
-        </div>
+        </button>
       </div>
       <ul class="nav-links" id="nav-links">
         <li class="link"><a href="#home">Home</a></li>
@@ -526,6 +534,23 @@
         <li class="link"><a href="#contact">Contact</a></li>
       </ul>
     </nav>
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const navLinks = document.getElementById("nav-links");
+      const menuBtnIcon = menuBtn.querySelector("i");
+      
+      menuBtn.addEventListener("click", (e) => {
+        navLinks.classList.toggle("open");
+      
+        const isOpen = navLinks.classList.contains("open");
+        menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+      });
+      
+      navLinks.addEventListener("click", (e) => {
+        navLinks.classList.remove("open");
+        menuBtnIcon.setAttribute("class", "ri-menu-line");
+      });
+    </script>
 
     <header class="header" id="home">
       <div class="section-container header-container">
@@ -545,6 +570,17 @@
         </div>
       </div>
     </header>
+    <script>
+      const downloadCVButton = document.getElementById("download-cv");
+      
+      downloadCVButton.addEventListener("click", (e) => {
+        const link = document.createElement("a");
+        link.setAttribute("download", "CV.pdf");
+        link.setAttribute("href", "./assets/cooper/CV.pdf");
+        link.click();
+      });
+    </script>
+
     <section class="section-container about-container" id="about">
       <div class="about-image">
         <img src="./assets/cooper/about.jpg" alt="about" />
@@ -566,16 +602,25 @@
         </p>
         <div class="about-progress">
           <h5>UX Design</h5>
-          <div class="about-progressbar"><span></span></div>
+          <div class="about-progressbar" data-progress="95"><span></span></div>
           <h5>Visual Storytelling</h5>
-          <div class="about-progressbar"><span></span></div>
+          <div class="about-progressbar" data-progress="75"><span></span></div>
           <h5>Prototyping</h5>
-          <div class="about-progressbar"><span></span></div>
+          <div class="about-progressbar" data-progress="80"><span></span></div>
           <h5>Adobe Mastery</h5>
-          <div class="about-progressbar"><span></span></div>
+          <div class="about-progressbar" data-progress="70"><span></span></div>
         </div>
       </div>
     </section>
+    <script>
+      const progressBars = document.querySelectorAll(".about-progressbar");
+
+      progressBars.forEach(bar => {
+        const progress = bar.dataset.progress;
+        bar.querySelector("span").style.width = progress + "%";
+      });
+    </script>
+
     <section class="service" id="service">
       <div class="section-container service-container">
         <h2 class="section-header">What We Do</h2>
@@ -712,6 +757,38 @@
         </div>
       </div>
     </section>
+    <script>
+      const tabList = document.querySelector(".resume-tablist");
+      
+      tabList.addEventListener("click", (e) => {
+        const tabIndex = e.target.dataset.tab;
+        if (!tabIndex) return;
+      
+        const tabs = document.querySelectorAll("[data-tab]");
+        tabs.forEach((tab) => {
+          if (tab.dataset.tab === tabIndex) {
+            tab.classList.add("active");
+          } else {
+            tab.classList.remove("active");
+          }
+        });
+      
+        const activePanel = document.querySelector(".panel-grid.active");
+        const toActivePanel = document.querySelector(`[data-panel="${tabIndex}"]`);
+        if (activePanel.dataset.panel === tabIndex) return;
+        activePanel.classList.add("close");
+        activePanel.addEventListener(
+          "animationend",
+          (e) => {
+            activePanel.classList.remove("active");
+            activePanel.classList.remove("close");
+            toActivePanel.classList.add("active");
+          },
+          { once: true }
+        );
+      });
+    </script>
+      
     <section class="banner">
       <div class="section-container banner-container">
         <div class="banner-card">
@@ -729,6 +806,59 @@
         <div class="banner-card">
           <h4>15+</h4>
           <p>Global Reach</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="client">
+      <div class="section-container client-container">
+        <h2 class="section-header">Happy Clients Says</h2>
+        <p class="section-description">
+          The seamless integration of innovation and user-centric design in
+          their work has left a lasting impression on our clients and elevated
+          our digital presence.
+        </p>
+        <div class="slider">
+          <div class="slider-track">
+            <div class="slide">
+              <div class="client-card">
+                <p>
+                  Their ability to create visually stunning and highly
+                  functional designs is exceptional. As the CEO of Digital
+                  Dynamics Agency, I have witnessed firsthand the positive
+                  impact they have on our projects.
+                </p>
+                <h4>Michael Rodriguez</h4>
+                <h5>CEO, Digital Dynamics Agency</h5>
+                <img src="./assets/cooper/client-1.jpg" alt="client" />
+              </div>
+            </div>
+            <div class="slide">
+              <div class="client-card">
+                <p>
+                  Working with Cooper was a revelation! Their designs not only
+                  captured the essence of our brand but elevated it to new
+                  heights.
+                </p>
+                <h4>Sarah Johnson</h4>
+                <h5>Marketing Director, Tech Innovations Inc.</h5>
+                <img src="./assets/cooper/client-2.jpg" alt="client" />
+              </div>
+            </div>
+            <div class="slide">
+              <div class="client-card">
+                <p>
+                  I had the pleasure of collaborating with them on a critical
+                  project for Innovate Startups. Their ability to translate our
+                  brand vision into a visually compelling user experience was
+                  truly impressive.
+                </p>
+                <h4>Alexandra Thompson</h4>
+                <h5>Founder, Innovate Startups</h5>
+                <img src="./assets/cooper/client-3.jpg" alt="client" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -784,4 +914,4 @@
     </script>
   </body>
 </html>
-<!-- 49-137-267-397-527-657-787 -->
+<!-- 49-137-267-397-527-657-787-917 -->
