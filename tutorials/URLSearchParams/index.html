@@ -52,7 +52,17 @@
         text-decoration: none;
       }
 
+      input, 
+      textarea {
+        font-family: inherit;
+        border: 0px solid transparent;
+        outline: 1px solid transparent;
+        background-color: transparent;
+      }
+
       button:focus-visible,
+      input:focus-visible,
+      textarea:focus-visible,
       a:focus-visible {
         outline: 1px solid #999;
       }
@@ -628,6 +638,9 @@
       .slider-track {
         padding-bottom: 3rem;
         display: flex;
+        scrollbar-width: thin;
+        scrollbar-color: #fff4 #000;
+        overflow: auto;
       }
 
       .slide {
@@ -661,7 +674,11 @@
       .client-card img {
         max-width: 100px;
         margin-inline: auto;
-        border-radius: 50%;
+        /* border-radius: 50%; */
+        /* clip-path: url("#mask-1"); */
+        clip-path: url("#mask-2");
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
       }
       
       .blog-container .section-header::before {
@@ -673,8 +690,16 @@
         display: grid;
         gap: 1rem;
       }
+
+      .blog-card {
+        display: flex;
+        flex-direction: column;
+      }
       
       .blog-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
         padding: 1rem;
         background-color: var(--secondary-color-dark);
       }
@@ -690,6 +715,7 @@
       }
       
       .blog-content > div {
+        margin-top: auto;
         display: flex;
         gap: 2rem;
         flex-wrap: wrap;
@@ -721,8 +747,8 @@
       }
       
       .footer-container .section-header::before {
-        left: 50%;
-        transform: translateX(-50%);
+        /* left: 50%; */
+        /* transform: translateX(-50%); */
         content: "Contact Us";
       }
       
@@ -783,22 +809,126 @@
         width: 100%;
         padding: 0.75rem;
         color: var(--white);
-        font-size: 1rem;
-        outline: none;
-        border: none;
+        /* font-size: 1rem; */
+        /* font-family: inherit; */
+        /* outline: none; */
+        /* border: none; */
         border-bottom: 1px solid var(--text-light);
-        background-color: transparent;
+        /* background-color: transparent; */
       }
       
       .footer-form textarea {
-        min-height: 8rem;
+        /* min-height: 8rem; */
         margin-bottom: 1rem;
       }
       
       .footer-form .btn {
         max-width: fit-content;
       }
+
+      .footer-bar {
+        padding: 1rem;
+        color: var(--text-light);
+        font-size: 0.9rem;
+        text-align: center;
+      }
       
+      @media (width > 540px) {
+        .panel-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      
+        .blog-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      
+      @media (width > 768px) {
+        nav {
+          position: static;
+          max-width: var(--max-width);
+          margin-inline: auto;
+          padding: 2rem 1rem;
+          display: flex;
+          gap: 2rem;
+          align-items: center;
+          justify-content: space-between;
+        }
+      
+        .nav-header {
+          padding: 0;
+          background-color: transparent;
+        }
+      
+        .nav-logo a span {
+          color: var(--primary-color);
+        }
+      
+        .nav-menu-btn {
+          display: none;
+        }
+      
+        .nav-links {
+          position: static;
+          padding: 0;
+          flex-direction: row;
+          justify-content: flex-end;
+          background-color: transparent;
+          transform: none;
+        }
+      
+        .about-container {
+          align-items: center;
+          grid-template-columns: repeat(2, 1fr);
+        }
+      
+        .service-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      
+        .service-card {
+          padding: 2rem;
+        }
+      
+        .panel-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      
+        .banner-container {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      
+        .banner-card:nth-child(2n - 1),
+        .banner-card:nth-child(2) {
+          border-right: 1px solid var(--white);
+        }
+      
+        .blog-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      
+        .footer-grid {
+          grid-template-columns: 1fr 2fr;
+        }
+      }
+      
+      @media (width > 1024px) {
+        .panel-grid {
+          gap: 2rem;
+        }
+      
+        .panel-card {
+          padding: 2rem;
+        }
+      
+        .blog-grid {
+          gap: 2rem;
+        }
+      
+        .blog-content {
+          padding: 2rem;
+        }
+      }
     </style>
   </head>
   <body>
@@ -1242,7 +1372,7 @@
                 <input type="text" placeholder="Your Name" />
                 <input type="text" placeholder="Your Email" />
               </div>
-              <textarea placeholder="Your Message"></textarea>
+              <textarea placeholder="Your Message" rows="8"></textarea>
               <button class="btn btn-primary">Send Message</button>
             </form>
           </div>
@@ -1304,4 +1434,4 @@
     </script>
   </body>
 </html>
-<!-- 49-137-267-397-527-657-787-917-1047-1177-1307 -->
+<!-- 49-137-267-397-527-657-787-917-1047-1177-1307-1437 -->
