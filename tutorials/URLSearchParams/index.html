@@ -407,10 +407,21 @@
       .about-progressbar {
         isolation: isolate;
         position: relative;
-        flex: 1;
+        /* flex: 1; */
         height: 10px;
         border-radius: 4px;
         background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .about-progressbar::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        /* width: var(--width); */
+        height: 100%;
+        border-radius: inherit;
+        background-color: var(--white);
       }
       
       .about-progressbar span {
@@ -555,6 +566,7 @@
         text-align: center;
         border-radius: 6px;
         background-color: var(--secondary-color-dark);
+        border-radius: 12px;
         box-shadow: 3px 3px 3px #0005, 
                   -3px -3px 3px #fff1;
         /* transition: 0.3s; */
@@ -570,7 +582,8 @@
         margin-bottom: 1rem;
         color: var(--primary-color);
         font-size: 2.5rem;
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: color 300ms;
       }
       
       .panel-card:hover span {
@@ -634,7 +647,7 @@
       .slider {
         /* width: 100%; */
         /* display: flex; */
-        overflow: hidden;
+        /* overflow: hidden; */
       }
 
       .slider-track {
@@ -643,6 +656,37 @@
         /* scrollbar-width: thin; */
         /* scrollbar-color: #fff4 #000; */
         /* overflow: auto; */
+        overflow: hidden;
+      }
+
+      .slider .control {
+        margin-top: 2rem;
+        text-align: center;
+      }
+      
+      .slider button {
+        color: var(--white);
+        font-size: 0px;
+        border-radius: 50%;
+        border: 1px solid var(--white);
+        background-color: var(--secondary-color);
+        transition: background-color 300ms;
+      }
+
+      .slider button:hover {
+        background-color: var(--primary-color-dark);
+      }
+    
+      button#prev {
+        padding: 0.45rem 0.5rem 0.45rem 0.7rem;
+      }
+    
+      button#next {
+        padding: 0.45rem 0.7rem 0.45rem 0.5rem;
+      }
+    
+      .slider button i {
+        font-size: 2rem;
       }
 
       .slide {
@@ -698,6 +742,17 @@
       .blog-card {
         display: flex;
         flex-direction: column;
+        /* border-radius: 12px; */
+        /* box-shadow: 3px 3px 3px #0005, 
+                  -3px -3px 3px #fff1; */
+      }
+
+      .blog-card img {
+        /* padding: 5%; */
+        clip-path: url("#mask-1");
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
       }
       
       .blog-content {
@@ -729,8 +784,8 @@
       
       .blog-content a {
         color: var(--white);
-        transition: 0.3s;
-      }
+        /* transition: 0.3s; */
+        transition: color 300ms;      }
       
       .blog-content a:hover {
         color: var(--primary-color);
@@ -788,7 +843,8 @@
       .footer-socials a {
         color: var(--white);
         font-size: 1.25rem;
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: color 300ms;
       }
       
       .footer-socials a:hover {
@@ -941,9 +997,9 @@
         transform: translateX(100%);
       }
       
-      /* .slide.active {
+      .slide.active {
         transform: translateX(0);
-      } */
+      }
     
       .relative {
         position: relative;
@@ -962,7 +1018,7 @@
         transition: transform 300ms;
       }
       
-      /* .slide.fade-in-left {
+      .slide.fade-in-left {
         animation: fade-in-left 1s linear forwards;
       }
     
@@ -973,9 +1029,9 @@
         100% {
           transform: translateX(0%);
         }
-      } */
+      }
     
-      /* .slide.fade-in-right {
+      .slide.fade-in-right {
         animation: fade-in-right 1s linear forwards;
       }
     
@@ -986,9 +1042,9 @@
         100% {
           transform: translateX(0%);
         }
-      } */
+      }
     
-      /* .slide.fade-out-left {
+      .slide.fade-out-left {
         animation: fade-out-left 1s linear forwards;
       }
     
@@ -999,9 +1055,9 @@
         100% {
           transform: translateX(-100%);
         }
-      } */
+      }
       
-      /* .slide.fade-out-right {
+      .slide.fade-out-right {
         animation: fade-out-right 1s linear forwards;
       }
     
@@ -1012,7 +1068,7 @@
         100% {
           transform: translateX(100%);
         }
-      } */
+      }
     </style>
   </head>
   <body>
@@ -1374,41 +1430,118 @@
     </section>
     <script>
       const slides = document.querySelectorAll(".slide");
-      const forwards = document.getElementById("next");
-      const backwards = document.getElementById("prev");
-      const slidesLength = slides.length;
-      let current = 0;
-      let next = 1;
-      let prev = slidesLength - 1;
+      const nextb = document.getElementById("next");
+      const prevb = document.getElementById("prev");
+      let index = 0;
+      let prevIndex = 0;
+      let penultimateIndex = 0;
 
-      forwards.addEventListener("click", () => {
-        slides[current].classList.replace("current", "prev");
-        slides[next].classList.replace("next", "current");
-        slides[prev].classList.remove("prev");
-        next++;
-        next = next % slidesLength;
-        slides[next].classList.add("next");
-        current++;
-        current = current % slidesLength;
-        prev++;
-        prev = prev % slidesLength;
-      });
+      // next.addEventListener("click", () => {
+      //   const activeSlide = slides[index];
+      //   activeSlide.classList.remove("fade-in-left", "fade-in-right");
+      //   activeSlide.classList.add("fade-out-left");
+      //   index++;
+      //   index = index % slides.length;
+      //   slides[index].classList.remove("fade-out-left", "fade-out-right");
+      //   slides[index].classList.add("fade-in-left");
+      // })
 
-      backwards.addEventListener("click", () => {
-        slides[current].classList.replace("current", "next");
-        slides[prev].classList.replace("prev", "current");
-        slides[next].classList.remove("next");
-        prev--;
-        prev = prev + slidesLength;
-        prev = prev % slidesLength;
-        slides[prev].classList.add("prev");
-        current--;
-        current = current + slidesLength;
-        current = current % slidesLength;
-        next--;
-        next = next + slidesLength;
-        next = next % slidesLength;
-      });
+      nextb.addEventListener("click", () => {
+        const activeSlide = slides[index];
+        penultimateIndex = prevIndex;
+        const penultimateSlide = slides[penultimateIndex];
+        const penultimateSlideAnimations = penultimateSlide.getAnimations();
+        // console.log(animations);
+        if (penultimateSlideAnimations.length > 0) {
+          penultimateSlideAnimations[0].finish();
+          // penultimateSlideAnimations[0].playbackRate = 10;
+          // activeSlide.getAnimations()[0].playbackRate = 5;
+          activeSlide.getAnimations()[0].finish();
+          // slides[prevIndex].getAnimations()[0].playbackRate = 5;
+          slides[prevIndex].getAnimations()[0].finish();
+        }
+        prevIndex = index;
+        activeSlide.classList.remove("fade-in-left", "fade-in-right");
+        activeSlide.classList.add("fade-out-left");
+        index++;
+        index = index % slides.length;
+        // console.log(index, prevIndex, finish);
+        slides[index].classList.remove("fade-out-left", "fade-out-right");
+        slides[index].classList.add("fade-in-left");
+      })
+
+      nextb.addEventListener("click", () => {
+        const activeSlide = slides[index];
+        activeSlide.classList.remove("active");
+      }, {once: true})
+
+      prevb.addEventListener("click", () => {
+        const activeSlide = slides[index];
+        activeSlide.classList.remove("active");
+      }, {once: true})
+
+      prevb.addEventListener("click", () => {
+        // const activeSlide = document.querySelector(".slide.active");
+        const activeSlide = slides[index];
+        penultimateIndex = prevIndex;
+        const penultimateSlide = slides[penultimateIndex];
+        const penultimateSlideAnimations = penultimateSlide.getAnimations();
+        // console.log(animations);
+        if (penultimateSlideAnimations.length > 0) {
+          penultimateSlideAnimations[0].finish();
+          // penultimateSlideAnimations[0].playbackRate = 10;
+          // activeSlide.getAnimations()[0].playbackRate = 5;
+          activeSlide.getAnimations()[0].finish();
+          // slides[prevIndex].getAnimations()[0].playbackRate = 5;
+          slides[prevIndex].getAnimations()[0].finish();
+        }
+        prevIndex = index;
+        // activeSlide.classList.replace("active", "fade-out-right");
+        activeSlide.classList.remove("fade-in-left", "fade-in-right");
+        activeSlide.classList.add("fade-out-right");
+        index--;
+        index = index + slides.length;
+        index = index % slides.length;
+        slides[index].classList.remove("fade-out-left", "fade-out-right");
+        slides[index].classList.add("fade-in-right");
+      })
+
+      // const slides = document.querySelectorAll(".slide");
+      // const forwards = document.getElementById("next");
+      // const backwards = document.getElementById("prev");
+      // const slidesLength = slides.length;
+      // let current = 0;
+      // let next = 1;
+      // let prev = slidesLength - 1;
+
+      // forwards.addEventListener("click", () => {
+      //   slides[current].classList.replace("current", "prev");
+      //   slides[next].classList.replace("next", "current");
+      //   slides[prev].classList.remove("prev");
+      //   next++;
+      //   next = next % slidesLength;
+      //   slides[next].classList.add("next");
+      //   current++;
+      //   current = current % slidesLength;
+      //   prev++;
+      //   prev = prev % slidesLength;
+      // });
+
+      // backwards.addEventListener("click", () => {
+      //   slides[current].classList.replace("current", "next");
+      //   slides[prev].classList.replace("prev", "current");
+      //   slides[next].classList.remove("next");
+      //   prev--;
+      //   prev = prev + slidesLength;
+      //   prev = prev % slidesLength;
+      //   slides[prev].classList.add("prev");
+      //   current--;
+      //   current = current + slidesLength;
+      //   current = current % slidesLength;
+      //   next--;
+      //   next = next + slidesLength;
+      //   next = next % slidesLength;
+      // });
     </script>
 
     <section class="section-container blog-container" id="blog">
@@ -1564,4 +1697,4 @@
     </script>
   </body>
 </html>
-<!-- 49-137-267-397-527-657-787-917-1047-1177-1307-1437-1567 -->
+<!-- 49-137-267-397-527-657-787-917-1047-1177-1307-1437-1567-1697 -->
