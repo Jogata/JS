@@ -36,6 +36,10 @@
         box-sizing: border-box;
       }
 
+      ul {
+        list-style: none;
+      }
+
       a {
         display: inline-block;
         text-decoration: none;
@@ -210,11 +214,39 @@
       }
 
       .header {
+        position: relative;
         min-height: 50vw;
-        background-image: url("./assets/travelty/header.jpg");
+        /* background-image: url("./assets/travelty/header.jpg"); */
+        /* background-image: url("./assets/travelty/ai-generated-8567535.png");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover; */
+      }
+
+      .header::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-image: 
+          linear-gradient(#0005, #0005);
+        z-index: 2;
+      }
+
+      .header::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-image: url("./assets/travelty/ai-generated-8567535.png");
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
+        z-index: 1;
       }
       
       nav {
@@ -249,9 +281,10 @@
       }
 
       .nav-links {
-        list-style: none;
+        /* list-style: none; */
         position: absolute;
-        top: 68px;
+        /* top: 68px; */
+        top: 100%;
         left: 0;
         width: 100%;
         padding: 2rem;
@@ -284,7 +317,9 @@
       }
 
       .header-container {
+        position: relative;
         padding-block: 10rem;
+        z-index: 3;
       }
       
       .header-container h1 {
@@ -428,7 +463,11 @@
       .client-image img {
         max-width: 400px;
         margin-inline: auto;
-        border-radius: 6px;
+        /* border-radius: 6px; */
+        /* clip-path: url("#mask-1"); */
+        /* clip-path: url("#mask-2"); */
+        clip-path: url("#mask-3");
+        /* clip-path: url("#mask-4"); */
       }
       
       .client-image img.show {
@@ -473,6 +512,31 @@
         overflow: hidden;
       }
 
+      .slider .control {
+        margin-top: 2rem;
+        text-align: center;
+      }
+    
+      .slider button {
+        color: var(--white);
+        font-size: 0px;
+        border-radius: 50%;
+        border: 1px solid var(--text-dark);
+        background-color: var(--text-dark);
+      }
+    
+      button#prev {
+        padding: 0.45rem 0.5rem 0.45rem 0.7rem;
+      }
+    
+      button#next {
+        padding: 0.45rem 0.7rem 0.45rem 0.5rem;
+      }
+    
+      .slider button i {
+        font-size: 2rem;
+      }
+        
       .slide {
         position: absolute;
         width: 100%;
@@ -480,12 +544,77 @@
         transform: translateX(100%);
       }
       
-      /* .slide.active {
+      .slide.active {
         transform: translateX(0);
-      } */
+      }
       
       .relative {
         position: relative;
+      }
+      
+      .current {
+        transform: translate(0);
+        transition: transform 300ms;
+      }
+      .next {
+        transform: translate(100%);
+        transition: transform 300ms;
+      }
+      .prev {
+        transform: translate(-100%);
+        transition: transform 300ms;
+      }
+        
+      .slide.fade-in-left {
+        animation: fade-in-left 1s linear forwards;
+      }
+    
+      @keyframes fade-in-left {
+        0% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(0%);
+        }
+      }
+    
+      .slide.fade-in-right {
+        animation: fade-in-right 1s linear forwards;
+      }
+    
+      @keyframes fade-in-right {
+        0% {
+          transform: translateX(-100%);
+        }
+        100% {
+          transform: translateX(0%);
+        }
+      }
+    
+      .slide.fade-out-left {
+        animation: fade-out-left 1s linear forwards;
+      }
+    
+      @keyframes fade-out-left {
+        0% {
+          transform: translateX(0%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+    
+      .slide.fade-out-right {
+        animation: fade-out-right 1s linear forwards;
+      }
+    
+      @keyframes fade-out-right {
+        0% {
+          transform: translateX(0%);
+        }
+        100% {
+          transform: translateX(100%);
+        }
       }
       
       .client-card p {
@@ -583,7 +712,8 @@
             rgba(0, 0, 0, 0.2),
             rgba(0, 0, 0, 0.8)
           );
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: transform 300ms;
         z-index: 1;
       }
       
@@ -697,7 +827,7 @@
       }
 
       .footer-links {
-        list-style: none;
+        /* list-style: none; */
         display: grid;
         gap: 1rem;
       }
@@ -726,7 +856,8 @@
         }
       
         nav {
-          position: static;
+          /* position: static; */
+          position: relative;
           max-width: var(--max-width);
           margin-inline: auto;
           padding: 2rem 1rem;
@@ -734,6 +865,7 @@
           gap: 2rem;
           align-items: center;
           justify-content: space-between;
+          /* z-index: 3; */
         }
       
         .nav-header {
@@ -1871,4 +2003,4 @@
     </script>
   </body>
 </html>
-<!-- 49-579-704-834-964-1094-1224-1354-1484-1614-1744-1874 -->
+<!-- 49-579-704-834-964-1094-1224-1354-1484-1614-1744-1874-2006 -->
