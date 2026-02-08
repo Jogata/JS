@@ -201,6 +201,7 @@
         border-radius: 6px;
         background-color: var(--primary-color);
         transition: 0.3s;
+        transition: background-color 300ms;
         /* cursor: pointer; */
       }
       
@@ -457,17 +458,34 @@
       }
 
       .client-content {
-        overflow: hidden;
+        /* overflow: hidden; */
       }
       
       .slider {
         width: 100%;
         margin-top: 2rem;
+        /* overflow: hidden; */
       }
       
       .slider-track {
         padding-bottom: 2rem;
         display: flex;
+        overflow: hidden;
+      }
+
+      .slide {
+        position: absolute;
+        width: 100%;
+        flex-shrink: 0;
+        transform: translateX(100%);
+      }
+      
+      /* .slide.active {
+        transform: translateX(0);
+      } */
+      
+      .relative {
+        position: relative;
       }
       
       .client-card p {
@@ -824,6 +842,23 @@
         <h1>The Most Beautiful<br />Places In The<br />World!</h1>
       </div>
     </header>
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const navLinks = document.getElementById("nav-links");
+      const menuBtnIcon = menuBtn.querySelector("i");
+      
+      menuBtn.addEventListener("click", (e) => {
+        navLinks.classList.toggle("open");
+      
+        const isOpen = navLinks.classList.contains("open");
+        menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+      });
+      
+      navLinks.addEventListener("click", (e) => {
+        navLinks.classList.remove("open");
+        menuBtnIcon.setAttribute("class", "ri-menu-line");
+      });
+    </script>
 
     <section class="section-container offer-container" id="offer">
       <div class="offer-image">
@@ -922,8 +957,8 @@
         <h2 class="section-header">What our client says</h2>
 
         <div class="slider">
-          <div class="slider-track">
-            <div class="slide">
+          <div class="slider-track relative">
+            <div class="slide relative current">
               <div class="client-card">
                 <p>
                   The expert-guided tours provided me with an in-depth
@@ -940,7 +975,7 @@
                 </div>
               </div>
             </div>
-            <div class="slide">
+            <div class="slide next">
               <div class="client-card">
                 <p>
                   Thanks to the seamless travel planning service, my vacation
@@ -957,7 +992,7 @@
                 </div>
               </div>
             </div>
-            <div class="slide">
+            <div class="slide prev">
               <div class="client-card">
                 <p>
                   The exclusive VIP experiences took my trip to a whole new
@@ -975,17 +1010,103 @@
               </div>
             </div>
           </div>
-          <div class="client-btns">
+          <div class="control">
+            <button id="next">
+              next <i class="ri-arrow-left-double-line"></i>
+            </button>
+            <button id="prev">
+              prev <i class="ri-arrow-right-double-line"></i>
+            </button>
+          </div>
+          <!-- <div class="client-btns">
             <div class="prev">
               <i class="ri-arrow-left-line"></i>
             </div>
             <div class="next">
               <i class="ri-arrow-right-line"></i>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </section>
+    <script>
+      const slides = document.querySelectorAll(".slide");
+      const nextb = document.getElementById("next");
+      const prevb = document.getElementById("prev");
+      let index = 0;
+      let prevIndex = 0;
+      let penultimateIndex = 0;
+
+      // next.addEventListener("click", () => {
+      //   const activeSlide = slides[index];
+      //   activeSlide.classList.remove("fade-in-left", "fade-in-right");
+      //   activeSlide.classList.add("fade-out-left");
+      //   index++;
+      //   index = index % slides.length;
+      //   slides[index].classList.remove("fade-out-left", "fade-out-right");
+      //   slides[index].classList.add("fade-in-left");
+      // })
+
+      nextb.addEventListener("click", () => {
+        const activeSlide = slides[index];
+        penultimateIndex = prevIndex;
+        const penultimateSlide = slides[penultimateIndex];
+        const penultimateSlideAnimations = penultimateSlide.getAnimations();
+        // console.log(animations);
+        if (penultimateSlideAnimations.length > 0) {
+          penultimateSlideAnimations[0].finish();
+          // penultimateSlideAnimations[0].playbackRate = 10;
+          // activeSlide.getAnimations()[0].playbackRate = 5;
+          activeSlide.getAnimations()[0].finish();
+          // slides[prevIndex].getAnimations()[0].playbackRate = 5;
+          slides[prevIndex].getAnimations()[0].finish();
+        }
+        prevIndex = index;
+        activeSlide.classList.remove("fade-in-left", "fade-in-right");
+        activeSlide.classList.add("fade-out-left");
+        index++;
+        index = index % slides.length;
+        // console.log(index, prevIndex, finish);
+        slides[index].classList.remove("fade-out-left", "fade-out-right");
+        slides[index].classList.add("fade-in-left");
+      })
+
+      nextb.addEventListener("click", () => {
+        const activeSlide = slides[index];
+        activeSlide.classList.remove("active");
+      }, {once: true})
+
+      prevb.addEventListener("click", () => {
+        const activeSlide = slides[index];
+        activeSlide.classList.remove("active");
+      }, {once: true})
+
+      prevb.addEventListener("click", () => {
+        // const activeSlide = document.querySelector(".slide.active");
+        const activeSlide = slides[index];
+        penultimateIndex = prevIndex;
+        const penultimateSlide = slides[penultimateIndex];
+        const penultimateSlideAnimations = penultimateSlide.getAnimations();
+        // console.log(animations);
+        if (penultimateSlideAnimations.length > 0) {
+          penultimateSlideAnimations[0].finish();
+          // penultimateSlideAnimations[0].playbackRate = 10;
+          // activeSlide.getAnimations()[0].playbackRate = 5;
+          activeSlide.getAnimations()[0].finish();
+          // slides[prevIndex].getAnimations()[0].playbackRate = 5;
+          slides[prevIndex].getAnimations()[0].finish();
+        }
+        prevIndex = index;
+        // activeSlide.classList.replace("active", "fade-out-right");
+        activeSlide.classList.remove("fade-in-left", "fade-in-right");
+        activeSlide.classList.add("fade-out-right");
+        index--;
+        index = index + slides.length;
+        index = index % slides.length;
+        slides[index].classList.remove("fade-out-left", "fade-out-right");
+        slides[index].classList.add("fade-in-right");
+      })
+    </script>
 
     <section class="banner">
       <div class="banner-wrapper">
@@ -1095,6 +1216,15 @@
         </div>
       </div>
     </section>
+    <script>
+      const banner = document.querySelector(".banner-wrapper");
+      
+      Array.from(banner.children).forEach((item) => {
+        const duplicateNode = item.cloneNode(true);
+        duplicateNode.setAttribute("aria-hidden", true);
+        banner.appendChild(duplicateNode);
+      });
+    </script>
 
     <section class="section-container newsletter-container" id="contact">
       <div class="newsletter-content">
@@ -1741,4 +1871,4 @@
     </script>
   </body>
 </html>
-<!-- 49-579-704-834-964-1094-1224-1354-1484-1614-1744 -->
+<!-- 49-579-704-834-964-1094-1224-1354-1484-1614-1744-1874 -->
