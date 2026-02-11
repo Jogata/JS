@@ -132,7 +132,7 @@
   font-family: Georgia, serif;
   font-family: "DM Serif Display", serif;
   /* line-height: 1.6; */
-  background-color: #080a0c;
+  /* background-color: #080a0c; */
       }
         
       .section-container {
@@ -375,6 +375,10 @@
       .faq-image img {
         max-width: 450px;
         margin-inline: auto;
+        /* clip-path: url("#mask-1"); */
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        clip-path: url("#mask-4");
       }
       
       .faq-content .section-header {
@@ -439,7 +443,11 @@
       
       .article-card img {
         margin-bottom: 1rem;
-        border-radius: 6px;
+        /* border-radius: 6px; */
+        clip-path: url("#mask-1");
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
       }
       
       .article-card div {
@@ -470,10 +478,21 @@
         text-align: center;
       }
       
-      .swiper {
+      .slider {
+        position: relative;
+        /* width: 100%; */
         margin-top: 2rem;
-        width: 100%;
         padding-bottom: 3rem;
+        overflow: hidden;
+        /* z-index: 2; */
+      }
+
+      .slider-track {
+        display: flex;
+      }
+    
+      #relative {
+        position: relative;
       }
       
       .client-card {
@@ -618,10 +637,115 @@
         text-align: center;
       }
 
+      @media (width > 540px) {
+        .article-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .footer-container {
+          grid-template-columns: 1fr 2fr;
+        }
+      
+        .footer-col:first-child {
+          grid-area: 1/1/2/3;
+        }
+      }
+
+      @media (width > 768px) {
+        nav {
+          position: static;
+          max-width: var(--max-width);
+          margin-inline: auto;
+          padding: 2rem 1rem;
+          display: flex;
+          gap: 2rem;
+          align-items: center;
+          justify-content: space-between;
+        }
+      
+        .nav-header {
+          flex: 1;
+          padding: 0;
+          background-color: transparent;
+        }
+      
+        .nav-logo a {
+          font-size: 1.5rem;
+        }
+      
+        .nav-logo a span {
+          color: var(--primary-color);
+        }
+      
+        .nav-menu-btn {
+          display: none;
+        }
+      
+        .nav-links {
+          position: static;
+          padding: 0;
+          flex-direction: row;
+          background-color: transparent;
+          transform: none;
+        }
+      
+        .nav-links a {
+          color: var(--white);
+        }
+      
+        .nav-btns {
+          display: flex;
+          flex: 1;
+        }
+      
+        .nav-btns .btn {
+          color: var(--primary-color);
+          background-color: var(--white);
+        }
+      
+        .header-container {
+          padding-block: 8rem 12rem;
+        }
+      
+        .about-header {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      
+        .about-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      
+        .about-card {
+          padding: 5rem 2rem;
+        }
+      
+        .faq-container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      
+        .article-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      
+        .banner-container {
+          align-items: center;
+          grid-template-columns: repeat(2, 1fr);
+        }
+      
+        .footer-container {
+          grid-template-columns: 2fr 1fr 1.5fr;
+        }
+      
+        .footer-col:first-child {
+          grid-area: unset;
+        }
+      }
+      
       .header {
         position: relative;
         max-width: var(--max-width);
-        margin: auto;
+        /* margin: auto; */
+        margin: 3rem auto 0;
         background: none;
       }
 
@@ -641,10 +765,15 @@
         background-position: center;
         background-size: cover;
         clip-path: url("#mask-1");
-        clip-path: url("#mask-2");
-        clip-path: url("#mask-3");
-        clip-path: url("#mask-4");
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
         z-index: -1;
+      }
+
+      nav {
+        top: 0;
+        max-width: var(--max-width);
       }
     </style>
   </head>
@@ -655,9 +784,9 @@
           <div class="nav-logo">
             <a href="#">Sec<span>tt</span>re</a>
           </div>
-          <div class="nav-menu-btn" id="menu-btn">
+          <button class="nav-menu-btn" id="menu-btn">
             <span><i class="ri-menu-line"></i></span>
-          </div>
+          </button>
         </div>
         <ul class="nav-links" id="nav-links">
           <li><a href="#home">Home</a></li>
@@ -670,6 +799,7 @@
           <button class="btn">Get A Quote</button>
         </div>
       </nav>
+
       <div class="section-container header-container" id="home">
         <p>INDUSTRIAL</p>
         <h1>We Provide Best Industrial Service</h1>
@@ -2087,4 +2217,4 @@
   </body>
 </html>
 <!-- 49-579-704-834-964-1094-1224-1354-1484-1614-1744-1874-
-  2006-2134-1310-1440-1570-1700-1830-1960-2090 -->
+  2006-2134-1310-1440-1570-1700-1830-1960-2090-2220 -->
