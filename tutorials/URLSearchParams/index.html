@@ -42,7 +42,8 @@
 
       a {    
         text-decoration: none;
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: color 300ms;
       }
 
       button {
@@ -413,8 +414,10 @@
       }
       
       .faq-header span {
+        color: var(--text-dark);
         font-size: 1.5rem;
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: transform 300ms;
         cursor: pointer;
       }
       
@@ -490,11 +493,64 @@
       .slider-track {
         display: flex;
       }
+      
+      .slide {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        flex-shrink: 0;
+        transform: translateX(100%);
+        /* opacity: 0; */
+      }
     
       #relative {
         position: relative;
       }
+
+      .current {
+        transform: translate(0);
+        /* transition: transform 300ms; */
+        transition: transform 300ms, 
+                      opacity 300ms;
+        /* opacity: 1; */
+        /* z-index: 1; */
+      }
+    
+      .left {
+        transform: translateX(-100%);
+        transition: transform 300ms;
+      }
+    
+      .right {
+        transform: translateX(100%);
+        transition: transform 300ms;
+      }
+
+      .pagination {
+        margin-top: 2rem;
+        text-align: center;
+      }
       
+      .page-button {
+        aspect-ratio: 1;
+        margin: 0.5rem;
+        padding: 0.4em 0.84em;
+        color: var(--text-dark);
+        font-size: 1.2rem;
+        /* background-color: transparent; */
+        filter: drop-shadow(1px 1px #000);
+        /* transition: color 0.4s, background-color 0.4s; */
+        transition: color 400ms, border-color 400ms;
+        /* border: 1px solid; */
+        /* opacity: 1; */
+      }
+      
+      .page-button.active {
+        color: var(--text-dark);
+        /* background-color: var(--white-color); */
+        border: 1px solid;
+      }
+        
       .client-card {
         max-width: 600px;
         margin-inline: auto;
@@ -539,9 +595,9 @@
         text-align: left;
       }
       
-      .swiper-pagination-bullet-active {
+      /* .swiper-pagination-bullet-active {
         background-color: var(--primary-color);
-      }
+      } */
       
       .banner {
         background-color: var(--extra-light);
@@ -616,6 +672,13 @@
         gap: 1rem;
         align-items: center;
       }
+
+      .footer-media img {
+        clip-path: url("#mask-1");
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
+      }
       
       .footer-socials a {
         padding: 3px 8px;
@@ -652,6 +715,13 @@
       }
 
       @media (width > 768px) {
+        .header::after {
+          clip-path: url("#mask-1");
+          /* clip-path: url("#mask-2"); */
+          /* clip-path: url("#mask-3"); */
+          /* clip-path: url("#mask-4"); */
+        }
+
         nav {
           position: static;
           max-width: var(--max-width);
@@ -740,12 +810,18 @@
           grid-area: unset;
         }
       }
+
+      @media (width > 1024px) {
+        .article-grid {
+          gap: 2rem;
+        }
+      }
       
       .header {
         position: relative;
         max-width: var(--max-width);
-        /* margin: auto; */
-        margin: 3rem auto 0;
+        margin: auto;
+        /* margin: 3rem auto 0; */
         background: none;
       }
 
@@ -764,7 +840,7 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
-        clip-path: url("#mask-1");
+        /* clip-path: url("#mask-1"); */
         /* clip-path: url("#mask-2"); */
         /* clip-path: url("#mask-3"); */
         /* clip-path: url("#mask-4"); */
@@ -773,8 +849,29 @@
 
       nav {
         top: 0;
-        max-width: var(--max-width);
+        /* max-width: var(--max-width); */
       }
+
+      .zoom-in {
+        animation: zoom-in 2s linear backwards;
+      }
+
+      .rotate {
+        animation: rotate 1s linear forwards;
+      }
+      
+      @keyframes zoom-in {
+        0% {
+          opacity: 0;
+        }
+      }
+      
+      @keyframes rotate {
+        0% {
+          transform: rotate(80deg);
+          opacity: 0;
+        }
+      }      
     </style>
   </head>
   <body>
@@ -981,7 +1078,7 @@
       <h2 class="section-header">Client's Testimonials</h2>
       <div class="slider">
         <div class="slider-track">
-          <div class="slide">
+          <div class="slide current" id="relative">
             <div class="client-card">
               <span><i class="ri-double-quotes-l"></i></span>
               <p>
@@ -999,7 +1096,7 @@
               </div>
             </div>
           </div>
-          <div class="slide">
+          <div class="slide next">
             <div class="client-card">
               <span><i class="ri-double-quotes-l"></i></span>
               <p>
@@ -1018,7 +1115,7 @@
               </div>
             </div>
           </div>
-          <div class="slide">
+          <div class="slide prev">
             <div class="client-card">
               <span><i class="ri-double-quotes-l"></i></span>
               <p>
@@ -1041,11 +1138,44 @@
           <button class="page-button active">1</button>
           <button class="page-button">2</button>
           <button class="page-button">3</button>
-          <button class="page-button">4</button>
-          <button class="page-button">5</button>
+          <!-- <button class="page-button">4</button> -->
+          <!-- <button class="page-button">5</button> -->
         </div>
       </div>
     </section>
+    <script>
+      const slides = document.querySelectorAll(".slide");
+      const slidesLength = slides.length;
+      let current = 0;
+      
+      const slidesClasses = new Array(slidesLength);
+      // console.log(slidesClasses);
+      const pageButtons = document.querySelectorAll(".page-button");
+    
+      pageButtons.forEach((button, index) => {
+        button.addEventListener("click", () => {
+          current = index;
+          const currentActiveButton = document.querySelector(".page-button.active");
+          currentActiveButton.classList.remove("active");
+          const newActiveButton = pageButtons[index];
+          newActiveButton.classList.add("active");
+    
+          slidesClasses.fill("slide");
+          slidesClasses[index] = "slide current";
+          
+          for (let index = 0; index < current; index++) {
+            slidesClasses[index] = "slide left";
+          }
+          
+          for (let index = current + 1; index < slidesLength; index++) {
+            slidesClasses[index] = "slide right";
+          }
+    
+          // console.log(slidesClasses);
+          slides.forEach((slide, index) => slide.className = slidesClasses[index]);
+        })
+      })
+    </script>
 
     <section class="banner">
       <div class="section-container banner-container">
@@ -1337,42 +1467,42 @@
       </div>
     </section>
     <script>
-      const slides = document.querySelectorAll(".slide");
-      const forwards = document.getElementById("next");
-      const backwards = document.getElementById("prev");
-      const slidesLength = slides.length;
-      let current = 0;
-      let next = 1;
-      let prev = slidesLength - 1;
+      // const slides = document.querySelectorAll(".slide");
+      // const forwards = document.getElementById("next");
+      // const backwards = document.getElementById("prev");
+      // const slidesLength = slides.length;
+      // let current = 0;
+      // let next = 1;
+      // let prev = slidesLength - 1;
 
-      forwards.addEventListener("click", () => {
-        slides[current].classList.replace("current", "prev");
-        slides[next].classList.replace("next", "current");
-        slides[prev].classList.remove("prev");
-        next++;
-        next = next % slidesLength;
-        slides[next].classList.add("next");
-        current++;
-        current = current % slidesLength;
-        prev++;
-        prev = prev % slidesLength;
-      });
+      // forwards.addEventListener("click", () => {
+      //   slides[current].classList.replace("current", "prev");
+      //   slides[next].classList.replace("next", "current");
+      //   slides[prev].classList.remove("prev");
+      //   next++;
+      //   next = next % slidesLength;
+      //   slides[next].classList.add("next");
+      //   current++;
+      //   current = current % slidesLength;
+      //   prev++;
+      //   prev = prev % slidesLength;
+      // });
 
-      backwards.addEventListener("click", () => {
-        slides[current].classList.replace("current", "next");
-        slides[prev].classList.replace("prev", "current");
-        slides[next].classList.remove("next");
-        prev--;
-        prev = prev + slidesLength;
-        prev = prev % slidesLength;
-        slides[prev].classList.add("prev");
-        current--;
-        current = current + slidesLength;
-        current = current % slidesLength;
-        next--;
-        next = next + slidesLength;
-        next = next % slidesLength;
-      });
+      // backwards.addEventListener("click", () => {
+      //   slides[current].classList.replace("current", "next");
+      //   slides[prev].classList.replace("prev", "current");
+      //   slides[next].classList.remove("next");
+      //   prev--;
+      //   prev = prev + slidesLength;
+      //   prev = prev % slidesLength;
+      //   slides[prev].classList.add("prev");
+      //   current--;
+      //   current = current + slidesLength;
+      //   current = current % slidesLength;
+      //   next--;
+      //   next = next + slidesLength;
+      //   next = next % slidesLength;
+      // });
 
       // const slides = document.querySelectorAll(".slide");
       // const nextb = document.getElementById("next");
@@ -2217,4 +2347,4 @@
   </body>
 </html>
 <!-- 49-579-704-834-964-1094-1224-1354-1484-1614-1744-1874-
-  2006-2134-1310-1440-1570-1700-1830-1960-2090-2220 -->
+  2006-2134-1310-1440-1570-1700-1830-1960-2090-2220-2350 -->
