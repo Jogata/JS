@@ -3,990 +3,140 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>URL SearchParams in JS</title> -->
-    <title>Secttre</title>
+    <title>URL SearchParams in JS</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      /* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"); */
-      @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@400;500;600;700&display=swap");
-      @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Kaushan+Script&family=Playfair+Display&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Brawler:wght@400;700&family=Croissant+One&family=Ephesis&family=Gloock&family=Hurricane&family=Imbue:opsz,wght@10..100,100..900&family=Modak&family=Montez&family=Prosto+One&family=Rye&family=Shojumaru&family=Young+Serif&family=ZCOOL+XiaoWei&display=swap');
-      @import url("https://fonts.googleapis.com/css2?family=Lora:ital@0;1&family=Poppins:wght@400;500;600&display=swap");
-      @import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Goldman:wght@400;700&display=swap");
-      @import url('https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Great+Vibes&display=swap');
-      
-      :root {
-        --primary-color: #ff5f11;
-        --primary-color-dark: #d04f0f;
-        --text-dark: #111827;
-        --text-light: #6b7280;
-        --extra-light: #f3f4f6;
-        --white: #ffffff;
-        --max-width: 1200px;
-      }
-      
-      *,
-      *::before,
-      *::after {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      ul {
-        list-style: none;
-      }
-
-      a {    
-        text-decoration: none;
-        /* transition: 0.3s; */
-        transition: color 300ms;
-      }
-
-      button {
-        font-family: inherit;
-        border: 0px solid transparent;
-        outline: 1px solid transparent;
-        background-color: transparent;
-        cursor: pointer;
-      }
-
-      input {
-        font-family: inherit;
-        border: 0px solid transparent;
-        outline: 1px solid transparent;
-        background-color: transparent;
-      }
-      
-      button:focus-visible,
-      input:focus-visible,
-      a:focus-visible {
-        outline: 1px solid #999;
-      }
-
-      img {
-        display: block;
-        width: 100%;
-        /* display: flex; */
-      }
-
-      .svg {
-        /* display: none; */
-        position: absolute;
-        width: 0;
-        height: 0;
-      }
-
-      .mask-1 {
-        clip-path: url("#mask-1");
-      }
-      
-      .mask-2 {
-        clip-path: url("#mask-2");
-      }
-      
-      .mask-3 {
-        clip-path: url("#mask-3");
-      }
-      
-      .mask-4 {
-        clip-path: url("#mask-4");
-      }
-      
-      html {
-      /* body { */
-        scroll-behavior: smooth;
-      }
-      
-      body {
-        color: #fff;
-        font-family: "Roboto", sans-serif;
-  font-family: 'Abril Fatface', cursive;
-  font-family: 'Courgette', cursive;
-  font-family: 'Dancing Script', cursive;
-  font-family: 'Great Vibes', cursive;
-  font-family: 'Josefin Sans', sans-serif;
-  font-family: 'Limelight', cursive;
-  font-family: 'Lobster', cursive;
-  font-family: 'Montserrat', sans-serif;
-  font-family: 'Oleo Script Swash Caps', cursive;
-  font-family: 'Poppins', sans-serif;
-  font-family: 'Raleway', sans-serif;
-  font-family: 'Fraunces', serif;
-  font-family: 'Playfair Display', serif;
-  font-family: 'Lemon', cursive;
-  font-family: "Goldman", sans-serif;
-  font-family: "Lora", serif;
-  font-family: "Croissant One", serif;
-  font-family: "Shojumaru", system-ui;
-  font-family: "Montez", cursive;
-  font-family: "Modak", system-ui;
-  font-family: "Prosto One", sans-serif;
-  font-family: "Young Serif", serif;
-  font-family: "ZCOOL XiaoWei", sans-serif;
-  font-family: "Brawler", serif;
-  font-family: "Gloock", serif;
-  font-family: "Ephesis", cursive;
-  font-family: "Platypi", serif;
-  font-family: "Patua One", serif;
-  font-family: "Rye", serif;
-  font-family: "Arizonia", cursive;
-  font-family: "Imbue", serif;
-  font-family: 'Kaushan Script', cursive;
-  font-family: "Hurricane", cursive;
-  font-family: "Bona Nova SC", serif;
-  font-family: Georgia, serif;
-  font-family: "DM Serif Display", serif;
-  /* line-height: 1.6; */
-  /* background-color: #080a0c; */
-      }
-        
-      .section-container {
-        max-width: var(--max-width);
-        margin: auto;
-        padding: 5rem 1rem;
-      }
-      
-      .section-subheader {
-        margin-bottom: 0.5rem;
-        color: var(--primary-color);
-        font-size: 1rem;
-        font-weight: 600;
-      }
-      
-      .section-header {
-        color: var(--text-dark);
-        font-size: 2rem;
-        font-weight: 700;
-        line-height: 2.5rem;
-      }
-      
-      .section-description {
-        color: var(--text-light);
-        line-height: 1.75rem;
-      }
-      
-      .btn {
-        padding: 0.75rem 1.5rem;
-        color: var(--white);
-        white-space: nowrap;
-        /* outline: none; */
-        /* border: none; */
-        border-radius: 6px;
-        background-color: var(--primary-color);
-        /* transition: 0.3s; */
-        transition: background-color 300ms;
-        /* cursor: pointer; */
-      }
-      
-      .btn:hover {
-        background-color: var(--primary-color-dark);
-      }
-
-      .header {
-        /* min-height: 50vw; */
-        background-image: 
-          linear-gradient(
-            rgba(0, 0, 0, 0.75), 
-            rgba(0, 0, 0, 0.75)),
-          url("./assets/industrial/header.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-      }
-
-      nav {
-        isolation: isolate;
-        position: fixed;
-        width: 100%;
-        z-index: 9;
-      }
-
-      .nav-header {
-        padding: 1rem;
-        width: 100%;
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        background-color: var(--primary-color);
-      }
-      
-      .nav-logo a {
-        color: var(--white);
-        font-size: 1.25rem;
-        font-weight: 500;
-        font-style: italic;
-      }
-      
-      .nav-menu-btn {
-        color: var(--white);
-        font-size: 1.5rem;
-        /* cursor: pointer; */
-      }
-      
-      .nav-links {
-        /* list-style: none; */
-        position: absolute;
-        /* top: 68px; */
-        top: 100%;
-        left: 0;
-        width: 100%;
-        padding: 2rem;
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        /* background-color: var(--extra-light); */
-        background-color: #f2dace;
-        transform: translateY(-100%);
-        /* transition: 0.5s; */
-        transition: transform 500ms;
-        z-index: -1;
-      }
-      
-      .nav-links.open {
-        transform: translateY(0);
-      }
-      
-      .nav-links a {
-        color: var(--primary-color);
-      }
-      
-      .nav-links a:hover {
-        color: var(--primary-color-dark);
-      }
-      
-      .nav-btns {
-        display: none;
-      }
-      
-      .header-container {
-        padding-block: 10rem;
-      }
-      
-      .header-container p {
-        margin-bottom: 1rem;
-        color: var(--white);
-      }
-      
-      .header-container h1 {
-        margin-bottom: 2rem;
-        max-width: 600px;
-        color: var(--white);
-        font-size: 4rem;
-        font-weight: 600;
-        line-height: 5rem;
-      }
-      
-      .header-flex {
-        display: flex;
-        gap: 2rem;
-        flex-wrap: wrap;
-        align-items: center;
-      }
-      
-      .header-card {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-      }
-      
-      .header-card span {
-        padding: 2px 10px;
-        color: var(--primary-color);
-        font-size: 2rem;
-        border-radius: 50%;
-        background-color: var(--white);
-      }
-      
-      .header-card h5 {
-        color: var(--text-light);
-        font-size: 0.9rem;
-        font-weight: 400;
-      }
-      
-      .header-card h4 {
-        color: var(--white);
-        font-size: 1.25rem;
-        font-weight: 600;
-      }
-      
-      .about-header {
-        margin-bottom: 4rem;
-        display: grid;
-        gap: 2rem;
-      }
-      
-      .about-grid {
-        display: grid;
-        grid-auto-rows: max-content;
-      }
-      
-      .about-card {
-        padding: 4rem 2rem;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-      }
-
-      .about-card:nth-child(1) {
-        background-image: 
-          linear-gradient(
-            rgba(0, 0, 0, 0.7), 
-            rgba(0, 0, 0, 0.7)),
-          url("./assets/industrial/about-1.jpg");
-      }
-      
-      .about-card:nth-child(2) {
-        background-image: 
-          linear-gradient(
-            rgba(0, 0, 0, 0.7), 
-            rgba(0, 0, 0, 0.7)),
-          url("./assets/industrial/about-2.jpg");
-      }
-      
-      .about-card:nth-child(3) {
-        background-image: 
-          linear-gradient(
-            rgba(0, 0, 0, 0.7), 
-            rgba(0, 0, 0, 0.7)),
-          url("./assets/industrial/about-3.jpg");
-      }
-      
-      .about-card p {
-        margin-bottom: 0.5rem;
-        color: var(--white);
-      }
-      
-      .about-card h4 {
-        max-width: 250px;
-        color: var(--white);
-        font-size: 1.5rem;
-        font-weight: 500;
-        line-height: 2rem;
-      }
-      
-      .faq-container {
-        display: grid;
-        gap: 2rem;
-      }
-      
-      .faq-image {
-        overflow: hidden;
-      }
-      
-      .faq-image img {
-        max-width: 450px;
-        margin-inline: auto;
-        /* clip-path: url("#mask-1"); */
-        /* clip-path: url("#mask-2"); */
-        /* clip-path: url("#mask-3"); */
-        clip-path: url("#mask-4");
-      }
-      
-      .faq-content .section-header {
-        margin-bottom: 1rem;
-      }
-      
-      .faq-grid {
-        margin-top: 1rem;
-        display: grid;
-        gap: 1rem;
-      }
-      
-      .faq-card {
-        padding: 1rem;
-        display: grid;
-        gap: 10px;
-        border: 5px;
-        background-color: var(--extra-light);
-      }
-      
-      .faq-header {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        justify-content: space-between;
-      }
-      
-      .faq-header h4 {
-        color: var(--text-dark);
-        font-size: 1.1rem;
-        font-weight: 600;
-      }
-      
-      .faq-header span {
-        color: var(--text-dark);
-        font-size: 1.5rem;
-        /* transition: 0.3s; */
-        transition: transform 300ms;
-        cursor: pointer;
-      }
-      
-      .faq-card.active .faq-header span {
-        transform: rotate(180deg);
-      }
-      
-      .faq-description {
-        display: none;
-        color: var(--text-light);
-      }
-      
-      .faq-card.active .faq-description {
-        display: block;
-      }
-      
-      .article-container :is(.section-subheader, .section-header) {
-        text-align: center;
-      }
-      
-      .article-grid {
-        margin-top: 4rem;
-        display: grid;
-        gap: 1rem;
-      }
-      
-      .article-card img {
-        margin-bottom: 1rem;
-        /* border-radius: 6px; */
-        clip-path: url("#mask-1");
-        /* clip-path: url("#mask-2"); */
-        /* clip-path: url("#mask-3"); */
-        /* clip-path: url("#mask-4"); */
-      }
-      
-      .article-card div {
-        margin-bottom: 0.5rem;
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-        align-items: center;
-      }
-      
-      .article-card p {
-        color: var(--text-light);
-        font-weight: 500;
-      }
-
-      .article-card a {
-        color: var(--primary-color);
-        font-weight: 500;
-      }
-      
-      .article-card h4 {
-        color: var(--text-dark);
-        font-size: 1.1rem;
-        font-weight: 600;
-      }
-      
-      .client-container :is(.section-subheader, .section-header) {
-        text-align: center;
-      }
-      
-      .slider {
-        position: relative;
-        /* width: 100%; */
-        margin-top: 2rem;
-        padding-bottom: 3rem;
-        overflow: hidden;
-        /* z-index: 2; */
-      }
-
-      .slider-track {
-        display: flex;
-      }
-      
-      .slide {
-        position: absolute;
-        top: 0;
-        width: 100%;
-        flex-shrink: 0;
-        transform: translateX(100%);
-        /* opacity: 0; */
-      }
-    
-      #relative {
-        position: relative;
-      }
-
-      .current {
-        transform: translate(0);
-        /* transition: transform 300ms; */
-        transition: transform 300ms, 
-                      opacity 300ms;
-        /* opacity: 1; */
-        /* z-index: 1; */
-      }
-    
-      .left {
-        transform: translateX(-100%);
-        transition: transform 300ms;
-      }
-    
-      .right {
-        transform: translateX(100%);
-        transition: transform 300ms;
-      }
-
-      .pagination {
-        margin-top: 2rem;
-        text-align: center;
-      }
-      
-      .page-button {
-        aspect-ratio: 1;
-        margin: 0.5rem;
-        padding: 0.4em 1em;
-        color: var(--text-dark);
-        font-size: 1.2rem;
-        /* background-color: transparent; */
-        /* filter: drop-shadow(1px 1px #000); */
-        /* transition: color 0.4s, background-color 0.4s; */
-        transition: color 400ms, 
-            border-color 400ms;
-        /* border: 1px solid; */
-        /* opacity: 1; */
-      }
-      
-      .page-button.active {
-        color: var(--text-dark);
-        /* background-color: var(--white-color); */
-        border: 2px solid;
-      }
-        
-      .client-card {
-        max-width: 600px;
-        margin-inline: auto;
-        text-align: center;
-      }
-      
-      .client-card span {
-        color: var(--primary-color);
-        font-size: 4rem;
-        line-height: 4rem;
-      }
-      
-      .client-card p {
-        margin-bottom: 2rem;
-        color: var(--text-dark);
-        line-height: 1.75rem;
-      }
-      
-      .client-details {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      .client-details img {
-        max-width: 70px;
-        border-radius: 50%;
-        border: 3px solid var(--text-dark);
-        /* clip-path: url("#mask-1"); */
-        /* clip-path: url("#mask-2"); */
-        /* clip-path: url("#mask-3"); */
-        /* clip-path: url("#mask-4"); */
-      }
-      
-      .client-details h4 {
-        color: var(--text-dark);
-        font-size: 1.2rem;
-        font-weight: 600;
-        text-align: left;
-      }
-      
-      .client-details h5 {
-        color: var(--text-light);
-        font-size: 1rem;
-        font-weight: 500;
-        text-align: left;
-      }
-      
-      /* .swiper-pagination-bullet-active {
-        background-color: var(--primary-color);
-      } */
-      
-      .banner {
-        background-color: var(--extra-light);
-      }
-      
-      .banner-container {
-        display: grid;
-        gap: 2rem;
-      }
-      
-      .banner-content .section-header {
-        margin-bottom: 1rem;
-      }
-      
-      .banner-form form {
-        width: 100%;
-        max-width: 400px;
-        margin-inline: auto;
-        display: flex;
-        gap: 10px;
-        align-items: center;
-      }
-      
-      .banner-form input {
-        width: 100%;
-        padding: 0.75rem;
-        /* outline: none; */
-        border-radius: 6px;
-        border: 1px solid var(--text-light);
-      }
-
-      .footer-container {
-        display: grid;
-        gap: 4rem 2rem;
-      }
-      
-      .footer-col h4 {
-        margin-bottom: 1rem;
-        color: var(--text-dark);
-        font-size: 1.2rem;
-        font-weight: 600;
-      }
-      
-      .footer-col p {
-        max-width: 350px;
-        margin-bottom: 2rem;
-        color: var(--text-light);
-      }
-      
-      .footer-links {
-        display: grid;
-        gap: 0.75rem;
-      }
-      
-      .footer-links a {
-        color: var(--text-light);
-      }
-      
-      .footer-links a:hover {
-        color: var(--primary-color);
-      }
-      
-      .footer-media {
-        margin-bottom: 2rem;
-        display: grid;
-        gap: 1rem;
-        grid-template-columns: repeat(3, 1fr);
-      }
-      
-      .footer-socials {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-      }
-
-      .footer-media img {
-        clip-path: url("#mask-1");
-        /* clip-path: url("#mask-2"); */
-        /* clip-path: url("#mask-3"); */
-        /* clip-path: url("#mask-4"); */
-      }
-      
-      .footer-socials a {
-        padding: 3px 8px;
-        color: var(--primary-color);
-        font-size: 1.25rem;
-        border-radius: 6px;
-        background-color: var(--extra-light);
-      }
-      
-      .footer-socials a:hover {
-        color: var(--white);
-        background-color: var(--primary-color);
-      }
-      
-      .footer-bar {
-        padding: 1rem;
-        color: var(--text-light);
-        font-size: 0.9rem;
-        text-align: center;
-      }
-
-      @media (width > 540px) {
-        .article-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-        
-        .footer-container {
-          grid-template-columns: 1fr 2fr;
-        }
-      
-        .footer-col:first-child {
-          grid-area: 1/1/2/3;
-        }
-      }
-
-      @media (width > 768px) {
-        .header::after {
-          clip-path: url("#mask-1");
-          /* clip-path: url("#mask-2"); */
-          /* clip-path: url("#mask-3"); */
-          /* clip-path: url("#mask-4"); */
-        }
-
-        nav {
-          position: static;
-          max-width: var(--max-width);
-          margin-inline: auto;
-          padding: 2rem 1rem;
-          display: flex;
-          gap: 2rem;
-          align-items: center;
-          justify-content: space-between;
-        }
-      
-        .nav-header {
-          flex: 1;
-          padding: 0;
-          background-color: transparent;
-        }
-      
-        .nav-logo a {
-          font-size: 1.5rem;
-        }
-      
-        .nav-logo a span {
-          color: var(--primary-color);
-        }
-      
-        .nav-menu-btn {
-          display: none;
-        }
-      
-        .nav-links {
-          position: static;
-          padding: 0;
-          flex-direction: row;
-          background-color: transparent;
-          transform: none;
-        }
-      
-        .nav-links a {
-          color: var(--white);
-        }
-      
-        .nav-btns {
-          display: flex;
-          flex: 1;
-        }
-      
-        .nav-btns .btn {
-          color: var(--primary-color);
-          background-color: var(--white);
-        }
-      
-        .header-container {
-          padding-block: 8rem 12rem;
-        }
-      
-        .about-header {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      
-        .about-grid {
-          grid-template-columns: repeat(3, 1fr);
-        }
-      
-        .about-card {
-          padding: 5rem 2rem;
-        }
-      
-        .faq-container {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      
-        .article-grid {
-          grid-template-columns: repeat(3, 1fr);
-        }
-      
-        .banner-container {
-          align-items: center;
-          grid-template-columns: repeat(2, 1fr);
-        }
-      
-        .footer-container {
-          grid-template-columns: 2fr 1fr 1.5fr;
-        }
-      
-        .footer-col:first-child {
-          grid-area: unset;
-        }
-      }
-
-      @media (width > 1024px) {
-        .article-grid {
-          gap: 2rem;
-        }
-      }
-      
-      .header {
-        position: relative;
-        max-width: var(--max-width);
-        margin: auto;
-        /* margin: 3rem auto 0; */
-        background: none;
-      }
-
-      .header::after {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-image: 
-          linear-gradient(
-            rgba(0, 0, 0, 0.75), 
-            rgba(0, 0, 0, 0.75)),
-          url("./assets/industrial/header.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        /* clip-path: url("#mask-1"); */
-        /* clip-path: url("#mask-2"); */
-        /* clip-path: url("#mask-3"); */
-        /* clip-path: url("#mask-4"); */
-        z-index: -1;
-      }
-
-      nav {
-        top: 0;
-        /* max-width: var(--max-width); */
-      }
-
-      .zoom-in {
-        animation: zoom-in 2s linear backwards;
-      }
-
-      .rotate {
-        animation: rotate 1s linear forwards;
-      }
-      
-      .fade-left {
-        animation: fade-left 1s linear backwards;
-      }
-      
-      .fade-right {
-        animation: fade-right 1s linear backwards;
-      }
-      
-      .fade-up {
-        animation: fade-up 1s linear backwards;
-      }
-      
-      .fade-up-full {
-        animation: fade-up-full 1s linear backwards;
-      }
-      
-      .fade-up-relative {
-        animation: fade-up-relative 1s linear backwards;
-      }
-      
-      .fade-up-absolute {
-        animation: fade-up-absolute 1s linear backwards;
-      }
-      
-      .fade-down-relative {
-        animation: fade-down-relative 1s linear backwards;
-      }
-      
-      .fade-down-absolute {
-        animation: fade-down-absolute 1s linear backwards;
-      }
-      
-      .delayed {
-        /* animation-delay: calc(0.2s * var(--i)); */
-        animation-delay: calc(0.2s * var(--delay));
-      }
-      
-      .paused {
-        animation-play-state: paused;
-      }
-      
-      @keyframes zoom-in {
-        0% {
-          opacity: 0;
-        }
-      }
-      
-      @keyframes rotate {
-        0% {
-          transform: rotate(80deg);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-left {
-        0% {
-          transform: translateX(10%);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-right {
-        0% {
-          transform: translateX(-10%);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-up {
-        0% {
-          transform: translateY(10%);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-up-full {
-        0% {
-          transform: translateY(100%);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-up-relative {
-        0% {
-          transform: translateY(10%);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-up-absolute {
-        0% {
-          transform: translateY(1rem);
-          opacity: 0;
-        }
-      }
-      
-      /* @keyframes fade-down { */
-      @keyframes fade-down-relative {
-        0% {
-          transform: translateY(-10%);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-down-absolute {
-        0% {
-          transform: translateY(-1rem);
-          opacity: 0;
-        }
-      } 
-    </style>
   </head>
   <body>
+    <nav>
+      <div class="nav-header">
+        <div class="logo nav-logo">
+          <a href="#">
+            Food<span>man</span>
+          </a>
+        </div>
+        <div class="nav-menu-btn" id="menu-btn">
+          <span><i class="ri-menu-line"></i></span>
+        </div>
+      </div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#special">Special</a></li>
+        <li><a href="#chef">Chef</a></li>
+        <li><a href="#client">Clients</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ul>
+      <div class="nav-btn">
+        <button class="btn">
+          <i class="ri-shopping-bag-fill"></i>
+        </button>
+      </div>
+    </nav>
+
+    <header class="section-container header-container" id="home">
+      <div class="header-image">
+        <img src="assets/header.png" alt="header" />
+      </div>
+      <div class="header-content">
+        <h1>Meet, Eat & Enjoy The <span>True Taste</span>.</h1>
+        <p class="section-description">
+          Discover the true essence of culinary delight as you meet, eat, and
+          savor the authentic flavors that define our passion for food.
+        </p>
+        <div class="header-btn">
+          <button class="btn">Get Started</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="section-container special-container" id="special">
+      <h2 class="section-header">Our Special Dish</h2>
+      <p class="section-description">
+        Each dish promises an unforgettable dining experience, blending
+        innovation with tradition to delight your senses.
+      </p>
+      <div class="special-grid">
+        <div class="special-card">
+          <img src="assets/special-1.png" alt="special" />
+          <h4>Chicken Veg Curry</h4>
+          <p>
+            Diced chicken simmered in aromatic curry sauce with mixed veggies
+            like potatoes, cauliflower, and beans for a hearty, flavorful dish.
+          </p>
+          <div class="special-ratings">
+            <span><i class="ri-star-fill"></i></span>
+            <span><i class="ri-star-fill"></i></span>
+            <span><i class="ri-star-fill"></i></span>
+            <span><i class="ri-star-fill"></i></span>
+            <span><i class="ri-star-fill"></i></span>
+          </div>
+          <div class="special-footer">
+            <p class="price">$12.50</p>
+            <button class="btn">Add to Cart</button>
+          </div>
+        </div>
+        <div class="special-card">
+          <img src="assets/special-2.png" alt="special" />
+          <h4>Chicken Veg Stir-Fry</h4>
+          <p>
+            Tender chicken strips wok-tossed with a colorful array of fresh
+            vegetables in a flavorful blend of spices and sauces.
+          </p>
+          <div class="special-ratings">
+            <span><i class="ri-star-fill"></i></span>
+            <span><i class="ri-star-fill"></i></span>
+            <span><i class="ri-star-fill"></i></span>
+            <span><i class="ri-star-fill"></i></span>
+            <span><i class="ri-star-fill"></i></span>
+          </div>
+          <div class="special-footer">
+            <p class="price">$18.50</p>
+            <button class="btn">Add to Cart</button>
+          </div>
+        </div>
+        <div class="special-card">
+          <img src="assets/special-3.png" alt="special" />
+          <h4>Chicken Veg Pasta</h4>
+          <p>
+            Al dente pasta tossed with chicken strips and a mix of vibrant
+            vegetables in a creamy garlic herb sauce, offering a delightful
+            pasta experience.
+          </p>
+          <div class="special-ratings">
+            <span><i class="ri-star-fill"></i></span>
+            <span><i class="ri-star-fill"></i></span>
+            <span><i class="ri-star-fill"></i></span>
+            <span><i class="ri-star-fill"></i></span>
+            <span><i class="ri-star-fill"></i></span>
+          </div>
+          <div class="special-footer">
+            <p class="price">$15.50</p>
+            <button class="btn">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-container explore-container">
+      <div class="explore-image">
+        <img src="assets/explore.png" alt="explore" />
+      </div>
+      <div class="explore-content">
+        <h1 class="section-header">We Serve Healthy & Tasty Food</h1>
+        <p class="section-description">
+          Indulge guilt-free with our commitment to serving wholesome and
+          delicious meals. Explore a menu curated to balance taste and
+          nutrition, ensuring every bite is both satisfying and nourishing.
+        </p>
+        <div class="explore-btn">
+          <button class="btn">
+            Explore Story <span><i class="ri-arrow-right-line"></i></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div class="page">
     <header class="header">
       <nav>
         <div class="nav-header">
@@ -1381,6 +531,7 @@
           });
       }
     </script>
+    </div>
     
     <div class="page" style="display: none;">
     <header class="header">
@@ -2476,5 +1627,4 @@
     </script>
   </body>
 </html>
-<!-- 49-579-704-834-964-1094-1224-1354-1484-1614-1744-1874-
-  2006-2134-1310-1440-1570-1700-1830-1960-2090-2220-2350-2480 -->
+<!-- 49-1500-1630-->
