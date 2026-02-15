@@ -916,9 +916,129 @@
         }
       }
     </style>
+    <style>
+      .zoom-in {
+        animation: zoom-in 2s linear backwards;
+      }
+      
+      .rotate {
+        animation: rotate 1s linear forwards;
+      }
+      
+      .fade-left {
+        animation: fade-left 1s linear backwards;
+      }
+      
+      .fade-right {
+        animation: fade-right 1s linear backwards;
+      }
+      
+      .fade-up {
+        animation: fade-up 1s linear backwards;
+      }
+      
+      .fade-up-full {
+        animation: fade-up-full 1s linear backwards;
+      }
+      
+      .fade-up-relative {
+        animation: fade-up-relative 1s linear backwards;
+      }
+      
+      .fade-up-absolute {
+        animation: fade-up-absolute 1s linear backwards;
+      }
+      
+      .fade-down-relative {
+        animation: fade-down-relative 1s linear backwards;
+      }
+      
+      .fade-down-absolute {
+        animation: fade-down-absolute 1s linear backwards;
+      }
+      
+      .delayed {
+        /* animation-delay: calc(0.2s * var(--i)); */
+        animation-delay: calc(0.2s * var(--delay));
+      }
+      
+      .paused {
+        animation-play-state: paused;
+      }
+      
+      @keyframes zoom-in {
+        0% {
+          opacity: 0;
+        }
+      }
+      
+      @keyframes rotate {
+        0% {
+          transform: rotate(80deg);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fade-left {
+        0% {
+          transform: translateX(10%);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fade-right {
+        0% {
+          transform: translateX(-10%);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fade-up {
+        0% {
+          transform: translateY(10%);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fade-up-full {
+        0% {
+          transform: translateY(100%);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fade-up-relative {
+        0% {
+          transform: translateY(10%);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fade-up-absolute {
+        0% {
+          transform: translateY(1rem);
+          opacity: 0;
+        }
+      }
+        
+      /* @keyframes fade-down { */
+      @keyframes fade-down-relative {
+        0% {
+          transform: translateY(-10%);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fade-down-absolute {
+        0% {
+          transform: translateY(-1rem);
+          opacity: 0;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div class="page">
+    <div class="page" style="display: none;">
     <nav>
       <div class="nav-header">
         <div class="logo nav-logo">
@@ -951,13 +1071,16 @@
       menuBtn.addEventListener("click", (e) => {
         navLinks.classList.toggle("open");
       
-        const isOpen = navLinks.classList.contains("open");
-        menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+        // const isOpen = navLinks.classList.contains("open");
+        // menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+        menuBtnIcon.classList.toggle("ri-menu-line");
+        menuBtnIcon.classList.toggle("ri-close-line");
       });
       
       navLinks.addEventListener("click", (e) => {
         navLinks.classList.remove("open");
-        menuBtnIcon.setAttribute("class", "ri-menu-line");
+        // menuBtnIcon.setAttribute("class", "ri-menu-line");
+        menuBtnIcon.className = "ri-menu-line";
       });
     </script>
 
@@ -1303,7 +1426,7 @@
     </svg>
     </div>
 
-    <div class="page" style="display: none;">
+    <div class="page" style="display: block;">
     <header class="header">
       <nav>
         <div class="nav-header">
@@ -1327,9 +1450,14 @@
       </nav>
 
       <div class="section-container header-container" id="home">
-        <p>INDUSTRIAL</p>
-        <h1>We Provide Best Industrial Service</h1>
-        <div class="header-flex">
+        <!-- <p>INDUSTRIAL</p> -->
+        <p class="fade-up-full paused">INDUSTRIAL</p>
+        <!-- <h1>We Provide Best Industrial Service</h1> -->
+        <h1 class="fade-up-absolute paused delayed" style="--delay: 1">
+          We Provide Best Industrial Service
+        </h1>
+        <!-- <div class="header-flex"> -->
+        <div class="header-flex fade-up-absolute paused delayed" style="--delay: 2">
           <div class="header-card">
             <span><i class="ri-store-2-fill"></i></span>
             <div>
@@ -1378,8 +1506,10 @@
     <section class="section-container about-container" id="about">
       <div class="about-header">
         <div>
-          <h3 class="section-subheader">About Us</h3>
-          <h2 class="section-header">
+          <!-- <h3 class="section-subheader">About Us</h3> -->
+          <h3 class="section-subheader fade-up-full paused">About Us</h3>
+          <!-- <h2 class="section-header"> -->
+          <h2 class="section-header fade-up-absolute paused delayed" style="--delay: 1">
             The Cleaver Industrial Business You Can Feel
           </h2>
         </div>
@@ -2797,4 +2927,4 @@
     </script>
   </body>
 </html>
-<!-- 49-1500-1630-1760-1890-2020-2150-2280-2410-2540-2670-2800 -->
+<!-- 49-1500-1630-1760-1890-2020-2150-2280-2410-2540-2670-2800-2930 -->
