@@ -6,138 +6,138 @@
     <title>URL SearchParams in JS</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap");
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  button {
-    font-family: inherit;
-    border: 0px solid transparent;
-    outline: 1px solid transparent;
-    background-color: transparent;
-    cursor: pointer;
-  }
-  button:focus-visible,
-  a:focus-visible {
-    outline: 1px solid #999;
-  }
-  body {
-    background-color: hsl(222, 100%, 99%);
-  }
-  .container {
-    min-height: 100vh;
-    margin-inline: 1.5rem;
-    display: grid;
-    place-items: center;
-  }
-  .search {
-    position: relative;
-    width: 76px;
-    height: 76px;
-    padding: 10px;
-    border-radius: 4rem;
-    background-color: #fff;
-    box-shadow: 0 4px 24px hsla(222, 68%, 12%, 0.1);
-    transition: width 0.5s cubic-bezier(0.9, 0, 0.3, 0.9);
-    overflow: hidden;
-  }
-  .search-input {
-    width: calc(100% - 64px);
-    height: 100%;
-    padding-left: 14px;
-    font-size: 13px;
-    font-weight: 500;
-    font-family: "Poppins", sans-serif;
-    outline: none;
-    border: none;
-    border-radius: 4rem;
-    transition: opacity 1.5s;
-    pointer-events: none;
-    opacity: 0;
-  }
-  .search-input:-webkit-autofill {
-    box-shadow: 0 0 0 100px #fff inset;
-  }
-  .search-button {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 10px;
-    width: 56px;
-    height: 56px;
-    margin: auto;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    background-color: blue;
-    transition: transform 0.6s cubic-bezier(0.9, 0, 0.3, 0.9);
-    cursor: pointer;
-  }
-  .search-icon,
-  .search-close {
-    position: absolute;
-    color: #fff;
-    font-size: 1.5rem;
-    transition: opacity 0.5s cubic-bezier(0.9, 0, 0.3, 0.9);
-  }
-  .search-close {
-    opacity: 0;
-  }
-  .show-search {
-    width: 100%;
-  }
-  .show-search .search-input {
-    opacity: 1;
-    pointer-events: initial;
-  }
-  .show-search .search-button {
-    transform: rotate(90deg);
-  }
-  .show-search .search-icon {
-    opacity: 0;
-  }
-  .show-search .search-close {
-    opacity: 1;
-  }
-  @media screen and (min-width: 576px) {
-    .show-search {
-      width: 450px;
-    }
-  }
-  @media screen and (min-width: 968px) {
-    :root {
-      --small-font-size: 13px;
-    }
-  }
-</style>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+      
+      :root {
+        --text-dark: #0a0a0a;
+        --text-light: #737373;
+        --extra-light: #f5f5f5;
+        --white: #ffffff;
+        --max-width: 1200px;
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      .section-container {
+        max-width: var(--max-width);
+        margin: auto;
+        padding: 5rem 1rem;
+      }
+      
+      .section-header {
+        color: var(--text-dark);
+        font-size: 2rem;
+        font-weight: 700;
+      }
+      
+      .btn {
+        padding: 1rem 1.5rem;
+        color: var(--text-dark);
+        font-size: 1rem;
+        font-weight: 600;
+        outline: none;
+        border: none;
+        border-radius: 6px;
+        background-color: var(--white);
+        transition: 0.3s;
+        cursor: pointer;
+      }
+      
+      .btn:hover {
+        background-color: var(--extra-light);
+      }
+      
+      img {
+        display: flex;
+        width: 100%;
+      }      
+    </style>
   </head>
   <body>
-    <div class="container">
-      <form class="search" id="search-bar">
-          <input type="search" placeholder="Search something..." class="search-input">
-          <button class="search-button" id="search-button">
-              <i class="ri-search-2-line search-icon"></i>
-              <i class="ri-close-line search-close"></i>
-          </button>
-      </form>
-  </div>
-  <script>
-    const toggleSearch = (search, button) => {
-        const searchBar = document.getElementById(search);
-        const searchButton = document.getElementById(button) ;
-        searchButton.addEventListener('click', () =>{
-            searchBar.classList.toggle('show-search');
-        })
-     }
-     toggleSearch('search-bar', 'search-button');
-     const form = document.getElementById("search-bar");
-     form.addEventListener("click", (e) => {
-      e.preventDefault();
-     })
-  </script>
+    <header class="header">
+      <nav>
+        <div class="nav-header">
+          <div class="nav-logo">
+            <a href="#">Market</a>
+          </div>
+          <div class="nav-menu-btn" id="menu-btn">
+            <span><i class="ri-menu-line"></i></span>
+          </div>
+        </div>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#">Refer</a></li>
+          <li><a href="#">Sign In</a></li>
+          <li><a href="#">Start Selling</a></li>
+          <li><button class="btn">Join</button></li>
+        </ul>
+      </nav>
+      <div class="section-container header-container">
+        <h1>Find The<br />Photographer</h1>
+        <form action="/">
+          <button class="btn"><i class="ri-search-line"></i></button>
+          <input type="text" placeholder="Search Photographer" />
+        </form>
+        <p>Design, Writing, Animation, Photography, Videos</p>
+      </div>
+    </header>
+    <div class="section-container popular-container">
+      <h2 class="section-header">Most Popular Gigs</h2>
+      <div class="popular-grid">
+        <div class="popular-card">
+          <img src="assets/popular-1.jpg" alt="popular" />
+          <p>CapturedMoments</p>
+          <h4>The Family Portrait Sessions</h4>
+          <div>
+            <div class="rating">
+              <span><i class="ri-star-fill"></i></span>
+              5.0 (549)
+            </div>
+            <div class="price">Start from: <span>$150</span></div>
+          </div>
+        </div>
+        <div class="popular-card">
+          <img src="assets/popular-2.jpg" alt="popular" />
+          <p>WanderlustLens</p>
+          <h4>Outdoor Adventure Shoot</h4>
+          <div>
+            <div class="rating">
+              <span><i class="ri-star-fill"></i></span>
+              4.9 (796)
+            </div>
+            <div class="price">Start from: <span>$200</span></div>
+          </div>
+        </div>
+        <div class="popular-card">
+          <img src="assets/popular-3.jpg" alt="popular" />
+          <p>UrbanFrames</p>
+          <h4>Cityscape Photography Tour</h4>
+          <div>
+            <div class="rating">
+              <span><i class="ri-star-fill"></i></span>
+              4.5 (490)
+            </div>
+            <div class="price">Start from: <span>$250</span></div>
+          </div>
+        </div>
+        <div class="popular-card">
+          <img src="assets/popular-4.jpg" alt="popular" />
+          <p>WeddingWhispers</p>
+          <h4>Elegant Wedding Photography</h4>
+          <div>
+            <div class="rating">
+              <span><i class="ri-star-fill"></i></span>
+              4.8 (945)
+            </div>
+            <div class="price">Start from: <span>$500</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="page" style="display: none;">
     <header class="header">
@@ -665,7 +665,7 @@
     </svg>
     </div>
 
-    <h1 style="text-align: center;">URLSearchParams in JavaScript - Constructing Query Strings</h1>
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
     
     <script>
       // Create Query String as String
