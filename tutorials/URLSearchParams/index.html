@@ -49,12 +49,13 @@
         color: var(--text-dark);
         font-size: 1rem;
         font-weight: 600;
-        outline: none;
-        border: none;
+        /* outline: none; */
+        /* border: none; */
         border-radius: 6px;
         background-color: var(--white);
-        transition: 0.3s;
-        cursor: pointer;
+        /* transition: 0.3s; */
+        transition: background-color 300ms;
+        /* cursor: pointer; */
       }
       
       .btn:hover {
@@ -69,11 +70,11 @@
 
       a {
         text-decoration: none;
-        transition: 0.3s;
+        /* transition: 0.3s; */
       }
       
-      html,
-      body {
+      html {
+      /* body { */
         scroll-behavior: smooth;
       }
       
@@ -132,7 +133,8 @@
         flex-direction: column;
         background-color: var(--text-dark);
         transform: translateY(-100%);
-        transition: 0.5s;
+        /* transition: 0.5s; */
+        transition: transform 500ms;
         z-index: -1;
       }
       
@@ -237,7 +239,111 @@
         color: var(--text-dark);
         font-size: 1.2rem;
         font-weight: 600;
-      }        
+      }
+
+      .popular-card > div {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+      }
+      
+      .popular-card .rating {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        color: var(--text-light);
+      }
+      
+      .popular-card .rating span {
+        color: goldenrod;
+        font-size: 1.2rem;
+      }
+      
+      .popular-card .price {
+        color: var(--text-light);
+      }
+      
+      .popular-card .price span {
+        color: var(--text-dark);
+        font-weight: 600;
+      }
+      
+      .talent-container .section-header {
+        text-align: center;
+      }
+      
+      .talent-grid {
+        margin-top: 2rem;
+        display: grid;
+        gap: 1rem;
+      }
+      
+      .talent-card {
+        padding: 2rem 1rem;
+        text-align: center;
+        border-radius: 1rem;
+        border: 2px solid transparent;
+        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+        transition: 0.3s;
+      }
+      
+      .talent-card:hover {
+        border-color: var(--text-dark);
+      }
+      
+      .talent-card span {
+        display: inline-block;
+        margin-bottom: 1rem;
+        padding: 5px 13px;
+        color: var(--text-dark);
+        font-size: 2rem;
+        border-radius: 10px;
+        background-color: var(--extra-light);
+        transition: 0.3s;
+      }
+      
+      .banner-card {
+        flex-shrink: 0;
+      }
+
+      .banner-card img {
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .banner-card:hover .scrollable {
+        transform: translateY(0);
+      }
+
+      .scrollable {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        transform: translateY(100%);
+        transition: transform 500ms;
+        scrollbar-width: thin;
+        scrollbar-color: var(--text-dark) 
+              var(--primary-color-light);
+        overflow: auto;
+      }
+
+      .banner-content {
+        position: static;
+        margin-top: auto;
+        transform: translateY(0);
+      }
+
+      @media (width < 400px) {
+        .banner-card {
+          max-width: 90vw;
+          min-width: 200px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -732,6 +838,7 @@
     <section class="banner">
       <div class="banner-wrapper">
         <div class="banner-card">
+          <div class="scrollable">
           <img src="./assets/travelty-images/banner-1.jpg" alt="banner" />
           <div class="banner-content">
             <h4>Bora Bora</h4>
@@ -748,7 +855,9 @@
             </p>
           </div>
         </div>
+        </div>
         <div class="banner-card">
+          <div class="scrollable">
           <img src="./assets/travelty-images/banner-2.jpg" alt="banner" />
           <div class="banner-content">
             <h4>Banff National Park</h4>
@@ -765,7 +874,9 @@
             </p>
           </div>
         </div>
+        </div>
         <div class="banner-card">
+          <div class="scrollable">
           <img src="./assets/travelty-images/banner-3.jpg" alt="banner" />
           <div class="banner-content">
             <h4>Barcelona</h4>
@@ -782,7 +893,9 @@
             </p>
           </div>
         </div>
+        </div>
         <div class="banner-card">
+          <div class="scrollable">
           <img src="./assets/travelty-images/banner-4.jpg" alt="banner" />
           <div class="banner-content">
             <h4>Cape Town</h4>
@@ -800,7 +913,9 @@
             </p>
           </div>
         </div>
+        </div>
         <div class="banner-card">
+          <div class="scrollable">
           <img src="./assets/travelty-images/banner-5.jpg" alt="banner" />
           <div class="banner-content">
             <h4>Queenstown</h4>
@@ -817,7 +932,9 @@
             </p>
           </div>
         </div>
+        </div>
         <div class="banner-card">
+          <div class="scrollable">
           <img src="./assets/travelty-images/banner-6.jpg" alt="banner" />
           <div class="banner-content">
             <h4>Santorini</h4>
@@ -834,6 +951,7 @@
               both relaxation and adventure.
             </p>
           </div>
+          </div>
         </div>
       </div>
     </section>
@@ -845,6 +963,18 @@
         duplicateNode.setAttribute("aria-hidden", true);
         banner.appendChild(duplicateNode);
       });
+
+      const width = banner.scrollWidth;
+      // console.log(width);
+      banner.style.width = `${width}px`;
+
+      window.addEventListener("resize", () => {
+        // banner.removeAttribute("style");
+        banner.style.width = "auto";
+        const width = banner.scrollWidth;
+        // console.log(width);
+        banner.style.width = `${width}px`;
+      })
     </script>
 
     <section class="section-container newsletter-container" id="contact">
@@ -963,4 +1093,4 @@
     </script>
   </body>
 </html>
-<!-- 49-576-706-836-966 -->
+<!-- 49-576-706-836-966-1096 -->
