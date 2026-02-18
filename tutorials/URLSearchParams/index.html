@@ -117,6 +117,127 @@
         font-size: 1.5rem;
         cursor: pointer;
       }
+
+      .nav-links {
+        list-style: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        width: 100%;
+        padding: 2rem;
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background-color: var(--text-dark);
+        transform: translateY(-100%);
+        transition: 0.5s;
+        z-index: -1;
+      }
+      
+      .nav-links.open {
+        transform: translateY(0);
+      }
+      
+      .nav-links a {
+        color: var(--white);
+        white-space: nowrap;
+        transition: 0.3s;
+      }
+      
+      .nav-links a:hover {
+        color: var(--text-light);
+      }
+      
+      .nav-links .btn {
+        color: var(--white);
+        border: 1px solid var(--white);
+        background-color: transparent;
+      }
+      
+      .nav-links .btn:hover {
+        color: var(--text-dark);
+        border-color: var(--white);
+        background-color: var(--white);
+      }
+      
+      .header-container {
+        padding-block: 10rem;
+      }
+      
+      .header-container h1 {
+        margin-bottom: 1rem;
+        color: var(--white);
+        font-size: 3rem;
+        line-height: 3.5rem;
+      }
+      
+      .header-container form {
+        width: 100%;
+        max-width: 400px;
+        margin-bottom: 10px;
+        padding: 2px;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        border-radius: 6px;
+        background-color: var(--white);
+      }
+      
+      .header-container form .btn {
+        padding: 10px;
+        font-size: 1.25rem;
+        background-color: transparent;
+      }
+      
+      .header-container form input {
+        width: 100%;
+        color: var(--text-dark);
+        font-size: 1rem;
+        outline: none;
+        border: none;
+      }
+      
+      .header-container p {
+        color: var(--white);
+        font-size: 0.9rem;
+      }
+      
+      .popular-grid {
+        margin-top: 2rem;
+        display: grid;
+        gap: 1rem;
+      }
+      
+      .popular-card {
+        padding: 1rem;
+        border-radius: 1rem;
+        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+        transition: 0.3s;
+      }
+      
+      .popular-card:hover {
+        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+      }
+      
+      .popular-card img {
+        margin-bottom: 1rem;
+        border-radius: 10px;
+      }
+      
+      .popular-card p {
+        margin-bottom: 0.5rem;
+        color: var(--text-light);
+        font-weight: 500;
+      }
+
+      .popular-card h4 {
+        margin-bottom: 1rem;
+        color: var(--text-dark);
+        font-size: 1.2rem;
+        font-weight: 600;
+      }        
     </style>
   </head>
   <body>
@@ -126,9 +247,9 @@
           <div class="nav-logo">
             <a href="#">Market</a>
           </div>
-          <div class="nav-menu-btn" id="menu-btn">
+          <button class="nav-menu-btn" id="menu-btn">
             <span><i class="ri-menu-line"></i></span>
-          </div>
+          </button>
         </div>
         <ul class="nav-links" id="nav-links">
           <li><a href="#">Refer</a></li>
@@ -146,6 +267,7 @@
         <p>Design, Writing, Animation, Photography, Videos</p>
       </div>
     </header>
+
     <section class="section-container popular-container">
       <h2 class="section-header">Most Popular Gigs</h2>
       <div class="popular-grid">
@@ -158,7 +280,9 @@
               <span><i class="ri-star-fill"></i></span>
               5.0 (549)
             </div>
-            <div class="price">Start from: <span>$150</span></div>
+            <div class="price">
+              Start from: <span>$150</span>
+            </div>
           </div>
         </div>
         <div class="popular-card">
@@ -170,7 +294,9 @@
               <span><i class="ri-star-fill"></i></span>
               4.9 (796)
             </div>
-            <div class="price">Start from: <span>$200</span></div>
+            <div class="price">
+              Start from: <span>$200</span>
+            </div>
           </div>
         </div>
         <div class="popular-card">
@@ -182,7 +308,9 @@
               <span><i class="ri-star-fill"></i></span>
               4.5 (490)
             </div>
-            <div class="price">Start from: <span>$250</span></div>
+            <div class="price">
+              Start from: <span>$250</span>
+            </div>
           </div>
         </div>
         <div class="popular-card">
@@ -194,7 +322,9 @@
               <span><i class="ri-star-fill"></i></span>
               4.8 (945)
             </div>
-            <div class="price">Start from: <span>$500</span></div>
+            <div class="price">
+              Start from: <span>$500</span>
+            </div>
           </div>
         </div>
       </div>
@@ -206,8 +336,8 @@
           <span><i class="ri-passport-line"></i></span>
           <h4>Portrait Photography</h4>
           <p>
-            Mastery in capturing the essence and personality of individuals or
-            groups.
+            Mastery in capturing the essence and personality of individuals 
+            or groups.
           </p>
         </div>
         <div class="talent-card">
@@ -230,16 +360,16 @@
           <span><i class="ri-zoom-in-line"></i></span>
           <h4>Macro Photography</h4>
           <p>
-            Specialization in capturing extreme close-up images, often of small
-            subjects.
+            Specialization in capturing extreme close-up images, often of 
+            small subjects.
           </p>
         </div>
         <div class="talent-card">
           <span><i class="ri-calendar-event-line"></i></span>
           <h4>Event Photography</h4>
           <p>
-            Proficiency in documenting events such as weddings, parties, and
-            corporate gatherings.
+            Proficiency in documenting events such as weddings, parties, 
+            and corporate gatherings.
           </p>
         </div>
         <div class="talent-card">
@@ -254,16 +384,16 @@
           <span><i class="ri-handbag-line"></i></span>
           <h4>Product Photography</h4>
           <p>
-            Skill in photographing products for marketing, e-commerce, or
-            advertising purposes.
+            Skill in photographing products for marketing, e-commerce, 
+            or advertising purposes.
           </p>
         </div>
         <div class="talent-card">
           <span><i class="ri-goblet-line"></i></span>
           <h4>Food Photography</h4>
           <p>
-            Talent in capturing food and beverages in an appetizing and visually
-            appealing manner.
+            Talent in capturing food and beverages in an appetizing and 
+            visually appealing manner.
           </p>
         </div>
       </div>
@@ -274,7 +404,7 @@
       <nav>
         <div class="nav-header">
           <div class="logo nav-logo">
-            <a href="#">Travelty</a>
+            <a href="#">Travelty-travelty-images</a>
           </div>
           <button class="nav-menu-btn" id="menu-btn">
             <span><i class="ri-menu-line"></i></span>
@@ -315,7 +445,7 @@
 
     <section class="section-container offer-container" id="offer">
       <div class="offer-image">
-        <img src="./assets/travelty/offer.jpg" alt="offer" />
+        <img src="./assets/travelty-images/offer.jpg" alt="offer" />
       </div>
       <div class="offer-content">
         <h3 class="section-subheader">EXCLUSIVE OFFER</h3>
@@ -348,7 +478,7 @@
       <h2 class="section-header">We provide world top destination for you</h2>
       <div class="service-grid">
         <div class="service-card">
-          <img src="./assets/travelty/service-1.jpg" alt="service" />
+          <img src="./assets/travelty-images/service-1.jpg" alt="service" />
           <div class="service-content">
             <h4>Tailor-Made Experiences for Your Perfect Getaway</h4>
             <p>Customized Itineraries</p>
@@ -365,7 +495,7 @@
           </div>
         </div>
         <div class="service-card">
-          <img src="./assets/travelty/service-2.jpg" alt="service" />
+          <img src="./assets/travelty-images/service-2.jpg" alt="service" />
           <div class="service-content">
             <h4>Explore with Confidence, Led by Local Experts</h4>
             <p>Expert Guided Tours</p>
@@ -382,7 +512,7 @@
           </div>
         </div>
         <div class="service-card">
-          <img src="./assets/travelty/service-3.jpg" alt="service" />
+          <img src="./assets/travelty-images/service-3.jpg" alt="service" />
           <div class="service-content">
             <h4>Hassle-Free Organization for a Stress-Free Vacation</h4>
             <p>Seamless Travel Planning</p>
@@ -403,7 +533,7 @@
 
     <section class="section-container client-container" id="client">
       <div class="client-image">
-        <img src="./assets/travelty/client-1.jpg" alt="client" />
+        <img src="./assets/travelty-images/client-1.jpg" alt="client" />
       </div>
       <div class="client-content">
         <h3 class="section-subheader">TESTIMONIALS</h3>
@@ -420,7 +550,7 @@
                   gems that aren't in the typical tourist guides.
                 </p>
                 <div class="client-details">
-                  <img src="./assets/travelty/user-1.jpg" alt="client" />
+                  <img src="./assets/travelty-images/user-1.jpg" alt="client" />
                   <div>
                     <h4>Robert Chang</h4>
                     <h5>Software Developer</h5>
@@ -437,7 +567,7 @@
                   destination without worrying about the details.
                 </p>
                 <div class="client-details">
-                  <img src="./assets/travelty/user-2.jpg" alt="client" />
+                  <img src="./assets/travelty-images/user-2.jpg" alt="client" />
                   <div>
                     <h4>Emily Rodriguez</h4>
                     <h5>Financial Analyst</h5>
@@ -454,7 +584,7 @@
                   looking to add a touch of opulence to their travels.
                 </p>
                 <div class="client-details">
-                  <img src="./assets/travelty/user-3.jpg" alt="client" />
+                  <img src="./assets/travelty-images/user-3.jpg" alt="client" />
                   <div>
                     <h4>Michael Anderson</h4>
                     <h5>Marketing Executive</h5>
@@ -602,7 +732,7 @@
     <section class="banner">
       <div class="banner-wrapper">
         <div class="banner-card">
-          <img src="./assets/travelty/banner-1.jpg" alt="banner" />
+          <img src="./assets/travelty-images/banner-1.jpg" alt="banner" />
           <div class="banner-content">
             <h4>Bora Bora</h4>
             <div class="banner-ratings">
@@ -619,7 +749,7 @@
           </div>
         </div>
         <div class="banner-card">
-          <img src="./assets/travelty/banner-2.jpg" alt="banner" />
+          <img src="./assets/travelty-images/banner-2.jpg" alt="banner" />
           <div class="banner-content">
             <h4>Banff National Park</h4>
             <div class="banner-ratings">
@@ -636,7 +766,7 @@
           </div>
         </div>
         <div class="banner-card">
-          <img src="./assets/travelty/banner-3.jpg" alt="banner" />
+          <img src="./assets/travelty-images/banner-3.jpg" alt="banner" />
           <div class="banner-content">
             <h4>Barcelona</h4>
             <div class="banner-ratings">
@@ -653,7 +783,7 @@
           </div>
         </div>
         <div class="banner-card">
-          <img src="./assets/travelty/banner-4.jpg" alt="banner" />
+          <img src="./assets/travelty-images/banner-4.jpg" alt="banner" />
           <div class="banner-content">
             <h4>Cape Town</h4>
             <div class="banner-ratings">
@@ -671,7 +801,7 @@
           </div>
         </div>
         <div class="banner-card">
-          <img src="./assets/travelty/banner-5.jpg" alt="banner" />
+          <img src="./assets/travelty-images/banner-5.jpg" alt="banner" />
           <div class="banner-content">
             <h4>Queenstown</h4>
             <div class="banner-ratings">
@@ -688,7 +818,7 @@
           </div>
         </div>
         <div class="banner-card">
-          <img src="./assets/travelty/banner-6.jpg" alt="banner" />
+          <img src="./assets/travelty-images/banner-6.jpg" alt="banner" />
           <div class="banner-content">
             <h4>Santorini</h4>
             <div class="banner-ratings">
@@ -735,7 +865,7 @@
       <div class="section-container footer-container">
         <div class="footer-col">
           <div class="logo footer-logo">
-            <a href="#home">Travelty</a>
+            <a href="#home">Travelty-travelty-images</a>
           </div>
           <p>
             Discover a world of endless possibilities as we curate the 
@@ -777,7 +907,7 @@
         </div>
       </div>
       <div class="footer-bar">
-        Copyright © 2024 Travelty. All rights reserved.
+        Copyright © 2024 Travelty-travelty-images. All rights reserved.
       </div>
     </footer>
 
@@ -833,4 +963,4 @@
     </script>
   </body>
 </html>
-<!-- 49-576-706-836 -->
+<!-- 49-576-706-836-966 -->
