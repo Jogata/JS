@@ -42,6 +42,7 @@
         display: inline-block;
         text-decoration: none;
         /* transition: 0.3s; */
+        transition: color 300ms;
       }
 
       button {
@@ -173,7 +174,7 @@
       }
       
       .header {
-        padding: 5rem 0 2rem;
+        padding: 0 0 2rem;
         background-color: var(--text-dark);
         /* background-image: url("./assets/market-images/header.jpg");
         background-repeat: no-repeat;
@@ -260,8 +261,9 @@
       
       .header-container {
         position: relative;
-        padding-block: 10rem;
-        filter: drop-shadow(-3px -3px 3px #fff4);
+        /* padding-block: 10rem; */
+        padding-block: 14rem;
+        /* filter: drop-shadow(-3px -3px 3px #fff4); */
         z-index: 1;
       }
 
@@ -276,7 +278,7 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
-        clip-path: url("#mask-1");
+        /* clip-path: url("#mask-1"); */
         /* clip-path: url("#mask-2"); */
         /* clip-path: url("#mask-3"); */
         /* clip-path: url("#mask-4"); */
@@ -332,7 +334,8 @@
       
       .popular-card {
         padding: 1rem;
-        border-radius: 1rem;
+        /* border-radius: 1rem; */
+        border-radius: 16px;
         box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
         transition: 0.3s;
       }
@@ -405,7 +408,8 @@
       .talent-card {
         padding: 2rem 1rem;
         text-align: center;
-        border-radius: 1rem;
+        /* border-radius: 1rem; */
+        border-radius: 16px;
         border: 2px solid transparent;
         box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
         transition: 0.3s;
@@ -444,8 +448,10 @@
 
       .register-grid {
         display: grid;
-        border-radius: 1rem;
+        /* border-radius: 1rem; */
+        border-radius: 16px;
         background-color: var(--text-dark);
+        overflow: hidden;
       }
       
       .register-content {
@@ -597,7 +603,7 @@
       }
       
       .footer-links {
-        list-style: none;
+        /* list-style: none; */
         display: grid;
         gap: 1rem;
       }
@@ -633,7 +639,123 @@
         .footer-container {
           grid-template-columns: repeat(2, 1fr);
         }
-      }        
+      }
+
+      @media (width < 768px) {
+        .header {
+          padding: 5rem 0 0;
+        }
+      }
+
+      @media (width > 768px) {
+        nav {
+          position: static;
+          padding: 2rem 1rem;
+          display: flex;
+          gap: 2rem;
+          /* flex-wrap: wrap; */
+          align-items: center;
+          justify-content: space-between;
+        }
+      
+        .nav-header {
+          padding: 0;
+          background-color: transparent;
+        }
+      
+        .nav-menu-btn {
+          display: none;
+        }
+      
+        .nav-links {
+          position: static;
+          padding: 0;
+          flex-direction: row;
+          justify-content: flex-end;
+          background-color: transparent;
+          transform: none;
+        }
+        
+        .header-container {
+          /* padding-block: 8rem 12rem; */
+          filter: drop-shadow(-3px -3px 3px #fff4);
+        }
+
+        .header-container::after {
+          clip-path: url("#mask-1");
+          /* clip-path: url("#mask-2"); */
+          /* clip-path: url("#mask-3"); */
+          /* clip-path: url("#mask-4"); */
+        }
+          
+        .header-container h1 {
+          font-size: 4rem;
+          line-height: 4.5rem;
+        }
+      
+        .popular-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      
+        .talent-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      
+        .register-grid {
+          grid-template-columns: repeat(2, 1fr);
+          background-color: transparent;
+        }
+      
+        .register-content {
+          position: relative;
+          margin-top: auto;
+          padding-block: 4rem;
+          padding-inline: 4rem 0;
+          border-radius: 16px 0 0 16px;
+          background-color: var(--text-dark);
+        }
+
+        .register-content::after {
+          position: absolute;
+          top: 0;
+          left: 100%;
+          content: "";
+          width: 100%;
+          height: 100%;
+          border-radius: 0 16px 16px 0;
+          background-color: inherit;
+          z-index: -1;
+        }
+        
+        .register-image {
+          /* isolation: isolate; */
+          /* position: relative; */
+          display: block;
+        }
+      
+        .register-image img {
+          /* position: absolute; */
+          /* bottom: 0; */
+          /* left: 50%; */
+          /* transform: translateX(-50%); */
+          max-width: 325px;
+          margin: 0 auto;
+        }
+      
+        .footer-container {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      @media (width > 1024px) {
+        .talent-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      
+        .footer-container {
+          grid-template-columns: repeat(5, 1fr);
+        }
+      }
       
       .banner-card {
         flex-shrink: 0;
@@ -864,13 +986,16 @@
       menuBtn.addEventListener("click", (e) => {
         navLinks.classList.toggle("open");
       
-        const isOpen = navLinks.classList.contains("open");
-        menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+        // const isOpen = navLinks.classList.contains("open");
+        // menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+        menuBtnIcon.classList.toggle("ri-menu-line");
+        menuBtnIcon.classList.toggle("ri-close-line");
       });
       
       navLinks.addEventListener("click", (e) => {
         navLinks.classList.remove("open");
-        menuBtnIcon.setAttribute("class", "ri-menu-line");
+        // menuBtnIcon.setAttribute("class", "ri-menu-line");
+        menuBtnIcon.className = "ri-menu-line";
       });
     </script>
 
@@ -1039,7 +1164,7 @@
           </div>
         </div>
         <!-- <div class="register-image"> -->
-        <div class="register-image fade-up-absolute paused delayed" style="--delay: 4">
+        <div class="register-image fade-left paused delayed" style="--delay: 4">
           <img src="./assets/market-images/register.png" alt="register" />
         </div>
       </div>
@@ -1173,7 +1298,8 @@
     <footer class="footer">
       <div class="section-container footer-container">
         <div class="footer-col">
-          <h4>ABOUT</h4>
+          <!-- <h4>ABOUT</h4> -->
+          <h4 class="fade-up-absolute paused">ABOUT</h4>
           <ul class="footer-links">
             <li><a href="#">Careers</a></li>
             <li><a href="#">Press & News</a></li>
@@ -1183,7 +1309,8 @@
           </ul>
         </div>
         <div class="footer-col">
-          <h4>SUPPORT</h4>
+          <!-- <h4>SUPPORT</h4> -->
+          <h4 class="fade-up-absolute paused">SUPPORT</h4>
           <ul class="footer-links">
             <li><a href="#">Help & Support</a></li>
             <li><a href="#">Trust & Safety</a></li>
@@ -1192,7 +1319,8 @@
           </ul>
         </div>
         <div class="footer-col">
-          <h4>COMMUNITY</h4>
+          <!-- <h4>COMMUNITY</h4> -->
+          <h4 class="fade-up-absolute paused">COMMUNITY</h4>
           <ul class="footer-links">
             <li><a href="#">Events</a></li>
             <li><a href="#">Blog</a></li>
@@ -1204,7 +1332,8 @@
           </ul>
         </div>
         <div class="footer-col">
-          <h4>CATEGORY</h4>
+          <!-- <h4>CATEGORY</h4> -->
+          <h4 class="fade-up-absolute paused">CATEGORY</h4>
           <ul class="footer-links">
             <li><a href="#">Graphic Design</a></li>
             <li><a href="#">Website Design</a></li>
@@ -1216,7 +1345,8 @@
           </ul>
         </div>
         <div class="footer-col">
-          <h4>BROWSE</h4>
+          <!-- <h4>BROWSE</h4> -->
+          <h4 class="fade-up-absolute paused">BROWSE</h4>
           <ul class="footer-links">
             <li><a href="#">Freelancers by Skills</a></li>
             <li><a href="#">Freelancers in USA</a></li>
@@ -1873,4 +2003,4 @@
     </script>
   </body>
 </html>
-<!-- 49-576-706-836-966-1096-1226-1356-1486-1616-1746-1876 -->
+<!-- 49-576-706-836-966-1096-1226-1356-1486-1616-1746-1876-2006 -->
