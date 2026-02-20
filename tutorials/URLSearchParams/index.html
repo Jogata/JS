@@ -26,10 +26,16 @@
         --max-width: 1200px;
       }
       
-      * {
+      *,
+      *::before,
+      *::after {      
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+      }
+
+      ul {
+        list-style: none;
       }
 
       a {
@@ -167,15 +173,18 @@
       }
       
       .header {
-        background-image: url("./assets/market-images/header.jpg");
+        padding: 5rem 0 2rem;
+        background-color: var(--text-dark);
+        /* background-image: url("./assets/market-images/header.jpg");
         background-repeat: no-repeat;
         background-position: center;
-        background-size: cover;
+        background-size: cover; */
       }
       
       nav {
-        position: fixed;
         isolation: isolate;
+        position: fixed;
+        top: 0;
         width: 100%;
         max-width: var(--max-width);
         margin-inline: auto;
@@ -204,9 +213,10 @@
       }
 
       .nav-links {
-        list-style: none;
+        /* list-style: none; */
         position: absolute;
-        top: 68px;
+        /* top: 68px; */
+        top: 100%;
         left: 0;
         width: 100%;
         padding: 2rem;
@@ -249,7 +259,28 @@
       }
       
       .header-container {
+        position: relative;
         padding-block: 10rem;
+        filter: drop-shadow(-3px -3px 3px #fff4);
+        z-index: 1;
+      }
+
+      .header-container::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-image: url("./assets/market-images/header.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        clip-path: url("#mask-1");
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
+        z-index: -1;
       }
       
       .header-container h1 {
@@ -267,8 +298,8 @@
         margin-bottom: 1rem;
         padding: 2px;
         display: flex;
-        gap: 10px;
-        align-items: center;
+        /* gap: 10px; */
+        /* align-items: center; */
         border-radius: 6px;
         background-color: var(--white);
       }
@@ -281,6 +312,7 @@
       
       .header-container form input {
         width: 100%;
+        padding-left: 0.5em;
         color: var(--text-dark);
         font-size: 1rem;
         /* outline: none; */
@@ -311,7 +343,11 @@
       
       .popular-card img {
         margin-bottom: 1rem;
-        border-radius: 10px;
+        /* border-radius: 10px; */
+        clip-path: url("#mask-1");
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
       }
       
       .popular-card p {
@@ -543,7 +579,61 @@
         border-radius: 6px;
         background-color: var(--text-dark);
       }
+
+      .footer {
+        background-color: var(--text-dark);
+      }
       
+      .footer-container {
+        display: grid;
+        gap: 4rem 2rem;
+      }
+      
+      .footer-col h4 {
+        margin-bottom: 1rem;
+        color: var(--white);
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+      
+      .footer-links {
+        list-style: none;
+        display: grid;
+        gap: 1rem;
+      }
+      
+      .footer-links a {
+        color: var(--text-light);
+      }
+      
+      .footer-links a:hover {
+        color: var(--white);
+      }
+      
+      .footer-bar {
+        padding: 1rem;
+        color: var(--text-light);
+        font-size: 0.9rem;
+        text-align: center;
+      }
+
+      @media (width > 540px) {
+        .popular-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      
+        .talent-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      
+        .register-content {
+          padding-inline: 2rem;
+        }
+      
+        .footer-container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }        
       
       .banner-card {
         flex-shrink: 0;
@@ -715,7 +805,7 @@
         <div class="nav-header">
           <div class="nav-logo">
             <!-- <a href="#">Market</a> -->
-            <a href="#" class="fade-up-absolute paused">
+            <a href="#" class="fade-in paused">
               Market
             </a>
           </div>
@@ -724,10 +814,30 @@
           </button>
         </div>
         <ul class="nav-links" id="nav-links">
-          <li><a href="#">Refer</a></li>
-          <li><a href="#">Sign In</a></li>
-          <li><a href="#">Start Selling</a></li>
-          <li><button class="btn">Join</button></li>
+          <!-- <li><a href="#">Refer</a></li> -->
+          <li>
+            <a href="#" class="fade-right paused delayed" style="--delay: 2">
+              Refer
+            </a>
+          </li>
+          <!-- <li><a href="#">Sign In</a></li> -->
+          <li>
+            <a href="#" class="fade-right paused delayed" style="--delay: 3">
+              Sign In
+            </a>
+          </li>
+          <!-- <li><a href="#">Start Selling</a></li> -->
+          <li>
+            <a href="#" class="fade-right paused delayed" style="--delay: 4">
+              Start Selling
+            </a>
+          </li>
+          <!-- <li><button class="btn">Join</button></li> -->
+          <li>
+            <button class="btn fade-right paused delayed" style="--delay: 6">
+              Join
+            </button>
+          </li>
         </ul>
       </nav>
       <div class="section-container header-container">
@@ -746,6 +856,23 @@
         </p>
       </div>
     </header>
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const navLinks = document.getElementById("nav-links");
+      const menuBtnIcon = menuBtn.querySelector("i");
+      
+      menuBtn.addEventListener("click", (e) => {
+        navLinks.classList.toggle("open");
+      
+        const isOpen = navLinks.classList.contains("open");
+        menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+      });
+      
+      navLinks.addEventListener("click", (e) => {
+        navLinks.classList.remove("open");
+        menuBtnIcon.setAttribute("class", "ri-menu-line");
+      });
+    </script>
 
     <section class="section-container popular-container">
       <!-- <h2 class="section-header">Most Popular Gigs</h2> -->
@@ -1690,20 +1817,23 @@
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
     
     <div id="calc" style="padding: 5rem;">
-      <!-- <input type="number" id="width"> -->
+      <input type="number" id="width">
       <input type="number" id="height" placeholder="Height" style="padding: 0.5em;">
       <button id="calc" style="padding: 0.5em; border: 1px solid;">Calc</button>
-      <p id="new-width" style="padding: 0.5em; color: tomato;">New width: <span></span></p>    <!-- (1914-1210)/2 - 1914 -->
+      <p id="new-width" style="padding: 0.5em; color: tomato;">
+        New width: <span id="right"></span> <span id="left"></span>
+      </p>
       <!-- <p id="new-height" style="color: tomato;">New height: <span></span></p> -->
       <script>
         const button = document.getElementById("calc");
         button.addEventListener("click", () => {
-          // const width = document.getElementById("width").value;
+          const width = document.getElementById("width").value;
           const height = document.getElementById("height").value;
           console.log(height);
           const k = 1294/2048;
           const newWidth = Number(height) * k;
-          document.querySelector("#new-width span").textContent = newWidth;
+          document.querySelector("#left").textContent = newWidth;
+          document.querySelector("#right").textContent = width - ((width - newWidth)/2);
         })
       </script>
     </div>
@@ -1743,4 +1873,4 @@
     </script>
   </body>
 </html>
-<!-- 49-576-706-836-966-1096-1226-1356-1486-1616-1746 -->
+<!-- 49-576-706-836-966-1096-1226-1356-1486-1616-1746-1876 -->
