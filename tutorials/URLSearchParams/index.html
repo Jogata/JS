@@ -3,982 +3,138 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>URL SearchParams in JS</title> -->
-    <title>Market</title>
+    <title>URL SearchParams in JS</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      /* @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"); */
-      @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Kaushan+Script&family=Playfair+Display&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Brawler:wght@400;700&family=Croissant+One&family=Ephesis&family=Gloock&family=Hurricane&family=Imbue:opsz,wght@10..100,100..900&family=Modak&family=Montez&family=Prosto+One&family=Rye&family=Shojumaru&family=Young+Serif&family=ZCOOL+XiaoWei&display=swap');
-      @import url("https://fonts.googleapis.com/css2?family=Lora:ital@0;1&family=Poppins:wght@400;500;600&display=swap");
-      @import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Goldman:wght@400;700&display=swap");
-      @import url('https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Great+Vibes&display=swap');
-      @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@400;500;600;700&display=swap");
-      
-      :root {
-        --text-dark: #0a0a0a;
-        --text-light: #737373;
-        --extra-light: #f5f5f5;
-        --white: #ffffff;
-        --max-width: 1200px;
-      }
-      
-      *,
-      *::before,
-      *::after {      
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      ul {
-        list-style: none;
-      }
-
-      a {
-        display: inline-block;
-        text-decoration: none;
-        /* transition: 0.3s; */
-        transition: color 300ms;
-      }
-
-      button {
-        font-family: inherit;
-        border: 0px solid transparent;
-        outline: 1px solid transparent;
-        background-color: transparent;
-        cursor: pointer;
-      }
-
-      input {
-        font-family: inherit;
-        border: 0px solid transparent;
-        outline: 1px solid transparent;
-        background-color: transparent;
-      }
-
-      button:focus-visible,
-      input:focus-visible,
-      a:focus-visible {
-        outline: 1px solid #999;
-      }
-
-      img {
-        /* display: flex; */
-        display: block;
-        width: 100%;
-      }
-
-      .svg {
-        /* display: none; */
-        position: absolute;
-        width: 0;
-        height: 0;
-      }
-
-      .mask-1 {
-        clip-path: url("#mask-1");
-      }
-      
-      .mask-2 {
-        clip-path: url("#mask-2");
-      }
-      
-      .mask-3 {
-        clip-path: url("#mask-3");
-      }
-      
-      .mask-4 {
-        clip-path: url("#mask-4");
-      }
-
-      .section-container {
-        max-width: var(--max-width);
-        margin: auto;
-        padding: 5rem 1rem;
-      }
-      
-      .section-header {
-        color: var(--text-dark);
-        font-size: 2rem;
-        font-weight: 700;
-      }
-      
-      .btn {
-        padding: 1rem 1.5rem;
-        color: var(--text-dark);
-        font-size: 1rem;
-        font-weight: 600;
-        /* outline: none; */
-        /* border: none; */
-        border-radius: 6px;
-        background-color: var(--white);
-        /* transition: 0.3s; */
-        transition: background-color 300ms;
-        /* cursor: pointer; */
-      }
-      
-      .btn:hover {
-        background-color: var(--extra-light);
-      }
-            
-      html {
-      /* body { */
-        scroll-behavior: smooth;
-      }
-      
-      body {
-        color: var(--white);
-        font-family: "Roboto", sans-serif;
-  font-family: 'Abril Fatface', cursive;
-  font-family: 'Courgette', cursive;
-  font-family: 'Dancing Script', cursive;
-  font-family: 'Great Vibes', cursive;
-  font-family: 'Josefin Sans', sans-serif;
-  font-family: 'Limelight', cursive;
-  font-family: 'Lobster', cursive;
-  font-family: 'Montserrat', sans-serif;
-  font-family: 'Oleo Script Swash Caps', cursive;
-  font-family: 'Poppins', sans-serif;
-  font-family: 'Raleway', sans-serif;
-  font-family: 'Fraunces', serif;
-  font-family: 'Playfair Display', serif;
-  font-family: 'Lemon', cursive;
-  font-family: "Goldman", sans-serif;
-  font-family: "Lora", serif;
-  font-family: "Croissant One", serif;
-  font-family: "Shojumaru", system-ui;
-  font-family: "Montez", cursive;
-  font-family: "Modak", system-ui;
-  font-family: "Prosto One", sans-serif;
-  font-family: "Young Serif", serif;
-  font-family: "ZCOOL XiaoWei", sans-serif;
-  font-family: "Brawler", serif;
-  font-family: "Gloock", serif;
-  font-family: "Ephesis", cursive;
-  font-family: "Platypi", serif;
-  font-family: "Patua One", serif;
-  font-family: "Rye", serif;
-  font-family: "Arizonia", cursive;
-  font-family: "Imbue", serif;
-  font-family: 'Kaushan Script', cursive;
-  font-family: "Hurricane", cursive;
-  font-family: "Bona Nova SC", serif;
-  font-family: "DM Serif Display", serif;
-  font-family: Georgia, serif;
-  /* line-height: 1.6; */
-  /* background-color: #080a0c; */
-      }
-      
-      .header {
-        padding: 0 0 2rem;
-        background-color: var(--text-dark);
-        /* background-image: url("./assets/market-images/header.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover; */
-      }
-      
-      nav {
-        isolation: isolate;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        max-width: var(--max-width);
-        margin-inline: auto;
-        z-index: 9;
-      }
-      
-      .nav-header {
-        padding: 1rem;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: var(--text-dark);
-      }
-      
-      .nav-logo a {
-        color: var(--white);
-        font-size: 1.5rem;
-        font-weight: 600;
-      }
-      
-      .nav-menu-btn {
-        color: var(--white);
-        font-size: 1.5rem;
-        /* cursor: pointer; */
-      }
-
-      .nav-links {
-        /* list-style: none; */
-        position: absolute;
-        /* top: 68px; */
-        top: 100%;
-        left: 0;
-        width: 100%;
-        padding: 2rem;
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        background-color: var(--text-dark);
-        transform: translateY(-100%);
-        /* transition: 0.5s; */
-        transition: transform 500ms;
-        z-index: -1;
-      }
-      
-      .nav-links.open {
-        transform: translateY(0);
-      }
-      
-      .nav-links a {
-        color: var(--white);
-        white-space: nowrap;
-        /* transition: 0.3s; */
-        transition: color 300ms;
-      }
-      
-      .nav-links a:hover {
-        color: var(--text-light);
-      }
-      
-      .nav-links .btn {
-        color: var(--white);
-        border: 1px solid var(--white);
-        background-color: transparent;
-      }
-      
-      .nav-links .btn:hover {
-        color: var(--text-dark);
-        border-color: var(--white);
-        background-color: var(--white);
-      }
-      
-      .header-container {
-        position: relative;
-        /* padding-block: 10rem; */
-        padding-block: 14rem;
-        /* filter: drop-shadow(-3px -3px 3px #fff4); */
-        z-index: 1;
-      }
-
-      .header-container::after {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-image: url("./assets/market-images/header.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        /* clip-path: url("#mask-1"); */
-        /* clip-path: url("#mask-2"); */
-        /* clip-path: url("#mask-3"); */
-        /* clip-path: url("#mask-4"); */
-        z-index: -1;
-      }
-      
-      .header-container h1 {
-        /* margin-bottom: 1rem; */
-        margin-bottom: 2rem;
-        color: var(--white);
-        font-size: 3rem;
-        line-height: 3.5rem;
-      }
-      
-      .header-container form {
-        width: 100%;
-        max-width: 400px;
-        /* margin-bottom: 10px; */
-        margin-bottom: 1rem;
-        padding: 2px;
-        display: flex;
-        /* gap: 10px; */
-        /* align-items: center; */
-        border-radius: 6px;
-        background-color: var(--white);
-      }
-      
-      .header-container form .btn {
-        padding: 10px;
-        font-size: 1.25rem;
-        background-color: transparent;
-      }
-      
-      .header-container form input {
-        width: 100%;
-        padding-left: 0.5em;
-        color: var(--text-dark);
-        font-size: 1rem;
-        /* outline: none; */
-        /* border: none; */
-      }
-      
-      .header-container p {
-        color: var(--white);
-        font-size: 0.9rem;
-      }
-      
-      .popular-grid {
-        margin-top: 2rem;
-        display: grid;
-        gap: 1rem;
-      }
-      
-      .popular-card {
-        padding: 1rem;
-        /* border-radius: 1rem; */
-        border-radius: 16px;
-        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
-        /* transition: 0.3s; */
-        transition: box-shadow 300ms;
-      }
-      
-      .popular-card:hover {
-        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
-      }
-      
-      .popular-card img {
-        margin-bottom: 1rem;
-        /* border-radius: 10px; */
-        clip-path: url("#mask-1");
-        /* clip-path: url("#mask-2"); */
-        /* clip-path: url("#mask-3"); */
-        /* clip-path: url("#mask-4"); */
-      }
-      
-      .popular-card p {
-        margin-bottom: 0.5rem;
-        color: var(--text-light);
-        font-weight: 500;
-      }
-
-      .popular-card h4 {
-        margin-bottom: 1rem;
-        color: var(--text-dark);
-        font-size: 1.2rem;
-        font-weight: 600;
-      }
-
-      .popular-card > div {
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-      }
-      
-      .popular-card .rating {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-        color: var(--text-light);
-      }
-      
-      .popular-card .rating span {
-        color: goldenrod;
-        font-size: 1.2rem;
-      }
-      
-      .popular-card .price {
-        color: var(--text-light);
-      }
-      
-      .popular-card .price span {
-        color: var(--text-dark);
-        font-weight: 600;
-      }
-      
-      .talent-container .section-header {
-        text-align: center;
-      }
-      
-      .talent-grid {
-        margin-top: 2rem;
-        display: grid;
-        gap: 1rem;
-      }
-      
-      .talent-card {
-        padding: 2rem 1rem;
-        text-align: center;
-        /* border-radius: 1rem; */
-        border-radius: 16px;
-        border: 2px solid transparent;
-        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
-        /* transition: 0.3s; */
-        transition: border-color 300ms;
-      }
-      
-      .talent-card:hover {
-        border-color: var(--text-dark);
-      }
-      
-      .talent-card span {
-        display: inline-block;
-        margin-bottom: 1rem;
-        padding: 5px 13px;
-        color: var(--text-dark);
-        font-size: 2rem;
-        border-radius: 10px;
-        background-color: var(--extra-light);
-        /* transition: 0.3s; */
-        transition: color 300ms,
-        background-color 300ms;
-      }
-
-      .talent-card:hover span {
-        color: var(--white);
-        background-color: var(--text-dark);
-      }
-
-      .talent-card h4 {
-        margin-bottom: 0.5rem;
-        color: var(--text-dark);
-        font-size: 1.2rem;
-        font-weight: 600;
-      }
-      
-      .talent-card p {
-        color: var(--text-light);
-      }
-
-      .register-grid {
-        display: grid;
-        /* border-radius: 1rem; */
-        border-radius: 16px;
-        background-color: var(--text-dark);
-        overflow: hidden;
-      }
-      
-      .register-content {
-        padding-block: 4rem;
-        padding-inline: 1rem;
-      }
-        
-      .register-content h4 {
-        margin-bottom: 2rem;
-        color: var(--white);
-        font-size: 3rem;
-        font-weight: 600;
-        line-height: 4rem;
-      }
-      
-      .register-image {
-        display: none;
-      }
-      
-      .slider {
-        width: 100%;
-        /* padding-block: 2rem; */
-      }
-
-      .slider .control {
-        margin-top: 2rem;
-        text-align: center;
-      }
-    
-      .slider button {
-        color: var(--white);
-        font-size: 0px;
-        border-radius: 50%;
-        border: 1px solid black;
-        background-color: var(--text-dark);
-      }
-    
-      button#prev {
-        padding: 0.45rem 0.5rem 0.45rem 0.7rem;
-      }
-    
-      button#next {
-        padding: 0.45rem 0.7rem 0.45rem 0.5rem;
-      }
-    
-      .slider button i {
-        font-size: 2rem;
-      }
-        
-      .slider-track {
-        padding-block: 2rem;
-        display: flex;
-        overflow: hidden;
-      }
-
-      .slide {
-        flex-shrink: 0;
-        position: absolute;
-        width: 100%;
-        /* max-width: 500px; */
-        padding-inline: 1rem;
-        transform: translateX(100%);
-      }
-      
-      .relative {
-        position: relative;
-      }
-      
-      .current {
-        transform: translate(0);
-        transition: transform 300ms;
-        z-index: 1;
-      }
-    
-      .next {
-        transform: translate(100%);
-        transition: transform 300ms;
-      }
-      
-      .prev {
-        transform: translate(-100%);
-        transition: transform 300ms;
-      }
-      
-      /* .slide {
-        max-width: 500px;
-        padding-inline: 1rem;
-      } */
-      
-      .client-card {
-        max-width: 500px;
-        margin: 0 auto;
-        padding: 2rem;
-        border-radius: 16px;
-        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
-        /* transition: 0.3s; */
-        transition: box-shadow 300ms;
-      }
-      
-      .client-card:hover {
-        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
-      }
-      
-      .client-card p {
-        margin-bottom: 2rem;
-        color: var(--text-light);
-      }
-      
-      .client-footer {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        justify-content: space-between;
-      }
-      
-      .client-footer h4 {
-        color: var(--text-dark);
-        font-size: 1.2rem;
-        font-weight: 600;
-      }
-      
-      .client-footer h5 {
-        color: var(--text-light);
-        font-size: 1rem;
-        font-weight: 500;
-      }
-      
-      .client-footer span {
-        padding: 5px 11px;
-        color: var(--white);
-        font-size: 1.5rem;
-        border-radius: 6px;
-        background-color: var(--text-dark);
-      }
-
-      .footer {
-        padding-bottom: 1rem;
-        background-color: var(--text-dark);
-      }
-      
-      .footer-container {
-        display: grid;
-        gap: 4rem 2rem;
-      }
-      
-      .footer-col h4 {
-        margin-bottom: 1rem;
-        color: var(--white);
-        font-size: 1.2rem;
-        font-weight: 600;
-      }
-      
-      .footer-links {
-        /* list-style: none; */
-        display: grid;
-        gap: 1rem;
-      }
-      
-      .footer-links a {
-        color: var(--text-light);
-      }
-      
-      .footer-links a:hover {
-        color: var(--white);
-      }
-      
-      .footer-bar {
-        padding: 1rem;
-        color: var(--text-light);
-        font-size: 0.9rem;
-        text-align: center;
-      }
-
-      @media (width > 540px) {
-        .popular-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      
-        .talent-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      
-        .register-content {
-          padding-inline: 2rem;
-        }
-      
-        .footer-container {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-
-      @media (width < 768px) {
-        .header {
-          padding: 5rem 0 0;
-        }
-      }
-
-      @media (width > 768px) {
-        nav {
-          position: static;
-          padding: 2rem 1rem;
-          display: flex;
-          gap: 2rem;
-          /* flex-wrap: wrap; */
-          align-items: center;
-          justify-content: space-between;
-        }
-      
-        .nav-header {
-          padding: 0;
-          background-color: transparent;
-        }
-      
-        .nav-menu-btn {
-          display: none;
-        }
-      
-        .nav-links {
-          position: static;
-          padding: 0;
-          flex-direction: row;
-          justify-content: flex-end;
-          background-color: transparent;
-          transform: none;
-        }
-        
-        .header-container {
-          /* padding-block: 8rem 12rem; */
-          filter: drop-shadow(-3px -3px 3px #fff4);
-        }
-
-        .header-container::after {
-          clip-path: url("#mask-1");
-          /* clip-path: url("#mask-2"); */
-          /* clip-path: url("#mask-3"); */
-          /* clip-path: url("#mask-4"); */
-        }
-          
-        .header-container h1 {
-          font-size: 4rem;
-          line-height: 4.5rem;
-        }
-      
-        .popular-grid {
-          grid-template-columns: repeat(4, 1fr);
-        }
-      
-        .talent-grid {
-          grid-template-columns: repeat(3, 1fr);
-        }
-      
-        .register-grid {
-          grid-template-columns: repeat(2, 1fr);
-          background-color: transparent;
-        }
-      
-        .register-content {
-          position: relative;
-          margin-top: auto;
-          padding-block: 4rem;
-          padding-inline: 4rem 0;
-          border-radius: 16px 0 0 16px;
-          background-color: var(--text-dark);
-        }
-
-        .register-content::after {
-          position: absolute;
-          top: 0;
-          left: 100%;
-          /* left: -40%; */
-          content: "";
-          width: 100%;
-          /* width: 280%; */
-          height: 100%;
-          border-radius: 0 16px 16px 0;
-          background-color: inherit;
-          /* background-color: var(--text-dark); */
-          /* clip-path: url("#mask-1"); */
-          /* clip-path: url("#mask-2"); */
-          /* clip-path: url("#mask-3"); */
-          /* clip-path: url("#mask-4"); */
-          z-index: -1;
-        }
-        
-        .register-image {
-          /* isolation: isolate; */
-          position: relative;
-          display: block;
-        }
-      
-        .register-image img {
-          /* position: absolute; */
-          /* bottom: 0; */
-          /* left: 50%; */
-          /* transform: translateX(-50%); */
-          max-width: 325px;
-          margin: 0 auto;
-          /* border-radius: 50%; */
-          /* clip-path: url("#mask-1"); */
-          /* clip-path: url("#mask-2"); */
-          /* clip-path: url("#mask-3"); */
-          /* clip-path: url("#mask-4"); */
-        }
-
-        .register-image img:first-child {
-          clip-path: url("#mask-1");
-          /* clip-path: url("#mask-2"); */
-          /* clip-path: url("#mask-3"); */
-          /* clip-path: url("#mask-4"); */
-        }
-
-        .register-image #mask {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          width: 100%;
-          height: 50%;
-          object-fit: cover;
-          object-position: top center;
-        }
-      
-        .footer-container {
-          grid-template-columns: repeat(3, 1fr);
-        }
-      }
-
-      @media (width > 1024px) {
-        .talent-grid {
-          grid-template-columns: repeat(4, 1fr);
-        }
-      
-        .footer-container {
-          grid-template-columns: repeat(5, 1fr);
-        }
-      }
-
-      @media (width > 1700px) {
-        .register-grid {
-          overflow: visible;
-        }
-
-        .register-content {
-          background-color: transparent;
-        }
-
-        .register-content::after {
-          left: -40%;
-          width: 280%;
-          background-color: var(--text-dark);
-          /* clip-path: url("#mask-1"); */
-          /* clip-path: url("#mask-2"); */
-          clip-path: url("#mask-3");
-          /* clip-path: url("#mask-4"); */
-        }
-      }
-      
-      .banner-card {
-        flex-shrink: 0;
-      }
-
-      .banner-card img {
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .banner-card:hover .scrollable {
-        transform: translateY(0);
-      }
-
-      .scrollable {
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: flex;
-        width: 100%;
-        height: 100%;
-        transform: translateY(100%);
-        transition: transform 500ms;
-        scrollbar-width: thin;
-        scrollbar-color: var(--text-dark) 
-              var(--primary-color-light);
-        overflow: auto;
-      }
-
-      .banner-content {
-        position: static;
-        margin-top: auto;
-        transform: translateY(0);
-      }
-
-      @media (width < 400px) {
-        .banner-card {
-          max-width: 90vw;
-          min-width: 200px;
-        }
-      }
-
-      /* .zoom-in { */
-      .fade-in {
-        /* animation: zoom-in 2s linear backwards; */
-        animation: fade-in 2s linear backwards;
-      }
-      
-      .rotate {
-        animation: rotate 1s linear forwards;
-      }
-      
-      .fade-left {
-        animation: fade-left 1s linear backwards;
-      }
-      
-      .fade-right {
-        animation: fade-right 1s linear backwards;
-      }
-      
-      .fade-up {
-        animation: fade-up 1s linear backwards;
-      }
-      
-      .fade-up-full {
-        animation: fade-up-full 1s linear backwards;
-      }
-      
-      .fade-up-relative {
-        animation: fade-up-relative 1s linear backwards;
-      }
-      
-      .fade-up-absolute {
-        animation: fade-up-absolute 1s linear backwards;
-      }
-      
-      .fade-down-relative {
-        animation: fade-down-relative 1s linear backwards;
-      }
-      
-      .fade-down-absolute {
-        animation: fade-down-absolute 1s linear backwards;
-      }
-      
-      .delayed {
-        /* animation-delay: calc(0.2s * var(--i)); */
-        animation-delay: calc(0.2s * var(--delay));
-      }
-      
-      .paused {
-        animation-play-state: paused;
-      }
-      
-      /* @keyframes zoom-in { */
-      @keyframes fade-in {
-        0% {
-          opacity: 0;
-        }
-      }
-      
-      @keyframes rotate {
-        0% {
-          transform: rotate(80deg);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-left {
-        0% {
-          transform: translateX(10%);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-right {
-        0% {
-          transform: translateX(-10%);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-up {
-        0% {
-          transform: translateY(10%);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-up-full {
-        0% {
-          transform: translateY(100%);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-up-relative {
-        0% {
-          transform: translateY(10%);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-up-absolute {
-        0% {
-          transform: translateY(1rem);
-          opacity: 0;
-        }
-      }
-        
-      /* @keyframes fade-down { */
-      @keyframes fade-down-relative {
-        0% {
-          transform: translateY(-10%);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-down-absolute {
-        0% {
-          transform: translateY(-1rem);
-          opacity: 0;
-        }
-      }
-    </style>
   </head>
   <body>
+    <nav>
+      <div class="nav-bar">
+        <div class="nav-header">
+          <div class="nav-logo">
+            <a href="#">
+              <img src="assets/logo.png" alt="logo" />
+            </a>
+          </div>
+          <div class="nav-menu-btn" id="menu-btn">
+            <i class="ri-menu-line"></i>
+          </div>
+        </div>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#home">HOME</a></li>
+          <li><a href="#about">ABOUT</a></li>
+          <li><a href="#trainer">TRAINER</a></li>
+          <li><a href="#client">CLIENT</a></li>
+          <li><a href="#blog">BLOG</a></li>
+          <li><a href="#contact">CONTACT US</a></li>
+        </ul>
+      </div>
+    </nav>
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const navLinks = document.getElementById("nav-links");
+      const menuBtnIcon = menuBtn.querySelector("i");
+
+      menuBtn.addEventListener("click", (e) => {
+        navLinks.classList.toggle("open");
+        const isOpen = navLinks.classList.contains("open");
+        menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+      });
+    
+      navLinks.addEventListener("click", (e) => {
+        navLinks.classList.remove("open");
+        menuBtnIcon.setAttribute("class", "ri-menu-line");
+      });
+    </script>
+    <header class="header" id="header">
+      <div class="section-container header-container">
+        <div class="header-content">
+          <h1>HARD WORK</h1>
+          <h2>ISS FOR EVERY SUCCESS</h2>
+          <p>Start by taking inspirations, continue it to give inspirations</p>
+          <div class="header-btn">
+            <button class="btn btn-primary">GET STARTED</button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section class="section-container about-container" id="about">
+      <div class="about-header">
+        <h2 class="section-header">ABOUT US</h2>
+        <p class="section-description">
+          Our mission is to inspire and support individuals in achieving their
+          health and wellness goals, regardless of their fitness level or
+          background.
+        </p>
+      </div>
+      <div class="about-grid">
+        <div class="about-card">
+          <h4>WINNER COACHES</h4>
+          <p>
+            We pride ourselves on having a team of dedicated and experienced
+            coaches who are committed to helping you succeed.
+          </p>
+        </div>
+        <div class="about-card">
+          <h4>AFFORDABLE PRICE</h4>
+          <p>
+            We believe that everyone should have access to high-quality fitness
+            facilities without breaking the bank.
+          </p>
+        </div>
+        <div class="about-card">
+          <h4>MODERN EQUIPMENTS</h4>
+          <p>
+            Stay ahead of the curve with our state-of-the-art equipment designed
+            to elevate your workout experience.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="session">
+      <div class="session-card">
+        <h4>BODY BUILDING</h4>
+        <p>
+          Sculpt your physique and build muscle mass with our specialized
+          bodybuilding programs at FitPhysique.
+        </p>
+        <button class="btn btn-secondary">
+          READ MORE <i class="ri-arrow-right-line"></i>
+        </button>
+      </div>
+      <div class="session-card">
+        <h4>CARDIO</h4>
+        <p>
+          Elevate your heart rate and boost your endurance with our dynamic
+          cardio workouts at FitPhysique.
+        </p>
+        <button class="btn btn-secondary">
+          READ MORE <i class="ri-arrow-right-line"></i>
+        </button>
+      </div>
+      <div class="session-card">
+        <h4>FITNESS</h4>
+        <p>
+          Embrace a holistic approach to fitness with our comprehensive fitness
+          programs at FitPhysique.
+        </p>
+        <button class="btn btn-secondary">
+          READ MORE <i class="ri-arrow-right-line"></i>
+        </button>
+      </div>
+      <div class="session-card">
+        <h4>CROSSFIT</h4>
+        <p>
+          Experience the ultimate full-body workout with our intense CrossFit
+          classes at FitPhysique.
+        </p>
+        <button class="btn btn-secondary">
+          READ MORE <i class="ri-arrow-right-line"></i>
+        </button>
+      </div>
+    </section>      
+
+    <div class="page" style="display: none;">
     <header class="header">
       <nav>
         <div class="nav-header">
@@ -1036,24 +192,26 @@
       </div>
     </header>
     <script>
-      const menuBtn = document.getElementById("menu-btn");
-      const navLinks = document.getElementById("nav-links");
-      const menuBtnIcon = menuBtn.querySelector("i");
-      
-      menuBtn.addEventListener("click", (e) => {
-        navLinks.classList.toggle("open");
-      
-        // const isOpen = navLinks.classList.contains("open");
-        // menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
-        menuBtnIcon.classList.toggle("ri-menu-line");
-        menuBtnIcon.classList.toggle("ri-close-line");
-      });
-      
-      navLinks.addEventListener("click", (e) => {
-        navLinks.classList.remove("open");
-        // menuBtnIcon.setAttribute("class", "ri-menu-line");
-        menuBtnIcon.className = "ri-menu-line";
-      });
+      {
+        const menuBtn = document.getElementById("menu-btn");
+        const navLinks = document.getElementById("nav-links");
+        const menuBtnIcon = menuBtn.querySelector("i");
+        
+        menuBtn.addEventListener("click", (e) => {
+          navLinks.classList.toggle("open");
+        
+          // const isOpen = navLinks.classList.contains("open");
+          // menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+          menuBtnIcon.classList.toggle("ri-menu-line");
+          menuBtnIcon.classList.toggle("ri-close-line");
+        });
+        
+        navLinks.addEventListener("click", (e) => {
+          navLinks.classList.remove("open");
+          // menuBtnIcon.setAttribute("class", "ri-menu-line");
+          menuBtnIcon.className = "ri-menu-line";
+        });        
+      }    
     </script>
 
     <section class="section-container popular-container">
@@ -1603,13 +761,14 @@
           });
       }
     </script>
+    </div>
 
     <div class="page" style="display: none;">
     <header class="header">
       <nav>
         <div class="nav-header">
           <div class="logo nav-logo">
-            <a href="#">Travelty-travelty-images</a>
+            <a href="#">Travelty</a>
           </div>
           <button class="nav-menu-btn" id="menu-btn">
             <span><i class="ri-menu-line"></i></span>
@@ -2136,7 +1295,7 @@
         </div>
       </div>
       <div class="footer-bar">
-        Copyright © 2024 Travelty-travelty-images. All rights reserved.
+        Copyright © 2024 Travelty. All rights reserved.
       </div>
     </footer>
 
@@ -2154,60 +1313,7 @@
     </svg>
     </div>
 
-    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
-
-    <script>
-      function container(param) {
-        function dec() {
-          if (secret) {
-            secret -= 1;
-            return true;
-          } else {
-            return false;
-          }
-        }
-
-        console.dir(dec);
-
-        this.member = param;
-        let secret = 3;
-        var that = this;
-        this.service = function () {
-          if (dec()) {
-            return that.member;
-          } else {
-            return null;
-          }
-        }
-      }
-
-      const test = {
-        init: container
-      }
-
-      test.init("init");
-      console.log(test.member);
-      console.log(test.service());
-    </script>
-    <script>
-      const links = document.querySelectorAll(".footer-links a");
-      console.log(links);
-
-      for (let i = 0; i < links.length; i++) {
-        // links[i].addEventListener("click", (e) => {
-        //   e.preventDefault();
-        //   console.log(i+1);
-        // })
-        // links[i].addEventListener("click", function (e) {
-        //   e.preventDefault();
-        //   console.log(i+1);
-        // })
-        links[i].onclick = function (e) {
-          e.preventDefault();
-          alert(i+1);
-        }
-      }
-    </script>
+    <h1 style="text-align: center;">URLSearchParams in JavaScript - Constructing Query Strings</h1>
     
     <div id="calc" style="padding: 5rem;">
       <input type="number" id="width">
@@ -2266,4 +1372,4 @@
     </script>
   </body>
 </html>
-<!-- 49-576-706-836-966-1096-1226-1356-1486-1616-1746-1876-2006-2136-2266 -->
+<!-- 49-1245-1375 -->
