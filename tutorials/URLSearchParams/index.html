@@ -37,7 +37,12 @@
         box-sizing: border-box;
       }
 
+      ul {
+        list-style: none;
+      }
+
       a {
+        display: inline-block;
         text-decoration: none;
         transition: 0.3s;
       }
@@ -181,25 +186,20 @@
       }
 
       nav {
-        position: fixed;
-        width: 100%;
+        /* position: fixed; */
+        /* width: 100%; */
         background-color: var(--text-dark);
-        z-index: 9;
+        /* z-index: 9; */
       }
       
       .nav-bar {
-        width: 100%;
+        /* width: 100%; */
         max-width: var(--max-width);
         margin-inline: auto;
       }
       
       .nav-header {
         padding: 1rem;
-        display: flex;
-        gap: 1rem;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
         background-color: var(--text-dark);
       }
       
@@ -213,27 +213,52 @@
         /* cursor: pointer; */
       }
       
-      .nav-links {
-        list-style: none;
-        position: absolute;
-        top: 68px;
-        left: 0;
-        width: 100%;
-        padding: 2rem;
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        background-color: var(--text-dark);
-        transform: translateY(-100%);
-        transition: 0.5s;
-        z-index: -1;
+      @media (width < 768px) {
+        nav {
+          position: fixed;
+          width: 100%;
+          z-index: 1;
+        }
+
+        .nav-header {
+          display: flex;
+          gap: 1rem;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .nav-links {
+          /* list-style: none; */
+          position: absolute;
+          top: 68px;
+          left: 0;
+          width: 100%;
+          padding: 2rem;
+          /* display: flex; */
+          /* gap: 2rem; */
+          /* align-items: center; */
+          /* justify-content: center; */
+          /* flex-direction: column; */
+          background-color: var(--text-dark);
+          transform: translateY(-100%);
+          transition: 0.5s;
+          z-index: -1;
+        }
+
+        .nav-links.open {
+          transform: translateY(0);
+        }
+        
+        .nav-links li {
+          padding: 1rem 0;
+          text-align: center;
+        }
       }
       
-      .nav-links.open {
+      /* .nav-links.open {
         transform: translateY(0);
-      }
+      } */
       
       .nav-links a {
         color: var(--white);
@@ -248,6 +273,22 @@
       }
       
       .header {
+        background-color: var(--text-dark);
+        /* background-image: 
+          linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0.2),
+            rgba(0, 0, 0, 0.8)
+          ),
+          url("./assets/FitPhysique-images/header.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover; */
+      }
+      
+      .header-container {
+        padding-block: 10rem;
+        display: grid;
         background-image: 
           linear-gradient(
             to right,
@@ -258,11 +299,6 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
-      }
-      
-      .header-container {
-        padding-block: 10rem;
-        display: grid;
       }
 
       .header-content h1 {
@@ -500,7 +536,7 @@
       }
       
       .membership-card ul {
-        list-style: none;
+        /* list-style: none; */
         margin-bottom: 1rem;
         display: grid;
         gap: 1rem;
@@ -720,7 +756,7 @@
       }
       
       .footer-links {
-        list-style: none;
+        /* list-style: none; */
         display: grid;
         gap: 1rem;
       }
@@ -824,6 +860,122 @@
           grid-template-columns: repeat(2, 1fr);
         }
       }
+
+      @media (width > 768px) {
+        nav {
+          /* position: static; */
+          padding: 1.5rem 1rem;
+        }
+      
+        .nav-bar {
+          display: flex;
+          gap: 2rem;
+          /* flex-wrap: wrap; */
+          align-items: center;
+          justify-content: space-between;
+        }
+      
+        .nav-header {
+          /* padding: 0; */
+          /* background-color: transparent; */
+        }
+      
+        .nav-logo img {
+          max-width: 120px;
+        }
+      
+        .nav-menu-btn {
+          display: none;
+        }
+        
+        .nav-links {
+          display: flex;
+          gap: 1rem;
+          flex-wrap: wrap;
+          /* position: static; */
+          /* padding: 0; */
+          /* flex-direction: row; */
+          /* justify-content: flex-end; */
+          /* background-color: transparent; */
+          /* transform: none; */
+          /* z-index: 1; */
+        }
+
+        .nav-links a {
+          padding: 0.5rem 1rem;
+          /* border: 1px solid red; */
+        }
+      
+        .header-container {
+          padding-block: 12rem;
+          grid-template-columns: repeat(2, 1fr);
+        }
+      
+        .header-content {
+          grid-column: 2/3;
+        }
+      
+        .about-header {
+          gap: 2rem;
+          align-items: center;
+          grid-template-columns: repeat(2, 1fr);
+        }
+      
+        .about-header .section-header {
+          text-align: right;
+        }
+        
+        .about-header .section-description {
+          margin-inline-start: unset;
+          text-align: left;
+        }
+      
+        .about-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      
+        .session {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      
+        .session-card {
+          padding: 10rem 2rem;
+        }
+      
+        .trainer-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      
+        .membership-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      
+        .blog-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      
+        .logo-banner {
+          grid-template-columns: repeat(4, 1fr);
+        }
+        
+        .footer-container {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      
+      @media (width > 1024px) {
+        .trainer-grid {
+          gap: 2rem;
+        }
+      
+        .membership-grid {
+          gap: 2rem;
+        }
+      
+        .membership-card {
+          padding: 2rem;
+        }
+      }
     </style>
   </head>
   <body>
@@ -872,7 +1024,7 @@
       <div class="section-container header-container">
         <div class="header-content">
           <h1>HARD WORK</h1>
-          <h2>ISS FOR EVERY SUCCESS</h2>
+          <h2>IS FOR EVERY SUCCESS</h2>
           <p>Start by taking inspirations, continue it to give inspirations</p>
           <div class="header-btn">
             <button class="btn btn-primary">GET STARTED</button>
@@ -1362,26 +1514,26 @@
       </div>
     </header>
     <script>
-      {
-        const menuBtn = document.getElementById("menu-btn");
-        const navLinks = document.getElementById("nav-links");
-        const menuBtnIcon = menuBtn.querySelector("i");
+      // {
+        // const menuBtn = document.getElementById("menu-btn");
+        // const navLinks = document.getElementById("nav-links");
+        // const menuBtnIcon = menuBtn.querySelector("i");
         
-        menuBtn.addEventListener("click", (e) => {
-          navLinks.classList.toggle("open");
+        // menuBtn.addEventListener("click", (e) => {
+        //   navLinks.classList.toggle("open");
         
           // const isOpen = navLinks.classList.contains("open");
           // menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
-          menuBtnIcon.classList.toggle("ri-menu-line");
-          menuBtnIcon.classList.toggle("ri-close-line");
-        });
+        //   menuBtnIcon.classList.toggle("ri-menu-line");
+        //   menuBtnIcon.classList.toggle("ri-close-line");
+        // });
         
-        navLinks.addEventListener("click", (e) => {
-          navLinks.classList.remove("open");
+        // navLinks.addEventListener("click", (e) => {
+        //   navLinks.classList.remove("open");
           // menuBtnIcon.setAttribute("class", "ri-menu-line");
-          menuBtnIcon.className = "ri-menu-line";
-        });        
-      }    
+      //     menuBtnIcon.className = "ri-menu-line";
+      //   });        
+      // }    
     </script>
 
     <section class="section-container popular-container">
@@ -2542,4 +2694,4 @@
     </script>
   </body>
 </html>
-<!-- 49-1245-1375-1505-1635-1765-1895-2025-2155-2285-2415-2545 -->
+<!-- 49-1245-1375-1505-1635-1765-1895-2025-2155-2285-2415-2545-2675 -->
