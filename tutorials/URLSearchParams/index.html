@@ -44,7 +44,8 @@
       a {
         display: inline-block;
         text-decoration: none;
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: color 300ms;
       }
 
       button {
@@ -53,6 +54,13 @@
         outline: 1px solid transparent;
         background-color: transparent;
         cursor: pointer;
+      }
+
+      input {
+        font-family: inherit;
+        border: 0px solid transparent;
+        outline: 1px solid transparent;
+        background-color: transparent;
       }
 
       button:focus-visible,
@@ -288,7 +296,7 @@
       
       .header-container {
         padding-block: 10rem;
-        display: grid;
+        /* display: grid;
         background-image: 
           linear-gradient(
             to right,
@@ -298,7 +306,7 @@
           url("./assets/FitPhysique-images/header.jpg");
         background-repeat: no-repeat;
         background-position: center;
-        background-size: cover;
+        background-size: cover; */
       }
 
       .header-content h1 {
@@ -348,22 +356,31 @@
         isolation: isolate;
         position: relative;
         margin-bottom: 1rem;
-        padding-top: 4rem;
+        /* padding-top: 4rem; */
+        display: grid;
         color: var(--text-dark);
         font-size: 1.2rem;
         font-weight: 600;
         font-family: var(--header-font);
       }
+
+      .about-card h4 span {
+        grid-column: 1/2;
+        grid-row: 1/2;
+        margin-top: auto;
+      }
       
       .about-card h4::before {
-        position: absolute;
-        left: 0;
-        bottom: 0;
+        /* position: absolute; */
+        /* left: 0; */
+        /* bottom: 0; */
+        grid-column: 1/2;
+        grid-row: 1/2;
         color: var(--text-dark);
         font-size: 6rem;
         line-height: 6rem;
         opacity: 0.1;
-        z-index: -1;
+        /* z-index: -1; */
       }
       
       .about-card:nth-child(1) h4::before {
@@ -383,6 +400,8 @@
       }
       
       .session {
+        max-width: 1600px;
+        margin: auto;
         display: grid;
       }
 
@@ -429,7 +448,8 @@
       .session-card h4 {
         isolation: isolate;
         position: relative;
-        max-width: fit-content;
+        /* max-width: fit-content; */
+        display: inline-block;
         margin-inline: auto;
         margin-bottom: 1rem;
         color: var(--white);
@@ -443,8 +463,9 @@
         top: 0;
         left: -5px;
         content: "";
+        width: 25px;
         height: 25px;
-        aspect-ratio: 1;
+        /* aspect-ratio: 1; */
         background-color: var(--primary-color);
         z-index: -1;
       }
@@ -496,15 +517,52 @@
         color: var(--primary-color);
       }
 
-      .membership {
-        background-image: 
-          linear-gradient(
-            rgba(0, 0, 0, 0.6), 
-            rgba(0, 0, 0, 0.6)),
-          url("./assets/FitPhysique-images/membership.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
+      @media (width < 1400px) {
+        .membership {
+          background-image: 
+            linear-gradient(
+              rgba(0, 0, 0, 0.6), 
+              rgba(0, 0, 0, 0.6)),
+            url("./assets/FitPhysique-images/membership.jpg");
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+        }
+      }
+
+      @media (width > 1400px) {
+        .membership {
+          position: relative;
+          padding-bottom: 1rem;
+          filter: drop-shadow(1px 1px 1px #fff4);
+          background-color: var(--text-dark);
+          z-index: 1;
+        }
+
+        .membership::after {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          content: "";
+          width: 100%;
+          max-width: 1400px;
+          height: 100%;
+          margin: auto;
+          background-image: 
+            linear-gradient(
+              rgba(0, 0, 0, 0.6), 
+              rgba(0, 0, 0, 0.6)),
+            url("./assets/FitPhysique-images/membership.jpg");
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+          clip-path: url("#mask-1");
+          /* clip-path: url("#mask-2"); */
+          /* clip-path: url("#mask-3"); */
+          /* clip-path: url("#mask-4"); */
+          z-index: -1;
+        }
       }
       
       .membership-container .section-header {
@@ -704,6 +762,10 @@
       
       .blog-card img {
         margin-bottom: 10px;
+        clip-path: url("#mask-1");
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
       }
       
       .blog-card h4 {
@@ -789,14 +851,21 @@
         gap: 10px;
         grid-template-columns: repeat(3, 1fr);
       }
+
+      .gallery-grid img {
+        /* clip-path: url("#mask-1"); */
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        clip-path: url("#mask-4");
+      }
       
       .footer-col form {
         width: 100%;
         max-width: 400px;
         margin-bottom: 2rem;
         display: flex;
-        align-items: center;
-        justify-content: center;
+        /* align-items: center; */
+        /* justify-content: center; */
         border-radius: 2px;
         background-color: var(--white);
       }
@@ -805,8 +874,8 @@
         width: 100%;
         padding-inline: 1rem;
         color: var(--text-dark);
-        outline: none;
-        border: none;
+        /* outline: none; */
+        /* border: none; */
       }
       
       .footer-socials {
@@ -861,6 +930,12 @@
         }
       }
 
+      @media (width < 768px) {
+        .header {
+          padding-top: 3rem;
+        }
+      }
+
       @media (width > 768px) {
         nav {
           /* position: static; */
@@ -895,7 +970,7 @@
           /* position: static; */
           /* padding: 0; */
           /* flex-direction: row; */
-          /* justify-content: flex-end; */
+          justify-content: flex-end;
           /* background-color: transparent; */
           /* transform: none; */
           /* z-index: 1; */
@@ -905,16 +980,50 @@
           padding: 0.5rem 1rem;
           /* border: 1px solid red; */
         }
+
+        .header {
+          padding-bottom: 1rem;
+        }
       
         .header-container {
+          position: relative;
           padding-block: 12rem;
+          display: grid;
           grid-template-columns: repeat(2, 1fr);
+          filter: drop-shadow(1px 1px 1px #fff4);
+          z-index: 1;
+        }
+      
+        .header-container::after {
+          position: absolute;
+          top: 0;
+          left: 0;
+          content: "";
+          width: 100%;
+          height: 100%;
+          background-image: 
+            linear-gradient(
+              to right,
+              rgba(0, 0, 0, 0.2),
+              rgba(0, 0, 0, 0.8)
+            ),
+            url("./assets/FitPhysique-images/header.jpg");
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+          clip-path: url("#mask-1");
+          /* clip-path: url("#mask-2"); */
+          /* clip-path: url("#mask-3"); */
+          /* clip-path: url("#mask-4"); */
+          z-index: -1;          
         }
       
         .header-content {
+          /* position: relative; */
           grid-column: 2/3;
+          /* z-index: 1; */
         }
-      
+
         .about-header {
           gap: 2rem;
           align-items: center;
@@ -962,7 +1071,7 @@
           grid-template-columns: repeat(3, 1fr);
         }
       }
-      
+
       @media (width > 1024px) {
         .trainer-grid {
           gap: 2rem;
@@ -1044,21 +1153,24 @@
       </div>
       <div class="about-grid">
         <div class="about-card">
-          <h4>WINNER COACHES</h4>
+          <!-- <h4>WINNER COACHES</h4> -->
+          <h4><span>WINNER COACHES</span></h4>
           <p>
             We pride ourselves on having a team of dedicated and experienced
             coaches who are committed to helping you succeed.
           </p>
         </div>
         <div class="about-card">
-          <h4>AFFORDABLE PRICE</h4>
+          <!-- <h4>AFFORDABLE PRICE</h4> -->
+          <h4><span>AFFORDABLE PRICE</span></h4>
           <p>
             We believe that everyone should have access to high-quality fitness
             facilities without breaking the bank.
           </p>
         </div>
         <div class="about-card">
-          <h4>MODERN EQUIPMENTS</h4>
+          <!-- <h4>MODERN EQUIPMENTS</h4> -->
+          <h4><span>MODERN EQUIPMENTS</span></h4>
           <p>
             Stay ahead of the curve with our state-of-the-art equipment designed
             to elevate your workout experience.
@@ -2694,4 +2806,4 @@
     </script>
   </body>
 </html>
-<!-- 49-1245-1375-1505-1635-1765-1895-2025-2155-2285-2415-2545-2675 -->
+<!-- 49-1245-1375-1505-1635-1765-1895-2025-2155-2285-2415-2545-2675-2827 -->
