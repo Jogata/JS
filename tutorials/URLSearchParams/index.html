@@ -171,12 +171,13 @@
         /* outline: none; */
         /* border: none; */
         border-radius: 2px;
-        transition: 0.3s;
+        /* transition: 0.3s; */
         /* cursor: pointer; */
       }
       
       .btn-primary {
         background-color: var(--primary-color);
+        transition: background-color 300ms;
       }
       
       .btn-primary:hover {
@@ -184,8 +185,10 @@
       }
       
       .btn-secondary {
-        background-color: transparent;
         border: 1px solid var(--white);
+        background-color: transparent;
+        transition: border-color 300ms, 
+                background-color 300ms;
       }
       
       .btn-secondary:hover {
@@ -225,7 +228,8 @@
         nav {
           position: fixed;
           width: 100%;
-          z-index: 1;
+          /* z-index: 1; */
+          z-index: 99;
         }
 
         .nav-header {
@@ -250,7 +254,8 @@
           /* flex-direction: column; */
           background-color: var(--text-dark);
           transform: translateY(-100%);
-          transition: 0.5s;
+          /* transition: 0.5s; */
+          transition: transform 500ms;
           z-index: -1;
         }
 
@@ -273,7 +278,8 @@
         font-size: 1.1rem;
         font-family: var(--header-font);
         white-space: nowrap;
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: color 300ms;
       }
       
       .nav-links a:hover {
@@ -445,6 +451,11 @@
             rgba(0, 0, 0, 0.6)),
           url("./assets/FitPhysique-images/session-4.jpg");
       }
+
+      .session-card.fade-in {
+        animation-duration: 500ms;
+        animation-delay: calc(0.1s * var(--delay));
+      }
       
       .session-card h4 {
         isolation: isolate;
@@ -476,6 +487,20 @@
         margin-inline: auto;
         margin-bottom: 2rem;
         color: var(--extra-light);
+      }
+
+      .session-card .btn span {
+        display: inline-block;
+        padding-left: 0.5rem;
+        transition: transform 300ms;
+      }
+
+      .session-card .btn span i {
+        transform: rotate(45deg);
+      }
+
+      .session-card .btn:hover span {
+        transform: translateX(20%);
       }
       
       .trainer-grid {
@@ -579,7 +604,8 @@
       .membership-card {
         padding: 1rem;
         background-color: rgba(0, 0, 0, 0.6);
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: background-color 300ms;
       }
       
       .membership-card:hover {
@@ -611,7 +637,8 @@
         color: var(--primary-color);
         font-size: 1.2rem;
         font-weight: 600;
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: color 300ms;
       }
       
       .membership-card:hover li span {
@@ -663,7 +690,8 @@
         /* background-color: transparent; */
         filter: drop-shadow(1px 1px #000);
         /* transition: color 0.4s, background-color 0.4s; */
-        transition: color 0.4s, border-color 0.4s;
+        transition: color 400ms, 
+            border-color 400ms;
         /* border: 1px solid; */
         /* opacity: 1; */
       }
@@ -775,7 +803,8 @@
         font-size: 1.2rem;
         font-weight: 400;
         font-family: var(--header-font);
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: color 300ms;
       }
       
       .blog-card:hover h4 {
@@ -825,7 +854,9 @@
       }
       
       .footer-links a {
+        width: 100%;
         color: var(--text-light);
+        line-height: 1.4;
       }
       
       .footer-links a:hover {
@@ -899,7 +930,8 @@
       }
       
       .footer-bar {
-        padding: 1rem;
+        /* padding: 1rem; */
+        padding: 1rem 1rem 2rem;
         color: var(--text-light);
         font-size: 0.9rem;
         text-align: center;
@@ -1087,8 +1119,8 @@
         }
       }
 
-      .zoom-in {
-        animation: zoom-in 2s linear backwards;
+      .fade-in {
+        animation: fade-in 2s linear backwards;
       }
       
       .rotate {
@@ -1119,6 +1151,10 @@
         animation: fade-up-absolute 1s linear backwards;
       }
       
+      .fade-down-full {
+        animation: fade-down-full 1s linear backwards;
+      }
+
       .fade-down-relative {
         animation: fade-down-relative 1s linear backwards;
       }
@@ -1136,7 +1172,7 @@
         animation-play-state: paused;
       }
       
-      @keyframes zoom-in {
+      @keyframes fade-in {
         0% {
           opacity: 0;
         }
@@ -1187,6 +1223,13 @@
       @keyframes fade-up-absolute {
         0% {
           transform: translateY(1rem);
+          opacity: 0;
+        }
+      }
+
+      @keyframes fade-down-full {
+        0% {
+          transform: translateY(-100%);
           opacity: 0;
         }
       }
@@ -1262,11 +1305,12 @@
           <p class="fade-up-absolute paused delayed" style="--delay: 4">
             Start by taking inspirations, continue it to give inspirations
           </p>
-          <div class="header-btn">
-            <!-- <button class="btn btn-primary">GET STARTED</button> -->
-            <button class="btn btn-primary fade-up-absolute paused delayed" style="--delay: 6">
+          <!-- <div class="header-btn"> -->
+          <div class="header-btn fade-up-absolute paused delayed" style="--delay: 6">
+            <button class="btn btn-primary">GET STARTED</button>
+            <!-- <button class="btn btn-primary fade-up-absolute paused delayed" style="--delay: 6">
               GET STARTED
-            </button>
+            </button> -->
           </div>
         </div>
       </div>
@@ -1274,15 +1318,20 @@
 
     <section class="section-container about-container" id="about">
       <div class="about-header">
-        <h2 class="section-header">ABOUT US</h2>
-        <p class="section-description">
+        <!-- <h2 class="section-header">ABOUT US</h2> -->
+        <h2 class="section-header fade-left paused">
+          ABOUT US
+        </h2>
+        <!-- <p class="section-description"> -->
+        <p class="section-description fade-right paused">
           Our mission is to inspire and support individuals in achieving their
           health and wellness goals, regardless of their fitness level or
           background.
         </p>
       </div>
       <div class="about-grid">
-        <div class="about-card">
+        <!-- <div class="about-card"> -->
+        <div class="about-card fade-up-absolute paused delayed" style="--delay: 2">
           <!-- <h4>WINNER COACHES</h4> -->
           <h4><span>WINNER COACHES</span></h4>
           <p>
@@ -1290,7 +1339,8 @@
             coaches who are committed to helping you succeed.
           </p>
         </div>
-        <div class="about-card">
+        <!-- <div class="about-card"> -->
+        <div class="about-card fade-up-absolute paused delayed" style="--delay: 3">
           <!-- <h4>AFFORDABLE PRICE</h4> -->
           <h4><span>AFFORDABLE PRICE</span></h4>
           <p>
@@ -1298,7 +1348,8 @@
             facilities without breaking the bank.
           </p>
         </div>
-        <div class="about-card">
+        <!-- <div class="about-card"> -->
+        <div class="about-card fade-up-absolute paused delayed" style="--delay: 4">
           <!-- <h4>MODERN EQUIPMENTS</h4> -->
           <h4><span>MODERN EQUIPMENTS</span></h4>
           <p>
@@ -1310,52 +1361,68 @@
     </section>
 
     <section class="session">
-      <div class="session-card">
+      <!-- <div class="session-card"> -->
+      <div class="session-card fade-in paused">
         <h4>BODY BUILDING</h4>
         <p>
           Sculpt your physique and build muscle mass with our specialized
           bodybuilding programs at FitPhysique.
         </p>
         <button class="btn btn-secondary">
-          READ MORE <i class="ri-arrow-right-line"></i>
+          <!-- READ MORE <i class="ri-arrow-right-line"></i> -->
+          READ MORE 
+          <span><i class="fa fa-location-arrow"></i></span>
         </button>
       </div>
-      <div class="session-card">
+      <!-- <div class="session-card"> -->
+      <div class="session-card fade-in paused delayed" style="--delay: 1">
         <h4>CARDIO</h4>
         <p>
           Elevate your heart rate and boost your endurance with our dynamic
           cardio workouts at FitPhysique.
         </p>
         <button class="btn btn-secondary">
-          READ MORE <i class="ri-arrow-right-line"></i>
+          <!-- READ MORE <i class="ri-arrow-right-line"></i> -->
+          READ MORE 
+          <span><i class="fa fa-location-arrow"></i></span>
         </button>
       </div>
-      <div class="session-card">
+      <!-- <div class="session-card"> -->
+      <div class="session-card fade-in paused delayed" style="--delay: 2">
         <h4>FITNESS</h4>
         <p>
           Embrace a holistic approach to fitness with our comprehensive fitness
           programs at FitPhysique.
         </p>
         <button class="btn btn-secondary">
-          READ MORE <i class="ri-arrow-right-line"></i>
+          <!-- READ MORE <i class="ri-arrow-right-line"></i> -->
+          READ MORE 
+          <span><i class="fa fa-location-arrow"></i></span>
         </button>
       </div>
-      <div class="session-card">
+      <!-- <div class="session-card"> -->
+      <div class="session-card fade-in paused delayed" style="--delay: 3">
         <h4>CROSSFIT</h4>
         <p>
           Experience the ultimate full-body workout with our intense CrossFit
           classes at FitPhysique.
         </p>
         <button class="btn btn-secondary">
-          READ MORE <i class="ri-arrow-right-line"></i>
+          <!-- READ MORE <i class="ri-arrow-right-line"></i> -->
+          READ MORE 
+          <span><i class="fa fa-location-arrow"></i></span>
         </button>
       </div>
     </section>
 
     <section class="section-container trainer-container" id="trainer">
-      <h2 class="section-header">MEET OUR TRAINERS</h2>
+      <!-- <h2 class="section-header">MEET OUR TRAINERS</h2> -->
+      <h2 class="section-header fade-right paused">
+        MEET OUR TRAINERS
+      </h2>
       <div class="trainer-grid">
-        <div class="trainer-card">
+        <!-- <div class="trainer-card"> -->
+        <div class="trainer-card fade-up-absolute paused delayed" style="--delay: 2">
           <img src="./assets/FitPhysique-images/trainer-1.jpg" alt="trainer" />
           <h4>DAVID WILLIAMS</h4>
           <p>Body Builder Coach</p>
@@ -1365,7 +1432,8 @@
             <a href="#"><i class="ri-youtube-fill"></i></a>
           </div>
         </div>
-        <div class="trainer-card">
+        <!-- <div class="trainer-card"> -->
+        <div class="trainer-card fade-up-absolute paused delayed" style="--delay: 3">
           <img src="./assets/FitPhysique-images/trainer-2.jpg" alt="trainer" />
           <h4>ROSY RIVERA</h4>
           <p>Cardio Coach</p>
@@ -1375,7 +1443,8 @@
             <a href="#"><i class="ri-youtube-fill"></i></a>
           </div>
         </div>
-        <div class="trainer-card">
+        <!-- <div class="trainer-card"> -->
+        <div class="trainer-card fade-up-absolute paused delayed" style="--delay: 4">
           <img src="./assets/FitPhysique-images/trainer-3.jpg" alt="trainer" />
           <h4>MATT STONIE</h4>
           <p>Fitness Coach</p>
@@ -1385,7 +1454,8 @@
             <a href="#"><i class="ri-youtube-fill"></i></a>
           </div>
         </div>
-        <div class="trainer-card">
+        <!-- <div class="trainer-card"> -->
+        <div class="trainer-card fade-up-absolute paused delayed" style="--delay: 5">
           <img src="./assets/FitPhysique-images/trainer-4.jpg" alt="trainer" />
           <h4>SOFIA LAUREN</h4>
           <p>Crossfit Coach</p>
@@ -1400,9 +1470,13 @@
 
     <section class="membership">
       <div class="section-container membership-container">
-        <h2 class="section-header">MEMBERSHIP</h2>
+        <!-- <h2 class="section-header">MEMBERSHIP</h2> -->
+        <h2 class="section-header fade-right paused">
+          MEMBERSHIP
+        </h2>
         <div class="membership-grid">
-          <div class="membership-card">
+          <!-- <div class="membership-card"> -->
+          <div class="membership-card fade-up-absolute paused delayed" style="--delay: 2">
             <h4>STANDARD</h4>
             <ul>
               <li>
@@ -1433,7 +1507,8 @@
             <h3><sup>$</sup>30<span>/month</span></h3>
             <button class="btn btn-primary">BUY NOW</button>
           </div>
-          <div class="membership-card">
+          <!-- <div class="membership-card"> -->
+          <div class="membership-card fade-up-absolute paused delayed" style="--delay: 3">
             <h4>PROFESSIONAL</h4>
             <ul>
               <li>
@@ -1464,7 +1539,8 @@
             <h3><sup>$</sup>45<span>/month</span></h3>
             <button class="btn btn-primary">BUY NOW</button>
           </div>
-          <div class="membership-card">
+          <!-- <div class="membership-card"> -->
+          <div class="membership-card fade-up-absolute paused delayed" style="--delay: 4">
             <h4>ULTIMATE</h4>
             <ul>
               <li>
@@ -1500,8 +1576,11 @@
     </section>
 
     <section class="section-container client-container" id="client">
-      <h2 class="section-header">OUR TESTIMONIALS</h2>
-      <div class="slider">
+      <!-- <h2 class="section-header">OUR TESTIMONIALS</h2> -->
+      <h2 class="section-header fade-in paused">
+        OUR TESTIMONIALS
+      </h2>
+      <div class="slider fade-in paused delayed" style="--delay: 2">
         <div class="slider-track">
           <div class="slide current" id="relative">
             <div class="client-card">
@@ -1586,63 +1665,86 @@
 
     <section class="blog" id="blog">
       <div class="section-container blog-container">
-        <h2 class="section-header">BLOGS</h2>
+        <!-- <h2 class="section-header">BLOGS</h2> -->
+        <h2 class="section-header fade-right paused">
+          BLOGS
+        </h2>
         <div class="blog-grid">
-          <div class="blog-card">
+          <!-- <div class="blog-card"> -->
+          <div class="blog-card fade-up-absolute paused delayed" style="--delay: 2">
             <img src="./assets/FitPhysique-images/blog-1.jpg" alt="blog" />
             <h4>Fueling Your Body for Optimal Performance</h4>
           </div>
-          <div class="blog-card">
+          <!-- <div class="blog-card"> -->
+          <div class="blog-card fade-up-absolute paused delayed" style="--delay: 3">
             <img src="./assets/FitPhysique-images/blog-2.jpg" alt="blog" />
             <h4>A Guide to Setting and Achieving Fitness Goals</h4>
           </div>
-          <div class="blog-card">
+          <!-- <div class="blog-card"> -->
+          <div class="blog-card fade-up-absolute paused delayed" style="--delay: 4">
             <img src="./assets/FitPhysique-images/blog-3.jpg" alt="blog" />
             <h4>Tips and Techniques for Efficient Exercise</h4>
           </div>
-          <div class="blog-card">
+          <!-- <div class="blog-card"> -->
+          <div class="blog-card fade-up-absolute paused delayed" style="--delay: 5">
             <img src="./assets/FitPhysique-images/blog-4.jpg" alt="blog" />
             <h4>A Beginner's Guide to Starting Your Running Journey</h4>
           </div>
         </div>
-        <div class="blog-btn">
+        <!-- <div class="blog-btn"> -->
+        <div class="blog-btn fade-down-full paused delayed" style="--delay: 8">
           <button class="btn btn-primary">VIEW ALL</button>
         </div>
       </div>
     </section>
 
     <section class="section-container logo-banner">
-      <img src="./assets/FitPhysique-images/banner-1.png" alt="banner" />
-      <img src="./assets/FitPhysique-images/banner-2.png" alt="banner" />
-      <img src="./assets/FitPhysique-images/banner-3.png" alt="banner" />
-      <img src="./assets/FitPhysique-images/banner-4.png" alt="banner" />
+      <!-- <img src="./assets/FitPhysique-images/banner-1.png" alt="banner" /> -->
+      <img src="./assets/FitPhysique-images/banner-1.png" alt="banner" 
+        class="fade-up-absolute paused" />
+      <!-- <img src="./assets/FitPhysique-images/banner-2.png" alt="banner" /> -->
+      <img src="./assets/FitPhysique-images/banner-2.png" alt="banner" 
+        class="fade-up-absolute paused delayed" style="--delay: 1" />
+      <!-- <img src="./assets/FitPhysique-images/banner-3.png" alt="banner" /> -->
+      <img src="./assets/FitPhysique-images/banner-3.png" alt="banner" 
+        class="fade-up-absolute paused delayed" style="--delay: 2" />
+      <!-- <img src="./assets/FitPhysique-images/banner-4.png" alt="banner" /> -->
+      <img src="./assets/FitPhysique-images/banner-4.png" alt="banner" 
+        class="fade-up-absolute paused delayed" style="--delay: 3" />
     </section>
 
     <footer class="footer" id="contact">
       <div class="section-container footer-container">
         <div class="footer-col">
           <div class="footer-logo">
-            <a href="#"><img src="./assets/FitPhysique-images/logo.png" alt="logo" /></a>
+            <!-- <a href="#"><img src="./assets/FitPhysique-images/logo.png" alt="logo" /></a> -->
+            <a href="#" class="fade-in paused">
+              <img src="./assets/FitPhysique-images/logo.png" alt="logo" />
+            </a>
           </div>
-          <p>
+          <!-- <p> -->
+          <p class="fade-up-absolute paused delayed" style="--delay: 2">
             Welcome to FitPhysique, where we believe that every journey to
             fitness is unique and empowering.
           </p>
           <ul class="footer-links">
             <li>
-              <a href="#">
+              <!-- <a href="#"> -->
+              <a href="#" class="fade-right paused delayed" style="--delay: 3">
                 <span><i class="ri-map-pin-2-fill"></i></span>
                 123 Main Street<br />Sunrise Valley, Evergreen Heights
               </a>
             </li>
             <li>
-              <a href="#">
+              <!-- <a href="#"> -->
+              <a href="#" class="fade-right paused delayed" style="--delay: 4">
                 <span><i class="ri-phone-fill"></i></span>
                 +91 9876543210
               </a>
             </li>
             <li>
-              <a href="#">
+              <!-- <a href="#"> -->
+              <a href="#" class="fade-right paused delayed" style="--delay: 5">
                 <span><i class="ri-mail-fill"></i></span>
                 info@fitphysique.com
               </a>
@@ -1650,37 +1752,68 @@
           </ul>
         </div>
         <div class="footer-col">
-          <h4>GALLERY</h4>
+          <!-- <h4>GALLERY</h4> -->
+          <h4 class="fade-in paused">GALLERY</h4>
           <div class="gallery-grid">
-            <img src="./assets/FitPhysique-images/gallery-1.jpg" alt="gallery" />
-            <img src="./assets/FitPhysique-images/gallery-2.jpg" alt="gallery" />
-            <img src="./assets/FitPhysique-images/gallery-3.jpg" alt="gallery" />
-            <img src="./assets/FitPhysique-images/gallery-4.jpg" alt="gallery" />
-            <img src="./assets/FitPhysique-images/gallery-5.jpg" alt="gallery" />
-            <img src="./assets/FitPhysique-images/gallery-6.jpg" alt="gallery" />
-            <img src="./assets/FitPhysique-images/gallery-7.jpg" alt="gallery" />
-            <img src="./assets/FitPhysique-images/gallery-8.jpg" alt="gallery" />
-            <img src="./assets/FitPhysique-images/gallery-9.jpg" alt="gallery" />
+            <!-- <img src="./assets/FitPhysique-images/gallery-1.jpg" alt="gallery" /> -->
+            <img src="./assets/FitPhysique-images/gallery-1.jpg" alt="gallery" 
+              class="fade-in paused delayed" style="--delay: 1" />
+            <!-- <img src="./assets/FitPhysique-images/gallery-2.jpg" alt="gallery" /> -->
+            <img src="./assets/FitPhysique-images/gallery-2.jpg" alt="gallery" 
+              class="fade-in paused delayed" style="--delay: 2" />
+            <!-- <img src="./assets/FitPhysique-images/gallery-3.jpg" alt="gallery" /> -->
+            <img src="./assets/FitPhysique-images/gallery-3.jpg" alt="gallery" 
+              class="fade-in paused delayed" style="--delay: 3" />
+            <!-- <img src="./assets/FitPhysique-images/gallery-4.jpg" alt="gallery" /> -->
+            <img src="./assets/FitPhysique-images/gallery-4.jpg" alt="gallery" 
+              class="fade-in paused delayed" style="--delay: 4" />
+            <!-- <img src="./assets/FitPhysique-images/gallery-5.jpg" alt="gallery" /> -->
+            <img src="./assets/FitPhysique-images/gallery-5.jpg" alt="gallery" 
+              class="fade-in paused delayed" style="--delay: 5" />
+            <!-- <img src="./assets/FitPhysique-images/gallery-6.jpg" alt="gallery" /> -->
+            <img src="./assets/FitPhysique-images/gallery-6.jpg" alt="gallery" 
+              class="fade-in paused delayed" style="--delay: 6" />
+            <!-- <img src="./assets/FitPhysique-images/gallery-7.jpg" alt="gallery" /> -->
+            <img src="./assets/FitPhysique-images/gallery-7.jpg" alt="gallery" 
+              class="fade-in paused delayed" style="--delay: 7" />
+            <!-- <img src="./assets/FitPhysique-images/gallery-8.jpg" alt="gallery" /> -->
+            <img src="./assets/FitPhysique-images/gallery-8.jpg" alt="gallery" 
+              class="fade-in paused delayed" style="--delay: 8" />
+            <!-- <img src="./assets/FitPhysique-images/gallery-9.jpg" alt="gallery" /> -->
+            <img src="./assets/FitPhysique-images/gallery-9.jpg" alt="gallery" 
+              class="fade-in paused delayed" style="--delay: 9" />
           </div>
         </div>
         <div class="footer-col">
-          <h4>NEWSLETTER</h4>
-          <p>
+          <!-- <h4>NEWSLETTER</h4> -->
+          <h4 class="fade-in paused">NEWSLETTER</h4>
+          <!-- <p> -->
+          <p class="fade-up-absolute paused delayed" style="--delay: 2">
             Don't miss out on the latest news and offers - sign up 
             today and join our thriving fitness community!
           </p>
-          <form action="/">
+          <form class="fade-up-absolute paused delayed" style="--delay: 4">
             <input type="text" placeholder="Enter Email" />
             <button class="btn btn-primary">SEND</button>
           </form>
           <div class="footer-socials">
-            <a href="#"><i class="ri-facebook-fill"></i></a>
-            <a href="#"><i class="ri-twitter-fill"></i></a>
-            <a href="#"><i class="ri-youtube-fill"></i></a>
+            <!-- <a href="#"><i class="ri-facebook-fill"></i></a> -->
+            <a href="#" class="fade-up-absolute paused delayed" style="--delay: 6">
+              <i class="ri-facebook-fill"></i>
+            </a>
+            <!-- <a href="#"><i class="ri-twitter-fill"></i></a> -->
+            <a href="#" class="fade-up-absolute paused delayed" style="--delay: 7">
+              <i class="ri-twitter-fill"></i>
+            </a>
+            <!-- <a href="#"><i class="ri-youtube-fill"></i></a> -->
+            <a href="#" class="fade-up-absolute paused delayed" style="--delay: 8">
+              <i class="ri-youtube-fill"></i>
+            </a>
           </div>
         </div>
       </div>
-      <div class="footer-bar">
+      <!-- <div class="footer-bar"> -->
+      <div class="footer-bar fade-up-absolute paused">
         Copyright © 2026 FitPhysique. All rights reserved.
       </div>
     </footer>
@@ -2954,4 +3087,4 @@
     </script>
   </body>
 </html>
-<!-- 49-1245-1375-1505-1635-1765-1895-2025-2155-2285-2415-2545-2675-2827-2957 -->
+<!-- 49-1245-1375-1505-1635-1765-1895-2025-2155-2285-2415-2545-2675-2827-2957-3090 -->
