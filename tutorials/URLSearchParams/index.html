@@ -27,10 +27,16 @@
         --max-width: 1024px;
       }
 
-      * {
+      *,
+      *::before,
+      *::after {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+      }
+
+      ul {
+        list-style: none;
       }
 
       a {
@@ -38,6 +44,19 @@
         transition: 0.3s;
       }
 
+      button {
+        font-family: inherit;
+        border: 0px solid transparent;
+        outline: 1px solid transparent;
+        background-color: transparent;
+        cursor: pointer;
+      }
+      
+      button:focus-visible,
+      a:focus-visible {
+        outline: 1px solid #999;
+      }
+        
       img {
         /* display: flex; */
         display: block;
@@ -142,12 +161,12 @@
       .btn {
         padding: 0.75rem 1.5rem;
         color: var(--white);
-        outline: none;
-        border: none;
+        /* outline: none; */
+        /* border: none; */
         border-radius: 6px;
         background-color: var(--primary-color);
         transition: 0.3s;
-        cursor: pointer;
+        /* cursor: pointer; */
       }
       
       .btn:hover {
@@ -168,14 +187,20 @@
       nav {
         position: absolute;
         top: 0;
-        left: 50%;
-        transform: translate(-50%);
+        /* left: 50%; */
+        left: 0;
+        right: 0;
+        /* transform: translate(-50%); */
         width: 100%;
         max-width: var(--max-width);
+        margin: auto;
         padding: 1rem;
         display: flex;
+        gap: 1rem 2rem;
+        flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
+        filter: drop-shadow(1px 1px 1px #000);
         z-index: 9;
       }
       
@@ -188,21 +213,27 @@
       }
       
       .nav-links {
-        list-style: none;
+        /* list-style: none; */
         display: none;
         position: absolute;
-        top: 95px;
+        /* top: 95px; */
+        top: 100%;
         right: 1rem;
-        width: 100%;
+        left: 1rem;
+        /* width: 100%; */
+        min-width: fit-content;
         max-width: 350px;
+        margin-left: auto;
         padding: 5px;
         gap: 5px;
-        border-radius: 1rem;
+        /* border-radius: 1rem; */
+        border-radius: 16px;
         background-color: var(--primary-color);
         box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
       }
       
       .nav-links.open {
+        padding-block: 2rem;
         display: grid;
       }
       
@@ -228,14 +259,16 @@
         font-size: 1.5rem;
         border-radius: 6px;
         border: 1px solid var(--white);
-        background-color: rgba(0, 0, 0, 0.1);
-        cursor: pointer;
+        /* background-color: rgba(0, 0, 0, 0.1); */
+        background-color: #d7a200;
+        /* cursor: pointer; */
       }
 
       .header-image {
-        height: 100%;
+        /* max-width: 550px; */
+        /* height: 100%; */
         min-height: 500px;
-        border-bottom-left-radius: 15rem;
+        /* border-bottom-left-radius: 15rem; */
         background-image: url("./assets/music-images/header.jpg");
         background-repeat: no-repeat;
         background-position: center;
@@ -255,18 +288,19 @@
         position: relative;
         /* height: 100%; */
         min-height: 400px;
+        filter: drop-shadow(1px 1px 1px #000);
       }
       
       .feature-image::after {
         position: absolute;
         top: 0;
         right: 0;
-        left: 0;
+        /* left: 0; */
         content: "";
         width: 100%;
         max-width: 500px;
         height: 100%;
-        margin: auto;
+        /* margin: auto; */
         background-image: url("./assets/music-images/feature.jpg");
         background-repeat: no-repeat;
         background-position: center;
@@ -342,8 +376,15 @@
       }
       
       .slider {
+        position: relative;
         width: 100%;
         margin-top: 2rem;
+        /* padding-bottom: 4rem; */
+        overflow: hidden;
+      }
+
+      .slider-track {
+        display: flex;
       }
       
       .review-card {
@@ -389,11 +430,18 @@
         padding: 5rem 1rem;
         text-align: center;
       }
-      
-      .footer-content a img {
+
+      .footer-content > a {
+        display: block;
         max-width: 60px;
         margin-bottom: 2rem;
         margin-inline: auto;
+      }
+      
+      .footer-content a img {
+        /* max-width: 60px; */
+        /* margin-bottom: 2rem; */
+        /* margin-inline: auto; */
       }
       
       .footer-socials {
@@ -421,10 +469,17 @@
         color: var(--white);
       }
 
+      @media (width < 768px) {
+        .feature-image::after {
+          left: 0;
+          margin: auto;
+        }
+      }
+
       @media (width > 768px) {
         .section-container {
           display: grid;
-          align-items: center;
+          /* align-items: center; */
           grid-template-columns:
             minmax(1rem, 1fr)
             minmax(0, calc(var(--max-width) / 2))
@@ -445,7 +500,12 @@
         }
       
         .header-image {
+          max-width: 550px;
           grid-area: 1/3/2/5;
+          clip-path: url("#mask-1");
+          /* clip-path: url("#mask-2"); */
+          /* clip-path: url("#mask-3"); */
+          /* clip-path: url("#mask-4"); */
         }
       
         .header-content {
@@ -459,16 +519,20 @@
           grid-column: 1/3;
           isolation: isolate;
           position: relative;
+          height: 100%;
+          z-index: -1;
         }
       
         .feature-image::after {
-          top: 8rem;
+          /* top: 8rem; */
           max-width: 600px;
-          height: 100vw;
-          transform: translateX(25%) rotate(45deg);
-          transform-origin: top;
-          border-top-left-radius: 25rem;
-          border-top-right-radius: 25rem;
+          /* height: 100vw; */
+          /* transform: translateX(25%) rotate(45deg); */
+          /* transform: rotate(45deg); */
+          transform: rotate(16deg);
+          /* transform-origin: top; */
+          /* border-top-left-radius: 25rem; */
+          /* border-top-right-radius: 25rem; */
         }
       
         .feature-content {
@@ -482,17 +546,24 @@
           grid-area: 1/3/2/5;
           isolation: isolate;
           position: relative;
+          filter: drop-shadow(1px 1px 1px #000);
+          z-index: -1;
         }
         
         .quality-image::after {
-          top: 8rem;
+          /* top: 8rem; */
           max-width: 600px;
-          height: 100vw;
-          transform: translateX(-25%) rotate(-45deg);
-          background-position: left center;
-          transform-origin: top;
-          border-top-left-radius: 25rem;
-          border-top-right-radius: 25rem;
+          /* height: 100vw; */
+          /* transform: translateX(-25%) rotate(-45deg); */
+          /* transform: rotate(-45deg); */
+          /* background-position: left center; */
+          /* transform-origin: top; */
+          /* border-top-left-radius: 25rem; */
+          /* border-top-right-radius: 25rem; */
+          clip-path: url("#mask-1");
+          /* clip-path: url("#mask-2"); */
+          /* clip-path: url("#mask-3"); */
+          /* clip-path: url("#mask-4"); */
         }
       
         .quality-content {
@@ -524,9 +595,9 @@
           <li><a href="#client">Clients</a></li>
           <li><a href="#contact">Contact Us</a></li>
         </ul>
-        <div class="nav-menu-btn" id="menu-btn">
+        <button class="nav-menu-btn" id="menu-btn">
           <i class="ri-menu-line"></i>
-        </div>
+        </button>
       </nav>
       <div class="header-image"></div>
       <div class="header-content">
@@ -553,12 +624,15 @@
         navLinks.classList.toggle("open");
       
         const isOpen = navLinks.classList.contains("open");
-        menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+        // menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+        menuBtnIcon.classList.toggle("ri-menu-line");
+        menuBtnIcon.classList.toggle("ri-close-line");
       });
       
       navLinks.addEventListener("click", (e) => {
         navLinks.classList.remove("open");
-        menuBtnIcon.setAttribute("class", "ri-menu-line");
+        // menuBtnIcon.setAttribute("class", "ri-menu-line");
+        menuBtnIcon.className = "ri-menu-line";
       });
     </script>
 
@@ -622,11 +696,13 @@
     </section>
 
     <section class="review-container" id="client">
-      <h2 class="section-header">Awesome<br /><span>Review</span></h2>
+      <h2 class="section-header">
+        Awesome <span class="block">Review</span>
+      </h2>
       <div class="slider">
         <div class="slider-track">
           <div class="slide">
-            <div class="review-card">
+            <div class="review-card current">
               <img src="./assets/music-images/user-1.jpg" alt="review" />
               <h4>Sarah Johnson</h4>
               <h5>Music Producer</h5>
@@ -640,7 +716,7 @@
             </div>
           </div>
           <div class="slide">
-            <div class="review-card">
+            <div class="review-card right" id="relative">
               <img src="./assets/music-images/user-2.jpg" alt="review" />
               <h4>David Lee</h4>
               <h5>Sound Engineer</h5>
@@ -655,12 +731,66 @@
             </div>
           </div>
         </div>
+        <div class="pagination">
+          <button class="page-button active">1</button>
+          <button class="page-button">2</button>
+          <!-- <button class="page-button">3</button> -->
+          <!-- <button class="page-button">4</button> -->
+        </div>    
+        <!-- <div class="control">
+          <button id="next">
+            next <i class="ri-arrow-left-double-line"></i>
+          </button>
+          <button id="prev">
+            prev <i class="ri-arrow-right-double-line"></i>
+          </button>
+        </div>     -->
       </div>
     </section>
+    <script>
+      // const slides = document.querySelectorAll(".slide");
+      // const forwards = document.getElementById("next");
+      // const backwards = document.getElementById("prev");
+      // const slidesLength = slides.length;
+      // let current = 0;
+      // let next = 1;
+      // let prev = slidesLength - 1;
+
+      // forwards.addEventListener("click", () => {
+      //   slides[current].classList.replace("current", "prev");
+      //   slides[next].classList.replace("next", "current");
+      //   slides[prev].classList.remove("prev");
+      //   next++;
+      //   next = next % slidesLength;
+      //   slides[next].classList.add("next");
+      //   current++;
+      //   current = current % slidesLength;
+      //   prev++;
+      //   prev = prev % slidesLength;
+      // });
+
+      // backwards.addEventListener("click", () => {
+      //   slides[current].classList.replace("current", "next");
+      //   slides[prev].classList.replace("prev", "current");
+      //   slides[next].classList.remove("next");
+      //   prev--;
+      //   prev = prev + slidesLength;
+      //   prev = prev % slidesLength;
+      //   slides[prev].classList.add("prev");
+      //   current--;
+      //   current = current + slidesLength;
+      //   current = current % slidesLength;
+      //   next--;
+      //   next = next + slidesLength;
+      //   next = next % slidesLength;
+      // });
+    </script>
 
     <footer class="footer" id="contact">
       <div class="footer-content">
-        <a href="#"><img src="./assets/music-images/logo-white.png" alt="logo" /></a>
+        <a href="#">
+          <img src="./assets/music-images/logo-white.png" alt="logo" />
+        </a>
         <div class="footer-socials">
           <a href="#"><i class="ri-facebook-fill"></i></a>
           <a href="#"><i class="ri-twitter-fill"></i></a>
@@ -686,7 +816,7 @@
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
     
-    <div id="calc" style="padding: 5rem; display: block;">
+    <div id="calc" style="padding: 5rem; display: none;">
       <input type="number" id="width">
       <input type="number" id="height" placeholder="Height" style="padding: 0.5em;">
       <button id="calc" style="padding: 0.5em; border: 1px solid;">Calc</button>
@@ -743,4 +873,4 @@
     </script>
   </body>
 </html>
-<!-- 49-106-236-367-481-611-741 -->
+<!-- 49-106-236-367-481-611-741-876 -->
