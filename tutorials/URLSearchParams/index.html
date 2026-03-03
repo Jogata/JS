@@ -92,6 +92,10 @@
       .block {
         display: block;
       }
+
+      .bg {
+        display: none;
+      }
         
       html {
       /* body { */
@@ -147,6 +151,8 @@
         /* margin-bottom: 1rem; */
         margin-bottom: 2rem;
         color: var(--main-text-color);
+        /* color: transparent; */
+        /* -webkit-text-stroke: 1px var(--main-text-color); */
         font-size: 3.5rem;
         font-weight: 600;
         line-height: 4rem;
@@ -298,6 +304,7 @@
         /* height: 100%; */
         min-height: 400px;
         filter: drop-shadow(1px 1px 1px #000);
+        /* border: 1px solid red; */
       }
       
       .feature-image::after {
@@ -451,7 +458,8 @@
       .page-button.active {
         /* color: var(--main-text-color); */
         /* background-color: var(--white); */
-        background-color: var(--primary-color);
+        /* background-color: var(--primary-color); */
+        background-color: var(--primary-color-dark);
         /* border: 1px solid; */
       }
       
@@ -723,6 +731,13 @@
         }
       }
 
+      @media (width < 2400px) {
+        .section-header {
+          color: transparent;
+          -webkit-text-stroke: 1px var(--main-text-color);
+        }
+      }
+
       /* :root {
         --main-text-color: #fff;
         --text-light: #bfbdbd;
@@ -735,6 +750,10 @@
       .zoom-in {
         animation: zoom-in 2s linear backwards;
       }
+
+      .fade-in {
+        animation: fade-in 2s linear backwards;
+      }
       
       .rotate {
         animation: rotate 1s linear forwards;
@@ -742,6 +761,10 @@
       
       .fade-left {
         animation: fade-left 1s linear backwards;
+      }
+
+      .fade-left-absolute {
+        animation: fade-left-absolute 1s linear backwards;
       }
       
       .fade-right {
@@ -791,6 +814,12 @@
         }
       }
 
+      @keyframes fade-in {
+        0% {
+          opacity: 0;
+        }
+      }
+
       @keyframes rotate {
         0% {
           transform: rotate(80deg);
@@ -804,10 +833,24 @@
           opacity: 0;
         }
       }
+
+      @keyframes fade-left-absolute {
+        0% {
+          transform: translateX(1rem);
+          opacity: 0;
+        }
+      }
       
       @keyframes fade-right {
         0% {
           transform: translateX(-10%);
+          opacity: 0;
+        }
+      }
+
+      @keyframes fade-right-absolute {
+        0% {
+          transform: translateX(1rem);
           opacity: 0;
         }
       }
@@ -862,51 +905,111 @@
         }
       }
       
-      .bg {
-        position: fixed;
-        width: 120%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        background-image: url("./assets/music-images/bg.jpeg");
-        background-image: url("./assets/music-images/pxbee_2026-03-02_17-48-49.jpeg");
-        background-image: url("./assets/music-images/1772465530305.png_image.png");
-        background-image: url("./assets/music-images/1772449260084.png_image.png");
-        background-image: url("./assets/music-images/audio-inferno-2.webp");
-        background-repeat: no-repeat;
-        background-position: top left;
-        background-size: cover;
-        background-size: contain;
-        animation: animate 100s ease-in-out infinite;
-        z-index: -1;
-      }
-      
-      .bg::after {      
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-image: 
-          linear-gradient(to top, 
-            rgba(0, 0, 0, 0.8), 
-            transparent, 
-            rgba(0, 0, 0, 0.8)), 
-          linear-gradient(to left, 
-            rgba(0, 0, 0, 0.8), 
-            transparent, 
-            transparent);
-      }
-      
-      @keyframes animate {
-        50% {
-          transform: translateX(-16%);
+      @media screen and (min-width: 2300px) {
+        .bg {
+          display: block;
+          position: fixed;
+          /* width: 120%; */
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          /* background-image: url("./assets/music-images/bg.jpeg"); */
+          /* background-image: url("./assets/music-images/pxbee_2026-03-02_17-48-49.jpeg"); */
+          /* background-image: url("./assets/music-images/1772465530305.png_image.png"); */
+          /* background-image: url("./assets/music-images/1772449260084.png_image.png"); */
+          /* background-image: url("./assets/music-images/audio-inferno-2.webp"); */
+          /* background-image: url("./assets/music-images/audio-inferno-2-wide.webp"); */
+          /* background-image: url("./assets/music-images/audio-inferno-2-wide.jpeg"); */
+          background-image: url("./assets/music-images/audio-inferno-2-wide.jpeg");
+          background-repeat: no-repeat;
+          /* background-position: top left; */
+          background-position: center;
+          background-size: cover;
+          /* background-size: contain; */
+          /* animation: animate 100s ease-in-out infinite; */
+          z-index: -1;
         }
+        
+        .bg::after {      
+          position: absolute;
+          top: 0;
+          left: 0;
+          content: "";
+          width: 100%;
+          height: 100%;
+          background-image: 
+            linear-gradient(to top, 
+              rgba(0, 0, 0, 0.8), 
+              transparent, 
+              rgba(0, 0, 0, 0.8)), 
+            linear-gradient(to left, 
+              rgba(0, 0, 0, 0.8), 
+              transparent, 
+              transparent);
+        }
+        
+        /* @keyframes animate {
+          50% {
+            transform: translateX(-16%);
+          }
+        } */
       }
     </style>
   </head>
   <body>
+    <header class="header" id="home">
+      <nav>
+        <div class="nav-header">
+          <div class="nav-logo">
+            <a href="#">
+              <img src="assets/logo-white.png" alt="logo" />
+            </a>
+          </div>
+          <div class="nav-menu-btn" id="menu-btn">
+            <i class="ri-menu-line"></i>
+          </div>
+        </div>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#home">HOME</a></li>
+          <li><a href="#about">ABOUT US</a></li>
+          <li><a href="#service">SERVICES</a></li>
+          <li class="nav-logo">
+            <a href="#">
+              <img src="assets/logo-white.png" alt="logo" />
+            </a>
+          </li>
+          <li><a href="#client">CLIENT</a></li>
+          <li><a href="#blog">BLOG</a></li>
+          <li><a href="#contact">CONTACT US</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="section-container portfolio-container">
+      <h2 class="section-header">~ PORTFOLIO ~</h2>
+      <div class="portfolio-grid">
+        <div class="portfolio-card">
+          <img src="assets/portfolio-1.jpg" alt="portfolio" />
+          <div class="portfolio-content">
+            <button class="btn">VIEW PPORTFOLIO</button>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <img src="assets/portfolio-2.jpg" alt="portfolio" />
+          <div class="portfolio-content">
+            <button class="btn">VIEW PPORTFOLIO</button>
+          </div>
+        </div>
+        <div class="portfolio-card">
+          <img src="assets/portfolio-3.jpg" alt="portfolio" />
+          <div class="portfolio-content">
+            <button class="btn">VIEW PPORTFOLIO</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page">
     <div class="bg"></div>
     <header class="section-container header" id="home">
       <nav>
@@ -971,7 +1074,9 @@
     </script>
 
     <section class="section-container feature-container" id="feature">
-      <div class="feature-image"></div>
+      <!-- <div class="feature-image"></div> -->
+      <!-- <div class="feature-image fade-right paused"></div> -->
+      <div class="feature-image fade-left-absolute paused"></div>
       <div class="feature-content">
         <!-- <div class="feature-card"> -->
         <div class="feature-card fade-up-absolute paused">
@@ -1014,29 +1119,35 @@
     </section>
 
     <section class="section-container quality-container" id="quality">
-      <div class="quality-image"></div>
+      <!-- <div class="quality-image"></div> -->
+      <div class="quality-image fade-right paused"></div>
       <div class="quality-content">
-        <h2 class="section-header">
+        <!-- <h2 class="section-header"> -->
+        <h2 class="section-header fade-left paused">
           Best <span class="block">Quality</span>
         </h2>
-        <p class="section-description">
+        <!-- <p class="section-description"> -->
+        <p class="section-description fade-up-absolute paused delayed" style="--delay: 2">
           Curated with meticulous attention to detail and a passion for
           excellence. Explore a handpicked collection of top-tier tracks,
           meticulously chosen to deliver the pinnacle of sonic enjoyment.
           Elevate your listening experience with unmatched audio clarity 
           and richness, setting the standard for quality in every note.
         </p>
-        <div class="quality-btn">
+        <!-- <div class="quality-btn"> -->
+        <div class="quality-btn fade-up-absolute paused delayed" style="--delay: 4">
           <button class="btn">EXPLORE NOW</button>
         </div>
       </div>
     </section>
 
     <section class="review-container" id="client">
-      <h2 class="section-header">
+      <!-- <h2 class="section-header"> -->
+      <h2 class="section-header fade-up-absolute paused">
         Awesome <span class="block">Review</span>
       </h2>
-      <div class="slider">
+      <!-- <div class="slider"> -->
+      <div class="slider fade-in paused delayed" style="--delay: 2">
         <div class="slider-track">
           <div class="slide current">
             <div class="review-card">
@@ -1072,7 +1183,8 @@
             </div>
           </div>
         </div>
-        <div class="pagination">
+        <!-- <div class="pagination"> -->
+        <div class="pagination fade-down-absolute paused delayed" style="--delay: 4">
           <button class="page-button active"></button>
           <button class="page-button"></button>
           <!-- <button class="page-button">3</button> -->
@@ -1159,18 +1271,35 @@
       // });
     </script>
 
-    <footer class="footer" id="contact">
+    <!-- <footer class="footer" id="contact"> -->
+    <footer class="footer fade-in paused">
       <div class="footer-content">
-        <a href="#">
+        <!-- <a href="#"> -->
+        <a href="#" class="fade-up-absolute paused delayed" style="--delay: 4">
           <img src="./assets/music-images/logo-white.png" alt="logo" />
         </a>
         <div class="footer-socials">
-          <a href="#"><i class="ri-facebook-fill"></i></a>
-          <a href="#"><i class="ri-twitter-fill"></i></a>
-          <a href="#"><i class="ri-pinterest-line"></i></a>
-          <a href="#"><i class="ri-linkedin-fill"></i></a>
+          <!-- <a href="#"><i class="ri-facebook-fill"></i></a> -->
+          <a href="#" class="fade-up-absolute paused delayed" style="--delay: 6">
+            <i class="ri-facebook-fill"></i>
+          </a>
+          <!-- <a href="#"><i class="ri-twitter-fill"></i></a> -->
+          <a href="#" class="fade-up-absolute paused delayed" style="--delay: 7">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <!-- <a href="#"><i class="ri-pinterest-line"></i></a> -->
+          <a href="#" class="fade-up-absolute paused delayed" style="--delay: 8">
+            <i class="ri-pinterest-line"></i>
+          </a>
+          <!-- <a href="#"><i class="ri-linkedin-fill"></i></a> -->
+          <a href="#" class="fade-up-absolute paused delayed" style="--delay: 9">
+            <i class="ri-linkedin-fill"></i>
+          </a>
         </div>
-        <p>Copyright © 2026 Company. All rights reserved.</p>
+        <!-- <p>Copyright © 2026 Company. All rights reserved.</p> -->
+        <p class="fade-up-absolute paused delayed" style="--delay: 12">
+          Copyright © 2026 Company. All rights reserved.
+        </p>
       </div>
     </footer>
 
@@ -1204,6 +1333,7 @@
           });
       }      
     </script>
+    </div>
 
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
     
@@ -1264,4 +1394,4 @@
     </script>
   </body>
 </html>
-<!-- 49-106-236-367-481-611-741-876-1006-1136-1266 -->
+<!-- 49-106-236-367-481-611-741-876-1006-1136-1266-1396 -->
