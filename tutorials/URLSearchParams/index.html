@@ -3,959 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>URL SearchParams in JS</title> -->
-    <title>Music</title>
+    <title>URL SearchParams in JS</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
-      @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Kaushan+Script&family=Playfair+Display&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Brawler:wght@400;700&family=Croissant+One&family=Ephesis&family=Gloock&family=Hurricane&family=Imbue:opsz,wght@10..100,100..900&family=Modak&family=Montez&family=Prosto+One&family=Rye&family=Shojumaru&family=Young+Serif&family=ZCOOL+XiaoWei&display=swap');
-      @import url("https://fonts.googleapis.com/css2?family=Lora:ital@0;1&family=Poppins:wght@400;500;600&display=swap");
-      @import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Goldman:wght@400;700&display=swap");
-      @import url('https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Great+Vibes&display=swap');
-      @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@400;500;600;700&display=swap");
-
-      :root {
-        --primary-color: #fdb701;
-        --primary-color-dark: #e9a200;
-        --text-dark: #0a0a0a;
-        --main-text-color: #fff;
-        /* --text-light: #737373; */
-        --text-light: #bfbdbd;
-        --white: #ffffff;
-        --max-width: 1024px;
-      }
-
-      *,
-      *::before,
-      *::after {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      ul {
-        list-style: none;
-      }
-
-      a {
-        text-decoration: none;
-        /* transition: 0.3s; */
-        transition: color 300ms;
-      }
-
-      button {
-        font-family: inherit;
-        border: 0px solid transparent;
-        outline: 1px solid transparent;
-        background-color: transparent;
-        cursor: pointer;
-      }
-      
-      button:focus-visible,
-      a:focus-visible {
-        outline: 1px solid #999;
-      }
-        
-      img {
-        /* display: flex; */
-        display: block;
-        width: 100%;
-      }
-
-      .svg {
-        /* display: none; */
-        position: absolute;
-        width: 0;
-        height: 0;
-      }
-      
-      .mask-1 {
-        clip-path: url("#mask-1");
-      }
-      
-      .mask-2 {
-        clip-path: url("#mask-2");
-      }
-      
-      .mask-3 {
-        clip-path: url("#mask-3");
-      }
-      
-      .mask-4 {
-        clip-path: url("#mask-4");
-      }
-
-      .block {
-        display: block;
-      }
-
-      .bg {
-        display: none;
-      }
-        
-      html {
-      /* body { */
-        scroll-behavior: smooth;
-      }
-      
-      body {
-        /* min-height: 100vh; */
-        /* color: #fff; */
-        font-family: "Open Sans", sans-serif;
-  font-family: "Roboto", sans-serif;
-  font-family: 'Abril Fatface', cursive;
-  font-family: 'Courgette', cursive;
-  font-family: 'Dancing Script', cursive;
-  font-family: 'Great Vibes', cursive;
-  font-family: 'Josefin Sans', sans-serif;
-  font-family: 'Limelight', cursive;
-  font-family: 'Lobster', cursive;
-  font-family: 'Montserrat', sans-serif;
-  font-family: 'Oleo Script Swash Caps', cursive;
-  font-family: 'Poppins', sans-serif;
-  font-family: 'Raleway', sans-serif;
-  font-family: 'Fraunces', serif;
-  font-family: 'Playfair Display', serif;
-  font-family: 'Lemon', cursive;
-  font-family: "Goldman", sans-serif;
-  font-family: "Lora", serif;
-  font-family: "Croissant One", serif;
-  font-family: "Shojumaru", system-ui;
-  font-family: "Montez", cursive;
-  font-family: "Modak", system-ui;
-  font-family: "Prosto One", sans-serif;
-  font-family: "Young Serif", serif;
-  font-family: "ZCOOL XiaoWei", sans-serif;
-  font-family: "Brawler", serif;
-  font-family: "Gloock", serif;
-  font-family: "Ephesis", cursive;
-  font-family: "Platypi", serif;
-  font-family: "Patua One", serif;
-  font-family: "Rye", serif;
-  font-family: "Arizonia", cursive;
-  font-family: "Imbue", serif;
-  font-family: 'Kaushan Script', cursive;
-  font-family: "Hurricane", cursive;
-  font-family: "Bona Nova SC", serif;
-  font-family: "DM Serif Display", serif;
-        font-family: Georgia, serif;
-        /* line-height: 1.6; */
-        background-color: #080a0c;
-      }
-      
-      .section-header {
-        /* margin-bottom: 1rem; */
-        margin-bottom: 2rem;
-        color: var(--main-text-color);
-        /* color: transparent; */
-        /* -webkit-text-stroke: 1px var(--main-text-color); */
-        font-size: 3.5rem;
-        font-weight: 600;
-        line-height: 4rem;
-      }
-      
-      .section-header span {
-        font-size: 5.5rem;
-      }
-      
-      .section-description {
-        margin-bottom: 2rem;
-        color: var(--text-light);
-        line-height: 1.75rem;
-      }
-      
-      .btn {
-        padding: 0.75rem 1.5rem;
-        /* color: var(--white); */
-        color: var(--text-dark);
-        font-weight: bold;
-        /* outline: none; */
-        /* border: none; */
-        border-radius: 6px;
-        background-color: var(--primary-color);
-        /* transition: 0.3s; */
-        transition: background-color 300ms;
-        /* cursor: pointer; */
-      }
-      
-      .btn:hover {
-        background-color: var(--primary-color-dark);
-      }
-            
-      /* .page {
-        min-height: 100vh;
-        max-width: 100vw;
-        overflow: hidden;
-      } */
-      
-      .header {
-        isolation: isolate;
-        position: relative;
-      }
-      
-      nav {
-        position: absolute;
-        top: 0;
-        /* left: 50%; */
-        left: 0;
-        right: 0;
-        /* transform: translate(-50%); */
-        width: 100%;
-        max-width: var(--max-width);
-        margin: auto;
-        padding: 1rem;
-        display: flex;
-        gap: 1rem 2rem;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: space-between;
-        filter: drop-shadow(1px 1px 1px #000);
-        z-index: 9;
-      }
-      
-      .nav-logo a img {
-        max-width: 50px;
-      }
-      
-      .nav-logo .logo-color {
-        display: none;
-      }
-      
-      .nav-links {
-        /* list-style: none; */
-        display: none;
-        position: absolute;
-        /* top: 95px; */
-        top: 100%;
-        right: 1rem;
-        left: 1rem;
-        /* width: 100%; */
-        min-width: fit-content;
-        max-width: 350px;
-        margin-left: auto;
-        padding: 5px;
-        gap: 5px;
-        /* border-radius: 1rem; */
-        border-radius: 16px;
-        background-color: var(--primary-color);
-        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
-      }
-      
-      .nav-links.open {
-        padding-block: 2rem;
-        display: grid;
-      }
-      
-      .nav-links a {
-        display: inline-block;
-        width: 100%;
-        padding: 0.75rem;
-        color: var(--text-dark);
-        font-weight: 500;
-        white-space: nowrap;
-        text-align: center;
-        border-radius: 10px;
-      }
-      
-      .nav-links a:hover {
-        color: var(--white);
-        background-color: var(--primary-color-dark);
-      }
-
-      .nav-menu-btn {
-        padding: 5px 11px;
-        color: var(--white);
-        font-size: 1.5rem;
-        border-radius: 6px;
-        border: 1px solid var(--white);
-        /* background-color: rgba(0, 0, 0, 0.1); */
-        background-color: #d7a200;
-        /* cursor: pointer; */
-      }
-
-      .header-image {
-        /* max-width: 550px; */
-        /* height: 100%; */
-        min-height: 500px;
-        /* border-bottom-left-radius: 15rem; */
-        /* background-image: url("./assets/music-images/header1.jpg"); */
-        background-image: url("./assets/music-images/header.png");
-        background-repeat: no-repeat;
-        /* background-position: center; */
-        background-position: top;
-        background-size: cover;
-      }
-      
-      .header-content {
-        max-width: 520px;
-        margin: auto;
-        padding-block: 5rem;
-        padding-inline: 1rem;
-        text-align: center;
-      }
-      
-      .feature-image {
-        isolation: isolate;
-        position: relative;
-        /* height: 100%; */
-        min-height: 400px;
-        filter: drop-shadow(1px 1px 1px #000);
-        /* border: 1px solid red; */
-      }
-      
-      .feature-image::after {
-        position: absolute;
-        top: 0;
-        right: 0;
-        /* left: 0; */
-        content: "";
-        width: 100%;
-        max-width: 500px;
-        height: 100%;
-        /* margin: auto; */
-        background-image: url("./assets/music-images/feature.jpg");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        clip-path: url("#mask-1");
-        /* clip-path: url("#mask-2"); */
-        /* clip-path: url("#mask-3"); */
-        /* clip-path: url("#mask-4"); */
-      }
-      
-      .feature-content {
-        padding-block: 5rem;
-        padding-inline: 1rem;
-      }
-      
-      .feature-content .icon {
-        color: var(--main-text-color);
-        font-size: 3rem;
-      }
-
-      .feature-card {
-        padding: 1rem;
-        background-color: rgba(255, 255, 255, 0.6);
-        border-radius: 12px;
-        background-color: rgba(0, 0, 0, 0.6);
-        /* filter: drop-shadow(1px 1px 1px #fff); */
-        /* box-shadow: 3px 3px 3px #0004; */
-        /* border: 1px solid; */
-      }
-
-      .feature-card:not(:first-child) {
-        margin-top: 2rem;
-      }
-      
-      /* .feature-card:not(:first-child) .icon {
-        margin-top: 2rem;
-      } */
-      
-      .feature-content h4 {
-        margin-bottom: 0.5rem;
-        color: var(--main-text-color);
-        font-size: 2rem;
-        font-weight: 600;
-      }
-      
-      .feature-content p {
-        padding-bottom: 1rem;
-        color: var(--text-light);
-        line-height: 1.75rem;
-      }
-      
-      .feature-card:not(:last-child) p {
-        border-bottom: 2px dashed var(--main-text-color);
-      }
-      
-      .quality-image {
-        isolation: isolate;
-        position: relative;
-        aspect-ratio: 1;
-        /* height: 100%; */
-        /* min-height: 400px; */
-        /* min-height: 530px; */
-      }
-      
-      .quality-image::after {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-image: url("./assets/music-images/quality.png");
-        background-repeat: no-repeat;
-        background-position: center;
-        /* background-position: top; */
-        background-size: cover;
-        clip-path: url("#mask-1");
-        /* clip-path: url("#mask-2"); */
-        /* clip-path: url("#mask-3"); */
-        /* clip-path: url("#mask-4"); */
-      }
-      
-      .quality-content {
-        padding-block: 2rem 5rem;
-        padding-inline: 1rem;
-        text-align: center;
-      }
-      
-      .review-container {
-        max-width: var(--max-width);
-        margin-inline: auto;
-        padding: 5rem 1rem;
-        text-align: center;
-      }
-      
-      .slider {
-        position: relative;
-        width: 100%;
-        margin-top: 2rem;
-        /* padding-bottom: 4rem; */
-        overflow: hidden;
-      }
-
-      .slider-track {
-        display: flex;
-      }
-
-      .slide {
-        flex-shrink: 0;
-        position: absolute;
-        top: 0;
-        width: 100%;
-        transform: translateX(100%);
-        /* opacity: 0; */
-      }
-      
-      .pagination {
-        text-align: center;
-      }
-      
-      .page-button {
-        /* aspect-ratio: 1; */
-        width: 1rem;
-        height: 1rem;
-        margin: 0.5rem;
-        /* padding: 0.4em 0.72em; */
-        /* color: var(--white); */
-        /* font-size: 1.2rem; */
-        /* font-weight: bold; */
-        border-radius: 50%;
-        border: 1px solid var(--main-text-color);
-        /* background-color: transparent; */
-        filter: drop-shadow(1px 1px #000);
-        transition: background-color 400ms;
-        /* transition: color 0.4s, border-color 0.4s; */
-        /* opacity: 1; */
-      }
-      
-      .page-button.active {
-        /* color: var(--main-text-color); */
-        /* background-color: var(--white); */
-        /* background-color: var(--primary-color); */
-        background-color: var(--primary-color-dark);
-        /* border: 1px solid; */
-      }
-      
-      .review-card {
-        /* flex-shrink: 0; */
-        /* position: absolute; */
-        /* top: 0; */
-        /* width: 100%; */
-        max-width: 600px;
-        margin-inline: auto;
-        padding: 2rem;
-        /* transform: translateX(100%); */
-      }
-
-      #relative {
-        position: relative;
-      }
-    
-      .current {
-        transform: translate(0);
-        /* transition: transform 300ms; */
-        transition: transform 300ms, 
-                      opacity 300ms;
-        /* opacity: 1; */
-        /* z-index: 1; */
-      }
-    
-      .left {
-        transform: translateX(-100%);
-        transition: transform 300ms;
-      }
-    
-      .right {
-        transform: translateX(100%);
-        transition: transform 300ms;
-      }
-
-      .drop-shadow {
-        filter: drop-shadow(1px 1px 1px #000);
-      }
-        
-      .review-card img {
-        max-width: 150px;
-        margin-inline: auto;
-        margin-bottom: 1rem;
-        /* border-radius: 50%; */
-        /* box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2); */
-        /* clip-path: url("#mask-1"); */
-        /* clip-path: url("#mask-2"); */
-        /* clip-path: url("#mask-3"); */
-        clip-path: url("#mask-4");
-      }
-
-      .review-card h4 {
-        margin-bottom: 5px;
-        color: var(--main-text-color);
-        font-size: 1.5rem;
-        font-weight: 600;
-      }
-        
-      .review-card h5 {
-        margin-bottom: 1rem;
-        font-size: 1rem;
-        font-weight: 500;
-        columns: var(--text-light);
-      }
-      
-      .review-card p {
-        color: var(--main-text-color);
-        line-height: 1.75rem;
-      }
-      
-      .footer {
-        /* position: relative; */
-        /* max-width: var(--max-width); */
-        /* margin: auto; */
-        /* background-color: var(--primary-color-dark); */
-      }
-
-      @media (width < 1250px) {
-        .footer {
-          background-color: var(--primary-color-dark);
-        }
-      }
-
-      @media (width > 1250px) {
-        .footer {
-          position: relative;
-          max-width: var(--max-width);
-          margin: 0 auto;
-        }
-
-        .footer::after {
-          position: absolute;
-          top: 0;
-          left: -10%;
-          content: "";
-          width: 120%;
-          height: 100%;
-          background-color: var(--primary-color-dark);
-          /* clip-path: url("#mask-1"); */
-          /* clip-path: url("#mask-2"); */
-          clip-path: url("#mask-3");
-          /* clip-path: url("#mask-4"); */
-          z-index: -1;
-        }
-      }
-      
-      .footer-content {
-        max-width: var(--max-width);
-        margin-inline: auto;
-        padding: 5rem 1rem;
-        text-align: center;
-      }
-
-      .footer-content > a {
-        display: block;
-        max-width: 60px;
-        margin-bottom: 2rem;
-        margin-inline: auto;
-      }
-      
-      .footer-content a img {
-        /* max-width: 60px; */
-        /* margin-bottom: 2rem; */
-        /* margin-inline: auto; */
-      }
-      
-      .footer-socials {
-        margin-bottom: 2rem;
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      .footer-socials a {
-        padding: 5px 9px;
-        color: var(--white);
-        font-size: 1.5rem;
-        border-radius: 50%;
-        /* background-color: var(--main-text-color); */
-        background-color: var(--text-dark);
-        transition: color 300ms, 
-        background-color 300ms;
-      }
-      
-      .footer-socials a:hover {
-        color: var(--primary-color-dark);
-        background-color: var(--white);
-      }
-      
-      .footer-content p {
-        color: var(--white);
-      }
-
-      @media (width < 768px) {
-        .feature-image::after {
-          left: 0;
-          margin: auto;
-        }
-      }
-
-      @media (width > 768px) {
-        .section-container {
-          display: grid;
-          /* align-items: center; */
-          grid-template-columns:
-            minmax(1rem, 1fr)
-            minmax(0, calc(var(--max-width) / 2))
-            minmax(0, calc(var(--max-width) / 2))
-            minmax(1rem, 1fr);
-        }
-      
-        nav {
-          padding: 2rem 1rem;
-        }
-      
-        .nav-logo .logo-color {
-          display: flex;
-        }
-      
-        .nav-logo .logo-white {
-          display: none;
-        }
-      
-        .header-image {
-          max-width: 550px;
-          grid-area: 1/3/2/5;
-          clip-path: url("#mask-1");
-          /* clip-path: url("#mask-2"); */
-          /* clip-path: url("#mask-3"); */
-          /* clip-path: url("#mask-4"); */
-        }
-      
-        .header-content {
-          grid-column: 2/3;
-          padding-inline: 0 2rem;
-          padding-block: 14rem 10rem;
-          text-align: left;
-        }
-        
-        .feature-image {
-          grid-column: 1/3;
-          isolation: isolate;
-          position: relative;
-          height: 100%;
-          z-index: -1;
-        }
-      
-        .feature-image::after {
-          /* top: 8rem; */
-          max-width: 600px;
-          /* height: 100vw; */
-          /* transform: translateX(25%) rotate(45deg); */
-          /* transform: rotate(45deg); */
-          transform: rotate(16deg);
-          /* transform-origin: top; */
-          /* border-top-left-radius: 25rem; */
-          /* border-top-right-radius: 25rem; */
-        }
-      
-        .feature-content {
-          grid-area: 1/3/2/4;
-          padding-inline: 2rem;
-          padding-block: 8rem;
-          text-align: left;
-        }
-      
-        .quality-image {
-          /* grid-area: 1/3/2/5; */
-          grid-area: 1/3/2/3;
-          isolation: isolate;
-          position: relative;
-          /* aspect-ratio: 2/3; */
-          width: 100%;
-          height: 100%;
-          /* margin: auto; */
-          filter: drop-shadow(1px 1px 1px #000);
-          z-index: -1;
-        }
-        
-        .quality-image::after {
-          /* top: 8rem; */
-          max-width: 600px;
-          /* height: 100vw; */
-          /* transform: translateX(-25%) rotate(-45deg); */
-          /* transform: rotate(-45deg); */
-          background-position: top;
-          /* transform-origin: top; */
-          /* border-top-left-radius: 25rem; */
-          /* border-top-right-radius: 25rem; */
-          /* clip-path: url("#mask-1"); */
-          /* clip-path: url("#mask-2"); */
-          /* clip-path: url("#mask-3"); */
-          /* clip-path: url("#mask-4"); */
-        }
-      
-        .quality-content {
-          grid-column: 2/3;
-          padding-inline: 0 2rem;
-          /* padding-block: 8rem; */
-          padding-block: 6rem;
-          text-align: left;
-        }
-      
-        .review-container {
-          padding-block: 10rem 5rem;
-        }
-      }
-
-      @media (width < 2400px) {
-        .section-header {
-          color: transparent;
-          -webkit-text-stroke: 1px var(--main-text-color);
-        }
-      }
-
-      /* :root {
-        --main-text-color: #fff;
-        --text-light: #bfbdbd;
-      } */
-
-      /* .feature-card {
-        background-color: rgba(0, 0, 0, 0.6);
-      } */
-
-      .zoom-in {
-        animation: zoom-in 2s linear backwards;
-      }
-
-      .fade-in {
-        animation: fade-in 2s linear backwards;
-      }
-      
-      .rotate {
-        animation: rotate 1s linear forwards;
-      }
-      
-      .fade-left {
-        animation: fade-left 1s linear backwards;
-      }
-
-      .fade-left-absolute {
-        animation: fade-left-absolute 1s linear backwards;
-      }
-      
-      .fade-right {
-        animation: fade-right 1s linear backwards;
-      }
-      
-      .fade-up {
-        animation: fade-up 1s linear backwards;
-      }
-      
-      .fade-up-full {
-        animation: fade-up-full 1s linear backwards;
-      }
-      
-      .fade-up-relative {
-        animation: fade-up-relative 1s linear backwards;
-      }
-      
-      .fade-up-absolute {
-        animation: fade-up-absolute 1s linear backwards;
-      }
-      
-      .fade-down-full {
-        animation: fade-down-full 1s linear backwards;
-      }
-      
-      .fade-down-relative {
-        animation: fade-down-relative 1s linear backwards;
-      }
-      
-      .fade-down-absolute {
-        animation: fade-down-absolute 1s linear backwards;
-      }
-
-      .delayed {
-        /* animation-delay: calc(0.2s * var(--i)); */
-        animation-delay: calc(0.2s * var(--delay));
-      }
-      
-      .paused {
-        animation-play-state: paused;
-      }
-      
-      @keyframes zoom-in {
-        0% {
-          opacity: 0;
-        }
-      }
-
-      @keyframes fade-in {
-        0% {
-          opacity: 0;
-        }
-      }
-
-      @keyframes rotate {
-        0% {
-          transform: rotate(80deg);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-left {
-        0% {
-          transform: translateX(10%);
-          opacity: 0;
-        }
-      }
-
-      @keyframes fade-left-absolute {
-        0% {
-          transform: translateX(1rem);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-right {
-        0% {
-          transform: translateX(-10%);
-          opacity: 0;
-        }
-      }
-
-      @keyframes fade-right-absolute {
-        0% {
-          transform: translateX(1rem);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-up {
-        0% {
-          transform: translateY(10%);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-up-full {
-        0% {
-          transform: translateY(100%);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-up-relative {
-        0% {
-          transform: translateY(10%);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-up-absolute {
-        0% {
-          transform: translateY(1rem);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-down-full {
-        0% {
-          transform: translateY(-100%);
-          opacity: 0;
-        }
-      }  
-        
-      /* @keyframes fade-down { */
-      @keyframes fade-down-relative {
-        0% {
-          transform: translateY(-10%);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-down-absolute {
-        0% {
-          transform: translateY(-1rem);
-          opacity: 0;
-        }
-      }
-      
-      @media screen and (min-width: 2300px) {
-        .bg {
-          display: block;
-          position: fixed;
-          /* width: 120%; */
-          width: 100%;
-          height: 100%;
-          top: 0;
-          left: 0;
-          /* background-image: url("./assets/music-images/bg.jpeg"); */
-          /* background-image: url("./assets/music-images/pxbee_2026-03-02_17-48-49.jpeg"); */
-          /* background-image: url("./assets/music-images/1772465530305.png_image.png"); */
-          /* background-image: url("./assets/music-images/1772449260084.png_image.png"); */
-          /* background-image: url("./assets/music-images/audio-inferno-2.webp"); */
-          /* background-image: url("./assets/music-images/audio-inferno-2-wide.webp"); */
-          /* background-image: url("./assets/music-images/audio-inferno-2-wide.jpeg"); */
-          background-image: url("./assets/music-images/audio-inferno-2-wide.jpeg");
-          background-repeat: no-repeat;
-          /* background-position: top left; */
-          background-position: center;
-          background-size: cover;
-          /* background-size: contain; */
-          /* animation: animate 100s ease-in-out infinite; */
-          z-index: -1;
-        }
-        
-        .bg::after {      
-          position: absolute;
-          top: 0;
-          left: 0;
-          content: "";
-          width: 100%;
-          height: 100%;
-          background-image: 
-            linear-gradient(to top, 
-              rgba(0, 0, 0, 0.8), 
-              transparent, 
-              rgba(0, 0, 0, 0.8)), 
-            linear-gradient(to left, 
-              rgba(0, 0, 0, 0.8), 
-              transparent, 
-              transparent);
-        }
-        
-        /* @keyframes animate {
-          50% {
-            transform: translateX(-16%);
-          }
-        } */
-      }
-    </style>
   </head>
   <body>
     <header class="header" id="home">
@@ -985,7 +35,23 @@
         </ul>
       </nav>
     </header>
-    <div class="section-container portfolio-container">
+    <section class="section-container about-container" id="about">
+      <h2 class="section-header">WE CAPTURE THE MOMENTS</h2>
+      <p class="section-description">
+        At Capturer, we specialize in freezing those fleeting moments in time
+        that hold immense significance for you. With our passion for photography
+        and keen eye for detail, we transform ordinary moments into
+        extraordinary memories.
+      </p>
+      <p class="section-description">
+        Whether it's a milestone event, a candid portrait, or the breathtaking
+        beauty of nature, we strive to encapsulate the essence of every moment,
+        ensuring that your cherished memories last a lifetime. Trust us to
+        capture the magic of your life's journey, one frame at a time.
+      </p>
+      <img src="assets/logo-dark.png" alt="logo" />
+    </section>
+    <section class="section-container portfolio-container">
       <h2 class="section-header">~ PORTFOLIO ~</h2>
       <div class="portfolio-grid">
         <div class="portfolio-card">
@@ -1007,7 +73,121 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
+    <section class="service" id="service">
+      <div class="section-container service-container">
+        <h2 class="section-header">~ SERVICES ~</h2>
+        <p class="section-description">
+          At Capturer, we offer a range of professional photography services
+          tailored to meet your unique needs. With a commitment to excellence
+          and creativity, we strive to exceed your expectations, delivering
+          captivating visuals that tell your story with authenticity and
+          passion.
+        </p>
+        <div class="service-grid">
+          <div class="service-card">
+            <h4>Portrait Sessions</h4>
+            <p>
+              Our portrait sessions are designed to showcase your personality
+              and style in stunning imagery.
+            </p>
+          </div>
+          <div class="service-card">
+            <h4>Maternity Sessions</h4>
+            <p>
+              Embrace the beauty and miracle of new life with our maternity and
+              newborn photography sessions.
+            </p>
+          </div>
+          <div class="service-card">
+            <h4>Family Sessions</h4>
+            <p>
+              Cherish the bond of family with our custom-designed playful candid
+              moments and portrait sessions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section-container client-container" id="client">
+      <h2 class="section-header">~ TESTIMONIALS ~</h2>
+      <div class="slider">
+        <div class="slider-track">
+          <div class="slide">
+            <div class="client-card">
+              <img src="assets/client-1.jpg" alt="client" />
+              <p>
+                Capturer exceeded all our expectations! Their attention to
+                detail and ability to capture the essence of our special day was
+                truly remarkable. Every time we look at our wedding photos,
+                we're transported back to those magical moments. Thank you for
+                preserving our memories so beautifully!
+              </p>
+              <h4>Sarah and Michael</h4>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="client-card">
+              <img src="assets/client-2.jpg" alt="client" />
+              <p>
+                We couldn't be happier with our family portrait session with
+                Capturer. They made us feel relaxed and comfortable throughout
+                the entire shoot, resulting in natural and candid photos that
+                perfectly reflect our family dynamic. These images will be
+                cherished for years to come!
+              </p>
+              <h4>The Johnson Family</h4>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="client-card">
+              <img src="assets/client-3.jpg" alt="client" />
+              <p>
+                Capturer's maternity and newborn sessions captured the most
+                precious moments of our lives with such tenderness and care.
+                From the anticipation of pregnancy to the joy of welcoming our
+                little one, every photo tells a story that we'll cherish
+                forever. Thank you for creating beautiful memories for our
+                family!
+              </p>
+              <h4>Emily and David</h4>
+            </div>
+          </div>
+        </div>
+        <div class="pagination">
+          <button class="page-button">1</button>
+        </div>
+      </div>
+    </section>
+    <section class="section-container gallery-container">
+      <h2 class="section-header">~ GALLERY ~</h2>
+      <div class="gallery-grid">
+        <img src="assets/image-1.jpg" alt="gallery" />
+        <img src="assets/image-2.jpg" alt="gallery" />
+        <img src="assets/image-3.jpg" alt="gallery" />
+        <img src="assets/image-4.jpg" alt="gallery" />
+        <img src="assets/image-5.jpg" alt="gallery" />
+        <img src="assets/image-6.jpg" alt="gallery" />
+        <img src="assets/image-7.jpg" alt="gallery" />
+        <img src="assets/image-8.jpg" alt="gallery" />
+      </div>
+      <div class="gallery-btn">
+        <button class="btn">VIEW GALLERY</button>
+      </div>
+    </section>
+    <section class="section-container instagram-container">
+      <h2 class="section-header">~ INSTAGRAM ~</h2>
+      <div class="instagram-flex">
+        <img src="assets/image-1.jpg" alt="instagram" />
+        <img src="assets/image-2.jpg" alt="instagram" />
+        <img src="assets/image-3.jpg" alt="instagram" />
+        <img src="assets/image-4.jpg" alt="instagram" />
+        <img src="assets/image-5.jpg" alt="instagram" />
+        <img src="assets/image-6.jpg" alt="instagram" />
+        <img src="assets/image-7.jpg" alt="instagram" />
+        <img src="assets/image-8.jpg" alt="instagram" />
+      </div>
+    </section>
 
     <div class="page">
     <div class="bg"></div>
@@ -1394,4 +574,4 @@
     </script>
   </body>
 </html>
-<!-- 49-106-236-367-481-611-741-876-1006-1136-1266-1396 -->
+<!-- 49-447-577 -->
