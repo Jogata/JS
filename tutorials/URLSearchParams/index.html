@@ -170,7 +170,32 @@
       }
       
       .header {
+        position: relative;
+        /* max-width: var(--max-width); */
+        /* height: 30vw; */
+        /* min-height: 600px; */
+        /* margin: auto; */
+        /* background-image: 
+          radial-gradient(
+            rgba(255, 255, 255, 0), 
+            rgba(0, 0, 0, 0.9)),
+          url("./assets/capturer-images/header.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover; */
+      }
+
+      .bg {
+        max-width: var(--max-width);
+        /* height: 30vw; */
         min-height: 600px;
+        margin: auto;
+        /* position: absolute; */
+        /* top: 0; */
+        /* left: 0; */
+        /* content: ""; */
+        /* width: 100%; */
+        /* height: 100%; */
         background-image: 
           radial-gradient(
             rgba(255, 255, 255, 0), 
@@ -179,9 +204,14 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
+        clip-path: url("#mask-1");
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
+        /* z-index: -1; */
       }
       
-      nav {
+      /* nav {
         isolation: isolate;
         position: fixed;
         top: 0;
@@ -189,7 +219,7 @@
         max-width: var(--max-width);
         margin: auto;
         z-index: 9;
-      }
+      } */
       
       .nav-header {
         padding: 1rem;
@@ -212,22 +242,22 @@
       
       .nav-links {
         list-style: none;
-        position: absolute;
-        width: 100%;
-        padding: 2rem;
+        /* position: absolute; */
+        /* width: 100%; */
+        /* padding: 2rem; */
         display: flex;
         gap: 2rem;
         align-items: center;
-        flex-direction: column;
-        background-color: var(--text-dark);
-        transform: translateY(-100%);
-        transition: 0.5s;
-        z-index: -1;
+        /* flex-direction: column; */
+        /* background-color: var(--text-dark); */
+        /* transform: translateY(-100%); */
+        /* transition: 0.5s; */
+        /* z-index: -1; */
       }
       
-      .nav-links.open {
+      /* .nav-links.open {
         transform: translateY(0);
-      }
+      } */
       
       .nav-links .nav-logo {
         display: none;
@@ -307,7 +337,7 @@
         opacity: 1;
       }
       
-      .service {
+      /* .service {
         background-image: 
           linear-gradient(
             rgba(0, 0, 0, 0.9), 
@@ -316,6 +346,32 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
+      } */
+
+      .section-container {
+        position: relative;
+      }
+
+      .service-container::after {
+        position: absolute;
+        top: 0;
+        left: -30%;
+        content: "";
+        width: 160%;
+        height: 100%;
+        background-image: 
+          linear-gradient(
+            rgba(0, 0, 0, 0.8), 
+            rgba(0, 0, 0, 0.8)),
+          url("./assets/capturer-images/service.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        clip-path: url("#mask-1");
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
+        z-index: -1;
       }
       
       .service-container .section-header {
@@ -369,9 +425,11 @@
       }
       
       .slider {
+        position: relative;
         width: 100%;
         margin-top: 2rem;
         padding-bottom: 3rem;
+        overflow: hidden;
       }
 
       .pagination {
@@ -401,6 +459,39 @@
       
       .slider-track {
         display: flex;
+        padding-bottom: 3rem;
+      }
+            
+      .slide {
+        flex-shrink: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        transform: translateX(100%);
+        /* opacity: 0; */
+      }
+    
+      #relative {
+        position: relative;
+      }
+    
+      .current {
+        transform: translate(0);
+        /* transition: transform 300ms; */
+        transition: transform 300ms, 
+                      opacity 300ms;
+        /* opacity: 1; */
+        /* z-index: 1; */
+      }
+    
+      .left {
+        transform: translateX(-100%);
+        transition: transform 300ms;
+      }
+    
+      .right {
+        transform: translateX(100%);
+        transition: transform 300ms;
       }
       
       .client-card {
@@ -408,7 +499,7 @@
         margin-inline: auto;
         text-align: center;
       }
-      
+
       .client-card img {
         max-width: 120px;
         margin-inline: auto;
@@ -614,6 +705,37 @@
         }
       }
 
+      @media (width < 768px) {
+        nav {
+          isolation: isolate;
+          position: fixed;
+          top: 0;
+          width: 100%;
+          max-width: var(--max-width);
+          margin: auto;
+          z-index: 9;
+        }
+
+        .nav-links {
+          list-style: none;
+          position: absolute;
+          width: 100%;
+          padding: 2rem;
+          display: flex;
+          gap: 2rem;
+          /* align-items: center; */
+          flex-direction: column;
+          background-color: var(--text-dark);
+          transform: translateY(-100%);
+          transition: 0.5s;
+          z-index: -1;
+        }
+        
+        .nav-links.open {
+          transform: translateY(0);
+        }          
+      }
+
       @media (width > 768px) {
         .header {
           min-height: 650px;
@@ -621,8 +743,9 @@
       
         nav {
           padding: 2rem 1rem;
-          position: static;
+          /* position: static; */
           max-width: 900px;
+          margin: auto;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -633,13 +756,17 @@
         }
         
         .nav-links {
-          padding: 0;
-          width: 100%;
-          position: static;
-          transform: none;
+          /* padding: 0; */
+          /* width: 100%; */
+          /* position: static; */
+          /* transform: none; */
           flex-direction: row;
           justify-content: space-between;
           background-color: transparent;
+        }
+
+        .nav-links a {
+          color: var(--text-dark);
         }
       
         .nav-links .nav-logo {
@@ -706,7 +833,7 @@
           <li><a href="#service">SERVICES</a></li>
           <li class="nav-logo">
             <a href="#">
-              <img src="./assets/capturer-images/logo-white.png" alt="logo" />
+              <img src="./assets/capturer-images/logo-dark.png" alt="logo" />
             </a>
           </li>
           <li><a href="#client">CLIENT</a></li>
@@ -714,6 +841,7 @@
           <li><a href="#contact">CONTACT US</a></li>
         </ul>
       </nav>
+      <div class="bg"></div>
     </header>
     <script>
       const menuBtn = document.getElementById("menu-btn");
@@ -814,7 +942,7 @@
       <h2 class="section-header">~ TESTIMONIALS ~</h2>
       <div class="slider">
         <div class="slider-track">
-          <div class="slide">
+          <div class="slide current">
             <div class="client-card">
               <img src="./assets/capturer-images/client-1.jpg" alt="client" />
               <p>
@@ -827,7 +955,7 @@
               <h4>Sarah and Michael</h4>
             </div>
           </div>
-          <div class="slide">
+          <div class="slide right">
             <div class="client-card">
               <img src="./assets/capturer-images/client-2.jpg" alt="client" />
               <p>
@@ -840,7 +968,7 @@
               <h4>The Johnson Family</h4>
             </div>
           </div>
-          <div class="slide">
+          <div class="slide right" id="relative">
             <div class="client-card">
               <img src="./assets/capturer-images/client-3.jpg" alt="client" />
               <p>
@@ -856,7 +984,9 @@
           </div>
         </div>
         <div class="pagination">
-          <button class="page-button">1</button>
+          <button class="page-button active">1</button>
+          <button class="page-button">2</button>
+          <button class="page-button">3</button>
         </div>
       </div>
     </section>
@@ -1354,4 +1484,4 @@
     </script>
   </body>
 </html>
-<!-- 49-447-577-707-837-967-1097-1227-1357 -->
+<!-- 49-447-577-707-837-967-1097-1227-1357-1487 -->
