@@ -191,6 +191,7 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover; */
+        /* filter: drop-shadow(3px 3px 3px #000); */
       }
 
       .bg {
@@ -444,9 +445,10 @@
       }
       
       .slider {
-        position: relative;
+        /* position: relative; */
         width: 100%;
         margin-top: 2rem;
+        padding-top: 1rem;
         padding-bottom: 3rem;
         overflow: hidden;
       }
@@ -484,7 +486,9 @@
       }
       
       .slider-track {
+        position: relative;
         display: flex;
+        /* padding-top: 1rem; */
         padding-bottom: 3rem;
       }
             
@@ -531,7 +535,10 @@
         margin-inline: auto;
         margin-bottom: 2rem;
         border-radius: 50%;
-        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+        border: 3px solid var(--white);
+        outline: 3px solid var(--text-dark);
+        /* box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2); */
+        filter: drop-shadow(3px 3px 3px #0005);
       }
       
       .client-card p {
@@ -730,7 +737,8 @@
       }
 
       .footer-bar {
-        padding: 1rem;
+        /* padding: 1rem; */
+        padding: 2rem 1rem;
         color: var(--extra-light);
         font-size: 0.9rem;
         text-align: center;
@@ -1085,8 +1093,87 @@
         }
       }
     </style>
+    <style>
+      .animated-bg {
+        position: fixed;
+        width: 120%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-image: url("./assets/capturer-images/header.jpg");
+        background-repeat: no-repeat;
+        background-position: center left;
+        background-size: cover;
+        animation: animate 100s ease-in-out infinite;
+        z-index: -1;
+      }
+
+      .animated-bg::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        background-image: 
+          linear-gradient(
+            to top, 
+            rgba(0, 0, 0, 0.8), 
+            transparent, 
+            rgba(0, 0, 0, 0.8)), 
+          linear-gradient(
+            to left, 
+            rgba(0, 0, 0, 0.8), 
+            transparent, 
+            transparent);
+      }
+      
+      @keyframes animate {
+        50% {
+          transform: translateX(-16%);
+        }
+      }
+
+      .section-container {
+        isolation: isolate;
+        margin-bottom: 2rem;
+        border-radius: 24px;
+        background-color: #fffd;
+      }
+
+      nav {
+        padding: 2rem 2%;
+        max-width: var(--max-width);
+        background-color: var(--white);
+      }
+
+      .blog-container {
+        background-color: transparent;
+      }
+
+      .service-container {
+        background-color: transparent;
+      }
+
+      .portfolio-card {
+        display: flex;
+        overflow: auto;
+      }
+
+      .portfolio-card::after {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 2rem;
+        margin-top: auto;
+        text-align: center;
+        transform: none;
+      }
+    </style>
   </head>
   <body>
+    <div class="animated-bg"></div>
     <header class="header" id="home">
       <nav>
         <div class="nav-header">
@@ -1427,34 +1514,77 @@
           <!-- <img src="./assets/capturer-images/logo-dark.png" alt="logo" /> -->
           <img src="./assets/capturer-images/logo-dark.png" alt="logo" class="fade-in paused" />
           <div class="footer-socials">
-            <a href="#"><i class="ri-facebook-fill"></i></a>
-            <a href="#"><i class="ri-instagram-line"></i></a>
-            <a href="#"><i class="ri-twitter-fill"></i></a>
-            <a href="#"><i class="ri-youtube-fill"></i></a>
-            <a href="#"><i class="ri-pinterest-line"></i></a>
+            <!-- <a href="#"><i class="ri-facebook-fill"></i></a> -->
+            <a href="#" class="fade-up-absolute paused delayed" style="--delay: 2">
+              <i class="ri-facebook-fill"></i>
+            </a>
+            <!-- <a href="#"><i class="ri-instagram-line"></i></a> -->
+            <a href="#" class="fade-up-absolute paused delayed" style="--delay: 3">
+              <i class="ri-instagram-line"></i>
+            </a>
+            <!-- <a href="#"><i class="ri-twitter-fill"></i></a> -->
+            <a href="#" class="fade-up-absolute paused delayed" style="--delay: 4">
+              <i class="ri-twitter-fill"></i>
+            </a>
+            <!-- <a href="#"><i class="ri-youtube-fill"></i></a> -->
+            <a href="#" class="fade-up-absolute paused delayed" style="--delay: 5">
+              <i class="ri-youtube-fill"></i>
+            </a>
+            <!-- <a href="#"><i class="ri-pinterest-line"></i></a> -->
+            <a href="#" class="fade-up-absolute paused delayed" style="--delay: 6">
+              <i class="ri-pinterest-line"></i>
+            </a>
           </div>
         </div>
         <div class="footer-col">
           <ul class="footer-links">
-            <li><a href="#home">HOME</a></li>
-            <li><a href="#about">ABOUT US</a></li>
-            <li><a href="#service">SERVICES</a></li>
-            <li><a href="#client">CLIENT</a></li>
-            <li><a href="#blog">BLOG</a></li>
-            <li><a href="#contact">CONTACT US</a></li>
+            <!-- <li><a href="#home">HOME</a></li> -->
+            <li>
+              <a href="#home" class="fade-right-absolute paused delayed" style="--delay: 2">
+                HOME</a>
+            </li>
+            <!-- <li><a href="#about">ABOUT US</a></li> -->
+            <li>
+              <a href="#about" class="fade-right-absolute paused delayed" style="--delay: 3">
+                ABOUT US</a>
+            </li>
+            <!-- <li><a href="#service">SERVICES</a></li> -->
+            <li>
+              <a href="#service" class="fade-right-absolute paused delayed" style="--delay: 4">
+                SERVICES</a>
+            </li>
+            <!-- <li><a href="#client">CLIENT</a></li> -->
+            <li>
+              <a href="#client" class="fade-right-absolute paused delayed" style="--delay: 5">
+                CLIENT</a>
+            </li>
+            <!-- <li><a href="#blog">BLOG</a></li> -->
+            <li>
+              <a href="#blog" class="fade-right-absolute paused delayed" style="--delay: 6">
+                BLOG</a>
+            </li>
+            <!-- <li><a href="#contact">CONTACT US</a></li> -->
+            <li>
+              <a href="#contact" class="fade-right-absolute paused delayed" style="--delay: 7">
+                CONTACT US</a>
+            </li>
           </ul>
         </div>
         <div class="footer-col">
-          <h4>STAY IN TOUCH</h4>
-          <p>
+          <!-- <h4>STAY IN TOUCH</h4> -->
+          <h4 class="fade-up-absolute paused">STAY IN TOUCH</h4>
+          <!-- <p> -->
+          <p class="fade-up-absolute paused delayed" style="--delay: 2">
             Keep up-to-date with all things Capturer! Join our 
             community and never miss a moment!
           </p>
         </div>
       </div>
-      <!-- <div class="footer-bar"> -->
-      <div class="footer-bar fade-up-absolute paused">
-        Copyright © 2026 Company. All rights reserved.
+      <div class="footer-bar">
+      <!-- <div class="footer-bar fade-up-absolute paused"> -->
+        <p class="fade-up-absolute paused">
+          Copyright © 2026 Company. All rights reserved.
+        </p>
       </div>
     </footer>
 
@@ -1874,4 +2004,4 @@
     </script>
   </body>
 </html>
-<!-- 49-447-577-707-837-967-1097-1227-1357-1487-1617-1747-1877 -->
+<!-- 49-447-577-707-837-967-1097-1227-1357-1487-1617-1747-1877-2007 -->
