@@ -77,6 +77,14 @@
       .mask-2 {
         clip-path: url("#mask-2");
       }
+
+      .mask-3 {
+        clip-path: url("#mask-3");
+      }
+
+      .mask-4 {
+        clip-path: url("#mask-4");
+      }
         
       .section-container {
         max-width: var(--max-width);
@@ -215,7 +223,9 @@
       }
       
       .header {
-        padding-block: 5rem;
+        /* position: relative; */
+        /* padding-block: 5rem; */
+        background-color: var(--text-dark);
         background-image: 
           linear-gradient(
             rgba(15, 26, 44, 0.5),
@@ -225,6 +235,50 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
+      }
+
+      @media (width < 768px) {
+        .header {
+          padding-top: 5rem;
+        }
+      }
+
+      .header-container {
+        position: relative;
+        padding: 8rem 2%;
+        transform: translateY(2rem);
+        filter: drop-shadow(3px 3px 3px #000);
+        z-index: 1;
+      }
+
+      @media (width > 1200px) {
+        .header-container {
+          padding: 5vw 2%;
+        }
+      }
+
+      .header-container::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        /* border-radius: 12px; */
+        background-image: 
+          linear-gradient(
+            rgba(15, 26, 44, 0.5),
+            rgba(15, 26, 44, 0.5)
+          ),
+          url("./assets/miranda-images/images/header.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        clip-path: url("#mask-1");
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
+        z-index: -1;
       }
       
       .header-container .section-subheader {
@@ -278,8 +332,10 @@
       }
       
       .about {
-        position: relative;
         isolation: isolate;
+        position: relative;
+        max-width: 1600px;
+        margin: auto;
       }
       
       .about::before {
@@ -293,6 +349,10 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
+        clip-path: url("#mask-1");
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
         opacity: 0.05;
         z-index: -1;
       }
@@ -305,6 +365,7 @@
       .about-grid {
         display: grid;
         gap: 1rem;
+        grid-auto-rows: 1fr;
       }
 
       .about-card {
@@ -313,6 +374,15 @@
         display: grid;
         place-content: center;
         text-align: center;
+        box-shadow: 3px 3px 6px #0009;
+      }
+
+      .about-card:nth-child(2) {
+        border: 6px double var(--primary-color);
+      }
+
+      .about-card:nth-child(4) {
+        border: 6px double var(--white);
       }
 
       .about-card span {
@@ -335,17 +405,25 @@
       
       .about-card:nth-child(4) {
         background-color: var(--primary-color);
-        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+        /* box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2); */
       }
       
       .about-card:nth-child(4) :is(h4, p) {
         color: var(--white);
       }
+
+      .about-image {
+        filter: drop-shadow(3px 3px 3px #000);
+      }
       
       .about-image img {
         height: 100%;
         object-fit: cover;
-        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+        /* box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2); */
+        clip-path: url("#mask-1");
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
       }
       
       .about-content .section-description {
@@ -368,9 +446,17 @@
         display: grid;
         gap: 0 1rem;
       }
+
+      .room-card {
+        filter: drop-shadow(3px 3px 3px #000);
+      }
       
       .room-card img {
-        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+        clip-path: url("#mask-1");
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        /* clip-path: url("#mask-4"); */
+        /* box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2); */
       }
       
       .room-card-details {
@@ -383,7 +469,7 @@
         border-radius: 6px;
         background-color: var(--white);
         transform: translateY(-50%);
-        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+        /* box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2); */
       }
       
       .room-card-details h4 {
@@ -402,10 +488,12 @@
         color: var(--secondary-color);
         font-size: 1.2rem;
         font-weight: 600;
+        font-family: Georgia, serif;
       }
       
       .room-card-details h3 span {
         font-size: 0.8rem;
+        font-family: "Poppins", sans-serif;
       }
 
       .intro {
@@ -441,7 +529,11 @@
       .intro-video {
         max-width: 450px;
         margin: auto;
-        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+        /* clip-path: url("#mask-1"); */
+        /* clip-path: url("#mask-2"); */
+        clip-path: url("#mask-3");
+        /* clip-path: url("#mask-4"); */
+        /* box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2); */
       }
 
       .feature-container :is(.section-subheader, .section-header) {
@@ -556,6 +648,7 @@
         color: var(--white);
         font-size: 2.5rem;
         font-weight: 700;
+        font-family: Georgia, serif;
       }
       
       .menu-banner p {
@@ -756,7 +849,8 @@
           justify-content: space-between;
           border-radius: 6px;
           background-color: var(--white);
-          transform: translateY(50%);
+          /* transform: translateY(50%); */
+          transform: translateY(2rem);
         }
       
         .nav-header {
@@ -785,7 +879,7 @@
       
         .about::before {
           width: 75%;
-          height: 75%;
+          /* height: 75%; */
         }
         
         .about-container {
@@ -878,6 +972,38 @@
         animation: fade-right 1s linear backwards;
       }
       
+      .fade-right-absolute {
+        animation: fade-right-absolute 1s linear backwards;
+      }
+      
+      .fade-up {
+        animation: fade-up 1s linear backwards;
+      }
+      
+      .fade-up-full {
+        animation: fade-up-full 1s linear backwards;
+      }
+      
+      .fade-up-relative {
+        animation: fade-up-relative 1s linear backwards;
+      }
+      
+      .fade-up-absolute {
+        animation: fade-up-absolute 1s linear backwards;
+      }
+      
+      .fade-down-full {
+        animation: fade-down-full 1s linear backwards;
+      }
+      
+      .fade-down-relative {
+        animation: fade-down-relative 1s linear backwards;
+      }
+      
+      .fade-down-absolute {
+        animation: fade-down-absolute 1s linear backwards;
+      }
+
       .delayed {
         /* animation-delay: calc(0.2s * var(--i)); */
         animation-delay: calc(0.2s * var(--delay));
@@ -980,6 +1106,7 @@
     </style>
   </head>
   <body>
+    <div class="bg">
     <nav>
       <div class="nav-bar">
         <div class="nav-header">
@@ -1048,6 +1175,7 @@
         </form>
       </div>
     </section>
+    </div>
 
     <section class="about" id="about">
       <div class="section-container about-container">
@@ -1057,6 +1185,7 @@
           </div>
           <div class="about-card">
             <span><i class="ri-user-line"></i></span>
+            <!-- <span><i class="fa fa-user-o"></i></span> -->
             <h4>Strong Team</h4>
             <p>
               Unlocking Hospitality Excellence And Ensures Your Perfect Stay
@@ -1284,7 +1413,8 @@
             <p>Projects are Completed</p>
           </li>
           <li>
-            <span><i class="ri-user-line"></i></span>
+            <!-- <span><i class="ri-user-line"></i></span> -->
+            <span><i class="fa fa-user-o"></i></span>
             <h4>10M</h4>
             <p>Active Around World</p>
           </li>
@@ -2269,4 +2399,4 @@
     </script>
   </body>
 </html>
-<!-- 49-842-972-1102-1232-1362-1492-1622-1752-1882-2012-2142-2272 -->
+<!-- 49-842-972-1102-1232-1362-1492-1622-1752-1882-2012-2142-2272-2402 -->
