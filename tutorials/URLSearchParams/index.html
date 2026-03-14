@@ -22,17 +22,30 @@
         padding: 0;
         box-sizing: border-box;
       }
+
+      button {
+        font-family: inherit;
+        border: 0px solid transparent;
+        outline: 1px solid transparent;
+        background-color: transparent;
+        cursor: pointer;
+      }
+      
+      button:focus-visible,
+      a:focus-visible {
+        outline: 1px solid #999;
+      }        
       
       .btn {
         padding: 0.75rem 1.5rem;
         color: var(--white);
         font-size: 1rem;
-        outline: none;
-        border: none;
+        /* outline: none; */
+        /* border: none; */
         border-radius: 6px;
         background-color: var(--primary-color);
         transition: 0.3s;
-        cursor: pointer;
+        /* cursor: pointer; */
       }
       
       .btn:hover {
@@ -43,6 +56,25 @@
         /* display: flex; */
         display: block;
         width: 100%;
+      }
+
+      .svg {
+        /* display: none; */
+        position: absolute;
+        width: 0;
+        height: 0;
+      }
+      
+      .mask-1 {
+        clip-path: url("#mask-1");
+      }
+      
+      .mask-2 {
+        clip-path: url("#mask-2");
+      }
+      
+      .mask-3 {
+        clip-path: url("#mask-3");
       }
       
       a {
@@ -286,6 +318,101 @@
         font-size: 1.5rem;
         font-weight: 600;
       }
+
+      @media (width > 540px) {
+        .header-image {
+          min-height: max(75vh, 550px);
+        }
+      
+        .banner {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      
+      @media (width > 768px) {
+        nav {
+          padding: 2rem 1rem;
+        }
+        
+        .nav-logo .logo-color {
+          display: flex;
+        }
+      
+        .nav-logo .logo-white {
+          display: none;
+        }
+      
+        .nav-menu-btn {
+          display: none;
+        }
+        
+        .nav-links {
+          max-width: fit-content;
+          padding: 0.75rem 3rem;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          display: flex;
+          gap: 3rem;
+          flex-direction: row;
+          border-radius: 5rem;
+          background-color: rgba(255, 154, 48, 0.8);
+        }
+      
+        .header-container {
+          display: grid;
+          align-items: center;
+          grid-template-columns:
+            minmax(1rem, 1fr)
+            minmax(0, calc(var(--max-width) * 0.4))
+            minmax(0, calc(var(--max-width) * 0.6))
+            minmax(1rem, 1fr);
+        }
+        
+        .header-image {
+          min-height: max(75vh, 650px);
+          grid-area: 1/3/2/5;
+        }
+      
+        .header-content {
+          padding-top: 10rem;
+          grid-column: 2/3;
+          text-align: left;
+        }
+      
+        .header-content h1 {
+          font-size: 5rem;
+          line-height: 4rem;
+        }
+      
+        .header-content h2 {
+          font-size: 5rem;
+          line-height: 4rem;
+        }
+        
+        .banner {
+          display: grid;
+          grid-template-columns:
+            minmax(1rem, 1fr)
+            minmax(0, calc(var(--max-width) / 4))
+            minmax(0, calc(var(--max-width) / 4))
+            minmax(0, calc(var(--max-width) / 4))
+            minmax(0, calc(var(--max-width) / 4))
+            minmax(1rem, 1fr);
+          background-color: #ffad23;
+        }
+      
+        .banner-card:nth-child(1) {
+          grid-column: 1/3;
+        }
+      }
+      
+      @media (width > 1024px) {
+        .nav-links {
+          padding: 0.75rem 4rem;
+          gap: 4rem;
+        }
+      }
     </style>
   </head>
   <body>
@@ -366,13 +493,16 @@
       menuBtn.addEventListener("click", (e) => {
         navLinks.classList.toggle("open");
       
-        const isOpen = navLinks.classList.contains("open");
-        menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+        // const isOpen = navLinks.classList.contains("open");
+        // menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+        menuBtnIcon.classList.toggle("ri-menu-line");
+        menuBtnIcon.classList.toggle("ri-close-line");
       });
       
       navLinks.addEventListener("click", (e) => {
         navLinks.classList.remove("open");
-        menuBtnIcon.setAttribute("class", "ri-menu-line");
+        // menuBtnIcon.setAttribute("class", "ri-menu-line");
+        menuBtnIcon.className = "ri-menu-line";
       });
       
       const headerImage = document.querySelector(".header-image");
@@ -457,4 +587,4 @@
     </script>
   </body>
 </html>
-<!-- 70-200-330-460 -->
+<!-- 70-200-330-460-590 -->
