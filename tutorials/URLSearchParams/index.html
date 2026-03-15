@@ -95,6 +95,7 @@
       }        
       
       a {
+        display: inline-block;
         text-decoration: none;
         /* transition: 0.3s; */
         transition:  color 300ms;
@@ -185,15 +186,18 @@
           position: absolute;
           /* top: 75px; */
           top: 100%;
+          left: 1rem;
           right: 1rem;
           width: 100%;
           max-width: 350px;
+          margin-left: auto;
           padding: 2rem;
           display: none;
           gap: 2rem;
-          align-items: center;
-          justify-content: center;
+          /* align-items: center; */
+          /* justify-content: center; */
           flex-direction: column;
+          text-align: center;
           /* border-radius: 1rem; */
           border-radius: 16px;
           background-color: var(--primary-color);
@@ -232,6 +236,7 @@
         position: relative;
         /* min-height: max(75vh, 500px); */
         min-height: 70vw;
+        background-image: url("./assets/disc-world-images/header.png");
         /* background-position: center center; */
         background-position: center right;
         background-repeat: no-repeat;
@@ -242,8 +247,48 @@
         /* clip-path: url("#mask-3"); */
         /* clip-path: url("#mask-4"); */
       }
+
+      .mask-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        /* border: 1px solid green; */
+      }
       
-      .header-image::after {
+      .mask-bg::after {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        content: "";
+        width: 100%;
+        height: 100%;
+        transform: translateX(-100%);
+        background-color: var(--white);
+        animation: scroll-right 500ms linear forwards;
+        /* animation-delay: 1s; */
+        z-index: 1;
+        /* border: 1px solid red; */
+      }
+      
+      .mask-bg::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        transform: translateX(-100%);
+        background-color: var(--primary-color);
+        animation: scroll-right 500ms linear forwards;
+        /* animation-delay: 1s; */
+        z-index: 1;
+        /* border: 1px solid blue; */
+      }
+        
+      /* .header-image::after {
         position: absolute;
         top: 0;
         left: 0;
@@ -253,35 +298,41 @@
         background-color: var(--primary-color);
         animation: scroll-right 0.5s 0.3s linear forwards;
         z-index: 1;
-      }
+      } */
       
       .header-image.reveal {
-        background-image: url("./assets/disc-world-images/header.png");
+        /* background-image: url("./assets/disc-world-images/header.png"); */
       }
       
       .header-image.reveal::after {
-        left: unset;
-        right: 0;
-        animation: scroll-left 0.5s linear forwards;
+        /* left: unset; */
+        /* right: 0; */
+        /* animation: scroll-left 0.5s linear forwards; */
       }
       
+      /* @keyframes scroll-right {
+        0% {
+          width: 0;
+        }
+        100% {
+          width: 100%;
+        }
+      } */
+
       @keyframes scroll-right {
-        0% {
-          width: 0;
-        }
         100% {
-          width: 100%;
+          transform: translateX(100%);
         }
       }
       
-      @keyframes scroll-left {
+      /* @keyframes scroll-left {
         0% {
           width: 100%;
         }
         100% {
           width: 0;
         }
-      }
+      } */
       
       .header-content {
         padding: 4rem 1rem;
@@ -309,7 +360,10 @@
       }
       
       .banner {
-        margin-top: 5rem;
+        max-width: var(--max-width);
+        margin: auto;
+        /* margin-top: 5rem; */
+        padding-top: 5rem;
         display: grid;
       }
       
@@ -329,11 +383,15 @@
         position: absolute;
         /* top: -100%; */
         left: -100%;
-        bottom: 0;
+        /* bottom: 0; */
+        bottom: -30%;
         content: "";
         width: 200%;
-        height: 100%;
-        border-top-right-radius: 50%;
+        /* height: 100%; */
+        height: 200%;
+        /* border-radius: 2000px; */
+        /* border-top-right-radius: 50%; */
+        border-top-right-radius: 100%;
         background-color: var(--primary-color);
         z-index: -1;
       }
@@ -344,9 +402,11 @@
       
       .banner-card:nth-child(3) {
         background-color: #ffc823;
+        z-index: 1;
       }
       
       .banner-card:nth-child(4) {
+        /* grid-column: -3/-1; */
         background-color: #ffad23;
       }
       
@@ -357,6 +417,7 @@
       }
       
       .banner-card p {
+        max-width: calc(var(--max-width)/4);
         margin-bottom: 0.5rem;
         color: var(--text-dark);
         font-size: 0.9rem;
@@ -424,13 +485,13 @@
           padding: 2rem 1rem;
         }
         
-        .nav-logo .logo-color {
+        /* .nav-logo .logo-color {
           display: flex;
         }
       
         .nav-logo .logo-white {
           display: none;
-        }
+        } */
       
         .nav-menu-btn {
           display: none;
@@ -493,11 +554,16 @@
             minmax(0, calc(var(--max-width) / 4))
             minmax(0, calc(var(--max-width) / 4))
             minmax(1rem, 1fr);
-          background-color: #ffad23;
+          /* background-color: #ffad23; */
+          overflow: hidden;
         }
       
         .banner-card:nth-child(1) {
           grid-column: 1/3;
+        }
+
+        .banner-card:nth-child(4) {
+          grid-column: -3/-1;
         }
       }
       
@@ -509,12 +575,28 @@
       }
 
       @media (width <= 1340px) {
+        .header-image {
+          border-bottom-left-radius: 220px;
+        }
+
         .header-container p {
           margin: auto;
         }
       }
 
       @media (width > 1340px) {
+        .nav-logo .logo-color {
+          display: flex;
+        }
+      
+        .nav-logo .logo-white {
+          display: none;
+        }
+
+        .nav-links {
+          margin: auto;
+        }
+
         .header-container {
           display: grid;
           align-items: center;
@@ -533,6 +615,10 @@
           max-width: 1200px;
           min-height: 1000px;
           height: 100%;
+          clip-path: url("#mask-1");
+          /* clip-path: url("#mask-2"); */
+          /* clip-path: url("#mask-3"); */
+          /* clip-path: url("#mask-4"); */
         }
 
         .header-content {
@@ -584,6 +670,14 @@
       
       .fade-down-full {
         animation: fade-down-full 1s linear backwards;
+      }
+
+      .fade-down-relative {
+        animation: fade-down-relative 1s linear backwards;
+      }
+      
+      .fade-down-absolute {
+        animation: fade-down-absolute 1s linear backwards;
       }
 
       .delayed {
@@ -669,14 +763,31 @@
           transform: translateY(-100%);
           opacity: 0;
         }
-      }  
+      }
+
+      /* @keyframes fade-down { */
+        @keyframes fade-down-relative {
+          0% {
+            transform: translateY(-10%);
+            opacity: 0;
+          }
+        }
+        
+        @keyframes fade-down-absolute {
+          0% {
+            transform: translateY(-1rem);
+            opacity: 0;
+          }
+        }
     </style>
   </head>
   <body>
     <header class="header">
-      <nav>
+      <!-- <nav> -->
+      <nav class="fade-down-full paused">
         <div class="nav-logo">
           <a href="#">
+          <!-- <a href="#" class="fade-down-full paused"> -->
             <img src="./assets/disc-world-images/logo-color.png" alt="logo" class="logo-color" />
             <img src="./assets/disc-world-images/logo-white.png" alt="logo" class="logo-white" />
           </a>
@@ -687,12 +798,14 @@
           <li><a href="#">Booking</a></li>
           <li><a href="#">Contact Us</a></li>
         </ul>
-        <div class="nav-menu-btn" id="menu-btn">
+        <button class="nav-menu-btn" id="menu-btn">
           <span><i class="ri-menu-line"></i></span>
-        </div>
+        </button>
       </nav>
       <div class="header-container">
-        <div class="header-image"></div>
+        <div class="header-image">
+          <div class="mask-bg"></div>
+        </div>
         <div class="header-content">
           <h1>DISCOVER</h1>
           <h2>WORLDWIDE</h2>
@@ -708,7 +821,8 @@
       </div>
     </header>
 
-    <div class="banner">
+    <!-- <div class="banner"> -->
+    <div class="banner fade-up-absolute paused">
       <div class="banner-card">
         <div class="banner-content">
           <h2>20%</h2>
@@ -762,7 +876,7 @@
         menuBtnIcon.className = "ri-menu-line";
       });
       
-      const headerImage = document.querySelector(".header-image");
+      // const headerImage = document.querySelector(".header-image");
 
       // headerImage.addEventListener(
       //   "animationend",
@@ -773,6 +887,22 @@
       //   },
       //   { once: true }
       // );
+
+      const observer = new IntersectionObserver(animate);
+
+      const elements = document.querySelectorAll(".paused");
+      
+      elements.forEach(element => {
+          observer.observe(element);
+      })
+      
+      function animate(entries) {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.remove("paused");
+            }
+          });
+      }      
     </script>
 
     <svg class="svg">
@@ -847,4 +977,4 @@
     </script>
   </body>
 </html>
-<!-- 70-200-330-460-590-720-850 -->
+<!-- 70-200-330-460-590-720-850-980 -->
