@@ -42,6 +42,10 @@
         box-sizing: border-box;
       }
 
+      ul {
+        list-style: none;
+      }
+
       button {
         font-family: inherit;
         border: 0px solid transparent;
@@ -49,8 +53,16 @@
         background-color: transparent;
         cursor: pointer;
       }
+
+      input {
+        font-family: inherit;
+        border: 0px solid transparent;
+        outline: 1px solid transparent;
+        background-color: transparent;
+      }
       
       button:focus-visible,
+      input:focus-visible,
       a:focus-visible {
         outline: 1px solid #999;
       }
@@ -386,6 +398,12 @@
         align-items: center;
         flex-direction: column;
       }
+
+      /* @media (width > 768px) {
+        .banner-content .section-header {
+          margin-bottom: 0;
+        }
+      } */
       
       .banner-content .btn {
         color: var(--primary-color);
@@ -607,6 +625,10 @@
         font-size: 2rem;
         font-weight: 600;
       }
+
+      .experience-header p span {
+        display: block;
+      }
       
       .experience-grid {
         max-width: 900px;
@@ -718,8 +740,8 @@
         height: 100%;
         background-image: 
           linear-gradient(
-            rgba(0, 0, 0, 0.5), 
-            rgba(0, 0, 0, 0.5)),
+            rgba(0, 0, 0, 0.6), 
+            rgba(0, 0, 0, 0.8)),
           /* url("./assets/mystic-images/subscribe.jpg"); */
           url("./assets/mystic-images/1773839050031_image.png");
         background-repeat: no-repeat;
@@ -760,7 +782,7 @@
         margin-inline: auto;
         margin-block: 2rem;
         display: flex;
-        align-items: center;
+        /* align-items: center; */
         border-radius: 5rem;
         background-color: var(--white);
       }
@@ -770,9 +792,12 @@
         padding: 0 1rem;
         color: var(--bg-dark);
         font-size: 1rem;
-        outline: none;
-        border: none;
-        background-color: transparent;
+        /* outline: none; */
+        /* border: none; */
+        border-top-left-radius: 5rem;
+        border-bottom-left-radius: 5rem;
+        /* background-color: transparent; */
+        /* border: 1px solid red; */
       }
       
       .subscribe-content .btn {
@@ -853,7 +878,7 @@
       }
       
       .footer-links {
-        list-style: none;
+        /* list-style: none; */
         display: grid;
         gap: 1rem;
       }
@@ -945,7 +970,13 @@
         }
       
         .banner-content .section-header {
+          max-width: 600px;
+          margin: auto;
           text-align: left;
+        }
+
+        .banner-content .btn {
+          margin: auto;
         }
       
         .information-header {
@@ -1001,13 +1032,17 @@
         animation: zoom-in 2s linear backwards;
       }
       
-      .rotate {
-        animation: rotate 1s linear forwards;
+      .fade-in {
+        animation: fade-in 2s linear backwards;
       }
       
-      .fade-left {
+      /* .rotate {
+        animation: rotate 1s linear forwards;
+      } */
+      
+      /* .fade-left {
         animation: fade-left 1s linear backwards;
-      }
+      } */
       
       .fade-left-absolute {
         animation: fade-left-absolute 1s linear backwards;
@@ -1021,24 +1056,32 @@
         animation: fade-right-absolute 1s linear backwards;
       }
       
-      .fade-up {
+      /* .fade-up {
         animation: fade-up 1s linear backwards;
-      }
+      } */
       
-      .fade-up-full {
+      /* .fade-up-full {
         animation: fade-up-full 1s linear backwards;
-      }
+      } */
       
-      .fade-up-relative {
+      /* .fade-up-relative {
         animation: fade-up-relative 1s linear backwards;
-      }
+      } */
       
       .fade-up-absolute {
         animation: fade-up-absolute 1s linear backwards;
       }
       
-      .fade-down-full {
+      /* .fade-down-full {
         animation: fade-down-full 1s linear backwards;
+      } */
+      
+      .fade-down-relative {
+        animation: fade-down-relative 1s linear backwards;
+      }
+      
+      .fade-down-absolute {
+        animation: fade-down-absolute 1s linear backwards;
       }
       
       .delayed {
@@ -1051,6 +1094,12 @@
       }
       
       @keyframes zoom-in {
+        0% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes fade-in {
         0% {
           opacity: 0;
         }
@@ -1125,33 +1174,61 @@
           opacity: 0;
         }
       }  
+        
+      /* @keyframes fade-down { */
+      @keyframes fade-down-relative {
+        0% {
+          transform: translateY(-10%);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fade-down-absolute {
+        0% {
+          transform: translateY(-1rem);
+          opacity: 0;
+        }
+      }
     </style>
   </head>
   <body>
-    <header class="header">
+    <!-- <header class="header"> -->
+    <header class="header fade-in paused">
       <nav>
-        <div class="logo">
+        <!-- <div class="logo"> -->
+        <div class="logo fade-right-absolute paused delayed" style="--delay: 4">
           <img src="./assets/mystic-images/logo.png" alt="logo" />
         </div>
         <div class="nav-actions">
-          <button class="btn">Sign Up</button>
+          <!-- <button class="btn">Sign Up</button> -->
+          <button class="btn fade-right-absolute paused delayed" style="--delay: 6">
+            Sign Up
+          </button>
         </div>
       </nav>
       <div class="section-container header-container">
-        <div class="header-image">
+        <!-- <div class="header-image"> -->
+        <div class="header-image fade-right paused delayed" style="--delay: 8">
           <!-- <img src="./assets/mystic-images/header.jpg" alt="header" /> -->
           <img src="./assets/mystic-images/1773828520040_image.png" alt="header" />
         </div>
         <div class="header-content">
-          <h1>Course Is On Sale!</h1>
-          <p class="section-description">
+          <!-- <h1>Course Is On Sale!</h1> -->
+          <h1 class="fade-up-absolute paused delayed" style="--delay: 10">
+            Course Is On Sale!
+          </h1>
+          <!-- <p class="section-description"> -->
+          <p class="section-description fade-up-absolute paused delayed" style="--delay: 11">
             Unleash your inner photographer with our exclusive photography
             course, now on sale! Whether you're a beginner or looking to level
             up your skills, this limited-time offer is your opportunity to
             master the art of photography at an unbeatable price.
           </p>
-          <div class="header-btn">
-            <button class="btn">Contact Us</button>
+          <div class="header-btn fade-up-absolute paused delayed" style="--delay: 12">
+            <!-- <button class="btn">Contact Us</button> -->
+            <button class="btn">
+              Contact Us
+            </button>
           </div>
         </div>
       </div>
@@ -1159,33 +1236,45 @@
 
     <section class="banner">
       <div class="section-container banner-header">
-        <h2 class="section-header">New Course Will Start Soon</h2>
-        <p class="section-description">
+        <!-- <h2 class="section-header">New Course Will Start Soon</h2> -->
+        <h2 class="section-header fade-up-absolute paused">
+          New Course Will Start Soon
+        </h2>
+        <!-- <p class="section-description"> -->
+        <p class="section-description fade-up-absolute paused delayed" style="--delay: 2">
           Our next photography course is just around the corner! Get ready to
           embark on a journey of creativity and exploration as we launch our
           brand-new course.
         </p>
         <div class="banner-header-grid">
-          <div>
+          <!-- <div> -->
+          <div class="fade-up-absolute paused delayed" style="--delay: 4">
             <h4>22</h4>
             <p>Hours</p>
           </div>
-          <div>
+          <!-- <div> -->
+          <div class="fade-up-absolute paused delayed" style="--delay: 5">
             <h4>37</h4>
             <p>Minutes</p>
           </div>
-          <div>
+          <!-- <div> -->
+          <div class="fade-up-absolute paused delayed" style="--delay: 6">
             <h4>14</h4>
             <p>Seconds</p>
           </div>
         </div>
       </div>
-      <div class="banner-container">
+      <!-- <div class="banner-container"> -->
+      <div class="banner-container fade-in paused">
         <div class="section-container banner-content">
-          <h2 class="section-header">
+          <!-- <h2 class="section-header"> -->
+          <h2 class="section-header fade-right-absolute paused delayed" style="--delay: 2">
             We're Ready For You. Learn With Us Now!
           </h2>
-          <button class="btn">Contact Us</button>
+          <!-- <button class="btn">Contact Us</button> -->
+          <button class="btn fade-right-absolute paused delayed" style="--delay: 4">
+            Contact Us
+          </button>
         </div>
       </div>
     </section>
@@ -1193,20 +1282,29 @@
     <section class="section-container information-container">
       <div class="information-header">
         <div class="information-content">
-          <h2 class="section-header">Information</h2>
-          <p class="section-description">
+          <!-- <h2 class="section-header">Information</h2> -->
+          <h2 class="section-header fade-up-absolute paused">
+            Information
+          </h2>
+          <!-- <p class="section-description"> -->
+          <p class="section-description fade-up-absolute paused delayed" style="--delay: 2">
             Whether you're a budding enthusiast or an experienced shutterbug,
             this upcoming opportunity promises to be your gateway to capturing
             life's moments like never before.
           </p>
-          <button class="btn">Contact Us</button>
+          <!-- <button class="btn">Contact Us</button> -->
+          <button class="btn fade-up-absolute paused delayed" style="--delay: 4">
+            Contact Us
+          </button>
         </div>
-        <div class="information-image">
+        <!-- <div class="information-image"> -->
+        <div class="information-image fade-right paused" style="--delay: 2">
           <img src="./assets/mystic-images/information.jpg" alt="information" />
         </div>
       </div>
       <div class="information-grid">
-        <div class="information-card">
+        <!-- <div class="information-card"> -->
+        <div class="information-card fade-up-absolute paused">
           <h4>Beginner</h4>
           <h5>Booking Price</h5>
           <h3><sup>$</sup>29<sup>.99</sup></h3>
@@ -1217,7 +1315,8 @@
           </p>
           <button class="btn">Know More</button>
         </div>
-        <div class="information-card">
+        <!-- <div class="information-card"> -->
+        <div class="information-card fade-up-absolute paused delayed" style="--delay: 1">
           <h4>Advanced</h4>
           <h5>Booking Price</h5>
           <h3><sup>$</sup>49<sup>.99</sup></h3>
@@ -1228,7 +1327,8 @@
           </p>
           <button class="btn">Know More</button>
         </div>
-        <div class="information-card">
+        <!-- <div class="information-card"> -->
+        <div class="information-card fade-up-absolute paused delayed" style="--delay: 2">
           <h4>Smartphone</h4>
           <h5>Booking Price</h5>
           <h3><sup>$</sup>39<sup>.99</sup></h3>
@@ -1242,15 +1342,21 @@
       </div>
     </section>
 
-    <section class="testimonial">
+    <!-- <section class="testimonial"> -->
+    <section class="testimonial fade-in paused">
       <div class="section-container testimonial-container">
-        <h2 class="section-header">Testimonials</h2>
-        <p class="section-description">
+        <!-- <h2 class="section-header">Testimonials</h2> -->
+        <h2 class="section-header fade-up-absolute paused delayed" style="--delay: 4">
+          Testimonials
+        </h2>
+        <!-- <p class="section-description"> -->
+        <p class="section-description fade-up-absolute paused delayed" style="--delay: 6">
           Hear from our passionate photography enthusiasts who have embarked on
           a transformative journey with our courses.
         </p>
         <div class="testimonial-grid">
-          <div class="testimonial-card">
+          <!-- <div class="testimonial-card"> -->
+          <div class="testimonial-card fade-up-absolute paused delayed" style="--delay: 8">
             <div>
               <img src="./assets/mystic-images/testimonial-1.jpg" alt="testimonial" />
               <h4>Sarah Thompson</h4>
@@ -1263,7 +1369,8 @@
               progress.
             </p>
           </div>
-          <div class="testimonial-card">
+          <!-- <div class="testimonial-card"> -->
+          <div class="testimonial-card fade-up-absolute paused delayed" style="--delay: 9">
             <div>
               <img src="./assets/mystic-images/testimonial-2.jpg" alt="testimonial" />
               <h4>John Smith</h4>
@@ -1276,7 +1383,8 @@
               Highly recommended.
             </p>
           </div>
-          <div class="testimonial-card">
+          <!-- <div class="testimonial-card"> -->
+          <div class="testimonial-card fade-up-absolute paused delayed" style="--delay: 10">
             <div>
               <img src="./assets/mystic-images/testimonial-3.jpg" alt="testimonial" />
               <h4>Michael Carter</h4>
@@ -1295,19 +1403,40 @@
 
     <section class="section-container experience-container">
       <div class="experience-header">
-        <h2>7</h2>
-        <p>Years<br />Of Experience</p>
+        <!-- <h2>7</h2> -->
+        <h2 class="fade-in paused">7</h2>
+        <!-- <p>Years<br />Of Experience</p> -->
+        <p class="fade-right-absolute paused delayed" style="--delay: 4">
+          Years <br />Of Experience
+        </p>
+        <!-- <p>
+          <span class="fade-right-absolute paused delayed" style="--delay: 2">
+            Years 
+          </span>
+          <span class="fade-right-absolute paused delayed" style="--delay: 4">
+            Of Experience
+          </span>
+        </p> -->
       </div>
       <div class="experience-grid">
-        <img src="./assets/mystic-images/icon-1.png" alt="icon" />
-        <img src="./assets/mystic-images/icon-2.png" alt="icon" />
-        <img src="./assets/mystic-images/icon-3.png" alt="icon" />
-        <img src="./assets/mystic-images/icon-4.png" alt="icon" />
+        <!-- <img src="./assets/mystic-images/icon-1.png" alt="icon" /> -->
+        <img src="./assets/mystic-images/icon-1.png" alt="icon" 
+          class="fade-up-absolute paused delayed" style="--delay: 6" />
+        <!-- <img src="./assets/mystic-images/icon-2.png" alt="icon" /> -->
+        <img src="./assets/mystic-images/icon-2.png" alt="icon" 
+          class="fade-up-absolute paused delayed" style="--delay: 7" />
+        <!-- <img src="./assets/mystic-images/icon-3.png" alt="icon" /> -->
+        <img src="./assets/mystic-images/icon-3.png" alt="icon" 
+          class="fade-up-absolute paused delayed" style="--delay: 8" />
+        <!-- <img src="./assets/mystic-images/icon-4.png" alt="icon" /> -->
+        <img src="./assets/mystic-images/icon-4.png" alt="icon" 
+          class="fade-up-absolute paused delayed" style="--delay: 9" />
       </div>
       <div class="experience-image">
         <!-- <img src="./assets/mystic-images/experience.jpg" alt="experience" /> -->
         <!-- <img src="./assets/mystic-images/modern-studio-enh-wide.png" alt="Interior of modern photo studio with professional equipment" /> -->
-        <img src="./assets/mystic-images/modern-studio-enh-wide-2.jpeg" alt="Interior of modern photo studio with professional equipment" />
+        <img src="./assets/mystic-images/modern-studio-enh-wide-2.jpeg" 
+          alt="Interior of modern photo studio with professional equipment" />
       </div>
     </section>
 
@@ -1394,8 +1523,9 @@
 
     <script>
       const observer = new IntersectionObserver(animate);
-      
+
       const elements = document.querySelectorAll(".paused");
+
       elements.forEach(element => {
           observer.observe(element);
       })
@@ -1627,4 +1757,4 @@
     </script>
   </body>
 </html>
-<!-- 70-200-328-460-590-720-850-980-1110-1240-1370-1500-1630 -->
+<!-- 70-200-328-460-590-720-850-980-1110-1240-1370-1500-1630-1760 -->
