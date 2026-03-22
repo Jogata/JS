@@ -839,6 +839,130 @@
           padding-bottom: 3rem;
         }
       }
+
+      .zoom-in {
+        animation: zoom-in 2s linear backwards;
+      }
+      
+      .rotate {
+        animation: rotate 1s linear forwards;
+      }
+      
+      .fade-left {
+        animation: fade-left 1s linear backwards;
+      }
+      
+      .fade-left-absolute {
+        animation: fade-left-absolute 1s linear backwards;
+      }
+      
+      .fade-right {
+        animation: fade-right 1s linear backwards;
+      }
+      
+      .fade-right-absolute {
+        animation: fade-right-absolute 1s linear backwards;
+      }
+      
+      .fade-up {
+        animation: fade-up 1s linear backwards;
+      }
+      
+      .fade-up-full {
+        animation: fade-up-full 1s linear backwards;
+      }
+      
+      .fade-up-relative {
+        animation: fade-up-relative 1s linear backwards;
+      }
+      
+      .fade-up-absolute {
+        animation: fade-up-absolute 1s linear backwards;
+      }
+      
+      .fade-down-full {
+        animation: fade-down-full 1s linear backwards;
+      }
+      
+      .paused {
+        animation-play-state: paused;
+      }
+      
+      @keyframes zoom-in {
+        0% {
+          opacity: 0;
+        }
+      }
+      
+      @keyframes rotate {
+        0% {
+          transform: rotate(80deg);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fade-left {
+        0% {
+          transform: translateX(10%);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fade-left-absolute {
+        0% {
+          transform: translateX(1rem);
+          opacity: 0;
+        }
+      }
+        
+      @keyframes fade-right {
+        0% {
+          transform: translateX(-10%);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fade-right-absolute {
+        0% {
+          transform: translateX(-1rem);
+          opacity: 0;
+        }
+      }
+        
+      @keyframes fade-up {
+        0% {
+          transform: translateY(10%);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fade-up-full {
+        0% {
+          transform: translateY(100%);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fade-up-relative {
+        0% {
+          transform: translateY(10%);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fade-up-absolute {
+        0% {
+          transform: translateY(1rem);
+          opacity: 0;
+        }
+      }
+      
+      @keyframes fade-down-full {
+        0% {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+      }  
     </style>
   </head>
   <body>
@@ -859,9 +983,9 @@
               />
             </a>
           </div>
-          <div class="nav-menu-btn" id="menu-btn">
+          <button class="nav-menu-btn" id="menu-btn">
             <i class="ri-menu-line"></i>
-          </div>
+          </button>
         </div>
         <ul class="nav-links" id="nav-links">
           <li><a href="#home">HOME</a></li>
@@ -876,7 +1000,10 @@
           <img src="./assets/burger-house-images/header.png" alt="header" />
         </div>
         <div class="header-content">
-          <h2>IT IS GOOD TIME FOR THE GREATE TASTE OF BURGER</h2>
+          <!-- <h2>IT IS GOOD TIME FOR THE GREATE TASTE OF BURGER</h2> -->
+          <h2 class="fade-up-absolute paused delayed" style="--delay: 2">
+            IT IS GOOD TIME FOR THE GREATE TASTE OF BURGER
+          </h2>
           <h1>BURGER<br /><span>WEEK</span></h1>
         </div>
       </div>
@@ -889,13 +1016,16 @@
       menuBtn.addEventListener("click", (e) => {
         navLinks.classList.toggle("open");
       
-        const isOpen = navLinks.classList.contains("open");
-        menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+        // const isOpen = navLinks.classList.contains("open");
+        // menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+        menuBtnIcon.classList.toggle("ri-close-line");
+        menuBtnIcon.classList.toggle("ri-menu-line");
       });
       
       navLinks.addEventListener("click", (e) => {
         navLinks.classList.remove("open");
-        menuBtnIcon.setAttribute("class", "ri-menu-line");
+        // menuBtnIcon.setAttribute("class", "ri-menu-line");
+        menuBtnIcon.className = "ri-menu-line";
       });
     </script>
 
@@ -952,7 +1082,7 @@
         </div>
       </div>
     </section>
-    
+
     <section class="section-container event-container" id="event">
       <div class="event-content">
         <div class="event-image">
@@ -1707,4 +1837,4 @@
     </script>
   </body>
 </html>
-<!-- 70-670-800-930-1060-1190-1320-1450-1580-1710 -->
+<!-- 70-670-800-930-1060-1190-1320-1450-1580-1710-1840 -->
