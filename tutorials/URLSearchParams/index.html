@@ -74,7 +74,137 @@
         align-items: center;
         justify-content: center;
       }
+
+      .tab-btn {
+        color: var(--text-light);
+        font-size: 1.2rem;
+        font-weight: 600;
+        outline: none;
+        border: none;
+        background-color: transparent;
+        transition: 0.3s;
+        cursor: pointer;
+      }
       
+      .tab-btn.active {
+        color: var(--primary-color);
+      }
+      
+      .tabs span {
+        display: flex;
+        width: 2px;
+        height: 1rem;
+        background-color: var(--text-light);
+      }
+      
+      .panel {
+        display: none;
+        max-width: 400px;
+        margin-inline: auto;
+      }
+      
+      .panel.active {
+        display: block;
+        animation: show-panel 0.3s forwards;
+      }
+      
+      .panel.close {
+        animation: hide-panel 0.3s forwards;
+      }
+      
+      @keyframes show-panel {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+      
+      @keyframes hide-panel {
+        0% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      .panel form {
+        display: grid;
+      }
+      
+      .input-group {
+        isolation: isolate;
+        position: relative;
+        margin-bottom: 2rem;
+        padding-block: 0.75rem;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        border-bottom: 1px solid var(--text-light);
+      }
+      
+      .input-group label {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--white);
+        font-size: 1rem;
+        transition: 0.3s;
+      }
+      
+      .input-group input {
+        width: 100%;
+        color: var(--white);
+        font-size: 1rem;
+        outline: none;
+        border: none;
+        background-color: transparent;
+      }
+      
+      .input-group input:not(:placeholder-shown) ~ label,
+      .input-group input:focus ~ label {
+        top: 0px;
+        color: var(--text-light);
+        font-size: 0.7rem;
+      }
+      
+      .input-group span {
+        color: var(--text-light);
+        font-size: 1.2rem;
+      }
+            
+      .panel form p {
+        margin-bottom: 1.5rem;
+        color: var(--text-light);
+        text-align: center;
+      }
+      
+      .panel form a {
+        text-decoration: none;
+        color: var(--text-light);
+        text-align: center;
+        transition: 0.3s;
+      }
+      
+      .panel form a span {
+        color: var(--primary-color);
+      }
+      
+      .panel form a:hover {
+        color: var(--white);
+      }
+      
+      .image {
+        height: 100%;
+        min-height: 300px;
+        background-image: url("assets/header.jpg");
+        background-repeat: no-repeat;
+        background-position: bottom center;
+        background-size: cover;
+      }
     </style>
   </head>
   <body>
@@ -197,4 +327,4 @@
     </script>
   </body>
 </html>
-<!-- 70-200 -->
+<!-- 70-200-330 -->
