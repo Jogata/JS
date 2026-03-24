@@ -3,272 +3,142 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URL SearchParams in JS</title>
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/> -->
+    <!-- <title>URL SearchParams in JS</title> -->
+    <title>Nat Geo Wild</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-<style>
-  *,
-  *::before,
-  *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  body {
-    min-height: 100vh;
-    /* width: 100%; */
-    /* max-width: 1000px; */
-    padding: 5rem 0;
-    display: flex;
-    /* justify-content: center; */
-    color: #2c2446;
-    font-family: Arial, Helvetica, sans-serif;
-    /* border-radius: 0.5rem; */
-    background-color: #d0d5e3;
-  }
-  .page {
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 2%;
-    border-radius: 8px;
-    background-color: #fff;
-  }
-  nav {
-    padding: 1.5rem 2rem;
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    justify-content: space-between;
-  }
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    font-size: 0.85rem;
-  }
-  nav ul li {
-    display: flex;
-    gap: 0.2rem;
-    align-items: center;
-    cursor: pointer;
-  }
-  nav:not(.sub-nav) {
-    padding: 2rem;
-    border-bottom: 1.5px solid #dcdcdc;
-  }
-  .buttons-container {
-    display: flex;
-    gap: 1rem;
-  }
-  button {
-    width: max-content;
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
-    border-radius: 2rem;
-    border: 1px solid transparent;
-    background-color: transparent;
-    transition: 0.5s;
-    cursor: pointer;
-  }
-  .log-in {
-    color: inherit;
-    border-color: #2c2446;
-  }
-  .log-in:hover {
-    color: #fff;
-    background-color: #2c2446;
-  }
-  .get-started {
-    color: #fff;
-    background-color: #2c2446;
-  }
-  .get-started:hover {
-    color: #2c2446;
-    border-color: #2c2446;
-    background-color: transparent;
-  }
-  .icon-tabler-search {
-    cursor: pointer;
-  }
-  h1 {
-    margin: 2rem 0 1rem 2rem;
-  }
-  main {
-    display: flex;
-    gap: 3rem;
-    padding: 0 2rem;
-  }
-  .main-section, aside {
-    width: 100%;
-  }
-  .main-section > img {
-    width: 100%;
-    object-fit: cover;
-  }
-  h2 {
-    margin: 1rem 0;
-  }
-  p {
-    max-width: 300px;
-    font-size: 0.8rem;
-    line-height: 1.5;
-  }
-  .author {
-    margin-top: 1.5rem;
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-  }
-  .author img {
-    width: 35px;
-    height: 35px;
-    object-fit: cover;
-    border-radius: 50%;
-  }
-  h3 {
-    margin-bottom: 1.5rem;
-  }
-  .article {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-  }
-  .article > img {
-    width: 120px;
-    height: 120px;
-  }
-  .author-name {
-    opacity: .7;
-  }
-  h4 {
-    font-size: 1.4rem;
-    padding-right: 2rem;
-  }
-</style>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+      
+      :root {
+        --primary-color: #f7c703;
+        --text-dark: #030303;
+        --text-light: #676767;
+        --white: #ffffff;
+        --max-width: 1200px;
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--text-dark);
+      }
+      
+      .container {
+        isolation: isolate;
+        position: relative;
+        min-height: 100vh;
+        display: grid;
+      }
+      
+      .logo {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: var(--max-width);
+        padding: 1rem;
+      }
+      
+      .logo img {
+        display: flex;
+        width: 100%;
+        max-width: 150px;
+      }
+      
+      .content {
+        padding-block: 8rem 5rem;
+        padding-inline: 1rem;
+      }
+      
+      .content h1 {
+        margin-bottom: 2rem;
+        max-width: 400px;
+        margin-inline: auto;
+        color: var(--white);
+        font-size: 2.5rem;
+        font-weight: 500;
+        text-align: center;
+      }
+
+      .tabs {
+        margin-bottom: 2rem;
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        justify-content: center;
+      }
+      
+    </style>
   </head>
   <body>
-    <div class="page">
-    <nav>
-      <ul> 
-        <li>Product
-          <svg xmlns="http://www.w3.org/2000/svg" 
-            width="20"  height="20"  viewBox="0 0 24 24" 
-            fill="none"  stroke="currentColor"  stroke-width="1.5" 
-            stroke-linecap="round"  stroke-linejoin="round" 
-            class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path d="M6 9l6 6l6 -6" />
-          </svg> 
-        </li> 
-        <li>Pricing</li>
-        <li>Use Cases
-          <svg  xmlns="http://www.w3.org/2000/svg" 
-            width="20"  height="20"  viewBox="0 0 24 24" 
-            fill="none"  stroke="currentColor"  stroke-width="1.5" 
-            stroke-linecap="round"  stroke-linejoin="round" 
-            class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <path d="M6 9l6 6l6 -6" />
-          </svg> 
-        </li> 
-        <li>Blog</li>
-      </ul> 
-      <div class="buttons-container">
-        <button class="log-in">Log In</button>
-        <button class="get-started">Get started</button>
-      </div> 
-    </nav> 
-    <nav class="sub-nav">
-      <ul> 
-        <li>Project</li>
-        <li>Remote</li>
-        <li>Teamwork</li>
-        <li>Productivity</li>
-        <li>Marketing</li>
-      </ul> 
-      <svg  
-        xmlns="http://www.w3.org/2000/svg" 
-        width="22"  height="22"  viewBox="0 0 24 24" 
-        fill="none"  stroke="currentColor"  stroke-width="2" 
-        stroke-linecap="round"  stroke-linejoin="round" 
-        class="icon icon-tabler icons-tabler-outline icon-tabler-search"
-      > 
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-        <path d="M21 21l-6 -6" />
-      </svg> 
-    </nav> 
-    <h1>Productivity</h1>
-    <main> 
-      <section class="main-section">
-        <img 
-          src="https://images.unsplash.com/photo-1708359611705-252750dbd422?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTB8fHNub3d5JTIwc2NlbmVyeXxlbnwwfHwwfHx8MA%3D%3D" 
-          alt="snowy scenery with two people walking" width="350" height="230">
-        <h2>Little Things Do Make A <br>Difference</h2>
-        <p> 
-          Why do you want to motivate yourself? Actually, just answering that 
-          question fully can be one of the better ways to get your daily motivation.
-        </p> 
-        <div class="author">
-          <img 
-            src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D" 
-            alt="profile" width="50" height="50">
-          <p class="author-name">Kathryn Shelton</p>
-        </div> 
-      </section> 
-      <aside> 
-        <h3>Recent articles</h3>
-        <div class="article">
-          <img 
-            src="https://images.unsplash.com/photo-1550676224-f5a1e8b6e15f?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTV8fGJ1aWxkaW5nc3xlbnwwfHwwfHx8MA%3D%3D" 
-            alt="city buildings" width="100" height="150">
-          <div class="article-info">
-            <h4>Common Symbols And Their Meanings</h4>
-            <div class="author">
-              <img 
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjJ8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D" 
-                alt="profile" width="50" height="50">
-              <p class="author-name">Susie Russell</p>
-            </div> 
-          </div> 
-        </div> 
-        <div class="article">
-          <img 
-            src="https://images.unsplash.com/photo-1565728744382-61accd4aa148?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fG1lZXRpbmd8ZW58MHx8MHx8fDA%3D" 
-            alt="a meeting between two people" width="100" height="150">
-          <div class="article-info">
-            <h4>Success Steps For Your Business</h4>
-            <div class="author">
-              <img 
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzR8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D" 
-                alt="profile" width="50" height="50">
-              <p class="author-name">Connor Parsons</p>
-            </div> 
-          </div> 
-        </div> 
-        <div class="article">
-          <img 
-            src="https://images.unsplash.com/photo-1517252441880-7c0968fc8513?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHNreSUyMHdpdGglMjBidWlsZGluZ3xlbnwwfHwwfHx8MA%3D%3D" 
-            alt="hotel with big windows in Iceland" width="100" height="150">
-          <div class="article-info">
-            <h4>The Strength Of Your Belief</h4>
-            <div class="author">
-              <img 
-                src="https://images.unsplash.com/photo-1531891437562-4301cf35b7e4?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDh8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D" 
-                alt="profile" width="50" height="50">
-              <p class="author-name">Jonathan Yates</p>
-            </div> 
-          </div> 
-        </div> 
-      </aside> 
-    </main> 
-    </div> 
-
-    <h1 style="display: none;">URLSearchParams in JavaScript - Constructing Query Strings</h1>
+    <div class="container">
+      <div class="logo">
+        <a href="#"><img src="assets/logo.png" alt="logo" /></a>
+      </div>
+      <div class="content">
+        <h1>Log in to the world of Wild</h1>
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="1">Log In</button>
+          <span></span>
+          <button class="tab-btn" data-tab="2">Sign Up</button>
+        </div>
+        <div class="tabs-panel">
+          <div class="panel active" data-panel="1">
+            <form action="/">
+              <div class="input-group">
+                <input type="email" placeholder=" " />
+                <label for="email">Email</label>
+              </div>
+              <div class="input-group">
+                <input type="password" id="login-password" placeholder=" " />
+                <label for="login-password">Password</label>
+                <span id="login-password-eye">
+                  <i class="ri-eye-off-fill"></i>
+                </span>
+              </div>
+              <button>Log In</button>
+              <p>or</p>
+              <a href="#">Forgot your password?</a>
+            </form>
+          </div>
+          <div class="panel" data-panel="2">
+            <form action="/">
+              <div class="input-group">
+                <input type="email" placeholder=" " />
+                <label for="email">Email</label>
+              </div>
+              <div class="input-group">
+                <input type="password" id="signup-password" placeholder=" " />
+                <label for="signup-password">Password</label>
+                <span id="signup-password-eye">
+                  <i class="ri-eye-off-fill"></i>
+                </span>
+              </div>
+              <div class="input-group">
+                <input type="password" id="confirm-password" placeholder=" " />
+                <label for="confirm-password">Confirm Password</label>
+                <span id="confirm-password-eye">
+                  <i class="ri-eye-off-fill"></i>
+                </span>
+              </div>
+              <button>Sign Up</button>
+              <p>or</p>
+              <a href="#">Already have an account? <span>Login</span></a>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="image"></div>
+    </div>
+    
+    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
     
     <div id="calc" style="padding: 5rem; display: none;">
       <input type="number" id="width">
@@ -327,4 +197,4 @@
     </script>
   </body>
 </html>
-<!-- 70-200-330 -->
+<!-- 70-200 -->
