@@ -18,15 +18,73 @@
         --max-width: 1200px;
       }
       
-      * {
+      *,
+      *::before,
+      *::after {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
+
+      ul {
+        list-style: none;
+      }
+
+      .bulled {
+        list-style: inside circle;
+        padding-left: 1rem;
+      }
+      
+      .bulled li {
+        margin: 0.5rem 0;
+      }
+      
+      a {
+        text-decoration: none;
+        display: inline-block;
+        transition: color 300ms;
+      }
+      
+      button {
+        font-family: inherit;
+        border: 0px solid transparent;
+        outline: 1px solid transparent;
+        background-color: transparent;
+        cursor: pointer;
+      }
+      
+      button:focus-visible,
+      a:focus-visible {
+        outline: 1px solid #999;
+      }
+      
+      .link {
+        display: inline;
+        color: #f1683a;
+      }
+      
+      a.not-active {
+        color: red;
+        font-weight: bold;
+        cursor: not-allowed;
+        pointer-events: none;
+        user-select: none;
+      }
+      
+      a.not-active:hover {
+        color: #fff;
+        background-color: red;
+      }
+      
+      img {
+        display: block;
+        width: 100%;
+      }
       
       body {
         font-family: "Poppins", sans-serif;
-        background-color: var(--text-dark);
+        /* background-color: var(--text-dark); */
+        background-color: #0e0e0e;
       }
       
       .container {
@@ -37,10 +95,10 @@
       }
       
       .logo {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
+        /* position: absolute; */
+        /* top: 0; */
+        /* left: 50%; */
+        /* transform: translateX(-50%); */
         width: 100%;
         max-width: var(--max-width);
         padding: 1rem;
@@ -79,11 +137,11 @@
         color: var(--text-light);
         font-size: 1.2rem;
         font-weight: 600;
-        outline: none;
-        border: none;
+        /* outline: none; */
+        /* border: none; */
         background-color: transparent;
         transition: 0.3s;
-        cursor: pointer;
+        /* cursor: pointer; */
       }
       
       .tab-btn.active {
@@ -174,8 +232,24 @@
       .input-group span {
         color: var(--text-light);
         font-size: 1.2rem;
+        cursor: pointer;
       }
-            
+      
+      .panel form button {
+        max-width: fit-content;
+        margin-inline: auto;
+        margin-bottom: 2rem;
+        padding: 0.5rem 2.5rem;
+        color: var(--text-dark);
+        font-size: 1rem;
+        font-weight: 700;
+        /* outline: none; */
+        /* border: none; */
+        border-radius: 12px;
+        background-color: var(--primary-color);
+        /* cursor: pointer; */
+      }
+      
       .panel form p {
         margin-bottom: 1.5rem;
         color: var(--text-light);
@@ -186,7 +260,8 @@
         text-decoration: none;
         color: var(--text-light);
         text-align: center;
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        /* transition: color 300ms; */
       }
       
       .panel form a span {
@@ -200,17 +275,54 @@
       .image {
         height: 100%;
         min-height: 300px;
-        background-image: url("assets/header.jpg");
+        background-image: url("./assets/nat-geo-wild-img/header.jpg");
         background-repeat: no-repeat;
         background-position: bottom center;
         background-size: cover;
+      }
+
+      @media (width > 540px) {
+        .image {
+          min-height: 450px;
+        }
+      }
+      
+      @media (width > 768px) {
+        .container {
+          /* align-items: center; */
+          grid-template-columns: 1fr 1fr;
+            /* minmax(0, 1fr) */
+            /* minmax(0, calc(var(--max-width) / 2)) */
+            /* minmax(0, calc(var(--max-width) / 2)) */
+            /* minmax(0, 1fr); */
+        }
+      
+        .logo {
+          grid-column: 1/2;
+          grid-row: 1/2;
+          padding: 2rem 1rem;
+          z-index: 1;
+        }
+        
+        .content {
+          grid-column: 2/3;
+          grid-row: 1/2;
+          /* grid-area: 1/3/2/4; */
+          margin: auto;
+          padding-block: 2rem;
+        }
+      
+        .image {
+          grid-column: 1/2;
+          grid-row: 1/2;
+        }
       }
     </style>
   </head>
   <body>
     <div class="container">
       <div class="logo">
-        <a href="#"><img src="assets/logo.png" alt="logo" /></a>
+        <a href="#"><img src="./assets/nat-geo-wild-img/logo.png" alt="logo" /></a>
       </div>
       <div class="content">
         <h1>Log in to the world of Wild</h1>
@@ -267,8 +379,26 @@
       </div>
       <div class="image"></div>
     </div>
+
+    <script>
+      const showHidePasswords = (type) => {
+        const passwordButton = document.getElementById(`${type}-password-eye`);
+        
+        passwordButton.addEventListener("click", (e) => {
+          const passwordInput = document.getElementById(`${type}-password`);
+          const icon = passwordButton.querySelector("i");
+          const isVisible = icon.classList.contains("ri-eye-fill");
+          passwordInput.type = isVisible ? "password" : "text";
+          icon.setAttribute("class", isVisible ? "ri-eye-off-fill" : "ri-eye-fill");
+        });
+      };
+      
+      showHidePasswords("login");
+      showHidePasswords("signup");
+      showHidePasswords("confirm");        
+    </script>
     
-    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
     
     <div id="calc" style="padding: 5rem; display: none;">
       <input type="number" id="width">
@@ -327,4 +457,4 @@
     </script>
   </body>
 </html>
-<!-- 70-200-330 -->
+<!-- 70-200-330-460 -->
