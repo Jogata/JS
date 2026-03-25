@@ -95,6 +95,29 @@
         display: block;
         width: 100%;
       }
+
+      .svg {
+        /* display: none; */
+        position: absolute;
+        width: 0;
+        height: 0;
+      }
+      
+      .mask-1 {
+        clip-path: url("#mask-1");
+      }
+      
+      .mask-2 {
+        clip-path: url("#mask-2");
+      }
+      
+      .mask-3 {
+        clip-path: url("#mask-3");
+      }
+      
+      .mask-4 {
+        clip-path: url("#mask-4");
+      }        
       
       body {
         font-family: "Roboto", sans-serif;
@@ -231,7 +254,8 @@
         /* outline: none; */
         /* border: none; */
         background-color: transparent;
-        transition: 0.3s;
+        /* transition: 0.3s; */
+        transition: color 300ms;
         /* cursor: pointer; */
       }
       
@@ -414,14 +438,18 @@
           grid-row: 1/2;
         }
       }
-
+      
       .zoom-in {
         animation: zoom-in 2s linear backwards;
       }
 
-      .rotate {
-        animation: rotate 1s linear forwards;
+      .fade-in {
+        animation: fade-in 2s linear backwards;
       }
+      
+      /* .rotate {
+        animation: rotate 1s linear forwards;
+      } */
       
       .fade-left {
         animation: fade-left 1s linear backwards;
@@ -439,24 +467,32 @@
         animation: fade-right-absolute 1s linear backwards;
       }
       
-      .fade-up {
+      /* .fade-up {
         animation: fade-up 1s linear backwards;
-      }
+      } */
       
-      .fade-up-full {
+      /* .fade-up-full {
         animation: fade-up-full 1s linear backwards;
-      }
+      } */
       
-      .fade-up-relative {
+      /* .fade-up-relative {
         animation: fade-up-relative 1s linear backwards;
-      }
+      } */
       
       .fade-up-absolute {
         animation: fade-up-absolute 1s linear backwards;
       }
       
-      .fade-down-full {
+      /* .fade-down-full {
         animation: fade-down-full 1s linear backwards;
+      } */
+
+      /* .fade-down-relative {
+        animation: fade-down-relative 1s linear backwards;
+      } */
+      
+      .fade-down-absolute {
+        animation: fade-down-absolute 1s linear backwards;
       }
       
       .delayed {
@@ -473,13 +509,19 @@
           opacity: 0;
         }
       }
+
+      @keyframes fade-in {
+        0% {
+          opacity: 0;
+        }
+      }
       
-      @keyframes rotate {
+      /* @keyframes rotate {
         0% {
           transform: rotate(80deg);
           opacity: 0;
         }
-      }
+      } */
       
       @keyframes fade-left {
         0% {
@@ -494,7 +536,7 @@
           opacity: 0;
         }
       }
-      
+        
       @keyframes fade-right {
         0% {
           transform: translateX(-10%);
@@ -509,26 +551,26 @@
         }
       }
         
-      @keyframes fade-up {
+      /* @keyframes fade-up {
         0% {
           transform: translateY(10%);
           opacity: 0;
         }
-      }
+      } */
       
-      @keyframes fade-up-full {
+      /* @keyframes fade-up-full {
         0% {
           transform: translateY(100%);
           opacity: 0;
         }
-      }
+      } */
       
-      @keyframes fade-up-relative {
+      /* @keyframes fade-up-relative {
         0% {
           transform: translateY(10%);
           opacity: 0;
         }
-      }
+      } */
       
       @keyframes fade-up-absolute {
         0% {
@@ -537,74 +579,141 @@
         }
       }
       
-      @keyframes fade-down-full {
+      /* @keyframes fade-down-full {
         0% {
           transform: translateY(-100%);
           opacity: 0;
         }
-      }
+      } */
+
+      /* @keyframes fade-down { */
+      /* @keyframes fade-down-relative {
+        0% {
+          transform: translateY(-10%);
+          opacity: 0;
+        }
+      } */
       
+      @keyframes fade-down-absolute {
+        0% {
+          transform: translateY(-1rem);
+          opacity: 0;
+        }
+      }
     </style>
   </head>
   <body>
+    <nav style="display: none;">
+      <div class="nav-header">
+        <div class="nav-logo">
+          <a href="#">
+            <img src="assets/logo-dark.png" alt="logo" class="logo-dark" />
+            <img src="assets/logo-white.png" alt="logo" class="logo-white" />
+          </a>
+        </div>
+        <div class="nav-menu-btn" id="menu-btn">
+          <i class="ri-menu-line"></i>
+        </div>
+      </div>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#product">Product</a></li>
+        <li><a href="#store">Store</a></li>
+        <li><button class="btn">Buy Now</button></li>
+      </ul>
+    </nav>
+
     <div class="container">
       <div class="logo">
-        <a href="#"><img src="./assets/nat-geo-wild-img/logo.png" alt="logo" /></a>
+        <!-- <a href="#"> -->
+        <a href="#" class="zoom-in paused">
+          <img src="./assets/nat-geo-wild-img/logo.png" alt="logo" />
+        </a>
       </div>
       <div class="content">
-        <h1>Log in to the world of Wild</h1>
+        <!-- <h1>Log in to the world of Wild</h1> -->
+        <h1 class="fade-up-absolute paused">
+          Log in to the world of Wild
+        </h1>
         <div class="tabs">
-          <button class="tab-btn active" data-tab="1">Log In</button>
-          <span></span>
-          <button class="tab-btn" data-tab="2">Sign Up</button>
+          <!-- <button class="tab-btn active" data-tab="1">Log In</button> -->
+          <button class="tab-btn active fade-left-absolute paused" data-tab="1">
+            Log In
+          </button>
+          <!-- <span></span> -->
+          <span class="zoom-in paused"></span>
+          <!-- <button class="tab-btn" data-tab="2">Sign Up</button> -->
+          <button class="tab-btn fade-right-absolute paused" data-tab="2">
+            Sign Up
+          </button>
         </div>
         <div class="tabs-panel">
           <div class="panel active" data-panel="1">
-            <form action="/">
-              <div class="input-group">
+            <form>
+              <!-- <div class="input-group"> -->
+              <div class="input-group fade-up-absolute paused delayed" style="--delay: 2">
                 <input type="email" placeholder=" " />
                 <label for="email">Email</label>
               </div>
-              <div class="input-group">
+              <!-- <div class="input-group"> -->
+              <div class="input-group fade-up-absolute paused delayed" style="--delay: 4">
                 <input type="password" id="login-password" placeholder=" " />
                 <label for="login-password">Password</label>
                 <span id="login-password-eye">
                   <i class="ri-eye-off-fill"></i>
                 </span>
               </div>
-              <button>Log In</button>
-              <p>or</p>
-              <a href="#">Forgot your password?</a>
+              <!-- <button>Log In</button> -->
+              <button class="fade-up-absolute paused delayed" style="--delay: 6">
+                Log In
+              </button>
+              <!-- <p>or</p> -->
+              <p class="zoom-in paused delayed" style="--delay: 6">or</p>
+              <!-- <a href="#">Forgot your password?</a> -->
+              <a href="#" class="fade-down-absolute paused delayed" style="--delay: 6">
+                Forgot your password?
+              </a>
             </form>
           </div>
           <div class="panel" data-panel="2">
             <form action="/">
-              <div class="input-group">
+              <!-- <div class="input-group"> -->
+              <div class="input-group fade-up-absolute paused delayed" style="--delay: 2">
                 <input type="email" placeholder=" " />
                 <label for="email">Email</label>
               </div>
-              <div class="input-group">
+              <!-- <div class="input-group"> -->
+              <div class="input-group fade-up-absolute paused delayed" style="--delay: 4">
                 <input type="password" id="signup-password" placeholder=" " />
                 <label for="signup-password">Password</label>
                 <span id="signup-password-eye">
                   <i class="ri-eye-off-fill"></i>
                 </span>
               </div>
-              <div class="input-group">
+              <!-- <div class="input-group"> -->
+              <div class="input-group fade-up-absolute paused delayed" style="--delay: 6">
                 <input type="password" id="confirm-password" placeholder=" " />
                 <label for="confirm-password">Confirm Password</label>
                 <span id="confirm-password-eye">
                   <i class="ri-eye-off-fill"></i>
                 </span>
               </div>
-              <button>Sign Up</button>
-              <p>or</p>
-              <a href="#">Already have an account? <span> Login</span></a>
+              <!-- <button>Sign Up</button> -->
+              <button class="fade-up-absolute paused delayed" style="--delay: 8">
+                Sign Up
+              </button>
+              <!-- <p>or</p> -->
+              <p class="zoom-in paused delayed" style="--delay: 8">or</p>
+              <!-- <a href="#">Already have an account? <span> Login</span></a> -->
+              <a href="#" class="fade-down-absolute paused delayed" style="--delay: 8">
+                Already have an account? <span> Login</span>
+              </a>
             </form>
           </div>
         </div>
       </div>
-      <div class="image"></div>
+      <!-- <div class="image"></div> -->
+      <div class="image fade-in paused"></div>
     </div>
 
     <script>
@@ -655,12 +764,33 @@
       
       showHidePasswords("login");
       showHidePasswords("signup");
-      showHidePasswords("confirm");        
+      showHidePasswords("confirm");
+
+      const observer = new IntersectionObserver(animate);
+
+      const elements = document.querySelectorAll(".paused");
+      
+      elements.forEach(element => {
+          observer.observe(element);
+      })
+      
+      function animate(entries) {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.remove("paused");
+            }
+          });
+      }
+    </script>
+    <script>
+      const form = document.querySelector("form");
+      
+      form.addEventListener("submit", e => e.preventDefault());
     </script>
     
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
     
-    <div id="calc" style="padding: 5rem; display: block;">
+    <div id="calc" style="padding: 5rem; display: none;">
       <input type="number" id="width">
       <input type="number" id="height" placeholder="Height" style="padding: 0.5em;">
       <button id="calc" style="padding: 0.5em; border: 1px solid;">Calc</button>
@@ -717,4 +847,4 @@
     </script>
   </body>
 </html>
-<!-- 70-200-330-460-590-720 -->
+<!-- 70-200-330-460-590-720-850 -->
