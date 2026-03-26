@@ -3,607 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <title>URL SearchParams in JS</title> -->
-    <title>Nat Geo Wild</title>
+    <title>URL SearchParams in JS</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <style>
-      /* @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"); */
-      @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Courgette&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@300;400;600&family=Limelight&family=Lobster&family=Montserrat:wght@300;400;600&family=Oleo+Script+Swash+Caps:wght@400;700&family=Poppins:wght@300;400;700;800&family=Raleway:ital,wght@0,400;1,300;1,600&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz@9..144&family=Kaushan+Script&family=Playfair+Display&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Patua+One&family=Platypi:ital,wght@0,300..800;1,300..800&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Arizonia&family=Brawler:wght@400;700&family=Croissant+One&family=Ephesis&family=Gloock&family=Hurricane&family=Imbue:opsz,wght@10..100,100..900&family=Modak&family=Montez&family=Prosto+One&family=Rye&family=Shojumaru&family=Young+Serif&family=ZCOOL+XiaoWei&display=swap');
-      @import url("https://fonts.googleapis.com/css2?family=Lora:ital@0;1&family=Poppins:wght@400;500;600&display=swap");
-      @import url("https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Goldman:wght@400;700&display=swap");
-      @import url('https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Great+Vibes&display=swap');
-      @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@400;500;600;700&display=swap");
-      
-      :root {
-        --primary-color: #f7c703;
-        --text-dark: #030303;
-        --text-light: #676767;
-        --white: #ffffff;
-        --max-width: 1200px;
-      }
-      
-      *,
-      *::before,
-      *::after {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      ul {
-        list-style: none;
-      }
-
-      .bulled {
-        list-style: inside circle;
-        padding-left: 1rem;
-      }
-      
-      .bulled li {
-        margin: 0.5rem 0;
-      }
-      
-      a {
-        text-decoration: none;
-        display: inline-block;
-        transition: color 300ms;
-      }
-      
-      button {
-        font-family: inherit;
-        border: 0px solid transparent;
-        outline: 1px solid transparent;
-        background-color: transparent;
-        cursor: pointer;
-      }
-      
-      input {
-        font-family: inherit;
-        border: 0px solid transparent;
-        outline: 1px solid transparent;
-        background-color: transparent;
-      }
-      
-      button:focus-visible,
-      a:focus-visible {
-        outline: 1px solid #999;
-      }
-      
-      .link {
-        display: inline;
-        color: #f1683a;
-      }
-      
-      a.not-active {
-        color: red;
-        font-weight: bold;
-        cursor: not-allowed;
-        pointer-events: none;
-        user-select: none;
-      }
-      
-      a.not-active:hover {
-        color: #fff;
-        background-color: red;
-      }
-      
-      img {
-        display: block;
-        width: 100%;
-      }
-
-      .svg {
-        /* display: none; */
-        position: absolute;
-        width: 0;
-        height: 0;
-      }
-      
-      .mask-1 {
-        clip-path: url("#mask-1");
-      }
-      
-      .mask-2 {
-        clip-path: url("#mask-2");
-      }
-      
-      .mask-3 {
-        clip-path: url("#mask-3");
-      }
-      
-      .mask-4 {
-        clip-path: url("#mask-4");
-      }        
-      
-      body {
-        font-family: "Roboto", sans-serif;
-  font-family: 'Abril Fatface', cursive;
-  font-family: 'Courgette', cursive;
-  font-family: 'Dancing Script', cursive;
-  font-family: 'Great Vibes', cursive;
-  font-family: 'Josefin Sans', sans-serif;
-  font-family: 'Limelight', cursive;
-  font-family: 'Lobster', cursive;
-  font-family: 'Montserrat', sans-serif;
-  font-family: 'Oleo Script Swash Caps', cursive;
-  font-family: 'Raleway', sans-serif;
-  font-family: 'Fraunces', serif;
-  font-family: 'Playfair Display', serif;
-  font-family: 'Lemon', cursive;
-  font-family: "Goldman", sans-serif;
-  font-family: "Lora", serif;
-  font-family: "Croissant One", serif;
-  font-family: "Shojumaru", system-ui;
-  font-family: "Montez", cursive;
-  font-family: "Modak", system-ui;
-  font-family: "Prosto One", sans-serif;
-  font-family: "Young Serif", serif;
-  font-family: "ZCOOL XiaoWei", sans-serif;
-  font-family: "Brawler", serif;
-  font-family: "Gloock", serif;
-  font-family: "Ephesis", cursive;
-  font-family: "Platypi", serif;
-  font-family: "Patua One", serif;
-  font-family: "Rye", serif;
-  font-family: "Arizonia", cursive;
-  font-family: "Imbue", serif;
-  font-family: 'Kaushan Script', cursive;
-  font-family: "Hurricane", cursive;
-  font-family: "Bona Nova SC", serif;
-  font-family: "DM Serif Display", serif;
-  font-family: Georgia, serif;
-  font-family: 'Poppins', sans-serif;
-        /* background-color: var(--text-dark); */
-        background-color: #0e0e0e;
-      }
-      
-      .container {
-        isolation: isolate;
-        position: relative;
-        min-height: 100vh;
-        display: grid;
-        grid-template-rows: auto 1fr 1fr 1.2fr;
-      }
-
-      /* .container::after {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background: 
-          linear-gradient(
-            transparent, 
-            rgba(0, 0, 0, 0.9), 
-            transparent
-          );
-        z-index: 1;
-      } */
-      
-      .logo {
-        /* position: absolute; */
-        /* top: 0; */
-        /* left: 50%; */
-        /* transform: translateX(-50%); */
-        grid-column: 1/2;
-        grid-row: 1/2;
-        width: 100%;
-        max-width: var(--max-width);
-        padding: 1rem;
-        z-index: 2;
-      }
-      
-      .logo img {
-        /* display: flex; */
-        /* width: 100%; */
-        max-width: 150px;
-      }
-      
-      .content {
-        grid-column: 1/2;
-        grid-row: 2/4;
-        position: relative;
-        /* padding-block: 8rem 5rem; */
-        padding-block: 5rem;
-        padding-inline: 1rem;
-        z-index: 2;
-      }
-
-      /* .content::after {
-        position: absolute;
-        top: 0;
-        left: 0;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background: 
-          linear-gradient(
-            transparent, 
-            rgba(0, 0, 0, 0.9)
-          );
-        z-index: -1;
-      } */
-
-      .content h1 {
-        margin-bottom: 2rem;
-        max-width: 400px;
-        margin-inline: auto;
-        color: var(--white);
-        font-size: 2.5rem;
-        font-weight: 500;
-        text-align: center;
-      }
-
-      .tabs {
-        margin-bottom: 2rem;
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .tab-btn {
-        color: var(--text-light);
-        font-size: 1.2rem;
-        font-weight: 600;
-        /* outline: none; */
-        /* border: none; */
-        background-color: transparent;
-        /* transition: 0.3s; */
-        transition: color 300ms;
-        /* cursor: pointer; */
-      }
-      
-      .tab-btn.active {
-        color: var(--primary-color);
-      }
-      
-      .tabs span {
-        display: flex;
-        width: 2px;
-        height: 1rem;
-        background-color: var(--text-light);
-      }
-      
-      .panel {
-        display: none;
-        max-width: 400px;
-        margin-inline: auto;
-      }
-      
-      .panel.active {
-        display: block;
-        animation: show-panel 0.3s forwards;
-      }
-      
-      .panel.close {
-        animation: hide-panel 0.3s forwards;
-      }
-      
-      @keyframes show-panel {
-        0% {
-          opacity: 0;
-        }
-        100% {
-          opacity: 1;
-        }
-      }
-      
-      @keyframes hide-panel {
-        0% {
-          opacity: 1;
-        }
-        100% {
-          opacity: 0;
-        }
-      }
-
-      .panel form {
-        display: grid;
-      }
-      
-      .input-group {
-        isolation: isolate;
-        position: relative;
-        margin-bottom: 2rem;
-        padding-block: 0.75rem;
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        border-bottom: 1px solid var(--text-light);
-      }
-      
-      .input-group label {
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        color: var(--white);
-        font-size: 1rem;
-        transition: 0.3s;
-        pointer-events: none;
-      }
-      
-      .input-group input {
-        width: 100%;
-        color: var(--white);
-        font-size: 1rem;
-        /* outline: none; */
-        /* border: none; */
-        /* background-color: transparent; */
-      }
-      
-      .input-group input:not(:placeholder-shown) ~ label,
-      .input-group input:focus ~ label {
-        top: 0px;
-        color: var(--text-light);
-        font-size: 0.7rem;
-      }
-      
-      .input-group span {
-        color: var(--text-light);
-        font-size: 1.2rem;
-        cursor: pointer;
-      }
-      
-      .panel form button {
-        /* max-width: fit-content; */
-        margin-inline: auto;
-        margin-bottom: 2rem;
-        padding: 0.5rem 2.5rem;
-        color: var(--text-dark);
-        font-size: 1rem;
-        font-weight: 700;
-        /* outline: none; */
-        /* border: none; */
-        border-radius: 12px;
-        background-color: var(--primary-color);
-        /* cursor: pointer; */
-      }
-      
-      .panel form p {
-        margin-bottom: 1.5rem;
-        color: var(--text-light);
-        text-align: center;
-      }
-      
-      .panel form a {
-        /* text-decoration: none; */
-        margin-inline: auto;
-        padding: 0.5em 1em;
-        color: var(--text-light);
-        text-align: center;
-        /* transition: 0.3s; */
-        /* transition: color 300ms; */
-      }
-      
-      .panel form a span {
-        color: var(--primary-color);
-      }
-      
-      .panel form a:hover {
-        color: var(--white);
-      }
-      
-      .image {
-        grid-column: 1/2;
-        grid-row: 3/5;
-        height: 100%;
-        min-height: 300px;
-        background-image: url("./assets/nat-geo-wild-img/header.jpg");
-        background-repeat: no-repeat;
-        background-position: bottom center;
-        background-size: cover;
-      }
-
-      @media (width > 540px) {
-        .image {
-          min-height: 450px;
-        }
-      }
-      
-      @media (width > 768px) {
-        .container {
-          /* align-items: center; */
-          grid-template-columns: 1fr 1fr;
-          grid-template-rows: 1fr;
-            /* minmax(0, 1fr) */
-            /* minmax(0, calc(var(--max-width) / 2)) */
-            /* minmax(0, calc(var(--max-width) / 2)) */
-            /* minmax(0, 1fr); */
-        }
-      
-        .logo {
-          grid-column: 1/2;
-          grid-row: 1/2;
-          padding: 2rem 1rem;
-          z-index: 1;
-        }
-        
-        .content {
-          grid-column: 2/3;
-          grid-row: 1/2;
-          /* grid-area: 1/3/2/4; */
-          margin: auto;
-          padding-block: 2rem;
-        }
-      
-        .image {
-          grid-column: 1/2;
-          grid-row: 1/2;
-        }
-      }
-      
-      .zoom-in {
-        animation: zoom-in 2s linear backwards;
-      }
-
-      .fade-in {
-        animation: fade-in 2s linear backwards;
-      }
-      
-      /* .rotate {
-        animation: rotate 1s linear forwards;
-      } */
-      
-      .fade-left {
-        animation: fade-left 1s linear backwards;
-      }
-      
-      .fade-left-absolute {
-        animation: fade-left-absolute 1s linear backwards;
-      }
-      
-      .fade-right {
-        animation: fade-right 1s linear backwards;
-      }
-      
-      .fade-right-absolute {
-        animation: fade-right-absolute 1s linear backwards;
-      }
-      
-      /* .fade-up {
-        animation: fade-up 1s linear backwards;
-      } */
-      
-      /* .fade-up-full {
-        animation: fade-up-full 1s linear backwards;
-      } */
-      
-      /* .fade-up-relative {
-        animation: fade-up-relative 1s linear backwards;
-      } */
-      
-      .fade-up-absolute {
-        animation: fade-up-absolute 1s linear backwards;
-      }
-      
-      /* .fade-down-full {
-        animation: fade-down-full 1s linear backwards;
-      } */
-
-      /* .fade-down-relative {
-        animation: fade-down-relative 1s linear backwards;
-      } */
-      
-      .fade-down-absolute {
-        animation: fade-down-absolute 1s linear backwards;
-      }
-      
-      .delayed {
-        /* animation-delay: calc(0.2s * var(--i)); */
-        animation-delay: calc(0.2s * var(--delay));
-      }
-      
-      .paused {
-        animation-play-state: paused;
-      }
-      
-      @keyframes zoom-in {
-        0% {
-          opacity: 0;
-        }
-      }
-
-      @keyframes fade-in {
-        0% {
-          opacity: 0;
-        }
-      }
-      
-      /* @keyframes rotate {
-        0% {
-          transform: rotate(80deg);
-          opacity: 0;
-        }
-      } */
-      
-      @keyframes fade-left {
-        0% {
-          transform: translateX(10%);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-left-absolute {
-        0% {
-          transform: translateX(1rem);
-          opacity: 0;
-        }
-      }
-        
-      @keyframes fade-right {
-        0% {
-          transform: translateX(-10%);
-          opacity: 0;
-        }
-      }
-      
-      @keyframes fade-right-absolute {
-        0% {
-          transform: translateX(-1rem);
-          opacity: 0;
-        }
-      }
-        
-      /* @keyframes fade-up {
-        0% {
-          transform: translateY(10%);
-          opacity: 0;
-        }
-      } */
-      
-      /* @keyframes fade-up-full {
-        0% {
-          transform: translateY(100%);
-          opacity: 0;
-        }
-      } */
-      
-      /* @keyframes fade-up-relative {
-        0% {
-          transform: translateY(10%);
-          opacity: 0;
-        }
-      } */
-      
-      @keyframes fade-up-absolute {
-        0% {
-          transform: translateY(1rem);
-          opacity: 0;
-        }
-      }
-      
-      /* @keyframes fade-down-full {
-        0% {
-          transform: translateY(-100%);
-          opacity: 0;
-        }
-      } */
-
-      /* @keyframes fade-down { */
-      /* @keyframes fade-down-relative {
-        0% {
-          transform: translateY(-10%);
-          opacity: 0;
-        }
-      } */
-      
-      @keyframes fade-down-absolute {
-        0% {
-          transform: translateY(-1rem);
-          opacity: 0;
-        }
-      }
-    </style>
   </head>
   <body>
-    <nav style="display: none;">
+    <nav>
       <div class="nav-header">
         <div class="nav-logo">
           <a href="#">
@@ -622,6 +27,132 @@
         <li><button class="btn">Buy Now</button></li>
       </ul>
     </nav>
+    <header class="section-container header-container" id="home">
+      <div class="header-image">
+        <img src="assets/header.png" alt="header" />
+        <img src="assets/header-bg.png" alt="header_bg" class="header-bg" />
+        <div class="header-image-content">
+          <h4>Price: $100</h4>
+          <button class="btn">Add to cart</button>
+        </div>
+      </div>
+      <div class="header-content">
+        <h1>Bluetooth<br />Headphone</h1>
+        <p>
+          Dive into our curated selection of premium Bluetooth headphones,
+          crafted for the ultimate listening experience.
+        </p>
+      </div>
+    </header>
+    <section class="product" id="product">
+      <div class="section-container product-container">
+        <div class="product-grid">
+          <div class="product-image">
+            <img src="assets/product.png" alt="product" />
+          </div>
+          <div class="product-content">
+            <div class="product-card">
+              <h4>Bluetooth</h4>
+              <p>Bluetooth 4.2 - ACC codec</p>
+              <a href="#">Learn More</a>
+            </div>
+            <div class="product-card">
+              <h4>Quality sound</h4>
+              <a href="#">Learn More</a>
+            </div>
+            <div class="product-card">
+              <div class="product-colors">
+                <div><i class="ri-check-line"></i></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+              <p>Available colors</p>
+            </div>
+          </div>
+        </div>
+        <div class="product-btn">
+          <button class="btn">Add to cart</button>
+        </div>
+      </div>
+    </section>
+    <section class="section-container store-container" id="store">
+      <h2>JBL beats design</h2>
+      <p>
+        Explore our JBL Beats Design collection, where style 
+        meets superior audio performance.
+      </p>
+      <div class="slider">
+        <div class="slider-track">
+          <div class="slide">
+            <div class="store-card">
+              <h4>Model no- 00035</h4>
+              <img src="assets/store-1.png" alt="store" />
+              <h3>Price- $120</h3>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="store-card">
+              <h4>Model no- 00045</h4>
+              <img src="assets/store-2.png" alt="store" />
+              <h3>Price- $130</h3>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="store-card">
+              <h4>Model no- 00025</h4>
+              <img src="assets/store-3.png" alt="store" />
+              <h3>Price- $110</h3>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="store-card">
+              <h4>Model no- 00055</h4>
+              <img src="assets/store-4.png" alt="store" />
+              <h3>Price- $140</h3>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="store-card">
+              <h4>Model no- 00015</h4>
+              <img src="assets/store-5.png" alt="store" />
+              <h3>Price- $100</h3>
+            </div>
+          </div>
+          <div class="slide">
+            <div class="store-card">
+              <h4>Model no- 00065</h4>
+              <img src="assets/store-6.png" alt="store" />
+              <h3>Price- $150</h3>
+            </div>
+          </div>
+        </div>
+        <div class="pagination"></div>
+      </div>
+    </section>
+    <footer class="footer">
+      <div class="section-container footer-container">
+        <img src="assets/logo-white.png" alt="logo" />
+        <ul class="footer-socials">
+          <li>
+            <a href="#"><i class="ri-facebook-fill"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="ri-twitter-fill"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="ri-pinterest-line"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="ri-linkedin-fill"></i></a>
+          </li>
+        </ul>
+      </div>
+      <div class="footer-bar">
+        Copyright © 2026 JBL Beats. All rights reserved
+      </div>
+    </footer>
 
     <div class="container">
       <div class="logo">
@@ -715,7 +246,6 @@
       <!-- <div class="image"></div> -->
       <div class="image fade-in paused"></div>
     </div>
-
     <script>
       const tabList = document.querySelector(".tabs");
       
@@ -784,7 +314,7 @@
     </script>
     <script>
       const form = document.querySelector("form");
-      
+
       form.addEventListener("submit", e => e.preventDefault());
     </script>
     
@@ -847,4 +377,4 @@
     </script>
   </body>
 </html>
-<!-- 70-200-330-460-590-720-850 -->
+<!-- 70-200-330-460-590-720-850-980 -->
