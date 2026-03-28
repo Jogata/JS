@@ -27,7 +27,9 @@
         --header-font: "Montserrat", sans-serif;
       }
       
-      * {
+      *,
+      *::before,
+      *::after {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -74,7 +76,8 @@
       }
         
       img {
-        display: flex;
+        /* display: flex; */
+        display: block;
         width: 100%;
       }
 
@@ -435,6 +438,7 @@
       }
 
       .slider-track {
+        position: relative;
         max-width: 400px;
         margin: auto;
         display: flex;
@@ -445,30 +449,36 @@
       }
       
       .page-button {
-        aspect-ratio: 1;
+        /* aspect-ratio: 1; */
+        width: 1rem;
+        height: 1rem;
         margin: 0.5rem;
         padding: 0.4em 0.72em;
-        color: var(--white-color);
-        font-size: var(--normal-font-size);
-        font-weight: var(--font-semi-bold);
+        color: var(--text-dark);
+        font-size: 0px;
+        border-radius: 50%;
         /* background-color: transparent; */
         filter: drop-shadow(1px 1px #000);
         /* transition: color 0.4s, background-color 0.4s; */
-        transition: color 0.4s, border-color 0.4s;
-        /* border: 1px solid; */
+        transition: background-color 400ms;
+        /* transition: color 0.4s, border-color 0.4s; */
+        border: 1px solid;
         /* opacity: 1; */
       }
       
       .page-button.active {
-        color: var(--black-color);
-        /* background-color: var(--white-color); */
-        border: 1px solid;
+        /* color: var(--text-dark); */
+        background-color: var(--text-dark);
+        /* border: 1px solid; */
       }
       
       .slide {
         flex-shrink: 0;
+        position: absolute;
+        top: 0;
         width: 100%;
         /* max-width: 400px; */
+        transform: translateX(100%);
       }
       
       .store-card h4 {
@@ -493,9 +503,28 @@
         font-family: var(--header-font);
         text-align: center;
       }
+
+      #relative {
+        position: relative;
+      }
       
-      .swiper-pagination-bullet-active {
-        background-color: var(--text-dark);
+      .current {
+        transform: translate(0);
+        /* transition: transform 300ms; */
+        transition: transform 300ms, 
+                      opacity 300ms;
+        /* opacity: 1; */
+        /* z-index: 1; */
+      }
+    
+      .left {
+        transform: translateX(-100%);
+        transition: transform 300ms;
+      }
+    
+      .right {
+        transform: translateX(100%);
+        transition: transform 300ms;
       }
       
       .footer {
@@ -643,9 +672,9 @@
             <img src="./assets/headphones-images/logo-white.png" alt="logo" class="logo-white" />
           </a>
         </div>
-        <div class="nav-menu-btn" id="menu-btn">
+        <button class="nav-menu-btn" id="menu-btn">
           <i class="ri-menu-line"></i>
-        </div>
+        </button>
       </div>
       <ul class="nav-links" id="nav-links">
         <li><a href="#home">Home</a></li>
@@ -654,6 +683,23 @@
         <li><button class="btn">Buy Now</button></li>
       </ul>
     </nav>
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const navLinks = document.getElementById("nav-links");
+      const menuBtnIcon = menuBtn.querySelector("i");
+      
+      menuBtn.addEventListener("click", (e) => {
+        navLinks.classList.toggle("open");
+      
+        const isOpen = navLinks.classList.contains("open");
+        menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+      });
+      
+      navLinks.addEventListener("click", (e) => {
+        navLinks.classList.remove("open");
+        menuBtnIcon.setAttribute("class", "ri-menu-line");
+      });
+    </script>
 
     <header class="section-container header-container" id="home">
       <div class="header-image">
@@ -706,7 +752,7 @@
         </div>
       </div>
     </section>
-    
+
     <section class="section-container store-container" id="store">
       <h2>JBL beats design</h2>
       <p>
@@ -715,42 +761,42 @@
       </p>
       <div class="slider">
         <div class="slider-track">
-          <div class="slide">
+          <div class="slide current" id="relative">
             <div class="store-card">
               <h4>Model no- 00035</h4>
               <img src="./assets/headphones-images/store-1.png" alt="store" />
               <h3>Price- $120</h3>
             </div>
           </div>
-          <div class="slide">
+          <div class="slide right">
             <div class="store-card">
               <h4>Model no- 00045</h4>
               <img src="./assets/headphones-images/store-2.png" alt="store" />
               <h3>Price- $130</h3>
             </div>
           </div>
-          <div class="slide">
+          <div class="slide right">
             <div class="store-card">
               <h4>Model no- 00025</h4>
               <img src="./assets/headphones-images/store-3.png" alt="store" />
               <h3>Price- $110</h3>
             </div>
           </div>
-          <div class="slide">
+          <div class="slide right">
             <div class="store-card">
               <h4>Model no- 00055</h4>
               <img src="./assets/headphones-images/store-4.png" alt="store" />
               <h3>Price- $140</h3>
             </div>
           </div>
-          <div class="slide">
+          <div class="slide right">
             <div class="store-card">
               <h4>Model no- 00015</h4>
               <img src="./assets/headphones-images/store-5.png" alt="store" />
               <h3>Price- $100</h3>
             </div>
           </div>
-          <div class="slide">
+          <div class="slide right">
             <div class="store-card">
               <h4>Model no- 00065</h4>
               <img src="./assets/headphones-images/store-6.png" alt="store" />
@@ -758,13 +804,97 @@
             </div>
           </div>
         </div>
+        <div class="control">
+          <button id="next" class="btn">
+            next <i class="ri-arrow-left-double-line"></i>
+          </button>
+          <button id="prev">
+            prev <i class="ri-arrow-right-double-line"></i>
+          </button>
+        </div>    
         <div class="pagination">
           <button class="page-button active">1</button>
           <button class="page-button">2</button>
           <button class="page-button">3</button>
-          <button class="page-button">4</button>    
+          <button class="page-button">4</button>
+          <button class="page-button">5</button>
+          <button class="page-button">6</button>
         </div>
       </div>
+      <script>
+        const slides = document.querySelectorAll(".slide");
+        const slidesLength = slides.length;
+        let current = 3;
+        
+        const slidesClasses = new Array(slidesLength);
+        // console.log(slidesClasses);
+        const pageButtons = document.querySelectorAll(".page-button");
+      
+        pageButtons.forEach((button, index) => {
+          button.addEventListener("click", () => {
+            current = index;
+            const currentActiveButton = document.querySelector(".page-button.active");
+            currentActiveButton.classList.remove("active");
+            const newActiveButton = pageButtons[index];
+            newActiveButton.classList.add("active");
+      
+            slidesClasses.fill("slide");
+            slidesClasses[index] = "slide current";
+            
+            for (let index = 0; index < current; index++) {
+              slidesClasses[index] = "slide left";
+            }
+            
+            for (let index = current + 1; index < slidesLength; index++) {
+              slidesClasses[index] = "slide right";
+            }
+      
+            // console.log(slidesClasses);
+            slides.forEach((slide, index) => slide.className = slidesClasses[index]);
+          })
+        })
+      </script>
+          <script>
+            const setUpSliderWithAnimations = () => {
+              const slides = document.querySelectorAll(".slide");
+              const nextb = document.getElementById("next");
+              const prevb = document.getElementById("prev");
+              let index = 0;
+              let prevIndex = 0;
+              let penultimateIndex = 0;
+        
+              nextb.addEventListener("click", () => {
+                const activeSlide = slides[index];
+                penultimateIndex = prevIndex;
+                const penultimateSlide = slides[penultimateIndex];
+                const penultimateSlideAnimations = penultimateSlide.getAnimations();
+                if (penultimateSlideAnimations.length > 0) {
+                  penultimateSlideAnimations[0].finish();
+                  activeSlide.getAnimations()[0].finish();
+                  slides[prevIndex].getAnimations()[0].finish();
+                }
+                prevIndex = index;
+                activeSlide.classList.remove("fade-in-left", "fade-in-right");
+                activeSlide.classList.add("fade-out-left");
+                index++;
+                index = index % slides.length;
+                slides[index].classList.remove("fade-out-left", "fade-out-right");
+                slides[index].classList.add("fade-in-left");
+              })
+        
+              nextb.addEventListener("click", () => {
+                const activeSlide = slides[index];
+                activeSlide.classList.remove("active");
+              }, {once: true})
+              
+              prevb.addEventListener("click", () => {
+                const activeSlide = slides[index];
+                activeSlide.classList.remove("active");
+              }, {once: true})            
+            }
+      
+            // setUpSliderWithAnimations();
+          </script>
     </section>
     <footer class="footer">
       <div class="section-container footer-container">
@@ -970,7 +1100,7 @@
     
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
     
-    <div id="calc" style="padding: 5rem; display: none;">
+    <div id="calc" style="padding: 5rem; display: block;">
       <input type="number" id="width">
       <input type="number" id="height" placeholder="Height" style="padding: 0.5em;">
       <button id="calc" style="padding: 0.5em; border: 1px solid;">Calc</button>
@@ -1027,4 +1157,4 @@
     </script>
   </body>
 </html>
-<!-- 70-200-380-510-640-770-900-1030 -->
+<!-- 70-200-380-510-640-770-900-1030-1160 -->
