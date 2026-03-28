@@ -660,7 +660,115 @@
         .product-colors {
           justify-content: flex-start;
         }
-      }        
+      }
+    </style>
+    <style>
+        .slider .control {
+          margin-top: 2rem;
+          text-align: center;
+        }
+        
+        .slider button {
+          color: var(--white);
+          font-size: 0px;
+          border-radius: 50%;
+          border: 1px solid black;
+          background-color: var(--text-dark);
+        }
+      
+        button#prev {
+          padding: 0.45rem 0.5rem 0.45rem 0.7rem;
+        }
+      
+        button#next {
+          padding: 0.45rem 0.7rem 0.45rem 0.5rem;
+        }
+      
+        .slider button i {
+          font-size: 2rem;
+        }
+        
+        .slider-track {
+          /* display: flex; */
+          /* overflow: hidden; */
+        }
+      
+        .slide {
+          /* position: absolute; */
+          /* width: 100%; */
+          /* height: 100%; */
+          /* flex-shrink: 0; */
+          /* transform: translateX(100%); */
+        }
+        
+        .relative {
+          position: relative;
+        }
+      
+        .current {
+          transform: translate(0);
+          transition: transform 300ms;
+        }
+        .next {
+          transform: translate(100%);
+          transition: transform 300ms;
+        }
+        .prev {
+          transform: translate(-100%);
+          transition: transform 300ms;
+        }
+      
+        .slide.fade-in-left {
+          animation: fade-in-left 1s linear forwards;
+        }
+      
+        @keyframes fade-in-left {
+          0% {
+            transform: translateX(100%);
+          }
+          100% {
+            transform: translateX(0%);
+          }
+        }
+      
+        .slide.fade-in-right {
+          animation: fade-in-right 1s linear forwards;
+        }
+      
+        @keyframes fade-in-right {
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(0%);
+          }
+        }
+      
+        .slide.fade-out-left {
+          animation: fade-out-left 1s linear forwards;
+        }
+      
+        @keyframes fade-out-left {
+          0% {
+            transform: translateX(0%);
+          }
+          100% {
+            transform: translateX(-100%);
+          }
+        }
+        
+        .slide.fade-out-right {
+          animation: fade-out-right 1s linear forwards;
+        }
+      
+        @keyframes fade-out-right {
+          0% {
+            transform: translateX(0%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
+        }
     </style>
   </head>
   <body>
@@ -691,8 +799,10 @@
       menuBtn.addEventListener("click", (e) => {
         navLinks.classList.toggle("open");
       
-        const isOpen = navLinks.classList.contains("open");
-        menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+        // const isOpen = navLinks.classList.contains("open");
+        // menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+        menuBtnIcon.classList.toggle("ri-close-line");
+        menuBtnIcon.classList.toggle("ri-menu-line");
       });
       
       navLinks.addEventListener("click", (e) => {
@@ -812,14 +922,14 @@
             prev <i class="ri-arrow-right-double-line"></i>
           </button>
         </div>    
-        <div class="pagination">
+        <!-- <div class="pagination">
           <button class="page-button active">1</button>
           <button class="page-button">2</button>
           <button class="page-button">3</button>
           <button class="page-button">4</button>
           <button class="page-button">5</button>
           <button class="page-button">6</button>
-        </div>
+        </div> -->
       </div>
       <script>
         const slides = document.querySelectorAll(".slide");
@@ -890,10 +1000,30 @@
               prevb.addEventListener("click", () => {
                 const activeSlide = slides[index];
                 activeSlide.classList.remove("active");
-              }, {once: true})            
+              }, {once: true})
+
+              prevb.addEventListener("click", () => {
+                const activeSlide = slides[index];
+                penultimateIndex = prevIndex;
+                const penultimateSlide = slides[penultimateIndex];
+                const penultimateSlideAnimations = penultimateSlide.getAnimations();
+                if (penultimateSlideAnimations.length > 0) {
+                  penultimateSlideAnimations[0].finish();
+                  activeSlide.getAnimations()[0].finish();
+                  slides[prevIndex].getAnimations()[0].finish();
+                }
+                prevIndex = index;
+                activeSlide.classList.remove("fade-in-left", "fade-in-right");
+                activeSlide.classList.add("fade-out-right");
+                index--;
+                index = index + slides.length;
+                index = index % slides.length;
+                slides[index].classList.remove("fade-out-left", "fade-out-right");
+                slides[index].classList.add("fade-in-right");
+              })
             }
       
-            // setUpSliderWithAnimations();
+            setUpSliderWithAnimations();
           </script>
     </section>
     <footer class="footer">
@@ -1157,4 +1287,4 @@
     </script>
   </body>
 </html>
-<!-- 70-200-380-510-640-770-900-1030-1160 -->
+<!-- 70-200-380-510-640-770-900-1030-1160-1290 -->
