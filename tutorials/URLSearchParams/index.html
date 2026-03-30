@@ -259,7 +259,7 @@
       .header-image {
         isolation: isolate;
         position: relative;
-        overflow: hidden;
+        /* overflow: hidden; */
       }
       
       .header-image img {
@@ -612,6 +612,26 @@
         text-align: center;
       }
 
+      @media (width <= 768px) {
+        .nav-links a {
+          animation: none;
+        }
+
+        .header-image img.fade-right {
+          animation-name: fade-up-absolute;
+        }
+
+        .header-content.fade-left {
+          animation-name: fade-up-absolute;
+          animation-delay: 1.2s;
+        }
+
+        .header-content p {
+          max-width: 400px;
+          margin: auto;
+        }
+      }
+
       @media (width > 768px) {
         nav {
           position: static;
@@ -621,6 +641,10 @@
           gap: 2rem;
           align-items: center;
           justify-content: space-between;
+        }
+
+        nav.fade-down-full {
+          animation: none;
         }
       
         .nav-header {
@@ -869,9 +893,9 @@
           animation: fade-down-relative 1s linear backwards;
         } */
         
-        /* .fade-down-absolute {
+        .fade-down-absolute {
           animation: fade-down-absolute 1s linear backwards;
-        } */
+        }
         
         .delayed {
           /* animation-delay: calc(0.2s * var(--i)); */
@@ -972,12 +996,12 @@
           }
         } */
         
-        /* @keyframes fade-down-absolute {
+        @keyframes fade-down-absolute {
           0% {
             transform: translateY(-1rem);
             opacity: 0;
           }
-        } */
+        }
     </style>
     <style>
       *,
@@ -988,7 +1012,7 @@
         box-sizing: border-box;
       }
       
-      body {
+      .body {
         position: relative;
         min-height: 100vh;
         display: flex;
@@ -1038,7 +1062,7 @@
         z-index: 1;
       }
       
-      nav {
+      .nav {
         display: flex;
         justify-content: space-between;
       }
@@ -1063,7 +1087,7 @@
         margin-top: -0.5rem;
       }
       
-      ul {
+      .ul {
         list-style: none;
         display: flex;
         gap: 1rem;
@@ -1077,7 +1101,7 @@
         font-family: Georgia, serif;
       }
       
-      a {
+      .a {
         text-decoration: none;
         color: inherit;
         font-size: 0.9rem;
@@ -1085,7 +1109,7 @@
         transition: color 300ms;
       }
       
-      nav button {
+      .nav button {
         width: max-content;
         padding: 0.8rem 1.2rem;
         color: #fff;
@@ -1095,18 +1119,18 @@
         cursor: pointer;
       }
       
-      main {
+      .main {
         padding: 2.5rem;
       }
 
-      h1 {
+      .h1 {
         max-width: 400px;
         font-size: 3rem;
         line-height: 1.3;
         opacity: 0.9;
       }
       
-      h1 + p {
+      .h1 + p {
         max-width: 400px;
         margin: 1.5rem 0;
         line-height: 1.5;
@@ -1133,7 +1157,7 @@
         box-shadow: 0 0.8rem 1rem -0.25rem #2a286131;
       }
       
-      h2 {
+      .h2 {
         max-width: 250px;
         margin-bottom: 1rem;
         font-size: 1.2rem;
@@ -1168,16 +1192,16 @@
           margin: 5rem 0;
         }
 
-        nav {
+        .nav {
           flex-direction: column;
           gap: 1rem;
         }
         
-        main {
+        .main {
           padding: 1rem;
         }
         
-        h1 {
+        .h1 {
           margin-top: 2rem;
           font-size: 2.5rem;
         }
@@ -1185,9 +1209,9 @@
     </style>
   </head>
   <body>
-    <div class="page" style="display: none;">
-    <nav>
-    <!-- <nav class="fade-down-full paused"> -->
+    <div class="page">
+    <!-- <nav> -->
+    <nav class="fade-down-full paused">
       <div class="nav-header">
         <!-- <div class="nav-logo"> -->
         <div class="nav-logo fade-in paused">
@@ -1207,7 +1231,7 @@
           </a>
         </div>
         <!-- <button class="nav-menu-btn" id="menu-btn"> -->
-        <button class="nav-menu-btn fade-right-absolute paused delayed" id="menu-btn" style="--delay: 4">
+        <button class="nav-menu-btn fade-in paused" id="menu-btn" style="--delay: 4">
           <i class="ri-menu-line"></i>
         </button>
       </div>
@@ -1261,16 +1285,36 @@
 
     <header class="section-container header-container" id="home">
       <div class="header-image">
-        <img src="./assets/headphones-images/header.png" alt="header" />
-        <img src="./assets/headphones-images/header-bg.png" alt="header_bg" class="header-bg" />
+        <!-- <img src="./assets/headphones-images/header.png" alt="header" /> -->
+        <img 
+          src="./assets/headphones-images/header.png" 
+          alt="header" 
+          class="fade-right paused" 
+        />
+        <!-- <img src="./assets/headphones-images/header-bg.png" alt="header_bg" class="header-bg" /> -->
+        <img 
+          src="./assets/headphones-images/header-bg.png" 
+          alt="header_bg" 
+          class="header-bg fade-in paused delayed" 
+          style="--delay: 2" 
+        />
         <div class="header-image-content">
-          <h4>Price: $100</h4>
-          <button class="btn">Add to cart</button>
+          <!-- <h4>Price: $100</h4> -->
+          <h4 class="fade-up-absolute paused delayed" style="--delay: 4">
+            Price: $100
+          </h4>
+          <!-- <button class="btn">Add to cart</button> -->
+          <button class="btn fade-up-absolute paused delayed" style="--delay: 5">
+            Add to cart
+          </button>
         </div>
       </div>
-      <div class="header-content">
+      <!-- <div class="header-content"> -->
+      <div class="header-content fade-left paused">
         <h1>Bluetooth<br />Headphone</h1>
+        <!-- <h1 class="fade-up-relative paused">Bluetooth<br />Headphone</h1> -->
         <p>
+        <!-- <p class="fade-up-absolute paused"> -->
           Dive into our curated selection of premium Bluetooth headphones,
           crafted for the ultimate listening experience.
         </p>
@@ -1281,12 +1325,15 @@
       <div class="section-container product-container">
         <div class="product-grid">
           <div class="product-image">
-            <img src="./assets/headphones-images/product.png" alt="product" />
+            <!-- <img src="./assets/headphones-images/product.png" alt="product" /> -->
+            <img src="./assets/headphones-images/product.png" alt="product" class="fade-right paused" />
           </div>
           <div class="product-content">
             <div class="product-card">
-              <h4>Bluetooth</h4>
-              <p>Bluetooth 4.2 - ACC codec</p>
+              <!-- <h4>Bluetooth</h4> -->
+              <h4 class="fade-left paused">Bluetooth</h4>
+              <!-- <p>Bluetooth 4.2 - ACC codec</p> -->
+              <p class="fade-left paused">Bluetooth 4.2 - ACC codec</p>
               <a href="#">Learn More</a>
             </div>
             <div class="product-card">
@@ -1565,7 +1612,8 @@
           </li>
         </ul>
       </div>
-      <div class="footer-bar">
+      <!-- <div class="footer-bar"> -->
+      <div class="footer-bar fade-down-absolute paused">
         Copyright © 2026 JBL Beats. All rights reserved
       </div>
     </footer>
@@ -1602,7 +1650,7 @@
     </svg>
     </div>
 
-    <div class="landing-page">
+    <div class="landing-page" style="display: none;">
       <nav>
         <div class="logo">
           <div class="big-square"></div>
@@ -1710,6 +1758,28 @@
           </div>
         </div>
       </main>
+
+      <script>
+        const start = () => {
+          const observer = new IntersectionObserver(animate);
+          
+          const elements = document.querySelectorAll(".paused");
+      
+          elements.forEach(element => {
+              observer.observe(element);
+          })
+          
+          function animate(entries) {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.remove("paused");
+                }
+              });
+          }          
+        }
+      
+        // start();
+      </script>      
     </div>
 
     <div class="page" style="display: none;">
@@ -1937,4 +2007,4 @@
     </script>
   </body>
 </html>
-<!-- 70-200-380-510-640-770-900-1030-1160-1290-1420-1550-1680-1810-1940 -->
+<!-- 70-200-380-510-640-770-900-1030-1160-1290-1420-1550-1680-1810-1940-2070 -->
