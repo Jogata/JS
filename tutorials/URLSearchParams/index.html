@@ -416,6 +416,10 @@
       .product-btn .btn:hover {
         background-color: var(--extra-light);
       }
+
+      .store-container {
+        padding-inline: 0;
+      }
       
       .store-container h2 {
         margin-bottom: 0.5rem;
@@ -427,7 +431,9 @@
       }
       
       .store-container p {
-        margin-bottom: 4rem;
+        max-width: 400px;
+        /* margin-bottom: 4rem; */
+        margin: 0 auto 4rem;
         color: var(--text-light);
         font-weight: 500;
         text-align: center;
@@ -435,9 +441,9 @@
       
       .slider {
         width: 100%;
-        padding-bottom: 5rem;
+        /* padding-bottom: 5rem; */
         overflow: hidden;
-        border: 10px solid red;
+        /* border: 10px solid red; */
       }
 
       .slider-track {
@@ -448,6 +454,7 @@
       }
 
       .pagination {
+        padding-top: 3rem;
         text-align: center;
       }
       
@@ -1398,6 +1405,7 @@
     </section>
 
     <section class="section-container store-container" id="store">
+    <!-- <section class="store-container" id="store"> -->
       <h2>JBL beats design</h2>
       <p>
         Explore our JBL Beats Design collection, where style 
@@ -1405,44 +1413,44 @@
       </p>
       <div class="slider">
         <div class="slider-track">
-          <div class="slide prev">
+          <div class="slide current">
             <div class="store-card">
-              <h4>Model no- 00035</h4>
+              <h4>Model no- 00035 1</h4>
               <img src="./assets/headphones-images/store-1.png" alt="store" />
               <h3>Price- $120</h3>
             </div>
           </div>
-          <div class="slide relative current">
+          <div class="slide relative next">
             <div class="store-card">
-              <h4>Model no- 00045</h4>
+              <h4>Model no- 00045 2</h4>
               <img src="./assets/headphones-images/store-2.png" alt="store" />
               <h3>Price- $130</h3>
             </div>
           </div>
-          <div class="slide next">
+          <div class="slide">
             <div class="store-card">
-              <h4>Model no- 00025</h4>
+              <h4>Model no- 00025 3</h4>
               <img src="./assets/headphones-images/store-3.png" alt="store" />
               <h3>Price- $110</h3>
             </div>
           </div>
           <div class="slide">
             <div class="store-card">
-              <h4>Model no- 00055</h4>
+              <h4>Model no- 00055 4</h4>
               <img src="./assets/headphones-images/store-4.png" alt="store" />
               <h3>Price- $140</h3>
             </div>
           </div>
           <div class="slide">
             <div class="store-card">
-              <h4>Model no- 00015</h4>
+              <h4>Model no- 00015 5</h4>
               <img src="./assets/headphones-images/store-5.png" alt="store" />
               <h3>Price- $100</h3>
             </div>
           </div>
-          <div class="slide">
+          <div class="slide prev">
             <div class="store-card">
-              <h4>Model no- 00065</h4>
+              <h4>Model no- 00065 6</h4>
               <img src="./assets/headphones-images/store-6.png" alt="store" />
               <h3>Price- $150</h3>
             </div>
@@ -1507,20 +1515,32 @@
             // const backwards = document.getElementById("prev");
             const sliderButtons = document.querySelectorAll(".page-button");
             const slidesLength = slides.length;
-            let prev = 0;
-            let current = 1;
-            let next = 2;
+            let prev = 5;
+            let current = 0;
+            let next = 1;
             // let newCurrent = 1;
-
+            
             sliderButtons.forEach((button, index) => {
-                button.addEventListener("click", () => changeSlide(index));
-              })
-
-              function changeSlide(newIndex) {
-                if (newIndex > current) {
-                  forwards();
+              button.addEventListener("click", () => changeSlide(index));
+            })
+            
+            function changeSlide(newIndex) {
+              const diff = Math.abs(newIndex - current);
+              
+              if (newIndex > current) {
+                  sliderButtons[current].classList.remove("active");
+                  sliderButtons[newIndex].classList.add("active");
+                  for (let i = 0; i < diff; i++) {
+                    forwards();
+                  }
+                  // forwards();
                 } else if (newIndex < current) {
-                  backwards();
+                  sliderButtons[current].classList.remove("active");
+                  sliderButtons[newIndex].classList.add("active");
+                  for (let i = 0; i < diff; i++) {
+                    backwards();
+                  }
+                  // backwards();
                 }
               }
   
