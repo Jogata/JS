@@ -52,6 +52,7 @@
       
       a {
         text-decoration: none;
+        display: inline-block;
         /* transition: 0.3s; */
         transition: color 300ms;
       }
@@ -272,6 +273,12 @@
         border-radius: 6px;
       }
       
+      @media (width <= 768px) {
+        .nav-links a {
+          animation-name: none;
+        }
+      }
+
       @media (width > 768px) {
         nav {
           position: static;
@@ -534,23 +541,53 @@
     <nav>
       <div class="nav-header">
         <div class="nav-logo">
-          <a href="#">
+          <!-- <a href="#"> -->
+          <a href="#" class="fade-in paused">
             pl<span><i class="ri-play-fill"></i></span>y
           </a>
         </div>
-        <button class="nav-menu-btn" id="menu-btn">
+        <!-- <button class="nav-menu-btn" id="menu-btn"> -->
+        <button class="nav-menu-btn fade-in paused" id="menu-btn">
           <span><i class="ri-menu-line"></i></span>
         </button>
       </div>
       <ul class="nav-links" id="nav-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Trending</a></li>
-        <li><a href="#">Collections</a></li>
-        <li><a href="#">Categories</a></li>
-        <li><a href="#">Contact</a></li>
+        <!-- <li><a href="#">Home</a></li> -->
+        <li>
+          <a href="#" class="fade-right paused delayed" style="--delay: 2">
+            Home
+          </a>
+        </li>
+        <!-- <li><a href="#">Trending</a></li> -->
+        <li>
+          <a href="#" class="fade-right paused delayed" style="--delay: 3">
+            Trending
+          </a>
+        </li>
+        <!-- <li><a href="#">Collections</a></li> -->
+        <li>
+          <a href="#" class="fade-right paused delayed" style="--delay: 4">
+            Collections
+          </a>
+        </li>
+        <!-- <li><a href="#">Categories</a></li> -->
+        <li>
+          <a href="#" class="fade-right paused delayed" style="--delay: 5">
+            Categories
+          </a>
+        </li>
+        <!-- <li><a href="#">Contact</a></li> -->
+        <li>
+          <a href="#" class="fade-right paused delayed" style="--delay: 6">
+            Contact
+          </a>
+        </li>
       </ul>
       <div class="nav-btns">
-        <button class="btn">Sign Up</button>
+        <!-- <button class="btn">Sign Up</button> -->
+        <button class="btn fade-right paused delayed" style="--delay: 7">
+          Sign Up
+        </button>
       </div>
     </nav>
     <script>
@@ -612,21 +649,21 @@
     </svg>
 
     <script>
-        const observer = new IntersectionObserver(animate);
-
-const elements = document.querySelectorAll(".paused");
-
-elements.forEach(element => {
-    observer.observe(element);
-})
-
-function animate(entries) {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.remove("paused");
+      const observer = new IntersectionObserver(animate);
+      
+      const elements = document.querySelectorAll(".paused");
+      
+      elements.forEach(element => {
+          observer.observe(element);
+      })
+      
+      function animate(entries) {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.remove("paused");
+            }
+          });
       }
-    });
-}
     </script>
 
     <!-- <h1>Leaderboard</h1> -->
