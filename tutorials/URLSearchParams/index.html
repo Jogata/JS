@@ -406,7 +406,11 @@
         width: 100%;
         height: 100%;
         background-color: var(--primary-color-dark);
-        clip-path: polygon(10rem 0, 100% 0, 100% 100%, 0 100%);
+        /* clip-path: polygon(10rem 0, 100% 0, 100% 100%, 0 100%); */
+        /* clip-path: url("#mask-1"); */
+        /* clip-path: url("#mask-2"); */
+        clip-path: url("#mask-3");
+        /* clip-path: url("#mask-4"); */
         z-index: -1;
       }
       
@@ -488,9 +492,14 @@
         content: "";
         /* width: 100vw; */
         width: 100%;
-        height: calc(100% - 2rem);
+        /* height: calc(100% - 2rem); */
+        height: 100%;
         background-color: var(--primary-color-dark);
-        clip-path: polygon(0 0, calc(100% - 10rem) 0%, 100% 100%, 0% 100%);
+        /* clip-path: polygon(0 0, calc(100% - 10rem) 0%, 100% 100%, 0% 100%); */
+        /* clip-path: url("#mask-1"); */
+        /* clip-path: url("#mask-2"); */
+        clip-path: url("#mask-3");
+        /* clip-path: url("#mask-4"); */
         z-index: -1;
       }
       
@@ -552,9 +561,14 @@
         content: "";
         /* width: 100vw; */
         width: 100%;
-        height: calc(100% - 2rem);
+        /* height: calc(100% - 2rem); */
+        height: 100%;
         background-color: var(--primary-color-dark);
-        clip-path: polygon(10rem 0, 100% 0, 100% 100%, 0 100%);
+        /* clip-path: polygon(10rem 0, 100% 0, 100% 100%, 0 100%); */
+        /* clip-path: url("#mask-1"); */
+        /* clip-path: url("#mask-2"); */
+        clip-path: url("#mask-3");
+        /* clip-path: url("#mask-4"); */
         z-index: -1;
       }
       
@@ -742,7 +756,6 @@
           <span><i class="ri-menu-line"></i></span>
         </div>
       </div>
-      <!-- <ul class="nav-links" id="nav-links"> -->
       <ul class="nav-links" id="nav-links" role="list">
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About Us</a></li>
@@ -754,6 +767,24 @@
         <button class="btn">Sign Up</button>
       </div>
     </nav>
+    <script>
+      const menuBtn = document.getElementById("menu-btn");
+      const navLinks = document.getElementById("nav-links");
+      const menuBtnIcon = menuBtn.querySelector("i");
+
+      menuBtn.addEventListener("click", (e) => {
+        navLinks.classList.toggle("open");
+
+        const isOpen = navLinks.classList.contains("open");
+        menuBtnIcon.setAttribute("class", isOpen ? "ri-close-line" : "ri-menu-line");
+      });
+
+      navLinks.addEventListener("click", (e) => {
+        navLinks.classList.remove("open");
+        menuBtnIcon.setAttribute("class", "ri-menu-line");
+      });
+    </script>
+
     <header class="header" id="home">
       <div class="section-container header-container">
         <div class="header-content">
@@ -844,7 +875,6 @@
           responsible development exists in order to develop a more organised
           world and lead to better future
         </p>
-        <!-- <ul class="commitment-list"> -->
         <ul class="commitment-list" role="list">
           <li>
             <div class="gradient-box">
@@ -880,7 +910,6 @@
           We are already developing exciting new technologies that 
           will help people connect and explore in the world
         </p>
-        <!-- <ul class="build-grid"> -->
         <ul class="build-grid" role="list">
           <li>
             <div class="build-card gradient-box">
@@ -904,12 +933,64 @@
       </div>
     </section>
 
+    <section class="section-container client-container" id="resources">
+      <div class="client-image gradient-box">
+        <img src="assets/client.png" alt="client" />
+      </div>
+      <div class="client-content">
+        <h2 class="section-header">
+          What our <span>trusted clients</span> say
+        </h2>
+        <p class="section-description">
+          Find the clients who already trust us, we always give the best to our
+          clients
+        </p>
+        <div class="slider">
+          <div class="slider-track">
+            <div class="slide">
+              <div class="client-card gradient-box">
+                <p>
+                  Exploring my own VR world was an unparalleled experience! As a
+                  designer, I'm constantly seeking inspiration, and this
+                  platform opened up a whole new dimension for me.
+                </p>
+                <h4>Sarah Thompson</h4>
+                <h5>Graphic Designer</h5>
+              </div>
+            </div>
+            <div class="slide">
+              <div class="client-card gradient-box">
+                <p>
+                  Being in the tech field, I'm always on the lookout for
+                  cutting-edge experiences. This VR platform exceeded my
+                  expectations.
+                </p>
+                <h4>John Rodriguez</h4>
+                <h5>Software Engineer</h5>
+              </div>
+            </div>
+            <div class="slide">
+              <div class="client-card gradient-box">
+                <p>
+                  In the world of marketing, creativity is key. This VR website
+                  provided me with a playground to unleash my creativity like
+                  never before.
+                </p>
+                <h4>Emily Chang</h4>
+                <h5>Marketing Manager</h5>
+              </div>
+            </div>
+          </div>
+          <div class="pagination"></div>
+        </div>
+      </div>
+    </section>
+
     <footer class="footer">
       <div class="section-container footer-container">
         <div class="logo footer-logo">
           <a href="#">VETA</a>
         </div>
-        <!-- <ul class="footer-links"> -->
         <ul class="footer-links" role="list">
           <li><a href="#about">About</a></li>
           <li><a href="#project">Projects</a></li>
