@@ -935,7 +935,7 @@
 
     <section class="section-container client-container" id="resources">
       <div class="client-image gradient-box">
-        <img src="assets/client.png" alt="client" />
+        <img src="./assets/veta-images/client.png" alt="client" />
       </div>
       <div class="client-content">
         <h2 class="section-header">
@@ -946,8 +946,10 @@
           clients
         </p>
         <div class="slider">
-          <div class="slider-track">
-            <div class="slide">
+          <!-- <div class="slider-track"> -->
+          <div class="slider-track relative">
+            <!-- <div class="slide"> -->
+            <div class="slide relative current">
               <div class="client-card gradient-box">
                 <p>
                   Exploring my own VR world was an unparalleled experience! As a
@@ -958,7 +960,8 @@
                 <h5>Graphic Designer</h5>
               </div>
             </div>
-            <div class="slide">
+            <!-- <div class="slide"> -->
+            <div class="slide next">
               <div class="client-card gradient-box">
                 <p>
                   Being in the tech field, I'm always on the lookout for
@@ -969,7 +972,8 @@
                 <h5>Software Engineer</h5>
               </div>
             </div>
-            <div class="slide">
+            <!-- <div class="slide"> -->
+            <div class="slide prev">
               <div class="client-card gradient-box">
                 <p>
                   In the world of marketing, creativity is key. This VR website
@@ -981,9 +985,55 @@
               </div>
             </div>
           </div>
-          <div class="pagination"></div>
+          <!-- <div class="pagination"></div> -->
+          <div class="control">
+            <button id="next">
+              next <i class="ri-arrow-left-double-line"></i>
+            </button>
+            <button id="prev">
+              prev <i class="ri-arrow-right-double-line"></i>
+            </button>
+          </div>      
         </div>
       </div>
+      <script>
+        const slides = document.querySelectorAll(".slide");
+        const forwards = document.getElementById("next");
+        const backwards = document.getElementById("prev");
+        const slidesLength = slides.length;
+        let current = 0;
+        let next = 1;
+        let prev = slidesLength - 1;
+  
+        forwards.addEventListener("click", () => {
+          slides[current].classList.replace("current", "prev");
+          slides[next].classList.replace("next", "current");
+          slides[prev].classList.remove("prev");
+          next++;
+          next = next % slidesLength;
+          slides[next].classList.add("next");
+          current++;
+          current = current % slidesLength;
+          prev++;
+          prev = prev % slidesLength;
+        });
+  
+        backwards.addEventListener("click", () => {
+          slides[current].classList.replace("current", "next");
+          slides[prev].classList.replace("prev", "current");
+          slides[next].classList.remove("next");
+          prev--;
+          prev = prev + slidesLength;
+          prev = prev % slidesLength;
+          slides[prev].classList.add("prev");
+          current--;
+          current = current + slidesLength;
+          current = current % slidesLength;
+          next--;
+          next = next + slidesLength;
+          next = next % slidesLength;
+        });
+      </script>
     </section>
 
     <footer class="footer">
