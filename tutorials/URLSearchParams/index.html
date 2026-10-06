@@ -1185,8 +1185,8 @@
       }
     </style>
     <style>
-.zoom-in {
-  animation: zoom-in 2s linear backwards;
+.fade-in {
+  animation: fade-in 2s linear backwards;
 }
 
 .rotate {
@@ -1246,7 +1246,7 @@
   animation-play-state: paused;
 }
 
-@keyframes zoom-in {
+@keyframes fade-in {
   0% {
     opacity: 0;
   }
@@ -1345,6 +1345,7 @@
       padding: 0;
       box-sizing: border-box;
     }
+  
     body {
       min-height: 100vh;
       padding: 5rem 0;
@@ -1355,52 +1356,82 @@
       font-family: "Courier Prime", monospace;
       background-color: #222;
     }
+
+    .coffee-section {
+      width: 100%;
+    }
+  
     nav,
     header,
     main {
       width: 90%;
       max-width: 800px;
+      margin-inline: auto;
       color: #fff;
     }
+  
     nav,
     main {
       background-color: #2f2f2f;
     }
+  
     nav {
       padding: 0 1rem;
     }
+  
     nav ul {
       list-style: none;
-      margin-bottom: -0.8rem;
+      width: 100%;
+      /* margin-bottom: -0.8rem; */
       display: flex;
       gap: 0.5rem;
       align-items: center;
       justify-content: center;
       font-size: 0.85rem;
     }
+  
     nav ul li {
       cursor: pointer;
     }
+  
     .circle {
+      display: inline-block;
       width: 0.3rem;
       height: 0.3rem;
       border-radius: 50%;
       background-color: #1e1e1e;
     }
+  
     .logo {
       margin: 0 1rem;
+      position: relative;
+      /* margin: 0 2rem; */
       padding: 1rem 1.2rem;
       color: #222;
       font-size: 1.5rem;
       font-family: "Goldman", sans-serif;
-      background-color: #fff;
+      /* outline: 1rem solid #fff; */
+      /* background-color: #fff; */
       box-shadow: 0 0.25rem 1.5rem #1e1e1e;
       z-index: 1;
     }
+
+    .logo::after {
+      position: absolute;
+      top: -5%;
+      left: -5%;
+      content: "";
+      width: 110%;
+      height: 110%;
+      background-color: #fff;
+      z-index: -1;
+    }
+  
     header {
       position: relative;
       min-height: 300px;
-      padding: 0 1rem;
+      /* padding: 0 1rem; */
+      padding: 3rem 1rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1410,6 +1441,7 @@
       background-repeat: no-repeat;
       background-size: cover;
     }
+  
     .layer {
       position: absolute;
       width: 100%;
@@ -1417,16 +1449,19 @@
       background-color: #222;
       opacity: 0.7;
     }
+  
     h1,
     p,
     button {
       position: relative;
     }
+  
     p {
       max-width: 600px;
       margin: 1.5rem auto 2rem auto;
       font-size: 0.8rem;
     }
+  
     button {
       padding: 0.5rem 0.8rem;
       color: inherit;
@@ -1435,27 +1470,58 @@
       background-color: transparent;
       cursor: pointer;
     }
+  
     main {
       padding: 3rem 2rem 5rem 2rem;
     }
+  
     h2 {
       margin-bottom: 1rem;
       font-size: 1rem;
     }
+  
     .images {
       display: flex;
       gap: 0.25rem;
       justify-content: space-between;
     }
+  
     .images img {
       width: 100%;
       object-fit: cover;
       transition: 0.5s;
       cursor: pointer;
     }
+  
     .images img:hover {
       transform: scale(1.2);
       box-shadow: 0 0.5rem 1rem #1e1e1e;
+    }
+  
+    @media (max-width: 700px) {
+      nav {
+        font-size: 0.6rem;
+        text-align: center;
+      }
+  
+      h2 {
+        text-align: center;
+      }
+  
+      .logo {
+        font-size: 1.2rem;
+      }
+  
+      .images {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+      }
+  
+      .images img {
+        max-width: 260px;
+        min-height: 200px;
+      }
     }
   </style>
   </head>
@@ -1743,7 +1809,7 @@
       </div>
     </footer>
 
-    <div class="coffee">
+    <div class="coffee-section">
       <nav>
         <ul>
           <li>Our Story</li>
@@ -1779,13 +1845,20 @@
     </div>
 
     <!-- <div class="bg"></div> -->
-    <div class="page page-width" style="display: none;">
+    <div class="page page-width" style="display: block;">
     <nav class="page-width">
       <div class="nav-header">
         <div class="logo nav-logo">
-          <a href="#">VETA</a>
+          <!-- <a href="#">VETA</a> -->
+          <a href="#" class="fade-in paused">
+            VETA
+          </a>
         </div>
-        <button class="nav-menu-btn" id="menu-btn" title="Menu">
+        <button 
+          id="menu-btn" 
+          class="nav-menu-btn fade-in paused" 
+          title="Menu"
+        >
           <span class="sr-only">menu</span>
           <span><i class="ri-menu-line"></i></span>
         </button>
@@ -1794,14 +1867,57 @@
         </div> -->
       </div>
       <ul class="nav-links" id="nav-links" role="list">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About Us</a></li>
-        <li><a href="#project">Our Projects</a></li>
-        <li><a href="#community">Community</a></li>
-        <li><a href="#resources">Resources</a></li>
+        <li>
+          <!-- <a href="#home">Home</a> -->
+          <a href="#home" 
+            class="fade-right paused delayed" 
+            style="--delay: 0"
+          >
+            Home
+          </a>
+        </li>
+        <li>
+          <!-- <a href="#about">About Us</a> -->
+          <a href="#about" 
+            class="fade-right paused delayed" 
+            style="--delay: 2"
+          >
+            About Us
+          </a>
+        </li>
+        <li>
+          <!-- <a href="#project">Our Projects</a> -->
+          <a href="#project" 
+            class="fade-right paused delayed" 
+            style="--delay: 4"
+          >
+            Project
+          </a>
+        </li>
+        <li>
+          <!-- <a href="#community">Community</a> -->
+          <a href="#community" 
+            class="fade-right paused delayed" 
+            style="--delay: 6"
+          >
+            Community
+          </a>
+        </li>
+        <li>
+          <!-- <a href="#resources">Resources</a> -->
+          <a href="#resources" 
+            class="fade-right paused delayed" 
+            style="--delay: 8"
+          >
+          Resources
+          </a>
+        </li>
       </ul>
       <div class="nav-btns">
-        <button class="btn">Sign Up</button>
+        <!-- <button class="btn"> -->
+        <button class="btn fade-right paused">
+          Sign Up
+        </button>
       </div>
     </nav>
     <script>
@@ -2640,4 +2756,4 @@
     </script>
   </body>
 </html>
-<!-- 70-180-310-538-668-870-983-1194-2205-2522 -->
+<!-- 70-180-310-538-668-870-983-1194-2205-2522-2643 -->
