@@ -91,42 +91,45 @@
       
       body {
         font-family: "Poppins", sans-serif;
-        background-image: url("./assets/jadoo-images/header-bg.png");
+        /* background-image: url("./assets/jadoo-images/header-bg.png");
         background-position: top center;
         background-repeat: no-repeat;
-        background-size: contain;
+        background-size: contain; */
       }
       
       nav {
         position: fixed;
         isolation: isolate;
         width: 100%;
-        max-width: var(--max-width);
-        margin-inline: auto;
+        /* max-width: var(--max-width); */
+        /* margin-inline: auto; */
+        background-color: var(--text-dark);
         z-index: 9;
       }
-
-.nav-header {
-  padding: 1rem;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: var(--text-dark);
-}
-
-.nav-logo .logo {
-  color: var(--white);
-}
-
-.nav-menu-btn {
-  color: var(--white);
-  font-size: 1.5rem;
-  cursor: pointer;
-}
+      
+      .nav-header {
+        padding: 1rem;
+        width: 100%;
+        max-width: var(--max-width);
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: var(--text-dark);
+      }
+      
+      .nav-logo .logo {
+        color: var(--white);
+      }
+      
+      .nav-menu-btn {
+        color: var(--white);
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
 
 .nav-links {
-  list-style: none;
+  /* list-style: none; */
   position: absolute;
   top: 65px;
   left: 0;
@@ -158,9 +161,27 @@
 }
 
 .header-container {
+  position: relative;
+  max-width: 100%;
   display: grid;
   gap: 2rem;
-  overflow: hidden;
+  /* overflow: hidden; */
+}
+
+.header-container::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 100%;
+  /* width: 100vw; */
+  height: 100%;
+  min-height: 100vh;
+  background-image: url("./assets/jadoo-images/header-bg.png");
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-size: cover;
+  z-index: -1;
 }
 
 .header-image img {
@@ -198,11 +219,12 @@
 
 .header-btns .btn {
   padding: 1rem 1.5rem;
-  outline: none;
-  border: none;
+  /* outline: none; */
+  /* border: none; */
   color: var(--white);
   font-size: 1rem;
-  border-radius: 5px;
+  /* border-radius: 5px; */
+  border-radius: 6px;
   background-color: #f1a501;
   box-shadow: 2px 2px 20px rgba(241, 165, 1, 0.5);
   cursor: pointer;
@@ -309,6 +331,111 @@
         color: var(--text-dark);
         transform: rotateY(180deg);
       }
+
+      .trip-container {
+        display: grid;
+        gap: 2rem;
+        overflow: hidden;
+      }
+      
+      .trip-image img {
+        max-width: 425px;
+        margin-inline: auto;
+      }
+      
+      .trip-list {
+        list-style: none;
+        margin-top: 2rem;
+        display: grid;
+        gap: 2rem;
+      }
+      
+      .trip-list li {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+      }
+      
+      .trip-list li span {
+        padding: 8px 15px;
+        color: var(--white);
+        font-size: 1.75rem;
+        border-radius: 1rem;
+      }
+      
+      .trip-list li:nth-child(1) span {
+        background-color: #f0bb1f;
+      }
+      
+      .trip-list li:nth-child(2) span {
+        background-color: #f15a2b;
+      }
+      
+      .trip-list li:nth-child(3) span {
+        background-color: #006380;
+      }
+      
+      .trip-list h4 {
+        color: var(--text-dark);
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+      
+      .trip-list p {
+        color: var(--text-light);
+      }
+      
+      .client-container {
+        padding-bottom: 3rem;
+        display: grid;
+        gap: 2rem 4rem;
+      }
+      
+      .slider {
+        width: 100%;
+      }
+      
+      .slide {
+        height: auto;
+      }
+      
+      .client-card {
+        position: relative;
+        isolation: isolate;
+        padding-block: 3rem 2rem;
+        padding-inline: 3rem 1rem;
+      }
+      
+      .client-card img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        max-width: 80px;
+        border-radius: 50%;
+      }
+      
+      .client-card-content {
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
+      }
+      
+      .client-card-content p {
+        margin-bottom: 2rem;
+        color: var(--text-light);
+      }
+      
+      .client-card-content h4 {
+        color: var(--text-dark);
+        font-size: 1.2rem;
+        font-weight: 600;
+      }
+      
+      .client-card-content h5 {
+        color: var(--text-light);
+        font-size: 1rem;
+        font-weight: 500;
+      }
     </style>
   </head>
   <body>
@@ -319,9 +446,12 @@
             Jad<span>oo</span>.
           </a>
         </div>
-        <div class="nav-menu-btn" id="menu-btn">
+        <!-- <div class="nav-menu-btn" id="menu-btn">
           <i class="ri-menu-line"></i>
-        </div>
+        </div> -->
+        <button class="nav-menu-btn" id="menu-btn">
+          <i class="ri-menu-line"></i>
+        </button>
       </div>
       <ul class="nav-links" id="nav-links">
         <li><a href="#home">Home</a></li>
@@ -332,7 +462,7 @@
       </ul>
     </nav>
     <script>
-      {
+      // {
       const menuBtn = document.getElementById("menu-btn");
       const navLinks = document.getElementById("nav-links");
       const menuBtnIcon = menuBtn.querySelector("i");
@@ -348,7 +478,7 @@
         navLinks.classList.remove("open");
         menuBtnIcon.setAttribute("class", "ri-menu-line");
       });
-      }
+      // }
     </script>
 
     <header class="section-container header-container" id="home">
@@ -366,10 +496,14 @@
         </p>
         <div class="header-btns">
           <button class="btn">Find out more</button>
-          <a href="#">
+          <!-- <a href="#">
             <span><i class="ri-play-fill"></i></span>
             Play Demo
-          </a>
+          </a> -->
+          <button href="#">
+            <span><i class="ri-play-fill"></i></span>
+            Play Demo
+          </button>
         </div>
       </div>
     </header>
