@@ -105,10 +105,10 @@
         clip-path: url("#mask-4");
       }
         
-      a.not-active:hover {
-        /* color: #fff; */
-        /* background-color: red; */
-      }
+      /* a.not-active:hover {
+        color: #fff;
+        background-color: red;
+      } */
         
       /* .bulled {
         list-style: inside circle;
@@ -118,7 +118,19 @@
       /* .bulled li {
         margin: 0.5rem 0;
       } */
-        
+      
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        overflow: hidden;
+      }
+      
       .section-container {
         max-width: var(--max-width);
         margin: auto;
@@ -214,16 +226,16 @@
         background-size: contain; */
       }
 
-      @media screen and (min-aspect-ratio: 16/9) {
+      /* @media screen and (min-aspect-ratio: 16/9) {
         body {
-          /* background-position: top center; */
-          /* background-size: contain; */
+          background-position: top center;
+          background-size: contain;
         }
-      }
+      } */
       
-      .dark-bg {
-        /* background-color: #18293d; */
-      }
+      /* .dark-bg {
+        background-color: #18293d;
+      } */
         
       nav {
         position: fixed;
@@ -386,32 +398,32 @@
         border: 1px solid red;
       }
       
-      .header-btns a {
-        /* display: flex;
+      /* .header-btns a {
+        display: flex;
         gap: 1rem;
         align-items: center;
         color: var(--text-light);
         font-size: 1rem;
         font-weight: 500;
-        transition: 0.3s; */
-      }
+        transition: 0.3s;
+      } */
       
-      .header-btns a:hover {
-        /* color: var(--text-dark); */
-      }
+      /* .header-btns a:hover {
+        color: var(--text-dark);
+      } */
 
       .play-btn:hover {
         color: var(--text-dark);
       }
       
-      .header-btns a span {
-        /* padding: 6px 12px;
+      /* .header-btns a span {
+        padding: 6px 12px;
         color: var(--white);
         font-size: 1.5rem;
         border-radius: 50%;
         background-color: var(--primary-color);
-        box-shadow: 2px 2px 20px rgba(224, 105, 81, 0.5); */
-      }
+        box-shadow: 2px 2px 20px rgba(224, 105, 81, 0.5);
+      } */
 
       .play-btn span {
         padding: 6px 12px;
@@ -838,20 +850,86 @@
         /* cursor: pointer; */
       }
       
-      .details-btn:hover {
-        /* color: #000; */
-        /* background-color: #eee8; */
-        /* box-shadow: inset 2px 2px 2px #000,
-                  inset -2px -2px 2px #fff; */
-      }
+      /* .details-btn:hover {
+        color: #000;
+        background-color: #eee8;
+        box-shadow: inset 2px 2px 2px #000,
+                  inset -2px -2px 2px #fff;
+      } */
       
-      .big-fs {
-        /* font-size: 4rem; */
-      }
+      /* .big-fs {
+        font-size: 4rem;
+      } */
       
-      .cursive {
-        /* font-family: "Arizonia", cursive; */
-      }
+      /* .cursive {
+        font-family: "Arizonia", cursive;
+      } */
+    </style>
+    <style>
+        .slider {
+          margin-top: 2rem;
+        }
+        
+        .slider .control {
+          margin-top: 2rem;
+          text-align: center;
+        }
+      
+        .slider button {
+          color: var(--white);
+          font-size: 0px;
+          border-radius: 50%;
+          border: 1px solid black;
+          background-color: var(--text-dark);
+        }
+      
+        button#prev {
+          padding: 0.45rem 0.5rem 0.45rem 0.7rem;
+        }
+      
+        button#next {
+          padding: 0.45rem 0.7rem 0.45rem 0.5rem;
+        }
+      
+        .slider button i {
+          font-size: 2rem;
+        }
+      
+        .slider-track {
+          display: flex;
+          overflow: hidden;
+        }
+      
+        .slide {
+          flex-shrink: 0;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          padding: 0 2%;
+          display: flex;
+          transform: translateX(100%);
+        }
+        
+        /* .slide.active {
+          transform: translateX(0);
+        } */
+        
+        .relative {
+          position: relative;
+        }
+        
+        .current {
+          transform: translate(0);
+          transition: transform 300ms;
+        }
+        .next {
+          transform: translate(100%);
+          transition: transform 300ms;
+        }
+        .prev {
+          transform: translate(-100%);
+          transition: transform 300ms;
+        }
     </style>
   </head>
   <body>
@@ -1071,9 +1149,9 @@
         <!-- Slider main container -->
         <div class="slider">
           <!-- Additional required wrapper -->
-          <div class="slider-track">
+          <div class="slider-track relative">
             <!-- Slides -->
-            <div class="slide">
+            <div class="slide relative current">
               <div class="client-card">
                 <img src="./assets/jadoo-images/client-1.jpg" alt="client" />
                 <div class="client-card-content">
@@ -1088,7 +1166,7 @@
                 </div>
               </div>
             </div>
-            <div class="slide">
+            <div class="slide next">
               <div class="client-card">
                 <img src="./assets/jadoo-images/client-2.jpg" alt="client" />
                 <div class="client-card-content">
@@ -1102,7 +1180,7 @@
                 </div>
               </div>
             </div>
-            <div class="slide">
+            <div class="slide prev">
               <div class="client-card">
                 <img src="./assets/jadoo-images/client-3.jpg" alt="client" />
                 <div class="client-card-content">
@@ -1118,14 +1196,16 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="control">
-          <button id="next">
-            next <i class="ri-arrow-left-double-line"></i>
-          </button>
-          <button id="prev">
-            prev <i class="ri-arrow-right-double-line"></i>
-          </button>
+          <div class="control">
+            <button id="next" title="Next client">
+              <span className="sr-only">Next client</span>
+              <i class="ri-arrow-left-double-line"></i>
+            </button>
+            <button id="prev" title="Previous client">
+              <span className="sr-only">Previous client</span>
+              <i class="ri-arrow-right-double-line"></i>
+            </button>
+          </div>
         </div>
         <script>
           const slides = document.querySelectorAll(".slide");
@@ -1210,8 +1290,12 @@
           </ul>
           <h5>Discover our app</h5>
           <div class="footer-discover">
-            <a href="#"><img src="./assets/jadoo-images/google-play.jpg" alt="discover" /></a>
-            <a href="#"><img src="./assets/jadoo-images/app-store.jpg" alt="discover" /></a>
+            <a href="#">
+              <img src="./assets/jadoo-images/google-play.jpg" alt="discover" />
+            </a>
+            <a href="#">
+              <img src="./assets/jadoo-images/app-store.jpg" alt="discover" />
+            </a>
           </div>
         </div>
       </div>
@@ -1339,4 +1423,4 @@
     </script>
   </body>
 </html>
-<!-- 70-1028-1139-1239 -->
+<!-- 70-1028-1139-1239-1342 -->
