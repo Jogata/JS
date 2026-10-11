@@ -984,7 +984,7 @@
         }
       }
 
-      .slide2 {
+      .slide2, .slide3 {
           flex-shrink: 0;
           position: absolute;
           width: 100%;
@@ -1601,6 +1601,107 @@
       </script>
     </div>
 
+    <div class="slider">
+      <div class="slider-track relative">
+        <div class="slide3 relative current">
+          <div class="client-card">
+            <img src="./assets/jadoo-images/client-1.jpg" alt="client" />
+            <div class="client-card-content">
+              <p>
+                Booking my trips through this platform has been a
+                game-changer! From the intuitive interface to the seamless
+                booking process, I've never felt more excited to explore new
+                destinations.
+              </p>
+              <h4>Emily Watson</h4>
+              <h5>Travel Enthusiast</h5>
+            </div>
+          </div>
+        </div>
+        <div class="slide3 next">
+          <div class="client-card">
+            <img src="./assets/jadoo-images/client-2.jpg" alt="client" />
+            <div class="client-card-content">
+              <p>
+                As a busy professional, time is of the essence. This website
+                made planning my vacation a breeze, allowing me to focus on
+                what matters most: making memories with my family.
+              </p>
+              <h4>David Nguyen</h4>
+              <h5>Business Executive</h5>
+            </div>
+          </div>
+        </div>
+        <div class="slide3 prev">
+          <div class="client-card">
+            <img src="./assets/jadoo-images/client-3.jpg" alt="client" />
+            <div class="client-card-content">
+              <p>
+                I've been using this service for years, and it never
+                disappoints. The convenience of booking my flights,
+                accommodations, and activities all in one place saves me
+                time and stress every trip.
+              </p>
+              <h4>Michael Johnson</h4>
+              <h5>Frequent Flyer</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="control">
+        <button id="next3" title="Next client">
+          <span className="sr-only">Next client</span>
+          <i class="ri-arrow-left-double-line"></i>
+        </button>
+        <button id="prev3" title="Previous client">
+          <span className="sr-only">Previous client</span>
+          <i class="ri-arrow-right-double-line"></i>
+        </button>
+      </div>
+      <script>
+        const setUpSliderWithTransform = () => {
+        const slides = document.querySelectorAll(".slide3");
+        const forwards = document.getElementById("next3");
+        const backwards = document.getElementById("prev3");
+        const slidesLength = slides.length;
+        let current = 0;
+        let next = 1;
+        let prev = slidesLength - 1;
+  
+        forwards.addEventListener("click", () => {
+          slides[current].classList.replace("current", "prev");
+          slides[next].classList.replace("next", "current");
+          slides[prev].classList.remove("prev");
+          next++;
+          next = next % slidesLength;
+          slides[next].classList.add("next");
+          current++;
+          current = current % slidesLength;
+          prev++;
+          prev = prev % slidesLength;
+        });
+  
+        backwards.addEventListener("click", () => {
+          slides[current].classList.replace("current", "next");
+          slides[prev].classList.replace("prev", "current");
+          slides[next].classList.remove("next");
+          prev--;
+          prev = prev + slidesLength;
+          prev = prev % slidesLength;
+          slides[prev].classList.add("prev");
+          current--;
+          current = current + slidesLength;
+          current = current % slidesLength;
+          next--;
+          next = next + slidesLength;
+          next = next % slidesLength;
+        });
+        }
+  
+        setUpSliderWithTransform();
+      </script>
+    </div>
+
     <footer class="footer">
       <div class="section-container footer-container">
         <div class="footer-col">
@@ -1776,4 +1877,4 @@
     </script>
   </body>
 </html>
-<!-- 70-1028-1139-1239-1342-1422 -->
+<!-- 70-1028-1139-1239-1342-1422-1779 -->
