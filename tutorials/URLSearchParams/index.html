@@ -984,7 +984,7 @@
         }
       }
 
-      .slide2, .slide3 {
+      .slide2, .slide3, .slide4 {
           flex-shrink: 0;
           position: absolute;
           width: 100%;
@@ -1699,6 +1699,108 @@
         }
   
         setUpSliderWithTransform();
+      </script>
+    </div>
+
+    <div class="slider slider4 to-right">
+      <div class="slider-track relative">
+        <div class="slide4 relative current">
+          <div class="client-card">
+            <img src="./assets/jadoo-images/client-1.jpg" alt="client" />
+            <div class="client-card-content">
+              <p>
+                Booking my trips through this platform has been a
+                game-changer! From the intuitive interface to the seamless
+                booking process, I've never felt more excited to explore new
+                destinations.
+              </p>
+              <h4>Emily Watson</h4>
+              <h5>Travel Enthusiast</h5>
+            </div>
+          </div>
+        </div>
+        <div class="slide4 next">
+          <div class="client-card">
+            <img src="./assets/jadoo-images/client-2.jpg" alt="client" />
+            <div class="client-card-content">
+              <p>
+                As a busy professional, time is of the essence. This website
+                made planning my vacation a breeze, allowing me to focus on
+                what matters most: making memories with my family.
+              </p>
+              <h4>David Nguyen</h4>
+              <h5>Business Executive</h5>
+            </div>
+          </div>
+        </div>
+        <div class="slide4 prev">
+          <div class="client-card">
+            <img src="./assets/jadoo-images/client-3.jpg" alt="client" />
+            <div class="client-card-content">
+              <p>
+                I've been using this service for years, and it never
+                disappoints. The convenience of booking my flights,
+                accommodations, and activities all in one place saves me
+                time and stress every trip.
+              </p>
+              <h4>Michael Johnson</h4>
+              <h5>Frequent Flyer</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="control">
+        <button id="next4" title="Next client">
+          <span className="sr-only">Next client</span>
+          <i class="ri-arrow-left-double-line"></i>
+        </button>
+        <button id="prev4" title="Previous client">
+          <span className="sr-only">Previous client</span>
+          <i class="ri-arrow-right-double-line"></i>
+        </button>
+      </div>
+      <script>
+        {
+          const slider = document.querySelector(".slider4");
+          const slides = document.querySelectorAll(".slide4");
+          const forwards = document.getElementById("next4");
+          const backwards = document.getElementById("prev4");
+          const slidesLength = slides.length;
+          let current = 0;
+          let next = 1;
+          let prev = slidesLength - 1;
+          
+          forwards.addEventListener("click", () => {
+            slider.classList.replace("to-right", "to-left");
+            slides[current].classList.replace("current", "prev");
+            slides[next].classList.replace("next", "current");
+            slides[prev].classList.remove("prev");
+            next++;
+            next = next % slidesLength;
+            slides[next].classList.add("next");
+            current++;
+            current = current % slidesLength;
+            prev++;
+            prev = prev % slidesLength;
+          });
+        
+          backwards.addEventListener("click", () => {
+            slider.classList.replace("to-left", "to-right");
+            slides[current].classList.replace("current", "next");
+            slides[prev].classList.replace("prev", "current");
+            slides[next].classList.remove("next");
+            prev--;
+            prev = prev + slidesLength;
+            prev = prev % slidesLength;
+            slides[prev].classList.add("prev");
+            current--;
+            current = current + slidesLength;
+            current = current % slidesLength;
+            next--;
+            next = next + slidesLength;
+            next = next % slidesLength;
+          });
+        }
       </script>
     </div>
 
