@@ -250,6 +250,7 @@
       }
 
       .slider {
+        padding: 2rem 0;
         /* background: url("https://images.unsplash.com/photo-1604147495798-57beb5d6af73?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"); */
         /* clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%); */
         overflow: hidden;
@@ -280,70 +281,127 @@
       
       .slider-item {
         flex-shrink: 0;
-        position: relative;
+        /* position: relative; */
         /* width: 100vw; */
         width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        /* display: flex; */
+        /* align-items: center; */
+        /* justify-content: center; */
+        display: grid;
+        grid-template-columns: auto 1fr;
       }
       
       .slider-bg {
-        position: absolute;
+        /* position: absolute; */
+        /* width: 750px; */
+        grid-column: 1/2;
+        grid-row: 1/2;
         width: 100%;
         max-width: 750px;
-        /* width: 750px; */
+        margin: auto;
         /* height: 750px; */
         height: 100%;
         max-height: 750px;
         border-radius: 50%;
       }
+
+      .test {
+        grid-column: 2/3;
+        grid-row: 1/2;
+        display: grid;
+      }
+
+      .slider-data {
+        grid-column: 1/2;
+        grid-row: 1/2;
+        /* margin: auto 10% auto auto; */
+        margin: 10% 5% auto auto;
+        text-align: center;
+        z-index: 2;
+      }
       
       .slider-img {
+        grid-column: 1/2;
+        grid-row: 1/2;
         width: 90%;
         max-width: 750px;
+        margin: auto;
         z-index: 1;
       }
       
       .slider-title {
-        position: absolute;
-        top: 10%;
-        right: 10%;
+        /* position: absolute; */
+        /* top: 10%; */
+        /* right: 10%; */
+        /* grid-column: 1/2; */
+        /* grid-row: 1/2; */
+        /* margin: auto 0 auto auto; */
         color: white;
         font-size: 60px;
         font-weight: 900;
         text-align: center;
-        z-index: 1;
+        /* z-index: 1; */
       }
       
       .slider-price {
-        position: absolute;
-        top: 10%;
-        left: 10%;
+        /* position: absolute; */
+        /* top: 10%; */
+        /* left: 10%; */
+        grid-column: 1/2;
+        grid-row: 1/2;
+        margin: 100% 0 auto;
+        padding: 0.2em;
         color: white;
         font-size: 60px;
         font-weight: 300;
         text-align: center;
         border: 1px solid gray;
-        z-index: 1;
+        border-radius: 12px;
+        /* z-index: 1; */
+        z-index: 2;
       }
       
       .buy-button {
-        position: absolute;
-        top: 50%;
-        right: 10%;
+        /* position: absolute; */
+        /* top: 50%; */
+        /* right: 10%; */
+        /* grid-column: 1/2; */
+        /* grid-row: 1/2; */
+        /* margin: auto 0 auto auto; */
         color: white;
         font-size: 30px;
         font-weight: 900;
         border: 1px solid gray;
         background-color: black;
-        z-index: 1;
-        cursor: pointer;
+        transition: color 300ms, 
+        background-color 300ms;
+        /* z-index: 1; */
+        /* z-index: 2; */
+        /* cursor: pointer; */
       }
       
       .buy-button:hover {
         color: black;
         background-color: white;
+      }
+
+      @media screen and (max-width: 800px) {
+        .slider-price {
+          grid-column: 1/2;
+          grid-row: 1/2;
+          margin: 0 auto auto;
+          /* background-color: black; */
+          background-color: lightgrey;
+        }
+
+        .test {
+          grid-column: 1/2;
+          grid-row: 1/2;
+        }
+
+        .slider-data {
+          margin: auto;
+        }
       }
 
       .slider-item:nth-child(1) .slider-bg {
@@ -705,9 +763,9 @@
         font-weight: 300;
       }
 
-      @media screen and (max-width:480px) {
+      @media screen and (max-width: 480px) {
         nav {
-          padding: 20px;
+          /* padding: 20px; */
         }
       
         .search {
@@ -715,16 +773,16 @@
         }
       
         .nav-bottom {
-          flex-wrap: wrap;
+          /* flex-wrap: wrap; */
         }
       
-        .menu-item{
-          margin: 20px;
+        .menu-item {
+          /* margin: 20px; */
           font-size: 20px;
           font-weight: 700;
         }
       
-        .slider{
+        .slider {
           clip-path: none;
         }
         
@@ -742,10 +800,10 @@
         }
       
         .slider-price {
-          top: unset;
-          bottom: -50;
-          left: 0;
-          background-color: lightgrey;
+          /* top: unset; */
+          /* bottom: -50; */
+          /* left: 0; */
+          /* background-color: lightgrey; */
         }
         
         .buy-button {
@@ -849,13 +907,17 @@
     <div class="slider">
       <div class="slider-wrapper">
         <div class="slider-item">
-          <img src="./assets/images-nike/air.png" alt="" class="slider-img">
-          <div class="slider-bg"></div>
-          <h1 class="slider-title">AIR FORCE</br> NEW</br> SEASON</h1>
           <h2 class="slider-price">$119</h2>
-          <a href="#product" class="buy-button">
-            BUY NOW!
-          </a> 
+          <div class="test">
+            <img src="./assets/images-nike/air.png" alt="" class="slider-img">
+            <div class="slider-bg"></div>
+            <div class="slider-data">
+              <h1 class="slider-title">AIR FORCE</br> NEW</br> SEASON</h1>
+              <a href="#product" class="buy-button">
+                BUY NOW!
+              </a> 
+            </div>
+          </div>
         </div>
         <div class="slider-item">
           <img src="./assets/images-nike/jordan.png" alt="" class="slider-img">
