@@ -926,40 +926,56 @@
           </div>
         </div>
         <div class="slider-item">
-          <img src="./assets/images-nike/jordan.png" alt="" class="slider-img">
-          <div class="slider-bg"></div>
-          <h1 class="slider-title">AIR JORDAN</br> NEW</br> SEASON</h1>
           <h2 class="slider-price">$149</h2>
-          <a href="#product" class="buy-button">
-            BUY NOW!
-          </a> 
+          <div class="test">
+            <img src="./assets/images-nike/jordan.png" alt="" class="slider-img">
+            <div class="slider-bg"></div>
+            <div class="slider-data">
+              <h1 class="slider-title">AIR JORDAN</br> NEW</br> SEASON</h1>
+              <a href="#product" class="buy-button">
+                BUY NOW!
+              </a> 
+            </div>
+          </div>
         </div>
         <div class="slider-item">
-          <img src="./assets/images-nike/blazer.png" alt="" class="slider-img">
-          <div class="slider-bg"></div>
-          <h1 class="slider-title">BLAZER</br> NEW</br> SEASON</h1>
           <h2 class="slider-price">$109</h2>
-          <a href="#product" class="buy-button">
-            BUY NOW!
-          </a> 
+          <div class="test">
+            <img src="./assets/images-nike/blazer.png" alt="" class="slider-img">
+            <div class="slider-bg"></div>
+            <div class="slider-data">
+              <h1 class="slider-title">BLAZER</br> NEW</br> SEASON</h1>
+              <a href="#product" class="buy-button">
+                BUY NOW!
+              </a> 
+            </div>
+          </div>
         </div>
         <div class="slider-item">
-          <img src="./assets/images-nike/crater.png" alt="" class="slider-img">
-          <div class="slider-bg"></div>
-          <h1 class="slider-title">CRATER</br> NEW</br> SEASON</h1>
           <h2 class="slider-price">$129</h2>
-          <a href="#product" class="buy-button">
-            BUY NOW!
-          </a>
+          <div class="test">
+            <img src="./assets/images-nike/crater.png" alt="" class="slider-img">
+            <div class="slider-bg"></div>
+            <div class="slider-data">
+              <h1 class="slider-title">CRATER</br> NEW</br> SEASON</h1>
+              <a href="#product" class="buy-button">
+                BUY NOW!
+              </a>
+            </div>
+          </div>
         </div>
         <div class="slider-item">
-          <img src="./assets/images-nike/hippie.png" alt="" class="slider-img">
-          <div class="slider-bg"></div>
-          <h1 class="slider-title">HIPPIE</br> NEW</br> SEASON</h1>
           <h2 class="slider-price">$99</h2>
-          <a href="#product" class="buy-button">
-            BUY NOW!
-          </a>
+          <div class="test">
+            <img src="./assets/images-nike/hippie.png" alt="" class="slider-img">
+            <div class="slider-bg"></div>
+            <div class="slider-data">
+              <h1 class="slider-title">HIPPIE</br> NEW</br> SEASON</h1>
+              <a href="#product" class="buy-button">
+                BUY NOW!
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1138,11 +1154,11 @@
           colors: [
             {
               code: "black",
-              img: "./img/air.png",
+              img: "./assets/images-nike/air.png",
             },
             {
               code: "darkblue",
-              img: "./img/air2.png",
+              img: "./assets/images-nike/air2.png",
             },
           ],
         },
@@ -1153,11 +1169,11 @@
           colors: [
             {
               code: "lightgray",
-              img: "./img/jordan.png",
+              img: "./assets/images-nike/jordan.png",
             },
             {
               code: "green",
-              img: "./img/jordan2.png",
+              img: "./assets/images-nike/jordan2.png",
             },
           ],
         },
@@ -1168,11 +1184,11 @@
           colors: [
             {
               code: "lightgray",
-              img: "./img/blazer.png",
+              img: "./assets/images-nike/blazer.png",
             },
             {
               code: "green",
-              img: "./img/blazer2.png",
+              img: "./assets/images-nike/blazer2.png",
             },
           ],
         },
@@ -1183,11 +1199,11 @@
           colors: [
             {
               code: "black",
-              img: "./img/crater.png",
+              img: "./assets/images-nike/crater.png",
             },
             {
               code: "lightgray",
-              img: "./img/crater2.png",
+              img: "./assets/images-nike/crater2.png",
             },
           ],
         },
@@ -1198,16 +1214,72 @@
           colors: [
             {
               code: "gray",
-              img: "./img/hippie.png",
+              img: "./assets/images-nike/hippie.png",
             },
             {
               code: "black",
-              img: "./img/hippie2.png",
+              img: "./assets/images-nike/hippie2.png",
             },
           ],
         },
       ];
 
+      let choosenProduct = products[0];
+      
+      const currentProductImg = document.querySelector(".product-img");
+      const currentProductTitle = document.querySelector(".product-title");
+      const currentProductPrice = document.querySelector(".product-price");
+      const currentProductColors = document.querySelectorAll(".color");
+      const currentProductSizes = document.querySelectorAll(".size");
+      
+      menuItems.forEach((item, index) => {
+        item.addEventListener("click", () => {
+          //change the current slide
+          wrapper.style.transform = `translateX(${-100 * index}%)`;
+      
+          //change the choosen product
+          choosenProduct = products[index];
+      
+          //change texts of currentProduct
+          currentProductTitle.textContent = choosenProduct.title;
+          currentProductPrice.textContent = "$" + choosenProduct.price;
+          currentProductImg.src = choosenProduct.colors[0].img;
+      
+          //assing new colors
+          currentProductColors.forEach((color, index) => {
+            color.style.backgroundColor = choosenProduct.colors[index].code;
+          });
+        });
+      });
+      
+      currentProductColors.forEach((color, index) => {
+        color.addEventListener("click", () => {
+          currentProductImg.src = choosenProduct.colors[index].img;
+        });
+      });
+      
+      currentProductSizes.forEach((size, index) => {
+        size.addEventListener("click", () => {
+          currentProductSizes.forEach((size) => {
+            size.style.backgroundColor = "white";
+            size.style.color = "black";
+          });
+          size.style.backgroundColor = "black";
+          size.style.color = "white";
+        });
+      });
+      
+      const productButton = document.querySelector(".product-button");
+      const payment = document.querySelector(".payment");
+      const close = document.querySelector(".close");
+      
+      productButton.addEventListener("click", () => {
+        payment.style.display = "flex";
+      });
+      
+      close.addEventListener("click", () => {
+        payment.style.display = "none";
+      });
     </script>
 
     <svg class="svg">
