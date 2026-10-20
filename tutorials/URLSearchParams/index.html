@@ -262,14 +262,14 @@
         overflow: hidden;
       }
       
-      .slider-wrapper {
+      .slider-track {
         position: relative;
         /* width: 500vw; */
         display: flex;
         transition: all 1.5s ease-in-out;
       }
 
-      .slider-wrapper::after {
+      .slider-track::after {
         position: absolute;
         top: 0;
         left: 0;
@@ -285,7 +285,8 @@
         z-index: -1;
       }
       
-      .slider-item {
+      .slide {
+        box-sizing: border-box;
         flex-shrink: 0;
         /* position: relative; */
         /* width: 100vw; */
@@ -293,6 +294,7 @@
         /* display: flex; */
         /* align-items: center; */
         /* justify-content: center; */
+        padding: 1rem 5%;
         display: grid;
         grid-template-columns: auto 1fr;
       }
@@ -410,43 +412,48 @@
         }
       }
 
-      .slider-item:nth-child(1) .slider-bg {
+      .slide:nth-child(1) .slider-bg {
         background-color: #369e62;
       }
-      .slider-item:nth-child(2) .slider-bg {
+      .slide:nth-child(2) .slider-bg {
         background-color: rebeccapurple;
       }
-      .slider-item:nth-child(3) .slider-bg {
+      .slide:nth-child(3) .slider-bg {
         background-color: teal;
       }
-      .slider-item:nth-child(4) .slider-bg {
+      .slide:nth-child(4) .slider-bg {
         background-color: cornflowerblue;
       }
-      .slider-item:nth-child(5) .slider-bg {
+      .slide:nth-child(5) .slider-bg {
         background-color: rgb(124, 115, 80);
       }
       
-      .slider-item:nth-child(1) .slider-price {
+      .slide:nth-child(1) .slider-price {
         color: #369e62;
       }
-      .slider-item:nth-child(2) .slider-price {
+      .slide:nth-child(2) .slider-price {
         color: white;
       }
-      .slider-item:nth-child(3) .slider-price {
+      .slide:nth-child(3) .slider-price {
         color: teal;
       }
-      .slider-item:nth-child(4) .slider-price {
+      .slide:nth-child(4) .slider-price {
         color: cornflowerblue;
       }
-      .slider-item:nth-child(5) .slider-price {
+      .slide:nth-child(5) .slider-price {
         color: cornsilk;
       }
       
       .features {
-        padding: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+        /* padding: 50px; */
+        padding: 50px 5%;
+        /* display: flex; */
+        /* align-items: center; */
+        /* justify-content: space-between; */
+        display: grid;
+        gap: 2rem 5%;
+        grid-template-columns: 
+          repeat(auto-fit, minmax(250px, 1fr));
       }
       
       .feature {
@@ -468,8 +475,10 @@
       }
       
       .feature-desc {
-        width: 50%;
-        height: 100px;
+        /* width: 50%; */
+        max-width: 160px;
+        /* height: 100px; */
+        margin: 0 auto;
         color: gray;
       }
 
@@ -664,37 +673,100 @@
       }
 
       .gallery {
+        /* padding: 50px; */
+        padding: 50px 5%;
         display: flex;
-        padding: 50px;
+        gap: 5vh 5%;
+        flex-wrap: wrap;
       }
       
       .gallery-item {
         flex: 1;
-        padding: 50px;
+        min-width: 300px;
+        /* padding: 50px; */
+        display: flex;
+        flex-direction: column;
+      }
+
+      @media screen and (min-width: 700px) {
+        .reversed {
+          /* display: flex; */
+          flex-direction: column-reverse;
+        }
+      }
+
+      @media screen and (max-width: 400px) {
+        .gallery-item {
+          min-width: 100%;
+        }
       }
       
       .gallery-img {
         width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* clip-path: url("#mask-1"); */
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        clip-path: url("#mask-4");
       }
       
       .new-season {
-        display: flex;
+        padding: 3rem 2%;
+        /* display: flex; */
+        display: grid;
+        gap: 1rem;
+        /* grid-auto-rows: 1fr; */
+        /* grid-template-columns: repeat(3, 1fr); */
+        /* grid-template-columns: repeat(3, minmax(0, 1fr)); */
+        /* border: 1px solid red; */
+        /* background: red; */
+      }
+
+      @media screen and (min-width: 900px) {
+        .new-season {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
       }
       
       .ns-item {
-        flex: 1;
+        /* flex: 1; */
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
         color: white;
         text-align: center;
-        background-color: black;
+        /* background-color: black; */
+        /* border: 1px solid; */
+        filter: drop-shadow(1px 1px 1px #fff5) 
+              drop-shadow(-1px -1px 1px #fff5);
+      }
+
+      .ns-item:nth-child(2) {
+        box-sizing: border-box;
+        /* padding: 50px; */
+        padding: 50px 5%;
+        border: 1px solid #fff4;
+        outline: 1px solid #fff4;
+        outline-offset: 5px;
+        /* box-shadow: -3px -3px 3px #fff5; */
+      }
+
+      .ns-item:nth-child(2) > * {
+        width: 100%;
       }
       
       .ns-img {
         width: 100%;
-        height: 500px;
+        /* height: 500px; */
+        height: 100%;
+        min-height: 500px;
+        object-fit: cover;
+        /* clip-path: url("#mask-1"); */
+        /* clip-path: url("#mask-2"); */
+        /* clip-path: url("#mask-3"); */
+        clip-path: url("#mask-4");
       }
       
       .ns-title {
@@ -702,9 +774,16 @@
       }
       
       .ns-button {
-        padding: 15px;
+        /* padding: 15px; */
+        padding: 1rem;
+        color: #999;
         font-weight: 600;
-        cursor: pointer;
+        transition: color 300ms;
+        /* cursor: pointer; */
+      }
+
+      .ns-button:hover {
+        color: inherit;
       }
 
       footer {
@@ -770,17 +849,17 @@
       }
 
       @media screen and (max-width: 480px) {
-        nav {
-          /* padding: 20px; */
-        }
+        /* nav {
+          padding: 20px;
+        } */
       
         .search {
           display: none;
         }
       
-        .nav-bottom {
-          /* flex-wrap: wrap; */
-        }
+        /* .nav-bottom {
+          flex-wrap: wrap;
+        } */
       
         .menu-item {
           /* margin: 20px; */
@@ -805,12 +884,12 @@
           display: none;
         }
       
-        .slider-price {
-          /* top: unset; */
-          /* bottom: -50; */
-          /* left: 0; */
-          /* background-color: lightgrey; */
-        }
+        /* .slider-price {
+          top: unset;
+          bottom: -50;
+          left: 0;
+          background-color: lightgrey;
+        } */
         
         .buy-button {
           right: 0;
@@ -848,16 +927,12 @@
           font-size: 50px;
         }
         
-        .gallery {
+        /* .gallery {
           display: none;
-        }
+        } */
       
         .new-season {
           flex-direction: column;
-        }
-      
-        .ns-item:nth-child(2) {
-          padding: 50px;
         }
       
         footer {
@@ -911,8 +986,8 @@
     </nav>
 
     <div class="slider">
-      <div class="slider-wrapper">
-        <div class="slider-item">
+      <div class="slider-track">
+        <div class="slide">
           <h2 class="slider-price">$119</h2>
           <div class="test">
             <img src="./assets/images-nike/air.png" alt="" class="slider-img">
@@ -925,7 +1000,7 @@
             </div>
           </div>
         </div>
-        <div class="slider-item">
+        <div class="slide">
           <h2 class="slider-price">$149</h2>
           <div class="test">
             <img src="./assets/images-nike/jordan.png" alt="" class="slider-img">
@@ -938,7 +1013,7 @@
             </div>
           </div>
         </div>
-        <div class="slider-item">
+        <div class="slide">
           <h2 class="slider-price">$109</h2>
           <div class="test">
             <img src="./assets/images-nike/blazer.png" alt="" class="slider-img">
@@ -951,7 +1026,7 @@
             </div>
           </div>
         </div>
-        <div class="slider-item">
+        <div class="slide">
           <h2 class="slider-price">$129</h2>
           <div class="test">
             <img src="./assets/images-nike/crater.png" alt="" class="slider-img">
@@ -964,7 +1039,7 @@
             </div>
           </div>
         </div>
-        <div class="slider-item">
+        <div class="slide">
           <h2 class="slider-price">$99</h2>
           <div class="test">
             <img src="./assets/images-nike/hippie.png" alt="" class="slider-img">
@@ -1054,10 +1129,15 @@
         <img src="https://images.pexels.com/photos/9295809/pexels-photo-9295809.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
           alt="" class="gallery-img">
       </div>
-      <div class="gallery-item">
+      <!-- <div class="gallery-item">
         <img src="https://images.pexels.com/photos/1040427/pexels-photo-1040427.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
           alt="" class="gallery-img">
         <h1 class="gallery-title">This is the First Day of Your New Life</h1>
+      </div> -->
+      <div class="gallery-item reversed">
+        <h1 class="gallery-title">This is the First Day of Your New Life</h1>
+        <img src="https://images.pexels.com/photos/1040427/pexels-photo-1040427.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
+          alt="" class="gallery-img">
       </div>
       <div class="gallery-item">
         <h1 class="gallery-title">Just Do it!</h1>
@@ -1075,8 +1155,10 @@
         <h3 class="ns-title-sm">WINTER NEW ARRIVALS</h3>
         <h1 class="ns-title">New Season</h1>
         <h1 class="ns-title">New Collection</h1>
-        <a href="#nav">
-          <button class="ns-button">CHOOSE YOUR STYLE</button>
+        <a href="#nav" class="ns-button">
+          <!-- <button class="ns-button"> -->
+            CHOOSE YOUR STYLE
+          <!-- </button> -->
         </a>
       </div>
       <div class="ns-item">
@@ -1143,7 +1225,7 @@
     </div>
 
     <script>
-      const wrapper = document.querySelector(".slider-wrapper");
+      const track = document.querySelector(".slider-track");
       const menuItems = document.querySelectorAll(".menu-item");
       
       const products = [
@@ -1235,7 +1317,8 @@
       menuItems.forEach((item, index) => {
         item.addEventListener("click", () => {
           //change the current slide
-          wrapper.style.transform = `translateX(${-100 * index}%)`;
+          track.style.transform = `translateX(${-100 * index}%)`;
+          // track.scrollLeft();
       
           //change the choosen product
           choosenProduct = products[index];
