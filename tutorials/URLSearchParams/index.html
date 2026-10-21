@@ -248,16 +248,16 @@
         justify-content: center;
       }
       
-      .menu-item {
+      .tab {
         /* margin-right: 50px; */
         color: lightgray;
+        font-size: 2rem;
         font-weight: 400;
-        cursor: pointer;
+        /* cursor: pointer; */
       }
 
       .slider {
         padding: 2rem 0;
-        /* background: url("https://images.unsplash.com/photo-1604147495798-57beb5d6af73?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"); */
         /* clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%); */
         overflow: hidden;
       }
@@ -276,7 +276,8 @@
         content: "";
         width: 100%;
         height: 100%;
-        background: url("https://images.unsplash.com/photo-1604147495798-57beb5d6af73?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80");
+        /* background: url("https://images.unsplash.com/photo-1604147495798-57beb5d6af73?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"); */
+        background-image: url("./assets/images-nike/photo-1604147495798-57beb5d6af73.jpg");
         /* clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%); */
         /* clip-path: url("#mask-1"); */
         /* clip-path: url("#mask-2"); */
@@ -908,7 +909,7 @@
           flex-wrap: wrap;
         } */
       
-        .menu-item {
+        .tab {
           /* margin: 20px; */
           font-size: 20px;
           font-weight: 700;
@@ -1038,18 +1039,64 @@
           <span class="limited-offer">Limited Offer!</span>
         </div>
       </div>
-      <div class="nav-bottom">
-        <h3 class="menu-item">AIR FORCE</h3>
-        <h3 class="menu-item">JORDAN</h3>
-        <h3 class="menu-item">BLAZER</h3>
-        <h3 class="menu-item">CRATER</h3>
-        <h3 class="menu-item">HIPPIE</h3>
+      <!-- <div class="nav-bottom">
+        <h3 class="tab">AIR FORCE</h3>
+        <h3 class="tab">JORDAN</h3>
+        <h3 class="tab">BLAZER</h3>
+        <h3 class="tab">CRATER</h3>
+        <h3 class="tab">HIPPIE</h3>
+      </div> -->
+      <div role="tablist" aria-label="Nike's models" class="nav-bottom tabs">
+        <button role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1" class="tab">
+          AIR FORCE
+        </button>
+        <button role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2" tabindex="-1" class="tab">
+          JORDAN
+        </button>
+        <button role="tab" aria-selected="false" aria-controls="panel-3" id="tab-3" tabindex="-1" class="tab">
+          BLAZER
+        </button>
+        <button role="tab" aria-selected="false" aria-controls="panel-4" id="tab-4" tabindex="-1" class="tab">
+          CRATER
+        </button>
+        <button role="tab" aria-selected="false" aria-controls="panel-5" id="tab-5" tabindex="-1" class="tab">
+          HIPPIE
+        </button>
       </div>
+      <script>
+        const tabList = document.querySelector(".nav-bottom");
+        const tabs = document.querySelectorAll(".tab");
+        
+        tabList.addEventListener("keydown", (e) => {
+          // console.log(e.key);
+          let currentFocus = [...tabs].indexOf(document.activeElement);
+        
+          if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+            // Remove current tab from keyboard sequence
+            // tabs[currentFocus].setAttribute("tabindex", "-1");
+            tabs[currentFocus].tabIndex = -1;
+        
+            if (e.key === "ArrowRight") {
+              currentFocus++;
+              if (currentFocus >= tabs.length) currentFocus = 0; // Loop back to start
+            } else if (e.key === "ArrowLeft") {
+              currentFocus--;
+              if (currentFocus < 0) currentFocus = tabs.length - 1; // Loop to end
+            }
+        
+            // Add new tab to keyboard sequence and focus it
+            // tabs[currentFocus].setAttribute("tabindex", "0");
+            tabs[currentFocus].tabIndex = 0;
+            tabs[currentFocus].focus();
+          }
+        });
+      </script>
     </nav>
 
     <div class="slider">
       <div class="slider-track">
-        <div class="slide">
+        <!-- <div class="slide"> -->
+        <div class="slide" id="panel-1" role="tabpanel" aria-labelledby="tab-1">
           <h2 class="slider-price">$119</h2>
           <div class="test">
             <img src="./assets/images-nike/air.png" alt="" class="slider-img">
@@ -1058,57 +1105,61 @@
               <h1 class="slider-title">AIR FORCE</br> NEW</br> SEASON</h1>
               <a href="#product" class="buy-button">
                 BUY NOW!
-              </a> 
+              </a>
             </div>
           </div>
         </div>
-        <div class="slide">
+        <!-- <div class="slide"> -->
+        <div class="slide" id="panel-2" role="tabpanel" aria-labelledby="tab-2" area-hidden="true">
           <h2 class="slider-price">$149</h2>
           <div class="test">
             <img src="./assets/images-nike/jordan.png" alt="" class="slider-img">
             <div class="slider-bg"></div>
             <div class="slider-data">
               <h1 class="slider-title">AIR JORDAN</br> NEW</br> SEASON</h1>
-              <a href="#product" class="buy-button">
+              <a href="#product" class="buy-button" tabindex="-1">
                 BUY NOW!
-              </a> 
+              </a>
             </div>
           </div>
         </div>
-        <div class="slide">
+        <!-- <div class="slide"> -->
+        <div class="slide" id="panel-3" role="tabpanel" aria-labelledby="tab-3" area-hidden="true">
           <h2 class="slider-price">$109</h2>
           <div class="test">
             <img src="./assets/images-nike/blazer.png" alt="" class="slider-img">
             <div class="slider-bg"></div>
             <div class="slider-data">
               <h1 class="slider-title">BLAZER</br> NEW</br> SEASON</h1>
-              <a href="#product" class="buy-button">
+              <a href="#product" class="buy-button" tabindex="-1">
                 BUY NOW!
-              </a> 
+              </a>
             </div>
           </div>
         </div>
-        <div class="slide">
+        <!-- <div class="slide"> -->
+        <div class="slide" id="panel-4" role="tabpanel" aria-labelledby="tab-4" area-hidden="true">
           <h2 class="slider-price">$129</h2>
           <div class="test">
             <img src="./assets/images-nike/crater.png" alt="" class="slider-img">
             <div class="slider-bg"></div>
             <div class="slider-data">
               <h1 class="slider-title">CRATER</br> NEW</br> SEASON</h1>
-              <a href="#product" class="buy-button">
+              <a href="#product" class="buy-button" tabindex="-1">
                 BUY NOW!
               </a>
             </div>
           </div>
         </div>
-        <div class="slide">
+        <!-- <div class="slide"> -->
+        <div class="slide" id="panel-5" role="tabpanel" aria-labelledby="tab-5" area-hidden="true">
           <h2 class="slider-price">$99</h2>
           <div class="test">
             <img src="./assets/images-nike/hippie.png" alt="" class="slider-img">
             <div class="slider-bg"></div>
             <div class="slider-data">
               <h1 class="slider-title">HIPPIE</br> NEW</br> SEASON</h1>
-              <a href="#product" class="buy-button">
+              <a href="#product" class="buy-button" tabindex="-1">
                 BUY NOW!
               </a>
             </div>
@@ -1319,8 +1370,10 @@
     </div>
 
     <script>
+      const menuItems = document.querySelectorAll(".tab");
       const track = document.querySelector(".slider-track");
-      const menuItems = document.querySelectorAll(".menu-item");
+      const slides = document.querySelectorAll(".slide");
+      let slideIndex = 0;
       
       const products = [
         {
@@ -1410,19 +1463,34 @@
       
       menuItems.forEach((item, index) => {
         item.addEventListener("click", () => {
-          //change the current slide
+          // change the current slide
           track.style.transform = `translateX(${-100 * index}%)`;
           // track.scrollLeft();
+
+          // change the current tab
+          // console.log(item);
+          item.ariaSelected = "true";
+          currentMenuItem.tabIndex = 0;
+          const currentMenuItem = menuItems[slideIndex];
+          // console.log(currentMenuItem);
+          currentMenuItem.ariaSelected = "false";
+          currentMenuItem.tabIndex = -1;
+          // const newMenuItem = menuItems[slideIndex];
       
-          //change the choosen product
+          const currentSlide = slides[slideIndex];
+          currentSlide.querySelector(".buy-button").tabIndex = -1;
+          slideIndex = index;
+          const newSlide = slides[index];
+          newSlide.querySelector(".buy-button").tabIndex = 0;
+          // change the choosen product
           choosenProduct = products[index];
       
-          //change texts of currentProduct
+          // change texts of currentProduct
           currentProductTitle.textContent = choosenProduct.title;
           currentProductPrice.textContent = "$" + choosenProduct.price;
           currentProductImg.src = choosenProduct.colors[0].img;
       
-          //assing new colors
+          // assing new colors
           currentProductColors.forEach((color, index) => {
             color.style.backgroundColor = choosenProduct.colors[index].code;
           });
@@ -1446,9 +1514,9 @@
         });
       });
       
-      const productButton = document.querySelector(".product-button");
-      const payment = document.querySelector(".payment");
-      const close = document.querySelector(".close");
+      // const productButton = document.querySelector(".product-button");
+      // const payment = document.querySelector(".payment");
+      // const close = document.querySelector(".close");
       
       // productButton.addEventListener("click", () => {
       //   payment.style.display = "flex";
