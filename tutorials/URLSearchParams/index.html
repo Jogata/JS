@@ -32,17 +32,22 @@
         text-decoration: none;
       }
       
-      button {
+      button, input {
         font-family: inherit;
         border: 0px solid transparent;
-        outline: 1px solid transparent;
+        outline: 0px solid transparent;
         background-color: transparent;
+        /* cursor: pointer; */
+      }
+
+      button {
         cursor: pointer;
       }
       
       button:focus-visible,
+      input:focus-visible,
       a:focus-visible {
-        outline: 1px solid #999;
+        outline: 3px solid slateblue;
       }
 
       /* .link {
@@ -150,7 +155,7 @@
         background-color: #18293d;
       } */
 
-      .btn {
+      /* .btn {
         display: inline-block;
         margin: 2rem 0;
         padding: 0.6em 1.4em;
@@ -185,7 +190,7 @@
         background-color: #eee8;
         box-shadow: inset 2px 2px 2px #000,
                   inset -2px -2px 2px #fff;
-      }
+      } */
       
       /* .big-fs {
         font-size: 4rem;
@@ -216,20 +221,32 @@
       }
       
       .search {
-        padding: 10px 20px;
+        position: relative;
+        /* padding: 10px 20px; */
         display: flex;
         align-items: center;
         border-radius: 10px;
-        background-color: gray;
+        /* background-color: gray; */
+        box-shadow: inset -1px -1px 1px #fff6, 
+                    inset 1px 1px 1px #fff2;
       }
       
       .search-input {
+        padding: 10px 40px 10px 20px;
+        color: #eee;
         border: none;
+        border-radius: inherit;
         background-color: transparent;
       }
       
       .search-input::placeholder {
-        color: lightgray;
+        /* color: lightgray; */
+        color: #fff5;
+      }
+
+      .search img {
+        position: absolute;
+        right: 10px;
       }
       
       .limited-offer {
@@ -276,7 +293,6 @@
         content: "";
         width: 100%;
         height: 100%;
-        /* background: url("https://images.unsplash.com/photo-1604147495798-57beb5d6af73?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80"); */
         background-image: url("./assets/images-nike/photo-1604147495798-57beb5d6af73.jpg");
         /* clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%); */
         /* clip-path: url("#mask-1"); */
@@ -298,9 +314,14 @@
         padding: 1rem 5%;
         display: grid;
         grid-template-columns: auto 1fr;
+        outline-offset: -3px;
+      }
+
+      .slide:focus-visible {
+        outline: 3px solid slateblue;
       }
       
-      .slider-bg {
+      .slide-bg {
         /* position: absolute; */
         /* width: 750px; */
         grid-column: 1/2;
@@ -314,13 +335,13 @@
         border-radius: 50%;
       }
 
-      .test {
+      .slide-product {
         grid-column: 2/3;
         grid-row: 1/2;
         display: grid;
       }
 
-      .slider-data {
+      .slide-data {
         grid-column: 1/2;
         grid-row: 1/2;
         /* margin: auto 10% auto auto; */
@@ -329,7 +350,7 @@
         z-index: 2;
       }
       
-      .slider-img {
+      .slide-img {
         grid-column: 1/2;
         grid-row: 1/2;
         width: 90%;
@@ -338,7 +359,7 @@
         z-index: 1;
       }
       
-      .slider-title {
+      .slide-title {
         /* position: absolute; */
         /* top: 10%; */
         /* right: 10%; */
@@ -353,7 +374,7 @@
         /* z-index: 1; */
       }
       
-      .slider-price {
+      .slide-price {
         /* position: absolute; */
         /* top: 10%; */
         /* left: 10%; */
@@ -398,7 +419,7 @@
       }
 
       @media screen and (max-width: 800px) {
-        .slider-price {
+        .slide-price {
           grid-column: 1/2;
           grid-row: 1/2;
           margin: 0 auto auto;
@@ -411,41 +432,41 @@
           grid-row: 1/2;
         }
 
-        .slider-data {
+        .slide-data {
           /* margin: auto; */
           margin: auto 0 0 0;
         }
       }
 
-      .slide:nth-child(1) .slider-bg {
+      .slide:nth-child(1) .slide-bg {
         background-color: #369e62;
       }
-      .slide:nth-child(2) .slider-bg {
+      .slide:nth-child(2) .slide-bg {
         background-color: rebeccapurple;
       }
-      .slide:nth-child(3) .slider-bg {
+      .slide:nth-child(3) .slide-bg {
         background-color: teal;
       }
-      .slide:nth-child(4) .slider-bg {
+      .slide:nth-child(4) .slide-bg {
         background-color: cornflowerblue;
       }
-      .slide:nth-child(5) .slider-bg {
+      .slide:nth-child(5) .slide-bg {
         background-color: rgb(124, 115, 80);
       }
       
-      .slide:nth-child(1) .slider-price {
+      .slide:nth-child(1) .slide-price {
         color: #369e62;
       }
-      .slide:nth-child(2) .slider-price {
+      .slide:nth-child(2) .slide-price {
         color: white;
       }
-      .slide:nth-child(3) .slider-price {
+      .slide:nth-child(3) .slide-price {
         color: teal;
       }
-      .slide:nth-child(4) .slider-price {
+      .slide:nth-child(4) .slide-price {
         color: cornflowerblue;
       }
-      .slide:nth-child(5) .slider-price {
+      .slide:nth-child(5) .slide-price {
         color: cornsilk;
       }
       
@@ -665,10 +686,10 @@
       
       .colors,
       .sizes {
+        margin-bottom: 20px;
         display: flex;
         /* display: inline-flex; */
         flex-wrap: wrap;
-        margin-bottom: 20px;
       }
 
       .color {
@@ -692,6 +713,11 @@
         font-size: 20px;
         border: 1px solid black;
         cursor: pointer;
+      }
+
+      .size.selected {
+        color: white;
+        background-color: black;
       }
       
       .product-button {
@@ -867,6 +893,11 @@
       .f-input {
         /* padding: 5px; */
         padding: 6px;
+        color: #eee;
+      }
+
+      .f-input::placeholder {
+        color: #fff6;
       }
       
       .f-button {
@@ -919,34 +950,34 @@
           clip-path: none;
         }
         
-        .slider-img {
+        .slide-img {
           width: 90%;
         }
       
-        .slider-bg {
+        .slide-bg {
           width: 100%;
           height: 100%;
         }
       
-        .slider-title {
+        .slide-title {
           display: none;
         }
       
-        /* .slider-price {
+        /* .slide-price {
           top: unset;
           bottom: -50;
           left: 0;
           background-color: lightgrey;
         } */
         
-        .buy-button {
-          /* right: 0; */
-          /* top: 0; */
-        }
+        /* .buy-button {
+          right: 0;
+          top: 0;
+        } */
       
-        .features {
-          /* flex-direction: column; */
-        }
+        /* .features {
+          flex-direction: column;
+        } */
       
         .product {
           clip-path: none;
@@ -988,9 +1019,9 @@
           display: none;
         } */
       
-        .new-season {
-          /* flex-direction: column; */
-        }
+        /* .new-season {
+          flex-direction: column;
+        } */
       
         footer {
           align-items: center;
@@ -1019,6 +1050,22 @@
           width: 90%;
           padding: 20px;
         }
+      }
+    </style>
+    <style>
+      .test {
+        padding: 3rem;
+        background-color: white;
+      }
+
+      .test button {
+        border: 1px solid;
+      }
+
+      .test img {
+        display: inline-block;
+        filter: invert(1);
+        transition: all 500ms;
       }
     </style>
   </head>
@@ -1078,10 +1125,14 @@
         
             if (e.key === "ArrowRight") {
               currentFocus++;
-              if (currentFocus >= tabs.length) currentFocus = 0; // Loop back to start
+              // if (currentFocus >= tabs.length) currentFocus = 0;
+               // Loop back to start
+              currentFocus = currentFocus % tabs.length;
             } else if (e.key === "ArrowLeft") {
               currentFocus--;
-              if (currentFocus < 0) currentFocus = tabs.length - 1; // Loop to end
+              // if (currentFocus < 0) currentFocus = tabs.length - 1;
+               // Loop to end
+              currentFocus = (currentFocus + tabs.length) % tabs.length;
             }
         
             // Add new tab to keyboard sequence and focus it
@@ -1096,13 +1147,13 @@
     <div class="slider">
       <div class="slider-track">
         <!-- <div class="slide"> -->
-        <div class="slide" id="panel-1" role="tabpanel" aria-labelledby="tab-1">
-          <h2 class="slider-price">$119</h2>
-          <div class="test">
-            <img src="./assets/images-nike/air.png" alt="" class="slider-img">
-            <div class="slider-bg"></div>
-            <div class="slider-data">
-              <h1 class="slider-title">AIR FORCE</br> NEW</br> SEASON</h1>
+        <div class="slide" id="panel-1" role="tabpanel" aria-labelledby="tab-1" tabindex="0">
+          <h2 class="slide-price">$119</h2>
+          <div class="slide-product">
+            <img src="./assets/images-nike/air.png" alt="" class="slide-img">
+            <div class="slide-bg"></div>
+            <div class="slide-data">
+              <h1 class="slide-title">AIR FORCE</br> NEW</br> SEASON</h1>
               <a href="#product" class="buy-button">
                 BUY NOW!
               </a>
@@ -1110,56 +1161,56 @@
           </div>
         </div>
         <!-- <div class="slide"> -->
-        <div class="slide" id="panel-2" role="tabpanel" aria-labelledby="tab-2" area-hidden="true">
-          <h2 class="slider-price">$149</h2>
-          <div class="test">
-            <img src="./assets/images-nike/jordan.png" alt="" class="slider-img">
-            <div class="slider-bg"></div>
-            <div class="slider-data">
-              <h1 class="slider-title">AIR JORDAN</br> NEW</br> SEASON</h1>
-              <a href="#product" class="buy-button" tabindex="-1">
+        <div class="slide" id="panel-2" role="tabpanel" aria-labelledby="tab-2" tabindex="-1" inert>
+          <h2 class="slide-price">$149</h2>
+          <div class="slide-product">
+            <img src="./assets/images-nike/jordan.png" alt="" class="slide-img">
+            <div class="slide-bg"></div>
+            <div class="slide-data">
+              <h1 class="slide-title">AIR JORDAN</br> NEW</br> SEASON</h1>
+              <a href="#product" class="buy-button">
                 BUY NOW!
               </a>
             </div>
           </div>
         </div>
         <!-- <div class="slide"> -->
-        <div class="slide" id="panel-3" role="tabpanel" aria-labelledby="tab-3" area-hidden="true">
-          <h2 class="slider-price">$109</h2>
-          <div class="test">
-            <img src="./assets/images-nike/blazer.png" alt="" class="slider-img">
-            <div class="slider-bg"></div>
-            <div class="slider-data">
-              <h1 class="slider-title">BLAZER</br> NEW</br> SEASON</h1>
-              <a href="#product" class="buy-button" tabindex="-1">
+        <div class="slide" id="panel-3" role="tabpanel" aria-labelledby="tab-3" tabindex="-1" inert>
+          <h2 class="slide-price">$109</h2>
+          <div class="slide-product">
+            <img src="./assets/images-nike/blazer.png" alt="" class="slide-img">
+            <div class="slide-bg"></div>
+            <div class="slide-data">
+              <h1 class="slide-title">BLAZER</br> NEW</br> SEASON</h1>
+              <a href="#product" class="buy-button">
                 BUY NOW!
               </a>
             </div>
           </div>
         </div>
         <!-- <div class="slide"> -->
-        <div class="slide" id="panel-4" role="tabpanel" aria-labelledby="tab-4" area-hidden="true">
-          <h2 class="slider-price">$129</h2>
-          <div class="test">
-            <img src="./assets/images-nike/crater.png" alt="" class="slider-img">
-            <div class="slider-bg"></div>
-            <div class="slider-data">
-              <h1 class="slider-title">CRATER</br> NEW</br> SEASON</h1>
-              <a href="#product" class="buy-button" tabindex="-1">
+        <div class="slide" id="panel-4" role="tabpanel" aria-labelledby="tab-4" tabindex="-1" inert>
+          <h2 class="slide-price">$129</h2>
+          <div class="slide-product">
+            <img src="./assets/images-nike/crater.png" alt="" class="slide-img">
+            <div class="slide-bg"></div>
+            <div class="slide-data">
+              <h1 class="slide-title">CRATER</br> NEW</br> SEASON</h1>
+              <a href="#product" class="buy-button">
                 BUY NOW!
               </a>
             </div>
           </div>
         </div>
         <!-- <div class="slide"> -->
-        <div class="slide" id="panel-5" role="tabpanel" aria-labelledby="tab-5" area-hidden="true">
-          <h2 class="slider-price">$99</h2>
-          <div class="test">
-            <img src="./assets/images-nike/hippie.png" alt="" class="slider-img">
-            <div class="slider-bg"></div>
-            <div class="slider-data">
-              <h1 class="slider-title">HIPPIE</br> NEW</br> SEASON</h1>
-              <a href="#product" class="buy-button" tabindex="-1">
+        <div class="slide" id="panel-5" role="tabpanel" aria-labelledby="tab-5" tabindex="-1" inert>
+          <h2 class="slide-price">$99</h2>
+          <div class="slide-product">
+            <img src="./assets/images-nike/hippie.png" alt="" class="slide-img">
+            <div class="slide-bg"></div>
+            <div class="slide-data">
+              <h1 class="slide-title">HIPPIE</br> NEW</br> SEASON</h1>
+              <a href="#product" class="buy-button">
                 BUY NOW!
               </a>
             </div>
@@ -1356,10 +1407,22 @@
         <div class="footer-right-menu">
           <h1 class="f-menu-title">Follow Us</h1>
           <div class="f-icons">
-            <img src="./assets/images-nike/facebook.png" alt="" class="f-icon">
-            <img src="./assets/images-nike/twitter.png" alt="" class="f-icon">
-            <img src="./assets/images-nike/instagram.png" alt="" class="f-icon">
-            <img src="./assets/images-nike/whatsapp.png" alt="" class="f-icon">
+            <a href="#f">
+              <span class="sr-only">facebook</span>
+              <img src="./assets/images-nike/facebook.png" alt="" class="f-icon">
+            </a>
+            <a href="#t">
+              <span class="sr-only">twitter</span>
+              <img src="./assets/images-nike/twitter.png" alt="" class="f-icon">
+            </a>
+            <a href="#i">
+              <span class="sr-only">instagram</span>
+              <img src="./assets/images-nike/instagram.png" alt="" class="f-icon">
+            </a>
+            <a href="#w">
+              <span class="sr-only">whatsapp</span>
+              <img src="./assets/images-nike/whatsapp.png" alt="" class="f-icon">
+            </a>
           </div>
         </div>
         <div class="footer-right-menu">
@@ -1370,7 +1433,7 @@
     </div>
 
     <script>
-      const menuItems = document.querySelectorAll(".tab");
+      // const tabs = document.querySelectorAll(".tab");
       const track = document.querySelector(".slider-track");
       const slides = document.querySelectorAll(".slide");
       let slideIndex = 0;
@@ -1461,27 +1524,33 @@
       const currentProductColors = document.querySelectorAll(".color");
       const currentProductSizes = document.querySelectorAll(".size");
       
-      menuItems.forEach((item, index) => {
-        item.addEventListener("click", () => {
+      tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => {
           // change the current slide
           track.style.transform = `translateX(${-100 * index}%)`;
           // track.scrollLeft();
 
           // change the current tab
-          // console.log(item);
-          item.ariaSelected = "true";
-          currentMenuItem.tabIndex = 0;
-          const currentMenuItem = menuItems[slideIndex];
-          // console.log(currentMenuItem);
-          currentMenuItem.ariaSelected = "false";
-          currentMenuItem.tabIndex = -1;
-          // const newMenuItem = menuItems[slideIndex];
+          // console.log(tab);
+          tab.ariaSelected = "true";
+          tab.tabIndex = 0;
+          const oldTab = tabs[slideIndex];
+          // console.log(oldTab);
+          oldTab.ariaSelected = "false";
+          oldTab.tabIndex = -1;
+          // const newMenutab = tabs[slideIndex];
       
-          const currentSlide = slides[slideIndex];
-          currentSlide.querySelector(".buy-button").tabIndex = -1;
+          const oldSlide = slides[slideIndex];
+          // oldSlide.querySelector(".buy-button").tabIndex = -1;
+          // oldSlide.removeAttribute("inert");
+          oldSlide.inert = true;
+          oldSlide.tabIndex = -1;
           slideIndex = index;
           const newSlide = slides[index];
-          newSlide.querySelector(".buy-button").tabIndex = 0;
+          // newSlide.querySelector(".buy-button").tabIndex = 0;
+          // newSlide.setAttribute("inert", "");
+          newSlide.inert = false;
+          newSlide.tabIndex = 0;
           // change the choosen product
           choosenProduct = products[index];
       
@@ -1503,14 +1572,16 @@
         });
       });
       
-      currentProductSizes.forEach((size, index) => {
+      currentProductSizes.forEach(size => {
         size.addEventListener("click", () => {
-          currentProductSizes.forEach((size) => {
-            size.style.backgroundColor = "white";
-            size.style.color = "black";
+          currentProductSizes.forEach(size => {
+            // size.style.backgroundColor = "white";
+            // size.style.color = "black";
+            size.classList.remove("selected");
           });
-          size.style.backgroundColor = "black";
-          size.style.color = "white";
+          size.classList.add("selected");
+          // size.style.backgroundColor = "black";
+          // size.style.color = "white";
         });
       });
       
@@ -1525,6 +1596,24 @@
       // close.addEventListener("click", () => {
       //   payment.style.display = "none";
       // });
+    </script>
+
+    <script>
+            // if (e.key === "ArrowRight") {
+            //   currentFocus++;
+            //   if (currentFocus >= tabs.length) currentFocus = 0; // Loop back to start
+            // } else if (e.key === "ArrowLeft") {
+            //   currentFocus--;
+            //   if (currentFocus < 0) currentFocus = tabs.length - 1; // Loop to end
+            // }
+
+            // if (e.key === "ArrowRight") {
+            //   currentFocus++;
+            //   currentFocus = currentFocus % tabs.length; // Loop back to start
+            // } else if (e.key === "ArrowLeft") {
+            //   currentFocus--;
+            //   currentFocus = (currentFocus + tabs.length) % tabs.length; // Loop to end
+            // }
     </script>
 
     <svg class="svg">
@@ -1586,6 +1675,21 @@
   }
 };
     </script>
+
+    <div class="test">
+      <button command="--spin-image" commandfor="target-img">Spin</button>
+      <img id="target-img" src="./assets//images-nike/sneakers.png">
+
+      <script>
+        document
+        .getElementById("target-img")
+        .addEventListener("command", (e) => {
+          if (e.command === "--spin-image") {
+            e.target.style.transform = "rotate(360deg)";
+          }
+        });
+      </script>
+    </div>
         
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
     
