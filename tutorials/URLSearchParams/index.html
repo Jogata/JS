@@ -1088,13 +1088,14 @@
         padding: 3rem;
       }
 
-      #products {
+      .color-picker-group {
         max-width: 1600px;
-        margin: auto;
+        margin: 2rem auto;
         padding: 2rem 3%;
-        display: grid;
+        /* display: grid; */
+        display: flex;
         gap: 1.5rem;
-        border: none;
+        border: 1px solid #fff2;
         border-radius: 12px;
         /* background-color: #080a0c; */
         box-shadow: 3px 3px 3px #0005, 
@@ -1110,12 +1111,12 @@
                  -3px -3px 3px #fff2;
       }
 
-      .color-picker-group {
+      /* .color-picker-group {
         border: none;
         display: flex;
         gap: 12px;
         padding: 0;
-      }
+      } */
       
       .visually-hidden {
         position: absolute;
@@ -1724,6 +1725,7 @@
             // }
     </script>
 
+    <div style="display: none;">
     <div id="test-products">
       <fieldset id="products">
         <legend>Select a color option:</legend>
@@ -1731,6 +1733,7 @@
     </div>
 
     <script>
+      {
       const productsData = [
         { id: 1, colors: ["white", "black"] },
         { id: 2, colors: ["white", "green"] },
@@ -1768,6 +1771,68 @@
       }
 
       generateSwatches(productsData);
+      }
+    </script>
+    </div>
+
+    <div id="test-products">
+      <div id="product-container"></div>
+    </div>
+    
+    <template id="swatch-template-fieldset">
+      <fieldset class="color-picker-group">
+        <legend>Select a color option: </legend>
+      </fieldset>
+    </template>
+
+    <template id="swatch-template-label">
+      <label class="swatch-label">
+        <input type="radio">
+        <span class="visually-hidden"></span>
+      </label>
+    </template>
+
+    <script>
+      const productsData = [
+        { id: 1, colors: ["white", "black"] },
+        { id: 2, colors: ["white", "green"] },
+        { id: 3, colors: ["white", "black", "blue"] }
+      ];
+      
+      const productContainer = document.getElementById("product-container");
+      const fieldsetTemplate = document.getElementById("swatch-template-fieldset");
+      const labelTemplate = document.getElementById("swatch-template-label");
+      
+      productsData.forEach(product => {
+        // const groupElement = document.createElement("fieldset");
+        const fieldsetClone = fieldsetTemplate.content.cloneNode(true);
+        // groupElement.className = "color-picker-group";
+        productContainer.appendChild(fieldsetClone);
+        const fieldsets = productContainer.querySelectorAll("fieldset");
+      
+        product.colors.forEach((color, index) => {
+          const labelClone = labelTemplate.content.cloneNode(true);
+      
+          const label = labelClone.querySelector(".swatch-label");
+          const input = labelClone.querySelector("input");
+          const textSpan = labelClone.querySelector(".visually-hidden");
+      
+          label.style.setProperty("--swatch-color-primary", product.colors[index]);
+          // if (product.colors[1]) label.style.setProperty("--swatch-color-secondary", product.colors[1]);
+          // if (product.colors[2]) label.style.setProperty("--swatch-color-tertiary", product.colors[2]);
+      
+          // input.type = "radio";
+          input.name = `colors-prod-${product.id}`;
+          input.value = product.colors.join("-");
+          if (index === 0) input.checked = true;
+      
+          textSpan.textContent = product.colors.join(" and ");
+      
+          // fieldsetClone.appendChild(labelClone);
+          fieldsets[fieldsets.length - 1].appendChild(labelClone);
+        });
+      });
+        
     </script>
 
     <svg class="svg">
