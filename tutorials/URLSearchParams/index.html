@@ -1901,7 +1901,7 @@
     </script>
 
     <div>
-      <section class="section-container testimonial-container" id="testimonials">
+      <section class="section-container testimonial-container" id="testimonials" style="display: none;">
         <h2 class="section-header">Testimonials</h2>
         <div class="slider-1">
           <div class="slider-track-1 relative">
@@ -2016,7 +2016,7 @@
         </div>
       </section>
 
-      <section class="section-container testimonial-container" id="testimonials">
+      <section class="section-container testimonial-container" id="testimonials" style="display: none;">
         <h2 class="section-header">Testimonials</h2>
         <div class="slider-2">
           <div class="slider-track-2 relative">
@@ -2189,6 +2189,92 @@
             // }
     </script>
 
+    <div id="slider-1" style="background-color: whitesmoke; z-index: 5; max-width: 1200px; margin: auto; position: relative; padding: 5%;">
+      <div class="home-slider">
+        <div class="slider-track">
+          <article class="home-article current" id="relative">
+            <h2>Slide 1</h2>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+              Explicabo facere dicta nulla quo culpa optio libero amet 
+              dolores nihil adipisci voluptas molestiae non corporis, 
+              officia officiis? Molestiae magnam delectus consequatur 
+              asperiores voluptas sapiente nulla.</p>
+            <img src="./assets/aventa/home-car-1.png" alt="" class="home-image">
+          </article>
+          <article class="home-article right">
+            <h2>Slide 2</h2>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+              Explicabo facere dicta nulla quo culpa optio libero amet 
+              dolores nihil adipisci voluptas molestiae non corporis, 
+              officia officiis? Molestiae magnam delectus consequatur 
+              asperiores voluptas sapiente nulla.</p>
+            <img src="./assets/aventa/home-car-2.png" alt="" class="home-image">
+          </article>
+          <article class="home-article right">
+            <h2>Slide 3</h2>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+              Explicabo facere dicta nulla quo culpa optio libero amet 
+              dolores nihil adipisci voluptas molestiae non corporis, 
+              officia officiis? Molestiae magnam delectus consequatur 
+              asperiores voluptas sapiente nulla.</p>
+            <img src="./assets/aventa/home-car-3.png" alt="" class="home-image">
+          </article>
+          <article class="home-article right">
+            <h2>Slide 4</h2>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+              Explicabo facere dicta nulla quo culpa optio libero amet 
+              dolores nihil adipisci voluptas molestiae non corporis, 
+              officia officiis? Molestiae magnam delectus consequatur 
+              asperiores voluptas sapiente nulla.</p>
+            <img src="./assets/aventa/home-car-4.png" alt="" class="home-image">
+          </article>
+        </div>
+        <div class="pagination">
+          <button class="page-button active">1</button>
+          <button class="page-button">2</button>
+          <button class="page-button">3</button>
+          <button class="page-button">4</button>
+        </div>
+      </div>
+      <script>
+        function setUpSlider1() {    
+          const slides = document.querySelectorAll(".home-article");
+          const slidesLength = slides.length;
+          let current = 0;
+        
+          const slidesClasses = new Array(slidesLength);
+          // console.log(slidesClasses);
+          const pageButtons = document.querySelectorAll(".page-button");
+        
+          pageButtons.forEach((button, index) => {
+            button.addEventListener("click", () => {
+              current = index;
+              const currentActiveButton = document.querySelector(".page-button.active");
+              currentActiveButton.classList.remove("active");
+              const newActiveButton = pageButtons[index];
+              newActiveButton.classList.add("active");
+        
+              slidesClasses.fill("home-article");
+              slidesClasses[index] = "home-article current";
+              
+              for (let index = 0; index < current; index++) {
+                slidesClasses[index] = "home-article left";
+              }
+              
+              for (let index = current + 1; index < slidesLength; index++) {
+                slidesClasses[index] = "home-article right";
+              }
+        
+              // console.log(slidesClasses);
+              slides.forEach((slide, index) => slide.className = slidesClasses[index]);
+            })
+          })
+        }
+      
+        setUpSlider1();
+      </script>
+    </div>
+    
     <div style="display: none;">
     <div id="test-products">
       <fieldset id="products">
