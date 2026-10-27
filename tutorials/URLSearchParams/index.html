@@ -1068,61 +1068,61 @@
         }
       }
 
-      .zoom-in {
+      /* .zoom-in {
         animation: zoom-in 2s linear backwards;
-      }
+      } */
 
       .fade-in {
         animation: fade-in 2s linear backwards;
       }
 
-      .rotate {
+      /* .rotate {
         animation: rotate 1s linear forwards;
-      }
+      } */
       
-      .fade-left {
+      /* .fade-left {
         animation: fade-left 1s linear backwards;
-      }
+      } */
       
-      .fade-left-absolute {
+      /* .fade-left-absolute {
         animation: fade-left-absolute 1s linear backwards;
-      }
+      } */
       
-      .fade-right {
+      /* .fade-right {
         animation: fade-right 1s linear backwards;
-      }
+      } */
       
       .fade-right-absolute {
         animation: fade-right-absolute 1s linear backwards;
       }
       
-      .fade-up {
+      /* .fade-up {
         animation: fade-up 1s linear backwards;
-      }
+      } */
       
-      .fade-up-full {
+      /* .fade-up-full {
         animation: fade-up-full 1s linear backwards;
-      }
+      } */
       
-      .fade-up-relative {
+      /* .fade-up-relative {
         animation: fade-up-relative 1s linear backwards;
-      }
+      } */
       
-      .fade-up-absolute {
+      /* .fade-up-absolute {
         animation: fade-up-absolute 1s linear backwards;
-      }
+      } */
       
-      .fade-down-full {
+      /* .fade-down-full {
         animation: fade-down-full 1s linear backwards;
-      }
+      } */
       
-      .fade-down-relative {
+      /* .fade-down-relative {
         animation: fade-down-relative 1s linear backwards;
-      }
+      } */
       
-      .fade-down-absolute {
+      /* .fade-down-absolute {
         animation: fade-down-absolute 1s linear backwards;
-      }
+      } */
       
       .delayed {
         /* animation-delay: calc(0.2s * var(--i)); */
@@ -1133,11 +1133,11 @@
         animation-play-state: paused;
       }
       
-      @keyframes zoom-in {
+      /* @keyframes zoom-in {
         0% {
           opacity: 0;
         }
-      }
+      } */
 
       @keyframes fade-in {
         0% {
@@ -1173,12 +1173,12 @@
         }
       } */
       
-      /* @keyframes fade-right-absolute {
+      @keyframes fade-right-absolute {
         0% {
           transform: translateX(-1rem);
           opacity: 0;
         }
-      } */
+      }
         
       /* @keyframes fade-up {
         0% {
@@ -1869,16 +1869,19 @@
     <div class="page">
     <nav id="nav">
       <div class="nav-top">
-        <div class="nav-item">
+        <!-- <div class="nav-item"> -->
+        <div class="nav-item fade-in paused">
           <img src="./assets/images-nike/sneakers.png" alt="">
         </div>
-        <div class="nav-item">
+        <!-- <div class="nav-item"> -->
+        <div class="nav-item fade-right-absolute paused delayed" style="--delay: --2">
           <div class="search">
             <input type="text" placeholder="Search..." class="search-input">
             <img src="./assets/images-nike/search.png" width="20" height="20" class="search-icon">
           </div>
         </div>
-        <div class="nav-item">
+        <!-- <div class="nav-item"> -->
+        <div class="nav-item fade-right-absolute paused delayed" style="--delay: 4">
           <span class="limited-offer">Limited Offer!</span>
         </div>
       </div>
@@ -2391,6 +2394,24 @@
       //   payment.style.display = "none";
       // });
     </script>
+
+<script>
+  const observer = new IntersectionObserver(animate);
+
+  const elements = document.querySelectorAll(".paused");
+
+  elements.forEach(element => {
+      observer.observe(element);
+  })
+
+  function animate(entries) {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove("paused");
+        }
+      });
+  }
+</script>
 
     <div>
       <section class="section-container testimonial-container" id="testimonials" style="display: none;">
@@ -2947,7 +2968,7 @@
       </div>
     </section>
 
-    <section class="section-container" id="slider-with-transform">
+    <section class="section-container" id="slider-with-transform" style="display: none;">
       <div class="choose-header">
         <h2 class="section-header">CHOOSE YOUR FAVORITE MOTORCYCLE</h2>
         <div class="border"></div>
