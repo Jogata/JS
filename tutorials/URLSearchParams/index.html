@@ -72,7 +72,6 @@
         --transition-1: 250ms ease;
         --transition-2: 500ms ease;
         --transition-3: 1000ms ease;
-    
       }
     
       *,
@@ -499,6 +498,105 @@
     
       .input-field:focus {
         border-color: var(--gold-crayola);
+      }
+    
+      .icon-wrapper {
+        position: relative;
+        margin-block-end: 20px;
+      }
+    
+      .icon-wrapper .input-field {
+        appearance: none;
+        margin-block-end: 0;
+        padding-inline-start: 40px;
+        cursor: pointer;
+      }
+    
+      .icon-wrapper i {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.4rem;
+        pointer-events: none;
+      }
+    
+      .icon-wrapper i:first-child {
+        left: 15px;
+      }
+    
+      .icon-wrapper i:last-child {
+        right: 10px;
+      }
+      
+      .preload {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: grid;
+        place-content: center;
+        justify-items: center;
+        transition: var(--transition-2);
+        background-color: var(--gold-crayola);
+        z-index: 10;
+      }
+    
+      .preload > * {
+        transition: var(--transition-1);
+      }
+    
+      .preload.loaded > * {
+        opacity: 0;
+      }
+    
+      .preload.loaded {
+        transform: translateY(100%);
+        transition-delay: 250ms;
+      }
+    
+      .circle {
+        width: 112px;
+        height: 112px;
+        margin-block-end: 45px;
+        border-radius: var(--radius-circle);
+        border: 3px solid var(--white);
+        border-block-start-color: var(--smoky-black-3);
+        animation: rotate360 1s linear infinite;
+      }
+    
+      @keyframes rotate360 {
+        0% {
+          transform: rotate(0);
+        }
+        100% {
+          transform: rotate(1turn);
+        }
+      }
+    
+      .preload .text {
+        padding-inline-start: 16px;
+        font-size: calc(2rem + 3vw);
+        font-weight: var(--weight-bold);
+        text-transform: uppercase;
+        letter-spacing: 16px;
+        line-height: 1em;
+        background-image: var(--loading-text-gradient);
+        background-size: 500%;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-stroke: 0.5px var(--eerie-black-3);
+        animation: loadingText linear 2s infinite;
+      }
+    
+      @keyframes loadingText {
+        0% {
+          background-position: 100%;
+        }
+        100% {
+          background-position: 0%;
+        }
       }
     </style>
   </head>
