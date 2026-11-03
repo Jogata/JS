@@ -386,8 +386,8 @@
     
       .has-before::before,
       .has-after::after {
-        content: "";
         position: absolute;
+        content: "";
       }
     
       .section {
@@ -404,6 +404,101 @@
       .grid-list {
         display: grid;
         gap: 40px;
+      }
+    
+      .shine-hover {
+        position: relative;
+      }
+    
+      .shine-hover::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 50%;
+        height: 100%;
+        background-image: 
+          linear-gradient(
+            to right, 
+            transparent 0%, 
+            #fff6 100%);
+        transform: skewX(-0.08turn) translateX(-180%);
+      }
+    
+      .shine-hover:is(:hover, :focus-within)::after {
+        transform: skewX(-0.08turn) translateX(275%);
+        transition: var(--transition-3);
+      }
+
+      .img-holder {
+        aspect-ratio: var(--width) / var(--height);
+        background-color: var(--eerie-black-4);
+        overflow: hidden;
+      }
+    
+      .btn-text {
+        margin-inline: auto;
+        padding-block-end: 4px;
+        color: var(--gold-crayola);
+        font-weight: var(--weight-bold);
+        text-transform: uppercase;
+        letter-spacing: var(--letterSpacing-3);
+        transition: var(--transition-1);
+      }
+    
+      .btn-text:is(:hover, :focus-visible) {
+        color: var(--white);
+      }
+    
+      .shape {
+        display: none;
+        position: absolute;
+        max-width: max-content;
+        z-index: -1;
+      }
+    
+      .w-100 {
+        width: 100%;
+      }
+    
+      .move-anim {
+        animation: move 5s linear infinite;
+      }
+    
+      @keyframes move {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+    
+        50% {
+          transform: translateY(30px);
+        }
+      }
+    
+      .has-bg-image {
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+      }
+    
+      .input-field {
+        height: 56px;
+        margin-block-end: 20px;
+        padding: 10px 20px;
+        color: var(--white);
+        outline: none;
+        border: 1px solid var(--white-alpha-10);
+        background-color: var(--eerie-black-2);
+        transition: border-color var(--transition-2);
+      }
+    
+      .input-field::placeholder {
+        color: inherit;
+      }
+    
+      .input-field:focus {
+        border-color: var(--gold-crayola);
       }
     </style>
   </head>
