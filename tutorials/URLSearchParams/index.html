@@ -235,8 +235,7 @@
       .label-2 {
         font-size: var(--fontSize-label-2);
       }
-    </style>
-    <style>
+
       .container {
         padding-inline: 16px;
       }
@@ -310,6 +309,101 @@
         width: 100px;
         margin-inline: auto;
         margin-block-start: 5px;
+      }
+      
+      .btn {
+        position: relative;
+        max-width: max-content;
+        padding: 12px 45px;
+        color: var(--gold-crayola);
+        font-size: var(--fontSize-label-2);
+        font-weight: var(--weight-bold);
+        text-transform: uppercase;
+        letter-spacing: var(--letterSpacing-5);
+        border: 2px solid var(--gold-crayola);
+        overflow: hidden;
+        z-index: 1;
+      }
+    
+      .btn::before {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        content: "";
+        width: 200%;
+        height: 200%;
+        border-radius: var(--radius-circle);
+        background-color: var(--gold-crayola);
+        transition: var(--transition-2);
+        z-index: -1;
+      }
+    
+      .btn .text {
+        transition: var(--transition-1);
+      }
+    
+      .btn .text-2 {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: max-content;
+        color: var(--smoky-black-1);
+      }
+    
+      .btn:is(:hover, :focus-visible)::before {
+        bottom: -50%;
+      }
+    
+      .btn:is(:hover, :focus-visible) .text-1 {
+        transform: translateY(-40px);
+      }
+    
+      .btn:is(:hover, :focus-visible) .text-2 {
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    
+      .btn-secondary {
+        background-color: var(--gold-crayola);
+        color: var(--black);
+      }
+    
+      .btn-secondary::before {
+        background-color: var(--smoky-black-1);
+      }
+    
+      .btn-secondary .text-2 {
+        color: var(--white);
+      }
+    
+      .has-before,
+      .has-after {
+        position: relative;
+        z-index: 1;
+      }
+    
+      .has-before::before,
+      .has-after::after {
+        content: "";
+        position: absolute;
+      }
+    
+      .section {
+        position: relative;
+        padding-block: var(--section-space);
+        overflow: hidden;
+        z-index: 1;
+      }
+    
+      .bg-black-10 {
+        background-color: var(--smoky-black-2);
+      }
+    
+      .grid-list {
+        display: grid;
+        gap: 40px;
       }
     </style>
   </head>
@@ -463,7 +557,7 @@
           <li class="slider-item active">
 
             <div class="slider-bg">
-              <img src="./assets/images-grilli/hero-slider-1.jpg" width="1880" height="950" alt="" class="img-cover" loading="lazy">
+              <img src="./assets/images-grilli/hero-slider-1.jpg" width="1880" height="950" alt="" class="img-cover">
             </div>
 
             <p class="label-2 section-subtitle slider-reveal">Tradational & Hygine</p>
@@ -487,7 +581,7 @@
           <li class="slider-item">
 
             <div class="slider-bg">
-              <img src="./assets/images-grilli/hero-slider-2.jpg" width="1880" height="950" alt="" class="img-cover" loading="lazy">
+              <img src="./assets/images-grilli/hero-slider-2.jpg" width="1880" height="950" alt="" class="img-cover">
             </div>
 
             <p class="label-2 section-subtitle slider-reveal">delightful experience</p>
@@ -512,7 +606,7 @@
           <li class="slider-item">
 
             <div class="slider-bg">
-              <img src="./assets/images-grilli/hero-slider-3.jpg" width="1880" height="950" alt="" class="img-cover" loading="lazy">
+              <img src="./assets/images-grilli/hero-slider-3.jpg" width="1880" height="950" alt="" class="img-cover">
             </div>
 
             <p class="label-2 section-subtitle slider-reveal">amazing & delicious</p>
