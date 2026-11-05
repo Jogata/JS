@@ -304,7 +304,7 @@
       }
     
       .section-subtitle::after {
-        content: url('./assets/images-grilli/separator.svg');
+        content: url("./assets/images-grilli/separator.svg");
         display: block;
         width: 100%;
         max-width: 100px;
@@ -905,6 +905,93 @@
         inset: 0;
         border: 1px solid var(--gold-crayola);
         animation: rotate360 15s linear infinite;
+      }
+      
+      .slider-reveal {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+    
+      .hero .slider-item.active .slider-reveal {
+        animation: sliderReveal 1s ease forwards;
+      }
+    
+      @keyframes sliderReveal {
+        0% {
+          transform: translateY(30px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+    
+      .hero .slider-item.active .section-subtitle {
+        animation-delay: 500ms;
+      }
+    
+      .hero .slider-item.active .hero-title {
+        animation-delay: 1000ms;
+      }
+    
+      .hero .slider-item.active .hero-text {
+        animation-delay: 1.5s;
+      }
+    
+      .hero .slider-item.active .btn {
+        animation-delay: 2s;
+      }
+    
+      .service .section-title {
+        margin-block-end: 16px;
+      }
+    
+      .service .section-text {
+        margin-block-end: 40px;
+      }
+    
+      .service-card {
+        overflow: hidden;
+      }
+    
+      .service-card .has-before {
+        margin-block-end: 26px;
+        padding-block: 30px;
+        z-index: 1;
+      }
+    
+      .service-card .has-before::before {
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 140px;
+        height: 100%;
+        background-image: url("./assets/images-grilli/img-pattern.svg");
+        background-repeat: repeat;
+        background-position: center;
+        background-size: cover;
+        transition: var(--transition-2);
+        transition-delay: 0;
+        will-change: transform;
+        z-index: -1;
+      }
+    
+      .service-card:is(:hover, :focus-within) .has-before::before {
+        transform: rotateY(0.5turn) translateX(50%);
+        transition-delay: 300ms;
+      }
+    
+      .service-card .card-banner {
+        transition: var(--transition-2);
+      }
+    
+      .service-card:is(:hover, :focus-within) .card-banner {
+        transform: scale(1.05);
+      }
+    
+      .service .card-title {
+        margin-block-end: 12px;
       }
     </style>
   </head>
