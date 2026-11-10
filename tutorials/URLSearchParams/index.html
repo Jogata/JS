@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Aclonica&family=Cookie&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Forum&family=Marcellus&family=Prata&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+
       :root {
         --gold-crayola: hsl(38, 61%, 73%);
         --quick-silver: hsla(0, 0%, 65%, 1);
@@ -29,8 +31,8 @@
         --loading-text-gradient: linear-gradient(90deg, transparent 0% 16.66%, var(--smoky-black-3) 33.33% 50%, transparent 66.66% 75%);
         --gradient-1: linear-gradient(to top, hsla(0, 0%, 0%, 0.9), hsla(0, 0%, 0%, 0.7), transparent);
     
-        --fontFamily-forum: 'Forum', cursive;
-        --fontFamily-dm_sans: 'DM Sans', sans-serif;
+        --fontFamily-forum: "Forum", cursive;
+        --fontFamily-dm_sans: "DM Sans", sans-serif;
     
         --fontSize-display-1: calc(1.3rem + 6.7vw);
         --fontSize-headline-1: calc(2rem + 2.5vw);
@@ -943,11 +945,11 @@
         animation-delay: 2s;
       }
     
-      .service .section-title {
+      .services .section-title {
         margin-block-end: 16px;
       }
     
-      .service .section-text {
+      .services .section-text {
         margin-block-end: 40px;
       }
     
@@ -1118,7 +1120,8 @@
         line-height: var(--lineHeight-4);
       }
     
-      .menu-text .span {
+      /* .menu-text .span { */
+      .menu-text time {
         display: inline-block;
         color: var(--gold-crayola);
       }
@@ -1149,17 +1152,31 @@
         background-image: url("./assets/images-grilli/testimonial-bg.jpg");
       }
     
-      .testi .quote {
+      /* .testi .quote {
         font-size: 7rem;
         font-family: var(--fontFamily-forum);
         line-height: 0.7em;
-      }
+      } */
     
       .testi .wrapper {
         margin-block: 40px 50px;
         display: flex;
         gap: 2px;
         justify-content: center;
+      }
+
+      .testi-text::before {
+        display: block;
+        content: "”";
+        margin-bottom: 15px;
+        color: var(--gold-crayola);
+        /* font-size: 5rem; */
+        font-size: 7rem;
+        /* font-family: serif; */
+        font-family: var(--fontFamily-forum);
+        font-weight: bold;
+        /* line-height: 0.7em; */
+        line-height: 1;
       }
     
       .testi .separator {
@@ -1279,13 +1296,36 @@
         line-height: var(--lineHeight-6);
       }
     </style>
+    <style>
+      .contact-card {
+        display: block;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid var(--border-color, #ccc);
+        /* text-decoration: none; */
+        transition: background-color 0.2s ease;
+      }
+
+      .contact-card:hover,
+      .contact-card:focus {
+        background-color: var(--hover-bg, #f9f9f9);
+      }
+    </style>
+    <style>
+      section {
+        display: none;
+      }
+      .menu {
+        display: block;
+      }
+    </style>
   </head>
   <body>
-    <nav class="nav-text-separated">
+    <!-- <nav class="nav-text-separated">
       <a href="#home">Home</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
-    </nav>
+    </nav> -->
     <div class="topbar">
       <div class="container">
     
@@ -1518,12 +1558,16 @@
 
       </section>
 
-      <section aria-label="Service" class="section service bg-black-10 text-center">
+      <!-- <section aria-label="Service" class="section service bg-black-10 text-center"> -->
+      <section aria-labelledby="services-label" class="section services bg-black-10 text-center">
         <div class="container">
+
+          <h2 id="services-label" class="sr-only">Our Services</h2>
 
           <p class="section-subtitle label-2">Flavors For Royalty</p>
 
-          <h2 class="headline-1 section-title">We Offer Top Notch</h2>
+          <!-- <h2 class="headline-1 section-title">We Offer Top Notch</h2> -->
+          <p class="headline-1 section-title">We Offer Top Notch</p>
 
           <p class="section-text">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry 
@@ -1611,7 +1655,7 @@
         </div>
       </section>
 
-      <section class="section about text-center" aria-labelledby="about-label" id="about">
+      <section id="about" aria-labelledby="about-label" class="section about text-center">
         <div class="container">
 
           <div class="about-content">
@@ -1628,7 +1672,13 @@
 
             <div class="contact-label">Book Through Call</div>
 
-            <a href="tel:+804001234567" class="body-1 contact-number hover-underline">+80 (400) 123 4567</a>
+            <!-- <a href="tel:+804001234567" class="body-1 contact-number hover-underline">+80 (400) 123 4567</a> -->
+            <div class="booking-method">
+              <a href="tel:+804001234567" class="contact-card hover-underline">
+                <span class="contact-label">Book Through Call</span>
+                <span class="body-1 contact-number">+80 (400) 123 4567</span>
+              </a>
+            </div>
 
             <a href="#" class="btn btn-primary">
               <span class="text text-1">Read More</span>
@@ -1639,7 +1689,8 @@
 
           <figure class="about-banner">
 
-            <img src="./assets/images-grilli/about-banner.jpg" width="570" height="570" loading="lazy" alt="about banner" class="w-100">
+            <!-- <img src="./assets/images-grilli/about-banner.jpg" width="570" height="570" loading="lazy" alt="about banner" class="w-100"> -->
+            <img src="./assets/images-grilli/about-banner.jpg" width="570" height="570" loading="lazy" alt="" class="w-100">
 
             <div class="abs-img abs-img-1 has-before">
               <img src="./assets/images-grilli/about-abs-image.jpg" width="285" height="285" loading="lazy" alt="" class="w-100">
@@ -1696,12 +1747,14 @@
 
       </section>
 
-      <section class="section menu" aria-label="Menu" id="menu">
+      <!-- <section class="section menu" aria-label="Menu" id="menu"> -->
+      <section class="section menu" aria-labelledby="menu-label" id="menu">
         <div class="container">
 
           <p class="section-subtitle text-center label-2">Special Selection</p>
 
-          <h2 class="headline-1 section-title text-center">Delicious Menu</h2>
+          <!-- <h2 class="headline-1 section-title text-center">Delicious Menu</h2> -->
+          <h2 id="menu-label" class="headline-1 section-title text-center">Delicious Menu</h2>
 
           <ul class="grid-list">
 
@@ -1873,9 +1926,12 @@
 
           </ul>
 
-          <p class="menu-text text-center">
+          <!-- <p class="menu-text text-center">
             During winter daily from <span class="span">7:00 pm</span> to <span class="span">9:00 pm</span>
-          </p>
+          </p> -->
+          <p class="menu-text text-center">
+            During winter daily from <time datetime="19:00">7:00 pm</time> to <time datetime="21:00">9:00 pm</time>
+          </p>          
 
           <a href="#" class="btn btn-primary">
             <span class="text text-1">View All Menu</span>
@@ -1883,36 +1939,55 @@
             <span class="text text-2" aria-hidden="true">View All Menu</span>
           </a>
 
-          <img src="./assets/images-grilli/shape-5.png" width="921" height="1036" loading="lazy" alt="shape"
+          <img src="./assets/images-grilli/shape-5.png" width="921" height="1036" loading="lazy" alt=""
             class="shape shape-2 move-anim">
-          <img src="./assets/images-grilli/shape-6.png" width="343" height="345" loading="lazy" alt="shape"
+          <img src="./assets/images-grilli/shape-6.png" width="343" height="345" loading="lazy" alt=""
             class="shape shape-3 move-anim">
 
         </div>
       </section>
 
-      <section class="section testi text-center has-bg-image" aria-label="Testimonials">
+      <!-- <section class="section testi text-center has-bg-image" aria-label="Testimonials"> -->
+      <section class="section testi text-center has-bg-image" aria-labelledby="testi-label">
         <div class="container">
+
+          <h2 id="testi-label" class="sr-only">Testimonials</h2>
       
-          <div class="quote">”</div>
+          <!-- <div class="quote">”</div> -->
       
-          <p class="headline-2 testi-text">
+          <!-- <p class="headline-2 testi-text">
             I wanted to thank you for inviting me down for that amazing dinner the other night. The food was
             extraordinary.
-          </p>
-      
-          <div class="wrapper">
-            <div class="separator"></div>
-            <div class="separator"></div>
-            <div class="separator"></div>
-          </div>
-      
-          <div class="profile">
-            <img src="./assets/images-grilli/testi-avatar.jpg" width="100" height="100" loading="lazy" alt="Sam Jhonson"
-              class="img">
-            <p class="label-2 profile-name">Sam Jhonson</p>
-          </div>
-      
+          </p> -->
+          <figure class="testimonial-container">
+
+            <blockquote class="testi-text headline-2">
+              <p>
+                I wanted to thank you for inviting me down for that amazing dinner the other night. The food was
+                extraordinary.
+              </p>
+            </blockquote>
+        
+            <!-- <div class="wrapper"> -->
+            <div class="wrapper" aria-hidden="true">
+              <!-- <div class="separator"></div> -->
+              <span class="separator"></span>
+              <!-- <div class="separator"></div> -->
+              <span class="separator"></span>
+              <!-- <div class="separator"></div> -->
+              <span class="separator"></span>
+            </div>
+        
+            <!-- <div class="profile">
+              <img src="./assets/images-grilli/testi-avatar.jpg" width="100" height="100" loading="lazy" alt="Sam Jhonson"
+                class="img">
+              <p class="label-2 profile-name">Sam Jhonson</p>
+            </div> -->
+            <figcaption class="profile">
+              <img src="./assets/images-grilli/testi-avatar.jpg" width="100" height="100" loading="lazy" alt="" class="img">
+              <p class="label-2 profile-name">Sam Jhonson</p>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
@@ -2035,12 +2110,16 @@
         </div>
       </section>
 
-      <section class="section features text-center" aria-label="Features">
+      <!-- <section class="section features text-center" aria-label="Features"> -->
+      <section class="section features text-center" aria-labelledby="features-label">
         <div class="container">
+
+          <h2 id="features-label" class="sr-only">Features</h2>
 
           <p class="section-subtitle label-2">Why Choose Us</p>
 
-          <h2 class="headline-1 section-title">Our Strength</h2>
+          <!-- <h2 class="headline-1 section-title">Our Strength</h2> -->
+          <p class="headline-1 section-title">Our Strength</p>
 
           <ul class="grid-list">
 
@@ -2111,12 +2190,14 @@
         </div>
       </section>
 
-      <section class="section event bg-black-10" aria-label="Event">
+      <!-- <section class="section event bg-black-10" aria-label="Event"> -->
+      <section class="section event bg-black-10" aria-labelledby="event-label">
         <div class="container">
 
           <p class="section-subtitle label-2 text-center">Recent Updates</p>
 
-          <h2 class="section-title headline-1 text-center">Upcoming Event</h2>
+          <!-- <h2 class="section-title headline-1 text-center">Upcoming Event</h2> -->
+          <h2 id="event-label" class="section-title headline-1 text-center">Upcoming Event</h2>
 
           <ul class="grid-list">
 
@@ -2126,7 +2207,6 @@
                 <div class="card-banner img-holder" style="--width: 350; --height: 450;">
                   <img src="./assets/images-grilli/event-1.jpg" width="350" height="450" loading="lazy"
                     alt="Flavour so good you'll try to eat with your eyes." class="img-cover">
-
                   <time class="publish-date label-2" datetime="2022-09-15">15/09/2022</time>
                 </div>
 
@@ -2147,7 +2227,6 @@
                 <div class="card-banner img-holder" style="--width: 350; --height: 450;">
                   <img src="./assets/images-grilli/event-2.jpg" width="350" height="450" loading="lazy"
                     alt="Flavour so good you'll try to eat with your eyes." class="img-cover">
-
                   <time class="publish-date label-2" datetime="2022-09-08">08/09/2022</time>
                 </div>
 
@@ -2168,7 +2247,6 @@
                 <div class="card-banner img-holder" style="--width: 350; --height: 450;">
                   <img src="./assets/images-grilli/event-3.jpg" width="350" height="450" loading="lazy"
                     alt="Flavour so good you'll try to eat with your eyes." class="img-cover">
-
                   <time class="publish-date label-2" datetime="2022-09-03">03/09/2022</time>
                 </div>
 
@@ -2257,9 +2335,9 @@
       </script>
     </div>
         
-    <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1>
+    <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
     
-    <div id="calc" style="padding: 5rem; display: block;">
+    <div id="calc" style="padding: 5rem; display: none;">
       <input type="number" id="width">
       <input type="number" id="height" placeholder="Height" style="padding: 0.5em;">
       <button id="calc" style="padding: 0.5em; border: 1px solid;">Calc</button>
