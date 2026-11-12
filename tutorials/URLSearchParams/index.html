@@ -1376,33 +1376,8 @@
         margin-block-start: 40px;
       }
       
-      .back-top-btn {
-        position: fixed;
-        right: 20px;
-        bottom: 20px;
-        width: 50px;
-        height: 50px;
-        display: grid;
-        place-items: center;
-        color: var(--smoky-black-1);
-        font-size: 22px;
-        border-radius: var(--radius-circle);
-        background-color: var(--gold-crayola);
-        box-shadow: var(--shadow-1);
-        transition: var(--transition-1);
-        visibility: hidden;
-        opacity: 0;
-        z-index: 4;
-      }
-    
-      .back-top-btn:is(:hover, :focus-visible) {
-        background-color: var(--white);
-        color: var(--gold-crayola);
-      }
-    
-      .back-top-btn.active {
-        opacity: 1;
-        visibility: visible;
+      footer {
+        background-image: url("./assets/images-grilli/footer-bg.jpg");
       }
       
       .footer-top {
@@ -1508,6 +1483,103 @@
         display: inline;
         color: var(--gold-crayola);
         text-decoration: underline;
+      }
+
+      .back-top-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        width: 50px;
+        height: 50px;
+        display: grid;
+        place-items: center;
+        color: var(--smoky-black-1);
+        font-size: 22px;
+        border-radius: var(--radius-circle);
+        background-color: var(--gold-crayola);
+        box-shadow: var(--shadow-1);
+        transition: var(--transition-1);
+        visibility: hidden;
+        opacity: 0;
+        z-index: 4;
+      }
+    
+      .back-top-btn:is(:hover, :focus-visible) {
+        background-color: var(--white);
+        color: var(--gold-crayola);
+      }
+    
+      .back-top-btn.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      
+      @media (min-width: 575px) {
+        :root {    
+          --fontSize-body-2: 2rem;
+        }
+
+        :is(.service, .about) .section-text {
+          max-width: 420px;
+          margin-inline: auto;
+        }
+
+        .contact-number {
+          --fontSize-body-1: 3rem;
+        }
+
+        .topbar {
+          display: block;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          padding-block: 10px;
+          border-block-end: 1px solid var(--white-alpha-20);
+          transition: var(--transition-1);
+          z-index: 4;
+        }
+    
+        .topbar:has(~ .header.active) {
+          transform: translateY(-100%);
+        }
+    
+        .topbar-item:not(.link),
+        .topbar .separator {
+          display: none;
+        }
+    
+        .topbar .container,
+        .topbar-item {
+          display: flex;
+          align-items: center;
+        }
+    
+        .topbar .container {
+          justify-content: center;
+          gap: 30px;
+        }
+    
+        .topbar-item {
+          gap: 6px;
+        }
+    
+        .topbar-item ion-icon {
+          --ionicon-stroke-width: 60px;
+        }
+    
+        .topbar-item .span {
+          font-size: var(--fontSize-label-1);
+        }
+    
+        .topbar .link {
+          transition: var(--transition-1);
+        }
+    
+        .topbar .link:is(:hover, :focus-visible) {
+          color: var(--gold-crayola);
+        }
+
       }
     </style>
     <style>
@@ -2489,130 +2561,129 @@
         
     </main>
 
-    <footer class="footer section has-bg-image text-center"
-    style="background-image: url('./assets/images/footer-bg.jpg')">
-    <div class="container">
-
-      <div class="footer-top grid-list">
-
-        <div class="footer-brand has-before has-after">
-
-          <a href="#" class="logo">
-            <img src="./assets/images/logo.svg" width="160" height="50" loading="lazy" alt="Grilli">
-          </a>
-
-          <!-- <address class="body-4">
-            Restaurant St, Delicious City, London 9578, UK
-          </address>
-
-          <a href="mailto:booking@grilli.com" class="body-4 contact-link">booking@grilli.com</a>
-
-          <a href="tel:+88123123456" class="body-4 contact-link">Booking Request : +88-123-123456</a>
-
-          <p class="body-4">
-            Open : 09:00 am - 01:00 pm
-          </p> -->
-          <address>
-            <p class="body-4">Restaurant St, Delicious City, London 9578, UK</p>
-            <a href="mailto:booking@grilli.com" class="contact-link">booking@grilli.com</a>
-            <a href="tel:+88123123456" class="contact-link">Booking Request : +88-123-123456</a>
-          </address>
-          
-          <p class="body-4">
-            Open : <time datetime="09:00">09:00 am</time> - <time datetime="13:00">01:00 pm</time>
-          </p>
-
-          <div class="wrapper">
-            <div class="separator"></div>
-            <div class="separator"></div>
-            <div class="separator"></div>
-          </div>
-
-          <p class="title-1">Get News & Offers</p>
-
-          <p class="label-1">
-            Subscribe us & Get <span class="span">25% Off.</span>
-          </p>
-
-          <form class="input-wrapper">
-            <div class="icon-wrapper">
-              <i class="fa fa-envelope-o" aria-hidden="true"></i>
-              <input type="email" name="email" placeholder="Your email" autocomplete="off" class="input-field">
+    <footer class="footer section has-bg-image text-center">
+      <div class="container">
+    
+        <div class="footer-top grid-list">
+    
+          <div class="footer-brand has-before has-after">
+    
+            <a href="#" class="logo">
+              <img src="./assets/images/logo.svg" width="160" height="50" loading="lazy" alt="Grilli">
+            </a>
+    
+            <!-- <address class="body-4">
+                Restaurant St, Delicious City, London 9578, UK
+              </address>
+    
+              <a href="mailto:booking@grilli.com" class="body-4 contact-link">booking@grilli.com</a>
+    
+              <a href="tel:+88123123456" class="body-4 contact-link">Booking Request : +88-123-123456</a>
+    
+              <p class="body-4">
+                Open : 09:00 am - 01:00 pm
+              </p> -->
+            <address>
+              <p class="body-4">Restaurant St, Delicious City, London 9578, UK</p>
+              <a href="mailto:booking@grilli.com" class="contact-link">booking@grilli.com</a>
+              <a href="tel:+88123123456" class="contact-link">Booking Request : +88-123-123456</a>
+            </address>
+    
+            <p class="body-4">
+              Open : <time datetime="09:00">09:00 am</time> - <time datetime="13:00">01:00 pm</time>
+            </p>
+    
+            <div class="wrapper">
+              <div class="separator"></div>
+              <div class="separator"></div>
+              <div class="separator"></div>
             </div>
-
-            <button type="submit" class="btn btn-secondary">
-              <span class="text text-1">Subscribe</span>
-              <span class="text text-2" aria-hidden="true">Subscribe</span>
-            </button>
-          </form>
-
+    
+            <p class="title-1">Get News & Offers</p>
+    
+            <p class="label-1">
+              Subscribe us & Get <span class="span">25% Off.</span>
+            </p>
+    
+            <form class="input-wrapper">
+              <div class="icon-wrapper">
+                <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                <input type="email" name="email" placeholder="Your email" autocomplete="off" class="input-field">
+              </div>
+    
+              <button type="submit" class="btn btn-secondary">
+                <span class="text text-1">Subscribe</span>
+                <span class="text text-2" aria-hidden="true">Subscribe</span>
+              </button>
+            </form>
+    
+          </div>
+    
+          <ul class="footer-list">
+    
+            <li>
+              <a href="#" class="label-2 footer-link hover-underline">Home</a>
+            </li>
+    
+            <li>
+              <a href="#" class="label-2 footer-link hover-underline">Menus</a>
+            </li>
+    
+            <li>
+              <a href="#" class="label-2 footer-link hover-underline">About Us</a>
+            </li>
+    
+            <li>
+              <a href="#" class="label-2 footer-link hover-underline">Our Chefs</a>
+            </li>
+    
+            <li>
+              <a href="#" class="label-2 footer-link hover-underline">Contact</a>
+            </li>
+    
+          </ul>
+    
+          <ul class="footer-list">
+    
+            <li>
+              <!-- <a href="#" class="label-2 footer-link hover-underline">Facebook</a> -->
+              <a href="#" class="label-2 footer-link hover-underline" target="_blank" rel="noopener">Facebook</a>
+            </li>
+    
+            <li>
+              <!-- <a href="#" class="label-2 footer-link hover-underline">Instagram</a> -->
+              <a href="#" class="label-2 footer-link hover-underline" target="_blank" rel="noopener">Instagram</a>
+            </li>
+    
+            <li>
+              <!-- <a href="#" class="label-2 footer-link hover-underline">Twitter</a> -->
+              <a href="#" class="label-2 footer-link hover-underline" target="_blank" rel="noopener">Twitter</a>
+            </li>
+    
+            <li>
+              <!-- <a href="#" class="label-2 footer-link hover-underline">Youtube</a> -->
+              <a href="#" class="label-2 footer-link hover-underline" target="_blank" rel="noopener">Youtube</a>
+            </li>
+    
+            <li>
+              <!-- <a href="#" class="label-2 footer-link hover-underline">Google Map</a> -->
+              <a href="#" class="label-2 footer-link hover-underline" target="_blank" rel="noopener">Google Map</a>
+            </li>
+    
+          </ul>
+    
         </div>
-
-        <ul class="footer-list">
-
-          <li>
-            <a href="#" class="label-2 footer-link hover-underline">Home</a>
-          </li>
-
-          <li>
-            <a href="#" class="label-2 footer-link hover-underline">Menus</a>
-          </li>
-
-          <li>
-            <a href="#" class="label-2 footer-link hover-underline">About Us</a>
-          </li>
-
-          <li>
-            <a href="#" class="label-2 footer-link hover-underline">Our Chefs</a>
-          </li>
-
-          <li>
-            <a href="#" class="label-2 footer-link hover-underline">Contact</a>
-          </li>
-
-        </ul>
-
-        <ul class="footer-list">
-
-          <li>
-            <!-- <a href="#" class="label-2 footer-link hover-underline">Facebook</a> -->
-            <a href="#" class="label-2 footer-link hover-underline" target="_blank" rel="noopener">Facebook</a>
-          </li>
-
-          <li>
-            <!-- <a href="#" class="label-2 footer-link hover-underline">Instagram</a> -->
-            <a href="#" class="label-2 footer-link hover-underline" target="_blank" rel="noopener">Instagram</a>
-          </li>
-
-          <li>
-            <!-- <a href="#" class="label-2 footer-link hover-underline">Twitter</a> -->
-            <a href="#" class="label-2 footer-link hover-underline" target="_blank" rel="noopener">Twitter</a>
-          </li>
-
-          <li>
-            <!-- <a href="#" class="label-2 footer-link hover-underline">Youtube</a> -->
-            <a href="#" class="label-2 footer-link hover-underline" target="_blank" rel="noopener">Youtube</a>
-          </li>
-
-          <li>
-            <!-- <a href="#" class="label-2 footer-link hover-underline">Google Map</a> -->
-            <a href="#" class="label-2 footer-link hover-underline" target="_blank" rel="noopener">Google Map</a>
-          </li>
-
-        </ul>
-
+    
+        <div class="footer-bottom">
+    
+          <p class="copyright">
+            &copy; 2026 Grilli. All Rights Reserved
+          </p>
+    
+        </div>
+    
       </div>
-
-      <div class="footer-bottom">
-
-        <p class="copyright">
-          &copy; 2026 Grilli. All Rights Reserved
-        </p>
-
-      </div>
-
-    </div>
-  </footer>
+    </footer>
 
   <a href="#top" class="back-top-btn active" aria-label="Back to top">
     <i class="fa fa-chevron-up" aria-hidden="true"></i>
