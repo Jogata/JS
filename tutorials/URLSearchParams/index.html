@@ -774,7 +774,8 @@
         /* max-width: unset; */
         display: block;
         max-width: 100%;
-        padding-block: 10px;
+        /* padding-block: 10px; */
+        padding: 0.5rem 1rem;
         /* display: flex; */
         /* align-items: center; */
         font-size: var(--fontSize-label-2);
@@ -1744,16 +1745,18 @@
           z-index: 2;
         }
     
-        .hero .slider-btn i {
-          /* transform: rotate(-45deg); */
-        }
+        /* .hero .slider-btn i {
+          transform: rotate(-45deg);
+        } */
     
         .hero .slider-btn.prev {
-          left: 30px;
+          /* left: 30px; */
+          left: 3%;
         }
     
         .hero .slider-btn.next {
-          right: 30px;
+          /* right: 30px; */
+          right: 3%;
         }
     
         .hero .slider-btn:is(:hover, :focus-visible) {
@@ -1796,6 +1799,36 @@
       .contact-card:hover,
       .contact-card:focus {
         background-color: var(--hover-bg, #f9f9f9);
+      }
+      /* .btn {
+        width: 100px;
+        height: 50px;
+        display: grid;
+        place-content: center;
+        font-style: 1.2rem;
+      }
+      .btn {
+        padding: 0.4em 1em;
+        font-size: 1.2rem;
+      } */
+      .slider-btn {
+        position: relative;
+      }
+      .slider-btn::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: "";
+        width: 100%;
+        height: 100%;
+        /* display: grid; */
+        /* place-items: center; */
+        padding: 0 0.39em;
+        /* color: var(--gold-crayola); */
+        /* font-size: 2.4rem; */
+        border: 1px solid var(--gold-crayola);
+        transform: rotate(45deg);
+        /* transition: var(--transition-1); */
       }
     </style>
     <style>
@@ -1865,7 +1898,7 @@
   
         <nav id="primary-nav" aria-label="Primary" class="navbar">
   
-          <button type="button" aria-label="Close menu" class="menu-toggler close-btn">
+          <button type="button" aria-label="Close menu" class="close-btn">
             <i class="ri-close-line" aria-hidden="true"></i>
           </button>
   
@@ -1945,58 +1978,92 @@
           aria-label="Open menu" 
           aria-expanded="false" 
           aria-controls="primary-nav" 
-          class="menu-toggler nav-open-btn"
+          class="nav-open-btn"
         >
           <span class="line line-1"></span>
           <span class="line line-2"></span>
           <span class="line line-3"></span>
         </button>
   
-        <div class="menu-toggler overlay"></div>
+        <!-- <div class="menu-toggler overlay"></div> -->
+        <div class="overlay"></div>
 
       </div>
     </header>
     <script>
       const navbar = document.querySelector(".navbar");
       const navLinks = navbar.querySelectorAll(".navbar-link");
-      const menuTogglers = document.querySelectorAll(".menu-toggler");
+      // const menuTogglers = document.querySelectorAll(".menu-toggler");
       // const openMenuButton = document.querySelector(".nav-open-btn");
-      const openMenuButton = menuTogglers[1];
-      const closeMenuButton = menuTogglers[0];
+      // const openMenuButton = menuTogglers[1];
+      const openMenuButton = document.querySelector(".nav-open-btn");
+      // const closeMenuButton = menuTogglers[0];
+      const closeMenuButton = document.querySelector(".close-btn");
       // console.log(openMenuButton);
       // console.log(closeMenuButton);
-      console.log(navLinks);
-      // const overlay = document.querySelector(".overlay");
-      const overlay = menuTogglers[2];
+      // console.log(navLinks);
+      // const overlay = menuTogglers[2];
+      const overlay = document.querySelector(".overlay");
       
-      function toggleMenu(shouldRestoreFocus) {
-        navbar.classList.toggle("active");
-        overlay.classList.toggle("active");
-        document.body.classList.toggle("nav-active");
-        let isMenuOpen = openMenuButton.ariaExpanded;
-        // console.log(isMenuOpen);
-        if (isMenuOpen === "true") {
-          // console.log("here");
-          openMenuButton.ariaExpanded = "false";
-          (shouldRestoreFocus && openMenuButton.focus());
-        } else {
-          // console.log("here");
-          openMenuButton.ariaExpanded = "true";
-          // openMenuButton.blur();
-          closeMenuButton.focus();
-          // closeMenuButton.style.color = "red";
-        }
+      // function toggleMenu(shouldRestoreFocus) {
+      //   navbar.classList.toggle("active");
+      //   overlay.classList.toggle("active");
+      //   document.body.classList.toggle("nav-active");
+      //   let isMenuOpen = openMenuButton.ariaExpanded;
+      //   console.log(isMenuOpen);
+      //   if (isMenuOpen === "true") {
+      //     console.log("here");
+      //     openMenuButton.ariaExpanded = "false";
+      //     (shouldRestoreFocus && openMenuButton.focus());
+      //   } else {
+      //     console.log("here");
+      //     openMenuButton.ariaExpanded = "true";
+      //     openMenuButton.blur();
+      //     closeMenuButton.focus();
+      //     closeMenuButton.style.color = "red";
+      //   }
+      // }
+
+      function openMenu() {
+        navbar.classList.add("active");
+        overlay.classList.add("active");
+        document.body.classList.add("nav-active");
+        openMenuButton.setAttribute("aria-expanded", "true");
+      
+        // navbar.addEventListener("keydown", handleMenuKeydown);
+        closeMenuButton.focus();
       }
       
-      menuTogglers.forEach(el => {
-        el.addEventListener("click", () => {
-          toggleMenu(true);
-        });
+      function closeMenu(shouldRestoreFocus) {
+        navbar.classList.remove("active");
+        overlay.classList.remove("active");
+        document.body.classList.remove("nav-active");
+        openMenuButton.setAttribute("aria-expanded", "false");
+      
+        // navbar.removeEventListener("keydown", handleMenuKeydown);
+        // openMenuButton.focus();
+        (shouldRestoreFocus && openMenuButton.focus());
+      }
+        
+      // menuTogglers.forEach(el => {
+      //   el.addEventListener("click", () => {
+      //     toggleMenu(true);
+      //   });
+      // });
+
+      openMenuButton.addEventListener("click", openMenu);
+
+      closeMenuButton.addEventListener("click", () => {
+        closeMenu(true);
+      });
+
+      overlay.addEventListener("click", () => {
+        closeMenu(true);
       });
 
       navLinks.forEach(el => {
         el.addEventListener("click", () => {
-          toggleMenu(false);
+          closeMenu(false);
         });
       });
     </script>
