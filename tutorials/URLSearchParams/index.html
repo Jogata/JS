@@ -1788,17 +1788,17 @@
     </style>
     <style>
       .contact-card {
-        display: block;
-        padding: 15px;
-        border-radius: 8px;
-        border: 1px solid var(--border-color, #ccc);
+        /* display: block; */
+        /* padding: 15px; */
+        /* border-radius: 8px; */
+        /* border: 1px solid var(--border-color, #ccc); */
         /* text-decoration: none; */
-        transition: background-color 0.2s ease;
+        /* transition: background-color 0.2s ease; */
       }
 
       .contact-card:hover,
       .contact-card:focus {
-        background-color: var(--hover-bg, #f9f9f9);
+        /* background-color: var(--hover-bg, #f9f9f9); */
       }
       /* .btn {
         width: 100px;
@@ -2057,6 +2057,8 @@
       
         navbar.addEventListener("keydown", handleMenuKeydown);
         closeMenuButton.focus();
+
+        window.addEventListener("resize", removeNavEventsOnResize);
       }
       
       function closeMenu(shouldRestoreFocus) {
@@ -2068,6 +2070,8 @@
         navbar.removeEventListener("keydown", handleMenuKeydown);
         // openMenuButton.focus();
         (shouldRestoreFocus && openMenuButton.focus());
+
+        window.removeEventListener("resize", removeNavEventsOnResize);
       }
         
       // menuTogglers.forEach(el => {
@@ -2097,7 +2101,7 @@
         closeMenu(false);
       }
 
-      window.addEventListener("resize", removeNavEventsOnResize);
+      // window.addEventListener("resize", removeNavEventsOnResize);
     </script>
 
     <main id="content">
@@ -3067,10 +3071,40 @@
     
       </div>
     </footer>
+    
+    <a href="#top" class="back-top-btn active" aria-label="Back to top">
+      <i class="fa fa-chevron-up" aria-hidden="true"></i>
+    </a>
 
-  <a href="#top" class="back-top-btn active" aria-label="Back to top">
-    <i class="fa fa-chevron-up" aria-hidden="true"></i>
-  </a>
+    <script>
+      const header = document.querySelector(".header");
+      const backTopBtn = document.querySelector(".back-top-btn");
+      
+      let lastScrollPos = 0;
+      
+      function hideHeader() {
+        const isScrollBottom = lastScrollPos < window.scrollY;
+
+        if (isScrollBottom) {
+          header.classList.add("hide");
+        } else {
+          header.classList.remove("hide");
+        }
+      
+        lastScrollPos = window.scrollY;
+      }
+      
+      window.addEventListener("scroll", function () {
+        if (window.scrollY >= 50) {
+          header.classList.add("active");
+          backTopBtn.classList.add("active");
+          hideHeader();
+        } else {
+          header.classList.remove("active");
+          backTopBtn.classList.remove("active");
+        }
+      });
+    </script>
 
     <script>
           const handleLogin = (e) => {
