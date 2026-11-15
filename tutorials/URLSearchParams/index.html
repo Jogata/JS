@@ -2106,19 +2106,29 @@
 
     <main id="content">
 
-      <section id="home" aria-label="Home" class="hero text-center">
+      <section id="home" aria-label="Home section" aria-roledescription="carousel" class="hero text-center">
 
-        <ul class="hero-slider">
-
+        <div class="slider-controls">
           <button type="button" class="slider-btn prev" aria-label="Previous slide">
+            <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+          </button>
+      
+          <button type="button" class="slider-btn next" aria-label="Next slide">
+            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <ul class="hero-slider" aria-live="polite">
+
+          <!-- <button type="button" class="slider-btn prev" aria-label="Previous slide">
             <i class="fa fa-angle-double-left" aria-hidden="true"></i>
           </button>
   
           <button type="button" class="slider-btn next" aria-label="Next slide">
             <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-          </button>
+          </button> -->
 
-          <li class="slider-item active">
+          <li class="slider-item active" aria-roledescription="slide" aria-label="1 of 3">
 
             <div class="slider-bg">
               <img src="./assets/images-grilli/hero-slider-1.jpg" width="1880" height="950" alt="" class="img-cover">
@@ -2142,7 +2152,7 @@
 
           </li>
 
-          <li class="slider-item">
+          <li class="slider-item" aria-roledescription="slide" aria-label="2 of 3">
 
             <div class="slider-bg">
               <img src="./assets/images-grilli/hero-slider-2.jpg" width="1880" height="950" alt="" class="img-cover">
@@ -2167,7 +2177,7 @@
 
           </li>
 
-          <li class="slider-item">
+          <li class="slider-item" aria-roledescription="slide" aria-label="3 of 3">
 
             <div class="slider-bg">
               <img src="./assets/images-grilli/hero-slider-3.jpg" width="1880" height="950" alt="" class="img-cover">
@@ -2193,14 +2203,6 @@
 
         </ul>
 
-        <!-- <button class="slider-btn prev" aria-label="Slide to previous">
-          <i class="fa fa-angle-double-left" aria-hidden="true"></i>
-        </button>
-
-        <button class="slider-btn next" aria-label="Slide to next">
-          <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-        </button> -->
-
         <a href="#" class="hero-btn has-after">
           <img src="./assets/images-grilli/hero-icon.png" width="48" height="48" alt="" aria-hidden="true">
           <span class="label-2 text-center span">Book A Table</span>
@@ -2208,10 +2210,36 @@
 
       </section>
       <script>
-        const test1 = document.querySelector(".prev");
-        test1.addEventListener("click", (e) => {
-          console.log(e.target);
-        })
+        const heroSlider = document.querySelector(".hero-slider");
+        const heroSliderItems = document.querySelectorAll(".hero-slider .slider-item");
+        const heroSliderPrevBtn = document.querySelector(".prev");
+        const heroSliderNextBtn = document.querySelector(".next");
+        
+        let currentSlidePos = 0;
+        let lastActiveSliderItem = heroSliderItems[0];
+        
+        const updateSliderPos = function () {
+          lastActiveSliderItem.classList.remove("active");
+          heroSliderItems[currentSlidePos].classList.add("active");
+          lastActiveSliderItem = heroSliderItems[currentSlidePos];
+        }
+        
+        const slideNext = function () {
+          if (currentSlidePos >= heroSliderItems.length - 1) {
+            currentSlidePos = 0;
+          } else {
+            currentSlidePos++;
+          }
+        
+          updateSliderPos();
+        }
+        
+        heroSliderNextBtn.addEventListener("click", slideNext);
+
+        // const test1 = document.querySelector(".prev");
+        // test1.addEventListener("click", (e) => {
+        //   console.log(e.target);
+        // })
       </script>
 
       <!-- <section aria-label="Service" class="section service bg-black-10 text-center"> -->
