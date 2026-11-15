@@ -1811,8 +1811,27 @@
         padding: 0.4em 1em;
         font-size: 1.2rem;
       } */
-      .slider-btn {
+      .slider-controls {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        padding: 0 3%;
+        transform: translateY(-50%);
+        display: flex;
+        gap: 5%;
+        justify-content: space-between;
+        pointer-events: none;
+        z-index: 2;
+        border: 1px solid red;
+      }
+      .hero .slider-btn.prev, 
+      .hero .slider-btn.next {
         position: relative;
+        top: 0;
+        left: 0;
+        right: 0;
+        transform: translateY(0%) rotate(45deg);
+        pointer-events: all;
       }
       .slider-btn::after {
         position: absolute;
@@ -2120,14 +2139,6 @@
 
         <ul class="hero-slider" aria-live="polite">
 
-          <!-- <button type="button" class="slider-btn prev" aria-label="Previous slide">
-            <i class="fa fa-angle-double-left" aria-hidden="true"></i>
-          </button>
-  
-          <button type="button" class="slider-btn next" aria-label="Next slide">
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-          </button> -->
-
           <li class="slider-item active" aria-roledescription="slide" aria-label="1 of 3">
 
             <div class="slider-bg">
@@ -2210,32 +2221,44 @@
 
       </section>
       <script>
-        const heroSlider = document.querySelector(".hero-slider");
-        const heroSliderItems = document.querySelectorAll(".hero-slider .slider-item");
+        // const heroSlider = document.querySelector(".hero-slider");
+        const heroSlides = document.querySelectorAll(".hero-slider .slider-item");
         const heroSliderPrevBtn = document.querySelector(".prev");
         const heroSliderNextBtn = document.querySelector(".next");
         
-        let currentSlidePos = 0;
-        let lastActiveSliderItem = heroSliderItems[0];
+        let currentSlideIndex = 0;
+        let currentActiveSlide = heroSlides[currentSlideIndex];
+
+        heroSliderPrevBtn.addEventListener("click", slidePrev);
+        heroSliderNextBtn.addEventListener("click", slideNext);
         
-        const updateSliderPos = function () {
-          lastActiveSliderItem.classList.remove("active");
-          heroSliderItems[currentSlidePos].classList.add("active");
-          lastActiveSliderItem = heroSliderItems[currentSlidePos];
+        function updateSlider() {
+          currentActiveSlide.classList.remove("active");
+          const newActiveSlide = heroSlides[currentSlideIndex];
+          newActiveSlide.classList.add("active");
+          currentActiveSlide = newActiveSlide;
         }
-        
-        const slideNext = function () {
-          if (currentSlidePos >= heroSliderItems.length - 1) {
-            currentSlidePos = 0;
+
+        function slidePrev() {
+          if (currentSlideIndex <= 0) {
+            currentSlideIndex = heroSlides.length - 1;
           } else {
-            currentSlidePos++;
+            currentSlideIndex--;
           }
         
-          updateSliderPos();
+          updateSlider();
         }
         
-        heroSliderNextBtn.addEventListener("click", slideNext);
-
+        function slideNext() {
+          if (currentSlideIndex >= heroSlides.length - 1) {
+            currentSlideIndex = 0;
+          } else {
+            currentSlideIndex++;
+          }
+        
+          updateSlider();
+        }
+        
         // const test1 = document.querySelector(".prev");
         // test1.addEventListener("click", (e) => {
         //   console.log(e.target);
