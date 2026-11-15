@@ -879,29 +879,39 @@
         opacity: 1;
       }
       
-      .hero .slider-btn {
+      /* .hero .slider-btn { */
+      .hero .slider-controls {
         display: none;
       }
     
-      .hero {
+      .slider {
         position: relative;
-        min-height: 100vh;
-        padding-block: 120px;
-        overflow: hidden;
+        /* min-height: 100vh; */
+        /* padding-block: 120px; */
+        /* overflow: hidden; */
         z-index: 1;
+      }
+
+      .hero-slider {
+        display: grid;
       }
     
       .hero .slider-item {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        grid-column: 1/1;
+        grid-row: 1/1;
+        /* position: absolute; */
+        /* top: 50%; */
+        /* left: 50%; */
+        /* transform: translate(-50%, -50%); */
         width: 100%;
         height: 100%;
+        min-height: 768px;
+        padding: 10vw 0;
         display: grid;
         place-content: center;
-        padding-block-start: 100px;
-        transition: var(--transition-3);
+        /* padding-block-start: 100px; */
+        /* transition: var(--transition-3); */
+        transition: opacity var(--transition-3);
         visibility: hidden;
         opacity: 0;
         z-index: 1;
@@ -918,13 +928,19 @@
         left: 0;
         width: 100%;
         height: 100%;
-        transform: scale(1.15);
+        /* transform: scale(1.15); */
         pointer-events: none;
         user-select: none;
+        overflow: hidden;
         z-index: -1;
+        /* border: 1px solid red; */
+      }
+
+      .hero .slider-bg img {
+        transform: scale(1.15);
       }
     
-      .hero .slider-item.active .slider-bg {
+      .hero .slider-item.active .slider-bg img {
         animation: smoothScale 7s linear forwards;
       }
     
@@ -1726,14 +1742,19 @@
         .navbar-list {
           margin-inline: 30px;
         }
+
+        .hero .slider-controls {
+          display: flex;
+        }
     
         .hero .slider-btn {
-          position: absolute;
-          top: 50%;
+          /* position: absolute; */
+          /* top: 50%; */
           /* width: 45px; */
           /* height: 45px; */
           /* display: grid; */
-          display: block;
+          /* display: block; */
+          display: inline-block;
           /* place-items: center; */
           padding: 0 0.39em;
           color: var(--gold-crayola);
@@ -1751,12 +1772,12 @@
     
         .hero .slider-btn.prev {
           /* left: 30px; */
-          left: 3%;
+          /* left: 3%; */
         }
     
         .hero .slider-btn.next {
           /* right: 30px; */
-          right: 3%;
+          /* right: 3%; */
         }
     
         .hero .slider-btn:is(:hover, :focus-visible) {
@@ -1821,8 +1842,9 @@
         gap: 5%;
         justify-content: space-between;
         pointer-events: none;
+        overflow: hidden;
         z-index: 2;
-        border: 1px solid red;
+        /* border: 1px solid red; */
       }
       .hero .slider-btn.prev, 
       .hero .slider-btn.next {
@@ -2127,6 +2149,8 @@
 
       <section id="home" aria-label="Home section" aria-roledescription="carousel" class="hero text-center">
 
+        <div class="slider">
+
         <div class="slider-controls">
           <button type="button" class="slider-btn prev" aria-label="Previous slide">
             <i class="fa fa-angle-double-left" aria-hidden="true"></i>
@@ -2214,6 +2238,8 @@
 
         </ul>
 
+        </div>
+
         <a href="#" class="hero-btn has-after">
           <img src="./assets/images-grilli/hero-icon.png" width="48" height="48" alt="" aria-hidden="true">
           <span class="label-2 text-center span">Book A Table</span>
@@ -2257,6 +2283,23 @@
           }
         
           updateSlider();
+        }
+
+        const heroSlider = document.querySelector(".hero-slider");
+        let autoSlideInterval;
+        
+        heroSlider.addEventListener("mouseover", function () {
+          clearInterval(autoSlideInterval);
+        });
+        
+        // heroSlider.addEventListener("mouseout", autoSlide);
+        
+        // window.addEventListener("load", autoSlide);
+
+        function autoSlide() {
+          autoSlideInterval = setInterval(function () {
+            slideNext();
+          }, 7000);
         }
         
         // const test1 = document.querySelector(".prev");
