@@ -633,21 +633,34 @@
       .topbar {
         display: none;
       }
+
+      .topbar .left, 
+      .topbar .separator {
+        display: none;
+      }
     
       .header .btn {
         display: none;
       }
-    
-      .header {
+
+      .test-header {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
+        z-index: 4;
+      }
+    
+      .header {
+        /* position: fixed; */
+        /* top: 0; */
+        /* left: 0; */
+        /* width: 100%; */
         padding-block: 40px;
         border-block-end: 1px solid transparent;
         background-color: transparent;
         transition: var(--transition-1);
-        z-index: 4;
+        /* z-index: 4; */
       }
     
       .header.active {
@@ -1590,34 +1603,52 @@
 
         .topbar {
           display: block;
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
+          /* position: fixed; */
+          /* top: 0; */
+          /* left: 0; */
+          /* width: 100%; */
           padding-block: 10px;
           border-block-end: 1px solid var(--white-alpha-20);
           transition: var(--transition-1);
-          z-index: 4;
+          /* z-index: 4; */
+        }
+
+        .topbar .right, 
+        .topbar .left {
+          margin: 0 auto;
+          display: flex;
+          gap: 2rem;
+          align-items: center;
+          /* display: none; */
         }
     
         .topbar:has(~ .header.active) {
           transform: translateY(-100%);
         }
     
-        .topbar-item:not(.link),
+        /* .topbar-item:not(.link), */
+        /* .topbar .left, 
         .topbar .separator {
           display: none;
-        }
-    
+        } */
+
+        /* .topbar .container {
+          text-align: center;
+        } */
+        
         .topbar .container,
         .topbar-item {
           display: flex;
+          flex-wrap: wrap;
           align-items: center;
         }
     
         .topbar .container {
-          gap: 30px;
-          justify-content: center;
+          /* gap: 30px; */
+          gap: 1rem 2rem;
+          /* justify-content: center; */
+          justify-content: space-between;
+          text-align: center;
         }
     
         .topbar-item {
@@ -1729,6 +1760,10 @@
       }
       
       @media (min-width: 768px) {
+        .topbar .separator {
+          display: block;
+        }
+
         .grid-list {
           grid-template-columns: 1fr 1fr;
         }
@@ -1942,9 +1977,9 @@
           max-width: unset;
         }
     
-        .topbar .separator {
+        /* .topbar .separator {
           display: block;
-        }
+        } */
     
         .nav-open-btn,
         .navbar>*:not(.navbar-list),
@@ -2183,6 +2218,49 @@
         /* display: block; */
       }
     </style>
+    <style>
+      .test-header {
+        display: none;
+      }
+      .test1-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+      }
+      .test-topbar {}
+      .test-container {
+        display: grid;
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .test-topbar-item {
+        display: flex;
+        gap: 1rem;
+        /* flex-wrap: wrap; */
+        align-items: center;
+      }
+      .test-topbar-item.test-separator {
+        position: relative;
+      }
+      .test-topbar-item.test-separator::after {
+        display: inline-block;
+        content: "";
+        width: 8px;
+  height: 8px;
+  margin: 0 5%;
+  border: 1px solid var(--gold-crayola);
+  transform: rotate(45deg);
+      }
+      .test-flex {
+        display: flex;
+        align-items: center;
+      }
+    </style>
   </head>
   <body>
     <!-- <nav class="nav-text-separated">
@@ -2192,9 +2270,58 @@
     </nav> -->
     <a href="#content" class="skip-link">Skip to main content</a>
 
+    <div class="test1-header">
+      <div class="test-topbar">
+        <div class="test-container">
+      
+          <div class="test-flex">
+          <address class="test-topbar-item test-separator">
+            <div class="test-icon">
+              <i class="ri-map-pin-line" aria-hidden="true"></i>
+            </div>
+            <span class="test-span">
+              Restaurant St, Delicious City, London 9578, UK
+            </span>
+          </address>
+      
+          <!-- <div class="separator"></div> -->
+      
+          <div class="test-topbar-item item-2">
+            <div class="test-icon">
+              <i class="ri-time-line" aria-hidden="true"></i>
+            </div>
+            <span class="test-span">Daily : 8.00 am to 10.00 pm</span>
+          </div>
+          </div>
+      
+          <div class="test-flex">
+          <a href="tel:+11234567890" class="test-topbar-item link test-separator">
+            <div class="test-icon">
+              <!-- <i class="fa fa-phone" aria-hidden="true"></i> -->
+              <i class="ri-phone-line" aria-hidden="true"></i>
+            </div>
+            <span class="test-span">+1 123 456 7890</span>
+          </a>
+      
+          <!-- <div class="separator"></div> -->
+      
+          <a href="mailto:booking@restaurant.com" class="test-topbar-item link">
+            <div class="icon">
+              <i class="fa fa-envelope-o" aria-hidden="true"></i>
+            </div>
+            <span class="test-span">booking@restaurant.com</span>
+          </a>
+          </div>
+      
+        </div>
+      </div>
+      </div>
+
+    <div class="test-header">
     <div class="topbar">
       <div class="container">
     
+        <div class="left">
         <address class="topbar-item">
           <div class="icon">
             <i class="ri-map-pin-line" aria-hidden="true"></i>
@@ -2212,7 +2339,9 @@
           </div>
           <span class="span">Daily : 8.00 am to 10.00 pm</span>
         </div>
+        </div>
     
+        <div class="right">
         <a href="tel:+11234567890" class="topbar-item link">
           <div class="icon">
             <!-- <i class="fa fa-phone" aria-hidden="true"></i> -->
@@ -2229,10 +2358,10 @@
           </div>
           <span class="span">booking@restaurant.com</span>
         </a>
+        </div>
     
       </div>
     </div>
-
     <header class="header">
       <div class="container">
   
@@ -2447,6 +2576,7 @@
 
       // window.addEventListener("resize", removeNavEventsOnResize);
     </script>
+    </div>
 
     <main id="content">
 
