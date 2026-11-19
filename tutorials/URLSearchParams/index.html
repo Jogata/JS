@@ -3946,8 +3946,8 @@
 };
     </script>
 
-    <div class="test" style="display: none;">
-      <button command="--spin-image" commandfor="target-img">Spin</button>
+    <div class="test" style="display: block;">
+      <!-- <button command="--spin-image" commandfor="target-img">Spin</button>
       <img id="target-img" src="./assets/images-nike/sneakers.png">
 
       <script>
@@ -3958,7 +3958,117 @@
             e.target.style.transform = "rotate(360deg)";
           }
         });
-      </script>
+      </script> -->
+      <section class="section-container testimonial-container" id="testimonials">
+        <h2 class="section-header">Testimonials</h2>
+        <div class="slider">
+          <div class="slider-track relative">
+            <div class="slide relative current">
+              <div class="testimonial-card">
+                <p>
+                  Working with them was an absolute pleasure! Their modern design
+                  expertise completely transformed my home into a contemporary
+                  haven. I now have a space that not only looks stunning but also
+                  feels incredibly comfortable. I couldn't be happier with the
+                  results
+                </p>
+                <img src="./assets/nova/images/profile-pic-1.jpg" alt="testimonial" />
+                <h4>Sam William</h4>
+                <h5>CEO, Co-Founder</h5>
+              </div>
+            </div>
+            <div class="slide next">
+              <div class="testimonial-card">
+                <p>
+                  I hired them to revamp our office space, and the results
+                  exceeded my expectations. Their innovative design concepts
+                  breathed new life into our workplace, making it both functional
+                  and stylish. The team's attention to detail and commitment to
+                  quality are truly commendable.
+                </p>
+                <img src="./assets/nova/images/profile-pic-2.jpg" alt="testimonial" />
+                <h4>Michelle Anna</h4>
+                <h5>Office Renovator</h5>
+              </div>
+            </div>
+            <div class="slide">
+              <div class="testimonial-card">
+                <p>
+                  I had a vision of a minimalist-inspired home, and they brought
+                  it to life flawlessly. Their designers understood my aesthetic
+                  and incorporated sleek, clean lines, and a neutral color palette
+                  to create a serene oasis. I'm in love with my modern,
+                  clutter-free space!
+                </p>
+                <img src="./assets/nova/images/profile-pic-3.jpg" alt="testimonial" />
+                <h4>John D'souza</h4>
+                <h5>Banker</h5>
+              </div>
+            </div>
+            <div class="slide prev">
+              <div class="testimonial-card">
+                <p>
+                  What sets them apart is their professionalism and efficiency.
+                  They made the entire design process hassle-free, from the
+                  initial consultation to the final installation. Their team
+                  handled everything, leaving me with a beautifully designed
+                  modern interior
+                </p>
+                <img src="./assets/nova/images/profile-pic-4.jpg" alt="testimonial" />
+                <h4>David Laid</h4>
+                <h5>Businessman</h5>
+              </div>
+            </div>
+          </div>
+          <div class="control">
+            <button id="next">
+              next <i class="ri-arrow-left-double-line"></i>
+            </button>
+            <button id="prev">
+              prev <i class="ri-arrow-right-double-line"></i>
+            </button>
+          </div>
+          <!-- <div class="pagination"></div> -->
+          <script>
+            const slides = document.querySelectorAll(".slide");
+            const forwards = document.getElementById("next");
+            const backwards = document.getElementById("prev");
+            const slidesLength = slides.length;
+            let current = 0;
+            let next = 1;
+            let prev = slidesLength - 1;
+      
+            forwards.addEventListener("click", () => {
+              slides[current].classList.replace("current", "prev");
+              slides[next].classList.replace("next", "current");
+              slides[prev].classList.remove("prev");
+              next++;
+              next = next % slidesLength;
+              slides[next].classList.add("next");
+              current++;
+              current = current % slidesLength;
+              prev++;
+              prev = prev % slidesLength;
+            });
+      
+            backwards.addEventListener("click", () => {
+              slides[current].classList.replace("current", "next");
+              slides[prev].classList.replace("prev", "current");
+              slides[next].classList.remove("next");
+              prev--;
+              prev = prev + slidesLength;
+              prev = prev % slidesLength;
+              slides[prev].classList.add("prev");
+              current--;
+              current = current + slidesLength;
+              current = current % slidesLength;
+              next--;
+              next = next + slidesLength;
+              next = next % slidesLength;
+            });
+          </script>
+        </div>
+      </section>
     </div>
         
     <!-- <h1>URLSearchParams in JavaScript - Constructing Query Strings</h1> -->
