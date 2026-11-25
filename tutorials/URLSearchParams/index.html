@@ -726,10 +726,10 @@
         display: none;
       }
 
-      .topbar .left, 
+      /* .topbar .left, 
       .topbar .separator {
-        /* display: none; */
-      }
+        display: none;
+      } */
 
       .topbar-items:first-child {
         display: none;
@@ -772,6 +772,7 @@
       } */
     
       .header .container {
+        max-width: 100%;
         padding-inline: 20px;
         display: flex;
         gap: 8px;
@@ -1159,6 +1160,8 @@
       }
     
       .service-card {
+        display: inline-block;
+        margin: 0 auto;
         overflow: hidden;
       }
     
@@ -1211,21 +1214,30 @@
       }
     
       .about .container {
+        position: relative;
         display: grid;
-        gap: 120px;
+        /* gap: 120px; */
       }
     
       .about-banner {
         position: relative;
-        margin-block-end: 120px;
+        /* margin-block-end: 120px; */
+        padding-inline-start: 5%;
       }
     
-      .about-banner>.w-100 {
-        padding-inline-start: 50px;
+      .about-banner > .w-100 {
+        /* padding-inline-start: 50px; */
+      }
+
+      .about-banner .badge {
+        max-width: 135px;
+        margin-left: auto;
+        transform: translateY(50%);
+        overflow: hidden;
       }
     
       .about .abs-img {
-        position: absolute;
+        /* position: absolute; */
       }
     
       .about .abs-img::before {
@@ -1233,29 +1245,43 @@
       }
     
       .about .abs-img-1 {
-        left: 0;
-        bottom: -120px;
-        width: 150px;
-        padding-block: 50px;
+        /* position: relative; */
+        /* left: 0; */
+        /* bottom: -120px; */
+        /* width: 150px; */
+        width: 40%;
+        /* padding-block: 50px; */
+        max-width: 285px;
+        padding-block: 5%;
+        transform: translateX(-25%) translateY(-50%);
       }
     
-      .about .abs-img-2 {
+      /* .about .abs-img-2 {
         top: -65px;
         right: 0;
         overflow: hidden;
-      }
+      } */
     
       .about .abs-img-1::before {
         top: 0;
-        left: 50%;
+        /* left: 50%; */
+        left: 5%;
         bottom: 0;
-        transform: translateX(-50%);
-        width: 140px;
+        /* transform: translateX(-50%); */
+        /* width: 140px; */
+        width: 90%;
         background-image: url("./assets/images-grilli/img-pattern.svg");
         background-repeat: repeat;
       }
     
-      .about .abs-img-2::before {
+      /* .about .abs-img-2::before {
+        inset: 0;
+        background-image: url("./assets/images-grilli/badge-2-bg.png");
+        background-repeat: no-repeat;
+        background-size: contain;
+        animation: rotate360 15s linear infinite;
+      } */
+      .about .badge::before {
         inset: 0;
         background-image: url("./assets/images-grilli/badge-2-bg.png");
         background-repeat: no-repeat;
@@ -1822,15 +1848,15 @@
         }
 
         .about .container {
-          gap: 80px;
+          /* gap: 80px; */
         }
     
         .about-banner>.w-100 {
-          padding-inline-start: 90px;
+          /* padding-inline-start: 90px; */
         }
     
         .about .abs-img-1 {
-          width: 285px;
+          /* width: 285px; */
         }
     
         .about .contact-number {
@@ -1916,7 +1942,7 @@
         }
     
         .navbar-list {
-          margin-inline: 30px;
+          /* margin-inline: 30px; */
         }
 
         .hero .slider-controls {
@@ -2028,8 +2054,10 @@
         }
     
         .about .container {
-          gap: 30px;
-          grid-template-columns: 0.7fr 1fr;
+          /* gap: 30px; */
+          gap: 5%;
+          /* grid-template-columns: 0.7fr 1fr; */
+          grid-template-columns: 1fr 1fr;
         }
     
         .special-dish {
@@ -2115,7 +2143,8 @@
         }
     
         .topbar .container {
-          max-width: unset;
+          /* max-width: unset; */
+          max-width: 100%;
         }
     
         /* .topbar .separator {
@@ -2129,7 +2158,7 @@
         }
     
         .header .container {
-          max-width: unset;
+          /* max-width: unset; */
         }
     
         .navbar,
@@ -2207,7 +2236,7 @@
 
         .services .grid-list li {
           grid-row: 2/4;
-          border: 1px solid red;
+          /* border: 1px solid red; */
         }
     
         .services .grid-list li:nth-child(2n+1) {
@@ -2262,13 +2291,14 @@
         }
     
         .about-content {
-          padding-inline-end: 90px;
+          /* padding-inline-end: 90px; */
         }
     
         .about .shape {
           display: block;
           top: 46%;
           left: 0;
+          transform: translateX(-70%);
         }
     
         .special-dish {
@@ -2308,6 +2338,12 @@
         .features .shape-2 {
           left: 0;
           bottom: 80px;
+        }
+      }
+
+      @media (min-width: 2000px) {
+        :root {
+          --fontSize-headline-1: 6rem;
         }
       }
 
@@ -2538,6 +2574,7 @@
       }
       .hero, 
       .services, 
+      #about, 
       #testimonials, 
       #slider-with-animations {
         display: block;
@@ -3137,6 +3174,9 @@
           </div>
 
           <figure class="about-banner">
+            <div class="badge has-before">
+              <img src="./assets/images-grilli/badge-2.png" width="133" height="134" loading="lazy" alt="">
+            </div>
 
             <!-- <img src="./assets/images-grilli/about-banner.jpg" width="570" height="570" loading="lazy" alt="about banner" class="w-100"> -->
             <img src="./assets/images-grilli/about-banner.jpg" width="570" height="570" loading="lazy" alt="" class="w-100">
@@ -3145,9 +3185,9 @@
               <img src="./assets/images-grilli/about-abs-image.jpg" width="285" height="285" loading="lazy" alt="" class="w-100">
             </div>
 
-            <div class="abs-img abs-img-2 has-before">
+            <!-- <div class="abs-img abs-img-2 has-before">
               <img src="./assets/images-grilli/badge-2.png" width="133" height="134" loading="lazy" alt="">
-            </div>
+            </div> -->
 
           </figure>
 
