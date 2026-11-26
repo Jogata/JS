@@ -4687,6 +4687,48 @@
             </button>
           </div>
           <!-- <div class="pagination"></div> -->
+          <script>
+            const setUpSliderWithTransform = () => {
+            const slides = document.querySelectorAll("#slider-with-transform .slide");
+            const forwards = document.getElementById("next1");
+            const backwards = document.getElementById("prev1");
+            const slidesLength = slides.length;
+            let current = 0;
+            let next = 1;
+            let prev = slidesLength - 1;
+      
+            forwards.addEventListener("click", () => {
+              slides[current].classList.replace("current", "prev");
+              slides[next].classList.replace("next", "current");
+              slides[prev].classList.remove("prev");
+              next++;
+              next = next % slidesLength;
+              slides[next].classList.add("next");
+              current++;
+              current = current % slidesLength;
+              prev++;
+              prev = prev % slidesLength;
+            });
+      
+            backwards.addEventListener("click", () => {
+              slides[current].classList.replace("current", "next");
+              slides[prev].classList.replace("prev", "current");
+              slides[next].classList.remove("next");
+              prev--;
+              prev = prev + slidesLength;
+              prev = prev % slidesLength;
+              slides[prev].classList.add("prev");
+              current--;
+              current = current + slidesLength;
+              current = current % slidesLength;
+              next--;
+              next = next + slidesLength;
+              next = next % slidesLength;
+            });
+            }
+      
+            setUpSliderWithTransform();
+          </script>
         </div>
       </section>
     </div>
