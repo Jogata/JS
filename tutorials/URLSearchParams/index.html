@@ -42,13 +42,18 @@
         --fontFamily-forum: "Forum", cursive;
         --fontFamily-dm_sans: "DM Sans", sans-serif;
     
-        --fontSize-display-1: calc(1.3rem + 6.7vw);
-        --fontSize-headline-1: calc(2rem + 2.5vw);
-        --fontSize-headline-2: calc(1.3rem + 2.4vw);
-        --fontSize-title-1: calc(1.6rem + 1.2vw);
+        /* --fontSize-display-1: calc(1.3rem + 6.7vw); */
+        /* --fontSize-headline-1: calc(2rem + 2.5vw); */
+        /* --fontSize-headline-2: calc(1.3rem + 2.4vw); */
+        /* --fontSize-title-1: calc(1.6rem + 1.2vw); */
+        --fontSize-display-1: clamp(2.5rem, 1.3rem + 6.7vw, 6rem);
+        --fontSize-headline-1: clamp(2.2rem, 2rem + 2.5vw, 4rem);
+        --fontSize-headline-2: clamp(1.8rem, 1.3rem + 2.4vw, 3.2rem);
+        --fontSize-title-1: clamp(1.5rem, 1.6rem + 1.2vw, 2.4rem);
         --fontSize-title-2: 2.2rem;
         --fontSize-title-3: 2.1rem;
-        --fontSize-title-4: calc(1.6rem + 1.2vw);
+        /* --fontSize-title-4: calc(1.6rem + 1.2vw); */
+        --fontSize-title-4: clamp(1.5rem, 1.6rem + 1.2vw, 2.4rem);
         --fontSize-body-1: 2.4rem;
         --fontSize-body-2: 1.6rem;
         --fontSize-body-3: 1.8rem;
@@ -572,11 +577,11 @@
       }
     
       .input-field {
-        height: 56px;
+        /* height: 56px; */
         margin-block-end: 20px;
         padding: 10px 20px;
         color: var(--white);
-        outline: none;
+        /* outline: none; */
         border: 1px solid var(--white-alpha-10);
         background-color: var(--eerie-black-2);
         transition: border-color var(--transition-2);
@@ -586,7 +591,7 @@
         color: inherit;
       }
     
-      .input-field:focus {
+      .input-field:focus-visible {
         border-color: var(--gold-crayola);
       }
     
@@ -1138,6 +1143,10 @@
       .hero .slider-item.active .section-subtitle {
         animation-delay: 500ms;
       }
+
+      .hero .slider-item .hero-title {
+        font-size: calc(1.3rem + 6.7vw);
+      }
     
       .hero .slider-item.active .hero-title {
         animation-delay: 1000ms;
@@ -1565,6 +1574,7 @@
     
       .form-text {
         margin-block-end: 40px;
+        margin-block: 60px 40px;
       }
     
       .form-text .link {
@@ -1608,8 +1618,9 @@
       }
     
       textarea.input-field {
-        resize: none;
-        height: 140px;
+        /* resize: none; */
+        resize: vertical;
+        /* height: 140px; */
         padding-block: 20px;
         line-height: var(--lineHeight-1);
       }
@@ -1659,6 +1670,10 @@
         line-height: var(--lineHeight-6);
       }
       
+      .features .bg-container {
+        display: none;
+      }
+
       .event .section-title {
         margin-block-end: 40px;
       }
@@ -2301,6 +2316,10 @@
         :root {
           --fontSize-title-2: 2.5rem;
         }
+
+        .grid-list {
+          gap: 1rem 3%;
+        }
     
         .container,
         :is(.service, .event) .container {
@@ -2457,6 +2476,47 @@
         .features .grid-list {
           grid-template-columns: repeat(4, 1fr);
         }
+
+        .features .grid-list .feature-card {
+          /* grid-template-columns: repeat(4, 1fr); */
+          height: 100%;
+        }
+
+        .features {
+          overflow: visible;
+        }
+
+        .features .container {
+          position: relative;
+        }
+
+        .features .bg-container {
+          display: block;
+          position: absolute;
+          top: -10%;
+          left: -10%;
+          width: 110%;
+          /* max-width: 90vw; */
+          height: 120%;
+          border: 1px solid red;
+        }
+    
+        .features .shape {
+          display: block;
+        }
+    
+        .features .shape-1 {
+          /* top: -100px; */
+          top: 0;
+          right: 0;
+          /* right: -50px; */
+        }
+    
+        .features .shape-2 {
+          left: 0;
+          bottom: 80px;
+          /* transform: translateX(-100%); */
+        }
       }
 
       @media (min-width: 1400px) {
@@ -2503,7 +2563,24 @@
         }
     
         .features {
+          /* position: relative; */
           overflow: visible;
+        }
+
+        .features .container {
+          position: relative;
+        }
+
+        .features .bg-container {
+          display: block;
+          position: absolute;
+          top: -10%;
+          left: -10%;
+          width: 120%;
+          max-width: 90vw;
+          height: 120%;
+          z-index: -1;
+          /* border: 1px solid red; */
         }
     
         .features .shape {
@@ -2511,13 +2588,16 @@
         }
     
         .features .shape-1 {
-          top: -100px;
-          right: 0;
+          /* top: -100px; */
+          top: 0;
+          /* right: 0; */
+          right: -50px;
         }
     
         .features .shape-2 {
           left: 0;
           bottom: 80px;
+          /* transform: translateX(-100%); */
         }
       }
 
@@ -3960,7 +4040,9 @@
 
               </div>
 
-              <textarea name="message" placeholder="Message" autocomplete="off" class="input-field"></textarea>
+              <textarea name="message" placeholder="Message" autocomplete="off" class="input-field" cols="20" rows="10">
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae rerum consectetur enim ea deleniti necessitatibus, eligendi eaque odio ab, quod sunt corporis eveniet, dolores ipsam assumenda molestias pariatur est molestiae at quae iure! Quasi ea maiores ad natus nisi sapiente iure impedit placeat mollitia in perferendis expedita voluptas vel quaerat itaque, nihil ex totam magni facere sunt possimus aliquam. Nesciunt, ex maxime sunt vitae blanditiis incidunt repudiandae architecto itaque veritatis minima excepturi, nihil voluptate vero soluta hic possimus porro fugit veniam eaque expedita quas! Consequatur possimus ipsa amet officiis iste, cupiditate labore odio voluptatum at quia rerum nihil accusamus? Suscipit est voluptate quaerat? Iusto cupiditate, at, ullam est quibusdam non minus tenetur ex incidunt provident reiciendis accusamus cum? Natus tempora ducimus optio aperiam officiis labore, voluptatem minima, laborum, in earum quis fuga ullam laboriosam perspiciatis modi architecto debitis reiciendis. Nemo, veritatis eum? Ipsum quae animi rem officia, dignissimos sit ut vero molestiae? Maxime, iure natus iusto consequuntur possimus ex aperiam qui error tempore ratione necessitatibus quae. Praesentium, impedit? Assumenda corporis, hic debitis deserunt itaque dolores quos! Laborum facilis assumenda dolorum soluta culpa similique officia, id corrupti dolor cum molestias est delectus praesentium et nihil corporis dignissimos dolores ex ea vitae.
+              </textarea>
 
               <button type="submit" class="btn btn-secondary">
                 <span class="text text-1">Book A Table</span>
@@ -4079,11 +4161,19 @@
 
           </ul>
 
-          <img src="./assets/images-grilli/shape-7.png" width="208" height="178" loading="lazy" alt=""
+          <!-- <img src="./assets/images-grilli/shape-7.png" width="208" height="178" loading="lazy" alt=""
             class="shape shape-1">
 
           <img src="./assets/images-grilli/shape-8.png" width="120" height="115" loading="lazy" alt=""
-            class="shape shape-2">
+            class="shape shape-2"> -->
+
+          <div class="bg-container">
+            <img src="./assets/images-grilli/shape-7.png" width="208" height="178" loading="lazy" alt=""
+              class="shape shape-1">
+
+            <img src="./assets/images-grilli/shape-8.png" width="120" height="115" loading="lazy" alt=""
+              class="shape shape-2">
+          </div>
 
         </div>
       </section>
@@ -4962,10 +5052,10 @@
             </div>
           </div>
           <div class="control">
-            <button id="next1">
+            <button id="next3">
               next <i class="ri-arrow-left-double-line"></i>
             </button>
-            <button id="prev1">
+            <button id="prev3">
               prev <i class="ri-arrow-right-double-line"></i>
             </button>
           </div>
@@ -4973,8 +5063,8 @@
           <script>
             const setUpSliderWithTransform = () => {
             const slides = document.querySelectorAll("#slider-with-transform .slide");
-            const forwards = document.getElementById("next1");
-            const backwards = document.getElementById("prev1");
+            const forwards = document.getElementById("next3");
+            const backwards = document.getElementById("prev3");
             const slidesLength = slides.length;
             let current = 0;
             let next = 1;
